@@ -50,10 +50,7 @@ export default function Simulator({ match: initialMatch, mode = "local", onlineC
     };
     onlineClient.socket.on("room:state", handler);
     onlineClient.connect();
-    return () => {
-      onlineClient.socket.off("room:state", handler);
-      onlineClient.close?.();
-    };
+    return () => onlineClient.socket.off("room:state", handler);
   }, [online, onlineClient]);
 
   const actorId = useMemo(() => {
@@ -306,8 +303,9 @@ export default function Simulator({ match: initialMatch, mode = "local", onlineC
 
   return <main className="simulator-page">
     <header className="sim-topbar">
-      <div className="sim-header-logo"><img src="./images/logo_battlespirits.png" alt="Battle Spirits" /></div>
-      <div className="sim-header-steps"><PhaseBar phase={match.phase} /></div>
+      <img src="./images/logo_battlespirits.png" alt="Battle Spirits" />
+      <div><span>Eternal Ver. 17.1</span><strong>{t("turn")} {match.turnNumber} • {match.players[match.activePlayerId].name}</strong></div>
+      <PhaseBar phase={match.phase} playerColor={match.players[match.activePlayerId]?.playerColor} />
       <div className="sim-header-actions">{online && <button className="ghost" onClick={()=>setShowChat(true)}>{t("chat")}</button>}<button className="ghost" onClick={()=>setShowLog(true)}>{t("log")}</button><button className="ghost" onClick={onExit}>{t("exit")}</button></div>
     </header>
 

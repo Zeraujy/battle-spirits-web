@@ -5,7 +5,10 @@ const LABELS = {
   ptBR:{ start:"Start Step", core:"Core Step", draw:"Draw Step", refresh:"Refresh Step", main:"Main Step", attack:"Attack Step", end:"End Step" },
   en:{ start:"Start Step", core:"Core Step", draw:"Draw Step", refresh:"Refresh Step", main:"Main Step", attack:"Attack Step", end:"End Step" }
 };
-export default function PhaseBar({ phase }) {
+
+export default function PhaseBar({ phase, playerColor }) {
   const { language } = useLanguage();
-  return <div className="phase-bar">{PHASES.map((p) => <div key={p} className={p === phase ? "current" : ""}>{LABELS[language]?.[p] || LABELS.en[p]}</div>)}</div>;
+  return <div className="phase-bar" style={{ "--phase-player-color": playerColor || "var(--accent)" }}>
+    {PHASES.map((p) => <div key={p} className={p === phase ? "current" : ""}>{LABELS[language]?.[p] || LABELS.en[p]}</div>)}
+  </div>;
 }

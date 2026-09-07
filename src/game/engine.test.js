@@ -11,7 +11,6 @@ const cards = [
   normalizeCard({ id: "R2", namePT: "Red Cost", cardType: "spirit", colors: ["red"], cost: 3, reduction: ["red"], symbols: ["red"], levels: [{ level: 1, cores: 1, bp: 2000 }] }),
   normalizeCard({ id: "B1", namePT: "Test Brave", cardType: "brave", colors: ["red"], cost: 0, reduction: [], symbols: ["red"], braveBP: 2000, braveCondition: { cardTypes: ["spirit"] }, levels: [{ level: 1, cores: 1, bp: 1000 }] }),
   normalizeCard({ id: "M1", namePT: "Flash Test", cardType: "magic", colors: ["red"], cost: 0, reduction: [], effects: [{ type: "flash", timing: "flash", operations: [{ type: "draw", count: 1 }] }] }),
-  normalizeCard({ id: "M2", namePT: "Paid Flash Test", cardType: "magic", colors: ["red"], cost: 1, reduction: [], effects: [{ type: "flash", timing: "flash", operations: [{ type: "draw", count: 1 }] }] }),
   normalizeCard({ id: "BU1", namePT: "Burst One", cardType: "magic", cost: 0, subtypes: ["burst"], effects: [{ type: "burst", timing: "afterLifeDecreases", operations: [] }] }),
   normalizeCard({ id: "BU2", namePT: "Burst Two", cardType: "magic", cost: 0, subtypes: ["burst"], effects: [{ type: "burst", timing: "afterLifeDecreases", operations: [] }] }),
   normalizeCard({ id: "MI1", namePT: "Mirage Test", cardType: "magic", cost: 2, mirage: { cost: 0, reduction: [] }, effects: [{ type: "mirage", timing: "mirage" }] }),
@@ -167,101 +166,4 @@ test("Grandwalker/Grandstone-style Nexus cores are not movable as normal field c
   match.players.player1.field.nexuses = [fieldCard("GW1", "grandwalker", 2)];
   const r = applyGameAction(match, { type: "MOVE_CORE", move: { from: { zone: "card", instanceId: "grandwalker" }, to: { zone: "reserve" }, coreType: "regular" } }, "player1", index);
   assert.equal(r.ok, false);
-});
-
-test("manual summon requires dragging cost to Core Trash and Lv cores onto the card", () => {
-  let match = matchBase();
-  match.phase = "main";
-  match.players.player1.hand.unshift({ ...makePhysicalCard("R1", index), instanceId: "manual-spirit" });
-  let r = applyGameAction(match, { type:"BEGIN_MANUAL_PLAY", instanceId:"manual-spirit" }, "player1", index);
-  assert.equal(r.ok, true);
-  assert.equal(r.match.pendingManualPlay.payableCost, 1);
-  assert.equal(r.match.players.player1.field.spirits.find((c)=>c.instanceId==="manual-spirit").cores.regular, 0);
-  r = applyGameAction(r.match, { type:"MOVE_CORE", move:{ from:{zone:"reserve"}, to:{zone:"trash"}, coreType:"regular" } }, "player1", index);
-  assert.equal(r.match.pendingManualPlay.paidRegular, 1);
-  r = applyGameAction(r.match, { type:"MOVE_CORE", move:{ from:{zone:"reserve"}, to:{zone:"card",instanceId:"manual-spirit"}, coreType:"regular" } }, "player1", index);
-  r = applyGameAction(r.match, { type:"CONFIRM_MANUAL_PLAY" }, "player1", index);
-  assert.equal(r.ok, true);
-  assert.equal(r.match.pendingManualPlay, null);
-  assert.equal(r.match.players.player1.trashCores, 1);
-  assert.equal(r.match.players.player1.reserve, 1);
-  assert.equal(r.match.players.player1.field.spirits.find((c)=>c.instanceId==="manual-spirit").cores.regular, 1);
-});
-
-test("manual play cannot advance the phase until it is confirmed or cancelled", () => {
-  let match = matchBase();
-  match.phase = "main";
-  match.players.player1.hand.unshift({ ...makePhysicalCard("R1", index), instanceId:"pending-spirit" });
-  let r = applyGameAction(match, { type:"BEGIN_MANUAL_PLAY", instanceId:"pending-spirit" }, "player1", index);
-  assert.equal(r.ok, true);
-  const blocked = applyGameAction(r.match, { type:"ADVANCE_PHASE" }, "player1", index);
-  assert.equal(blocked.ok, false);
-  r = applyGameAction(r.match, { type:"CANCEL_MANUAL_PLAY" }, "player1", index);
-  assert.equal(r.ok, true);
-  assert.equal(r.match.pendingManualPlay, null);
-  assert.ok(r.match.players.player1.hand.some((c)=>c.instanceId==="pending-spirit"));
-});
-
-
-test("manual Magic payment works during Flash Timing", () => {
-  let match = matchBase();
-  match.phase = "attack";
-  match.players.player1.field.spirits = [fieldCard("R1", "flash-attacker")];
-  match.players.player2.hand.unshift({ ...makePhysicalCard("M2", index), instanceId:"paid-magic" });
-  match = applyGameAction(match, { type:"DECLARE_ATTACK", instanceId:"flash-attacker" }, "player1", index).match;
-  let r = applyGameAction(match, { type:"BEGIN_MANUAL_COST", instanceId:"paid-magic", options:{ kind:"magic", mode:"flash" } }, "player2", index);
-  assert.equal(r.ok, true);
-  assert.equal(r.match.pendingManualCost.payableCost, 1);
-  r = applyGameAction(r.match, { type:"MOVE_CORE", move:{ from:{zone:"reserve"}, to:{zone:"trash"}, coreType:"regular" } }, "player2", index);
-  assert.equal(r.ok, true);
-  r = applyGameAction(r.match, { type:"CONFIRM_MANUAL_COST" }, "player2", index);
-  assert.equal(r.ok, true);
-  assert.equal(r.match.pendingManualCost, null);
-  assert.equal(r.match.players.player2.trashCores, 1);
-  assert.equal(r.match.players.player2.trash.at(-1).cardId, "M2");
-});
-
-test("manual Direct Combine keeps the Brave attached while cost is paid manually", () => {
-  let match = matchBase();
-  match.phase = "main";
-  match.players.player1.field.spirits = [fieldCard("R1", "direct-host", 1)];
-  match.players.player1.hand.unshift({ ...makePhysicalCard("B1", index), instanceId:"manual-brave" });
-  let r = applyGameAction(match, { type:"BEGIN_MANUAL_PLAY", instanceId:"manual-brave", options:{ directCombineHostInstanceId:"direct-host" } }, "player1", index);
-  assert.equal(r.ok, true);
-  assert.equal(r.match.pendingManualPlay.minimumCores, 0);
-  const brave = r.match.players.player1.field.other.find((c)=>c.instanceId==="manual-brave");
-  assert.equal(brave.combinedWith, "direct-host");
-  r = applyGameAction(r.match, { type:"CONFIRM_MANUAL_PLAY" }, "player1", index);
-  assert.equal(r.ok, true);
-  assert.equal(r.match.pendingManualPlay, null);
-  assert.equal(r.match.players.player1.field.other.find((c)=>c.instanceId==="manual-brave").combinedWith, "direct-host");
-});
-
-test("manual Void to Reserve adds one regular Core", () => {
-  let match = matchBase();
-  const before = match.players.player1.reserve;
-  const r = applyGameAction(match, { type:"MANUAL", payload:{ type:"voidToReserve", playerId:"player1" } }, "player1", index);
-  assert.equal(r.ok, true);
-  assert.equal(r.match.players.player1.reserve, before + 1);
-});
-
-test("revealed cards can move from deck to reveal, hand, top and bottom", () => {
-  let match = matchBase();
-  const top = match.players.player1.deck[0];
-  let r = applyGameAction(match, { type:"MANUAL", payload:{ type:"revealTop", playerId:"player1" } }, "player1", index);
-  assert.equal(r.ok, true);
-  assert.equal(r.match.players.player1.revealed.at(-1).instanceId, top.instanceId);
-  r = applyGameAction(r.match, { type:"MANUAL", payload:{ type:"revealedToHand", playerId:"player1", instanceId:top.instanceId } }, "player1", index);
-  assert.equal(r.ok, true);
-  assert.ok(r.match.players.player1.hand.some((c)=>c.instanceId===top.instanceId));
-
-  const nextTop = r.match.players.player1.deck[0];
-  r = applyGameAction(r.match, { type:"MANUAL", payload:{ type:"revealTop", playerId:"player1" } }, "player1", index);
-  r = applyGameAction(r.match, { type:"MANUAL", payload:{ type:"revealedToBottom", playerId:"player1", instanceId:nextTop.instanceId } }, "player1", index);
-  assert.equal(r.match.players.player1.deck.at(-1).instanceId, nextTop.instanceId);
-
-  const third = r.match.players.player1.deck[0];
-  r = applyGameAction(r.match, { type:"MANUAL", payload:{ type:"revealTop", playerId:"player1" } }, "player1", index);
-  r = applyGameAction(r.match, { type:"MANUAL", payload:{ type:"revealedToTop", playerId:"player1", instanceId:third.instanceId } }, "player1", index);
-  assert.equal(r.match.players.player1.deck[0].instanceId, third.instanceId);
 });

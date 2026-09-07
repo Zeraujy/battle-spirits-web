@@ -584,3 +584,47 @@ textarea { width:100%; min-height:100px; resize:vertical; border:1px solid var(-
 .fatal-error-card h1 { font-size:32px; margin-top:8px; }
 .fatal-error-card p { color:var(--muted); line-height:1.6; }
 .fatal-error-card pre { max-height:220px; overflow:auto; white-space:pre-wrap; word-break:break-word; padding:12px; border:1px solid var(--line); border-radius:10px; background:#060d18; color:#ffb5ba; }
+
+/* ===== Player colors patch — preserves 2.0.1 online transport ===== */
+.phase-bar > div.current {
+  background: var(--phase-player-color, var(--accent)) !important;
+  border-color: var(--phase-player-color, var(--accent)) !important;
+  box-shadow: 0 0 22px color-mix(in srgb, var(--phase-player-color, var(--accent)) 42%, transparent) !important;
+}
+
+.player-color-picker {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(7, 19, 33, .58);
+}
+.player-color-picker > span { font-size: 13px; font-weight: 800; }
+.player-color-picker > div { display: flex; flex-wrap: wrap; gap: 9px; }
+.player-color-picker button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,.12);
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  transition: transform .14s ease, border-color .14s ease, box-shadow .14s ease;
+}
+.player-color-picker button.selected {
+  transform: scale(1.12);
+  border-color: #fff;
+  box-shadow: 0 0 0 3px rgba(255,255,255,.14), 0 0 18px currentColor;
+}
+.room-players > div {
+  position: relative;
+  border-top: 3px solid var(--room-player-color, var(--line));
+}
+.room-color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--room-player-color, var(--accent-2));
+  justify-self: center;
+  box-shadow: 0 0 10px var(--room-player-color, var(--accent-2));
+}
