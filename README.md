@@ -1,4 +1,4 @@
-# Battle Spirits Eternal Simulator — Rebuild 2.0
+# Battle Spirits Eternal Simulator — v2.2.0
 
 Reconstrução limpa do simulador Battle Spirits original, pensada para **Eternal**, modo local, online 1v1 e empacotamento em **Electron / instalador Windows (.exe)**.
 
