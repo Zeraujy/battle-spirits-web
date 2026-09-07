@@ -1,0 +1,5248 @@
+[
+  {
+    "id": "SD10-001",
+    "name": "Light-Bladra",
+    "nameEN": "Light-Bladra",
+    "namePT": "Light-Bladra",
+    "nameKey": "light-bladra",
+    "set": "SD10",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "[Charge] Your BP-destruction effect limits are increased by 1000.",
+      "ptBR": "[Charge] O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-001-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        }
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-001.webp"
+  },
+  {
+    "id": "SD10-002",
+    "name": "Glory-Guardler",
+    "nameEN": "Glory-Guardler",
+    "namePT": "Glory-Guardler",
+    "nameKey": "glory-guardler",
+    "set": "SD10",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 1,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "When this Spirit attacks, it gains +2000 BP for the battle. Lv2: [Charge].",
+      "ptBR": "Quando este Spirit atacar, ele recebe +2000 BP durante a batalha. Lv2: [Charge]."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-002-attack",
+        "event": "whenAttacks",
+        "actions": [
+          {
+            "type": "modifyBP",
+            "amount": 2000,
+            "duration": "battle"
+          }
+        ]
+      },
+      {
+        "id": "sd10-002-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        },
+        "levels": [
+          2
+        ]
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-002.webp"
+  },
+  {
+    "id": "SD10-003",
+    "name": "Mirage-Wyvern",
+    "nameEN": "Mirage-Wyvern",
+    "namePT": "Mirage-Wyvern",
+    "nameKey": "mirage-wyvern",
+    "set": "SD10",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "Lv2/Lv3: When this Spirit attacks, draw 1 card.",
+      "ptBR": "Lv2/Lv3: quando este Spirit atacar, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-003-attack-draw",
+        "event": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-003.webp"
+  },
+  {
+    "id": "SD10-004",
+    "name": "SteamDragon Seasmoker",
+    "nameEN": "SteamDragon Seasmoker",
+    "namePT": "SteamDragon Seasmoker",
+    "nameKey": "steamdragon-seasmoker",
+    "set": "SD10",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "When this Spirit is destroyed, destroy 1 opposing Spirit with 4000 BP or less.",
+      "ptBR": "Quando este Spirit for destruído, destrua 1 Spirit do oponente com 4000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-004-destroyed",
+        "event": "whenDestroyed",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 4000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 4000,
+              "chargeableBPDestruction": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-004.webp"
+  },
+  {
+    "id": "SD10-005",
+    "name": "Bronze-Wurm",
+    "nameEN": "Bronze-Wurm",
+    "namePT": "Bronze-Wurm",
+    "nameKey": "bronze-wurm",
+    "set": "SD10",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "[Charge] Your BP-destruction effect limits are increased by 1000.",
+      "ptBR": "[Charge] O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-005-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        }
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-005.webp"
+  },
+  {
+    "id": "SD10-006",
+    "name": "Mon-Dosoon",
+    "nameEN": "Mon-Dosoon",
+    "namePT": "Mon-Dosoon",
+    "nameKey": "mon-dosoon",
+    "set": "SD10",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-006.webp"
+  },
+  {
+    "id": "SD10-007",
+    "name": "FirewhirlDragon Firestorm",
+    "nameEN": "FirewhirlDragon Firestorm",
+    "namePT": "FirewhirlDragon Firestorm",
+    "nameKey": "firewhirldragon-firestorm",
+    "set": "SD10",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "When this Spirit attacks, destroy 1 opposing Spirit with 3000 BP or less.",
+      "ptBR": "Quando este Spirit atacar, destrua 1 Spirit do oponente com 3000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-007-attack",
+        "event": "whenAttacks",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 3000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 3000,
+              "chargeableBPDestruction": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-007.webp"
+  },
+  {
+    "id": "SD10-008",
+    "name": "Dragon-Annura",
+    "nameEN": "Dragon-Annura",
+    "namePT": "Dragon-Annura",
+    "nameKey": "dragon-annura",
+    "set": "SD10",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "During your Attack Step, all your Spirits with Charge gain +2000 BP. Lv2: [Charge].",
+      "ptBR": "Durante o seu Attack Step, todos os seus Spirits com Charge recebem +2000 BP. Lv2: [Charge]."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-008-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        },
+        "levels": [
+          2
+        ]
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-008.webp"
+  },
+  {
+    "id": "SD10-009",
+    "name": "Sunpillar-Dragon",
+    "nameEN": "Sunpillar-Dragon",
+    "namePT": "Sunpillar-Dragon",
+    "nameKey": "sunpillar-dragon",
+    "set": "SD10",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "When summoned, return 1 Astral Dragon Spirit/Brave card from your Trash to your hand. Lv2: [Charge].",
+      "ptBR": "Quando Invocado: devolva 1 carta de Spirit/Brave da família Astral Dragon do seu Trash para a sua mão. Lv2: [Charge]."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-009-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "selectTrashTarget",
+            "titlePT": "Sunpillar-Dragon",
+            "instructionPT": "Escolha 1 Spirit ou Brave do Trash para voltar à mão.",
+            "selector": {
+              "owner": "own",
+              "cardTypes": [
+                "spirit",
+                "brave"
+              ]
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd10-009-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        },
+        "levels": [
+          2
+        ]
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-009.webp"
+  },
+  {
+    "id": "SD10-010",
+    "name": "StormDragon Supercell-Dragoon",
+    "nameEN": "StormDragon Supercell-Dragoon",
+    "namePT": "StormDragon Supercell-Dragoon",
+    "nameKey": "stormdragon-supercell-dragoon",
+    "set": "SD10",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "When summoned, destroy up to 2 opposing Spirits with 4000 BP or less. Lv2/Lv3: When attacking, this Spirit gains +2000 BP for each of your Spirits with Charge. Lv3: specified attack.",
+      "ptBR": "Quando Invocado: destrua até 2 Spirits do oponente com 4000 BP ou menos. Lv2/Lv3: quando este Spirit atacar, ele recebe +2000 BP para cada um dos seus Spirits com Charge. Lv3: ataque especificado."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-010-summon",
+        "event": "whenSummoned",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 4000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 4000,
+              "chargeableBPDestruction": true
+            },
+            "maxTargets": 2,
+            "onConfirm": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-010.webp"
+  },
+  {
+    "id": "SD10-011",
+    "name": "Dustwhirl",
+    "nameEN": "Dustwhirl",
+    "namePT": "Dustwhirl",
+    "nameKey": "dustwhirl",
+    "set": "SD10",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon",
+      "Machine Dragon"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "When this Brave is summoned, destroy 1 opposing Nexus. Combine condition: Spirit with [Charge]. While combined, when this Spirit attacks, destroy 1 opposing Spirit with 3000 BP or less.",
+      "ptBR": "Quando este Brave for Invocado: destrua 1 Nexus do oponente. Condição de Combine: Spirit com [Charge]. Enquanto estiver combinado, quando este Spirit atacar, destrua 1 Spirit do oponente com 3000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-011-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Dustwhirl",
+            "instructionPT": "Escolha 1 Nexus do oponente para destruir.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd10-011-combined-attack",
+        "event": "whenAttacks",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 3000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 3000,
+              "chargeableBPDestruction": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ],
+        "requiresCombined": true
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-011.webp"
+  },
+  {
+    "id": "SD10-012",
+    "name": "Magma Spouting Star City",
+    "nameEN": "Magma Spouting Star City",
+    "namePT": "Magma Spouting Star City",
+    "nameKey": "magma-spouting-star-city",
+    "set": "SD10",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "During your Attack Step, all your Astral Dragon Spirits gain +2000 BP. Lv2 during either Attack Step: when your Spirit effect destroys an opposing Spirit, draw 1 card.",
+      "ptBR": "Durante o seu Attack Step, todos os seus Spirits da família Astral Dragon recebem +2000 BP. Lv2 durante qualquer Attack Step: quando o efeito de um dos seus Spirits destruir um Spirit do oponente, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-012.webp"
+  },
+  {
+    "id": "SD10-013",
+    "name": "Dragon Shuttle to the Heavens",
+    "nameEN": "Dragon Shuttle to the Heavens",
+    "namePT": "Dragon Shuttle to the Heavens",
+    "nameKey": "dragon-shuttle-to-the-heavens",
+    "set": "SD10",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "When your Life is reduced by an opposing Spirit attack, destroy that attacking Spirit if it has 5000 BP or less. Lv2: when your Spirit with Charge destroys an opposing Spirit, destroy 1 opposing Nexus.",
+      "ptBR": "Quando a sua Life for reduzida pelo ataque de um Spirit do oponente, destrua aquele Spirit atacante se ele tiver 5000 BP ou menos. Lv2: quando um dos seus Spirits com Charge destruir um Spirit do oponente, destrua 1 Nexus do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-013.webp"
+  },
+  {
+    "id": "SD10-014",
+    "name": "Twin Flame",
+    "nameEN": "Twin Flame",
+    "namePT": "Twin Flame",
+    "nameKey": "twin-flame",
+    "set": "SD10",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: destroy up to 2 opposing Spirits with 2000 BP or less.",
+      "ptBR": "Flash: destrua até 2 Spirits do oponente com 2000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-014-flash",
+        "event": "magicFlash",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 2000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 2000,
+              "chargeableBPDestruction": true
+            },
+            "maxTargets": 2,
+            "onConfirm": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-014.webp"
+  },
+  {
+    "id": "SD10-015",
+    "name": "Fire Wall",
+    "nameEN": "Fire Wall",
+    "namePT": "Fire Wall",
+    "nameKey": "fire-wall",
+    "set": "SD10",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash (opponent Attack Step): destroy 1 of your red Spirits; at the end of this battle, end the Attack Step.",
+      "ptBR": "Flash (durante o Attack Step do oponente): destrua 1 dos seus Spirits Vermelhos; ao final desta batalha, encerre o Attack Step."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-015.webp"
+  },
+  {
+    "id": "SD10-016",
+    "name": "Charge Draw",
+    "nameEN": "Charge Draw",
+    "namePT": "Charge Draw",
+    "nameKey": "charge-draw",
+    "set": "SD10",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: draw 2 cards, then reveal the top 2 cards; add all Spirit/Brave cards with Charge to your hand and return the rest to the top in any order. Flash: 1 Spirit gains +3000 BP this turn.",
+      "ptBR": "Main: compre 2 cartas. Depois, revele as 2 cartas do topo do seu deck; adicione à sua mão todas as cartas de Spirit/Brave com Charge e devolva as demais ao topo em qualquer ordem. Flash: 1 Spirit recebe +3000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-016-main",
+        "event": "magicMain",
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "id": "sd10-016-flash",
+        "event": "magicFlash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Charge Draw — Flash",
+            "instructionPT": "Escolha 1 Spirit para receber +3000 BP neste turno.",
+            "selector": {
+              "owner": "any",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": 3000,
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-016.webp"
+  },
+  {
+    "id": "SD10-X01",
+    "name": "ShineDragon Shining-Dragon",
+    "nameEN": "ShineDragon Shining-Dragon",
+    "namePT": "ShineDragon Shining-Dragon",
+    "nameKey": "shinedragon-shining-dragon",
+    "set": "SD10",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 8000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 11000
+      }
+    ],
+    "effectText": {
+      "en": "When summoned, you may summon 1 red Brave from your hand without paying its cost. Lv2/Lv3: when attacking, destroy 1 opposing Spirit with 5000 BP or less. Lv3: [Charge].",
+      "ptBR": "Quando Invocado: você pode Invocar 1 Brave Vermelho da sua mão sem pagar seu custo. Lv2/Lv3: quando este Spirit atacar, destrua 1 Spirit do oponente com 5000 BP ou menos. Lv3: [Charge]."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-x01-attack",
+        "event": "whenAttacks",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 5000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 5000,
+              "chargeableBPDestruction": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ],
+        "levels": [
+          2,
+          3
+        ]
+      },
+      {
+        "id": "sd10-x01-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        },
+        "levels": [
+          3
+        ]
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-X01.webp"
+  },
+  {
+    "id": "SD10-X02",
+    "name": "ShiningSacredSword Shining-Sword",
+    "nameEN": "ShiningSacredSword Shining-Sword",
+    "namePT": "ShiningSacredSword Shining-Sword",
+    "nameKey": "shiningsacredsword-shining-sword",
+    "set": "SD10",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 7,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Sword Blade"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "When this Brave is summoned, destroy all opposing Spirits with 3000 BP or less and draw 1 card for each destroyed. Lv1: [Charge]. Combine condition: cost 5 or more. While combined: [Charge].",
+      "ptBR": "Quando este Brave for Invocado: destrua todos os Spirits do oponente com 3000 BP ou menos e compre 1 carta para cada Spirit destruído. Lv1: [Charge]. Condição de Combine: custo 5 ou mais. Enquanto estiver combinado: [Charge]."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd10-x02-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "destroyAllMatching",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 3000,
+              "chargeableBPDestruction": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd10-x02-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        }
+      },
+      {
+        "id": "sd10-x02-combined-charge",
+        "event": "continuous",
+        "requiresCombined": true,
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        }
+      }
+    ],
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-X02.webp"
+  },
+  {
+    "id": "SD17-001",
+    "name": "Pinacochasaurus",
+    "nameEN": "Pinacochasaurus",
+    "namePT": "Pinacochasaurus",
+    "nameKey": "pinacochasaurus",
+    "set": "SD17",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 1,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This Spirit is also treated as Green.",
+      "ptBR": "Este Spirit também é tratado como Verde."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-001-green",
+        "event": "continuous",
+        "modifiers": {
+          "addColors": [
+            "green"
+          ],
+          "symbolAlternatives": [
+            "green"
+          ]
+        }
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-001.webp"
+  },
+  {
+    "id": "SD17-002",
+    "name": "Dark-Dinonychusaw",
+    "nameEN": "Dark-Dinonychusaw",
+    "namePT": "Dark-Dinonychusaw",
+    "nameKey": "dark-dinonychusaw",
+    "set": "SD17",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "Lv2/Lv3: this Spirit is also treated as Green.",
+      "ptBR": "Lv2/Lv3: este Spirit também é tratado como Verde."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-002-green",
+        "event": "continuous",
+        "levels": [
+          2,
+          3
+        ],
+        "modifiers": {
+          "addColors": [
+            "green"
+          ],
+          "symbolAlternatives": [
+            "green"
+          ]
+        }
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-002.webp"
+  },
+  {
+    "id": "SD17-003",
+    "name": "SwordDragon Stegodita",
+    "nameEN": "SwordDragon Stegodita",
+    "namePT": "SwordDragon Stegodita",
+    "nameKey": "sworddragon-stegodita",
+    "set": "SD17",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "[Confront].",
+      "ptBR": "[Confront]."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-003-confront",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "confront"
+          ]
+        }
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-003.webp"
+  },
+  {
+    "id": "SD17-004",
+    "name": "Bronswordsaurus",
+    "nameEN": "Bronswordsaurus",
+    "namePT": "Bronswordsaurus",
+    "nameKey": "bronswordsaurus",
+    "set": "SD17",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "When summoned, destroy 1 opposing Nexus. [Rush: Green] Place 1 Core from the Void on this Spirit.",
+      "ptBR": "Quando Invocado: destrua 1 Nexus do oponente. [Rush: Green] Coloque 1 Core do Void neste Spirit."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-004-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Bronswordsaurus",
+            "instructionPT": "Escolha 1 Nexus do oponente para destruir.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "controlsSymbolColor",
+              "color": "green"
+            },
+            "actions": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Rush — Green",
+                "instructionPT": "Escolha este Spirit para receber 1 Core do Void.",
+                "selector": {
+                  "owner": "own",
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "onSelect": {
+                  "type": "addCoreFromVoid",
+                  "amount": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-004.webp"
+  },
+  {
+    "id": "SD17-005",
+    "name": "FeatherDragon Pedpenner",
+    "nameEN": "FeatherDragon Pedpenner",
+    "namePT": "FeatherDragon Pedpenner",
+    "nameKey": "featherdragon-pedpenner",
+    "set": "SD17",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Terra Dragon",
+      "Flying Fang"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "During your Attack Step, all your Terra Dragon Spirits gain +2000 BP.",
+      "ptBR": "Durante o seu Attack Step, todos os seus Spirits da família Terra Dragon recebem +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-005.webp"
+  },
+  {
+    "id": "SD17-006",
+    "name": "FierceDragon Lambeos",
+    "nameEN": "FierceDragon Lambeos",
+    "namePT": "FierceDragon Lambeos",
+    "nameKey": "fiercedragon-lambeos",
+    "set": "SD17",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "[Confront]. Lv2: when this Spirit attacks, draw 1 card.",
+      "ptBR": "[Confront]. Lv2: quando este Spirit atacar, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-006-confront",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "confront"
+          ]
+        }
+      },
+      {
+        "id": "sd17-006-draw",
+        "event": "whenAttacks",
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-006.webp"
+  },
+  {
+    "id": "SD17-007",
+    "name": "Pteraslasher",
+    "nameEN": "Pteraslasher",
+    "namePT": "Pteraslasher",
+    "nameKey": "pteraslasher",
+    "set": "SD17",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon",
+      "Flying Fang"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "When this Spirit attacks, it gains +3000 BP. [Rush: Green] Place 1 Core from the Void on this Spirit.",
+      "ptBR": "Quando este Spirit atacar, ele recebe +3000 BP durante a batalha. [Rush: Green] Coloque 1 Core do Void neste Spirit."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-007-attack",
+        "event": "whenAttacks",
+        "actions": [
+          {
+            "type": "modifyBP",
+            "amount": 3000,
+            "duration": "battle"
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-007.webp"
+  },
+  {
+    "id": "SD17-008",
+    "name": "Monoforcesaurus",
+    "nameEN": "Monoforcesaurus",
+    "namePT": "Monoforcesaurus",
+    "nameKey": "monoforcesaurus",
+    "set": "SD17",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "[Confront]. [Rush: Green] On its first attack this turn, refresh this Spirit.",
+      "ptBR": "[Confront]. [Rush: Green] No primeiro ataque deste Spirit neste turno, dê Refresh nele."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-008-confront",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "confront"
+          ]
+        }
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-008.webp"
+  },
+  {
+    "id": "SD17-009",
+    "name": "PiercingDragon Styragorn",
+    "nameEN": "PiercingDragon Styragorn",
+    "namePT": "PiercingDragon Styragorn",
+    "nameKey": "piercingdragon-styragorn",
+    "set": "SD17",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "[Confront]. Lv2/Lv3: when this Spirit attacks, destroy 1 opposing Spirit with BP equal to or less than this Spirit.",
+      "ptBR": "[Confront]. Lv2/Lv3: quando este Spirit atacar, destrua 1 Spirit do oponente com BP igual ou menor que o BP deste Spirit."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-009-confront",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "confront"
+          ]
+        }
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-009.webp"
+  },
+  {
+    "id": "SD17-010",
+    "name": "Lancemosaurus",
+    "nameEN": "Lancemosaurus",
+    "namePT": "Lancemosaurus",
+    "nameKey": "lancemosaurus",
+    "set": "SD17",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-010.webp"
+  },
+  {
+    "id": "SD17-011",
+    "name": "ArmedMachineDragon Silveed",
+    "nameEN": "ArmedMachineDragon Silveed",
+    "namePT": "ArmedMachineDragon Silveed",
+    "nameKey": "armedmachinedragon-silveed",
+    "set": "SD17",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon",
+      "Machine Dragon"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "When this Brave is summoned, return 1 Spirit card with Rush from your Trash to your hand. Combine condition: Terra Dragon. While combined, the Spirit gains [Confront].",
+      "ptBR": "Quando este Brave for Invocado: devolva 1 carta de Spirit com Rush do seu Trash para a sua mão. Condição de Combine: Terra Dragon. Enquanto estiver combinado, o Spirit recebe [Confront]."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-011-combined-confront",
+        "event": "continuous",
+        "requiresCombined": true,
+        "modifiers": {
+          "keywords": [
+            "confront"
+          ]
+        }
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-011.webp"
+  },
+  {
+    "id": "SD17-012",
+    "name": "Primeval Forest",
+    "nameEN": "Primeval Forest",
+    "namePT": "Primeval Forest",
+    "nameKey": "primeval-forest",
+    "set": "SD17",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "During your Attack Step, when only an opposing Spirit is destroyed by BP comparison, draw 1 card. Lv2: when one of your Spirits is destroyed by an opposing Spirit, return 1 Terra Dragon Spirit card from your Trash to your hand.",
+      "ptBR": "Durante o seu Attack Step, quando apenas um Spirit do oponente for destruído por comparação de BP, compre 1 carta. Lv2: quando um dos seus Spirits for destruído por um Spirit do oponente, devolva 1 carta de Spirit da família Terra Dragon do seu Trash para a sua mão."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-012.webp"
+  },
+  {
+    "id": "SD17-013",
+    "name": "Dark Galaxy of Dusk",
+    "nameEN": "Dark Galaxy of Dusk",
+    "namePT": "Dark Galaxy of Dusk",
+    "nameKey": "dark-galaxy-of-dusk",
+    "set": "SD17",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red",
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [
+      "red",
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "During your Attack Step, all your Terra Dragon Spirits gain +2000 BP. Lv2: during your End Step, refresh 1 Terra Dragon Spirit.",
+      "ptBR": "Durante o seu Attack Step, todos os seus Spirits da família Terra Dragon recebem +2000 BP. Lv2: durante o seu End Step, dê Refresh em 1 Spirit da família Terra Dragon."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-013.webp"
+  },
+  {
+    "id": "SD17-014",
+    "name": "Jurassic Flame",
+    "nameEN": "Jurassic Flame",
+    "namePT": "Jurassic Flame",
+    "nameKey": "jurassic-flame",
+    "set": "SD17",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: destroy 1 opposing Spirit with 3000 BP or less. [Rush: Green] Exhaust 1 opposing Spirit.",
+      "ptBR": "Flash: destrua 1 Spirit do oponente com 3000 BP ou menos. [Rush: Green] Dê Exhaust em 1 Spirit do oponente."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-014-flash",
+        "event": "magicFlash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Jurassic Flame",
+            "instructionPT": "Escolha 1 Spirit do oponente com 3000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 3000
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-014.webp"
+  },
+  {
+    "id": "SD17-015",
+    "name": "Dino Crisis",
+    "nameEN": "Dino Crisis",
+    "namePT": "Dino Crisis",
+    "nameKey": "dino-crisis",
+    "set": "SD17",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: destroy any number of opposing Spirits with a total BP of 5000 or less. [Rush: Green] Refresh 2 of your Spirits with one symbol.",
+      "ptBR": "Flash: destrua qualquer quantidade de Spirits do oponente cuja soma de BP seja 5000 ou menos. [Rush: Green] Dê Refresh em 2 dos seus Spirits com 1 símbolo."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-015-flash",
+        "event": "magicFlash",
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "titlePT": "Dino Crisis",
+            "instructionPT": "Escolha Spirits do oponente com total de até 5000 BP.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "maxTotalBP": 5000,
+            "allowZero": true,
+            "onConfirm": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-015.webp"
+  },
+  {
+    "id": "SD17-016",
+    "name": "Rush Draw",
+    "nameEN": "Rush Draw",
+    "namePT": "Rush Draw",
+    "nameKey": "rush-draw",
+    "set": "SD17",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: draw 2 cards, then reveal the top 2 cards and add 1 Spirit/Brave with Rush to your hand; return the rest to the top in any order. Flash: 1 Spirit gains +3000 BP this turn.",
+      "ptBR": "Main: compre 2 cartas. Depois, revele as 2 cartas do topo do seu deck e adicione 1 Spirit/Brave com Rush à sua mão; devolva as demais ao topo do deck em qualquer ordem. Flash: 1 Spirit recebe +3000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-016-main",
+        "event": "magicMain",
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "id": "sd17-016-flash",
+        "event": "magicFlash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Rush Draw — Flash",
+            "instructionPT": "Escolha 1 Spirit para receber +3000 BP neste turno.",
+            "selector": {
+              "owner": "any",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": 3000,
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-016.webp"
+  },
+  {
+    "id": "SD17-X01",
+    "name": "DarkDragon Dark-Tyrannosaura",
+    "nameEN": "DarkDragon Dark-Tyrannosaura",
+    "namePT": "DarkDragon Dark-Tyrannosaura",
+    "nameKey": "darkdragon-dark-tyrannosaura",
+    "set": "SD17",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "When this Spirit attacks, destroy 1 opposing Spirit with BP equal to or less than this Spirit. [Rush: Green] If only the opposing Spirit is destroyed by BP comparison, move 1 Core from opponent Life to Reserve. Lv2/Lv3: all your Terra Dragon Spirits gain +3000 BP during your Attack Step.",
+      "ptBR": "Quando este Spirit atacar, destrua 1 Spirit do oponente com BP igual ou menor que o BP deste Spirit. [Rush: Green] Se apenas o Spirit do oponente for destruído por comparação de BP, mova 1 Core da Life do oponente para a Reserve dele. Lv2/Lv3: durante o seu Attack Step, todos os seus Spirits da família Terra Dragon recebem +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-X01.webp"
+  },
+  {
+    "id": "SD17-X02",
+    "name": "DarknessDemonSword Dark-Blade",
+    "nameEN": "DarknessDemonSword Dark-Blade",
+    "namePT": "DarknessDemonSword Dark-Blade",
+    "nameKey": "darknessdemonsword-dark-blade",
+    "set": "SD17",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Sword Blade"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "When this Brave is summoned, destroy 1 opposing Nexus; if destroyed this way, draw 1 card. Combine condition: cost 5 or more. While combined, when the Spirit attacks it may make a specified attack.",
+      "ptBR": "Quando este Brave for Invocado: destrua 1 Nexus do oponente; se ele for destruído por este efeito, compre 1 carta. Condição de Combine: custo 5 ou mais. Enquanto estiver combinado, quando o Spirit atacar, ele pode realizar um ataque especificado."
+    },
+    "effects": [],
+    "abilities": [
+      {
+        "id": "sd17-x02-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Dark-Blade",
+            "instructionPT": "Escolha 1 Nexus do oponente para destruir.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterSelect": [
+              {
+                "type": "draw",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-X02.webp"
+  },
+  {
+    "id": "SD19-001",
+    "name": "Fizard",
+    "nameEN": "Fizard",
+    "namePT": "Fizard",
+    "nameKey": "fizard",
+    "set": "SD19",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Winged Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-001.webp"
+  },
+  {
+    "id": "SD19-002",
+    "name": "Mugendra",
+    "nameEN": "Mugendra",
+    "namePT": "Mugendra",
+    "nameKey": "mugendra",
+    "set": "SD19",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 1,
+    "reduction": [
+      "red",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Incarnate"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "At all levels, this Spirit's color and symbol are also treated as White.",
+      "ptBR": "Em todos os níveis, a cor e o símbolo deste Spirit também são tratados como Branco."
+    },
+    "effects": [
+      {
+        "id": "sd19-002-color-symbol",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Color / Symbol",
+          "ptBR": "Cor / Símbolo"
+        },
+        "text": {
+          "en": "This Spirit's color and symbol are also treated as White.",
+          "ptBR": "A cor e o símbolo deste Spirit também são tratados como Branco."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd19-002-continuous-white",
+        "event": "continuous",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "modifiers": {
+          "addColors": [
+            "white"
+          ],
+          "addSymbols": [
+            "white"
+          ]
+        }
+      }
+    ],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-002.webp"
+  },
+  {
+    "id": "SD19-003",
+    "name": "Rookie-Ryuuman",
+    "nameEN": "Rookie-Ryuuman",
+    "namePT": "Rookie-Ryuuman",
+    "nameKey": "rookie-ryuuman",
+    "set": "SD19",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Dragonfolk"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 When This Spirit Attacks: Draw 1 card.",
+      "ptBR": "LV2/LV3 Quando Este Spirit Ataca: Compre 1 carta."
+    },
+    "effects": [
+      {
+        "id": "sd19-003-when-attacks",
+        "type": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Draw 1 card.",
+          "ptBR": "Compre 1 carta."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd19-003-when-attacks-draw",
+        "event": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "labelPT": "Quando Este Spirit Ataca",
+        "labelEN": "When This Spirit Attacks",
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-003.webp"
+  },
+  {
+    "id": "SD19-004",
+    "name": "Buzz-Ryuuman",
+    "nameEN": "Buzz-Ryuuman",
+    "namePT": "Buzz-Ryuuman",
+    "nameKey": "buzz-ryuuman",
+    "set": "SD19",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Dragonfolk"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Destroy one opposing Spirit with 4000 BP or less.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Destrua 1 Spirit do oponente com 4000 BP ou menos."
+    },
+    "effects": [
+      {
+        "id": "sd19-004-when-destroyed",
+        "type": "whenDestroyed",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "When This Spirit Is Destroyed",
+          "ptBR": "Quando Este Spirit For Destruído"
+        },
+        "text": {
+          "en": "Destroy one opposing Spirit with 4000 BP or less.",
+          "ptBR": "Destrua 1 Spirit do oponente com 4000 BP ou menos."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd19-004-when-destroyed",
+        "event": "whenDestroyed",
+        "levels": [
+          1,
+          2
+        ],
+        "labelPT": "Quando Este Spirit For Destruído",
+        "labelEN": "When This Spirit Is Destroyed",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Buzz-Ryuuman — efeito de destruição",
+            "instructionPT": "Escolha 1 Spirit do oponente com 4000 BP ou menos para destruir.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 4000
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-004.webp"
+  },
+  {
+    "id": "SD19-005",
+    "name": "Edge-Wolf",
+    "nameEN": "Edge-Wolf",
+    "namePT": "Edge-Wolf",
+    "nameKey": "edge-wolf",
+    "set": "SD19",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Imperial Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: This Spirit gains +3000 BP for the battle. If you control an Ultimate, it gains an additional +3000 BP.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Este Spirit recebe +3000 BP durante a batalha. Se você controlar um Ultimate, ele recebe mais +3000 BP."
+    },
+    "effects": [
+      {
+        "id": "sd19-005-when-attacks",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "This Spirit gains +3000 BP. If you control an Ultimate, it gains an additional +3000 BP.",
+          "ptBR": "Este Spirit recebe +3000 BP. Se você controlar um Ultimate, ele recebe mais +3000 BP."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-005.webp"
+  },
+  {
+    "id": "SD19-006",
+    "name": "Dragoknight",
+    "nameEN": "Dragoknight",
+    "namePT": "Dragoknight",
+    "nameKey": "dragoknight",
+    "set": "SD19",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Dragonfolk"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: If you control an Ultimate, destroy one opposing Nexus. LV1/LV2 When This Spirit Attacks: Draw 1 card.",
+      "ptBR": "LV1/LV2 Quando Invocado: Se você controlar um Ultimate, destrua 1 Nexus do oponente. LV1/LV2 Quando Este Spirit Ataca: Compre 1 carta."
+    },
+    "effects": [
+      {
+        "id": "sd19-006-when-summoned",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "If you control an Ultimate, destroy one opposing Nexus.",
+          "ptBR": "Se você controlar um Ultimate, destrua 1 Nexus do oponente."
+        }
+      },
+      {
+        "id": "sd19-006-when-attacks",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Draw 1 card.",
+          "ptBR": "Compre 1 carta."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd19-006-when-summoned",
+        "event": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "labelPT": "Quando Invocado",
+        "labelEN": "When Summoned",
+        "condition": {
+          "type": "controlsCardType",
+          "cardType": "ultimate"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Dragoknight — Quando Invocado",
+            "instructionPT": "Você controla um Ultimate. Escolha 1 Nexus do oponente para destruir.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd19-006-when-attacks-draw",
+        "event": "whenAttacks",
+        "levels": [
+          1,
+          2
+        ],
+        "labelPT": "Quando Este Spirit Ataca",
+        "labelEN": "When This Spirit Attacks",
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-006.webp"
+  },
+  {
+    "id": "SD19-007",
+    "name": "Aizendragon",
+    "nameEN": "Aizendragon",
+    "namePT": "Aizendragon",
+    "nameKey": "aizendragon",
+    "set": "SD19",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Dragonfolk"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Battles: Destroy one opposing Spirit with 3000 BP or less. If you control an Ultimate, also draw 1 card.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Batalha: Destrua 1 Spirit do oponente com 3000 BP ou menos. Se você controlar um Ultimate, também compre 1 carta."
+    },
+    "effects": [
+      {
+        "id": "sd19-007-when-battles",
+        "type": "whenBattles",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenBattles",
+        "title": {
+          "en": "When This Spirit Battles",
+          "ptBR": "Quando Este Spirit Batalha"
+        },
+        "text": {
+          "en": "Destroy one opposing Spirit with 3000 BP or less. If you control an Ultimate, also draw 1 card.",
+          "ptBR": "Destrua 1 Spirit do oponente com 3000 BP ou menos. Se você controlar um Ultimate, também compre 1 carta."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-007.webp"
+  },
+  {
+    "id": "SD19-008",
+    "name": "Ultimate-Goradon",
+    "nameEN": "Ultimate-Goradon",
+    "namePT": "Ultimate-Goradon",
+    "nameKey": "ultimate-goradon",
+    "set": "SD19",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 3,
+    "families": [
+      "Incarnate",
+      "Reptile Beast"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 9000
+      },
+      {
+        "level": 5,
+        "cores": 5,
+        "bp": 11000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one Red Spirit. LV4/LV5 Ultimate Trigger When This Ultimate Attacks: On a hit, the opponent must block if possible, but their Ultimates are not required to block. If an opposing Spirit blocks, move 1 core from the opponent's Life to their Reserve.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Vermelho. LV4/LV5 Ultimate Trigger Quando Este Ultimate Ataca: Em um acerto, o oponente deve bloquear se puder, mas os Ultimates dele não são obrigados a bloquear. Se um Spirit do oponente bloquear, mova 1 core da Life do oponente para a Reserve dele."
+    },
+    "effects": [
+      {
+        "id": "sd19-008-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one Red Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Vermelho."
+        }
+      },
+      {
+        "id": "sd19-008-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          4,
+          5
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, the opponent must block if possible, but their Ultimates are not required to block. If an opposing Spirit blocks, move 1 core from the opponent's Life to their Reserve.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, o oponente deve bloquear se puder, mas os Ultimates dele não são obrigados a bloquear. Se um Spirit do oponente bloquear, mova 1 core da Life do oponente para a Reserve dele."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-008.webp"
+  },
+  {
+    "id": "SD19-009",
+    "name": "The Ultimate Soldier Dragno",
+    "nameEN": "The Ultimate Soldier Dragno",
+    "namePT": "The Ultimate Soldier Dragno",
+    "nameKey": "the-ultimate-soldier-dragno",
+    "set": "SD19",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Incarnate",
+      "Dragonfolk"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 8000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 12000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one Red Spirit. LV3/LV4 Ultimate Trigger When This Ultimate Attacks: On a hit, the opponent must block if possible, but their Ultimates are not required to block. If an opposing Spirit blocks, move 1 core from the opponent's Life to their Reserve.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Vermelho. LV3/LV4 Ultimate Trigger Quando Este Ultimate Ataca: Em um acerto, o oponente deve bloquear se puder, mas os Ultimates dele não são obrigados a bloquear. Se um Spirit do oponente bloquear, mova 1 core da Life do oponente para a Reserve dele."
+    },
+    "effects": [
+      {
+        "id": "sd19-009-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one Red Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Vermelho."
+        }
+      },
+      {
+        "id": "sd19-009-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, the opponent must block if possible, but their Ultimates are not required to block. If an opposing Spirit blocks, move 1 core from the opponent's Life to their Reserve.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, o oponente deve bloquear se puder, mas os Ultimates dele não são obrigados a bloquear. Se um Spirit do oponente bloquear, mova 1 core da Life do oponente para a Reserve dele."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-009.webp"
+  },
+  {
+    "id": "SD19-010",
+    "name": "Ultimate Ma-Gwo",
+    "nameEN": "Ultimate Ma-Gwo",
+    "namePT": "Ultimate Ma-Gwo",
+    "nameKey": "ultimate-ma-gwo",
+    "set": "SD19",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 2,
+    "families": [
+      "Incarnate",
+      "Dragonfolk",
+      "Ancient Dragon"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 9000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 13000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one Red Spirit. LV3/LV4 When Summoned: Destroy one opposing Spirit with 6000 BP or less. LV3/LV4 Ultimate Trigger When This Ultimate Attacks: On a hit, the opponent must block if possible, but their Ultimates are not required to block. If an opposing Spirit blocks, move 1 core from the opponent's Life to their Reserve.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Vermelho. LV3/LV4 Quando Invocado: Destrua 1 Spirit do oponente com 6000 BP ou menos. LV3/LV4 Ultimate Trigger Quando Este Ultimate Ataca: Em um acerto, o oponente deve bloquear se puder, mas os Ultimates dele não são obrigados a bloquear. Se um Spirit do oponente bloquear, mova 1 core da Life do oponente para a Reserve dele."
+    },
+    "effects": [
+      {
+        "id": "sd19-010-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one Red Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Vermelho."
+        }
+      },
+      {
+        "id": "sd19-010-when-summoned",
+        "type": "whenSummoned",
+        "levels": [
+          3,
+          4
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Destroy one opposing Spirit with 6000 BP or less.",
+          "ptBR": "Destrua 1 Spirit do oponente com 6000 BP ou menos."
+        }
+      },
+      {
+        "id": "sd19-010-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, the opponent must block if possible, but their Ultimates are not required to block. If an opposing Spirit blocks, move 1 core from the opponent's Life to their Reserve.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, o oponente deve bloquear se puder, mas os Ultimates dele não são obrigados a bloquear. Se um Spirit do oponente bloquear, mova 1 core da Life do oponente para a Reserve dele."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-010.webp"
+  },
+  {
+    "id": "SD19-011",
+    "name": "Vila dos Caçadores",
+    "nameEN": "The Village of Hunters",
+    "namePT": "Vila dos Caçadores",
+    "nameKey": "the-village-of-hunters",
+    "set": "SD19",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": null
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": null
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All of your Red Spirits and Ultimates gain +2000 BP. LV2 During the Opponent's Attack Step: When the opponent reduces your Life, destroy one opposing Spirit with 4000 BP or less; if you control an Ultimate, you may destroy one with 5000 BP or less instead.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits e Ultimates Vermelhos recebem +2000 BP. LV2 Durante o Attack Step do Oponente: Quando o oponente reduzir sua Life, destrua 1 Spirit dele com 4000 BP ou menos; se você controlar um Ultimate, destrua 1 com 5000 BP ou menos em vez disso."
+    },
+    "effects": [
+      {
+        "id": "sd19-011-own-attack-step",
+        "type": "attackStep",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "During Your Attack Step",
+          "ptBR": "Durante Seu Attack Step"
+        },
+        "text": {
+          "en": "All of your Red Spirits and Ultimates gain +2000 BP.",
+          "ptBR": "Todos os seus Spirits e Ultimates Vermelhos recebem +2000 BP."
+        }
+      },
+      {
+        "id": "sd19-011-opponent-attack-step",
+        "type": "opponentAttackStep",
+        "levels": [
+          2
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "During the Opponent's Attack Step",
+          "ptBR": "Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "When the opponent reduces your Life, destroy one opposing Spirit with 4000 BP or less. If you control an Ultimate, destroy one opposing Spirit with 5000 BP or less instead.",
+          "ptBR": "Quando o oponente reduzir sua Life, destrua 1 Spirit do oponente com 4000 BP ou menos. Se você controlar um Ultimate, destrua 1 Spirit do oponente com 5000 BP ou menos em vez disso."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-011.webp"
+  },
+  {
+    "id": "SD19-012",
+    "name": "Céu do Amanhecer Vermelho",
+    "nameEN": "The Red Dawn Sky",
+    "namePT": "Céu do Amanhecer Vermelho",
+    "nameKey": "the-red-dawn-sky",
+    "set": "SD19",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": null
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": null
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: If your first attack of the turn is made by one of your Ultimates, draw 1 card. LV2 During Your Attack Step: When an opposing Spirit is destroyed by BP comparison, destroy one opposing Nexus.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Se o primeiro ataque do turno for feito por um dos seus Ultimates, compre 1 carta. LV2 Durante Seu Attack Step: Quando um Spirit do oponente for destruído por comparação de BP, destrua 1 Nexus do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd19-012-first-ultimate-attack",
+        "type": "attackStep",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "During Your Attack Step",
+          "ptBR": "Durante Seu Attack Step"
+        },
+        "text": {
+          "en": "If your first attack of the turn is made by one of your Ultimates, draw 1 card.",
+          "ptBR": "Se o primeiro ataque do turno for feito por um dos seus Ultimates, compre 1 carta."
+        }
+      },
+      {
+        "id": "sd19-012-bp-destruction",
+        "type": "whenOpponentSpiritDestroyedByBP",
+        "levels": [
+          2
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "LV2 During Your Attack Step",
+          "ptBR": "LV2 Durante Seu Attack Step"
+        },
+        "text": {
+          "en": "When an opposing Spirit is destroyed by BP comparison, destroy one opposing Nexus.",
+          "ptBR": "Quando um Spirit do oponente for destruído por comparação de BP, destrua 1 Nexus do oponente."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-012.webp"
+  },
+  {
+    "id": "SD19-013",
+    "name": "Neo-Double Draw",
+    "nameEN": "Neo-Double Draw",
+    "namePT": "Neo-Double Draw",
+    "nameKey": "neo-double-draw",
+    "set": "SD19",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Draw 2 cards. If you control an Ultimate, draw 1 additional card. Flash: One Spirit or Ultimate gains +1000 BP for this turn.",
+      "ptBR": "Main: Compre 2 cartas. Se você controlar um Ultimate, compre mais 1 carta. Flash: 1 Spirit ou Ultimate recebe +1000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd19-013-main",
+        "type": "main",
+        "levels": [],
+        "timing": "main",
+        "title": {
+          "en": "Main",
+          "ptBR": "Main"
+        },
+        "text": {
+          "en": "Draw 2 cards. If you control an Ultimate, draw 1 additional card.",
+          "ptBR": "Compre 2 cartas. Se você controlar um Ultimate, compre mais 1 carta."
+        }
+      },
+      {
+        "id": "sd19-013-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "One Spirit or Ultimate gains +1000 BP for this turn.",
+          "ptBR": "1 Spirit ou Ultimate recebe +1000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd19-013-magic-main",
+        "event": "magicMain",
+        "labelPT": "Main",
+        "labelEN": "Main",
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 2
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "controlsCardType",
+              "cardType": "ultimate"
+            },
+            "actions": [
+              {
+                "type": "draw",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sd19-013-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Neo-Double Draw — Flash",
+            "instructionPT": "Escolha 1 Spirit ou Ultimate para receber +1000 BP durante este turno.",
+            "selector": {
+              "owner": "any",
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": 1000,
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-013.webp"
+  },
+  {
+    "id": "SD19-014",
+    "name": "Blazing Burst",
+    "nameEN": "Blazing Burst",
+    "namePT": "Blazing Burst",
+    "nameKey": "blazing-burst",
+    "set": "SD19",
+    "cardType": "magic",
+    "subtypes": [
+      "burst"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Burst — After Your Life Decreases: Destroy one opposing Spirit with 5000 BP or less. Then you may pay this card's cost to activate its Flash effect. Flash: Destroy one of your Red Spirits. For the rest of this turn, attacks by opposing Spirits can reduce your Life by no more than 1 at a time.",
+      "ptBR": "Burst — Após Sua Life Diminuir: Destrua 1 Spirit do oponente com 5000 BP ou menos. Depois, você pode pagar o custo desta carta para ativar seu efeito Flash. Flash: Destrua 1 dos seus Spirits Vermelhos. Pelo restante deste turno, ataques de Spirits do oponente não podem reduzir sua Life em mais de 1 por vez."
+    },
+    "effects": [
+      {
+        "id": "sd19-014-burst",
+        "type": "burst",
+        "levels": [],
+        "timing": "afterLifeDecreases",
+        "title": {
+          "en": "Burst: After Your Life Decreases",
+          "ptBR": "Burst: Após Sua Life Diminuir"
+        },
+        "text": {
+          "en": "Destroy one opposing Spirit with 5000 BP or less. Then you may pay this card's cost to activate its Flash effect.",
+          "ptBR": "Destrua 1 Spirit do oponente com 5000 BP ou menos. Depois, você pode pagar o custo desta carta para ativar seu efeito Flash."
+        }
+      },
+      {
+        "id": "sd19-014-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Destroy one of your Red Spirits. For the rest of this turn, attacks by opposing Spirits can reduce your Life by no more than 1 at a time.",
+          "ptBR": "Destrua 1 dos seus Spirits Vermelhos. Pelo restante deste turno, ataques de Spirits do oponente não podem reduzir sua Life em mais de 1 por vez."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd19-014-burst-life",
+        "event": "burstLifeDecrease",
+        "labelPT": "Burst — Após sua Life diminuir",
+        "labelEN": "Burst — After your Life decreases",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Blazing Burst",
+            "instructionPT": "Escolha 1 Spirit do oponente com 5000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 5000
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd19-014-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Blazing Burst — Flash",
+            "instructionPT": "Escolha 1 dos seus Spirits Vermelhos para destruir.",
+            "selector": {
+              "owner": "own",
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "red"
+              ]
+            },
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterSelect": [
+              {
+                "type": "setTurnProtection",
+                "protection": {
+                  "type": "limitSpiritAttackLifeDamage",
+                  "maxDamage": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-014.webp"
+  },
+  {
+    "id": "SD19-015",
+    "name": "Flame Spark",
+    "nameEN": "Flame Spark",
+    "namePT": "Flame Spark",
+    "nameKey": "flame-spark",
+    "set": "SD19",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Destroy any number of opposing Spirits whose combined BP is 5000 or less. If this effect destroys at least one Spirit, return one Spirit card from your Trash to your hand.",
+      "ptBR": "Flash: Destrua qualquer quantidade de Spirits do oponente cuja soma de BP seja 5000 ou menos. Se este efeito destruir pelo menos 1 Spirit, devolva 1 carta de Spirit do seu Trash para sua mão."
+    },
+    "effects": [
+      {
+        "id": "sd19-015-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Destroy any number of opposing Spirits whose combined BP is 5000 or less. If this effect destroys at least one Spirit, return one Spirit card from your Trash to your hand.",
+          "ptBR": "Destrua qualquer quantidade de Spirits do oponente cuja soma de BP seja 5000 ou menos. Se este efeito destruir pelo menos 1 Spirit, devolva 1 carta de Spirit do seu Trash para sua mão."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd19-015-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "titlePT": "Flame Spark",
+            "instructionPT": "Escolha Spirits do oponente até 5000 BP no total.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "maxTotalBP": 5000,
+            "allowZero": true,
+            "onConfirm": {
+              "type": "destroy"
+            },
+            "afterIfAny": [
+              {
+                "type": "selectTrashTarget",
+                "titlePT": "Flame Spark — Trash",
+                "instructionPT": "Escolha 1 Spirit do seu Trash para voltar à mão.",
+                "selector": {
+                  "owner": "own",
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "onSelect": {
+                  "type": "returnToHand"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-015.webp"
+  },
+  {
+    "id": "SD19-016",
+    "name": "Neo-Flame Tempest",
+    "nameEN": "Neo-Flame Tempest",
+    "namePT": "Neo-Flame Tempest",
+    "nameKey": "neo-flame-tempest",
+    "set": "SD19",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 7,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Choose one — destroy one opposing Spirit with 8000 BP or less; or destroy all Spirits with 4000 BP or less.",
+      "ptBR": "Flash: Escolha 1 — destrua 1 Spirit do oponente com 8000 BP ou menos; ou destrua todos os Spirits com 4000 BP ou menos."
+    },
+    "effects": [
+      {
+        "id": "sd19-016-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Choose one: destroy one opposing Spirit with 8000 BP or less; or destroy all Spirits with 4000 BP or less.",
+          "ptBR": "Escolha 1: destrua 1 Spirit do oponente com 8000 BP ou menos; ou destrua todos os Spirits com 4000 BP ou menos."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd19-016-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "chooseOption",
+            "titlePT": "Neo-Flame Tempest",
+            "instructionPT": "Escolha 1 efeito.",
+            "options": [
+              {
+                "id": "destroy-one-8000",
+                "labelPT": "1 Spirit ≤ 8000 BP",
+                "actions": [
+                  {
+                    "type": "selectTarget",
+                    "titlePT": "Neo-Flame Tempest",
+                    "instructionPT": "Escolha 1 Spirit do oponente com 8000 BP ou menos.",
+                    "selector": {
+                      "owner": "opponent",
+                      "cardTypes": [
+                        "spirit"
+                      ],
+                      "maxBP": 8000
+                    },
+                    "onSelect": {
+                      "type": "destroy"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "destroy-all-4000",
+                "labelPT": "Todos os Spirits ≤ 4000 BP",
+                "actions": [
+                  {
+                    "type": "destroyAllMatching",
+                    "selector": {
+                      "owner": "any",
+                      "cardTypes": [
+                        "spirit"
+                      ],
+                      "maxBP": 4000
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-016.webp"
+  },
+  {
+    "id": "SD19-X01",
+    "name": "Ultimate-Siegfried",
+    "nameEN": "Ultimate-Siegfried",
+    "namePT": "Ultimate-Siegfried",
+    "nameKey": "ultimate-siegfried",
+    "set": "SD19",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Incarnate",
+      "Ancient Dragon"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 10000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 14000
+      },
+      {
+        "level": 5,
+        "cores": 5,
+        "bp": 20000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one Red Spirit. Ultimate Trigger when this Ultimate attacks. LV4/LV5 Flash — True-Awaken: Move 1 core from one of your Spirits to this Ultimate to give it +3000 BP.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Vermelho. Ultimate Trigger quando este Ultimate ataca. LV4/LV5 Flash — True-Awaken: Mova 1 core de um dos seus Spirits para este Ultimate para dar +3000 BP a ele."
+    },
+    "effects": [
+      {
+        "id": "sd19-x01-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one Red Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Vermelho."
+        }
+      },
+      {
+        "id": "sd19-x01-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, the opponent must block if possible, but their Ultimates are not required to block. If an opposing Spirit blocks, move 1 core from the opponent's Life to their Reserve.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, o oponente deve bloquear se puder, mas os Ultimates dele não são obrigados a bloquear. Se um Spirit do oponente bloquear, mova 1 core da Life do oponente para a Reserve dele."
+        }
+      },
+      {
+        "id": "sd19-x01-true-awaken",
+        "type": "flash",
+        "levels": [
+          4,
+          5
+        ],
+        "timing": "whenAttacksFlash",
+        "title": {
+          "en": "True-Awaken",
+          "ptBR": "True-Awaken"
+        },
+        "text": {
+          "en": "During this Ultimate's attack, move 1 core from one of your Spirits to this Ultimate. If you do, this Ultimate gains +3000 BP.",
+          "ptBR": "Durante o ataque deste Ultimate, mova 1 core de um dos seus Spirits para este Ultimate. Se fizer isso, este Ultimate recebe +3000 BP."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD19-UltimateDeck-ScorchingZero/SD19-X01.webp"
+  },
+  {
+    "id": "SD20-001",
+    "name": "Missile Mobile",
+    "nameEN": "Missile Mobile",
+    "namePT": "Missile Mobile",
+    "nameKey": "missile-mobile",
+    "set": "SD20",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-001.webp"
+  },
+  {
+    "id": "SD20-002",
+    "name": "Mugendra",
+    "nameEN": "Mugendra",
+    "namePT": "Mugendra",
+    "nameKey": "mugendra",
+    "set": "SD20",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 1,
+    "reduction": [
+      "red",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Incarnate"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: This Spirit's color and symbol are also treated as White.",
+      "ptBR": "LV1/LV2/LV3: A cor e o símbolo deste Spirit também são tratados como Branco."
+    },
+    "effects": [
+      {
+        "id": "sd20-002-color-symbol",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Color / Symbol",
+          "ptBR": "Cor / Símbolo"
+        },
+        "text": {
+          "en": "This Spirit's color and symbol are also treated as White.",
+          "ptBR": "A cor e o símbolo deste Spirit também são tratados como Branco."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-002-continuous-white",
+        "event": "continuous",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "modifiers": {
+          "addColors": [
+            "white"
+          ],
+          "addSymbols": [
+            "white"
+          ]
+        }
+      }
+    ],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-002.webp"
+  },
+  {
+    "id": "SD20-003",
+    "name": "Defenzard",
+    "nameEN": "Defenzard",
+    "namePT": "Defenzard",
+    "nameKey": "defenzard",
+    "set": "SD20",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armored Dragon"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: This Spirit gains +3000 BP. If your Life is 3 or less, it gains an additional +3000 BP.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +3000 BP. Se sua Life estiver em 3 ou menos, ele recebe mais +3000 BP."
+    },
+    "effects": [
+      {
+        "id": "sd20-003-when-blocks",
+        "type": "whenBlocks",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenBlocks",
+        "title": {
+          "en": "When This Spirit Blocks",
+          "ptBR": "Quando Este Spirit Bloqueia"
+        },
+        "text": {
+          "en": "This Spirit gains +3000 BP. If your Life is 3 or less, it gains an additional +3000 BP.",
+          "ptBR": "Este Spirit recebe +3000 BP. Se sua Life estiver em 3 ou menos, ele recebe mais +3000 BP."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-003-when-blocks-bp",
+        "event": "whenBlocks",
+        "levels": [
+          1,
+          2
+        ],
+        "labelPT": "Quando Este Spirit Bloqueia",
+        "labelEN": "When This Spirit Blocks",
+        "actions": [
+          {
+            "type": "modifyBP",
+            "amount": 3000,
+            "duration": "battle"
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "ownLifeAtMost",
+              "value": 3
+            },
+            "actions": [
+              {
+                "type": "modifyBP",
+                "amount": 3000,
+                "duration": "battle"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-003.webp"
+  },
+  {
+    "id": "SD20-004",
+    "name": "Shield Mobile",
+    "nameEN": "Shield Mobile",
+    "namePT": "Shield Mobile",
+    "nameKey": "shield-mobile",
+    "set": "SD20",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During the Opponent's Attack Step: This Spirit can block while exhausted. LV2/LV3 Heavy Armor: Red — This Spirit is unaffected by opposing Red Spirit, Brave, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step do Oponente: Este Spirit pode bloquear mesmo estando Exhausted. LV2/LV3 Heavy Armor: Vermelho — Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Vermelhos do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd20-004-exhausted-block",
+        "type": "opponentAttackStep",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "During the Opponent's Attack Step",
+          "ptBR": "Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "This Spirit can block while exhausted.",
+          "ptBR": "Este Spirit pode bloquear mesmo estando Exhausted."
+        }
+      },
+      {
+        "id": "sd20-004-heavy-armor",
+        "type": "heavyArmor",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Heavy Armor: Red",
+          "ptBR": "Heavy Armor: Vermelho"
+        },
+        "text": {
+          "en": "This Spirit is unaffected by opposing Red Spirit, Brave, Nexus, and Magic effects.",
+          "ptBR": "Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Vermelhos do oponente."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-004.webp"
+  },
+  {
+    "id": "SD20-005",
+    "name": "Trooper Mobile",
+    "nameEN": "Trooper Mobile",
+    "namePT": "Trooper Mobile",
+    "nameKey": "trooper-mobile",
+    "set": "SD20",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 Heavy Armor: Red — This Spirit is unaffected by opposing Red Spirit, Brave, Nexus, and Magic effects. LV2/LV3 When This Spirit Blocks: Put 1 core from the Void onto one of your White Spirits.",
+      "ptBR": "LV1/LV2/LV3 Heavy Armor: Vermelho — Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Vermelhos do oponente. LV2/LV3 Quando Este Spirit Bloqueia: Coloque 1 Core do Void em 1 dos seus Spirits Brancos."
+    },
+    "effects": [
+      {
+        "id": "sd20-005-heavy-armor",
+        "type": "heavyArmor",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Heavy Armor: Red",
+          "ptBR": "Heavy Armor: Vermelho"
+        },
+        "text": {
+          "en": "This Spirit is unaffected by opposing Red Spirit, Brave, Nexus, and Magic effects.",
+          "ptBR": "Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Vermelhos do oponente."
+        }
+      },
+      {
+        "id": "sd20-005-when-blocks",
+        "type": "whenBlocks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenBlocks",
+        "title": {
+          "en": "When This Spirit Blocks",
+          "ptBR": "Quando Este Spirit Bloqueia"
+        },
+        "text": {
+          "en": "Put 1 core from the Void onto one of your White Spirits.",
+          "ptBR": "Coloque 1 Core do Void em 1 dos seus Spirits Brancos."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-005-heavy-armor-red",
+        "event": "continuous",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "modifiers": {
+          "heavyArmorColors": [
+            "red"
+          ]
+        }
+      },
+      {
+        "id": "sd20-005-when-blocks-core",
+        "event": "whenBlocks",
+        "levels": [
+          2,
+          3
+        ],
+        "labelPT": "Quando Este Spirit Bloqueia",
+        "labelEN": "When This Spirit Blocks",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Trooper Mobile — Core do Void",
+            "instructionPT": "Escolha 1 dos seus Spirits Brancos para receber 1 Core do Void.",
+            "selector": {
+              "owner": "own",
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "white"
+              ]
+            },
+            "onSelect": {
+              "type": "addCoreFromVoid",
+              "amount": 1
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-005.webp"
+  },
+  {
+    "id": "SD20-006",
+    "name": "Wing Soldier",
+    "nameEN": "Wing Soldier",
+    "namePT": "Wing Soldier",
+    "nameKey": "wing-soldier",
+    "set": "SD20",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Return one opposing Spirit with 5000 BP or less to the hand. If your Life is 3 or less, return one additional opposing Spirit with 5000 BP or less to the hand.",
+      "ptBR": "LV1/LV2 Quando Invocado: Devolva para a mão 1 Spirit do oponente com 5000 BP ou menos. Se sua Life estiver em 3 ou menos, devolva para a mão mais 1 Spirit do oponente com 5000 BP ou menos."
+    },
+    "effects": [
+      {
+        "id": "sd20-006-when-summoned",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Return one opposing Spirit with 5000 BP or less to the hand. If your Life is 3 or less, return one additional opposing Spirit with 5000 BP or less to the hand.",
+          "ptBR": "Devolva para a mão 1 Spirit do oponente com 5000 BP ou menos. Se sua Life estiver em 3 ou menos, devolva para a mão mais 1 Spirit do oponente com 5000 BP ou menos."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-006-when-summoned-return",
+        "event": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "labelPT": "Quando Invocado",
+        "labelEN": "When Summoned",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Wing Soldier — Quando Invocado",
+            "instructionPT": "Escolha 1 Spirit do oponente com 5000 BP ou menos para devolver à mão.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 5000
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "ownLifeAtMost",
+              "value": 3
+            },
+            "actions": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Wing Soldier — Life 3 ou menos",
+                "instructionPT": "Sua Life está em 3 ou menos. Escolha mais 1 Spirit do oponente com 5000 BP ou menos para devolver à mão.",
+                "selector": {
+                  "owner": "opponent",
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "maxBP": 5000
+                },
+                "onSelect": {
+                  "type": "returnToHand"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-006.webp"
+  },
+  {
+    "id": "SD20-007",
+    "name": "White Jet Dragoon",
+    "nameEN": "White Jet Dragoon",
+    "namePT": "White Jet Dragoon",
+    "nameKey": "white-jet-dragoon",
+    "set": "SD20",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armored Dragon"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: While your Life is 3 or less, this Spirit gains +4000 BP. LV2 When This Spirit Attacks: Discard one opposing set Burst.",
+      "ptBR": "LV1/LV2: Enquanto sua Life estiver em 3 ou menos, este Spirit recebe +4000 BP. LV2 Quando Este Spirit Ataca: Descarte 1 Burst que o oponente tenha preparado."
+    },
+    "effects": [
+      {
+        "id": "sd20-007-life-bp",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Life 3 or Less",
+          "ptBR": "Life 3 ou Menos"
+        },
+        "text": {
+          "en": "While your Life is 3 or less, this Spirit gains +4000 BP.",
+          "ptBR": "Enquanto sua Life estiver em 3 ou menos, este Spirit recebe +4000 BP."
+        }
+      },
+      {
+        "id": "sd20-007-when-attacks",
+        "type": "whenAttacks",
+        "levels": [
+          2
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Discard one opposing set Burst.",
+          "ptBR": "Descarte 1 Burst que o oponente tenha preparado."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-007.webp"
+  },
+  {
+    "id": "SD20-008",
+    "name": "UltimateCannon-Bell",
+    "nameEN": "UltimateCannon-Bell",
+    "namePT": "UltimateCannon-Bell",
+    "nameKey": "ultimatecannon-bell",
+    "set": "SD20",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 3,
+    "families": [
+      "Incarnate",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 7000
+      },
+      {
+        "level": 4,
+        "cores": 2,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one White Spirit. LV4 Ultimate Trigger When This Ultimate Attacks: On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Branco. LV4 Ultimate Trigger Quando Este Ultimate Ataca: Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd20-008-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one White Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Branco."
+        }
+      },
+      {
+        "id": "sd20-008-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          4
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-008.webp"
+  },
+  {
+    "id": "SD20-009",
+    "name": "Ultimate-Asc",
+    "nameEN": "Ultimate-Asc",
+    "namePT": "Ultimate-Asc",
+    "nameKey": "ultimate-asc",
+    "set": "SD20",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Incarnate",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 8000
+      },
+      {
+        "level": 4,
+        "cores": 2,
+        "bp": 10000
+      },
+      {
+        "level": 5,
+        "cores": 4,
+        "bp": 13000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one White Spirit. LV3/LV4/LV5 Ultimate Trigger When This Ultimate Attacks: On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Branco. LV3/LV4/LV5 Ultimate Trigger Quando Este Ultimate Ataca: Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd20-009-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one White Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Branco."
+        }
+      },
+      {
+        "id": "sd20-009-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-009.webp"
+  },
+  {
+    "id": "SD20-010",
+    "name": "Ultimate-Surtr",
+    "nameEN": "Ultimate-Surtr",
+    "namePT": "Ultimate-Surtr",
+    "nameKey": "ultimate-surtr",
+    "set": "SD20",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 2,
+    "families": [
+      "Incarnate",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 11000
+      },
+      {
+        "level": 4,
+        "cores": 2,
+        "bp": 14000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one White Spirit. LV3/LV4 Ultimate Trigger When This Ultimate Attacks: On a hit, this Ultimate cannot be blocked by opposing Spirits. LV4 During Your End Step: Refresh this Ultimate.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Branco. LV3/LV4 Ultimate Trigger Quando Este Ultimate Ataca: Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente. LV4 Durante Seu End Step: Dê Refresh neste Ultimate."
+    },
+    "effects": [
+      {
+        "id": "sd20-010-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one White Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Branco."
+        }
+      },
+      {
+        "id": "sd20-010-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+        }
+      },
+      {
+        "id": "sd20-010-end-step",
+        "type": "refresh",
+        "levels": [
+          4
+        ],
+        "timing": "yourEndStep",
+        "title": {
+          "en": "During Your End Step",
+          "ptBR": "Durante Seu End Step"
+        },
+        "text": {
+          "en": "Refresh this Ultimate.",
+          "ptBR": "Dê Refresh neste Ultimate."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-010.webp"
+  },
+  {
+    "id": "SD20-011",
+    "name": "Comando Norte de Rowgard",
+    "nameEN": "The Rowgard Northern Instructions Bureau",
+    "namePT": "Comando Norte de Rowgard",
+    "nameKey": "the-rowgard-northern-instructions-bureau",
+    "set": "SD20",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": null
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": null
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: All of your White Spirits and Ultimates gain +2000 BP. LV2 During the Opponent's Attack Step: While your Life is 3 or less, opposing Ultimate effects can reduce your Life by only 1 per turn.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Todos os seus Spirits e Ultimates Brancos recebem +2000 BP. LV2 Durante o Attack Step do Oponente: Enquanto sua Life estiver em 3 ou menos, efeitos de Ultimates do oponente só podem reduzir sua Life em 1 por turno."
+    },
+    "effects": [
+      {
+        "id": "sd20-011-bp-boost",
+        "type": "opponentAttackStep",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "During the Opponent's Attack Step",
+          "ptBR": "Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "All of your White Spirits and Ultimates gain +2000 BP.",
+          "ptBR": "Todos os seus Spirits e Ultimates Brancos recebem +2000 BP."
+        }
+      },
+      {
+        "id": "sd20-011-life-protection",
+        "type": "opponentAttackStep",
+        "levels": [
+          2
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "LV2 During the Opponent's Attack Step",
+          "ptBR": "LV2 Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "While your Life is 3 or less, opposing Ultimate effects can reduce your Life by only 1 per turn.",
+          "ptBR": "Enquanto sua Life estiver em 3 ou menos, efeitos de Ultimates do oponente só podem reduzir sua Life em 1 por turno."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-011.webp"
+  },
+  {
+    "id": "SD20-012",
+    "name": "O Mundo em Queda",
+    "nameEN": "The Falling World",
+    "namePT": "O Mundo em Queda",
+    "nameKey": "the-falling-world",
+    "set": "SD20",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": null
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": null
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Spirits or Ultimates is destroyed by the opponent, return one opposing Nexus to the hand. LV2 During the Opponent's Attack Step: When one of your Spirits or Ultimates is destroyed by the opponent, return one opposing Spirit to the hand.",
+      "ptBR": "LV1/LV2: Quando 1 dos seus Spirits ou Ultimates for destruído pelo oponente, devolva 1 Nexus do oponente para a mão. LV2 Durante o Attack Step do Oponente: Quando 1 dos seus Spirits ou Ultimates for destruído pelo oponente, devolva 1 Spirit do oponente para a mão."
+    },
+    "effects": [
+      {
+        "id": "sd20-012-return-nexus",
+        "type": "whenDestroyedByOpponent",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenYourSpiritOrUltimateDestroyed",
+        "title": {
+          "en": "When Your Spirit/Ultimate Is Destroyed",
+          "ptBR": "Quando Seu Spirit/Ultimate For Destruído"
+        },
+        "text": {
+          "en": "When one of your Spirits or Ultimates is destroyed by the opponent, return one opposing Nexus to the hand.",
+          "ptBR": "Quando 1 dos seus Spirits ou Ultimates for destruído pelo oponente, devolva 1 Nexus do oponente para a mão."
+        }
+      },
+      {
+        "id": "sd20-012-return-spirit",
+        "type": "opponentAttackStep",
+        "levels": [
+          2
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "LV2 During the Opponent's Attack Step",
+          "ptBR": "LV2 Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "When one of your Spirits or Ultimates is destroyed by the opponent, return one opposing Spirit to the hand.",
+          "ptBR": "Quando 1 dos seus Spirits ou Ultimates for destruído pelo oponente, devolva 1 Spirit do oponente para a mão."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-012.webp"
+  },
+  {
+    "id": "SD20-013",
+    "name": "Ultimate Power",
+    "nameEN": "Ultimate Power",
+    "namePT": "Ultimate Power",
+    "nameKey": "ultimate-power",
+    "set": "SD20",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: One Spirit or Ultimate gains +3000 BP for this turn.",
+      "ptBR": "Flash: 1 Spirit ou Ultimate recebe +3000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd20-013-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "One Spirit or Ultimate gains +3000 BP for this turn.",
+          "ptBR": "1 Spirit ou Ultimate recebe +3000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-013-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Ultimate Power — Flash",
+            "instructionPT": "Escolha 1 Spirit ou Ultimate para receber +3000 BP durante este turno.",
+            "selector": {
+              "owner": "any",
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": 3000,
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-013.webp"
+  },
+  {
+    "id": "SD20-014",
+    "name": "Burst Shield",
+    "nameEN": "Burst Shield",
+    "namePT": "Burst Shield",
+    "nameKey": "burst-shield",
+    "set": "SD20",
+    "cardType": "magic",
+    "subtypes": [
+      "burst"
+    ],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Burst — After Your Life Decreases: Put 1 core from the Void onto one of your White Spirits. Then you may pay this card's cost to activate its Flash effect. Flash: For this turn, your Life cannot be reduced by attacks from Spirits with cost 4 or more.",
+      "ptBR": "Burst — Após Sua Life Diminuir: Coloque 1 Core do Void em 1 dos seus Spirits Brancos. Depois, você pode pagar o custo desta carta para ativar seu efeito Flash. Flash: Durante este turno, sua Life não pode ser reduzida por ataques de Spirits de custo 4 ou mais."
+    },
+    "effects": [
+      {
+        "id": "sd20-014-burst",
+        "type": "burst",
+        "levels": [],
+        "timing": "afterLifeDecreases",
+        "title": {
+          "en": "Burst: After Your Life Decreases",
+          "ptBR": "Burst: Após Sua Life Diminuir"
+        },
+        "text": {
+          "en": "Put 1 core from the Void onto one of your White Spirits. Then you may pay this card's cost to activate its Flash effect.",
+          "ptBR": "Coloque 1 Core do Void em 1 dos seus Spirits Brancos. Depois, você pode pagar o custo desta carta para ativar seu efeito Flash."
+        }
+      },
+      {
+        "id": "sd20-014-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "For this turn, your Life cannot be reduced by attacks from Spirits with cost 4 or more.",
+          "ptBR": "Durante este turno, sua Life não pode ser reduzida por ataques de Spirits de custo 4 ou mais."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-014-burst-life",
+        "event": "burstLifeDecrease",
+        "labelPT": "Burst — Após sua Life diminuir",
+        "labelEN": "Burst — After your Life decreases",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Burst Shield",
+            "instructionPT": "Escolha 1 dos seus Spirits Brancos para receber 1 Core do Void.",
+            "selector": {
+              "owner": "own",
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "white"
+              ]
+            },
+            "onSelect": {
+              "type": "addCoreFromVoid",
+              "amount": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd20-014-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "setTurnProtection",
+            "protection": {
+              "type": "preventSpiritAttackLifeDamageCostAtLeast",
+              "minCost": 4
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-014.webp"
+  },
+  {
+    "id": "SD20-015",
+    "name": "Last Rebellion",
+    "nameEN": "Last Rebellion",
+    "namePT": "Last Rebellion",
+    "nameKey": "last-rebellion",
+    "set": "SD20",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Choose one — return all opposing Spirits with cost 3 or less to the hand; or return one opposing Spirit that is not combined with a Brave to the hand.",
+      "ptBR": "Flash: Escolha 1 — devolva para a mão todos os Spirits do oponente de custo 3 ou menos; ou devolva para a mão 1 Spirit do oponente que não esteja combinado com um Brave."
+    },
+    "effects": [
+      {
+        "id": "sd20-015-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Choose one: return all opposing Spirits with cost 3 or less to the hand; or return one opposing Spirit that is not combined with a Brave to the hand.",
+          "ptBR": "Escolha 1: devolva para a mão todos os Spirits do oponente de custo 3 ou menos; ou devolva para a mão 1 Spirit do oponente que não esteja combinado com um Brave."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-015-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "chooseOption",
+            "titlePT": "Last Rebellion",
+            "instructionPT": "Escolha 1 efeito.",
+            "options": [
+              {
+                "id": "return-all-cost-3",
+                "labelPT": "Todos os Spirits de custo 3 ou menos",
+                "actions": [
+                  {
+                    "type": "returnAllMatchingToHand",
+                    "selector": {
+                      "owner": "opponent",
+                      "cardTypes": [
+                        "spirit"
+                      ],
+                      "maxCost": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "return-one-uncombined",
+                "labelPT": "1 Spirit não combinado",
+                "actions": [
+                  {
+                    "type": "selectTarget",
+                    "titlePT": "Last Rebellion",
+                    "instructionPT": "Escolha 1 Spirit do oponente que não esteja combinado com Brave.",
+                    "selector": {
+                      "owner": "opponent",
+                      "cardTypes": [
+                        "spirit"
+                      ],
+                      "notCombinedWithBrave": true
+                    },
+                    "onSelect": {
+                      "type": "returnToHand"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-015.webp"
+  },
+  {
+    "id": "SD20-016",
+    "name": "Blitz Order",
+    "nameEN": "Blitz Order",
+    "namePT": "Blitz Order",
+    "nameKey": "blitz-order",
+    "set": "SD20",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 7,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Return one opposing Spirit to the hand. Then refresh one of your Spirits.",
+      "ptBR": "Flash: Devolva 1 Spirit do oponente para a mão. Depois, dê Refresh em 1 dos seus Spirits."
+    },
+    "effects": [
+      {
+        "id": "sd20-016-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Return one opposing Spirit to the hand. Then refresh one of your Spirits.",
+          "ptBR": "Devolva 1 Spirit do oponente para a mão. Depois, dê Refresh em 1 dos seus Spirits."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-016-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Blitz Order",
+            "instructionPT": "Escolha 1 Spirit do oponente para voltar à mão.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            },
+            "afterSelect": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Blitz Order — Refresh",
+                "instructionPT": "Escolha 1 dos seus Spirits para receber Refresh.",
+                "selector": {
+                  "owner": "own",
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "onSelect": {
+                  "type": "refresh"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-016.webp"
+  },
+  {
+    "id": "SD20-X01",
+    "name": "Ultimate-Odin",
+    "nameEN": "Ultimate-Odin",
+    "namePT": "Ultimate-Odin",
+    "nameKey": "ultimate-odin",
+    "set": "SD20",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Incarnate",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 10000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 15000
+      },
+      {
+        "level": 5,
+        "cores": 4,
+        "bp": 20000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one White Spirit. LV3/LV4/LV5 When Summoned: Return one opposing Spirit to the hand. LV3/LV4/LV5 Ultimate Trigger When This Ultimate Attacks: On a hit, this Ultimate cannot be blocked by opposing Spirits. LV4/LV5 During Your End Step: Refresh this Ultimate.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Branco. LV3/LV4/LV5 Quando Invocado: Devolva 1 Spirit do oponente para a mão. LV3/LV4/LV5 Ultimate Trigger Quando Este Ultimate Ataca: Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente. LV4/LV5 Durante Seu End Step: Dê Refresh neste Ultimate."
+    },
+    "effects": [
+      {
+        "id": "sd20-x01-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one White Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Branco."
+        }
+      },
+      {
+        "id": "sd20-x01-when-summoned",
+        "type": "whenSummoned",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Return one opposing Spirit to the hand.",
+          "ptBR": "Devolva 1 Spirit do oponente para a mão."
+        }
+      },
+      {
+        "id": "sd20-x01-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+        }
+      },
+      {
+        "id": "sd20-x01-end-step",
+        "type": "refresh",
+        "levels": [
+          4,
+          5
+        ],
+        "timing": "yourEndStep",
+        "title": {
+          "en": "During Your End Step",
+          "ptBR": "Durante Seu End Step"
+        },
+        "text": {
+          "en": "Refresh this Ultimate.",
+          "ptBR": "Dê Refresh neste Ultimate."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-X01.webp"
+  }
+]

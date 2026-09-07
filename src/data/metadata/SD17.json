@@ -1,0 +1,1559 @@
+[
+  {
+    "id": "SD17-001",
+    "nameEN": "Pinacochasaurus",
+    "namePT": "Pinacochasaurus",
+    "nameKey": "pinacochasaurus",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 1,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This Spirit is also treated as Green.",
+      "ptBR": "Este Spirit também é tratado como Verde."
+    },
+    "effects": [
+      {
+        "id": "sd17-001-color-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Color",
+          "ptBR": "Cor"
+        },
+        "text": {
+          "en": "This Spirit is also treated as Green.",
+          "ptBR": "Este Spirit também é tratado como Verde."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-001-green",
+        "event": "continuous",
+        "modifiers": {
+          "addColors": [
+            "green"
+          ],
+          "symbolAlternatives": [
+            "green"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "SD17-002",
+    "nameEN": "Dark-Dinonychusaw",
+    "namePT": "Dark-Dinonychusaw",
+    "nameKey": "dark-dinonychusaw",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "Lv2/Lv3: this Spirit is also treated as Green.",
+      "ptBR": "Lv2/Lv3: este Spirit também é tratado como Verde."
+    },
+    "effects": [
+      {
+        "id": "sd17-002-color-display",
+        "type": "constant",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Color",
+          "ptBR": "Cor"
+        },
+        "text": {
+          "en": "This Spirit is also treated as Green.",
+          "ptBR": "Este Spirit também é tratado como Verde."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-002-green",
+        "event": "continuous",
+        "levels": [
+          2,
+          3
+        ],
+        "modifiers": {
+          "addColors": [
+            "green"
+          ],
+          "symbolAlternatives": [
+            "green"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "SD17-003",
+    "nameEN": "SwordDragon Stegodita",
+    "namePT": "SwordDragon Stegodita",
+    "nameKey": "sworddragon-stegodita",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "[Confront].",
+      "ptBR": "[Confront]."
+    },
+    "effects": [
+      {
+        "id": "sd17-003-confront-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Confront",
+          "ptBR": "Confront"
+        },
+        "text": {
+          "en": "This Spirit has [Confront].",
+          "ptBR": "Este Spirit possui [Confront]."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-003-confront",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "confront"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "SD17-004",
+    "nameEN": "Bronswordsaurus",
+    "namePT": "Bronswordsaurus",
+    "nameKey": "bronswordsaurus",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "When summoned, destroy 1 opposing Nexus. [Rush: Green] Place 1 Core from the Void on this Spirit.",
+      "ptBR": "Quando Invocado: destrua 1 Nexus do oponente. [Rush: Green] Coloque 1 Core do Void neste Spirit."
+    },
+    "effects": [
+      {
+        "id": "sd17-004-when-summoned-display",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Destroy 1 opposing Nexus.",
+          "ptBR": "Destrua 1 Nexus do oponente."
+        }
+      },
+      {
+        "id": "sd17-004-rush-green-display",
+        "type": "rush",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Place 1 Core from the Void on this Spirit.",
+          "ptBR": "Coloque 1 Core do Void neste Spirit."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-004-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Bronswordsaurus",
+            "instructionPT": "Escolha 1 Nexus do oponente para destruir.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "controlsSymbolColor",
+              "color": "green"
+            },
+            "actions": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Rush — Green",
+                "instructionPT": "Escolha este Spirit para receber 1 Core do Void.",
+                "selector": {
+                  "owner": "own",
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "onSelect": {
+                  "type": "addCoreFromVoid",
+                  "amount": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD17-005",
+    "nameEN": "FeatherDragon Pedpenner",
+    "namePT": "FeatherDragon Pedpenner",
+    "nameKey": "featherdragon-pedpenner",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Terra Dragon",
+      "Flying Fang"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "During your Attack Step, all your Terra Dragon Spirits gain +2000 BP.",
+      "ptBR": "Durante o seu Attack Step, todos os seus Spirits da família Terra Dragon recebem +2000 BP."
+    },
+    "effects": [
+      {
+        "id": "sd17-005-attack-step-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "During Your Attack Step",
+          "ptBR": "Durante Seu Attack Step"
+        },
+        "text": {
+          "en": "All your Terra Dragon Spirits gain +2000 BP.",
+          "ptBR": "Todos os seus Spirits da família Terra Dragon recebem +2000 BP."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD17-006",
+    "nameEN": "FierceDragon Lambeos",
+    "namePT": "FierceDragon Lambeos",
+    "nameKey": "fiercedragon-lambeos",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "[Confront]. Lv2: when this Spirit attacks, draw 1 card.",
+      "ptBR": "[Confront]. Lv2: quando este Spirit atacar, compre 1 carta."
+    },
+    "effects": [
+      {
+        "id": "sd17-006-confront-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Confront",
+          "ptBR": "Confront"
+        },
+        "text": {
+          "en": "This Spirit has [Confront].",
+          "ptBR": "Este Spirit possui [Confront]."
+        }
+      },
+      {
+        "id": "sd17-006-when-attacks-display",
+        "type": "whenAttacks",
+        "levels": [
+          2
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Draw 1 card.",
+          "ptBR": "Compre 1 carta."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-006-confront",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "confront"
+          ]
+        }
+      },
+      {
+        "id": "sd17-006-draw",
+        "event": "whenAttacks",
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD17-007",
+    "nameEN": "Pteraslasher",
+    "namePT": "Pteraslasher",
+    "nameKey": "pteraslasher",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon",
+      "Flying Fang"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "When this Spirit attacks, it gains +3000 BP. [Rush: Green] Place 1 Core from the Void on this Spirit.",
+      "ptBR": "Quando este Spirit atacar, ele recebe +3000 BP durante a batalha. [Rush: Green] Coloque 1 Core do Void neste Spirit."
+    },
+    "effects": [
+      {
+        "id": "sd17-007-when-attacks-display",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "This Spirit gains +3000 BP for the battle.",
+          "ptBR": "Este Spirit recebe +3000 BP durante a batalha."
+        }
+      },
+      {
+        "id": "sd17-007-rush-green-display",
+        "type": "rush",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Place 1 Core from the Void on this Spirit.",
+          "ptBR": "Coloque 1 Core do Void neste Spirit."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-007-attack",
+        "event": "whenAttacks",
+        "actions": [
+          {
+            "type": "modifyBP",
+            "amount": 3000,
+            "duration": "battle"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD17-008",
+    "nameEN": "Monoforcesaurus",
+    "namePT": "Monoforcesaurus",
+    "nameKey": "monoforcesaurus",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "[Confront]. [Rush: Green] On its first attack this turn, refresh this Spirit.",
+      "ptBR": "[Confront]. [Rush: Green] No primeiro ataque deste Spirit neste turno, dê Refresh nele."
+    },
+    "effects": [
+      {
+        "id": "sd17-008-confront-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Confront",
+          "ptBR": "Confront"
+        },
+        "text": {
+          "en": "This Spirit has [Confront].",
+          "ptBR": "Este Spirit possui [Confront]."
+        }
+      },
+      {
+        "id": "sd17-008-rush-green-display",
+        "type": "rush",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "On this Spirit's first attack this turn, refresh it.",
+          "ptBR": "No primeiro ataque deste Spirit neste turno, dê Refresh nele."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-008-confront",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "confront"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "SD17-009",
+    "nameEN": "PiercingDragon Styragorn",
+    "namePT": "PiercingDragon Styragorn",
+    "nameKey": "piercingdragon-styragorn",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "[Confront]. Lv2/Lv3: when this Spirit attacks, destroy 1 opposing Spirit with BP equal to or less than this Spirit.",
+      "ptBR": "[Confront]. Lv2/Lv3: quando este Spirit atacar, destrua 1 Spirit do oponente com BP igual ou menor que o BP deste Spirit."
+    },
+    "effects": [
+      {
+        "id": "sd17-009-confront-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Confront",
+          "ptBR": "Confront"
+        },
+        "text": {
+          "en": "This Spirit has [Confront].",
+          "ptBR": "Este Spirit possui [Confront]."
+        }
+      },
+      {
+        "id": "sd17-009-when-attacks-display",
+        "type": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Destroy 1 opposing Spirit with BP equal to or less than this Spirit.",
+          "ptBR": "Destrua 1 Spirit do oponente com BP igual ou menor que o BP deste Spirit."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-009-confront",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "confront"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "SD17-010",
+    "nameEN": "Lancemosaurus",
+    "namePT": "Lancemosaurus",
+    "nameKey": "lancemosaurus",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": []
+  },
+  {
+    "id": "SD17-011",
+    "nameEN": "ArmedMachineDragon Silveed",
+    "namePT": "ArmedMachineDragon Silveed",
+    "nameKey": "armedmachinedragon-silveed",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon",
+      "Machine Dragon"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "When this Brave is summoned, return 1 Spirit card with Rush from your Trash to your hand. Combine condition: Terra Dragon. While combined, the Spirit gains [Confront].",
+      "ptBR": "Quando este Brave for Invocado: devolva 1 carta de Spirit com Rush do seu Trash para a sua mão. Condição de Combine: Terra Dragon. Enquanto estiver combinado, o Spirit recebe [Confront]."
+    },
+    "effects": [
+      {
+        "id": "sd17-011-when-summoned-display",
+        "type": "whenSummoned",
+        "levels": [
+          1
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When This Brave Is Summoned",
+          "ptBR": "Quando Este Brave For Invocado"
+        },
+        "text": {
+          "en": "Return 1 Spirit card with Rush from your Trash to your hand.",
+          "ptBR": "Devolva 1 carta de Spirit com Rush do seu Trash para a sua mão."
+        }
+      },
+      {
+        "id": "sd17-011-combine-condition-display",
+        "type": "combineCondition",
+        "levels": [],
+        "timing": "combine",
+        "title": {
+          "en": "Combine Condition",
+          "ptBR": "Condição de Combine"
+        },
+        "text": {
+          "en": "Combine with a Terra Dragon Spirit.",
+          "ptBR": "Combine com um Spirit da família Terra Dragon."
+        }
+      },
+      {
+        "id": "sd17-011-while-combined-display",
+        "type": "combined",
+        "levels": [],
+        "timing": "always",
+        "title": {
+          "en": "While Combined",
+          "ptBR": "Enquanto Combinado"
+        },
+        "text": {
+          "en": "The combined Spirit gains [Confront].",
+          "ptBR": "O Spirit combinado recebe [Confront]."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-011-combined-confront",
+        "event": "continuous",
+        "requiresCombined": true,
+        "modifiers": {
+          "keywords": [
+            "confront"
+          ]
+        }
+      }
+    ],
+    "braveBP": 3000,
+    "braveCondition": {
+      "type": "family",
+      "value": "Terra Dragon"
+    }
+  },
+  {
+    "id": "SD17-012",
+    "nameEN": "Primeval Forest",
+    "namePT": "Primeval Forest",
+    "nameKey": "primeval-forest",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "During your Attack Step, when only an opposing Spirit is destroyed by BP comparison, draw 1 card. Lv2: when one of your Spirits is destroyed by an opposing Spirit, return 1 Terra Dragon Spirit card from your Trash to your hand.",
+      "ptBR": "Durante o seu Attack Step, quando apenas um Spirit do oponente for destruído por comparação de BP, compre 1 carta. Lv2: quando um dos seus Spirits for destruído por um Spirit do oponente, devolva 1 carta de Spirit da família Terra Dragon do seu Trash para a sua mão."
+    },
+    "effects": [
+      {
+        "id": "sd17-012-bp-destroy-draw-display",
+        "type": "triggered",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "During Your Attack Step",
+          "ptBR": "Durante Seu Attack Step"
+        },
+        "text": {
+          "en": "When only an opposing Spirit is destroyed by BP comparison, draw 1 card.",
+          "ptBR": "Quando apenas um Spirit do oponente for destruído por comparação de BP, compre 1 carta."
+        }
+      },
+      {
+        "id": "sd17-012-level2-return-display",
+        "type": "triggered",
+        "levels": [
+          2
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "When One of Your Spirits Is Destroyed",
+          "ptBR": "Quando Um dos Seus Spirits For Destruído"
+        },
+        "text": {
+          "en": "When one of your Spirits is destroyed by an opposing Spirit, return 1 Terra Dragon Spirit card from your Trash to your hand.",
+          "ptBR": "Quando um dos seus Spirits for destruído por um Spirit do oponente, devolva 1 carta de Spirit da família Terra Dragon do seu Trash para a sua mão."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD17-013",
+    "nameEN": "Dark Galaxy of Dusk",
+    "namePT": "Dark Galaxy of Dusk",
+    "nameKey": "dark-galaxy-of-dusk",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red",
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [
+      "red",
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "During your Attack Step, all your Terra Dragon Spirits gain +2000 BP. Lv2: during your End Step, refresh 1 Terra Dragon Spirit.",
+      "ptBR": "Durante o seu Attack Step, todos os seus Spirits da família Terra Dragon recebem +2000 BP. Lv2: durante o seu End Step, dê Refresh em 1 Spirit da família Terra Dragon."
+    },
+    "effects": [
+      {
+        "id": "sd17-013-attack-step-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "During Your Attack Step",
+          "ptBR": "Durante Seu Attack Step"
+        },
+        "text": {
+          "en": "All your Terra Dragon Spirits gain +2000 BP.",
+          "ptBR": "Todos os seus Spirits da família Terra Dragon recebem +2000 BP."
+        }
+      },
+      {
+        "id": "sd17-013-end-step-display",
+        "type": "refresh",
+        "levels": [
+          2
+        ],
+        "timing": "yourEndStep",
+        "title": {
+          "en": "During Your End Step",
+          "ptBR": "Durante Seu End Step"
+        },
+        "text": {
+          "en": "Refresh 1 Terra Dragon Spirit.",
+          "ptBR": "Dê Refresh em 1 Spirit da família Terra Dragon."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD17-014",
+    "nameEN": "Jurassic Flame",
+    "namePT": "Jurassic Flame",
+    "nameKey": "jurassic-flame",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: destroy 1 opposing Spirit with 3000 BP or less. [Rush: Green] Exhaust 1 opposing Spirit.",
+      "ptBR": "Flash: destrua 1 Spirit do oponente com 3000 BP ou menos. [Rush: Green] Dê Exhaust em 1 Spirit do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd17-014-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Destroy 1 opposing Spirit with 3000 BP or less.",
+          "ptBR": "Destrua 1 Spirit do oponente com 3000 BP ou menos."
+        }
+      },
+      {
+        "id": "sd17-014-rush-green-display",
+        "type": "rush",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Exhaust 1 opposing Spirit.",
+          "ptBR": "Dê Exhaust em 1 Spirit do oponente."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-014-flash",
+        "event": "magicFlash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Jurassic Flame",
+            "instructionPT": "Escolha 1 Spirit do oponente com 3000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 3000
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD17-015",
+    "nameEN": "Dino Crisis",
+    "namePT": "Dino Crisis",
+    "nameKey": "dino-crisis",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: destroy any number of opposing Spirits with a total BP of 5000 or less. [Rush: Green] Refresh 2 of your Spirits with one symbol.",
+      "ptBR": "Flash: destrua qualquer quantidade de Spirits do oponente cuja soma de BP seja 5000 ou menos. [Rush: Green] Dê Refresh em 2 dos seus Spirits com 1 símbolo."
+    },
+    "effects": [
+      {
+        "id": "sd17-015-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Destroy any number of opposing Spirits with a total BP of 5000 or less.",
+          "ptBR": "Destrua qualquer quantidade de Spirits do oponente cuja soma de BP seja 5000 ou menos."
+        }
+      },
+      {
+        "id": "sd17-015-rush-green-display",
+        "type": "rush",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Refresh 2 of your Spirits with one symbol.",
+          "ptBR": "Dê Refresh em 2 dos seus Spirits com 1 símbolo."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-015-flash",
+        "event": "magicFlash",
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "titlePT": "Dino Crisis",
+            "instructionPT": "Escolha Spirits do oponente com total de até 5000 BP.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "maxTotalBP": 5000,
+            "allowZero": true,
+            "onConfirm": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD17-016",
+    "nameEN": "Rush Draw",
+    "namePT": "Rush Draw",
+    "nameKey": "rush-draw",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: draw 2 cards, then reveal the top 2 cards and add 1 Spirit/Brave with Rush to your hand; return the rest to the top in any order. Flash: 1 Spirit gains +3000 BP this turn.",
+      "ptBR": "Main: compre 2 cartas. Depois, revele as 2 cartas do topo do seu deck e adicione 1 Spirit/Brave com Rush à sua mão; devolva as demais ao topo do deck em qualquer ordem. Flash: 1 Spirit recebe +3000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd17-016-main-display",
+        "type": "main",
+        "levels": [],
+        "timing": "main",
+        "title": {
+          "en": "Main",
+          "ptBR": "Main"
+        },
+        "text": {
+          "en": "Draw 2 cards, then reveal the top 2 cards and add 1 Spirit/Brave with Rush to your hand; return the rest to the top in any order.",
+          "ptBR": "Compre 2 cartas. Depois, revele as 2 cartas do topo do seu deck e adicione 1 Spirit/Brave com Rush à sua mão; devolva as demais ao topo do deck em qualquer ordem."
+        }
+      },
+      {
+        "id": "sd17-016-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "1 Spirit gains +3000 BP this turn.",
+          "ptBR": "1 Spirit recebe +3000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-016-main",
+        "event": "magicMain",
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "id": "sd17-016-flash",
+        "event": "magicFlash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Rush Draw — Flash",
+            "instructionPT": "Escolha 1 Spirit para receber +3000 BP neste turno.",
+            "selector": {
+              "owner": "any",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": 3000,
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD17-X01",
+    "nameEN": "DarkDragon Dark-Tyrannosaura",
+    "namePT": "DarkDragon Dark-Tyrannosaura",
+    "nameKey": "darkdragon-dark-tyrannosaura",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "When this Spirit attacks, destroy 1 opposing Spirit with BP equal to or less than this Spirit. [Rush: Green] If only the opposing Spirit is destroyed by BP comparison, move 1 Core from opponent Life to Reserve. Lv2/Lv3: all your Terra Dragon Spirits gain +3000 BP during your Attack Step.",
+      "ptBR": "Quando este Spirit atacar, destrua 1 Spirit do oponente com BP igual ou menor que o BP deste Spirit. [Rush: Green] Se apenas o Spirit do oponente for destruído por comparação de BP, mova 1 Core da Life do oponente para a Reserve dele. Lv2/Lv3: durante o seu Attack Step, todos os seus Spirits da família Terra Dragon recebem +3000 BP."
+    },
+    "effects": [
+      {
+        "id": "sd17-x01-when-attacks-display",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Destroy 1 opposing Spirit with BP equal to or less than this Spirit.",
+          "ptBR": "Destrua 1 Spirit do oponente com BP igual ou menor que o BP deste Spirit."
+        }
+      },
+      {
+        "id": "sd17-x01-rush-green-display",
+        "type": "rush",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenBattles",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "If only the opposing Spirit is destroyed by BP comparison, move 1 Core from the opponent's Life to their Reserve.",
+          "ptBR": "Se apenas o Spirit do oponente for destruído por comparação de BP, mova 1 Core da Life do oponente para a Reserve dele."
+        }
+      },
+      {
+        "id": "sd17-x01-attack-step-display",
+        "type": "constant",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "During Your Attack Step",
+          "ptBR": "Durante Seu Attack Step"
+        },
+        "text": {
+          "en": "All your Terra Dragon Spirits gain +3000 BP.",
+          "ptBR": "Todos os seus Spirits da família Terra Dragon recebem +3000 BP."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD17-X02",
+    "nameEN": "DarknessDemonSword Dark-Blade",
+    "namePT": "DarknessDemonSword Dark-Blade",
+    "nameKey": "darknessdemonsword-dark-blade",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Sword Blade"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "When this Brave is summoned, destroy 1 opposing Nexus; if destroyed this way, draw 1 card. Combine condition: cost 5 or more. While combined, when the Spirit attacks it may make a specified attack.",
+      "ptBR": "Quando este Brave for Invocado: destrua 1 Nexus do oponente; se ele for destruído por este efeito, compre 1 carta. Condição de Combine: custo 5 ou mais. Enquanto estiver combinado, quando o Spirit atacar, ele pode realizar um ataque especificado."
+    },
+    "effects": [
+      {
+        "id": "sd17-x02-when-summoned-display",
+        "type": "whenSummoned",
+        "levels": [
+          1
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When This Brave Is Summoned",
+          "ptBR": "Quando Este Brave For Invocado"
+        },
+        "text": {
+          "en": "Destroy 1 opposing Nexus. If it is destroyed this way, draw 1 card.",
+          "ptBR": "Destrua 1 Nexus do oponente. Se ele for destruído por este efeito, compre 1 carta."
+        }
+      },
+      {
+        "id": "sd17-x02-combine-condition-display",
+        "type": "combineCondition",
+        "levels": [],
+        "timing": "combine",
+        "title": {
+          "en": "Combine Condition",
+          "ptBR": "Condição de Combine"
+        },
+        "text": {
+          "en": "Combine with a Spirit that costs 5 or more.",
+          "ptBR": "Combine com um Spirit de custo 5 ou mais."
+        }
+      },
+      {
+        "id": "sd17-x02-while-combined-display",
+        "type": "combined",
+        "levels": [],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "While Combined — When This Spirit Attacks",
+          "ptBR": "Enquanto Combinado — Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "The combined Spirit may make a specified attack.",
+          "ptBR": "O Spirit combinado pode realizar um ataque especificado."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd17-x02-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Dark-Blade",
+            "instructionPT": "Escolha 1 Nexus do oponente para destruir.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterSelect": [
+              {
+                "type": "draw",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "braveBP": 5000,
+    "braveCondition": {
+      "type": "costAtLeast",
+      "value": 5
+    }
+  }
+]

@@ -1,0 +1,1643 @@
+[
+  {
+    "id": "SD10-001",
+    "nameEN": "Light-Bladra",
+    "namePT": "Light-Bladra",
+    "nameKey": "light-bladra",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "[Charge] Your BP-destruction effect limits are increased by 1000.",
+      "ptBR": "[Charge] O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
+    },
+    "effects": [
+      {
+        "id": "sd10-001-charge-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Charge",
+          "ptBR": "Charge"
+        },
+        "text": {
+          "en": "Your BP-destruction effect limits are increased by 1000.",
+          "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-001-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        }
+      }
+    ]
+  },
+  {
+    "id": "SD10-002",
+    "nameEN": "Glory-Guardler",
+    "namePT": "Glory-Guardler",
+    "nameKey": "glory-guardler",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 1,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "When this Spirit attacks, it gains +2000 BP for the battle. Lv2: [Charge].",
+      "ptBR": "Quando este Spirit atacar, ele recebe +2000 BP durante a batalha. Lv2: [Charge]."
+    },
+    "effects": [
+      {
+        "id": "sd10-002-when-attacks-display",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "This Spirit gains +2000 BP for the battle.",
+          "ptBR": "Este Spirit recebe +2000 BP durante a batalha."
+        }
+      },
+      {
+        "id": "sd10-002-charge-display",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Charge",
+          "ptBR": "Charge"
+        },
+        "text": {
+          "en": "Your BP-destruction effect limits are increased by 1000.",
+          "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-002-attack",
+        "event": "whenAttacks",
+        "actions": [
+          {
+            "type": "modifyBP",
+            "amount": 2000,
+            "duration": "battle"
+          }
+        ]
+      },
+      {
+        "id": "sd10-002-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        },
+        "levels": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD10-003",
+    "nameEN": "Mirage-Wyvern",
+    "namePT": "Mirage-Wyvern",
+    "nameKey": "mirage-wyvern",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "Lv2/Lv3: When this Spirit attacks, draw 1 card.",
+      "ptBR": "Lv2/Lv3: quando este Spirit atacar, compre 1 carta."
+    },
+    "effects": [
+      {
+        "id": "sd10-003-when-attacks-display",
+        "type": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Draw 1 card.",
+          "ptBR": "Compre 1 carta."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-003-attack-draw",
+        "event": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD10-004",
+    "nameEN": "SteamDragon Seasmoker",
+    "namePT": "SteamDragon Seasmoker",
+    "nameKey": "steamdragon-seasmoker",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "When this Spirit is destroyed, destroy 1 opposing Spirit with 4000 BP or less.",
+      "ptBR": "Quando este Spirit for destruído, destrua 1 Spirit do oponente com 4000 BP ou menos."
+    },
+    "effects": [
+      {
+        "id": "sd10-004-when-destroyed-display",
+        "type": "whenDestroyed",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "When This Spirit Is Destroyed",
+          "ptBR": "Quando Este Spirit For Destruído"
+        },
+        "text": {
+          "en": "Destroy 1 opposing Spirit with 4000 BP or less.",
+          "ptBR": "Destrua 1 Spirit do oponente com 4000 BP ou menos."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-004-destroyed",
+        "event": "whenDestroyed",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 4000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 4000,
+              "chargeableBPDestruction": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD10-005",
+    "nameEN": "Bronze-Wurm",
+    "namePT": "Bronze-Wurm",
+    "nameKey": "bronze-wurm",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "[Charge] Your BP-destruction effect limits are increased by 1000.",
+      "ptBR": "[Charge] O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
+    },
+    "effects": [
+      {
+        "id": "sd10-005-charge-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Charge",
+          "ptBR": "Charge"
+        },
+        "text": {
+          "en": "Your BP-destruction effect limits are increased by 1000.",
+          "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-005-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        }
+      }
+    ]
+  },
+  {
+    "id": "SD10-006",
+    "nameEN": "Mon-Dosoon",
+    "namePT": "Mon-Dosoon",
+    "nameKey": "mon-dosoon",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": []
+  },
+  {
+    "id": "SD10-007",
+    "nameEN": "FirewhirlDragon Firestorm",
+    "namePT": "FirewhirlDragon Firestorm",
+    "nameKey": "firewhirldragon-firestorm",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "When this Spirit attacks, destroy 1 opposing Spirit with 3000 BP or less.",
+      "ptBR": "Quando este Spirit atacar, destrua 1 Spirit do oponente com 3000 BP ou menos."
+    },
+    "effects": [
+      {
+        "id": "sd10-007-when-attacks-display",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Destroy 1 opposing Spirit with 3000 BP or less.",
+          "ptBR": "Destrua 1 Spirit do oponente com 3000 BP ou menos."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-007-attack",
+        "event": "whenAttacks",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 3000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 3000,
+              "chargeableBPDestruction": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD10-008",
+    "nameEN": "Dragon-Annura",
+    "namePT": "Dragon-Annura",
+    "nameKey": "dragon-annura",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "During your Attack Step, all your Spirits with Charge gain +2000 BP. Lv2: [Charge].",
+      "ptBR": "Durante o seu Attack Step, todos os seus Spirits com Charge recebem +2000 BP. Lv2: [Charge]."
+    },
+    "effects": [
+      {
+        "id": "sd10-008-attack-step-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "During Your Attack Step",
+          "ptBR": "Durante Seu Attack Step"
+        },
+        "text": {
+          "en": "All your Spirits with Charge gain +2000 BP.",
+          "ptBR": "Todos os seus Spirits com Charge recebem +2000 BP."
+        }
+      },
+      {
+        "id": "sd10-008-charge-display",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Charge",
+          "ptBR": "Charge"
+        },
+        "text": {
+          "en": "Your BP-destruction effect limits are increased by 1000.",
+          "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-008-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        },
+        "levels": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD10-009",
+    "nameEN": "Sunpillar-Dragon",
+    "namePT": "Sunpillar-Dragon",
+    "nameKey": "sunpillar-dragon",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "When summoned, return 1 Astral Dragon Spirit/Brave card from your Trash to your hand. Lv2: [Charge].",
+      "ptBR": "Quando Invocado: devolva 1 carta de Spirit/Brave da família Astral Dragon do seu Trash para a sua mão. Lv2: [Charge]."
+    },
+    "effects": [
+      {
+        "id": "sd10-009-when-summoned-display",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Return 1 Astral Dragon Spirit/Brave card from your Trash to your hand.",
+          "ptBR": "Devolva 1 carta de Spirit/Brave da família Astral Dragon do seu Trash para a sua mão."
+        }
+      },
+      {
+        "id": "sd10-009-charge-display",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Charge",
+          "ptBR": "Charge"
+        },
+        "text": {
+          "en": "Your BP-destruction effect limits are increased by 1000.",
+          "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-009-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "selectTrashTarget",
+            "titlePT": "Sunpillar-Dragon",
+            "instructionPT": "Escolha 1 Spirit ou Brave do Trash para voltar à mão.",
+            "selector": {
+              "owner": "own",
+              "cardTypes": [
+                "spirit",
+                "brave"
+              ]
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd10-009-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        },
+        "levels": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD10-010",
+    "nameEN": "StormDragon Supercell-Dragoon",
+    "namePT": "StormDragon Supercell-Dragoon",
+    "nameKey": "stormdragon-supercell-dragoon",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "When summoned, destroy up to 2 opposing Spirits with 4000 BP or less. Lv2/Lv3: When attacking, this Spirit gains +2000 BP for each of your Spirits with Charge. Lv3: specified attack.",
+      "ptBR": "Quando Invocado: destrua até 2 Spirits do oponente com 4000 BP ou menos. Lv2/Lv3: quando este Spirit atacar, ele recebe +2000 BP para cada um dos seus Spirits com Charge. Lv3: ataque especificado."
+    },
+    "effects": [
+      {
+        "id": "sd10-010-when-summoned-display",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Destroy up to 2 opposing Spirits with 4000 BP or less.",
+          "ptBR": "Destrua até 2 Spirits do oponente com 4000 BP ou menos."
+        }
+      },
+      {
+        "id": "sd10-010-when-attacks-display",
+        "type": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "This Spirit gains +2000 BP for each of your Spirits with Charge.",
+          "ptBR": "Este Spirit recebe +2000 BP para cada um dos seus Spirits com Charge."
+        }
+      },
+      {
+        "id": "sd10-010-specified-attack-display",
+        "type": "constant",
+        "levels": [
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Specified Attack",
+          "ptBR": "Ataque Especificado"
+        },
+        "text": {
+          "en": "This Spirit may make a specified attack.",
+          "ptBR": "Este Spirit pode realizar um ataque especificado."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-010-summon",
+        "event": "whenSummoned",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 4000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 4000,
+              "chargeableBPDestruction": true
+            },
+            "maxTargets": 2,
+            "onConfirm": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD10-011",
+    "nameEN": "Dustwhirl",
+    "namePT": "Dustwhirl",
+    "nameKey": "dustwhirl",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Astral Dragon",
+      "Machine Dragon"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "When this Brave is summoned, destroy 1 opposing Nexus. Combine condition: Spirit with [Charge]. While combined, when this Spirit attacks, destroy 1 opposing Spirit with 3000 BP or less.",
+      "ptBR": "Quando este Brave for Invocado: destrua 1 Nexus do oponente. Condição de Combine: Spirit com [Charge]. Enquanto estiver combinado, quando este Spirit atacar, destrua 1 Spirit do oponente com 3000 BP ou menos."
+    },
+    "effects": [
+      {
+        "id": "sd10-011-when-summoned-display",
+        "type": "whenSummoned",
+        "levels": [
+          1
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When This Brave Is Summoned",
+          "ptBR": "Quando Este Brave For Invocado"
+        },
+        "text": {
+          "en": "Destroy 1 opposing Nexus.",
+          "ptBR": "Destrua 1 Nexus do oponente."
+        }
+      },
+      {
+        "id": "sd10-011-combine-condition-display",
+        "type": "combineCondition",
+        "levels": [],
+        "timing": "combine",
+        "title": {
+          "en": "Combine Condition",
+          "ptBR": "Condição de Combine"
+        },
+        "text": {
+          "en": "Combine with a Spirit that has [Charge].",
+          "ptBR": "Combine com um Spirit que possua [Charge]."
+        }
+      },
+      {
+        "id": "sd10-011-while-combined-display",
+        "type": "combined",
+        "levels": [],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "While Combined — When This Spirit Attacks",
+          "ptBR": "Enquanto Combinado — Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Destroy 1 opposing Spirit with 3000 BP or less.",
+          "ptBR": "Destrua 1 Spirit do oponente com 3000 BP ou menos."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-011-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Dustwhirl",
+            "instructionPT": "Escolha 1 Nexus do oponente para destruir.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd10-011-combined-attack",
+        "event": "whenAttacks",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 3000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 3000,
+              "chargeableBPDestruction": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ],
+        "requiresCombined": true
+      }
+    ],
+    "braveBP": 3000,
+    "braveCondition": {
+      "type": "keyword",
+      "value": "chargeRed"
+    }
+  },
+  {
+    "id": "SD10-012",
+    "nameEN": "Magma Spouting Star City",
+    "namePT": "Magma Spouting Star City",
+    "nameKey": "magma-spouting-star-city",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "During your Attack Step, all your Astral Dragon Spirits gain +2000 BP. Lv2 during either Attack Step: when your Spirit effect destroys an opposing Spirit, draw 1 card.",
+      "ptBR": "Durante o seu Attack Step, todos os seus Spirits da família Astral Dragon recebem +2000 BP. Lv2 durante qualquer Attack Step: quando o efeito de um dos seus Spirits destruir um Spirit do oponente, compre 1 carta."
+    },
+    "effects": [
+      {
+        "id": "sd10-012-attack-step-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "During Your Attack Step",
+          "ptBR": "Durante Seu Attack Step"
+        },
+        "text": {
+          "en": "All your Astral Dragon Spirits gain +2000 BP.",
+          "ptBR": "Todos os seus Spirits da família Astral Dragon recebem +2000 BP."
+        }
+      },
+      {
+        "id": "sd10-012-destroy-draw-display",
+        "type": "triggered",
+        "levels": [
+          2
+        ],
+        "timing": "eitherAttackStep",
+        "title": {
+          "en": "During Either Attack Step",
+          "ptBR": "Durante Qualquer Attack Step"
+        },
+        "text": {
+          "en": "When your Spirit effect destroys an opposing Spirit, draw 1 card.",
+          "ptBR": "Quando o efeito de um dos seus Spirits destruir um Spirit do oponente, compre 1 carta."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD10-013",
+    "nameEN": "Dragon Shuttle to the Heavens",
+    "namePT": "Dragon Shuttle to the Heavens",
+    "nameKey": "dragon-shuttle-to-the-heavens",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "When your Life is reduced by an opposing Spirit attack, destroy that attacking Spirit if it has 5000 BP or less. Lv2: when your Spirit with Charge destroys an opposing Spirit, destroy 1 opposing Nexus.",
+      "ptBR": "Quando a sua Life for reduzida pelo ataque de um Spirit do oponente, destrua aquele Spirit atacante se ele tiver 5000 BP ou menos. Lv2: quando um dos seus Spirits com Charge destruir um Spirit do oponente, destrua 1 Nexus do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd10-013-life-reduced-display",
+        "type": "triggered",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "afterLifeDecreases",
+        "title": {
+          "en": "When Your Life Is Reduced",
+          "ptBR": "Quando Sua Life For Reduzida"
+        },
+        "text": {
+          "en": "When your Life is reduced by an opposing Spirit attack, destroy that attacking Spirit if it has 5000 BP or less.",
+          "ptBR": "Quando sua Life for reduzida pelo ataque de um Spirit do oponente, destrua aquele Spirit atacante se ele tiver 5000 BP ou menos."
+        }
+      },
+      {
+        "id": "sd10-013-charge-destroy-display",
+        "type": "triggered",
+        "levels": [
+          2
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "When Your Spirit with Charge Destroys",
+          "ptBR": "Quando Seu Spirit com Charge Destruir"
+        },
+        "text": {
+          "en": "When your Spirit with Charge destroys an opposing Spirit, destroy 1 opposing Nexus.",
+          "ptBR": "Quando um dos seus Spirits com Charge destruir um Spirit do oponente, destrua 1 Nexus do oponente."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD10-014",
+    "nameEN": "Twin Flame",
+    "namePT": "Twin Flame",
+    "nameKey": "twin-flame",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: destroy up to 2 opposing Spirits with 2000 BP or less.",
+      "ptBR": "Flash: destrua até 2 Spirits do oponente com 2000 BP ou menos."
+    },
+    "effects": [
+      {
+        "id": "sd10-014-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Destroy up to 2 opposing Spirits with 2000 BP or less.",
+          "ptBR": "Destrua até 2 Spirits do oponente com 2000 BP ou menos."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-014-flash",
+        "event": "magicFlash",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 2000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 2000,
+              "chargeableBPDestruction": true
+            },
+            "maxTargets": 2,
+            "onConfirm": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD10-015",
+    "nameEN": "Fire Wall",
+    "namePT": "Fire Wall",
+    "nameKey": "fire-wall",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash (opponent Attack Step): destroy 1 of your red Spirits; at the end of this battle, end the Attack Step.",
+      "ptBR": "Flash (durante o Attack Step do oponente): destrua 1 dos seus Spirits Vermelhos; ao final desta batalha, encerre o Attack Step."
+    },
+    "effects": [
+      {
+        "id": "sd10-015-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "Flash — Opponent's Attack Step",
+          "ptBR": "Flash — Attack Step do Oponente"
+        },
+        "text": {
+          "en": "Destroy 1 of your Red Spirits. At the end of this battle, end the Attack Step.",
+          "ptBR": "Destrua 1 dos seus Spirits Vermelhos. Ao final desta batalha, encerre o Attack Step."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD10-016",
+    "nameEN": "Charge Draw",
+    "namePT": "Charge Draw",
+    "nameKey": "charge-draw",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: draw 2 cards, then reveal the top 2 cards; add all Spirit/Brave cards with Charge to your hand and return the rest to the top in any order. Flash: 1 Spirit gains +3000 BP this turn.",
+      "ptBR": "Main: compre 2 cartas. Depois, revele as 2 cartas do topo do seu deck; adicione à sua mão todas as cartas de Spirit/Brave com Charge e devolva as demais ao topo em qualquer ordem. Flash: 1 Spirit recebe +3000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd10-016-main-display",
+        "type": "main",
+        "levels": [],
+        "timing": "main",
+        "title": {
+          "en": "Main",
+          "ptBR": "Main"
+        },
+        "text": {
+          "en": "Draw 2 cards, then reveal the top 2 cards. Add all Spirit/Brave cards with Charge to your hand and return the rest to the top in any order.",
+          "ptBR": "Compre 2 cartas. Depois, revele as 2 cartas do topo do seu deck; adicione à sua mão todas as cartas de Spirit/Brave com Charge e devolva as demais ao topo em qualquer ordem."
+        }
+      },
+      {
+        "id": "sd10-016-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "1 Spirit gains +3000 BP this turn.",
+          "ptBR": "1 Spirit recebe +3000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-016-main",
+        "event": "magicMain",
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "id": "sd10-016-flash",
+        "event": "magicFlash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Charge Draw — Flash",
+            "instructionPT": "Escolha 1 Spirit para receber +3000 BP neste turno.",
+            "selector": {
+              "owner": "any",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": 3000,
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD10-X01",
+    "nameEN": "ShineDragon Shining-Dragon",
+    "namePT": "ShineDragon Shining-Dragon",
+    "nameKey": "shinedragon-shining-dragon",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 8000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 11000
+      }
+    ],
+    "effectText": {
+      "en": "When summoned, you may summon 1 red Brave from your hand without paying its cost. Lv2/Lv3: when attacking, destroy 1 opposing Spirit with 5000 BP or less. Lv3: [Charge].",
+      "ptBR": "Quando Invocado: você pode Invocar 1 Brave Vermelho da sua mão sem pagar seu custo. Lv2/Lv3: quando este Spirit atacar, destrua 1 Spirit do oponente com 5000 BP ou menos. Lv3: [Charge]."
+    },
+    "effects": [
+      {
+        "id": "sd10-x01-when-summoned-display",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "You may summon 1 Red Brave from your hand without paying its cost.",
+          "ptBR": "Você pode Invocar 1 Brave Vermelho da sua mão sem pagar seu custo."
+        }
+      },
+      {
+        "id": "sd10-x01-when-attacks-display",
+        "type": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Destroy 1 opposing Spirit with 5000 BP or less.",
+          "ptBR": "Destrua 1 Spirit do oponente com 5000 BP ou menos."
+        }
+      },
+      {
+        "id": "sd10-x01-charge-display",
+        "type": "constant",
+        "levels": [
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Charge",
+          "ptBR": "Charge"
+        },
+        "text": {
+          "en": "Your BP-destruction effect limits are increased by 1000.",
+          "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-x01-attack",
+        "event": "whenAttacks",
+        "labelPT": "Efeito de destruição",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Destruição por BP",
+            "instructionPT": "Escolha Spirit do oponente com 5000 BP ou menos.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 5000,
+              "chargeableBPDestruction": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ],
+        "levels": [
+          2,
+          3
+        ]
+      },
+      {
+        "id": "sd10-x01-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        },
+        "levels": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD10-X02",
+    "nameEN": "ShiningSacredSword Shining-Sword",
+    "namePT": "ShiningSacredSword Shining-Sword",
+    "nameKey": "shiningsacredsword-shining-sword",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 7,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Sword Blade"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "When this Brave is summoned, destroy all opposing Spirits with 3000 BP or less and draw 1 card for each destroyed. Lv1: [Charge]. Combine condition: cost 5 or more. While combined: [Charge].",
+      "ptBR": "Quando este Brave for Invocado: destrua todos os Spirits do oponente com 3000 BP ou menos e compre 1 carta para cada Spirit destruído. Lv1: [Charge]. Condição de Combine: custo 5 ou mais. Enquanto estiver combinado: [Charge]."
+    },
+    "effects": [
+      {
+        "id": "sd10-x02-when-summoned-display",
+        "type": "whenSummoned",
+        "levels": [
+          1
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When This Brave Is Summoned",
+          "ptBR": "Quando Este Brave For Invocado"
+        },
+        "text": {
+          "en": "Destroy all opposing Spirits with 3000 BP or less and draw 1 card for each destroyed.",
+          "ptBR": "Destrua todos os Spirits do oponente com 3000 BP ou menos e compre 1 carta para cada Spirit destruído."
+        }
+      },
+      {
+        "id": "sd10-x02-charge-display",
+        "type": "constant",
+        "levels": [
+          1
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Charge",
+          "ptBR": "Charge"
+        },
+        "text": {
+          "en": "Your BP-destruction effect limits are increased by 1000.",
+          "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
+        }
+      },
+      {
+        "id": "sd10-x02-combine-condition-display",
+        "type": "combineCondition",
+        "levels": [],
+        "timing": "combine",
+        "title": {
+          "en": "Combine Condition",
+          "ptBR": "Condição de Combine"
+        },
+        "text": {
+          "en": "Combine with a Spirit that costs 5 or more.",
+          "ptBR": "Combine com um Spirit de custo 5 ou mais."
+        }
+      },
+      {
+        "id": "sd10-x02-while-combined-display",
+        "type": "combined",
+        "levels": [],
+        "timing": "always",
+        "title": {
+          "en": "While Combined",
+          "ptBR": "Enquanto Combinado"
+        },
+        "text": {
+          "en": "The combined Spirit has [Charge].",
+          "ptBR": "O Spirit combinado possui [Charge]."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd10-x02-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "destroyAllMatching",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 3000,
+              "chargeableBPDestruction": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd10-x02-charge",
+        "event": "continuous",
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        }
+      },
+      {
+        "id": "sd10-x02-combined-charge",
+        "event": "continuous",
+        "requiresCombined": true,
+        "modifiers": {
+          "keywords": [
+            "chargeRed"
+          ],
+          "bpDestructionLimitBonus": 1000
+        }
+      }
+    ],
+    "braveBP": 5000,
+    "braveCondition": {
+      "type": "costAtLeast",
+      "value": 5
+    }
+  }
+]

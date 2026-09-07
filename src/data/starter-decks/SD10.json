@@ -1,0 +1,79 @@
+{
+  "id": "SD10",
+  "name": "Tsurugi Deck — Shining Charge",
+  "totalCards": 40,
+  "cards": [
+    {
+      "cardId": "SD10-001",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD10-002",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD10-003",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD10-004",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD10-005",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD10-006",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD10-007",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD10-008",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD10-009",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD10-010",
+      "quantity": 1
+    },
+    {
+      "cardId": "SD10-011",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD10-012",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD10-013",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD10-014",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD10-015",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD10-016",
+      "quantity": 1
+    },
+    {
+      "cardId": "SD10-X01",
+      "quantity": 1
+    },
+    {
+      "cardId": "SD10-X02",
+      "quantity": 1
+    }
+  ]
+}

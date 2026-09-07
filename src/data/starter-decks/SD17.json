@@ -1,0 +1,79 @@
+{
+  "id": "SD17",
+  "name": "New Tsurugi Deck — Darkness Fang",
+  "totalCards": 40,
+  "cards": [
+    {
+      "cardId": "SD17-001",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD17-002",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD17-003",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD17-004",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD17-005",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD17-006",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD17-007",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD17-008",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD17-009",
+      "quantity": 1
+    },
+    {
+      "cardId": "SD17-010",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD17-011",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD17-012",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD17-013",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD17-014",
+      "quantity": 3
+    },
+    {
+      "cardId": "SD17-015",
+      "quantity": 1
+    },
+    {
+      "cardId": "SD17-016",
+      "quantity": 2
+    },
+    {
+      "cardId": "SD17-X01",
+      "quantity": 1
+    },
+    {
+      "cardId": "SD17-X02",
+      "quantity": 1
+    }
+  ]
+}

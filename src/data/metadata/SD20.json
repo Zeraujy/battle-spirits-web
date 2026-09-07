@@ -1,0 +1,1486 @@
+[
+  {
+    "id": "SD20-001",
+    "nameEN": "Missile Mobile",
+    "namePT": "Missile Mobile",
+    "nameKey": "missile-mobile",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": []
+  },
+  {
+    "id": "SD20-002",
+    "nameEN": "Mugendra",
+    "namePT": "Mugendra",
+    "nameKey": "mugendra",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 1,
+    "reduction": [
+      "red",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Incarnate"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: This Spirit's color and symbol are also treated as White.",
+      "ptBR": "LV1/LV2/LV3: A cor e o símbolo deste Spirit também são tratados como Branco."
+    },
+    "effects": [
+      {
+        "id": "sd20-002-color-symbol",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Color / Symbol",
+          "ptBR": "Cor / Símbolo"
+        },
+        "text": {
+          "en": "This Spirit's color and symbol are also treated as White.",
+          "ptBR": "A cor e o símbolo deste Spirit também são tratados como Branco."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-002-continuous-white",
+        "event": "continuous",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "modifiers": {
+          "addColors": [
+            "white"
+          ],
+          "addSymbols": [
+            "white"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "SD20-003",
+    "nameEN": "Defenzard",
+    "namePT": "Defenzard",
+    "nameKey": "defenzard",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armored Dragon"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: This Spirit gains +3000 BP. If your Life is 3 or less, it gains an additional +3000 BP.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +3000 BP. Se sua Life estiver em 3 ou menos, ele recebe mais +3000 BP."
+    },
+    "effects": [
+      {
+        "id": "sd20-003-when-blocks",
+        "type": "whenBlocks",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenBlocks",
+        "title": {
+          "en": "When This Spirit Blocks",
+          "ptBR": "Quando Este Spirit Bloqueia"
+        },
+        "text": {
+          "en": "This Spirit gains +3000 BP. If your Life is 3 or less, it gains an additional +3000 BP.",
+          "ptBR": "Este Spirit recebe +3000 BP. Se sua Life estiver em 3 ou menos, ele recebe mais +3000 BP."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-003-when-blocks-bp",
+        "event": "whenBlocks",
+        "levels": [
+          1,
+          2
+        ],
+        "labelPT": "Quando Este Spirit Bloqueia",
+        "labelEN": "When This Spirit Blocks",
+        "actions": [
+          {
+            "type": "modifyBP",
+            "amount": 3000,
+            "duration": "battle"
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "ownLifeAtMost",
+              "value": 3
+            },
+            "actions": [
+              {
+                "type": "modifyBP",
+                "amount": 3000,
+                "duration": "battle"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD20-004",
+    "nameEN": "Shield Mobile",
+    "namePT": "Shield Mobile",
+    "nameKey": "shield-mobile",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During the Opponent's Attack Step: This Spirit can block while exhausted. LV2/LV3 Heavy Armor: Red — This Spirit is unaffected by opposing Red Spirit, Brave, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step do Oponente: Este Spirit pode bloquear mesmo estando Exhausted. LV2/LV3 Heavy Armor: Vermelho — Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Vermelhos do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd20-004-exhausted-block",
+        "type": "opponentAttackStep",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "During the Opponent's Attack Step",
+          "ptBR": "Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "This Spirit can block while exhausted.",
+          "ptBR": "Este Spirit pode bloquear mesmo estando Exhausted."
+        }
+      },
+      {
+        "id": "sd20-004-heavy-armor",
+        "type": "heavyArmor",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Heavy Armor: Red",
+          "ptBR": "Heavy Armor: Vermelho"
+        },
+        "text": {
+          "en": "This Spirit is unaffected by opposing Red Spirit, Brave, Nexus, and Magic effects.",
+          "ptBR": "Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Vermelhos do oponente."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD20-005",
+    "nameEN": "Trooper Mobile",
+    "namePT": "Trooper Mobile",
+    "nameKey": "trooper-mobile",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 Heavy Armor: Red — This Spirit is unaffected by opposing Red Spirit, Brave, Nexus, and Magic effects. LV2/LV3 When This Spirit Blocks: Put 1 core from the Void onto one of your White Spirits.",
+      "ptBR": "LV1/LV2/LV3 Heavy Armor: Vermelho — Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Vermelhos do oponente. LV2/LV3 Quando Este Spirit Bloqueia: Coloque 1 Core do Void em 1 dos seus Spirits Brancos."
+    },
+    "effects": [
+      {
+        "id": "sd20-005-heavy-armor",
+        "type": "heavyArmor",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Heavy Armor: Red",
+          "ptBR": "Heavy Armor: Vermelho"
+        },
+        "text": {
+          "en": "This Spirit is unaffected by opposing Red Spirit, Brave, Nexus, and Magic effects.",
+          "ptBR": "Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Vermelhos do oponente."
+        }
+      },
+      {
+        "id": "sd20-005-when-blocks",
+        "type": "whenBlocks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenBlocks",
+        "title": {
+          "en": "When This Spirit Blocks",
+          "ptBR": "Quando Este Spirit Bloqueia"
+        },
+        "text": {
+          "en": "Put 1 core from the Void onto one of your White Spirits.",
+          "ptBR": "Coloque 1 Core do Void em 1 dos seus Spirits Brancos."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-005-heavy-armor-red",
+        "event": "continuous",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "modifiers": {
+          "heavyArmorColors": [
+            "red"
+          ]
+        }
+      },
+      {
+        "id": "sd20-005-when-blocks-core",
+        "event": "whenBlocks",
+        "levels": [
+          2,
+          3
+        ],
+        "labelPT": "Quando Este Spirit Bloqueia",
+        "labelEN": "When This Spirit Blocks",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Trooper Mobile — Core do Void",
+            "instructionPT": "Escolha 1 dos seus Spirits Brancos para receber 1 Core do Void.",
+            "selector": {
+              "owner": "own",
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "white"
+              ]
+            },
+            "onSelect": {
+              "type": "addCoreFromVoid",
+              "amount": 1
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD20-006",
+    "nameEN": "Wing Soldier",
+    "namePT": "Wing Soldier",
+    "nameKey": "wing-soldier",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Return one opposing Spirit with 5000 BP or less to the hand. If your Life is 3 or less, return one additional opposing Spirit with 5000 BP or less to the hand.",
+      "ptBR": "LV1/LV2 Quando Invocado: Devolva para a mão 1 Spirit do oponente com 5000 BP ou menos. Se sua Life estiver em 3 ou menos, devolva para a mão mais 1 Spirit do oponente com 5000 BP ou menos."
+    },
+    "effects": [
+      {
+        "id": "sd20-006-when-summoned",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Return one opposing Spirit with 5000 BP or less to the hand. If your Life is 3 or less, return one additional opposing Spirit with 5000 BP or less to the hand.",
+          "ptBR": "Devolva para a mão 1 Spirit do oponente com 5000 BP ou menos. Se sua Life estiver em 3 ou menos, devolva para a mão mais 1 Spirit do oponente com 5000 BP ou menos."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-006-when-summoned-return",
+        "event": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "labelPT": "Quando Invocado",
+        "labelEN": "When Summoned",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Wing Soldier — Quando Invocado",
+            "instructionPT": "Escolha 1 Spirit do oponente com 5000 BP ou menos para devolver à mão.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 5000
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "ownLifeAtMost",
+              "value": 3
+            },
+            "actions": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Wing Soldier — Life 3 ou menos",
+                "instructionPT": "Sua Life está em 3 ou menos. Escolha mais 1 Spirit do oponente com 5000 BP ou menos para devolver à mão.",
+                "selector": {
+                  "owner": "opponent",
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "maxBP": 5000
+                },
+                "onSelect": {
+                  "type": "returnToHand"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD20-007",
+    "nameEN": "White Jet Dragoon",
+    "namePT": "White Jet Dragoon",
+    "nameKey": "white-jet-dragoon",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Armored Dragon"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: While your Life is 3 or less, this Spirit gains +4000 BP. LV2 When This Spirit Attacks: Discard one opposing set Burst.",
+      "ptBR": "LV1/LV2: Enquanto sua Life estiver em 3 ou menos, este Spirit recebe +4000 BP. LV2 Quando Este Spirit Ataca: Descarte 1 Burst que o oponente tenha preparado."
+    },
+    "effects": [
+      {
+        "id": "sd20-007-life-bp",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Life 3 or Less",
+          "ptBR": "Life 3 ou Menos"
+        },
+        "text": {
+          "en": "While your Life is 3 or less, this Spirit gains +4000 BP.",
+          "ptBR": "Enquanto sua Life estiver em 3 ou menos, este Spirit recebe +4000 BP."
+        }
+      },
+      {
+        "id": "sd20-007-when-attacks",
+        "type": "whenAttacks",
+        "levels": [
+          2
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Discard one opposing set Burst.",
+          "ptBR": "Descarte 1 Burst que o oponente tenha preparado."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD20-008",
+    "nameEN": "UltimateCannon-Bell",
+    "namePT": "UltimateCannon-Bell",
+    "nameKey": "ultimatecannon-bell",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 3,
+    "families": [
+      "Incarnate",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 7000
+      },
+      {
+        "level": 4,
+        "cores": 2,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one White Spirit. LV4 Ultimate Trigger When This Ultimate Attacks: On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Branco. LV4 Ultimate Trigger Quando Este Ultimate Ataca: Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd20-008-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one White Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Branco."
+        }
+      },
+      {
+        "id": "sd20-008-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          4
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD20-009",
+    "nameEN": "Ultimate-Asc",
+    "namePT": "Ultimate-Asc",
+    "nameKey": "ultimate-asc",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Incarnate",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 8000
+      },
+      {
+        "level": 4,
+        "cores": 2,
+        "bp": 10000
+      },
+      {
+        "level": 5,
+        "cores": 4,
+        "bp": 13000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one White Spirit. LV3/LV4/LV5 Ultimate Trigger When This Ultimate Attacks: On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Branco. LV3/LV4/LV5 Ultimate Trigger Quando Este Ultimate Ataca: Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd20-009-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one White Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Branco."
+        }
+      },
+      {
+        "id": "sd20-009-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD20-010",
+    "nameEN": "Ultimate-Surtr",
+    "namePT": "Ultimate-Surtr",
+    "nameKey": "ultimate-surtr",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 2,
+    "families": [
+      "Incarnate",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 11000
+      },
+      {
+        "level": 4,
+        "cores": 2,
+        "bp": 14000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one White Spirit. LV3/LV4 Ultimate Trigger When This Ultimate Attacks: On a hit, this Ultimate cannot be blocked by opposing Spirits. LV4 During Your End Step: Refresh this Ultimate.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Branco. LV3/LV4 Ultimate Trigger Quando Este Ultimate Ataca: Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente. LV4 Durante Seu End Step: Dê Refresh neste Ultimate."
+    },
+    "effects": [
+      {
+        "id": "sd20-010-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one White Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Branco."
+        }
+      },
+      {
+        "id": "sd20-010-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+        }
+      },
+      {
+        "id": "sd20-010-end-step",
+        "type": "refresh",
+        "levels": [
+          4
+        ],
+        "timing": "yourEndStep",
+        "title": {
+          "en": "During Your End Step",
+          "ptBR": "Durante Seu End Step"
+        },
+        "text": {
+          "en": "Refresh this Ultimate.",
+          "ptBR": "Dê Refresh neste Ultimate."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD20-X01",
+    "nameEN": "Ultimate-Odin",
+    "namePT": "Ultimate-Odin",
+    "nameKey": "ultimate-odin",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Incarnate",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 10000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 15000
+      },
+      {
+        "level": 5,
+        "cores": 4,
+        "bp": 20000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one White Spirit. LV3/LV4/LV5 When Summoned: Return one opposing Spirit to the hand. LV3/LV4/LV5 Ultimate Trigger When This Ultimate Attacks: On a hit, this Ultimate cannot be blocked by opposing Spirits. LV4/LV5 During Your End Step: Refresh this Ultimate.",
+      "ptBR": "Condição de Invocação: Você deve controlar pelo menos 1 Spirit Branco. LV3/LV4/LV5 Quando Invocado: Devolva 1 Spirit do oponente para a mão. LV3/LV4/LV5 Ultimate Trigger Quando Este Ultimate Ataca: Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente. LV4/LV5 Durante Seu End Step: Dê Refresh neste Ultimate."
+    },
+    "effects": [
+      {
+        "id": "sd20-x01-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one White Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Branco."
+        }
+      },
+      {
+        "id": "sd20-x01-when-summoned",
+        "type": "whenSummoned",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Return one opposing Spirit to the hand.",
+          "ptBR": "Devolva 1 Spirit do oponente para a mão."
+        }
+      },
+      {
+        "id": "sd20-x01-ultimate-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, this Ultimate cannot be blocked by opposing Spirits.",
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente."
+        }
+      },
+      {
+        "id": "sd20-x01-end-step",
+        "type": "refresh",
+        "levels": [
+          4,
+          5
+        ],
+        "timing": "yourEndStep",
+        "title": {
+          "en": "During Your End Step",
+          "ptBR": "Durante Seu End Step"
+        },
+        "text": {
+          "en": "Refresh this Ultimate.",
+          "ptBR": "Dê Refresh neste Ultimate."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD20-011",
+    "nameEN": "The Rowgard Northern Instructions Bureau",
+    "namePT": "Comando Norte de Rowgard",
+    "nameKey": "the-rowgard-northern-instructions-bureau",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": null
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": null
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: All of your White Spirits and Ultimates gain +2000 BP. LV2 During the Opponent's Attack Step: While your Life is 3 or less, opposing Ultimate effects can reduce your Life by only 1 per turn.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Todos os seus Spirits e Ultimates Brancos recebem +2000 BP. LV2 Durante o Attack Step do Oponente: Enquanto sua Life estiver em 3 ou menos, efeitos de Ultimates do oponente só podem reduzir sua Life em 1 por turno."
+    },
+    "effects": [
+      {
+        "id": "sd20-011-bp-boost",
+        "type": "opponentAttackStep",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "During the Opponent's Attack Step",
+          "ptBR": "Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "All of your White Spirits and Ultimates gain +2000 BP.",
+          "ptBR": "Todos os seus Spirits e Ultimates Brancos recebem +2000 BP."
+        }
+      },
+      {
+        "id": "sd20-011-life-protection",
+        "type": "opponentAttackStep",
+        "levels": [
+          2
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "LV2 During the Opponent's Attack Step",
+          "ptBR": "LV2 Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "While your Life is 3 or less, opposing Ultimate effects can reduce your Life by only 1 per turn.",
+          "ptBR": "Enquanto sua Life estiver em 3 ou menos, efeitos de Ultimates do oponente só podem reduzir sua Life em 1 por turno."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD20-012",
+    "nameEN": "The Falling World",
+    "namePT": "O Mundo em Queda",
+    "nameKey": "the-falling-world",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": null
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": null
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Spirits or Ultimates is destroyed by the opponent, return one opposing Nexus to the hand. LV2 During the Opponent's Attack Step: When one of your Spirits or Ultimates is destroyed by the opponent, return one opposing Spirit to the hand.",
+      "ptBR": "LV1/LV2: Quando 1 dos seus Spirits ou Ultimates for destruído pelo oponente, devolva 1 Nexus do oponente para a mão. LV2 Durante o Attack Step do Oponente: Quando 1 dos seus Spirits ou Ultimates for destruído pelo oponente, devolva 1 Spirit do oponente para a mão."
+    },
+    "effects": [
+      {
+        "id": "sd20-012-return-nexus",
+        "type": "whenDestroyedByOpponent",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenYourSpiritOrUltimateDestroyed",
+        "title": {
+          "en": "When Your Spirit/Ultimate Is Destroyed",
+          "ptBR": "Quando Seu Spirit/Ultimate For Destruído"
+        },
+        "text": {
+          "en": "When one of your Spirits or Ultimates is destroyed by the opponent, return one opposing Nexus to the hand.",
+          "ptBR": "Quando 1 dos seus Spirits ou Ultimates for destruído pelo oponente, devolva 1 Nexus do oponente para a mão."
+        }
+      },
+      {
+        "id": "sd20-012-return-spirit",
+        "type": "opponentAttackStep",
+        "levels": [
+          2
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "LV2 During the Opponent's Attack Step",
+          "ptBR": "LV2 Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "When one of your Spirits or Ultimates is destroyed by the opponent, return one opposing Spirit to the hand.",
+          "ptBR": "Quando 1 dos seus Spirits ou Ultimates for destruído pelo oponente, devolva 1 Spirit do oponente para a mão."
+        }
+      }
+    ],
+    "abilities": []
+  },
+  {
+    "id": "SD20-013",
+    "nameEN": "Ultimate Power",
+    "namePT": "Ultimate Power",
+    "nameKey": "ultimate-power",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: One Spirit or Ultimate gains +3000 BP for this turn.",
+      "ptBR": "Flash: 1 Spirit ou Ultimate recebe +3000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd20-013-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "One Spirit or Ultimate gains +3000 BP for this turn.",
+          "ptBR": "1 Spirit ou Ultimate recebe +3000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-013-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Ultimate Power — Flash",
+            "instructionPT": "Escolha 1 Spirit ou Ultimate para receber +3000 BP durante este turno.",
+            "selector": {
+              "owner": "any",
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": 3000,
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD20-014",
+    "nameEN": "Burst Shield",
+    "namePT": "Burst Shield",
+    "nameKey": "burst-shield",
+    "cardType": "magic",
+    "subtypes": [
+      "burst"
+    ],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Burst — After Your Life Decreases: Put 1 core from the Void onto one of your White Spirits. Then you may pay this card's cost to activate its Flash effect. Flash: For this turn, your Life cannot be reduced by attacks from Spirits with cost 4 or more.",
+      "ptBR": "Burst — Após Sua Life Diminuir: Coloque 1 Core do Void em 1 dos seus Spirits Brancos. Depois, você pode pagar o custo desta carta para ativar seu efeito Flash. Flash: Durante este turno, sua Life não pode ser reduzida por ataques de Spirits de custo 4 ou mais."
+    },
+    "effects": [
+      {
+        "id": "sd20-014-burst",
+        "type": "burst",
+        "levels": [],
+        "timing": "afterLifeDecreases",
+        "title": {
+          "en": "Burst: After Your Life Decreases",
+          "ptBR": "Burst: Após Sua Life Diminuir"
+        },
+        "text": {
+          "en": "Put 1 core from the Void onto one of your White Spirits. Then you may pay this card's cost to activate its Flash effect.",
+          "ptBR": "Coloque 1 Core do Void em 1 dos seus Spirits Brancos. Depois, você pode pagar o custo desta carta para ativar seu efeito Flash."
+        }
+      },
+      {
+        "id": "sd20-014-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "For this turn, your Life cannot be reduced by attacks from Spirits with cost 4 or more.",
+          "ptBR": "Durante este turno, sua Life não pode ser reduzida por ataques de Spirits de custo 4 ou mais."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-014-burst-life",
+        "event": "burstLifeDecrease",
+        "labelPT": "Burst — Após sua Life diminuir",
+        "labelEN": "Burst — After your Life decreases",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Burst Shield",
+            "instructionPT": "Escolha 1 dos seus Spirits Brancos para receber 1 Core do Void.",
+            "selector": {
+              "owner": "own",
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "white"
+              ]
+            },
+            "onSelect": {
+              "type": "addCoreFromVoid",
+              "amount": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd20-014-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "setTurnProtection",
+            "protection": {
+              "type": "preventSpiritAttackLifeDamageCostAtLeast",
+              "minCost": 4
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD20-015",
+    "nameEN": "Last Rebellion",
+    "namePT": "Last Rebellion",
+    "nameKey": "last-rebellion",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Choose one — return all opposing Spirits with cost 3 or less to the hand; or return one opposing Spirit that is not combined with a Brave to the hand.",
+      "ptBR": "Flash: Escolha 1 — devolva para a mão todos os Spirits do oponente de custo 3 ou menos; ou devolva para a mão 1 Spirit do oponente que não esteja combinado com um Brave."
+    },
+    "effects": [
+      {
+        "id": "sd20-015-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Choose one: return all opposing Spirits with cost 3 or less to the hand; or return one opposing Spirit that is not combined with a Brave to the hand.",
+          "ptBR": "Escolha 1: devolva para a mão todos os Spirits do oponente de custo 3 ou menos; ou devolva para a mão 1 Spirit do oponente que não esteja combinado com um Brave."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-015-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "chooseOption",
+            "titlePT": "Last Rebellion",
+            "instructionPT": "Escolha 1 efeito.",
+            "options": [
+              {
+                "id": "return-all-cost-3",
+                "labelPT": "Todos os Spirits de custo 3 ou menos",
+                "actions": [
+                  {
+                    "type": "returnAllMatchingToHand",
+                    "selector": {
+                      "owner": "opponent",
+                      "cardTypes": [
+                        "spirit"
+                      ],
+                      "maxCost": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "return-one-uncombined",
+                "labelPT": "1 Spirit não combinado",
+                "actions": [
+                  {
+                    "type": "selectTarget",
+                    "titlePT": "Last Rebellion",
+                    "instructionPT": "Escolha 1 Spirit do oponente que não esteja combinado com Brave.",
+                    "selector": {
+                      "owner": "opponent",
+                      "cardTypes": [
+                        "spirit"
+                      ],
+                      "notCombinedWithBrave": true
+                    },
+                    "onSelect": {
+                      "type": "returnToHand"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "SD20-016",
+    "nameEN": "Blitz Order",
+    "namePT": "Blitz Order",
+    "nameKey": "blitz-order",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 7,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Return one opposing Spirit to the hand. Then refresh one of your Spirits.",
+      "ptBR": "Flash: Devolva 1 Spirit do oponente para a mão. Depois, dê Refresh em 1 dos seus Spirits."
+    },
+    "effects": [
+      {
+        "id": "sd20-016-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Return one opposing Spirit to the hand. Then refresh one of your Spirits.",
+          "ptBR": "Devolva 1 Spirit do oponente para a mão. Depois, dê Refresh em 1 dos seus Spirits."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd20-016-magic-flash",
+        "event": "magicFlash",
+        "labelPT": "Flash",
+        "labelEN": "Flash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Blitz Order",
+            "instructionPT": "Escolha 1 Spirit do oponente para voltar à mão.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            },
+            "afterSelect": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Blitz Order — Refresh",
+                "instructionPT": "Escolha 1 dos seus Spirits para receber Refresh.",
+                "selector": {
+                  "owner": "own",
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "onSelect": {
+                  "type": "refresh"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

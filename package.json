@@ -1,0 +1,81 @@
+{
+  "name": "battle-spirits-eternal-simulator",
+  "version": "2.3.11",
+  "private": true,
+  "type": "module",
+  "description": "Unofficial Battle Spirits Eternal simulator - React/Vite/Electron",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && cross-env ELECTRON_START_URL=http://127.0.0.1:5173 electron .\"",
+    "dev:web": "vite --host 127.0.0.1",
+    "dev:server": "node --env-file-if-exists=server/.env server/index.mjs",
+    "electron": "electron .",
+    "electron:updater": "electron . --mode=updater",
+    "electron:server": "electron . --mode=server",
+    "build": "vite build",
+    "preview": "vite preview",
+    "dist:win": "npm run build && electron-builder --win nsis && node scripts/generate-update-manifest.mjs",
+    "test": "node --test src/game/*.test.js",
+    "verify": "node scripts/verify-project.mjs",
+    "check": "npm run verify && npm test && npm run build"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.2",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.0.0",
+    "electron": "^44.2.0",
+    "electron-builder": "^26.0.12",
+    "vite": "^8.2.2",
+    "wait-on": "^8.0.4"
+  },
+  "build": {
+    "appId": "com.fan.battlespirits.eternal.simulator",
+    "productName": "Battle Spirits",
+    "artifactName": "Battle-Spirits-Setup-${version}.${ext}",
+    "asar": true,
+    "afterPack": "scripts/after-pack.cjs",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "server/**/*",
+      "src/game/**/*",
+      "src/data/**/*",
+      "config/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "config/update-config.json",
+        "to": "config/update-config.json"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Battle Spirits",
+      "uninstallDisplayName": "Battle Spirits"
+    }
+  }
+}
