@@ -150,10 +150,15 @@ function createBrowserOnlineClient(serverUrl) {
   // Transporte da base 2.0.x que o projeto já usava com sucesso no navegador:
   // WebSocket preferencial, com fallback automático para polling.
   const socket = io(url, {
-    transports: ["websocket", "polling"],
-    autoConnect: false,
-    reconnection: true
-  });
+  transports: ["polling"],
+  upgrade: false,
+  autoConnect: false,
+  reconnection: true,
+  reconnectionAttempts: Infinity,
+  reconnectionDelay: 1000,
+  reconnectionDelayMax: 5000,
+  timeout: 30000
+});
 
   let session = null;
   let hasConnectedOnce = false;
