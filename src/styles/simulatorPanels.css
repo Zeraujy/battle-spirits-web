@@ -1,0 +1,1104 @@
+/* =========================================================
+   BATTLE SPIRITS SIMULATOR
+   PAINÉIS LATERAIS — v2.3.0
+
+   Somente interface.
+   Não altera engine, regras ou online.
+========================================================= */
+
+
+/* =========================================================
+   CARTA SELECIONADA
+========================================================= */
+
+.inspector-scroll {
+  box-sizing: border-box;
+
+  width: 100%;
+
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+
+/* Título "CARTA SELECIONADA" */
+
+.inspector-scroll > .eyebrow {
+  display: block;
+
+  width: 100%;
+
+  margin-bottom: 10px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   CORREÇÃO DO ALINHAMENTO DA CARTA
+========================================================= */
+
+/*
+ * CardTile é um botão.
+ * display:block + margin-inline:auto garante
+ * que ele realmente fique no centro da coluna.
+ */
+
+.inspector-scroll > .card-tile,
+.inspector-scroll > button.card-tile {
+  display: block !important;
+
+  width: 150px !important;
+  max-width: 82% !important;
+
+  margin-top: 8px !important;
+  margin-bottom: 12px !important;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+
+/*
+ * Garante que nenhum alinhamento herdado
+ * do botão force a carta para a esquerda.
+ */
+
+.inspector .card-tile {
+  float: none !important;
+
+  justify-self: center !important;
+  align-self: center !important;
+}
+
+
+/* Imagem dentro da carta */
+
+.inspector-scroll
+  > .card-tile
+  > img,
+
+.inspector-scroll
+  > button.card-tile
+  > img {
+  display: block;
+
+  width: 100%;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* =========================================================
+   NOME DA CARTA
+========================================================= */
+
+.inspector-scroll > h2 {
+  width: 100%;
+
+  margin:
+    7px auto
+    7px !important;
+
+  text-align: center;
+
+  font-size: 15px !important;
+}
+
+
+/* =========================================================
+   ID / TIPO / CUSTO
+========================================================= */
+
+.inspector-scroll > .card-meta {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 5px;
+
+  margin-bottom: 8px !important;
+}
+
+
+/* =========================================================
+   TEXTO DO EFEITO
+========================================================= */
+
+/*
+ * O efeito continua alinhado à esquerda.
+ * Centralizar texto longo prejudicaria a leitura.
+ */
+
+.inspector-scroll .effect-text,
+.inspector-scroll .effect-text-block {
+  width: 100%;
+
+  text-align: left;
+}
+
+
+/* =========================================================
+   BOTÕES DA CARTA
+========================================================= */
+
+.inspector-scroll
+  .inspector-actions {
+  width:
+    min(
+      100%,
+      220px
+    );
+
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: left;
+}
+
+
+/* =========================================================
+   RESOLUÇÃO MANUAL
+========================================================= */
+
+.inspector-scroll
+  .compact-manual-tools {
+  width: 100%;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* =========================================================
+   CONTROLE DA PARTIDA
+========================================================= */
+
+.turn-panel-main {
+  box-sizing: border-box;
+
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+
+/* CONTROLE DA PARTIDA */
+
+.turn-panel-main
+  > .eyebrow {
+  display: block;
+
+  width: 100%;
+
+  text-align: center;
+}
+
+
+/* Nome do jogador */
+
+.turn-panel-main
+  > h2 {
+  width: 100%;
+
+  margin:
+    9px 0
+    5px;
+
+  text-align: center;
+
+  font-size: 18px;
+}
+
+
+/* Texto da fase */
+
+.turn-panel-main
+  > p {
+  width:
+    min(
+      100%,
+      215px
+    );
+
+  margin:
+    0 auto
+    12px;
+
+  color:
+    var(--muted);
+
+  text-align: center;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   BOTÃO AVANÇAR FASE
+========================================================= */
+
+.turn-panel-main
+  > .primary-btn.big {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width:
+    min(
+      100%,
+      190px
+    );
+
+  min-height: 49px;
+
+  margin:
+    0 auto
+    14px;
+
+  font-weight: 800;
+
+  text-align: center;
+}
+
+
+/* Outros painéis */
+
+.turn-panel-main
+  > .pending-payment-panel,
+
+.turn-panel-main
+  > .mulligan-box {
+  width: 100%;
+}
+
+
+/* =========================================================
+   SEQUÊNCIA ETERNAL
+========================================================= */
+
+.eternal-sequence-card {
+  --eternal-accent:
+    #f4bd4b;
+
+  position: relative;
+
+  box-sizing: border-box;
+
+  width:
+    min(
+      100%,
+      220px
+    );
+
+  margin:
+    4px auto
+    10px;
+
+  padding:
+    14px
+    12px
+    12px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--eternal-accent)
+      34%,
+      var(--line)
+    );
+
+  border-radius:
+    16px;
+
+  background:
+
+    radial-gradient(
+      circle
+      at 85% 5%,
+
+      color-mix(
+        in srgb,
+        var(--eternal-accent)
+        13%,
+        transparent
+      ),
+
+      transparent
+      42%
+    ),
+
+    linear-gradient(
+      155deg,
+
+      rgba(
+        14,
+        33,
+        55,
+        0.98
+      ),
+
+      rgba(
+        5,
+        15,
+        27,
+        0.99
+      )
+    );
+
+  box-shadow:
+
+    inset
+    0 1px 0
+    rgba(
+      255,
+      255,
+      255,
+      0.035
+    ),
+
+    0 12px 30px
+    rgba(
+      0,
+      0,
+      0,
+      0.18
+    );
+}
+
+
+/* Linha brilhante superior */
+
+.eternal-sequence-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 2px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+
+      transparent,
+
+      var(
+        --eternal-accent
+      ),
+
+      transparent
+    );
+
+  opacity: 0.9;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.eternal-sequence-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 8px;
+
+  margin-bottom: 13px;
+
+  padding-bottom: 10px;
+
+  border-bottom:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.07
+    );
+}
+
+
+.eternal-sequence-header
+  > div {
+  min-width: 0;
+
+  display: grid;
+
+  gap: 3px;
+}
+
+
+.eternal-sequence-header
+  .eyebrow {
+  color:
+
+    color-mix(
+      in srgb,
+
+      var(
+        --eternal-accent
+      )
+
+      80%,
+
+      white
+    );
+
+  font-size: 7px;
+
+  letter-spacing:
+    0.13em;
+}
+
+
+.eternal-sequence-header
+  strong {
+  color:
+    #f3f7fc;
+
+  font-size:
+    12px;
+
+  line-height:
+    1.15;
+}
+
+
+/* Contador 03/07 */
+
+.eternal-sequence-progress {
+  flex:
+    0 0 auto;
+
+  min-width:
+    39px;
+
+  padding:
+    5px 7px;
+
+  border:
+    1px solid
+
+    color-mix(
+      in srgb,
+
+      var(
+        --eternal-accent
+      )
+
+      32%,
+
+      transparent
+    );
+
+  border-radius:
+    999px;
+
+  background:
+
+    color-mix(
+      in srgb,
+
+      var(
+        --eternal-accent
+      )
+
+      10%,
+
+      transparent
+    );
+
+  color:
+
+    color-mix(
+      in srgb,
+
+      var(
+        --eternal-accent
+      )
+
+      88%,
+
+      white
+    );
+
+  font-size:
+    8px;
+
+  font-weight:
+    900;
+
+  text-align:
+    center;
+
+  letter-spacing:
+    0.06em;
+}
+
+
+/* =========================================================
+   LISTA DAS FASES
+========================================================= */
+
+.eternal-phase-list {
+  display: grid;
+
+  gap: 0;
+}
+
+
+.eternal-phase-step {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    29px
+    minmax(
+      0,
+      1fr
+    );
+
+  gap: 8px;
+
+  min-height:
+    37px;
+
+  color:
+    #71839a;
+
+  transition:
+    color
+      0.18s ease,
+
+    transform
+      0.18s ease;
+}
+
+
+/* =========================================================
+   TRILHO
+========================================================= */
+
+.eternal-phase-rail {
+  position: relative;
+
+  display: flex;
+
+  justify-content:
+    center;
+}
+
+
+.eternal-phase-rail::after {
+  content: "";
+
+  position: absolute;
+
+  top: 24px;
+  bottom: -2px;
+
+  left: 50%;
+
+  width: 1px;
+
+  transform:
+    translateX(
+      -50%
+    );
+
+  background:
+    rgba(
+      132,
+      157,
+      187,
+      0.18
+    );
+}
+
+
+.eternal-phase-step:last-child
+  .eternal-phase-rail::after {
+  display: none;
+}
+
+
+/* =========================================================
+   NÚMEROS
+========================================================= */
+
+.eternal-phase-node {
+  position: relative;
+
+  z-index: 1;
+
+  width: 22px;
+  height: 22px;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(
+      132,
+      157,
+      187,
+      0.26
+    );
+
+  border-radius:
+    50%;
+
+  background:
+    #091626;
+
+  color:
+    #71839a;
+
+  font-size:
+    7px;
+
+  font-weight:
+    900;
+
+  transition:
+    border-color
+      0.18s ease,
+
+    background
+      0.18s ease,
+
+    color
+      0.18s ease,
+
+    box-shadow
+      0.18s ease,
+
+    transform
+      0.18s ease;
+}
+
+
+/* =========================================================
+   TEXTO DAS FASES
+========================================================= */
+
+.eternal-phase-copy {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content:
+    flex-start;
+
+  padding-top:
+    3px;
+}
+
+
+.eternal-phase-copy
+  strong {
+  color: inherit;
+
+  font-size:
+    10px;
+
+  line-height:
+    1.15;
+
+  letter-spacing:
+    0.035em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.eternal-phase-copy
+  span {
+  margin-top:
+    3px;
+
+  color:
+
+    color-mix(
+      in srgb,
+
+      var(
+        --eternal-accent
+      )
+
+      80%,
+
+      white
+    );
+
+  font-size:
+    6px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.12em;
+}
+
+
+/* =========================================================
+   FASE CONCLUÍDA
+========================================================= */
+
+.eternal-phase-step.complete {
+  color:
+    #91a2b7;
+}
+
+
+.eternal-phase-step.complete
+  .eternal-phase-node {
+  border-color:
+    rgba(
+      133,
+      164,
+      199,
+      0.3
+    );
+
+  background:
+    rgba(
+      60,
+      87,
+      115,
+      0.2
+    );
+
+  color:
+    #9cb0c6;
+}
+
+
+/* =========================================================
+   FASE ATUAL
+========================================================= */
+
+.eternal-phase-step.current {
+  color:
+    #ffffff;
+
+  transform:
+    translateX(
+      2px
+    );
+}
+
+
+.eternal-phase-step.current
+  .eternal-phase-node {
+  border-color:
+    var(
+      --eternal-accent
+    );
+
+  background:
+
+    color-mix(
+      in srgb,
+
+      var(
+        --eternal-accent
+      )
+
+      22%,
+
+      #071321
+    );
+
+  color:
+    #ffffff;
+
+  box-shadow:
+
+    0 0 0 3px
+
+    color-mix(
+      in srgb,
+
+      var(
+        --eternal-accent
+      )
+
+      10%,
+
+      transparent
+    ),
+
+    0 0 16px
+
+    color-mix(
+      in srgb,
+
+      var(
+        --eternal-accent
+      )
+
+      28%,
+
+      transparent
+    );
+
+  transform:
+    scale(
+      1.08
+    );
+
+  animation:
+    eternalCurrentPulse
+    2.2s
+    ease-in-out
+    infinite;
+}
+
+
+/* =========================================================
+   ANIMAÇÃO
+========================================================= */
+
+@keyframes eternalCurrentPulse {
+
+  0%,
+  100% {
+    box-shadow:
+
+      0 0 0 3px
+
+      color-mix(
+        in srgb,
+
+        var(
+          --eternal-accent
+        )
+
+        9%,
+
+        transparent
+      ),
+
+      0 0 10px
+
+      color-mix(
+        in srgb,
+
+        var(
+          --eternal-accent
+        )
+
+        18%,
+
+        transparent
+      );
+  }
+
+
+  50% {
+    box-shadow:
+
+      0 0 0 4px
+
+      color-mix(
+        in srgb,
+
+        var(
+          --eternal-accent
+        )
+
+        13%,
+
+        transparent
+      ),
+
+      0 0 19px
+
+      color-mix(
+        in srgb,
+
+        var(
+          --eternal-accent
+        )
+
+        34%,
+
+        transparent
+      );
+  }
+}
+
+
+/* =========================================================
+   TELAS MENORES
+========================================================= */
+
+@media (
+  max-width:
+    1380px
+) {
+
+  .inspector-scroll,
+  .turn-panel-main {
+    padding-left:
+      3px;
+
+    padding-right:
+      3px;
+  }
+
+
+  .inspector-scroll
+    > .card-tile,
+
+  .inspector-scroll
+    > button.card-tile {
+    width:
+      145px !important;
+
+    max-width:
+      80% !important;
+  }
+
+
+  .eternal-sequence-card {
+    width: 100%;
+
+    padding:
+      11px
+      9px
+      10px;
+  }
+
+
+  .eternal-phase-step {
+    grid-template-columns:
+      25px
+      minmax(
+        0,
+        1fr
+      );
+
+    gap: 6px;
+
+    min-height:
+      33px;
+  }
+
+
+  .eternal-phase-node {
+    width:
+      20px;
+
+    height:
+      20px;
+  }
+
+
+  .eternal-phase-rail::after {
+    top:
+      22px;
+  }
+
+
+  .eternal-phase-copy
+    strong {
+    font-size:
+      9px;
+  }
+}
+
+
+/* =========================================================
+   POUCA ALTURA
+========================================================= */
+
+@media (
+  max-height:
+    760px
+)
+and (
+  min-width:
+    901px
+) {
+
+  .eternal-phase-step {
+    min-height:
+      30px;
+  }
+
+
+  .eternal-sequence-card {
+    padding-top:
+      10px;
+
+    padding-bottom:
+      9px;
+  }
+
+
+  .eternal-sequence-header {
+    margin-bottom:
+      9px;
+
+    padding-bottom:
+      8px;
+  }
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+
+  .eternal-phase-step,
+  .eternal-phase-node {
+    transition:
+      none;
+  }
+
+
+  .eternal-phase-step.current
+    .eternal-phase-node {
+    animation:
+      none;
+  }
+}
