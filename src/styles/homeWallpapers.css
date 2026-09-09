@@ -1,0 +1,283 @@
+/* =========================================================
+   BATTLE SPIRITS ETERNAL SIMULATOR
+   HOME — RANDOM WALLPAPER SLIDESHOW
+   Smooth decode/crossfade hotfix
+========================================================= */
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.home-wallpaper-slideshow {
+  position:
+    fixed;
+
+  z-index:
+    0;
+
+  inset:
+    0;
+
+  overflow:
+    hidden;
+
+  pointer-events:
+    none;
+
+  background:
+    var(
+      --bg,
+      #07101e
+    );
+
+  contain:
+    paint;
+}
+
+
+/* =========================================================
+   IMAGENS
+========================================================= */
+
+.home-wallpaper-layer {
+  position:
+    absolute;
+
+  inset:
+    -2.5%;
+
+  width:
+    105%;
+
+  height:
+    105%;
+
+  max-width:
+    none;
+
+  object-fit:
+    cover;
+
+  object-position:
+    center center;
+
+  opacity:
+    0;
+
+  transform:
+    translateZ(0)
+    scale(
+      1.045
+    );
+
+  backface-visibility:
+    hidden;
+
+  filter:
+    saturate(
+      .86
+    )
+    contrast(
+      1.04
+    )
+    brightness(
+      .78
+    );
+
+  /*
+   * A opacidade foi aumentada só um pouco:
+   * antes ~0.24, agora 0.29.
+   */
+  transition:
+    opacity
+      3.6s
+      cubic-bezier(
+        .22,
+        .61,
+        .36,
+        1
+      );
+
+  will-change:
+    opacity;
+
+  user-select:
+    none;
+}
+
+
+.home-wallpaper-layer.active {
+  opacity:
+    .29;
+}
+
+
+/*
+ * Movimento muito leve feito em uma camada já decodificada.
+ * Evitamos animar filtros ou background-size durante a troca,
+ * porque são mais caros para o navegador.
+ */
+
+.home-wallpaper-slideshow.ready
+  .home-wallpaper-layer.active {
+  animation:
+    bsHomeWallpaperDrift
+    18s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+@keyframes bsHomeWallpaperDrift {
+  from {
+    transform:
+      translate3d(
+        -0.2%,
+        0,
+        0
+      )
+      scale(
+        1.045
+      );
+  }
+
+  to {
+    transform:
+      translate3d(
+        0.3%,
+        -0.18%,
+        0
+      )
+      scale(
+        1.055
+      );
+  }
+}
+
+
+/* =========================================================
+   OVERLAY ESCURO
+========================================================= */
+
+.home-wallpaper-shade {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        4,
+        8,
+        14,
+        .56
+      )
+      0%,
+
+      rgba(
+        4,
+        9,
+        16,
+        .64
+      )
+      42%,
+
+      rgba(
+        4,
+        10,
+        18,
+        .73
+      )
+      100%
+    );
+}
+
+
+.home-wallpaper-vignette {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    radial-gradient(
+      ellipse
+      at 43% 43%,
+      transparent
+      0%,
+      rgba(
+        0,
+        0,
+        0,
+        .07
+      )
+      53%,
+      rgba(
+        0,
+        0,
+        0,
+        .38
+      )
+      100%
+    );
+}
+
+
+/* =========================================================
+   HOME ACIMA DO WALLPAPER
+========================================================= */
+
+body
+  .home-page {
+  position:
+    relative;
+
+  z-index:
+    1;
+
+  background:
+    transparent
+    !important;
+}
+
+
+.home-page
+  > * {
+  position:
+    relative;
+
+  z-index:
+    2;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+
+  .home-wallpaper-slideshow.ready
+    .home-wallpaper-layer.active {
+    animation:
+      none;
+  }
+
+
+  .home-wallpaper-layer {
+    transition:
+      opacity
+      1.6s
+      ease;
+  }
+
+}

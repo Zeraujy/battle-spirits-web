@@ -1,0 +1,3789 @@
+/* =========================================================
+   BATTLE SPIRITS ETERNAL SIMULATOR
+   ARENA VISUAL — v2.3.x
+
+   Objetivos:
+   - Braves / Other à esquerda
+   - Spirits / Ultimates no centro
+   - Nexus à direita
+   - Cartas centralizadas como grupo
+   - Novas cartas entram à direita do grupo
+   - Glow externo para raridade X+
+   - Sem alterar regras, engine ou online
+========================================================= */
+
+
+/* =========================================================
+   ESTRUTURA DAS TRÊS ZONAS
+========================================================= */
+
+.battlefield-row {
+  grid-template-columns:
+    minmax(150px, 1fr)
+    minmax(330px, 2.45fr)
+    minmax(150px, 1fr)
+    !important;
+
+  gap:
+    9px !important;
+
+  padding:
+    1px 0;
+}
+
+
+/* =========================================================
+   ZONAS
+========================================================= */
+
+.field-zone {
+  position:
+    relative;
+
+  isolation:
+    isolate;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(
+      121,
+      162,
+      207,
+      0.19
+    ) !important;
+
+  border-radius:
+    13px !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        4,
+        19,
+        29,
+        0.64
+      ),
+      rgba(
+        2,
+        13,
+        22,
+        0.52
+      )
+    ) !important;
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.025
+      ),
+    inset 0 -18px 36px
+      rgba(
+        0,
+        0,
+        0,
+        0.08
+      );
+
+  transition:
+    border-color
+      0.16s ease,
+    box-shadow
+      0.16s ease,
+    background
+      0.16s ease;
+}
+
+
+/*
+ * Uma linha de luz muito discreta no topo de cada zona.
+ * Fica atrás das cartas e não atrapalha leitura.
+ */
+
+.field-zone::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  z-index:
+    -1;
+
+  left:
+    12%;
+
+  right:
+    12%;
+
+  top:
+    0;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(
+        143,
+        188,
+        239,
+        0.22
+      ),
+      transparent
+    );
+}
+
+
+/* BRAVES / OTHER — esquerda */
+
+.field-zone.other {
+  background:
+    radial-gradient(
+      circle
+      at 50% 100%,
+      rgba(
+        218,
+        166,
+        61,
+        0.055
+      ),
+      transparent
+      62%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(
+        5,
+        20,
+        30,
+        0.66
+      ),
+      rgba(
+        3,
+        13,
+        22,
+        0.55
+      )
+    ) !important;
+}
+
+
+/* SPIRITS / ULTIMATES — zona principal central */
+
+.field-zone.spirits {
+  border-color:
+    rgba(
+      117,
+      175,
+      220,
+      0.27
+    ) !important;
+
+  background:
+    radial-gradient(
+      ellipse
+      at 50% 50%,
+      rgba(
+        71,
+        142,
+        180,
+        0.075
+      ),
+      transparent
+      67%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(
+        6,
+        24,
+        35,
+        0.72
+      ),
+      rgba(
+        3,
+        15,
+        24,
+        0.58
+      )
+    ) !important;
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.03
+      ),
+    inset 0 0 34px
+      rgba(
+        77,
+        149,
+        193,
+        0.035
+      );
+}
+
+
+/* NEXUS — direita */
+
+.field-zone.nexuses {
+  background:
+    radial-gradient(
+      circle
+      at 50% 100%,
+      rgba(
+        89,
+        131,
+        202,
+        0.065
+      ),
+      transparent
+      62%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(
+        5,
+        19,
+        31,
+        0.68
+      ),
+      rgba(
+        3,
+        13,
+        23,
+        0.56
+      )
+    ) !important;
+}
+
+
+/* Feedback quando o jogador pode soltar uma carta */
+
+.field-zone.droppable-field:hover {
+  border-color:
+    rgba(
+      105,
+      177,
+      255,
+      0.48
+    ) !important;
+
+  box-shadow:
+    inset 0 0 28px
+      rgba(
+        83,
+        158,
+        224,
+        0.055
+      ),
+    0 0 0 1px
+      rgba(
+        105,
+        177,
+        255,
+        0.06
+      );
+}
+
+
+/* =========================================================
+   CABEÇALHO DAS ZONAS
+========================================================= */
+
+.zone-title {
+  position:
+    relative;
+
+  z-index:
+    3;
+
+  min-height:
+    22px;
+
+  padding:
+    3px 5px 6px
+    !important;
+
+  border-bottom:
+    1px solid
+    rgba(
+      126,
+      160,
+      199,
+      0.09
+    );
+
+  color:
+    #88a5c2 !important;
+
+  font-size:
+    8px !important;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.105em !important;
+
+  text-transform:
+    uppercase;
+}
+
+
+.zone-title b {
+  min-width:
+    20px;
+
+  height:
+    20px;
+
+  display:
+    inline-grid;
+
+  place-items:
+    center;
+
+  padding:
+    0 5px;
+
+  border:
+    1px solid
+    rgba(
+      112,
+      158,
+      208,
+      0.18
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      10,
+      30,
+      51,
+      0.7
+    );
+
+  color:
+    #c6d9ec;
+
+  font-size:
+    8px;
+}
+
+
+/*
+ * A zona central recebe um destaque de título ligeiramente maior.
+ */
+
+.field-zone.spirits
+  .zone-title {
+  color:
+    #b5d5ed !important;
+}
+
+
+.field-zone.spirits
+  .zone-title::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    22%;
+
+  right:
+    22%;
+
+  bottom:
+    -1px;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(
+        100,
+        184,
+        232,
+        0.32
+      ),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   POSICIONAMENTO DAS CARTAS
+========================================================= */
+
+.field-cards {
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  min-width:
+    0;
+
+  width:
+    100%;
+
+  display:
+    flex !important;
+
+  flex-wrap:
+    nowrap !important;
+
+  align-items:
+    center !important;
+
+  /*
+   * Com poucas cartas, o grupo permanece no meio.
+   * Se exceder o espaço, "safe" evita perder a primeira carta.
+   */
+  justify-content:
+    safe center !important;
+
+  gap:
+    12px !important;
+
+  min-height:
+    0 !important;
+
+  padding:
+    11px 13px 13px;
+
+  overflow-x:
+    auto;
+
+  overflow-y:
+    hidden;
+
+  scroll-behavior:
+    smooth;
+
+  scrollbar-width:
+    thin;
+
+  scrollbar-color:
+    rgba(
+      106,
+      148,
+      194,
+      0.24
+    )
+    transparent;
+}
+
+
+.field-cards::-webkit-scrollbar {
+  height:
+    4px;
+}
+
+
+.field-cards::-webkit-scrollbar-thumb {
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      106,
+      148,
+      194,
+      0.24
+    );
+}
+
+
+/*
+ * Cada nova carta é adicionada ao final do array.
+ * Como o grupo está centralizado, as anteriores cedem espaço
+ * para a esquerda e a nova aparece à direita.
+ */
+
+.field-card-wrap {
+  position:
+    relative;
+
+  flex:
+    0 0
+    98px;
+
+  width:
+    98px !important;
+
+  min-width:
+    98px;
+
+  z-index:
+    1;
+
+  animation:
+    arenaCardEnter
+    0.18s
+    ease-out;
+}
+
+
+@keyframes arenaCardEnter {
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(
+        5px
+      )
+      scale(
+        0.965
+      );
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      none;
+  }
+}
+
+
+/* =========================================================
+   CARTAS X+ — AURA EXTERNA
+========================================================= */
+
+/*
+ * O efeito usa SOMENTE box-shadow.
+ * Portanto o brilho fica ao redor da carta e não sobre a arte.
+ */
+
+.field-card-wrap.x-rarity-field-glow
+  > .card-tile {
+  border-color:
+    rgba(
+      255,
+      255,
+      255,
+      0.22
+    );
+
+  box-shadow:
+    0 9px 24px
+      rgba(
+        0,
+        0,
+        0,
+        0.34
+      ),
+    0 0 5px
+      var(
+        --field-glow-soft
+      ),
+    0 0 12px
+      var(
+        --field-glow-mid
+      ),
+    0 0 22px
+      var(
+        --field-glow-far
+      ) !important;
+}
+
+
+/* RED */
+
+.field-card-wrap.field-glow-red {
+  --field-glow-soft:
+    rgba(
+      255,
+      108,
+      103,
+      0.48
+    );
+
+  --field-glow-mid:
+    rgba(
+      225,
+      65,
+      63,
+      0.34
+    );
+
+  --field-glow-far:
+    rgba(
+      191,
+      42,
+      42,
+      0.18
+    );
+}
+
+
+/* PURPLE */
+
+.field-card-wrap.field-glow-purple {
+  --field-glow-soft:
+    rgba(
+      183,
+      132,
+      255,
+      0.48
+    );
+
+  --field-glow-mid:
+    rgba(
+      139,
+      87,
+      224,
+      0.34
+    );
+
+  --field-glow-far:
+    rgba(
+      102,
+      58,
+      183,
+      0.19
+    );
+}
+
+
+/* GREEN */
+
+.field-card-wrap.field-glow-green {
+  --field-glow-soft:
+    rgba(
+      118,
+      226,
+      153,
+      0.46
+    );
+
+  --field-glow-mid:
+    rgba(
+      70,
+      177,
+      107,
+      0.32
+    );
+
+  --field-glow-far:
+    rgba(
+      49,
+      135,
+      79,
+      0.17
+    );
+}
+
+
+/* WHITE */
+
+.field-card-wrap.field-glow-white {
+  --field-glow-soft:
+    rgba(
+      245,
+      252,
+      255,
+      0.52
+    );
+
+  --field-glow-mid:
+    rgba(
+      195,
+      222,
+      247,
+      0.34
+    );
+
+  --field-glow-far:
+    rgba(
+      134,
+      184,
+      228,
+      0.16
+    );
+}
+
+
+/* YELLOW */
+
+.field-card-wrap.field-glow-yellow {
+  --field-glow-soft:
+    rgba(
+      255,
+      218,
+      102,
+      0.52
+    );
+
+  --field-glow-mid:
+    rgba(
+      235,
+      183,
+      55,
+      0.34
+    );
+
+  --field-glow-far:
+    rgba(
+      187,
+      129,
+      27,
+      0.18
+    );
+}
+
+
+/* BLUE */
+
+.field-card-wrap.field-glow-blue {
+  --field-glow-soft:
+    rgba(
+      111,
+      185,
+      255,
+      0.52
+    );
+
+  --field-glow-mid:
+    rgba(
+      66,
+      133,
+      227,
+      0.35
+    );
+
+  --field-glow-far:
+    rgba(
+      43,
+      92,
+      181,
+      0.18
+    );
+}
+
+
+/* NEUTRAL / FALLBACK */
+
+.field-card-wrap.field-glow-neutral {
+  --field-glow-soft:
+    rgba(
+      255,
+      214,
+      112,
+      0.45
+    );
+
+  --field-glow-mid:
+    rgba(
+      226,
+      177,
+      68,
+      0.28
+    );
+
+  --field-glow-far:
+    rgba(
+      187,
+      127,
+      33,
+      0.15
+    );
+}
+
+
+/* =========================================================
+   ULTIMATE / MULTICOLOR — AURA PRISMÁTICA
+========================================================= */
+
+.field-card-wrap.field-glow-rainbow
+  > .card-tile {
+  box-shadow:
+    0 9px 24px
+      rgba(
+        0,
+        0,
+        0,
+        0.36
+      ),
+
+    -5px -3px 11px
+      rgba(
+        255,
+        101,
+        95,
+        0.26
+      ),
+
+    5px -3px 12px
+      rgba(
+        255,
+        205,
+        91,
+        0.24
+      ),
+
+    6px 5px 15px
+      rgba(
+        96,
+        177,
+        255,
+        0.25
+      ),
+
+    -5px 6px 15px
+      rgba(
+        163,
+        116,
+        255,
+        0.25
+      ),
+
+    0 0 24px
+      rgba(
+        111,
+        226,
+        198,
+        0.12
+      )
+    !important;
+}
+
+
+/*
+ * Um aro prismático externo muito sutil.
+ * Ele fica atrás da carta; a arte não recebe overlay.
+ */
+
+.field-card-wrap.field-glow-rainbow::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  z-index:
+    -1;
+
+  inset:
+    -5px;
+
+  border-radius:
+    13px;
+
+  background:
+    conic-gradient(
+      from 35deg,
+      rgba(
+        255,
+        105,
+        98,
+        0.35
+      ),
+      rgba(
+        255,
+        214,
+        95,
+        0.28
+      ),
+      rgba(
+        106,
+        226,
+        184,
+        0.25
+      ),
+      rgba(
+        92,
+        176,
+        255,
+        0.32
+      ),
+      rgba(
+        169,
+        118,
+        255,
+        0.32
+      ),
+      rgba(
+        255,
+        105,
+        98,
+        0.35
+      )
+    );
+
+  filter:
+    blur(
+      7px
+    );
+
+  opacity:
+    0.52;
+
+  pointer-events:
+    none;
+}
+
+
+/* =========================================================
+   SELEÇÃO / PENDING
+========================================================= */
+
+.field-card-wrap.x-rarity-field-glow
+  > .card-tile.selected {
+  outline-color:
+    #f8d479;
+
+  outline-offset:
+    3px;
+}
+
+
+.field-card-wrap.pending {
+  z-index:
+    4;
+}
+
+
+/* =========================================================
+   BREAKPOINTS
+========================================================= */
+
+@media (
+  max-width:
+    1500px
+) {
+
+  .battlefield-row {
+    grid-template-columns:
+      minmax(
+        130px,
+        0.95fr
+      )
+      minmax(
+        300px,
+        2.25fr
+      )
+      minmax(
+        130px,
+        0.95fr
+      )
+      !important;
+  }
+
+
+  .field-card-wrap {
+    flex-basis:
+      90px;
+
+    width:
+      90px !important;
+
+    min-width:
+      90px;
+  }
+
+
+  .field-cards {
+    gap:
+      10px !important;
+
+    padding-left:
+      10px;
+
+    padding-right:
+      10px;
+  }
+
+}
+
+
+@media (
+  max-width:
+    1220px
+) {
+
+  .battlefield-row {
+    grid-template-columns:
+      minmax(
+        115px,
+        0.9fr
+      )
+      minmax(
+        280px,
+        2.1fr
+      )
+      minmax(
+        115px,
+        0.9fr
+      )
+      !important;
+  }
+
+
+  .field-card-wrap {
+    flex-basis:
+      84px;
+
+    width:
+      84px !important;
+
+    min-width:
+      84px;
+  }
+
+
+  .field-cards {
+    gap:
+      8px !important;
+  }
+
+}
+
+
+
+
+/* =========================================================
+   BURST — ÁREA AO LADO DO TRASH
+========================================================= */
+
+/*
+ * A lateral direita agora comporta duas zonas:
+ * BURST + TRASH.
+ */
+
+.hand-row {
+  grid-template-columns:
+    92px
+    minmax(
+      0,
+      1fr
+    )
+    136px
+    !important;
+}
+
+
+.hand-side-zones {
+  min-width:
+    0;
+
+  height:
+    100%;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    5px;
+
+  align-items:
+    center;
+}
+
+
+.hand-side-zones
+  .stack-card {
+  width:
+    100%;
+
+  min-width:
+    0;
+
+  height:
+    min(
+      82px,
+      100%
+    );
+
+  min-height:
+    68px;
+}
+
+
+/* =========================================================
+   BURST SLOT
+========================================================= */
+
+.burst-stack-card {
+  position:
+    relative;
+
+  isolation:
+    isolate;
+
+  overflow:
+    hidden;
+
+  border-color:
+    rgba(
+      243,
+      192,
+      78,
+      0.28
+    ) !important;
+
+  background:
+    radial-gradient(
+      circle
+      at 50% 62%,
+      rgba(
+        243,
+        192,
+        78,
+        0.11
+      ),
+      transparent
+      53%
+    ),
+    linear-gradient(
+      165deg,
+      rgba(
+        30,
+        28,
+        19,
+        0.92
+      ),
+      rgba(
+        8,
+        16,
+        26,
+        0.98
+      )
+    ) !important;
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.025
+      );
+}
+
+
+.burst-stack-card::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  z-index:
+    4;
+
+  left:
+    12%;
+
+  right:
+    12%;
+
+  top:
+    0;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(
+        255,
+        211,
+        103,
+        0.7
+      ),
+      transparent
+    );
+
+  opacity:
+    0.7;
+}
+
+
+.burst-stack-card
+  > span {
+  color:
+    #ffd36e;
+
+  font-weight:
+    900;
+}
+
+
+/*
+ * Não queremos que o slot vazio fique apagado
+ * pelo estilo global de button:disabled.
+ */
+
+.burst-stack-card:disabled {
+  opacity:
+    1 !important;
+
+  cursor:
+    default;
+}
+
+
+/* =========================================================
+   BURST DEFINIDO
+========================================================= */
+
+.burst-stack-card.occupied {
+  border-color:
+    rgba(
+      244,
+      189,
+      75,
+      0.46
+    ) !important;
+
+  box-shadow:
+    0 0 0 1px
+      rgba(
+        244,
+        189,
+        75,
+        0.05
+      ),
+    0 0 15px
+      rgba(
+        244,
+        189,
+        75,
+        0.08
+      ),
+    inset 0 0 18px
+      rgba(
+        244,
+        189,
+        75,
+        0.035
+      );
+}
+
+
+.burst-stack-card.occupied:hover {
+  border-color:
+    rgba(
+      255,
+      215,
+      115,
+      0.7
+    ) !important;
+
+  box-shadow:
+    0 0 0 1px
+      rgba(
+        244,
+        189,
+        75,
+        0.08
+      ),
+    0 0 20px
+      rgba(
+        244,
+        189,
+        75,
+        0.13
+      ),
+    inset 0 0 22px
+      rgba(
+        244,
+        189,
+        75,
+        0.045
+      );
+}
+
+
+.burst-card-back {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    1;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  object-fit:
+    cover;
+
+  opacity:
+    0.61;
+
+  filter:
+    brightness(
+      0.66
+    )
+    saturate(
+      0.8
+    );
+}
+
+
+.burst-stack-card.occupied
+  > span,
+.burst-stack-card.occupied
+  > b {
+  z-index:
+    5;
+}
+
+
+.burst-stack-card.occupied
+  > b {
+  color:
+    #fff1bd;
+
+  font-size:
+    11px;
+
+  letter-spacing:
+    0.1em;
+
+  text-shadow:
+    0 2px 7px
+      rgba(
+        0,
+        0,
+        0,
+        0.92
+      );
+}
+
+
+/* Diamante Burst */
+
+.burst-set-gem {
+  position:
+    absolute;
+
+  z-index:
+    6;
+
+  left:
+    50%;
+
+  top:
+    50%;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  width:
+    27px;
+
+  height:
+    27px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      219,
+      124,
+      0.74
+    );
+
+  border-radius:
+    50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(
+        244,
+        189,
+        75,
+        0.38
+      ),
+      rgba(
+        112,
+        68,
+        12,
+        0.77
+      )
+    );
+
+  color:
+    #ffe6a5;
+
+  font-size:
+    11px;
+
+  font-style:
+    normal;
+
+  box-shadow:
+    0 0 13px
+      rgba(
+        244,
+        189,
+        75,
+        0.28
+      ),
+    inset 0 0 7px
+      rgba(
+        255,
+        255,
+        255,
+        0.08
+      );
+
+  text-shadow:
+    0 0 7px
+      rgba(
+        255,
+        224,
+        139,
+        0.6
+      );
+
+  pointer-events:
+    none;
+}
+
+
+/* =========================================================
+   BURST VAZIO
+========================================================= */
+
+.burst-stack-card.empty {
+  border-style:
+    dashed !important;
+
+  border-color:
+    rgba(
+      153,
+      164,
+      181,
+      0.16
+    ) !important;
+
+  background:
+    rgba(
+      7,
+      17,
+      29,
+      0.54
+    ) !important;
+}
+
+
+.burst-stack-card.empty
+  > span {
+  color:
+    #75889e;
+}
+
+
+.burst-stack-card.empty
+  > b {
+  color:
+    #64768a;
+
+  font-size:
+    11px;
+}
+
+
+.burst-empty-gem {
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  top:
+    50%;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  color:
+    rgba(
+      125,
+      147,
+      171,
+      0.3
+    );
+
+  font-size:
+    23px;
+
+  font-style:
+    normal;
+
+  pointer-events:
+    none;
+}
+
+
+/* =========================================================
+   TRASH AO LADO DO BURST
+========================================================= */
+
+.hand-side-zones
+  .stack-card.trash {
+  border-color:
+    rgba(
+      119,
+      157,
+      201,
+      0.22
+    );
+}
+
+
+/* =========================================================
+   RESPONSIVO DO BURST
+========================================================= */
+
+@media (
+  max-width:
+    1500px
+) {
+
+  .hand-row {
+    grid-template-columns:
+      88px
+      minmax(
+        0,
+        1fr
+      )
+      126px
+      !important;
+  }
+
+}
+
+
+@media (
+  max-width:
+    1220px
+) {
+
+  .hand-row {
+    grid-template-columns:
+      84px
+      minmax(
+        0,
+        1fr
+      )
+      116px
+      !important;
+  }
+
+
+  .hand-side-zones {
+    gap:
+      4px;
+  }
+
+
+  .burst-set-gem {
+    width:
+      23px;
+
+    height:
+      23px;
+
+    font-size:
+      9px;
+  }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+
+  .field-zone,
+  .field-card-wrap {
+    transition:
+      none;
+
+    animation:
+      none;
+  }
+
+}
+
+
+
+/* =========================================================
+   ATTACK FOCUS — FOCO VISUAL DURANTE ATAQUE DIRETO
+========================================================= */
+
+.table-area.attack-focus-active {
+  position:
+    relative;
+}
+
+
+.table-area.attack-focus-active
+  .attack-focus-dim {
+  filter:
+    brightness(
+      0.34
+    )
+    saturate(
+      0.55
+    );
+
+  opacity:
+    0.56;
+
+  transition:
+    filter
+      0.14s ease,
+    opacity
+      0.14s ease;
+}
+
+
+.table-area.attack-focus-active
+  .attack-focus-relevant {
+  position:
+    relative;
+
+  z-index:
+    6;
+
+  filter:
+    none;
+
+  opacity:
+    1;
+}
+
+
+/*
+ * O campo do atacante e o centro da batalha permanecem vivos.
+ * O HUD superior também ganha uma faixa de destaque porque o Life
+ * é o alvo do ataque direto.
+ */
+
+.table-area.attack-focus-active
+  .attack-focus-top-hud {
+  position:
+    relative;
+
+  z-index:
+    7;
+
+  filter:
+    brightness(
+      0.84
+    )
+    saturate(
+      0.9
+    );
+
+  opacity:
+    1;
+}
+
+
+.table-area.attack-focus-active
+  .attack-focus-top-hud
+  .life-core-display {
+  border-color:
+    rgba(
+      255,
+      255,
+      255,
+      0.42
+    );
+
+  box-shadow:
+    0 0 20px
+      rgba(
+        255,
+        255,
+        255,
+        0.08
+      ),
+    0 0 28px
+      color-mix(
+        in srgb,
+        var(--attack-theme, #ff5662)
+        25%,
+        transparent
+      );
+}
+
+
+/*
+ * Véu escuro dentro da mesa, sem afetar as áreas relevantes.
+ */
+
+.table-area.attack-focus-active::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    4;
+
+  pointer-events:
+    none;
+
+  background:
+    radial-gradient(
+      ellipse
+      at 50% 66%,
+      transparent
+      0 18%,
+      rgba(
+        0,
+        0,
+        0,
+        0.28
+      )
+      44%,
+      rgba(
+        0,
+        0,
+        0,
+        0.48
+      )
+      100%
+    );
+}
+
+
+/* =========================================================
+   ATTACK ARROW — NOVO VISUAL
+========================================================= */
+
+.attack-arrow-layer {
+  position:
+    fixed;
+
+  inset:
+    0;
+
+  z-index:
+    170;
+
+  pointer-events:
+    none;
+
+  overflow:
+    visible;
+}
+
+
+.attack-arrow-layer
+  .attack-arrow-shadow {
+  stroke:
+    rgba(
+      0,
+      0,
+      0,
+      0.72
+    );
+
+  stroke-width:
+    13;
+
+  stroke-linecap:
+    round;
+}
+
+
+.attack-arrow-layer
+  .attack-arrow-core {
+  stroke:
+    var(
+      --attack-arrow-color,
+      #ff5d68
+    );
+
+  stroke-width:
+    6;
+
+  stroke-linecap:
+    round;
+
+  filter:
+    url(
+      #attack-arrow-glow
+    );
+}
+
+
+.attack-arrow-layer
+  .attack-arrow-head-path {
+  fill:
+    var(
+      --attack-arrow-color,
+      #ff5d68
+    );
+
+  filter:
+    url(
+      #attack-arrow-glow
+    );
+}
+
+
+.attack-arrow-layer
+  .attack-arrow-origin {
+  fill:
+    var(
+      --attack-arrow-color,
+      #ff5d68
+    );
+
+  stroke:
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+
+  stroke-width:
+    2;
+
+  filter:
+    url(
+      #attack-arrow-glow
+    );
+}
+
+
+/* =========================================================
+   CORES DA SETA
+========================================================= */
+
+.attack-arrow-red {
+  --attack-arrow-color:
+    #ff6469;
+}
+
+
+.attack-arrow-blue {
+  --attack-arrow-color:
+    #68b7ff;
+}
+
+
+.attack-arrow-green {
+  --attack-arrow-color:
+    #69d992;
+}
+
+
+.attack-arrow-purple {
+  --attack-arrow-color:
+    #a87cff;
+}
+
+
+.attack-arrow-white {
+  --attack-arrow-color:
+    #edf8ff;
+}
+
+
+.attack-arrow-yellow {
+  --attack-arrow-color:
+    #ffd264;
+}
+
+
+.attack-arrow-neutral {
+  --attack-arrow-color:
+    #f2bf56;
+}
+
+
+/* =========================================================
+   ULTIMATE / MULTICOLOR — SETA PRISMÁTICA
+========================================================= */
+
+.attack-arrow-rainbow
+  .attack-arrow-core {
+  stroke:
+    url(
+      #attack-arrow-rainbow-gradient
+    );
+}
+
+
+.attack-arrow-rainbow
+  .attack-arrow-head-path {
+  fill:
+    #d5b2ff;
+
+  filter:
+    drop-shadow(
+      0 0 6px
+      rgba(
+        132,
+        102,
+        255,
+        0.56
+      )
+    )
+    drop-shadow(
+      0 0 12px
+      rgba(
+        255,
+        192,
+        94,
+        0.32
+      )
+    );
+}
+
+
+.attack-arrow-rainbow
+  .attack-arrow-origin {
+  fill:
+    #e7c8ff;
+
+  stroke:
+    #fff5cb;
+
+  box-shadow:
+    none;
+}
+
+
+/* =========================================================
+   RESPONSIVO / REDUCED MOTION
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+
+  .table-area.attack-focus-active
+    .attack-focus-dim {
+    transition:
+      none;
+  }
+
+}
+
+
+/* =========================================================
+   CENTRO DA ARENA — BATALHA / CONFRONTO / FLASH
+========================================================= */
+
+/*
+ * Mantém a área do meio elegante e compacta,
+ * sem disputar atenção com as cartas do campo.
+ */
+
+.table-middle {
+  min-height:
+    92px !important;
+
+  margin:
+    6px 0 !important;
+
+  padding:
+    8px 10px !important;
+
+  border-top:
+    1px solid
+    rgba(
+      116,
+      154,
+      201,
+      0.16
+    ) !important;
+
+  border-bottom:
+    1px solid
+    rgba(
+      116,
+      154,
+      201,
+      0.16
+    ) !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        7,
+        22,
+        36,
+        0.34
+      ),
+      rgba(
+        11,
+        35,
+        53,
+        0.22
+      ),
+      rgba(
+        7,
+        22,
+        36,
+        0.34
+      )
+    );
+}
+
+
+/* =========================================================
+   CASCO PRINCIPAL
+========================================================= */
+
+.battle-center-shell {
+  width:
+    min(
+      100%,
+      860px
+    );
+
+  margin:
+    0 auto;
+
+  padding:
+    10px 14px;
+
+  border:
+    1px solid
+    rgba(
+      116,
+      154,
+      201,
+      0.18
+    );
+
+  border-radius:
+    16px;
+
+  background:
+    radial-gradient(
+      ellipse
+      at 50% 0%,
+      rgba(
+        244,
+        189,
+        75,
+        0.06
+      ),
+      transparent
+      45%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(
+        9,
+        29,
+        46,
+        0.76
+      ),
+      rgba(
+        5,
+        19,
+        33,
+        0.72
+      )
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.03
+      ),
+    0 8px 24px
+      rgba(
+        0,
+        0,
+        0,
+        0.18
+      );
+}
+
+
+.battle-center-shell.idle {
+  padding:
+    8px 12px;
+}
+
+
+/* =========================================================
+   ESTADO OCIOSO
+========================================================= */
+
+.center-idle {
+  text-align:
+    center;
+
+  display:
+    grid;
+
+  gap:
+    3px;
+}
+
+
+.battle-center-kicker {
+  color:
+    #f4bd4b !important;
+
+  font-size:
+    10px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.14em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.center-idle strong {
+  color:
+    #f4f8fb;
+
+  font-size:
+    14px;
+
+  font-weight:
+    900;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA BATALHA
+========================================================= */
+
+.battle-center-header {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    10px;
+
+  margin-bottom:
+    8px;
+}
+
+
+.battle-center-title {
+  display:
+    grid;
+
+  gap:
+    2px;
+}
+
+
+.battle-center-title strong {
+  color:
+    #f6fbff;
+
+  font-size:
+    15px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.01em;
+}
+
+
+.battle-center-turn-chip {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  min-height:
+    30px;
+
+  padding:
+    0 10px;
+
+  border:
+    1px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.26
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      244,
+      189,
+      75,
+      0.07
+    );
+
+  color:
+    #ffd26a;
+
+  font-size:
+    10px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.06em;
+}
+
+
+.battle-center-turn-chip b {
+  min-width:
+    22px;
+
+  height:
+    22px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      244,
+      189,
+      75,
+      0.14
+    );
+
+  color:
+    #fff3c1;
+
+  font-size:
+    10px;
+}
+
+
+/* =========================================================
+   PARTICIPANTES
+========================================================= */
+
+.battle-participants-enhanced {
+  display:
+    grid !important;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    auto
+    minmax(
+      0,
+      1fr
+    );
+
+  gap:
+    10px;
+
+  align-items:
+    center;
+
+  margin:
+    0 !important;
+}
+
+
+.battle-side {
+  min-width:
+    0;
+
+  display:
+    grid;
+
+  gap:
+    4px;
+
+  padding:
+    10px 12px;
+
+  border:
+    1px solid
+    rgba(
+      112,
+      153,
+      201,
+      0.16
+    );
+
+  border-radius:
+    12px;
+
+  background:
+    rgba(
+      4,
+      18,
+      31,
+      0.58
+    );
+
+  text-align:
+    center;
+}
+
+
+.battle-side small {
+  color:
+    #7891ab;
+
+  font-size:
+    8px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.1em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.battle-side b {
+  display:
+    block;
+
+  color:
+    #f4f8fb;
+
+  font-size:
+    14px;
+
+  font-weight:
+    900;
+
+  line-height:
+    1.15;
+
+  text-wrap:
+    balance;
+
+  overflow-wrap:
+    anywhere;
+}
+
+
+.battle-side span {
+  color:
+    #9fc1df;
+
+  font-size:
+    11px;
+
+  font-weight:
+    800;
+}
+
+
+.battle-side.attacker {
+  box-shadow:
+    inset 0 0 0 1px
+      rgba(
+        239,
+        101,
+        106,
+        0.06
+      );
+}
+
+
+.battle-side.blocker {
+  box-shadow:
+    inset 0 0 0 1px
+      rgba(
+        102,
+        172,
+        255,
+        0.05
+      );
+}
+
+
+.battle-versus-badge {
+  width:
+    48px;
+
+  height:
+    48px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    1px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.22
+    );
+
+  border-radius:
+    50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(
+        244,
+        189,
+        75,
+        0.14
+      ),
+      rgba(
+        14,
+        29,
+        43,
+        0.9
+      )
+    );
+
+  box-shadow:
+    0 0 20px
+      rgba(
+        244,
+        189,
+        75,
+        0.08
+      );
+}
+
+
+.battle-versus-badge em {
+  color:
+    #ffd26a !important;
+
+  font-size:
+    13px !important;
+
+  font-style:
+    normal;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    0.08em;
+}
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.battle-actions-refined {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    10px;
+
+  margin-top:
+    9px;
+}
+
+
+.battle-info-strip {
+  min-height:
+    38px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid
+    rgba(
+      114,
+      154,
+      201,
+      0.17
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      8,
+      28,
+      48,
+      0.62
+    );
+
+  color:
+    #87a5c4;
+
+  font-size:
+    10px;
+}
+
+
+.battle-info-strip span {
+  color:
+    #7f95ac;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.06em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.battle-info-strip b {
+  color:
+    #f1f6fb;
+
+  font-size:
+    11px;
+}
+
+
+.battle-action-button {
+  min-height:
+    40px;
+
+  padding:
+    0 18px;
+
+  border-radius:
+    12px !important;
+
+  font-size:
+    12px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.01em;
+
+  box-shadow:
+    0 8px 18px
+      rgba(
+        0,
+        0,
+        0,
+        0.18
+      );
+}
+
+
+.battle-action-button-primary {
+  box-shadow:
+    0 10px 22px
+      rgba(
+        244,
+        189,
+        75,
+        0.12
+      );
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (
+  max-width:
+    1220px
+) {
+
+  .battle-center-shell {
+    padding:
+      9px 11px;
+  }
+
+
+  .battle-center-title strong {
+    font-size:
+      13px;
+  }
+
+
+  .battle-side {
+    padding:
+      8px 9px;
+  }
+
+
+  .battle-side b {
+    font-size:
+      12px;
+  }
+
+
+  .battle-side span,
+  .battle-action-button,
+  .battle-info-strip {
+    font-size:
+      10px;
+  }
+
+
+  .battle-action-button {
+    min-height:
+      36px;
+
+    padding:
+      0 14px;
+  }
+
+}
+
+
+@media (
+  max-width:
+    980px
+) {
+
+  .battle-center-header {
+    flex-direction:
+      column;
+
+    justify-content:
+      center;
+  }
+
+
+  .battle-participants-enhanced {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .battle-versus-badge {
+    margin:
+      0 auto;
+  }
+
+}
+
+
+
+/* =========================================================
+   HOTFIX — CENTRO DA ARENA COMPACTO
+   Substitui o painel grande anterior.
+========================================================= */
+
+.table-middle {
+  min-height:
+    70px !important;
+
+  height:
+    100% !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    5px 8px !important;
+
+  overflow:
+    hidden !important;
+
+  display:
+    flex !important;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border-top:
+    1px solid
+    rgba(
+      116,
+      154,
+      201,
+      0.14
+    ) !important;
+
+  border-bottom:
+    1px solid
+    rgba(
+      116,
+      154,
+      201,
+      0.14
+    ) !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        5,
+        19,
+        31,
+        0.18
+      ),
+      rgba(
+        12,
+        34,
+        51,
+        0.28
+      ),
+      rgba(
+        5,
+        19,
+        31,
+        0.18
+      )
+    ) !important;
+}
+
+
+/*
+ * Oculta completamente as estruturas antigas caso o navegador
+ * ainda esteja com regras anteriores em cache.
+ */
+
+.battle-center-shell,
+.battle-center-card {
+  display:
+    none !important;
+}
+
+
+/* =========================================================
+   CENTRO OCIOSO
+========================================================= */
+
+.battle-center-compact {
+  width:
+    min(
+      100%,
+      980px
+    );
+
+  min-width:
+    0;
+}
+
+
+.battle-center-compact.idle {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    9px;
+
+  color:
+    #dce7f4;
+}
+
+
+.battle-center-phase {
+  color:
+    #f4bd4b;
+
+  font-size:
+    8px;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.battle-center-compact.idle
+  > strong {
+  font-size:
+    13px;
+
+  font-weight:
+    900;
+}
+
+
+/* =========================================================
+   BATALHA ATIVA — UMA ÚNICA FAIXA HORIZONTAL
+========================================================= */
+
+.battle-center-compact.active {
+  display:
+    grid;
+
+  grid-template-columns:
+    auto
+    minmax(
+      280px,
+      1fr
+    )
+    auto;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  min-height:
+    58px;
+
+  padding:
+    6px 10px;
+
+  border:
+    1px solid
+    rgba(
+      119,
+      157,
+      201,
+      0.18
+    );
+
+  border-radius:
+    12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        8,
+        28,
+        45,
+        0.76
+      ),
+      rgba(
+        5,
+        18,
+        31,
+        0.7
+      )
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.025
+      );
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.battle-compact-status {
+  min-width:
+    92px;
+
+  display:
+    grid;
+
+  gap:
+    1px;
+
+  padding-right:
+    10px;
+
+  border-right:
+    1px solid
+    rgba(
+      119,
+      157,
+      201,
+      0.12
+    );
+}
+
+
+.battle-compact-status
+  > span {
+  color:
+    #f4bd4b;
+
+  font-size:
+    7px;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.battle-compact-status
+  > strong {
+  color:
+    #f7f9fc;
+
+  font-size:
+    12px;
+
+  font-weight:
+    950;
+
+  line-height:
+    1.05;
+}
+
+
+.battle-compact-status
+  > em {
+  width:
+    fit-content;
+
+  margin-top:
+    2px;
+
+  padding:
+    2px 5px;
+
+  border:
+    1px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.24
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      244,
+      189,
+      75,
+      0.07
+    );
+
+  color:
+    #ffd36b;
+
+  font-size:
+    7px;
+
+  font-style:
+    normal;
+
+  font-weight:
+    900;
+}
+
+
+/* =========================================================
+   CONFRONTO
+========================================================= */
+
+.battle-compact-matchup {
+  min-width:
+    0;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    32px
+    minmax(
+      0,
+      1fr
+    );
+
+  align-items:
+    center;
+
+  gap:
+    7px;
+}
+
+
+.battle-compact-card {
+  min-width:
+    0;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    auto
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  align-items:
+    center;
+
+  gap:
+    6px;
+
+  min-height:
+    34px;
+
+  padding:
+    4px 8px;
+
+  border:
+    1px solid
+    rgba(
+      112,
+      153,
+      201,
+      0.13
+    );
+
+  border-radius:
+    9px;
+
+  background:
+    rgba(
+      3,
+      16,
+      28,
+      0.46
+    );
+}
+
+
+.battle-compact-card
+  small {
+  padding:
+    3px 5px;
+
+  border-radius:
+    999px;
+
+  color:
+    #8097af;
+
+  background:
+    rgba(
+      116,
+      154,
+      201,
+      0.07
+    );
+
+  font-size:
+    6px;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    0.08em;
+}
+
+
+.battle-compact-card
+  b {
+  min-width:
+    0;
+
+  overflow:
+    hidden;
+
+  color:
+    #eef5fb;
+
+  font-size:
+    10px;
+
+  font-weight:
+    900;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+
+.battle-compact-card
+  > span {
+  flex:
+    0 0 auto;
+
+  color:
+    #8fb5d6;
+
+  font-size:
+    8px;
+
+  font-weight:
+    850;
+
+  white-space:
+    nowrap;
+}
+
+
+.battle-compact-card.attacker {
+  border-left:
+    2px solid
+    rgba(
+      255,
+      105,
+      111,
+      0.58
+    );
+}
+
+
+.battle-compact-card.defender {
+  border-right:
+    2px solid
+    rgba(
+      103,
+      171,
+      255,
+      0.48
+    );
+}
+
+
+.battle-compact-vs {
+  width:
+    30px;
+
+  height:
+    30px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    1px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.22
+    );
+
+  border-radius:
+    50%;
+
+  color:
+    #ffd169;
+
+  background:
+    rgba(
+      244,
+      189,
+      75,
+      0.07
+    );
+
+  font-size:
+    8px;
+
+  font-weight:
+    950;
+}
+
+
+/* =========================================================
+   PRIORIDADE / BOTÕES
+========================================================= */
+
+.battle-compact-actions {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    flex-end;
+
+  gap:
+    6px;
+
+  min-width:
+    0;
+}
+
+
+.battle-compact-priority {
+  display:
+    grid;
+
+  gap:
+    1px;
+
+  text-align:
+    right;
+
+  white-space:
+    nowrap;
+}
+
+
+.battle-compact-priority
+  span {
+  color:
+    #728ba5;
+
+  font-size:
+    6px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.08em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.battle-compact-priority
+  b {
+  max-width:
+    110px;
+
+  overflow:
+    hidden;
+
+  color:
+    #cfe0ef;
+
+  font-size:
+    8px;
+
+  text-overflow:
+    ellipsis;
+}
+
+
+.battle-compact-button {
+  min-height:
+    34px !important;
+
+  padding:
+    0 12px !important;
+
+  border-radius:
+    9px !important;
+
+  font-size:
+    9px !important;
+
+  font-weight:
+    900 !important;
+
+  white-space:
+    nowrap;
+}
+
+
+/* =========================================================
+   TELAS MENORES
+========================================================= */
+
+@media (
+  max-width:
+    1380px
+) {
+
+  .battle-center-compact.active {
+    grid-template-columns:
+      82px
+      minmax(
+        240px,
+        1fr
+      )
+      auto;
+
+    gap:
+      7px;
+  }
+
+
+  .battle-compact-status {
+    min-width:
+      0;
+  }
+
+
+  .battle-compact-card {
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      )
+      auto;
+  }
+
+
+  .battle-compact-card
+    small {
+    display:
+      none;
+  }
+
+
+  .battle-compact-priority {
+    display:
+      none;
+  }
+
+}
+
+
+@media (
+  max-width:
+    1120px
+) {
+
+  .battle-center-compact.active {
+    grid-template-columns:
+      70px
+      minmax(
+        200px,
+        1fr
+      )
+      auto;
+  }
+
+
+  .battle-compact-card
+    > span {
+    display:
+      none;
+  }
+
+
+  .battle-compact-button {
+    padding:
+      0 9px !important;
+
+    font-size:
+      8px !important;
+  }
+
+}
+
+
+/* =========================================================
+   BATTLE FOCUS — MANTER ATÉ O FIM DO CONFRONTO
+========================================================= */
+
+/*
+ * O foco agora não existe só durante o arraste da seta.
+ * Enquanto match.battle existir, a mesa continua escurecida
+ * e destacando o que é relevante para o confronto.
+ */
+
+.table-area.attack-focus-active
+  .attack-focus-life-target {
+  position:
+    relative;
+
+  z-index:
+    8;
+
+  filter:
+    none;
+
+  opacity:
+    1;
+}
+
+
+.table-area.attack-focus-active
+  .attack-focus-life-target
+  .life-core-display {
+  border-color:
+    rgba(
+      255,
+      255,
+      255,
+      0.44
+    );
+
+  box-shadow:
+    0 0 18px
+      rgba(
+        255,
+        255,
+        255,
+        0.08
+      ),
+    0 0 30px
+      color-mix(
+        in srgb,
+        var(--attack-theme, #ff5662)
+        26%,
+        transparent
+      );
+}
+
+
+.table-area.attack-focus-active
+  .attack-focus-top-field,
+.table-area.attack-focus-active
+  .attack-focus-bottom-field,
+.table-area.attack-focus-active
+  .table-middle {
+  transition:
+    opacity 0.14s ease,
+    filter 0.14s ease;
+}
+
+
+
+/* =========================================================
+   HOTFIX — BURST / TRASH ESPREMIDOS
+   Ajuste de largura da coluna direita na área da mão.
+========================================================= */
+
+/*
+ * A coluna da direita estava estreita demais para acomodar
+ * BURST + TRASH lado a lado.
+ * Aqui damos mais espaço real e um tamanho mínimo útil para
+ * cada stack card.
+ */
+
+.hand-row {
+  grid-template-columns:
+    88px
+    minmax(
+      0,
+      1fr
+    )
+    164px
+    !important;
+
+  gap:
+    8px
+    !important;
+}
+
+
+.hand-side-zones {
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(
+        76px,
+        1fr
+      )
+    );
+
+  gap:
+    6px;
+
+  justify-content:
+    end;
+}
+
+
+.hand-side-zones
+  .stack-card {
+  min-width:
+    76px;
+
+  min-height:
+    82px;
+
+  height:
+    82px;
+}
+
+
+.hand-side-zones
+  .stack-card
+  > span {
+  top:
+    5px;
+
+  left:
+    50%;
+
+  transform:
+    translateX(
+      -50%
+    );
+
+  font-size:
+    8px;
+
+  letter-spacing:
+    0.08em;
+
+  white-space:
+    nowrap;
+}
+
+
+.hand-side-zones
+  .stack-card
+  > b {
+  bottom:
+    6px;
+
+  font-size:
+    18px;
+}
+
+
+/*
+ * Mantém a carta do Trash legível e com bom enquadramento.
+ */
+
+.hand-side-zones
+  .stack-card.trash
+  .trash-image,
+.hand-side-zones
+  .burst-card-back {
+  object-fit:
+    cover;
+}
+
+
+/* Ajuste dos breakpoints da mesma área */
+
+@media (
+  max-width:
+    1500px
+) {
+
+  .hand-row {
+    grid-template-columns:
+      84px
+      minmax(
+        0,
+        1fr
+      )
+      154px
+      !important;
+  }
+
+
+  .hand-side-zones {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          72px,
+          1fr
+        )
+      );
+  }
+
+
+  .hand-side-zones
+    .stack-card {
+    min-width:
+      72px;
+  }
+
+}
+
+
+@media (
+  max-width:
+    1220px
+) {
+
+  .hand-row {
+    grid-template-columns:
+      80px
+      minmax(
+        0,
+        1fr
+      )
+      146px
+      !important;
+  }
+
+
+  .hand-side-zones {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          68px,
+          1fr
+        )
+      );
+
+    gap:
+      5px;
+  }
+
+
+  .hand-side-zones
+    .stack-card {
+    min-width:
+      68px;
+
+    min-height:
+      78px;
+
+    height:
+      78px;
+  }
+
+
+  .hand-side-zones
+    .stack-card
+    > span {
+    font-size:
+      7px;
+  }
+
+}

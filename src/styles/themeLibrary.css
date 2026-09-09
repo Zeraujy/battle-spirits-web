@@ -1,0 +1,942 @@
+/* =========================================================
+   BATTLE SPIRITS ETERNAL SIMULATOR
+   THEME LIBRARY — v2.3.x
+========================================================= */
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.theme-library {
+  display:
+    grid;
+
+  gap:
+    18px;
+
+  padding:
+    16px;
+
+  border:
+    1px solid
+    var(--line);
+
+  border-radius:
+    16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--panel-2-solid, #12243e)
+        55%,
+        transparent
+      ),
+      color-mix(
+        in srgb,
+        var(--bg)
+        72%,
+        transparent
+      )
+    );
+}
+
+
+.theme-library
+  .settings-section-heading {
+  align-items:
+    flex-start;
+}
+
+
+.theme-library-subtitle {
+  max-width:
+    580px;
+
+  margin:
+    5px 0 0;
+
+  color:
+    var(--muted);
+
+  font-size:
+    11px;
+
+  line-height:
+    1.55;
+}
+
+
+/* =========================================================
+   SEÇÕES
+========================================================= */
+
+.theme-library-section {
+  display:
+    grid;
+
+  gap:
+    12px;
+
+  padding-top:
+    16px;
+
+  border-top:
+    1px solid
+    var(--line);
+}
+
+
+.theme-library-section-heading {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    12px;
+}
+
+
+.theme-library-section-heading
+  > div {
+  display:
+    grid;
+
+  gap:
+    2px;
+}
+
+
+.theme-library-section-heading
+  span {
+  color:
+    var(--accent);
+
+  font-size:
+    8px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    .13em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.theme-library-section-heading
+  strong {
+  font-size:
+    14px;
+}
+
+
+.theme-library-section-heading
+  small {
+  color:
+    var(--muted);
+
+  font-size:
+    9px;
+}
+
+
+/* =========================================================
+   RECOMENDADOS
+========================================================= */
+
+.recommended-theme-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    10px;
+}
+
+
+.theme-preset-card {
+  min-width:
+    0;
+
+  overflow:
+    hidden;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    116px
+    minmax(
+      0,
+      1fr
+    );
+
+  border:
+    1px solid
+    var(--line);
+
+  border-radius:
+    14px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--panel-solid, #0d1a2e)
+      82%,
+      transparent
+    );
+
+  transition:
+    transform
+      .15s ease,
+    border-color
+      .15s ease,
+    box-shadow
+      .15s ease;
+}
+
+
+.theme-preset-card:hover {
+  transform:
+    translateY(
+      -1px
+    );
+
+  border-color:
+    var(--line-strong);
+}
+
+
+.theme-preset-card.active {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--accent)
+      70%,
+      white
+    );
+
+  box-shadow:
+    0 0 0 1px
+      color-mix(
+        in srgb,
+        var(--accent)
+        15%,
+        transparent
+      ),
+    0 10px 28px
+      rgba(
+        0,
+        0,
+        0,
+        .2
+      );
+}
+
+
+/* =========================================================
+   MINI PREVIEW
+========================================================= */
+
+.theme-preset-preview {
+  min-height:
+    148px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  padding:
+    12px;
+
+  background:
+    var(
+      --theme-card-bg
+    );
+}
+
+
+.theme-preview-window {
+  width:
+    88px;
+
+  height:
+    108px;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--theme-card-accent-2)
+      42%,
+      transparent
+    );
+
+  border-radius:
+    10px;
+
+  background:
+    var(
+      --theme-card-panel
+    );
+
+  box-shadow:
+    0 12px 26px
+      rgba(
+        0,
+        0,
+        0,
+        .28
+      );
+}
+
+
+.theme-preview-topbar {
+  height:
+    19px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    3px;
+
+  padding:
+    0 6px;
+
+  border-bottom:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--theme-card-accent-2)
+      24%,
+      transparent
+    );
+}
+
+
+.theme-preview-topbar
+  i {
+  width:
+    5px;
+
+  height:
+    5px;
+
+  border-radius:
+    50%;
+
+  background:
+    var(
+      --theme-card-accent
+    );
+}
+
+
+.theme-preview-content {
+  display:
+    grid;
+
+  gap:
+    7px;
+
+  padding:
+    11px 9px;
+}
+
+
+.theme-preview-content
+  span {
+  height:
+    8px;
+
+  border-radius:
+    999px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--theme-card-accent-2)
+      45%,
+      transparent
+    );
+}
+
+
+.theme-preview-content
+  span:nth-child(2) {
+  width:
+    72%;
+}
+
+
+.theme-preview-content
+  b {
+  width:
+    42px;
+
+  height:
+    24px;
+
+  margin-top:
+    4px;
+
+  border-radius:
+    7px;
+
+  background:
+    var(
+      --theme-card-accent
+    );
+}
+
+
+/* =========================================================
+   COPY DOS PRESETS
+========================================================= */
+
+.theme-preset-copy {
+  min-width:
+    0;
+
+  display:
+    grid;
+
+  align-content:
+    center;
+
+  gap:
+    8px;
+
+  padding:
+    12px;
+}
+
+
+.theme-preset-title,
+.saved-theme-title {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    8px;
+}
+
+
+.theme-preset-title
+  strong {
+  min-width:
+    0;
+
+  overflow:
+    hidden;
+
+  font-size:
+    13px;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+
+.theme-preset-copy
+  p {
+  margin:
+    0;
+
+  color:
+    var(--muted);
+
+  font-size:
+    9px;
+
+  line-height:
+    1.45;
+}
+
+
+.theme-active-badge {
+  flex:
+    0 0 auto;
+
+  padding:
+    3px 6px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--ok)
+      38%,
+      transparent
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--ok)
+      10%,
+      transparent
+    );
+
+  color:
+    var(--ok);
+
+  font-size:
+    7px !important;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    .05em !important;
+
+  text-transform:
+    uppercase;
+}
+
+
+.theme-apply-button {
+  background:
+    color-mix(
+      in srgb,
+      var(--accent)
+      16%,
+      var(--panel-solid, #0d1a2e)
+    );
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--accent)
+      34%,
+      var(--line)
+    );
+}
+
+
+/* =========================================================
+   SWATCHES
+========================================================= */
+
+.theme-swatches {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    0;
+}
+
+
+.theme-swatches
+  i {
+  width:
+    17px;
+
+  height:
+    17px;
+
+  margin-left:
+    -3px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      .22
+    );
+
+  border-radius:
+    50%;
+
+  box-shadow:
+    0 2px 6px
+      rgba(
+        0,
+        0,
+        0,
+        .3
+      );
+}
+
+
+.theme-swatches
+  i:first-child {
+  margin-left:
+    0;
+}
+
+
+/* =========================================================
+   CUSTOMIZER
+========================================================= */
+
+.theme-library
+  .theme-customizer {
+  padding:
+    16px 0 0;
+
+  border:
+    0;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  border-radius:
+    0;
+
+  background:
+    transparent;
+}
+
+
+.save-theme-row {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  gap:
+    10px;
+
+  align-items:
+    end;
+
+  margin-top:
+    4px;
+
+  padding:
+    12px;
+
+  border:
+    1px solid
+    var(--line);
+
+  border-radius:
+    12px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--panel-solid, #0d1a2e)
+      64%,
+      transparent
+    );
+}
+
+
+.save-theme-row
+  > button {
+  min-height:
+    41px;
+}
+
+
+/* =========================================================
+   MEUS TEMAS
+========================================================= */
+
+.saved-theme-list {
+  display:
+    grid;
+
+  gap:
+    8px;
+}
+
+
+.saved-theme-card {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  padding:
+    11px 12px;
+
+  border:
+    1px solid
+    var(--line);
+
+  border-radius:
+    12px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--panel-solid, #0d1a2e)
+      72%,
+      transparent
+    );
+}
+
+
+.saved-theme-card.active {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--accent)
+      54%,
+      var(--line)
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--accent)
+      5%,
+      var(--panel-solid, #0d1a2e)
+    );
+}
+
+
+.saved-theme-info {
+  min-width:
+    0;
+
+  display:
+    grid;
+
+  gap:
+    7px;
+}
+
+
+.saved-theme-title
+  strong {
+  min-width:
+    0;
+
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+
+.saved-theme-actions {
+  display:
+    flex;
+
+  gap:
+    6px;
+}
+
+
+/* =========================================================
+   EMPTY / NOTICE
+========================================================= */
+
+.theme-library-empty {
+  display:
+    grid;
+
+  gap:
+    4px;
+
+  padding:
+    18px;
+
+  border:
+    1px dashed
+    var(--line);
+
+  border-radius:
+    12px;
+
+  color:
+    var(--muted);
+
+  text-align:
+    center;
+}
+
+
+.theme-library-empty
+  strong {
+  color:
+    var(--text);
+
+  font-size:
+    11px;
+}
+
+
+.theme-library-empty
+  span {
+  font-size:
+    9px;
+}
+
+
+.theme-library-notice {
+  padding:
+    8px 10px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--ok)
+      28%,
+      var(--line)
+    );
+
+  border-radius:
+    9px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--ok)
+      7%,
+      transparent
+    );
+
+  color:
+    color-mix(
+      in srgb,
+      var(--ok)
+      78%,
+      white
+    );
+
+  font-size:
+    10px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (
+  max-width:
+    900px
+) {
+
+  .recommended-theme-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+}
+
+
+@media (
+  max-width:
+    620px
+) {
+
+  .theme-preset-card {
+    grid-template-columns:
+      96px
+      minmax(
+        0,
+        1fr
+      );
+  }
+
+
+  .theme-preset-preview {
+    min-height:
+      132px;
+
+    padding:
+      8px;
+  }
+
+
+  .theme-preview-window {
+    width:
+      76px;
+
+    height:
+      98px;
+  }
+
+
+  .save-theme-row,
+  .saved-theme-card {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .saved-theme-actions {
+    width:
+      100%;
+  }
+
+
+  .saved-theme-actions
+    button {
+    flex:
+      1;
+  }
+
+}

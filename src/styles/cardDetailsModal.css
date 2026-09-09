@@ -1,0 +1,1788 @@
+/* =========================================================
+   BATTLE SPIRITS SIMULATOR
+   CARD DETAILS MODAL — v2.3.0
+========================================================= */
+
+
+/* =========================================================
+   JANELA
+========================================================= */
+
+.modal.card-details-shell {
+  width:
+    min(
+      980px,
+      calc(100vw - 36px)
+    );
+
+  max-height:
+    92vh;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.28
+    );
+
+  background:
+    radial-gradient(
+      circle
+      at 12% 0%,
+      rgba(
+        244,
+        189,
+        75,
+        0.08
+      ),
+      transparent
+      31%
+    ),
+    linear-gradient(
+      155deg,
+      #0d1c30,
+      #07111f
+    );
+
+  box-shadow:
+    0 26px 80px
+      rgba(
+        0,
+        0,
+        0,
+        0.58
+      ),
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.035
+      );
+}
+
+
+.modal.card-details-shell
+  > header {
+  margin: 0;
+
+  padding:
+    15px 18px;
+
+  border-bottom:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.07
+    );
+
+  background:
+    rgba(
+      5,
+      14,
+      25,
+      0.58
+    );
+}
+
+
+.modal.card-details-shell
+  > header h2 {
+  font-size:
+    15px;
+
+  letter-spacing:
+    0.02em;
+}
+
+
+.card-details-modal {
+  box-sizing:
+    border-box;
+
+  max-height:
+    calc(
+      92vh - 65px
+    );
+
+  overflow-y:
+    auto;
+
+  padding:
+    20px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.card-details-hero {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(
+      240px,
+      310px
+    )
+    minmax(
+      0,
+      1fr
+    );
+
+  gap:
+    24px;
+
+  align-items:
+    start;
+}
+
+
+/* =========================================================
+   IMAGEM
+========================================================= */
+
+.card-details-image-column {
+  min-width: 0;
+}
+
+
+.card-details-image-frame {
+  position:
+    relative;
+
+  width:
+    min(
+      100%,
+      300px
+    );
+
+  margin:
+    0 auto;
+
+  padding:
+    8px;
+
+  box-sizing:
+    border-box;
+
+  border:
+    1px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.25
+    );
+
+  border-radius:
+    18px;
+
+  background:
+    linear-gradient(
+      155deg,
+      rgba(
+        255,
+        255,
+        255,
+        0.04
+      ),
+      rgba(
+        0,
+        0,
+        0,
+        0.18
+      )
+    );
+
+  box-shadow:
+    0 18px 42px
+      rgba(
+        0,
+        0,
+        0,
+        0.34
+      );
+}
+
+
+.card-details-image-frame::before {
+  content: "";
+
+  position:
+    absolute;
+
+  inset:
+    -1px;
+
+  z-index:
+    -1;
+
+  border-radius:
+    inherit;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(
+        244,
+        189,
+        75,
+        0.22
+      ),
+      transparent
+      38%,
+      rgba(
+        92,
+        160,
+        232,
+        0.12
+      )
+    );
+}
+
+
+.card-details-image-frame
+  img {
+  display:
+    block;
+
+  width:
+    100%;
+
+  height:
+    auto;
+
+  border-radius:
+    11px;
+}
+
+
+/* =========================================================
+   IDIOMA
+========================================================= */
+
+.card-details-language-switch {
+  width:
+    min(
+      100%,
+      300px
+    );
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:
+    7px;
+
+  margin:
+    12px auto 0;
+
+  padding:
+    5px;
+
+  box-sizing:
+    border-box;
+
+  border:
+    1px solid
+    rgba(
+      118,
+      153,
+      193,
+      0.18
+    );
+
+  border-radius:
+    11px;
+
+  background:
+    rgba(
+      3,
+      13,
+      24,
+      0.62
+    );
+}
+
+
+.card-details-language-switch
+  button {
+  min-height:
+    35px;
+
+  border:
+    1px solid
+    transparent;
+
+  border-radius:
+    8px;
+
+  background:
+    transparent;
+
+  color:
+    #8fa1b7;
+
+  font-size:
+    10px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.06em;
+
+  cursor:
+    pointer;
+
+  transition:
+    0.16s ease;
+}
+
+
+.card-details-language-switch
+  button:hover {
+  color:
+    #ffffff;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.035
+    );
+}
+
+
+.card-details-language-switch
+  button.active {
+  border-color:
+    #f4bd4b;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f6c655,
+      #dda125
+    );
+
+  color:
+    #09111b;
+
+  box-shadow:
+    0 5px 16px
+      rgba(
+        0,
+        0,
+        0,
+        0.2
+      );
+}
+
+
+/* =========================================================
+   CABEÇALHO DA CARTA
+========================================================= */
+
+.card-details-info {
+  min-width:
+    0;
+}
+
+
+.card-details-heading {
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  justify-content:
+    space-between;
+
+  gap:
+    14px;
+
+  padding-bottom:
+    13px;
+
+  border-bottom:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.07
+    );
+}
+
+
+.card-details-heading
+  > div {
+  min-width: 0;
+}
+
+
+.card-details-id {
+  display:
+    block;
+
+  margin-bottom:
+    5px;
+
+  color:
+    #f4bd4b;
+
+  font-size:
+    9px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.13em;
+}
+
+
+.card-details-name {
+  margin:
+    0;
+
+  color:
+    #f4f7fb;
+
+  font-size:
+    clamp(
+      22px,
+      3vw,
+      31px
+    );
+
+  line-height:
+    1.08;
+
+  letter-spacing:
+    -0.025em;
+}
+
+
+/* =========================================================
+   GLOW ESPECIAL PARA RARIDADE X+
+========================================================= */
+
+.card-details-name.rarity-glow {
+  transition:
+    text-shadow
+      0.18s ease,
+    filter
+      0.18s ease;
+}
+
+
+.card-details-name.rarity-glow.red {
+  color:
+    #fff3f1;
+
+  text-shadow:
+    0 0 8px
+      rgba(
+        255,
+        92,
+        92,
+        0.18
+      ),
+    0 0 18px
+      rgba(
+        207,
+        64,
+        64,
+        0.2
+      ),
+    0 0 34px
+      rgba(
+        185,
+        48,
+        48,
+        0.12
+      );
+}
+
+
+.card-details-name.rarity-glow.purple {
+  color:
+    #f5f0ff;
+
+  text-shadow:
+    0 0 8px
+      rgba(
+        166,
+        120,
+        255,
+        0.18
+      ),
+    0 0 18px
+      rgba(
+        132,
+        88,
+        220,
+        0.22
+      ),
+    0 0 34px
+      rgba(
+        110,
+        70,
+        194,
+        0.12
+      );
+}
+
+
+.card-details-name.rarity-glow.green {
+  color:
+    #f2fff7;
+
+  text-shadow:
+    0 0 8px
+      rgba(
+        110,
+        212,
+        144,
+        0.18
+      ),
+    0 0 18px
+      rgba(
+        76,
+        168,
+        108,
+        0.22
+      ),
+    0 0 34px
+      rgba(
+        56,
+        130,
+        83,
+        0.12
+      );
+}
+
+
+.card-details-name.rarity-glow.white {
+  color:
+    #ffffff;
+
+  text-shadow:
+    0 0 8px
+      rgba(
+        255,
+        255,
+        255,
+        0.18
+      ),
+    0 0 18px
+      rgba(
+        208,
+        224,
+        243,
+        0.22
+      ),
+    0 0 34px
+      rgba(
+        196,
+        214,
+        236,
+        0.14
+      );
+}
+
+
+.card-details-name.rarity-glow.yellow {
+  color:
+    #fff9e9;
+
+  text-shadow:
+    0 0 8px
+      rgba(
+        255,
+        214,
+        95,
+        0.2
+      ),
+    0 0 18px
+      rgba(
+        237,
+        186,
+        49,
+        0.24
+      ),
+    0 0 34px
+      rgba(
+        194,
+        145,
+        22,
+        0.14
+      );
+}
+
+
+.card-details-name.rarity-glow.blue {
+  color:
+    #f3f9ff;
+
+  text-shadow:
+    0 0 8px
+      rgba(
+        112,
+        178,
+        255,
+        0.18
+      ),
+    0 0 18px
+      rgba(
+        78,
+        135,
+        221,
+        0.22
+      ),
+    0 0 34px
+      rgba(
+        54,
+        103,
+        176,
+        0.12
+      );
+}
+
+
+.card-details-name.rarity-glow.rainbow {
+  background:
+    linear-gradient(
+      90deg,
+      #ffd56a 0%,
+      #ff8e6b 18%,
+      #96d7ff 38%,
+      #c1a3ff 58%,
+      #7ff0cb 77%,
+      #ffd56a 100%
+    );
+
+  background-size:
+    180% 100%;
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  color:
+    transparent;
+
+  filter:
+    drop-shadow(
+      0 0 8px
+      rgba(
+        255,
+        196,
+        88,
+        0.18
+      )
+    )
+    drop-shadow(
+      0 0 14px
+      rgba(
+        131,
+        96,
+        187,
+        0.18
+      )
+    );
+}
+
+
+.card-details-name.rarity-glow.neutral {
+  color:
+    #ffffff;
+
+  text-shadow:
+    0 0 8px
+      rgba(
+        244,
+        189,
+        75,
+        0.16
+      ),
+    0 0 18px
+      rgba(
+        244,
+        189,
+        75,
+        0.18
+      );
+}
+
+
+.card-details-rarity {
+  flex:
+    0 0 auto;
+
+  min-width:
+    37px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  padding:
+    9px 10px;
+
+  border:
+    1px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.42
+    );
+
+  border-radius:
+    10px;
+
+  background:
+    rgba(
+      244,
+      189,
+      75,
+      0.09
+    );
+
+  color:
+    #ffd36d;
+
+  font-size:
+    13px;
+
+  font-weight:
+    950;
+}
+
+
+/* =========================================================
+   CHIPS
+========================================================= */
+
+.card-details-primary-chips {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    6px;
+
+  margin-top:
+    11px;
+}
+
+
+.card-details-primary-chips
+  span {
+  padding:
+    5px 8px;
+
+  border:
+    1px solid
+    rgba(
+      116,
+      151,
+      192,
+      0.2
+    );
+
+  border-radius:
+    7px;
+
+  background:
+    rgba(
+      13,
+      35,
+      59,
+      0.74
+    );
+
+  color:
+    #aabbd0;
+
+  font-size:
+    9px;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.05em;
+}
+
+
+.card-details-primary-chips
+  b {
+  color:
+    #e4ebf4;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.card-details-stats-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    90px
+    minmax(
+      0,
+      1fr
+    );
+
+  gap:
+    8px;
+
+  margin-top:
+    13px;
+}
+
+
+.card-details-stat {
+  min-height:
+    67px;
+
+  box-sizing:
+    border-box;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  justify-content:
+    center;
+
+  gap:
+    6px;
+
+  padding:
+    10px;
+
+  border:
+    1px solid
+    rgba(
+      113,
+      153,
+      198,
+      0.16
+    );
+
+  border-radius:
+    10px;
+
+  background:
+    rgba(
+      4,
+      18,
+      33,
+      0.56
+    );
+}
+
+
+.card-details-stat-wide {
+  min-width: 0;
+}
+
+
+.card-details-stat
+  small {
+  color:
+    #70849c;
+
+  font-size:
+    7px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.card-details-stat
+  > strong {
+  color:
+    #ffffff;
+
+  font-size:
+    24px;
+}
+
+
+.card-details-stat
+  em {
+  color:
+    #7e90a5;
+
+  font-size:
+    10px;
+
+  font-style:
+    normal;
+}
+
+
+/* =========================================================
+   CORES
+========================================================= */
+
+.card-details-color-row,
+.card-details-icon-row {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  align-items:
+    center;
+
+  gap:
+    6px;
+}
+
+
+.card-detail-color {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    6px;
+
+  color:
+    #cbd6e3;
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+}
+
+
+.card-detail-color
+  i {
+  width:
+    10px;
+
+  height:
+    10px;
+
+  border-radius:
+    50%;
+
+  box-shadow:
+    0 0 0 2px
+      rgba(
+        255,
+        255,
+        255,
+        0.08
+      );
+}
+
+
+.card-detail-color.red i,
+.card-detail-symbol.red {
+  background:
+    #c64f4f;
+}
+
+
+.card-detail-color.purple i,
+.card-detail-symbol.purple {
+  background:
+    #7f5cc3;
+}
+
+
+.card-detail-color.green i,
+.card-detail-symbol.green {
+  background:
+    #4c9b68;
+}
+
+
+.card-detail-color.white i,
+.card-detail-symbol.white {
+  background:
+    #d4dde8;
+
+  color:
+    #172435;
+}
+
+
+.card-detail-color.yellow i,
+.card-detail-symbol.yellow {
+  background:
+    #d2aa3d;
+
+  color:
+    #1b170c;
+}
+
+
+.card-detail-color.blue i,
+.card-detail-symbol.blue {
+  background:
+    #4c7fc4;
+}
+
+
+.card-detail-color.ultimate i,
+.card-detail-symbol.ultimate {
+  background:
+    linear-gradient(
+      135deg,
+      #dfb64c,
+      #8360bb
+    );
+}
+
+
+/* =========================================================
+   SÍMBOLOS / REDUÇÕES
+========================================================= */
+
+.card-detail-symbol {
+  width:
+    24px;
+
+  height:
+    24px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.13
+    );
+
+  border-radius:
+    50%;
+
+  color:
+    #ffffff;
+
+  font-size:
+    8px;
+
+  font-weight:
+    950;
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.13
+      );
+}
+
+
+/* =========================================================
+   SEÇÕES
+========================================================= */
+
+.card-details-section {
+  margin-top:
+    16px;
+}
+
+
+.card-details-section-title {
+  margin:
+    0 0
+    8px;
+
+  color:
+    #7f94ac;
+
+  font-size:
+    8px;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.card-details-tag-list {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    6px;
+}
+
+
+.card-details-tag-list
+  span {
+  padding:
+    6px 9px;
+
+  border:
+    1px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.2
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      244,
+      189,
+      75,
+      0.055
+    );
+
+  color:
+    #d7c28b;
+
+  font-size:
+    9px;
+
+  font-weight:
+    700;
+}
+
+
+.card-details-tag-list.secondary
+  span {
+  border-color:
+    rgba(
+      114,
+      158,
+      205,
+      0.19
+    );
+
+  background:
+    rgba(
+      74,
+      122,
+      174,
+      0.07
+    );
+
+  color:
+    #9cb9d7;
+}
+
+
+/* =========================================================
+   LEVELS
+========================================================= */
+
+.card-details-levels {
+  display:
+    grid;
+
+  gap:
+    6px;
+}
+
+
+.card-details-level {
+  display:
+    grid;
+
+  grid-template-columns:
+    58px
+    minmax(
+      90px,
+      1fr
+    )
+    minmax(
+      110px,
+      1fr
+    );
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  min-height:
+    39px;
+
+  padding:
+    5px 9px;
+
+  border:
+    1px solid
+    rgba(
+      113,
+      153,
+      198,
+      0.15
+    );
+
+  border-radius:
+    9px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        20,
+        48,
+        76,
+        0.56
+      ),
+      rgba(
+        5,
+        18,
+        33,
+        0.38
+      )
+    );
+}
+
+
+.card-details-level
+  > strong {
+  color:
+    #f4bd4b;
+
+  font-size:
+    11px;
+}
+
+
+.card-details-level
+  span {
+  color:
+    #8fa2b8;
+
+  font-size:
+    9px;
+}
+
+
+.card-details-level
+  span b {
+  color:
+    #eaf0f7;
+
+  font-size:
+    11px;
+}
+
+
+.card-details-level
+  .card-details-bp {
+  text-align:
+    right;
+
+  color:
+    #9fb0c4;
+}
+
+
+.card-details-level
+  .card-details-bp b {
+  color:
+    #ffffff;
+
+  font-size:
+    13px;
+}
+
+
+/* =========================================================
+   EFEITO
+========================================================= */
+
+.card-details-effect-panel {
+  margin-top:
+    20px;
+
+  padding:
+    16px;
+
+  border:
+    1px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.18
+    );
+
+  border-radius:
+    13px;
+
+  background:
+    linear-gradient(
+      155deg,
+      rgba(
+        20,
+        42,
+        68,
+        0.75
+      ),
+      rgba(
+        5,
+        17,
+        30,
+        0.78
+      )
+    );
+}
+
+
+.card-details-effect-panel
+  .card-details-section-title {
+  color:
+    #f1bd50;
+}
+
+
+.card-details-effect-list {
+  display:
+    grid;
+
+  gap:
+    10px;
+}
+
+
+.card-details-effect-entry {
+  padding:
+    12px;
+
+  border:
+    1px solid
+    rgba(
+      103,
+      143,
+      192,
+      0.15
+    );
+
+  border-left:
+    2px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.72
+    );
+
+  border-radius:
+    0 12px 12px 0;
+
+  background:
+    linear-gradient(
+      155deg,
+      rgba(
+        5,
+        19,
+        34,
+        0.72
+      ),
+      rgba(
+        10,
+        27,
+        46,
+        0.54
+      )
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.03
+      );
+}
+
+
+.card-details-effect-chips {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    6px;
+
+  margin-bottom:
+    8px;
+}
+
+
+.card-details-effect-chip {
+  padding:
+    5px 8px;
+
+  border-radius:
+    999px;
+
+  border:
+    1px solid
+    rgba(
+      121,
+      155,
+      194,
+      0.22
+    );
+
+  background:
+    rgba(
+      12,
+      30,
+      50,
+      0.75
+    );
+
+  color:
+    #a7bbd1;
+
+  font-size:
+    9px;
+
+  font-weight:
+    900;
+
+  letter-spacing:
+    0.05em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.card-details-effect-chip.level {
+  border-color:
+    rgba(
+      244,
+      189,
+      75,
+      0.44
+    );
+
+  background:
+    rgba(
+      244,
+      189,
+      75,
+      0.12
+    );
+
+  color:
+    #ffd16c;
+}
+
+
+.card-details-effect-chip.ability {
+  border-color:
+    rgba(
+      100,
+      169,
+      255,
+      0.35
+    );
+
+  background:
+    rgba(
+      59,
+      118,
+      198,
+      0.14
+    );
+
+  color:
+    #b8d7ff;
+}
+
+
+.card-details-effect-chip.timing {
+  border-color:
+    rgba(
+      124,
+      202,
+      169,
+      0.3
+    );
+
+  background:
+    rgba(
+      60,
+      115,
+      97,
+      0.14
+    );
+
+  color:
+    #bce9da;
+}
+
+
+.card-details-effect-chip.generic {
+  color:
+    #d2deeb;
+}
+
+
+.card-details-effect-text {
+  margin: 0;
+
+  white-space:
+    pre-wrap;
+
+  color:
+    #d8e2ee;
+
+  font-size:
+    12px;
+
+  line-height:
+    1.7;
+}
+
+
+.card-details-effect-text.rich {
+  color:
+    #d7e1ed;
+}
+
+
+/* =========================================================
+   DESTAQUES DE TERMOS
+========================================================= */
+
+.card-term {
+  display:
+    inline;
+
+  font-weight:
+    800;
+}
+
+
+.card-term.level {
+  color:
+    #ffd161;
+}
+
+
+.card-term.ability {
+  padding:
+    1px 5px;
+
+  border:
+    1px solid
+    rgba(
+      95,
+      164,
+      255,
+      0.28
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      60,
+      118,
+      196,
+      0.12
+    );
+
+  color:
+    #bfe0ff;
+}
+
+
+.card-term.keyword {
+  color:
+    #f5d680;
+}
+
+
+.card-term.timing {
+  color:
+    #91e0c7;
+}
+
+
+/* =========================================================
+   DECK BUILDER — CARTA CLICÁVEL
+========================================================= */
+
+.builder-card
+  .card-tile {
+  cursor:
+    zoom-in;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (
+  max-width:
+    760px
+) {
+
+  .modal.card-details-shell {
+    width:
+      min(
+        96vw,
+        620px
+      );
+
+    max-height:
+      94vh;
+  }
+
+
+  .card-details-modal {
+    max-height:
+      calc(
+        94vh - 64px
+      );
+
+    padding:
+      15px;
+  }
+
+
+  .card-details-hero {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .card-details-image-frame,
+  .card-details-language-switch {
+    width:
+      min(
+        280px,
+        100%
+      );
+  }
+
+}
+
+
+@media (
+  max-width:
+    460px
+) {
+
+  .card-details-stats-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .card-details-level {
+    grid-template-columns:
+      48px
+      1fr;
+  }
+
+
+  .card-details-level
+    .card-details-bp {
+    grid-column:
+      1 / -1;
+
+    text-align:
+      left;
+  }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+
+  .card-details-language-switch
+    button,
+  .card-details-name.rarity-glow {
+    transition:
+      none;
+  }
+
+}

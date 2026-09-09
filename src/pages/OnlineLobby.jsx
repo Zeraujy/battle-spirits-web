@@ -22,7 +22,18 @@ import {
   ONLINE_SERVER_URL
 } from "../config/online.js";
 
+import {
+  cardIndex
+} from "../services/cardRepository.js";
+
+import {
+  getCardName,
+  resolveCardImage
+} from "../game/cardAdapter.js";
+
 import "../styles/v230.css";
+import "../styles/onlineLobby.css";
+
 
 const PLAYER_COLORS = [
   {
@@ -50,6 +61,189 @@ const PLAYER_COLORS = [
     label: "Azul"
   }
 ];
+
+
+function deckSize(deck) {
+  return (
+    deck?.cards?.reduce(
+      (sum, entry) =>
+        sum +
+        Number(
+          entry.quantity ||
+          0
+        ),
+      0
+    ) || 0
+  );
+}
+
+
+function getDeckCoverCard(deck) {
+  if (!deck) {
+    return null;
+  }
+
+  const fallbackId =
+    deck.cards?.find(
+      (entry) =>
+        Number(
+          entry.quantity ||
+          0
+        ) > 0
+    )?.cardId ||
+    deck.cards?.find(
+      (entry) =>
+        Number(
+          entry.quantity ||
+          0
+        ) > 0
+    )?.id ||
+    null;
+
+  const coverId =
+    deck.coverCardId ||
+    fallbackId;
+
+  if (!coverId) {
+    return null;
+  }
+
+  return (
+    cardIndex.get(
+      coverId
+    ) ||
+    null
+  );
+}
+
+
+function getInitials(name) {
+  const parts =
+    String(
+      name ||
+      "Player"
+    )
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
+  if (!parts.length) {
+    return "P";
+  }
+
+  if (parts.length === 1) {
+    return parts[0]
+      .slice(0, 2)
+      .toUpperCase();
+  }
+
+  return (
+    parts[0][0] +
+    parts[
+      parts.length - 1
+    ][0]
+  ).toUpperCase();
+}
+
+
+function RoomPlayerCard({
+  id,
+  roomPlayer
+}) {
+  const color =
+    roomPlayer
+      ?.profile
+      ?.playerColor ||
+    (
+      id === "player1"
+        ? "#68a8ff"
+        : "#e45b63"
+    );
+
+  const name =
+    roomPlayer
+      ?.profile
+      ?.name ||
+    "Aguardando...";
+
+  const avatar =
+    roomPlayer
+      ?.profile
+      ?.avatar ||
+    null;
+
+  return (
+    <div
+      className={
+        `online-room-player ${
+          roomPlayer
+            ? "occupied"
+            : "waiting"
+        }`
+      }
+      style={{
+        "--online-player-color":
+          color
+      }}
+    >
+      <span
+        className="online-room-player-index"
+      >
+        {id === "player1"
+          ? "01"
+          : "02"}
+      </span>
+
+      <div className="online-room-avatar">
+        {avatar
+          ? (
+            <img
+              src={avatar}
+              alt=""
+            />
+          )
+          : (
+            <span>
+              {getInitials(
+                name
+              )}
+            </span>
+          )}
+      </div>
+
+      <div className="online-room-player-copy">
+        <small>
+          {id === "player1"
+            ? "PLAYER 01"
+            : "PLAYER 02"}
+        </small>
+
+        <strong>
+          {name}
+        </strong>
+
+        <span>
+          {roomPlayer
+            ?.connected
+            ? "Conectado"
+            : roomPlayer
+              ? "Offline"
+              : "Aguardando jogador"}
+        </span>
+      </div>
+
+      <i
+        className={
+          roomPlayer
+            ?.connected
+            ? "online"
+            : ""
+        }
+      />
+    </div>
+  );
+}
+
 
 export default function OnlineLobby({
   onBack,
@@ -113,6 +307,51 @@ export default function OnlineLobby({
       ),
     []
   );
+
+  const selectedDeck =
+    useMemo(
+      () =>
+        decks.find(
+          (deck) =>
+            deck.id ===
+            deckId
+        ) ||
+        null,
+      [
+        decks,
+        deckId
+      ]
+    );
+
+  const coverCard =
+    useMemo(
+      () =>
+        getDeckCoverCard(
+          selectedDeck
+        ),
+      [
+        selectedDeck
+      ]
+    );
+
+  const coverImage =
+    coverCard
+      ? resolveCardImage(
+          coverCard
+        )
+      : "./images/card-back.png";
+
+  const coverName =
+    coverCard
+      ? getCardName(
+          coverCard
+        )
+      : "Carta de capa";
+
+  const totalCards =
+    deckSize(
+      selectedDeck
+    );
 
   useEffect(() => {
     deckIdRef.current =
@@ -233,13 +472,6 @@ export default function OnlineLobby({
       }
     };
 
-    /*
-     * PRIMEIRO JOGADOR DO PAR
-     *
-     * Ele cria uma sala usando exatamente
-     * o mesmo sistema de Criar Sala
-     * já utilizado pelo online atual.
-     */
     const onMatchmakingHost = (
       payload
     ) => {
@@ -316,9 +548,6 @@ export default function OnlineLobby({
       );
     };
 
-    /*
-     * SEGUNDO JOGADOR DO PAR
-     */
     const onMatchmakingGuest = (
       payload
     ) => {
@@ -332,11 +561,6 @@ export default function OnlineLobby({
       );
     };
 
-    /*
-     * Quando o host terminou de criar
-     * a sala, o segundo jogador entra
-     * usando o joinRoom original.
-     */
     const onMatchmakingRoom = (
       payload
     ) => {
@@ -422,10 +646,6 @@ export default function OnlineLobby({
       );
     };
 
-    /*
-     * Depois que o segundo jogador entrou,
-     * o host inicia normalmente a sala.
-     */
     const onMatchmakingStart = (
       payload
     ) => {
@@ -789,18 +1009,29 @@ export default function OnlineLobby({
 
   if (!decks.length) {
     return (
-      <main className="standard-page">
-        <header className="page-header">
+      <main className="standard-page online-lobby-page">
+        <header className="online-lobby-topbar">
           <button
-            className="ghost"
+            className="ghost online-back-button"
             onClick={onBack}
           >
-            ← Voltar
+            <span aria-hidden="true">←</span>
+            Voltar
           </button>
 
-          <h1>
-            Online
-          </h1>
+          <div className="online-lobby-title">
+            <span className="eyebrow">
+              ONLINE 1V1
+            </span>
+
+            <h1>
+              Partida online
+            </h1>
+
+            <p>
+              Prepare seu deck antes de entrar no servidor.
+            </p>
+          </div>
         </header>
 
         <EmptyState title="Nenhum deck salvo">
@@ -811,16 +1042,23 @@ export default function OnlineLobby({
   }
 
   return (
-    <main className="standard-page online-v230-page">
-      <header className="page-header">
+    <main className="standard-page online-lobby-page">
+
+      <header className="online-lobby-topbar">
+
         <button
-          className="ghost"
+          className="ghost online-back-button"
           onClick={onBack}
         >
-          ← Voltar
+          <span aria-hidden="true">
+            ←
+          </span>
+
+          Voltar
         </button>
 
-        <div>
+
+        <div className="online-lobby-title">
           <span className="eyebrow">
             ONLINE 1V1
           </span>
@@ -828,290 +1066,563 @@ export default function OnlineLobby({
           <h1>
             Partida online
           </h1>
+
+          <p>
+            Encontre um oponente ou jogue diretamente com um amigo.
+          </p>
         </div>
 
-        <span
-          className={`connection-pill ${status}`}
+
+        <div
+          className={
+            `online-connection-card ${
+              status
+            }`
+          }
         >
-          {status}
-        </span>
+          <i />
+
+          <div>
+            <span>
+              SERVIDOR
+            </span>
+
+            <strong>
+              {status === "conectado"
+                ? "ONLINE"
+                : "OFFLINE"}
+            </strong>
+          </div>
+        </div>
+
       </header>
 
-      <section className="panel online-panel online-v230-panel">
-        {!room && (
-          <>
-            <div className="online-setup-grid">
-              <label>
-                Deck
 
-                <select
-                  value={deckId}
-                  disabled={
-                    searching
-                  }
-                  onChange={(
-                    event
-                  ) =>
-                    setDeckId(
-                      event
-                        .target
-                        .value
-                    )
-                  }
-                >
-                  {decks.map(
-                    (deck) => (
-                      <option
-                        value={
-                          deck.id
-                        }
-                        key={
-                          deck.id
-                        }
-                      >
-                        {
-                          deck.name
-                        }
-                      </option>
-                    )
-                  )}
-                </select>
-              </label>
+      {!room ? (
+        <section className="online-lobby-shell">
 
-              <div className="online-color-picker">
-                <span>
-                  Cor do jogador
-                </span>
+          <section
+            className="online-player-setup"
+            style={{
+              "--online-player-color":
+                playerColor
+            }}
+          >
 
-                <div>
-                  {PLAYER_COLORS.map(
-                    (color) => (
-                      <button
-                        type="button"
-                        key={
-                          color.value
-                        }
-                        title={
-                          color.label
-                        }
-                        aria-label={
-                          color.label
-                        }
-                        disabled={
-                          searching
-                        }
-                        className={
-                          playerColor ===
-                          color.value
-                            ? "selected"
-                            : ""
-                        }
-                        style={{
-                          background:
-                            color.value
-                        }}
-                        onClick={() =>
-                          chooseColor(
-                            color.value
-                          )
-                        }
-                      />
-                    )
-                  )}
-                </div>
+            <div className="online-cover-column">
+              <div className="online-cover-frame">
+                <img
+                  src={coverImage}
+                  alt=""
+                />
+
+                <span className="online-cover-shine" />
               </div>
+
+              <span>
+                DECK COVER
+              </span>
             </div>
 
-            <section className="quick-match-card">
+
+            <div className="online-player-main">
+
+              <header className="online-player-header">
+
+                <div className="online-player-identity">
+
+                  <div className="online-player-avatar">
+                    {profile?.avatar
+                      ? (
+                        <img
+                          src={profile.avatar}
+                          alt=""
+                        />
+                      )
+                      : (
+                        <span>
+                          {getInitials(
+                            profile?.name ||
+                            "Jogador"
+                          )}
+                        </span>
+                      )}
+                  </div>
+
+
+                  <div>
+                    <span className="online-player-kicker">
+                      SEU DUELISTA
+                    </span>
+
+                    <h2>
+                      {profile?.name ||
+                        "Jogador"}
+                    </h2>
+                  </div>
+
+                </div>
+
+
+                <div className="online-player-status">
+                  <i />
+
+                  <span>
+                    {status === "conectado"
+                      ? "PRONTO"
+                      : "AGUARDANDO"}
+                  </span>
+                </div>
+
+              </header>
+
+
+              <div className="online-deck-select-row">
+
+                <label>
+                  <span>
+                    Deck
+                  </span>
+
+                  <select
+                    value={deckId}
+                    disabled={searching}
+                    onChange={(
+                      event
+                    ) =>
+                      setDeckId(
+                        event.target.value
+                      )
+                    }
+                  >
+                    {decks.map(
+                      (deck) => (
+                        <option
+                          value={deck.id}
+                          key={deck.id}
+                        >
+                          {deck.name}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </label>
+
+
+                <div className="online-color-section">
+
+                  <div className="online-color-heading">
+                    <span>
+                      Cor do jogador
+                    </span>
+
+                    <small>
+                      Identidade visual na mesa
+                    </small>
+                  </div>
+
+
+                  <div className="online-color-options">
+                    {PLAYER_COLORS.map(
+                      (color) => (
+                        <button
+                          type="button"
+                          key={color.value}
+                          title={color.label}
+                          aria-label={color.label}
+                          disabled={searching}
+                          className={
+                            playerColor ===
+                            color.value
+                              ? "selected"
+                              : ""
+                          }
+                          style={{
+                            "--picker-color":
+                              color.value,
+                            background:
+                              color.value
+                          }}
+                          onClick={() =>
+                            chooseColor(
+                              color.value
+                            )
+                          }
+                        >
+                          <span />
+                        </button>
+                      )
+                    )}
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <footer className="online-deck-meta">
+
+                <div>
+                  <span>
+                    DECK
+                  </span>
+
+                  <strong>
+                    {selectedDeck?.name ||
+                      "Nenhum"}
+                  </strong>
+                </div>
+
+
+                <div>
+                  <span>
+                    CARTAS
+                  </span>
+
+                  <strong>
+                    {totalCards}
+                  </strong>
+                </div>
+
+
+                <div className="online-deck-cover-name">
+                  <span>
+                    CAPA
+                  </span>
+
+                  <strong title={coverName}>
+                    {coverName}
+                  </strong>
+                </div>
+
+              </footer>
+
+            </div>
+
+          </section>
+
+
+          <section
+            className={
+              `online-matchmaking-card ${
+                searching
+                  ? "searching"
+                  : ""
+              }`
+            }
+          >
+
+            <div className="online-matchmaking-copy">
+
+              <div className="online-matchmaking-icon">
+                <span>
+                  VS
+                </span>
+              </div>
+
+
               <div>
                 <span className="eyebrow">
                   PARTIDA RÁPIDA
                 </span>
 
                 <h2>
-                  Procurar partida
+                  {searching
+                    ? "Buscando oponente"
+                    : "Procurar partida"}
                 </h2>
 
                 <p>
-                  Encontre automaticamente outro jogador disponível.
+                  {searching
+                    ? (
+                      searchMessage ||
+                      "Procurando outro jogador..."
+                    )
+                    : "Encontre automaticamente outro jogador disponível e entre direto na batalha."}
                 </p>
               </div>
 
-              {!searching ? (
-                <button
-                  className="primary-btn big"
-                  disabled={
-                    status !==
-                    "conectado"
-                  }
-                  onClick={
-                    findRandomMatch
-                  }
-                >
-                  Procurar partida
-                </button>
-              ) : (
-                <div className="matchmaking-searching">
-                  <div className="matchmaking-pulse" />
-
-                  <strong>
-                    {
-                      searchMessage
-                    }
-                  </strong>
-
-                  <button
-                    className="ghost"
-                    onClick={
-                      cancelSearch
-                    }
-                  >
-                    Cancelar busca
-                  </button>
-                </div>
-              )}
-            </section>
-
-            <div className="online-divider">
-              <span>
-                OU JOGUE COM UM AMIGO
-              </span>
             </div>
 
-            <div className="online-room-options">
+
+            {!searching ? (
               <button
-                className="primary-btn"
+                className="primary-btn big online-matchmaking-button"
                 disabled={
-                  searching
+                  status !==
+                  "conectado"
                 }
                 onClick={
-                  createRoom
+                  findRandomMatch
                 }
+              >
+                <span>
+                  Procurar partida
+                </span>
+
+                <b aria-hidden="true">
+                  →
+                </b>
+              </button>
+            ) : (
+              <div className="online-searching-actions">
+
+                <div className="online-search-pulse">
+                  <i />
+                  <i />
+                  <i />
+                </div>
+
+
+                <button
+                  className="ghost"
+                  onClick={
+                    cancelSearch
+                  }
+                >
+                  Cancelar busca
+                </button>
+
+              </div>
+            )}
+
+          </section>
+
+
+          <div className="online-friends-divider">
+            <span />
+
+            <b>
+              OU JOGUE COM UM AMIGO
+            </b>
+
+            <span />
+          </div>
+
+
+          <section className="online-friends-grid">
+
+            <article className="online-friend-card create">
+
+              <div className="online-friend-icon">
+                +
+              </div>
+
+
+              <div className="online-friend-copy">
+                <span className="eyebrow">
+                  NOVA SALA
+                </span>
+
+                <h3>
+                  Criar sala
+                </h3>
+
+                <p>
+                  Gere um código e envie para seu amigo entrar.
+                </p>
+              </div>
+
+
+              <button
+                className="primary-btn"
+                disabled={searching}
+                onClick={createRoom}
               >
                 Criar sala
               </button>
 
-              <div className="join-box">
+            </article>
+
+
+            <article className="online-friend-card join">
+
+              <div className="online-friend-icon">
+                #
+              </div>
+
+
+              <div className="online-friend-copy">
+                <span className="eyebrow">
+                  CÓDIGO
+                </span>
+
+                <h3>
+                  Entrar em sala
+                </h3>
+
+                <p>
+                  Digite o código recebido para entrar na partida.
+                </p>
+              </div>
+
+
+              <div className="online-join-row">
+
                 <input
                   placeholder="CÓDIGO"
-                  value={
-                    joinCode
-                  }
+                  value={joinCode}
                   maxLength={6}
-                  disabled={
-                    searching
-                  }
+                  disabled={searching}
                   onChange={(
                     event
                   ) =>
                     setJoinCode(
-                      event
-                        .target
-                        .value
+                      event.target.value
                         .toUpperCase()
                     )
                   }
+                  onKeyDown={(
+                    event
+                  ) => {
+                    if (
+                      event.key ===
+                      "Enter"
+                    ) {
+                      joinRoom();
+                    }
+                  }}
                 />
 
+
                 <button
-                  disabled={
-                    searching
-                  }
-                  onClick={
-                    joinRoom
-                  }
+                  disabled={searching}
+                  onClick={joinRoom}
                 >
                   Entrar
                 </button>
+
               </div>
+
+            </article>
+
+          </section>
+
+
+          {error && (
+            <div className="online-lobby-error">
+              <strong>
+                Não foi possível continuar
+              </strong>
+
+              <span>
+                {error}
+              </span>
             </div>
-          </>
-        )}
+          )}
 
-        {room && (
-          <div className="room-card">
-            <span>
-              CÓDIGO DA SALA
-            </span>
+        </section>
+      ) : (
+        <section className="online-room-shell">
 
-            <strong>
-              {room.code}
-            </strong>
+          <header className="online-room-heading">
 
-            <div className="room-players">
-              {[
-                "player1",
-                "player2"
-              ].map(
-                (id) => {
-                  const roomPlayer =
-                    room.players?.[
-                      id
-                    ];
+            <div>
+              <span className="eyebrow">
+                SALA PRIVADA
+              </span>
 
-                  const color =
-                    roomPlayer
-                      ?.profile
-                      ?.playerColor ||
-                    (id ===
-                    "player1"
-                      ? "#68a8ff"
-                      : "#e45b63");
+              <h2>
+                Aguardando batalha
+              </h2>
 
-                  return (
-                    <div
-                      key={id}
-                      style={{
-                        "--room-player-color":
-                          color
-                      }}
-                    >
-                      <span className="room-color-dot" />
-
-                      <b>
-                        {roomPlayer
-                          ?.profile
-                          ?.name ||
-                          "Aguardando..."}
-                      </b>
-
-                      <small>
-                        {roomPlayer
-                          ?.connected
-                          ? "conectado"
-                          : "offline"}
-                      </small>
-                    </div>
-                  );
-                }
-              )}
+              <p>
+                Compartilhe o código com seu adversário.
+              </p>
             </div>
+
+
+            <div className="online-room-code">
+              <span>
+                CÓDIGO DA SALA
+              </span>
+
+              <strong>
+                {room.code}
+              </strong>
+            </div>
+
+          </header>
+
+
+          <div className="online-room-duel">
+
+            <RoomPlayerCard
+              id="player1"
+              roomPlayer={
+                room.players?.player1
+              }
+            />
+
+
+            <div className="online-room-vs">
+              <span>
+                VS
+              </span>
+            </div>
+
+
+            <RoomPlayerCard
+              id="player2"
+              roomPlayer={
+                room.players?.player2
+              }
+            />
+
+          </div>
+
+
+          <footer className="online-room-footer">
+
+            <div className="online-room-hint">
+              <i />
+
+              <span>
+                {room.players?.player2
+                  ? "Os dois jogadores estão na sala."
+                  : "Aguardando o segundo jogador entrar."}
+              </span>
+            </div>
+
 
             {room.viewerPlayerId ===
               "player1" &&
               !room.started && (
                 <button
-                  className="primary-btn big"
+                  className="primary-btn big online-room-start"
                   disabled={
-                    !room.players
-                      ?.player2
+                    !room.players?.player2
                   }
-                  onClick={
-                    start
-                  }
+                  onClick={start}
                 >
-                  Iniciar partida
+                  <span>
+                    Iniciar partida
+                  </span>
+
+                  <b aria-hidden="true">
+                    →
+                  </b>
                 </button>
               )}
-          </div>
-        )}
 
-        {error && (
-          <div className="online-error-box">
-            {error}
-          </div>
-        )}
-      </section>
+          </footer>
+
+
+          {error && (
+            <div className="online-lobby-error">
+              <strong>
+                Não foi possível continuar
+              </strong>
+
+              <span>
+                {error}
+              </span>
+            </div>
+          )}
+
+        </section>
+      )}
+
     </main>
   );
 }

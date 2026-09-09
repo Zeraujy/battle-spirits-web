@@ -1,0 +1,961 @@
+/* =========================================================
+   BATTLE SPIRITS ETERNAL SIMULATOR
+   CARTA SELECIONADA — VISUAL REFINADO
+   Funciona no simulador local e online.
+========================================================= */
+
+
+/* =========================================================
+   PAINEL GERAL
+========================================================= */
+
+.inspector {
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(244, 189, 75, 0.055),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(10, 27, 47, 0.98),
+      rgba(5, 15, 28, 0.98)
+    ) !important;
+}
+
+
+.inspector-scroll {
+  scrollbar-width:
+    thin;
+
+  scrollbar-color:
+    rgba(130, 159, 194, 0.34)
+    transparent;
+}
+
+
+.inspector-scroll::-webkit-scrollbar {
+  width:
+    4px;
+}
+
+
+.inspector-scroll::-webkit-scrollbar-thumb {
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      130,
+      159,
+      194,
+      0.34
+    );
+}
+
+
+/* =========================================================
+   TÍTULO "CARTA SELECIONADA"
+========================================================= */
+
+.inspector-scroll
+  > .eyebrow {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    7px;
+
+  width:
+    100%;
+
+  margin:
+    0 0 10px;
+
+  color:
+    #f4bd4b;
+
+  font-size:
+    10px;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    0.15em;
+
+  text-align:
+    center;
+
+  text-transform:
+    uppercase;
+}
+
+
+.inspector-scroll
+  > .eyebrow::before,
+.inspector-scroll
+  > .eyebrow::after {
+  content:
+    "";
+
+  flex:
+    1;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(244, 189, 75, 0.28)
+    );
+}
+
+
+.inspector-scroll
+  > .eyebrow::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(244, 189, 75, 0.28),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   CARTA
+========================================================= */
+
+.inspector-scroll
+  > .card-tile,
+.inspector-scroll
+  > button.card-tile {
+  position:
+    relative;
+
+  display:
+    block !important;
+
+  width:
+    150px !important;
+
+  max-width:
+    82% !important;
+
+  margin:
+    4px auto 11px !important;
+
+  border-radius:
+    10px;
+
+  filter:
+    drop-shadow(
+      0 12px 18px
+      rgba(
+        0,
+        0,
+        0,
+        0.32
+      )
+    );
+
+  transition:
+    transform
+    0.18s ease,
+    filter
+    0.18s ease;
+}
+
+
+.inspector-scroll
+  > .card-tile:hover {
+  transform:
+    translateY(-1px);
+
+  filter:
+    drop-shadow(
+      0 14px 22px
+      rgba(
+        0,
+        0,
+        0,
+        0.38
+      )
+    );
+}
+
+
+/* =========================================================
+   NOME
+========================================================= */
+
+.inspector-scroll
+  > h2 {
+  position:
+    relative;
+
+  margin:
+    0 auto 8px !important;
+
+  padding:
+    0 3px 8px;
+
+  color:
+    #f6f8fb;
+
+  font-size:
+    15px !important;
+
+  font-weight:
+    900;
+
+  line-height:
+    1.18;
+
+  letter-spacing:
+    -0.015em;
+
+  text-align:
+    center;
+
+  text-wrap:
+    balance;
+}
+
+
+.inspector-scroll
+  > h2::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    18%;
+
+  right:
+    18%;
+
+  bottom:
+    0;
+
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(244, 189, 75, 0.34),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   META — ID / TIPO / CUSTO
+========================================================= */
+
+.inspector
+  .card-meta {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    5px;
+
+  margin:
+    0 0 10px !important;
+}
+
+
+.inspector
+  .card-meta span {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  min-height:
+    21px;
+
+  box-sizing:
+    border-box;
+
+  padding:
+    4px 7px !important;
+
+  border:
+    1px solid
+    rgba(
+      112,
+      153,
+      201,
+      0.22
+    ) !important;
+
+  border-radius:
+    999px !important;
+
+  background:
+    rgba(
+      13,
+      35,
+      59,
+      0.72
+    );
+
+  color:
+    #b6c6d8;
+
+  font-size:
+    8px !important;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.025em;
+}
+
+
+/* =========================================================
+   BLOCO DE EFEITOS
+========================================================= */
+
+.selected-card-effect-panel {
+  position:
+    relative;
+
+  margin:
+    9px 0 0;
+
+  padding:
+    12px 9px 9px;
+
+  border:
+    1px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.16
+    );
+
+  border-radius:
+    11px;
+
+  background:
+    linear-gradient(
+      155deg,
+      rgba(
+        17,
+        39,
+        65,
+        0.72
+      ),
+      rgba(
+        4,
+        16,
+        29,
+        0.72
+      )
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(
+        255,
+        255,
+        255,
+        0.025
+      );
+}
+
+
+.selected-card-effect-label {
+  display:
+    block;
+
+  margin:
+    0 0 8px;
+
+  color:
+    #f4bd4b;
+
+  font-size:
+    7px;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    0.14em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.selected-card-effect-list {
+  display:
+    grid;
+
+  gap:
+    7px;
+}
+
+
+.selected-card-effect-entry {
+  position:
+    relative;
+
+  padding:
+    9px 9px 9px 10px;
+
+  border:
+    1px solid
+    rgba(
+      110,
+      149,
+      194,
+      0.13
+    );
+
+  border-left:
+    2px solid
+    rgba(
+      244,
+      189,
+      75,
+      0.62
+    );
+
+  border-radius:
+    0 9px 9px 0;
+
+  background:
+    rgba(
+      4,
+      17,
+      30,
+      0.56
+    );
+}
+
+
+.selected-card-effect-entry
+  p,
+.selected-card-effect-panel.empty
+  p {
+  margin:
+    0;
+
+  color:
+    #d8e2ed;
+
+  font-size:
+    10px;
+
+  line-height:
+    1.62;
+
+  text-align:
+    left;
+
+  overflow-wrap:
+    anywhere;
+}
+
+
+.selected-card-effect-panel.empty
+  p {
+  color:
+    #76899f;
+}
+
+
+/* =========================================================
+   CABEÇALHOS DE EFEITO
+========================================================= */
+
+.selected-card-effect-badges {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    4px;
+
+  margin-bottom:
+    7px;
+}
+
+
+.selected-card-effect-badge {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  min-height:
+    20px;
+
+  box-sizing:
+    border-box;
+
+  padding:
+    3px 7px;
+
+  border:
+    1px solid
+    rgba(
+      113,
+      151,
+      195,
+      0.2
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      13,
+      34,
+      57,
+      0.78
+    );
+
+  color:
+    #bdccdc;
+
+  font-size:
+    7px;
+
+  font-weight:
+    950;
+
+  letter-spacing:
+    0.045em;
+
+  line-height:
+    1;
+
+  text-transform:
+    uppercase;
+}
+
+
+.selected-card-effect-badge.level {
+  border-color:
+    rgba(
+      244,
+      189,
+      75,
+      0.38
+    );
+
+  background:
+    rgba(
+      244,
+      189,
+      75,
+      0.10
+    );
+
+  color:
+    #ffd46f;
+}
+
+
+.selected-card-effect-badge.ability {
+  border-color:
+    rgba(
+      102,
+      170,
+      255,
+      0.34
+    );
+
+  background:
+    rgba(
+      64,
+      121,
+      193,
+      0.13
+    );
+
+  color:
+    #bcdcff;
+}
+
+
+.selected-card-effect-badge.timing {
+  border-color:
+    rgba(
+      103,
+      199,
+      164,
+      0.29
+    );
+
+  background:
+    rgba(
+      53,
+      112,
+      91,
+      0.13
+    );
+
+  color:
+    #bde9d9;
+}
+
+
+/* =========================================================
+   DESTAQUES DENTRO DO TEXTO
+========================================================= */
+
+.selected-card-term {
+  font-weight:
+    900;
+}
+
+
+.selected-card-term.level {
+  color:
+    #ffd15c;
+}
+
+
+.selected-card-term.ability {
+  display:
+    inline;
+
+  color:
+    #add4ff;
+
+  text-shadow:
+    0 0 10px
+      rgba(
+        98,
+        165,
+        247,
+        0.15
+      );
+}
+
+
+.selected-card-term.timing {
+  color:
+    #8edbc3;
+}
+
+
+.selected-card-term.cardtype {
+  color:
+    #f3c86b;
+}
+
+
+.selected-card-term.zone {
+  color:
+    #9dc8f4;
+}
+
+
+.selected-card-term.keyword {
+  color:
+    #f0cf81;
+}
+
+
+/* =========================================================
+   BOTÕES DE AÇÃO DA CARTA
+========================================================= */
+
+.inspector
+  .inspector-actions {
+  display:
+    grid;
+
+  gap:
+    6px;
+
+  margin-top:
+    9px;
+}
+
+
+.inspector
+  .inspector-actions
+  > button {
+  min-height:
+    34px;
+
+  font-size:
+    9px;
+}
+
+
+.inspector
+  .combine-box {
+  padding:
+    8px;
+
+  border:
+    1px solid
+    rgba(
+      112,
+      153,
+      201,
+      0.16
+    );
+
+  border-radius:
+    9px;
+
+  background:
+    rgba(
+      4,
+      16,
+      29,
+      0.5
+    );
+}
+
+
+/* =========================================================
+   RESOLUÇÃO MANUAL
+========================================================= */
+
+.inspector
+  .compact-manual-tools {
+  margin-top:
+    14px !important;
+
+  padding-top:
+    11px !important;
+
+  border-top:
+    1px solid
+    rgba(
+      117,
+      151,
+      190,
+      0.17
+    ) !important;
+}
+
+
+.inspector
+  .compact-manual-tools
+  summary {
+  position:
+    relative;
+
+  padding:
+    6px 7px;
+
+  border-radius:
+    7px;
+
+  color:
+    #8295ab !important;
+
+  font-size:
+    8px !important;
+
+  font-weight:
+    900 !important;
+
+  letter-spacing:
+    0.045em;
+
+  transition:
+    0.15s ease;
+}
+
+
+.inspector
+  .compact-manual-tools
+  summary:hover {
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.025
+    );
+
+  color:
+    #b5c6d9 !important;
+}
+
+
+.inspector
+  .compact-manual-tools[open]
+  summary {
+  color:
+    #f4bd4b !important;
+
+  background:
+    rgba(
+      244,
+      189,
+      75,
+      0.05
+    );
+}
+
+
+.inspector
+  .manual-grid {
+  gap:
+    5px;
+
+  padding-top:
+    3px;
+}
+
+
+.inspector
+  .manual-grid
+  button {
+  min-height:
+    30px;
+
+  padding:
+    6px 7px;
+
+  border-radius:
+    7px;
+
+  font-size:
+    8px;
+}
+
+
+/* =========================================================
+   ESTADO VAZIO
+========================================================= */
+
+.inspector-scroll
+  > .muted:first-of-type {
+  margin:
+    18px 6px;
+
+  padding:
+    14px 10px;
+
+  border:
+    1px dashed
+    rgba(
+      114,
+      151,
+      193,
+      0.2
+    );
+
+  border-radius:
+    10px;
+
+  color:
+    #71849a;
+
+  font-size:
+    10px;
+
+  line-height:
+    1.55;
+
+  text-align:
+    center;
+}
+
+
+/* =========================================================
+   TELAS BAIXAS / COMPACTAS
+========================================================= */
+
+@media (
+  max-height:
+    820px
+) and (
+  min-width:
+    901px
+) {
+
+  .inspector-scroll
+    > .card-tile,
+  .inspector-scroll
+    > button.card-tile {
+    width:
+      132px !important;
+
+    margin-bottom:
+      8px !important;
+  }
+
+
+  .inspector-scroll
+    > h2 {
+    font-size:
+      13px !important;
+  }
+
+
+  .selected-card-effect-entry
+    p,
+  .selected-card-effect-panel.empty
+    p {
+    font-size:
+      9px;
+  }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+
+  .inspector-scroll
+    > .card-tile,
+  .inspector
+    .compact-manual-tools
+    summary {
+    transition:
+      none;
+  }
+
+}

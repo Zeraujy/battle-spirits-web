@@ -1,0 +1,683 @@
+/* =========================================================
+   BATTLE SPIRITS SIMULATOR
+   CARD DETAILS — 3D / PERSPECTIVE TILT
+   Complemento para cardDetailsModal.css
+========================================================= */
+
+
+/* =========================================================
+   PALCO DE PERSPECTIVA
+========================================================= */
+
+.card-details-image-stage {
+  width:
+    min(
+      100%,
+      300px
+    );
+
+  margin:
+    0 auto;
+
+  perspective:
+    1050px;
+
+  perspective-origin:
+    center center;
+}
+
+
+/*
+ * O frame original continua sendo usado.
+ * As variáveis são atualizadas via requestAnimationFrame,
+ * sem causar re-render do React a cada movimento do mouse.
+ */
+.card-details-image-frame.card-details-tilt-card {
+  --card-tilt-x:
+    0deg;
+
+  --card-tilt-y:
+    0deg;
+
+  --card-pointer-x:
+    50%;
+
+  --card-pointer-y:
+    50%;
+
+  --card-shadow-x:
+    0px;
+
+  --card-shadow-y:
+    18px;
+
+  width:
+    100%;
+
+  margin:
+    0;
+
+  overflow:
+    hidden;
+
+  cursor:
+    default;
+
+  transform:
+    rotateX(
+      var(
+        --card-tilt-x
+      )
+    )
+    rotateY(
+      var(
+        --card-tilt-y
+      )
+    )
+    translateZ(
+      0
+    );
+
+  transform-style:
+    preserve-3d;
+
+  transform-origin:
+    center center;
+
+  backface-visibility:
+    hidden;
+
+  box-shadow:
+    var(
+      --card-shadow-x
+    )
+    var(
+      --card-shadow-y
+    )
+    38px
+    rgba(
+      0,
+      0,
+      0,
+      0.42
+    ),
+    0 8px 18px
+    rgba(
+      0,
+      0,
+      0,
+      0.24
+    ),
+    0 0 0
+    rgba(
+      244,
+      189,
+      75,
+      0
+    );
+
+  transition:
+    transform
+      440ms
+      cubic-bezier(
+        .2,
+        .8,
+        .2,
+        1
+      ),
+    box-shadow
+      440ms
+      cubic-bezier(
+        .2,
+        .8,
+        .2,
+        1
+      );
+
+  will-change:
+    transform;
+
+  isolation:
+    isolate;
+}
+
+
+.card-details-image-frame.card-details-tilt-card.is-tilting {
+  transition:
+    transform
+      70ms
+      linear,
+    box-shadow
+      140ms
+      ease-out;
+
+  box-shadow:
+    var(
+      --card-shadow-x
+    )
+    var(
+      --card-shadow-y
+    )
+    40px
+    rgba(
+      0,
+      0,
+      0,
+      0.46
+    ),
+    0 10px 22px
+    rgba(
+      0,
+      0,
+      0,
+      0.28
+    ),
+    0 0 22px
+    rgba(
+      244,
+      189,
+      75,
+      0.20
+    ),
+    0 0 42px
+    rgba(
+      104,
+      168,
+      255,
+      0.10
+    );
+}
+
+
+/* =========================================================
+   IMAGEM
+========================================================= */
+
+.card-details-image-frame.card-details-tilt-card
+  img {
+  position:
+    relative;
+
+  z-index:
+    1;
+
+  pointer-events:
+    none;
+
+  user-select:
+    none;
+
+  transform:
+    translateZ(
+      0
+    );
+}
+
+
+/* =========================================================
+   REFLEXO PRINCIPAL
+========================================================= */
+
+.card-details-tilt-glare {
+  position:
+    absolute;
+
+  z-index:
+    3;
+
+  inset:
+    8px;
+
+  border-radius:
+    11px;
+
+  pointer-events:
+    none;
+
+  opacity:
+    0;
+
+  background:
+    radial-gradient(
+      circle
+      at
+      var(
+        --card-pointer-x
+      )
+      var(
+        --card-pointer-y
+      ),
+      rgba(
+        255,
+        255,
+        255,
+        0.30
+      )
+      0%,
+      rgba(
+        255,
+        255,
+        255,
+        0.13
+      )
+      11%,
+      rgba(
+        255,
+        255,
+        255,
+        0.045
+      )
+      28%,
+      transparent
+      54%
+    );
+
+  mix-blend-mode:
+    screen;
+
+  transition:
+    opacity
+      260ms
+      ease;
+
+  will-change:
+    opacity;
+}
+
+
+.card-details-tilt-card.is-tilting
+  .card-details-tilt-glare {
+  opacity:
+    .66;
+}
+
+
+/* =========================================================
+   BRILHO ANGULAR
+========================================================= */
+
+/*
+ * Essa segunda camada evita aquele aspecto de "lanterna"
+ * no centro e dá um brilho mais parecido com verniz/cartão.
+ */
+.card-details-tilt-sheen {
+  position:
+    absolute;
+
+  z-index:
+    2;
+
+  inset:
+    8px;
+
+  border-radius:
+    11px;
+
+  pointer-events:
+    none;
+
+  opacity:
+    0;
+
+  background:
+    linear-gradient(
+      115deg,
+      transparent
+      12%,
+      rgba(
+        255,
+        255,
+        255,
+        0.02
+      )
+      29%,
+      rgba(
+        255,
+        255,
+        255,
+        0.16
+      )
+      43%,
+      rgba(
+        255,
+        255,
+        255,
+        0.035
+      )
+      56%,
+      transparent
+      75%
+    );
+
+  background-size:
+    210%
+    210%;
+
+  background-position:
+    calc(
+      100% -
+      var(
+        --card-pointer-x
+      )
+    )
+    calc(
+      100% -
+      var(
+        --card-pointer-y
+      )
+    );
+
+  mix-blend-mode:
+    screen;
+
+  transition:
+    opacity
+      260ms
+      ease;
+}
+
+
+.card-details-tilt-card.is-tilting
+  .card-details-tilt-sheen {
+  opacity:
+    .48;
+}
+
+
+/* =========================================================
+   RARIDADE X+ — FOIL SUTIL
+========================================================= */
+
+/*
+ * Aproveita a detecção de raridade que o modal já possui.
+ * É propositalmente discreto para não esconder a arte.
+ */
+.card-details-tilt-card.special-foil
+  .card-details-tilt-sheen {
+  background:
+    linear-gradient(
+      115deg,
+      rgba(
+        255,
+        204,
+        86,
+        0
+      )
+      4%,
+      rgba(
+        255,
+        116,
+        111,
+        0.13
+      )
+      22%,
+      rgba(
+        255,
+        225,
+        120,
+        0.18
+      )
+      36%,
+      rgba(
+        105,
+        199,
+        255,
+        0.17
+      )
+      50%,
+      rgba(
+        187,
+        131,
+        255,
+        0.17
+      )
+      63%,
+      rgba(
+        105,
+        235,
+        190,
+        0.14
+      )
+      76%,
+      rgba(
+        255,
+        204,
+        86,
+        0
+      )
+      94%
+    );
+
+  background-size:
+    230%
+    230%;
+}
+
+
+.card-details-tilt-card.special-foil.is-tilting
+  .card-details-tilt-sheen {
+  opacity:
+    .62;
+}
+
+
+/* =========================================================
+   AURA X+ POR COR
+========================================================= */
+
+.card-details-tilt-card.special-foil.red {
+  --tilt-aura:
+    rgba(
+      224,
+      66,
+      64,
+      .20
+    );
+}
+
+
+.card-details-tilt-card.special-foil.purple {
+  --tilt-aura:
+    rgba(
+      139,
+      91,
+      222,
+      .20
+    );
+}
+
+
+.card-details-tilt-card.special-foil.green {
+  --tilt-aura:
+    rgba(
+      74,
+      169,
+      108,
+      .20
+    );
+}
+
+
+.card-details-tilt-card.special-foil.white {
+  --tilt-aura:
+    rgba(
+      221,
+      232,
+      245,
+      .18
+    );
+}
+
+
+.card-details-tilt-card.special-foil.yellow {
+  --tilt-aura:
+    rgba(
+      232,
+      183,
+      48,
+      .20
+    );
+}
+
+
+.card-details-tilt-card.special-foil.blue {
+  --tilt-aura:
+    rgba(
+      75,
+      132,
+      216,
+      .20
+    );
+}
+
+
+.card-details-tilt-card.special-foil.rainbow {
+  --tilt-aura:
+    rgba(
+      174,
+      124,
+      238,
+      .20
+    );
+}
+
+
+.card-details-tilt-card.special-foil.neutral {
+  --tilt-aura:
+    rgba(
+      244,
+      189,
+      75,
+      .18
+    );
+}
+
+
+.card-details-tilt-card.special-foil.is-tilting {
+  box-shadow:
+    var(
+      --card-shadow-x
+    )
+    var(
+      --card-shadow-y
+    )
+    42px
+    rgba(
+      0,
+      0,
+      0,
+      0.48
+    ),
+    0 10px 24px
+    rgba(
+      0,
+      0,
+      0,
+      0.28
+    ),
+    0 0 26px
+    var(
+      --tilt-aura,
+      rgba(
+        244,
+        189,
+        75,
+        .24
+      )
+    ),
+    0 0 52px
+    var(
+      --tilt-aura,
+      rgba(
+        244,
+        189,
+        75,
+        .16
+      )
+    );
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (
+  max-width:
+    760px
+) {
+
+  .card-details-image-stage {
+    width:
+      min(
+        280px,
+        100%
+      );
+  }
+
+}
+
+
+/* =========================================================
+   DISPOSITIVOS SEM HOVER
+========================================================= */
+
+@media (
+  hover:
+    none
+) {
+
+  .card-details-image-frame.card-details-tilt-card {
+    transform:
+      none
+      !important;
+
+    transition:
+      none;
+
+    box-shadow:
+      0 18px 42px
+      rgba(
+        0,
+        0,
+        0,
+        0.34
+      );
+  }
+
+
+  .card-details-tilt-glare,
+  .card-details-tilt-sheen {
+    display:
+      none;
+  }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE — REDUCED MOTION
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+
+  .card-details-image-frame.card-details-tilt-card {
+    transform:
+      none
+      !important;
+
+    transition:
+      none;
+  }
+
+
+  .card-details-tilt-glare,
+  .card-details-tilt-sheen {
+    display:
+      none;
+  }
+
+}

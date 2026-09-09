@@ -24,6 +24,7 @@ import {
 import { useLanguage } from "../i18n.jsx";
 
 import "../styles/simulatorPanels.css";
+import "../styles/arenaVisuals.css";
 
 
 function effectText(card, language) {
@@ -232,6 +233,179 @@ function EternalSequence({
         )}
       </div>
     </section>
+  );
+}
+
+
+/* =========================================================
+   ARENA — GLOW DE RARIDADE X+
+========================================================= */
+
+const ARENA_HIGH_RARITIES = new Set([
+  "X",
+  "XX",
+  "10THX",
+  "XV",
+  "NX",
+  "AX",
+  "PX",
+  "PXV",
+  "転醒X",
+  "契約X"
+]);
+
+
+function normalizeArenaRarity(rarity) {
+  return String(rarity || "")
+    .trim()
+    .replace(/\s+/g, "")
+    .toUpperCase();
+}
+
+
+function hasArenaRarityGlow(card) {
+  const rarity =
+    normalizeArenaRarity(
+      card?.rarity
+    );
+
+  if (!rarity) {
+    return false;
+  }
+
+  if (
+    ARENA_HIGH_RARITIES.has(
+      rarity
+    )
+  ) {
+    return true;
+  }
+
+  /*
+   * Compatibilidade com futuras raridades que terminem em X,
+   * sem transformar M/R/U/C em cartas brilhantes.
+   */
+  return (
+    rarity !== "EX" &&
+    rarity.endsWith("X")
+  );
+}
+
+
+function getArenaGlowTheme(card) {
+  const validColors =
+    new Set([
+      "red",
+      "purple",
+      "green",
+      "white",
+      "yellow",
+      "blue"
+    ]);
+
+
+  const symbols =
+    [
+      ...new Set(
+        (
+          Array.isArray(
+            card?.symbols
+          )
+            ? card.symbols
+            : []
+        )
+          .map(
+            (symbol) =>
+              String(
+                symbol
+              )
+                .trim()
+                .toLowerCase()
+          )
+          .filter(Boolean)
+      )
+    ];
+
+
+  const colors =
+    [
+      ...new Set(
+        (
+          Array.isArray(
+            card?.colors
+          )
+            ? card.colors
+            : []
+        )
+          .map(
+            (color) =>
+              String(
+                color
+              )
+                .trim()
+                .toLowerCase()
+          )
+          .filter(Boolean)
+      )
+    ];
+
+
+  /*
+   * Ultimates e cartas realmente multicoloridas recebem
+   * a aura prismática.
+   */
+  if (
+    card?.cardType ===
+      "ultimate" ||
+    symbols.includes(
+      "ultimate"
+    ) ||
+    colors.includes(
+      "ultimate"
+    ) ||
+    symbols.filter(
+      (symbol) =>
+        validColors.has(
+          symbol
+        )
+    ).length > 1 ||
+    colors.filter(
+      (color) =>
+        validColors.has(
+          color
+        )
+    ).length > 1
+  ) {
+    return "rainbow";
+  }
+
+
+  const symbolColor =
+    symbols.find(
+      (symbol) =>
+        validColors.has(
+          symbol
+        )
+    );
+
+
+  if (symbolColor) {
+    return symbolColor;
+  }
+
+
+  const cardColor =
+    colors.find(
+      (color) =>
+        validColors.has(
+          color
+        )
+    );
+
+
+  return (
+    cardColor ||
+    "neutral"
   );
 }
 
@@ -1247,6 +1421,28 @@ export default function Simulator({
       !pending;
 
 
+    const burstPhysical =
+      player.burst ||
+      null;
+
+
+    const canInspectBurst =
+      Boolean(
+        burstPhysical
+      ) &&
+      reveal &&
+      !burstPhysical.hidden;
+
+
+    const burstCard =
+      canInspectBurst
+        ? getDatabaseCard(
+            cardIndex,
+            burstPhysical
+          )
+        : null;
+
+
     return (
       <div className="hand-row">
 
@@ -1493,74 +1689,190 @@ export default function Simulator({
         </div>
 
 
-        <button
-          className="stack-card trash"
+        <div className="hand-side-zones">
 
-          onMouseEnter={() =>
-            setTrashHover(
-              playerId
-            )
-          }
+          <button
+            type="button"
 
-          onMouseLeave={() =>
-            setTrashHover(
-              null
-            )
-          }
-
-          onClick={() => {
-            const topCard =
-              player.trash.at(
-                -1
-              );
-
-            if (
-              topCard?.cardId
-            ) {
-              setSelectedId(
-                topCard.instanceId
-              );
+            className={
+              `stack-card burst-stack-card ${
+                burstPhysical
+                  ? "occupied"
+                  : "empty"
+              }`
             }
-          }}
-        >
-          <span>
-            TRASH
-          </span>
 
-          <b>
-            {
-              player.trash
-                .length
+            disabled={
+              !burstPhysical
             }
-          </b>
 
-          {player.trash.length
-            ? (
-              <img
-                className="trash-image"
+            onMouseEnter={() => {
+              if (
+                burstCard
+              ) {
+                previewStart(
+                  burstCard
+                );
+              }
+            }}
 
-                src={
-                  getDatabaseCard(
-                    cardIndex,
-                    player.trash.at(
-                      -1
-                    )
-                  )?.image ||
-                  resolveCardImage(
+            onMouseLeave={() => {
+              if (
+                burstCard
+              ) {
+                previewEnd();
+              }
+            }}
+
+            onClick={() => {
+              if (
+                canInspectBurst &&
+                burstPhysical
+                  ?.instanceId
+              ) {
+                setSelectedId(
+                  burstPhysical
+                    .instanceId
+                );
+              }
+            }}
+
+            title={
+              burstPhysical
+                ? (
+                    canInspectBurst &&
+                    burstCard
+                      ? getCardName(
+                          burstCard
+                        )
+                      : (
+                          language ===
+                          "en"
+                            ? "Set Burst"
+                            : "Burst definido"
+                        )
+                  )
+                : (
+                    language ===
+                    "en"
+                      ? "No Burst set"
+                      : "Nenhum Burst definido"
+                  )
+            }
+          >
+            <span>
+              BURST
+            </span>
+
+
+            {burstPhysical
+              ? (
+                <>
+                  <img
+                    className="burst-card-back"
+                    src="./images/card-back.png"
+                    alt="Burst"
+                  />
+
+                  <i
+                    className="burst-set-gem"
+                    aria-hidden="true"
+                  >
+                    ◆
+                  </i>
+
+                  <b>
+                    SET
+                  </b>
+                </>
+              )
+              : (
+                <>
+                  <i
+                    className="burst-empty-gem"
+                    aria-hidden="true"
+                  >
+                    ◇
+                  </i>
+
+                  <b>
+                    —
+                  </b>
+                </>
+              )}
+          </button>
+
+
+          <button
+            className="stack-card trash"
+
+            onMouseEnter={() =>
+              setTrashHover(
+                playerId
+              )
+            }
+
+            onMouseLeave={() =>
+              setTrashHover(
+                null
+              )
+            }
+
+            onClick={() => {
+              const topCard =
+                player.trash.at(
+                  -1
+                );
+
+              if (
+                topCard?.cardId
+              ) {
+                setSelectedId(
+                  topCard.instanceId
+                );
+              }
+            }}
+          >
+            <span>
+              TRASH
+            </span>
+
+            <b>
+              {
+                player.trash
+                  .length
+              }
+            </b>
+
+            {player.trash.length
+              ? (
+                <img
+                  className="trash-image"
+
+                  src={
                     getDatabaseCard(
                       cardIndex,
                       player.trash.at(
                         -1
                       )
+                    )?.image ||
+                    resolveCardImage(
+                      getDatabaseCard(
+                        cardIndex,
+                        player.trash.at(
+                          -1
+                        )
+                      )
                     )
-                  )
-                }
+                  }
 
-                alt="Trash"
-              />
-            )
-            : null}
-        </button>
+                  alt="Trash"
+                />
+              )
+              : null}
+          </button>
+
+        </div>
 
       </div>
     );
@@ -1681,12 +1993,30 @@ export default function Simulator({
                 return (
                   <div
                     className={
-                      `field-card-wrap ${
+                      [
+                        "field-card-wrap",
+
                         physical.flags
                           ?.pendingManualPlay
                           ? "pending"
+                          : "",
+
+                        hasArenaRarityGlow(
+                          card
+                        )
+                          ? "x-rarity-field-glow"
+                          : "",
+
+                        hasArenaRarityGlow(
+                          card
+                        )
+                          ? `field-glow-${getArenaGlowTheme(
+                              card
+                            )}`
                           : ""
-                      }`
+                      ]
+                        .filter(Boolean)
+                        .join(" ")
                     }
 
                     key={
@@ -1791,6 +2121,12 @@ export default function Simulator({
 
     return (
       <div className="battlefield-row">
+
+        {renderZone(
+          "BRAVES / OTHER",
+          "other"
+        )}
+
         {renderZone(
           "SPIRITS / ULTIMATES",
           "spirits"
@@ -1801,10 +2137,6 @@ export default function Simulator({
           "nexuses"
         )}
 
-        {renderZone(
-          "BRAVES / OTHER",
-          "other"
-        )}
       </div>
     );
   }
@@ -2536,8 +2868,9 @@ export default function Simulator({
 
     if (!battle) {
       return (
-        <div className="center-idle">
-          <span>
+        <div className="battle-center-compact idle">
+
+          <span className="battle-center-phase">
             {
               match.phase
                 .toUpperCase()
@@ -2557,6 +2890,7 @@ export default function Simulator({
                   ].name
                 }`}
           </strong>
+
         </div>
       );
     }
@@ -2578,10 +2912,65 @@ export default function Simulator({
         : null;
 
 
-    return (
-      <div className="battle-center-card">
+    const attackerCard =
+      attacker
+        ? getDatabaseCard(
+            cardIndex,
+            attacker.card
+          )
+        : null;
 
-        <div>
+
+    const blockerCard =
+      blocker
+        ? getDatabaseCard(
+            cardIndex,
+            blocker.card
+          )
+        : null;
+
+
+    const attackerName =
+      attackerCard
+        ? getCardName(
+            attackerCard
+          )
+        : "—";
+
+
+    const blockerName =
+      blockerCard
+        ? getCardName(
+            blockerCard
+          )
+        : "—";
+
+
+    const attackerBp =
+      attackerCard
+        ? getEffectiveBP(
+            match,
+            cardIndex,
+            attacker.card
+          )
+        : 0;
+
+
+    const blockerBp =
+      blockerCard
+        ? getEffectiveBP(
+            match,
+            cardIndex,
+            blocker.card
+          )
+        : "—";
+
+
+    return (
+      <div className="battle-center-compact active">
+
+        <div className="battle-compact-status">
+
           <span>
             {t(
               "battle"
@@ -2594,69 +2983,104 @@ export default function Simulator({
                 .toUpperCase()
             }
           </strong>
-        </div>
 
-
-        <div className="battle-participants">
-          <b>
-            {attacker
-              ? getCardName(
-                  getDatabaseCard(
-                    cardIndex,
-                    attacker.card
-                  )
-                )
-              : "—"}
-          </b>
-
-          <span>
-            {attacker
-              ? getEffectiveBP(
-                  match,
-                  cardIndex,
-                  attacker.card
-                )
-              : 0}{" "}
-            BP
-          </span>
-
-          <em>
-            VS
-          </em>
-
-          <b>
-            {blocker
-              ? getCardName(
-                  getDatabaseCard(
-                    cardIndex,
-                    blocker.card
-                  )
-                )
-              : "—"}
-          </b>
-
-          <span>
-            {blocker
-              ? getEffectiveBP(
-                  match,
-                  cardIndex,
-                  blocker.card
-                )
-              : "—"}{" "}
-            BP
-          </span>
-        </div>
-
-
-        {battle.flash && (
-          <div className="battle-actions">
-            <p>
-              Flash{" "}
+          {battle.flash && (
+            <em>
+              FLASH{" "}
               {
                 battle.flash
                   .number
               }
-              :{" "}
+            </em>
+          )}
+
+        </div>
+
+
+        <div className="battle-compact-matchup">
+
+          <div className="battle-compact-card attacker">
+            <small>
+              {
+                language ===
+                "en"
+                  ? "ATK"
+                  : "ATQ"
+              }
+            </small>
+
+            <b>
+              {
+                attackerName
+              }
+            </b>
+
+            <span>
+              {
+                attackerBp
+              }{" "}
+              BP
+            </span>
+          </div>
+
+
+          <span className="battle-compact-vs">
+            VS
+          </span>
+
+
+          <div className="battle-compact-card defender">
+
+            <small>
+              {blocker
+                ? (
+                    language ===
+                    "en"
+                      ? "BLOCK"
+                      : "BLOQ"
+                  )
+                : "LIFE"}
+            </small>
+
+            <b>
+              {blocker
+                ? blockerName
+                : (
+                    language ===
+                    "en"
+                      ? "Direct Attack"
+                      : "Ataque Direto"
+                  )}
+            </b>
+
+            <span>
+              {blocker
+                ? `${blockerBp} BP`
+                : (
+                    language ===
+                    "en"
+                      ? "Life target"
+                      : "Alvo: Life"
+                  )}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div className="battle-compact-actions">
+
+          {battle.flash && (
+            <div className="battle-compact-priority">
+              <span>
+                {
+                  language ===
+                  "en"
+                    ? "Priority"
+                    : "Prioridade"
+                }
+              </span>
 
               <b>
                 {
@@ -2666,9 +3090,14 @@ export default function Simulator({
                   ].name
                 }
               </b>
-            </p>
+            </div>
+          )}
 
+
+          {battle.flash && (
             <button
+              className="battle-compact-button"
+
               disabled={
                 !canControlActor
               }
@@ -2688,14 +3117,14 @@ export default function Simulator({
                 "passFlash"
               )}
             </button>
-          </div>
-        )}
+          )}
 
 
-        {battle.stage ===
-          "block" && (
-          <div className="battle-actions">
+          {battle.stage ===
+            "block" && (
             <button
+              className="battle-compact-button"
+
               disabled={
                 !canControlActor
               }
@@ -2714,15 +3143,13 @@ export default function Simulator({
                 "noBlock"
               )}
             </button>
-          </div>
-        )}
+          )}
 
 
-        {battle.stage ===
-          "resolve" && (
-          <div className="battle-actions">
+          {battle.stage ===
+            "resolve" && (
             <button
-              className="primary-btn"
+              className="primary-btn battle-compact-button"
 
               disabled={
                 !canControlActor
@@ -2742,13 +3169,13 @@ export default function Simulator({
                 "resolveBattle"
               )}
             </button>
-          </div>
-        )}
+          )}
+
+        </div>
 
       </div>
     );
   }
-
 
   /* =======================================================
      CHAT
@@ -2845,6 +3272,51 @@ export default function Simulator({
     bottom.soulCore
       ?.zone ===
     "trash";
+
+
+  const attackCardCtx =
+    attackDrag
+      ? findPhysicalCard(
+          match,
+          attackDrag.instanceId
+        )
+      : null;
+
+
+  const attackCard =
+    attackCardCtx
+      ? getDatabaseCard(
+          cardIndex,
+          attackCardCtx.card
+        )
+      : null;
+
+
+  const attackArrowTheme =
+    attackCard
+      ? getArenaGlowTheme(
+          attackCard
+        )
+      : "red";
+
+
+  const activeBattle =
+    match.battle ||
+    null;
+
+
+  const battleFocusActive =
+    Boolean(
+      attackDrag ||
+      activeBattle
+    );
+
+
+  const directBattleTargetId =
+    activeBattle &&
+    !activeBattle.blockerInstanceId
+      ? activeBattle.defenderPlayerId
+      : null;
 
 
   /* =======================================================
@@ -3455,8 +3927,33 @@ export default function Simulator({
             TABLE
         ================================================= */}
 
-        <section className="table-area">
+        <section
+          className={
+            `table-area ${
+              battleFocusActive
+                ? "attack-focus-active"
+                : ""
+            }`
+          }
 
+          style={{
+            "--attack-theme":
+              attackArrowTheme
+          }}
+        >
+
+          <div
+            className={
+              battleFocusActive
+                ? (
+                    directBattleTargetId ===
+                    topId
+                      ? "attack-focus-relevant attack-focus-top-hud attack-focus-life-target"
+                      : "attack-focus-dim attack-focus-top-hud"
+                  )
+                : "attack-focus-top-hud"
+            }
+          >
           <PlayerHud
             player={
               top
@@ -3478,33 +3975,86 @@ export default function Simulator({
               topId
             }
           />
+          </div>
 
 
+          <div
+            className={
+              battleFocusActive
+                ? "attack-focus-dim"
+                : ""
+            }
+          >
           {renderHand(
             topId
           )}
+          </div>
 
 
+          <div
+            className={
+              battleFocusActive
+                ? "attack-focus-relevant attack-focus-top-field"
+                : "attack-focus-top-field"
+            }
+          >
           {renderField(
             topId
           )}
+          </div>
 
 
-          <div className="table-middle">
+          <div
+            className={
+              `table-middle ${
+                battleFocusActive
+                  ? "attack-focus-relevant"
+                  : ""
+              }`
+            }
+          >
             {battleCenter()}
           </div>
 
 
+          <div
+            className={
+              battleFocusActive
+                ? "attack-focus-relevant attack-focus-bottom-field"
+                : "attack-focus-bottom-field"
+            }
+          >
           {renderField(
             bottomId
           )}
+          </div>
 
 
+          <div
+            className={
+              battleFocusActive
+                ? "attack-focus-dim"
+                : ""
+            }
+          >
           {renderHand(
             bottomId
           )}
+          </div>
 
 
+          <div
+            className={
+              battleFocusActive
+                ? (
+                    directBattleTargetId ===
+                    bottomId
+                      ? "attack-focus-relevant attack-focus-life-target"
+                      : "attack-focus-dim"
+                  )
+                : ""
+            }
+          >
           <PlayerHud
             player={
               bottom
@@ -3524,6 +4074,7 @@ export default function Simulator({
               bottomId
             }
           />
+          </div>
 
         </section>
 
@@ -4147,43 +4698,91 @@ export default function Simulator({
 
       {attackDrag && (
         <svg
-          className="attack-arrow-layer"
+          className={
+            `attack-arrow-layer attack-arrow-${attackArrowTheme}`
+          }
+
+          style={{
+            "--attack-arrow":
+              attackArrowTheme
+          }}
+
           width="100%"
           height="100%"
         >
           <defs>
+
+            <linearGradient
+              id="attack-arrow-rainbow-gradient"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="#ff6767" />
+              <stop offset="18%" stopColor="#ffd36a" />
+              <stop offset="38%" stopColor="#7ee7bd" />
+              <stop offset="58%" stopColor="#77b9ff" />
+              <stop offset="78%" stopColor="#b48cff" />
+              <stop offset="100%" stopColor="#ff79c8" />
+            </linearGradient>
+
+            <filter
+              id="attack-arrow-glow"
+              x="-50%"
+              y="-50%"
+              width="200%"
+              height="200%"
+            >
+              <feGaussianBlur
+                stdDeviation="4.5"
+                result="blur"
+              />
+
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
             <marker
               id="attack-arrow-head"
-              markerWidth="12"
-              markerHeight="12"
-              refX="9"
-              refY="4"
+              markerWidth="18"
+              markerHeight="18"
+              refX="14"
+              refY="6"
               orient="auto"
+              markerUnits="strokeWidth"
             >
               <path
-                d="M0,0 L0,8 L10,4 z"
+                className="attack-arrow-head-path"
+                d="M0,0 L0,12 L15,6 z"
               />
             </marker>
           </defs>
 
           <line
-            x1={
-              attackDrag.startX
-            }
+            className="attack-arrow-shadow"
+            x1={attackDrag.startX}
+            y1={attackDrag.startY}
+            x2={attackDrag.x}
+            y2={attackDrag.y}
+          />
 
-            y1={
-              attackDrag.startY
-            }
-
-            x2={
-              attackDrag.x
-            }
-
-            y2={
-              attackDrag.y
-            }
-
+          <line
+            className="attack-arrow-core"
+            x1={attackDrag.startX}
+            y1={attackDrag.startY}
+            x2={attackDrag.x}
+            y2={attackDrag.y}
             markerEnd="url(#attack-arrow-head)"
+          />
+
+          <circle
+            className="attack-arrow-origin"
+            cx={attackDrag.startX}
+            cy={attackDrag.startY}
+            r="7"
           />
         </svg>
       )}

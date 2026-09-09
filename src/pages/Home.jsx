@@ -1,41 +1,73 @@
-import { cards } from "../services/cardRepository.js";
-import { getDecks } from "../services/storage.js";
-import { useLanguage } from "../i18n.jsx";
+import {
+  cards
+} from "../services/cardRepository.js";
+
+import {
+  getDecks
+} from "../services/storage.js";
+
+import {
+  useLanguage
+} from "../i18n.jsx";
+
 import ProjectInfoButtons from "../components/ProjectInfoButtons.jsx";
 
-export default function Home({ go }) {
-  const { t } = useLanguage();
-  const decks = getDecks();
+
+export default function Home({
+  go
+}) {
+  const {
+    t
+  } =
+    useLanguage();
+
+  const decks =
+    getDecks();
+
 
   return (
     <main className="home-page">
+
       <section className="hero-panel">
+
         <img
           className="game-logo"
           src="./images/logo_battlespirits.png"
           alt="Battle Spirits"
         />
 
+
         <div className="hero-copy">
+
           <span className="eyebrow">
-            {t("fanSimulator")}
+            {t(
+              "fanSimulator"
+            )}
           </span>
 
           <h1>
-            {t("gateOpen")}
+            {t(
+              "gateOpen"
+            )}
           </h1>
+
         </div>
 
+
         <div className="home-stats">
+
           <div>
             <strong>
               {cards.length}
             </strong>
 
             <span>
-              {t("cardsLoaded")}
+              {t(
+                "cardsLoaded"
+              )}
             </span>
           </div>
+
 
           <div>
             <strong>
@@ -43,9 +75,12 @@ export default function Home({ go }) {
             </strong>
 
             <span>
-              {t("savedDecks")}
+              {t(
+                "savedDecks"
+              )}
             </span>
           </div>
+
 
           <div>
             <strong>
@@ -53,73 +88,124 @@ export default function Home({ go }) {
             </strong>
 
             <span>
-              {t("rulesTarget")}
+              {t(
+                "rulesTarget"
+              )}
             </span>
           </div>
+
         </div>
+
       </section>
 
+
       <section className="menu-grid clean-menu">
+
         <button
           className="menu-card primary"
-          onClick={() => go("local")}
+          onClick={() =>
+            go(
+              "local"
+            )
+          }
         >
           <b>
-            {t("local")}
+            {t(
+              "local"
+            )}
           </b>
         </button>
+
 
         <button
           className="menu-card"
-          onClick={() => go("online")}
+          onClick={() =>
+            go(
+              "online"
+            )
+          }
         >
           <b>
-            {t("online")}
+            {t(
+              "online"
+            )}
           </b>
         </button>
+
 
         <button
           className="menu-card"
-          onClick={() => go("decks")}
+          onClick={() =>
+            go(
+              "decks"
+            )
+          }
         >
           <b>
-            {t("decks")}
+            {t(
+              "decks"
+            )}
           </b>
         </button>
+
 
         <button
           className="menu-card"
-          onClick={() => go("profile")}
+          onClick={() =>
+            go(
+              "profile"
+            )
+          }
         >
           <b>
-            {t("profile")}
+            {t(
+              "profile"
+            )}
           </b>
         </button>
+
 
         <button
           className="menu-card"
-          onClick={() => go("account")}
+          onClick={() =>
+            go(
+              "account"
+            )
+          }
         >
           <b>
-            {t("account")}
+            {t(
+              "account"
+            )}
           </b>
         </button>
 
-        <ProjectInfoButtons />
 
         <button
           className="menu-card settings-menu-card"
-          onClick={() => go("settings")}
+          onClick={() =>
+            go(
+              "settings"
+            )
+          }
         >
           <b>
-            ⚙ {t("settings")}
+            {t(
+              "settings"
+            )}
           </b>
         </button>
+
+
+        <ProjectInfoButtons />
+
       </section>
+
 
       <footer className="home-footer">
         Battle Spirits © BANDAI. Unofficial fan project.
       </footer>
+
     </main>
   );
 }

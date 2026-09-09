@@ -1,0 +1,534 @@
+/* =========================================================
+   BATTLE SPIRITS SIMULATOR
+   DECK BUILDER — PAGINAÇÃO v2.3.0
+
+   Somente interface.
+========================================================= */
+
+
+/* =========================================================
+   INFORMAÇÕES ACIMA DAS CARTAS
+========================================================= */
+
+.deck-browser-meta {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin:
+    10px 0
+    14px;
+
+  padding:
+    8px 12px;
+
+  border:
+    1px solid
+    rgba(
+      122,
+      157,
+      196,
+      0.16
+    );
+
+  border-radius:
+    10px;
+
+  background:
+    rgba(
+      4,
+      17,
+      31,
+      0.45
+    );
+
+  color:
+    var(--muted);
+
+  font-size:
+    11px;
+}
+
+
+.deck-browser-meta b {
+  color:
+    #f1f6fc;
+
+  font-weight:
+    800;
+}
+
+
+/* =========================================================
+   PAGINAÇÃO
+========================================================= */
+
+.deck-pagination {
+  position: relative;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 13px;
+
+  margin-top:
+    24px;
+
+  padding:
+    18px 12px
+    6px;
+
+  border-top:
+    1px solid
+    rgba(
+      122,
+      157,
+      196,
+      0.14
+    );
+}
+
+
+/* =========================================================
+   ÁREA DOS NÚMEROS
+========================================================= */
+
+.deck-pagination-pages {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+}
+
+
+/* =========================================================
+   BOTÃO DE PÁGINA
+========================================================= */
+
+.deck-pagination-page {
+  appearance: none;
+
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(
+      116,
+      158,
+      204,
+      0.22
+    );
+
+  border-radius:
+    9px;
+
+  background:
+    rgba(
+      11,
+      31,
+      52,
+      0.85
+    );
+
+  color:
+    #c6d3e3;
+
+  font-size:
+    11px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform
+      0.16s ease,
+    border-color
+      0.16s ease,
+    background
+      0.16s ease,
+    color
+      0.16s ease,
+    box-shadow
+      0.16s ease;
+}
+
+
+.deck-pagination-page:hover {
+  transform:
+    translateY(
+      -1px
+    );
+
+  border-color:
+    rgba(
+      244,
+      189,
+      75,
+      0.55
+    );
+
+  background:
+    rgba(
+      24,
+      50,
+      79,
+      0.96
+    );
+
+  color:
+    #ffffff;
+}
+
+
+/* Página selecionada */
+
+.deck-pagination-page.active {
+  border-color:
+    #f4bd4b;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f7c957,
+      #e5a92c
+    );
+
+  color:
+    #07111d;
+
+  box-shadow:
+    0 0 0 3px
+      rgba(
+        244,
+        189,
+        75,
+        0.09
+      ),
+    0 6px 18px
+      rgba(
+        0,
+        0,
+        0,
+        0.24
+      );
+
+  cursor:
+    default;
+}
+
+
+/* =========================================================
+   ANTERIOR / PRÓXIMA
+========================================================= */
+
+.deck-pagination-arrow {
+  appearance: none;
+
+  min-height:
+    38px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  padding:
+    0 14px;
+
+  border:
+    1px solid
+    rgba(
+      116,
+      158,
+      204,
+      0.22
+    );
+
+  border-radius:
+    9px;
+
+  background:
+    rgba(
+      11,
+      31,
+      52,
+      0.86
+    );
+
+  color:
+    #d5dfeb;
+
+  font-size:
+    10px;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform
+      0.16s ease,
+    border-color
+      0.16s ease,
+    background
+      0.16s ease,
+    color
+      0.16s ease;
+}
+
+
+.deck-pagination-arrow:hover:not(:disabled) {
+  transform:
+    translateY(
+      -1px
+    );
+
+  border-color:
+    rgba(
+      244,
+      189,
+      75,
+      0.45
+    );
+
+  background:
+    rgba(
+      24,
+      50,
+      79,
+      0.96
+    );
+
+  color:
+    #ffffff;
+}
+
+
+.deck-pagination-arrow:disabled {
+  opacity:
+    0.32;
+
+  cursor:
+    not-allowed;
+
+  transform:
+    none;
+}
+
+
+/* =========================================================
+   RETICÊNCIAS
+========================================================= */
+
+.deck-pagination-ellipsis {
+  width:
+    24px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  color:
+    #71839a;
+
+  font-size:
+    14px;
+
+  font-weight:
+    900;
+
+  user-select:
+    none;
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+/*
+ * Dá uma pequena separação visual entre
+ * os filtros e o contador de resultados.
+ */
+
+.card-browser > .filters {
+  margin-bottom:
+    2px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (
+  max-width:
+    1100px
+) {
+
+  .deck-pagination {
+    gap:
+      8px;
+  }
+
+
+  .deck-pagination-page {
+    width:
+      34px;
+
+    height:
+      34px;
+  }
+
+
+  .deck-pagination-arrow {
+    min-height:
+      34px;
+
+    padding:
+      0 10px;
+  }
+
+}
+
+
+@media (
+  max-width:
+    760px
+) {
+
+  .deck-browser-meta {
+    flex-direction:
+      column;
+
+    align-items:
+      flex-start;
+
+    gap:
+      4px;
+  }
+
+
+  .deck-pagination {
+    flex-wrap:
+      wrap;
+
+    gap:
+      8px;
+  }
+
+
+  .deck-pagination-pages {
+    order:
+      -1;
+
+    width:
+      100%;
+  }
+
+
+  .deck-pagination-arrow {
+    flex:
+      1 1 120px;
+  }
+
+}
+
+
+@media (
+  max-width:
+    520px
+) {
+
+  .deck-pagination-page {
+    width:
+      31px;
+
+    height:
+      31px;
+
+    border-radius:
+      7px;
+
+    font-size:
+      10px;
+  }
+
+
+  .deck-pagination-arrow span {
+    display:
+      none;
+  }
+
+
+  .deck-pagination-arrow {
+    flex:
+      0 0 42px;
+
+    min-width:
+      42px;
+
+    padding:
+      0;
+  }
+
+
+  .deck-pagination-ellipsis {
+    width:
+      16px;
+  }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+
+  .deck-pagination-page,
+  .deck-pagination-arrow {
+    transition:
+      none;
+  }
+
+}

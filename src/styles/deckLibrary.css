@@ -1,0 +1,1430 @@
+/* =========================================================
+   DECK LIBRARY — HYBRID V3
+   Battle Spirits Eternal Simulator
+
+   Mistura:
+   - layout antigo: capa grande / presença visual
+   - layout novo: busca, stats, status, metadados e correção
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.deck-library-v2-page {
+  position: relative;
+  min-height: 100vh;
+  max-width: none !important;
+  margin: 0 !important;
+
+  padding:
+    clamp(22px, 3vw, 46px)
+    clamp(22px, 4.5vw, 78px)
+    56px;
+
+  overflow-x: hidden;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      color-mix(in srgb, var(--accent-2) 16%, transparent),
+      transparent 34rem
+    ),
+    radial-gradient(
+      circle at 92% 2%,
+      color-mix(in srgb, var(--accent) 10%, transparent),
+      transparent 31rem
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg) 88%, #17243b) 0%,
+      var(--bg) 62%,
+      #040811 100%
+    );
+}
+
+.deck-library-v2-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .22;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 49.94%,
+      rgba(255,255,255,.035) 50%,
+      transparent 50.06%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.014) 0 1px,
+      transparent 1px 112px
+    );
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      rgba(0,0,0,.3) 65%,
+      transparent
+    );
+}
+
+.deck-library-v2-page::after {
+  content: "";
+  position: fixed;
+  left: 50%;
+  top: 52%;
+
+  width: min(1200px, 78vw);
+  height: 560px;
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events: none;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      color-mix(in srgb, var(--accent-2) 6%, transparent),
+      transparent 68%
+    );
+
+  filter: blur(28px);
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.deck-library-v2-topbar {
+  position: relative;
+  z-index: 2;
+
+  width: min(1420px, 100%);
+  margin: 0 auto 24px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  gap: 22px;
+
+  align-items: start;
+}
+
+.deck-library-v2-back {
+  justify-self: start;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  min-height: 42px;
+
+  padding: 10px 14px;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--line-strong)
+      80%,
+      transparent
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--panel-solid, #0d1a2e)
+      54%,
+      transparent
+    );
+
+  box-shadow:
+    0 9px 28px rgba(0,0,0,.18);
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    transform .15s ease,
+    border-color .15s ease,
+    background .15s ease;
+}
+
+.deck-library-v2-back:hover:not(:disabled) {
+  transform: translateX(-2px);
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--accent-2)
+      45%,
+      var(--line)
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--accent-2)
+      7%,
+      var(--panel)
+    );
+
+  filter: none;
+}
+
+.deck-library-v2-back > span {
+  color: var(--accent-2);
+  font-size: 16px;
+}
+
+.deck-library-v2-title {
+  min-width: 390px;
+  text-align: center;
+}
+
+.deck-library-v2-title .eyebrow {
+  margin-bottom: 6px;
+  font-size: 10px;
+  letter-spacing: .22em;
+}
+
+.deck-library-v2-title h1 {
+  margin: 0;
+
+  font-size:
+    clamp(
+      32px,
+      3vw,
+      46px
+    );
+
+  font-weight: 950;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.deck-library-v2-title p {
+  margin: 9px 0 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+.deck-library-v2-new {
+  justify-self: end;
+
+  min-height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding:
+    9px
+    10px
+    9px
+    16px;
+
+  border-radius: 11px;
+
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.2);
+}
+
+.deck-library-v2-new > b {
+  width: 27px;
+  height: 27px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid rgba(23,16,6,.18);
+
+  border-radius: 7px;
+
+  background:
+    rgba(255,255,255,.15);
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.deck-library-v2-summary {
+  position: relative;
+  z-index: 2;
+
+  width: min(1420px, 100%);
+
+  margin: 0 auto 24px;
+
+  display: grid;
+
+  grid-template-columns:
+    120px
+    120px
+    140px
+    minmax(280px, 1fr);
+
+  gap: 8px;
+
+  padding: 10px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--line)
+      86%,
+      transparent
+    );
+
+  border-radius: 14px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--panel-solid, #0d1a2e)
+      54%,
+      transparent
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.018);
+
+  backdrop-filter: blur(10px);
+}
+
+.deck-library-v2-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 9px;
+
+  min-height: 44px;
+
+  padding: 8px 11px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--line)
+      78%,
+      transparent
+    );
+
+  border-radius: 9px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--bg)
+      48%,
+      transparent
+    );
+}
+
+.deck-library-v2-stat span {
+  color: var(--muted);
+
+  font-size: 7px;
+  font-weight: 900;
+
+  letter-spacing: .11em;
+
+  text-transform: uppercase;
+}
+
+.deck-library-v2-stat strong {
+  font-size: 16px;
+}
+
+.deck-library-v2-stat.valid strong {
+  color: var(--ok);
+}
+
+.deck-library-v2-search {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 0;
+
+  padding: 0 9px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--line-strong)
+      70%,
+      transparent
+    );
+
+  border-radius: 9px;
+
+  background: #081526;
+}
+
+.deck-library-v2-search > span {
+  flex: 0 0 auto;
+
+  color: var(--accent-2);
+
+  font-size: 16px;
+
+  opacity: .72;
+}
+
+.deck-library-v2-search input {
+  min-width: 0;
+  height: 42px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  box-shadow: none;
+}
+
+.deck-library-v2-search input:focus {
+  border: 0;
+  box-shadow: none;
+}
+
+.deck-library-v2-search:focus-within {
+  border-color: var(--accent-2);
+
+  box-shadow:
+    0 0 0 3px rgba(104,168,255,.08);
+}
+
+.deck-library-v2-search > button {
+  width: 26px;
+  height: 26px;
+
+  flex: 0 0 auto;
+
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  border: 0;
+
+  border-radius: 6px;
+
+  background:
+    rgba(255,255,255,.035);
+
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   LIBRARY HEADING
+========================================================= */
+
+.deck-library-v2-library {
+  position: relative;
+  z-index: 2;
+
+  width: min(1420px, 100%);
+
+  margin: 0 auto;
+}
+
+.deck-library-v2-library-heading {
+  display: grid;
+
+  grid-template-columns:
+    auto
+    1fr;
+
+  gap: 15px;
+
+  align-items: end;
+
+  margin-bottom: 13px;
+}
+
+.deck-library-v2-library-heading .eyebrow {
+  font-size: 7px;
+}
+
+.deck-library-v2-library-heading h2 {
+  margin: 4px 0 0;
+
+  color:
+    color-mix(
+      in srgb,
+      var(--text)
+      88%,
+      var(--muted)
+    );
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.deck-library-v2-line {
+  height: 1px;
+  margin-bottom: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--line),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   GRID
+   Mais próximo do layout antigo:
+   cards um pouco mais estreitos e altos.
+========================================================= */
+
+.deck-library-v2-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(
+        270px,
+        310px
+      )
+    );
+
+  justify-content: start;
+
+  gap: 16px;
+}
+
+
+/* =========================================================
+   DECK CARD — HYBRID
+========================================================= */
+
+.deck-library-v2-card {
+  --deck-accent: var(--accent-2);
+
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  height: 390px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--deck-accent)
+      34%,
+      var(--line)
+    );
+
+  border-radius: 18px;
+
+  background: #07101e;
+
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.02);
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease;
+}
+
+.deck-library-v2-card:hover {
+  transform:
+    translateY(-4px);
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--deck-accent)
+      60%,
+      white
+    );
+
+  box-shadow:
+    0 28px 58px rgba(0,0,0,.32),
+    0 0 32px
+    color-mix(
+      in srgb,
+      var(--deck-accent)
+      9%,
+      transparent
+    );
+}
+
+
+/* Botão ocupa todo card */
+.deck-library-v2-open {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  display: block;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  border: 0 !important;
+
+  border-radius: inherit;
+
+  background: transparent;
+
+  color: inherit;
+
+  text-align: left;
+
+  filter: none !important;
+}
+
+.deck-library-v2-open:hover {
+  border: 0 !important;
+  filter: none !important;
+}
+
+
+/* =========================================================
+   FULL-BLEED COVER
+   Reintroduz a sensação do layout antigo.
+========================================================= */
+
+.deck-library-v2-cover {
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  overflow: hidden;
+}
+
+.deck-library-v2-card-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  aspect-ratio: auto;
+
+  overflow: hidden;
+
+  border: 0;
+
+  border-radius: inherit;
+
+  background: #050b13;
+
+  box-shadow: none;
+
+  transform: none;
+}
+
+.deck-library-v2-card-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  /*
+   * A carta é um pouco ampliada para o deck
+   * parecer mais com uma capa/poster.
+   */
+  transform:
+    scale(1.035);
+
+  transform-origin:
+    center 20%;
+
+  transition:
+    transform .28s ease,
+    filter .28s ease;
+}
+
+.deck-library-v2-card:hover
+  .deck-library-v2-card-image img {
+  transform:
+    scale(1.075);
+
+  filter:
+    saturate(1.05)
+    brightness(1.02);
+}
+
+
+/* Overlay escuro que permite o texto sem esconder a arte */
+.deck-library-v2-cover::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3,8,15,.04) 0%,
+      rgba(3,8,15,.10) 31%,
+      rgba(4,9,17,.46) 53%,
+      rgba(5,10,18,.92) 76%,
+      #07101e 100%
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(
+        in srgb,
+        var(--deck-accent)
+        7%,
+        transparent
+      ),
+      transparent 44%
+    );
+}
+
+.deck-library-v2-shine {
+  position: absolute;
+
+  z-index: 2;
+
+  inset:
+    -35%
+    72%
+    -35%
+    -40%;
+
+  transform:
+    rotate(12deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.12),
+      transparent
+    );
+
+  opacity: .2;
+
+  pointer-events: none;
+
+  transition:
+    left .35s ease,
+    right .35s ease;
+}
+
+.deck-library-v2-card:hover
+  .deck-library-v2-shine {
+  inset:
+    -35%
+    -40%
+    -35%
+    72%;
+}
+
+
+/*
+ * O label antigo "DECK COVER" continua presente,
+ * mas agora fica como detalhe sutil sobre a arte.
+ */
+.deck-library-v2-cover-label {
+  position: absolute;
+
+  z-index: 4;
+
+  left: 16px;
+  top: 15px;
+
+  padding:
+    5px 7px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(4,10,18,.68);
+
+  color:
+    rgba(255,255,255,.7);
+
+  font-size: 6px;
+
+  font-weight: 900;
+
+  letter-spacing: .16em;
+
+  backdrop-filter:
+    blur(8px);
+}
+
+
+/* =========================================================
+   CONTENT OVER THE COVER
+========================================================= */
+
+.deck-library-v2-content {
+  position: absolute;
+
+  z-index: 5;
+
+  inset:
+    auto
+    0
+    0;
+
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-rows:
+    auto
+    auto
+    auto
+    auto;
+
+  gap: 9px;
+
+  padding:
+    78px
+    17px
+    15px;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(5,10,18,.74) 26%,
+      rgba(5,10,18,.96) 64%,
+      #07101e 100%
+    );
+}
+
+
+/* =========================================================
+   HEADER / STATUS
+========================================================= */
+
+.deck-library-v2-card-header {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 9px;
+}
+
+.deck-library-v2-card-header
+  .eyebrow {
+  display: inline-block;
+
+  margin-bottom: 3px;
+
+  color:
+    color-mix(
+      in srgb,
+      var(--deck-accent)
+      74%,
+      white
+    );
+
+  font-size: 7px;
+
+  text-shadow:
+    0 2px 6px
+    rgba(0,0,0,.8);
+}
+
+.deck-library-v2-card-header
+  h2 {
+  margin: 0;
+
+  max-width: 205px;
+
+  overflow: hidden;
+
+  color: #fff;
+
+  font-size: 23px;
+
+  font-weight: 950;
+
+  letter-spacing: -.035em;
+
+  line-height: 1.03;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 3px 14px
+    rgba(0,0,0,.8);
+}
+
+.deck-library-v2-status {
+  flex: 0 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding:
+    5px 7px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(4,10,18,.76);
+
+  color:
+    var(--muted);
+
+  font-size: 6px;
+
+  font-weight: 900;
+
+  letter-spacing: .07em;
+
+  backdrop-filter:
+    blur(8px);
+}
+
+.deck-library-v2-status > i {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+}
+
+.deck-library-v2-status.valid {
+  color: var(--ok);
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--ok)
+      32%,
+      transparent
+    );
+}
+
+.deck-library-v2-status.invalid {
+  color: #ffd079;
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--accent)
+      34%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   COVER NAME
+========================================================= */
+
+.deck-library-v2-cover-name {
+  min-width: 0;
+
+  margin: 0;
+
+  display: grid;
+
+  gap: 2px;
+}
+
+.deck-library-v2-cover-name > span {
+  color:
+    rgba(255,255,255,.52);
+
+  font-size: 6px;
+
+  font-weight: 900;
+
+  letter-spacing: .11em;
+
+  text-transform: uppercase;
+}
+
+.deck-library-v2-cover-name strong {
+  overflow: hidden;
+
+  color:
+    color-mix(
+      in srgb,
+      var(--deck-accent)
+      68%,
+      white
+    );
+
+  font-size: 10px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 2px 7px
+    rgba(0,0,0,.8);
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.deck-library-v2-meta {
+  display: grid;
+
+  grid-template-columns:
+    64px
+    64px
+    minmax(0,1fr);
+
+  gap: 5px;
+}
+
+.deck-library-v2-meta > div {
+  min-width: 0;
+
+  display: grid;
+
+  gap: 2px;
+
+  padding:
+    6px 7px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+
+  border-radius:
+    7px;
+
+  background:
+    rgba(5,13,24,.67);
+
+  backdrop-filter:
+    blur(7px);
+}
+
+.deck-library-v2-meta span {
+  color:
+    rgba(255,255,255,.47);
+
+  font-size: 5px;
+
+  font-weight: 900;
+
+  letter-spacing: .1em;
+}
+
+.deck-library-v2-meta strong {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color:
+    rgba(255,255,255,.91);
+
+  font-size: 9px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.deck-library-v2-footer {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding-top: 9px;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.09);
+
+  color:
+    color-mix(
+      in srgb,
+      var(--deck-accent)
+      72%,
+      white
+    );
+
+  font-size: 7px;
+
+  font-weight: 900;
+
+  letter-spacing: .12em;
+}
+
+.deck-library-v2-footer > b {
+  font-size: 16px;
+
+  transition:
+    transform .16s ease;
+}
+
+.deck-library-v2-card:hover
+  .deck-library-v2-footer > b {
+  transform:
+    translateX(3px);
+}
+
+
+/* =========================================================
+   ADD NEW DECK
+   Mantém o estilo novo, mas com a mesma altura.
+========================================================= */
+
+.deck-library-v2-add-card {
+  width: 100%;
+  height: 390px;
+
+  display: grid;
+
+  place-items: center;
+  align-content: center;
+
+  gap: 8px;
+
+  padding: 24px;
+
+  border:
+    1px dashed
+    color-mix(
+      in srgb,
+      var(--line-strong)
+      82%,
+      transparent
+    );
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--panel-solid, #0d1a2e)
+        34%,
+        transparent
+      ),
+      color-mix(
+        in srgb,
+        var(--bg)
+        46%,
+        transparent
+      )
+    );
+
+  color: var(--muted);
+
+  text-align: center;
+
+  transition:
+    transform .16s ease,
+    border-color .16s ease,
+    background .16s ease,
+    color .16s ease;
+}
+
+.deck-library-v2-add-card:hover:not(:disabled) {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--accent)
+      46%,
+      var(--line)
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--accent)
+      4%,
+      var(--panel-solid, #0d1a2e)
+    );
+
+  color: var(--text);
+
+  filter: none;
+}
+
+.deck-library-v2-add-card > span {
+  width: 54px;
+  height: 54px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--accent)
+      34%,
+      var(--line)
+    );
+
+  border-radius: 14px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--accent)
+      5%,
+      transparent
+    );
+
+  color: var(--accent);
+
+  font-size: 27px;
+  font-weight: 600;
+}
+
+.deck-library-v2-add-card strong {
+  margin-top: 3px;
+
+  font-size: 13px;
+}
+
+.deck-library-v2-add-card small {
+  color: var(--muted);
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   EMPTY / NO RESULTS
+========================================================= */
+
+.deck-library-v2-empty {
+  display: grid;
+
+  gap: 12px;
+
+  justify-items: center;
+}
+
+.deck-library-v2-no-results {
+  min-height: 260px;
+
+  display: grid;
+
+  place-items: center;
+  align-content: center;
+
+  gap: 10px;
+
+  border:
+    1px dashed
+    var(--line);
+
+  border-radius: 16px;
+
+  color: var(--muted);
+
+  text-align: center;
+}
+
+.deck-library-v2-no-results > span {
+  font-size: 28px;
+
+  color: var(--accent-2);
+
+  opacity: .6;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1060px) {
+
+  .deck-library-v2-summary {
+    grid-template-columns:
+      repeat(3, 1fr);
+  }
+
+  .deck-library-v2-search {
+    grid-column:
+      1 / -1;
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .deck-library-v2-topbar {
+    grid-template-columns:
+      1fr
+      auto;
+  }
+
+  .deck-library-v2-title {
+    grid-column:
+      1 / -1;
+
+    grid-row:
+      2;
+
+    min-width: 0;
+
+    text-align: left;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .deck-library-v2-page {
+    padding:
+      15px
+      11px
+      30px;
+  }
+
+  .deck-library-v2-summary {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0,1fr)
+      );
+
+    padding: 7px;
+  }
+
+  .deck-library-v2-stat {
+    display: grid;
+
+    justify-items: center;
+  }
+
+  .deck-library-v2-grid {
+    grid-template-columns:
+      repeat(
+        auto-fill,
+        minmax(
+          230px,
+          1fr
+        )
+      );
+  }
+
+  .deck-library-v2-card,
+  .deck-library-v2-add-card {
+    height: 360px;
+  }
+
+  .deck-library-v2-content {
+    padding:
+      74px
+      14px
+      13px;
+  }
+
+  .deck-library-v2-card-header h2 {
+    font-size: 20px;
+  }
+
+  .deck-library-v2-meta {
+    grid-template-columns:
+      1fr
+      1fr;
+  }
+
+  .deck-library-v2-meta > div:last-child {
+    display: none;
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .deck-library-v2-card,
+  .deck-library-v2-card-image img,
+  .deck-library-v2-footer > b,
+  .deck-library-v2-add-card,
+  .deck-library-v2-back {
+    transition: none;
+  }
+
+}

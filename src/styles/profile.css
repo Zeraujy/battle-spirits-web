@@ -1,0 +1,1182 @@
+/* =========================================================
+   PROFILE V2 — CLEAN FIX
+   Battle Spirits Eternal Simulator
+
+   Correção da composição:
+   - remove nome duplicado sobre o banner
+   - avatar deixa de ficar "flutuando" entre duas áreas
+   - identidade e abas ficam alinhadas numa única barra
+   - mantém amigos, chat e edição
+========================================================= */
+
+.profile-v2-page {
+  position: relative;
+  min-height: 100vh;
+  max-width: none !important;
+  margin: 0 !important;
+
+  padding:
+    clamp(22px, 3vw, 46px)
+    clamp(22px, 4.5vw, 78px)
+    56px;
+
+  overflow-x: hidden;
+
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      color-mix(in srgb, var(--accent-2) 16%, transparent),
+      transparent 34rem
+    ),
+    radial-gradient(
+      circle at 92% 2%,
+      color-mix(in srgb, var(--accent) 10%, transparent),
+      transparent 31rem
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg) 88%, #17243b) 0%,
+      var(--bg) 62%,
+      #040811 100%
+    );
+}
+
+.profile-v2-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .2;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.013) 0 1px,
+      transparent 1px 112px
+    );
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      rgba(0,0,0,.28) 66%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.profile-v2-topbar {
+  position: relative;
+  z-index: 2;
+
+  width: min(1240px, 100%);
+  margin: 0 auto 28px;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.profile-v2-back {
+  justify-self: start;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  min-height: 42px;
+  padding: 10px 14px;
+
+  border-color:
+    color-mix(in srgb, var(--line-strong) 80%, transparent);
+
+  background:
+    color-mix(in srgb, var(--panel-solid, #0d1a2e) 54%, transparent);
+
+  box-shadow:
+    0 9px 28px rgba(0,0,0,.18);
+}
+
+.profile-v2-back > span {
+  color: var(--accent-2);
+}
+
+.profile-v2-title {
+  min-width: 380px;
+  text-align: center;
+}
+
+.profile-v2-title .eyebrow {
+  margin-bottom: 6px;
+  font-size: 10px;
+  letter-spacing: .22em;
+}
+
+.profile-v2-title h1 {
+  margin: 0;
+
+  font-size:
+    clamp(
+      32px,
+      3vw,
+      45px
+    );
+
+  font-weight: 950;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.profile-v2-title p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.profile-v2-mode {
+  justify-self: end;
+
+  min-width: 122px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 8px 11px;
+
+  border: 1px solid var(--line);
+  border-radius: 11px;
+
+  background:
+    color-mix(in srgb, var(--panel-solid, #0d1a2e) 52%, transparent);
+}
+
+.profile-v2-mode > i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.profile-v2-mode.online > i {
+  background: var(--ok);
+
+  box-shadow:
+    0 0 12px
+    color-mix(in srgb, var(--ok) 70%, transparent);
+}
+
+.profile-v2-mode > div {
+  display: grid;
+  gap: 1px;
+}
+
+.profile-v2-mode span {
+  color: var(--muted);
+
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+
+.profile-v2-mode strong {
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   SHELL
+========================================================= */
+
+.profile-v2-shell {
+  position: relative;
+  z-index: 2;
+
+  width: min(1120px, 100%);
+  margin: 0 auto;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    color-mix(in srgb, var(--line-strong) 78%, transparent);
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--panel-solid, #0d1a2e) 90%, transparent),
+      color-mix(in srgb, var(--bg) 94%, transparent)
+    );
+
+  box-shadow:
+    0 32px 86px rgba(0,0,0,.32),
+    inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+
+/* =========================================================
+   HERO / BANNER
+========================================================= */
+
+.profile-v2-hero {
+  position: relative;
+
+  height: 245px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent-2) 30%, #0b1c30),
+      color-mix(in srgb, var(--accent) 16%, #07101e)
+    );
+
+  background-size: cover;
+  background-position: center;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.profile-v2-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3,8,15,.03),
+      rgba(3,8,15,.08) 54%,
+      rgba(3,8,15,.38) 100%
+    );
+
+  pointer-events: none;
+}
+
+.profile-v2-banner-edit {
+  position: absolute;
+  z-index: 4;
+  right: 17px;
+  top: 17px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 8px 10px;
+
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 9px;
+
+  background: rgba(4,10,18,.72);
+
+  color: #fff;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(8px);
+}
+
+.profile-v2-banner-edit > span {
+  color: var(--accent);
+}
+
+
+/*
+ * O nome sobre o banner estava duplicando
+ * a identidade da barra abaixo.
+ * Agora o banner fica limpo.
+ */
+.profile-v2-hero-copy {
+  display: none;
+}
+
+
+/* =========================================================
+   IDENTITY BAR
+========================================================= */
+
+.profile-v2-identity-bar {
+  position: relative;
+
+  min-height: 116px;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+
+  gap: 17px;
+
+  align-items: center;
+
+  padding:
+    16px
+    22px;
+
+  border-bottom: 1px solid var(--line);
+
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--accent-2) 3%, transparent),
+      color-mix(in srgb, var(--panel-solid, #0d1a2e) 86%, transparent),
+      color-mix(in srgb, var(--accent) 2%, transparent)
+    );
+}
+
+
+/*
+ * Antes o avatar usava position:absolute e top negativo.
+ * Isso criava a sensação de layout quebrado.
+ */
+.profile-v2-avatar-wrap {
+  position: relative;
+
+  left: auto;
+  top: auto;
+
+  width: 86px;
+  height: 86px;
+
+  flex: 0 0 auto;
+}
+
+.profile-v2-avatar {
+  width: 86px;
+  height: 86px;
+
+  overflow: hidden;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  border:
+    3px solid
+    color-mix(in srgb, var(--accent-2) 28%, var(--panel-solid, #0d1a2e));
+
+  background: #132945;
+
+  font-size: 23px;
+  font-weight: 950;
+
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.3),
+    0 0 24px
+    color-mix(in srgb, var(--accent-2) 7%, transparent);
+}
+
+.profile-v2-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-v2-avatar-edit {
+  position: absolute;
+
+  right: -1px;
+  bottom: 0;
+
+  width: 29px;
+  height: 29px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    2px solid
+    var(--panel-solid, #0d1a2e);
+
+  border-radius: 50%;
+
+  background: var(--accent);
+
+  color: #171006;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.28);
+}
+
+
+/* =========================================================
+   IDENTITY COPY
+========================================================= */
+
+.profile-v2-identity-copy {
+  min-width: 0;
+
+  display: grid;
+  gap: 2px;
+}
+
+.profile-v2-identity-copy > span {
+  color: var(--accent);
+
+  font-size: 6px;
+  font-weight: 900;
+
+  letter-spacing: .15em;
+}
+
+.profile-v2-identity-copy strong {
+  margin-top: 1px;
+
+  overflow: hidden;
+
+  color: var(--text);
+
+  font-size: 22px;
+  font-weight: 950;
+
+  letter-spacing: -.025em;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-v2-identity-copy small {
+  color: var(--muted);
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.profile-v2-tabs {
+  justify-self: end;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 4px;
+
+  border:
+    1px solid
+    color-mix(in srgb, var(--line) 82%, transparent);
+
+  border-radius: 11px;
+
+  background:
+    color-mix(in srgb, var(--bg) 45%, transparent);
+}
+
+.profile-v2-tabs button {
+  min-height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 8px 12px;
+
+  border-color: transparent;
+
+  background: transparent;
+
+  color: var(--muted);
+
+  font-size: 9px;
+}
+
+.profile-v2-tabs button:hover:not(:disabled) {
+  border-color:
+    color-mix(in srgb, var(--accent-2) 22%, transparent);
+
+  background:
+    color-mix(in srgb, var(--accent-2) 4%, transparent);
+
+  color: var(--text);
+
+  filter: none;
+}
+
+.profile-v2-tabs button.active {
+  color: #171006;
+
+  background: var(--accent);
+
+  border-color:
+    color-mix(in srgb, var(--accent) 80%, white);
+
+  box-shadow:
+    0 5px 14px rgba(0,0,0,.15);
+}
+
+.profile-v2-tabs button > span {
+  min-width: 18px;
+  height: 18px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 999px;
+
+  background:
+    rgba(0,0,0,.15);
+
+  font-size: 7px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.profile-v2-content,
+.profile-v2-chat {
+  padding: 22px;
+}
+
+.profile-v2-section-heading {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+  align-items: flex-start;
+
+  margin-bottom: 16px;
+}
+
+.profile-v2-section-heading h3 {
+  margin: 4px 0 0;
+
+  font-size: 19px;
+}
+
+.profile-v2-section-heading p {
+  margin: 5px 0 0;
+
+  color: var(--muted);
+
+  font-size: 9px;
+}
+
+.profile-v2-save-state {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 6px 8px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 999px;
+
+  color: var(--muted);
+
+  font-size: 6px;
+  font-weight: 900;
+
+  letter-spacing: .09em;
+}
+
+.profile-v2-save-state > i {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+}
+
+
+/* =========================================================
+   PROFILE FORM
+========================================================= */
+
+.profile-v2-edit-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap: 13px;
+}
+
+.profile-v2-edit-grid label {
+  display: grid;
+
+  gap: 7px;
+}
+
+.profile-v2-edit-grid label > span,
+.profile-v2-label-row > span {
+  font-size: 9px;
+  font-weight: 850;
+}
+
+.profile-v2-username-input {
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0,1fr);
+
+  align-items: center;
+
+  border: 1px solid var(--line);
+
+  border-radius: 10px;
+
+  background: #081526;
+}
+
+.profile-v2-username-input:focus-within {
+  border-color: var(--accent-2);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(104,168,255,.1);
+}
+
+.profile-v2-username-input > b {
+  padding-left: 12px;
+
+  color: var(--accent-2);
+}
+
+.profile-v2-username-input input {
+  border: 0;
+
+  background: transparent;
+
+  box-shadow: none;
+}
+
+.profile-v2-username-input input:focus {
+  border: 0;
+
+  box-shadow: none;
+}
+
+.profile-v2-bio-field {
+  grid-column: 1 / -1;
+}
+
+.profile-v2-label-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.profile-v2-label-row small {
+  color: var(--muted);
+
+  font-size: 7px;
+}
+
+.profile-v2-bio-field textarea {
+  min-height: 130px;
+}
+
+.profile-v2-profile-actions {
+  margin-top: 16px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto;
+
+  gap: 14px;
+
+  align-items: center;
+
+  padding-top: 15px;
+
+  border-top: 1px solid var(--line);
+}
+
+.profile-v2-profile-actions > div {
+  color: var(--muted);
+
+  font-size: 8px;
+}
+
+.profile-v2-save-button {
+  min-width: 210px;
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 18px;
+}
+
+.profile-v2-save-button > b {
+  width: 27px;
+  height: 27px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(23,16,6,.18);
+
+  border-radius: 7px;
+
+  background:
+    rgba(255,255,255,.15);
+}
+
+
+/* =========================================================
+   FRIENDS
+========================================================= */
+
+.profile-v2-friends-search,
+.profile-v2-social-block,
+.profile-v2-offline-social {
+  padding: 16px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 13px;
+
+  background:
+    color-mix(in srgb, var(--panel-solid, #0d1a2e) 40%, transparent);
+}
+
+.profile-v2-content > * + * {
+  margin-top: 11px;
+}
+
+.profile-v2-search-row {
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto;
+
+  gap: 8px;
+}
+
+.profile-v2-search-row button {
+  min-width: 110px;
+}
+
+.profile-v2-social-block > header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+}
+
+.profile-v2-social-block > header > strong {
+  min-width: 25px;
+  height: 25px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--line);
+
+  border-radius: 999px;
+
+  color: var(--muted);
+
+  font-size: 8px;
+}
+
+.profile-v2-people-list {
+  display: grid;
+
+  gap: 7px;
+}
+
+.profile-v2-person-row {
+  display: grid;
+
+  grid-template-columns:
+    42px
+    minmax(0,1fr)
+    auto;
+
+  gap: 10px;
+
+  align-items: center;
+
+  padding: 9px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 10px;
+
+  background: #09182a;
+}
+
+.profile-v2-mini-avatar {
+  width: 42px;
+  height: 42px;
+
+  overflow: hidden;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #173353;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.profile-v2-mini-avatar.large {
+  width: 50px;
+  height: 50px;
+}
+
+.profile-v2-mini-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.profile-v2-person-copy {
+  min-width: 0;
+
+  display: grid;
+}
+
+.profile-v2-person-copy strong {
+  overflow: hidden;
+
+  font-size: 11px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.profile-v2-person-copy small {
+  color: var(--muted);
+
+  font-size: 8px;
+}
+
+.profile-v2-empty-social,
+.profile-v2-empty-chat {
+  min-height: 160px;
+
+  display: grid;
+
+  place-items: center;
+
+  align-content: center;
+
+  gap: 6px;
+
+  color: var(--muted);
+
+  text-align: center;
+}
+
+.profile-v2-empty-social > span,
+.profile-v2-empty-chat > span {
+  color: var(--accent);
+
+  font-size: 22px;
+}
+
+.profile-v2-empty-social > strong {
+  color: var(--text);
+
+  font-size: 12px;
+}
+
+.profile-v2-empty-social > small {
+  font-size: 8px;
+}
+
+.profile-v2-offline-social {
+  display: grid;
+
+  grid-template-columns:
+    46px
+    minmax(0,1fr);
+
+  gap: 13px;
+
+  align-items: center;
+}
+
+.profile-v2-info-icon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid
+    color-mix(in srgb, var(--accent) 30%, var(--line));
+
+  border-radius: 10px;
+
+  color: var(--accent);
+
+  background:
+    color-mix(in srgb, var(--accent) 5%, transparent);
+}
+
+.profile-v2-offline-social h3 {
+  margin: 0;
+}
+
+.profile-v2-offline-social p {
+  margin: 5px 0 0;
+
+  color: var(--muted);
+
+  font-size: 9px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+.profile-v2-chat {
+  display: grid;
+
+  gap: 12px;
+}
+
+.profile-v2-chat-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding-bottom: 12px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.profile-v2-chat-header h3 {
+  margin: 3px 0 0;
+
+  font-size: 17px;
+}
+
+.profile-v2-chat-header p {
+  margin: 3px 0 0;
+
+  color: var(--muted);
+
+  font-size: 8px;
+}
+
+.profile-v2-messages {
+  min-height: 290px;
+  max-height: 420px;
+
+  overflow-y: auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  padding: 4px;
+}
+
+.profile-v2-message {
+  width: min(78%, 620px);
+
+  padding: 9px 10px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 10px;
+
+  background: #0b1a2d;
+}
+
+.profile-v2-message small {
+  color: var(--muted);
+
+  font-size: 7px;
+}
+
+.profile-v2-message p {
+  margin: 4px 0 0;
+
+  font-size: 11px;
+
+  line-height: 1.45;
+}
+
+.profile-v2-chat-compose {
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto;
+
+  gap: 8px;
+
+  padding-top: 11px;
+
+  border-top: 1px solid var(--line);
+}
+
+.profile-v2-chat-compose button {
+  min-width: 100px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 780px) {
+
+  .profile-v2-topbar {
+    grid-template-columns:
+      1fr
+      auto;
+  }
+
+  .profile-v2-title {
+    grid-column:
+      1 / -1;
+
+    grid-row: 2;
+
+    min-width: 0;
+
+    text-align: left;
+  }
+
+  .profile-v2-hero {
+    height: 200px;
+  }
+
+  .profile-v2-identity-bar {
+    grid-template-columns:
+      auto
+      minmax(0,1fr);
+
+    gap: 12px;
+  }
+
+  .profile-v2-tabs {
+    grid-column: 1 / -1;
+
+    justify-self: stretch;
+
+    overflow-x: auto;
+  }
+
+  .profile-v2-tabs button {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .profile-v2-edit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-v2-bio-field {
+    grid-column: 1;
+  }
+
+  .profile-v2-profile-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-v2-save-button {
+    width: 100%;
+  }
+
+}
+
+
+@media (max-width: 520px) {
+
+  .profile-v2-page {
+    padding:
+      15px
+      11px
+      30px;
+  }
+
+  .profile-v2-shell {
+    border-radius: 16px;
+  }
+
+  .profile-v2-hero {
+    height: 170px;
+  }
+
+  .profile-v2-avatar-wrap {
+    width: 72px;
+    height: 72px;
+  }
+
+  .profile-v2-avatar {
+    width: 72px;
+    height: 72px;
+  }
+
+  .profile-v2-avatar-edit {
+    width: 26px;
+    height: 26px;
+  }
+
+  .profile-v2-identity-copy strong {
+    font-size: 18px;
+  }
+
+  .profile-v2-content,
+  .profile-v2-chat {
+    padding: 15px;
+  }
+
+}
