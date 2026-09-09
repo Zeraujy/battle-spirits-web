@@ -1,6 +1,4 @@
-from pathlib import Path
-
-readme = """# Battle Spirits Eternal Simulator
+## Battle Spirits Eternal Simulator
 
 Um simulador não oficial de **Battle Spirits**, criado para reunir jogadores, facilitar testes de decks e tornar o jogo mais acessível através do navegador.
 
