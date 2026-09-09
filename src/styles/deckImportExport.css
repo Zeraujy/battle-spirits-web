@@ -1,0 +1,259 @@
+/* =========================================================
+   DECK BUILDER — IMPORT / EXPORT
+========================================================= */
+
+.deck-builder-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.deck-transfer-btn {
+  position: relative;
+}
+
+.deck-transfer-btn::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  bottom: 5px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--accent-2) 55%, transparent),
+      transparent
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity .15s ease;
+}
+
+.deck-transfer-btn:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   NOTICE
+========================================================= */
+
+.deck-transfer-notice {
+  width:
+    min(
+      1180px,
+      calc(100% - 48px)
+    );
+
+  margin:
+    -8px auto
+    14px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  gap: 12px;
+
+  align-items: center;
+
+  padding:
+    10px 12px;
+
+  border:
+    1px solid
+    var(--line);
+
+  border-radius:
+    10px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--panel-solid, #0d1a2e)
+      74%,
+      transparent
+    );
+
+  color:
+    var(--text);
+
+  box-shadow:
+    0 10px 28px
+    rgba(0,0,0,.15);
+}
+
+.deck-transfer-notice.success {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--ok)
+      32%,
+      var(--line)
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--ok)
+      5%,
+      var(--panel-solid, #0d1a2e)
+    );
+}
+
+.deck-transfer-notice.warning {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--accent)
+      38%,
+      var(--line)
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--accent)
+      5%,
+      var(--panel-solid, #0d1a2e)
+    );
+}
+
+.deck-transfer-notice.error {
+  border-color:
+    rgba(
+      255,
+      106,
+      115,
+      .38
+    );
+
+  background:
+    rgba(
+      87,
+      18,
+      27,
+      .22
+    );
+}
+
+.deck-transfer-notice > span {
+  min-width: 0;
+
+  font-size:
+    9px;
+
+  line-height:
+    1.45;
+}
+
+.deck-transfer-notice > button {
+  width:
+    26px;
+
+  height:
+    26px;
+
+  padding:
+    0;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border:
+    0;
+
+  border-radius:
+    6px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .04
+    );
+
+  color:
+    var(--muted);
+
+  font-size:
+    15px;
+}
+
+.deck-transfer-notice > button:hover {
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      .08
+    );
+
+  color:
+    var(--text);
+
+  filter:
+    none;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .deck-page > .page-header {
+    align-items:
+      flex-start;
+  }
+
+  .deck-builder-actions {
+    max-width:
+      380px;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .deck-transfer-notice {
+    width:
+      calc(
+        100% -
+        22px
+      );
+
+    margin-top:
+      0;
+  }
+
+  .deck-builder-actions {
+    width:
+      100%;
+
+    max-width:
+      none;
+  }
+
+  .deck-builder-actions > button {
+    flex:
+      1 1
+      calc(
+        50% -
+        6px
+      );
+  }
+
+}
