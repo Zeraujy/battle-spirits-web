@@ -19,6 +19,52 @@
 }
 
 * { box-sizing: border-box; }
+
+/* =========================================================
+   INTERAÇÃO DA INTERFACE
+   Desativa a seleção azul nativa do navegador no simulador,
+   sem impedir seleção/edição dentro de campos de texto.
+========================================================= */
+
+html,
+body,
+#root,
+#root * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Evita o "ghost drag" nativo das imagens do navegador. */
+img {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/*
+ * Campos editáveis continuam funcionando normalmente:
+ * seleção de texto, copiar/colar e edição.
+ */
+input,
+textarea,
+[contenteditable="true"],
+.allow-text-selection {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+  -webkit-touch-callout: default;
+}
+
+/* Seleção visual dentro de campos editáveis. */
+input::selection,
+textarea::selection,
+[contenteditable="true"]::selection,
+.allow-text-selection::selection {
+  background: rgba(104, 168, 255, .42);
+  color: inherit;
+}
+
 html, body, #root { min-width: 100%; min-height: 100%; margin: 0; }
 body {
   min-height: 100vh;
