@@ -1,1 +1,1 @@
-# Battle Spirits Eternal Simulator — v2.2.0
+# Battle Spirits Eternal Simulator — v2.4.0
