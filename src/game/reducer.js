@@ -7,7 +7,13 @@ import { useMagic, setBurst, setMirage, activateBurst, manualAction } from "./ef
 import { beginManualPlay, confirmManualPlay, cancelManualPlay } from "./manualPlay.js";
 import { beginManualCost, confirmManualCost, cancelManualCost } from "./manualCost.js";
 import { resolveEffectDecision } from "./effectEngine/effectEngine.js";
-import { finalizeUltimateTriggerAfterDecision, resolveUltimateTriggerStage } from "./specialRules.js";
+import {
+  finalizeTriggerCounterAfterDecision,
+  finalizeUltimateTriggerAfterDecision,
+  passTriggerCounter,
+  resolveUltimateTriggerStage,
+  useTriggerCounter
+} from "./specialRules.js";
 
 function finishResult(result, cardIndex, actionType) {
   if (!result?.ok || !result.match) return result;
@@ -15,7 +21,8 @@ function finishResult(result, cardIndex, actionType) {
   let next = result.match;
 
   if (actionType === "RESOLVE_EFFECT_DECISION") {
-    next = finalizeUltimateTriggerAfterDecision(next);
+    next = finalizeTriggerCounterAfterDecision(next);
+    next = finalizeUltimateTriggerAfterDecision(next, cardIndex);
   }
 
   const braveCheck = enforceBraveConditions(next, cardIndex);
@@ -42,7 +49,7 @@ export function applyGameAction(match, action, actorId, cardIndex) {
   if (
     match.battle?.stage === "ultimateTrigger" &&
     !match.pendingEffectDecision &&
-    !["RESOLVE_ULTIMATE_TRIGGER", "MANUAL"].includes(action.type)
+    !["RESOLVE_ULTIMATE_TRIGGER", "PASS_TRIGGER_COUNTER", "USE_TRIGGER_COUNTER", "MANUAL"].includes(action.type)
   ) {
     return { ok: false, error: "Resolva o Ultimate Trigger antes de continuar a batalha." };
   }
@@ -66,6 +73,8 @@ export function applyGameAction(match, action, actorId, cardIndex) {
     case "EXCHANGE_BRAVE": result = exchangeBrave(match, actorId, action.braveInstanceId, action.hostInstanceId, cardIndex, action.options || {}); break;
     case "DECLARE_ATTACK": result = declareAttack(match, actorId, action.instanceId, cardIndex); break;
     case "RESOLVE_ULTIMATE_TRIGGER": result = resolveUltimateTriggerStage(match, actorId, cardIndex); break;
+    case "PASS_TRIGGER_COUNTER": result = passTriggerCounter(match, actorId); break;
+    case "USE_TRIGGER_COUNTER": result = useTriggerCounter(match, actorId, action.instanceId, cardIndex, action.options || {}); break;
     case "PASS_FLASH": result = passFlash(match, actorId); break;
     case "FLASH_USED": result = registerFlashUsed(match, actorId); break;
     case "DECLARE_BLOCK": result = declareBlock(match, actorId, action.instanceId, cardIndex); break;

@@ -24,6 +24,12 @@ const cards = [
   normalizeCard({ id: "U2", namePT: "Ultimate Trigger Restriction", cardType: "ultimate", colors: ["white"], cost: 5, symbols: ["ultimate"], levels: [{ level: 3, cores: 1, bp: 9000 }], effects: [{ id: "u2-trigger", type: "ultimateTrigger", timing: "whenAttacks", levels: [3], text: { ptBR: "Em um acerto, este Ultimate não pode ser bloqueado por Spirits do oponente.", en: "On a hit, this Ultimate cannot be blocked by opposing Spirits." } }], abilities: [{ id: "u2-hit", event: "ultimateTriggerHit", actions: [{ type: "cannotBeBlockedBySpirits" }] }] }),
   normalizeCard({ id: "U3", namePT: "Level Gated Ultimate", cardType: "ultimate", colors: ["green"], cost: 6, symbols: ["ultimate"], levels: [{ level: 3, cores: 1, bp: 9000 }, { level: 4, cores: 3, bp: 13000 }], effects: [{ id: "u3-trigger", type: "ultimateTrigger", timing: "whenAttacks", levels: [4], text: { ptBR: "Ultimate Trigger no LV4.", en: "Ultimate Trigger at LV4." } }] }),
   normalizeCard({ id: "U4", namePT: "Ultimate Trigger Decision", cardType: "ultimate", colors: ["green"], cost: 7, symbols: ["ultimate"], levels: [{ level: 3, cores: 1, bp: 10000 }], effects: [{ id: "u4-trigger", type: "ultimateTrigger", timing: "whenAttacks", levels: [3], text: { ptBR: "Em um acerto, destrua 1 Spirit do oponente.", en: "On a hit, destroy 1 opposing Spirit." } }], abilities: [{ id: "u4-hit", event: "ultimateTriggerHit", actions: [{ type: "selectTarget", selector: { owner: "opponent", cardTypes: ["spirit"] }, onSelect: { type: "destroy" } }] }] }),
+  normalizeCard({ id: "RM1", namePT: "Red Magic", cardType: "magic", colors: ["red"], cost: 1, reduction: [], effects: [] }),
+  normalizeCard({ id: "YM1", namePT: "Yellow Magic", cardType: "magic", colors: ["yellow"], cost: 1, reduction: [], effects: [] }),
+  normalizeCard({ id: "TC1", namePT: "Counter Bind Test", cardType: "magic", colors: ["green"], cost: 0, reduction: [], effects: [{ id: "tc1-counter", type: "triggerCounter", timing: "triggerCounter", condition: null, operations: [{ type: "conditional", condition: { type: "ultimateTriggerRevealedColor", color: "green" }, actions: [{ type: "negateUltimateTrigger" }] }] }] }),
+  normalizeCard({ id: "U5", namePT: "Critical Ultimate", cardType: "ultimate", colors: ["yellow"], cost: 7, symbols: ["ultimate"], levels: [{ level: 3, cores: 1, bp: 10000 }, { level: 4, cores: 2, bp: 14000 }], effects: [{ id: "u5-trigger", type: "ultimateTrigger", timing: "whenAttacks", levels: [3, 4], text: { ptBR: "Em um acerto, bloqueadores de Level menor não podem bloquear.", en: "On a hit, lower-level cards cannot block." } }, { id: "u5-critical", type: "criticalHit", timing: "ultimateTriggerHit", levels: [3, 4], condition: { type: "ultimateTriggerRevealedCardType", cardType: "magic" }, operations: [{ type: "chooseOption", titlePT: "Critical Hit", titleEN: "Critical Hit", options: [{ id: "red", labelPT: "Vermelho", labelEN: "Red", actions: [{ type: "returnAllTrashMatchingToHand", selector: { owner: "self", cardTypes: ["magic"], colors: ["red"] } }] }, { id: "yellow", labelPT: "Amarelo", labelEN: "Yellow", actions: [{ type: "returnAllTrashMatchingToHand", selector: { owner: "self", cardTypes: ["magic"], colors: ["yellow"] } }] }] }] }], abilities: [{ id: "u5-hit", event: "ultimateTriggerHit", levels: [3, 4], actions: [{ type: "cannotBeBlockedByLowerLevel" }] }] }),
+  normalizeCard({ id: "U6", namePT: "XU Ultimate", cardType: "ultimate", colors: ["green"], cost: 7, symbols: ["ultimate"], levels: [{ level: 3, cores: 1, bp: 10000 }, { level: 4, cores: 3, bp: 18000 }], effects: [{ id: "u6-trigger", type: "ultimateTrigger", timing: "whenAttacks", levels: [4], text: { ptBR: "Em um acerto, dê Exhaust em até 2 Spirits.", en: "On a hit, exhaust up to 2 Spirits." } }, { id: "u6-xu", type: "xuTrigger", timing: "afterUltimateTrigger", levels: [4], condition: { type: "ownLifeAtMost", value: 3 }, text: { ptBR: "XU Trigger: em um acerto, mova 1 Life do oponente ao Trash.", en: "XU Trigger: on a hit, move 1 opposing Life to Trash." }, operations: [{ type: "moveLifeToTrash", player: "opponent", amount: 1 }] }], abilities: [{ id: "u6-hit", event: "ultimateTriggerHit", levels: [4], actions: [{ type: "selectMultipleTargets", selector: { owner: "opponent", cardTypes: ["spirit"] }, maxTargets: 2, asManyAsPossible: true, onConfirm: { type: "exhaust" } }] }] }),
+  normalizeCard({ id: "U7", namePT: "Battle Trigger Ultimate", cardType: "ultimate", colors: ["green"], cost: 6, symbols: ["ultimate"], levels: [{ level: 4, cores: 1, bp: 12000 }], effects: [{ id: "u7-battle-trigger", type: "ultimateTriggerBattle", timing: "whenBattles", levels: [4], text: { ptBR: "Ultimate Trigger quando batalha.", en: "Ultimate Trigger when this Ultimate battles." } }] }),
   normalizeCard({ id: "GW1", namePT: "Grandwalker Test", cardType: "Grandwalker Nexus", cost: 3, families: ["Grandwalker"], symbols: ["red"], levels: [{ level: 1, cores: 0, bp: 0 }] }),
   normalizeCard({ id: "E1", namePT: "Summon Draw", cardType: "spirit", colors: ["red"], cost: 0, symbols: ["red"], levels: [{ level: 1, cores: 1, bp: 1000 }], abilities: [{ id: "e1-summon", event: "whenSummoned", actions: [{ type: "draw", amount: 1 }] }] }),
   normalizeCard({ id: "E2", namePT: "Attack BP", cardType: "spirit", colors: ["red"], cost: 0, symbols: ["red"], levels: [{ level: 1, cores: 1, bp: 1000 }], abilities: [{ id: "e2-attack", event: "whenAttacks", levels: [1], actions: [{ type: "modifyBP", amount: 2000, duration: "battle" }] }] }),
@@ -655,4 +661,199 @@ test("Ultimate Trigger v2 blocks Flash actions until its stage is resolved", () 
   const earlyPass = applyGameAction(attack.match, { type: "PASS_FLASH" }, "player2", index);
   assert.equal(earlyPass.ok, false);
   assert.match(earlyPass.error, /Ultimate Trigger/i);
+});
+
+test("Advanced Trigger opens a Trigger Counter window only when a valid counter is in hand", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.field.spirits = [fieldCard("U2", "u2", 1)];
+  match.players.player2.hand.unshift({ ...makePhysicalCard("TC1", index), instanceId: "counter-card" });
+  match.players.player2.deck = [{ ...makePhysicalCard("G1", index), instanceId: "green-reveal" }, ...match.players.player2.deck];
+  const r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "u2" }, "player1", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.battle.ultimateTrigger.status, "counterWindow");
+  assert.equal(r.match.battle.ultimateTrigger.counterPlayerId, "player2");
+});
+
+test("Trigger Counter window can be passed and returns control to the Ultimate controller", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.field.spirits = [fieldCard("U2", "u2", 1)];
+  match.players.player2.hand.unshift({ ...makePhysicalCard("TC1", index), instanceId: "counter-card" });
+  match.players.player2.deck = [{ ...makePhysicalCard("G1", index), instanceId: "green-reveal" }, ...match.players.player2.deck];
+  let r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "u2" }, "player1", index);
+  r = applyGameAction(r.match, { type: "PASS_TRIGGER_COUNTER" }, "player2", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.battle.ultimateTrigger.status, "revealed");
+  r = applyGameAction(r.match, { type: "RESOLVE_ULTIMATE_TRIGGER" }, "player1", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.battle.stage, "flash1");
+});
+
+test("Counter Bind-style Trigger Counter negates a HIT when the revealed card is Green", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.field.spirits = [fieldCard("U2", "u2", 1)];
+  match.players.player2.hand.unshift({ ...makePhysicalCard("TC1", index), instanceId: "counter-card" });
+  match.players.player2.deck = [{ ...makePhysicalCard("G1", index), instanceId: "green-reveal" }, ...match.players.player2.deck];
+  let r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "u2" }, "player1", index);
+  assert.equal(r.match.battle.ultimateTrigger.originalHit, true);
+  r = applyGameAction(r.match, { type: "USE_TRIGGER_COUNTER", instanceId: "counter-card" }, "player2", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.battle.ultimateTrigger.countered, true);
+  assert.equal(r.match.battle.ultimateTrigger.hit, false);
+  assert.equal(r.match.players.player2.hand.some((card) => card.instanceId === "counter-card"), false);
+  assert.equal(r.match.players.player2.trash.some((card) => card.cardId === "TC1"), true);
+  r = applyGameAction(r.match, { type: "RESOLVE_ULTIMATE_TRIGGER" }, "player1", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.battle.stage, "flash1");
+  assert.equal(r.match.battle.restrictions.spiritsCannotBlock, undefined);
+});
+
+test("Trigger Counter that does not meet its condition does not negate the HIT", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.field.spirits = [fieldCard("U2", "u2", 1)];
+  match.players.player2.hand.unshift({ ...makePhysicalCard("TC1", index), instanceId: "counter-card" });
+  match.players.player2.deck = [{ ...makePhysicalCard("R1", index), instanceId: "red-reveal" }, ...match.players.player2.deck];
+  let r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "u2" }, "player1", index);
+  r = applyGameAction(r.match, { type: "USE_TRIGGER_COUNTER", instanceId: "counter-card" }, "player2", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.battle.ultimateTrigger.countered, false);
+  assert.equal(r.match.battle.ultimateTrigger.hit, true);
+  r = applyGameAction(r.match, { type: "RESOLVE_ULTIMATE_TRIGGER" }, "player1", index);
+  assert.equal(r.match.battle.restrictions.spiritsCannotBlock, true);
+});
+
+test("Critical Hit only becomes eligible when the revealed HIT card matches its condition", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.field.spirits = [fieldCard("U5", "critical", 1)];
+  match.players.player2.deck = [{ ...makePhysicalCard("RM1", index), instanceId: "magic-reveal" }, ...match.players.player2.deck];
+  let r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "critical" }, "player1", index);
+  assert.equal(r.match.battle.ultimateTrigger.hit, true);
+  assert.equal(r.match.battle.ultimateTrigger.criticalHit?.eligible, true);
+
+  match = matchBase();
+  match.phase = "attack";
+  match.players.player1.field.spirits = [fieldCard("U5", "critical-2", 1)];
+  match.players.player2.deck = [{ ...makePhysicalCard("R1", index), instanceId: "spirit-reveal" }, ...match.players.player2.deck];
+  r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "critical-2" }, "player1", index);
+  assert.equal(r.match.battle.ultimateTrigger.criticalHit, null);
+});
+
+test("Critical Hit uses Decision Queue and returns all Magic cards of the chosen color from Trash", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.field.spirits = [fieldCard("U5", "critical", 1)];
+  match.players.player1.trash = [
+    { ...makePhysicalCard("RM1", index), instanceId: "red-magic-a" },
+    { ...makePhysicalCard("RM1", index), instanceId: "red-magic-b" },
+    { ...makePhysicalCard("YM1", index), instanceId: "yellow-magic-a" }
+  ];
+  match.players.player2.deck = [{ ...makePhysicalCard("RM1", index), instanceId: "magic-reveal" }, ...match.players.player2.deck];
+  let r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "critical" }, "player1", index);
+  r = applyGameAction(r.match, { type: "RESOLVE_ULTIMATE_TRIGGER" }, "player1", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.pendingEffectDecision?.kind, "chooseOption");
+  r = applyGameAction(r.match, { type: "RESOLVE_EFFECT_DECISION", payload: { optionId: "red" } }, "player1", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.pendingEffectDecision, null);
+  assert.equal(r.match.players.player1.hand.filter((card) => card.cardId === "RM1").length >= 2, true);
+  assert.equal(r.match.players.player1.trash.some((card) => card.instanceId === "yellow-magic-a"), true);
+  assert.equal(r.match.battle.stage, "flash1");
+});
+
+test("Critical Hit lower-Level restriction filters blockers dynamically", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.field.spirits = [fieldCard("U5", "critical", 1)];
+  match.players.player2.field.spirits = [fieldCard("R1", "low-blocker", 1), fieldCard("U1", "level-three-blocker", 1)];
+  match.players.player2.deck = [{ ...makePhysicalCard("R1", index), instanceId: "reveal" }, ...match.players.player2.deck];
+  let r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "critical" }, "player1", index);
+  r = applyGameAction(r.match, { type: "RESOLVE_ULTIMATE_TRIGGER" }, "player1", index);
+  r = applyGameAction(r.match, { type: "PASS_FLASH" }, "player2", index);
+  r = applyGameAction(r.match, { type: "PASS_FLASH" }, "player1", index);
+  assert.equal(r.match.battle.stage, "block");
+  assert.equal(applyGameAction(r.match, { type: "DECLARE_BLOCK", instanceId: "low-blocker" }, "player2", index).ok, false);
+  assert.equal(applyGameAction(r.match, { type: "DECLARE_BLOCK", instanceId: "level-three-blocker" }, "player2", index).ok, true);
+});
+
+test("XU Trigger starts after a base GUARD when its condition is met", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.life = 3;
+  match.players.player1.field.spirits = [fieldCard("U6", "xu-source", 3)];
+  match.players.player2.deck = [
+    { ...makePhysicalCard("U4", index), instanceId: "base-guard" },
+    { ...makePhysicalCard("R1", index), instanceId: "xu-hit" },
+    ...match.players.player2.deck
+  ];
+  let r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "xu-source" }, "player1", index);
+  assert.equal(r.match.battle.ultimateTrigger.hit, false);
+  r = applyGameAction(r.match, { type: "RESOLVE_ULTIMATE_TRIGGER" }, "player1", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.battle.stage, "ultimateTrigger");
+  assert.equal(r.match.battle.ultimateTrigger.kind, "xu");
+  assert.equal(r.match.battle.ultimateTrigger.hit, true);
+});
+
+test("XU Trigger does not start when its Life condition is not met", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.life = 4;
+  match.players.player1.field.spirits = [fieldCard("U6", "xu-source", 3)];
+  match.players.player2.deck = [{ ...makePhysicalCard("U4", index), instanceId: "base-guard" }, ...match.players.player2.deck];
+  let r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "xu-source" }, "player1", index);
+  r = applyGameAction(r.match, { type: "RESOLVE_ULTIMATE_TRIGGER" }, "player1", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.battle.stage, "flash1");
+  assert.notEqual(r.match.battle.ultimateTrigger.kind, "xu");
+});
+
+test("XU HIT moves Life to Core Trash instead of Reserve", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.life = 3;
+  match.players.player1.field.spirits = [fieldCard("U6", "xu-source", 3)];
+  match.players.player2.deck = [
+    { ...makePhysicalCard("U4", index), instanceId: "base-guard" },
+    { ...makePhysicalCard("R1", index), instanceId: "xu-hit" },
+    ...match.players.player2.deck
+  ];
+  const lifeBefore = match.players.player2.life;
+  const reserveBefore = match.players.player2.reserve;
+  const trashCoresBefore = match.players.player2.trashCores;
+  let r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "xu-source" }, "player1", index);
+  r = applyGameAction(r.match, { type: "RESOLVE_ULTIMATE_TRIGGER" }, "player1", index);
+  r = applyGameAction(r.match, { type: "RESOLVE_ULTIMATE_TRIGGER" }, "player1", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.players.player2.life, lifeBefore - 1);
+  assert.equal(r.match.players.player2.reserve, reserveBefore);
+  assert.equal(r.match.players.player2.trashCores, trashCoresBefore + 1);
+  assert.equal(r.match.battle.stage, "flash1");
+});
+
+test("selectMultipleTargets asManyAsPossible auto-resolves all available targets up to the requested count", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.field.spirits = [fieldCard("U6", "multi-xu", 3)];
+  match.players.player2.field.spirits = [fieldCard("R1", "only-target", 1)];
+  match.players.player2.deck = [{ ...makePhysicalCard("R1", index), instanceId: "hit-card" }, ...match.players.player2.deck];
+  let r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "multi-xu" }, "player1", index);
+  r = applyGameAction(r.match, { type: "RESOLVE_ULTIMATE_TRIGGER" }, "player1", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.pendingEffectDecision, null);
+  assert.equal(r.match.players.player2.field.spirits[0].exhausted, true);
+});
+
+test("Ultimate Trigger type containing ultimateTrigger is recognized for whenBattles on attack", () => {
+  let match = matchBase();
+  match.phase = "attack";
+  match.players.player1.field.spirits = [fieldCard("U7", "battle-trigger", 1)];
+  match.players.player2.deck = [{ ...makePhysicalCard("R1", index), instanceId: "battle-reveal" }, ...match.players.player2.deck];
+  const r = applyGameAction(match, { type: "DECLARE_ATTACK", instanceId: "battle-trigger" }, "player1", index);
+  assert.equal(r.ok, true);
+  assert.equal(r.match.battle.stage, "ultimateTrigger");
+  assert.equal(r.match.battle.ultimateTrigger.effectId, "u7-battle-trigger");
 });

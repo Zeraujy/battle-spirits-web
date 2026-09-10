@@ -26,7 +26,10 @@ const EVENT_ALIASES = new Map([
   ["utriggerhit", "ultimateTriggerHit"],
   ["ultimatetriggerguard", "ultimateTriggerGuard"],
   ["utriggerguard", "ultimateTriggerGuard"],
-  ["ultimatetriggerresolved", "ultimateTriggerResolved"]
+  ["ultimatetriggerresolved", "ultimateTriggerResolved"],
+  ["triggercounter", "triggerCounter"],
+  ["xutriggerhit", "xuTriggerHit"],
+  ["xuhit", "xuTriggerHit"]
 ]);
 
 export function normalizeEventName(value) {
@@ -63,7 +66,7 @@ export function getTriggeredEntries(card, event) {
     // não deve virar um fallback manual de whenAttacks no Effect Engine.
     if (source === "effects") {
       const specialType = String(entry?.type || "").replace(/[\s_-]+/g, "").toLowerCase();
-      if (specialType === "ultimatetrigger") return false;
+      if (specialType.includes("ultimatetrigger")) return false;
     }
     return entryMatchesEvent(entry, event);
   });

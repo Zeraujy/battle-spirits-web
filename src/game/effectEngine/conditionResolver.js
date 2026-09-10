@@ -50,6 +50,21 @@ function typedConditionMatches(match, condition, context, cardIndex) {
   if (type === "ownLifeAtMost") {
     return Number(match.players?.[sourcePlayerId]?.life ?? 0) <= Number(condition.value ?? condition.max ?? 0);
   }
+  if (type === "ultimateTriggerRevealedCardType") {
+    const cardId = context.ultimateTrigger?.revealedCardId;
+    const revealed = cardId ? cardIndex.get(cardId) : null;
+    const expected = String(condition.cardType ?? condition.value ?? "").toLowerCase();
+    return Boolean(revealed && String(revealed.cardType || "").toLowerCase() === expected);
+  }
+  if (type === "ultimateTriggerRevealedColor") {
+    const cardId = context.ultimateTrigger?.revealedCardId;
+    const revealed = cardId ? cardIndex.get(cardId) : null;
+    const expected = String(condition.color ?? condition.value ?? "").toLowerCase();
+    return Boolean(revealed && (revealed.colors || []).map((color) => String(color).toLowerCase()).includes(expected));
+  }
+  if (type === "ultimateTriggerWasHit") {
+    return Boolean(context.ultimateTrigger?.originalHit ?? context.ultimateTrigger?.hit);
+  }
   return false;
 }
 function compareNumber(actual, condition = {}) {
@@ -126,7 +141,7 @@ export function entryConditionsMatch(match, entry, context = {}, cardIndex) {
     if (Number(level) !== Number(entry.level)) return false;
   }
 
-  const isCombined = Boolean(sourcePhysical?.combinedWith || context.isCombined || context.combinedHostInstanceId);
+  const isCombined = Boolean(sourcePhysical?.combinedWith || context.isCombined || context.combinedHostInstanceId || context.combinedBrave);
   if (entry.requiresCombined === true && !isCombined) return false;
   if (entry.requiresCombined === false && isCombined) return false;
 

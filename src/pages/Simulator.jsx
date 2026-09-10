@@ -595,11 +595,26 @@ export default function Simulator({
         "ultimateTrigger" &&
         match.battle
           ?.ultimateTrigger
-          ?.controllerPlayerId
       ) {
-        return match.battle
-          .ultimateTrigger
-          .controllerPlayerId;
+        const trigger =
+          match.battle
+            .ultimateTrigger;
+
+        if (
+          trigger.status ===
+            "counterWindow" &&
+          trigger.counterPlayerId
+        ) {
+          return trigger
+            .counterPlayerId;
+        }
+
+        if (
+          trigger.controllerPlayerId
+        ) {
+          return trigger
+            .controllerPlayerId;
+        }
       }
 
       if (
@@ -3748,10 +3763,27 @@ export default function Simulator({
           )
         : null;
 
+    const isXU =
+      trigger.kind === "xu";
+
+    const isCounterWindow =
+      trigger.status ===
+        "counterWindow";
+
+    const isCountered =
+      Boolean(
+        trigger.countered
+      );
+
+    const resolvingPlayerId =
+      isCounterWindow
+        ? trigger.counterPlayerId
+        : trigger.controllerPlayerId;
+
     const waiting =
       online &&
       viewerPlayerId !==
-        trigger.controllerPlayerId;
+        resolvingPlayerId;
 
     const sourceName =
       sourceCard
@@ -3784,50 +3816,150 @@ export default function Simulator({
             ""
           );
 
+    const criticalText =
+      language === "en"
+        ? (
+            trigger.criticalHit
+              ?.textEN ||
+            trigger.criticalHit
+              ?.textPT ||
+            ""
+          )
+        : (
+            trigger.criticalHit
+              ?.textPT ||
+            trigger.criticalHit
+              ?.textEN ||
+            ""
+          );
+
+    const counterCards =
+      isCounterWindow &&
+      trigger.counterPlayerId
+        ? (
+            match.players[
+              trigger.counterPlayerId
+            ]?.hand || []
+          )
+            .map(
+              (physical) => ({
+                physical,
+                card:
+                  cardIndex.get(
+                    physical.cardId
+                  )
+              })
+            )
+            .filter(
+              ({ card }) =>
+                card?.cardType ===
+                  "magic" &&
+                (
+                  card.effects || []
+                ).some(
+                  (effect) => {
+                    const type =
+                      String(
+                        effect?.type ||
+                        ""
+                      )
+                        .replace(
+                          /[\s_-]+/g,
+                          ""
+                        )
+                        .toLowerCase();
+
+                    const timing =
+                      String(
+                        effect?.timing ||
+                        ""
+                      )
+                        .replace(
+                          /[\s_-]+/g,
+                          ""
+                        )
+                        .toLowerCase();
+
+                    return (
+                      type ===
+                        "triggercounter" ||
+                      timing ===
+                        "triggercounter"
+                    );
+                  }
+                )
+            )
+        : [];
+
+    const resultLabel =
+      isCountered
+        ? "COUNTERED"
+        : trigger.hit
+          ? "HIT"
+          : "GUARD";
+
     return (
       <div className="ultimate-trigger-overlay">
         <section
           className={
             `ultimate-trigger-modal ${
-              trigger.hit
-                ? "hit"
-                : "guard"
+              isXU
+                ? "xu"
+                : ""
+            } ${
+              isCountered
+                ? "countered"
+                : trigger.hit
+                  ? "hit"
+                  : "guard"
             }`
           }
         >
           <header className="ultimate-trigger-header">
             <div>
               <span className="eyebrow">
-                ULTIMATE TRIGGER
+                {isXU
+                  ? "XU TRIGGER"
+                  : "ULTIMATE TRIGGER"}
               </span>
 
               <h2>
-                {trigger.hit
-                  ? "HIT"
-                  : "GUARD"}
+                {resultLabel}
               </h2>
             </div>
 
             <span className="ultimate-trigger-status">
-              {trigger.hit
+              {isCounterWindow
                 ? (
                     language === "en"
-                      ? "TRIGGER HIT"
-                      : "TRIGGER ACERTOU"
+                      ? "TRIGGER COUNTER WINDOW"
+                      : "JANELA DE TRIGGER COUNTER"
                   )
-                : (
-                    language === "en"
-                      ? "TRIGGER GUARDED"
-                      : "TRIGGER DEFENDIDO"
-                  )}
+                : isCountered
+                  ? (
+                      language === "en"
+                        ? "TRIGGER COUNTERED"
+                        : "TRIGGER ANULADO"
+                    )
+                  : trigger.hit
+                    ? (
+                        language === "en"
+                          ? "TRIGGER HIT"
+                          : "TRIGGER ACERTOU"
+                      )
+                    : (
+                        language === "en"
+                          ? "TRIGGER GUARDED"
+                          : "TRIGGER DEFENDIDO"
+                      )}
             </span>
           </header>
 
           <div className="ultimate-trigger-comparison">
             <article className="ultimate-trigger-card source">
               <span>
-                {language === "en"
-                  ? "ULTIMATE"
+                {isXU
+                  ? "XU SOURCE"
                   : "ULTIMATE"}
               </span>
 
@@ -3853,15 +3985,13 @@ export default function Simulator({
               <span>
                 {trigger.status === "emptyDeck"
                   ? "—"
-                  : trigger.hit
+                  : trigger.originalHit
                     ? ">"
                     : "≤"}
               </span>
 
               <small>
-                {trigger.hit
-                  ? "HIT"
-                  : "GUARD"}
+                {resultLabel}
               </small>
             </div>
 
@@ -3893,20 +4023,134 @@ export default function Simulator({
             </article>
           </div>
 
-          {triggerText && (
+          {!isCountered &&
+            trigger.criticalHit
+              ?.eligible && (
+            <div className="ultimate-trigger-critical-hit">
+              <span>
+                CRITICAL HIT
+              </span>
+
+              <strong>
+                {language === "en"
+                  ? "Critical Hit condition met"
+                  : "Condição de Critical Hit cumprida"}
+              </strong>
+
+              {criticalText && (
+                <p>
+                  {criticalText}
+                </p>
+              )}
+            </div>
+          )}
+
+          {isCounterWindow && (
+            <div className="trigger-counter-window">
+              <span className="trigger-counter-kicker">
+                TRIGGER COUNTER
+              </span>
+
+              <strong>
+                {language === "en"
+                  ? "Respond before the HIT effect resolves"
+                  : "Responda antes da resolução do efeito de HIT"}
+              </strong>
+
+              <p>
+                {language === "en"
+                  ? "You may use a Trigger Counter card now, or pass the response window."
+                  : "Você pode usar uma carta com Trigger Counter agora ou passar esta janela de resposta."}
+              </p>
+
+              {!waiting && (
+                <div className="trigger-counter-options">
+                  {counterCards.map(
+                    ({
+                      physical,
+                      card
+                    }) => (
+                      <button
+                        type="button"
+                        className="trigger-counter-card"
+                        key={
+                          physical.instanceId
+                        }
+                        onClick={() =>
+                          dispatch(
+                            {
+                              type:
+                                "USE_TRIGGER_COUNTER",
+                              instanceId:
+                                physical.instanceId
+                            },
+                            trigger.counterPlayerId
+                          )
+                        }
+                      >
+                        <span className="trigger-counter-card-image">
+                          {card?.image ? (
+                            <img
+                              src={resolveCardImage(card)}
+                              alt={getCardName(card)}
+                            />
+                          ) : (
+                            getCardName(card)
+                          )}
+                        </span>
+
+                        <span>
+                          <strong>
+                            {getCardName(card)}
+                          </strong>
+
+                          <small>
+                            COST {card?.cost ?? "-"}
+                          </small>
+                        </span>
+                      </button>
+                    )
+                  )}
+
+                  <button
+                    type="button"
+                    className="ghost trigger-counter-pass"
+                    onClick={() =>
+                      dispatch(
+                        {
+                          type:
+                            "PASS_TRIGGER_COUNTER"
+                        },
+                        trigger.counterPlayerId
+                      )
+                    }
+                  >
+                    {language === "en"
+                      ? "Do not use Trigger Counter"
+                      : "Não usar Trigger Counter"}
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {triggerText &&
+            !isCounterWindow && (
             <div className="ultimate-trigger-effect-text">
               <span>
-                {trigger.hit
-                  ? (
-                      language === "en"
-                        ? "HIT EFFECT"
-                        : "EFEITO DE HIT"
-                    )
-                  : (
-                      language === "en"
-                        ? "RESULT"
-                        : "RESULTADO"
-                    )}
+                {isXU
+                  ? "XU HIT EFFECT"
+                  : trigger.hit
+                    ? (
+                        language === "en"
+                          ? "HIT EFFECT"
+                          : "EFEITO DE HIT"
+                      )
+                    : (
+                        language === "en"
+                          ? "RESULT"
+                          : "RESULTADO"
+                      )}
               </span>
 
               <p>{triggerText}</p>
@@ -3916,11 +4160,19 @@ export default function Simulator({
           <footer className="ultimate-trigger-footer">
             {waiting ? (
               <span>
-                {language === "en"
-                  ? "Waiting for the attacking player to resolve the Ultimate Trigger."
-                  : "Aguardando o jogador atacante resolver o Ultimate Trigger."}
+                {isCounterWindow
+                  ? (
+                      language === "en"
+                        ? "Waiting for the opponent's Trigger Counter response."
+                        : "Aguardando a resposta de Trigger Counter do oponente."
+                    )
+                  : (
+                      language === "en"
+                        ? "Waiting for the Trigger controller to continue."
+                        : "Aguardando o controlador do Trigger continuar."
+                    )}
               </span>
-            ) : (
+            ) : !isCounterWindow ? (
               <button
                 type="button"
                 className="primary-btn ultimate-trigger-button"
@@ -3934,29 +4186,31 @@ export default function Simulator({
                   )
                 }
               >
-                {trigger.hit
+                {isCountered
                   ? (
                       language === "en"
-                        ? "Resolve HIT and continue"
-                        : "Resolver HIT e continuar"
+                        ? "Continue after Trigger Counter"
+                        : "Continuar após Trigger Counter"
                     )
-                  : (
-                      language === "en"
-                        ? "Continue to Flash Timing 1"
-                        : "Continuar para Flash Timing 1"
-                    )}
+                  : trigger.hit
+                    ? (
+                        language === "en"
+                          ? `Resolve ${isXU ? "XU HIT" : "HIT"} and continue`
+                          : `Resolver ${isXU ? "XU HIT" : "HIT"} e continuar`
+                      )
+                    : (
+                        language === "en"
+                          ? "Continue"
+                          : "Continuar"
+                      )}
               </button>
-            )}
+            ) : null}
           </footer>
         </section>
       </div>
     );
   }
 
-
-  /* =======================================================
-     BATTLE CENTER
-  ======================================================= */
 
   function battleCenter() {
     const battle =

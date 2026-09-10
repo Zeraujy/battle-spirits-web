@@ -3,7 +3,7 @@ import { removeFieldCard, updateFieldCard } from "../zones.js";
 import { otherPlayerId } from "../utils.js";
 import { conditionMatchesEffect } from "./conditionResolver.js";
 import { addBPModifier } from "./modifierResolver.js";
-import { resolveActionTargets } from "./targetResolver.js";
+import { collectTrashTargets, resolveActionTargets } from "./targetResolver.js";
 
 const ACTION_ALIASES = {
   modifybp: "modifyBP",
@@ -32,7 +32,12 @@ const ACTION_ALIASES = {
   setbattlerestriction: "setBattleRestriction",
   setbattleflag: "setBattleRestriction",
   preventspiritblock: "setBattleRestriction",
-  cannotbeblockedbyspirits: "setBattleRestriction"
+  cannotbeblockedbyspirits: "setBattleRestriction",
+  cannotbeblockedbylowerlevel: "setBattleRestriction",
+  returntotopdeck: "returnToTopDeck",
+  returnalltrashmatchingtohand: "returnAllTrashMatchingToHand",
+  movelifetotrash: "moveLifeToTrash",
+  negateultimatetrigger: "negateUltimateTrigger"
 };
 
 function canonicalType(type) {
@@ -105,6 +110,7 @@ function moveTargetOut(match, target, destination, cardIndex) {
     const clean = cleanPhysical(removed.card);
     if (destination === "trash") player = { ...player, trash: [...player.trash, clean] };
     if (destination === "hand") player = { ...player, hand: [...player.hand, clean] };
+    if (destination === "topDeck") player = { ...player, deck: [clean, ...player.deck] };
     let next = { ...match, players: { ...match.players, [current.playerId]: player } };
     if (current.zone === "spirits") next = detachAttachedBrave(next, current.playerId, current.card.instanceId, cardIndex);
     return next;
@@ -291,8 +297,53 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: Math.abs(delta) };
   }
 
+  if (type === "moveLifeToTrash") {
+    const playerId = resolvePlayerId(next, action, context);
+    const player = next.players?.[playerId];
+    if (!player) return { match, notes: ["Jogador alvo inválido para mover Life ao Trash."], manualResolutionNeeded: true, executed: false };
+    const requested = Math.max(0, Number(action.amount ?? action.count ?? 1));
+    const moved = Math.min(requested, Number(player.life || 0));
+    const life = Math.max(0, Number(player.life || 0) - moved);
+    next = {
+      ...next,
+      players: {
+        ...next.players,
+        [playerId]: { ...player, life, trashCores: Number(player.trashCores || 0) + moved }
+      }
+    };
+    if (life <= 0 && moved > 0) next = { ...next, winnerId: otherPlayerId(next, playerId), winnerReason: "life" };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
+  }
+
+  if (type === "negateUltimateTrigger") {
+    if (!next.battle?.ultimateTrigger) {
+      return { match: next, notes: ["Não existe Ultimate/XU Trigger ativo para anular."], manualResolutionNeeded: true, executed: false };
+    }
+    const trigger = next.battle.ultimateTrigger;
+    next = {
+      ...next,
+      battle: {
+        ...next.battle,
+        ultimateTrigger: {
+          ...trigger,
+          originalHit: Boolean(trigger.originalHit ?? trigger.hit),
+          hit: false,
+          countered: true
+        }
+      }
+    };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "returnAllTrashMatchingToHand") {
+    const selector = typeof action.selector === "object" && action.selector ? action.selector : {};
+    const targets = collectTrashTargets(next, cardIndex, { ...selector, owner: selector.owner ?? action.owner ?? "self" }, context);
+    for (const target of targets) next = moveTargetOut(next, target, "hand", cardIndex);
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: targets.length };
+  }
+
   if ([
-    "modifyBP", "refresh", "exhaust", "destroy", "returnToHand",
+    "modifyBP", "refresh", "exhaust", "destroy", "returnToHand", "returnToTopDeck",
     "destroyAllMatching", "refreshAllMatching", "exhaustAllMatching", "returnAllMatchingToHand"
   ].includes(type)) {
     const allType = ["destroyAllMatching", "refreshAllMatching", "exhaustAllMatching", "returnAllMatchingToHand"].includes(type);
@@ -325,6 +376,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       }
       if (baseType === "destroy") return moveTargetOut(working, target, "trash", cardIndex);
       if (baseType === "returnToHand") return moveTargetOut(working, target, "hand", cardIndex);
+      if (baseType === "returnToTopDeck") return moveTargetOut(working, target, "topDeck", cardIndex);
       return working;
     });
   }
@@ -365,9 +417,16 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     if (["preventspiritblock", "cannotbeblockedbyspirits"].includes(rawType)) {
       restriction.spiritsCannotBlock = true;
     }
+    if (rawType === "cannotbeblockedbylowerlevel") {
+      const level = Number(context.sourceCard && context.sourcePhysical
+        ? context.sourceCard.levels?.filter((entry) => Number(entry.cores) <= (Number(context.sourcePhysical.cores?.regular || 0) + (context.sourcePhysical.cores?.soul ? 1 : 0))).sort((a, b) => Number(a.level) - Number(b.level)).at(-1)?.level || 0
+        : 0);
+      restriction.minimumBlockerLevel = level;
+    }
     if (action.spiritsCannotBlock != null) restriction.spiritsCannotBlock = Boolean(action.spiritsCannotBlock);
     if (action.ultimatesCannotBlock != null) restriction.ultimatesCannotBlock = Boolean(action.ultimatesCannotBlock);
     if (action.mustBlockIfAble != null) restriction.mustBlockIfAble = Boolean(action.mustBlockIfAble);
+    if (action.minimumBlockerLevel != null) restriction.minimumBlockerLevel = Number(action.minimumBlockerLevel);
 
     if (!Object.keys(restriction).length) {
       return { match: next, notes: ["Restrição de batalha sem dados estruturados."], manualResolutionNeeded: true, executed: false };

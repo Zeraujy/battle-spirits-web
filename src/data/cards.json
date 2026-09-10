@@ -21044,7 +21044,35 @@
         "requiresCombined": true
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd28-008-utrigger-hit-v2",
+        "event": "ultimateTriggerHit",
+        "levels": [
+          4
+        ],
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Ultimate Trigger — HIT",
+            "titleEN": "Ultimate Trigger — HIT",
+            "instructionPT": "Escolha 1 Spirit do oponente em Exhaust para devolver ao topo do deck do dono.",
+            "instructionEN": "Choose 1 exhausted opposing Spirit to return to the top of its owner's deck.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "exhausted": true
+            },
+            "onSelect": {
+              "type": "returnToTopDeck"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-008.webp",
     "nameJP": "剛の剣聖ルビート"
   },
@@ -21161,7 +21189,18 @@
         "text": {
           "en": "After the Ultimate Trigger, if your Life is 3 or less, perform XU Trigger. On an XU hit, move 1 Core from your opponent's Life to their Trash.",
           "ptBR": "Após o Ultimate Trigger, se a sua Life for 3 ou menos, execute XU Trigger. Em um acerto de XU, mova 1 Core da Life do oponente para o Trash dele."
-        }
+        },
+        "condition": {
+          "type": "ownLifeAtMost",
+          "value": 3
+        },
+        "operations": [
+          {
+            "type": "moveLifeToTrash",
+            "player": "opponent",
+            "amount": 1
+          }
+        ]
       }
     ],
     "abilities": [
@@ -21178,6 +21217,34 @@
             "type": "addCoreFromVoid",
             "target": "self",
             "amount": 2
+          }
+        ]
+      },
+      {
+        "id": "sd28-009-utrigger-hit-v2",
+        "event": "ultimateTriggerHit",
+        "levels": [
+          4,
+          5
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "titlePT": "Ultimate Trigger — HIT",
+            "titleEN": "Ultimate Trigger — HIT",
+            "instructionPT": "Escolha 2 Spirits do oponente para dar Exhaust. Se houver menos de 2, resolva o máximo possível.",
+            "instructionEN": "Choose 2 opposing Spirits to exhaust. If fewer than 2 are available, resolve as many as possible.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "maxTargets": 2,
+            "asManyAsPossible": true,
+            "onConfirm": {
+              "type": "exhaust"
+            }
           }
         ]
       }
@@ -21513,7 +21580,7 @@
         "id": "sd28-013-counter-display",
         "type": "triggerCounter",
         "levels": [],
-        "timing": "ultimateTriggerHit",
+        "timing": "triggerCounter",
         "title": {
           "en": "Trigger Counter",
           "ptBR": "Trigger Counter"
@@ -21521,7 +21588,21 @@
         "text": {
           "en": "If the card revealed by the opposing Ultimate Trigger is Green, negate that Ultimate Trigger.",
           "ptBR": "Se a carta revelada pelo Ultimate Trigger do oponente for Verde, anule aquele Ultimate Trigger."
-        }
+        },
+        "operations": [
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "ultimateTriggerRevealedColor",
+              "color": "green"
+            },
+            "actions": [
+              {
+                "type": "negateUltimateTrigger"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "sd28-013-flash-display",
@@ -24581,7 +24662,136 @@
         "text": {
           "en": "If the hit card is a Magic card, choose a color and return all Magic cards of that color from your Trash to your hand.",
           "ptBR": "Se a carta acertada for uma Magic, escolha uma cor e devolva para a sua mão todas as Magics daquela cor do seu Trash."
-        }
+        },
+        "condition": {
+          "type": "ultimateTriggerRevealedCardType",
+          "cardType": "magic"
+        },
+        "operations": [
+          {
+            "type": "chooseOption",
+            "titlePT": "Critical Hit",
+            "titleEN": "Critical Hit",
+            "instructionPT": "Escolha uma cor. Todas as Magics dessa cor no seu Trash voltam para a sua mão.",
+            "instructionEN": "Choose a color. Return all Magic cards of that color from your Trash to your hand.",
+            "options": [
+              {
+                "id": "red",
+                "labelPT": "Vermelho",
+                "labelEN": "Red",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "red"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "purple",
+                "labelPT": "Roxo",
+                "labelEN": "Purple",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "purple"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "green",
+                "labelPT": "Verde",
+                "labelEN": "Green",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "green"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "white",
+                "labelPT": "Branco",
+                "labelEN": "White",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "white"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "yellow",
+                "labelPT": "Amarelo",
+                "labelEN": "Yellow",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "yellow"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "blue",
+                "labelPT": "Azul",
+                "labelEN": "Blue",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "blue"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "sd23-x01-battle",
@@ -24601,7 +24811,22 @@
         }
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-x01-utrigger-hit-v2",
+        "event": "ultimateTriggerHit",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "actions": [
+          {
+            "type": "cannotBeBlockedByLowerLevel"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-X01.webp",
     "nameJP": "アルティメット・ヴァリエル",
     "summonCondition": {

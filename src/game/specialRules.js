@@ -1,6 +1,10 @@
-import { fieldCards, findPhysicalCard, getCurrentLevel, getDatabaseCard } from "./selectors.js";
+import { fieldCards, findPhysicalCard, getBraveAttachment, getCurrentLevel, getDatabaseCard } from "./selectors.js";
+import { calculateReduction, autoBuildPayment } from "./cost.js";
+import { payCoreCost } from "./cores.js";
+import { removeHandCard } from "./zones.js";
 import { appendLog, otherPlayerId } from "./utils.js";
 import { resolveCardEvent, resolveOperations } from "./effectEngine/effectEngine.js";
+import { entryConditionsMatch } from "./effectEngine/conditionResolver.js";
 import { getCombinedStats } from "./brave.js";
 
 const COLOR_WORDS = {
@@ -11,6 +15,10 @@ const COLOR_WORDS = {
   yellow: ["yellow", "amarelo", "amarela", "黄"],
   blue: ["blue", "azul", "青"]
 };
+
+function compact(value) {
+  return String(value || "").replace(/[\s_-]+/g, "").toLowerCase();
+}
 
 function controlsMatching(match, playerId, cardIndex, condition = {}) {
   const player = match.players[playerId];
@@ -73,21 +81,71 @@ function effectTextValue(effect, language) {
     : (text?.ptBR || text?.en || "");
 }
 
-function ultimateTriggerEffects(card, physical) {
+function levelMatches(effect, card, physical) {
   const level = getCurrentLevel(card, physical)?.level ?? 0;
+  if (Array.isArray(effect?.levels) && effect.levels.length && !effect.levels.map(Number).includes(Number(level))) return false;
+  if (effect?.level != null && Number(effect.level) !== Number(level)) return false;
+  return true;
+}
+
+function triggerTimingMatches(effect, timing = "whenAttacks") {
+  const type = compact(effect?.type);
+  const effectTiming = compact(effect?.timing);
+  const isTrigger = type.includes("ultimatetrigger") || effectTiming === "ultimatetrigger";
+  if (!isTrigger) return false;
+  if (timing === "whenBattles") return effectTiming === "whenbattles" || type.includes("battle");
+  return effectTiming === "whenattacks" || effectTiming === "ultimatetrigger" || (!effectTiming && !type.includes("battle"));
+}
+
+function ultimateTriggerEffects(match, cardIndex, card, physical, timing = "whenAttacks") {
+  const combined = Boolean(getBraveAttachment(match, physical?.instanceId));
   return (card?.effects || []).filter((effect) => {
-    const type = String(effect?.type || "").replace(/[\s_-]+/g, "").toLowerCase();
-    const timing = String(effect?.timing || "").replace(/[\s_-]+/g, "").toLowerCase();
-    const isTrigger = type === "ultimatetrigger" || timing === "ultimatetrigger";
-    if (!isTrigger) return false;
-    if (Array.isArray(effect.levels) && effect.levels.length && !effect.levels.map(Number).includes(Number(level))) return false;
-    if (effect.level != null && Number(effect.level) !== Number(level)) return false;
+    if (!triggerTimingMatches(effect, timing)) return false;
+    if (!levelMatches(effect, card, physical)) return false;
+    if (effect.requiresCombined === true && !combined) return false;
+    if (effect.requiresCombined === false && combined) return false;
     return true;
   });
 }
 
-export function findUltimateTriggerEffect(card, physical) {
-  return ultimateTriggerEffects(card, physical)[0] || null;
+export function findUltimateTriggerEffect(match, cardIndex, card, physical, timing = "whenAttacks") {
+  return ultimateTriggerEffects(match, cardIndex, card, physical, timing)[0] || null;
+}
+
+function findXUTriggerEffect(match, cardIndex, card, physical) {
+  if (!card || !physical) return null;
+  const context = {
+    event: "afterUltimateTrigger",
+    sourcePlayerId: findPhysicalCard(match, physical.instanceId)?.playerId || null,
+    sourceInstanceId: physical.instanceId,
+    sourcePhysical: physical,
+    sourceCard: card,
+    combinedBrave: getBraveAttachment(match, physical.instanceId)
+  };
+  return (card.effects || []).find((effect) => {
+    if (compact(effect?.type) !== "xutrigger") return false;
+    if (!levelMatches(effect, card, physical)) return false;
+    return entryConditionsMatch(match, effect, context, cardIndex);
+  }) || null;
+}
+
+function findCriticalHitEffect(match, cardIndex, card, physical, trigger) {
+  if (!trigger?.hit || !card || !physical) return null;
+  const context = {
+    event: "ultimateTriggerHit",
+    sourcePlayerId: trigger.controllerPlayerId,
+    sourceInstanceId: physical.instanceId,
+    sourcePhysical: physical,
+    sourceCard: card,
+    combinedBrave: getBraveAttachment(match, physical.instanceId),
+    ultimateTrigger: trigger,
+    ultimateTriggerHit: true
+  };
+  return (card.effects || []).find((effect) =>
+    compact(effect?.type) === "criticalhit" &&
+    levelMatches(effect, card, physical) &&
+    entryConditionsMatch(match, effect, context, cardIndex)
+  ) || null;
 }
 
 function hitOperations(effect) {
@@ -96,9 +154,30 @@ function hitOperations(effect) {
   return Array.isArray(value) ? value : [value];
 }
 
-function beginFirstFlash(match) {
+function xuHitOperations(effect) {
+  const value = effect?.operations ?? effect?.actions ?? effect?.onHitOperations ?? effect?.hitOperations ?? effect?.operationsOnHit ?? [];
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+function resumeBattle(match, stage) {
   const battle = match.battle;
   if (!battle) return match;
+  const resumeStage = stage || "flash1";
+  if (resumeStage === "flash2") {
+    return {
+      ...match,
+      battle: {
+        ...battle,
+        stage: "flash2",
+        flash: {
+          number: 2,
+          priorityPlayerId: battle.defenderPlayerId,
+          consecutivePasses: 0
+        }
+      }
+    };
+  }
   return {
     ...match,
     battle: {
@@ -113,35 +192,48 @@ function beginFirstFlash(match) {
   };
 }
 
-export function resolveUltimateTriggerOnAttack(match, attackerPlayerId, attackerPhysical, cardIndex) {
-  const attackerCard = getDatabaseCard(cardIndex, attackerPhysical);
-  if (attackerCard?.cardType !== "ultimate") {
-    return { match, triggered: false, manualResolutionNeeded: false };
-  }
+function triggerDisplayName(kind) {
+  return kind === "xu" ? "XU Trigger" : "U-Trigger";
+}
 
-  const effect = findUltimateTriggerEffect(attackerCard, attackerPhysical);
-  if (!effect) return { match, triggered: false, manualResolutionNeeded: false };
-
-  const opponentId = otherPlayerId(match, attackerPlayerId);
-  const opponent = match.players[opponentId];
-  const sourceCost = Number(getCombinedStats(match, cardIndex, attackerPhysical).cost || attackerCard?.cost || 0);
-  const baseTrigger = {
-    sourceInstanceId: attackerPhysical.instanceId,
-    sourceCardId: attackerPhysical.cardId,
-    controllerPlayerId: attackerPlayerId,
+function buildTriggerBase(match, sourcePlayerId, sourcePhysical, sourceCard, effect, kind, resumeStage) {
+  const opponentId = otherPlayerId(match, sourcePlayerId);
+  return {
+    kind,
+    sourceInstanceId: sourcePhysical.instanceId,
+    sourceCardId: sourcePhysical.cardId,
+    controllerPlayerId: sourcePlayerId,
     opponentPlayerId: opponentId,
+    counterPlayerId: opponentId,
     effectId: effect.id || null,
-    sourceCost,
-    sourceLevel: getCurrentLevel(attackerCard, attackerPhysical)?.level ?? null,
+    sourceCost: Number(sourceCard?.cost || 0),
+    sourceLevel: getCurrentLevel(sourceCard, sourcePhysical)?.level ?? null,
+    originalHit: false,
     hit: false,
+    countered: false,
+    counterPassed: false,
     revealedCardId: null,
     revealedInstanceId: null,
     revealedCost: null,
     status: "revealed",
     effectResolution: "pending",
+    counterResolution: "pending",
     manualResolutionNeeded: false,
+    resumeStage,
     effectTextPT: effectTextValue(effect, "ptBR"),
-    effectTextEN: effectTextValue(effect, "en")
+    effectTextEN: effectTextValue(effect, "en"),
+    criticalHit: null
+  };
+}
+
+function beginTriggerReveal(match, sourcePlayerId, sourcePhysical, sourceCard, effect, cardIndex, { kind = "ultimate", resumeStage = "flash1" } = {}) {
+  const opponentId = otherPlayerId(match, sourcePlayerId);
+  const opponent = match.players[opponentId];
+  const combinedStats = getCombinedStats(match, cardIndex, sourcePhysical);
+  const sourceCost = Number(combinedStats.cost || sourceCard?.cost || 0);
+  const baseTrigger = {
+    ...buildTriggerBase(match, sourcePlayerId, sourcePhysical, sourceCard, effect, kind, resumeStage),
+    sourceCost
   };
 
   if (!opponent?.deck?.length) {
@@ -151,9 +243,9 @@ export function resolveUltimateTriggerOnAttack(match, attackerPlayerId, attacker
         ...match.battle,
         stage: "ultimateTrigger",
         flash: null,
-        ultimateTrigger: { ...baseTrigger, status: "emptyDeck", effectResolution: "none" }
+        ultimateTrigger: { ...baseTrigger, status: "emptyDeck", effectResolution: "none", counterResolution: "none" }
       }
-    }, "U-Trigger: o deck do oponente estava vazio; nenhuma carta foi revelada.", "effect");
+    }, `${triggerDisplayName(kind)}: o deck do oponente estava vazio; nenhuma carta foi revelada.`, "effect");
     return { match: next, triggered: true, hit: false, manualResolutionNeeded: false };
   }
 
@@ -162,6 +254,37 @@ export function resolveUltimateTriggerOnAttack(match, attackerPlayerId, attacker
   const revealedCard = getDatabaseCard(cardIndex, revealed);
   const revealedCost = Number(revealedCard?.cost || 0);
   const hit = sourceCost > revealedCost;
+
+  const hasTriggerCounter = hit && (opponent.hand || []).some((physical) => {
+    const card = getDatabaseCard(cardIndex, physical);
+    return card?.cardType === "magic" && isTriggerCounterCard(card);
+  });
+
+  let trigger = {
+    ...baseTrigger,
+    revealedCardId: revealed.cardId,
+    revealedInstanceId: revealed.instanceId,
+    revealedCost,
+    originalHit: hit,
+    hit,
+    status: hasTriggerCounter ? "counterWindow" : "revealed",
+    counterResolution: hasTriggerCounter ? "pending" : "none"
+  };
+
+  if (kind === "ultimate" && hit) {
+    const criticalHit = findCriticalHitEffect(match, cardIndex, sourceCard, sourcePhysical, trigger);
+    if (criticalHit) {
+      trigger = {
+        ...trigger,
+        criticalHit: {
+          eligible: true,
+          effectId: criticalHit.id || null,
+          textPT: effectTextValue(criticalHit, "ptBR"),
+          textEN: effectTextValue(criticalHit, "en")
+        }
+      };
+    }
+  }
 
   let next = {
     ...match,
@@ -172,7 +295,11 @@ export function resolveUltimateTriggerOnAttack(match, attackerPlayerId, attacker
         deck,
         trash: [
           ...opponent.trash,
-          { ...revealed, revealedByUltimateTrigger: true }
+          {
+            ...revealed,
+            revealedByUltimateTrigger: true,
+            revealedByXUTrigger: kind === "xu"
+          }
         ]
       }
     },
@@ -180,24 +307,169 @@ export function resolveUltimateTriggerOnAttack(match, attackerPlayerId, attacker
       ...match.battle,
       stage: "ultimateTrigger",
       flash: null,
-      ultimateTrigger: {
-        ...baseTrigger,
-        revealedCardId: revealed.cardId,
-        revealedInstanceId: revealed.instanceId,
-        revealedCost,
-        hit,
-        status: "revealed"
-      }
+      ultimateTrigger: trigger
     }
   };
 
   next = appendLog(
     next,
-    `U-Trigger: ${revealedCard?.namePT || revealedCard?.nameEN || revealed.cardId} (Cost ${revealedCost}) — ${hit ? "HIT" : "GUARD"}.`,
+    `${triggerDisplayName(kind)}: ${revealedCard?.namePT || revealedCard?.nameEN || revealed.cardId} (Cost ${revealedCost}) — ${hit ? "HIT" : "GUARD"}.`,
     "effect"
   );
 
   return { match: next, triggered: true, hit, manualResolutionNeeded: false };
+}
+
+export function resolveUltimateTriggerOnAttack(match, attackerPlayerId, attackerPhysical, cardIndex) {
+  const attackerCard = getDatabaseCard(cardIndex, attackerPhysical);
+  if (attackerCard?.cardType !== "ultimate") {
+    return { match, triggered: false, manualResolutionNeeded: false };
+  }
+
+  const combined = Boolean(getBraveAttachment(match, attackerPhysical.instanceId));
+  const attackEffect = findUltimateTriggerEffect(match, cardIndex, attackerCard, attackerPhysical, "whenAttacks");
+  const battleEffect = findUltimateTriggerEffect(match, cardIndex, attackerCard, attackerPhysical, "whenBattles");
+  const effect = attackEffect || battleEffect;
+  if (!effect) return { match, triggered: false, manualResolutionNeeded: false };
+  if (effect.requiresCombined === true && !combined) return { match, triggered: false, manualResolutionNeeded: false };
+
+  return beginTriggerReveal(match, attackerPlayerId, attackerPhysical, attackerCard, effect, cardIndex, {
+    kind: "ultimate",
+    resumeStage: "flash1"
+  });
+}
+
+export function resolveUltimateTriggerOnBlock(match, blockerPlayerId, blockerPhysical, cardIndex) {
+  const blockerCard = getDatabaseCard(cardIndex, blockerPhysical);
+  if (blockerCard?.cardType !== "ultimate") return { match, triggered: false, manualResolutionNeeded: false };
+  const effect = findUltimateTriggerEffect(match, cardIndex, blockerCard, blockerPhysical, "whenBattles");
+  if (!effect) return { match, triggered: false, manualResolutionNeeded: false };
+  const combined = Boolean(getBraveAttachment(match, blockerPhysical.instanceId));
+  if (effect.requiresCombined === true && !combined) return { match, triggered: false, manualResolutionNeeded: false };
+  return beginTriggerReveal(match, blockerPlayerId, blockerPhysical, blockerCard, effect, cardIndex, {
+    kind: "ultimate",
+    resumeStage: "flash2"
+  });
+}
+
+export function isTriggerCounterCard(card) {
+  if (!card) return false;
+  return (card.effects || []).some((effect) => compact(effect?.type) === "triggercounter" || compact(effect?.timing) === "triggercounter");
+}
+
+export function getTriggerCounterCards(match, playerId, cardIndex) {
+  const trigger = match.battle?.ultimateTrigger;
+  if (!trigger || match.battle?.stage !== "ultimateTrigger" || trigger.status !== "counterWindow" || trigger.counterPlayerId !== playerId) return [];
+  return (match.players?.[playerId]?.hand || [])
+    .map((physical) => ({ physical, card: getDatabaseCard(cardIndex, physical) }))
+    .filter(({ card }) => card?.cardType === "magic" && isTriggerCounterCard(card));
+}
+
+export function passTriggerCounter(match, actorId) {
+  const battle = match.battle;
+  const trigger = battle?.ultimateTrigger;
+  if (!battle || battle.stage !== "ultimateTrigger" || !trigger || trigger.status !== "counterWindow") {
+    return { ok: false, error: "Não existe janela de Trigger Counter ativa." };
+  }
+  if (actorId !== trigger.counterPlayerId) return { ok: false, error: "A janela de Trigger Counter pertence ao outro jogador." };
+  const next = {
+    ...match,
+    battle: {
+      ...battle,
+      ultimateTrigger: {
+        ...trigger,
+        status: "revealed",
+        counterPassed: true,
+        counterResolution: "passed"
+      }
+    }
+  };
+  return { ok: true, match: appendLog(next, `${match.players[actorId].name} não usou Trigger Counter.`, "effect") };
+}
+
+export function useTriggerCounter(match, actorId, instanceId, cardIndex, { payment } = {}) {
+  const battle = match.battle;
+  const trigger = battle?.ultimateTrigger;
+  if (!battle || battle.stage !== "ultimateTrigger" || !trigger || trigger.status !== "counterWindow") {
+    return { ok: false, error: "Não existe janela de Trigger Counter ativa." };
+  }
+  if (actorId !== trigger.counterPlayerId) return { ok: false, error: "A janela de Trigger Counter pertence ao outro jogador." };
+
+  const ctx = findPhysicalCard(match, instanceId);
+  if (!ctx || ctx.playerId !== actorId || ctx.zone !== "hand") return { ok: false, error: "Trigger Counter não encontrado na mão." };
+  const card = getDatabaseCard(cardIndex, ctx.card);
+  if (card?.cardType !== "magic" || !isTriggerCounterCard(card)) return { ok: false, error: "Esta carta não possui Trigger Counter Magic estruturado." };
+
+  const cost = calculateReduction(match, actorId, card, cardIndex);
+  const chosen = payment ?? autoBuildPayment(match, actorId, cost.payable, cardIndex);
+  if (!chosen && cost.payable > 0) return { ok: false, error: "Cores insuficientes para usar o Trigger Counter." };
+  const paid = payCoreCost(match, actorId, chosen || [], cost.payable, cardIndex);
+  if (!paid.ok) return paid;
+
+  const removed = removeHandCard(paid.match.players[actorId], instanceId);
+  if (!removed.card) return { ok: false, error: "Não foi possível retirar o Trigger Counter da mão." };
+  let next = {
+    ...paid.match,
+    players: {
+      ...paid.match.players,
+      [actorId]: removed.player
+    }
+  };
+
+  const engine = resolveCardEvent(next, {
+    event: "triggerCounter",
+    sourcePlayerId: actorId,
+    sourcePhysical: removed.card,
+    sourceCard: card,
+    sourceCardId: card.id,
+    context: {
+      ultimateTrigger: next.battle?.ultimateTrigger,
+      triggerCounter: true
+    }
+  }, cardIndex);
+  next = engine.match;
+
+  const playerAfter = next.players[actorId];
+  next = {
+    ...next,
+    players: {
+      ...next.players,
+      [actorId]: {
+        ...playerAfter,
+        trash: [
+          ...playerAfter.trash,
+          { ...removed.card, cores: { regular: 0, soul: false } }
+        ]
+      }
+    }
+  };
+
+  const currentTrigger = next.battle?.ultimateTrigger || trigger;
+  const waitingDecision = Boolean(next.pendingEffectDecision);
+  next = {
+    ...next,
+    battle: {
+      ...next.battle,
+      ultimateTrigger: {
+        ...currentTrigger,
+        status: waitingDecision
+          ? "waitingCounterDecision"
+          : (currentTrigger.countered ? "countered" : "revealed"),
+        counterResolution: waitingDecision ? "waitingDecision" : "resolved",
+        counterCardId: card.id,
+        counterCardInstanceId: removed.card.instanceId,
+        manualResolutionNeeded: Boolean(engine.manualResolutionNeeded)
+      }
+    }
+  };
+  next = appendLog(next, `${match.players[actorId].name} usou ${card.namePT || card.nameEN || card.id} como Trigger Counter.`, "effect");
+
+  return {
+    ok: true,
+    match: next,
+    manualResolutionNeeded: Boolean(engine.manualResolutionNeeded),
+    notes: engine.notes || []
+  };
 }
 
 function markTriggerWaitingDecision(match, manualResolutionNeeded) {
@@ -216,21 +488,41 @@ function markTriggerWaitingDecision(match, manualResolutionNeeded) {
   };
 }
 
-function finishTrigger(match, manualResolutionNeeded = false) {
-  if (!match.battle?.ultimateTrigger) return match;
-  const withResult = {
+function startXUTriggerIfEligible(match, previousTrigger, cardIndex) {
+  if (!previousTrigger || previousTrigger.kind === "xu") return null;
+  const sourceCtx = findPhysicalCard(match, previousTrigger.sourceInstanceId);
+  if (!sourceCtx) return null;
+  const sourcePhysical = sourceCtx.card;
+  const sourceCard = getDatabaseCard(cardIndex, sourcePhysical);
+  const xuEffect = findXUTriggerEffect(match, cardIndex, sourceCard, sourcePhysical);
+  if (!xuEffect) return null;
+
+  return beginTriggerReveal(match, previousTrigger.controllerPlayerId, sourcePhysical, sourceCard, xuEffect, cardIndex, {
+    kind: "xu",
+    resumeStage: previousTrigger.resumeStage || "flash1"
+  }).match;
+}
+
+function completeCurrentTrigger(match, cardIndex, manualResolutionNeeded = false) {
+  const trigger = match.battle?.ultimateTrigger;
+  if (!trigger) return match;
+
+  const resolved = {
     ...match,
     battle: {
       ...match.battle,
       ultimateTrigger: {
-        ...match.battle.ultimateTrigger,
+        ...trigger,
         status: "resolved",
         effectResolution: "resolved",
         manualResolutionNeeded: Boolean(manualResolutionNeeded)
       }
     }
   };
-  return beginFirstFlash(withResult);
+
+  const xu = startXUTriggerIfEligible(resolved, trigger, cardIndex);
+  if (xu) return xu;
+  return resumeBattle(resolved, trigger.resumeStage || "flash1");
 }
 
 export function resolveUltimateTriggerStage(match, actorId, cardIndex) {
@@ -239,33 +531,50 @@ export function resolveUltimateTriggerStage(match, actorId, cardIndex) {
   if (!battle || battle.stage !== "ultimateTrigger" || !trigger) {
     return { ok: false, error: "Não existe Ultimate Trigger aguardando resolução." };
   }
+  if (trigger.status === "counterWindow" || trigger.status === "waitingCounterDecision") {
+    return { ok: false, error: "Conclua a janela de Trigger Counter antes de resolver o Trigger." };
+  }
   if (actorId !== trigger.controllerPlayerId) {
-    return { ok: false, error: "A resolução deste Ultimate Trigger pertence ao jogador atacante." };
+    return { ok: false, error: "A resolução deste Trigger pertence ao jogador controlador." };
   }
   if (match.pendingEffectDecision) {
-    return { ok: false, error: "Resolva a decisão de efeito pendente antes de continuar o Ultimate Trigger." };
+    return { ok: false, error: "Resolva a decisão de efeito pendente antes de continuar o Trigger." };
   }
 
-  if (!trigger.hit || trigger.status === "emptyDeck") {
-    const next = finishTrigger(match, false);
+  if (!trigger.hit || trigger.countered || trigger.status === "emptyDeck") {
+    const next = completeCurrentTrigger(match, cardIndex, false);
     return { ok: true, match: next, manualResolutionNeeded: false, notes: [] };
   }
 
   const sourceCtx = findPhysicalCard(match, trigger.sourceInstanceId);
-  const sourcePhysical = sourceCtx?.card || null;
-  const sourceCard = sourcePhysical ? getDatabaseCard(cardIndex, sourcePhysical) : cardIndex.get(trigger.sourceCardId);
+  if (!sourceCtx) {
+    const next = completeCurrentTrigger(
+      appendLog(match, `${triggerDisplayName(trigger.kind)}: a fonte não está mais no campo; o efeito de HIT não foi ativado.`, "effect"),
+      cardIndex,
+      false
+    );
+    return { ok: true, match: next, manualResolutionNeeded: false, notes: [] };
+  }
+
+  const sourcePhysical = sourceCtx.card;
+  const sourceCard = getDatabaseCard(cardIndex, sourcePhysical) || cardIndex.get(trigger.sourceCardId);
   const effect = sourceCard
-    ? (sourceCard.effects || []).find((entry) => entry.id === trigger.effectId) || findUltimateTriggerEffect(sourceCard, sourcePhysical)
+    ? (sourceCard.effects || []).find((entry) => entry.id === trigger.effectId) ||
+      (trigger.kind === "xu"
+        ? findXUTriggerEffect(match, cardIndex, sourceCard, sourcePhysical)
+        : findUltimateTriggerEffect(match, cardIndex, sourceCard, sourcePhysical, trigger.resumeStage === "flash2" ? "whenBattles" : "whenAttacks"))
     : null;
 
+  const event = trigger.kind === "xu" ? "xuTriggerHit" : "ultimateTriggerHit";
   const context = {
-    event: "ultimateTriggerHit",
+    event,
     sourcePlayerId: trigger.controllerPlayerId,
     sourceInstanceId: trigger.sourceInstanceId,
     sourcePhysical,
     sourceCard,
     ultimateTrigger: trigger,
-    ultimateTriggerHit: true
+    ultimateTriggerHit: trigger.kind !== "xu",
+    xuTriggerHit: trigger.kind === "xu"
   };
 
   let next = match;
@@ -273,7 +582,7 @@ export function resolveUltimateTriggerStage(match, actorId, cardIndex) {
   const notes = [];
   let structuredResolved = false;
 
-  const operations = hitOperations(effect);
+  const operations = trigger.kind === "xu" ? xuHitOperations(effect) : hitOperations(effect);
   if (operations.length) {
     const opsResult = resolveOperations(next, trigger.controllerPlayerId, operations, cardIndex, context);
     next = opsResult.match;
@@ -282,34 +591,18 @@ export function resolveUltimateTriggerStage(match, actorId, cardIndex) {
     notes.push(...(opsResult.notes || []));
 
     if (next.pendingEffectDecision) {
-      next = {
-        ...next,
-        pendingEffectDecision: {
-          ...next.pendingEffectDecision,
-          continuationEvents: [
-            ...(next.pendingEffectDecision.continuationEvents || []),
-            {
-              event: "ultimateTriggerHit",
-              sourcePlayerId: trigger.controllerPlayerId,
-              sourceInstanceId: trigger.sourceInstanceId,
-              sourceCardId: trigger.sourceCardId,
-              context: { ultimateTrigger: trigger, ultimateTriggerHit: true }
-            }
-          ]
-        }
-      };
       next = markTriggerWaitingDecision(next, true);
       return { ok: true, match: next, manualResolutionNeeded: true, notes };
     }
   }
 
   const eventResult = resolveCardEvent(next, {
-    event: "ultimateTriggerHit",
+    event,
     sourcePlayerId: trigger.controllerPlayerId,
     sourceInstanceId: trigger.sourceInstanceId,
     sourcePhysical,
     sourceCardId: trigger.sourceCardId,
-    context: { ultimateTrigger: trigger, ultimateTriggerHit: true }
+    context
   }, cardIndex);
   next = eventResult.match;
   manualResolutionNeeded = manualResolutionNeeded || Boolean(eventResult.manualResolutionNeeded);
@@ -323,16 +616,34 @@ export function resolveUltimateTriggerStage(match, actorId, cardIndex) {
 
   if (!structuredResolved) {
     manualResolutionNeeded = true;
-    notes.push("O U-Trigger acertou, mas o efeito de HIT desta carta ainda precisa ser resolvido manualmente conforme o texto.");
+    notes.push(`${triggerDisplayName(trigger.kind)} acertou, mas o efeito de HIT desta carta ainda precisa ser resolvido manualmente conforme o texto.`);
   }
 
-  next = finishTrigger(next, manualResolutionNeeded);
+  next = completeCurrentTrigger(next, cardIndex, manualResolutionNeeded);
   return { ok: true, match: next, manualResolutionNeeded, notes };
 }
 
-export function finalizeUltimateTriggerAfterDecision(match) {
+export function finalizeTriggerCounterAfterDecision(match) {
+  if (match.pendingEffectDecision) return match;
+  const battle = match.battle;
+  const trigger = battle?.ultimateTrigger;
+  if (!battle || battle.stage !== "ultimateTrigger" || !trigger || trigger.counterResolution !== "waitingDecision") return match;
+  return {
+    ...match,
+    battle: {
+      ...battle,
+      ultimateTrigger: {
+        ...trigger,
+        status: trigger.countered ? "countered" : "revealed",
+        counterResolution: "resolved"
+      }
+    }
+  };
+}
+
+export function finalizeUltimateTriggerAfterDecision(match, cardIndex) {
   if (match.pendingEffectDecision) return match;
   const battle = match.battle;
   if (!battle || battle.stage !== "ultimateTrigger" || battle.ultimateTrigger?.status !== "waitingDecision") return match;
-  return finishTrigger(match, false);
+  return completeCurrentTrigger(match, cardIndex, false);
 }

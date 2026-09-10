@@ -1,4 +1,4 @@
-import { findPhysicalCard, getBraveAttachment, getDatabaseCard, getEffectiveBP, getEffectiveSymbols } from "./selectors.js";
+import { findPhysicalCard, getBraveAttachment, getCurrentLevel, getDatabaseCard, getEffectiveBP, getEffectiveSymbols } from "./selectors.js";
 import { updateFieldCard, removeFieldCard } from "./zones.js";
 import { appendLog, otherPlayerId, uid } from "./utils.js";
 import { resolveUltimateTriggerOnAttack } from "./specialRules.js";
@@ -126,6 +126,10 @@ export function legalBlockers(match, cardIndex) {
     const card = getDatabaseCard(cardIndex, physical);
     if (restrictions.spiritsCannotBlock && ["spirit", "brave"].includes(card?.cardType)) return false;
     if (restrictions.ultimatesCannotBlock && card?.cardType === "ultimate") return false;
+    if (restrictions.minimumBlockerLevel != null) {
+      const level = Number(getCurrentLevel(card, physical)?.level || 0);
+      if (level < Number(restrictions.minimumBlockerLevel)) return false;
+    }
     return true;
   });
 }

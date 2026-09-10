@@ -1244,7 +1244,136 @@
         "text": {
           "en": "If the hit card is a Magic card, choose a color and return all Magic cards of that color from your Trash to your hand.",
           "ptBR": "Se a carta acertada for uma Magic, escolha uma cor e devolva para a sua mão todas as Magics daquela cor do seu Trash."
-        }
+        },
+        "condition": {
+          "type": "ultimateTriggerRevealedCardType",
+          "cardType": "magic"
+        },
+        "operations": [
+          {
+            "type": "chooseOption",
+            "titlePT": "Critical Hit",
+            "titleEN": "Critical Hit",
+            "instructionPT": "Escolha uma cor. Todas as Magics dessa cor no seu Trash voltam para a sua mão.",
+            "instructionEN": "Choose a color. Return all Magic cards of that color from your Trash to your hand.",
+            "options": [
+              {
+                "id": "red",
+                "labelPT": "Vermelho",
+                "labelEN": "Red",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "red"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "purple",
+                "labelPT": "Roxo",
+                "labelEN": "Purple",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "purple"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "green",
+                "labelPT": "Verde",
+                "labelEN": "Green",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "green"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "white",
+                "labelPT": "Branco",
+                "labelEN": "White",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "white"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "yellow",
+                "labelPT": "Amarelo",
+                "labelEN": "Yellow",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "yellow"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "blue",
+                "labelPT": "Azul",
+                "labelEN": "Blue",
+                "actions": [
+                  {
+                    "type": "returnAllTrashMatchingToHand",
+                    "selector": {
+                      "owner": "self",
+                      "cardTypes": [
+                        "magic"
+                      ],
+                      "colors": [
+                        "blue"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "sd23-x01-battle",
@@ -1264,7 +1393,22 @@
         }
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-x01-utrigger-hit-v2",
+        "event": "ultimateTriggerHit",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "actions": [
+          {
+            "type": "cannotBeBlockedByLowerLevel"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-X01.webp",
     "nameJP": "アルティメット・ヴァリエル",
     "summonCondition": {

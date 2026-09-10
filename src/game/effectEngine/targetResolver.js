@@ -139,12 +139,25 @@ export function resolveActionTargets(match, action = {}, cardIndex, context = {}
     : collectFieldTargets(match, cardIndex, selector, context);
 
   if (selectionType === "selectMultipleTargets") {
+    const maximum = Math.max(0, Number(action.maxTargets ?? candidates.length));
+    if (action.asManyAsPossible === true) {
+      const required = Math.min(maximum, candidates.length);
+      if (required === 0) return { status: "resolved", targets: [] };
+      if (candidates.length <= maximum) return { status: "resolved", targets: candidates, requested: required, minimum: required };
+      return {
+        status: "manual",
+        targets: candidates,
+        requested: maximum,
+        minimum: maximum,
+        reason: `Escolha exatamente ${maximum} alvo(s).`
+      };
+    }
     if (!candidates.length && action.allowZero) return { status: "resolved", targets: [] };
     return {
       status: "manual",
       targets: candidates,
-      requested: Number(action.maxTargets ?? candidates.length),
-      minimum: action.allowZero ? 0 : 1,
+      requested: maximum,
+      minimum: action.allowZero ? 0 : Math.max(1, Number(action.minTargets ?? 1)),
       reason: "Escolha manual de múltiplos alvos necessária."
     };
   }
