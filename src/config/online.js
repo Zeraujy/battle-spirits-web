@@ -10,7 +10,7 @@
  */
 
 const ONLINE_SERVER_DEFAULT_URL =
-  "https://desktop-88e9pl9.tail8fb8c7.ts.net";
+  "https://battle-spirits-simulator.onrender.com/";
 
 function normalizeServerUrl(value) {
   return String(value || "")
