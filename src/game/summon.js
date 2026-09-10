@@ -5,6 +5,7 @@ import { addFieldCard, removeHandCard, updateFieldCard } from "./zones.js";
 import { appendLog } from "./utils.js";
 import { conditionMatches } from "./brave.js";
 import { checkSummoningCondition } from "./specialRules.js";
+import { resolveCardEvent } from "./effectEngine/effectEngine.js";
 
 function minimumCores(card) {
   if (card.cardType === "nexus") return 0;
@@ -97,8 +98,10 @@ export function summonFromHand(match, playerId, instanceId, cardIndex, options =
       combinedWith: directHostId
     };
     player = addFieldCard(player, "other", physical);
-    const next = appendLog({ ...paid.match, players: { ...paid.match.players, [playerId]: player } }, `${player.name} invocou ${card.namePT || card.nameEN || card.id} em Direct Combine.`, "action");
-    return { ok: true, match: next, manualResolutionNeeded: (card.effects || []).some((e) => ["whenSummoned", "onSummon"].includes(e.timing) && !(e.operations?.length)) };
+    let next = appendLog({ ...paid.match, players: { ...paid.match.players, [playerId]: player } }, `${player.name} invocou ${card.namePT || card.nameEN || card.id} em Direct Combine.`, "action");
+    const engine = resolveCardEvent(next, { event: "whenSummoned", sourcePlayerId: playerId, sourceInstanceId: physical.instanceId }, cardIndex);
+    next = engine.match;
+    return { ok: true, match: next, manualResolutionNeeded: engine.manualResolutionNeeded, notes: engine.notes };
   }
 
   const min = minimumCores(card);
@@ -120,7 +123,9 @@ export function summonFromHand(match, playerId, instanceId, cardIndex, options =
   player = addFieldCard(player, zone, physical);
   let next = { ...placed.match, players: { ...placed.match.players, [playerId]: player } };
   next = appendLog(next, `${player.name} invocou ${card.namePT || card.nameEN || card.id}.`, "action");
-  return { ok: true, match: next, manualResolutionNeeded: (card.effects || []).some((e) => ["whenSummoned", "onSummon"].includes(e.timing) && !(e.operations?.length)) };
+  const engine = resolveCardEvent(next, { event: "whenSummoned", sourcePlayerId: playerId, sourceInstanceId: physical.instanceId }, cardIndex);
+  next = engine.match;
+  return { ok: true, match: next, manualResolutionNeeded: engine.manualResolutionNeeded, notes: engine.notes };
 }
 
 export function deployNexus(match, playerId, instanceId, cardIndex, options = {}) {
@@ -139,5 +144,7 @@ export function deployNexus(match, playerId, instanceId, cardIndex, options = {}
   player = addFieldCard(removed.player, "nexuses", { ...removed.card, cardType: "nexus", cores: { regular: 0, soul: false } });
   let next = { ...paid.match, players: { ...paid.match.players, [playerId]: player } };
   next = appendLog(next, `${player.name} colocou ${card.namePT || card.nameEN || card.id}.`, "action");
-  return { ok: true, match: next };
+  const engine = resolveCardEvent(next, { event: "whenDeployed", sourcePlayerId: playerId, sourceInstanceId: removed.card.instanceId }, cardIndex);
+  next = engine.match;
+  return { ok: true, match: next, manualResolutionNeeded: engine.manualResolutionNeeded, notes: engine.notes };
 }

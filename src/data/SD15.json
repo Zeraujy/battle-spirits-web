@@ -1,0 +1,1443 @@
+[
+  {
+    "id": "SD15-001",
+    "name": "The Angelia Pathiel",
+    "nameEN": "The Angelia Pathiel",
+    "namePT": "The Angelia Pathiel",
+    "nameKey": "the-angelia-pathiel",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Strengthening]: Your effects that reduce opposing Spirits' BP reduce 1000 additional BP.",
+      "ptBR": "LV1/LV2 [Strengthening]: seus efeitos que reduzem o BP de Spirits do oponente reduzem 1000 BP adicionais."
+    },
+    "effects": [
+      {
+        "id": "sd15-001-strengthening",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Strengthening",
+          "ptBR": "Strengthening"
+        },
+        "text": {
+          "en": "Your effects that reduce opposing Spirits' BP reduce 1000 additional BP.",
+          "ptBR": "Seus efeitos que reduzem o BP de Spirits do oponente reduzem 1000 BP adicionais."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-001.webp",
+    "nameJP": "天使パティエル"
+  },
+  {
+    "id": "SD15-002",
+    "name": "The Angelia Machael",
+    "nameEN": "The Angelia Machael",
+    "namePT": "The Angelia Machael",
+    "nameKey": "the-angelia-machael",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Strengthening]. LV2: When an opposing Spirit becomes 0 BP, exhaust all Spirits with 0 BP.",
+      "ptBR": "LV1/LV2 [Strengthening]. LV2: quando um Spirit do oponente chegar a 0 BP, dê Exhaust em todos os Spirits com 0 BP."
+    },
+    "effects": [
+      {
+        "id": "sd15-002-strengthening",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Strengthening",
+          "ptBR": "Strengthening"
+        },
+        "text": {
+          "en": "Your effects that reduce opposing Spirits' BP reduce 1000 additional BP.",
+          "ptBR": "Seus efeitos que reduzem o BP de Spirits do oponente reduzem 1000 BP adicionais."
+        }
+      },
+      {
+        "id": "sd15-002-zero-bp",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "whenOpponentSpiritBecomesZeroBP",
+        "title": {
+          "en": "When an Opposing Spirit Becomes 0 BP",
+          "ptBR": "Quando um Spirit do Oponente Chega a 0 BP"
+        },
+        "text": {
+          "en": "Exhaust all Spirits with 0 BP.",
+          "ptBR": "Dê Exhaust em todos os Spirits com 0 BP."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-002.webp",
+    "nameJP": "天使マカエル"
+  },
+  {
+    "id": "SD15-003",
+    "name": "The Angelia Archiel",
+    "nameEN": "The Angelia Archiel",
+    "namePT": "The Angelia Archiel",
+    "nameKey": "the-angelia-archiel",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: One opposing Spirit gets -1000 BP during this turn. LV2/LV3 When Destroyed: Opposing Spirits that cost 3 or less cannot attack during this turn.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: 1 Spirit do oponente recebe -1000 BP durante este turno. LV2/LV3 Quando Destruído: Spirits do oponente de custo 3 ou menos não podem atacar durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd15-003-attack",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "One opposing Spirit gets -1000 BP during this turn.",
+          "ptBR": "1 Spirit do oponente recebe -1000 BP durante este turno."
+        }
+      },
+      {
+        "id": "sd15-003-destroyed",
+        "type": "whenDestroyed",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "When Destroyed",
+          "ptBR": "Quando Destruído"
+        },
+        "text": {
+          "en": "Opposing Spirits that cost 3 or less cannot attack during this turn.",
+          "ptBR": "Spirits do oponente de custo 3 ou menos não podem atacar durante este turno."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-003.webp",
+    "nameJP": "天使アーチェル"
+  },
+  {
+    "id": "SD15-004",
+    "name": "The Angelia Axela",
+    "nameEN": "The Angelia Axela",
+    "namePT": "The Angelia Axela",
+    "nameKey": "the-angelia-axela",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: One opposing Spirit gets -2000 BP during this turn. LV2/LV3 When This Spirit Attacks: If the blocking opposing Spirit has BP less than or equal to this Spirit's BP, do not compare BP and treat this attack as unblocked.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: 1 Spirit do oponente recebe -2000 BP durante este turno. LV2/LV3 Quando Este Spirit Ataca: se o Spirit do oponente que bloqueou tiver BP menor ou igual ao BP deste Spirit, não compare BP e trate este ataque como não bloqueado."
+    },
+    "effects": [
+      {
+        "id": "sd15-004-attack-bp",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "One opposing Spirit gets -2000 BP during this turn.",
+          "ptBR": "1 Spirit do oponente recebe -2000 BP durante este turno."
+        }
+      },
+      {
+        "id": "sd15-004-unblocked",
+        "type": "battle",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "battleResolution",
+        "title": {
+          "en": "Battle Resolution",
+          "ptBR": "Resolução da Batalha"
+        },
+        "text": {
+          "en": "If the blocking opposing Spirit has BP less than or equal to this Spirit's BP, do not compare BP and treat this attack as unblocked.",
+          "ptBR": "Se o Spirit do oponente que bloqueou tiver BP menor ou igual ao BP deste Spirit, não compare BP e trate este ataque como não bloqueado."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-004.webp",
+    "nameJP": "天使アクセラ"
+  },
+  {
+    "id": "SD15-005",
+    "name": "The Angelia Plastiel",
+    "nameEN": "The Angelia Plastiel",
+    "namePT": "The Angelia Plastiel",
+    "nameKey": "the-angelia-plastiel",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Strengthening]. LV2/LV3 During Your Opponent's Attack Step: Attacks by opposing Spirits with 4000 BP or less cannot reduce your Life. LV3 When Destroyed: Return this Spirit to your hand.",
+      "ptBR": "LV1/LV2/LV3 [Strengthening]. LV2/LV3 Durante o Attack Step do oponente: ataques de Spirits do oponente com 4000 BP ou menos não podem reduzir sua Life. LV3 Quando Destruído: devolva este Spirit para a sua mão."
+    },
+    "effects": [
+      {
+        "id": "sd15-005-strengthening",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Strengthening",
+          "ptBR": "Strengthening"
+        },
+        "text": {
+          "en": "Your effects that reduce opposing Spirits' BP reduce 1000 additional BP.",
+          "ptBR": "Seus efeitos que reduzem o BP de Spirits do oponente reduzem 1000 BP adicionais."
+        }
+      },
+      {
+        "id": "sd15-005-life-protection",
+        "type": "constant",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "During Your Opponent's Attack Step",
+          "ptBR": "Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "Attacks by opposing Spirits with 4000 BP or less cannot reduce your Life.",
+          "ptBR": "Ataques de Spirits do oponente com 4000 BP ou menos não podem reduzir sua Life."
+        }
+      },
+      {
+        "id": "sd15-005-destroyed",
+        "type": "whenDestroyed",
+        "levels": [
+          3
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "When Destroyed",
+          "ptBR": "Quando Destruído"
+        },
+        "text": {
+          "en": "Return this Spirit to your hand.",
+          "ptBR": "Devolva este Spirit para a sua mão."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-005.webp",
+    "nameJP": "天使ブラスティエル"
+  },
+  {
+    "id": "SD15-X01",
+    "name": "The BattleAngelia Excel",
+    "nameEN": "The BattleAngelia Excel",
+    "namePT": "The BattleAngelia Excel",
+    "nameKey": "the-battleangelia-excel",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: One opposing Spirit gets -3000 BP during this turn. LV1/LV2/LV3: When one of your Spirits that costs 3 or less is destroyed by an opposing effect, return that Spirit card to your hand, then draw 1 card. LV2/LV3 When This Spirit Attacks: If an opposing Spirit becomes 0 BP due to this Spirit's effect, destroy all Spirits with 0 BP.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: 1 Spirit do oponente recebe -3000 BP durante este turno. LV1/LV2/LV3: quando um dos seus Spirits de custo 3 ou menos for destruído por um efeito do oponente, devolva aquela carta de Spirit para a sua mão e depois compre 1 carta. LV2/LV3 Quando Este Spirit Ataca: se um Spirit do oponente chegar a 0 BP devido ao efeito deste Spirit, destrua todos os Spirits com 0 BP."
+    },
+    "effects": [
+      {
+        "id": "sd15-x01-attack-bp",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "One opposing Spirit gets -3000 BP during this turn.",
+          "ptBR": "1 Spirit do oponente recebe -3000 BP durante este turno."
+        }
+      },
+      {
+        "id": "sd15-x01-recovery",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "ownLowCostSpiritDestroyedByOpponentEffect",
+        "title": {
+          "en": "Low-Cost Spirit Recovery",
+          "ptBR": "Recuperação de Spirit de Baixo Custo"
+        },
+        "text": {
+          "en": "When one of your Spirits that costs 3 or less is destroyed by an opposing effect, return it to your hand, then draw 1 card.",
+          "ptBR": "Quando um dos seus Spirits de custo 3 ou menos for destruído por um efeito do oponente, devolva-o à sua mão e depois compre 1 carta."
+        }
+      },
+      {
+        "id": "sd15-x01-zero-bp",
+        "type": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenOpponentSpiritBecomesZeroBP",
+        "title": {
+          "en": "0 BP Destruction",
+          "ptBR": "Destruição por 0 BP"
+        },
+        "text": {
+          "en": "If an opposing Spirit becomes 0 BP due to this Spirit's effect, destroy all Spirits with 0 BP.",
+          "ptBR": "Se um Spirit do oponente chegar a 0 BP devido ao efeito deste Spirit, destrua todos os Spirits com 0 BP."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-X01.webp",
+    "nameJP": "戦天使イクセル"
+  },
+  {
+    "id": "BS05-037",
+    "name": "The Angelia Kleio",
+    "nameEN": "The Angelia Kleio",
+    "namePT": "The Angelia Kleio",
+    "nameKey": "the-angelia-kleio",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Either Attack Step: When one of your Cost 2 Spirits is destroyed, draw 1 card.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step de qualquer jogador: quando um dos seus Spirits de custo 2 for destruído, compre 1 carta."
+    },
+    "effects": [
+      {
+        "id": "sd15-bs05-037-draw",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "eitherAttackStep",
+        "title": {
+          "en": "During Either Attack Step",
+          "ptBR": "Durante o Attack Step de Qualquer Jogador"
+        },
+        "text": {
+          "en": "When one of your Cost 2 Spirits is destroyed, draw 1 card.",
+          "ptBR": "Quando um dos seus Spirits de custo 2 for destruído, compre 1 carta."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-Reprints/BS05-037.webp",
+    "nameJP": "天使クレイオ",
+    "originalSet": "BS05"
+  },
+  {
+    "id": "BS08-042",
+    "name": "The Angelia Salaty",
+    "nameEN": "The Angelia Salaty",
+    "namePT": "The Angelia Salaty",
+    "nameKey": "the-angelia-salaty",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Holy Life] When This Spirit Attacks: When this Spirit's attack reduces your opponent's Life, put 1 Core from the Void into your Life. LV3 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle to your hand.",
+      "ptBR": "LV1/LV2/LV3 [Holy Life] Quando Este Spirit Ataca: quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Life. LV3 [Brilliance] Quando Este Spirit Ataca: no fim da batalha, devolva à sua mão todas as Magics que você usou nesta batalha."
+    },
+    "effects": [
+      {
+        "id": "sd15-bs08-042-holy-life",
+        "type": "holyLife",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Holy Life",
+          "ptBR": "Holy Life"
+        },
+        "text": {
+          "en": "When this Spirit's attack reduces your opponent's Life, put 1 Core from the Void into your Life.",
+          "ptBR": "Quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Life."
+        }
+      },
+      {
+        "id": "sd15-bs08-042-brilliance",
+        "type": "brilliance",
+        "levels": [
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Brilliance",
+          "ptBR": "Brilliance"
+        },
+        "text": {
+          "en": "At the end of the battle, return all Magic cards you used during this battle to your hand.",
+          "ptBR": "No fim da batalha, devolva à sua mão todas as Magics que você usou nesta batalha."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-Reprints/BS08-042.webp",
+    "nameJP": "天使サラティ",
+    "originalSet": "BS08"
+  },
+  {
+    "id": "BS10-048",
+    "name": "The Angelia Power",
+    "nameEN": "The Angelia Power",
+    "namePT": "The Angelia Power",
+    "nameKey": "the-angelia-power",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD15-Reprints/BS10-048.webp",
+    "nameJP": "天使パワー",
+    "originalSet": "BS10"
+  },
+  {
+    "id": "BS12-035",
+    "name": "The Angelia of Olimpics Phul",
+    "nameEN": "The Angelia of Olimpics Phul",
+    "namePT": "The Angelia of Olimpics Phul",
+    "nameKey": "the-angelia-of-olimpics-phul",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 2,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Destroyed: Put 1 Core from this Spirit into your Life.",
+      "ptBR": "LV1/LV2 Quando Destruído: coloque 1 Core deste Spirit na sua Life."
+    },
+    "effects": [
+      {
+        "id": "sd15-bs12-035-destroyed",
+        "type": "whenDestroyed",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "When Destroyed",
+          "ptBR": "Quando Destruído"
+        },
+        "text": {
+          "en": "Put 1 Core from this Spirit into your Life.",
+          "ptBR": "Coloque 1 Core deste Spirit na sua Life."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-Reprints/BS12-035.webp",
+    "nameJP": "オリンピアの天使フル",
+    "originalSet": "BS12"
+  },
+  {
+    "id": "BS12-037",
+    "name": "The Angelia of Olimpics Bethor",
+    "nameEN": "The Angelia of Olimpics Bethor",
+    "namePT": "The Angelia of Olimpics Bethor",
+    "nameKey": "the-angelia-of-olimpics-bethor",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Your Opponent's Attack Step: When an opposing Spirit with 2 symbols attacks, treat that Spirit as 2000 BP during the battle. LV2/LV3 During Either Attack Step: When one of your Divine Spirit Spirits is destroyed, you may put 1 Core from your field into your Life.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step do oponente: quando um Spirit do oponente com 2 símbolos atacar, trate aquele Spirit como 2000 BP durante a batalha. LV2/LV3 Durante o Attack Step de qualquer jogador: quando um dos seus Spirits da família Divine Spirit for destruído, você pode colocar 1 Core do seu campo na sua Life."
+    },
+    "effects": [
+      {
+        "id": "sd15-bs12-037-bp",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "During Your Opponent's Attack Step",
+          "ptBR": "Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "When an opposing Spirit with 2 symbols attacks, treat that Spirit as 2000 BP during the battle.",
+          "ptBR": "Quando um Spirit do oponente com 2 símbolos atacar, trate aquele Spirit como 2000 BP durante a batalha."
+        }
+      },
+      {
+        "id": "sd15-bs12-037-life",
+        "type": "constant",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "eitherAttackStep",
+        "title": {
+          "en": "During Either Attack Step",
+          "ptBR": "Durante o Attack Step de Qualquer Jogador"
+        },
+        "text": {
+          "en": "When one of your Divine Spirit Spirits is destroyed, you may put 1 Core from your field into your Life.",
+          "ptBR": "Quando um dos seus Spirits da família Divine Spirit for destruído, você pode colocar 1 Core do seu campo na sua Life."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-Reprints/BS12-037.webp",
+    "nameJP": "オリンピアの天使ベトール",
+    "originalSet": "BS12"
+  },
+  {
+    "id": "BS12-038",
+    "name": "The Angelia of Olimpics Phaleg",
+    "nameEN": "The Angelia of Olimpics Phaleg",
+    "namePT": "The Angelia of Olimpics Phaleg",
+    "nameKey": "the-angelia-of-olimpics-phaleg",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 2,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: For each Divine Spirit Spirit you control, designate 1 opposing Spirit. All designated Spirits cannot block during this turn. LV3 [Holy Life].",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: para cada Spirit da família Divine Spirit que você controlar, designe 1 Spirit do oponente. Todos os Spirits designados não podem bloquear durante este turno. LV3 [Holy Life]."
+    },
+    "effects": [
+      {
+        "id": "sd15-bs12-038-summon",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "For each Divine Spirit Spirit you control, designate 1 opposing Spirit. All designated Spirits cannot block during this turn.",
+          "ptBR": "Para cada Spirit da família Divine Spirit que você controlar, designe 1 Spirit do oponente. Todos os Spirits designados não podem bloquear durante este turno."
+        }
+      },
+      {
+        "id": "sd15-bs12-038-holy-life",
+        "type": "holyLife",
+        "levels": [
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Holy Life",
+          "ptBR": "Holy Life"
+        },
+        "text": {
+          "en": "When this Spirit's attack reduces your opponent's Life, put 1 Core from the Void into your Life.",
+          "ptBR": "Quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Life."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-Reprints/BS12-038.webp",
+    "nameJP": "オリンピアの天使ファレグ",
+    "originalSet": "BS12"
+  },
+  {
+    "id": "SD02-005",
+    "name": "The Angelia Cherubim",
+    "nameEN": "The Angelia Cherubim",
+    "namePT": "The Angelia Cherubim",
+    "nameKey": "the-angelia-cherubim",
+    "set": "SD15",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Reveal 1 card from the top of your deck for each Yellow symbol you control. Add 1 Magic card among them to your hand, then put the remaining cards on the bottom of your deck in any order. LV2/LV3 During Your Attack Step: Opposing Spirits that block one of your Spirits with [Brilliance] are treated as LV1 during the battle. LV3 [Brilliance].",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: revele 1 carta do topo do seu deck para cada símbolo Amarelo que você controla. Adicione 1 Magic entre elas à sua mão e coloque as demais no fundo do deck na ordem que desejar. LV2/LV3 Durante o seu Attack Step: Spirits do oponente que bloquearem um dos seus Spirits com [Brilliance] são tratados como LV1 durante a batalha. LV3 [Brilliance]."
+    },
+    "effects": [
+      {
+        "id": "sd15-sd02-005-summon",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Reveal 1 card from the top of your deck for each Yellow symbol you control. Add 1 Magic card among them to your hand, then put the remaining cards on the bottom of your deck in any order.",
+          "ptBR": "Revele 1 carta do topo do seu deck para cada símbolo Amarelo que você controla. Adicione 1 Magic entre elas à sua mão e coloque as demais no fundo do deck na ordem que desejar."
+        }
+      },
+      {
+        "id": "sd15-sd02-005-brilliance-support",
+        "type": "constant",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "During Your Attack Step",
+          "ptBR": "Durante o Seu Attack Step"
+        },
+        "text": {
+          "en": "Opposing Spirits that block one of your Spirits with [Brilliance] are treated as LV1 during the battle.",
+          "ptBR": "Spirits do oponente que bloquearem um dos seus Spirits com [Brilliance] são tratados como LV1 durante a batalha."
+        }
+      },
+      {
+        "id": "sd15-sd02-005-brilliance",
+        "type": "brilliance",
+        "levels": [
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Brilliance",
+          "ptBR": "Brilliance"
+        },
+        "text": {
+          "en": "At the end of the battle, return all Magic cards you used during this battle to your hand.",
+          "ptBR": "No fim da batalha, devolva à sua mão todas as Magics que você usou nesta batalha."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-Reprints/SD02-005.webp",
+    "nameJP": "天使ヘルヴィム",
+    "originalSet": "SD02"
+  },
+  {
+    "id": "BS10-074",
+    "name": "The Kigurumi Kumatar",
+    "nameEN": "The Kigurumi Kumatar",
+    "namePT": "The Kigurumi Kumatar",
+    "nameKey": "the-kigurumi-kumatar",
+    "set": "SD15",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Playful Hunt"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "Combine Condition: Cost 4 or more. While Braved — When This Spirit Battles: Exhaust all opposing Nexuses. All exhausted Nexuses cannot activate their effects.",
+      "ptBR": "Condição de Combine: custo 4 ou mais. Enquanto estiver combinado — Quando Este Spirit Batalha: dê Exhaust em todos os Nexus do oponente. Todos os Nexus em Exhaust não podem ativar seus efeitos."
+    },
+    "effects": [
+      {
+        "id": "sd15-bs10-074-combine",
+        "type": "combineCondition",
+        "levels": [],
+        "timing": "combine",
+        "title": {
+          "en": "Combine Condition",
+          "ptBR": "Condição de Combine"
+        },
+        "text": {
+          "en": "Combine with a Spirit that costs 4 or more.",
+          "ptBR": "Combine com um Spirit de custo 4 ou mais."
+        }
+      },
+      {
+        "id": "sd15-bs10-074-combined",
+        "type": "combined",
+        "levels": [],
+        "timing": "whenBattles",
+        "title": {
+          "en": "While Braved — When This Spirit Battles",
+          "ptBR": "Enquanto Combinado — Quando Este Spirit Batalha"
+        },
+        "text": {
+          "en": "Exhaust all opposing Nexuses. All exhausted Nexuses cannot activate their effects.",
+          "ptBR": "Dê Exhaust em todos os Nexus do oponente. Todos os Nexus em Exhaust não podem ativar seus efeitos."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-Reprints/BS10-074.webp",
+    "nameJP": "きぐるみクマッター",
+    "originalSet": "BS10",
+    "braveBP": 4000,
+    "braveCondition": {
+      "cardTypes": [
+        "spirit"
+      ],
+      "minCost": 4
+    }
+  },
+  {
+    "id": "SD15-006",
+    "name": "Angeloid",
+    "nameEN": "Angeloid",
+    "namePT": "Angeloid",
+    "nameKey": "angeloid",
+    "set": "SD15",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 When This Brave Is Summoned: Summon up to 3 Divine Spirit Spirit cards that cost 3 or less from your Trash without paying their costs. Combine Condition: Divine Spirit. While Braved — When This Spirit Attacks: Designate 1 opposing Spirit. That Spirit cannot block during this turn.",
+      "ptBR": "LV1 Quando Este Brave For Invocado: Invoque até 3 cartas de Spirit da família Divine Spirit de custo 3 ou menos do seu Trash sem pagar seus custos. Condição de Combine: Divine Spirit. Enquanto estiver combinado — Quando Este Spirit Ataca: designe 1 Spirit do oponente. Aquele Spirit não pode bloquear durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd15-006-summon",
+        "type": "whenSummoned",
+        "levels": [
+          1
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When This Brave Is Summoned",
+          "ptBR": "Quando Este Brave For Invocado"
+        },
+        "text": {
+          "en": "Summon up to 3 Divine Spirit Spirit cards that cost 3 or less from your Trash without paying their costs.",
+          "ptBR": "Invoque até 3 cartas de Spirit da família Divine Spirit de custo 3 ou menos do seu Trash sem pagar seus custos."
+        }
+      },
+      {
+        "id": "sd15-006-combine",
+        "type": "combineCondition",
+        "levels": [],
+        "timing": "combine",
+        "title": {
+          "en": "Combine Condition",
+          "ptBR": "Condição de Combine"
+        },
+        "text": {
+          "en": "Combine with a Divine Spirit Spirit.",
+          "ptBR": "Combine com um Spirit da família Divine Spirit."
+        }
+      },
+      {
+        "id": "sd15-006-combined",
+        "type": "combined",
+        "levels": [],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "While Braved — When This Spirit Attacks",
+          "ptBR": "Enquanto Combinado — Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Designate 1 opposing Spirit. That Spirit cannot block during this turn.",
+          "ptBR": "Designe 1 Spirit do oponente. Aquele Spirit não pode bloquear durante este turno."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-006.webp",
+    "nameJP": "エンジェロイド",
+    "braveBP": 2000,
+    "braveCondition": {
+      "cardTypes": [
+        "spirit"
+      ],
+      "families": [
+        "Divine Spirit"
+      ]
+    }
+  },
+  {
+    "id": "BSC05-020",
+    "name": "The Crown of the Starlit Sky",
+    "nameEN": "The Crown of the Starlit Sky",
+    "namePT": "The Crown of the Starlit Sky",
+    "nameKey": "the-crown-of-the-starlit-sky",
+    "set": "SD15",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Your Life Decreases: You may reveal the top card of your deck. If it is a Spirit card that costs 2 or less, you may summon it without paying its cost. If you do not summon it, or it is another card type, add it to your hand. LV2 During Your Opponent's Turn: Destroy all Red, Green, and Blue Spirits that are refreshed by Spirit or Magic effects.",
+      "ptBR": "LV1/LV2 Quando Sua Life Diminui: você pode revelar a carta do topo do seu deck. Se for um Spirit de custo 2 ou menos, você pode Invocá-lo sem pagar o custo. Se não o Invocar, ou se for outro tipo de carta, adicione-a à sua mão. LV2 Durante o turno do oponente: destrua todos os Spirits Vermelhos, Verdes e Azuis que receberem Refresh por efeitos de Spirit ou Magic."
+    },
+    "effects": [
+      {
+        "id": "sd15-bsc05-020-life",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenLifeDecreases",
+        "title": {
+          "en": "When Your Life Decreases",
+          "ptBR": "Quando Sua Life Diminui"
+        },
+        "text": {
+          "en": "Reveal the top card of your deck. If it is a Spirit that costs 2 or less, you may summon it for free; otherwise add it to your hand.",
+          "ptBR": "Revele a carta do topo do seu deck. Se for um Spirit de custo 2 ou menos, você pode Invocá-lo gratuitamente; caso contrário, adicione-o à sua mão."
+        }
+      },
+      {
+        "id": "sd15-bsc05-020-opponent-turn",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "opponentTurn",
+        "title": {
+          "en": "During Your Opponent's Turn",
+          "ptBR": "Durante o Turno do Oponente"
+        },
+        "text": {
+          "en": "Destroy all Red, Green, and Blue Spirits that are refreshed by Spirit or Magic effects.",
+          "ptBR": "Destrua todos os Spirits Vermelhos, Verdes e Azuis que receberem Refresh por efeitos de Spirit ou Magic."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-Reprints/BSC05-020.webp",
+    "nameJP": "星空の冠",
+    "originalSet": "BSC05"
+  },
+  {
+    "id": "SD15-007",
+    "name": "Ascension Zero",
+    "nameEN": "Ascension Zero",
+    "namePT": "Ascension Zero",
+    "nameKey": "ascension-zero",
+    "set": "SD15",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, when an opposing Spirit becomes 0 BP, exhaust all Spirits with 0 BP. Then, one opposing Spirit gets -2000 BP during this turn.",
+      "ptBR": "Flash: durante este turno, quando um Spirit do oponente chegar a 0 BP, dê Exhaust em todos os Spirits com 0 BP. Depois, 1 Spirit do oponente recebe -2000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd15-007-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "During this turn, when an opposing Spirit becomes 0 BP, exhaust all Spirits with 0 BP. Then, one opposing Spirit gets -2000 BP during this turn.",
+          "ptBR": "Durante este turno, quando um Spirit do oponente chegar a 0 BP, dê Exhaust em todos os Spirits com 0 BP. Depois, 1 Spirit do oponente recebe -2000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-007.webp",
+    "nameJP": "アセンションゼロ"
+  },
+  {
+    "id": "SD15-008",
+    "name": "Magical Draw",
+    "nameEN": "Magical Draw",
+    "namePT": "Magical Draw",
+    "nameKey": "magical-draw",
+    "set": "SD15",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Draw 1 card. Then reveal the top 5 cards of your deck, add all Spirit cards with [Strengthening] among them to your hand, and put the remaining cards on top of your deck in any order. Flash: One Spirit gets -3000 BP during this turn.",
+      "ptBR": "Main: compre 1 carta. Depois revele as 5 cartas do topo do seu deck, adicione à sua mão todos os Spirits com [Strengthening] entre elas e coloque as demais no topo do deck na ordem que desejar. Flash: 1 Spirit recebe -3000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd15-008-main",
+        "type": "main",
+        "levels": [],
+        "timing": "main",
+        "title": {
+          "en": "Main",
+          "ptBR": "Main"
+        },
+        "text": {
+          "en": "Draw 1 card. Then reveal the top 5 cards of your deck, add all Spirit cards with [Strengthening] among them to your hand, and put the remaining cards on top of your deck in any order.",
+          "ptBR": "Compre 1 carta. Depois revele as 5 cartas do topo do seu deck, adicione à sua mão todos os Spirits com [Strengthening] entre elas e coloque as demais no topo do deck na ordem que desejar."
+        }
+      },
+      {
+        "id": "sd15-008-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "One Spirit gets -3000 BP during this turn.",
+          "ptBR": "1 Spirit recebe -3000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-008.webp",
+    "nameJP": "マジカルドロー"
+  }
+]

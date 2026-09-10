@@ -1,0 +1,1510 @@
+[
+  {
+    "id": "BS04-048",
+    "name": "DarkPiyon",
+    "nameEN": "DarkPiyon",
+    "namePT": "DarkPiyon",
+    "nameKey": "darkpiyon",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Song Bird"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD13-Reprints/BS04-048.webp",
+    "nameJP": "ダークピヨン"
+  },
+  {
+    "id": "BS06-013",
+    "name": "Pigeonheadiless",
+    "nameEN": "Pigeonheadiless",
+    "namePT": "Pigeonheadiless",
+    "nameKey": "pigeonheadiless",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 2,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD13-Reprints/BS06-013.webp",
+    "nameJP": "ピジョンへディレス"
+  },
+  {
+    "id": "BS06-023",
+    "name": "The DarkBishop Baculus",
+    "nameEN": "The DarkBishop Baculus",
+    "namePT": "The DarkBishop Baculus",
+    "nameKey": "the-darkbishop-baculus",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Zombie",
+      "Demon God"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Leave exactly 1 Core on every Spirit. Move all other Cores on those Spirits to their owners' Reserves.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: deixe exatamente 1 Core em cada Spirit. Mova todos os outros Cores desses Spirits para as Reserves de seus donos."
+    },
+    "effects": [
+      {
+        "id": "sd13-bs06-023-summon-display",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Leave exactly 1 Core on every Spirit. Move all other Cores on those Spirits to their owners' Reserves.",
+          "ptBR": "Deixe exatamente 1 Core em cada Spirit. Mova todos os outros Cores desses Spirits para as Reserves de seus donos."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD13-Reprints/BS06-023.webp",
+    "nameJP": "闇司教バクルス"
+  },
+  {
+    "id": "BS06-049",
+    "name": "Pyorit",
+    "nameEN": "Pyorit",
+    "namePT": "Pyorit",
+    "nameKey": "pyorit",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Toy Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD13-Reprints/BS06-049.webp",
+    "nameJP": "ピョリット"
+  },
+  {
+    "id": "BS09-015",
+    "name": "The JailBeast Gashabers",
+    "nameEN": "The JailBeast Gashabers",
+    "namePT": "The JailBeast Gashabers",
+    "nameKey": "the-jailbeast-gashabers",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 2,
+    "families": [
+      "Zombie",
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Your Draw Step: If you control a Spirit with 8000 BP or more, draw 1 additional card. LV3 When Destroyed: Return 1 Yellow Spirit card from your Trash to your hand.",
+      "ptBR": "LV1/LV2/LV3 Durante o seu Draw Step: se você controlar um Spirit com 8000 BP ou mais, compre 1 carta adicional. LV3 Quando Destruído: devolva 1 carta de Spirit Amarelo do seu Trash para a sua mão."
+    },
+    "effects": [
+      {
+        "id": "sd13-bs09-015-draw-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "yourDrawStep",
+        "title": {
+          "en": "During Your Draw Step",
+          "ptBR": "Durante o Seu Draw Step"
+        },
+        "text": {
+          "en": "If you control a Spirit with 8000 BP or more, draw 1 additional card.",
+          "ptBR": "Se você controlar um Spirit com 8000 BP ou mais, compre 1 carta adicional."
+        }
+      },
+      {
+        "id": "sd13-bs09-015-destroyed-display",
+        "type": "whenDestroyed",
+        "levels": [
+          3
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "When Destroyed",
+          "ptBR": "Quando Destruído"
+        },
+        "text": {
+          "en": "Return 1 Yellow Spirit card from your Trash to your hand.",
+          "ptBR": "Devolva 1 carta de Spirit Amarelo do seu Trash para a sua mão."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD13-Reprints/BS09-015.webp",
+    "nameJP": "獄獣ガシャベルス"
+  },
+  {
+    "id": "SD13-001",
+    "name": "Amethystbat",
+    "nameEN": "Amethystbat",
+    "namePT": "Amethystbat",
+    "nameKey": "amethystbat",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Destroyed: Destroy 1 exhausted opposing Spirit that costs 3 or less.",
+      "ptBR": "LV1/LV2 Quando Destruído: destrua 1 Spirit do oponente em Exhaust de custo 3 ou menos."
+    },
+    "effects": [
+      {
+        "id": "sd13-001-destroyed-display",
+        "type": "whenDestroyed",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "When Destroyed",
+          "ptBR": "Quando Destruído"
+        },
+        "text": {
+          "en": "Destroy 1 exhausted opposing Spirit that costs 3 or less.",
+          "ptBR": "Destrua 1 Spirit do oponente em Exhaust de custo 3 ou menos."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd13-001-destroyed",
+        "event": "whenDestroyed",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Amethystbat",
+            "titleEN": "Amethystbat",
+            "instructionPT": "Escolha 1 Spirit do oponente em Exhaust de custo 3 ou menos.",
+            "instructionEN": "Choose 1 exhausted opposing Spirit that costs 3 or less.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "exhausted": true,
+              "maxCost": 3
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD13-AttributeEye-OpeningDeck-Amethyst/SD13-001.webp",
+    "nameJP": "アメジストバット"
+  },
+  {
+    "id": "SD13-002",
+    "name": "Bone-Cat",
+    "nameEN": "Bone-Cat",
+    "namePT": "Bone-Cat",
+    "nameKey": "bone-cat",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 2,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Purple Spirits that costs 3 or less is destroyed by an opposing Spirit effect, move all Cores from the Spirit that activated that effect to your opponent's Trash.",
+      "ptBR": "LV1/LV2: quando um dos seus Spirits Roxos de custo 3 ou menos for destruído por um efeito de Spirit do oponente, mova todos os Cores do Spirit que ativou aquele efeito para o Trash do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd13-002-retaliation-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "onOwnLowCostPurpleDestroyedBySpiritEffect",
+        "title": {
+          "en": "Retaliation",
+          "ptBR": "Retaliação"
+        },
+        "text": {
+          "en": "When one of your Purple Spirits that costs 3 or less is destroyed by an opposing Spirit effect, move all Cores from the source Spirit to your opponent's Trash.",
+          "ptBR": "Quando um dos seus Spirits Roxos de custo 3 ou menos for destruído por um efeito de Spirit do oponente, mova todos os Cores do Spirit de origem para o Trash do oponente."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD13-AttributeEye-OpeningDeck-Amethyst/SD13-002.webp",
+    "nameJP": "ボーン・キャット"
+  },
+  {
+    "id": "SD13-003",
+    "name": "Bone-Bison",
+    "nameEN": "Bone-Bison",
+    "namePT": "Bone-Bison",
+    "nameKey": "bone-bison",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Destroyed: Destroy 1 exhausted opposing Spirit. [Chain: Yellow] If you have a Yellow symbol, draw 1 card.",
+      "ptBR": "LV1/LV2/LV3 Quando Destruído: destrua 1 Spirit do oponente em Exhaust. [Chain: Amarelo] Se você possuir um símbolo Amarelo, compre 1 carta."
+    },
+    "effects": [
+      {
+        "id": "sd13-003-destroyed-display",
+        "type": "whenDestroyed",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "When Destroyed",
+          "ptBR": "Quando Destruído"
+        },
+        "text": {
+          "en": "Destroy 1 exhausted opposing Spirit.",
+          "ptBR": "Destrua 1 Spirit do oponente em Exhaust."
+        }
+      },
+      {
+        "id": "sd13-003-chain-yellow-display",
+        "type": "chain",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "Chain — Yellow",
+          "ptBR": "Chain — Amarelo"
+        },
+        "text": {
+          "en": "If you have a Yellow symbol, draw 1 card.",
+          "ptBR": "Se você possuir um símbolo Amarelo, compre 1 carta."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd13-003-destroyed",
+        "event": "whenDestroyed",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Bone-Bison",
+            "titleEN": "Bone-Bison",
+            "instructionPT": "Escolha 1 Spirit do oponente em Exhaust para destruir.",
+            "instructionEN": "Choose 1 exhausted opposing Spirit to destroy.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "exhausted": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "controlsSymbolColor",
+              "color": "yellow"
+            },
+            "actions": [
+              {
+                "type": "draw",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD13-AttributeEye-OpeningDeck-Amethyst/SD13-003.webp",
+    "nameJP": "ボーン・バイソン"
+  },
+  {
+    "id": "SD13-004",
+    "name": "Zombie-Hawk",
+    "nameEN": "Zombie-Hawk",
+    "namePT": "Zombie-Hawk",
+    "nameKey": "zombie-hawk",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Draw 1 card. [Chain: Yellow] If you have a Yellow symbol, treat 1 opposing Spirit as LV1 during this turn.",
+      "ptBR": "LV1/LV2 Quando Invocado: compre 1 carta. [Chain: Amarelo] Se você possuir um símbolo Amarelo, trate 1 Spirit do oponente como LV1 durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd13-004-summon-display",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Draw 1 card.",
+          "ptBR": "Compre 1 carta."
+        }
+      },
+      {
+        "id": "sd13-004-chain-display",
+        "type": "chain",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "Chain — Yellow",
+          "ptBR": "Chain — Amarelo"
+        },
+        "text": {
+          "en": "If you have a Yellow symbol, treat 1 opposing Spirit as LV1 during this turn.",
+          "ptBR": "Se você possuir um símbolo Amarelo, trate 1 Spirit do oponente como LV1 durante este turno."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd13-004-summon-draw",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD13-AttributeEye-OpeningDeck-Amethyst/SD13-004.webp",
+    "nameJP": "ゾンビ・ホーク"
+  },
+  {
+    "id": "SD13-005",
+    "name": "The CorpseDragonEarl Decoux-Lon",
+    "nameEN": "The CorpseDragonEarl Decoux-Lon",
+    "namePT": "The CorpseDragonEarl Decoux-Lon",
+    "nameKey": "the-corpsedragonearl-decoux-lon",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Zombie",
+      "Dark Snake"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Draw 1 card. [Chain: Yellow] If you have a Yellow symbol, exhaust 1 opposing Spirit with the highest current level. LV2 When This Spirit Attacks: Destroy 1 exhausted opposing Spirit.",
+      "ptBR": "LV1/LV2 Quando Invocado: compre 1 carta. [Chain: Amarelo] Se você possuir um símbolo Amarelo, dê Exhaust em 1 Spirit do oponente que possua o maior Level atual. LV2 Quando Este Spirit Ataca: destrua 1 Spirit do oponente em Exhaust."
+    },
+    "effects": [
+      {
+        "id": "sd13-005-summon-display",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Draw 1 card.",
+          "ptBR": "Compre 1 carta."
+        }
+      },
+      {
+        "id": "sd13-005-chain-display",
+        "type": "chain",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "Chain — Yellow",
+          "ptBR": "Chain — Amarelo"
+        },
+        "text": {
+          "en": "If you have a Yellow symbol, exhaust 1 opposing Spirit with the highest current level.",
+          "ptBR": "Se você possuir um símbolo Amarelo, dê Exhaust em 1 Spirit do oponente que possua o maior Level atual."
+        }
+      },
+      {
+        "id": "sd13-005-attack-display",
+        "type": "whenAttacks",
+        "levels": [
+          2
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Destroy 1 exhausted opposing Spirit.",
+          "ptBR": "Destrua 1 Spirit do oponente em Exhaust."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd13-005-summon-draw",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": "sd13-005-attack",
+        "event": "whenAttacks",
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Decoux-Lon",
+            "titleEN": "Decoux-Lon",
+            "instructionPT": "Escolha 1 Spirit do oponente em Exhaust para destruir.",
+            "instructionEN": "Choose 1 exhausted opposing Spirit to destroy.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "exhausted": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD13-AttributeEye-OpeningDeck-Amethyst/SD13-005.webp",
+    "nameJP": "骸龍伯ドクー・ロン"
+  },
+  {
+    "id": "SD13-006",
+    "name": "The DeathBeastDuke Deathlion",
+    "nameEN": "The DeathBeastDuke Deathlion",
+    "namePT": "The DeathBeastDuke Deathlion",
+    "nameKey": "the-deathbeastduke-deathlion",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: Destroy 1 exhausted opposing Spirit that costs 6 or less. [Chain: Yellow] If you have a Yellow symbol, this Spirit cannot be blocked by opposing LV2/LV3 Spirits during this turn.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: destrua 1 Spirit do oponente em Exhaust de custo 6 ou menos. [Chain: Amarelo] Se você possuir um símbolo Amarelo, este Spirit não pode ser bloqueado por Spirits LV2/LV3 do oponente durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd13-006-attack-display",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Destroy 1 exhausted opposing Spirit that costs 6 or less.",
+          "ptBR": "Destrua 1 Spirit do oponente em Exhaust de custo 6 ou menos."
+        }
+      },
+      {
+        "id": "sd13-006-chain-display",
+        "type": "chain",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Chain — Yellow",
+          "ptBR": "Chain — Amarelo"
+        },
+        "text": {
+          "en": "If you have a Yellow symbol, this Spirit cannot be blocked by opposing LV2/LV3 Spirits during this turn.",
+          "ptBR": "Se você possuir um símbolo Amarelo, este Spirit não pode ser bloqueado por Spirits LV2/LV3 do oponente durante este turno."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd13-006-attack",
+        "event": "whenAttacks",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Deathlion",
+            "titleEN": "Deathlion",
+            "instructionPT": "Escolha 1 Spirit do oponente em Exhaust de custo 6 ou menos.",
+            "instructionEN": "Choose 1 exhausted opposing Spirit that costs 6 or less.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "exhausted": true,
+              "maxCost": 6
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD13-AttributeEye-OpeningDeck-Amethyst/SD13-006.webp",
+    "nameJP": "死獣公デスリオン"
+  },
+  {
+    "id": "BS11-051",
+    "name": "Evil-Fisher",
+    "nameEN": "Evil-Fisher",
+    "namePT": "Evil-Fisher",
+    "nameKey": "evil-fisher",
+    "set": "SD13",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 2,
+    "families": [
+      "Darkling"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 When This Brave Is Summoned: Reveal the top 2 cards of your deck. Add 1 of them to your hand and discard the other. Combine Condition: Cost 4 or more. While Braved, When This Spirit Attacks: Return 1 Spirit card that costs 6 or less from your Trash to your hand.",
+      "ptBR": "LV1 Quando Este Brave For Invocado: revele as 2 cartas do topo do seu deck. Adicione 1 delas à sua mão e descarte a outra. Condição de Combine: custo 4 ou mais. Enquanto estiver combinado, Quando Este Spirit Ataca: devolva 1 carta de Spirit de custo 6 ou menos do seu Trash para a sua mão."
+    },
+    "effects": [
+      {
+        "id": "sd13-bs11-051-summon-display",
+        "type": "whenSummoned",
+        "levels": [
+          1
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When This Brave Is Summoned",
+          "ptBR": "Quando Este Brave For Invocado"
+        },
+        "text": {
+          "en": "Reveal the top 2 cards of your deck. Add 1 to your hand and discard the other.",
+          "ptBR": "Revele as 2 cartas do topo do seu deck. Adicione 1 à sua mão e descarte a outra."
+        }
+      },
+      {
+        "id": "sd13-bs11-051-combine-display",
+        "type": "combineCondition",
+        "levels": [],
+        "timing": "combine",
+        "title": {
+          "en": "Combine Condition",
+          "ptBR": "Condição de Combine"
+        },
+        "text": {
+          "en": "Combine with a Spirit that costs 4 or more.",
+          "ptBR": "Combine com um Spirit de custo 4 ou mais."
+        }
+      },
+      {
+        "id": "sd13-bs11-051-combined-attack-display",
+        "type": "combined",
+        "levels": [],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "While Braved — When This Spirit Attacks",
+          "ptBR": "Enquanto Combinado — Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Return 1 Spirit card that costs 6 or less from your Trash to your hand.",
+          "ptBR": "Devolva 1 carta de Spirit de custo 6 ou menos do seu Trash para a sua mão."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd13-bs11-051-combined-attack",
+        "event": "whenAttacks",
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTrashTarget",
+            "titlePT": "Evil-Fisher",
+            "titleEN": "Evil-Fisher",
+            "instructionPT": "Escolha 1 Spirit de custo 6 ou menos do seu Trash para devolver à mão.",
+            "instructionEN": "Choose 1 Spirit that costs 6 or less from your Trash to return to hand.",
+            "selector": {
+              "owner": "own",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxCost": 6
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD13-Reprints/BS11-051.webp",
+    "nameJP": "イビル・フィッシャー",
+    "braveBP": 2000,
+    "braveCondition": {
+      "cardTypes": [
+        "spirit"
+      ],
+      "minCost": 4
+    }
+  },
+  {
+    "id": "SD13-007",
+    "name": "Shadow-Maiden",
+    "nameEN": "Shadow-Maiden",
+    "namePT": "Shadow-Maiden",
+    "nameKey": "shadow-maiden",
+    "set": "SD13",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 When This Brave Is Summoned: Draw 1 card. Combine Condition: Zombie. While Braved, When This Spirit Attacks: Destroy 1 exhausted opposing Spirit that is not Braved.",
+      "ptBR": "LV1 Quando Este Brave For Invocado: compre 1 carta. Condição de Combine: Zombie. Enquanto estiver combinado, Quando Este Spirit Ataca: destrua 1 Spirit do oponente em Exhaust que não esteja combinado com um Brave."
+    },
+    "effects": [
+      {
+        "id": "sd13-007-summon-display",
+        "type": "whenSummoned",
+        "levels": [
+          1
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When This Brave Is Summoned",
+          "ptBR": "Quando Este Brave For Invocado"
+        },
+        "text": {
+          "en": "Draw 1 card.",
+          "ptBR": "Compre 1 carta."
+        }
+      },
+      {
+        "id": "sd13-007-combine-display",
+        "type": "combineCondition",
+        "levels": [],
+        "timing": "combine",
+        "title": {
+          "en": "Combine Condition",
+          "ptBR": "Condição de Combine"
+        },
+        "text": {
+          "en": "Combine with a Zombie Spirit.",
+          "ptBR": "Combine com um Spirit da família Zombie."
+        }
+      },
+      {
+        "id": "sd13-007-combined-display",
+        "type": "combined",
+        "levels": [],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "While Braved — When This Spirit Attacks",
+          "ptBR": "Enquanto Combinado — Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Destroy 1 exhausted opposing Spirit that is not Braved.",
+          "ptBR": "Destrua 1 Spirit do oponente em Exhaust que não esteja combinado com um Brave."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd13-007-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": "sd13-007-combined-attack",
+        "event": "whenAttacks",
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Shadow-Maiden",
+            "titleEN": "Shadow-Maiden",
+            "instructionPT": "Escolha 1 Spirit do oponente em Exhaust e sem Brave combinado.",
+            "instructionEN": "Choose 1 exhausted opposing Spirit that is not Braved.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "exhausted": true,
+              "notCombinedWithBrave": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD13-AttributeEye-OpeningDeck-Amethyst/SD13-007.webp",
+    "nameJP": "シャドウ・メイデン",
+    "braveBP": 2000,
+    "braveCondition": {
+      "cardTypes": [
+        "spirit"
+      ],
+      "families": [
+        "Zombie"
+      ]
+    }
+  },
+  {
+    "id": "BS12-063",
+    "name": "The Brigade's Skyscraper",
+    "nameEN": "The Brigade's Skyscraper",
+    "namePT": "The Brigade's Skyscraper",
+    "nameKey": "the-brigade-s-skyscraper",
+    "set": "SD13",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Deployed: Draw 1 card. LV2 During Your Attack Step: When one of your Zombie Spirits attacks, move 1 Core from an opposing Spirit to your opponent's Reserve.",
+      "ptBR": "LV1/LV2 Quando Colocado: compre 1 carta. LV2 Durante o seu Attack Step: quando um dos seus Spirits da família Zombie atacar, mova 1 Core de um Spirit do oponente para a Reserve do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd13-bs12-063-deploy-display",
+        "type": "whenDeployed",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenDeployed",
+        "title": {
+          "en": "When Deployed",
+          "ptBR": "Quando Colocado"
+        },
+        "text": {
+          "en": "Draw 1 card.",
+          "ptBR": "Compre 1 carta."
+        }
+      },
+      {
+        "id": "sd13-bs12-063-attack-step-display",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "During Your Attack Step",
+          "ptBR": "Durante o Seu Attack Step"
+        },
+        "text": {
+          "en": "When one of your Zombie Spirits attacks, move 1 Core from an opposing Spirit to your opponent's Reserve.",
+          "ptBR": "Quando um dos seus Spirits da família Zombie atacar, mova 1 Core de um Spirit do oponente para a Reserve do oponente."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd13-bs12-063-deploy",
+        "event": "whenDeployed",
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD13-Reprints/BS12-063.webp",
+    "nameJP": "旅団の摩天楼"
+  },
+  {
+    "id": "BS01-125",
+    "name": "Deadly Balance",
+    "nameEN": "Deadly Balance",
+    "namePT": "Deadly Balance",
+    "nameKey": "deadly-balance",
+    "set": "SD13",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Each player destroys 1 of their own Spirits.",
+      "ptBR": "Flash: cada jogador destrói 1 dos próprios Spirits."
+    },
+    "effects": [
+      {
+        "id": "sd13-bs01-125-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Each player destroys 1 of their own Spirits.",
+          "ptBR": "Cada jogador destrói 1 dos próprios Spirits."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD13-Reprints/BS01-125.webp",
+    "nameJP": "デッドリィバランス"
+  },
+  {
+    "id": "BS11-075",
+    "name": "Totentanz",
+    "nameEN": "Totentanz",
+    "namePT": "Totentanz",
+    "nameKey": "totentanz",
+    "set": "SD13",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: By discarding 1 Spirit or Brave card from your hand, move 2 Cores from 1 opposing Spirit to your opponent's Reserve.",
+      "ptBR": "Flash: ao descartar 1 carta de Spirit ou Brave da sua mão, mova 2 Cores de 1 Spirit do oponente para a Reserve do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd13-bs11-075-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "By discarding 1 Spirit or Brave card from your hand, move 2 Cores from 1 opposing Spirit to your opponent's Reserve.",
+          "ptBR": "Ao descartar 1 carta de Spirit ou Brave da sua mão, mova 2 Cores de 1 Spirit do oponente para a Reserve do oponente."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD13-Reprints/BS11-075.webp",
+    "nameJP": "トーテンタンツ"
+  },
+  {
+    "id": "SD13-008",
+    "name": "Soul Reap",
+    "nameEN": "Soul Reap",
+    "namePT": "Soul Reap",
+    "nameKey": "soul-reap",
+    "set": "SD13",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Destroy 1 exhausted opposing Spirit that costs exactly 4. [Chain: Yellow] If you have a Yellow symbol, choose Red, Purple, Green, White, Yellow, or Blue. During this turn, treat the color and symbol of 1 of your Spirits as the chosen color.",
+      "ptBR": "Flash: destrua 1 Spirit do oponente em Exhaust de custo exatamente 4. [Chain: Amarelo] Se você possuir um símbolo Amarelo, escolha Vermelho, Roxo, Verde, Branco, Amarelo ou Azul. Durante este turno, trate a cor e o símbolo de 1 dos seus Spirits como a cor escolhida."
+    },
+    "effects": [
+      {
+        "id": "sd13-008-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Destroy 1 exhausted opposing Spirit that costs exactly 4.",
+          "ptBR": "Destrua 1 Spirit do oponente em Exhaust de custo exatamente 4."
+        }
+      },
+      {
+        "id": "sd13-008-chain-display",
+        "type": "chain",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Chain — Yellow",
+          "ptBR": "Chain — Amarelo"
+        },
+        "text": {
+          "en": "If you have a Yellow symbol, choose a color. During this turn, treat the color and symbol of 1 of your Spirits as the chosen color.",
+          "ptBR": "Se você possuir um símbolo Amarelo, escolha uma cor. Durante este turno, trate a cor e o símbolo de 1 dos seus Spirits como a cor escolhida."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd13-008-flash",
+        "event": "magicFlash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Soul Reap",
+            "titleEN": "Soul Reap",
+            "instructionPT": "Escolha 1 Spirit do oponente em Exhaust de custo 4.",
+            "instructionEN": "Choose 1 exhausted opposing Spirit that costs 4.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "exhausted": true,
+              "minCost": 4,
+              "maxCost": 4
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD13-AttributeEye-OpeningDeck-Amethyst/SD13-008.webp",
+    "nameJP": "ソウルリープ"
+  },
+  {
+    "id": "SD13-X01",
+    "name": "The WickedDragonKing Cursedragon",
+    "nameEN": "The WickedDragonKing Cursedragon",
+    "namePT": "The WickedDragonKing Cursedragon",
+    "nameKey": "the-wickeddragonking-cursedragon",
+    "set": "SD13",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 7,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Destroy 2 exhausted opposing Spirits. Draw 1 card for each Spirit destroyed by this effect. LV2/LV3 When This Spirit Attacks: Move 1 Core from each of 2 opposing Spirits to your opponent's Reserve.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: destrua 2 Spirits do oponente em Exhaust. Compre 1 carta para cada Spirit destruído por este efeito. LV2/LV3 Quando Este Spirit Ataca: mova 1 Core de cada um de 2 Spirits do oponente para a Reserve do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd13-x01-summon-display",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Destroy 2 exhausted opposing Spirits. Draw 1 card for each Spirit destroyed by this effect.",
+          "ptBR": "Destrua 2 Spirits do oponente em Exhaust. Compre 1 carta para cada Spirit destruído por este efeito."
+        }
+      },
+      {
+        "id": "sd13-x01-attack-display",
+        "type": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "Move 1 Core from each of 2 opposing Spirits to your opponent's Reserve.",
+          "ptBR": "Mova 1 Core de cada um de 2 Spirits do oponente para a Reserve do oponente."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD13-AttributeEye-OpeningDeck-Amethyst/SD13-X01.webp",
+    "nameJP": "邪龍王カースドラゴン"
+  }
+]

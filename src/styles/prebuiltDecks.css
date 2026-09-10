@@ -1,0 +1,776 @@
+@import "./scrollbars.css";
+
+/* =========================================================
+   PREBUILT DECKS
+   Fluxo: Novo Deck -> Do zero / Deck pronto
+========================================================= */
+
+.deck-create-overlay {
+  position: fixed;
+  z-index: 120;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  padding: 24px;
+
+  background:
+    radial-gradient(circle at 50% 12%, rgba(104,168,255,.12), transparent 32rem),
+    rgba(3, 8, 15, .82);
+
+  backdrop-filter: blur(16px);
+}
+
+.deck-create-shell {
+  width: min(960px, 100%);
+  max-height: min(820px, calc(100vh - 48px));
+
+  overflow: hidden;
+
+  border: 1px solid var(--line-strong);
+  border-radius: 22px;
+
+  background:
+    linear-gradient(145deg, rgba(18,36,62,.98), rgba(7,16,30,.99));
+
+  box-shadow:
+    0 34px 100px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.deck-create-shell.prebuilt-mode {
+  width: min(1180px, 100%);
+}
+
+.deck-create-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+
+  padding: 24px 26px 20px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.deck-create-header > div {
+  min-width: 0;
+}
+
+.deck-create-header h2 {
+  margin: 5px 0 7px;
+  font-size: clamp(25px, 3vw, 36px);
+  letter-spacing: -.035em;
+}
+
+.deck-create-header p {
+  max-width: 690px;
+  margin: 0;
+
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.deck-create-close {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+  font-size: 22px;
+}
+
+.deck-create-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+
+  padding: 24px;
+}
+
+.deck-create-option {
+  position: relative;
+
+  min-height: 360px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  padding: 24px;
+
+  border: 1px solid var(--line);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(155deg, rgba(20,43,73,.84), rgba(7,17,31,.96));
+
+  text-align: left;
+
+  box-shadow:
+    0 18px 48px rgba(0,0,0,.2),
+    inset 0 1px 0 rgba(255,255,255,.025);
+
+  transition:
+    transform .17s ease,
+    border-color .17s ease,
+    box-shadow .17s ease,
+    background .17s ease;
+}
+
+.deck-create-option:hover:not(:disabled) {
+  transform: translateY(-4px);
+  filter: none;
+}
+
+.deck-create-option.empty:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent-2) 58%, var(--line));
+  box-shadow: 0 28px 62px rgba(0,0,0,.3), 0 0 34px rgba(104,168,255,.08);
+}
+
+.deck-create-option.prebuilt:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
+  box-shadow: 0 28px 62px rgba(0,0,0,.3), 0 0 34px rgba(244,189,75,.07);
+}
+
+.deck-create-option::after {
+  content: "";
+  position: absolute;
+  inset: auto -70px -100px auto;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: .16;
+}
+
+.deck-create-option.empty::after {
+  background: radial-gradient(circle, var(--accent-2), transparent 66%);
+}
+
+.deck-create-option.prebuilt::after {
+  background: radial-gradient(circle, var(--accent), transparent 66%);
+}
+
+.deck-create-option-code {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .17em;
+}
+
+.deck-create-option-mark {
+  width: 88px;
+  height: 118px;
+
+  display: grid;
+  place-items: center;
+
+  margin: 28px 0 24px;
+
+  border: 1px dashed color-mix(in srgb, var(--accent-2) 52%, var(--line));
+  border-radius: 12px;
+
+  background: rgba(104,168,255,.035);
+  color: var(--accent-2);
+
+  font-size: 42px;
+  font-weight: 300;
+}
+
+.deck-create-option-stack {
+  position: relative;
+  width: 116px;
+  height: 120px;
+  margin: 27px 0 25px;
+}
+
+.deck-create-option-stack i {
+  position: absolute;
+  left: 20px;
+  top: 2px;
+
+  width: 76px;
+  height: 108px;
+
+  border: 1px solid rgba(244,189,75,.34);
+  border-radius: 9px;
+
+  background:
+    linear-gradient(145deg, rgba(244,189,75,.16), rgba(12,28,48,.95));
+
+  box-shadow: 0 12px 26px rgba(0,0,0,.24);
+}
+
+.deck-create-option-stack i:nth-child(1) {
+  transform: translateX(-18px) rotate(-9deg);
+}
+
+.deck-create-option-stack i:nth-child(2) {
+  transform: translateX(18px) rotate(9deg);
+}
+
+.deck-create-option-stack i:nth-child(3) {
+  transform: translateX(0) rotate(0);
+  border-color: rgba(244,189,75,.58);
+}
+
+.deck-create-option strong {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 10px;
+  font-size: 23px;
+  letter-spacing: -.025em;
+}
+
+.deck-create-option p {
+  position: relative;
+  z-index: 2;
+
+  max-width: 370px;
+  margin: 0;
+
+  color: #b7c4d6;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.deck-create-option-action {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  margin-top: auto;
+  padding-top: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  color: var(--text);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.deck-create-option.empty .deck-create-option-action b {
+  color: var(--accent-2);
+}
+
+.deck-create-option.prebuilt .deck-create-option-action b {
+  color: var(--accent);
+}
+
+.prebuilt-browser {
+  /*
+   * IMPORTANTE:
+   * overflow-y:auto nos dois painéis só funciona de forma confiável
+   * quando o grid pai possui uma altura efetivamente limitada.
+   * Antes havia apenas max-height, então a lista da esquerda podia
+   * crescer junto com o conteúdo e ficar cortada pelo shell.
+   */
+  height: min(650px, calc(100dvh - 197px));
+  min-height: 0;
+  max-height: 650px;
+
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+
+  overflow: hidden;
+}
+
+.prebuilt-list-panel {
+  min-height: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  padding: 18px;
+
+  border-right: 1px solid var(--line);
+  background: rgba(5,14,26,.48);
+
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+  touch-action: pan-y;
+}
+
+.prebuilt-back-button {
+  margin-bottom: 18px;
+  padding: 8px 10px;
+  font-size: 10px;
+}
+
+.prebuilt-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-bottom: 10px;
+}
+
+.prebuilt-list-heading strong {
+  min-width: 26px;
+  height: 26px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--line);
+  border-radius: 999px;
+
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.prebuilt-template-list {
+  display: grid;
+  gap: 9px;
+}
+
+.prebuilt-template-button {
+  --prebuilt-accent: var(--accent-2);
+
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+
+  min-width: 0;
+  padding: 9px;
+
+  border-color: var(--line);
+  background: rgba(12,28,48,.72);
+
+  text-align: left;
+
+  transition:
+    transform .14s ease,
+    border-color .14s ease,
+    background .14s ease;
+}
+
+.prebuilt-template-button:hover:not(:disabled) {
+  transform: translateX(2px);
+  border-color: color-mix(in srgb, var(--prebuilt-accent) 38%, var(--line));
+  filter: none;
+}
+
+.prebuilt-template-button.active {
+  border-color: color-mix(in srgb, var(--prebuilt-accent) 62%, var(--line));
+  background: color-mix(in srgb, var(--prebuilt-accent) 7%, #0c1c30);
+  box-shadow: inset 3px 0 0 var(--prebuilt-accent);
+}
+
+.prebuilt-template-thumb {
+  width: 52px;
+  height: 72px;
+  overflow: hidden;
+
+  border-radius: 6px;
+  background: #050b13;
+}
+
+.prebuilt-template-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prebuilt-template-copy {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.prebuilt-template-copy small {
+  color: var(--prebuilt-accent);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .13em;
+}
+
+.prebuilt-template-copy strong {
+  overflow: hidden;
+  font-size: 11px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+}
+
+.prebuilt-template-copy em {
+  color: var(--muted);
+  font-size: 8px;
+  font-style: normal;
+}
+
+.prebuilt-template-button > b {
+  color: var(--prebuilt-accent);
+  font-size: 16px;
+}
+
+.prebuilt-detail {
+  --prebuilt-accent: var(--accent-2);
+
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  padding: 22px;
+
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+  touch-action: pan-y;
+}
+
+.prebuilt-detail-hero {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.prebuilt-detail-cover {
+  height: 238px;
+  overflow: hidden;
+
+  border: 1px solid color-mix(in srgb, var(--prebuilt-accent) 42%, var(--line));
+  border-radius: 13px;
+
+  background: #050b13;
+
+  box-shadow:
+    0 20px 48px rgba(0,0,0,.32),
+    0 0 32px color-mix(in srgb, var(--prebuilt-accent) 7%, transparent);
+}
+
+.prebuilt-detail-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prebuilt-detail-copy {
+  min-width: 0;
+}
+
+.prebuilt-set-code {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 8px;
+
+  border: 1px solid color-mix(in srgb, var(--prebuilt-accent) 34%, var(--line));
+  border-radius: 999px;
+
+  color: var(--prebuilt-accent);
+  background: color-mix(in srgb, var(--prebuilt-accent) 5%, transparent);
+
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .13em;
+}
+
+.prebuilt-detail-copy h3 {
+  margin: 12px 0 8px;
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: -.035em;
+  line-height: 1.05;
+}
+
+.prebuilt-detail-copy > p {
+  max-width: 620px;
+  margin: 0;
+
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.prebuilt-detail-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+
+  margin-top: 20px;
+}
+
+.prebuilt-detail-stats > div {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+
+  padding: 9px;
+
+  border: 1px solid var(--line);
+  border-radius: 9px;
+
+  background: rgba(8,21,38,.74);
+}
+
+.prebuilt-detail-stats span {
+  color: var(--muted);
+  font-size: 6px;
+  font-weight: 900;
+  letter-spacing: .11em;
+}
+
+.prebuilt-detail-stats strong {
+  overflow: hidden;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.prebuilt-card-list-block {
+  margin-top: 22px;
+
+  border: 1px solid var(--line);
+  border-radius: 13px;
+
+  background: rgba(6,16,29,.58);
+}
+
+.prebuilt-card-list-block > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.prebuilt-card-list-block > header > div {
+  display: grid;
+  gap: 3px;
+}
+
+.prebuilt-card-list-block > header strong {
+  font-size: 12px;
+}
+
+.prebuilt-ready-badge {
+  padding: 5px 8px;
+
+  border: 1px solid var(--line);
+  border-radius: 999px;
+
+  font-size: 7px;
+  font-weight: 950;
+  letter-spacing: .1em;
+}
+
+.prebuilt-ready-badge.ready {
+  color: var(--ok);
+  border-color: rgba(121,221,168,.28);
+  background: rgba(121,221,168,.06);
+}
+
+.prebuilt-ready-badge.incomplete {
+  color: #ffd079;
+  border-color: rgba(244,189,75,.3);
+  background: rgba(244,189,75,.06);
+}
+
+.prebuilt-card-list {
+  max-height: 230px;
+  overflow-y: auto;
+
+  display: grid;
+  gap: 1px;
+
+  padding: 5px;
+}
+
+.prebuilt-card-row {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr) 34px;
+  gap: 10px;
+  align-items: center;
+
+  min-height: 31px;
+  padding: 5px 8px;
+
+  border-radius: 6px;
+}
+
+.prebuilt-card-row:nth-child(odd) {
+  background: rgba(255,255,255,.018);
+}
+
+.prebuilt-card-row-id {
+  color: var(--prebuilt-accent);
+  font-size: 8px;
+  font-weight: 900;
+}
+
+.prebuilt-card-row strong {
+  min-width: 0;
+  overflow: hidden;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.prebuilt-card-row b {
+  color: var(--muted);
+  font-size: 9px;
+  text-align: right;
+}
+
+.prebuilt-error,
+.prebuilt-warning {
+  margin-top: 10px;
+  padding: 10px 12px;
+
+  border-radius: 9px;
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.prebuilt-error {
+  border: 1px solid rgba(255,106,115,.34);
+  background: rgba(255,106,115,.07);
+  color: #ff9ca3;
+}
+
+.prebuilt-warning {
+  border: 1px solid rgba(244,189,75,.28);
+  background: rgba(244,189,75,.06);
+  color: #ffe0a0;
+}
+
+.prebuilt-detail-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+
+  margin-top: 16px;
+  padding-top: 14px;
+
+  border-top: 1px solid var(--line);
+}
+
+.prebuilt-detail-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.prebuilt-create-button {
+  min-width: 190px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.prebuilt-create-button > b {
+  font-size: 15px;
+}
+
+@media (max-width: 900px) {
+  .deck-create-overlay {
+    padding: 12px;
+  }
+
+  .deck-create-shell {
+    max-height: calc(100vh - 24px);
+  }
+
+  .deck-create-choice-grid {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+    max-height: calc(100vh - 160px);
+  }
+
+  .deck-create-option {
+    min-height: 290px;
+  }
+
+  .prebuilt-browser {
+    height: min(760px, calc(100dvh - 170px));
+    max-height: calc(100dvh - 170px);
+    grid-template-columns: 1fr;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scrollbar-gutter: stable;
+  }
+
+  .prebuilt-list-panel {
+    height: auto;
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .prebuilt-template-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .prebuilt-detail {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 640px) {
+  .deck-create-header {
+    padding: 18px;
+  }
+
+  .deck-create-choice-grid,
+  .prebuilt-detail,
+  .prebuilt-list-panel {
+    padding: 14px;
+  }
+
+  .prebuilt-template-list {
+    grid-template-columns: 1fr;
+  }
+
+  .prebuilt-detail-hero {
+    grid-template-columns: 118px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .prebuilt-detail-cover {
+    height: 168px;
+  }
+
+  .prebuilt-detail-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .prebuilt-detail-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .prebuilt-create-button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck-create-option,
+  .prebuilt-template-button {
+    transition: none;
+  }
+}

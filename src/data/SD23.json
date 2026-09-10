@@ -1,0 +1,1276 @@
+[
+  {
+    "id": "SD23-001",
+    "name": "Haneppo",
+    "nameEN": "Haneppo",
+    "namePT": "Haneppo",
+    "nameKey": "haneppo",
+    "set": "SD23",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Small Toy"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Destroyed by Your Opponent: If you control a Spirit whose card name includes 'Fairy', draw 2 cards.",
+      "ptBR": "LV1/LV2 Quando Destruído pelo Oponente: se você controlar um Spirit cujo nome da carta inclua 'Fairy', compre 2 cartas."
+    },
+    "effects": [
+      {
+        "id": "sd23-001-destroyed",
+        "type": "whenDestroyed",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenDestroyedByOpponent",
+        "title": {
+          "en": "When Destroyed by Your Opponent",
+          "ptBR": "Quando Destruído pelo Oponente"
+        },
+        "text": {
+          "en": "If you control a Spirit whose card name includes 'Fairy', draw 2 cards.",
+          "ptBR": "Se você controlar um Spirit cujo nome da carta inclua 'Fairy', compre 2 cartas."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-001.webp",
+    "nameJP": "ハネッポ"
+  },
+  {
+    "id": "SD23-002",
+    "name": "The Fairy Mona",
+    "nameEN": "The Fairy Mona",
+    "namePT": "The Fairy Mona",
+    "nameKey": "the-fairy-mona",
+    "set": "SD23",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 1,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Music Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 During Either Attack Step, at battle resolution: If the opposing battling Spirit has 3000 BP or less, you may reveal the top card of your deck. If it is a Yellow Ultimate card, add it to your hand. Otherwise, discard it.",
+      "ptBR": "LV2 Durante o Attack Step de qualquer jogador, na resolução da batalha: se o Spirit oponente em batalha tiver 3000 BP ou menos, você pode revelar a carta do topo do seu deck. Se for uma carta de Ultimate Amarelo, adicione-a à sua mão. Caso contrário, descarte-a."
+    },
+    "effects": [
+      {
+        "id": "sd23-002-battle",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "battleResolution",
+        "title": {
+          "en": "Battle Resolution",
+          "ptBR": "Resolução da Batalha"
+        },
+        "text": {
+          "en": "If the opposing battling Spirit has 3000 BP or less, reveal the top card of your deck. Add it to your hand if it is a Yellow Ultimate; otherwise discard it.",
+          "ptBR": "Se o Spirit oponente em batalha tiver 3000 BP ou menos, revele a carta do topo do seu deck. Adicione-a à sua mão se for um Ultimate Amarelo; caso contrário, descarte-a."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-002.webp",
+    "nameJP": "妖精モナ"
+  },
+  {
+    "id": "SD23-003",
+    "name": "The Angelia Hiver",
+    "nameEN": "The Angelia Hiver",
+    "namePT": "The Angelia Hiver",
+    "nameKey": "the-angelia-hiver",
+    "set": "SD23",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 When This Spirit Attacks: During this battle, one opposing Spirit gets -3000 BP. If that Spirit becomes 0 BP due to this effect for the first time this turn, draw 1 card.",
+      "ptBR": "LV2/LV3 Quando Este Spirit Ataca: durante esta batalha, 1 Spirit do oponente recebe -3000 BP. Se aquele Spirit chegar a 0 BP devido a este efeito pela primeira vez neste turno, compre 1 carta."
+    },
+    "effects": [
+      {
+        "id": "sd23-003-attack",
+        "type": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "During this battle, one opposing Spirit gets -3000 BP. If that Spirit becomes 0 BP due to this effect for the first time this turn, draw 1 card.",
+          "ptBR": "Durante esta batalha, 1 Spirit do oponente recebe -3000 BP. Se aquele Spirit chegar a 0 BP devido a este efeito pela primeira vez neste turno, compre 1 carta."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-003.webp",
+    "nameJP": "天使イヴェール"
+  },
+  {
+    "id": "SD23-004",
+    "name": "The Angelia Aester",
+    "nameEN": "The Angelia Aester",
+    "namePT": "The Angelia Aester",
+    "nameKey": "the-angelia-aester",
+    "set": "SD23",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: One opposing Spirit gets -3000 BP during this turn.",
+      "ptBR": "LV1/LV2 Quando Invocado: 1 Spirit do oponente recebe -3000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd23-004-summon",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "One opposing Spirit gets -3000 BP during this turn.",
+          "ptBR": "1 Spirit do oponente recebe -3000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-004.webp",
+    "nameJP": "天使アエスタ"
+  },
+  {
+    "id": "SD23-005",
+    "name": "The Angelia Gourette",
+    "nameEN": "The Angelia Gourette",
+    "namePT": "The Angelia Gourette",
+    "nameKey": "the-angelia-gourette",
+    "set": "SD23",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: During this battle, one opposing Spirit gets -3000 BP. If that Spirit becomes 0 BP due to this effect, destroy it.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: durante esta batalha, 1 Spirit do oponente recebe -3000 BP. Se aquele Spirit chegar a 0 BP devido a este efeito, destrua-o."
+    },
+    "effects": [
+      {
+        "id": "sd23-005-attack",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "During this battle, one opposing Spirit gets -3000 BP. If that Spirit becomes 0 BP due to this effect, destroy it.",
+          "ptBR": "Durante esta batalha, 1 Spirit do oponente recebe -3000 BP. Se aquele Spirit chegar a 0 BP devido a este efeito, destrua-o."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-005.webp",
+    "nameJP": "天使グレット"
+  },
+  {
+    "id": "SD23-006",
+    "name": "The Fairy Actia",
+    "nameEN": "The Fairy Actia",
+    "namePT": "The Fairy Actia",
+    "nameKey": "the-fairy-actia",
+    "set": "SD23",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Music Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Opponent's Attack Step, at battle resolution: If the opposing battling Spirit has 3000 BP or less, its attack cannot reduce your Life. LV2 During Either Attack Step, at battle resolution: If the opposing battling Spirit has 3000 BP or less, put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do oponente, na resolução da batalha: se o Spirit oponente em batalha tiver 3000 BP ou menos, o ataque dele não pode reduzir sua Life. LV2 Durante o Attack Step de qualquer jogador, na resolução da batalha: se o Spirit oponente em batalha tiver 3000 BP ou menos, coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [
+      {
+        "id": "sd23-006-life-protection",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "Battle Resolution",
+          "ptBR": "Resolução da Batalha"
+        },
+        "text": {
+          "en": "If the opposing battling Spirit has 3000 BP or less, its attack cannot reduce your Life.",
+          "ptBR": "Se o Spirit oponente em batalha tiver 3000 BP ou menos, o ataque dele não pode reduzir sua Life."
+        }
+      },
+      {
+        "id": "sd23-006-core",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "eitherAttackStep",
+        "title": {
+          "en": "Battle Resolution",
+          "ptBR": "Resolução da Batalha"
+        },
+        "text": {
+          "en": "If the opposing battling Spirit has 3000 BP or less, put 1 Core from the Void into your Reserve.",
+          "ptBR": "Se o Spirit oponente em batalha tiver 3000 BP ou menos, coloque 1 Core do Void na sua Reserve."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-006.webp",
+    "nameJP": "妖精アクティア"
+  },
+  {
+    "id": "SD23-007",
+    "name": "The Angelia Lyell",
+    "nameEN": "The Angelia Lyell",
+    "namePT": "The Angelia Lyell",
+    "nameKey": "the-angelia-lyell",
+    "set": "SD23",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: During this battle, one opposing Spirit gets -5000 BP. LV2/LV3 During Either Attack Step, at battle resolution: If the opposing battling Spirit has 3000 BP or less, destroy it.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: durante esta batalha, 1 Spirit do oponente recebe -5000 BP. LV2/LV3 Durante o Attack Step de qualquer jogador, na resolução da batalha: se o Spirit oponente em batalha tiver 3000 BP ou menos, destrua-o."
+    },
+    "effects": [
+      {
+        "id": "sd23-007-attack",
+        "type": "whenAttacks",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Spirit Attacks",
+          "ptBR": "Quando Este Spirit Ataca"
+        },
+        "text": {
+          "en": "During this battle, one opposing Spirit gets -5000 BP.",
+          "ptBR": "Durante esta batalha, 1 Spirit do oponente recebe -5000 BP."
+        }
+      },
+      {
+        "id": "sd23-007-battle-destroy",
+        "type": "constant",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "battleResolution",
+        "title": {
+          "en": "Battle Resolution",
+          "ptBR": "Resolução da Batalha"
+        },
+        "text": {
+          "en": "If the opposing battling Spirit has 3000 BP or less, destroy it.",
+          "ptBR": "Se o Spirit oponente em batalha tiver 3000 BP ou menos, destrua-o."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-007.webp",
+    "nameJP": "天使ライエル"
+  },
+  {
+    "id": "SD23-008",
+    "name": "Ultimate-Kleio",
+    "nameEN": "Ultimate-Kleio",
+    "namePT": "Ultimate-Kleio",
+    "nameKey": "ultimate-kleio",
+    "set": "SD23",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Incarnate",
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 5,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one Yellow Spirit. LV3/LV4/LV5 Ultimate Trigger When This Ultimate Attacks: On a hit, the opposing battling Spirit gets -5000 BP during this battle. If an opposing Spirit blocks this Ultimate, move 1 Core from your opponent's Life to their Reserve.",
+      "ptBR": "Condição de Invocação: você deve controlar pelo menos 1 Spirit Amarelo. LV3/LV4/LV5 Ultimate Trigger Quando Este Ultimate Ataca: em um acerto, o Spirit oponente em batalha recebe -5000 BP durante esta batalha. Se um Spirit do oponente bloquear este Ultimate, mova 1 Core da Life do oponente para a Reserve dele."
+    },
+    "effects": [
+      {
+        "id": "sd23-008-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one Yellow Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Amarelo."
+        },
+        "condition": {
+          "cardType": "spirit",
+          "color": "yellow",
+          "minCount": 1
+        }
+      },
+      {
+        "id": "sd23-008-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "On a hit, the opposing battling Spirit gets -5000 BP during this battle. If an opposing Spirit blocks this Ultimate, move 1 Core from your opponent's Life to their Reserve.",
+          "ptBR": "Em um acerto, o Spirit oponente em batalha recebe -5000 BP durante esta batalha. Se um Spirit do oponente bloquear este Ultimate, mova 1 Core da Life do oponente para a Reserve dele."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-008.webp",
+    "nameJP": "アルティメット・クレイオ",
+    "summonCondition": {
+      "cardType": "spirit",
+      "color": "yellow",
+      "minCount": 1
+    }
+  },
+  {
+    "id": "SD23-009",
+    "name": "Ultimate-Virchu",
+    "nameEN": "Ultimate-Virchu",
+    "namePT": "Ultimate-Virchu",
+    "nameKey": "ultimate-virchu",
+    "set": "SD23",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Incarnate",
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 8000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 11000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one Yellow Spirit. LV3/LV4 When This Ultimate Battles: Magic cards in your hand cost 1 less. LV3/LV4 Ultimate Trigger When This Ultimate Attacks: On a hit, the opposing battling Spirit gets -10000 BP during this battle. If an opposing Spirit blocks this Ultimate, move 1 Core from your opponent's Life to their Reserve.",
+      "ptBR": "Condição de Invocação: você deve controlar pelo menos 1 Spirit Amarelo. LV3/LV4 Quando Este Ultimate Batalha: as cartas de Magic da sua mão custam 1 a menos. LV3/LV4 Ultimate Trigger Quando Este Ultimate Ataca: em um acerto, o Spirit oponente em batalha recebe -10000 BP durante esta batalha. Se um Spirit do oponente bloquear este Ultimate, mova 1 Core da Life do oponente para a Reserve dele."
+    },
+    "effects": [
+      {
+        "id": "sd23-009-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one Yellow Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Amarelo."
+        },
+        "condition": {
+          "cardType": "spirit",
+          "color": "yellow",
+          "minCount": 1
+        }
+      },
+      {
+        "id": "sd23-009-magic-cost",
+        "type": "constant",
+        "levels": [
+          3,
+          4
+        ],
+        "timing": "whenBattles",
+        "title": {
+          "en": "When This Ultimate Battles",
+          "ptBR": "Quando Este Ultimate Batalha"
+        },
+        "text": {
+          "en": "Magic cards in your hand cost 1 less.",
+          "ptBR": "As cartas de Magic da sua mão custam 1 a menos."
+        }
+      },
+      {
+        "id": "sd23-009-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "On a hit, the opposing battling Spirit gets -10000 BP during this battle. If an opposing Spirit blocks this Ultimate, move 1 Core from your opponent's Life to their Reserve.",
+          "ptBR": "Em um acerto, o Spirit oponente em batalha recebe -10000 BP durante esta batalha. Se um Spirit do oponente bloquear este Ultimate, mova 1 Core da Life do oponente para a Reserve dele."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-009.webp",
+    "nameJP": "アルティメット・バーチュ",
+    "summonCondition": {
+      "cardType": "spirit",
+      "color": "yellow",
+      "minCount": 1
+    }
+  },
+  {
+    "id": "SD23-010",
+    "name": "Ultimate-Exsia",
+    "nameEN": "Ultimate-Exsia",
+    "namePT": "Ultimate-Exsia",
+    "nameKey": "ultimate-exsia",
+    "set": "SD23",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "M",
+    "includedQuantity": 2,
+    "families": [
+      "Incarnate",
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 9000
+      },
+      {
+        "level": 4,
+        "cores": 2,
+        "bp": 11000
+      },
+      {
+        "level": 5,
+        "cores": 4,
+        "bp": 16000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one Yellow Spirit. LV3/LV4/LV5 Ultimate Trigger When This Ultimate Attacks: On a hit, one opposing Spirit gets -10000 BP during this battle; if it becomes 0 BP due to this effect, destroy it. LV5 [Brilliance] When This Ultimate Battles: At the end of the battle, return all Magic cards you used during this battle to your hand.",
+      "ptBR": "Condição de Invocação: você deve controlar pelo menos 1 Spirit Amarelo. LV3/LV4/LV5 Ultimate Trigger Quando Este Ultimate Ataca: em um acerto, 1 Spirit do oponente recebe -10000 BP durante esta batalha; se chegar a 0 BP devido a este efeito, destrua-o. LV5 [Brilliance] Quando Este Ultimate Batalha: no fim da batalha, devolva à sua mão todas as Magics que você usou nesta batalha."
+    },
+    "effects": [
+      {
+        "id": "sd23-010-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one Yellow Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Amarelo."
+        },
+        "condition": {
+          "cardType": "spirit",
+          "color": "yellow",
+          "minCount": 1
+        }
+      },
+      {
+        "id": "sd23-010-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "On a hit, one opposing Spirit gets -10000 BP during this battle; if it becomes 0 BP due to this effect, destroy it.",
+          "ptBR": "Em um acerto, 1 Spirit do oponente recebe -10000 BP durante esta batalha; se chegar a 0 BP devido a este efeito, destrua-o."
+        }
+      },
+      {
+        "id": "sd23-010-brilliance",
+        "type": "brilliance",
+        "levels": [
+          5
+        ],
+        "timing": "whenBattles",
+        "title": {
+          "en": "Brilliance",
+          "ptBR": "Brilliance"
+        },
+        "text": {
+          "en": "At the end of the battle, return all Magic cards you used during this battle to your hand.",
+          "ptBR": "No fim da batalha, devolva à sua mão todas as Magics que você usou nesta batalha."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-010.webp",
+    "nameJP": "アルティメット・エクスシア",
+    "summonCondition": {
+      "cardType": "spirit",
+      "color": "yellow",
+      "minCount": 1
+    }
+  },
+  {
+    "id": "SD23-011",
+    "name": "The Fortress Above the Clouds of Eirein",
+    "nameEN": "The Fortress Above the Clouds of Eirein",
+    "namePT": "The Fortress Above the Clouds of Eirein",
+    "nameKey": "the-fortress-above-the-clouds-of-eirein",
+    "set": "SD23",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Divine Spirit Spirits is returned to your hand or deck by an opposing Spirit or Magic effect, put 1 Core from the Void into your Life for each returned Spirit. LV2 During Either Attack Step: When an opposing battling Spirit becomes 0 BP for the first time during this turn, draw 1 card.",
+      "ptBR": "LV1/LV2: quando um dos seus Spirits da família Divine Spirit for devolvido à sua mão ou deck por um efeito de Spirit ou Magic do oponente, coloque 1 Core do Void na sua Life para cada Spirit devolvido. LV2 Durante o Attack Step de qualquer jogador: quando um Spirit oponente em batalha chegar a 0 BP pela primeira vez neste turno, compre 1 carta."
+    },
+    "effects": [
+      {
+        "id": "sd23-011-life",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "ownDivineSpiritReturnedByOpponent",
+        "title": {
+          "en": "Life Recovery",
+          "ptBR": "Recuperação de Life"
+        },
+        "text": {
+          "en": "For each of your Divine Spirit Spirits returned to your hand or deck by an opposing Spirit or Magic effect, put 1 Core from the Void into your Life.",
+          "ptBR": "Para cada um dos seus Spirits Divine Spirit devolvidos à sua mão ou deck por um efeito de Spirit ou Magic do oponente, coloque 1 Core do Void na sua Life."
+        }
+      },
+      {
+        "id": "sd23-011-draw",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "eitherAttackStep",
+        "title": {
+          "en": "During Either Attack Step",
+          "ptBR": "Durante o Attack Step de Qualquer Jogador"
+        },
+        "text": {
+          "en": "When an opposing battling Spirit becomes 0 BP for the first time during this turn, draw 1 card.",
+          "ptBR": "Quando um Spirit oponente em batalha chegar a 0 BP pela primeira vez neste turno, compre 1 carta."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-011.webp",
+    "nameJP": "エイレインの雲上要塞"
+  },
+  {
+    "id": "SD23-012",
+    "name": "Yellow Alert",
+    "nameEN": "Yellow Alert",
+    "namePT": "Yellow Alert",
+    "nameKey": "yellow-alert",
+    "set": "SD23",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: One opposing Spirit gets -2000 BP during this turn. If you use this Magic during your opponent's turn, also refresh 1 of your Yellow Spirits.",
+      "ptBR": "Flash: 1 Spirit do oponente recebe -2000 BP durante este turno. Se você usar esta Magic durante o turno do oponente, também dê Refresh em 1 dos seus Spirits Amarelos."
+    },
+    "effects": [
+      {
+        "id": "sd23-012-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "One opposing Spirit gets -2000 BP during this turn. If used during your opponent's turn, also refresh 1 of your Yellow Spirits.",
+          "ptBR": "1 Spirit do oponente recebe -2000 BP durante este turno. Se usada durante o turno do oponente, também dê Refresh em 1 dos seus Spirits Amarelos."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-012.webp",
+    "nameJP": "イエローアラート"
+  },
+  {
+    "id": "SD23-013",
+    "name": "Symphonic Burst",
+    "nameEN": "Symphonic Burst",
+    "namePT": "Symphonic Burst",
+    "nameKey": "symphonic-burst",
+    "set": "SD23",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Burst — After Your Opponent Destroys Your Spirit: Return the Spirit card that was destroyed when this Burst activated, if it costs 5 or less, from your Trash to your hand. Then, by paying this card's cost, activate its Flash effect. Flash: At the end of this battle, if your Life is 2 or less, end the Attack Step.",
+      "ptBR": "Burst — Após o Oponente Destruir seu Spirit: devolva do seu Trash para a sua mão a carta de Spirit que foi destruída quando este Burst ativou, se ela tiver custo 5 ou menos. Depois, pagando o custo desta carta, ative o efeito Flash. Flash: no fim desta batalha, se a sua Life for 2 ou menos, encerre o Attack Step."
+    },
+    "effects": [
+      {
+        "id": "sd23-013-burst",
+        "type": "burst",
+        "levels": [],
+        "timing": "afterOpponentDestroysYourSpirit",
+        "title": {
+          "en": "Burst",
+          "ptBR": "Burst"
+        },
+        "text": {
+          "en": "Return the Cost 5 or less Spirit card destroyed when this Burst activated from your Trash to your hand. Then you may pay this card's cost to activate its Flash effect.",
+          "ptBR": "Devolva do seu Trash para a sua mão a carta de Spirit de custo 5 ou menos destruída quando este Burst ativou. Depois você pode pagar o custo desta carta para ativar o efeito Flash."
+        }
+      },
+      {
+        "id": "sd23-013-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "At the end of this battle, if your Life is 2 or less, end the Attack Step.",
+          "ptBR": "No fim desta batalha, se a sua Life for 2 ou menos, encerre o Attack Step."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-013.webp",
+    "nameJP": "シンフォニックバースト"
+  },
+  {
+    "id": "SD23-014",
+    "name": "Burst Snap",
+    "nameEN": "Burst Snap",
+    "namePT": "Burst Snap",
+    "nameKey": "burst-snap",
+    "set": "SD23",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Burst — After Your Life Decreases: During this turn, attacks by opposing Spirits with costs 0, 1, 3, 5, 7, 9, or 11 cannot reduce your Life. Then, by paying this card's cost, activate its Flash effect. Flash: Choose 1 opposing Spirit. During this turn, it cannot attack or block, loses all of its effects, and cannot gain new effects.",
+      "ptBR": "Burst — Após Sua Life Diminuir: durante este turno, ataques de Spirits do oponente de custos 0, 1, 3, 5, 7, 9 ou 11 não podem reduzir sua Life. Depois, pagando o custo desta carta, ative o efeito Flash. Flash: escolha 1 Spirit do oponente. Durante este turno, ele não pode atacar nem bloquear, perde todos os efeitos e não pode ganhar novos efeitos."
+    },
+    "effects": [
+      {
+        "id": "sd23-014-burst",
+        "type": "burst",
+        "levels": [],
+        "timing": "lifeDecrease",
+        "title": {
+          "en": "Burst",
+          "ptBR": "Burst"
+        },
+        "text": {
+          "en": "During this turn, attacks by opposing Spirits with costs 0, 1, 3, 5, 7, 9, or 11 cannot reduce your Life.",
+          "ptBR": "Durante este turno, ataques de Spirits do oponente de custos 0, 1, 3, 5, 7, 9 ou 11 não podem reduzir sua Life."
+        }
+      },
+      {
+        "id": "sd23-014-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Choose 1 opposing Spirit. During this turn, it cannot attack or block, loses all of its effects, and cannot gain new effects.",
+          "ptBR": "Escolha 1 Spirit do oponente. Durante este turno, ele não pode atacar nem bloquear, perde todos os efeitos e não pode ganhar novos efeitos."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-014.webp",
+    "nameJP": "バーストスナップ"
+  },
+  {
+    "id": "SD23-015",
+    "name": "Angel Strike",
+    "nameEN": "Angel Strike",
+    "namePT": "Angel Strike",
+    "nameKey": "angel-strike",
+    "set": "SD23",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: One opposing Spirit or Ultimate gets -5000 BP during this turn. If it becomes 0 BP due to this effect, destroy it.",
+      "ptBR": "Flash: 1 Spirit ou Ultimate do oponente recebe -5000 BP durante este turno. Se chegar a 0 BP devido a este efeito, destrua-o."
+    },
+    "effects": [
+      {
+        "id": "sd23-015-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "One opposing Spirit or Ultimate gets -5000 BP during this turn. If it becomes 0 BP due to this effect, destroy it.",
+          "ptBR": "1 Spirit ou Ultimate do oponente recebe -5000 BP durante este turno. Se chegar a 0 BP devido a este efeito, destrua-o."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-015.webp",
+    "nameJP": "エンジェルストライク"
+  },
+  {
+    "id": "SD23-016",
+    "name": "Reversal Force",
+    "nameEN": "Reversal Force",
+    "namePT": "Reversal Force",
+    "nameKey": "reversal-force",
+    "set": "SD23",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Refresh all exhausted Spirits, then exhaust all refreshed Spirits. You cannot use this Magic during your turn.",
+      "ptBR": "Flash: dê Refresh em todos os Spirits em Exhaust e depois dê Exhaust em todos os Spirits em Refresh. Você não pode usar esta Magic durante o seu turno."
+    },
+    "effects": [
+      {
+        "id": "sd23-016-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Refresh all exhausted Spirits, then exhaust all refreshed Spirits. You cannot use this Magic during your turn.",
+          "ptBR": "Dê Refresh em todos os Spirits em Exhaust e depois dê Exhaust em todos os Spirits em Refresh. Você não pode usar esta Magic durante o seu turno."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-016.webp",
+    "nameJP": "リバーサルフォース"
+  },
+  {
+    "id": "SD23-X01",
+    "name": "Ultimate-Valiero",
+    "nameEN": "Ultimate-Valiero",
+    "namePT": "Ultimate-Valiero",
+    "nameKey": "ultimate-valiero",
+    "set": "SD23",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Incarnate",
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 10000
+      },
+      {
+        "level": 4,
+        "cores": 2,
+        "bp": 14000
+      },
+      {
+        "level": 5,
+        "cores": 3,
+        "bp": 17000
+      }
+    ],
+    "effectText": {
+      "en": "Summoning Condition: You must control at least one Yellow Spirit. LV3/LV4/LV5 Ultimate Trigger When This Ultimate Attacks: On a hit, this Ultimate cannot be blocked by opposing Spirits/Ultimates whose level is lower than this Ultimate's level. [Critical Hit] If the hit card is a Magic card, also choose a color and return all Magic cards of that color from your Trash to your hand. LV4/LV5 When This Ultimate Battles: One opposing Spirit/Ultimate gets -3000 BP during this turn.",
+      "ptBR": "Condição de Invocação: você deve controlar pelo menos 1 Spirit Amarelo. LV3/LV4/LV5 Ultimate Trigger Quando Este Ultimate Ataca: em um acerto, este Ultimate não pode ser bloqueado por Spirits/Ultimates do oponente cujo Level seja menor que o Level deste Ultimate. [Critical Hit] Se a carta acertada for uma Magic, escolha também uma cor e devolva para a sua mão todas as Magics daquela cor do seu Trash. LV4/LV5 Quando Este Ultimate Batalha: 1 Spirit/Ultimate do oponente recebe -3000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "sd23-x01-summon-condition",
+        "type": "summonCondition",
+        "levels": [],
+        "timing": "summon",
+        "title": {
+          "en": "Summoning Condition",
+          "ptBR": "Condição de Invocação"
+        },
+        "text": {
+          "en": "You must control at least one Yellow Spirit.",
+          "ptBR": "Você deve controlar pelo menos 1 Spirit Amarelo."
+        },
+        "condition": {
+          "cardType": "spirit",
+          "color": "yellow",
+          "minCount": 1
+        }
+      },
+      {
+        "id": "sd23-x01-trigger",
+        "type": "ultimateTrigger",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Ultimate Trigger",
+          "ptBR": "Ultimate Trigger"
+        },
+        "text": {
+          "en": "On a hit, this Ultimate cannot be blocked by opposing Spirits/Ultimates whose level is lower than this Ultimate's level.",
+          "ptBR": "Em um acerto, este Ultimate não pode ser bloqueado por Spirits/Ultimates do oponente cujo Level seja menor que o Level deste Ultimate."
+        }
+      },
+      {
+        "id": "sd23-x01-critical-hit",
+        "type": "criticalHit",
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "timing": "ultimateTriggerHit",
+        "title": {
+          "en": "Critical Hit",
+          "ptBR": "Critical Hit"
+        },
+        "text": {
+          "en": "If the hit card is a Magic card, choose a color and return all Magic cards of that color from your Trash to your hand.",
+          "ptBR": "Se a carta acertada for uma Magic, escolha uma cor e devolva para a sua mão todas as Magics daquela cor do seu Trash."
+        }
+      },
+      {
+        "id": "sd23-x01-battle",
+        "type": "whenBattles",
+        "levels": [
+          4,
+          5
+        ],
+        "timing": "whenBattles",
+        "title": {
+          "en": "When This Ultimate Battles",
+          "ptBR": "Quando Este Ultimate Batalha"
+        },
+        "text": {
+          "en": "One opposing Spirit/Ultimate gets -3000 BP during this turn.",
+          "ptBR": "1 Spirit/Ultimate do oponente recebe -3000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD23/SD23-X01.webp",
+    "nameJP": "アルティメット・ヴァリエル",
+    "summonCondition": {
+      "cardType": "spirit",
+      "color": "yellow",
+      "minCount": 1
+    }
+  }
+]

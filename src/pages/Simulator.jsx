@@ -25,6 +25,7 @@ import { useLanguage } from "../i18n.jsx";
 
 import "../styles/simulatorPanels.css";
 import "../styles/arenaVisuals.css";
+import "../styles/effectDecision.css";
 
 
 function effectText(card, language) {
@@ -487,6 +488,11 @@ export default function Simulator({
     setAttackDrag
   ] = useState(null);
 
+  const [
+    effectDecisionSelection,
+    setEffectDecisionSelection
+  ] = useState([]);
+
   const previewTimer =
     useRef(null);
 
@@ -495,6 +501,18 @@ export default function Simulator({
 
   const online =
     mode === "online";
+
+
+  const effectDecision =
+    match.pendingEffectDecision ||
+    null;
+
+
+  useEffect(() => {
+    setEffectDecisionSelection([]);
+  }, [
+    effectDecision?.id
+  ]);
 
 
   /* =======================================================
@@ -549,6 +567,15 @@ export default function Simulator({
 
   const actorId =
     useMemo(() => {
+      if (
+        match.pendingEffectDecision
+          ?.playerId
+      ) {
+        return match
+          .pendingEffectDecision
+          .playerId;
+      }
+
       if (
         match.battle
           ?.flash
@@ -617,6 +644,41 @@ export default function Simulator({
     pendingCost;
 
 
+  const blockingPending =
+    Boolean(
+      pending ||
+      effectDecision
+    );
+
+
+  const effectCandidateIds =
+    useMemo(
+      () =>
+        new Set(
+          (
+            effectDecision
+              ?.candidates ||
+            []
+          ).map(
+            (candidate) =>
+              candidate.instanceId
+          )
+        ),
+      [effectDecision]
+    );
+
+
+  const canControlEffectDecision =
+    Boolean(
+      effectDecision
+    ) &&
+    (
+      !online ||
+      viewerPlayerId ===
+        effectDecision.playerId
+    );
+
+
   const selectedCtx =
     selectedId
       ? findPhysicalCard(
@@ -638,6 +700,7 @@ export default function Simulator({
 
   const canMoveCores =
     canControlActor &&
+    !effectDecision &&
     actorId === bottomId &&
     (
       (
@@ -698,7 +761,9 @@ export default function Simulator({
           }
 
           if (
-            result?.manualResolutionNeeded
+            result?.manualResolutionNeeded &&
+            !result?.pendingEffectDecision &&
+            !result?.match?.pendingEffectDecision
           ) {
             setNotice(
               language === "en"
@@ -733,7 +798,8 @@ export default function Simulator({
     );
 
     if (
-      result.manualResolutionNeeded
+      result.manualResolutionNeeded &&
+      !result.match?.pendingEffectDecision
     ) {
       setNotice(
         language === "en"
@@ -741,6 +807,606 @@ export default function Simulator({
           : "O efeito ainda precisa de resolução manual conforme o texto."
       );
     }
+  }
+
+
+  /* =======================================================
+     EFFECT DECISION QUEUE
+  ======================================================= */
+
+  function effectDecisionTitle() {
+    if (!effectDecision) {
+      return "";
+    }
+
+    return language === "en"
+      ? (
+          effectDecision.titleEN ||
+          effectDecision.titlePT ||
+          "Effect Resolution"
+        )
+      : (
+          effectDecision.titlePT ||
+          effectDecision.titleEN ||
+          "Resolução de Efeito"
+        );
+  }
+
+
+  function effectDecisionInstruction() {
+    if (!effectDecision) {
+      return "";
+    }
+
+    const custom =
+      language === "en"
+        ? (
+            effectDecision.instructionEN ||
+            effectDecision.instructionPT
+          )
+        : (
+            effectDecision.instructionPT ||
+            effectDecision.instructionEN
+          );
+
+    if (custom) {
+      return custom;
+    }
+
+    if (
+      effectDecision.kind ===
+      "chooseOption"
+    ) {
+      return language === "en"
+        ? "Choose one effect to continue."
+        : "Escolha um efeito para continuar.";
+    }
+
+    if (
+      effectDecision.kind ===
+      "selectMultipleTargets"
+    ) {
+      return language === "en"
+        ? "Select the highlighted cards, then confirm."
+        : "Selecione as cartas destacadas e depois confirme.";
+    }
+
+    if (
+      effectDecision.kind ===
+      "selectTrashTarget"
+    ) {
+      return language === "en"
+        ? "Choose a valid card from the Trash."
+        : "Escolha uma carta válida do Trash.";
+    }
+
+    return language === "en"
+      ? "Click one of the highlighted valid cards."
+      : "Clique em uma das cartas válidas destacadas.";
+  }
+
+
+  function effectDecisionSelectedBP(
+    ids = effectDecisionSelection
+  ) {
+    return ids.reduce(
+      (
+        total,
+        instanceId
+      ) => {
+        const ctx =
+          findPhysicalCard(
+            match,
+            instanceId
+          );
+
+        if (
+          !ctx ||
+          ![
+            "spirits",
+            "nexuses",
+            "other"
+          ].includes(
+            ctx.zone
+          )
+        ) {
+          return total;
+        }
+
+        return total +
+          Number(
+            getEffectiveBP(
+              match,
+              cardIndex,
+              ctx.card
+            ) ||
+            0
+          );
+      },
+      0
+    );
+  }
+
+
+  function effectDecisionCanConfirm() {
+    if (
+      !effectDecision ||
+      !canControlEffectDecision
+    ) {
+      return false;
+    }
+
+    const count =
+      effectDecisionSelection.length;
+
+    const minimum =
+      Number(
+        effectDecision.minimum ||
+        0
+      );
+
+    const maximum =
+      Math.max(
+        minimum,
+        Number(
+          effectDecision.maximum ||
+          1
+        )
+      );
+
+    if (
+      count < minimum ||
+      count > maximum
+    ) {
+      return false;
+    }
+
+    if (
+      effectDecision.maxTotalBP != null &&
+      effectDecisionSelectedBP() >
+        Number(
+          effectDecision.maxTotalBP
+        )
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
+
+  function resolveEffectDecisionSelection(
+    ids
+  ) {
+    if (
+      !effectDecision ||
+      !canControlEffectDecision
+    ) {
+      return;
+    }
+
+    dispatch(
+      {
+        type:
+          "RESOLVE_EFFECT_DECISION",
+
+        payload: {
+          selectedInstanceIds:
+            ids
+        }
+      },
+      effectDecision.playerId
+    );
+  }
+
+
+  function chooseEffectDecisionOption(
+    optionId
+  ) {
+    if (
+      !effectDecision ||
+      !canControlEffectDecision
+    ) {
+      return;
+    }
+
+    dispatch(
+      {
+        type:
+          "RESOLVE_EFFECT_DECISION",
+
+        payload: {
+          optionId
+        }
+      },
+      effectDecision.playerId
+    );
+  }
+
+
+  function toggleEffectDecisionTarget(
+    instanceId
+  ) {
+    if (
+      !effectDecision ||
+      !canControlEffectDecision ||
+      !effectCandidateIds.has(
+        instanceId
+      )
+    ) {
+      return;
+    }
+
+    if (
+      effectDecision.kind !==
+        "selectMultipleTargets" &&
+      Number(
+        effectDecision.maximum ||
+        1
+      ) <= 1
+    ) {
+      resolveEffectDecisionSelection(
+        [instanceId]
+      );
+      return;
+    }
+
+    setEffectDecisionSelection(
+      (
+        current
+      ) => {
+        if (
+          current.includes(
+            instanceId
+          )
+        ) {
+          return current.filter(
+            (id) =>
+              id !== instanceId
+          );
+        }
+
+        const maximum =
+          Math.max(
+            1,
+            Number(
+              effectDecision.maximum ||
+              1
+            )
+          );
+
+        if (
+          current.length >=
+          maximum
+        ) {
+          setError(
+            language === "en"
+              ? `You can select up to ${maximum} card(s).`
+              : `Você pode selecionar no máximo ${maximum} carta(s).`
+          );
+          return current;
+        }
+
+        const next = [
+          ...current,
+          instanceId
+        ];
+
+        if (
+          effectDecision.maxTotalBP != null &&
+          effectDecisionSelectedBP(
+            next
+          ) >
+            Number(
+              effectDecision.maxTotalBP
+            )
+        ) {
+          setError(
+            language === "en"
+              ? `The selected cards exceed ${effectDecision.maxTotalBP} total BP.`
+              : `As cartas selecionadas ultrapassam ${effectDecision.maxTotalBP} BP no total.`
+          );
+          return current;
+        }
+
+        setError("");
+        return next;
+      }
+    );
+  }
+
+
+  function renderEffectDecisionOverlay() {
+    if (!effectDecision) {
+      return null;
+    }
+
+    const title =
+      effectDecisionTitle();
+
+    const instruction =
+      effectDecisionInstruction();
+
+    const sourceCard =
+      effectDecision.context
+        ?.sourceCard ||
+      (
+        effectDecision.context
+          ?.sourcePhysical
+          ? getDatabaseCard(
+              cardIndex,
+              effectDecision.context
+                .sourcePhysical
+            )
+          : null
+      );
+
+    const sourceName =
+      sourceCard
+        ? getCardName(
+            sourceCard
+          )
+        : null;
+
+    const waiting =
+      !canControlEffectDecision;
+
+    const isTrashPicker =
+      effectDecision.kind ===
+      "selectTrashTarget";
+
+    const isOptionPicker =
+      effectDecision.kind ===
+      "chooseOption";
+
+    const showConfirm =
+      effectDecision.kind ===
+        "selectMultipleTargets" ||
+      Number(
+        effectDecision.maximum ||
+        1
+      ) > 1;
+
+    const trashCandidates =
+      isTrashPicker
+        ? (
+            effectDecision.candidates ||
+            []
+          )
+            .map(
+              (candidate) => {
+                const ctx =
+                  findPhysicalCard(
+                    match,
+                    candidate.instanceId
+                  );
+
+                if (!ctx) {
+                  return null;
+                }
+
+                return {
+                  candidate,
+                  ctx,
+                  card:
+                    getDatabaseCard(
+                      cardIndex,
+                      ctx.card
+                    )
+                };
+              }
+            )
+            .filter(Boolean)
+        : [];
+
+    return (
+      <>
+        <div className="effect-decision-dimmer" />
+
+        <section
+          className={
+            `effect-decision-panel ${
+              isTrashPicker ||
+              isOptionPicker
+                ? "picker"
+                : "compact"
+            }`
+          }
+        >
+          <header className="effect-decision-header">
+            <div>
+              <span className="eyebrow">
+                {language === "en"
+                  ? "EFFECT RESOLUTION"
+                  : "RESOLUÇÃO DE EFEITO"}
+              </span>
+
+              <strong>
+                {title}
+              </strong>
+
+              {sourceName && (
+                <small>
+                  {sourceName}
+                </small>
+              )}
+            </div>
+
+            {waiting && (
+              <span className="effect-decision-waiting">
+                {language === "en"
+                  ? "Waiting for the other player"
+                  : "Aguardando o outro jogador"}
+              </span>
+            )}
+          </header>
+
+          <p>
+            {instruction}
+          </p>
+
+          {isOptionPicker &&
+            !waiting && (
+            <div className="effect-decision-options">
+              {(effectDecision.options || []).map(
+                (
+                  option,
+                  index
+                ) => (
+                  <button
+                    type="button"
+                    key={
+                      option.id ||
+                      index
+                    }
+                    onClick={() =>
+                      chooseEffectDecisionOption(
+                        String(
+                          option.id ??
+                          index
+                        )
+                      )
+                    }
+                  >
+                    {language === "en"
+                      ? (
+                          option.labelEN ||
+                          option.labelPT ||
+                          `Option ${index + 1}`
+                        )
+                      : (
+                          option.labelPT ||
+                          option.labelEN ||
+                          `Opção ${index + 1}`
+                        )}
+                  </button>
+                )
+              )}
+            </div>
+          )}
+
+          {isTrashPicker &&
+            !waiting && (
+            <div className="effect-decision-trash-grid">
+              {trashCandidates.map(
+                ({
+                  candidate,
+                  ctx,
+                  card
+                }) => {
+                  const selected =
+                    effectDecisionSelection.includes(
+                      candidate.instanceId
+                    );
+
+                  return (
+                    <div
+                      role="button"
+                      tabIndex={0}
+                      className={
+                        `effect-decision-trash-card ${
+                          selected
+                            ? "selected"
+                            : ""
+                        }`
+                      }
+                      key={
+                        candidate.instanceId
+                      }
+                      onClick={() =>
+                        toggleEffectDecisionTarget(
+                          candidate.instanceId
+                        )
+                      }
+                      onKeyDown={(e) => {
+                        if (
+                          e.key === "Enter" ||
+                          e.key === " "
+                        ) {
+                          e.preventDefault();
+                          toggleEffectDecisionTarget(
+                            candidate.instanceId
+                          );
+                        }
+                      }}
+                    >
+                      <CardTile
+                        card={card}
+                        physical={
+                          ctx.card
+                        }
+                        staticPreview
+                      />
+                    </div>
+                  );
+                }
+              )}
+            </div>
+          )}
+
+          {!waiting &&
+            !isOptionPicker && (
+            <footer className="effect-decision-footer">
+              <div className="effect-decision-counter">
+                <b>
+                  {effectDecisionSelection.length}
+                  /
+                  {effectDecision.maximum || 1}
+                </b>
+
+                {effectDecision.maxTotalBP != null && (
+                  <span>
+                    {effectDecisionSelectedBP()}
+                    /
+                    {effectDecision.maxTotalBP}
+                    {" "}
+                    BP
+                  </span>
+                )}
+              </div>
+
+              {showConfirm && (
+                <button
+                  type="button"
+                  className="primary-btn"
+                  disabled={
+                    !effectDecisionCanConfirm()
+                  }
+                  onClick={() =>
+                    resolveEffectDecisionSelection(
+                      effectDecisionSelection
+                    )
+                  }
+                >
+                  {language === "en"
+                    ? "Confirm targets"
+                    : "Confirmar alvos"}
+                </button>
+              )}
+
+              {Number(
+                effectDecision.minimum ||
+                0
+              ) === 0 && (
+                <button
+                  type="button"
+                  className="ghost"
+                  onClick={() =>
+                    resolveEffectDecisionSelection(
+                      []
+                    )
+                  }
+                >
+                  {language === "en"
+                    ? "Choose none"
+                    : "Não selecionar"}
+                </button>
+              )}
+            </footer>
+          )}
+        </section>
+      </>
+    );
   }
 
 
@@ -965,6 +1631,7 @@ export default function Simulator({
       match.phase !==
         "attack" ||
       match.battle ||
+      effectDecision ||
       physical.exhausted ||
       physical.combinedWith ||
       !canControlActor
@@ -1209,7 +1876,7 @@ export default function Simulator({
   ) {
     if (
       !card ||
-      pending ||
+      blockingPending ||
       !canControlActor ||
       playerId !==
         actorId
@@ -1410,7 +2077,7 @@ export default function Simulator({
       match.phase ===
         "main" &&
       !match.battle &&
-      !pending;
+      !blockingPending;
 
 
     const canManualDeck =
@@ -1418,7 +2085,7 @@ export default function Simulator({
       playerId ===
         actorId &&
       canControlActor &&
-      !pending;
+      !blockingPending;
 
 
     const burstPhysical =
@@ -1669,6 +2336,7 @@ export default function Simulator({
                   }
 
                   onClick={() =>
+                    !effectDecision &&
                     !hidden &&
                     setSelectedId(
                       physical.instanceId
@@ -1990,6 +2658,18 @@ export default function Simulator({
                     : null;
 
 
+                const isDecisionTarget =
+                  effectCandidateIds.has(
+                    physical.instanceId
+                  );
+
+
+                const isDecisionSelected =
+                  effectDecisionSelection.includes(
+                    physical.instanceId
+                  );
+
+
                 return (
                   <div
                     className={
@@ -1999,6 +2679,19 @@ export default function Simulator({
                         physical.flags
                           ?.pendingManualPlay
                           ? "pending"
+                          : "",
+
+                        isDecisionTarget
+                          ? "effect-decision-target"
+                          : "",
+
+                        isDecisionSelected
+                          ? "effect-decision-selected"
+                          : "",
+
+                        effectDecision &&
+                        !isDecisionTarget
+                          ? "effect-decision-unavailable"
                           : "",
 
                         hasArenaRarityGlow(
@@ -2025,13 +2718,19 @@ export default function Simulator({
 
                     onPointerDown={(
                       e
-                    ) =>
+                    ) => {
+                      if (
+                        effectDecision
+                      ) {
+                        return;
+                      }
+
                       attackPointerDown(
                         e,
                         playerId,
                         physical
-                      )
-                    }
+                      );
+                    }}
                   >
                     <CardTile
                       card={
@@ -2043,15 +2742,35 @@ export default function Simulator({
                       }
 
                       selected={
-                        selectedId ===
-                        physical.instanceId
-                      }
-
-                      onClick={() =>
-                        setSelectedId(
-                          physical.instanceId
+                        isDecisionSelected ||
+                        (
+                          !effectDecision &&
+                          selectedId ===
+                            physical.instanceId
                         )
                       }
+
+                      onClick={() => {
+                        if (
+                          isDecisionTarget &&
+                          canControlEffectDecision
+                        ) {
+                          toggleEffectDecisionTarget(
+                            physical.instanceId
+                          );
+                          return;
+                        }
+
+                        if (
+                          effectDecision
+                        ) {
+                          return;
+                        }
+
+                        setSelectedId(
+                          physical.instanceId
+                        );
+                      }}
 
                       onCoreDrop={
                         playerId ===
@@ -2184,7 +2903,7 @@ export default function Simulator({
       ownerId ===
         actorId &&
       canControlActor &&
-      !pending
+      !blockingPending
     ) {
 
       if (
@@ -2634,7 +3353,7 @@ export default function Simulator({
         "main" &&
       !match.battle &&
       ownerCanAct &&
-      !pending
+      !blockingPending
     ) {
 
       buttons.push(
@@ -2751,7 +3470,7 @@ export default function Simulator({
         "main" &&
       !match.battle &&
       ownerCanAct &&
-      !pending
+      !blockingPending
     ) {
 
       if (
@@ -3099,7 +3818,10 @@ export default function Simulator({
               className="battle-compact-button"
 
               disabled={
-                !canControlActor
+                !canControlActor ||
+                Boolean(
+                  effectDecision
+                )
               }
 
               onClick={() =>
@@ -3126,7 +3848,10 @@ export default function Simulator({
               className="battle-compact-button"
 
               disabled={
-                !canControlActor
+                !canControlActor ||
+                Boolean(
+                  effectDecision
+                )
               }
 
               onClick={() =>
@@ -3152,7 +3877,10 @@ export default function Simulator({
               className="primary-btn battle-compact-button"
 
               disabled={
-                !canControlActor
+                !canControlActor ||
+                Boolean(
+                  effectDecision
+                )
               }
 
               onClick={() =>
@@ -3434,6 +4162,9 @@ export default function Simulator({
       )}
 
 
+      {renderEffectDecisionOverlay()}
+
+
       <div className="sim-layout">
 
         {/* =================================================
@@ -3544,9 +4275,7 @@ export default function Simulator({
                 <button
                   disabled={
                     !canControlActor ||
-                    Boolean(
-                      pending
-                    )
+                    blockingPending
                   }
 
                   onClick={() =>
@@ -3575,9 +4304,7 @@ export default function Simulator({
                 <button
                   disabled={
                     !canControlActor ||
-                    Boolean(
-                      pending
-                    )
+                    blockingPending
                   }
 
                   onClick={() =>
@@ -3604,9 +4331,7 @@ export default function Simulator({
                 <button
                   disabled={
                     !canControlActor ||
-                    Boolean(
-                      pending
-                    )
+                    blockingPending
                   }
 
                   onClick={() =>
@@ -3636,9 +4361,7 @@ export default function Simulator({
                 <button
                   disabled={
                     !canControlActor ||
-                    Boolean(
-                      pending
-                    )
+                    blockingPending
                   }
 
                   onClick={() =>
@@ -3671,9 +4394,7 @@ export default function Simulator({
                     <button
                       disabled={
                         !canControlActor ||
-                        Boolean(
-                          pending
-                        )
+                        blockingPending
                       }
 
                       onClick={() =>
@@ -3703,9 +4424,7 @@ export default function Simulator({
                     <button
                       disabled={
                         !canControlActor ||
-                        Boolean(
-                          pending
-                        )
+                        blockingPending
                       }
 
                       onClick={() =>
@@ -3735,9 +4454,7 @@ export default function Simulator({
                     <button
                       disabled={
                         !canControlActor ||
-                        Boolean(
-                          pending
-                        )
+                        blockingPending
                       }
 
                       onClick={() =>
@@ -3764,9 +4481,7 @@ export default function Simulator({
                     <button
                       disabled={
                         !canControlActor ||
-                        Boolean(
-                          pending
-                        )
+                        blockingPending
                       }
 
                       onClick={() =>
@@ -3793,9 +4508,7 @@ export default function Simulator({
                     <button
                       disabled={
                         !canControlActor ||
-                        Boolean(
-                          pending
-                        )
+                        blockingPending
                       }
 
                       onClick={() =>
@@ -3822,9 +4535,7 @@ export default function Simulator({
                     <button
                       disabled={
                         !canControlActor ||
-                        Boolean(
-                          pending
-                        )
+                        blockingPending
                       }
 
                       onClick={() =>
@@ -3853,9 +4564,7 @@ export default function Simulator({
 
                       disabled={
                         !canControlActor ||
-                        Boolean(
-                          pending
-                        )
+                        blockingPending
                       }
 
                       onClick={() =>
@@ -4126,9 +4835,7 @@ export default function Simulator({
 
                 disabled={
                   !canControlActor ||
-                  Boolean(
-                    pending
-                  )
+                  blockingPending
                 }
 
                 onClick={() =>
@@ -4357,9 +5064,7 @@ export default function Simulator({
               <button
                 disabled={
                   !canControlActor ||
-                  Boolean(
-                    pending
-                  )
+                  blockingPending
                 }
 
                 onClick={() =>

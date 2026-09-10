@@ -49,6 +49,7 @@ export function makePhysicalCard(cardId, cardIndex) {
     exhausted: false,
     cores: { regular: 0, soul: false },
     temporaryBP: 0,
+    effectModifiers: [],
     pendingDestruction: false,
     combinedWith: null,
     flags: {}
@@ -95,6 +96,7 @@ export function createMatch({ player1, player2, firstPlayerId = "player1", cardI
     phase: "start",
     players,
     battle: null,
+    pendingEffectDecision: null,
     pending: [],
     temporary: {},
     winnerId: null,

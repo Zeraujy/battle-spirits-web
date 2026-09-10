@@ -9,24 +9,44 @@ import { getCardName } from "../game/cardAdapter.js";
 import { useLanguage } from "../i18n.jsx";
 
 import "../styles/deckBuilderPagination.css";
+import "../styles/deckImportExport.css";
 
 
 const CARDS_PER_PAGE = 21;
+
+const DECK_FILE_FORMAT =
+  "battle-spirits-eternal-deck";
+
+const DECK_FILE_VERSION = 1;
 
 
 /* =========================================================
    PAGINAÇÃO
 ========================================================= */
 
-function getPaginationItems(currentPage, totalPages) {
+function getPaginationItems(
+  currentPage,
+  totalPages
+) {
   if (totalPages <= 7) {
     return Array.from(
-      { length: totalPages },
-      (_, index) => index + 1
+      {
+        length:
+          totalPages
+      },
+      (
+        _,
+        index
+      ) =>
+        index + 1
     );
   }
 
-  if (currentPage <= 4) {
+
+  if (
+    currentPage <=
+    4
+  ) {
     return [
       1,
       2,
@@ -38,7 +58,11 @@ function getPaginationItems(currentPage, totalPages) {
     ];
   }
 
-  if (currentPage >= totalPages - 3) {
+
+  if (
+    currentPage >=
+    totalPages - 3
+  ) {
     return [
       1,
       "ellipsis-left",
@@ -49,6 +73,7 @@ function getPaginationItems(currentPage, totalPages) {
       totalPages
     ];
   }
+
 
   return [
     1,
@@ -62,6 +87,140 @@ function getPaginationItems(currentPage, totalPages) {
 }
 
 
+/* =========================================================
+   IMPORT / EXPORT
+========================================================= */
+
+function safeFileName(
+  value
+) {
+  const cleaned =
+    String(
+      value ||
+      "deck"
+    )
+      .trim()
+      .replace(
+        /[<>:"/\\|?*\u0000-\u001F]/g,
+        "-"
+      )
+      .replace(
+        /\s+/g,
+        " "
+      )
+      .slice(
+        0,
+        80
+      );
+
+  return (
+    cleaned ||
+    "deck"
+  );
+}
+
+
+function normalizeImportedCards(
+  entries
+) {
+  const merged =
+    new Map();
+
+  let ignored =
+    0;
+
+
+  for (
+    const entry of
+      Array.isArray(
+        entries
+      )
+        ? entries
+        : []
+  ) {
+    const cardId =
+      String(
+        entry?.cardId ||
+        entry?.id ||
+        ""
+      )
+        .trim();
+
+
+    const quantity =
+      Math.floor(
+        Number(
+          entry?.quantity ??
+          entry?.qty ??
+          entry?.count ??
+          0
+        )
+      );
+
+
+    if (
+      !cardId ||
+      !Number.isFinite(
+        quantity
+      ) ||
+      quantity <=
+        0
+    ) {
+      ignored +=
+        1;
+
+      continue;
+    }
+
+
+    if (
+      !cardIndex.has(
+        cardId
+      )
+    ) {
+      ignored +=
+        1;
+
+      continue;
+    }
+
+
+    merged.set(
+      cardId,
+
+      (
+        merged.get(
+          cardId
+        ) ||
+        0
+      ) +
+      quantity
+    );
+  }
+
+
+  return {
+    cards:
+      Array.from(
+        merged.entries()
+      )
+        .map(
+          (
+            [
+              cardId,
+              quantity
+            ]
+          ) => ({
+            cardId,
+            quantity
+          })
+        ),
+
+    ignored
+  };
+}
+
+
 export default function DeckBuilder({
   onBack,
   deckId = null
@@ -69,55 +228,119 @@ export default function DeckBuilder({
   const {
     t,
     language
-  } = useLanguage();
+  } =
+    useLanguage();
+
 
   const initialDecks =
     getDecks();
 
+
   const requested =
     initialDecks.find(
       (d) =>
-        d.id === deckId
-    ) || null;
+        d.id ===
+        deckId
+    ) ||
+    null;
 
 
-  const [decks, setDecks] =
-    useState(initialDecks);
+  const [
+    decks,
+    setDecks
+  ] =
+    useState(
+      initialDecks
+    );
 
 
-  const [draft, setDraft] =
+  const [
+    draft,
+    setDraft
+  ] =
     useState(
       requested || {
-        id: null,
-        name: t("newDeck"),
-        cards: [],
-        coverCardId: null
+        id:
+          null,
+
+        name:
+          t(
+            "newDeck"
+          ),
+
+        cards:
+          [],
+
+        coverCardId:
+          null
       }
     );
 
 
-  const [query, setQuery] =
-    useState("");
+  const [
+    query,
+    setQuery
+  ] =
+    useState(
+      ""
+    );
 
 
-  const [type, setType] =
-    useState("");
+  const [
+    type,
+    setType
+  ] =
+    useState(
+      ""
+    );
 
 
-  const [color, setColor] =
-    useState("");
+  const [
+    color,
+    setColor
+  ] =
+    useState(
+      ""
+    );
 
 
-  const [page, setPage] =
-    useState(1);
+  const [
+    page,
+    setPage
+  ] =
+    useState(
+      1
+    );
 
 
-  const [detailsCard, setDetailsCard] =
-    useState(null);
+  const [
+    detailsCard,
+    setDetailsCard
+  ] =
+    useState(
+      null
+    );
+
+
+  const [
+    transferNotice,
+    setTransferNotice
+  ] =
+    useState(
+      null
+    );
 
 
   const browserRef =
-    useRef(null);
+    useRef(
+      null
+    );
+
+
+  const importInputRef =
+    useRef(
+      null
+    );
 
 
   /* =======================================================
@@ -166,7 +389,8 @@ export default function DeckBuilder({
 
   const pageStartIndex =
     (
-      currentPage - 1
+      currentPage -
+      1
     ) *
     CARDS_PER_PAGE;
 
@@ -202,7 +426,8 @@ export default function DeckBuilder({
 
   const rangeStart =
     results.length
-      ? pageStartIndex + 1
+      ? pageStartIndex +
+        1
       : 0;
 
 
@@ -234,7 +459,8 @@ export default function DeckBuilder({
           Number(
             e.quantity ||
             0
-          ) > 0
+          ) >
+          0
       )
       .map(
         (e) =>
@@ -247,14 +473,17 @@ export default function DeckBuilder({
      QUANTIDADE
   ======================================================= */
 
-  function qty(cardId) {
+  function qty(
+    cardId
+  ) {
     return (
       draft.cards.find(
         (e) =>
           (
             e.cardId ||
             e.id
-          ) === cardId
+          ) ===
+          cardId
       )?.quantity ||
       0
     );
@@ -269,6 +498,7 @@ export default function DeckBuilder({
       cardIndex.get(
         cardId
       );
+
 
     if (!card) {
       return;
@@ -287,10 +517,15 @@ export default function DeckBuilder({
               e.id
             );
 
+
           return (
-            getCardName(c)
+            getCardName(
+              c
+            )
               .toLowerCase() ===
-            getCardName(card)
+            getCardName(
+              card
+            )
               .toLowerCase()
           )
             ? sum +
@@ -302,7 +537,9 @@ export default function DeckBuilder({
         },
         0
       ) -
-      qty(cardId);
+      qty(
+        cardId
+      );
 
 
     const allowed =
@@ -324,7 +561,8 @@ export default function DeckBuilder({
               (
                 e.cardId ||
                 e.id
-              ) !== cardId
+              ) !==
+              cardId
           ),
 
           ...(
@@ -332,6 +570,7 @@ export default function DeckBuilder({
               ? [
                   {
                     cardId,
+
                     quantity:
                       allowed
                   }
@@ -342,7 +581,8 @@ export default function DeckBuilder({
 
 
         const coverCardId =
-          allowed === 0 &&
+          allowed ===
+            0 &&
           d.coverCardId ===
             cardId
             ? (
@@ -383,43 +623,420 @@ export default function DeckBuilder({
     const next =
       getDecks();
 
-    setDecks(next);
+
+    setDecks(
+      next
+    );
+
 
     setDraft(
       next.find(
         (d) =>
-          d.id === id
+          d.id ===
+          id
       )
     );
+
+
+    setTransferNotice({
+      type:
+        "success",
+
+      text:
+        language ===
+        "en"
+          ? "Deck saved."
+          : "Deck salvo."
+    });
   }
 
 
   function fresh() {
     setDraft({
-      id: null,
+      id:
+        null,
+
       name:
-        t("newDeck"),
-      cards: [],
+        t(
+          "newDeck"
+        ),
+
+      cards:
+        [],
+
       coverCardId:
         null
     });
+
+
+    setTransferNotice(
+      null
+    );
   }
 
 
   function remove() {
-    if (!draft.id) {
+    if (
+      !draft.id
+    ) {
       return;
     }
+
 
     deleteDeck(
       draft.id
     );
 
+
     setDecks(
       getDecks()
     );
 
+
     fresh();
+  }
+
+
+  /* =======================================================
+     EXPORTAR
+  ======================================================= */
+
+  function exportDeck() {
+    if (
+      !draft.cards.length
+    ) {
+      setTransferNotice({
+        type:
+          "error",
+
+        text:
+          language ===
+          "en"
+            ? "Add at least one card before exporting."
+            : "Adicione pelo menos uma carta antes de exportar."
+      });
+
+      return;
+    }
+
+
+    const payload = {
+      format:
+        DECK_FILE_FORMAT,
+
+      version:
+        DECK_FILE_VERSION,
+
+      simulator:
+        "Battle Spirits Eternal Simulator",
+
+      simulatorVersion:
+        "2.4.0",
+
+      exportedAt:
+        new Date()
+          .toISOString(),
+
+      deck: {
+        name:
+          String(
+            draft.name ||
+            ""
+          )
+            .trim() ||
+          (
+            language ===
+            "en"
+              ? "Imported Deck"
+              : "Deck Importado"
+          ),
+
+        coverCardId:
+          draft.coverCardId ||
+          draft.cards[0]
+            ?.cardId ||
+          null,
+
+        cards:
+          draft.cards.map(
+            (entry) => ({
+              cardId:
+                entry.cardId ||
+                entry.id,
+
+              quantity:
+                Number(
+                  entry.quantity ||
+                  0
+                )
+            })
+          )
+      }
+    };
+
+
+    const blob =
+      new Blob(
+        [
+          JSON.stringify(
+            payload,
+            null,
+            2
+          )
+        ],
+        {
+          type:
+            "application/json;charset=utf-8"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(
+        blob
+      );
+
+
+    const anchor =
+      document.createElement(
+        "a"
+      );
+
+
+    anchor.href =
+      url;
+
+
+    anchor.download =
+      `${safeFileName(
+        draft.name
+      )}.bsdeck.json`;
+
+
+    document.body
+      .appendChild(
+        anchor
+      );
+
+
+    anchor.click();
+
+
+    anchor.remove();
+
+
+    setTimeout(
+      () =>
+        URL.revokeObjectURL(
+          url
+        ),
+      0
+    );
+
+
+    setTransferNotice({
+      type:
+        "success",
+
+      text:
+        language ===
+        "en"
+          ? "Deck exported successfully."
+          : "Deck exportado com sucesso."
+    });
+  }
+
+
+  /* =======================================================
+     IMPORTAR
+  ======================================================= */
+
+  async function importDeckFile(
+    file
+  ) {
+    if (!file) {
+      return;
+    }
+
+
+    try {
+      const rawText =
+        await file.text();
+
+
+      const parsed =
+        JSON.parse(
+          rawText
+        );
+
+
+      const imported =
+        parsed?.deck &&
+        (
+          parsed.format ===
+            DECK_FILE_FORMAT ||
+          parsed.deck.cards
+        )
+          ? parsed.deck
+          : parsed;
+
+
+      if (
+        !imported ||
+        !Array.isArray(
+          imported.cards
+        )
+      ) {
+        throw new Error(
+          language ===
+          "en"
+            ? "This file does not contain a valid deck."
+            : "Este arquivo não contém um deck válido."
+        );
+      }
+
+
+      const {
+        cards,
+        ignored
+      } =
+        normalizeImportedCards(
+          imported.cards
+        );
+
+
+      if (
+        !cards.length
+      ) {
+        throw new Error(
+          language ===
+          "en"
+            ? "No compatible cards were found in this file."
+            : "Nenhuma carta compatível foi encontrada neste arquivo."
+        );
+      }
+
+
+      const importedCoverId =
+        String(
+          imported.coverCardId ||
+          ""
+        )
+          .trim();
+
+
+      const coverCardId =
+        importedCoverId &&
+        cards.some(
+          (entry) =>
+            entry.cardId ===
+            importedCoverId
+        )
+          ? importedCoverId
+          : cards[0]
+              ?.cardId ||
+            null;
+
+
+      const name =
+        String(
+          imported.name ||
+          ""
+        )
+          .trim() ||
+        (
+          language ===
+          "en"
+            ? "Imported Deck"
+            : "Deck Importado"
+        );
+
+
+      setDraft({
+        id:
+          null,
+
+        name,
+
+        cards,
+
+        coverCardId
+      });
+
+
+      setQuery(
+        ""
+      );
+
+
+      setType(
+        ""
+      );
+
+
+      setColor(
+        ""
+      );
+
+
+      setPage(
+        1
+      );
+
+
+      setTransferNotice({
+        type:
+          ignored >
+          0
+            ? "warning"
+            : "success",
+
+        text:
+          language ===
+          "en"
+            ? (
+                ignored >
+                0
+                  ? `Deck imported. ${ignored} unsupported or invalid entr${ignored === 1 ? "y was" : "ies were"} ignored. Review it and click Save.`
+                  : "Deck imported. Review it and click Save."
+              )
+            : (
+                ignored >
+                0
+                  ? `Deck importado. ${ignored} entrada${ignored === 1 ? "" : "s"} inválida${ignored === 1 ? "" : "s"} ou sem suporte ${ignored === 1 ? "foi ignorada" : "foram ignoradas"}. Revise e clique em Salvar.`
+                  : "Deck importado. Revise e clique em Salvar."
+              )
+      });
+    } catch (
+      error
+    ) {
+      console.error(
+        "Falha ao importar deck:",
+        error
+      );
+
+
+      setTransferNotice({
+        type:
+          "error",
+
+        text:
+          error?.message ||
+          (
+            language ===
+            "en"
+              ? "Could not import this deck."
+              : "Não foi possível importar este deck."
+          )
+      });
+    } finally {
+      if (
+        importInputRef.current
+      ) {
+        importInputRef.current.value =
+          "";
+      }
+    }
   }
 
 
@@ -430,24 +1047,39 @@ export default function DeckBuilder({
   function changeQuery(
     value
   ) {
-    setQuery(value);
-    setPage(1);
+    setQuery(
+      value
+    );
+
+    setPage(
+      1
+    );
   }
 
 
   function changeType(
     value
   ) {
-    setType(value);
-    setPage(1);
+    setType(
+      value
+    );
+
+    setPage(
+      1
+    );
   }
 
 
   function changeColor(
     value
   ) {
-    setColor(value);
-    setPage(1);
+    setColor(
+      value
+    );
+
+    setPage(
+      1
+    );
   }
 
 
@@ -528,7 +1160,55 @@ export default function DeckBuilder({
         </div>
 
 
-        <div className="row-actions">
+        <div className="row-actions deck-builder-actions">
+
+          <input
+            ref={
+              importInputRef
+            }
+            className="deck-import-input"
+            hidden
+            type="file"
+            accept=".json,.bsdeck.json,application/json"
+            onChange={(
+              event
+            ) =>
+              importDeckFile(
+                event.target.files?.[0]
+              )
+            }
+          />
+
+
+          <button
+            className="ghost deck-transfer-btn"
+            onClick={() =>
+              importInputRef.current
+                ?.click()
+            }
+          >
+            {language ===
+            "en"
+              ? "Import Deck"
+              : "Importar Deck"}
+          </button>
+
+
+          <button
+            className="ghost deck-transfer-btn"
+            disabled={
+              !draft.cards.length
+            }
+            onClick={
+              exportDeck
+            }
+          >
+            {language ===
+            "en"
+              ? "Export Deck"
+              : "Exportar Deck"}
+          </button>
+
 
           <button
             className="ghost"
@@ -558,6 +1238,38 @@ export default function DeckBuilder({
       </header>
 
 
+      {transferNotice && (
+        <div
+          className={
+            `deck-transfer-notice ${
+              transferNotice.type
+            }`
+          }
+        >
+          <span>
+            {transferNotice.text}
+          </span>
+
+          <button
+            type="button"
+            aria-label={
+              language ===
+              "en"
+                ? "Close"
+                : "Fechar"
+            }
+            onClick={() =>
+              setTransferNotice(
+                null
+              )
+            }
+          >
+            ×
+          </button>
+        </div>
+      )}
+
+
       <div className="deck-layout">
 
         {/* =================================================
@@ -581,6 +1293,7 @@ export default function DeckBuilder({
               ) =>
                 setDraft({
                   ...draft,
+
                   name:
                     e.target.value
                 })
@@ -1050,7 +1763,6 @@ export default function DeckBuilder({
                           card={
                             card
                           }
-
                           onClick={() =>
                             setDetailsCard(
                               card
@@ -1065,9 +1777,11 @@ export default function DeckBuilder({
                             onClick={() =>
                               setQty(
                                 card.id,
+
                                 qty(
                                   card.id
-                                ) - 1
+                                ) -
+                                1
                               )
                             }
                           >
@@ -1086,9 +1800,11 @@ export default function DeckBuilder({
                             onClick={() =>
                               setQty(
                                 card.id,
+
                                 qty(
                                   card.id
-                                ) + 1
+                                ) +
+                                1
                               )
                             }
                           >
@@ -1100,7 +1816,8 @@ export default function DeckBuilder({
 
                         {qty(
                           card.id
-                        ) > 0 && (
+                        ) >
+                          0 && (
                           <button
                             className={
                               `cover-card-btn ${
@@ -1138,7 +1855,8 @@ export default function DeckBuilder({
                     PAGINAÇÃO
                 ========================================= */}
 
-                {totalPages > 1 && (
+                {totalPages >
+                  1 && (
                   <nav
                     className="deck-pagination"
 
@@ -1280,17 +1998,15 @@ export default function DeckBuilder({
           card={
             detailsCard
           }
-
-          onClose={() =>
-            setDetailsCard(
-              null
-            )
-          }
-
           initialLanguage={
             language === "en"
               ? "en"
               : "ptBR"
+          }
+          onClose={() =>
+            setDetailsCard(
+              null
+            )
           }
         />
       )}

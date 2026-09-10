@@ -1,7 +1,9 @@
-import { findPhysicalCard, getDatabaseCard, getEffectiveBP, getEffectiveSymbols } from "./selectors.js";
+import { findPhysicalCard, getBraveAttachment, getDatabaseCard, getEffectiveBP, getEffectiveSymbols } from "./selectors.js";
 import { updateFieldCard, removeFieldCard } from "./zones.js";
 import { appendLog, otherPlayerId, uid } from "./utils.js";
 import { resolveUltimateTriggerOnAttack } from "./specialRules.js";
+import { resolveCardEvent } from "./effectEngine/effectEngine.js";
+import { clearEffectModifiers } from "./effectEngine/modifierResolver.js";
 
 function refreshedBattleCards(player, cardIndex) {
   const cards = [...(player.field.spirits || []), ...(player.field.other || [])];
@@ -35,7 +37,25 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
   let next = { ...match, players: { ...match.players, [playerId]: player }, battle };
   next = appendLog(next, `${match.players[playerId].name} declarou um ataque.`, "battle");
   const trigger = resolveUltimateTriggerOnAttack(next, playerId, attacker, cardIndex);
-  return { ok: true, match: trigger.match, manualResolutionNeeded: trigger.manualResolutionNeeded };
+  const engine = resolveCardEvent(trigger.match, { event: "whenAttacks", sourcePlayerId: playerId, sourceInstanceId: instanceId }, cardIndex);
+  let resolvedMatch = engine.match;
+  let manualResolutionNeeded = Boolean(trigger.manualResolutionNeeded || engine.manualResolutionNeeded);
+  const notes = [...engine.notes];
+
+  const attachedBrave = getBraveAttachment(resolvedMatch, instanceId);
+  if (attachedBrave) {
+    const braveEngine = resolveCardEvent(resolvedMatch, {
+      event: "whenAttacks",
+      sourcePlayerId: playerId,
+      sourceInstanceId: attachedBrave.instanceId,
+      context: { isCombined: true, combinedHostInstanceId: instanceId }
+    }, cardIndex);
+    resolvedMatch = braveEngine.match;
+    manualResolutionNeeded = manualResolutionNeeded || braveEngine.manualResolutionNeeded;
+    notes.push(...braveEngine.notes);
+  }
+
+  return { ok: true, match: resolvedMatch, manualResolutionNeeded, notes };
 }
 
 export function passFlash(match, playerId) {
@@ -88,19 +108,33 @@ export function declareBlock(match, playerId, instanceId, cardIndex) {
   const blocker = legalBlockers(match, cardIndex).find((c) => c.instanceId === instanceId);
   if (!blocker) return { ok: false, error: "Bloqueador inválido." };
   const player = updateFieldCard(match.players[playerId], instanceId, (c) => ({ ...c, exhausted: true }));
-  return {
-    ok: true,
-    match: {
-      ...match,
-      players: { ...match.players, [playerId]: player },
-      battle: {
-        ...battle,
-        blockerInstanceId: instanceId,
-        stage: "flash2",
-        flash: { number: 2, priorityPlayerId: playerId, consecutivePasses: 0 }
-      }
+  const next = {
+    ...match,
+    players: { ...match.players, [playerId]: player },
+    battle: {
+      ...battle,
+      blockerInstanceId: instanceId,
+      stage: "flash2",
+      flash: { number: 2, priorityPlayerId: playerId, consecutivePasses: 0 }
     }
   };
+  const engine = resolveCardEvent(next, { event: "whenBlocks", sourcePlayerId: playerId, sourceInstanceId: instanceId }, cardIndex);
+  let resolvedMatch = engine.match;
+  let manualResolutionNeeded = engine.manualResolutionNeeded;
+  const notes = [...engine.notes];
+  const attachedBrave = getBraveAttachment(resolvedMatch, instanceId);
+  if (attachedBrave) {
+    const braveEngine = resolveCardEvent(resolvedMatch, {
+      event: "whenBlocks",
+      sourcePlayerId: playerId,
+      sourceInstanceId: attachedBrave.instanceId,
+      context: { isCombined: true, combinedHostInstanceId: instanceId }
+    }, cardIndex);
+    resolvedMatch = braveEngine.match;
+    manualResolutionNeeded = manualResolutionNeeded || braveEngine.manualResolutionNeeded;
+    notes.push(...braveEngine.notes);
+  }
+  return { ok: true, match: resolvedMatch, manualResolutionNeeded, notes };
 }
 
 export function declineBlock(match, playerId) {
@@ -112,7 +146,7 @@ export function declineBlock(match, playerId) {
 function destroyBattleCard(match, playerId, instanceId, cardIndex) {
   const player = match.players[playerId];
   const removed = removeFieldCard(player, instanceId);
-  if (!removed.card) return match;
+  if (!removed.card) return { match, destroyed: null };
   const returnedRegular = Number(removed.card.cores?.regular || 0);
   let nextPlayer = {
     ...removed.player,
@@ -133,7 +167,10 @@ function destroyBattleCard(match, playerId, instanceId, cardIndex) {
       nextPlayer = { ...braveRemoved.player, trash: [...braveRemoved.player.trash, { ...braveRemoved.card, combinedWith: null }] };
     }
   }
-  return { ...match, players: { ...match.players, [playerId]: nextPlayer } };
+  return {
+    match: { ...match, players: { ...match.players, [playerId]: nextPlayer } },
+    destroyed: { playerId, physical: removed.card }
+  };
 }
 
 export function resolveBattle(match, actorId, cardIndex) {
@@ -170,11 +207,37 @@ export function resolveBattle(match, actorId, cardIndex) {
     if (attackerCtx && blockerCtx) {
       const aBP = getEffectiveBP(match, cardIndex, attackerCtx.card);
       const bBP = getEffectiveBP(match, cardIndex, blockerCtx.card);
-      if (aBP <= bBP) next = destroyBattleCard(next, battle.attackerPlayerId, battle.attackerInstanceId, cardIndex);
-      if (bBP <= aBP) next = destroyBattleCard(next, battle.defenderPlayerId, battle.blockerInstanceId, cardIndex);
+      const destroyed = [];
+      if (aBP <= bBP) {
+        const result = destroyBattleCard(next, battle.attackerPlayerId, battle.attackerInstanceId, cardIndex);
+        next = result.match;
+        if (result.destroyed) destroyed.push(result.destroyed);
+      }
+      if (bBP <= aBP) {
+        const result = destroyBattleCard(next, battle.defenderPlayerId, battle.blockerInstanceId, cardIndex);
+        next = result.match;
+        if (result.destroyed) destroyed.push(result.destroyed);
+      }
       next = appendLog(next, `Battle Resolution: ${aBP} BP × ${bBP} BP.`, "battle");
+      next = { ...next, battle: null };
+      let manualResolutionNeeded = false;
+      const notes = [];
+      for (const destroyedCard of destroyed) {
+        const engine = resolveCardEvent(next, {
+          event: "whenDestroyed",
+          sourcePlayerId: destroyedCard.playerId,
+          sourcePhysical: destroyedCard.physical,
+          sourceCardId: destroyedCard.physical.cardId
+        }, cardIndex);
+        next = engine.match;
+        manualResolutionNeeded = manualResolutionNeeded || engine.manualResolutionNeeded;
+        notes.push(...engine.notes);
+      }
+      next = clearEffectModifiers(next, "battle", { battleId: battle.id });
+      return { ok: true, match: next, manualResolutionNeeded, notes };
     }
   }
   next = { ...next, battle: null };
+  next = clearEffectModifiers(next, "battle", { battleId: battle.id });
   return { ok: true, match: next };
 }

@@ -1,0 +1,245 @@
+/* =========================================================
+   EFFECT DECISION QUEUE
+   Interface para escolhas estruturadas do Effect Engine.
+========================================================= */
+
+.effect-decision-dimmer {
+  position: fixed;
+  inset: 0;
+  z-index: 880;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(104, 168, 255, .06), transparent 34%),
+    rgba(2, 8, 17, .46);
+  backdrop-filter: blur(1.5px);
+}
+
+.effect-decision-panel {
+  position: fixed;
+  top: 82px;
+  left: 50%;
+  z-index: 1400;
+  width: min(720px, calc(100vw - 32px));
+  transform: translateX(-50%);
+  border: 1px solid rgba(244, 189, 75, .46);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(20, 38, 64, .98), rgba(8, 20, 37, .98));
+  box-shadow:
+    0 22px 70px rgba(0, 0, 0, .48),
+    0 0 0 1px rgba(255, 255, 255, .03) inset,
+    0 0 28px rgba(244, 189, 75, .08);
+  padding: 16px;
+  color: var(--text);
+}
+
+.effect-decision-panel.compact {
+  width: min(620px, calc(100vw - 32px));
+}
+
+.effect-decision-panel.picker {
+  width: min(820px, calc(100vw - 32px));
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+}
+
+.effect-decision-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 10px;
+}
+
+.effect-decision-header > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.effect-decision-header strong {
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.effect-decision-header small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.effect-decision-panel > p {
+  margin: 0;
+  color: #dbe6f6;
+  line-height: 1.5;
+  font-size: 13px;
+}
+
+.effect-decision-waiting {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(104, 168, 255, .08);
+  color: #bfd7ff;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.effect-decision-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.effect-decision-options button {
+  min-height: 48px;
+  text-align: left;
+  border-color: rgba(104, 168, 255, .34);
+  background:
+    linear-gradient(135deg, rgba(25, 55, 91, .94), rgba(12, 31, 54, .94));
+}
+
+.effect-decision-options button:hover:not(:disabled) {
+  border-color: rgba(244, 189, 75, .72);
+  box-shadow: 0 0 18px rgba(244, 189, 75, .10);
+}
+
+.effect-decision-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 13px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.effect-decision-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.effect-decision-counter b {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.effect-decision-counter span {
+  padding: 4px 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(104, 168, 255, .07);
+}
+
+.effect-decision-trash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+  max-height: 52vh;
+  overflow: auto;
+  padding: 5px;
+}
+
+.effect-decision-trash-card {
+  min-width: 0;
+  padding: 7px;
+  border: 1px solid rgba(151, 181, 224, .26);
+  border-radius: 12px;
+  background: rgba(7, 18, 33, .86);
+  cursor: pointer;
+  transition:
+    transform .16s ease,
+    border-color .16s ease,
+    box-shadow .16s ease;
+}
+
+.effect-decision-trash-card:hover,
+.effect-decision-trash-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(244, 189, 75, .72);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .28), 0 0 18px rgba(244, 189, 75, .14);
+  outline: none;
+}
+
+.effect-decision-trash-card.selected {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 2px rgba(244, 189, 75, .20),
+    0 0 24px rgba(244, 189, 75, .24);
+}
+
+.effect-decision-trash-card .card-tile {
+  width: 100%;
+}
+
+.field-card-wrap.effect-decision-target {
+  position: relative;
+  z-index: 1200 !important;
+  cursor: pointer;
+  transform: translateY(-3px) scale(1.025);
+  filter: brightness(1.08);
+}
+
+.field-card-wrap.effect-decision-target::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  z-index: -1;
+  pointer-events: none;
+  border: 2px solid rgba(244, 189, 75, .92);
+  border-radius: 12px;
+  box-shadow:
+    0 0 12px rgba(244, 189, 75, .64),
+    0 0 28px rgba(104, 168, 255, .28);
+  animation: effect-target-pulse 1.35s ease-in-out infinite alternate;
+}
+
+.field-card-wrap.effect-decision-selected::after {
+  border-color: #fff0b8;
+  box-shadow:
+    0 0 0 3px rgba(244, 189, 75, .28),
+    0 0 18px rgba(244, 189, 75, .80),
+    0 0 36px rgba(104, 168, 255, .36);
+}
+
+.field-card-wrap.effect-decision-unavailable {
+  filter: brightness(.42) saturate(.58);
+}
+
+@keyframes effect-target-pulse {
+  from {
+    opacity: .72;
+    transform: scale(.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.015);
+  }
+}
+
+@media (max-width: 900px) {
+  .effect-decision-panel {
+    top: 66px;
+  }
+
+  .effect-decision-options {
+    grid-template-columns: 1fr;
+  }
+
+  .effect-decision-trash-grid {
+    grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field-card-wrap.effect-decision-target::after {
+    animation: none;
+  }
+}

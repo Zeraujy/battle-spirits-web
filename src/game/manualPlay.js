@@ -4,6 +4,7 @@ import { conditionMatches } from "./brave.js";
 import { findPhysicalCard, getDatabaseCard } from "./selectors.js";
 import { addFieldCard, removeFieldCard, removeHandCard } from "./zones.js";
 import { appendLog } from "./utils.js";
+import { resolveCardEvent } from "./effectEngine/effectEngine.js";
 
 function minimumCores(card) {
   if (card?.cardType === "nexus") return 0;
@@ -76,8 +77,10 @@ export function confirmManualPlay(match, playerId, cardIndex) {
   const nextPlayer = { ...player, field:{ spirits:updateZone(player.field.spirits), nexuses:updateZone(player.field.nexuses), other:updateZone(player.field.other) } };
   let next = { ...match, players:{ ...match.players, [playerId]:nextPlayer }, pendingManualPlay:null };
   next = appendLog(next, `${player.name} confirmou ${card.namePT || card.nameEN || card.id}.`, "action");
-  const manualResolutionNeeded = (card.effects || []).some((e)=>["whenSummoned","onSummon","whenDeployed","onDeploy"].includes(e.timing) && !(e.operations?.length));
-  return { ok:true, match:next, manualResolutionNeeded };
+  const event = card.cardType === "nexus" ? "whenDeployed" : "whenSummoned";
+  const engine = resolveCardEvent(next, { event, sourcePlayerId: playerId, sourceInstanceId: pending.instanceId }, cardIndex);
+  next = engine.match;
+  return { ok:true, match:next, manualResolutionNeeded: engine.manualResolutionNeeded, notes: engine.notes };
 }
 
 export function cancelManualPlay(match, playerId, cardIndex) {

@@ -3,10 +3,8 @@ import { payCoreCost } from "./cores.js";
 import { findPhysicalCard, getDatabaseCard } from "./selectors.js";
 import { removeHandCard, removeFieldCard, updateFieldCard, addFieldCard } from "./zones.js";
 import { appendLog, otherPlayerId } from "./utils.js";
+import { resolveCardEvent } from "./effectEngine/effectEngine.js";
 
-function effectAtTiming(card, timing) {
-  return (card?.effects || []).find((effect) => effect.timing === timing || effect.type === timing) || null;
-}
 
 export function canUseMagic(match, playerId, instanceId, cardIndex, mode = "main") {
   const ctx = findPhysicalCard(match, instanceId);
@@ -21,60 +19,37 @@ export function canUseMagic(match, playerId, instanceId, cardIndex, mode = "main
   return false;
 }
 
-function resolveSimpleOperations(match, sourcePlayerId, operations = [], cardIndex) {
-  let next = match;
-  const notes = [];
-  for (const op of operations) {
-    const playerId = op.player === "opponent" ? otherPlayerId(next, sourcePlayerId) : (op.playerId || sourcePlayerId);
-    const player = next.players[playerId];
-    if (!player) continue;
-    if (op.type === "draw") {
-      let deck = [...player.deck];
-      let hand = [...player.hand];
-      const count = Math.max(0, Number(op.count || 1));
-      for (let i = 0; i < count && deck.length; i += 1) hand.push(deck.shift());
-      next = { ...next, players: { ...next.players, [playerId]: { ...player, deck, hand } } };
-    } else if (op.type === "reserveCoreFromVoid") {
-      next = { ...next, players: { ...next.players, [playerId]: { ...player, reserve: player.reserve + Number(op.count || 1) } } };
-    } else if (op.type === "temporaryBP" && op.instanceId) {
-      const updated = updateFieldCard(player, op.instanceId, (c) => ({ ...c, temporaryBP: Number(c.temporaryBP || 0) + Number(op.amount || 0) }));
-      next = { ...next, players: { ...next.players, [playerId]: updated } };
-    } else if (op.type === "refresh" && op.instanceId) {
-      const updated = updateFieldCard(player, op.instanceId, (c) => ({ ...c, exhausted: false }));
-      next = { ...next, players: { ...next.players, [playerId]: updated } };
-    } else if (op.type === "exhaust" && op.instanceId) {
-      const updated = updateFieldCard(player, op.instanceId, (c) => ({ ...c, exhausted: true }));
-      next = { ...next, players: { ...next.players, [playerId]: updated } };
-    } else {
-      notes.push(`Operação manual necessária: ${op.type || "desconhecida"}`);
-    }
-  }
-  return { match: next, notes };
-}
-
 export function useMagic(match, playerId, instanceId, cardIndex, { mode = "main", payment, prepaid = false } = {}) {
   if (!canUseMagic(match, playerId, instanceId, cardIndex, mode)) return { ok: false, error: "Esta Magic não pode ser usada nesse timing." };
   const ctx = findPhysicalCard(match, instanceId);
   const card = getDatabaseCard(cardIndex, ctx.card);
   const cost = calculateReduction(match, playerId, card, cardIndex);
-  let paid = { ok:true, match };
+  let paid = { ok: true, match };
   if (!prepaid) {
     const chosen = payment ?? autoBuildPayment(match, playerId, cost.payable, cardIndex);
     if (!chosen && cost.payable > 0) return { ok: false, error: "Cores insuficientes para a Magic." };
     paid = payCoreCost(match, playerId, chosen || [], cost.payable, cardIndex);
     if (!paid.ok) return paid;
   }
+
   let player = paid.match.players[playerId];
   const removed = removeHandCard(player, instanceId);
-  const effect = mode === "main" ? effectAtTiming(card, "main") : effectAtTiming(card, "flash");
   let next = { ...paid.match, players: { ...paid.match.players, [playerId]: removed.player } };
-  const ops = effect?.operations || effect?.actions || [];
-  const resolved = resolveSimpleOperations(next, playerId, ops, cardIndex);
-  next = resolved.match;
+  const event = mode === "main" ? "magicMain" : "magicFlash";
+  const engine = resolveCardEvent(next, {
+    event,
+    sourcePlayerId: playerId,
+    sourcePhysical: removed.card,
+    sourceCard: card,
+    sourceCardId: card.id
+  }, cardIndex);
+  next = engine.match;
+
   player = next.players[playerId];
   player = { ...player, trash: [...player.trash, { ...removed.card, cores: { regular: 0, soul: false } }] };
   next = { ...next, players: { ...next.players, [playerId]: player } };
   next = appendLog(next, `${player.name} usou ${card.namePT || card.nameEN || card.id} (${mode}).`, "effect");
+
   if (mode === "flash" && next.battle?.flash) {
     next = {
       ...next,
@@ -88,7 +63,13 @@ export function useMagic(match, playerId, instanceId, cardIndex, { mode = "main"
       }
     };
   }
-  return { ok: true, match: next, manualResolutionNeeded: !ops.length || resolved.notes.length > 0, notes: resolved.notes };
+
+  return {
+    ok: true,
+    match: next,
+    manualResolutionNeeded: engine.triggered === 0 || engine.manualResolutionNeeded,
+    notes: engine.notes
+  };
 }
 
 export function setBurst(match, playerId, instanceId, cardIndex) {
@@ -148,13 +129,34 @@ export function activateBurst(match, playerId, cardIndex, { confirmCondition = f
   const player = match.players[playerId];
   if (!player?.burst) return { ok: false, error: "Nenhuma Burst setada." };
   if (!confirmCondition) return { ok: false, error: "Confirme que a condição oficial da Burst foi cumprida." };
+
   const physical = player.burst;
   const card = getDatabaseCard(cardIndex, physical);
-  const effect = (card?.effects || []).find((e) => e.type === "burst") || null;
-  const resolved = resolveSimpleOperations(match, playerId, effect?.operations || [], cardIndex);
-  const nextPlayer = { ...resolved.match.players[playerId], burst: null, trash: [...resolved.match.players[playerId].trash, { ...physical, faceDown: false }] };
-  const next = appendLog({ ...resolved.match, players: { ...resolved.match.players, [playerId]: nextPlayer } }, `${player.name} ativou ${card?.namePT || card?.nameEN || card?.id || "Burst"}.`, "effect");
-  return { ok: true, match: next, manualResolutionNeeded: !(effect?.operations?.length) };
+  const engine = resolveCardEvent(match, {
+    event: "burst",
+    sourcePlayerId: playerId,
+    sourcePhysical: physical,
+    sourceCard: card,
+    sourceCardId: card?.id
+  }, cardIndex);
+
+  const resolvedPlayer = engine.match.players[playerId];
+  const nextPlayer = {
+    ...resolvedPlayer,
+    burst: null,
+    trash: [...resolvedPlayer.trash, { ...physical, faceDown: false }]
+  };
+  const next = appendLog(
+    { ...engine.match, players: { ...engine.match.players, [playerId]: nextPlayer } },
+    `${player.name} ativou ${card?.namePT || card?.nameEN || card?.id || "Burst"}.`,
+    "effect"
+  );
+  return {
+    ok: true,
+    match: next,
+    manualResolutionNeeded: engine.triggered === 0 || engine.manualResolutionNeeded,
+    notes: engine.notes
+  };
 }
 
 export function manualAction(match, actorId, payload, cardIndex) {

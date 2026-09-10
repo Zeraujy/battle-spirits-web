@@ -1,5 +1,6 @@
 import { PHASES } from "./constants.js";
 import { appendLog, otherPlayerId } from "./utils.js";
+import { clearEffectModifiers } from "./effectEngine/modifierResolver.js";
 
 export function isFirstPlayersFirstTurn(match) {
   return match.turnNumber === 1 && match.activePlayerId === match.firstPlayerId;
@@ -83,6 +84,7 @@ export function advancePhase(match, actorId) {
         }
       }
     };
+    next = clearEffectModifiers(next, "turn");
     next = performPhaseEntry(next, "start");
     next = appendLog(next, `Turno ${next.turnNumber}: ${next.players[nextPlayerId].name}.`, "turn");
     return { ok: true, match: next };

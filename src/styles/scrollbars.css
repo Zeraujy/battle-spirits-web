@@ -1,0 +1,170 @@
+/* =========================================================
+   BATTLE SPIRITS ETERNAL SIMULATOR
+   SCROLLBARS GLOBAIS
+
+   Tema discreto em azul-gelo + dourado para combinar com
+   a identidade visual do simulador.
+
+   Aplica-se a páginas, modais, deck lists, logs, trash,
+   card grids e demais áreas com overflow.
+========================================================= */
+
+
+/* Firefox */
+html,
+body,
+#root,
+#root * {
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(104, 168, 255, .62)
+    rgba(5, 14, 26, .38);
+}
+
+
+/* Chromium / Chrome / Edge / Electron / Safari */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar,
+#root *::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+#root::-webkit-scrollbar-track,
+#root *::-webkit-scrollbar-track {
+  background:
+    rgba(5, 14, 26, .52);
+
+  border-radius:
+    999px;
+}
+
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+#root::-webkit-scrollbar-thumb,
+#root *::-webkit-scrollbar-thumb {
+  min-height:
+    34px;
+
+  border:
+    2px solid
+    rgba(5, 14, 26, .72);
+
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(125, 185, 255, .88),
+      rgba(78, 132, 196, .82)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 255, 255, .22),
+    0 0 8px
+      rgba(104, 168, 255, .09);
+}
+
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+#root::-webkit-scrollbar-thumb:hover,
+#root *::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(244, 189, 75, .92),
+      rgba(197, 143, 44, .90)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 255, 255, .20),
+    0 0 10px
+      rgba(244, 189, 75, .13);
+}
+
+
+html::-webkit-scrollbar-thumb:active,
+body::-webkit-scrollbar-thumb:active,
+#root::-webkit-scrollbar-thumb:active,
+#root *::-webkit-scrollbar-thumb:active {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 207, 102, .96),
+      rgba(211, 152, 41, .94)
+    );
+}
+
+
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner,
+#root::-webkit-scrollbar-corner,
+#root *::-webkit-scrollbar-corner {
+  background:
+    transparent;
+}
+
+
+/* Remove os botões/setas nativos que destoam da interface. */
+html::-webkit-scrollbar-button,
+body::-webkit-scrollbar-button,
+#root::-webkit-scrollbar-button,
+#root *::-webkit-scrollbar-button {
+  width:
+    0;
+
+  height:
+    0;
+
+  display:
+    none;
+}
+
+
+/* =========================================================
+   ÁREAS COMPACTAS
+
+   Algumas listas pequenas ficam melhores com 7px, sem
+   alterar as barras horizontais específicas da arena.
+========================================================= */
+
+.prebuilt-list-panel::-webkit-scrollbar,
+.prebuilt-detail::-webkit-scrollbar,
+.prebuilt-card-list::-webkit-scrollbar,
+.trash-hover-list::-webkit-scrollbar,
+.direct-messages::-webkit-scrollbar,
+.fatal-error-card pre::-webkit-scrollbar {
+  width:
+    7px;
+}
+
+
+.prebuilt-list-panel,
+.prebuilt-detail,
+.prebuilt-card-list,
+.trash-hover-list,
+.direct-messages {
+  scrollbar-color:
+    rgba(104, 168, 255, .58)
+    rgba(5, 14, 26, .28);
+}
+
+
+/*
+ * Mantém barras horizontais compactas da mesa.
+ * Regras específicas dos estilos da arena ainda podem
+ * sobrescrever estas dimensões normalmente.
+ */
+.field-cards::-webkit-scrollbar {
+  height:
+    5px;
+}

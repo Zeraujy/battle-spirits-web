@@ -1,5 +1,6 @@
 import { FIELD_ZONES } from "./constants.js";
 import { normalizeCard } from "./cardAdapter.js";
+import { getEffectBPBonus } from "./effectEngine/modifierResolver.js";
 
 export function findPhysicalCard(match, instanceId) {
   for (const [playerId, player] of Object.entries(match.players || {})) {
@@ -43,7 +44,7 @@ export function getBraveAttachment(match, hostInstanceId) {
 
 export function getEffectiveBP(match, cardIndex, physicalCard) {
   const card = getDatabaseCard(cardIndex, physicalCard);
-  let bp = getBaseBP(card, physicalCard) + Number(physicalCard.temporaryBP || 0);
+  let bp = getBaseBP(card, physicalCard) + Number(physicalCard.temporaryBP || 0) + getEffectBPBonus(physicalCard);
   const brave = getBraveAttachment(match, physicalCard.instanceId);
   if (brave) {
     const braveCard = getDatabaseCard(cardIndex, brave);
