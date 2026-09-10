@@ -21,7 +21,12 @@ const EVENT_ALIASES = new Map([
   ["afterlifedecreases", "burstLifeDecrease"],
   ["burstlifedecrease", "burstLifeDecrease"],
   ["burst", "burst"],
-  ["continuous", "continuous"]
+  ["continuous", "continuous"],
+  ["ultimatetriggerhit", "ultimateTriggerHit"],
+  ["utriggerhit", "ultimateTriggerHit"],
+  ["ultimatetriggerguard", "ultimateTriggerGuard"],
+  ["utriggerguard", "ultimateTriggerGuard"],
+  ["ultimatetriggerresolved", "ultimateTriggerResolved"]
 ]);
 
 export function normalizeEventName(value) {
@@ -53,7 +58,15 @@ export function getTriggeredEntries(card, event) {
   const entries = [
     ...(Array.isArray(card.effects) ? card.effects.map((entry) => ({ entry, source: "effects" })) : []),
     ...(Array.isArray(card.abilities) ? card.abilities.map((entry) => ({ entry, source: "abilities" })) : [])
-  ].filter(({ entry }) => entryMatchesEvent(entry, event));
+  ].filter(({ entry, source }) => {
+    // Ultimate Trigger possui uma etapa de regra própria. O texto de display
+    // não deve virar um fallback manual de whenAttacks no Effect Engine.
+    if (source === "effects") {
+      const specialType = String(entry?.type || "").replace(/[\s_-]+/g, "").toLowerCase();
+      if (specialType === "ultimatetrigger") return false;
+    }
+    return entryMatchesEvent(entry, event);
+  });
 
   const seen = new Set();
   return entries.filter(({ entry, source }) => {

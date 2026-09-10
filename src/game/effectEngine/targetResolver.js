@@ -15,6 +15,16 @@ function resolveOwnerPlayerIds(match, sourcePlayerId, selector = {}) {
   return [sourcePlayerId].filter(Boolean);
 }
 
+function candidateRuleTypes(candidate) {
+  const { physical, card, zone } = candidate || {};
+  const types = new Set([card?.cardType].filter(Boolean));
+  // Brave em Spirit State é tratado como Spirit pelas regras.
+  if (card?.cardType === "brave" && zone === "other" && !physical?.combinedWith) {
+    types.add("spirit");
+  }
+  return types;
+}
+
 function candidateMatches(match, cardIndex, candidate, selector = {}, context = {}) {
   const { physical, card, playerId, zone } = candidate;
   if (!physical || !card) return false;
@@ -23,8 +33,9 @@ function candidateMatches(match, cardIndex, candidate, selector = {}, context = 
 
   const zones = selector.zones || (selector.zone ? [selector.zone] : null);
   if (zones && !zones.includes(zone)) return false;
-  if (selector.cardType && card.cardType !== selector.cardType) return false;
-  if (selector.cardTypes && !selector.cardTypes.includes(card.cardType)) return false;
+  const ruleTypes = candidateRuleTypes(candidate);
+  if (selector.cardType && !ruleTypes.has(selector.cardType)) return false;
+  if (selector.cardTypes && !selector.cardTypes.some((type) => ruleTypes.has(type))) return false;
   if (selector.color && !(card.colors || []).includes(selector.color)) return false;
   if (selector.colors && !selector.colors.some((color) => (card.colors || []).includes(color))) return false;
   if (selector.family && !(card.families || []).includes(selector.family)) return false;

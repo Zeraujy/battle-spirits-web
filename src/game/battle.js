@@ -21,23 +21,45 @@ export function legalAttackers(match, playerId, cardIndex) {
 
 export function declareAttack(match, playerId, instanceId, cardIndex) {
   if (match.phase !== "attack" || match.activePlayerId !== playerId || match.battle) return { ok: false, error: "Não é possível declarar esse ataque agora." };
-  const attacker = legalAttackers(match, playerId, cardIndex).find((c) => c.instanceId === instanceId);
+  const attacker = legalAttackers(match, playerId, cardIndex).find((card) => card.instanceId === instanceId);
   if (!attacker) return { ok: false, error: "Atacante inválido ou Exhausted." };
+
   const defenderId = otherPlayerId(match, playerId);
-  let player = updateFieldCard(match.players[playerId], instanceId, (c) => ({ ...c, exhausted: true }));
+  const player = updateFieldCard(match.players[playerId], instanceId, (card) => ({ ...card, exhausted: true }));
   const battle = {
     id: uid("battle"),
     attackerPlayerId: playerId,
     defenderPlayerId: defenderId,
     attackerInstanceId: instanceId,
     blockerInstanceId: null,
-    stage: "flash1",
-    flash: { number: 1, priorityPlayerId: defenderId, consecutivePasses: 0 }
+    stage: "attackDeclared",
+    flash: null,
+    restrictions: {}
   };
+
   let next = { ...match, players: { ...match.players, [playerId]: player }, battle };
   next = appendLog(next, `${match.players[playerId].name} declarou um ataque.`, "battle");
+
   const trigger = resolveUltimateTriggerOnAttack(next, playerId, attacker, cardIndex);
-  const engine = resolveCardEvent(trigger.match, { event: "whenAttacks", sourcePlayerId: playerId, sourceInstanceId: instanceId }, cardIndex);
+  next = trigger.match;
+
+  if (!trigger.triggered) {
+    next = {
+      ...next,
+      battle: {
+        ...next.battle,
+        stage: "flash1",
+        flash: { number: 1, priorityPlayerId: defenderId, consecutivePasses: 0 }
+      }
+    };
+  }
+
+  const engine = resolveCardEvent(next, {
+    event: "whenAttacks",
+    sourcePlayerId: playerId,
+    sourceInstanceId: instanceId
+  }, cardIndex);
+
   let resolvedMatch = engine.match;
   let manualResolutionNeeded = Boolean(trigger.manualResolutionNeeded || engine.manualResolutionNeeded);
   const notes = [...engine.notes];
@@ -99,7 +121,13 @@ export function registerFlashUsed(match, playerId) {
 export function legalBlockers(match, cardIndex) {
   const battle = match.battle;
   if (!battle || battle.stage !== "block") return [];
-  return refreshedBattleCards(match.players[battle.defenderPlayerId], cardIndex);
+  const restrictions = battle.restrictions || {};
+  return refreshedBattleCards(match.players[battle.defenderPlayerId], cardIndex).filter((physical) => {
+    const card = getDatabaseCard(cardIndex, physical);
+    if (restrictions.spiritsCannotBlock && ["spirit", "brave"].includes(card?.cardType)) return false;
+    if (restrictions.ultimatesCannotBlock && card?.cardType === "ultimate") return false;
+    return true;
+  });
 }
 
 export function declareBlock(match, playerId, instanceId, cardIndex) {
@@ -137,9 +165,12 @@ export function declareBlock(match, playerId, instanceId, cardIndex) {
   return { ok: true, match: resolvedMatch, manualResolutionNeeded, notes };
 }
 
-export function declineBlock(match, playerId) {
+export function declineBlock(match, playerId, cardIndex) {
   const battle = match.battle;
   if (!battle || battle.stage !== "block" || battle.defenderPlayerId !== playerId) return { ok: false, error: "Não é possível recusar bloqueio agora." };
+  if (battle.restrictions?.mustBlockIfAble && legalBlockers(match, cardIndex).length > 0) {
+    return { ok: false, error: "Este efeito exige que o ataque seja bloqueado se houver um bloqueador válido." };
+  }
   return { ok: true, match: { ...match, battle: { ...battle, stage: "resolve", blockerInstanceId: null, flash: null } } };
 }
 

@@ -10,7 +10,8 @@ import { applyGameAction } from "../game/reducer.js";
 import {
   findPhysicalCard,
   getDatabaseCard,
-  getEffectiveBP
+  getEffectiveBP,
+  getEffectiveSymbols
 } from "../game/selectors.js";
 import {
   getCardName,
@@ -21,11 +22,18 @@ import {
   calculateReduction,
   getSpendableCoreSources
 } from "../game/cost.js";
+import {
+  getBraveSeparationPreview,
+  getCombinedStats,
+  getLegalBraveHosts
+} from "../game/brave.js";
 import { useLanguage } from "../i18n.jsx";
 
 import "../styles/simulatorPanels.css";
 import "../styles/arenaVisuals.css";
 import "../styles/effectDecision.css";
+import "../styles/braveUltimate.css";
+import "../styles/gameResult.css";
 
 
 function effectText(card, language) {
@@ -493,6 +501,11 @@ export default function Simulator({
     setEffectDecisionSelection
   ] = useState([]);
 
+  const [
+    braveSeparationDialog,
+    setBraveSeparationDialog
+  ] = useState(null);
+
   const previewTimer =
     useRef(null);
 
@@ -574,6 +587,19 @@ export default function Simulator({
         return match
           .pendingEffectDecision
           .playerId;
+      }
+
+      if (
+        match.battle
+          ?.stage ===
+        "ultimateTrigger" &&
+        match.battle
+          ?.ultimateTrigger
+          ?.controllerPlayerId
+      ) {
+        return match.battle
+          .ultimateTrigger
+          .controllerPlayerId;
       }
 
       if (
@@ -2676,6 +2702,10 @@ export default function Simulator({
                       [
                         "field-card-wrap",
 
+                        brave
+                          ? "brave-combined-host"
+                          : "",
+
                         physical.flags
                           ?.pendingManualPlay
                           ? "pending"
@@ -2815,14 +2845,16 @@ export default function Simulator({
                       footer={
                         brave
                           ? (
-                            <span className="attachment-label">
-                              +{" "}
-                              {getCardName(
-                                getDatabaseCard(
-                                  cardIndex,
-                                  brave
-                                )
-                              )}
+                            <span className="attachment-label brave-v2-label">
+                              <b>BRAVE</b>
+                              <span>
+                                {getCardName(
+                                  getDatabaseCard(
+                                    cardIndex,
+                                    brave
+                                  )
+                                )}
+                              </span>
                             </span>
                           )
                           : null
@@ -2955,26 +2987,12 @@ export default function Simulator({
           "brave"
         ) {
           const hosts =
-            match.players[
-              ownerId
-            ].field.spirits.filter(
-              (
-                host
-              ) =>
-                !(
-                  match.players[
-                    ownerId
-                  ].field.other ||
-                  []
-                ).some(
-                  (
-                    brave
-                  ) =>
-                    brave
-                      .combinedWith ===
-                    host
-                      .instanceId
-                )
+            getLegalBraveHosts(
+              match,
+              ownerId,
+              physical.instanceId,
+              cardIndex,
+              { includeManual: true }
             );
 
 
@@ -2991,12 +3009,11 @@ export default function Simulator({
                 </span>
 
                 {hosts.map(
-                  (
-                    host
-                  ) => (
+                  (hostEntry) => (
                     <button
                       key={
-                        host.instanceId
+                        hostEntry.physical
+                          .instanceId
                       }
 
                       onClick={() =>
@@ -3010,7 +3027,10 @@ export default function Simulator({
 
                             options: {
                               directCombineHostInstanceId:
-                                host.instanceId
+                                hostEntry.physical
+                                  .instanceId,
+                              confirmCondition:
+                                hostEntry.manual
                             }
                           },
                           ownerId
@@ -3018,10 +3038,7 @@ export default function Simulator({
                       }
                     >
                       {getCardName(
-                        getDatabaseCard(
-                          cardIndex,
-                          host
-                        )
+                        hostEntry.card
                       )}
                     </button>
                   )
@@ -3356,49 +3373,69 @@ export default function Simulator({
       !blockingPending
     ) {
 
+      const combinedStats =
+        getCombinedStats(
+          match,
+          cardIndex,
+          physical
+        );
+
+      buttons.push(
+        <div
+          key="brave-status"
+          className="brave-link-card"
+        >
+          <span>
+            {language === "en"
+              ? "COMBINED BRAVE"
+              : "BRAVE COMBINADO"}
+          </span>
+
+          <strong>
+            {getCardName(
+              combinedStats.braveCard
+            )}
+          </strong>
+
+          <div>
+            <small>
+              +{combinedStats.bpBonus} BP
+            </small>
+
+            <small>
+              {(combinedStats.symbols || [])
+                .filter(Boolean)
+                .join(" / ") || "—"}
+            </small>
+          </div>
+        </div>
+      );
+
       buttons.push(
         <button
           key="separate-attached"
-
           onClick={() =>
-            dispatch(
-              {
-                type:
-                  "SEPARATE_BRAVE",
-
-                braveInstanceId:
-                  attachedBrave.instanceId
-              },
-              ownerId
-            )
+            setBraveSeparationDialog({
+              playerId: ownerId,
+              braveInstanceId:
+                attachedBrave.instanceId
+            })
           }
         >
-          Separate Brave
+          {language === "en"
+            ? "Separate Brave"
+            : "Separar Brave"}
         </button>
       );
 
 
       const exchangeHosts =
-        match.players[
-          ownerId
-        ].field.spirits.filter(
-          (
-            host
-          ) =>
-            host.instanceId !==
-              physical.instanceId &&
-            !(
-              match.players[
-                ownerId
-              ].field.other ||
-              []
-            ).some(
-              (
-                brave
-              ) =>
-                brave.combinedWith ===
-                host.instanceId
-            )
+        getLegalBraveHosts(
+          match,
+          ownerId,
+          attachedBrave.instanceId,
+          cardIndex,
+          { includeManual: true }
         );
 
 
@@ -3415,12 +3452,11 @@ export default function Simulator({
             </span>
 
             {exchangeHosts.map(
-              (
-                host
-              ) => (
+              (hostEntry) => (
                 <button
                   key={
-                    host.instanceId
+                    hostEntry.physical
+                      .instanceId
                   }
 
                   onClick={() =>
@@ -3433,11 +3469,12 @@ export default function Simulator({
                           attachedBrave.instanceId,
 
                         hostInstanceId:
-                          host.instanceId,
+                          hostEntry.physical
+                            .instanceId,
 
                         options: {
                           confirmCondition:
-                            true
+                            hostEntry.manual
                         }
                       },
                       ownerId
@@ -3445,10 +3482,7 @@ export default function Simulator({
                   }
                 >
                   {getCardName(
-                    getDatabaseCard(
-                      cardIndex,
-                      host
-                    )
+                    hostEntry.card
                   )}
                 </button>
               )
@@ -3479,29 +3513,29 @@ export default function Simulator({
         buttons.push(
           <button
             key="separate"
-
             onClick={() =>
-              dispatch(
-                {
-                  type:
-                    "SEPARATE_BRAVE",
-
-                  braveInstanceId:
-                    physical.instanceId
-                },
-                ownerId
-              )
+              setBraveSeparationDialog({
+                playerId: ownerId,
+                braveInstanceId:
+                  physical.instanceId
+              })
             }
           >
-            Separate Brave
+            {language === "en"
+              ? "Separate Brave"
+              : "Separar Brave"}
           </button>
         );
       } else {
 
         const hosts =
-          match.players[
-            ownerId
-          ].field.spirits;
+          getLegalBraveHosts(
+            match,
+            ownerId,
+            physical.instanceId,
+            cardIndex,
+            { includeManual: true }
+          );
 
 
         if (
@@ -3517,12 +3551,11 @@ export default function Simulator({
               </span>
 
               {hosts.map(
-                (
-                  host
-                ) => (
+                (hostEntry) => (
                   <button
                     key={
-                      host.instanceId
+                      hostEntry.physical
+                        .instanceId
                     }
 
                     onClick={() =>
@@ -3535,11 +3568,12 @@ export default function Simulator({
                             physical.instanceId,
 
                           hostInstanceId:
-                            host.instanceId,
+                            hostEntry.physical
+                              .instanceId,
 
                           options: {
                             confirmCondition:
-                              true
+                              hostEntry.manual
                           }
                         },
                         ownerId
@@ -3547,10 +3581,7 @@ export default function Simulator({
                     }
                   >
                     {getCardName(
-                      getDatabaseCard(
-                        cardIndex,
-                        host
-                      )
+                      hostEntry.card
                     )}
                   </button>
                 )
@@ -3573,6 +3604,353 @@ export default function Simulator({
           —
         </p>
       );
+  }
+
+
+  function renderBraveSeparationOverlay() {
+    if (!braveSeparationDialog) {
+      return null;
+    }
+
+    const preview =
+      getBraveSeparationPreview(
+        match,
+        braveSeparationDialog.playerId,
+        braveSeparationDialog.braveInstanceId,
+        cardIndex
+      );
+
+    if (!preview) {
+      return null;
+    }
+
+    return (
+      <div className="brave-action-overlay">
+        <section className="brave-action-modal">
+          <span className="eyebrow">
+            {language === "en"
+              ? "BRAVE / SEPARATION"
+              : "BRAVE / SEPARAÇÃO"}
+          </span>
+
+          <h2>
+            {language === "en"
+              ? "Separate Brave?"
+              : "Separar o Brave?"}
+          </h2>
+
+          <p>
+            <b>{preview.braveName}</b>
+            {language === "en"
+              ? " will return to Spirit State."
+              : " voltará ao Spirit State."}
+          </p>
+
+          <div className="brave-separation-stats">
+            <div>
+              <span>LV1</span>
+              <strong>{preview.minimum} Core</strong>
+            </div>
+            <div>
+              <span>{language === "en" ? "HOST" : "ALVO"}</span>
+              <strong>{preview.hostRegular}</strong>
+            </div>
+            <div>
+              <span>RESERVE</span>
+              <strong>{preview.reserve}</strong>
+            </div>
+          </div>
+
+          <div
+            className={
+              `brave-separation-result ${
+                preview.survives
+                  ? "ok"
+                  : "danger"
+              }`
+            }
+          >
+            {preview.survives
+              ? (
+                  language === "en"
+                    ? "There are enough Cores to maintain the Brave at LV1."
+                    : "Há Cores suficientes para manter o Brave no LV1."
+                )
+              : (
+                  language === "en"
+                    ? "There are not enough Cores. The Brave will be sent to the Trash."
+                    : "Não há Cores suficientes. O Brave será enviado ao Trash."
+                )}
+          </div>
+
+          <div className="brave-action-buttons">
+            <button
+              type="button"
+              className="ghost"
+              onClick={() =>
+                setBraveSeparationDialog(null)
+              }
+            >
+              {language === "en"
+                ? "Cancel"
+                : "Cancelar"}
+            </button>
+
+            <button
+              type="button"
+              className="primary-btn"
+              onClick={() => {
+                const data = braveSeparationDialog;
+                setBraveSeparationDialog(null);
+                dispatch(
+                  {
+                    type: "SEPARATE_BRAVE",
+                    braveInstanceId:
+                      data.braveInstanceId
+                  },
+                  data.playerId
+                );
+              }}
+            >
+              {language === "en"
+                ? "Separate Brave"
+                : "Separar Brave"}
+            </button>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+
+  function renderUltimateTriggerOverlay() {
+    const battle = match.battle;
+    const trigger = battle?.ultimateTrigger;
+
+    if (
+      !battle ||
+      battle.stage !== "ultimateTrigger" ||
+      !trigger ||
+      effectDecision
+    ) {
+      return null;
+    }
+
+    const sourceCard =
+      cardIndex.get(
+        trigger.sourceCardId
+      );
+
+    const revealedCard =
+      trigger.revealedCardId
+        ? cardIndex.get(
+            trigger.revealedCardId
+          )
+        : null;
+
+    const waiting =
+      online &&
+      viewerPlayerId !==
+        trigger.controllerPlayerId;
+
+    const sourceName =
+      sourceCard
+        ? getCardName(sourceCard)
+        : trigger.sourceCardId;
+
+    const revealedName =
+      revealedCard
+        ? getCardName(revealedCard)
+        : (
+            trigger.status === "emptyDeck"
+              ? (
+                  language === "en"
+                    ? "Empty Deck"
+                    : "Deck vazio"
+                )
+              : trigger.revealedCardId || "—"
+          );
+
+    const triggerText =
+      language === "en"
+        ? (
+            trigger.effectTextEN ||
+            trigger.effectTextPT ||
+            ""
+          )
+        : (
+            trigger.effectTextPT ||
+            trigger.effectTextEN ||
+            ""
+          );
+
+    return (
+      <div className="ultimate-trigger-overlay">
+        <section
+          className={
+            `ultimate-trigger-modal ${
+              trigger.hit
+                ? "hit"
+                : "guard"
+            }`
+          }
+        >
+          <header className="ultimate-trigger-header">
+            <div>
+              <span className="eyebrow">
+                ULTIMATE TRIGGER
+              </span>
+
+              <h2>
+                {trigger.hit
+                  ? "HIT"
+                  : "GUARD"}
+              </h2>
+            </div>
+
+            <span className="ultimate-trigger-status">
+              {trigger.hit
+                ? (
+                    language === "en"
+                      ? "TRIGGER HIT"
+                      : "TRIGGER ACERTOU"
+                  )
+                : (
+                    language === "en"
+                      ? "TRIGGER GUARDED"
+                      : "TRIGGER DEFENDIDO"
+                  )}
+            </span>
+          </header>
+
+          <div className="ultimate-trigger-comparison">
+            <article className="ultimate-trigger-card source">
+              <span>
+                {language === "en"
+                  ? "ULTIMATE"
+                  : "ULTIMATE"}
+              </span>
+
+              <div className="ultimate-trigger-image">
+                {sourceCard?.image ? (
+                  <img
+                    src={resolveCardImage(sourceCard)}
+                    alt={sourceName}
+                  />
+                ) : (
+                  <div>{sourceName}</div>
+                )}
+              </div>
+
+              <strong>{sourceName}</strong>
+
+              <b>
+                COST {trigger.sourceCost}
+              </b>
+            </article>
+
+            <div className="ultimate-trigger-versus">
+              <span>
+                {trigger.status === "emptyDeck"
+                  ? "—"
+                  : trigger.hit
+                    ? ">"
+                    : "≤"}
+              </span>
+
+              <small>
+                {trigger.hit
+                  ? "HIT"
+                  : "GUARD"}
+              </small>
+            </div>
+
+            <article className="ultimate-trigger-card revealed">
+              <span>
+                {language === "en"
+                  ? "REVEALED"
+                  : "REVELADA"}
+              </span>
+
+              <div className="ultimate-trigger-image">
+                {revealedCard?.image ? (
+                  <img
+                    src={resolveCardImage(revealedCard)}
+                    alt={revealedName}
+                  />
+                ) : (
+                  <div>{revealedName}</div>
+                )}
+              </div>
+
+              <strong>{revealedName}</strong>
+
+              <b>
+                {trigger.revealedCost != null
+                  ? `COST ${trigger.revealedCost}`
+                  : "—"}
+              </b>
+            </article>
+          </div>
+
+          {triggerText && (
+            <div className="ultimate-trigger-effect-text">
+              <span>
+                {trigger.hit
+                  ? (
+                      language === "en"
+                        ? "HIT EFFECT"
+                        : "EFEITO DE HIT"
+                    )
+                  : (
+                      language === "en"
+                        ? "RESULT"
+                        : "RESULTADO"
+                    )}
+              </span>
+
+              <p>{triggerText}</p>
+            </div>
+          )}
+
+          <footer className="ultimate-trigger-footer">
+            {waiting ? (
+              <span>
+                {language === "en"
+                  ? "Waiting for the attacking player to resolve the Ultimate Trigger."
+                  : "Aguardando o jogador atacante resolver o Ultimate Trigger."}
+              </span>
+            ) : (
+              <button
+                type="button"
+                className="primary-btn ultimate-trigger-button"
+                onClick={() =>
+                  dispatch(
+                    {
+                      type:
+                        "RESOLVE_ULTIMATE_TRIGGER"
+                    },
+                    trigger.controllerPlayerId
+                  )
+                }
+              >
+                {trigger.hit
+                  ? (
+                      language === "en"
+                        ? "Resolve HIT and continue"
+                        : "Resolver HIT e continuar"
+                    )
+                  : (
+                      language === "en"
+                        ? "Continue to Flash Timing 1"
+                        : "Continuar para Flash Timing 1"
+                    )}
+              </button>
+            )}
+          </footer>
+        </section>
+      </div>
+    );
   }
 
 
@@ -4162,7 +4540,9 @@ export default function Simulator({
       )}
 
 
+      {renderUltimateTriggerOverlay()}
       {renderEffectDecisionOverlay()}
+      {renderBraveSeparationOverlay()}
 
 
       <div className="sim-layout">
@@ -5528,43 +5908,342 @@ export default function Simulator({
           WINNER
       ================================================= */}
 
-      {match.winnerId && (
-        <Modal
-          title={
-            t(
-              "matchEnd"
+      {match.winnerId && (() => {
+        const winner =
+          match.players[
+            match.winnerId
+          ];
+
+        const defeatedId =
+          otherPlayerId(
+            match,
+            match.winnerId
+          );
+
+        const defeated =
+          match.players[
+            defeatedId
+          ];
+
+        const isDefeat =
+          Boolean(
+            online &&
+            viewerPlayerId &&
+            match.winnerId !==
+              viewerPlayerId
+          );
+
+        const reason =
+          match.winnerReason ||
+          (
+            Number(
+              defeated?.life ||
+              0
+            ) <= 0
+              ? "life"
+              : (
+                  defeated?.deck
+                    ?.length === 0
+                    ? "deck"
+                    : "other"
+                )
+          );
+
+        const reasonTitle =
+          language === "en"
+            ? (
+                reason === "life"
+                  ? "Life depleted"
+                  : reason === "deck"
+                    ? "Deck depleted"
+                    : reason === "concede" ||
+                      reason === "surrender"
+                      ? "Concession"
+                      : "Victory condition"
+              )
+            : (
+                reason === "life"
+                  ? "Life reduzida a 0"
+                  : reason === "deck"
+                    ? "Deck esgotado"
+                    : reason === "concede" ||
+                      reason === "surrender"
+                      ? "Desistência"
+                      : "Condição de vitória"
+              );
+
+        const reasonText =
+          language === "en"
+            ? (
+                reason === "life"
+                  ? `${defeated?.name || "The opponent"} has no Life remaining.`
+                  : reason === "deck"
+                    ? `${defeated?.name || "The opponent"} can no longer continue with an empty Deck.`
+                    : reason === "concede" ||
+                      reason === "surrender"
+                      ? `${defeated?.name || "The opponent"} conceded the match.`
+                      : "The match victory condition was reached."
+              )
+            : (
+                reason === "life"
+                  ? `${defeated?.name || "O oponente"} ficou sem Life.`
+                  : reason === "deck"
+                    ? `${defeated?.name || "O oponente"} não pode continuar com o Deck vazio.`
+                    : reason === "concede" ||
+                      reason === "surrender"
+                      ? `${defeated?.name || "O oponente"} desistiu da partida.`
+                      : "A condição de vitória da partida foi alcançada."
+              );
+
+        const initials = (
+          name
+        ) =>
+          String(
+            name ||
+            "?"
+          )
+            .trim()
+            .split(
+              /\s+/
             )
-          }
-        >
-          <div className="winner-box">
+            .slice(
+              0,
+              2
+            )
+            .map(
+              (part) =>
+                part[0] ||
+                ""
+            )
+            .join(
+              ""
+            )
+            .toUpperCase() ||
+          "?";
 
-            <strong>
-              {
-                match.players[
-                  match.winnerId
-                ].name
-              }
-              {" "}
-              {t(
-                "wins"
-              )}
-            </strong>
+        return (
+          <div
+            className={[
+              "game-result-overlay",
+              isDefeat
+                ? "is-defeat"
+                : "is-victory"
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            role="dialog"
+            aria-modal="true"
+            aria-label={
+              language === "en"
+                ? "Match result"
+                : "Resultado da partida"
+            }
+          >
+            <section className="game-result-card">
+              <div className="game-result-ambient" />
 
-            <button
-              className="primary-btn"
+              <header className="game-result-header">
+                <span className="game-result-kicker">
+                  {language === "en"
+                    ? "MATCH COMPLETE"
+                    : "PARTIDA ENCERRADA"}
+                </span>
 
-              onClick={
-                onExit
-              }
-            >
-              {t(
-                "mainMenu"
-              )}
-            </button>
+                <div className="game-result-badge">
+                  <span>
+                    {isDefeat
+                      ? (
+                          language === "en"
+                            ? "DEFEAT"
+                            : "DERROTA"
+                        )
+                      : (
+                          language === "en"
+                            ? "VICTORY"
+                            : "VITÓRIA"
+                        )}
+                  </span>
+                </div>
 
+                <h2>
+                  {isDefeat
+                    ? (
+                        language === "en"
+                          ? `${winner?.name || "Opponent"} won the match`
+                          : `${winner?.name || "Oponente"} venceu a partida`
+                      )
+                    : (
+                        language === "en"
+                          ? `${winner?.name || "Player"} is victorious`
+                          : `${winner?.name || "Jogador"} venceu!`
+                      )}
+                </h2>
+
+                <p>
+                  {isDefeat
+                    ? (
+                        language === "en"
+                          ? "The duel is over. Review the result and prepare for the next battle."
+                          : "O duelo terminou. Confira o resultado e prepare-se para a próxima batalha."
+                      )
+                    : (
+                        language === "en"
+                          ? "The final blow was dealt. The duel belongs to the winner."
+                          : "O golpe final foi dado. O duelo pertence ao vencedor."
+                      )}
+                </p>
+              </header>
+
+              <div className="game-result-versus">
+                <article
+                  className="game-result-player winner"
+                  style={{
+                    "--result-player-color":
+                      winner?.playerColor ||
+                      "#f4bd4b"
+                  }}
+                >
+                  <span className="game-result-player-label">
+                    {language === "en"
+                      ? "WINNER"
+                      : "VENCEDOR"}
+                  </span>
+
+                  <div className="game-result-avatar">
+                    {winner?.avatar ? (
+                      <img
+                        src={winner.avatar}
+                        alt=""
+                      />
+                    ) : (
+                      <span>
+                        {initials(
+                          winner?.name
+                        )}
+                      </span>
+                    )}
+                  </div>
+
+                  <strong>
+                    {winner?.name ||
+                      (
+                        language === "en"
+                          ? "Player"
+                          : "Jogador"
+                      )}
+                  </strong>
+
+                  <small>
+                    {language === "en"
+                      ? "Victory"
+                      : "Vitória"}
+                  </small>
+                </article>
+
+                <div className="game-result-vs-mark">
+                  VS
+                </div>
+
+                <article
+                  className="game-result-player defeated"
+                  style={{
+                    "--result-player-color":
+                      defeated?.playerColor ||
+                      "#68a8ff"
+                  }}
+                >
+                  <span className="game-result-player-label">
+                    {language === "en"
+                      ? "DEFEATED"
+                      : "DERROTADO"}
+                  </span>
+
+                  <div className="game-result-avatar">
+                    {defeated?.avatar ? (
+                      <img
+                        src={defeated.avatar}
+                        alt=""
+                      />
+                    ) : (
+                      <span>
+                        {initials(
+                          defeated?.name
+                        )}
+                      </span>
+                    )}
+                  </div>
+
+                  <strong>
+                    {defeated?.name ||
+                      (
+                        language === "en"
+                          ? "Player"
+                          : "Jogador"
+                      )}
+                  </strong>
+
+                  <small>
+                    {language === "en"
+                      ? "Defeat"
+                      : "Derrota"}
+                  </small>
+                </article>
+              </div>
+
+              <div className="game-result-summary">
+                <div>
+                  <span>
+                    {language === "en"
+                      ? "RESULT"
+                      : "RESULTADO"}
+                  </span>
+
+                  <strong>
+                    {reasonTitle}
+                  </strong>
+
+                  <p>
+                    {reasonText}
+                  </p>
+                </div>
+
+                <div className="game-result-turn">
+                  <span>
+                    {language === "en"
+                      ? "FINAL TURN"
+                      : "TURNO FINAL"}
+                  </span>
+
+                  <strong>
+                    {match.turnNumber ||
+                      "-"}
+                  </strong>
+                </div>
+              </div>
+
+              <footer className="game-result-actions">
+                <button
+                  type="button"
+                  className="game-result-main-button"
+                  onClick={
+                    onExit
+                  }
+                >
+                  <span>
+                    {t(
+                      "mainMenu"
+                    )}
+                  </span>
+
+                  <b aria-hidden="true">
+                    →
+                  </b>
+                </button>
+              </footer>
+            </section>
           </div>
-        </Modal>
-      )}
+        );
+      })()}
 
 
       {/* =================================================

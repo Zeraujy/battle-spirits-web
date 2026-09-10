@@ -28,7 +28,11 @@ const ACTION_ALIASES = {
   selecttrashtarget: "selectTrashTarget",
   selectmultipletargets: "selectMultipleTargets",
   chooseoption: "chooseOption",
-  conditional: "conditional"
+  conditional: "conditional",
+  setbattlerestriction: "setBattleRestriction",
+  setbattleflag: "setBattleRestriction",
+  preventspiritblock: "setBattleRestriction",
+  cannotbeblockedbyspirits: "setBattleRestriction"
 };
 
 function canonicalType(type) {
@@ -345,6 +349,41 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       ? (action.then ?? action.actions ?? action.onTrue ?? [])
       : (action.else ?? action.onFalse ?? []);
     return resolveNested(next, asActionArray(branch), cardIndex, context);
+  }
+
+  if (type === "setBattleRestriction") {
+    if (!next.battle) {
+      return { match: next, notes: ["Não existe batalha ativa para aplicar a restrição."], manualResolutionNeeded: true, executed: false };
+    }
+
+    const rawType = String(rawAction.type || "").replace(/[\s_-]+/g, "").toLowerCase();
+    const restriction = {
+      ...(typeof action.restriction === "object" && action.restriction ? action.restriction : {}),
+      ...(typeof action.value === "object" && action.value ? action.value : {})
+    };
+
+    if (["preventspiritblock", "cannotbeblockedbyspirits"].includes(rawType)) {
+      restriction.spiritsCannotBlock = true;
+    }
+    if (action.spiritsCannotBlock != null) restriction.spiritsCannotBlock = Boolean(action.spiritsCannotBlock);
+    if (action.ultimatesCannotBlock != null) restriction.ultimatesCannotBlock = Boolean(action.ultimatesCannotBlock);
+    if (action.mustBlockIfAble != null) restriction.mustBlockIfAble = Boolean(action.mustBlockIfAble);
+
+    if (!Object.keys(restriction).length) {
+      return { match: next, notes: ["Restrição de batalha sem dados estruturados."], manualResolutionNeeded: true, executed: false };
+    }
+
+    next = {
+      ...next,
+      battle: {
+        ...next.battle,
+        restrictions: {
+          ...(next.battle.restrictions || {}),
+          ...restriction
+        }
+      }
+    };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
   }
 
   if (["selectTarget", "selectTrashTarget", "selectMultipleTargets"].includes(type)) {

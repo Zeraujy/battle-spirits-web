@@ -31,7 +31,7 @@ export function beginManualPlay(match, playerId, instanceId, cardIndex, options 
     const hostCard = getDatabaseCard(cardIndex, hostCtx.card);
     if (!["spirit","ultimate"].includes(hostCard?.cardType)) return { ok:false, error:"O alvo não pode receber este Brave." };
     if ((match.players[playerId].field.other || []).some((b)=>b.combinedWith===directHostId)) return { ok:false, error:"O alvo já possui um Brave combinado." };
-    if (!conditionMatches(card, hostCard, { ...options, confirmCondition:true })) return { ok:false, error:"A condição de combinação do Brave não foi cumprida." };
+    if (!conditionMatches(card, hostCard, options)) return { ok:false, error:"A condição de combinação do Brave não foi cumprida." };
     directHost = hostCtx;
   }
   const cost = calculateReduction(match, playerId, card, cardIndex);

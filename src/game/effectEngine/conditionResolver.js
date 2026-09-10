@@ -14,8 +14,10 @@ function controlsMatching(match, sourcePlayerId, cardIndex, condition = {}) {
   const minimum = Math.max(0, Number(condition.minCount ?? condition.count ?? 1));
   const matches = cards.filter(({ physical, card }) => {
     if (!card) return false;
-    if (condition.cardType && card.cardType !== condition.cardType) return false;
-    if (condition.cardTypes && !valueIn(card.cardType, condition.cardTypes)) return false;
+    const ruleTypes = new Set([card.cardType]);
+    if (card.cardType === "brave" && !physical.combinedWith) ruleTypes.add("spirit");
+    if (condition.cardType && !ruleTypes.has(condition.cardType)) return false;
+    if (condition.cardTypes && !condition.cardTypes.some((type) => ruleTypes.has(type))) return false;
     if (condition.color && !(card.colors || []).includes(condition.color)) return false;
     if (condition.colors && !condition.colors.some((color) => (card.colors || []).includes(color))) return false;
     if (condition.family && !(card.families || []).includes(condition.family)) return false;

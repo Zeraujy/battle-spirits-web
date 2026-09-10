@@ -64,6 +64,35 @@ export function getEffectiveSymbols(match, cardIndex, physicalCard) {
   return symbols.filter(Boolean);
 }
 
+export function getEffectiveCost(match, cardIndex, physicalCard) {
+  const card = getDatabaseCard(cardIndex, physicalCard);
+  let cost = Number(card?.cost || 0);
+  const brave = getBraveAttachment(match, physicalCard?.instanceId);
+  if (brave) {
+    const braveCard = getDatabaseCard(cardIndex, brave);
+    cost += Number(braveCard?.cost || 0);
+  }
+  return cost;
+}
+
+export function getEffectiveColors(match, cardIndex, physicalCard) {
+  const card = getDatabaseCard(cardIndex, physicalCard);
+  const values = [...(card?.colors || [])];
+  const brave = getBraveAttachment(match, physicalCard?.instanceId);
+  if (brave) {
+    const braveCard = getDatabaseCard(cardIndex, brave);
+    values.push(...(braveCard?.colors || []));
+  }
+  return [...new Set(values.filter(Boolean))];
+}
+
+export function getEffectiveFamilies(match, cardIndex, physicalCard) {
+  const card = getDatabaseCard(cardIndex, physicalCard);
+  // Regra oficial de Brave: ao combinar, BP+, Cost, cor e símbolo são
+  // adicionados ao alvo, mas o nome e a Família do alvo não mudam.
+  return [...new Set((card?.families || []).filter(Boolean))];
+}
+
 export function fieldCards(player) {
   return [
     ...(player.field?.spirits || []),
