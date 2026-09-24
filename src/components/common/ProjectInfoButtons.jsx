@@ -13,6 +13,67 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.2.5",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "Card Effect Intelligence", en: "Card Effect Intelligence" },
+    summary: {
+      pt: "A Eternal CPU passa a avaliar semanticamente o resultado dos efeitos estruturados, escolhendo alvos e respostas com base no valor real de destruir, exaurir, dar Refresh, alterar BP, comprar, gerar Cores e remover cartas do campo.",
+      en: "Eternal CPU now evaluates structured effects semantically, choosing targets and responses based on the real value of destroying, exhausting, refreshing, changing BP, drawing, generating Cores and removing cards from the field."
+    },
+    sections: [
+      {
+        title: { pt: "Leitura semântica de efeitos", en: "Semantic effect evaluation" },
+        items: {
+          pt: [
+            "Novo módulo `aiEffectSemantics.js` mede o impacto estratégico real de uma resolução estruturada além do score genérico do estado.",
+            "Destruir e devolver para a mão consideram o valor do corpo removido, BP, símbolos, Cores investidos e relevância na batalha atual.",
+            "Exhaust e Refresh agora diferenciam ameaças fortes de alvos fracos; mudanças de BP recebem peso adicional quando atingem atacante ou bloqueador da batalha em andamento.",
+            "Compra/recuperação de cartas, geração de Core, recuperação/perda de Life, proteções e restrições de batalha também entram na avaliação semântica."
+          ],
+          en: [
+            "New `aiEffectSemantics.js` module measures the real strategic impact of a structured resolution beyond the generic board-state score.",
+            "Destroy and return-to-hand evaluate the removed body's value, BP, symbols, invested Cores and relevance to the current battle.",
+            "Exhaust and Refresh now distinguish major threats from weak targets; BP changes receive extra weight when they affect the current attacker or blocker.",
+            "Card draw/recovery, Core generation, Life gain/loss, protections and battle restrictions are also part of semantic evaluation."
+          ]
+        }
+      },
+      {
+        title: { pt: "Decisões & alvos", en: "Decisions & targets" },
+        items: {
+          pt: [
+            "A pré-visualização da Decision Queue usa o novo score semântico antes da CPU confirmar um alvo ou opção.",
+            "A CPU tende a exaurir, devolver ou destruir a ameaça mais valiosa em vez de tratar todos os alvos legais como equivalentes.",
+            "Buffs de BP em Flash priorizam o corpo que está realmente participando da batalha quando isso muda a troca.",
+            "As decisões ranqueadas agora guardam `effectScore` e `effectReasons`, preparando a futura tela de debug da IA."
+          ],
+          en: [
+            "Decision Queue preview uses the new semantic score before the CPU confirms a target or option.",
+            "The CPU tends to exhaust, bounce or destroy the most valuable threat instead of treating every legal target as equivalent.",
+            "Flash BP buffs prioritize the body actually involved in the current battle when that changes the exchange.",
+            "Ranked decisions now keep `effectScore` and `effectReasons`, preparing the future AI debug view."
+          ]
+        }
+      },
+      {
+        title: { pt: "Validação", en: "Validation" },
+        items: {
+          pt: [
+            "A suíte automatizada passa de 96 para 102 testes.",
+            "Novos testes cobrem escolha de alvo para Exhaust, Refresh e retorno à mão, buff de BP contextual, leitura de Draw/Core e privacidade da mão oculta do oponente.",
+            "A IA continua sem consultar a identidade das cartas ocultas do adversário e continua executando apenas ações legais da Rules Engine."
+          ],
+          en: [
+            "The automated suite grows from 96 to 102 tests.",
+            "New tests cover Exhaust, Refresh and return-to-hand target choice, contextual BP buffs, Draw/Core semantics and opponent hidden-hand privacy.",
+            "The AI still never inspects the identity of hidden opponent cards and continues to execute only legal Rules Engine actions."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.2.4",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "Flash, Magic & Burst Intelligence", en: "Flash, Magic & Burst Intelligence" },

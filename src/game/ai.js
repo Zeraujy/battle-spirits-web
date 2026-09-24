@@ -11,6 +11,7 @@ import {
 import { calculateReduction } from "./cost.js";
 import { getBurstActivationEvent, isBurstCard } from "./burstRules.js";
 import { otherPlayerId } from "./utils.js";
+import { analyzeEffectTransition } from "./aiEffectSemantics.js";
 
 const DIFFICULTIES = new Set(["easy", "normal", "hard"]);
 const PROGRESS_ACTIONS = new Set([
@@ -616,6 +617,7 @@ function pendingDecisionBestGain(match, playerId, cardIndex, depth = 3) {
     const resolved = applyGameAction(match, candidate.action, playerId, cardIndex);
     if (!resolved?.ok || !resolved.match) continue;
     let gain = evaluateBoardState(resolved.match, playerId, cardIndex) - before;
+    gain += analyzeEffectTransition(match, resolved.match, playerId, cardIndex).score;
     gain += pendingDecisionBestGain(resolved.match, playerId, cardIndex, depth - 1);
     best = Math.max(best, gain);
   }
@@ -626,6 +628,7 @@ function actionPreviewPotential(match, playerId, action, cardIndex) {
   const result = applyGameAction(match, action, playerId, cardIndex);
   if (!result?.ok || !result.match) return -Infinity;
   let gain = evaluateBoardState(result.match, playerId, cardIndex) - evaluateBoardState(match, playerId, cardIndex);
+  gain += analyzeEffectTransition(match, result.match, playerId, cardIndex).score * 0.7;
   gain += pendingDecisionBestGain(result.match, playerId, cardIndex);
   if (result.manualResolutionNeeded && !result.match.pendingEffectDecision) gain -= 70;
   return gain;
@@ -686,7 +689,8 @@ function magicUseBias(match, playerId, action, result, cardIndex) {
   const mode = action.options?.mode === "flash" ? "flash" : "main";
   const beforeState = evaluateBoardState(match, playerId, cardIndex);
   const afterState = evaluateBoardState(result.match, playerId, cardIndex);
-  const immediateGain = afterState - beforeState;
+  const semanticGain = analyzeEffectTransition(match, result.match, playerId, cardIndex).score;
+  const immediateGain = afterState - beforeState + semanticGain * 0.65;
   const decisionGain = pendingDecisionBestGain(result.match, playerId, cardIndex);
   let score = decisionGain * 1.55;
 
@@ -760,8 +764,9 @@ function activateBurstBias(match, playerId, result, cardIndex) {
   const physical = match.players?.[playerId]?.burst;
   const card = getDatabaseCard(cardIndex, physical);
   const decisionGain = pendingDecisionBestGain(result.match, playerId, cardIndex);
-  const immediateGain = evaluateBoardState(result.match, playerId, cardIndex) - evaluateBoardState(match, playerId, cardIndex);
-  let score = 24 + decisionGain * 1.65;
+  const semanticGain = analyzeEffectTransition(match, result.match, playerId, cardIndex).score;
+  const immediateGain = evaluateBoardState(result.match, playerId, cardIndex) - evaluateBoardState(match, playerId, cardIndex) + semanticGain * 0.7;
+  let score = 24 + decisionGain * 1.65 + semanticGain * 0.45;
 
   if (getBurstActivationEvent(card) === "burstLifeDecrease") {
     const life = numeric(match.players?.[playerId]?.life);
@@ -924,7 +929,18 @@ function scoreCandidate(match, playerId, candidate, cardIndex, options, legalAct
   const after = evaluateBoardState(result.match, playerId, cardIndex);
   const delta = after - before;
 
+  const effectAnalysis = analyzeEffectTransition(match, result.match, playerId, cardIndex);
+  const semanticWeights = {
+    RESOLVE_EFFECT_DECISION: 1,
+    USE_MAGIC: 0.6,
+    ACTIVATE_BURST: 0.7,
+    RESOLVE_ULTIMATE_TRIGGER: 0.55,
+    USE_TRIGGER_COUNTER: 0.55
+  };
+  const semanticWeight = Number(semanticWeights[candidate.action?.type] || 0);
+
   let score = delta * 1.25;
+  score += effectAnalysis.score * semanticWeight;
   score += categoryBias(match, playerId, candidate, result, cardIndex, legalActions);
   score += repeatedActionPenalty(candidate.action, options.recentActionKeys || []);
 
@@ -936,7 +952,9 @@ function scoreCandidate(match, playerId, candidate, cardIndex, options, legalAct
     result,
     score,
     stateScore: after,
-    delta
+    delta,
+    effectScore: effectAnalysis.score * semanticWeight,
+    effectReasons: semanticWeight ? effectAnalysis.reasons : []
   };
 }
 

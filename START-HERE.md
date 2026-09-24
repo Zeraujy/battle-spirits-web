@@ -1,4 +1,4 @@
-# START HERE — v3.2.4
+# START HERE — v3.2.5
 
 Se você está aprendendo o projeto, comece por estes caminhos:
 
@@ -91,4 +91,15 @@ A etapa seguinte é **Flash, Magic & Burst Intelligence**, implementada na v3.2.
 - `src/game/effectEngine/normalizer.js`: variantes `lifeDecrease` / `afterLifeReduced` agora entram na mesma janela automática de Burst após perda de Life.
 - `src/game/ai.test.js`: cobre timing de Magic, resposta a lethal, economia de Flash, prioridade de Burst suportada e decisão entre ativar/passar.
 
-A próxima etapa planejada é **Card Effect Intelligence**, aprofundando o valor semântico de destruir, exaurir, refresh, BP, compra, retorno e outros efeitos estruturados.
+A etapa seguinte é **Card Effect Intelligence**, implementada na v3.2.5.
+
+
+## v3.2.5 — Card Effect Intelligence
+
+- `src/game/aiEffectSemantics.js`: camada dedicada que mede o valor estratégico dos efeitos estruturados a partir da transição real de estado.
+- `src/game/ai.js`: Decision Queue, Magic, Burst e Trigger passam a combinar avaliação geral do tabuleiro com score semântico dos efeitos.
+- Destruição, retorno à mão/deck, Exhaust, Refresh, alterações de BP, compra/recuperação de cartas, geração de Core, Life e proteções recebem sinais próprios.
+- As decisões ranqueadas guardam `effectScore` e `effectReasons`, preparando o futuro AI Debugger.
+- A camada semântica acompanha apenas cartas que já eram públicas e contagens públicas; a identidade da mão/deck ocultos do oponente não é usada.
+
+A próxima etapa planejada é **Planning / Lookahead**, permitindo que a dificuldade Hard compare pequenas sequências de ações antes de escolher a primeira jogada.

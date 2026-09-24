@@ -55,6 +55,87 @@ const cards = [
     }]
   }),
   normalizeCard({
+    id: "EXHAUST-SEM",
+    namePT: "Semantic Exhaust",
+    cardType: "magic",
+    colors: ["green"],
+    cost: 0,
+    reduction: [],
+    abilities: [{
+      id: "semantic-exhaust-main",
+      event: "magicMain",
+      actions: [{
+        type: "selectTarget",
+        selector: { owner: "opponent", cardTypes: ["spirit", "ultimate"] },
+        onSelect: { type: "exhaust" }
+      }]
+    }]
+  }),
+  normalizeCard({
+    id: "REFRESH-SEM",
+    namePT: "Semantic Refresh",
+    cardType: "magic",
+    colors: ["green"],
+    cost: 0,
+    reduction: [],
+    abilities: [{
+      id: "semantic-refresh-main",
+      event: "magicMain",
+      actions: [{
+        type: "selectTarget",
+        selector: { owner: "self", cardTypes: ["spirit", "ultimate"], exhausted: true },
+        onSelect: { type: "refresh" }
+      }]
+    }]
+  }),
+  normalizeCard({
+    id: "BOUNCE-SEM",
+    namePT: "Semantic Bounce",
+    cardType: "magic",
+    colors: ["white"],
+    cost: 0,
+    reduction: [],
+    abilities: [{
+      id: "semantic-bounce-main",
+      event: "magicMain",
+      actions: [{
+        type: "selectTarget",
+        selector: { owner: "opponent", cardTypes: ["spirit", "ultimate"] },
+        onSelect: { type: "returnToHand" }
+      }]
+    }]
+  }),
+  normalizeCard({
+    id: "BP-SEM",
+    namePT: "Semantic BP",
+    cardType: "magic",
+    colors: ["red"],
+    cost: 0,
+    reduction: [],
+    abilities: [{
+      id: "semantic-bp-flash",
+      event: "magicFlash",
+      actions: [{
+        type: "selectTarget",
+        selector: { owner: "self", cardTypes: ["spirit", "ultimate"] },
+        onSelect: { type: "modifyBP", amount: 4000, duration: "battle" }
+      }]
+    }]
+  }),
+  normalizeCard({
+    id: "CORE-SEM",
+    namePT: "Semantic Core",
+    cardType: "magic",
+    colors: ["green"],
+    cost: 0,
+    reduction: [],
+    abilities: [{
+      id: "semantic-core-main",
+      event: "magicMain",
+      actions: [{ type: "addCoreToReserveFromVoid", amount: 2 }]
+    }]
+  }),
+  normalizeCard({
     id: "BURST-OTHER",
     namePT: "Burst Other Trigger",
     cardType: "magic",
@@ -437,4 +518,146 @@ test("Burst Intelligence keeps a set Burst when activation has no legal effect t
 
   const action = chooseAIAction(match, "player2", index, { difficulty: "hard" });
   assert.equal(action.type, "PASS_BURST");
+});
+
+test("Card Effect Intelligence exhausts the highest-value opposing threat", () => {
+  const match = baseMatch("player2");
+  match.phase = "main";
+  match.players.player2.hand = [{ ...makePhysicalCard("EXHAUST-SEM", index), instanceId: "semantic-exhaust" }];
+  match.players.player1.field.spirits = [
+    fieldCard("S0", "exhaust-weak"),
+    fieldCard("S6", "exhaust-strong")
+  ];
+
+  const opened = applyGameAction(
+    match,
+    { type: "USE_MAGIC", instanceId: "semantic-exhaust", options: { mode: "main" } },
+    "player2",
+    index
+  );
+  assert.equal(opened.ok, true);
+  assert.ok(opened.match.pendingEffectDecision);
+
+  const action = chooseAIAction(opened.match, "player2", index, { difficulty: "hard" });
+  assert.equal(action.type, "RESOLVE_EFFECT_DECISION");
+  assert.deepEqual(action.payload?.selectedInstanceIds, ["exhaust-strong"]);
+});
+
+test("Card Effect Intelligence refreshes the strongest useful own body", () => {
+  const match = baseMatch("player2");
+  match.phase = "main";
+  match.players.player2.hand = [{ ...makePhysicalCard("REFRESH-SEM", index), instanceId: "semantic-refresh" }];
+  const weak = fieldCard("S0", "refresh-weak");
+  const strong = fieldCard("S6", "refresh-strong");
+  weak.exhausted = true;
+  strong.exhausted = true;
+  match.players.player2.field.spirits = [weak, strong];
+
+  const opened = applyGameAction(
+    match,
+    { type: "USE_MAGIC", instanceId: "semantic-refresh", options: { mode: "main" } },
+    "player2",
+    index
+  );
+  assert.equal(opened.ok, true);
+
+  const action = chooseAIAction(opened.match, "player2", index, { difficulty: "hard" });
+  assert.deepEqual(action.payload?.selectedInstanceIds, ["refresh-strong"]);
+});
+
+test("Card Effect Intelligence bounces the more valuable opposing body", () => {
+  const match = baseMatch("player2");
+  match.phase = "main";
+  match.players.player2.hand = [{ ...makePhysicalCard("BOUNCE-SEM", index), instanceId: "semantic-bounce" }];
+  match.players.player1.field.spirits = [
+    fieldCard("S0", "bounce-weak"),
+    fieldCard("S6", "bounce-strong")
+  ];
+
+  const opened = applyGameAction(
+    match,
+    { type: "USE_MAGIC", instanceId: "semantic-bounce", options: { mode: "main" } },
+    "player2",
+    index
+  );
+  assert.equal(opened.ok, true);
+
+  const action = chooseAIAction(opened.match, "player2", index, { difficulty: "hard" });
+  assert.deepEqual(action.payload?.selectedInstanceIds, ["bounce-strong"]);
+});
+
+test("Card Effect Intelligence prefers a BP buff on the body currently fighting", () => {
+  const match = baseMatch("player2");
+  match.phase = "attack";
+  match.players.player2.hand = [{ ...makePhysicalCard("BP-SEM", index), instanceId: "semantic-bp" }];
+  match.players.player2.field.spirits = [
+    fieldCard("S0", "bp-attacker"),
+    fieldCard("S6", "bp-backline")
+  ];
+  match.players.player1.field.spirits = [fieldCard("S3", "bp-blocker")];
+  match.battle = {
+    id: "semantic-bp-battle",
+    attackerPlayerId: "player2",
+    defenderPlayerId: "player1",
+    attackerInstanceId: "bp-attacker",
+    blockerInstanceId: "bp-blocker",
+    stage: "flash2",
+    flash: { number: 2, priorityPlayerId: "player2", consecutivePasses: 0 },
+    restrictions: {}
+  };
+
+  const opened = applyGameAction(
+    match,
+    { type: "USE_MAGIC", instanceId: "semantic-bp", options: { mode: "flash" } },
+    "player2",
+    index
+  );
+  assert.equal(opened.ok, true);
+
+  const action = chooseAIAction(opened.match, "player2", index, { difficulty: "hard" });
+  assert.deepEqual(action.payload?.selectedInstanceIds, ["bp-attacker"]);
+});
+
+test("Card Effect Intelligence exposes semantic reasons for draw and Core generation", () => {
+  const draw = baseMatch("player2");
+  draw.phase = "main";
+  draw.players.player2.hand = [{ ...makePhysicalCard("M0", index), instanceId: "semantic-draw" }];
+  const drawRanked = rankAIActions(draw, "player2", index, { difficulty: "hard" });
+  const drawAction = drawRanked.find((entry) => entry.action.type === "USE_MAGIC" && entry.action.instanceId === "semantic-draw");
+  assert.ok(drawAction);
+  assert.ok(drawAction.effectReasons.some((reason) => reason.type === "draw"));
+
+  const core = baseMatch("player2");
+  core.phase = "main";
+  core.players.player2.hand = [{ ...makePhysicalCard("CORE-SEM", index), instanceId: "semantic-core" }];
+  const coreRanked = rankAIActions(core, "player2", index, { difficulty: "hard" });
+  const coreAction = coreRanked.find((entry) => entry.action.type === "USE_MAGIC" && entry.action.instanceId === "semantic-core");
+  assert.ok(coreAction);
+  assert.ok(coreAction.effectReasons.some((reason) => reason.type === "core"));
+});
+
+test("Card Effect Intelligence still ignores opponent hidden hand identities", () => {
+  const a = baseMatch("player2");
+  const b = structuredClone(a);
+  a.phase = "main";
+  b.phase = "main";
+  a.players.player2.hand = [{ ...makePhysicalCard("CORE-SEM", index), instanceId: "semantic-private" }];
+  b.players.player2.hand = [{ ...makePhysicalCard("CORE-SEM", index), instanceId: "semantic-private" }];
+  a.players.player1.hand = [
+    { ...makePhysicalCard("S0", index), instanceId: "hidden-semantic-a" },
+    { ...makePhysicalCard("S0", index), instanceId: "hidden-semantic-b" }
+  ];
+  b.players.player1.hand = [
+    { ...makePhysicalCard("S6", index), instanceId: "hidden-semantic-c" },
+    { ...makePhysicalCard("M0", index), instanceId: "hidden-semantic-d" }
+  ];
+
+  const aAction = rankAIActions(a, "player2", index, { difficulty: "hard" })
+    .find((entry) => entry.action.type === "USE_MAGIC" && entry.action.instanceId === "semantic-private");
+  const bAction = rankAIActions(b, "player2", index, { difficulty: "hard" })
+    .find((entry) => entry.action.type === "USE_MAGIC" && entry.action.instanceId === "semantic-private");
+
+  assert.ok(aAction && bAction);
+  assert.equal(aAction.score, bAction.score);
+  assert.deepEqual(aAction.effectReasons, bAction.effectReasons);
 });

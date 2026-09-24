@@ -7,7 +7,7 @@ export const SNAPSHOT_VERSION = 1;
 export function createMatchSnapshot(match, metadata = {}) {
   return {
     snapshotVersion: SNAPSHOT_VERSION,
-    simulatorVersion: "3.2.4",
+    simulatorVersion: "3.2.5",
     metadata: clone(metadata || {}),
     match: clone(match)
   };
