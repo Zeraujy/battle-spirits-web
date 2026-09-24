@@ -4,8 +4,8 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const cardsRoot = path.join(root, "public", "cards-database");
-const MIN_WIDTH = 600;
-const MIN_HEIGHT = 850;
+const MIN_WIDTH = 300;
+const MIN_HEIGHT = 437;
 
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -103,7 +103,6 @@ if (unreadable.length) {
   for (const file of unreadable.slice(0, 12)) console.warn(`  AVISO leitura: ${file}`);
 }
 
-// Low-resolution art is reported as a warning instead of failing a build because
-// old card sets may only be available from smaller scans. Corrupt/unreadable
-// card images do fail verification.
+// v3.3.1c uses 300x437 WebP as the canonical web format. Images below that
+// size are reported as warnings; corrupt/unreadable assets still fail verification.
 if (unreadable.length) process.exit(1);

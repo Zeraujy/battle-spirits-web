@@ -1,4 +1,4 @@
-# START HERE — v3.3.1b
+# START HERE — v3.3.1c
 
 Se você está aprendendo o projeto, comece por estes caminhos:
 
@@ -125,7 +125,7 @@ A etapa seguinte é **Card Effect Intelligence**, implementada na v3.2.5.
 A próxima evolução planejada é aprofundar **personalidades/arquétipos específicos e memória tática da partida**, permitindo que a CPU ajuste o plano ao comportamento observado do oponente sem consultar informação oculta.
 
 
-## v3.3.1b — Card Back Loading Placeholder
+## v3.3.1c — Card Back Loading Placeholder
 
 - Database/Deck Builder mostra o verso oficial da carta enquanto a thumbnail ainda está inativa ou carregando.
 - A frente aparece com um fade curto somente depois do `load`.
@@ -140,3 +140,12 @@ A próxima evolução planejada é aprofundar **personalidades/arquétipos espec
 - `HomeWallpaperSlideshow.jsx`: deixa de baixar/decodear os 10 wallpapers no primeiro acesso; carrega apenas o atual e prepara o próximo em idle.
 - `public/_headers`: cache de navegador/Cloudflare para thumbnails, cartas e wallpapers.
 - Ao adicionar novas cartas, gere também a thumbnail correspondente preservando a mesma estrutura de pastas em `public/cards-thumbnails/`.
+
+
+## v3.3.1c — Fast Update & Deploy Workflow
+
+- `GERENCIAR_PROJETO.bat`: menu principal para aplicar patch, validar, publicar no GitHub e fazer deploy no Cloudflare.
+- `scripts/windows/project-manager.ps1`: automação por trás do menu.
+- `UPDATE-WORKFLOW.md`: instruções do novo fluxo.
+- Cards atuais já são 300×437 WebP e são reutilizados diretamente no Database/Deck Builder.
+- Wallpapers, card back e indicadores de Level foram otimizados para reduzir carregamento e deploy.

@@ -13,6 +13,50 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.3.1c",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "Atualização e Deploy Rápidos", en: "Fast Update & Deploy Workflow" },
+    summary: {
+      pt: "O projeto ganha um gerenciador de atualização em um clique e reduz bastante o peso dos assets enviados ao Cloudflare, mantendo GitHub e deploy sincronizados sem trocar arquivos pasta por pasta.",
+      en: "The project gains a one-click update manager and significantly reduces static asset weight, keeping GitHub and Cloudflare deployment in sync without manually replacing folders."
+    },
+    sections: [
+      {
+        title: { pt: "Fluxo de atualização", en: "Update workflow" },
+        items: {
+          pt: [
+            "Novo `GERENCIAR_PROJETO.bat` aplica ZIPs PATCH-ONLY automaticamente, preservando `.git`, `node_modules`, `dist`, `.env` e `server/.env`.",
+            "O gerenciador roda verify/test/build, cria commit, faz `git push` e pode publicar direto no Cloudflare com Wrangler.",
+            "`npm install` só é executado quando o lockfile muda ou `node_modules` não existe."
+          ],
+          en: [
+            "New `GERENCIAR_PROJETO.bat` automatically applies PATCH-ONLY ZIPs while preserving `.git`, `node_modules`, `dist`, `.env` and `server/.env`.",
+            "The manager runs verify/test/build, creates a commit, runs `git push` and can deploy directly to Cloudflare with Wrangler.",
+            "`npm install` only runs when the lockfile changes or `node_modules` is missing."
+          ]
+        }
+      },
+      {
+        title: { pt: "Assets & deploy", en: "Assets & deployment" },
+        items: {
+          pt: [
+            "Wallpapers foram recomprimidos mantendo 1920×1080; o conjunto caiu de ~20,3 MB para ~1,7 MB.",
+            "Verso da carta e indicadores de Level passaram para WebP e ficaram muito menores.",
+            "As cartas atuais já são WebP 300×437, então o Database reutiliza a imagem canônica diretamente em vez de procurar uma árvore duplicada de thumbnails.",
+            "Isso remove requisições 404 de thumbnail + fallback e reduz o pacote estático do deploy."
+          ],
+          en: [
+            "Wallpapers were recompressed while keeping 1920×1080; the set dropped from ~20.3 MB to ~1.7 MB.",
+            "Card back and Level indicators now use much smaller WebP assets.",
+            "Current card artwork is already 300×437 WebP, so Database reuses the canonical image directly instead of requesting a duplicate thumbnail tree.",
+            "This removes thumbnail 404 + fallback requests and reduces the static deployment package."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.3.1b",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "Card Back Loading Placeholder", en: "Card Back Loading Placeholder" },
@@ -25,13 +69,13 @@ const PATCHES = [
         title: { pt: "Carregamento visual", en: "Visual loading" },
         items: {
           pt: [
-            "Cartas em lazy-loading mostram `card-back.png` até a frente terminar de carregar.",
+            "Cartas em lazy-loading mostram `card-back.webp` até a frente terminar de carregar.",
             "A frente entra com um fade curto para evitar o efeito de imagem aparecendo bruscamente.",
             "Se a thumbnail falhar, o componente tenta automaticamente a arte original em alta qualidade.",
             "Se thumbnail e arte original falharem, o verso permanece visível no lugar da imagem quebrada."
           ],
           en: [
-            "Lazy-loaded cards show `card-back.png` until the front artwork finishes loading.",
+            "Lazy-loaded cards show `card-back.webp` until the front artwork finishes loading.",
             "The front artwork fades in briefly to avoid a harsh image pop-in.",
             "If the thumbnail fails, the component automatically tries the original high-quality artwork.",
             "If both thumbnail and original artwork fail, the card back remains visible instead of a broken image."

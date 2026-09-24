@@ -11,7 +11,7 @@ PACOTE COMPLETO.
 
 3) Coloque suas imagens principais em:
    public\images\logo_battlespirits.png
-   public\images\card-back.png
+   public\images\card-back.webp
 
 4) Para testar em desenvolvimento:
    INSTALAR_E_ABRIR.bat

@@ -107,7 +107,7 @@ export default function Home({ go }) {
         <div className="v3-brand-mini">
           <span className="v3-live-dot" />
           <span>ETERNAL SIMULATOR</span>
-          <b>V3.3.1b</b>
+          <b>V3.3.1c</b>
         </div>
 
         <button
@@ -220,7 +220,7 @@ export default function Home({ go }) {
               </div>
 
               <div className="v3-stat-card">
-                <strong>3.3.1b</strong>
+                <strong>3.3.1c</strong>
                 <span>Versão</span>
               </div>
             </div>
@@ -284,7 +284,7 @@ export default function Home({ go }) {
         <div className="v3-home-footer-center">
           <span className="v3-footer-line" />
           <b>ETERNAL SIMULATOR</b>
-          <small>V3.3.1b</small>
+          <small>V3.3.1c</small>
           <span className="v3-footer-line" />
         </div>
 

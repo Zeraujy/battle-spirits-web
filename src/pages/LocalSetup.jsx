@@ -128,7 +128,7 @@ function DuelistPanel({
       ? resolveCardImage(
           coverCard
         )
-      : "./images/card-back.png";
+      : "./images/card-back.webp";
 
   const coverName =
     coverCard

@@ -2043,7 +2043,7 @@ export default function Simulator({
       y: e.clientY,
       moved: false,
       width: Math.max(88, Math.round(rect.width)),
-      image: payload.image || "./images/card-back.png"
+      image: payload.image || "./images/card-back.webp"
     };
 
     cardDragRef.current = drag;
@@ -2579,7 +2579,7 @@ export default function Simulator({
             </b>
 
             <img
-              src="./images/card-back.png"
+              src="./images/card-back.webp"
               alt="Deck"
             />
           </div>
@@ -2889,7 +2889,7 @@ export default function Simulator({
                 <>
                   <img
                     className="burst-card-back"
-                    src="./images/card-back.png"
+                    src="./images/card-back.webp"
                     alt="Burst"
                   />
 
@@ -5232,7 +5232,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v3.3.1b • Arena 2D
+            Eternal v3.3.1c • Arena 2D
           </span>
 
           <strong>

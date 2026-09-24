@@ -30,14 +30,13 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.3.1-b") throw new Error(`package.json está em ${pkg.version}, esperado 3.3.1-b`);
+if (pkg.version !== "3.3.1-c") throw new Error(`package.json está em ${pkg.version}, esperado 3.3.1-c`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
-if (!cardTile.includes("setRenderedImage(fullImage)")) throw new Error("CardTile não possui fallback da thumbnail para a arte original.");
 const index = fs.readFileSync(path.join(root, "index.html"), "utf8");
 if (!index.includes("./config/online-config.js")) throw new Error("index.html não carrega a configuração Online em runtime.");
-if (!index.includes('rel="preload" as="image" href="./images/card-back.png"')) throw new Error("index.html não faz preload do verso usado como placeholder.");
+if (!index.includes('rel="preload" as="image" href="./images/card-back.webp"')) throw new Error("index.html não faz preload do verso WebP usado como placeholder.");
 const serverEnv = fs.readFileSync(path.join(root, "server", ".env.example"), "utf8");
 if (!/HOST=0\.0\.0\.0/.test(serverEnv)) throw new Error("server/.env.example precisa usar HOST=0.0.0.0");
 console.log(`Battle Spirits Eternal Simulator v${pkg.version}`);

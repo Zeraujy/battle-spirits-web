@@ -105,7 +105,7 @@ export default function AiSetup({ onBack, onStart }) {
           </p>
         </div>
 
-        <span className="ai-beta-pill">ARCHETYPE AI 3.3.1b</span>
+        <span className="ai-beta-pill">ARCHETYPE AI 3.3.1c</span>
       </header>
 
       {!decks.length ? (

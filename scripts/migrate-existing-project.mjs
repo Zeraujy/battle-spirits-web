@@ -22,7 +22,7 @@ function copy(relative) {
 
 copy("src/data");
 copy("public/cards-database");
-for (const name of ["logo_battlespirits.png", "card-back.png"]) {
+for (const name of ["logo_battlespirits.png", "card-back.webp"]) {
   const source = path.join(oldRoot, "public", "images", name);
   const dest = path.join(newRoot, "public", "images", name);
   if (fs.existsSync(source)) {

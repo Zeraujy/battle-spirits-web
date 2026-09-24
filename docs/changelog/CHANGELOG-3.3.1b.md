@@ -8,5 +8,5 @@
 - Arena, zoom e modal de detalhes continuam usando as imagens originais normalmente.
 
 ## Performance
-- O placeholder reaproveita `public/images/card-back.png`, então todas as cartas compartilham o mesmo asset em cache.
+- O placeholder reaproveita `public/images/card-back.webp`, então todas as cartas compartilham o mesmo asset em cache.
 - O comportamento mantém o lazy-loading introduzido na v3.3.1a; cartas fora da viewport não precisam baixar a frente para exibir algo visualmente correto.

@@ -153,7 +153,7 @@ function getDeckAccent(card) {
 
 function safeCoverImage(card) {
   if (!card) {
-    return "./images/card-back.png";
+    return "./images/card-back.webp";
   }
 
   const resolved =
@@ -163,7 +163,7 @@ function safeCoverImage(card) {
 
   return (
     resolved ||
-    "./images/card-back.png"
+    "./images/card-back.webp"
   );
 }
 
@@ -192,7 +192,7 @@ function CoverImage({
 
     if (img.dataset.fallback === "true") return;
     img.dataset.fallback = "true";
-    img.src = "./images/card-back.png";
+    img.src = "./images/card-back.webp";
   }
 
   return (

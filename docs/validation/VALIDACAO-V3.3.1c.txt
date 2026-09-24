@@ -1,0 +1,3 @@
+Battle Spirits Eternal Simulator v3.3.1c — Fast Update & Deploy Workflow
+
+Validar: npm run verify; npm run verify:v3; npm test; npm run build.

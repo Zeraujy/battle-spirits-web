@@ -94,7 +94,7 @@ export function getCardName(card) {
 }
 
 export function resolveCardImage(card) {
-  if (!card) return "./images/card-back.png";
+  if (!card) return "./images/card-back.webp";
   if (card.image) {
     if (/^(https?:|data:|blob:)/i.test(card.image)) return card.image;
     let image = String(card.image).replaceAll("\\", "/");
@@ -106,12 +106,14 @@ export function resolveCardImage(card) {
   const file = card.imageFile || card.fileName;
   if (set && file) return `./cards-database/${set}/${file}`;
   if (file) return `./cards-database/${file}`;
-  return "./images/card-back.png";
+  return "./images/card-back.webp";
 }
 
 
 export function resolveCardThumbnail(card) {
-  const image = resolveCardImage(card);
-  if (!image || /^(https?:|data:|blob:)/i.test(image)) return image;
-  return image.replace("./cards-database/", "./cards-thumbnails/");
+  // v3.3.1c: the current runtime card artwork is already web-optimized
+  // (300x437 WebP). Reuse it directly instead of issuing a request to a
+  // duplicate thumbnail tree. This avoids a 404 + fallback round-trip when
+  // cards-thumbnails is not present and keeps one canonical cached asset.
+  return resolveCardImage(card);
 }

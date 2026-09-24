@@ -62,7 +62,7 @@ const requiredPaths = [
   "scripts/windows"
 ];
 
-console.log("Battle Spirits Simulator v3.3.1b — verificação estrutural\n");
+console.log("Battle Spirits Simulator v3.3.1c — verificação estrutural\n");
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -108,14 +108,14 @@ if (fs.existsSync(manifestPath)) {
 }
 
 
-for (const levelAsset of ["lv1.png", "lv2.png", "lv3.png"]) {
+for (const levelAsset of ["lv1.webp", "lv2.webp", "lv3.webp"]) {
   const relative = path.join("public", "images", "ui", "arena", "levels", levelAsset);
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative.replaceAll(path.sep, "/")}`);
   if (!exists) failed = true;
 }
 
-for (const image of ["logo_battlespirits.png", "card-back.png"]) {
+for (const image of ["logo_battlespirits.png", "card-back.webp"]) {
   const exists = fs.existsSync(path.join(root, "public", "images", image));
   console.log(`${exists ? "OK " : "-- "} public/images/${image}`);
   if (!exists) console.warn(`AVISO: faltando public/images/${image}`);
@@ -152,4 +152,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v3.3.1b validada.");
+console.log("\nVERIFY OK — estrutura v3.3.1c validada.");

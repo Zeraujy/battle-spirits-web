@@ -9,3 +9,6 @@ Thumbs.db
 
 .wrangler/
 .dev.vars
+
+# Pacotes locais de atualização
+*.zip

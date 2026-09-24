@@ -18,7 +18,7 @@ export default function ArenaCardStatus({ level, bp, showBP = true }) {
           hasArtwork ? (
             <img
               className={`arena-card-level-image level-${levelNumber}`}
-              src={`./images/ui/arena/levels/lv${levelNumber}.png`}
+              src={`./images/ui/arena/levels/lv${levelNumber}.webp`}
               alt=""
               draggable={false}
             />

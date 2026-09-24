@@ -8,7 +8,7 @@ Algumas cartas da Database apareciam com o verso genérico a partir das páginas
 
 O catálogo consolidado `src/data/cards.json` possui os caminhos das artes. Alguns arquivos específicos de deck/coleção (`SD13.json`, `SD15.json`, `SD23.json`, `SD28.json`) sobrescrevem cartas com dados de regras mais completos, mas não repetem o campo `image`.
 
-O `cardRepository` substituía o registro inteiro pelo override mais recente. Isso removia o caminho da arte e fazia `resolveCardImage()` retornar `card-back.png`.
+O `cardRepository` substituía o registro inteiro pelo override mais recente. Isso removia o caminho da arte e fazia `resolveCardImage()` retornar `card-back.webp`.
 
 ### Solução
 

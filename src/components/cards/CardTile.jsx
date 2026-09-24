@@ -36,7 +36,7 @@ export default function CardTile({
 }) {
   const level = physical && card ? getCurrentLevel(card, physical) : null;
   const regular = Number(physical?.cores?.regular || 0);
-  const fullImage = hidden ? "./images/card-back.png" : resolveCardImage(card);
+  const fullImage = hidden ? "./images/card-back.webp" : resolveCardImage(card);
   const image = hidden ? fullImage : (imageVariant === "thumbnail" ? resolveCardThumbnail(card) : fullImage);
   const title = hidden ? "Carta oculta" : getCardName(card);
   const useLoadingBack = !hidden && imageVariant === "thumbnail";
@@ -72,7 +72,7 @@ export default function CardTile({
     <button
       type="button"
       className={`card-tile ${compact ? "compact" : ""} ${selected ? "selected" : ""} ${physical?.exhausted && !staticPreview ? "exhausted" : ""} ${physical?.flags?.pendingManualPlay ? "pending-play-card" : ""} ${unusable ? "unusable" : ""} ${dragActive ? "pointer-drag-active" : ""} ${useLoadingBack && !imageReady ? "card-image-pending" : ""}`}
-      style={useLoadingBack && !imageReady ? { backgroundImage: 'url("./images/card-back.png")' } : undefined}
+      style={useLoadingBack && !imageReady ? { backgroundImage: 'url("./images/card-back.webp")' } : undefined}
       aria-busy={useLoadingBack && !imageReady ? "true" : undefined}
       onClick={onClick}
       onPointerDown={onPointerDown}
