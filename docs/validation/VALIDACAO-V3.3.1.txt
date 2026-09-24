@@ -1,0 +1,56 @@
+Battle Spirits Eternal Simulator v3.3.1
+Archetype Intelligence & AI Debugger
+Data: 24/09/2026
+
+VALIDACOES
+==========
+
+[OK] node --test src/game/*.test.js
+     112/112 testes passando
+
+[OK] node scripts/verify-project.mjs
+     Estrutura v3.3.1 validada
+
+[OK] node scripts/verify-v3.mjs
+     Estrutura v3 validada
+
+[OK] node scripts/audit-card-images.mjs
+     382 imagens verificadas
+     0 abaixo do limite minimo
+
+[OK] node scripts/audit-runtime-card-references.mjs
+     365 cartas unicas em runtime
+     365/365 referencias de artwork validas
+
+[OK] Sintaxe JSX validada com @babel/parser
+     AiSetup.jsx
+     Simulator.jsx
+     ProjectInfoButtons.jsx
+
+ARQUETIPOS REAIS
+================
+SD23 Eris: Ultimate / Controle
+SD28 Land of Deep Green: Ultimate / Brave
+SD13 Amethyst: Controle / Recursos
+SD15 Topaz: Equilibrado / Recursos
+
+SIMULACAO HARD VS HARD
+======================
+SD23 Eris vs SD28 Land of Deep Green
+93 acoes
+5 turnos
+0 acoes ilegais
+Resultado: player1 por Life
+
+Acoes observadas:
+ADVANCE_PHASE: 32
+SET_BURST: 2
+SUMMON: 8
+DECLARE_ATTACK: 8
+PASS_FLASH: 16
+DECLINE_BLOCK: 8
+RESOLVE_BATTLE: 8
+PASS_BURST: 3
+RESOLVE_ULTIMATE_TRIGGER: 3
+COMBINE_BRAVE: 1
+MOVE_CORE: 4

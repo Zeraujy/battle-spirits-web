@@ -1,4 +1,4 @@
-# START HERE — v3.3.0
+# START HERE — v3.3.1
 
 Se você está aprendendo o projeto, comece por estes caminhos:
 
@@ -112,4 +112,14 @@ A etapa seguinte é **Card Effect Intelligence**, implementada na v3.2.5.
 - Mudanças que revelam informação antes oculta do deck encerram o lookahead; a CPU executa a ação e só então replana com a informação realmente conhecida.
 - Os resultados ranqueados passam a expor `planScore`, `planBonus`, `planDepth`, `planNodes` e `planActions`, preparando o AI Debugger visual.
 
-A próxima etapa planejada é **Deck & Archetype Intelligence / AI Debugger**, usando esses metadados para explicar decisões e adaptar prioridades ao estilo do deck.
+## v3.3.1 — Archetype Intelligence & AI Debugger
+
+- `src/game/aiArchetypes.js`: detecta afinidades Agressivo, Controle, Defensivo, Ultimate, Brave, Recursos e Equilibrado a partir da decklist conhecida antes da partida.
+- A CPU usa essas afinidades como pesos adicionais para ataque, bloqueio, Magic, Burst, Nexus, Ultimate, Brave e gerenciamento de recursos.
+- O perfil fica salvo em `match.ai.archetypeProfile`; sem perfil pré-calculado, a IA usa Equilibrado e não lê a ordem escondida do deck para inferir estratégia.
+- `chooseAIDecision()` expõe a mesma decisão real usada pela CPU com scores, plano previsto e alternativas, mantendo `chooseAIAction()` como wrapper compatível.
+- A tela Contra IA mostra o estilo detectado e permite ativar o **AI Debugger**.
+- O painel de debug na Arena mostra score total, imediato, lookahead, arquétipo, efeito, linha prevista e as melhores alternativas.
+- Na database atual, SD23 Eris é reconhecido como **Ultimate / Controle** e SD28 Land of Deep Green como **Ultimate / Brave**.
+
+A próxima evolução planejada é aprofundar **personalidades/arquétipos específicos e memória tática da partida**, permitindo que a CPU ajuste o plano ao comportamento observado do oponente sem consultar informação oculta.

@@ -13,6 +13,67 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.3.1",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "Archetype Intelligence & AI Debugger", en: "Archetype Intelligence & AI Debugger" },
+    summary: {
+      pt: "A Eternal CPU passa a reconhecer o estilo do próprio deck e usar essa identidade no score das jogadas. O primeiro AI Debugger visual mostra a ação escolhida, alternativas, lookahead e os pesos do arquétipo.",
+      en: "Eternal CPU now recognizes its own deck style and uses that identity when scoring moves. The first visual AI Debugger shows the chosen action, alternatives, lookahead and archetype weights."
+    },
+    sections: [
+      {
+        title: { pt: "Deck & Archetype Intelligence", en: "Deck & Archetype Intelligence" },
+        items: {
+          pt: [
+            "Novo `aiArchetypes.js` analisa curva, tipos de carta, cores, Burst/Flash, ações estruturadas, redução e presença de Ultimate/Brave.",
+            "O perfil trabalha com afinidades combináveis — Agressivo, Controle, Defensivo, Ultimate, Brave, Recursos e Equilibrado — permitindo estratégias híbridas.",
+            "SD23 Eris é reconhecido como Ultimate / Controle; SD28 Land of Deep Green como Ultimate / Brave na database atual.",
+            "O perfil é calculado pela decklist conhecida antes da partida e armazenado no estado da IA; a CPU não recalcula o arquétipo lendo a ordem escondida do deck durante o jogo."
+          ],
+          en: [
+            "New `aiArchetypes.js` analyzes curve, card types, colors, Burst/Flash, structured actions, reductions and Ultimate/Brave presence.",
+            "Profiles use mixable affinities — Aggressive, Control, Defensive, Ultimate, Brave, Resources and Balanced — allowing hybrid strategies.",
+            "SD23 Eris is recognized as Ultimate / Control; SD28 Land of Deep Green as Ultimate / Brave in the current database.",
+            "The profile is calculated from the known deck list before the match and stored in AI state; the CPU does not recompute its archetype by reading hidden deck order during play."
+          ]
+        }
+      },
+      {
+        title: { pt: "AI Debugger", en: "AI Debugger" },
+        items: {
+          pt: [
+            "A tela Contra IA mostra o estilo detectado e as três maiores afinidades antes de iniciar a partida.",
+            "O AI Debugger opcional exibe score total, score imediato, bônus de lookahead, peso do arquétipo e score semântico de efeitos.",
+            "A linha prevista e as melhores alternativas aparecem no mesmo painel, usando exatamente o ranking que escolheu a jogada real da CPU.",
+            "`chooseAIDecision()` preserva compatibilidade com `chooseAIAction()` e expõe metadados de decisão sem alterar a legalidade das ações."
+          ],
+          en: [
+            "The Play vs AI screen shows the detected style and top three affinities before the match starts.",
+            "The optional AI Debugger displays total score, immediate score, lookahead bonus, archetype weight and semantic effect score.",
+            "The predicted line and best alternatives appear in the same panel, using the exact ranking that selected the CPU's real move.",
+            "`chooseAIDecision()` keeps compatibility with `chooseAIAction()` while exposing decision metadata without changing action legality."
+          ]
+        }
+      },
+      {
+        title: { pt: "Segurança & validação", en: "Safety & validation" },
+        items: {
+          pt: [
+            "Os pesos de arquétipo só reordenam ações que já vieram de `getLegalActions()` e continuam passando pelo reducer normal.",
+            "Sem metadados de deck pré-calculados, a IA cai para um perfil Equilibrado em vez de inferir estratégia olhando cartas ainda escondidas no deck.",
+            "Novos testes cobrem detecção Ultimate/Brave, Controle, influência estratégica sem ação ilegal e os metadados usados pelo AI Debugger."
+          ],
+          en: [
+            "Archetype weights only reorder actions already exposed by `getLegalActions()` and still run through the normal reducer.",
+            "Without precomputed deck metadata, AI falls back to Balanced instead of inferring strategy by inspecting still-hidden deck cards.",
+            "New tests cover Ultimate/Brave detection, Control detection, strategic influence without illegal actions and AI Debugger metadata."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.3.0",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "Planning / Lookahead", en: "Planning / Lookahead" },

@@ -12,7 +12,7 @@ import BattleLinkOverlay from "../components/game/BattleLinkOverlay.jsx";
 import Modal from "../components/common/Modal.jsx";
 import { cardIndex } from "../services/cardRepository.js";
 import { applyGameAction } from "../game/reducer.js";
-import { chooseAIAction } from "../game/ai.js";
+import { chooseAIDecision } from "../game/ai.js";
 import {
   findPhysicalCard,
   getDatabaseCard,
@@ -58,6 +58,7 @@ import "../styles/arena/coreCombatV318.css";
 import "../styles/arena/cardInteractionV319.css";
 import "../styles/arena/rulesEffectsV320.css";
 import "../styles/arena/arenaLayoutV321.css";
+import "../styles/arena/aiDebuggerV331.css";
 
 
 function effectText(card, language) {
@@ -467,6 +468,41 @@ function getArenaGlowTheme(card) {
    SIMULATOR
 ========================================================= */
 
+function summarizeAIDebugEntry(entry) {
+  if (!entry) return null;
+  return {
+    action: entry.action || null,
+    label: entry.label || entry.action?.type || "Action",
+    score: Number(entry.planScore ?? entry.score ?? 0),
+    immediateScore: Number(entry.immediateScore ?? entry.score ?? 0),
+    planBonus: Number(entry.planBonus || 0),
+    planDepth: Number(entry.planDepth || 0),
+    planNodes: Number(entry.planNodes || 0),
+    planLabels: Array.isArray(entry.planLabels) ? entry.planLabels.slice(0, 6) : [],
+    effectScore: Number(entry.effectScore || 0),
+    effectReasons: Array.isArray(entry.effectReasons) ? entry.effectReasons.slice(0, 4) : [],
+    archetypeScore: Number(entry.archetypeScore || 0),
+    archetypeReasons: Array.isArray(entry.archetypeReasons) ? entry.archetypeReasons.slice(0, 4) : []
+  };
+}
+
+function aiDebugReasonText(reason, language) {
+  if (!reason) return "";
+  if (typeof reason === "string") return reason;
+  if (reason.ptBR || reason.en) return language === "en" ? (reason.en || reason.ptBR) : (reason.ptBR || reason.en);
+  if (reason.type) {
+    const amount = reason.amount != null ? ` ${reason.amount > 0 ? "+" : ""}${reason.amount}` : "";
+    return `${reason.type}${amount}`;
+  }
+  return "";
+}
+
+function formatAIScore(value) {
+  const number = Number(value || 0);
+  const rounded = Math.abs(number) >= 100 ? Math.round(number) : Math.round(number * 10) / 10;
+  return `${rounded > 0 ? "+" : ""}${rounded}`;
+}
+
 export default function Simulator({
   match: initialMatch,
   mode = "local",
@@ -509,6 +545,16 @@ export default function Simulator({
     notice,
     setNotice
   ] = useState("");
+
+  const [
+    aiDebugOpen,
+    setAiDebugOpen
+  ] = useState(false);
+
+  const [
+    aiDebugDecision,
+    setAiDebugDecision
+  ] = useState(null);
 
   const [
     showLog,
@@ -1078,13 +1124,14 @@ export default function Simulator({
       match.ai?.difficulty ||
       "normal";
 
-    const action =
-      chooseAIAction(
+    const decision =
+      chooseAIDecision(
         match,
         aiPlayerId,
         cardIndex,
         {
           difficulty,
+          archetypeProfile: match.ai?.archetypeProfile,
           recentActionKeys:
             guard.recentActionKeys,
           turnActionCount:
@@ -1092,6 +1139,20 @@ export default function Simulator({
           maxTurnActions: 70
         }
       );
+
+    const action = decision.action;
+
+    if (match.ai?.debugEnabled) {
+      setAiDebugDecision({
+        turnNumber: match.turnNumber,
+        phase: match.phase,
+        difficulty: decision.difficulty,
+        selectionReason: decision.selectionReason,
+        archetypeProfile: decision.archetypeProfile,
+        chosen: summarizeAIDebugEntry(decision.chosen),
+        alternatives: decision.ranked.slice(0, 5).map(summarizeAIDebugEntry)
+      });
+    }
 
     if (!action) {
       setNotice(
@@ -5171,7 +5232,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v3.3.0 • Arena 2D
+            Eternal v3.3.1 • Arena 2D
           </span>
 
           <strong>
@@ -5290,6 +5351,16 @@ export default function Simulator({
               : "Turno"}
           </button>
 
+          {aiMode && match.ai?.debugEnabled && (
+            <button
+              className={`ghost arena-dock-toggle ${aiDebugOpen ? "active" : ""}`}
+              onClick={() => setAiDebugOpen((value) => !value)}
+              title={language === "en" ? "AI decision debugger" : "Debugger das decisões da IA"}
+            >
+              AI DEBUG
+            </button>
+          )}
+
           {online && (
             <button
               className="ghost"
@@ -5350,6 +5421,100 @@ export default function Simulator({
           {error ||
             notice}
         </div>
+      )}
+
+
+      {aiMode && match.ai?.debugEnabled && aiDebugOpen && (
+        <aside className="ai-debugger-panel" aria-label="AI Debugger">
+          <header className="ai-debugger-header">
+            <div>
+              <span className="eyebrow">ETERNAL CPU • AI DEBUGGER</span>
+              <strong>{language === "en" ? "Decision trace" : "Rastro da decisão"}</strong>
+            </div>
+            <button type="button" className="ghost" onClick={() => setAiDebugOpen(false)}>×</button>
+          </header>
+
+          {aiDebugDecision ? (
+            <>
+              <div className="ai-debugger-meta">
+                <span>{language === "en" ? "Turn" : "Turno"} {aiDebugDecision.turnNumber}</span>
+                <span>{String(aiDebugDecision.phase || "").toUpperCase()}</span>
+                <span>{String(aiDebugDecision.difficulty || "normal").toUpperCase()}</span>
+              </div>
+
+              <section className="ai-debugger-archetype">
+                <small>{language === "en" ? "Detected style" : "Estilo detectado"}</small>
+                <strong>
+                  {language === "en"
+                    ? (aiDebugDecision.archetypeProfile?.labelEN || "Balanced")
+                    : (aiDebugDecision.archetypeProfile?.labelPT || "Equilibrado")}
+                </strong>
+                <span>
+                  {language === "en"
+                    ? aiDebugDecision.archetypeProfile?.summaryEN
+                    : aiDebugDecision.archetypeProfile?.summaryPT}
+                </span>
+              </section>
+
+              {aiDebugDecision.chosen && (
+                <section className="ai-debugger-chosen">
+                  <div className="ai-debugger-choice-head">
+                    <span>{language === "en" ? "Chosen action" : "Ação escolhida"}</span>
+                    <b>{formatAIScore(aiDebugDecision.chosen.score)}</b>
+                  </div>
+                  <strong>{aiDebugDecision.chosen.label}</strong>
+
+                  <div className="ai-debugger-score-grid">
+                    <span>Immediate <b>{formatAIScore(aiDebugDecision.chosen.immediateScore)}</b></span>
+                    <span>Lookahead <b>{formatAIScore(aiDebugDecision.chosen.planBonus)}</b></span>
+                    <span>Archetype <b>{formatAIScore(aiDebugDecision.chosen.archetypeScore)}</b></span>
+                    <span>Effect <b>{formatAIScore(aiDebugDecision.chosen.effectScore)}</b></span>
+                  </div>
+
+                  {aiDebugDecision.chosen.planLabels.length > 1 && (
+                    <div className="ai-debugger-plan">
+                      <small>{language === "en" ? "Predicted line" : "Linha prevista"}</small>
+                      <ol>
+                        {aiDebugDecision.chosen.planLabels.map((label, index) => (
+                          <li key={`${label}-${index}`}>{label}</li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+
+                  {!!aiDebugDecision.chosen.archetypeReasons.length && (
+                    <div className="ai-debugger-reasons">
+                      {aiDebugDecision.chosen.archetypeReasons.map((reason, index) => (
+                        <p key={`arch-${index}`}>
+                          <b>{formatAIScore(reason.score)}</b> {aiDebugReasonText(reason, language)}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                </section>
+              )}
+
+              <section className="ai-debugger-alternatives">
+                <small>{language === "en" ? "Top alternatives" : "Melhores alternativas"}</small>
+                {aiDebugDecision.alternatives.map((entry, index) => (
+                  <div
+                    key={`${entry.label}-${index}`}
+                    className={`ai-debugger-alternative ${index === 0 ? "best" : ""}`}
+                  >
+                    <span>{index + 1}. {entry.label}</span>
+                    <b>{formatAIScore(entry.score)}</b>
+                  </div>
+                ))}
+              </section>
+            </>
+          ) : (
+            <p className="ai-debugger-empty">
+              {language === "en"
+                ? "The first CPU decision will appear here."
+                : "A primeira decisão da CPU aparecerá aqui."}
+            </p>
+          )}
+        </aside>
       )}
 
 

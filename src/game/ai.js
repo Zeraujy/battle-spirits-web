@@ -12,6 +12,7 @@ import { calculateReduction } from "./cost.js";
 import { getBurstActivationEvent, isBurstCard } from "./burstRules.js";
 import { otherPlayerId } from "./utils.js";
 import { analyzeEffectTransition } from "./aiEffectSemantics.js";
+import { analyzeDeckArchetype, archetypeActionBias, inferPlayerArchetype } from "./aiArchetypes.js";
 
 const DIFFICULTIES = new Set(["easy", "normal", "hard"]);
 const PROGRESS_ACTIONS = new Set([
@@ -923,11 +924,26 @@ function categoryBias(match, playerId, candidate, result, cardIndex, legalAction
   return score;
 }
 
+export function resolveAIArchetypeProfile(match, playerId, cardIndex, options = {}) {
+  if (options.archetypeProfile) return options.archetypeProfile;
+  if (match?.ai?.archetypeProfile && match?.ai?.playerId === playerId) return match.ai.archetypeProfile;
+
+  // Do not derive strategy from the live hidden deck order. AI matches created
+  // through AiSetup store a pre-match profile based on the known deck list.
+  // Tests/tools without that metadata fall back to Balanced unless they
+  // explicitly opt in to deck-list inference.
+  if (options.inferArchetypeFromOwnDeck === true) {
+    return inferPlayerArchetype(match, playerId, cardIndex);
+  }
+  return analyzeDeckArchetype([], cardIndex);
+}
+
 function scoreCandidate(match, playerId, candidate, cardIndex, options, legalActions) {
   const result = applyGameAction(match, candidate.action, playerId, cardIndex);
   if (!result?.ok || !result.match) return null;
 
-  const before = evaluateBoardState(match, playerId, cardIndex);
+  const archetypeProfile = resolveAIArchetypeProfile(match, playerId, cardIndex, options);
+  const before = evaluateBoardState(match, playerId, cardIndex, options);
   const ownDeckShrank =
     (result.match.players?.[playerId]?.deck?.length || 0) <
     (match.players?.[playerId]?.deck?.length || 0);
@@ -938,7 +954,10 @@ function scoreCandidate(match, playerId, candidate, cardIndex, options, legalAct
     result.match,
     playerId,
     cardIndex,
-    knownOwnHandInstanceIds ? { knownOwnHandInstanceIds } : {}
+    {
+      ...options,
+      ...(knownOwnHandInstanceIds ? { knownOwnHandInstanceIds } : {})
+    }
   );
   const delta = after - before;
 
@@ -952,9 +971,19 @@ function scoreCandidate(match, playerId, candidate, cardIndex, options, legalAct
   };
   const semanticWeight = Number(semanticWeights[candidate.action?.type] || 0);
 
+  const archetypeAnalysis = archetypeActionBias(
+    match,
+    playerId,
+    candidate.action,
+    result,
+    cardIndex,
+    archetypeProfile
+  );
+
   let score = delta * 1.25;
   score += effectAnalysis.score * semanticWeight;
   score += categoryBias(match, playerId, candidate, result, cardIndex, legalActions);
+  score += archetypeAnalysis.score;
   score += repeatedActionPenalty(candidate.action, options.recentActionKeys || []);
 
   if (result.match.winnerId === playerId) score += 500_000;
@@ -967,7 +996,10 @@ function scoreCandidate(match, playerId, candidate, cardIndex, options, legalAct
     stateScore: after,
     delta,
     effectScore: effectAnalysis.score * semanticWeight,
-    effectReasons: semanticWeight ? effectAnalysis.reasons : []
+    effectReasons: semanticWeight ? effectAnalysis.reasons : [],
+    archetypeScore: archetypeAnalysis.score,
+    archetypeReasons: archetypeAnalysis.reasons,
+    archetypeProfile
   };
 }
 
@@ -975,11 +1007,13 @@ export function rankAIActions(match, playerId, cardIndex, options = {}) {
   if (!match || match.winnerId || !match.players?.[playerId]) return [];
   if (getMatchActor(match) !== playerId) return [];
 
+  const archetypeProfile = resolveAIArchetypeProfile(match, playerId, cardIndex, options);
+  const effectiveOptions = { ...options, archetypeProfile };
   const legalActions = getLegalActions(match, playerId, cardIndex);
   const ranked = [];
 
   for (const candidate of legalActions) {
-    const scored = scoreCandidate(match, playerId, candidate, cardIndex, options, legalActions);
+    const scored = scoreCandidate(match, playerId, candidate, cardIndex, effectiveOptions, legalActions);
     if (scored) ranked.push(scored);
   }
 
@@ -1123,8 +1157,10 @@ export function rankAIPlans(match, playerId, cardIndex, options = {}) {
       ? match.ai.difficulty
       : "normal";
 
-  const immediate = rankAIActions(match, playerId, cardIndex, options);
-  const profile = planningProfile(difficulty, options);
+  const archetypeProfile = resolveAIArchetypeProfile(match, playerId, cardIndex, options);
+  const effectiveOptions = { ...options, archetypeProfile };
+  const immediate = rankAIActions(match, playerId, cardIndex, effectiveOptions);
+  const profile = planningProfile(difficulty, effectiveOptions);
   if (!immediate.length || profile.depth <= 0 || !planningWindowOpen(match, playerId)) {
     return immediate.map((entry) => ({
       ...entry,
@@ -1172,7 +1208,7 @@ export function rankAIPlans(match, playerId, cardIndex, options = {}) {
             entry.result.match,
             playerId,
             cardIndex,
-            options,
+            effectiveOptions,
             profile,
             profile.depth,
             {
@@ -1202,30 +1238,30 @@ export function rankAIPlans(match, playerId, cardIndex, options = {}) {
   });
 }
 
-function chooseEasy(ranked, random) {
+function chooseEasyEntry(ranked, random) {
   if (!ranked.length) return null;
 
   const advance = ranked.find((entry) => entry.action.type === "ADVANCE_PHASE");
-  if (advance && safeRandom(random) < 0.16) return advance.action;
+  if (advance && safeRandom(random) < 0.16) return advance;
 
   const pool = ranked.slice(0, Math.min(4, ranked.length));
   const roll = safeRandom(random);
   const index = Math.floor(roll * pool.length);
-  return pool[index]?.action || ranked[0].action;
+  return pool[index] || ranked[0];
 }
 
-function chooseNormal(ranked, random) {
+function chooseNormalEntry(ranked, random) {
   if (!ranked.length) return null;
-  if (ranked.length === 1) return ranked[0].action;
+  if (ranked.length === 1) return ranked[0];
 
   // Usually take the best move. Small controlled variation prevents the CPU
   // from playing the exact same line every game without turning it random.
-  if (safeRandom(random) < 0.88) return ranked[0].action;
+  if (safeRandom(random) < 0.88) return ranked[0];
   const bestScore = Number(ranked[0].planScore ?? ranked[0].score ?? 0);
   const close = ranked
     .filter((entry) => Number(entry.planScore ?? entry.score ?? 0) >= bestScore - 18)
     .slice(0, 3);
-  return close[Math.floor(safeRandom(random) * close.length)]?.action || ranked[0].action;
+  return close[Math.floor(safeRandom(random) * close.length)] || ranked[0];
 }
 
 /**
@@ -1233,38 +1269,65 @@ function chooseNormal(ranked, random) {
  * It never bypasses the rules: every chosen action comes from getLegalActions()
  * and is scored by applying the same reducer used by local/online play.
  */
-export function chooseAIAction(match, playerId, cardIndex, options = {}) {
-  if (!match || match.winnerId) return null;
-  if (getMatchActor(match) !== playerId) return null;
+export function chooseAIDecision(match, playerId, cardIndex, options = {}) {
+  if (!match || match.winnerId) return { action: null, chosen: null, ranked: [], difficulty: null, archetypeProfile: null };
+  if (getMatchActor(match) !== playerId) return { action: null, chosen: null, ranked: [], difficulty: null, archetypeProfile: null };
 
   const difficulty = DIFFICULTIES.has(options.difficulty)
     ? options.difficulty
     : DIFFICULTIES.has(match.ai?.difficulty)
       ? match.ai.difficulty
       : "normal";
+  const archetypeProfile = resolveAIArchetypeProfile(match, playerId, cardIndex, options);
+  const effectiveOptions = { ...options, difficulty, archetypeProfile };
 
   const ranked =
     difficulty === "easy"
-      ? rankAIActions(match, playerId, cardIndex, options)
-      : rankAIPlans(match, playerId, cardIndex, { ...options, difficulty });
-  if (!ranked.length) return null;
+      ? rankAIActions(match, playerId, cardIndex, effectiveOptions)
+      : rankAIPlans(match, playerId, cardIndex, effectiveOptions);
+  if (!ranked.length) return { action: null, chosen: null, ranked: [], difficulty, archetypeProfile };
+
+  let chosen = null;
+  let selectionReason = "best-plan";
 
   // Loop guard: when a long same-turn chain is detected, prefer a legal
   // progression action instead of letting Brave/Mirage management oscillate.
   if (numeric(options.turnActionCount) >= numeric(options.maxTurnActions, 70)) {
     const progress = ranked.find((entry) => PROGRESS_ACTIONS.has(entry.action.type));
-    if (progress) return progress.action;
+    if (progress) {
+      chosen = progress;
+      selectionReason = "loop-guard";
+    }
   }
 
-  const decisionRandom =
-    options.random ||
-    deterministicDecisionRandom(match, playerId);
+  const decisionRandom = options.random || deterministicDecisionRandom(match, playerId);
+  if (!chosen) {
+    if (difficulty === "easy") {
+      chosen = chooseEasyEntry(ranked, decisionRandom);
+      selectionReason = "easy-variation";
+    } else if (difficulty === "normal") {
+      chosen = chooseNormalEntry(ranked, decisionRandom);
+      selectionReason = chosen === ranked[0] ? "best-plan" : "normal-variation";
+    } else {
+      chosen = ranked[0];
+      selectionReason = "best-plan";
+    }
+  }
 
-  if (difficulty === "easy") return chooseEasy(ranked, decisionRandom);
-  if (difficulty === "normal") return chooseNormal(ranked, decisionRandom);
+  return {
+    action: chosen?.action || null,
+    chosen,
+    ranked,
+    difficulty,
+    archetypeProfile,
+    selectionReason
+  };
+}
 
-  // Hard is deterministic and follows the highest-valued legal plan. Only the
-  // first action is committed; the plan is recalculated after every real state
-  // change so the CPU can adapt to the opponent and to random/trigger results.
-  return ranked[0].action;
+/**
+ * Compatibility wrapper used by tests and other game code that only needs the
+ * action itself. The richer debugger path uses chooseAIDecision().
+ */
+export function chooseAIAction(match, playerId, cardIndex, options = {}) {
+  return chooseAIDecision(match, playerId, cardIndex, options).action;
 }

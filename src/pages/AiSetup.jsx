@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { getDecks, getProfile } from "../services/storage.js";
 import { cardIndex } from "../services/cardRepository.js";
 import { createMatch, validateDeck } from "../game/state.js";
+import { analyzeDeckArchetype } from "../game/aiArchetypes.js";
 import EmptyState from "../components/common/EmptyState.jsx";
 import "../styles/pages/aiSetup.css";
 
@@ -25,6 +26,7 @@ export default function AiSetup({ onBack, onStart }) {
   const [cpuDeckId, setCpuDeckId] = useState(decks[1]?.id || decks[0]?.id || "");
   const [difficulty, setDifficulty] = useState("normal");
   const [first, setFirst] = useState("random");
+  const [debugEnabled, setDebugEnabled] = useState(false);
   const [error, setError] = useState("");
 
   const playerDeck = useMemo(
@@ -34,6 +36,11 @@ export default function AiSetup({ onBack, onStart }) {
   const cpuDeck = useMemo(
     () => decks.find((deck) => deck.id === cpuDeckId),
     [decks, cpuDeckId]
+  );
+
+  const cpuArchetype = useMemo(
+    () => analyzeDeckArchetype(cpuDeck?.cards || [], cardIndex),
+    [cpuDeck]
   );
 
   function start() {
@@ -72,10 +79,12 @@ export default function AiSetup({ onBack, onStart }) {
     onStart({
       ...match,
       ai: {
-        version: 3,
+        version: 4,
         playerId: "player2",
         humanPlayerId: "player1",
-        difficulty
+        difficulty,
+        archetypeProfile: cpuArchetype,
+        debugEnabled
       }
     });
   }
@@ -89,14 +98,14 @@ export default function AiSetup({ onBack, onStart }) {
         </button>
 
         <div>
-          <span className="eyebrow">ETERNAL CPU • PLANNING / LOOKAHEAD</span>
+          <span className="eyebrow">ETERNAL CPU • ARCHETYPE INTELLIGENCE</span>
           <h1>Partida contra IA</h1>
           <p>
-            A CPU usa a Rules Engine e agora compara pequenas sequências de jogadas antes de escolher a primeira ação.
+            A CPU analisa o próprio deck, adapta seu estilo de jogo e continua planejando sequências legais antes de agir.
           </p>
         </div>
 
-        <span className="ai-beta-pill">LOOKAHEAD 3.3</span>
+        <span className="ai-beta-pill">ARCHETYPE AI 3.3.1</span>
       </header>
 
       {!decks.length ? (
@@ -151,6 +160,17 @@ export default function AiSetup({ onBack, onStart }) {
                 </select>
               </label>
 
+              <div className="ai-archetype-summary">
+                <span className="eyebrow">ESTILO DETECTADO</span>
+                <strong>{cpuArchetype.labelPT}</strong>
+                <small>{cpuArchetype.summaryPT}</small>
+                <div className="ai-archetype-tags">
+                  {cpuArchetype.top.slice(0, 3).map((item) => (
+                    <span key={item.id}>{item.labelPT} {item.affinity}%</span>
+                  ))}
+                </div>
+              </div>
+
               <div className="ai-deck-summary">
                 <strong>{deckSize(cpuDeck)}</strong>
                 <span>cartas</span>
@@ -158,30 +178,44 @@ export default function AiSetup({ onBack, onStart }) {
             </article>
           </section>
 
-          <section className="ai-behavior-strip" aria-label="Recursos da Eternal CPU Planning / Lookahead">
+          <section className="ai-behavior-strip" aria-label="Recursos da Eternal CPU Archetype Intelligence">
             <div>
-              <strong>Ações legais</strong>
-              <span>Usa a mesma Rules Engine da partida.</span>
+              <strong>Arquétipo automático</strong>
+              <span>Analisa curva, tipos, efeitos e sinergias do próprio deck.</span>
             </div>
             <div>
               <strong>Planning / Lookahead</strong>
-              <span>Compara sequências legais antes de escolher a primeira jogada.</span>
+              <span>O plano futuro agora recebe pesos diferentes conforme o estilo detectado.</span>
             </div>
             <div>
-              <strong>Sem mão revelada</strong>
-              <span>Não usa a identidade das cartas ocultas do oponente.</span>
+              <strong>AI Debugger</strong>
+              <span>Opcionalmente mostra scores, alternativas e o plano previsto pela CPU.</span>
             </div>
           </section>
 
           <footer className="ai-setup-footer">
-            <label>
-              Quem começa?
-              <select value={first} onChange={(event) => setFirst(event.target.value)}>
-                <option value="random">Aleatório</option>
-                <option value="player1">Você</option>
-                <option value="player2">CPU</option>
-              </select>
-            </label>
+            <div className="ai-setup-options">
+              <label>
+                Quem começa?
+                <select value={first} onChange={(event) => setFirst(event.target.value)}>
+                  <option value="random">Aleatório</option>
+                  <option value="player1">Você</option>
+                  <option value="player2">CPU</option>
+                </select>
+              </label>
+
+              <label className="ai-debug-toggle">
+                <input
+                  type="checkbox"
+                  checked={debugEnabled}
+                  onChange={(event) => setDebugEnabled(event.target.checked)}
+                />
+                <span>
+                  <strong>AI Debugger</strong>
+                  <small>Mostra por que a CPU escolheu cada jogada.</small>
+                </span>
+              </label>
+            </div>
 
             <div>
               {error && <p className="ai-setup-error">{error}</p>}

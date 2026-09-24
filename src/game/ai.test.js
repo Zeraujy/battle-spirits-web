@@ -5,7 +5,8 @@ import { normalizeCard, makeCardIndex } from "./cardAdapter.js";
 import { createMatch, makePhysicalCard } from "./state.js";
 import { applyGameAction } from "./reducer.js";
 import { getLegalActions } from "./legalActions.js";
-import { chooseAIAction, evaluateBoardState, getMatchActor, rankAIActions, rankAIPlans } from "./ai.js";
+import { analyzeDeckArchetype } from "./aiArchetypes.js";
+import { chooseAIAction, chooseAIDecision, evaluateBoardState, getMatchActor, rankAIActions, rankAIPlans } from "./ai.js";
 
 const cards = [
   normalizeCard({ id: "S0", namePT: "Scout", cardType: "spirit", colors: ["red"], cost: 0, reduction: [], symbols: ["red"], levels: [{ level: 1, cores: 1, bp: 1000 }] }),
@@ -779,4 +780,79 @@ test("Planning / Lookahead does not peek at the identity of an unknown future dr
   assert.ok(aDraw && bDraw);
   assert.equal(aDraw.score, bDraw.score);
   assert.equal(aDraw.delta, bDraw.delta);
+});
+
+
+test("Archetype Intelligence detects an Ultimate / Brave hybrid deck", () => {
+  const archetypeIndex = makeCardIndex([
+    normalizeCard({ id: "AU", namePT: "Ultimate", cardType: "ultimate", colors: ["green"], cost: 5, symbols: ["ultimate"] }),
+    normalizeCard({ id: "AB", namePT: "Brave", cardType: "brave", colors: ["green"], cost: 4, symbols: ["green"] }),
+    normalizeCard({ id: "AS", namePT: "Spirit", cardType: "spirit", colors: ["green"], cost: 2, symbols: ["green"] }),
+    normalizeCard({ id: "AM", namePT: "Magic", cardType: "magic", colors: ["green"], cost: 3 })
+  ]);
+  const deck = [
+    { cardId: "AU", quantity: 10 },
+    { cardId: "AB", quantity: 8 },
+    { cardId: "AS", quantity: 17 },
+    { cardId: "AM", quantity: 5 }
+  ];
+
+  const profile = analyzeDeckArchetype(deck, archetypeIndex);
+  assert.equal(profile.hybrid, true);
+  assert.deepEqual(new Set([profile.primaryId, profile.secondaryId]), new Set(["ultimate", "brave"]));
+  assert.ok(profile.affinities.ultimate > 0.75);
+  assert.ok(profile.affinities.brave > 0.75);
+});
+
+test("Archetype Intelligence detects a control-oriented Magic/Nexus deck", () => {
+  const profile = analyzeDeckArchetype([
+    { cardId: "EXHAUST-SEM", quantity: 15 },
+    { cardId: "BOUNCE-SEM", quantity: 10 },
+    { cardId: "N0", quantity: 10 },
+    { cardId: "S3", quantity: 5 }
+  ], index);
+
+  assert.equal(profile.primaryId, "control");
+  assert.ok(profile.affinities.control >= profile.affinities.aggressive);
+  assert.ok(profile.metrics.types.magic >= 20);
+});
+
+test("Archetype Intelligence adds strategy score without bypassing legal actions", () => {
+  const match = baseMatch("player2");
+  match.phase = "attack";
+  match.players.player1.life = 4;
+  match.players.player1.field.spirits = [];
+  match.players.player2.field.spirits = [fieldCard("S3", "arch-attacker")];
+  const aggressiveProfile = analyzeDeckArchetype(Array.from({ length: 40 }, () => ({ cardId: "S3", quantity: 1 })), index);
+
+  const ranked = rankAIActions(match, "player2", index, { archetypeProfile: aggressiveProfile });
+  const attack = ranked.find((entry) => entry.action.type === "DECLARE_ATTACK");
+  assert.ok(attack);
+  assert.ok(attack.archetypeScore > 0);
+  assert.ok(attack.archetypeReasons.length > 0);
+
+  const legal = getLegalActions(match, "player2", index).map((entry) => JSON.stringify(entry.action));
+  assert.ok(legal.includes(JSON.stringify(ranked[0].action)));
+});
+
+test("AI Debugger decision exposes chosen plan, alternatives and stored archetype", () => {
+  const match = baseMatch("player2");
+  match.phase = "main";
+  const profile = analyzeDeckArchetype(Array.from({ length: 40 }, () => ({ cardId: "S3", quantity: 1 })), index);
+  match.ai = {
+    version: 4,
+    playerId: "player2",
+    humanPlayerId: "player1",
+    difficulty: "hard",
+    archetypeProfile: profile,
+    debugEnabled: true
+  };
+
+  const decision = chooseAIDecision(match, "player2", index, { difficulty: "hard" });
+  assert.ok(decision.action);
+  assert.ok(decision.chosen);
+  assert.ok(decision.ranked.length > 0);
+  assert.equal(decision.archetypeProfile.primaryId, profile.primaryId);
+  assert.ok("archetypeScore" in decision.chosen);
+  assert.ok(Array.isArray(decision.chosen.planLabels));
 });
