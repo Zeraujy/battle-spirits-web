@@ -1,4 +1,4 @@
-# START HERE — v3.2.5
+# START HERE — v3.3.0
 
 Se você está aprendendo o projeto, comece por estes caminhos:
 
@@ -102,4 +102,14 @@ A etapa seguinte é **Card Effect Intelligence**, implementada na v3.2.5.
 - As decisões ranqueadas guardam `effectScore` e `effectReasons`, preparando o futuro AI Debugger.
 - A camada semântica acompanha apenas cartas que já eram públicas e contagens públicas; a identidade da mão/deck ocultos do oponente não é usada.
 
-A próxima etapa planejada é **Planning / Lookahead**, permitindo que a dificuldade Hard compare pequenas sequências de ações antes de escolher a primeira jogada.
+
+## v3.3.0 — Planning / Lookahead
+
+- `src/game/ai.js`: adiciona `rankAIPlans()` com busca em largura limitada, orçamento determinístico de nós e desconto de ações futuras.
+- Normal compara a jogada atual com uma continuação; Hard pode planejar até três decisões futuras além da ação raiz, recalculando o plano após cada ação real.
+- A busca sempre usa `getLegalActions()` + `applyGameAction()` e para assim que o controle passa ao adversário.
+- Ações de progresso como Main → Attack são mantidas no feixe de busca mesmo quando possuem score imediato menor, permitindo enxergar pressão e lethal do Attack Step.
+- Mudanças que revelam informação antes oculta do deck encerram o lookahead; a CPU executa a ação e só então replana com a informação realmente conhecida.
+- Os resultados ranqueados passam a expor `planScore`, `planBonus`, `planDepth`, `planNodes` e `planActions`, preparando o AI Debugger visual.
+
+A próxima etapa planejada é **Deck & Archetype Intelligence / AI Debugger**, usando esses metadados para explicar decisões e adaptar prioridades ao estilo do deck.

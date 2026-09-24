@@ -72,7 +72,7 @@ export default function AiSetup({ onBack, onStart }) {
     onStart({
       ...match,
       ai: {
-        version: 2,
+        version: 3,
         playerId: "player2",
         humanPlayerId: "player1",
         difficulty
@@ -89,14 +89,14 @@ export default function AiSetup({ onBack, onStart }) {
         </button>
 
         <div>
-          <span className="eyebrow">ETERNAL CPU • BETA 2 • COMBAT</span>
+          <span className="eyebrow">ETERNAL CPU • PLANNING / LOOKAHEAD</span>
           <h1>Partida contra IA</h1>
           <p>
-            A CPU usa a Rules Engine e agora avalia pressão de ataque, trocas de BP e a defesa necessária para o próximo turno.
+            A CPU usa a Rules Engine e agora compara pequenas sequências de jogadas antes de escolher a primeira ação.
           </p>
         </div>
 
-        <span className="ai-beta-pill">COMBAT 2.2</span>
+        <span className="ai-beta-pill">LOOKAHEAD 3.3</span>
       </header>
 
       {!decks.length ? (
@@ -145,9 +145,9 @@ export default function AiSetup({ onBack, onStart }) {
               <label>
                 Dificuldade
                 <select value={difficulty} onChange={(event) => setDifficulty(event.target.value)}>
-                  <option value="easy">Fácil — mais permissiva</option>
-                  <option value="normal">Normal — equilibrada</option>
-                  <option value="hard">Difícil — melhor jogada disponível</option>
+                  <option value="easy">Fácil — decisões imediatas</option>
+                  <option value="normal">Normal — planeja 1 ação à frente</option>
+                  <option value="hard">Difícil — planeja até 3 ações à frente</option>
                 </select>
               </label>
 
@@ -158,14 +158,14 @@ export default function AiSetup({ onBack, onStart }) {
             </article>
           </section>
 
-          <section className="ai-behavior-strip" aria-label="Recursos da CPU Core & Resource Management">
+          <section className="ai-behavior-strip" aria-label="Recursos da Eternal CPU Planning / Lookahead">
             <div>
               <strong>Ações legais</strong>
               <span>Usa a mesma Rules Engine da partida.</span>
             </div>
             <div>
-              <strong>Core & Resource</strong>
-              <span>Planeja Cores, Level, redução e recursos para jogadas futuras.</span>
+              <strong>Planning / Lookahead</strong>
+              <span>Compara sequências legais antes de escolher a primeira jogada.</span>
             </div>
             <div>
               <strong>Sem mão revelada</strong>

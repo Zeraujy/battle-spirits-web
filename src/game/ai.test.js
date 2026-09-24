@@ -5,7 +5,7 @@ import { normalizeCard, makeCardIndex } from "./cardAdapter.js";
 import { createMatch, makePhysicalCard } from "./state.js";
 import { applyGameAction } from "./reducer.js";
 import { getLegalActions } from "./legalActions.js";
-import { chooseAIAction, evaluateBoardState, getMatchActor, rankAIActions } from "./ai.js";
+import { chooseAIAction, evaluateBoardState, getMatchActor, rankAIActions, rankAIPlans } from "./ai.js";
 
 const cards = [
   normalizeCard({ id: "S0", namePT: "Scout", cardType: "spirit", colors: ["red"], cost: 0, reduction: [], symbols: ["red"], levels: [{ level: 1, cores: 1, bp: 1000 }] }),
@@ -660,4 +660,123 @@ test("Card Effect Intelligence still ignores opponent hidden hand identities", (
   assert.ok(aAction && bAction);
   assert.equal(aAction.score, bAction.score);
   assert.deepEqual(aAction.effectReasons, bAction.effectReasons);
+});
+
+
+test("Planning / Lookahead sees Main -> Attack lethal before committing the phase advance", () => {
+  const match = baseMatch("player2");
+  match.turnNumber = 2;
+  match.phase = "main";
+  match.players.player1.life = 2;
+  match.players.player1.field.spirits = [];
+  match.players.player2.hand = [];
+  match.players.player2.field.spirits = [fieldCard("S6", "planned-lethal")];
+
+  const plans = rankAIPlans(match, "player2", index, { difficulty: "hard" });
+  assert.equal(plans[0].action.type, "ADVANCE_PHASE");
+  assert.ok(plans[0].planScore > plans[0].immediateScore);
+  assert.deepEqual(plans[0].planActions.slice(0, 2), [
+    { type: "ADVANCE_PHASE" },
+    { type: "DECLARE_ATTACK", instanceId: "planned-lethal" }
+  ]);
+});
+
+test("Planning / Lookahead returns a sequence made only from legal Rules Engine actions", () => {
+  const match = baseMatch("player2");
+  match.turnNumber = 2;
+  match.phase = "main";
+  match.players.player2.reserve = 4;
+  match.players.player2.hand = [
+    { ...makePhysicalCard("FLEX", index), instanceId: "plan-flex" },
+    { ...makePhysicalCard("S0", index), instanceId: "plan-follow-up" }
+  ];
+
+  const plan = rankAIPlans(match, "player2", index, { difficulty: "hard" })[0];
+  assert.ok(plan.planActions.length >= 2);
+
+  let state = match;
+  for (const plannedAction of plan.planActions) {
+    assert.equal(getMatchActor(state), "player2");
+    const legal = getLegalActions(state, "player2", index).map((entry) => JSON.stringify(entry.action));
+    assert.ok(legal.includes(JSON.stringify(plannedAction)), `planned action must remain legal: ${JSON.stringify(plannedAction)}`);
+    const result = applyGameAction(state, plannedAction, "player2", index);
+    assert.equal(result.ok, true, result.error || "planned action should apply");
+    state = result.match;
+    if (state.winnerId || getMatchActor(state) !== "player2") break;
+  }
+});
+
+test("Planning / Lookahead gives Hard a deeper horizon than Normal in a multi-action Main Step", () => {
+  const match = baseMatch("player2");
+  match.turnNumber = 2;
+  match.phase = "main";
+  match.players.player2.reserve = 5;
+  match.players.player2.hand = [
+    { ...makePhysicalCard("S0", index), instanceId: "depth-a" },
+    { ...makePhysicalCard("S3", index), instanceId: "depth-b" },
+    { ...makePhysicalCard("N0", index), instanceId: "depth-c" }
+  ];
+
+  const normal = rankAIPlans(match, "player2", index, { difficulty: "normal" });
+  const hard = rankAIPlans(match, "player2", index, { difficulty: "hard" });
+  const normalDepth = Math.max(...normal.map((entry) => entry.planDepth));
+  const hardDepth = Math.max(...hard.map((entry) => entry.planDepth));
+  assert.ok(hardDepth > normalDepth, `normal=${normalDepth} hard=${hardDepth}`);
+});
+
+test("Planning / Lookahead stops at hidden-information boundaries and replans after a draw", () => {
+  const match = baseMatch("player2");
+  match.turnNumber = 2;
+  match.phase = "main";
+  match.players.player2.reserve = 3;
+  match.players.player2.hand = [{ ...makePhysicalCard("M0", index), instanceId: "planning-draw" }];
+
+  const drawPlan = rankAIPlans(match, "player2", index, { difficulty: "hard" })
+    .find((entry) => entry.action.type === "USE_MAGIC" && entry.action.instanceId === "planning-draw");
+  assert.ok(drawPlan);
+  assert.equal(drawPlan.planDepth, 0);
+  assert.equal(drawPlan.planActions.length, 1);
+});
+
+test("Planning / Lookahead remains deterministic for the same seeded Hard state", () => {
+  const match = baseMatch("player2");
+  match.turnNumber = 2;
+  match.phase = "main";
+  match.players.player2.reserve = 4;
+  match.players.player2.hand = [
+    { ...makePhysicalCard("S0", index), instanceId: "hard-plan-a" },
+    { ...makePhysicalCard("S3", index), instanceId: "hard-plan-b" },
+    { ...makePhysicalCard("N0", index), instanceId: "hard-plan-c" }
+  ];
+
+  const a = rankAIPlans(match, "player2", index, { difficulty: "hard" })[0];
+  const b = rankAIPlans(structuredClone(match), "player2", index, { difficulty: "hard" })[0];
+  assert.deepEqual(a.action, b.action);
+  assert.equal(a.planScore, b.planScore);
+  assert.deepEqual(a.planActions, b.planActions);
+});
+
+
+test("Planning / Lookahead does not peek at the identity of an unknown future draw", () => {
+  const a = baseMatch("player2");
+  const b = structuredClone(a);
+  a.turnNumber = 2;
+  b.turnNumber = 2;
+  a.phase = "main";
+  b.phase = "main";
+  a.players.player2.reserve = 3;
+  b.players.player2.reserve = 3;
+  a.players.player2.hand = [{ ...makePhysicalCard("M0", index), instanceId: "fair-draw" }];
+  b.players.player2.hand = [{ ...makePhysicalCard("M0", index), instanceId: "fair-draw" }];
+  a.players.player2.deck[0] = { ...makePhysicalCard("S0", index), instanceId: "unknown-top-a" };
+  b.players.player2.deck[0] = { ...makePhysicalCard("S6", index), instanceId: "unknown-top-b" };
+
+  const aDraw = rankAIActions(a, "player2", index, { difficulty: "hard" })
+    .find((entry) => entry.action.type === "USE_MAGIC" && entry.action.instanceId === "fair-draw");
+  const bDraw = rankAIActions(b, "player2", index, { difficulty: "hard" })
+    .find((entry) => entry.action.type === "USE_MAGIC" && entry.action.instanceId === "fair-draw");
+
+  assert.ok(aDraw && bDraw);
+  assert.equal(aDraw.score, bDraw.score);
+  assert.equal(aDraw.delta, bDraw.delta);
 });

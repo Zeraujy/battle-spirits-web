@@ -1049,7 +1049,7 @@ export default function Simulator({
 
 
   /* =======================================================
-     CPU BETA 2 CONTROLLER
+     ETERNAL CPU PLANNING CONTROLLER
   ======================================================= */
 
   useEffect(() => {
@@ -5171,7 +5171,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v3.2.5 • Arena 2D
+            Eternal v3.3.0 • Arena 2D
           </span>
 
           <strong>

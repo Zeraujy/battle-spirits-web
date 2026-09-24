@@ -1,0 +1,13 @@
+Battle Spirits Eternal Simulator v3.3.0
+Planning / Lookahead
+
+- npm test: 108/108 OK
+- npm run verify: OK
+- npm run verify:v3: OK
+- Database: 365 IDs únicos
+- Artwork runtime: 365/365 referências válidas
+- Imagens auditadas: 382
+- Simulação SD23 vs SD28 Hard vs Hard: 86 ações / 5 turnos / término por Life / 0 ações ilegais
+
+A CPU continua executando somente ações legais da Rules Engine.
+O lookahead para quando o controle passa ao adversário ou quando uma resolução revela informação antes oculta do deck.

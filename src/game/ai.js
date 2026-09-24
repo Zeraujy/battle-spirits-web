@@ -110,7 +110,7 @@ function mainPlayResourceNeed(match, playerId, physical, cardIndex) {
   return cost.payable + minimumCoresForCard(card);
 }
 
-function resourceOutlookScore(match, playerId, cardIndex) {
+function resourceOutlookScore(match, playerId, cardIndex, options = {}) {
   const player = match.players?.[playerId];
   if (!player) return 0;
 
@@ -119,7 +119,9 @@ function resourceOutlookScore(match, playerId, cardIndex) {
   let appliedReductions = 0;
   let freePlays = 0;
 
+  const knownOwnHandInstanceIds = options.knownOwnHandInstanceIds || null;
   for (const physical of player.hand || []) {
+    if (knownOwnHandInstanceIds && !knownOwnHandInstanceIds.has(physical.instanceId)) continue;
     const card = getDatabaseCard(cardIndex, physical);
     if (!card) continue;
     if (["spirit", "ultimate", "brave", "nexus", "magic"].includes(card.cardType)) {
@@ -265,7 +267,7 @@ function cardBoardValue(match, playerId, physical, cardIndex) {
  * The opponent's hidden card identities are intentionally never inspected:
  * only hand/deck counts are used for the opponent.
  */
-export function evaluateBoardState(match, playerId, cardIndex) {
+export function evaluateBoardState(match, playerId, cardIndex, options = {}) {
   if (!match?.players?.[playerId]) return -1_000_000;
 
   const opponentId = otherPlayerId(match, playerId);
@@ -298,7 +300,7 @@ export function evaluateBoardState(match, playerId, cardIndex) {
 
   // Only the evaluated player's own hidden hand is inspected here. The
   // opponent remains represented by public hand/deck counts only.
-  score += resourceOutlookScore(match, playerId, cardIndex);
+  score += resourceOutlookScore(match, playerId, cardIndex, options);
 
   if (me.burst) score += 22;
   if (opponent.burst) score -= 16;
@@ -926,7 +928,18 @@ function scoreCandidate(match, playerId, candidate, cardIndex, options, legalAct
   if (!result?.ok || !result.match) return null;
 
   const before = evaluateBoardState(match, playerId, cardIndex);
-  const after = evaluateBoardState(result.match, playerId, cardIndex);
+  const ownDeckShrank =
+    (result.match.players?.[playerId]?.deck?.length || 0) <
+    (match.players?.[playerId]?.deck?.length || 0);
+  const knownOwnHandInstanceIds = ownDeckShrank
+    ? new Set((match.players?.[playerId]?.hand || []).map((physical) => physical.instanceId))
+    : null;
+  const after = evaluateBoardState(
+    result.match,
+    playerId,
+    cardIndex,
+    knownOwnHandInstanceIds ? { knownOwnHandInstanceIds } : {}
+  );
   const delta = after - before;
 
   const effectAnalysis = analyzeEffectTransition(match, result.match, playerId, cardIndex);
@@ -976,6 +989,219 @@ export function rankAIActions(match, playerId, cardIndex, options = {}) {
   });
 }
 
+
+const PLANNING_PROFILES = {
+  easy: { depth: 0, beamWidth: 0, rootWidth: 0, maxNodes: 0, discount: 0 },
+  normal: { depth: 1, beamWidth: 4, rootWidth: 8, maxNodes: 18, discount: 0.68 },
+  hard: { depth: 3, beamWidth: 5, rootWidth: 10, maxNodes: 45, discount: 0.78 }
+};
+
+function planningProfile(difficulty, options = {}) {
+  const base = PLANNING_PROFILES[difficulty] || PLANNING_PROFILES.normal;
+  return {
+    depth: Math.max(0, Number(options.lookaheadDepth ?? base.depth) || 0),
+    beamWidth: Math.max(1, Number(options.lookaheadBeamWidth ?? base.beamWidth) || 1),
+    rootWidth: Math.max(1, Number(options.lookaheadRootWidth ?? base.rootWidth) || 1),
+    maxNodes: Math.max(1, Number(options.lookaheadMaxNodes ?? base.maxNodes) || 1),
+    discount: clamp(Number(options.lookaheadDiscount ?? base.discount) || 0, 0, 1)
+  };
+}
+
+function crossesHiddenInformationBoundary(beforeMatch, afterMatch) {
+  if (!beforeMatch || !afterMatch) return false;
+  for (const id of ["player1", "player2"]) {
+    const before = beforeMatch.players?.[id];
+    const after = afterMatch.players?.[id];
+    if (!before || !after) continue;
+
+    // A smaller deck or a larger hand can reveal information that was unknown
+    // when the original decision was made (draws, deck reveals, trigger cards).
+    // The CPU commits the current action and replans after the real resolution
+    // instead of peeking through deterministic internal deck order.
+    if ((after.deck?.length || 0) < (before.deck?.length || 0)) return true;
+  }
+  return false;
+}
+
+function planningWindowOpen(match, playerId) {
+  if (!match || match.winnerId || getMatchActor(match) !== playerId) return false;
+  if (match.pendingManualPlay || match.pendingManualCost) return false;
+  if (match.burstOpportunity) return false;
+  if (match.battle && !match.pendingEffectDecision) return false;
+  if (match.pendingEffectDecision) return true;
+  return match.activePlayerId === playerId && ["main", "attack"].includes(match.phase);
+}
+
+function continuationCandidates(ranked, profile) {
+  const selected = ranked.slice(0, profile.beamWidth);
+  const seen = new Set(selected.map((entry) => actionKey(entry.action)));
+
+  // Progress actions are strategically important even when their immediate
+  // score is lower: advancing Main -> Attack is often the bridge between a
+  // setup play and lethal pressure. Always keep the best progression option
+  // in the search beam.
+  const progress = ranked.find((entry) => PROGRESS_ACTIONS.has(entry.action?.type));
+  if (progress && !seen.has(actionKey(progress.action))) selected.push(progress);
+
+  return selected;
+}
+
+function searchAIContinuation(match, playerId, cardIndex, options, profile, depth, context) {
+  if (depth <= 0 || !planningWindowOpen(match, playerId)) {
+    return { value: 0, actions: [], labels: [], nodes: 0 };
+  }
+  if (context.budget.nodes >= profile.maxNodes) {
+    return { value: 0, actions: [], labels: [], nodes: 0 };
+  }
+
+  const ranked = rankAIActions(match, playerId, cardIndex, {
+    ...options,
+    recentActionKeys: context.recentActionKeys
+  });
+  if (!ranked.length) return { value: 0, actions: [], labels: [], nodes: 0 };
+
+  let best = { value: 0, actions: [], labels: [], nodes: 0 };
+  let hasBest = false;
+
+  for (const candidate of continuationCandidates(ranked, profile)) {
+    if (context.budget.nodes >= profile.maxNodes) break;
+    context.budget.nodes += 1;
+
+    const nextMatch = candidate.result?.match;
+    if (!nextMatch) continue;
+
+    const key = actionKey(candidate.action);
+    const nextRecent = [...context.recentActionKeys, key].slice(-16);
+
+    let continuation = { value: 0, actions: [], labels: [], nodes: 0 };
+    if (
+      depth > 1 &&
+      !nextMatch.winnerId &&
+      getMatchActor(nextMatch) === playerId &&
+      !crossesHiddenInformationBoundary(match, nextMatch)
+    ) {
+      continuation = searchAIContinuation(
+        nextMatch,
+        playerId,
+        cardIndex,
+        options,
+        profile,
+        depth - 1,
+        { ...context, recentActionKeys: nextRecent }
+      );
+    }
+
+    // A small step cost makes an equivalent shorter plan preferable and helps
+    // suppress harmless Core/Brave churn without making progress actions bad.
+    const stepCost = PROGRESS_ACTIONS.has(candidate.action?.type) ? 0.4 : 1.2;
+    const value = candidate.score - stepCost + profile.discount * continuation.value;
+
+    if (!hasBest || value > best.value || (value === best.value && key < actionKey(best.actions[0]))) {
+      hasBest = true;
+      best = {
+        value,
+        actions: [candidate.action, ...continuation.actions],
+        labels: [candidate.label || candidate.action?.type || "Action", ...continuation.labels],
+        nodes: 1 + continuation.nodes
+      };
+    }
+  }
+
+  return best;
+}
+
+/**
+ * Multi-action planning layer used by Normal/Hard CPU. The first action still
+ * comes from getLegalActions(); planning only simulates future legal actions
+ * through applyGameAction(). Search stops as soon as control passes to the
+ * opponent, so hidden opponent hand identities are never inspected.
+ */
+export function rankAIPlans(match, playerId, cardIndex, options = {}) {
+  const difficulty = DIFFICULTIES.has(options.difficulty)
+    ? options.difficulty
+    : DIFFICULTIES.has(match?.ai?.difficulty)
+      ? match.ai.difficulty
+      : "normal";
+
+  const immediate = rankAIActions(match, playerId, cardIndex, options);
+  const profile = planningProfile(difficulty, options);
+  if (!immediate.length || profile.depth <= 0 || !planningWindowOpen(match, playerId)) {
+    return immediate.map((entry) => ({
+      ...entry,
+      immediateScore: entry.score,
+      planScore: entry.score,
+      planBonus: 0,
+      planDepth: 0,
+      planNodes: 0,
+      planActions: [entry.action],
+      planLabels: [entry.label || entry.action?.type || "Action"]
+    }));
+  }
+
+  const recentActionKeys = [...(options.recentActionKeys || [])];
+
+  const plannedRoots = new Set(
+    immediate.slice(0, profile.rootWidth).map((entry) => actionKey(entry.action))
+  );
+  // Never drop the bridge to a later phase merely because its immediate score
+  // is low. This is what lets Main-Step planning see Attack-Step payoff.
+  const progressRoot = immediate.find((entry) => PROGRESS_ACTIONS.has(entry.action?.type));
+  if (progressRoot) plannedRoots.add(actionKey(progressRoot.action));
+
+  const plans = immediate.map((entry) => {
+    const rootKey = actionKey(entry.action);
+    if (!plannedRoots.has(rootKey) || !entry.result?.match) {
+      return {
+        ...entry,
+        immediateScore: entry.score,
+        planScore: entry.score,
+        planBonus: 0,
+        planDepth: 0,
+        planNodes: 0,
+        planActions: [entry.action],
+        planLabels: [entry.label || entry.action?.type || "Action"]
+      };
+    }
+
+    const budget = { nodes: 1 };
+    const continuation =
+      !entry.result.match.winnerId &&
+      getMatchActor(entry.result.match) === playerId &&
+      !crossesHiddenInformationBoundary(match, entry.result.match)
+        ? searchAIContinuation(
+            entry.result.match,
+            playerId,
+            cardIndex,
+            options,
+            profile,
+            profile.depth,
+            {
+              budget,
+              recentActionKeys: [...recentActionKeys, rootKey].slice(-16)
+            }
+          )
+        : { value: 0, actions: [], labels: [], nodes: 0 };
+
+    const planScore = entry.score + profile.discount * continuation.value;
+    return {
+      ...entry,
+      immediateScore: entry.score,
+      planScore,
+      planBonus: planScore - entry.score,
+      planDepth: continuation.actions.length,
+      planNodes: continuation.nodes,
+      planActions: [entry.action, ...continuation.actions],
+      planLabels: [entry.label || entry.action?.type || "Action", ...continuation.labels]
+    };
+  });
+
+  return plans.sort((a, b) => {
+    if (b.planScore !== a.planScore) return b.planScore - a.planScore;
+    if (b.immediateScore !== a.immediateScore) return b.immediateScore - a.immediateScore;
+    return actionKey(a.action).localeCompare(actionKey(b.action));
+  });
+}
+
 function chooseEasy(ranked, random) {
   if (!ranked.length) return null;
 
@@ -995,12 +1221,15 @@ function chooseNormal(ranked, random) {
   // Usually take the best move. Small controlled variation prevents the CPU
   // from playing the exact same line every game without turning it random.
   if (safeRandom(random) < 0.88) return ranked[0].action;
-  const close = ranked.filter((entry) => entry.score >= ranked[0].score - 18).slice(0, 3);
+  const bestScore = Number(ranked[0].planScore ?? ranked[0].score ?? 0);
+  const close = ranked
+    .filter((entry) => Number(entry.planScore ?? entry.score ?? 0) >= bestScore - 18)
+    .slice(0, 3);
   return close[Math.floor(safeRandom(random) * close.length)]?.action || ranked[0].action;
 }
 
 /**
- * CPU Beta 2 controller.
+ * Eternal CPU planning controller.
  * It never bypasses the rules: every chosen action comes from getLegalActions()
  * and is scored by applying the same reducer used by local/online play.
  */
@@ -1014,7 +1243,10 @@ export function chooseAIAction(match, playerId, cardIndex, options = {}) {
       ? match.ai.difficulty
       : "normal";
 
-  const ranked = rankAIActions(match, playerId, cardIndex, options);
+  const ranked =
+    difficulty === "easy"
+      ? rankAIActions(match, playerId, cardIndex, options)
+      : rankAIPlans(match, playerId, cardIndex, { ...options, difficulty });
   if (!ranked.length) return null;
 
   // Loop guard: when a long same-turn chain is detected, prefer a legal
@@ -1031,6 +1263,8 @@ export function chooseAIAction(match, playerId, cardIndex, options = {}) {
   if (difficulty === "easy") return chooseEasy(ranked, decisionRandom);
   if (difficulty === "normal") return chooseNormal(ranked, decisionRandom);
 
-  // Hard is deterministic and always chooses the best resulting legal state.
+  // Hard is deterministic and follows the highest-valued legal plan. Only the
+  // first action is committed; the plan is recalculated after every real state
+  // change so the CPU can adapt to the opponent and to random/trigger results.
   return ranked[0].action;
 }

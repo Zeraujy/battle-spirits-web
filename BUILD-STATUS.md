@@ -1,4 +1,4 @@
-# Build Status — Battle Spirits Eternal Simulator v3.2.5
+# Build Status — Battle Spirits Eternal Simulator v3.3.0
 
 ## Validado neste pacote
 - `npm run verify`: **OK**
@@ -8,22 +8,24 @@
 - Imagens auditadas: **382**, nenhuma abaixo do limite mínimo do projeto
 - LV assets: LV1 / LV2 / LV3 presentes
 - Wallpaper atual da Arena presente e validado estruturalmente
-- `npm test`: **102/102 testes passando**
-  - 96 testes anteriores preservados
-  - 6 novos testes de Card Effect Intelligence
-  - prioridade semântica de alvo para Exhaust
-  - prioridade semântica de alvo para Refresh
-  - prioridade de retorno à mão sobre ameaças mais valiosas
-  - BP contextual no atacante/bloqueador atual
-  - identificação de Draw e geração de Core
-  - privacidade da mão oculta do adversário preservada
-- Simulação real **SD23 vs SD28 (Hard vs Hard)**: 240 ações, 18 turnos, término normal por Life e **0 ações ilegais**.
+- `npm test`: **108/108 testes passando**
+  - 102 testes anteriores preservados
+  - 6 novos testes de Planning / Lookahead
+  - lethal previsto através de Main → Attack
+  - legalidade de toda a sequência planejada
+  - horizonte maior no Hard do que no Normal
+  - parada/replanejamento ao revelar informação do deck
+  - determinismo do plano em estado seeded
+  - garantia de que o score de Draw não espia a identidade da próxima carta
+- Simulação real **SD23 vs SD28 (Hard vs Hard)**: **86 ações**, **5 turnos**, término normal por Life e **0 ações ilegais**.
 
-## Card Effect Intelligence
-- `src/game/aiEffectSemantics.js` adiciona score semântico de transições reais.
-- `rankAIActions()` passa a registrar `effectScore` e `effectReasons`.
-- Decision Queue usa valor do alvo em vez de tratar todos os alvos legais como equivalentes.
-- Magic/Burst/Trigger continuam executados exclusivamente pela Rules Engine.
+## Planning / Lookahead
+- `rankAIPlans()` adiciona busca multi-ação limitada sobre ações reais da Rules Engine.
+- Normal analisa uma continuação; Hard pode analisar até três decisões futuras além da ação atual.
+- O feixe mantém ações de progresso relevantes, permitindo enxergar Main → Attack e sequências de pressão.
+- A busca encerra quando o controle passa ao oponente ou quando uma resolução revela informação antes oculta do deck.
+- A CPU executa apenas a primeira ação do plano e recalcula tudo após cada mudança real do estado.
+- O ranking agora pode expor `planScore`, `planBonus`, `planDepth`, `planNodes` e `planActions` para o futuro AI Debugger.
 
 ## Build Vite neste ambiente
 O pacote GitHub-ready não inclui `node_modules`. O build de produção deve ser gerado após `npm install` no computador de destino ou pelo pipeline do Cloudflare.

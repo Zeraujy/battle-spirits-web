@@ -13,6 +13,67 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.3.0",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "Planning / Lookahead", en: "Planning / Lookahead" },
+    summary: {
+      pt: "A Eternal CPU passa a comparar pequenas sequências de ações legais antes de escolher a primeira jogada, com profundidade maior no Difícil e replanejamento após cada mudança real da partida.",
+      en: "Eternal CPU now compares short sequences of legal actions before choosing its first move, with a deeper horizon on Hard and replanning after every real match-state change."
+    },
+    sections: [
+      {
+        title: { pt: "Planejamento multi-ação", en: "Multi-action planning" },
+        items: {
+          pt: [
+            "Novo `rankAIPlans()` combina o score imediato com continuações legais futuras usando beam search limitado e orçamento determinístico de nós.",
+            "Normal analisa uma continuação; Difícil pode analisar até três decisões futuras além da ação atual.",
+            "Ações de progresso como Main → Attack permanecem no feixe de busca para que a CPU consiga enxergar pressão e lethal que só aparecem depois de avançar a fase.",
+            "O plano nunca é executado inteiro de uma vez: somente a primeira ação é confirmada e a CPU recalcula após cada resolução real."
+          ],
+          en: [
+            "New `rankAIPlans()` combines immediate score with future legal continuations using bounded beam search and a deterministic node budget.",
+            "Normal analyzes one continuation; Hard can analyze up to three future decisions beyond the current action.",
+            "Progress actions such as Main → Attack stay in the search beam so the CPU can see pressure and lethal that only exist after advancing the phase.",
+            "A whole plan is never committed at once: only the first action is executed and the CPU replans after every real resolution."
+          ]
+        }
+      },
+      {
+        title: { pt: "Informação oculta & segurança", en: "Hidden information & safety" },
+        items: {
+          pt: [
+            "A busca para imediatamente quando o controle passa ao adversário, evitando simular a mão oculta do outro jogador.",
+            "Compras, reveals e outras mudanças que consomem cartas do deck encerram o horizonte atual; a CPU só replana depois que a informação realmente foi revelada.",
+            "Toda etapa simulada continua vindo de `getLegalActions()` e passando por `applyGameAction()` — o lookahead não ganha atalhos próprios de regra.",
+            "A avaliação de uma compra não usa a identidade específica da carta ainda desconhecida para inflar o score antes da resolução."
+          ],
+          en: [
+            "Search stops immediately when control passes to the opponent, avoiding simulation of the other player's hidden hand.",
+            "Draws, reveals and other deck-consuming changes end the current horizon; the CPU replans only after that information is actually revealed.",
+            "Every simulated step still comes from `getLegalActions()` and runs through `applyGameAction()` — lookahead gains no private rules shortcuts.",
+            "A draw evaluation does not use the specific identity of the still-unknown card to inflate the score before resolution."
+          ]
+        }
+      },
+      {
+        title: { pt: "Diagnóstico & validação", en: "Diagnostics & validation" },
+        items: {
+          pt: [
+            "Ações ranqueadas agora podem expor `planScore`, `planBonus`, `planDepth`, `planNodes` e `planActions`, formando a base do futuro AI Debugger.",
+            "Novos testes verificam lethal através de mudança de fase, legalidade de toda a sequência planejada, profundidade por dificuldade, determinismo e fronteiras de informação oculta.",
+            "A CPU continua recalculando sua decisão a cada ação, podendo abandonar um plano antigo quando Trigger, Burst, alvo, compra ou resposta do adversário muda o estado."
+          ],
+          en: [
+            "Ranked actions can now expose `planScore`, `planBonus`, `planDepth`, `planNodes` and `planActions`, forming the basis of the future AI Debugger.",
+            "New tests cover lethal through phase advancement, legality of the entire planned sequence, difficulty-based depth, determinism and hidden-information boundaries.",
+            "The CPU still recalculates after every action and can abandon an old plan when Trigger, Burst, targets, draws or opponent responses change the state."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.2.5",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "Card Effect Intelligence", en: "Card Effect Intelligence" },
