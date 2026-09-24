@@ -15,12 +15,33 @@ const PATCHES = [
   {
     version: "3.2.1",
     date: { pt: "24/09/2026", en: "09/24/2026" },
-    title: { pt: "Match Stability & AI Readiness", en: "Match Stability & AI Readiness" },
+    title: { pt: "Match Stability, Matchmaking & CPU Beta 2", en: "Match Stability, Matchmaking & CPU Beta 2" },
     summary: {
-      pt: "Consolida a Arena atual e prepara a Rules Engine para IA, replay, debug e validação de partidas.",
-      en: "Consolidates the current Arena and prepares the Rules Engine for AI, replay, debugging and match validation."
+      pt: "Consolida a Arena atual, corrige o matchmaking e ativa a nova Eternal CPU Beta 2 usando a própria Rules Engine.",
+      en: "Consolidates the current Arena, fixes matchmaking and enables the new Eternal CPU Beta 2 using the same Rules Engine."
     },
     sections: [
+      {
+        title: { pt: "Eternal CPU Beta 2", en: "Eternal CPU Beta 2" },
+        items: {
+          pt: [
+            "O modo Contra IA foi reativado na Home com seleção de deck e dificuldades Fácil, Normal e Difícil.",
+            "A CPU escolhe somente ações retornadas por getLegalActions(), usando a mesma Rules Engine das partidas local e online.",
+            "A avaliação considera Life, BP, recursos, presença de campo, ataque, bloqueio, Burst, Mirage, Brave, Magic e decisões de efeito já automatizadas.",
+            "A CPU não usa a identidade das cartas ocultas da mão do oponente para decidir jogadas.",
+            "Adicionado bloqueio contra loops de gerenciamento de Brave/Mirage e atraso visual entre ações para tornar os turnos legíveis.",
+            "A suíte automatizada ganhou testes de legalidade da IA, ataque letal, bloqueio letal, informação oculta, decisão determinística e simulação IA vs IA."
+          ],
+          en: [
+            "VS AI has been re-enabled on Home with deck selection and Easy, Normal and Hard difficulties.",
+            "The CPU only chooses actions returned by getLegalActions(), using the same Rules Engine as local and online matches.",
+            "Evaluation considers Life, BP, resources, board presence, attacking, blocking, Burst, Mirage, Brave, Magic and already-automated effect decisions.",
+            "The CPU does not use the identity of the opponent's hidden hand cards when choosing actions.",
+            "A loop guard for Brave/Mirage management and a readable delay between CPU actions were added.",
+            "The automated suite now tests AI legality, lethal attacks, lethal blocks, hidden information, deterministic decisions and AI-vs-AI simulation."
+          ]
+        }
+      },
       {
         title: { pt: "Arquitetura & estabilidade", en: "Architecture & stability" },
         items: {

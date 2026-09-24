@@ -8,20 +8,19 @@
 - LV assets: LV1 / LV2 / LV3 presentes
 - Wallpaper atual da Arena presente e validado estruturalmente
 - CSS consolidado da Arena parseado com PostCSS sem erros
-- `npm test`: **76/76 testes passando**
+- `npm test`: **82/82 testes passando**
   - 71 testes anteriores preservados
   - seed determinística
   - Legal Actions
   - Action Log estruturado
   - auditoria de integridade
   - snapshot/restauração/replay
+  - CPU Beta 2: legalidade, ataque/bloqueio letal, informação oculta, decisão determinística e simulação IA vs IA
 
 ## Build Vite neste ambiente
-O build de produção não pôde ser concluído porque o `node_modules` recebido no ZIP foi instalado/materializado para Windows.
+Este pacote GitHub-ready não inclui `node_modules`, então o build Vite não foi executado neste ambiente. Os arquivos JSX modificados foram validados sintaticamente e as verificações estruturais/testes da Rules Engine passaram.
 
-O launcher local de Vite tenta executar `node.exe`; ao invocar o Vite diretamente com o Node Linux, o Rolldown não encontra o binding nativo de Linux.
-
-Isso não é um erro detectado no código-fonte da v3.2.1. Para gerar o build no Windows, reinstale as dependências no próprio computador antes de compilar:
+Para gerar o build no Windows, instale as dependências no próprio computador antes de compilar:
 
 ```powershell
 npm install

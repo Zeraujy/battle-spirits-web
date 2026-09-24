@@ -165,21 +165,20 @@ export default function Home({ go }) {
 
           <button
             type="button"
-            className="v3-play-card is-disabled"
-            disabled
-            title={pt ? "Modo contra IA em desenvolvimento" : "VS AI mode is under development"}
+            className="v3-play-card"
+            onClick={() => go("ai")}
           >
             <span className="v3-action-icon">
               <MenuIcon name="cpu" />
             </span>
 
             <span className="v3-action-copy">
-              <small>{pt ? "VS IA / EM BREVE" : "VS AI / COMING SOON"}</small>
-              <b>{pt ? "Contra IA" : "VS AI"}</b>
-              <em>{pt ? "Fácil, médio e difícil serão adicionados" : "Easy, normal and hard will be added"}</em>
+              <small>{pt ? "SOLO / CPU BETA 2" : "SOLO / CPU BETA 2"}</small>
+              <b>{pt ? "Jogar contra IA" : "Play vs AI"}</b>
+              <em>{pt ? "Fácil, normal e difícil" : "Easy, normal and hard"}</em>
             </span>
 
-            <span className="v3-action-badge">{pt ? "EM BREVE" : "SOON"}</span>
+            <span className="v3-action-arrow">→</span>
           </button>
 
           <button

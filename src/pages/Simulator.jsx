@@ -12,6 +12,7 @@ import BattleLinkOverlay from "../components/game/BattleLinkOverlay.jsx";
 import Modal from "../components/common/Modal.jsx";
 import { cardIndex } from "../services/cardRepository.js";
 import { applyGameAction } from "../game/reducer.js";
+import { chooseAIAction } from "../game/ai.js";
 import {
   findPhysicalCard,
   getDatabaseCard,
@@ -586,6 +587,28 @@ export default function Simulator({
   const online =
     mode === "online";
 
+  const aiMode =
+    mode === "ai";
+
+  const aiPlayerId =
+    match.ai?.playerId ||
+    initialMatch?.ai?.playerId ||
+    "player2";
+
+  const humanPlayerId =
+    match.ai?.humanPlayerId ||
+    initialMatch?.ai?.humanPlayerId ||
+    viewerPlayerId ||
+    "player1";
+
+  const aiGuardRef =
+    useRef({
+      turnNumber: null,
+      phase: null,
+      actions: 0,
+      recentActionKeys: []
+    });
+
 
   const effectDecision =
     match.pendingEffectDecision ||
@@ -667,6 +690,15 @@ export default function Simulator({
       }
 
       if (
+        match.burstOpportunity
+          ?.playerId
+      ) {
+        return match
+          .burstOpportunity
+          .playerId;
+      }
+
+      if (
         match.battle
           ?.stage ===
         "ultimateTrigger" &&
@@ -719,15 +751,21 @@ export default function Simulator({
 
 
   const canControlActor =
-    !online ||
-    viewerPlayerId ===
-      actorId;
+    online
+      ? viewerPlayerId ===
+          actorId
+      : aiMode
+        ? actorId ===
+            humanPlayerId
+        : true;
 
 
   const bottomId =
     online
       ? viewerPlayerId
-      : actorId;
+      : aiMode
+        ? humanPlayerId
+        : actorId;
 
 
   const topId =
@@ -869,9 +907,13 @@ export default function Simulator({
       effectDecision
     ) &&
     (
-      !online ||
-      viewerPlayerId ===
-        effectDecision.playerId
+      online
+        ? viewerPlayerId ===
+            effectDecision.playerId
+        : aiMode
+          ? humanPlayerId ===
+              effectDecision.playerId
+          : true
     );
 
 
@@ -1004,6 +1046,102 @@ export default function Simulator({
       );
     }
   }
+
+
+  /* =======================================================
+     CPU BETA 2 CONTROLLER
+  ======================================================= */
+
+  useEffect(() => {
+    if (
+      !aiMode ||
+      match.winnerId ||
+      actorId !== aiPlayerId
+    ) {
+      return undefined;
+    }
+
+    const guard =
+      aiGuardRef.current;
+
+    if (
+      guard.turnNumber !== match.turnNumber ||
+      guard.phase !== match.phase
+    ) {
+      guard.turnNumber = match.turnNumber;
+      guard.phase = match.phase;
+      guard.actions = 0;
+      guard.recentActionKeys = [];
+    }
+
+    const difficulty =
+      match.ai?.difficulty ||
+      "normal";
+
+    const action =
+      chooseAIAction(
+        match,
+        aiPlayerId,
+        cardIndex,
+        {
+          difficulty,
+          recentActionKeys:
+            guard.recentActionKeys,
+          turnActionCount:
+            guard.actions,
+          maxTurnActions: 70
+        }
+      );
+
+    if (!action) {
+      setNotice(
+        language === "en"
+          ? "CPU paused because no legal automatic action was found."
+          : "A CPU foi pausada porque nenhuma ação automática legal foi encontrada."
+      );
+      return undefined;
+    }
+
+    const delay =
+      difficulty === "hard"
+        ? 360
+        : difficulty === "easy"
+          ? 650
+          : 500;
+
+    const timer =
+      window.setTimeout(
+        () => {
+          const key =
+            JSON.stringify(
+              action
+            );
+
+          guard.actions += 1;
+          guard.recentActionKeys = [
+            ...guard.recentActionKeys,
+            key
+          ].slice(-14);
+
+          dispatch(
+            action,
+            aiPlayerId
+          );
+        },
+        delay
+      );
+
+    return () =>
+      window.clearTimeout(
+        timer
+      );
+  }, [
+    aiMode,
+    aiPlayerId,
+    actorId,
+    match,
+    language
+  ]);
 
 
   /* =======================================================
@@ -3231,9 +3369,13 @@ export default function Simulator({
 
 
     const ownerCanAct =
-      !online ||
-      viewerPlayerId ===
-        ownerId;
+      online
+        ? viewerPlayerId ===
+            ownerId
+        : aiMode
+          ? humanPlayerId ===
+              ownerId
+          : true;
 
 
     if (
@@ -4073,9 +4215,13 @@ export default function Simulator({
         : trigger.controllerPlayerId;
 
     const waiting =
-      online &&
-      viewerPlayerId !==
-        resolvingPlayerId;
+      online
+        ? viewerPlayerId !==
+            resolvingPlayerId
+        : aiMode
+          ? humanPlayerId !==
+              resolvingPlayerId
+          : false;
 
     const sourceName =
       sourceCard
@@ -5042,6 +5188,20 @@ export default function Simulator({
               ].name
             }
           </strong>
+
+          {aiMode && (
+            <small
+              className={`ai-turn-indicator ${
+                actorId === aiPlayerId
+                  ? "thinking"
+                  : ""
+              }`}
+            >
+              {actorId === aiPlayerId
+                ? (language === "en" ? "CPU thinking…" : "CPU pensando…")
+                : (language === "en" ? "Your action" : "Sua ação")}
+            </small>
+          )}
         </div>
 
 
@@ -5911,9 +6071,13 @@ export default function Simulator({
                           id
                         ].mulliganUsed ||
                         (
-                          online &&
-                          viewerPlayerId !==
-                            id
+                          online
+                            ? viewerPlayerId !==
+                                id
+                            : aiMode
+                              ? humanPlayerId !==
+                                  id
+                              : false
                         )
                       }
 
@@ -6059,7 +6223,13 @@ export default function Simulator({
           <div className="burst-opportunity-actions">
             <button
               className="primary-btn"
-              disabled={online && viewerPlayerId !== match.burstOpportunity.playerId}
+              disabled={
+                online
+                  ? viewerPlayerId !== match.burstOpportunity.playerId
+                  : aiMode
+                    ? humanPlayerId !== match.burstOpportunity.playerId
+                    : false
+              }
               onClick={() =>
                 dispatch(
                   { type: "ACTIVATE_BURST", options: { confirmCondition: false } },
@@ -6072,7 +6242,13 @@ export default function Simulator({
 
             <button
               className="ghost"
-              disabled={online && viewerPlayerId !== match.burstOpportunity.playerId}
+              disabled={
+                online
+                  ? viewerPlayerId !== match.burstOpportunity.playerId
+                  : aiMode
+                    ? humanPlayerId !== match.burstOpportunity.playerId
+                    : false
+              }
               onClick={() =>
                 dispatch(
                   { type: "PASS_BURST" },
@@ -6544,12 +6720,18 @@ export default function Simulator({
             defeatedId
           ];
 
+        const resultViewerId =
+          online
+            ? viewerPlayerId
+            : aiMode
+              ? humanPlayerId
+              : null;
+
         const isDefeat =
           Boolean(
-            online &&
-            viewerPlayerId &&
+            resultViewerId &&
             match.winnerId !==
-              viewerPlayerId
+              resultViewerId
           );
 
         const reason =
