@@ -1,0 +1,15 @@
+BATTLE SPIRITS — TESTE DO NOVO ATUALIZADOR (v3.3.1d)
+
+1. Abra GERENCIAR_PROJETO.bat na pasta do seu projeto.
+2. Escolha [1] Aplicar ZIP de update + validar + GitHub + Cloudflare.
+3. Selecione o ZIP Battle-Spirits-v3.3.1d-Update-Pipeline-Test-PATCH-ONLY.zip.
+4. Aguarde verify + 112 testes + build + git push.
+5. Quando perguntar pelo Cloudflare, responda S.
+6. Abra o site publicado.
+
+CONFIRMAÇÃO DE SUCESSO:
+- a Home deve mostrar V3.3.1d
+- deve aparecer o selo UPDATE OK ao lado da versão
+- Patch Notes deve mostrar "Teste do Pipeline de Atualização"
+
+Esta atualização não altera IA, Online, regras nem database.

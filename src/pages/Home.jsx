@@ -107,7 +107,13 @@ export default function Home({ go }) {
         <div className="v3-brand-mini">
           <span className="v3-live-dot" />
           <span>ETERNAL SIMULATOR</span>
-          <b>V3.3.1c</b>
+          <b>V3.3.1d</b>
+          <span
+            className="v3-update-pipeline-badge"
+            title={pt ? "Teste do novo fluxo de atualização concluído" : "New update workflow test completed"}
+          >
+            UPDATE OK
+          </span>
         </div>
 
         <button
@@ -220,7 +226,7 @@ export default function Home({ go }) {
               </div>
 
               <div className="v3-stat-card">
-                <strong>3.3.1c</strong>
+                <strong>3.3.1d</strong>
                 <span>Versão</span>
               </div>
             </div>
@@ -284,7 +290,7 @@ export default function Home({ go }) {
         <div className="v3-home-footer-center">
           <span className="v3-footer-line" />
           <b>ETERNAL SIMULATOR</b>
-          <small>V3.3.1c</small>
+          <small>V3.3.1d</small>
           <span className="v3-footer-line" />
         </div>
 

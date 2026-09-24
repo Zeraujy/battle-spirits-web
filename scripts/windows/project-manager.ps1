@@ -24,6 +24,19 @@ function Get-FileHashSafe($path) {
   return ""
 }
 
+function Get-DependencySignature {
+  $packagePath = Join-Path $ProjectRoot "package.json"
+  if (-not (Test-Path $packagePath)) { return "" }
+  $pkg = Get-Content $packagePath -Raw | ConvertFrom-Json
+  $shape = [ordered]@{
+    dependencies = $pkg.dependencies
+    devDependencies = $pkg.devDependencies
+    optionalDependencies = $pkg.optionalDependencies
+    peerDependencies = $pkg.peerDependencies
+  }
+  return ($shape | ConvertTo-Json -Depth 20 -Compress)
+}
+
 function Get-ProjectVersion {
   $pkg = Get-Content (Join-Path $ProjectRoot "package.json") -Raw | ConvertFrom-Json
   return $pkg.version
@@ -67,7 +80,7 @@ function Apply-UpdateZip {
     return $false
   }
 
-  $beforeLock = Get-FileHashSafe (Join-Path $ProjectRoot "package-lock.json")
+  $beforeDependencies = Get-DependencySignature
   $temp = Join-Path $env:TEMP ("battle-spirits-update-" + [guid]::NewGuid().ToString("N"))
   New-Item -ItemType Directory -Path $temp -Force | Out-Null
 
@@ -100,14 +113,14 @@ function Apply-UpdateZip {
       Remove-Item (Join-Path $ProjectRoot ".update-delete.txt") -Force
     }
 
-    $afterLock = Get-FileHashSafe (Join-Path $ProjectRoot "package-lock.json")
-    $needsInstall = (-not (Test-Path (Join-Path $ProjectRoot "node_modules"))) -or ($beforeLock -ne $afterLock)
+    $afterDependencies = Get-DependencySignature
+    $needsInstall = (-not (Test-Path (Join-Path $ProjectRoot "node_modules"))) -or ($beforeDependencies -ne $afterDependencies)
     if ($needsInstall) {
       Write-Host "Dependências mudaram ou node_modules não existe. Executando npm install..." -ForegroundColor Yellow
       npm install
       if ($LASTEXITCODE -ne 0) { throw "npm install falhou." }
     } else {
-      Write-Host "Dependências não mudaram; npm install ignorado." -ForegroundColor Green
+      Write-Host "Dependências não mudaram; npm install ignorado (mudanças de versão não forçam reinstall)." -ForegroundColor Green
     }
 
     Write-Host "Update aplicado com sucesso." -ForegroundColor Green

@@ -1,4 +1,4 @@
-# START HERE — v3.3.1c
+# START HERE — v3.3.1d
 
 Se você está aprendendo o projeto, comece por estes caminhos:
 
@@ -125,7 +125,7 @@ A etapa seguinte é **Card Effect Intelligence**, implementada na v3.2.5.
 A próxima evolução planejada é aprofundar **personalidades/arquétipos específicos e memória tática da partida**, permitindo que a CPU ajuste o plano ao comportamento observado do oponente sem consultar informação oculta.
 
 
-## v3.3.1c — Card Back Loading Placeholder
+## v3.3.1b — Card Back Loading Placeholder
 
 - Database/Deck Builder mostra o verso oficial da carta enquanto a thumbnail ainda está inativa ou carregando.
 - A frente aparece com um fade curto somente depois do `load`.
@@ -149,3 +149,8 @@ A próxima evolução planejada é aprofundar **personalidades/arquétipos espec
 - `UPDATE-WORKFLOW.md`: instruções do novo fluxo.
 - Cards atuais já são 300×437 WebP e são reutilizados diretamente no Database/Deck Builder.
 - Wallpapers, card back e indicadores de Level foram otimizados para reduzir carregamento e deploy.
+
+
+## v3.3.1d — Update Pipeline Test
+
+Atualização mínima para testar o novo fluxo. Depois de publicar, confirme na Home o selo `UPDATE OK` ao lado de `V3.3.1d`.

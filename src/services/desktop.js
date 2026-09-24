@@ -16,7 +16,7 @@ export async function applyDisplaySettings({ resolution = "1920x1080", displayMo
 export async function getAppInfo() {
   const desktop = window.battleSpiritsDesktop;
   if (desktop?.getAppInfo) return desktop.getAppInfo();
-  return { version: "3.3.1c", name: "Battle Spirits", mode: "web", packaged: false, userDataPath: null };
+  return { version: "3.3.1d", name: "Battle Spirits", mode: "web", packaged: false, userDataPath: null };
 }
 
 export async function openUpdater() {

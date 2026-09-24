@@ -13,6 +13,33 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.3.1d",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "Teste do Pipeline de Atualização", en: "Update Pipeline Test" },
+    summary: {
+      pt: "Atualização mínima criada de propósito para confirmar o novo fluxo automático: aplicar PATCH, validar, enviar ao GitHub e publicar no Cloudflare.",
+      en: "A deliberately tiny update created to confirm the new automatic workflow: apply PATCH, validate, push to GitHub and deploy to Cloudflare."
+    },
+    sections: [
+      {
+        title: { pt: "Confirmação visual", en: "Visual confirmation" },
+        items: {
+          pt: [
+            "A Home agora mostra `V3.3.1d` e o selo `UPDATE OK` no topo.",
+            "Se esse selo aparecer no site publicado, o PATCH chegou ao projeto e o deploy do Cloudflare recebeu a nova versão.",
+            "Nenhuma regra, IA, Online ou database foi alterada neste teste."
+          ],
+          en: [
+            "Home now shows `V3.3.1d` and an `UPDATE OK` badge in the top bar.",
+            "If this badge appears on the published site, the PATCH reached the project and Cloudflare received the new version.",
+            "No rules, AI, Online or database behavior was changed by this test."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.3.1c",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "Atualização e Deploy Rápidos", en: "Fast Update & Deploy Workflow" },

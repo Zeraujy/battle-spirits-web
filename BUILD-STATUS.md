@@ -1,4 +1,4 @@
-# Build Status — Battle Spirits Eternal Simulator v3.3.1c
+# Build Status — Battle Spirits Eternal Simulator v3.3.1d
 
 ## Fast Update & Deploy Workflow
 - `GERENCIAR_PROJETO.bat` automatiza aplicação de PATCH-ONLY, validação, build, commit/push e deploy Wrangler.
@@ -19,4 +19,9 @@
 - `npm test`
 - `npm run build` (com dependências instaladas)
 
-A v3.3.1c preserva IA, AI Debugger, Lookahead, Online/Matchmaking e o placeholder de verso da v3.3.1b.
+A v3.3.1d preserva IA, AI Debugger, Lookahead, Online/Matchmaking e o placeholder de verso da v3.3.1b.
+
+
+## v3.3.1d — Pipeline Test
+
+Atualização mínima para validar o novo GERENCIAR_PROJETO.bat. Confirmação visual: `V3.3.1d` + `UPDATE OK` na Home.
