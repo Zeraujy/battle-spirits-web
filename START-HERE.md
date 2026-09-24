@@ -1,4 +1,4 @@
-# START HERE — v3.3.1a
+# START HERE — v3.3.1b
 
 Se você está aprendendo o projeto, comece por estes caminhos:
 
@@ -124,6 +124,13 @@ A etapa seguinte é **Card Effect Intelligence**, implementada na v3.2.5.
 
 A próxima evolução planejada é aprofundar **personalidades/arquétipos específicos e memória tática da partida**, permitindo que a CPU ajuste o plano ao comportamento observado do oponente sem consultar informação oculta.
 
+
+## v3.3.1b — Card Back Loading Placeholder
+
+- Database/Deck Builder mostra o verso oficial da carta enquanto a thumbnail ainda está inativa ou carregando.
+- A frente aparece com um fade curto somente depois do `load`.
+- Se a thumbnail falhar, o simulador tenta a arte original; se ambas falharem, o verso permanece no lugar sem ícone de imagem quebrada.
+- A Arena e os modais continuam usando as imagens originais normalmente.
 
 ## v3.3.1a — Image Performance Hotfix
 

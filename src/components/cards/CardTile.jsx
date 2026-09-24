@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { resolveCardImage, resolveCardThumbnail, getCardName } from "../../game/cardAdapter.js";
 import { getCurrentLevel } from "../../game/selectors.js";
 import { CoreToken } from "../game/CoreArea.jsx";
@@ -38,11 +39,41 @@ export default function CardTile({
   const fullImage = hidden ? "./images/card-back.png" : resolveCardImage(card);
   const image = hidden ? fullImage : (imageVariant === "thumbnail" ? resolveCardThumbnail(card) : fullImage);
   const title = hidden ? "Carta oculta" : getCardName(card);
+  const useLoadingBack = !hidden && imageVariant === "thumbnail";
+  const [renderedImage, setRenderedImage] = useState(image);
+  const [imageReady, setImageReady] = useState(!useLoadingBack);
+  const [triedFullFallback, setTriedFullFallback] = useState(false);
+
+  useEffect(() => {
+    setRenderedImage(image);
+    setImageReady(!useLoadingBack);
+    setTriedFullFallback(false);
+  }, [image, useLoadingBack]);
+
+  function handleImageLoad() {
+    setImageReady(true);
+  }
+
+  function handleImageError() {
+    if (useLoadingBack && !triedFullFallback && renderedImage !== fullImage) {
+      setTriedFullFallback(true);
+      setImageReady(false);
+      setRenderedImage(fullImage);
+      return;
+    }
+
+    if (useLoadingBack) {
+      // Keep the Battle Spirits card back visible instead of a broken image.
+      setImageReady(false);
+    }
+  }
 
   return (
     <button
       type="button"
-      className={`card-tile ${compact ? "compact" : ""} ${selected ? "selected" : ""} ${physical?.exhausted && !staticPreview ? "exhausted" : ""} ${physical?.flags?.pendingManualPlay ? "pending-play-card" : ""} ${unusable ? "unusable" : ""} ${dragActive ? "pointer-drag-active" : ""}`}
+      className={`card-tile ${compact ? "compact" : ""} ${selected ? "selected" : ""} ${physical?.exhausted && !staticPreview ? "exhausted" : ""} ${physical?.flags?.pendingManualPlay ? "pending-play-card" : ""} ${unusable ? "unusable" : ""} ${dragActive ? "pointer-drag-active" : ""} ${useLoadingBack && !imageReady ? "card-image-pending" : ""}`}
+      style={useLoadingBack && !imageReady ? { backgroundImage: 'url("./images/card-back.png")' } : undefined}
+      aria-busy={useLoadingBack && !imageReady ? "true" : undefined}
       onClick={onClick}
       onPointerDown={onPointerDown}
       title={title}
@@ -58,17 +89,15 @@ export default function CardTile({
       onMouseLeave={!hidden && card ? () => onPreviewEnd?.() : undefined}
     >
       <img
-        src={image}
-        alt={title}
+        className={useLoadingBack ? `card-art-image ${imageReady ? "is-ready" : "is-loading"}` : undefined}
+        src={renderedImage}
+        alt={imageReady || !useLoadingBack ? title : ""}
         draggable={false}
         decoding="async"
         loading={loading}
         fetchPriority={fetchPriority}
-        onError={imageVariant === "thumbnail" ? (event) => {
-          if (event.currentTarget.dataset.fullFallback === "true") return;
-          event.currentTarget.dataset.fullFallback = "true";
-          event.currentTarget.src = fullImage;
-        } : undefined}
+        onLoad={useLoadingBack ? handleImageLoad : undefined}
+        onError={useLoadingBack ? handleImageError : undefined}
       />
 
       {!hidden && physical && (

@@ -1,0 +1,11 @@
+Battle Spirits Eternal Simulator v3.3.1b — Card Back Loading Placeholder
+
+Checklist:
+- CardTile thumbnail mode shows card-back while idle/loading.
+- Thumbnail success reveals front artwork.
+- Thumbnail failure falls back to original artwork.
+- Double failure keeps card-back visible.
+- Full-image Arena behavior remains unchanged.
+- npm run verify
+- npm run verify:v3
+- npm test

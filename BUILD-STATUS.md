@@ -1,13 +1,12 @@
-# Build Status — Battle Spirits Eternal Simulator v3.3.1a
+# Build Status — Battle Spirits Eternal Simulator v3.3.1b
 
-## Image Performance Hotfix
-- Home wallpaper: carregamento progressivo; não existe mais `Promise.all()` dos 10 wallpapers.
-- Thumbnails: **382** imagens WebP em `public/cards-thumbnails/`, largura de 300 px.
-- Artes originais permanecem intactas em `public/cards-database/`.
-- Deck Builder usa thumbnails + `loading=lazy` + `decoding=async` + prioridade baixa.
-- Deck Library usa thumbnails e lazy loading.
-- Próxima página do Deck Builder recebe prefetch apenas em idle.
-- `public/_headers` adiciona cache para assets estáticos.
+## Card Back Loading Placeholder
+- Database/Deck Builder usa `public/images/card-back.png` como placeholder enquanto thumbnails em lazy-loading ainda estão inativas ou carregando.
+- A arte frontal entra com fade curto após `load`.
+- Falha de thumbnail tenta automaticamente a arte original.
+- Se thumbnail e arte original falharem, o verso permanece visível e evita o ícone de imagem quebrada.
+- O placeholder reutiliza um único asset cacheável; não reverte as otimizações da v3.3.1a.
+- Arena, zoom e modal continuam usando a arte original normalmente.
 
 ## Validação esperada
 - `npm run verify`
@@ -15,4 +14,4 @@
 - `npm test`
 - `npm run build` (após `npm install`)
 
-A v3.3.1a preserva integralmente Archetype Intelligence, AI Debugger, Lookahead e Online/Matchmaking da v3.3.1.
+A v3.3.1b preserva Archetype Intelligence, AI Debugger, Lookahead, Online/Matchmaking e o Image Performance Hotfix da v3.3.1a.

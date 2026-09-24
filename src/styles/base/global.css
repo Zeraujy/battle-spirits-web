@@ -835,3 +835,23 @@ textarea::selection,
 .simulator-page .inspector .effect-bp {
   color: color-mix(in srgb, var(--selected-card-accent) 72%, #ffffff);
 }
+
+/* v3.3.1b — database/deck builder card loading placeholder */
+.card-tile.card-image-pending {
+  background-color: #080808;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.card-tile .card-art-image {
+  transition: opacity .18s ease;
+}
+.card-tile .card-art-image.is-loading {
+  opacity: 0;
+}
+.card-tile .card-art-image.is-ready {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-tile .card-art-image { transition: none; }
+}

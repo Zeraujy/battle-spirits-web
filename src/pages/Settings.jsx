@@ -249,7 +249,7 @@ export default function Settings({
     setAppInfo
   ] = useState({
     version:
-      "3.3.1a",
+      "3.3.1b",
 
     packaged:
       false,

@@ -13,6 +13,35 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.3.1b",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "Card Back Loading Placeholder", en: "Card Back Loading Placeholder" },
+    summary: {
+      pt: "O Database e o Deck Builder agora exibem o verso da carta enquanto a thumbnail está inativa ou carregando, evitando espaços vazios e imagens quebradas.",
+      en: "Database and Deck Builder now show the card back while a thumbnail is idle or loading, avoiding empty spaces and broken images."
+    },
+    sections: [
+      {
+        title: { pt: "Carregamento visual", en: "Visual loading" },
+        items: {
+          pt: [
+            "Cartas em lazy-loading mostram `card-back.png` até a frente terminar de carregar.",
+            "A frente entra com um fade curto para evitar o efeito de imagem aparecendo bruscamente.",
+            "Se a thumbnail falhar, o componente tenta automaticamente a arte original em alta qualidade.",
+            "Se thumbnail e arte original falharem, o verso permanece visível no lugar da imagem quebrada."
+          ],
+          en: [
+            "Lazy-loaded cards show `card-back.png` until the front artwork finishes loading.",
+            "The front artwork fades in briefly to avoid a harsh image pop-in.",
+            "If the thumbnail fails, the component automatically tries the original high-quality artwork.",
+            "If both thumbnail and original artwork fail, the card back remains visible instead of a broken image."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.3.1a",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "Image Performance Hotfix", en: "Image Performance Hotfix" },
