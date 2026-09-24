@@ -1,4 +1,4 @@
-# START HERE — v3.2.1
+# START HERE — v3.2.2
 
 Se você está aprendendo o projeto, comece por estes caminhos:
 
@@ -62,3 +62,12 @@ A Reserve e o Core Trash não devem receber caixas extras de orientação durant
 - `src/styles/arena/arenaLayoutV321.css`: base consolidada de Decks, mãos e zonas da Arena.
 
 A futura IA deve consultar `getLegalActions` em vez de reimplementar regras próprias.
+
+
+## v3.2.2 — CPU Combat Intelligence
+
+- `src/game/ai.js`: avaliação do Attack Step agora considera pressão total, trocas de BP e risco defensivo do turno seguinte.
+- `src/game/ai.test.js`: cobertura de preservação do último bloqueador, ataques suicidas, bloqueio eficiente e lethal.
+- A CPU continua obrigada a executar somente ações retornadas por `getLegalActions()`.
+
+A próxima etapa planejada é **Core & Resource Management**, sem mover regras de custo para a IA.

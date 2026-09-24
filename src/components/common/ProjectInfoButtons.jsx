@@ -13,6 +13,65 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.2.2",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "CPU Combat Intelligence", en: "CPU Combat Intelligence" },
+    summary: {
+      pt: "A Eternal CPU passa a avaliar o Attack Step como um plano de combate, preservando defesa e escolhendo trocas de BP com mais critério.",
+      en: "Eternal CPU now evaluates the Attack Step as a combat plan, preserving defense and choosing BP trades more carefully."
+    },
+    sections: [
+      {
+        title: { pt: "Ataque inteligente", en: "Smarter attacking" },
+        items: {
+          pt: [
+            "A CPU agora considera todos os atacantes prontos e todos os bloqueadores disponíveis, em vez de avaliar cada ataque isoladamente.",
+            "Ataques não letais que entregariam uma carta gratuitamente para um bloqueador muito mais forte passam a ser evitados.",
+            "A CPU reconhece pressão acumulada do Attack Step e sequências em que a quantidade de atacantes supera a quantidade de bloqueadores.",
+            "Ataques imediatamente letais continuam tendo prioridade máxima."
+          ],
+          en: [
+            "The CPU now considers all ready attackers and available blockers instead of evaluating every attack in isolation.",
+            "Non-lethal attacks that would donate a body to a much stronger blocker are now avoided.",
+            "The CPU recognizes full Attack Step pressure and sequences where attackers outnumber blockers.",
+            "Immediate lethal attacks still receive maximum priority."
+          ]
+        }
+      },
+      {
+        title: { pt: "Defesa & bloqueios", en: "Defense & blocking" },
+        items: {
+          pt: [
+            "A CPU estima o risco do próximo turno antes de exaurir seu último bloqueador em um ataque.",
+            "Com Life baixa, ela pode encerrar o Attack Step para manter defesa suficiente contra a resposta do oponente.",
+            "Ao bloquear, a CPU prefere o menor bloqueador que vence o combate e preserva corpos maiores quando eles não são necessários.",
+            "A decisão entre bloquear ou receber dano considera Life atual, próximos atacantes e o valor da troca de BP."
+          ],
+          en: [
+            "The CPU estimates next-turn risk before exhausting its last blocker on an attack.",
+            "At low Life it may end the Attack Step to preserve enough defense against the opponent's response.",
+            "When blocking, the CPU prefers the smallest body that wins combat and preserves larger bodies when they are unnecessary.",
+            "Block-versus-damage decisions consider current Life, future attackers and BP trade value."
+          ]
+        }
+      },
+      {
+        title: { pt: "Validação", en: "Validation" },
+        items: {
+          pt: [
+            "Adicionados testes para preservação do último bloqueador, rejeição de ataque suicida, bloqueio eficiente e prioridade de lethal.",
+            "A suíte automatizada passa de 82 para 86 testes, mantendo a regra de que toda ação da CPU precisa vir de getLegalActions()."
+          ],
+          en: [
+            "Added tests for preserving the last blocker, refusing suicide attacks, efficient blocking and lethal priority.",
+            "The automated suite grows from 82 to 86 tests while keeping the rule that every CPU action must come from getLegalActions()."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.2.1",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "Match Stability, Matchmaking & CPU Beta 2", en: "Match Stability, Matchmaking & CPU Beta 2" },

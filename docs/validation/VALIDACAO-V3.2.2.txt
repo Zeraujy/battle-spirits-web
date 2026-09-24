@@ -1,0 +1,28 @@
+Battle Spirits Eternal Simulator v3.2.2 — CPU Combat Intelligence
+Data: 24/09/2026
+
+VALIDAÇÃO
+- npm run verify: OK
+- npm run verify:v3: OK
+- npm test: 86/86 OK
+- Database: 365 IDs únicos
+- Artwork runtime: 365/365 referências válidas
+- Teste real IA vs IA: SD23 vs SD28
+  - 118 ações
+  - 7 turnos
+  - término por Life
+  - 0 ações ilegais
+
+COMBAT INTELLIGENCE
+- considera pressão do Attack Step inteiro
+- estima trocas de BP antes de atacar
+- evita ataques suicidas não letais
+- preserva bloqueadores quando o próximo turno apresenta risco letal
+- prioriza lethal imediato
+- escolhe bloqueador suficiente com melhor eficiência
+- decisões continuam limitadas a getLegalActions() + applyGameAction()
+
+BUILD
+- O ZIP GitHub-ready não inclui node_modules.
+- Dependências Windows do pacote original não podem validar o binding nativo Linux do Vite/Rolldown.
+- Executar npm install && npm run check no ambiente de deploy/Windows antes de publicar.

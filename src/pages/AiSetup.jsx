@@ -89,14 +89,14 @@ export default function AiSetup({ onBack, onStart }) {
         </button>
 
         <div>
-          <span className="eyebrow">ETERNAL CPU • BETA 2</span>
+          <span className="eyebrow">ETERNAL CPU • BETA 2 • COMBAT</span>
           <h1>Partida contra IA</h1>
           <p>
-            A CPU agora escolhe apenas ações válidas da Rules Engine e avalia o estado da partida antes de jogar.
+            A CPU usa a Rules Engine e agora avalia pressão de ataque, trocas de BP e a defesa necessária para o próximo turno.
           </p>
         </div>
 
-        <span className="ai-beta-pill">BETA 2</span>
+        <span className="ai-beta-pill">COMBAT 2.2</span>
       </header>
 
       {!decks.length ? (
@@ -158,14 +158,14 @@ export default function AiSetup({ onBack, onStart }) {
             </article>
           </section>
 
-          <section className="ai-behavior-strip" aria-label="Recursos da CPU Beta 2">
+          <section className="ai-behavior-strip" aria-label="Recursos da CPU Combat Intelligence">
             <div>
               <strong>Ações legais</strong>
               <span>Usa a mesma Rules Engine da partida.</span>
             </div>
             <div>
-              <strong>Leitura de mesa</strong>
-              <span>Avalia Life, BP, recursos e presença de campo.</span>
+              <strong>Combat Intelligence</strong>
+              <span>Planeja pressão, trocas, bloqueios e defesa do próximo turno.</span>
             </div>
             <div>
               <strong>Sem mão revelada</strong>

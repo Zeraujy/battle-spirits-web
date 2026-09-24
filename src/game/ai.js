@@ -206,30 +206,198 @@ function repeatedActionPenalty(action, recentActionKeys = []) {
   return repetitions === 1 ? -80 : -1200;
 }
 
+function readyBattleCards(match, playerId, cardIndex, { includeExhausted = false } = {}) {
+  const player = match.players?.[playerId];
+  if (!player) return [];
+
+  return [
+    ...(player.field?.spirits || []),
+    ...(player.field?.other || [])
+  ].filter((physical) => {
+    if (physical.combinedWith || physical.pendingDestruction) return false;
+    if (!includeExhausted && physical.exhausted) return false;
+    const card = getDatabaseCard(cardIndex, physical);
+    return ["spirit", "ultimate", "brave"].includes(card?.cardType);
+  });
+}
+
+function combatBodyValue(match, playerId, physical, cardIndex) {
+  if (!physical) return 0;
+  // cardBoardValue includes a small ready bonus. Removing it here makes this
+  // value stable while comparing bodies that may become exhausted in combat.
+  return Math.max(1, cardBoardValue(match, playerId, physical, cardIndex) - (physical.exhausted ? 0 : 4));
+}
+
+function combatSymbols(match, cardIndex, physical) {
+  return Math.max(1, getEffectiveSymbols(match, cardIndex, physical)?.length || 1);
+}
+
+function guaranteedDamageFromAttackers(match, cardIndex, attackers, blockerCount) {
+  if (!attackers?.length) return 0;
+  const damages = attackers
+    .map((physical) => combatSymbols(match, cardIndex, physical))
+    .sort((a, b) => b - a);
+
+  // Each ready blocker can stop at most one attack because it becomes
+  // Exhausted after blocking. A perfect defender blocks the largest symbols.
+  return damages.slice(Math.max(0, blockerCount)).reduce((sum, value) => sum + value, 0);
+}
+
+function nextTurnDefenseRisk(match, playerId, attackerInstanceId, cardIndex) {
+  const me = match.players?.[playerId];
+  const opponentId = otherPlayerId(match, playerId);
+  const opponent = match.players?.[opponentId];
+  if (!me || !opponent) return { penalty: 0, guaranteedDamage: 0, remainingBlockers: 0, threats: 0 };
+
+  // The opponent refreshes at the beginning of their next turn, so even cards
+  // that are currently Exhausted can become attackers. Our cards that attack
+  // this turn remain Exhausted through that opposing attack step.
+  const nextTurnThreats = readyBattleCards(match, opponentId, cardIndex, { includeExhausted: true });
+  const remainingBlockers = readyBattleCards(match, playerId, cardIndex)
+    .filter((physical) => physical.instanceId !== attackerInstanceId);
+
+  const guaranteedDamage = guaranteedDamageFromAttackers(
+    match,
+    cardIndex,
+    nextTurnThreats,
+    remainingBlockers.length
+  );
+
+  const life = numeric(me.life);
+  let penalty = 0;
+
+  if (nextTurnThreats.length && guaranteedDamage >= life && life > 0) {
+    penalty -= 2200;
+  } else if (life <= 1 && nextTurnThreats.length > remainingBlockers.length) {
+    penalty -= 520;
+  } else if (life <= 2 && nextTurnThreats.length > remainingBlockers.length) {
+    penalty -= 240;
+  } else if (life <= 3 && remainingBlockers.length === 0 && nextTurnThreats.length) {
+    penalty -= 110;
+  }
+
+  return {
+    penalty,
+    guaranteedDamage,
+    remainingBlockers: remainingBlockers.length,
+    threats: nextTurnThreats.length
+  };
+}
+
+function projectedAttackExchange(match, playerId, attacker, blockers, cardIndex) {
+  const opponentId = otherPlayerId(match, playerId);
+  const attackerBP = numeric(getEffectiveBP(match, cardIndex, attacker));
+  const attackerValue = combatBodyValue(match, playerId, attacker, cardIndex);
+  const symbols = combatSymbols(match, cardIndex, attacker);
+  const opponentLife = numeric(match.players?.[opponentId]?.life);
+
+  // Defender may always decline unless a restriction says otherwise. For AI
+  // planning, taking Life is valued as a cost, but an immediately lethal hit is
+  // effectively unacceptable to the defender.
+  const outcomes = [{
+    kind: "decline",
+    utility: opponentLife <= symbols ? 250_000 : 42 * symbols + (opponentLife <= 2 ? 36 : 0)
+  }];
+
+  for (const blocker of blockers) {
+    const blockerBP = numeric(getEffectiveBP(match, cardIndex, blocker));
+    const blockerValue = combatBodyValue(match, opponentId, blocker, cardIndex);
+    let utility = 0;
+
+    if (attackerBP > blockerBP) {
+      // Attacker survives and removes a public opposing body.
+      utility = blockerValue * 2.15;
+    } else if (attackerBP < blockerBP) {
+      // Defender can trade one exhausted blocker action for our attacker.
+      utility = -attackerValue * 2.55;
+    } else {
+      // Mutual destruction. Positive only when the enemy body is worth more.
+      utility = blockerValue * 1.65 - attackerValue * 1.75;
+    }
+
+    outcomes.push({ kind: "block", blocker, utility });
+  }
+
+  // The defender is assumed to choose the line that is worst for the attacker.
+  return outcomes.sort((a, b) => a.utility - b.utility)[0] || { kind: "decline", utility: 0 };
+}
+
 function attackScore(match, playerId, action, cardIndex) {
   const ctx = findPhysicalCard(match, action.instanceId);
   if (!ctx?.card) return 0;
 
   const opponentId = otherPlayerId(match, playerId);
   const opponent = match.players[opponentId];
-  const attackerBP = numeric(getEffectiveBP(match, cardIndex, ctx.card));
-  const symbols = Math.max(1, getEffectiveSymbols(match, cardIndex, ctx.card)?.length || 1);
-  const blockers = (opponent?.field?.spirits || [])
-    .concat(opponent?.field?.other || [])
-    .filter((physical) => !physical.exhausted);
+  const attacker = ctx.card;
+  const attackerBP = numeric(getEffectiveBP(match, cardIndex, attacker));
+  const symbols = combatSymbols(match, cardIndex, attacker);
+  const opponentLife = numeric(opponent?.life);
+  const attackers = readyBattleCards(match, playerId, cardIndex);
+  const blockers = readyBattleCards(match, opponentId, cardIndex);
+  const bodyValue = combatBodyValue(match, playerId, attacker, cardIndex);
 
   if (!blockers.length) {
-    const lethal = numeric(opponent?.life) <= symbols;
-    return lethal ? 250_000 : 85 + symbols * 34 + attackerBP / 900;
+    const lethal = opponentLife <= symbols;
+    let score = lethal ? 250_000 : 92 + symbols * 38 + attackerBP / 850;
+
+    // Battle Spirits rewards pressure, but an exhausted attacker cannot defend
+    // on the opponent's next turn. Hard/Normal now understand that trade-off.
+    if (!lethal) score += nextTurnDefenseRisk(match, playerId, action.instanceId, cardIndex).penalty;
+    return score;
   }
 
-  const blockerBPs = blockers.map((physical) => numeric(getEffectiveBP(match, cardIndex, physical)));
-  const weakest = Math.min(...blockerBPs);
-  const strongest = Math.max(...blockerBPs);
+  const guaranteedDamage = guaranteedDamageFromAttackers(match, cardIndex, attackers, blockers.length);
+  const forcedLethalPlan = guaranteedDamage >= opponentLife && opponentLife > 0;
+  const mustBlockNow = opponentLife <= symbols;
+  const exchange = projectedAttackExchange(match, playerId, attacker, blockers, cardIndex);
 
-  if (attackerBP > strongest) return 62 + symbols * 11;
-  if (attackerBP >= weakest) return 38 + symbols * 8;
-  return 8 + symbols * 4 - Math.max(0, weakest - attackerBP) / 700;
+  let score = exchange.utility;
+
+  // Whole-attack-step pressure. When every defensive assignment still leaves
+  // lethal damage, prefer feeding lower-value bodies into the first blocks and
+  // preserve the better attackers for later in the sequence.
+  if (forcedLethalPlan) {
+    score += 18_000;
+    score -= bodyValue * 0.7;
+  } else if (mustBlockNow) {
+    // A lethal-sized swing forces the defender to spend a blocker, even if the
+    // attacking body itself is smaller. This opens later attacks in the step.
+    score += 230 + Math.max(0, attackers.length - 1) * 28;
+    score -= bodyValue * 0.22;
+  } else {
+    const attackPressure = Math.max(0, attackers.length - blockers.length);
+    score += attackPressure * 38 + symbols * 10;
+  }
+
+  // If the best defensive reply simply destroys this attacker, treat a casual
+  // non-lethal suicide as genuinely bad instead of attacking just because the
+  // action is legal.
+  if (!mustBlockNow && exchange.kind === "block" && exchange.utility < 0) {
+    score -= 42;
+  }
+
+  if (!forcedLethalPlan && !mustBlockNow) {
+    score += nextTurnDefenseRisk(match, playerId, action.instanceId, cardIndex).penalty;
+  }
+
+  return score;
+}
+
+function futureAttackPressure(match, defenderId, cardIndex) {
+  const battle = match.battle;
+  if (!battle?.attackerPlayerId) return { attackers: [], guaranteedDamage: 0 };
+
+  const futureAttackers = readyBattleCards(match, battle.attackerPlayerId, cardIndex)
+    .filter((physical) => physical.instanceId !== battle.attackerInstanceId);
+  const currentBlockers = readyBattleCards(match, defenderId, cardIndex);
+  const guaranteedDamage = guaranteedDamageFromAttackers(
+    match,
+    cardIndex,
+    futureAttackers,
+    currentBlockers.length
+  );
+
+  return { attackers: futureAttackers, guaranteedDamage };
 }
 
 function blockScore(match, playerId, action, cardIndex) {
@@ -240,31 +408,82 @@ function blockScore(match, playerId, action, cardIndex) {
   const blockerCtx = findPhysicalCard(match, action.instanceId);
   if (!attackerCtx?.card || !blockerCtx?.card) return 0;
 
+  const opponentId = battle.attackerPlayerId;
   const attackerBP = numeric(getEffectiveBP(match, cardIndex, attackerCtx.card));
   const blockerBP = numeric(getEffectiveBP(match, cardIndex, blockerCtx.card));
-  const attackerSymbols = Math.max(1, getEffectiveSymbols(match, cardIndex, attackerCtx.card)?.length || 1);
+  const attackerSymbols = combatSymbols(match, cardIndex, attackerCtx.card);
+  const attackerValue = combatBodyValue(match, opponentId, attackerCtx.card, cardIndex);
+  const blockerValue = combatBodyValue(match, playerId, blockerCtx.card, cardIndex);
   const life = numeric(match.players[playerId]?.life);
+  const future = futureAttackPressure(match, playerId, cardIndex);
 
-  let score = 26;
-  if (blockerBP > attackerBP) score += 80;
-  else if (blockerBP === attackerBP) score += 55;
-  else score -= 22 + (attackerBP - blockerBP) / 650;
+  let score = 0;
 
-  if (life <= attackerSymbols) score += 200_000;
-  else if (life <= 2) score += 65;
+  if (blockerBP > attackerBP) {
+    score += 110 + attackerValue * 1.45;
+    // Among blockers that all win, spend the smallest adequate body.
+    score -= blockerValue * 0.7;
+    score -= Math.max(0, blockerBP - attackerBP) / 95;
+  } else if (blockerBP === attackerBP) {
+    score += 60 + attackerValue * 1.25 - blockerValue * 0.9;
+  } else {
+    // Sacrificial blocks are worthwhile mainly to protect critical Life.
+    score -= blockerValue * 1.5;
+    score -= Math.max(0, attackerBP - blockerBP) / 160;
+  }
 
-  // Prefer the cheapest sufficient blocker instead of wasting the largest body.
-  if (blockerBP >= attackerBP) score -= Math.max(0, blockerBP - attackerBP) / 1200;
+  const lethalHit = life <= attackerSymbols;
+  if (lethalHit) {
+    score += 220_000;
+  } else {
+    score += attackerSymbols * (life <= 2 ? 90 : life <= 3 ? 48 : 20);
+  }
+
+  // Do not casually exhaust the only useful blocker on a small attack when a
+  // more dangerous attacker is still waiting behind it.
+  if (!lethalHit && future.attackers.length) {
+    const biggestFutureBP = Math.max(
+      ...future.attackers.map((physical) => numeric(getEffectiveBP(match, cardIndex, physical))),
+      0
+    );
+    const biggestFutureSymbols = Math.max(
+      ...future.attackers.map((physical) => combatSymbols(match, cardIndex, physical)),
+      0
+    );
+    const currentThreat = attackerBP / 1000 + attackerSymbols * 2.2;
+    const futureThreat = biggestFutureBP / 1000 + biggestFutureSymbols * 2.2;
+
+    if (futureThreat > currentThreat + 1.2 && blockerBP >= attackerBP) {
+      score -= 72;
+    }
+  }
+
   return score;
 }
 
 function declineBlockScore(match, playerId, cardIndex) {
   const attackerCtx = findPhysicalCard(match, match.battle?.attackerInstanceId);
   if (!attackerCtx?.card) return 0;
-  const symbols = Math.max(1, getEffectiveSymbols(match, cardIndex, attackerCtx.card)?.length || 1);
+
+  const symbols = combatSymbols(match, cardIndex, attackerCtx.card);
   const life = numeric(match.players[playerId]?.life);
-  if (life <= symbols) return -300_000;
-  return life <= 2 ? -90 : -18 * symbols;
+  const afterLife = life - symbols;
+  if (afterLife <= 0) return -300_000;
+
+  const future = futureAttackPressure(match, playerId, cardIndex);
+  let score = -symbols * (life <= 2 ? 95 : life <= 3 ? 42 : 14);
+
+  // Taking non-lethal Life also moves those Cores to Reserve in Battle Spirits,
+  // so early-game damage is not always worse than throwing away a body.
+  if (life >= 4) score += symbols * 12 + 12;
+
+  if (future.guaranteedDamage >= afterLife && future.attackers.length) {
+    score -= 2600;
+  } else if (afterLife <= 2 && future.attackers.length) {
+    score -= 80;
+  }
+
+  return score;
 }
 
 function mulliganScore(match, playerId, cardIndex) {

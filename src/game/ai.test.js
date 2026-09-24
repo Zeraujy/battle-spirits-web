@@ -140,3 +140,67 @@ test("AI vs AI can advance through many legal actions without an illegal move", 
 
   assert.ok(steps >= 20, "AI simulation should exercise a meaningful action sequence");
 });
+
+test("Combat Intelligence holds the last blocker when a non-lethal attack would expose lethal next turn", () => {
+  const match = baseMatch("player2");
+  match.phase = "attack";
+  match.players.player2.life = 1;
+  match.players.player1.life = 5;
+  match.players.player1.field.spirits = [fieldCard("S3", "enemy-next-turn")];
+  match.players.player2.field.spirits = [fieldCard("S6", "cpu-last-blocker")];
+
+  const action = chooseAIAction(match, "player2", index, { difficulty: "hard" });
+  assert.equal(action.type, "ADVANCE_PHASE");
+});
+
+test("Combat Intelligence refuses a casual suicide attack into a much stronger blocker", () => {
+  const match = baseMatch("player2");
+  match.phase = "attack";
+  match.players.player1.life = 5;
+  match.players.player1.field.spirits = [fieldCard("S6", "enemy-wall")];
+  match.players.player2.field.spirits = [fieldCard("S3", "cpu-small-attacker")];
+
+  const ranked = rankAIActions(match, "player2", index, { difficulty: "hard" });
+  assert.equal(ranked[0].action.type, "ADVANCE_PHASE");
+  const attack = ranked.find((entry) => entry.action.type === "DECLARE_ATTACK");
+  assert.ok(attack);
+  assert.ok(attack.score < ranked[0].score);
+});
+
+test("Combat Intelligence uses the smallest sufficient blocker for a lethal hit", () => {
+  const match = baseMatch("player1");
+  match.phase = "attack";
+  match.players.player2.life = 1;
+  match.players.player1.field.spirits = [fieldCard("S0", "enemy-small-attacker")];
+  match.players.player2.field.spirits = [
+    fieldCard("S3", "cpu-efficient-blocker"),
+    fieldCard("S6", "cpu-premium-blocker")
+  ];
+  match.battle = {
+    id: "battle-efficient-block",
+    attackerPlayerId: "player1",
+    defenderPlayerId: "player2",
+    attackerInstanceId: "enemy-small-attacker",
+    blockerInstanceId: null,
+    stage: "block",
+    flash: null,
+    restrictions: {}
+  };
+
+  const action = chooseAIAction(match, "player2", index, { difficulty: "hard" });
+  assert.equal(action.type, "DECLARE_BLOCK");
+  assert.equal(action.instanceId, "cpu-efficient-blocker");
+});
+
+test("Combat Intelligence still takes immediate lethal even when defending next turn would be dangerous", () => {
+  const match = baseMatch("player2");
+  match.phase = "attack";
+  match.players.player2.life = 1;
+  match.players.player1.life = 2;
+  match.players.player1.field.spirits = [fieldCard("S3", "enemy-threat")];
+  match.players.player2.field.spirits = [fieldCard("S6", "cpu-lethal-attacker")];
+
+  const action = chooseAIAction(match, "player2", index, { difficulty: "hard" });
+  assert.equal(action.type, "DECLARE_ATTACK");
+  assert.equal(action.instanceId, "cpu-lethal-attacker");
+});
