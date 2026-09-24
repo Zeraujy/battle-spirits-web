@@ -1,0 +1,119 @@
+/* =========================================================
+   BATTLE SPIRITS ETERNAL SIMULATOR — v3.2.0
+   RULES & EFFECTS EXPANSION — UI LAYER
+
+   Keeps rule feedback clear without changing the simulator's
+   monochrome visual identity.
+========================================================= */
+
+.burst-opportunity-panel {
+  position: fixed;
+  z-index: 1450;
+  left: 50%;
+  top: 86px;
+  width: min(520px, calc(100vw - 32px));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(24,24,24,.97), rgba(10,10,10,.98));
+  box-shadow:
+    0 18px 48px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,255,255,.035);
+  backdrop-filter: blur(12px);
+}
+
+.burst-opportunity-panel > div:first-child {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.burst-opportunity-panel span {
+  color: #d8d8d8;
+  font-size: 8px;
+  font-weight: 1000;
+  letter-spacing: .18em;
+}
+
+.burst-opportunity-panel strong {
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.burst-opportunity-panel small {
+  overflow: hidden;
+  color: #a8a8a8;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.burst-opportunity-actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 7px;
+}
+
+.burst-opportunity-actions button {
+  min-height: 34px;
+  padding: 7px 11px;
+  font-size: 9px;
+}
+
+@media (max-width: 680px) {
+  .burst-opportunity-panel {
+    top: 72px;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .burst-opportunity-actions {
+    width: 100%;
+  }
+
+  .burst-opportunity-actions button {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burst-opportunity-panel,
+  .burst-opportunity-panel * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   HOTFIX — RAINBOW / ULTIMATE GLOW SHOULD HUG THE CARD
+
+   Some high-rarity Ultimate cards could show a broad rectangular halo because
+   an outer pseudo-element was attached to the whole field-card wrapper.
+   We keep the glow coming from the card itself and disable the wrapper-level
+   halo so the effect stays tight around the visible card art.
+--------------------------------------------------------- */
+
+.simulator-page .field-card-wrap.field-glow-rainbow::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Slightly reinforce the card-level aura so removing the wrapper halo does
+   not make Ultimate cards feel visually weaker. */
+.simulator-page .field-card-wrap.field-glow-rainbow > .card-tile {
+  box-shadow:
+    0 9px 24px rgba(0,0,0,.38),
+    -4px -3px 10px rgba(255, 72, 72, .28),
+     4px -3px 11px rgba(92, 160, 255, .28),
+     5px  4px 13px rgba(255, 218, 73, .25),
+    -4px  5px 13px rgba(133, 89, 255, .27),
+     0 0 22px rgba(255,255,255,.11) !important;
+}

@@ -1,0 +1,32 @@
+BATTLE SPIRITS ETERNAL SIMULATOR v3.1.2 — ETERNAL MONOCHROME COMPLETE
+Data: 23/09/2026
+
+ALTERAÇÕES VISUAIS
+- Paleta decorativa revisada em todas as folhas CSS da aplicação.
+- Telas/painéis antigos em azul, amarelo, dourado, verde e vermelho foram convertidos para preto, branco e grafite.
+- Sequência Eternal, decisões de efeito, Brave/Ultimate, Trigger Counter, resultado da partida, combate e setas foram neutralizados.
+- Settings, Deck Builder, Deck Library, Local Setup, Online Lobby, Perfil, Conta e modais foram neutralizados.
+- Cores padrão de jogador e acentos decorativos de decks foram convertidos para tons de cinza.
+
+EXCEÇÕES INTENCIONAIS
+- Core regular: AZUL.
+- Core de Life: AZUL.
+- Core regular colocado sobre cartas: AZUL.
+- Soul Core: VERMELHA.
+- Orbes/indicadores que representam diretamente cores/símbolos de cartas continuam coloridos.
+- Arte das cartas permanece original e colorida.
+
+VALIDAÇÃO
+- Engine: 57/57 testes aprovados.
+- npm run verify: aprovado.
+- npm run verify:v3: aprovado (14 arquivos essenciais).
+- JSON: 17 arquivos, 0 inválidos.
+- JSX alterado: validado com @babel/parser.
+- CSS: chaves equilibradas em todas as folhas.
+- Auditoria cromática CSS: somente styles.css (Core/Soul Core) e cardDetailsModal.css (orbes semânticos) mantêm cores cromáticas.
+- package.json/package-lock/app: versão 3.1.2 sincronizada.
+
+BUILD
+- O build Vite não foi reproduzido porque este pacote não distribui node_modules.
+- Nenhuma dependência nova foi adicionada.
+- No Windows: npm install && npm run check

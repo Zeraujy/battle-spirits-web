@@ -1,0 +1,28 @@
+BATTLE SPIRITS ETERNAL SIMULATOR v3.1.1 — ETERNAL MONOCHROME
+Data: 23/09/2026
+
+ALTERAÇÃO
+- Tema padrão Eternal convertido para preto, branco e grafite.
+- Azul, amarelo, ciano e outras cores decorativas foram removidos da UI-base,
+  Home e Arena 2D v3.1.
+- As cores próprias das cartas, símbolos e acentos dinâmicos de combate não
+  foram neutralizadas, para que sejam o contraste visual da partida.
+- Usuários ainda no preset recommended:eternal migram automaticamente para
+  a nova paleta; presets alternativos e temas customizados permanecem intactos.
+
+VALIDAÇÃO
+- Engine: 57/57 testes aprovados.
+- npm run verify: aprovado.
+- npm run verify:v3: aprovado (14 arquivos essenciais).
+- JSON: 17 arquivos, 0 inválidos.
+- CSS editado: contagem de chaves equilibrada.
+- styles.css, v3.css e arenaV31.css: 0 cores hexadecimais cromáticas decorativas.
+- cardDetailsModal.css e arenaVisuals.css continuam contendo cores de cartas/
+  símbolos e acentos de gameplay.
+- Sintaxe dos arquivos JS/MJS modificados: aprovada com node --check.
+
+BUILD
+- npm run build não pôde ser executado neste pacote porque node_modules não é
+  distribuído no ZIP (vite: not found).
+- Nenhuma dependência nova foi adicionada.
+- No Windows: npm install && npm run check

@@ -1,0 +1,1724 @@
+[
+  {
+    "id": "SD11-001",
+    "name": "Shriken",
+    "nameEN": "Shriken",
+    "namePT": "Shriken",
+    "nameKey": "shriken",
+    "set": "SD11",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Machine Beast",
+      "Claw Bird"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Heavy Armor: Red] This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects. LV2: This Spirit is also treated as Green.",
+      "ptBR": "LV1/LV2 [Heavy Armor: Vermelho] Este Spirit não é afetado por efeitos Vermelhos de Spirit/Brave/Nexus/Magic do oponente. LV2: Este Spirit também é tratado como Verde."
+    },
+    "effects": [
+      {
+        "id": "sd11-001-heavy-armor-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Heavy Armor: Red",
+          "ptBR": "Heavy Armor: Vermelho"
+        },
+        "text": {
+          "en": "This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.",
+          "ptBR": "Este Spirit não é afetado por efeitos Vermelhos de Spirit/Brave/Nexus/Magic do oponente."
+        }
+      },
+      {
+        "id": "sd11-001-green-display",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Color",
+          "ptBR": "Cor"
+        },
+        "text": {
+          "en": "This Spirit is also treated as Green.",
+          "ptBR": "Este Spirit também é tratado como Verde."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd11-001-green",
+        "event": "continuous",
+        "levels": [
+          2
+        ],
+        "modifiers": {
+          "addColors": [
+            "green"
+          ]
+        }
+      }
+    ],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-001.webp"
+  },
+  {
+    "id": "SD11-002",
+    "name": "Bobcats",
+    "nameEN": "Bobcats",
+    "namePT": "Bobcats",
+    "nameKey": "bobcats",
+    "set": "SD11",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-002.webp"
+  },
+  {
+    "id": "SD11-003",
+    "name": "Dark-Caribou",
+    "nameEN": "Dark-Caribou",
+    "namePT": "Dark-Caribou",
+    "nameKey": "dark-caribou",
+    "set": "SD11",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: This Spirit gains +3000 BP for the battle. LV2 When This Spirit Blocks: Put 1 Core from the Void on this Spirit. [Rush: Green] Exhaust 1 opposing Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloquear: este Spirit recebe +3000 BP durante a batalha. LV2 Quando Este Spirit Bloquear: coloque 1 Core do Void neste Spirit. [Rush: Green] Dê Exhaust em 1 Spirit do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd11-003-block-bp-display",
+        "type": "whenBlocks",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenBlocks",
+        "title": {
+          "en": "When This Spirit Blocks",
+          "ptBR": "Quando Este Spirit Bloqueia"
+        },
+        "text": {
+          "en": "This Spirit gains +3000 BP for the battle.",
+          "ptBR": "Este Spirit recebe +3000 BP durante a batalha."
+        }
+      },
+      {
+        "id": "sd11-003-block-core-display",
+        "type": "whenBlocks",
+        "levels": [
+          2
+        ],
+        "timing": "whenBlocks",
+        "title": {
+          "en": "When This Spirit Blocks",
+          "ptBR": "Quando Este Spirit Bloqueia"
+        },
+        "text": {
+          "en": "Put 1 Core from the Void on this Spirit.",
+          "ptBR": "Coloque 1 Core do Void neste Spirit."
+        }
+      },
+      {
+        "id": "sd11-003-rush-display",
+        "type": "rush",
+        "levels": [
+          2
+        ],
+        "timing": "whenBlocks",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Exhaust 1 opposing Spirit.",
+          "ptBR": "Dê Exhaust em 1 Spirit do oponente."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd11-003-block-bp",
+        "event": "whenBlocks",
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "amount": 3000,
+            "duration": "battle"
+          }
+        ]
+      },
+      {
+        "id": "sd11-003-block-core-rush",
+        "event": "whenBlocks",
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "addCoreFromVoid",
+            "target": "self",
+            "amount": 1
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "controlsSymbolColor",
+              "color": "green"
+            },
+            "actions": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Rush — Green",
+                "titleEN": "Rush — Green",
+                "instructionPT": "Escolha 1 Spirit do oponente para dar Exhaust.",
+                "instructionEN": "Choose 1 opposing Spirit to exhaust.",
+                "selector": {
+                  "owner": "opponent",
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "onSelect": {
+                  "type": "exhaust"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-003.webp"
+  },
+  {
+    "id": "SD11-004",
+    "name": "Rhinogold",
+    "nameEN": "Rhinogold",
+    "namePT": "Rhinogold",
+    "nameKey": "rhinogold",
+    "set": "SD11",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: This Spirit can block while exhausted. LV2/LV3 When This Spirit Blocks: This Spirit gains +3000 BP for the battle.",
+      "ptBR": "LV1/LV2/LV3: este Spirit pode bloquear mesmo estando em Exhaust. LV2/LV3 Quando Este Spirit Bloquear: este Spirit recebe +3000 BP durante a batalha."
+    },
+    "effects": [
+      {
+        "id": "sd11-004-exhausted-block-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Block While Exhausted",
+          "ptBR": "Bloqueio em Exhaust"
+        },
+        "text": {
+          "en": "This Spirit can block while exhausted.",
+          "ptBR": "Este Spirit pode bloquear mesmo estando em Exhaust."
+        }
+      },
+      {
+        "id": "sd11-004-block-bp-display",
+        "type": "whenBlocks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenBlocks",
+        "title": {
+          "en": "When This Spirit Blocks",
+          "ptBR": "Quando Este Spirit Bloqueia"
+        },
+        "text": {
+          "en": "This Spirit gains +3000 BP for the battle.",
+          "ptBR": "Este Spirit recebe +3000 BP durante a batalha."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd11-004-block-bp",
+        "event": "whenBlocks",
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "amount": 3000,
+            "duration": "battle"
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-004.webp"
+  },
+  {
+    "id": "SD11-005",
+    "name": "Dark-Gadphant",
+    "nameEN": "Dark-Gadphant",
+    "namePT": "Dark-Gadphant",
+    "nameKey": "dark-gadphant",
+    "set": "SD11",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Return 1 opposing Spirit with 2000 BP or less to the hand. [Rush: Green] Put 1 Core from the Void on this Spirit. LV2 [Heavy Armor: Red/Blue].",
+      "ptBR": "LV1/LV2 Quando Invocado: devolva 1 Spirit do oponente com 2000 BP ou menos para a mão. [Rush: Green] Coloque 1 Core do Void neste Spirit. LV2 [Heavy Armor: Vermelho/Azul]."
+    },
+    "effects": [
+      {
+        "id": "sd11-005-summon-display",
+        "type": "whenSummoned",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When Summoned",
+          "ptBR": "Quando Invocado"
+        },
+        "text": {
+          "en": "Return 1 opposing Spirit with 2000 BP or less to the hand.",
+          "ptBR": "Devolva 1 Spirit do oponente com 2000 BP ou menos para a mão."
+        }
+      },
+      {
+        "id": "sd11-005-rush-display",
+        "type": "rush",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Put 1 Core from the Void on this Spirit.",
+          "ptBR": "Coloque 1 Core do Void neste Spirit."
+        }
+      },
+      {
+        "id": "sd11-005-heavy-armor-display",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Heavy Armor: Red/Blue",
+          "ptBR": "Heavy Armor: Vermelho/Azul"
+        },
+        "text": {
+          "en": "This Spirit is unaffected by opposing Red/Blue Spirit/Brave/Nexus/Magic effects.",
+          "ptBR": "Este Spirit não é afetado por efeitos Vermelhos/Azuis de Spirit/Brave/Nexus/Magic do oponente."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd11-005-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Dark-Gadphant",
+            "titleEN": "Dark-Gadphant",
+            "instructionPT": "Escolha 1 Spirit do oponente com 2000 BP ou menos para devolver à mão.",
+            "instructionEN": "Choose 1 opposing Spirit with 2000 BP or less to return to hand.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maxBP": 2000
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "controlsSymbolColor",
+              "color": "green"
+            },
+            "actions": [
+              {
+                "type": "addCoreFromVoid",
+                "target": "self",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-005.webp"
+  },
+  {
+    "id": "SD11-006",
+    "name": "Bran-Falcon",
+    "nameEN": "Bran-Falcon",
+    "namePT": "Bran-Falcon",
+    "nameKey": "bran-falcon",
+    "set": "SD11",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Your Opponent's Attack Step: All your White Spirits gain +2000 BP.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step do oponente: todos os seus Spirits Brancos recebem +2000 BP."
+    },
+    "effects": [
+      {
+        "id": "sd11-006-opponent-attack-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "During Your Opponent's Attack Step",
+          "ptBR": "Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "All your White Spirits gain +2000 BP.",
+          "ptBR": "Todos os seus Spirits Brancos recebem +2000 BP."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-006.webp"
+  },
+  {
+    "id": "SD11-007",
+    "name": "Bear Polar",
+    "nameEN": "Bear Polar",
+    "namePT": "Bear Polar",
+    "nameKey": "bear-polar",
+    "set": "SD11",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Opponent's Attack Step: Your opponent must attack at least once if able. LV2 When This Spirit Blocks: This Spirit gains +3000 BP for the battle. [Rush: Green] Exhaust 1 opposing Spirit.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do oponente: o oponente deve realizar pelo menos 1 ataque se puder. LV2 Quando Este Spirit Bloquear: este Spirit recebe +3000 BP durante a batalha. [Rush: Green] Dê Exhaust em 1 Spirit do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd11-007-must-attack-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "During Your Opponent's Attack Step",
+          "ptBR": "Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "Your opponent must attack at least once if able.",
+          "ptBR": "O oponente deve realizar pelo menos 1 ataque se puder."
+        }
+      },
+      {
+        "id": "sd11-007-block-bp-display",
+        "type": "whenBlocks",
+        "levels": [
+          2
+        ],
+        "timing": "whenBlocks",
+        "title": {
+          "en": "When This Spirit Blocks",
+          "ptBR": "Quando Este Spirit Bloqueia"
+        },
+        "text": {
+          "en": "This Spirit gains +3000 BP for the battle.",
+          "ptBR": "Este Spirit recebe +3000 BP durante a batalha."
+        }
+      },
+      {
+        "id": "sd11-007-rush-display",
+        "type": "rush",
+        "levels": [
+          2
+        ],
+        "timing": "whenBlocks",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Exhaust 1 opposing Spirit.",
+          "ptBR": "Dê Exhaust em 1 Spirit do oponente."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd11-007-block",
+        "event": "whenBlocks",
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "amount": 3000,
+            "duration": "battle"
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "controlsSymbolColor",
+              "color": "green"
+            },
+            "actions": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Rush — Green",
+                "titleEN": "Rush — Green",
+                "instructionPT": "Escolha 1 Spirit do oponente para dar Exhaust.",
+                "instructionEN": "Choose 1 opposing Spirit to exhaust.",
+                "selector": {
+                  "owner": "opponent",
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "onSelect": {
+                  "type": "exhaust"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-007.webp"
+  },
+  {
+    "id": "SD11-008",
+    "name": "Wise-Monkey",
+    "nameEN": "Wise-Monkey",
+    "namePT": "Wise-Monkey",
+    "nameKey": "wise-monkey",
+    "set": "SD11",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: The 'When This Spirit Blocks' effects of all your Machine Beast Spirits also activate when those Spirits attack.",
+      "ptBR": "LV1/LV2 Durante o seu Attack Step: os efeitos 'Quando Este Spirit Bloqueia' de todos os seus Spirits da família Machine Beast também são ativados quando esses Spirits atacam."
+    },
+    "effects": [
+      {
+        "id": "sd11-008-copy-block-effects-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "During Your Attack Step",
+          "ptBR": "Durante o Seu Attack Step"
+        },
+        "text": {
+          "en": "The 'When This Spirit Blocks' effects of all your Machine Beast Spirits also activate when those Spirits attack.",
+          "ptBR": "Os efeitos 'Quando Este Spirit Bloqueia' de todos os seus Spirits da família Machine Beast também são ativados quando esses Spirits atacam."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-008.webp"
+  },
+  {
+    "id": "SD11-009",
+    "name": "The HuntingMachineBeast Silver-Jackal",
+    "nameEN": "The HuntingMachineBeast Silver-Jackal",
+    "namePT": "The HuntingMachineBeast Silver-Jackal",
+    "nameKey": "the-huntingmachinebeast-silver-jackal",
+    "set": "SD11",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Blocks: When only the opposing Spirit is destroyed by comparing BP, move 1 Core from your opponent's Life to their Reserve. [Rush: Green] Your opponent cannot activate Burst effects.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Bloquear: quando apenas o Spirit do oponente for destruído pela comparação de BP, mova 1 Core do Life do oponente para a Reserve dele. [Rush: Green] O oponente não pode ativar efeitos de Burst."
+    },
+    "effects": [
+      {
+        "id": "sd11-009-block-life-display",
+        "type": "whenBlocks",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "afterBPComparison",
+        "title": {
+          "en": "When This Spirit Blocks",
+          "ptBR": "Quando Este Spirit Bloqueia"
+        },
+        "text": {
+          "en": "When only the opposing Spirit is destroyed by comparing BP, move 1 Core from your opponent's Life to their Reserve.",
+          "ptBR": "Quando apenas o Spirit do oponente for destruído pela comparação de BP, mova 1 Core do Life do oponente para a Reserve dele."
+        }
+      },
+      {
+        "id": "sd11-009-rush-display",
+        "type": "rush",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenBlocks",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Your opponent cannot activate Burst effects.",
+          "ptBR": "O oponente não pode ativar efeitos de Burst."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-009.webp"
+  },
+  {
+    "id": "SD11-010",
+    "name": "Dark-Uranus",
+    "nameEN": "Dark-Uranus",
+    "namePT": "Dark-Uranus",
+    "nameKey": "dark-uranus",
+    "set": "SD11",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "green",
+      "green"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast",
+      "Imp"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3: This Spirit is also treated as Green. LV2/LV3 When This Braved Spirit Attacks: By exhausting 1 opposing Spirit with 7000 BP or more, refresh this Spirit. [Rush: Green] Put 1 Core from the Void on this Spirit.",
+      "ptBR": "LV2/LV3: este Spirit também é tratado como Verde. LV2/LV3 Quando Este Spirit Combinado Atacar: ao dar Exhaust em 1 Spirit do oponente com 7000 BP ou mais, dê Refresh neste Spirit. [Rush: Green] Coloque 1 Core do Void neste Spirit."
+    },
+    "effects": [
+      {
+        "id": "sd11-010-green-display",
+        "type": "constant",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Color",
+          "ptBR": "Cor"
+        },
+        "text": {
+          "en": "This Spirit is also treated as Green.",
+          "ptBR": "Este Spirit também é tratado como Verde."
+        }
+      },
+      {
+        "id": "sd11-010-braved-attack-display",
+        "type": "whenAttacks",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "When This Braved Spirit Attacks",
+          "ptBR": "Quando Este Spirit Combinado Ataca"
+        },
+        "text": {
+          "en": "By exhausting 1 opposing Spirit with 7000 BP or more, refresh this Spirit.",
+          "ptBR": "Ao dar Exhaust em 1 Spirit do oponente com 7000 BP ou mais, dê Refresh neste Spirit."
+        }
+      },
+      {
+        "id": "sd11-010-rush-display",
+        "type": "rush",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Put 1 Core from the Void on this Spirit.",
+          "ptBR": "Coloque 1 Core do Void neste Spirit."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd11-010-green",
+        "event": "continuous",
+        "levels": [
+          2,
+          3
+        ],
+        "modifiers": {
+          "addColors": [
+            "green"
+          ]
+        }
+      }
+    ],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-010.webp"
+  },
+  {
+    "id": "SD11-011",
+    "name": "Jet-Gannet",
+    "nameEN": "Jet-Gannet",
+    "namePT": "Jet-Gannet",
+    "nameKey": "jet-gannet",
+    "set": "SD11",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 When This Brave Is Summoned: Return 1 opposing Nexus to the hand. Combine Condition: Cost 4 or more. While Braved, during your opponent's Attack Step, when a Spirit with 4000 BP or more attacks, refresh this Spirit.",
+      "ptBR": "LV1 Quando Este Brave For Invocado: devolva 1 Nexus do oponente para a mão. Condição de Combine: custo 4 ou mais. Enquanto estiver combinado, durante o Attack Step do oponente, quando um Spirit com 4000 BP ou mais atacar, dê Refresh neste Spirit."
+    },
+    "effects": [
+      {
+        "id": "sd11-011-summon-display",
+        "type": "whenSummoned",
+        "levels": [
+          1
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "When This Brave Is Summoned",
+          "ptBR": "Quando Este Brave For Invocado"
+        },
+        "text": {
+          "en": "Return 1 opposing Nexus to the hand.",
+          "ptBR": "Devolva 1 Nexus do oponente para a mão."
+        }
+      },
+      {
+        "id": "sd11-011-combine-condition-display",
+        "type": "combineCondition",
+        "levels": [],
+        "timing": "combine",
+        "title": {
+          "en": "Combine Condition",
+          "ptBR": "Condição de Combine"
+        },
+        "text": {
+          "en": "Combine with a Spirit that costs 4 or more.",
+          "ptBR": "Combine com um Spirit de custo 4 ou mais."
+        }
+      },
+      {
+        "id": "sd11-011-combined-display",
+        "type": "combined",
+        "levels": [],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "While Braved",
+          "ptBR": "Enquanto Combinado"
+        },
+        "text": {
+          "en": "During your opponent's Attack Step, when a Spirit with 4000 BP or more attacks, refresh this Spirit.",
+          "ptBR": "Durante o Attack Step do oponente, quando um Spirit com 4000 BP ou mais atacar, dê Refresh neste Spirit."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd11-011-summon",
+        "event": "whenSummoned",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Jet-Gannet",
+            "titleEN": "Jet-Gannet",
+            "instructionPT": "Escolha 1 Nexus do oponente para devolver à mão.",
+            "instructionEN": "Choose 1 opposing Nexus to return to hand.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-011.webp",
+    "braveBP": 4000,
+    "braveCondition": {
+      "type": "costAtLeast",
+      "value": 4
+    }
+  },
+  {
+    "id": "SD11-012",
+    "name": "The Underground Lake of the Ice Sword",
+    "nameEN": "The Underground Lake of the Ice Sword",
+    "namePT": "The Underground Lake of the Ice Sword",
+    "nameKey": "the-underground-lake-of-the-ice-sword",
+    "set": "SD11",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Opponent's Attack Step: All your Machine Beast Spirits gain +2000 BP. LV2 During Your Opponent's Attack Step: When one of your Machine Beast Spirits blocks, put 1 Core from the Void on that Spirit.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do oponente: todos os seus Spirits da família Machine Beast recebem +2000 BP. LV2 Durante o Attack Step do oponente: quando 1 dos seus Spirits Machine Beast bloquear, coloque 1 Core do Void naquele Spirit."
+    },
+    "effects": [
+      {
+        "id": "sd11-012-bp-display",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "During Your Opponent's Attack Step",
+          "ptBR": "Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "All your Machine Beast Spirits gain +2000 BP.",
+          "ptBR": "Todos os seus Spirits da família Machine Beast recebem +2000 BP."
+        }
+      },
+      {
+        "id": "sd11-012-core-display",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "During Your Opponent's Attack Step",
+          "ptBR": "Durante o Attack Step do Oponente"
+        },
+        "text": {
+          "en": "When one of your Machine Beast Spirits blocks, put 1 Core from the Void on that Spirit.",
+          "ptBR": "Quando 1 dos seus Spirits Machine Beast bloquear, coloque 1 Core do Void naquele Spirit."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-012.webp"
+  },
+  {
+    "id": "SD11-013",
+    "name": "The Lost Crystal",
+    "nameEN": "The Lost Crystal",
+    "namePT": "The Lost Crystal",
+    "nameKey": "the-lost-crystal",
+    "set": "SD11",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Nexus Is Destroyed: You may summon 1 White Spirit card from your hand without paying the cost. LV2: All your Machine Beast Spirits gain [Heavy Armor: Red].",
+      "ptBR": "LV1/LV2 Quando Este Nexus For Destruído: você pode Invocar 1 carta de Spirit Branco da sua mão sem pagar o custo. LV2: todos os seus Spirits da família Machine Beast recebem [Heavy Armor: Vermelho]."
+    },
+    "effects": [
+      {
+        "id": "sd11-013-destroyed-display",
+        "type": "whenDestroyed",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "When This Nexus Is Destroyed",
+          "ptBR": "Quando Este Nexus For Destruído"
+        },
+        "text": {
+          "en": "You may summon 1 White Spirit card from your hand without paying the cost.",
+          "ptBR": "Você pode Invocar 1 carta de Spirit Branco da sua mão sem pagar o custo."
+        }
+      },
+      {
+        "id": "sd11-013-heavy-armor-display",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "always",
+        "title": {
+          "en": "Heavy Armor: Red",
+          "ptBR": "Heavy Armor: Vermelho"
+        },
+        "text": {
+          "en": "All your Machine Beast Spirits gain [Heavy Armor: Red].",
+          "ptBR": "Todos os seus Spirits da família Machine Beast recebem [Heavy Armor: Vermelho]."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-013.webp"
+  },
+  {
+    "id": "SD11-014",
+    "name": "Wind Wall",
+    "nameEN": "Wind Wall",
+    "namePT": "Wind Wall",
+    "nameKey": "wind-wall",
+    "set": "SD11",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: At the end of this battle, end the Attack Step. [Rush: Green] Exhaust 1 opposing Spirit.",
+      "ptBR": "Flash: ao final desta batalha, encerre o Attack Step. [Rush: Green] Dê Exhaust em 1 Spirit do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd11-014-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "At the end of this battle, end the Attack Step.",
+          "ptBR": "Ao final desta batalha, encerre o Attack Step."
+        }
+      },
+      {
+        "id": "sd11-014-rush-display",
+        "type": "rush",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Exhaust 1 opposing Spirit.",
+          "ptBR": "Dê Exhaust em 1 Spirit do oponente."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-014.webp"
+  },
+  {
+    "id": "SD11-015",
+    "name": "Dream Horizon",
+    "nameEN": "Dream Horizon",
+    "namePT": "Dream Horizon",
+    "nameKey": "dream-horizon",
+    "set": "SD11",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Return 1 opposing Spirit to the hand. [Rush: Green] Exhaust 1 opposing Spirit.",
+      "ptBR": "Flash: devolva 1 Spirit do oponente para a mão. [Rush: Green] Dê Exhaust em 1 Spirit do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd11-015-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Return 1 opposing Spirit to the hand.",
+          "ptBR": "Devolva 1 Spirit do oponente para a mão."
+        }
+      },
+      {
+        "id": "sd11-015-rush-display",
+        "type": "rush",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Exhaust 1 opposing Spirit.",
+          "ptBR": "Dê Exhaust em 1 Spirit do oponente."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd11-015-flash",
+        "event": "magicFlash",
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Dream Horizon",
+            "titleEN": "Dream Horizon",
+            "instructionPT": "Escolha 1 Spirit do oponente para devolver à mão.",
+            "instructionEN": "Choose 1 opposing Spirit to return to hand.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "controlsSymbolColor",
+              "color": "green"
+            },
+            "actions": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Rush — Green",
+                "titleEN": "Rush — Green",
+                "instructionPT": "Escolha 1 Spirit do oponente para dar Exhaust.",
+                "instructionEN": "Choose 1 opposing Spirit to exhaust.",
+                "selector": {
+                  "owner": "opponent",
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "onSelect": {
+                  "type": "exhaust"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-015.webp"
+  },
+  {
+    "id": "SD11-016",
+    "name": "Burst Break",
+    "nameEN": "Burst Break",
+    "namePT": "Burst Break",
+    "nameKey": "burst-break",
+    "set": "SD11",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Choose one. Return any number of opposing Spirits with a total of 5000 BP or less to the hand; or discard 1 of your opponent's set Burst cards. This effect cannot be used during the Main Step.",
+      "ptBR": "Flash: escolha um. Devolva para a mão qualquer número de Spirits do oponente com BP total de até 5000; ou descarte 1 Burst setado do oponente. Este efeito não pode ser usado durante o Main Step."
+    },
+    "effects": [
+      {
+        "id": "sd11-016-flash-display",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Choose one: return any number of opposing Spirits with a total of 5000 BP or less to the hand; or discard 1 of your opponent's set Burst cards. This effect cannot be used during the Main Step.",
+          "ptBR": "Escolha um: devolva para a mão qualquer número de Spirits do oponente com BP total de até 5000; ou descarte 1 Burst setado do oponente. Este efeito não pode ser usado durante o Main Step."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sd11-016-flash",
+        "event": "magicFlash",
+        "actions": [
+          {
+            "type": "chooseOption",
+            "titlePT": "Burst Break",
+            "titleEN": "Burst Break",
+            "instructionPT": "Escolha qual efeito de Burst Break deseja usar.",
+            "instructionEN": "Choose which Burst Break effect to use.",
+            "options": [
+              {
+                "id": "return-spirits",
+                "labelPT": "Devolver Spirits com BP total até 5000",
+                "labelEN": "Return Spirits totaling up to 5000 BP",
+                "actions": [
+                  {
+                    "type": "selectMultipleTargets",
+                    "titlePT": "Burst Break",
+                    "titleEN": "Burst Break",
+                    "instructionPT": "Escolha Spirits do oponente com BP total de até 5000.",
+                    "instructionEN": "Choose opposing Spirits totaling up to 5000 BP.",
+                    "selector": {
+                      "owner": "opponent",
+                      "cardTypes": [
+                        "spirit"
+                      ]
+                    },
+                    "maxTotalBP": 5000,
+                    "allowZero": true,
+                    "onConfirm": {
+                      "type": "returnToHand"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "discard-burst",
+                "labelPT": "Descartar 1 Burst setado",
+                "labelEN": "Discard 1 set Burst",
+                "actions": [
+                  {
+                    "type": "discardOpponentSetBurst"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-016.webp"
+  },
+  {
+    "id": "SD11-X01",
+    "name": "The DarkEmperor Ninetail-Dark",
+    "nameEN": "The DarkEmperor Ninetail-Dark",
+    "namePT": "The DarkEmperor Ninetail-Dark",
+    "nameKey": "the-darkemperor-ninetail-dark",
+    "set": "SD11",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Blocks: When only the opposing Spirit is destroyed by comparing BP, refresh this Spirit and it gains +3000 BP during this turn. LV3 When This Spirit Battles: Return 1 opposing Cost 6 or less Spirit to the hand. [Rush: Green] Exhaust 1 opposing Spirit.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Bloquear: quando apenas o Spirit do oponente for destruído pela comparação de BP, dê Refresh neste Spirit e ele recebe +3000 BP durante este turno. LV3 Quando Este Spirit Batalhar: devolva 1 Spirit do oponente de custo 6 ou menos para a mão. [Rush: Green] Dê Exhaust em 1 Spirit do oponente."
+    },
+    "effects": [
+      {
+        "id": "sd11-x01-block-display",
+        "type": "whenBlocks",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "afterBPComparison",
+        "title": {
+          "en": "When This Spirit Blocks",
+          "ptBR": "Quando Este Spirit Bloqueia"
+        },
+        "text": {
+          "en": "When only the opposing Spirit is destroyed by comparing BP, refresh this Spirit and it gains +3000 BP during this turn.",
+          "ptBR": "Quando apenas o Spirit do oponente for destruído pela comparação de BP, dê Refresh neste Spirit e ele recebe +3000 BP durante este turno."
+        }
+      },
+      {
+        "id": "sd11-x01-battle-display",
+        "type": "whenBattles",
+        "levels": [
+          3
+        ],
+        "timing": "whenBattles",
+        "title": {
+          "en": "When This Spirit Battles",
+          "ptBR": "Quando Este Spirit Batalha"
+        },
+        "text": {
+          "en": "Return 1 opposing Cost 6 or less Spirit to the hand.",
+          "ptBR": "Devolva 1 Spirit do oponente de custo 6 ou menos para a mão."
+        }
+      },
+      {
+        "id": "sd11-x01-rush-display",
+        "type": "rush",
+        "levels": [
+          3
+        ],
+        "timing": "whenBattles",
+        "title": {
+          "en": "Rush — Green",
+          "ptBR": "Rush — Green"
+        },
+        "text": {
+          "en": "Exhaust 1 opposing Spirit.",
+          "ptBR": "Dê Exhaust em 1 Spirit do oponente."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-X01.webp"
+  },
+  {
+    "id": "SD11-X02",
+    "name": "The MidnightSunTreasuredSword Midnight-Sun",
+    "nameEN": "The MidnightSunTreasuredSword Midnight-Sun",
+    "namePT": "The MidnightSunTreasuredSword Midnight-Sun",
+    "nameKey": "the-midnightsuntreasuredsword-midnight-sun",
+    "set": "SD11",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Exalted Sword"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "Combine Condition: Cost 5 or more. While Braved: [Heavy Armor: Green/White/Yellow/Blue]. While Braved: This Spirit's Rush effects activate ignoring their conditions.",
+      "ptBR": "Condição de Combine: custo 5 ou mais. Enquanto estiver combinado: [Heavy Armor: Verde/Branco/Amarelo/Azul]. Enquanto estiver combinado: os efeitos de Rush deste Spirit são ativados ignorando suas condições."
+    },
+    "effects": [
+      {
+        "id": "sd11-x02-combine-condition-display",
+        "type": "combineCondition",
+        "levels": [],
+        "timing": "combine",
+        "title": {
+          "en": "Combine Condition",
+          "ptBR": "Condição de Combine"
+        },
+        "text": {
+          "en": "Combine with a Spirit that costs 5 or more.",
+          "ptBR": "Combine com um Spirit de custo 5 ou mais."
+        }
+      },
+      {
+        "id": "sd11-x02-heavy-armor-display",
+        "type": "combined",
+        "levels": [],
+        "timing": "always",
+        "title": {
+          "en": "While Braved — Heavy Armor",
+          "ptBR": "Enquanto Combinado — Heavy Armor"
+        },
+        "text": {
+          "en": "The combined Spirit gains [Heavy Armor: Green/White/Yellow/Blue].",
+          "ptBR": "O Spirit combinado recebe [Heavy Armor: Verde/Branco/Amarelo/Azul]."
+        }
+      },
+      {
+        "id": "sd11-x02-rush-display",
+        "type": "combined",
+        "levels": [],
+        "timing": "always",
+        "title": {
+          "en": "While Braved — Rush",
+          "ptBR": "Enquanto Combinado — Rush"
+        },
+        "text": {
+          "en": "This Spirit's Rush effects activate ignoring their conditions.",
+          "ptBR": "Os efeitos de Rush deste Spirit são ativados ignorando suas condições."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-X02.webp",
+    "braveBP": 5000,
+    "braveCondition": {
+      "type": "costAtLeast",
+      "value": 5
+    }
+  }
+]

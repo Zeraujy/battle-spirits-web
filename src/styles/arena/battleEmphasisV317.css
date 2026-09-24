@@ -1,0 +1,110 @@
+/* =========================================================
+   BATTLE SPIRITS ETERNAL SIMULATOR — v3.1.7
+   BATTLE EMPHASIS
+
+   Visual feedback only. No rule decisions live here.
+   The accent follows the card's own color so combat remains readable
+   without breaking the simulator's black / white identity.
+========================================================= */
+
+/* Card color -> combat accent. */
+.simulator-page .field-card-wrap.arena-theme-red { --battle-card-accent: #e55f56; }
+.simulator-page .field-card-wrap.arena-theme-purple { --battle-card-accent: #aa83ee; }
+.simulator-page .field-card-wrap.arena-theme-green { --battle-card-accent: #66c985; }
+.simulator-page .field-card-wrap.arena-theme-white { --battle-card-accent: #dadada; }
+.simulator-page .field-card-wrap.arena-theme-yellow { --battle-card-accent: #e2bf51; }
+.simulator-page .field-card-wrap.arena-theme-blue { --battle-card-accent: #65b4ed; }
+.simulator-page .field-card-wrap.arena-theme-rainbow { --battle-card-accent: #d6a4f8; }
+.simulator-page .field-card-wrap.arena-theme-neutral { --battle-card-accent: #c7c7c7; }
+
+/* Active cards rise above the rest of the battlefield without adding a
+   rectangular frame around the wrapper. */
+.simulator-page .field-card-wrap.battle-card-attacker,
+.simulator-page .field-card-wrap.battle-card-blocker {
+  z-index: 44 !important;
+}
+
+.simulator-page .field-card-wrap.battle-card-attacker > .card-tile,
+.simulator-page .field-card-wrap.battle-card-blocker > .card-tile {
+  outline: none !important;
+  filter: brightness(1.08) saturate(1.04);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.48),
+    0 0 7px color-mix(in srgb, var(--battle-card-accent) 72%, transparent),
+    0 0 19px color-mix(in srgb, var(--battle-card-accent) 42%, transparent) !important;
+}
+
+.simulator-page .field-card-wrap.battle-card-attacker > .card-tile {
+  animation: bsBattleAttackerPulse 1.2s ease-in-out infinite alternate;
+}
+
+.simulator-page .field-card-wrap.battle-card-blocker > .card-tile {
+  animation: bsBattleBlockerPulse 1.05s ease-in-out infinite alternate;
+}
+
+/* During the Block Step, legal blockers get only a small light cue. This is
+   intentionally much quieter than the selected attacker / blocker. */
+.simulator-page .field-card-wrap.battle-card-can-block:not(.battle-card-blocker) > .card-tile {
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.4),
+    0 0 0 1px color-mix(in srgb, var(--battle-card-accent) 34%, transparent),
+    0 0 12px color-mix(in srgb, var(--battle-card-accent) 18%, transparent) !important;
+}
+
+.simulator-page .field-card-wrap.battle-card-can-block:not(.battle-card-blocker):hover > .card-tile {
+  filter: brightness(1.1);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.48),
+    0 0 6px color-mix(in srgb, var(--battle-card-accent) 58%, transparent),
+    0 0 18px color-mix(in srgb, var(--battle-card-accent) 30%, transparent) !important;
+}
+
+/* Compact role chips. They float over the art rather than drawing a frame
+   around the entire field slot. */
+.arena-battle-role {
+  position: absolute;
+  left: 50%;
+  top: -9px;
+  z-index: 18;
+  transform: translateX(-50%);
+  min-height: 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 7px;
+  border: 1px solid color-mix(in srgb, var(--battle-card-accent) 38%, rgba(255,255,255,.16));
+  border-radius: 999px;
+  background: rgba(8,8,8,.92);
+  color: color-mix(in srgb, var(--battle-card-accent) 52%, #fff);
+  box-shadow: 0 5px 14px rgba(0,0,0,.34);
+  font-size: 5px;
+  font-weight: 1000;
+  letter-spacing: .12em;
+  line-height: 1;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* When a Brave tag is present, offset the combat badge to the opposite side
+   so both pieces of information remain readable. */
+.simulator-page .field-card-wrap.brave-combined-host .arena-battle-role {
+  left: 8px;
+  transform: none;
+}
+
+@keyframes bsBattleAttackerPulse {
+  from { filter: brightness(1.03) saturate(1.02); }
+  to { filter: brightness(1.13) saturate(1.08); }
+}
+
+@keyframes bsBattleBlockerPulse {
+  from { filter: brightness(1.04) saturate(1.02); }
+  to { filter: brightness(1.11) saturate(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simulator-page .field-card-wrap.battle-card-attacker > .card-tile,
+  .simulator-page .field-card-wrap.battle-card-blocker > .card-tile {
+    animation: none !important;
+  }
+}

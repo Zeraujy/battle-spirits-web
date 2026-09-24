@@ -1,0 +1,35 @@
+BATTLE SPIRITS 2.2
+==================
+
+1) Copie seus dados da 2.1:
+   - execute MIGRAR_DADOS_ANTIGOS.bat
+   - informe a pasta da sua versão 2.1 atual
+
+2) Confira:
+   npm run verify
+
+3) Para testar em desenvolvimento:
+   INSTALAR_E_ABRIR.bat
+
+4) Para gerar o aplicativo Windows:
+   GERAR_INSTALADOR_WINDOWS.bat
+
+Resultado esperado em release\:
+   Battle-Spirits-Setup-2.2.0.exe
+   latest.json
+
+Depois de instalado, a pasta do jogo é preparada com:
+   Battle Spirits.exe
+   Battle Spirits Updater.exe
+   Battle Spirits Server.exe
+
+UPDATER
+-------
+O Updater está implementado, mas precisa de uma URL pública para funcionar fora da sua rede.
+Configure em Configurações > Servidor de atualizações.
+Veja docs\UPDATER-2.2.md.
+
+DADOS DO JOGADOR
+----------------
+Decks, perfil e configurações são persistidos em AppData e não ficam misturados
+com os arquivos instalados. A 2.2 preserva compatibilidade de dados com a 2.1.

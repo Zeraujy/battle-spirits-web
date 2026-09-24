@@ -1,0 +1,24 @@
+Battle Spirits Eternal Simulator v3.2.1
+Match Stability & AI Readiness
+
+VALIDAÇÃO REALIZADA
+- npm run verify: OK
+- npm run verify:v3: OK
+- npm test: 76/76 PASS
+- Database runtime: 365 cartas únicas
+- Artwork: 365/365 referências válidas
+- CSS v3.2.1: parseado sem erro via PostCSS
+- node --check nos novos módulos da engine: OK
+
+NOVOS MÓDULOS
+- legalActions.js
+- stateValidation.js
+- actionLog.js
+- snapshots.js
+- random.js
+- devTools.js
+- readiness.test.js
+- arenaLayoutV321.css
+
+BUILD
+O Vite não foi concluído neste ambiente porque o node_modules do ZIP atual é de Windows. O launcher chama node.exe e os bindings Linux do Rolldown não estão materializados. Reinstale npm dependencies no Windows e execute npm run check.

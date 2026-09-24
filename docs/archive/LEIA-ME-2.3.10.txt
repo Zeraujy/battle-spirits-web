@@ -1,0 +1,32 @@
+BATTLE SPIRITS ETERNAL SIMULATOR 2.3.10 - ONLINE STABLE
+=======================================================
+
+PACOTE COMPLETO.
+
+1) Coloque seus dados de cartas em:
+   src\data
+
+2) Coloque o database/imagens das cartas em:
+   public\cards-database
+
+3) Coloque suas imagens principais em:
+   public\images\logo_battlespirits.png
+   public\images\card-back.png
+
+4) Para testar em desenvolvimento:
+   INSTALAR_E_ABRIR.bat
+
+5) Para gerar o instalador Windows:
+   GERAR_INSTALADOR_WINDOWS.bat
+
+6) Para servidor local/Funnel:
+   RODAR_SERVIDOR_ONLINE.bat
+
+ONLINE 2.3.10
+--------------
+A camada de conexão foi restaurada ao comportamento comprovadamente funcional da base 2.0.x, mas todas as funções modernas do servidor 2.3.x foram preservadas.
+
+No campo Servidor do jogo, use a URL do seu Tailscale Funnel, por exemplo:
+https://nome-do-pc.nome-da-tailnet.ts.net
+
+Nao adicione /health ao endereço usado dentro do jogo.

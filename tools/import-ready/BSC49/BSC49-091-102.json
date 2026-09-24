@@ -1,0 +1,783 @@
+[
+  {
+    "id": "BSC49-091",
+    "name": "Triangle Trap LT",
+    "nameEN": "Triangle Trap LT",
+    "namePT": "Triangle Trap LT",
+    "nameKey": "triangle-trap-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "six"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Astral Soul"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "[Cannot Stack] When this card in your hand would be discarded by one of your Green-only effects, you may put it in your hand area instead of your Trash. Flash: Choose one — exhaust one opposing Spirit/Ultimate; or heavily exhaust three opposing Spirits/Ultimates with original cost 4 or less.",
+      "ptBR": "[Não Acumula] Quando esta carta na sua mão seria descartada por um dos seus efeitos somente Verdes, você pode colocá-la na sua área de Hand em vez do Trash. Flash: Escolha 1 — dê Exhaust em 1 Spirit/Ultimate do oponente; ou dê Heavy Exhaust em 3 Spirits/Ultimates do oponente com custo original 4 ou menos."
+    },
+    "effects": [
+      {
+        "id": "bsc49-091-hand",
+        "type": "constant",
+        "levels": [],
+        "timing": "whenDiscardedFromHand",
+        "title": {
+          "en": "[Cannot Stack] Hand Effect",
+          "ptBR": "[Não Acumula] Efeito na Mão"
+        },
+        "text": {
+          "en": "When this card in your hand would be discarded by one of your Green-only effects, you may put it in your hand area instead of your Trash.",
+          "ptBR": "Quando esta carta na sua mão seria descartada por um dos seus efeitos somente Verdes, você pode colocá-la na sua área de Hand em vez do Trash."
+        }
+      },
+      {
+        "id": "bsc49-091-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Choose one — exhaust one opposing Spirit/Ultimate; or heavily exhaust three opposing Spirits/Ultimates with original cost 4 or less.",
+          "ptBR": "Escolha 1 — dê Exhaust em 1 Spirit/Ultimate do oponente; ou dê Heavy Exhaust em 3 Spirits/Ultimates do oponente com custo original 4 ou menos."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-091.webp"
+  },
+  {
+    "id": "BSC49-092",
+    "name": "Life Charge LT",
+    "nameEN": "Life Charge LT",
+    "namePT": "Life Charge LT",
+    "nameKey": "life-charge-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main [Once per Turn: Same Name]: Destroy one of your Spirits with cost 10 or more to put five cores from the Void into your Trash. Flash [Once per Turn: Same Name]: Destroy one of your Spirits with cost 3 or more to put three cores from the Void into your Reserve.",
+      "ptBR": "Main [1 vez por turno: mesmo nome]: Destrua 1 dos seus Spirits de custo 10 ou mais para colocar 5 Cores do Void no seu Trash. Flash [1 vez por turno: mesmo nome]: Destrua 1 dos seus Spirits de custo 3 ou mais para colocar 3 Cores do Void na sua Reserve."
+    },
+    "effects": [
+      {
+        "id": "bsc49-092-main",
+        "type": "main",
+        "levels": [],
+        "timing": "main",
+        "title": {
+          "en": "Main",
+          "ptBR": "Main"
+        },
+        "text": {
+          "en": "Destroy one of your Spirits with cost 10 or more to put five cores from the Void into your Trash. [Once per Turn: Same Name]",
+          "ptBR": "Destrua 1 dos seus Spirits de custo 10 ou mais para colocar 5 Cores do Void no seu Trash. [1 vez por turno: mesmo nome]"
+        }
+      },
+      {
+        "id": "bsc49-092-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Destroy one of your Spirits with cost 3 or more to put three cores from the Void into your Reserve. [Once per Turn: Same Name]",
+          "ptBR": "Destrua 1 dos seus Spirits de custo 3 ou mais para colocar 3 Cores do Void na sua Reserve. [1 vez por turno: mesmo nome]"
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-092.webp"
+  },
+  {
+    "id": "BSC49-093",
+    "name": "Cassiopeia Seal LT",
+    "nameEN": "Cassiopeia Seal LT",
+    "namePT": "Cassiopeia Seal LT",
+    "nameKey": "cassiopeia-seal-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [
+      "field"
+    ],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "six"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Astral Soul"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Type: Field. While this card is in your Field, all Spirits/Ultimates designated by this card's effect cannot refresh. Flash: Designate up to two opposing Spirits/Ultimates and exhaust them. This effect cannot be prevented by opposing effects. Then place this card in your Field.",
+      "ptBR": "Tipo: Field. Enquanto esta carta estiver no seu Field, todos os Spirits/Ultimates designados pelo efeito desta carta não podem receber Refresh. Flash: Designe até 2 Spirits/Ultimates do oponente e dê Exhaust neles. Este efeito não pode ser impedido por efeitos do oponente. Depois, coloque esta carta no seu Field."
+    },
+    "effects": [
+      {
+        "id": "bsc49-093-field",
+        "type": "field",
+        "levels": [],
+        "timing": "whileInField",
+        "title": {
+          "en": "Field",
+          "ptBR": "Field"
+        },
+        "text": {
+          "en": "All Spirits/Ultimates designated by this card's effect cannot refresh.",
+          "ptBR": "Todos os Spirits/Ultimates designados pelo efeito desta carta não podem receber Refresh."
+        }
+      },
+      {
+        "id": "bsc49-093-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Designate up to two opposing Spirits/Ultimates and exhaust them. This effect cannot be prevented by opposing effects. Then place this card in your Field.",
+          "ptBR": "Designe até 2 Spirits/Ultimates do oponente e dê Exhaust neles. Este efeito não pode ser impedido por efeitos do oponente. Depois, coloque esta carta no seu Field."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-093.webp"
+  },
+  {
+    "id": "BSC49-094",
+    "name": "Reboot Code LT",
+    "nameEN": "Reboot Code LT",
+    "namePT": "Reboot Code LT",
+    "nameKey": "reboot-code-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "six"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Armed Machine"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "This card in your hand/hand area is unaffected by opposing effects. During the opponent's Attack Step, this card's cost becomes 2. Flash: Refresh all your Spirits. For this turn, all non-Braved Spirits refreshed by this effect cannot attack.",
+      "ptBR": "Esta carta na sua mão/área de Hand não é afetada por efeitos do oponente. Durante o Attack Step do oponente, o custo desta carta se torna 2. Flash: Dê Refresh em todos os seus Spirits. Durante este turno, todos os Spirits que não estejam combinados com Brave e que receberam Refresh por este efeito não podem atacar."
+    },
+    "effects": [
+      {
+        "id": "bsc49-094-hand",
+        "type": "constant",
+        "levels": [],
+        "timing": "whileInHand",
+        "title": {
+          "en": "Hand Effect",
+          "ptBR": "Efeito na Mão"
+        },
+        "text": {
+          "en": "This card in your hand/hand area is unaffected by opposing effects. During the opponent's Attack Step, this card's cost becomes 2.",
+          "ptBR": "Esta carta na sua mão/área de Hand não é afetada por efeitos do oponente. Durante o Attack Step do oponente, o custo desta carta se torna 2."
+        }
+      },
+      {
+        "id": "bsc49-094-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Refresh all your Spirits. For this turn, all non-Braved Spirits refreshed by this effect cannot attack.",
+          "ptBR": "Dê Refresh em todos os seus Spirits. Durante este turno, todos os Spirits que não estejam combinados com Brave e que receberam Refresh por este efeito não podem atacar."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-094.webp"
+  },
+  {
+    "id": "BSC49-095",
+    "name": "Delta Barrier LT",
+    "nameEN": "Delta Barrier LT",
+    "namePT": "Delta Barrier LT",
+    "nameKey": "delta-barrier-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Astral Soul"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "When your Life is reduced by an opposing effect, you may use this card from your hand/hand area immediately without paying its cost. A card used this way is unaffected by opposing effects until this Magic's effect finishes resolving. Flash: For this turn, your Life cannot become 0 from opposing effects or from attacks by opposing Spirits/Ultimates with cost 4 or more.",
+      "ptBR": "Quando sua Life for reduzida por um efeito do oponente, você pode usar esta carta da sua mão/área de Hand imediatamente sem pagar seu custo. Uma carta usada desta forma não é afetada por efeitos do oponente até o efeito desta Magic terminar de resolver. Flash: Durante este turno, sua Life não pode se tornar 0 por efeitos do oponente nem por ataques de Spirits/Ultimates do oponente de custo 4 ou mais."
+    },
+    "effects": [
+      {
+        "id": "bsc49-095-immediate",
+        "type": "constant",
+        "levels": [],
+        "timing": "whenLifeReducedByOpponentEffect",
+        "title": {
+          "en": "Immediate Use",
+          "ptBR": "Uso Imediato"
+        },
+        "text": {
+          "en": "When your Life is reduced by an opposing effect, you may use this card immediately without paying its cost. A card used this way is unaffected by opposing effects until this Magic's effect finishes resolving.",
+          "ptBR": "Quando sua Life for reduzida por um efeito do oponente, você pode usar esta carta imediatamente sem pagar seu custo. Uma carta usada desta forma não é afetada por efeitos do oponente até o efeito desta Magic terminar de resolver."
+        }
+      },
+      {
+        "id": "bsc49-095-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "For this turn, your Life cannot become 0 from opposing effects or from attacks by opposing Spirits/Ultimates with cost 4 or more.",
+          "ptBR": "Durante este turno, sua Life não pode se tornar 0 por efeitos do oponente nem por ataques de Spirits/Ultimates do oponente de custo 4 ou mais."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-095.webp"
+  },
+  {
+    "id": "BSC49-096",
+    "name": "Lunatic Seal LT",
+    "nameEN": "Lunatic Seal LT",
+    "namePT": "Lunatic Seal LT",
+    "nameKey": "lunatic-seal-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [
+      "field"
+    ],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Flying Fish"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "This card in your Field/Trash is unaffected by your other effects. Type: Field. While this card is in your Field, neither player's Life can increase or decrease. Neither deck is affected by deck-removal effects, and cards cannot be put into the Trash except by Divine Trust. At the end of your next turn after this card is placed in your Field, remove this card from the game. Main: Return one opposing Spirit/Nexus to the hand. Then, by removing five cards from your Trash that have Devotee and also Astral Soul/Galaxian, place this card in your Field.",
+      "ptBR": "Esta carta no seu Field/Trash não é afetada pelos seus outros efeitos. Tipo: Field. Enquanto esta carta estiver no seu Field, a Life de nenhum jogador pode aumentar ou diminuir. Nenhum deck é afetado por efeitos de descarte/remoção de deck, e cartas não podem ser colocadas no Trash exceto por Divine Trust. No final do seu próximo turno após esta carta ser colocada no Field, remova esta carta do jogo. Main: Devolva 1 Spirit/Nexus do oponente para a mão. Depois, ao remover do jogo 5 cartas do seu Trash que possuam Devotee e também Astral Soul/Galaxian, coloque esta carta no seu Field."
+    },
+    "effects": [
+      {
+        "id": "bsc49-096-protection",
+        "type": "constant",
+        "levels": [],
+        "timing": "whileInFieldOrTrash",
+        "title": {
+          "en": "Protection",
+          "ptBR": "Proteção"
+        },
+        "text": {
+          "en": "This card in your Field/Trash is unaffected by your other effects.",
+          "ptBR": "Esta carta no seu Field/Trash não é afetada pelos seus outros efeitos."
+        }
+      },
+      {
+        "id": "bsc49-096-field",
+        "type": "field",
+        "levels": [],
+        "timing": "whileInField",
+        "title": {
+          "en": "Field",
+          "ptBR": "Field"
+        },
+        "text": {
+          "en": "Neither player's Life can increase or decrease. Neither deck is affected by deck-removal effects, and cards cannot be put into the Trash except by Divine Trust. At the end of your next turn after this card is placed in your Field, remove this card from the game.",
+          "ptBR": "A Life de nenhum jogador pode aumentar ou diminuir. Nenhum deck é afetado por efeitos de descarte/remoção de deck, e cartas não podem ser colocadas no Trash exceto por Divine Trust. No final do seu próximo turno após esta carta ser colocada no Field, remova esta carta do jogo."
+        }
+      },
+      {
+        "id": "bsc49-096-main",
+        "type": "main",
+        "levels": [],
+        "timing": "main",
+        "title": {
+          "en": "Main",
+          "ptBR": "Main"
+        },
+        "text": {
+          "en": "Return one opposing Spirit/Nexus to the hand. Then, by removing five cards from your Trash that have Devotee and also Astral Soul/Galaxian, place this card in your Field.",
+          "ptBR": "Devolva 1 Spirit/Nexus do oponente para a mão. Depois, ao remover do jogo 5 cartas do seu Trash que possuam Devotee e também Astral Soul/Galaxian, coloque esta carta no seu Field."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-096.webp"
+  },
+  {
+    "id": "BSC49-097",
+    "name": "Pegasus Flap LT",
+    "nameEN": "Pegasus Flap LT",
+    "namePT": "Pegasus Flap LT",
+    "nameKey": "pegasus-flap-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "six"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Hunter Beast"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "[Once per Turn: Same Name] When your Yellow Braved Spirit attacks, you may return this card from your Trash to your hand. [Once per Turn: Same Name] When this card is returned from your Trash to your hand by a Yellow effect, you may give one opposing Spirit -3000 BP for this turn. Flash: When this battle resolves, end the battle without comparing BP. Then refresh one of your Spirits.",
+      "ptBR": "[1 vez por turno: mesmo nome] Quando seu Spirit Amarelo combinado com Brave atacar, você pode devolver esta carta do seu Trash para a mão. [1 vez por turno: mesmo nome] Quando esta carta voltar do seu Trash para a mão por um efeito Amarelo, você pode dar -3000 BP a 1 Spirit do oponente durante este turno. Flash: Quando esta batalha for resolvida, encerre a batalha sem comparar BP. Depois, dê Refresh em 1 dos seus Spirits."
+    },
+    "effects": [
+      {
+        "id": "bsc49-097-trash",
+        "type": "constant",
+        "levels": [],
+        "timing": "whenYellowBravedSpiritAttacks",
+        "title": {
+          "en": "Trash Effect",
+          "ptBR": "Efeito no Trash"
+        },
+        "text": {
+          "en": "When your Yellow Braved Spirit attacks, you may return this card from your Trash to your hand. [Once per Turn: Same Name]",
+          "ptBR": "Quando seu Spirit Amarelo combinado com Brave atacar, você pode devolver esta carta do seu Trash para a mão. [1 vez por turno: mesmo nome]"
+        }
+      },
+      {
+        "id": "bsc49-097-return",
+        "type": "constant",
+        "levels": [],
+        "timing": "whenReturnedFromTrashByYellowEffect",
+        "title": {
+          "en": "When Returned to Hand",
+          "ptBR": "Quando Voltar à Mão"
+        },
+        "text": {
+          "en": "When this card is returned from your Trash to your hand by a Yellow effect, you may give one opposing Spirit -3000 BP for this turn. [Once per Turn: Same Name]",
+          "ptBR": "Quando esta carta voltar do seu Trash para a mão por um efeito Amarelo, você pode dar -3000 BP a 1 Spirit do oponente durante este turno. [1 vez por turno: mesmo nome]"
+        }
+      },
+      {
+        "id": "bsc49-097-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "When this battle resolves, end the battle without comparing BP. Then refresh one of your Spirits.",
+          "ptBR": "Quando esta batalha for resolvida, encerre a batalha sem comparar BP. Depois, dê Refresh em 1 dos seus Spirits."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-097.webp"
+  },
+  {
+    "id": "BSC49-098",
+    "name": "Hand Typhoon LT",
+    "nameEN": "Hand Typhoon LT",
+    "namePT": "Hand Typhoon LT",
+    "nameKey": "hand-typhoon-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "six"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Imaginary Beast"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main [Once per Turn: Same Name]: Discard your entire hand, then draw four cards. By removing five cards from your Trash that have Devotee and also Astral Soul/Galaxian, apply this discard-and-draw effect to both players instead. Flash: One Spirit/Ultimate gains +3000 BP for this turn.",
+      "ptBR": "Main [1 vez por turno: mesmo nome]: Descarte toda a sua mão e depois compre 4 cartas. Ao remover do jogo 5 cartas do seu Trash que possuam Devotee e também Astral Soul/Galaxian, aplique este efeito de descartar e comprar aos dois jogadores em vez de apenas você. Flash: 1 Spirit/Ultimate recebe +3000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "bsc49-098-main",
+        "type": "main",
+        "levels": [],
+        "timing": "main",
+        "title": {
+          "en": "Main",
+          "ptBR": "Main"
+        },
+        "text": {
+          "en": "Discard your entire hand, then draw four cards. By removing five cards from your Trash that have Devotee and also Astral Soul/Galaxian, apply this effect to both players instead. [Once per Turn: Same Name]",
+          "ptBR": "Descarte toda a sua mão e depois compre 4 cartas. Ao remover do jogo 5 cartas do seu Trash que possuam Devotee e também Astral Soul/Galaxian, aplique este efeito aos dois jogadores em vez de apenas você. [1 vez por turno: mesmo nome]"
+        }
+      },
+      {
+        "id": "bsc49-098-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "One Spirit/Ultimate gains +3000 BP for this turn.",
+          "ptBR": "1 Spirit/Ultimate recebe +3000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-098.webp"
+  },
+  {
+    "id": "BSC49-099",
+    "name": "Wig Bind LT",
+    "nameEN": "Wig Bind LT",
+    "namePT": "Wig Bind LT",
+    "nameKey": "wig-bind-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 8,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "six"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Astral Soul"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: For this turn, all opposing Spirits with effect text cannot attack or block. Additionally, by removing five cards from your Trash that have Devotee and also Astral Soul/Galaxian, your opponent cannot use cards from their hand/hand area this turn unless those cards are Yellow-only.",
+      "ptBR": "Flash: Durante este turno, todos os Spirits do oponente que possuem texto de efeito não podem atacar nem bloquear. Além disso, ao remover do jogo 5 cartas do seu Trash que possuam Devotee e também Astral Soul/Galaxian, seu oponente não pode usar cartas da mão/área de Hand durante este turno, exceto cartas que sejam somente Amarelas."
+    },
+    "effects": [
+      {
+        "id": "bsc49-099-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "For this turn, all opposing Spirits with effect text cannot attack or block. Additionally, by removing five cards from your Trash that have Devotee and also Astral Soul/Galaxian, your opponent cannot use cards from their hand/hand area this turn unless those cards are Yellow-only.",
+          "ptBR": "Durante este turno, todos os Spirits do oponente que possuem texto de efeito não podem atacar nem bloquear. Além disso, ao remover do jogo 5 cartas do seu Trash que possuam Devotee e também Astral Soul/Galaxian, seu oponente não pode usar cartas da mão/área de Hand durante este turno, exceto cartas que sejam somente Amarelas."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-099.webp"
+  },
+  {
+    "id": "BSC49-100",
+    "name": "Orion Power LT",
+    "nameEN": "Orion Power LT",
+    "namePT": "Orion Power LT",
+    "nameKey": "orion-power-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Fighting Spirit"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "When this card in your hand is discarded by one of your Blue effects, you may activate its Main or Flash effect. Main [Once per Turn: Same Name]: For this turn, whenever an attack by one of your Spirits with Astral Soul, Galaxian, or Fighting Spirit reduces the opponent's Life, discard the top ten cards of the opponent's deck. Flash: One Spirit/Ultimate gains +3000 BP for this turn.",
+      "ptBR": "Quando esta carta na sua mão for descartada por um dos seus efeitos Azuis, você pode ativar seu efeito Main ou Flash. Main [1 vez por turno: mesmo nome]: Durante este turno, sempre que um ataque de 1 dos seus Spirits com Astral Soul, Galaxian ou Fighting Spirit reduzir a Life do oponente, descarte as 10 cartas do topo do deck do oponente. Flash: 1 Spirit/Ultimate recebe +3000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "bsc49-100-discard",
+        "type": "constant",
+        "levels": [],
+        "timing": "whenDiscardedByBlueEffect",
+        "title": {
+          "en": "When Discarded",
+          "ptBR": "Quando Descartada"
+        },
+        "text": {
+          "en": "When this card in your hand is discarded by one of your Blue effects, you may activate its Main or Flash effect.",
+          "ptBR": "Quando esta carta na sua mão for descartada por um dos seus efeitos Azuis, você pode ativar seu efeito Main ou Flash."
+        }
+      },
+      {
+        "id": "bsc49-100-main",
+        "type": "main",
+        "levels": [],
+        "timing": "main",
+        "title": {
+          "en": "Main",
+          "ptBR": "Main"
+        },
+        "text": {
+          "en": "For this turn, whenever an attack by one of your Spirits with Astral Soul, Galaxian, or Fighting Spirit reduces the opponent's Life, discard the top ten cards of the opponent's deck. [Once per Turn: Same Name]",
+          "ptBR": "Durante este turno, sempre que um ataque de 1 dos seus Spirits com Astral Soul, Galaxian ou Fighting Spirit reduzir a Life do oponente, descarte as 10 cartas do topo do deck do oponente. [1 vez por turno: mesmo nome]"
+        }
+      },
+      {
+        "id": "bsc49-100-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "One Spirit/Ultimate gains +3000 BP for this turn.",
+          "ptBR": "1 Spirit/Ultimate recebe +3000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-100.webp"
+  },
+  {
+    "id": "BSC49-101",
+    "name": "Argo Attack LT",
+    "nameEN": "Argo Attack LT",
+    "namePT": "Argo Attack LT",
+    "nameKey": "argo-attack-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "six"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Artificial Soldier"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Discard the top four cards of your deck. Then deploy all Ancient Battleship cards in your Trash without paying their costs. Flash: You may summon one Ancient Battleship Argo-Golem from your hand. Then one Spirit/Ultimate gains +5000 BP for this turn.",
+      "ptBR": "Main: Descarte as 4 cartas do topo do seu deck. Depois, coloque em campo todos os cards \"Ancient Battleship\" do seu Trash sem pagar seus custos. Flash: Você pode Invocar 1 \"Ancient Battleship Argo-Golem\" da sua mão. Depois, 1 Spirit/Ultimate recebe +5000 BP durante este turno."
+    },
+    "effects": [
+      {
+        "id": "bsc49-101-main",
+        "type": "main",
+        "levels": [],
+        "timing": "main",
+        "title": {
+          "en": "Main",
+          "ptBR": "Main"
+        },
+        "text": {
+          "en": "Discard the top four cards of your deck. Then deploy all Ancient Battleship cards in your Trash without paying their costs.",
+          "ptBR": "Descarte as 4 cartas do topo do seu deck. Depois, coloque em campo todos os cards \"Ancient Battleship\" do seu Trash sem pagar seus custos."
+        }
+      },
+      {
+        "id": "bsc49-101-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "You may summon one Ancient Battleship Argo-Golem from your hand. Then one Spirit/Ultimate gains +5000 BP for this turn.",
+          "ptBR": "Você pode Invocar 1 \"Ancient Battleship Argo-Golem\" da sua mão. Depois, 1 Spirit/Ultimate recebe +5000 BP durante este turno."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-101.webp"
+  },
+  {
+    "id": "BSC49-102",
+    "name": "Mercury Goblet LT",
+    "nameEN": "Mercury Goblet LT",
+    "namePT": "Mercury Goblet LT",
+    "nameKey": "mercury-goblet-lt",
+    "set": "BSC49",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "six"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Astral Soul"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "[Cannot Stack] When one of your Blue Nexuses becomes exhausted, you may return this card from your Trash to your hand. Flash: Destroy one opposing Spirit/Ultimate among those with the lowest cost that can be affected by this effect. This destruction cannot be prevented by opposing effects with cost 5 or less.",
+      "ptBR": "[Não Acumula] Quando 1 dos seus Nexuses Azuis ficar Exhausted, você pode devolver esta carta do seu Trash para a mão. Flash: Destrua 1 Spirit/Ultimate do oponente entre aqueles de menor custo que possam ser afetados por este efeito. Esta destruição não pode ser impedida por efeitos do oponente de custo 5 ou menos."
+    },
+    "effects": [
+      {
+        "id": "bsc49-102-trash",
+        "type": "constant",
+        "levels": [],
+        "timing": "whenBlueNexusExhausted",
+        "title": {
+          "en": "Trash Effect",
+          "ptBR": "Efeito no Trash"
+        },
+        "text": {
+          "en": "When one of your Blue Nexuses becomes exhausted, you may return this card from your Trash to your hand. [Cannot Stack]",
+          "ptBR": "Quando 1 dos seus Nexuses Azuis ficar Exhausted, você pode devolver esta carta do seu Trash para a mão. [Não Acumula]"
+        }
+      },
+      {
+        "id": "bsc49-102-flash",
+        "type": "flash",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Flash",
+          "ptBR": "Flash"
+        },
+        "text": {
+          "en": "Destroy one opposing Spirit/Ultimate among those with the lowest cost that can be affected by this effect. This destruction cannot be prevented by opposing effects with cost 5 or less.",
+          "ptBR": "Destrua 1 Spirit/Ultimate do oponente entre aqueles de menor custo que possam ser afetados por este efeito. Esta destruição não pode ser impedida por efeitos do oponente de custo 5 ou menos."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-102.webp"
+  }
+]

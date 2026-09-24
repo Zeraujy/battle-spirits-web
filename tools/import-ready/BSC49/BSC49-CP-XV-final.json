@@ -1,0 +1,1692 @@
+[
+  {
+    "id": "BSC49-CP01",
+    "name": "The GalacticDragonRider Zodiacapollocrimson (Revival)",
+    "nameEN": "The GalacticDragonRider Zodiacapollocrimson (Revival)",
+    "namePT": "The GalacticDragonRider Zodiacapollocrimson (Revival)",
+    "nameKey": "the-galacticdragonrider-zodiacapollocrimson-revival",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [
+      "manifest"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 12,
+    "reduction": [
+      "six",
+      "six",
+      "six",
+      "six",
+      "six",
+      "six"
+    ],
+    "rarity": "CP",
+    "includedQuantity": 1,
+    "families": [
+      "Sovereign",
+      "Divine Star",
+      "Dragon Knight"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 12000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 24000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 30000
+      }
+    ],
+    "effectText": {
+      "en": "Flash 《Manifest: The GalaxianContractor Dan with 6 or more cores》 [Either Attack Step] By moving your Soul Core to your Trash, pay 1 cost from the target and summon this card from your hand. This card/Spirit also gains Devotee/Galaxian. [Star World Release: 1] Lv1-Lv2-Lv3 [When Summoned/When Attacks] You may destroy one opposing Spirit/Ultimate with the highest BP. Then, by moving one core from your six-color GranWalker Nexus to a Spirit, open the top card of your deck. If it has Devotee and also Astral Soul/Galaxian, summon it without paying its cost. Otherwise, add the opened card to your hand.",
+      "ptBR": "Flash 《Manifestar: The GalaxianContractor Dan com 6 ou mais Cores》 [Attack Step de qualquer jogador] Ao mover seu Soul Core para o Trash, pague 1 de custo a partir do alvo e Invoque esta carta da sua mão. Esta carta/Spirit também recebe as famílias Devotee/Galaxian. [Star World Release: 1] Lv1-Lv2-Lv3 [Ao Invocar/Ao Atacar] Você pode destruir 1 Spirit/Ultimate do oponente com o maior BP. Depois, ao mover 1 Core do seu GranWalker Nexus de seis cores para um Spirit, revele a carta do topo do seu deck. Se ela possuir Devotee e também Astral Soul/Galaxian, Invoque-a sem pagar o custo. Caso contrário, adicione a carta revelada à sua mão."
+    },
+    "effects": [
+      {
+        "id": "bsc49-cp01-manifest",
+        "type": "flash",
+        "levels": [],
+        "timing": "eitherAttackStep",
+        "title": {
+          "en": "Manifest",
+          "ptBR": "Manifestar"
+        },
+        "text": {
+          "en": "By moving your Soul Core to your Trash, pay 1 cost from The GalaxianContractor Dan with 6 or more cores and summon this card from your hand.",
+          "ptBR": "Ao mover seu Soul Core para o Trash, pague 1 de custo a partir de The GalaxianContractor Dan com 6 ou mais Cores e Invoque esta carta da sua mão."
+        }
+      },
+      {
+        "id": "bsc49-cp01-family",
+        "type": "constant",
+        "levels": [],
+        "timing": "whileCardOrSpirit",
+        "title": {
+          "en": "Additional Families",
+          "ptBR": "Famílias Adicionais"
+        },
+        "text": {
+          "en": "This card/Spirit also gains Devotee/Galaxian.",
+          "ptBR": "Esta carta/Spirit também recebe as famílias Devotee/Galaxian."
+        }
+      },
+      {
+        "id": "bsc49-cp01-star-world-release",
+        "type": "trigger",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenSummonedOrAttacks",
+        "title": {
+          "en": "Star World Release: 1",
+          "ptBR": "Star World Release: 1"
+        },
+        "text": {
+          "en": "You may destroy one opposing Spirit/Ultimate with the highest BP. Then, by moving one core from your six-color GranWalker Nexus to a Spirit, open the top card of your deck. If it has Devotee and also Astral Soul/Galaxian, summon it without paying its cost. Otherwise, add it to your hand.",
+          "ptBR": "Você pode destruir 1 Spirit/Ultimate do oponente com o maior BP. Depois, ao mover 1 Core do seu GranWalker Nexus de seis cores para um Spirit, revele a carta do topo do deck. Se ela possuir Devotee e também Astral Soul/Galaxian, Invoque-a sem pagar o custo. Caso contrário, adicione-a à sua mão."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-CP01.webp"
+  },
+  {
+    "id": "BSC49-CP02",
+    "name": "The GalaxianContractor Dan",
+    "nameEN": "The GalaxianContractor Dan",
+    "namePT": "The GalaxianContractor Dan",
+    "nameKey": "the-galaxiancontractor-dan",
+    "set": "BSC49",
+    "cardType": "nexus",
+    "subtypes": [
+      "contract",
+      "granwalker"
+    ],
+    "colors": [
+      "red",
+      "purple",
+      "green",
+      "white",
+      "yellow",
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "six",
+      "six"
+    ],
+    "rarity": "CP",
+    "includedQuantity": 1,
+    "families": [
+      "GranWalker",
+      "Galaxian",
+      "Ur"
+    ],
+    "symbols": [
+      "god-red",
+      "god-red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0
+      }
+    ],
+    "effectText": {
+      "en": "《True Divine Trust》 [Astral Soul/Divine Star/Galaxian & Cost 3 or more] [Brave]. When one of your eligible Spirits/Braves is summoned, you may put one core from the Void on this Nexus. [Once per Turn: Same Name] When this Nexus is placed, you may discard the top three cards of your deck; put one core from the Void on this Nexus for each eligible card discarded this way. [Revival] Main [Once per Turn: Same Name]: If this card is in Soul State, you may place it. [Contract Domain] Lv1: For all your non-six-color cards/Accelerators with Astral Soul/Galaxian, all their reduction symbols are also treated as six-color reductions. [Contract Skill: 3] Lv1 [Your Main Step] [Once per Turn]: By moving three cores from this Nexus to the Void, open the top two cards of your deck. Add one Astral Soul/Galaxian card among them to your hand and discard the rest.",
+      "ptBR": "《True Divine Trust》 [Astral Soul/Divine Star/Galaxian & custo 3 ou mais] [Brave]. Quando 1 dos seus Spirits/Braves elegíveis for Invocado, você pode colocar 1 Core do Void neste Nexus. [1 vez por turno: mesmo nome] Quando este Nexus for colocado, você pode descartar as 3 cartas do topo do deck; coloque 1 Core do Void neste Nexus para cada carta elegível descartada desta forma. [Revival] Main [1 vez por turno: mesmo nome]: Se esta carta estiver em Soul State, você pode colocá-la. [Contract Domain] Lv1: Para todas as suas cartas/Accelerators que não sejam de seis cores e possuam Astral Soul/Galaxian, todos os seus símbolos de redução também são tratados como reduções de seis cores. [Contract Skill: 3] Lv1 [Seu Main Step] [1 vez por turno]: Ao mover 3 Cores deste Nexus para o Void, revele as 2 cartas do topo do seu deck. Adicione 1 carta Astral Soul/Galaxian entre elas à sua mão e descarte o restante."
+    },
+    "effects": [
+      {
+        "id": "bsc49-cp02-true-divine-trust",
+        "type": "trust",
+        "levels": [],
+        "timing": "onEligibleSummonOrPlacement",
+        "title": {
+          "en": "True Divine Trust",
+          "ptBR": "True Divine Trust"
+        },
+        "text": {
+          "en": "Trust Astral Soul/Divine Star/Galaxian cards with cost 3 or more and Braves. Eligible summons may add one core from the Void; on placement, you may mill three and gain one core per eligible card.",
+          "ptBR": "Trust para cartas Astral Soul/Divine Star/Galaxian de custo 3 ou mais e Braves. Invocações elegíveis podem adicionar 1 Core do Void; ao colocar este Nexus, você pode descartar 3 cartas e ganhar 1 Core por carta elegível."
+        }
+      },
+      {
+        "id": "bsc49-cp02-revival",
+        "type": "main",
+        "levels": [],
+        "timing": "main",
+        "title": {
+          "en": "Revival",
+          "ptBR": "Revival"
+        },
+        "text": {
+          "en": "If this card is in Soul State, you may place it. [Once per Turn: Same Name]",
+          "ptBR": "Se esta carta estiver em Soul State, você pode colocá-la. [1 vez por turno: mesmo nome]"
+        }
+      },
+      {
+        "id": "bsc49-cp02-contract-domain",
+        "type": "constant",
+        "levels": [
+          1
+        ],
+        "timing": "whileLevel1",
+        "title": {
+          "en": "Contract Domain",
+          "ptBR": "Contract Domain"
+        },
+        "text": {
+          "en": "For your non-six-color cards/Accelerators with Astral Soul/Galaxian, all reduction symbols are also treated as six-color reductions.",
+          "ptBR": "Para suas cartas/Accelerators que não sejam de seis cores e possuam Astral Soul/Galaxian, todos os símbolos de redução também são tratados como reduções de seis cores."
+        }
+      },
+      {
+        "id": "bsc49-cp02-contract-skill",
+        "type": "main",
+        "levels": [
+          1
+        ],
+        "timing": "main",
+        "title": {
+          "en": "Contract Skill: 3",
+          "ptBR": "Contract Skill: 3"
+        },
+        "text": {
+          "en": "By moving three cores from this Nexus to the Void, open the top two cards of your deck. Add one Astral Soul/Galaxian card among them to your hand and discard the rest. [Once per Turn]",
+          "ptBR": "Ao mover 3 Cores deste Nexus para o Void, revele as 2 cartas do topo do deck. Adicione 1 carta Astral Soul/Galaxian entre elas à sua mão e descarte o restante. [1 vez por turno]"
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-CP02.webp",
+    "contractNexus": true
+  },
+  {
+    "id": "BSC49-CP03",
+    "name": "Grandwalker Dan (Revival)",
+    "nameEN": "Grandwalker Dan (Revival)",
+    "namePT": "Grandwalker Dan (Revival)",
+    "nameKey": "grandwalker-dan-revival",
+    "set": "BSC49",
+    "cardType": "nexus",
+    "subtypes": [
+      "granwalker",
+      "revival"
+    ],
+    "colors": [
+      "red",
+      "purple",
+      "green",
+      "white",
+      "yellow",
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [],
+    "rarity": "CP",
+    "includedQuantity": 1,
+    "families": [
+      "GranWalker",
+      "Galaxian",
+      "Ur"
+    ],
+    "symbols": [
+      "god"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0
+      },
+      {
+        "level": 2,
+        "cores": 1
+      }
+    ],
+    "effectText": {
+      "en": "This database entry uses the current official errata. 《Divine Trust》 [Divine Star/Galaxian & Cost 3 or more]. When one of your eligible Spirits is summoned/descends, you may put one core from the Void on this Nexus. When this Nexus is placed, if you have no other same-name GranWalker Nexus, you may discard the top three cards of your deck and put one core from the Void on this Nexus for each eligible card discarded. Lv1-Lv2: Add all Galaxian cards discarded by this Nexus's Divine Trust to your hand. [Divine Skill: 4] Lv1-Lv2 Flash [Either Attack Step] [Once per Turn]: By moving four cores from this Nexus to the Void, destroy one opposing Spirit/Ultimate with 10000 BP or less. Your opponent cannot end the Attack Step with effects this turn. [Divine Domain] Lv2: While you have six or fewer cards in your hand, your hand is unaffected by opposing effects.",
+      "ptBR": "Esta entrada usa a errata oficial atual. 《Divine Trust》 [Divine Star/Galaxian & custo 3 ou mais]. Quando 1 dos seus Spirits elegíveis for Invocado/Descender, você pode colocar 1 Core do Void neste Nexus. Quando este Nexus for colocado, se você não possuir outro GranWalker Nexus com o mesmo nome, você pode descartar as 3 cartas do topo do deck e colocar 1 Core do Void neste Nexus para cada carta elegível descartada. Lv1-Lv2: Adicione à sua mão todas as cartas Galaxian descartadas pelo Divine Trust deste Nexus. [Divine Skill: 4] Lv1-Lv2 Flash [Attack Step de qualquer jogador] [1 vez por turno]: Ao mover 4 Cores deste Nexus para o Void, destrua 1 Spirit/Ultimate do oponente com 10000 BP ou menos. Neste turno, seu oponente não pode encerrar o Attack Step por efeitos. [Divine Domain] Lv2: Enquanto você tiver 6 ou menos cartas na mão, sua mão não é afetada por efeitos do oponente."
+    },
+    "effects": [
+      {
+        "id": "bsc49-cp03-divine-trust",
+        "type": "trust",
+        "levels": [],
+        "timing": "onEligibleSummonDescendOrPlacement",
+        "title": {
+          "en": "Divine Trust",
+          "ptBR": "Divine Trust"
+        },
+        "text": {
+          "en": "Trust Divine Star/Galaxian Spirits with cost 3 or more. Eligible summons/descends may add one core from the Void. On placement, if you have no other same-name GranWalker Nexus, you may mill three and gain one core per eligible card.",
+          "ptBR": "Trust para Spirits Divine Star/Galaxian de custo 3 ou mais. Invocações/Descend elegíveis podem adicionar 1 Core do Void. Ao colocar este Nexus, se não houver outro GranWalker Nexus de mesmo nome, você pode descartar 3 cartas e ganhar 1 Core por carta elegível."
+        }
+      },
+      {
+        "id": "bsc49-cp03-trust-recovery",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "afterDivineTrust",
+        "title": {
+          "en": "Divine Trust Recovery",
+          "ptBR": "Recuperação do Divine Trust"
+        },
+        "text": {
+          "en": "Add all Galaxian cards discarded by this Nexus's Divine Trust to your hand.",
+          "ptBR": "Adicione à sua mão todas as cartas Galaxian descartadas pelo Divine Trust deste Nexus."
+        }
+      },
+      {
+        "id": "bsc49-cp03-divine-skill",
+        "type": "flash",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "eitherAttackStep",
+        "title": {
+          "en": "Divine Skill: 4",
+          "ptBR": "Divine Skill: 4"
+        },
+        "text": {
+          "en": "By moving four cores from this Nexus to the Void, destroy one opposing Spirit/Ultimate with 10000 BP or less. Your opponent cannot end the Attack Step with effects this turn. [Once per Turn]",
+          "ptBR": "Ao mover 4 Cores deste Nexus para o Void, destrua 1 Spirit/Ultimate do oponente com 10000 BP ou menos. Neste turno, seu oponente não pode encerrar o Attack Step por efeitos. [1 vez por turno]"
+        }
+      },
+      {
+        "id": "bsc49-cp03-divine-domain",
+        "type": "constant",
+        "levels": [
+          2
+        ],
+        "timing": "whileLevel2",
+        "title": {
+          "en": "Divine Domain",
+          "ptBR": "Divine Domain"
+        },
+        "text": {
+          "en": "While you have six or fewer cards in your hand, your hand is unaffected by opposing effects.",
+          "ptBR": "Enquanto você tiver 6 ou menos cartas na mão, sua mão não é afetada por efeitos do oponente."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-CP03.webp",
+    "errata": true,
+    "printedCost": 4,
+    "printedReduction": [
+      "six",
+      "six",
+      "six"
+    ],
+    "printedSymbols": [
+      "red"
+    ],
+    "errataNote": {
+      "en": "Current official errata changes this card from the printed Cost 4 / six-color reduction x3 version to Cost 2 / no reduction, and updates several effects.",
+      "ptBR": "A errata oficial atual altera a carta impressa de Custo 4 / redução de seis cores x3 para Custo 2 / sem redução, além de atualizar diversos efeitos."
+    }
+  },
+  {
+    "id": "BSC49-XV01",
+    "name": "The BullDragonDeity Dragonic-Taurus XV",
+    "nameEN": "The BullDragonDeity Dragonic-Taurus XV",
+    "namePT": "The BullDragonDeity Dragonic-Taurus XV",
+    "nameKey": "the-bulldragondeity-dragonic-taurus-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 7,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Ancient Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 8000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 14000
+      }
+    ],
+    "effectText": {
+      "en": "Lv1-Lv2-Lv3 [When Attacks]: You may make a designated attack against one opposing Spirit/Ultimate. When this Spirit is blocked, compare the number of symbols on this Spirit and the blocker; for each symbol this Spirit has in excess, move one core from your opponent's Life to their Reserve. Lv3 [When Attacks]: For each of your other Spirits, add one Red symbol to this Spirit for this battle.",
+      "ptBR": "Lv1-Lv2-Lv3 [Ao Atacar]: Você pode realizar um ataque designado contra 1 Spirit/Ultimate do oponente. Quando este Spirit for bloqueado, compare a quantidade de símbolos deste Spirit com a do bloqueador; para cada símbolo que este Spirit possuir a mais, mova 1 Core da Life do oponente para a Reserve dele. Lv3 [Ao Atacar]: Para cada um dos seus outros Spirits, adicione 1 símbolo Vermelho a este Spirit durante esta batalha."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv01-designated-attack",
+        "type": "attack",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Designated Attack",
+          "ptBR": "Ataque Designado"
+        },
+        "text": {
+          "en": "You may make a designated attack against one opposing Spirit/Ultimate.",
+          "ptBR": "Você pode realizar um ataque designado contra 1 Spirit/Ultimate do oponente."
+        }
+      },
+      {
+        "id": "bsc49-xv01-symbol-life",
+        "type": "trigger",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenBlocked",
+        "title": {
+          "en": "Symbol Pressure",
+          "ptBR": "Pressão de Símbolos"
+        },
+        "text": {
+          "en": "Compare this Spirit's symbols with the blocker's symbols. For each symbol this Spirit has in excess, move one core from the opponent's Life to their Reserve.",
+          "ptBR": "Compare os símbolos deste Spirit com os do bloqueador. Para cada símbolo que este Spirit possuir a mais, mova 1 Core da Life do oponente para a Reserve dele."
+        }
+      },
+      {
+        "id": "bsc49-xv01-extra-symbols",
+        "type": "attack",
+        "levels": [
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Extra Red Symbols",
+          "ptBR": "Símbolos Vermelhos Extras"
+        },
+        "text": {
+          "en": "For each of your other Spirits, add one Red symbol to this Spirit for this battle.",
+          "ptBR": "Para cada um dos seus outros Spirits, adicione 1 símbolo Vermelho a este Spirit durante esta batalha."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV01.webp"
+  },
+  {
+    "id": "BSC49-XV02",
+    "name": "The ShineCentaurusDeity Sagitto-Apollodragon XV",
+    "nameEN": "The ShineCentaurusDeity Sagitto-Apollodragon XV",
+    "namePT": "The ShineCentaurusDeity Sagitto-Apollodragon XV",
+    "nameKey": "the-shinecentaurusdeity-sagitto-apollodragon-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [
+      "double-brave"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 8,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red",
+      "red",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 7000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 14000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 20000
+      }
+    ],
+    "effectText": {
+      "en": "Lv1-Lv2-Lv3: This Spirit can combine with up to two Braves. While it is combined with exactly two Braves, Life reduction caused by this Spirit cannot be prevented by opposing White effects. Lv1-Lv2-Lv3 [When Attacks]: Destroy any number of opposing Spirits/Ultimates whose total BP is 15000 or less. Increase this BP limit by 5000 for each Brave combined with this Spirit. [Braved] Lv2-Lv3 [When Attacks]: For each Brave on this Spirit, you may destroy one opposing Spirit/Ultimate/Nexus/GranWalker Nexus.",
+      "ptBR": "Lv1-Lv2-Lv3: Este Spirit pode combinar com até 2 Braves. Enquanto estiver combinado com exatamente 2 Braves, a redução de Life causada por este Spirit não pode ser impedida por efeitos Brancos do oponente. Lv1-Lv2-Lv3 [Ao Atacar]: Destrua qualquer quantidade de Spirits/Ultimates do oponente cuja soma de BP seja 15000 ou menos. Aumente esse limite em 5000 para cada Brave combinado com este Spirit. [Braved] Lv2-Lv3 [Ao Atacar]: Para cada Brave neste Spirit, você pode destruir 1 Spirit/Ultimate/Nexus/GranWalker Nexus do oponente."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv02-double-brave",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whileOnField",
+        "title": {
+          "en": "Double Brave",
+          "ptBR": "Brave Duplo"
+        },
+        "text": {
+          "en": "This Spirit can combine with up to two Braves. While combined with exactly two Braves, Life reduction caused by this Spirit cannot be prevented by opposing White effects.",
+          "ptBR": "Este Spirit pode combinar com até 2 Braves. Enquanto estiver combinado com exatamente 2 Braves, a redução de Life causada por este Spirit não pode ser impedida por efeitos Brancos do oponente."
+        }
+      },
+      {
+        "id": "bsc49-xv02-bp-destruction",
+        "type": "attack",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "BP Destruction",
+          "ptBR": "Destruição por BP"
+        },
+        "text": {
+          "en": "Destroy any number of opposing Spirits/Ultimates whose total BP is 15000 or less, plus 5000 to the limit for each Brave combined with this Spirit.",
+          "ptBR": "Destrua qualquer quantidade de Spirits/Ultimates do oponente cuja soma de BP seja 15000 ou menos, aumentando o limite em 5000 para cada Brave combinado com este Spirit."
+        }
+      },
+      {
+        "id": "bsc49-xv02-braved-destruction",
+        "type": "attack",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenAttacks",
+        "title": {
+          "en": "Braved Destruction",
+          "ptBR": "Destruição Braved"
+        },
+        "text": {
+          "en": "For each Brave on this Spirit, you may destroy one opposing Spirit/Ultimate/Nexus/GranWalker Nexus.",
+          "ptBR": "Para cada Brave neste Spirit, você pode destruir 1 Spirit/Ultimate/Nexus/GranWalker Nexus do oponente."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV02.webp"
+  },
+  {
+    "id": "BSC49-XV03",
+    "name": "The EvilCapricornusDeity Stein-Bolg XV",
+    "nameEN": "The EvilCapricornusDeity Stein-Bolg XV",
+    "namePT": "The EvilCapricornusDeity Stein-Bolg XV",
+    "nameKey": "the-evilcapricornusdeity-stein-bolg-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [
+      "burst"
+    ],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Nether Lord"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 11000
+      }
+    ],
+    "effectText": {
+      "en": "Burst: After your Life is reduced, summon this card without paying its cost. Lv1-Lv2-Lv3 [When Summoned] [Once per Turn: Same Name]: Return one Purple card from your Trash to your hand. Lv1-Lv2-Lv3 [Your Attack Step]: When one of your Spirits with Astral Soul/Galaxian attacks, you may move one core from an opposing card on the field to the opponent's Reserve. Lv2-Lv3: Cores moved to your opponent's Reserve by your effects are put into their Trash instead.",
+      "ptBR": "Burst: Depois que sua Life for reduzida, Invoque esta carta sem pagar o custo. Lv1-Lv2-Lv3 [Ao Invocar] [1 vez por turno: mesmo nome]: Devolva 1 carta Roxa do seu Trash para a mão. Lv1-Lv2-Lv3 [Seu Attack Step]: Quando 1 dos seus Spirits com Astral Soul/Galaxian atacar, você pode mover 1 Core de uma carta do oponente no campo para a Reserve dele. Lv2-Lv3: Cores movidos para a Reserve do oponente pelos seus efeitos são colocados no Trash dele em vez disso."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv03-burst",
+        "type": "burst",
+        "levels": [],
+        "timing": "afterLifeReduced",
+        "title": {
+          "en": "Burst",
+          "ptBR": "Burst"
+        },
+        "text": {
+          "en": "After your Life is reduced, summon this card without paying its cost.",
+          "ptBR": "Depois que sua Life for reduzida, Invoque esta carta sem pagar o custo."
+        }
+      },
+      {
+        "id": "bsc49-xv03-trash-recovery",
+        "type": "summon",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "Trash Recovery",
+          "ptBR": "Recuperação do Trash"
+        },
+        "text": {
+          "en": "Return one Purple card from your Trash to your hand. [Once per Turn: Same Name]",
+          "ptBR": "Devolva 1 carta Roxa do seu Trash para a mão. [1 vez por turno: mesmo nome]"
+        }
+      },
+      {
+        "id": "bsc49-xv03-core-remove",
+        "type": "trigger",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "Core Removal",
+          "ptBR": "Remoção de Core"
+        },
+        "text": {
+          "en": "When one of your Spirits with Astral Soul/Galaxian attacks, you may move one core from an opposing card on the field to their Reserve.",
+          "ptBR": "Quando 1 dos seus Spirits com Astral Soul/Galaxian atacar, você pode mover 1 Core de uma carta do oponente no campo para a Reserve dele."
+        }
+      },
+      {
+        "id": "bsc49-xv03-trash-replacement",
+        "type": "constant",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whileLevel2Or3",
+        "title": {
+          "en": "Reserve to Trash",
+          "ptBR": "Reserve para Trash"
+        },
+        "text": {
+          "en": "Cores moved to your opponent's Reserve by your effects are put into their Trash instead.",
+          "ptBR": "Cores movidos para a Reserve do oponente pelos seus efeitos são colocados no Trash dele em vez disso."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV03.webp"
+  },
+  {
+    "id": "BSC49-XV04",
+    "name": "The PirateDeity Piscegalleon XV",
+    "nameEN": "The PirateDeity Piscegalleon XV",
+    "namePT": "The PirateDeity Piscegalleon XV",
+    "nameKey": "the-piratedeity-piscegalleon-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 7,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple",
+      "purple",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Nightling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 7000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 12000
+      }
+    ],
+    "effectText": {
+      "en": "[Once per Turn: Same Name] When an opposing Spirit/Ultimate leaves the field by one of your effects, you may summon this card from your Trash. Lv1-Lv2 [When Summoned]: Treat this Spirit's color as colorless, then put one core from every opposing Spirit/Ultimate into the opponent's Trash. If no opposing Spirit/Ultimate is depleted by this effect, draw up to two cards. Lv2 [Once per Turn: Same Name]: When one of your Spirits leaves the field because of an opposing effect, you may discard two random cards from your opponent's hand.",
+      "ptBR": "[1 vez por turno: mesmo nome] Quando 1 Spirit/Ultimate do oponente sair do campo por um dos seus efeitos, você pode Invocar esta carta do seu Trash. Lv1-Lv2 [Ao Invocar]: Trate a cor deste Spirit como incolor e depois coloque 1 Core de cada Spirit/Ultimate do oponente no Trash dele. Se nenhum Spirit/Ultimate do oponente for esgotado por este efeito, compre até 2 cartas. Lv2 [1 vez por turno: mesmo nome]: Quando 1 dos seus Spirits sair do campo por um efeito do oponente, você pode descartar 2 cartas aleatórias da mão do oponente."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv04-trash-summon",
+        "type": "trigger",
+        "levels": [],
+        "timing": "opposingUnitLeavesByYourEffect",
+        "title": {
+          "en": "Summon from Trash",
+          "ptBR": "Invocar do Trash"
+        },
+        "text": {
+          "en": "When an opposing Spirit/Ultimate leaves the field by one of your effects, you may summon this card from your Trash. [Once per Turn: Same Name]",
+          "ptBR": "Quando 1 Spirit/Ultimate do oponente sair do campo por um dos seus efeitos, você pode Invocar esta carta do seu Trash. [1 vez por turno: mesmo nome]"
+        }
+      },
+      {
+        "id": "bsc49-xv04-mass-core",
+        "type": "summon",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "Mass Core Removal",
+          "ptBR": "Remoção de Cores em Massa"
+        },
+        "text": {
+          "en": "Treat this Spirit's color as colorless, then put one core from every opposing Spirit/Ultimate into the opponent's Trash. If none are depleted, draw up to two cards.",
+          "ptBR": "Trate a cor deste Spirit como incolor e coloque 1 Core de cada Spirit/Ultimate do oponente no Trash dele. Se nenhum for esgotado, compre até 2 cartas."
+        }
+      },
+      {
+        "id": "bsc49-xv04-random-discard",
+        "type": "trigger",
+        "levels": [
+          2
+        ],
+        "timing": "yourSpiritLeavesByOpponentEffect",
+        "title": {
+          "en": "Random Discard",
+          "ptBR": "Descarte Aleatório"
+        },
+        "text": {
+          "en": "When one of your Spirits leaves the field because of an opposing effect, you may discard two random cards from your opponent's hand. [Once per Turn: Same Name]",
+          "ptBR": "Quando 1 dos seus Spirits sair do campo por um efeito do oponente, você pode descartar 2 cartas aleatórias da mão do oponente. [1 vez por turno: mesmo nome]"
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV04.webp"
+  },
+  {
+    "id": "BSC49-XV05",
+    "name": "The CancerBushin Cancerd XV",
+    "nameEN": "The CancerBushin Cancerd XV",
+    "namePT": "The CancerBushin Cancerd XV",
+    "nameKey": "the-cancerbushin-cancerd-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [
+      "accelerator"
+    ],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Shellman"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 7000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 16000
+      }
+    ],
+    "effectText": {
+      "en": "[Once per Turn: Same Name] When this card in your hand is discarded by one of your Green-only effects, you may use its Accelerator without paying the cost. Flash Accelerator Cost 6 (Green2 + six-color): For this turn, when your cost 5 or more Spirit's attack reduces the opponent's Life, move one additional core from their Life to their Reserve. Then place this card in your hand area. Lv1-Lv2 [Your Attack Step]: While one of your Spirits attacks, your opponent can block only by using two Spirits; battle only one of those blockers. Additionally, your opponent cannot activate Burst effects.",
+      "ptBR": "[1 vez por turno: mesmo nome] Quando esta carta na sua mão for descartada por um dos seus efeitos somente Verdes, você pode usar seu Accelerator sem pagar o custo. Flash Accelerator Custo 6 (Verde2 + seis cores): Durante este turno, quando o ataque de um dos seus Spirits de custo 5 ou mais reduzir a Life do oponente, mova mais 1 Core da Life dele para a Reserve. Depois, coloque esta carta na sua área de Hand. Lv1-Lv2 [Seu Attack Step]: Enquanto 1 dos seus Spirits estiver atacando, seu oponente só pode bloquear usando 2 Spirits; batalhe contra apenas 1 desses bloqueadores. Além disso, seu oponente não pode ativar efeitos Burst."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv05-discard-accelerator",
+        "type": "trigger",
+        "levels": [],
+        "timing": "whenDiscardedByGreenOnlyEffect",
+        "title": {
+          "en": "Discard Accelerator",
+          "ptBR": "Accelerator por Descarte"
+        },
+        "text": {
+          "en": "When this card is discarded from your hand by one of your Green-only effects, you may use its Accelerator without paying the cost. [Once per Turn: Same Name]",
+          "ptBR": "Quando esta carta for descartada da sua mão por um dos seus efeitos somente Verdes, você pode usar seu Accelerator sem pagar o custo. [1 vez por turno: mesmo nome]"
+        }
+      },
+      {
+        "id": "bsc49-xv05-accelerator",
+        "type": "accelerator",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Accelerator: 6",
+          "ptBR": "Accelerator: 6"
+        },
+        "text": {
+          "en": "For this turn, when your cost 5 or more Spirit's attack reduces the opponent's Life, move one additional core from their Life to their Reserve. Then place this card in your hand area.",
+          "ptBR": "Durante este turno, quando o ataque de um dos seus Spirits de custo 5 ou mais reduzir a Life do oponente, mova mais 1 Core da Life dele para a Reserve. Depois, coloque esta carta na sua área de Hand."
+        }
+      },
+      {
+        "id": "bsc49-xv05-block-rule",
+        "type": "constant",
+        "levels": [
+          1,
+          2
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "Two-Spirit Block",
+          "ptBR": "Bloqueio com Dois Spirits"
+        },
+        "text": {
+          "en": "While one of your Spirits attacks, your opponent can block only by using two Spirits; battle only one of those blockers. Your opponent also cannot activate Burst effects.",
+          "ptBR": "Enquanto 1 dos seus Spirits estiver atacando, seu oponente só pode bloquear usando 2 Spirits; batalhe contra apenas 1 desses bloqueadores. O oponente também não pode ativar efeitos Burst."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV05.webp",
+    "accelerator": {
+      "cost": 6,
+      "reduction": [
+        "green",
+        "green",
+        "six"
+      ],
+      "timing": "flash"
+    }
+  },
+  {
+    "id": "BSC49-XV06",
+    "name": "The SephirothicSheepDeity Sephiro-Aries XV",
+    "nameEN": "The SephirothicSheepDeity Sephiro-Aries XV",
+    "namePT": "The SephirothicSheepDeity Sephiro-Aries XV",
+    "nameKey": "the-sephirothicsheepdeity-sephiro-aries-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Fairy"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 8000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 10000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 12000
+      }
+    ],
+    "effectText": {
+      "en": "When this card is opened from your deck by one of your Green effects, you may summon it as though all reductions were satisfied. Lv1-Lv2-Lv3 [Opponent's Main Step]: When your opponent summons a card without Galaxian/Fairy by a method other than Manifest, it is summoned exhausted. Lv2-Lv3 [When Attacks/Blocks]: You may heavily exhaust one opposing Spirit/Ultimate. Lv3: Cores on both fields, except Soul Cores, cannot be moved.",
+      "ptBR": "Quando esta carta for revelada do seu deck por um dos seus efeitos Verdes, você pode Invocá-la como se todas as reduções estivessem satisfeitas. Lv1-Lv2-Lv3 [Main Step do oponente]: Quando seu oponente Invocar uma carta que não possua Galaxian/Fairy por um método diferente de Manifestar, ela é Invocada em estado Exhausted. Lv2-Lv3 [Ao Atacar/Bloquear]: Você pode dar Heavy Exhaust em 1 Spirit/Ultimate do oponente. Lv3: Cores nos dois campos, exceto Soul Cores, não podem ser movidos."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv06-open-summon",
+        "type": "trigger",
+        "levels": [],
+        "timing": "whenOpenedFromDeckByGreenEffect",
+        "title": {
+          "en": "Opened Summon",
+          "ptBR": "Invocação ao Revelar"
+        },
+        "text": {
+          "en": "When this card is opened from your deck by one of your Green effects, you may summon it as though all reductions were satisfied.",
+          "ptBR": "Quando esta carta for revelada do seu deck por um dos seus efeitos Verdes, você pode Invocá-la como se todas as reduções estivessem satisfeitas."
+        }
+      },
+      {
+        "id": "bsc49-xv06-exhaust-summons",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "opponentMainStep",
+        "title": {
+          "en": "Exhausted Summons",
+          "ptBR": "Invocações Exhausted"
+        },
+        "text": {
+          "en": "Cards without Galaxian/Fairy summoned by your opponent by a method other than Manifest are summoned exhausted.",
+          "ptBR": "Cartas sem Galaxian/Fairy Invocadas pelo oponente por um método diferente de Manifestar são Invocadas Exhausted."
+        }
+      },
+      {
+        "id": "bsc49-xv06-heavy-exhaust",
+        "type": "trigger",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenAttacksOrBlocks",
+        "title": {
+          "en": "Heavy Exhaust",
+          "ptBR": "Heavy Exhaust"
+        },
+        "text": {
+          "en": "You may heavily exhaust one opposing Spirit/Ultimate.",
+          "ptBR": "Você pode dar Heavy Exhaust em 1 Spirit/Ultimate do oponente."
+        }
+      },
+      {
+        "id": "bsc49-xv06-core-lock",
+        "type": "constant",
+        "levels": [
+          3
+        ],
+        "timing": "whileLevel3",
+        "title": {
+          "en": "Core Lock",
+          "ptBR": "Bloqueio de Cores"
+        },
+        "text": {
+          "en": "Cores on both fields, except Soul Cores, cannot be moved.",
+          "ptBR": "Cores nos dois campos, exceto Soul Cores, não podem ser movidos."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV06.webp"
+  },
+  {
+    "id": "BSC49-XV07",
+    "name": "The WaterCarrierDeity Aqua-Elysion XV",
+    "nameEN": "The WaterCarrierDeity Aqua-Elysion XV",
+    "namePT": "The WaterCarrierDeity Aqua-Elysion XV",
+    "nameKey": "the-watercarrierdeity-aqua-elysion-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [
+      "super-heavy-armor"
+    ],
+    "colors": [
+      "white"
+    ],
+    "cost": 7,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 11000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 16000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Opponent's Attack Step]: You may summon this card from your hand/hand area by paying Cost 5 (White2 + six-color). If summoned this way, end the Attack Step after this battle ends. Lv1-Lv2-Lv3: All opposing non-Braved Spirits/Ultimates/Nexuses/GranWalker Nexuses cannot refresh. Lv2-Lv3: All your Spirits with Devotee and also Astral Soul/Galaxian gain [Super Heavy Armor: Red/Purple/White/Blue] and are unaffected by opposing Red/Purple/White/Blue effects.",
+      "ptBR": "Flash [Attack Step do oponente]: Você pode Invocar esta carta da sua mão/área de Hand pagando Custo 5 (Branco2 + seis cores). Se for Invocada desta forma, encerre o Attack Step depois que esta batalha terminar. Lv1-Lv2-Lv3: Todos os Spirits/Ultimates/Nexuses/GranWalker Nexuses do oponente que não estejam Braved não podem receber Refresh. Lv2-Lv3: Todos os seus Spirits com Devotee e também Astral Soul/Galaxian recebem [Super Heavy Armor: Vermelho/Roxo/Branco/Azul] e não são afetados por efeitos Vermelhos/Roxos/Brancos/Azuis do oponente."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv07-flash-summon",
+        "type": "flash",
+        "levels": [],
+        "timing": "opponentAttackStep",
+        "title": {
+          "en": "Defensive Summon",
+          "ptBR": "Invocação Defensiva"
+        },
+        "text": {
+          "en": "You may summon this card from your hand/hand area by paying Cost 5 (White2 + six-color). If summoned this way, end the Attack Step after this battle ends.",
+          "ptBR": "Você pode Invocar esta carta da sua mão/área de Hand pagando Custo 5 (Branco2 + seis cores). Se for Invocada desta forma, encerre o Attack Step depois que esta batalha terminar."
+        }
+      },
+      {
+        "id": "bsc49-xv07-refresh-lock",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whileOnField",
+        "title": {
+          "en": "Refresh Lock",
+          "ptBR": "Bloqueio de Refresh"
+        },
+        "text": {
+          "en": "All opposing non-Braved Spirits/Ultimates/Nexuses/GranWalker Nexuses cannot refresh.",
+          "ptBR": "Todos os Spirits/Ultimates/Nexuses/GranWalker Nexuses do oponente que não estejam Braved não podem receber Refresh."
+        }
+      },
+      {
+        "id": "bsc49-xv07-super-heavy-armor",
+        "type": "constant",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whileLevel2Or3",
+        "title": {
+          "en": "Super Heavy Armor",
+          "ptBR": "Super Heavy Armor"
+        },
+        "text": {
+          "en": "All your Spirits with Devotee and also Astral Soul/Galaxian gain Super Heavy Armor: Red/Purple/White/Blue.",
+          "ptBR": "Todos os seus Spirits com Devotee e também Astral Soul/Galaxian recebem Super Heavy Armor: Vermelho/Roxo/Branco/Azul."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV07.webp"
+  },
+  {
+    "id": "BSC49-XV08",
+    "name": "The MachineLionDeity Strikewurm-Leo XV",
+    "nameEN": "The MachineLionDeity Strikewurm-Leo XV",
+    "namePT": "The MachineLionDeity Strikewurm-Leo XV",
+    "nameKey": "the-machineliondeity-strikewurm-leo-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [
+      "mirage-armor"
+    ],
+    "colors": [
+      "white"
+    ],
+    "cost": 8,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white",
+      "white",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 8000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 13000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 20000
+      }
+    ],
+    "effectText": {
+      "en": "Lv1-Lv2-Lv3 [Mirage Armor: Purple/Green/White/Blue]: This Spirit cannot be blocked and is unaffected by opposing Purple/Green/White/Blue Spirit/Brave/Nexus/Magic effects. Lv2-Lv3 [Either Attack Step]: When this Spirit becomes exhausted, you may open the top card of your deck. If it has Devotee/Galaxian/GranWalker, refresh this Spirit. Discard the opened card afterward. [Braved] Lv3 [Your Attack Step]: All your Spirits with Devotee/Divine Star/Galaxian gain one additional White symbol.",
+      "ptBR": "Lv1-Lv2-Lv3 [Mirage Armor: Roxo/Verde/Branco/Azul]: Este Spirit não pode ser bloqueado e não é afetado por efeitos Roxos/Verdes/Brancos/Azuis de Spirits/Braves/Nexuses/Magics do oponente. Lv2-Lv3 [Attack Step de qualquer jogador]: Quando este Spirit ficar Exhausted, você pode revelar a carta do topo do seu deck. Se ela possuir Devotee/Galaxian/GranWalker, dê Refresh neste Spirit. Depois, descarte a carta revelada. [Braved] Lv3 [Seu Attack Step]: Todos os seus Spirits com Devotee/Divine Star/Galaxian recebem 1 símbolo Branco adicional."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv08-mirage-armor",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whileOnField",
+        "title": {
+          "en": "Mirage Armor: P/G/W/B",
+          "ptBR": "Mirage Armor: R/V/B/A"
+        },
+        "text": {
+          "en": "This Spirit cannot be blocked and is unaffected by opposing Purple/Green/White/Blue Spirit/Brave/Nexus/Magic effects.",
+          "ptBR": "Este Spirit não pode ser bloqueado e não é afetado por efeitos Roxos/Verdes/Brancos/Azuis de Spirits/Braves/Nexuses/Magics do oponente."
+        }
+      },
+      {
+        "id": "bsc49-xv08-refresh",
+        "type": "trigger",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenExhaustedEitherAttackStep",
+        "title": {
+          "en": "Leo Refresh",
+          "ptBR": "Refresh de Leo"
+        },
+        "text": {
+          "en": "When this Spirit becomes exhausted, you may open the top card of your deck. If it has Devotee/Galaxian/GranWalker, refresh this Spirit. Discard the opened card afterward.",
+          "ptBR": "Quando este Spirit ficar Exhausted, você pode revelar a carta do topo do deck. Se possuir Devotee/Galaxian/GranWalker, dê Refresh neste Spirit. Depois, descarte a carta revelada."
+        }
+      },
+      {
+        "id": "bsc49-xv08-white-symbol",
+        "type": "constant",
+        "levels": [
+          3
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "White Symbol Grant",
+          "ptBR": "Conceder Símbolo Branco"
+        },
+        "text": {
+          "en": "While Braved, all your Spirits with Devotee/Divine Star/Galaxian gain one additional White symbol.",
+          "ptBR": "Enquanto estiver Braved, todos os seus Spirits com Devotee/Divine Star/Galaxian recebem 1 símbolo Branco adicional."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV08.webp"
+  },
+  {
+    "id": "BSC49-XV09",
+    "name": "The ValkyrieVirgoDeity Vielje XV",
+    "nameEN": "The ValkyrieVirgoDeity Vielje XV",
+    "namePT": "The ValkyrieVirgoDeity Vielje XV",
+    "nameKey": "the-valkyrievirgodeity-vielje-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Angel"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Either Attack Step] [Once per Turn: Same Name]: If your Life is 3 or less and you have a Yellow Nexus, you may summon this card from your hand/hand area by paying 1 cost. Lv1-Lv2-Lv3 [When Summoned]: If your Life is 5 or less, you may put one core from the Void into your Life. Lv1-Lv2-Lv3 [Either Attack Step]: All opposing Spirits/Ultimates with cost 2/3/5/7/11/13 cannot attack or block. Lv2-Lv3: When this Spirit is depleted/destroyed by an opposing effect, you may return it to your hand.",
+      "ptBR": "Flash [Attack Step de qualquer jogador] [1 vez por turno: mesmo nome]: Se sua Life for 3 ou menos e você possuir um Nexus Amarelo, você pode Invocar esta carta da sua mão/área de Hand pagando 1 de custo. Lv1-Lv2-Lv3 [Ao Invocar]: Se sua Life for 5 ou menos, você pode colocar 1 Core do Void na sua Life. Lv1-Lv2-Lv3 [Attack Step de qualquer jogador]: Todos os Spirits/Ultimates do oponente de custo 2/3/5/7/11/13 não podem atacar nem bloquear. Lv2-Lv3: Quando este Spirit for esgotado/destruído por um efeito do oponente, você pode devolvê-lo para a sua mão."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv09-flash-summon",
+        "type": "flash",
+        "levels": [],
+        "timing": "eitherAttackStep",
+        "title": {
+          "en": "Low-Life Summon",
+          "ptBR": "Invocação com Life Baixa"
+        },
+        "text": {
+          "en": "If your Life is 3 or less and you have a Yellow Nexus, you may summon this card from your hand/hand area by paying 1 cost. [Once per Turn: Same Name]",
+          "ptBR": "Se sua Life for 3 ou menos e você possuir um Nexus Amarelo, você pode Invocar esta carta da sua mão/área de Hand pagando 1 de custo. [1 vez por turno: mesmo nome]"
+        }
+      },
+      {
+        "id": "bsc49-xv09-life-gain",
+        "type": "summon",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenSummoned",
+        "title": {
+          "en": "Life Recovery",
+          "ptBR": "Recuperação de Life"
+        },
+        "text": {
+          "en": "If your Life is 5 or less, you may put one core from the Void into your Life.",
+          "ptBR": "Se sua Life for 5 ou menos, você pode colocar 1 Core do Void na sua Life."
+        }
+      },
+      {
+        "id": "bsc49-xv09-cost-lock",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "eitherAttackStep",
+        "title": {
+          "en": "Cost Attack/Block Lock",
+          "ptBR": "Bloqueio por Custo"
+        },
+        "text": {
+          "en": "All opposing Spirits/Ultimates with cost 2/3/5/7/11/13 cannot attack or block.",
+          "ptBR": "Todos os Spirits/Ultimates do oponente de custo 2/3/5/7/11/13 não podem atacar nem bloquear."
+        }
+      },
+      {
+        "id": "bsc49-xv09-return-hand",
+        "type": "trigger",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "whenDepletedOrDestroyedByOpponent",
+        "title": {
+          "en": "Return to Hand",
+          "ptBR": "Retornar à Mão"
+        },
+        "text": {
+          "en": "When this Spirit is depleted/destroyed by an opposing effect, you may return it to your hand.",
+          "ptBR": "Quando este Spirit for esgotado/destruído por um efeito do oponente, você pode devolvê-lo para a sua mão."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV09.webp"
+  },
+  {
+    "id": "BSC49-XV10",
+    "name": "The MagicalTwinsDeity Geminize XV",
+    "nameEN": "The MagicalTwinsDeity Geminize XV",
+    "namePT": "The MagicalTwinsDeity Geminize XV",
+    "nameKey": "the-magicaltwinsdeity-geminize-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Magic Guide"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 10000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 12000
+      }
+    ],
+    "effectText": {
+      "en": "[Cannot Stack] When you use a cost 4 or more Magic while this card is in your hand/hand area, after that effect resolves, you may summon this card by paying 1 cost. Lv1-Lv2-Lv3 [Once per Turn]: When another one of your Spirits with Devotee/Astral Soul/Galaxian is summoned, you may open the top card of your deck. You may either summon the opened card without paying its cost or add it to your hand. Lv2-Lv3 Flash [Either Attack Step] [Once per Turn: Same Name]: You may use one Flash effect of a Magic card in your hand/hand area without paying its cost.",
+      "ptBR": "[Não Acumula] Quando você usar uma Magic de custo 4 ou mais enquanto esta carta estiver na sua mão/área de Hand, depois que o efeito resolver, você pode Invocar esta carta pagando 1 de custo. Lv1-Lv2-Lv3 [1 vez por turno]: Quando outro dos seus Spirits com Devotee/Astral Soul/Galaxian for Invocado, você pode revelar a carta do topo do deck. Você pode Invocar a carta revelada sem pagar o custo ou adicioná-la à sua mão. Lv2-Lv3 Flash [Attack Step de qualquer jogador] [1 vez por turno: mesmo nome]: Você pode usar 1 efeito Flash de uma carta Magic na sua mão/área de Hand sem pagar o custo."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv10-magic-summon",
+        "type": "trigger",
+        "levels": [],
+        "timing": "afterCost4PlusMagicResolves",
+        "title": {
+          "en": "Magic-Triggered Summon",
+          "ptBR": "Invocação por Magic"
+        },
+        "text": {
+          "en": "After you use a cost 4 or more Magic and its effect resolves, you may summon this card from your hand/hand area by paying 1 cost. [Cannot Stack]",
+          "ptBR": "Depois que você usar uma Magic de custo 4 ou mais e o efeito resolver, você pode Invocar esta carta da sua mão/área de Hand pagando 1 de custo. [Não Acumula]"
+        }
+      },
+      {
+        "id": "bsc49-xv10-open-card",
+        "type": "trigger",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenOtherEligibleSpiritSummoned",
+        "title": {
+          "en": "Open and Summon",
+          "ptBR": "Revelar e Invocar"
+        },
+        "text": {
+          "en": "When another one of your Spirits with Devotee/Astral Soul/Galaxian is summoned, you may open the top card of your deck. Summon it without paying its cost or add it to your hand. [Once per Turn]",
+          "ptBR": "Quando outro dos seus Spirits com Devotee/Astral Soul/Galaxian for Invocado, você pode revelar a carta do topo do deck. Invoque-a sem pagar o custo ou adicione-a à sua mão. [1 vez por turno]"
+        }
+      },
+      {
+        "id": "bsc49-xv10-free-magic",
+        "type": "flash",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "eitherAttackStep",
+        "title": {
+          "en": "Free Magic Flash",
+          "ptBR": "Magic Flash Gratuita"
+        },
+        "text": {
+          "en": "You may use one Flash effect of a Magic card in your hand/hand area without paying its cost. [Once per Turn: Same Name]",
+          "ptBR": "Você pode usar 1 efeito Flash de uma carta Magic na sua mão/área de Hand sem pagar o custo. [1 vez por turno: mesmo nome]"
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV10.webp"
+  },
+  {
+    "id": "BSC49-XV11",
+    "name": "The ScorpioKnight Scor-Spear XV",
+    "nameEN": "The ScorpioKnight Scor-Spear XV",
+    "namePT": "The ScorpioKnight Scor-Spear XV",
+    "nameKey": "the-scorpioknight-scor-spear-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Aberration"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 11000
+      }
+    ],
+    "effectText": {
+      "en": "[Cannot Stack] When one of your Braved Spirits, combined GranWalker Nexuses, or Braves would leave the field because of an opposing effect while this card is in your hand, you may summon this card by paying 1 cost. Lv1-Lv2-Lv3 [Either Attack Step] [Cannot Stack]: All your Spirits with Sovereign/Galaxian and all your Braves in Spirit form gain +10000 BP and one additional Blue symbol. Lv2-Lv3 [Your Attack Step]: When one of your Spirits with Astral Soul/Galaxian attacks, you may destroy one opposing Spirit with the lowest cost.",
+      "ptBR": "[Não Acumula] Quando 1 dos seus Spirits Braved, GranWalker Nexuses combinados ou Braves fosse sair do campo por um efeito do oponente enquanto esta carta estiver na sua mão, você pode Invocar esta carta pagando 1 de custo. Lv1-Lv2-Lv3 [Attack Step de qualquer jogador] [Não Acumula]: Todos os seus Spirits com Sovereign/Galaxian e todos os seus Braves em forma de Spirit recebem +10000 BP e 1 símbolo Azul adicional. Lv2-Lv3 [Seu Attack Step]: Quando 1 dos seus Spirits com Astral Soul/Galaxian atacar, você pode destruir 1 Spirit do oponente com o menor custo."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv11-protective-summon",
+        "type": "trigger",
+        "levels": [],
+        "timing": "whenBravedOrCombinedCardWouldLeave",
+        "title": {
+          "en": "Protective Summon",
+          "ptBR": "Invocação Protetora"
+        },
+        "text": {
+          "en": "When one of your Braved Spirits, combined GranWalker Nexuses, or Braves would leave the field because of an opposing effect, you may summon this card from your hand by paying 1 cost. [Cannot Stack]",
+          "ptBR": "Quando 1 dos seus Spirits Braved, GranWalker Nexuses combinados ou Braves fosse sair do campo por um efeito do oponente, você pode Invocar esta carta da sua mão pagando 1 de custo. [Não Acumula]"
+        }
+      },
+      {
+        "id": "bsc49-xv11-team-buff",
+        "type": "constant",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "eitherAttackStep",
+        "title": {
+          "en": "Army Enhancement",
+          "ptBR": "Fortalecimento do Exército"
+        },
+        "text": {
+          "en": "All your Spirits with Sovereign/Galaxian and all your Braves in Spirit form gain +10000 BP and one additional Blue symbol. [Cannot Stack]",
+          "ptBR": "Todos os seus Spirits com Sovereign/Galaxian e todos os seus Braves em forma de Spirit recebem +10000 BP e 1 símbolo Azul adicional. [Não Acumula]"
+        }
+      },
+      {
+        "id": "bsc49-xv11-lowest-cost-destroy",
+        "type": "trigger",
+        "levels": [
+          2,
+          3
+        ],
+        "timing": "yourAttackStep",
+        "title": {
+          "en": "Lowest-Cost Destruction",
+          "ptBR": "Destruição do Menor Custo"
+        },
+        "text": {
+          "en": "When one of your Spirits with Astral Soul/Galaxian attacks, you may destroy one opposing Spirit with the lowest cost.",
+          "ptBR": "Quando 1 dos seus Spirits com Astral Soul/Galaxian atacar, você pode destruir 1 Spirit do oponente com o menor custo."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV11.webp"
+  },
+  {
+    "id": "BSC49-XV12",
+    "name": "The BalanceDeity Libra-Golem XV",
+    "nameEN": "The BalanceDeity Libra-Golem XV",
+    "namePT": "The BalanceDeity Libra-Golem XV",
+    "nameKey": "the-balancedeity-libra-golem-xv",
+    "set": "BSC49",
+    "cardType": "spirit",
+    "subtypes": [
+      "accelerator",
+      "crush"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "cost": 8,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue",
+      "six"
+    ],
+    "rarity": "XV",
+    "includedQuantity": 1,
+    "families": [
+      "Devotee",
+      "Galaxian",
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 8000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 10000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 16000
+      }
+    ],
+    "effectText": {
+      "en": "Flash Accelerator Cost 5 (six-color x4): Destroy one opposing Spirit/Ultimate with the highest cost. Then place this card in your hand area. Lv1-Lv2-Lv3 [Crush: Lv] [When Attacks/Blocks]: Discard a number of cards from the top of your opponent's deck equal to this Spirit's Level. Lv3 [When Attacks/Blocks]: When a Spirit/Ultimate card is discarded from your opponent's deck, you may refresh this Spirit. Lv3 [When Attacks]: While this Spirit is refreshed, your opponent's Life cannot be reduced.",
+      "ptBR": "Flash Accelerator Custo 5 (seis cores x4): Destrua 1 Spirit/Ultimate do oponente com o maior custo. Depois, coloque esta carta na sua área de Hand. Lv1-Lv2-Lv3 [Crush: Lv] [Ao Atacar/Bloquear]: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit. Lv3 [Ao Atacar/Bloquear]: Quando uma carta Spirit/Ultimate for descartada do deck do oponente, você pode dar Refresh neste Spirit. Lv3 [Ao Atacar]: Enquanto este Spirit estiver Refresh, a Life do oponente não pode ser reduzida."
+    },
+    "effects": [
+      {
+        "id": "bsc49-xv12-accelerator",
+        "type": "accelerator",
+        "levels": [],
+        "timing": "flash",
+        "title": {
+          "en": "Accelerator: 5",
+          "ptBR": "Accelerator: 5"
+        },
+        "text": {
+          "en": "Destroy one opposing Spirit/Ultimate with the highest cost. Then place this card in your hand area.",
+          "ptBR": "Destrua 1 Spirit/Ultimate do oponente com o maior custo. Depois, coloque esta carta na sua área de Hand."
+        }
+      },
+      {
+        "id": "bsc49-xv12-crush",
+        "type": "trigger",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "timing": "whenAttacksOrBlocks",
+        "title": {
+          "en": "Crush: Lv",
+          "ptBR": "Crush: Lv"
+        },
+        "text": {
+          "en": "Discard a number of cards from the top of your opponent's deck equal to this Spirit's Level.",
+          "ptBR": "Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit."
+        }
+      },
+      {
+        "id": "bsc49-xv12-refresh",
+        "type": "trigger",
+        "levels": [
+          3
+        ],
+        "timing": "whenOpponentSpiritUltimateMilled",
+        "title": {
+          "en": "Mill Refresh",
+          "ptBR": "Refresh por Mill"
+        },
+        "text": {
+          "en": "When a Spirit/Ultimate card is discarded from your opponent's deck, you may refresh this Spirit.",
+          "ptBR": "Quando uma carta Spirit/Ultimate for descartada do deck do oponente, você pode dar Refresh neste Spirit."
+        }
+      },
+      {
+        "id": "bsc49-xv12-life-lock",
+        "type": "constant",
+        "levels": [
+          3
+        ],
+        "timing": "whileAttackingAndRefreshed",
+        "title": {
+          "en": "Life Lock",
+          "ptBR": "Bloqueio de Life"
+        },
+        "text": {
+          "en": "While this Spirit is refreshed during its attack, your opponent's Life cannot be reduced.",
+          "ptBR": "Enquanto este Spirit estiver Refresh durante seu ataque, a Life do oponente não pode ser reduzida."
+        }
+      }
+    ],
+    "abilities": [],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV12.webp",
+    "accelerator": {
+      "cost": 5,
+      "reduction": [
+        "six",
+        "six",
+        "six",
+        "six"
+      ],
+      "timing": "flash"
+    }
+  }
+]

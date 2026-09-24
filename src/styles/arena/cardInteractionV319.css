@@ -1,0 +1,185 @@
+/* =========================================================
+   BATTLE SPIRITS ETERNAL SIMULATOR — v3.1.9
+   CARD INTERACTION + CLICKABLE CORES
+
+   Presentation and interaction feedback only. All Core movement and card
+   legality is still validated by the Rules Engine.
+========================================================= */
+
+/* ---------------------------------------------------------
+   CORE TOKENS — CLICK OR DRAG
+--------------------------------------------------------- */
+
+.simulator-page .core-token.core-clickable {
+  cursor: grab;
+  transition:
+    transform .12s ease,
+    filter .12s ease,
+    box-shadow .12s ease;
+}
+
+.simulator-page .core-token.core-clickable:hover {
+  z-index: 24;
+  transform: translate(-50%, -50%) scale(1.13);
+  filter: brightness(1.08);
+  box-shadow:
+    0 5px 13px rgba(0,0,0,.55),
+    0 0 0 2px rgba(255,255,255,.12),
+    0 0 13px rgba(86,177,244,.16),
+    inset 0 0 0 2px rgba(255,255,255,.2);
+}
+
+.simulator-page .core-token.core-clickable:active {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+.simulator-page .core-token.core-clickable:focus-visible {
+  outline: none;
+  box-shadow:
+    0 5px 13px rgba(0,0,0,.55),
+    0 0 0 2px rgba(255,255,255,.24),
+    0 0 15px rgba(95,185,250,.2),
+    inset 0 0 0 2px rgba(255,255,255,.2);
+}
+
+/* During payment the Reserve communicates that tokens support quick-click. */
+.simulator-page .core-guidance-source .core-token.core-clickable {
+  animation: bsCoreReadyPulse 1.7s ease-in-out infinite alternate;
+}
+
+.simulator-page .core-guidance-target .core-token.core-clickable:hover {
+  box-shadow:
+    0 5px 13px rgba(0,0,0,.55),
+    0 0 0 2px rgba(255,255,255,.14),
+    0 0 13px rgba(220,220,220,.12),
+    inset 0 0 0 2px rgba(255,255,255,.2);
+}
+
+/* ---------------------------------------------------------
+   HAND / FIELD — DIGITAL CARD GAME FEEDBACK
+--------------------------------------------------------- */
+
+.simulator-page .local-hand-row .hand-card-slot {
+  animation: bsHandCardArrive .2s cubic-bezier(.2,.8,.2,1) both;
+  animation-delay: calc(var(--fan-order, 0) * 10ms);
+}
+
+.simulator-page .local-hand-row .hand-card-slot > .card-tile,
+.simulator-page .field-card-wrap > .card-tile {
+  transition:
+    transform .14s ease,
+    filter .14s ease,
+    box-shadow .14s ease,
+    border-color .14s ease;
+}
+
+.simulator-page .local-hand-row .hand-card-slot:hover > .card-tile:not(.pointer-drag-active) {
+  filter: brightness(1.045) contrast(1.015);
+}
+
+.simulator-page .field-card-wrap:hover > .card-tile:not(.pointer-drag-active) {
+  filter: brightness(1.035);
+}
+
+/* ---------------------------------------------------------
+   CUSTOM POINTER DRAG — CLEAR DESTINATION FEEDBACK
+--------------------------------------------------------- */
+
+.simulator-page .card-pointer-drag-preview {
+  transition: width .08s ease, box-shadow .12s ease;
+  will-change: left, top;
+}
+
+.simulator-page .card-drop-hover:not(.field-zone):not(.table-area) {
+  position: relative;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.18),
+    inset 0 0 24px rgba(255,255,255,.035),
+    0 0 22px rgba(255,255,255,.11) !important;
+}
+
+.simulator-page [data-card-drop-zone="trash"].card-drop-hover {
+  border-color: rgba(215,215,215,.58) !important;
+}
+
+.simulator-page [data-card-drop-zone="burst"].card-drop-hover {
+  border-color: rgba(232,232,232,.62) !important;
+}
+
+.simulator-page [data-card-drop-zone="deck"].card-drop-hover,
+.simulator-page [data-card-drop-zone="hand"].card-drop-hover {
+  border-color: rgba(205,205,205,.5) !important;
+}
+
+.simulator-page .table-area.card-drop-hover {
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.1),
+    inset 0 0 90px rgba(255,255,255,.025) !important;
+}
+
+/* ---------------------------------------------------------
+   HOVER PREVIEW — QUICKER, SHARPER, POSITIONED BESIDE CARD
+--------------------------------------------------------- */
+
+.simulator-page .card-zoom-preview {
+  width: 268px;
+  z-index: 1220;
+  overflow: hidden;
+  border-color: rgba(255,255,255,.18);
+  background: rgba(8,8,8,.97);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.7),
+    0 0 0 1px rgba(255,255,255,.025);
+  animation: bsInteractionPreviewIn .14s cubic-bezier(.2,.8,.2,1);
+}
+
+.simulator-page .card-zoom-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: auto;
+}
+
+/* ---------------------------------------------------------
+   MOTION
+--------------------------------------------------------- */
+
+@keyframes bsCoreReadyPulse {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.08) drop-shadow(0 0 5px rgba(78,169,238,.18));
+  }
+}
+
+@keyframes bsHandCardArrive {
+  from {
+    opacity: .2;
+    transform: translateY(14px) rotate(var(--fan-rotation, 0deg));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(var(--fan-lift, 0px)) rotate(var(--fan-rotation, 0deg));
+  }
+}
+
+@keyframes bsInteractionPreviewIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simulator-page .core-guidance-source .core-token.core-clickable,
+  .simulator-page .local-hand-row .hand-card-slot,
+  .simulator-page .card-zoom-preview {
+    animation: none !important;
+  }
+}

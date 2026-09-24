@@ -1,0 +1,41 @@
+BATTLE SPIRITS ETERNAL SIMULATOR — REBUILD v3.0.0
+=================================================
+
+Esta versão é INDEPENDENTE da sua v2. A pasta v2 não precisa ser substituída.
+
+PRIMEIRO TESTE
+--------------
+1. Extraia esta pasta em um local separado.
+2. Dê dois cliques em MIGRAR-CONTEUDO-DO-V2.bat.
+3. Cole o caminho da pasta do seu simulador v2 atual.
+   O script copia database/imagens/dados para a v3 e NÃO altera a v2.
+4. Execute INSTALAR_E_ABRIR.bat para testar a versão desktop/dev.
+
+ONLINE — MAIS SIMPLES
+---------------------
+• INICIAR-ONLINE.bat
+  Inicia o servidor Node + Socket.IO. O servidor escuta 0.0.0.0 por padrão.
+
+• CONFIGURAR-ONLINE.bat
+  Mostra o endereço atual e pede o novo. Basta colar a URL e confirmar.
+  O valor principal fica em:
+  public\config\online-config.js
+
+• TESTAR-ONLINE.bat
+  Testa a rota /health do endereço configurado.
+
+IMPORTANTE PARA CLOUDFLARE
+--------------------------
+Quando trocar o servidor, publique a mudança em public/config/online-config.js.
+O endereço não está mais espalhado pelos componentes do Online.
+
+ROLLBACK
+--------
+Se não gostar do Rebuild v3, feche/apague esta pasta e continue usando sua v2.
+Nenhum arquivo da v2 é removido pelo migrador.
+
+TESTES DO NÚCLEO
+----------------
+npm test
+
+Na montagem desta versão: 57/57 testes da engine passaram.

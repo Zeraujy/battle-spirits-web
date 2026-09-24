@@ -1,0 +1,384 @@
+/* =========================================================
+   BATTLE SPIRITS ETERNAL SIMULATOR — v3.1.6
+   FIELD CARD PRESENTATION
+
+   Visual-only battlefield layer:
+   - larger card art
+   - external LV / BP readout
+   - Brave card art stacked behind the host
+   - color-aware rarity glow
+
+   Rules and state are intentionally kept out of this stylesheet.
+========================================================= */
+
+/* ---------------------------------------------------------
+   FIELD LAYER / OVERFLOW HOTFIX
+
+   The battlefield presentation should sit visually above the zone chrome.
+   This prevents larger showcase cards, Brave attachments and glow effects
+   from being clipped by the field container.
+--------------------------------------------------------- */
+
+.simulator-page .battlefield-row,
+.simulator-page .field-zone,
+.simulator-page .field-cards {
+  overflow: visible !important;
+}
+
+.simulator-page .field-zone {
+  isolation: auto !important;
+}
+
+.simulator-page .field-cards {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------------------------------------------------------
+   FIELD CARD SIZE / SPACING
+--------------------------------------------------------- */
+
+.simulator-page .field-cards {
+  gap: 12px !important;
+  padding-inline: 8px;
+}
+
+.simulator-page .field-card-wrap {
+  position: relative;
+  flex: 0 0 116px !important;
+  width: 116px !important;
+  min-width: 116px !important;
+  padding: 2px 8px 32px;
+  overflow: visible;
+  z-index: 2;
+}
+
+.simulator-page .field-card-wrap .card-tile {
+  position: relative;
+  z-index: 4;
+  width: 100px !important;
+  margin: 0 auto !important;
+  overflow: hidden;
+  border-radius: 8px;
+  transform-origin: center center;
+}
+
+.simulator-page .field-card-wrap > .card-tile.selected {
+  outline: none !important;
+  box-shadow:
+    0 12px 26px rgba(0,0,0,.42),
+    0 0 0 1px rgba(255,255,255,.18),
+    0 0 16px rgba(255,255,255,.08) !important;
+}
+
+/* The external HUD replaces the tiny field badges. Core tokens themselves
+   remain visible on top of the card, so no gameplay information is lost. */
+.simulator-page .field-card-wrap > .card-tile .card-badges,
+.simulator-page .field-card-wrap > .card-tile .combined-tag,
+.simulator-page .field-card-wrap > .card-tile .brave-v2-label {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------
+   LV + BP HUD
+--------------------------------------------------------- */
+
+.arena-card-status {
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  z-index: 10;
+  width: 126px;
+  min-height: 30px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,.78));
+}
+
+.arena-card-level-slot {
+  flex: 0 0 48px;
+  min-width: 48px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+}
+
+.arena-card-level-image {
+  display: block;
+  width: 48px;
+  max-height: 28px;
+  object-fit: contain;
+  image-rendering: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+.arena-card-level-fallback {
+  min-width: 48px;
+  height: 24px;
+  padding: 0 6px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 5px;
+  background: linear-gradient(180deg, #4c4c4c, #161616);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 1000;
+  letter-spacing: -.02em;
+  text-shadow: 0 1px 0 #000, 0 0 3px #000;
+}
+
+.arena-card-bp {
+  flex: 0 1 auto;
+  min-width: 0;
+  color: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 1000;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -.07em;
+  white-space: nowrap;
+  -webkit-text-stroke: 1px rgba(0,0,0,.82);
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000,
+     0 3px 5px rgba(0,0,0,.9);
+}
+
+.arena-card-bp > span {
+  margin-left: 2px;
+  font-size: .82em;
+  letter-spacing: -.04em;
+}
+
+/* Nexus has no BP. Keep its level centered instead of leaving an empty gap. */
+.simulator-page .field-card-nexus .arena-card-status {
+  justify-content: center;
+}
+
+.simulator-page .field-card-nexus .arena-card-level-slot {
+  flex-basis: 58px;
+}
+
+/* ---------------------------------------------------------
+   EXHAUSTED STATE
+--------------------------------------------------------- */
+
+.simulator-page .field-card-wrap.is-exhausted {
+  flex-basis: 130px !important;
+  width: 130px !important;
+  min-width: 130px !important;
+  padding-inline: 15px;
+}
+
+.simulator-page .field-card-wrap.is-exhausted > .card-tile.exhausted {
+  width: 100px !important;
+  margin: 0 auto !important;
+  transform: rotate(90deg) scale(.78) !important;
+}
+
+/* LV / BP stay upright; only the physical card is exhausted. */
+.simulator-page .field-card-wrap.is-exhausted .arena-card-status {
+  bottom: 1px;
+}
+
+
+/* Remove the rectangular highlight around Brave hosts.
+   The Brave pairing should be communicated by the attachment art and tag,
+   not by a bright frame around the whole field card. */
+.simulator-page .field-card-wrap.brave-combined-host::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* ---------------------------------------------------------
+   BRAVE COMBINATION — CARD ART BEHIND HOST
+--------------------------------------------------------- */
+
+.simulator-page .field-card-wrap.brave-combined-host > .arena-brave-attachment {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  z-index: 1;
+  width: 88px;
+  aspect-ratio: 675 / 983;
+  transform: translateX(-24%) rotate(2deg) scale(.94);
+  transform-origin: center center;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.16);
+  background: #080808;
+  box-shadow: 0 9px 24px rgba(0,0,0,.48);
+  opacity: .82;
+  pointer-events: none;
+}
+
+.simulator-page .field-card-wrap.brave-combined-host > .arena-brave-attachment img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  image-rendering: auto;
+}
+
+.simulator-page .field-card-wrap.brave-combined-host > .card-tile {
+  transform: translateX(-5px);
+}
+
+.simulator-page .field-card-wrap.brave-combined-host::after {
+  content: "BRAVE";
+  top: -7px;
+  right: 2px;
+  bottom: auto;
+  left: auto;
+  transform: none;
+  z-index: 12;
+  padding: 3px 6px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+  background: rgba(8,8,8,.88);
+  color: #f2f2f2;
+  font-size: 6px;
+  font-weight: 1000;
+  letter-spacing: .13em;
+  box-shadow: 0 4px 12px rgba(0,0,0,.35);
+}
+
+.simulator-page .field-card-wrap.brave-combined-host.is-exhausted > .card-tile.exhausted {
+  transform: translateX(-5px) rotate(90deg) scale(.78) !important;
+}
+
+.simulator-page .field-card-wrap.brave-combined-host.is-exhausted > .arena-brave-attachment {
+  top: 4px;
+  left: 50%;
+  transform: translateX(-18%) rotate(90deg) scale(.74);
+}
+
+/* ---------------------------------------------------------
+   X+ / HIGH-RARITY GLOW — COLOR OF THE CARD
+--------------------------------------------------------- */
+
+.field-card-wrap.field-glow-red {
+  --field-glow-soft: rgba(255, 72, 58, .62);
+  --field-glow-mid: rgba(221, 42, 34, .42);
+  --field-glow-far: rgba(155, 17, 13, .24);
+}
+
+.field-card-wrap.field-glow-purple {
+  --field-glow-soft: rgba(183, 102, 255, .62);
+  --field-glow-mid: rgba(135, 62, 220, .42);
+  --field-glow-far: rgba(82, 25, 146, .24);
+}
+
+.field-card-wrap.field-glow-green {
+  --field-glow-soft: rgba(87, 232, 126, .58);
+  --field-glow-mid: rgba(43, 176, 83, .4);
+  --field-glow-far: rgba(20, 112, 50, .22);
+}
+
+.field-card-wrap.field-glow-white {
+  --field-glow-soft: rgba(248, 253, 255, .7);
+  --field-glow-mid: rgba(211, 230, 242, .44);
+  --field-glow-far: rgba(150, 176, 194, .24);
+}
+
+.field-card-wrap.field-glow-yellow {
+  --field-glow-soft: rgba(255, 222, 67, .68);
+  --field-glow-mid: rgba(238, 185, 29, .44);
+  --field-glow-far: rgba(170, 117, 9, .23);
+}
+
+.field-card-wrap.field-glow-blue {
+  --field-glow-soft: rgba(65, 175, 255, .66);
+  --field-glow-mid: rgba(35, 116, 223, .44);
+  --field-glow-far: rgba(18, 70, 151, .24);
+}
+
+.field-card-wrap.field-glow-neutral {
+  --field-glow-soft: rgba(236, 236, 236, .5);
+  --field-glow-mid: rgba(187, 187, 187, .3);
+  --field-glow-far: rgba(117, 117, 117, .17);
+}
+
+.field-card-wrap.field-glow-rainbow > .card-tile {
+  box-shadow:
+    0 9px 24px rgba(0,0,0,.38),
+    -5px -4px 12px rgba(255, 72, 72, .32),
+     5px -4px 13px rgba(92, 160, 255, .31),
+     6px  5px 16px rgba(255, 218, 73, .28),
+    -5px  6px 16px rgba(133, 89, 255, .3),
+     0 0 25px rgba(255,255,255,.13) !important;
+}
+
+.field-card-wrap.field-glow-rainbow::before {
+  background: conic-gradient(
+    from 35deg,
+    rgba(255, 82, 75, .5),
+    rgba(255, 221, 83, .44),
+    rgba(83, 224, 127, .42),
+    rgba(76, 166, 255, .46),
+    rgba(174, 103, 255, .46),
+    rgba(255, 82, 75, .5)
+  ) !important;
+  opacity: .68 !important;
+}
+
+/* Brave art may itself be a high-rarity card. */
+.simulator-page .field-card-wrap.brave-combined-host > .arena-brave-attachment.has-rarity-glow {
+  box-shadow:
+    0 9px 24px rgba(0,0,0,.5),
+    0 0 6px var(--brave-glow-soft),
+    0 0 16px var(--brave-glow-mid);
+}
+
+.arena-brave-attachment.brave-glow-red { --brave-glow-soft: rgba(255,72,58,.58); --brave-glow-mid: rgba(205,36,29,.38); }
+.arena-brave-attachment.brave-glow-purple { --brave-glow-soft: rgba(183,102,255,.58); --brave-glow-mid: rgba(124,53,210,.38); }
+.arena-brave-attachment.brave-glow-green { --brave-glow-soft: rgba(87,232,126,.55); --brave-glow-mid: rgba(39,158,75,.36); }
+.arena-brave-attachment.brave-glow-white { --brave-glow-soft: rgba(248,253,255,.65); --brave-glow-mid: rgba(194,219,234,.38); }
+.arena-brave-attachment.brave-glow-yellow { --brave-glow-soft: rgba(255,222,67,.62); --brave-glow-mid: rgba(220,166,22,.38); }
+.arena-brave-attachment.brave-glow-blue { --brave-glow-soft: rgba(65,175,255,.6); --brave-glow-mid: rgba(31,104,207,.38); }
+.arena-brave-attachment.brave-glow-neutral { --brave-glow-soft: rgba(235,235,235,.45); --brave-glow-mid: rgba(165,165,165,.26); }
+.arena-brave-attachment.brave-glow-rainbow { --brave-glow-soft: rgba(214,167,255,.56); --brave-glow-mid: rgba(100,170,255,.34); }
+
+/* ---------------------------------------------------------
+   RESPONSIVE DESKTOP SAFEGUARDS
+--------------------------------------------------------- */
+
+@media (max-width: 1500px) {
+  .simulator-page .field-cards { gap: 9px !important; }
+  .simulator-page .field-card-wrap {
+    flex-basis: 110px !important;
+    width: 110px !important;
+    min-width: 110px !important;
+    padding-inline: 7px;
+  }
+  .simulator-page .field-card-wrap .card-tile { width: 96px !important; }
+  .arena-card-status { width: 122px; }
+  .arena-card-level-slot { flex-basis: 46px; min-width: 46px; }
+  .arena-card-level-image { width: 46px; }
+  .arena-card-bp { font-size: 16px; }
+  .simulator-page .field-card-wrap.brave-combined-host > .arena-brave-attachment { width: 84px; }
+}
+
+@media (max-width: 1220px) {
+  .simulator-page .field-card-wrap {
+    flex-basis: 102px !important;
+    width: 102px !important;
+    min-width: 102px !important;
+    padding-inline: 6px;
+  }
+  .simulator-page .field-card-wrap .card-tile { width: 90px !important; }
+  .arena-card-status { width: 116px; }
+  .arena-card-level-slot { flex-basis: 42px; min-width: 42px; }
+  .arena-card-level-image { width: 42px; }
+  .arena-card-bp { font-size: 15px; }
+  .simulator-page .field-card-wrap.brave-combined-host > .arena-brave-attachment { width: 78px; }
+}

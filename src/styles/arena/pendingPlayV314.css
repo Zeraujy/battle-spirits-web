@@ -1,0 +1,183 @@
+/* =========================================================
+   v3.1.4 — contextual play confirmation and persistent resources
+   ---------------------------------------------------------
+   This file intentionally contains only the Arena UX introduced in 3.1.4.
+   Keeping it isolated makes future tuning of the classic v3.1 layout easier.
+========================================================= */
+
+/* Reserve / Core Trash are resources, not side-drawer content. They stay
+   visible when Card or Turn panels are collapsed. */
+.simulator-page .persistent-core-area {
+  position: fixed;
+  z-index: 72;
+  bottom: 8px;
+  width: 212px;
+  pointer-events: auto;
+}
+
+.simulator-page .persistent-reserve-area { left: 8px; }
+.simulator-page .persistent-trash-area { right: 8px; }
+
+.simulator-page .persistent-core-area .core-area {
+  width: 100%;
+  margin: 0 !important;
+  box-shadow:
+    inset 0 0 24px rgba(0,0,0,.22),
+    0 14px 34px rgba(0,0,0,.28) !important;
+}
+
+/* Leave enough scroll room behind the fixed resource box when a side drawer
+   is open, preventing the final controls from being covered. */
+.simulator-page .inspector-scroll,
+.simulator-page .turn-panel-main {
+  padding-bottom: 136px !important;
+}
+
+/* Contextual summon/deploy window. It uses viewport coordinates calculated by
+   Simulator.jsx, therefore it stays visually attached to the pending card even
+   when the side docks change size. */
+.simulator-page .pending-play-popover {
+  position: fixed;
+  z-index: 240;
+  width: 248px;
+  display: grid;
+  gap: 9px;
+  padding: 13px;
+  border: 1px solid rgba(210,210,210,.24);
+  border-radius: 13px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.045), transparent 42%),
+    linear-gradient(180deg, rgba(19,19,19,.985), rgba(8,8,8,.99));
+  box-shadow: 0 22px 64px rgba(0,0,0,.62), inset 0 1px 0 rgba(255,255,255,.035);
+  backdrop-filter: blur(16px);
+}
+
+.simulator-page .pending-play-popover::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border: solid rgba(210,210,210,.24);
+  background: #111;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.simulator-page .pending-play-popover.pending-side-right::before {
+  left: -6px;
+  border-width: 0 0 1px 1px;
+}
+
+.simulator-page .pending-play-popover.pending-side-left::before {
+  right: -6px;
+  border-width: 1px 1px 0 0;
+}
+
+.simulator-page .pending-play-popover > strong,
+.simulator-page .pending-magic-modal > strong {
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.simulator-page .pending-cost-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.simulator-page .pending-cost-summary > span {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+  padding: 7px 6px;
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 8px;
+  background: rgba(255,255,255,.025);
+  text-align: center;
+}
+
+.simulator-page .pending-cost-summary small {
+  color: #8d8d8d;
+  font-size: 7px;
+  line-height: 1.2;
+}
+
+.simulator-page .pending-cost-summary b {
+  font-size: 12px;
+}
+
+.simulator-page .pending-cost-summary .reduction b {
+  color: #d7d7d7;
+}
+
+.simulator-page .pending-play-popover .payment-meter,
+.simulator-page .pending-magic-modal .payment-meter {
+  min-height: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 9px;
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 8px;
+  background: rgba(0,0,0,.2);
+}
+
+.simulator-page .pending-play-popover .payment-meter span,
+.simulator-page .pending-magic-modal .payment-meter span {
+  color: #bdbdbd;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.simulator-page .pending-play-popover .payment-meter b,
+.simulator-page .pending-magic-modal .payment-meter b {
+  font-size: 11px;
+}
+
+.simulator-page .pending-help {
+  color: #8d8d8d;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.simulator-page .pending-play-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.simulator-page .pending-play-actions button {
+  min-height: 39px;
+}
+
+/* Magic/Flash is centered but deliberately does not swallow pointer events on
+   the rest of the board: the player still needs to drag Cores into Core Trash. */
+.simulator-page .pending-magic-layer {
+  position: fixed;
+  inset: 58px 0 0;
+  z-index: 235;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.simulator-page .pending-magic-modal {
+  width: min(330px, calc(100vw - 32px));
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid rgba(220,220,220,.25);
+  border-radius: 15px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.055), transparent 45%),
+    linear-gradient(180deg, rgba(18,18,18,.99), rgba(7,7,7,.995));
+  box-shadow: 0 30px 90px rgba(0,0,0,.72), inset 0 1px 0 rgba(255,255,255,.04);
+  backdrop-filter: blur(18px);
+  pointer-events: auto;
+}
+
+@media (max-width: 1180px) {
+  .simulator-page .persistent-core-area { width: 188px; }
+  .simulator-page .pending-play-popover { width: 228px; }
+}

@@ -1,0 +1,37 @@
+BATTLE SPIRITS ETERNAL SIMULATOR v3.1.1 — VALIDAÇÃO
+Data: 23/09/2026
+
+RESULTADOS
+- Engine: 57/57 testes aprovados.
+- npm run verify: aprovado.
+- npm run verify:v3: aprovado.
+- JSON: 17 arquivos verificados, 0 inválidos.
+- Imports relativos: 201 verificados, 0 não resolvidos.
+- JSX alterado: validado com @babel/parser.
+- arenaV31.css: 111 regras de topo, 0 erros de parsing.
+- Referências/dependências da antiga Arena 3D: 0 encontradas.
+
+BUILD
+O build Vite não foi reproduzido neste ambiente porque o projeto não inclui
+node_modules e a instalação de dependências excedeu o limite do ambiente.
+Nenhuma dependência nova foi adicionada pela Arena 2D v3.1.
+
+No Windows:
+  npm install
+  npm run check
+
+PRINCIPAIS ALTERAÇÕES v3.1
+- Arena 2D em tela cheia.
+- Mão em leque calculada dinamicamente.
+- Hover/elevação da mão local.
+- Preview grande da carta com nome, código e tipo.
+- HUDs compactos.
+- Deck, Burst e Trash integrados visualmente.
+- Zonas Braves/Other, Spirits/Ultimates e Nexus redesenhadas.
+- Painéis Carta e Turno recolhíveis.
+- Avanço de fase disponível na barra superior.
+- Reserve e Core Trash redesenhados.
+- Foco visual reforçado durante batalha.
+- Estados de carta exaurida mais claros.
+- Responsividade para desktops menores e telas de pouca altura.
+- Nenhuma biblioteca 3D reintroduzida.

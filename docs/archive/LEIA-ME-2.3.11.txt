@@ -1,0 +1,34 @@
+BATTLE SPIRITS 2.3.11 - ONLINE COMPATIBILITY
+================================================
+
+Esta é uma versão COMPLETA do código do simulador.
+
+O gameplay e as mecânicas da linha 2.3.x foram preservados.
+A mudança principal está somente na conexão online do executável.
+
+IMPORTANTE SOBRE AS CARTAS
+--------------------------
+Este pacote não possui os seus 70 cards reais porque esses arquivos pessoais do
+projeto não estão disponíveis neste ambiente. Antes de jogar, copie da sua
+versão atual:
+
+  src\data\
+  public\cards-database\
+
+E coloque suas imagens:
+
+  public\images\logo_battlespirits.png
+  public\images\card-back.png
+
+Você também pode usar MIGRAR_DADOS_ANTIGOS.bat.
+
+TESTE RECOMENDADO
+-----------------
+1. Copie/migre os dados acima.
+2. Rode INSTALAR_E_ABRIR.bat e confirme o online no navegador/Electron dev.
+3. Rode GERAR_INSTALADOR_WINDOWS.bat.
+4. Instale o Battle Spirits 2.3.11 e teste o .exe com o mesmo endereço de servidor.
+
+No executável 2.3.11, a conexão Socket.IO é criada no processo principal do
+Electron (Node), não no renderer. Isso isola a rede da interface e preserva a
+API da arena online.

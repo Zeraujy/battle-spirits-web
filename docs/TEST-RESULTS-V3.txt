@@ -1,0 +1,352 @@
+TAP version 13
+# Subtest: match starts with Eternal defaults
+ok 1 - match starts with Eternal defaults
+  ---
+  duration_ms: 2.840924
+  type: 'test'
+  ...
+# Subtest: first player skips core and attack on first turn via phase flow
+ok 2 - first player skips core and attack on first turn via phase flow
+  ---
+  duration_ms: 0.817553
+  type: 'test'
+  ...
+# Subtest: reduction uses matching field symbols
+ok 3 - reduction uses matching field symbols
+  ---
+  duration_ms: 0.412942
+  type: 'test'
+  ...
+# Subtest: battle follows flash1 -> block -> resolve and unblocked damage uses symbols
+ok 4 - battle follows flash1 -> block -> resolve and unblocked damage uses symbols
+  ---
+  duration_ms: 1.332299
+  type: 'test'
+  ...
+# Subtest: using Magic during Flash resets passes and transfers priority
+ok 5 - using Magic during Flash resets passes and transfers priority
+  ---
+  duration_ms: 1.60466
+  type: 'test'
+  ...
+# Subtest: Brave combine moves its cores to the host and adds BP
+ok 6 - Brave combine moves its cores to the host and adds BP
+  ---
+  duration_ms: 1.353782
+  type: 'test'
+  ...
+# Subtest: Brave can be summoned directly combined without needing Lv1 cores on itself
+ok 7 - Brave can be summoned directly combined without needing Lv1 cores on itself
+  ---
+  duration_ms: 0.655098
+  type: 'test'
+  ...
+# Subtest: Set Burst is limited to one set action per turn
+ok 8 - Set Burst is limited to one set action per turn
+  ---
+  duration_ms: 0.343458
+  type: 'test'
+  ...
+# Subtest: Mirage uses its own cost and has a separate once-per-turn set action
+ok 9 - Mirage uses its own cost and has a separate once-per-turn set action
+  ---
+  duration_ms: 0.526785
+  type: 'test'
+  ...
+# Subtest: Ultimate enforces a structured Summoning Condition
+ok 10 - Ultimate enforces a structured Summoning Condition
+  ---
+  duration_ms: 1.021641
+  type: 'test'
+  ...
+# Subtest: Ultimate Trigger reveals the opponent top card and records HIT/GUARD state
+ok 11 - Ultimate Trigger reveals the opponent top card and records HIT/GUARD state
+  ---
+  duration_ms: 1.138537
+  type: 'test'
+  ...
+# Subtest: Grandwalker/Grandstone-style Nexus cores are not movable as normal field cores
+ok 12 - Grandwalker/Grandstone-style Nexus cores are not movable as normal field cores
+  ---
+  duration_ms: 0.495027
+  type: 'test'
+  ...
+# Subtest: Effect Engine resolves legacy abilities on summon automatically
+ok 13 - Effect Engine resolves legacy abilities on summon automatically
+  ---
+  duration_ms: 0.633295
+  type: 'test'
+  ...
+# Subtest: Effect Engine resolves whenAttacks BP modifier using the source as target
+ok 14 - Effect Engine resolves whenAttacks BP modifier using the source as target
+  ---
+  duration_ms: 0.876972
+  type: 'test'
+  ...
+# Subtest: Effect Engine resolves Nexus whenDeployed operations
+ok 15 - Effect Engine resolves Nexus whenDeployed operations
+  ---
+  duration_ms: 0.425963
+  type: 'test'
+  ...
+# Subtest: Effect Engine resolves whenDestroyed after battle destruction
+ok 16 - Effect Engine resolves whenDestroyed after battle destruction
+  ---
+  duration_ms: 1.269475
+  type: 'test'
+  ...
+# Subtest: Effect Engine falls back to manual resolution when a target choice is ambiguous
+ok 17 - Effect Engine falls back to manual resolution when a target choice is ambiguous
+  ---
+  duration_ms: 0.72268
+  type: 'test'
+  ...
+# Subtest: Effect Engine understands selectTarget + onSelect from the current database format
+ok 18 - Effect Engine understands selectTarget + onSelect from the current database format
+  ---
+  duration_ms: 0.57055
+  type: 'test'
+  ...
+# Subtest: Effect Engine understands selectTrashTarget and returns the selected card to hand
+ok 19 - Effect Engine understands selectTrashTarget and returns the selected card to hand
+  ---
+  duration_ms: 0.36522
+  type: 'test'
+  ...
+# Subtest: Combined Brave whenAttacks ability is triggered through its host
+ok 20 - Combined Brave whenAttacks ability is triggered through its host
+  ---
+  duration_ms: 0.388246
+  type: 'test'
+  ...
+# Subtest: Effect Engine understands controlsSymbolColor conditions used by Rush-style abilities
+ok 21 - Effect Engine understands controlsSymbolColor conditions used by Rush-style abilities
+  ---
+  duration_ms: 0.479874
+  type: 'test'
+  ...
+# Subtest: Effect Engine keeps chooseOption manual when more than one valid option exists
+ok 22 - Effect Engine keeps chooseOption manual when more than one valid option exists
+  ---
+  duration_ms: 0.359001
+  type: 'test'
+  ...
+# Subtest: Effect Engine recognizes selectMultipleTargets and waits for the player choice
+ok 23 - Effect Engine recognizes selectMultipleTargets and waits for the player choice
+  ---
+  duration_ms: 0.345211
+  type: 'test'
+  ...
+# Subtest: Decision Queue resolves an ambiguous direct target through the reducer
+ok 24 - Decision Queue resolves an ambiguous direct target through the reducer
+  ---
+  duration_ms: 0.953448
+  type: 'test'
+  ...
+# Subtest: Decision Queue resolves chooseOption and continues automatically
+ok 25 - Decision Queue resolves chooseOption and continues automatically
+  ---
+  duration_ms: 0.305441
+  type: 'test'
+  ...
+# Subtest: Decision Queue resolves multiple targets
+ok 26 - Decision Queue resolves multiple targets
+  ---
+  duration_ms: 0.43755
+  type: 'test'
+  ...
+# Subtest: Decision Queue resolves Trash target selection
+ok 27 - Decision Queue resolves Trash target selection
+  ---
+  duration_ms: 0.417369
+  type: 'test'
+  ...
+# Subtest: Decision Queue preserves afterSelect and remaining actions
+ok 28 - Decision Queue preserves afterSelect and remaining actions
+  ---
+  duration_ms: 0.776471
+  type: 'test'
+  ...
+# Subtest: Reducer blocks unrelated game actions while an effect decision is pending
+ok 29 - Reducer blocks unrelated game actions while an effect decision is pending
+  ---
+  duration_ms: 0.299973
+  type: 'test'
+  ...
+# Subtest: Decision Queue preserves a Combined Brave trigger queued behind another decision
+ok 30 - Decision Queue preserves a Combined Brave trigger queued behind another decision
+  ---
+  duration_ms: 0.672475
+  type: 'test'
+  ...
+# Subtest: Brave v2 understands legacy family Combine conditions
+ok 31 - Brave v2 understands legacy family Combine conditions
+  ---
+  duration_ms: 0.195024
+  type: 'test'
+  ...
+# Subtest: Brave v2 exposes only legal structured Combine hosts
+ok 32 - Brave v2 exposes only legal structured Combine hosts
+  ---
+  duration_ms: 0.777983
+  type: 'test'
+  ...
+# Subtest: Brave v2 rejects a structured Combine condition even when confirmCondition is true
+ok 33 - Brave v2 rejects a structured Combine condition even when confirmCondition is true
+  ---
+  duration_ms: 0.274764
+  type: 'test'
+  ...
+# Subtest: Brave v2 adds Cost and Color but preserves the host Family while combined
+ok 34 - Brave v2 adds Cost and Color but preserves the host Family while combined
+  ---
+  duration_ms: 0.449508
+  type: 'test'
+  ...
+# Subtest: Brave v2 separation preview reports whether the Brave can maintain LV1
+ok 35 - Brave v2 separation preview reports whether the Brave can maintain LV1
+  ---
+  duration_ms: 0.297539
+  type: 'test'
+  ...
+# Subtest: Ultimate Trigger v2 pauses the battle before Flash Timing 1
+ok 36 - Ultimate Trigger v2 pauses the battle before Flash Timing 1
+  ---
+  duration_ms: 0.392001
+  type: 'test'
+  ...
+# Subtest: Ultimate Trigger v2 resolves HIT effects before Flash Timing 1
+ok 37 - Ultimate Trigger v2 resolves HIT effects before Flash Timing 1
+  ---
+  duration_ms: 0.459173
+  type: 'test'
+  ...
+# Subtest: Ultimate Trigger HIT restriction prevents Spirit and Brave-in-Spirit-State blockers
+ok 38 - Ultimate Trigger HIT restriction prevents Spirit and Brave-in-Spirit-State blockers
+  ---
+  duration_ms: 0.448826
+  type: 'test'
+  ...
+# Subtest: Ultimate Trigger v2 respects the effect Level requirement
+ok 39 - Ultimate Trigger v2 respects the effect Level requirement
+  ---
+  duration_ms: 0.257679
+  type: 'test'
+  ...
+# Subtest: Ultimate Trigger v2 uses the combined Brave Cost for HIT/GUARD comparison
+ok 40 - Ultimate Trigger v2 uses the combined Brave Cost for HIT/GUARD comparison
+  ---
+  duration_ms: 0.409127
+  type: 'test'
+  ...
+# Subtest: Ultimate Trigger v2 resumes automatically after a Decision Queue choice
+ok 41 - Ultimate Trigger v2 resumes automatically after a Decision Queue choice
+  ---
+  duration_ms: 1.319751
+  type: 'test'
+  ...
+# Subtest: Brave v2 treats an uncombined Brave as a Spirit for effect targeting
+ok 42 - Brave v2 treats an uncombined Brave as a Spirit for effect targeting
+  ---
+  duration_ms: 0.269516
+  type: 'test'
+  ...
+# Subtest: Ultimate Trigger v2 treats equal Cost as GUARD
+ok 43 - Ultimate Trigger v2 treats equal Cost as GUARD
+  ---
+  duration_ms: 0.260383
+  type: 'test'
+  ...
+# Subtest: Ultimate Trigger v2 can only be resolved by its controller
+ok 44 - Ultimate Trigger v2 can only be resolved by its controller
+  ---
+  duration_ms: 0.61728
+  type: 'test'
+  ...
+# Subtest: Ultimate Trigger v2 blocks Flash actions until its stage is resolved
+ok 45 - Ultimate Trigger v2 blocks Flash actions until its stage is resolved
+  ---
+  duration_ms: 0.412372
+  type: 'test'
+  ...
+# Subtest: Advanced Trigger opens a Trigger Counter window only when a valid counter is in hand
+ok 46 - Advanced Trigger opens a Trigger Counter window only when a valid counter is in hand
+  ---
+  duration_ms: 0.285721
+  type: 'test'
+  ...
+# Subtest: Trigger Counter window can be passed and returns control to the Ultimate controller
+ok 47 - Trigger Counter window can be passed and returns control to the Ultimate controller
+  ---
+  duration_ms: 0.353933
+  type: 'test'
+  ...
+# Subtest: Counter Bind-style Trigger Counter negates a HIT when the revealed card is Green
+ok 48 - Counter Bind-style Trigger Counter negates a HIT when the revealed card is Green
+  ---
+  duration_ms: 0.891595
+  type: 'test'
+  ...
+# Subtest: Trigger Counter that does not meet its condition does not negate the HIT
+ok 49 - Trigger Counter that does not meet its condition does not negate the HIT
+  ---
+  duration_ms: 0.488897
+  type: 'test'
+  ...
+# Subtest: Critical Hit only becomes eligible when the revealed HIT card matches its condition
+ok 50 - Critical Hit only becomes eligible when the revealed HIT card matches its condition
+  ---
+  duration_ms: 0.598894
+  type: 'test'
+  ...
+# Subtest: Critical Hit uses Decision Queue and returns all Magic cards of the chosen color from Trash
+ok 51 - Critical Hit uses Decision Queue and returns all Magic cards of the chosen color from Trash
+  ---
+  duration_ms: 0.853858
+  type: 'test'
+  ...
+# Subtest: Critical Hit lower-Level restriction filters blockers dynamically
+ok 52 - Critical Hit lower-Level restriction filters blockers dynamically
+  ---
+  duration_ms: 0.633235
+  type: 'test'
+  ...
+# Subtest: XU Trigger starts after a base GUARD when its condition is met
+ok 53 - XU Trigger starts after a base GUARD when its condition is met
+  ---
+  duration_ms: 0.732044
+  type: 'test'
+  ...
+# Subtest: XU Trigger does not start when its Life condition is not met
+ok 54 - XU Trigger does not start when its Life condition is not met
+  ---
+  duration_ms: 0.257538
+  type: 'test'
+  ...
+# Subtest: XU HIT moves Life to Core Trash instead of Reserve
+ok 55 - XU HIT moves Life to Core Trash instead of Reserve
+  ---
+  duration_ms: 0.407574
+  type: 'test'
+  ...
+# Subtest: selectMultipleTargets asManyAsPossible auto-resolves all available targets up to the requested count
+ok 56 - selectMultipleTargets asManyAsPossible auto-resolves all available targets up to the requested count
+  ---
+  duration_ms: 0.353854
+  type: 'test'
+  ...
+# Subtest: Ultimate Trigger type containing ultimateTrigger is recognized for whenBattles on attack
+ok 57 - Ultimate Trigger type containing ultimateTrigger is recognized for whenBattles on attack
+  ---
+  duration_ms: 0.2588
+  type: 'test'
+  ...
+1..57
+# tests 57
+# suites 0
+# pass 57
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 123.14915
