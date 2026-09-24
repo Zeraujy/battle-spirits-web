@@ -2,10 +2,13 @@ import { applyGameAction } from "./reducer.js";
 import { getLegalActions } from "./legalActions.js";
 import {
   findPhysicalCard,
+  getCurrentLevel,
   getDatabaseCard,
   getEffectiveBP,
-  getEffectiveSymbols
+  getEffectiveSymbols,
+  isCoreLockedNexus
 } from "./selectors.js";
+import { calculateReduction } from "./cost.js";
 import { otherPlayerId } from "./utils.js";
 
 const DIFFICULTIES = new Set(["easy", "normal", "hard"]);
@@ -24,7 +27,8 @@ const LOOP_SENSITIVE_ACTIONS = new Set([
   "COMBINE_BRAVE",
   "SEPARATE_BRAVE",
   "EXCHANGE_BRAVE",
-  "SET_MIRAGE"
+  "SET_MIRAGE",
+  "MOVE_CORE"
 ]);
 
 function clamp(value, min, max) {
@@ -34,6 +38,110 @@ function clamp(value, min, max) {
 function numeric(value, fallback = 0) {
   const number = Number(value);
   return Number.isFinite(number) ? number : fallback;
+}
+
+function minimumCoresForCard(card) {
+  if (!card || card.cardType === "nexus" || card.cardType === "magic") return 0;
+  if (!["spirit", "ultimate", "brave"].includes(card.cardType)) return 0;
+  const requirements = (card.levels || [])
+    .map((level) => Number(level.cores))
+    .filter(Number.isFinite);
+  return requirements.length ? Math.min(...requirements) : 1;
+}
+
+function physicalCoreCount(physical) {
+  return Number(physical?.cores?.regular || 0) + (physical?.cores?.soul ? 1 : 0);
+}
+
+function activeLevelEffectCount(card, levelNumber) {
+  if (!card || !levelNumber) return 0;
+  return (card.effects || []).filter((effect) => {
+    if (!Array.isArray(effect?.levels) || !effect.levels.length) return false;
+    return effect.levels.map(Number).includes(Number(levelNumber));
+  }).length;
+}
+
+function nextPrintedLevel(card, physical) {
+  const current = getCurrentLevel(card, physical);
+  const total = physicalCoreCount(physical);
+  return (card?.levels || [])
+    .filter((level) => Number(level.level || 0) > Number(current?.level || 0) && Number(level.cores) > total)
+    .sort((a, b) => Number(a.cores) - Number(b.cores))[0] || null;
+}
+
+function levelProgressBonus(card, physical) {
+  const current = getCurrentLevel(card, physical);
+  const next = nextPrintedLevel(card, physical);
+  if (!current || !next) return 0;
+  const invested = Math.max(0, physicalCoreCount(physical) - Number(current.cores || 0));
+  if (!invested) return 0;
+  // A small value for Cores already committed toward the next threshold keeps
+  // multi-Core level-up plans coherent without treating partial levels as BP.
+  return invested * 2.4;
+}
+
+function levelSafeFlexibleCores(match, playerId, cardIndex) {
+  const player = match.players?.[playerId];
+  if (!player) return 0;
+
+  let total = Number(player.reserve || 0) + (player.soulCore?.zone === "reserve" ? 1 : 0);
+  for (const physical of fieldCards(player)) {
+    if (physical.combinedWith || physical.pendingDestruction) continue;
+    const card = getDatabaseCard(cardIndex, physical);
+    if (!card || isCoreLockedNexus(card)) continue;
+    const current = getCurrentLevel(card, physical);
+    const required = Number(current?.cores ?? minimumCoresForCard(card));
+    const soul = physical.cores?.soul ? 1 : 0;
+    const regular = Number(physical.cores?.regular || 0);
+    const regularNeeded = Math.max(0, required - soul);
+    total += Math.max(0, regular - regularNeeded);
+    if (physical.cores?.soul && physicalCoreCount(physical) - 1 >= required) total += 1;
+  }
+  return total;
+}
+
+function mainPlayResourceNeed(match, playerId, physical, cardIndex) {
+  const card = getDatabaseCard(cardIndex, physical);
+  if (!card) return Infinity;
+  if (!["spirit", "ultimate", "brave", "nexus", "magic"].includes(card.cardType)) return Infinity;
+  const cost = calculateReduction(match, playerId, card, cardIndex);
+  return cost.payable + minimumCoresForCard(card);
+}
+
+function resourceOutlookScore(match, playerId, cardIndex) {
+  const player = match.players?.[playerId];
+  if (!player) return 0;
+
+  const flexible = levelSafeFlexibleCores(match, playerId, cardIndex);
+  let playable = 0;
+  let appliedReductions = 0;
+  let freePlays = 0;
+
+  for (const physical of player.hand || []) {
+    const card = getDatabaseCard(cardIndex, physical);
+    if (!card) continue;
+    if (["spirit", "ultimate", "brave", "nexus", "magic"].includes(card.cardType)) {
+      const cost = calculateReduction(match, playerId, card, cardIndex);
+      appliedReductions += Number(cost.applied || 0);
+      const need = cost.payable + minimumCoresForCard(card);
+      if (need <= flexible) playable += 1;
+      if (cost.printed > 0 && cost.payable === 0) freePlays += 1;
+    }
+  }
+
+  let score = Math.min(playable, 5) * 6.5;
+  score += Math.min(appliedReductions, 8) * 2.2;
+  score += Math.min(freePlays, 3) * 3.5;
+  if (player.soulCore?.zone === "reserve") score += 5;
+  if (match.phase === "main" && match.activePlayerId === playerId && (player.hand?.length || 0) && flexible === 0) score -= 8;
+  return score;
+}
+
+function unlockedLevelEffectDelta(card, beforePhysical, afterPhysical) {
+  const beforeLevel = Number(getCurrentLevel(card, beforePhysical)?.level || 0);
+  const afterLevel = Number(getCurrentLevel(card, afterPhysical)?.level || 0);
+  if (afterLevel <= beforeLevel) return 0;
+  return Math.max(0, activeLevelEffectCount(card, afterLevel) - activeLevelEffectCount(card, beforeLevel));
 }
 
 function safeRandom(random) {
@@ -123,15 +231,18 @@ function cardBoardValue(match, playerId, physical, cardIndex) {
   const regularCores = numeric(physical.cores?.regular);
   const soulBonus = physical.cores?.soul ? 2.5 : 0;
   const readyBonus = physical.exhausted ? 0 : 4;
+  const currentLevel = getCurrentLevel(card, physical);
+  const levelEffectBonus = activeLevelEffectCount(card, currentLevel?.level) * 5.5;
+  const progressBonus = levelProgressBonus(card, physical);
 
   if (type === "nexus") {
-    return 20 + cost * 2 + regularCores * 1.2;
+    return 20 + cost * 2 + regularCores * 1.2 + levelEffectBonus + progressBonus;
   }
 
   if (["spirit", "ultimate", "brave"].includes(type)) {
     const bp = numeric(getEffectiveBP(match, cardIndex, physical));
     const symbols = getEffectiveSymbols(match, cardIndex, physical)?.length || 0;
-    let value = 18 + cost * 2.2 + bp / 420 + symbols * 9 + regularCores * 1.5 + soulBonus + readyBonus;
+    let value = 18 + cost * 2.2 + bp / 420 + symbols * 9 + regularCores * 1.5 + soulBonus + readyBonus + levelEffectBonus + progressBonus;
 
     if (type === "ultimate") value += 8;
     if (type === "brave") value += 5;
@@ -182,6 +293,10 @@ export function evaluateBoardState(match, playerId, cardIndex) {
   for (const physical of fieldCards(opponent)) {
     score -= cardBoardValue(match, opponentId, physical, cardIndex);
   }
+
+  // Only the evaluated player's own hidden hand is inspected here. The
+  // opponent remains represented by public hand/deck counts only.
+  score += resourceOutlookScore(match, playerId, cardIndex);
 
   if (me.burst) score += 22;
   if (opponent.burst) score -= 16;
@@ -502,6 +617,70 @@ function mulliganScore(match, playerId, cardIndex) {
   return -35;
 }
 
+function summonResourceBias(match, playerId, action, result, cardIndex) {
+  const ctx = findPhysicalCard(match, action.instanceId);
+  const card = getDatabaseCard(cardIndex, ctx?.card);
+  if (!card) return 0;
+
+  const cost = calculateReduction(match, playerId, card, cardIndex);
+  let score = Number(cost.applied || 0) * 7;
+
+  const minimum = minimumCoresForCard(card);
+  const requested = Number(action.options?.coresToPlace ?? minimum);
+  if (requested > minimum && Array.isArray(card.levels)) {
+    const minPhysical = { ...ctx.card, cores: { regular: minimum, soul: false } };
+    const selectedPhysical = { ...ctx.card, cores: { regular: requested, soul: false } };
+    const minLevel = getCurrentLevel(card, minPhysical);
+    const selectedLevel = getCurrentLevel(card, selectedPhysical);
+    const bpGain = Math.max(0, Number(selectedLevel?.bp || 0) - Number(minLevel?.bp || 0));
+    const effectGain = Math.max(0, activeLevelEffectCount(card, selectedLevel?.level) - activeLevelEffectCount(card, minLevel?.level));
+    const extra = Math.max(0, requested - minimum);
+    score += bpGain / 520 + effectGain * 10 - extra * 3.8;
+  }
+
+  const beforeFlex = levelSafeFlexibleCores(match, playerId, cardIndex);
+  const afterFlex = levelSafeFlexibleCores(result.match, playerId, cardIndex);
+  if (afterFlex === 0 && beforeFlex > 0 && (result.match.players[playerId]?.hand?.length || 0)) score -= 10;
+
+  const hasMagicLeft = (result.match.players[playerId]?.hand || []).some((physical) =>
+    getDatabaseCard(cardIndex, physical)?.cardType === "magic"
+  );
+  if (hasMagicLeft && Number(result.match.players[playerId]?.reserve || 0) === 0) score -= 12;
+
+  return score;
+}
+
+function coreMoveBias(match, playerId, action, result, cardIndex) {
+  const move = action.move;
+  if (move?.from?.zone !== "reserve" || move?.to?.zone !== "card") return -20;
+
+  const beforeCtx = findPhysicalCard(match, move.to.instanceId);
+  const afterCtx = findPhysicalCard(result.match, move.to.instanceId);
+  const card = getDatabaseCard(cardIndex, beforeCtx?.card);
+  if (!beforeCtx?.card || !afterCtx?.card || !card) return -10;
+
+  const beforeLevel = getCurrentLevel(card, beforeCtx.card);
+  const afterLevel = getCurrentLevel(card, afterCtx.card);
+  let score = 0;
+
+  if (Number(afterLevel?.level || 0) > Number(beforeLevel?.level || 0)) {
+    const bpGain = Math.max(0, Number(afterLevel?.bp || 0) - Number(beforeLevel?.bp || 0));
+    const effectGain = unlockedLevelEffectDelta(card, beforeCtx.card, afterCtx.card);
+    score += 24 + bpGain / 320 + effectGain * 15;
+  } else {
+    const next = nextPrintedLevel(card, afterCtx.card);
+    const reserve = Number(result.match.players[playerId]?.reserve || 0);
+    const needed = next ? Math.max(0, Number(next.cores) - physicalCoreCount(afterCtx.card)) : Infinity;
+    if (Number.isFinite(needed) && needed <= reserve) score += 8;
+    else score -= 7;
+  }
+
+  const beforeOutlook = resourceOutlookScore(match, playerId, cardIndex);
+  const afterOutlook = resourceOutlookScore(result.match, playerId, cardIndex);
+  score += (afterOutlook - beforeOutlook) * 0.8;
+  return score;
+}
+
 function categoryBias(match, playerId, candidate, result, cardIndex, legalActions) {
   const action = candidate.action;
   const type = action.type;
@@ -516,8 +695,15 @@ function categoryBias(match, playerId, candidate, result, cardIndex, legalAction
       break;
     }
     case "MULLIGAN": score += mulliganScore(match, playerId, cardIndex); break;
-    case "SUMMON": score += 36; break;
-    case "DEPLOY_NEXUS": score += 28; break;
+    case "SUMMON": score += 36 + summonResourceBias(match, playerId, action, result, cardIndex); break;
+    case "DEPLOY_NEXUS": {
+      const ctx = findPhysicalCard(match, action.instanceId);
+      const card = getDatabaseCard(cardIndex, ctx?.card);
+      const reduction = card ? calculateReduction(match, playerId, card, cardIndex) : null;
+      score += 28 + Number(reduction?.applied || 0) * 6;
+      break;
+    }
+    case "MOVE_CORE": score += coreMoveBias(match, playerId, action, result, cardIndex); break;
     case "USE_MAGIC": score += action.options?.mode === "flash" ? 18 : 14; break;
     case "SET_BURST": score += match.players[playerId]?.burst ? 2 : 30; break;
     case "SET_MIRAGE": score += match.players[playerId]?.mirage ? 0 : 24; break;

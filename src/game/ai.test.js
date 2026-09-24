@@ -12,7 +12,11 @@ const cards = [
   normalizeCard({ id: "S3", namePT: "Warrior", cardType: "spirit", colors: ["red"], cost: 0, reduction: [], symbols: ["red"], levels: [{ level: 1, cores: 1, bp: 3000 }] }),
   normalizeCard({ id: "S6", namePT: "Dragon", cardType: "spirit", colors: ["red"], cost: 0, reduction: [], symbols: ["red", "red"], levels: [{ level: 1, cores: 1, bp: 6000 }] }),
   normalizeCard({ id: "N0", namePT: "Nexus", cardType: "nexus", colors: ["blue"], cost: 0, reduction: [], symbols: ["blue"], levels: [{ level: 1, cores: 0 }] }),
-  normalizeCard({ id: "M0", namePT: "Magic", cardType: "magic", colors: ["yellow"], cost: 0, reduction: [], effects: [{ type: "main", timing: "main", operations: [{ type: "draw", count: 1 }] }] })
+  normalizeCard({ id: "M0", namePT: "Magic", cardType: "magic", colors: ["yellow"], cost: 0, reduction: [], effects: [{ type: "main", timing: "main", operations: [{ type: "draw", count: 1 }] }] }),
+  normalizeCard({ id: "LVL", namePT: "Leveler", cardType: "spirit", colors: ["red"], cost: 0, reduction: [], symbols: ["red"], levels: [{ level: 1, cores: 1, bp: 1000 }, { level: 2, cores: 2, bp: 5000 }], effects: [{ id: "lvl-2", type: "constant", levels: [2], timing: "always" }] }),
+  normalizeCard({ id: "FLEX", namePT: "Flexible Body", cardType: "spirit", colors: ["red"], cost: 0, reduction: [], symbols: ["red"], levels: [{ level: 1, cores: 1, bp: 1800 }, { level: 2, cores: 4, bp: 2500 }] }),
+  normalizeCard({ id: "BLUE0", namePT: "Blue Scout", cardType: "spirit", colors: ["blue"], cost: 0, reduction: [], symbols: ["blue"], levels: [{ level: 1, cores: 1, bp: 1000 }] }),
+  normalizeCard({ id: "COST2", namePT: "Reduced Magic", cardType: "magic", colors: ["red"], cost: 2, reduction: ["red"], effects: [{ type: "main", timing: "main", operations: [{ type: "draw", count: 1 }] }] })
 ];
 const index = makeCardIndex(cards);
 const deck = Array.from({ length: 40 }, (_, i) => ["S0", "S3", "S6", "N0"][i % 4]);
@@ -203,4 +207,70 @@ test("Combat Intelligence still takes immediate lethal even when defending next 
   const action = chooseAIAction(match, "player2", index, { difficulty: "hard" });
   assert.equal(action.type, "DECLARE_ATTACK");
   assert.equal(action.instanceId, "cpu-lethal-attacker");
+});
+
+
+test("Core Management exposes higher-Level summon placements as legal Rules Engine actions", () => {
+  const match = baseMatch("player2");
+  match.phase = "main";
+  match.players.player2.reserve = 4;
+  match.players.player2.hand = [{ ...makePhysicalCard("LVL", index), instanceId: "level-summon" }];
+
+  const legal = getLegalActions(match, "player2", index).map((entry) => entry.action);
+  assert.ok(legal.some((action) =>
+    action.type === "SUMMON" &&
+    action.instanceId === "level-summon" &&
+    action.options?.coresToPlace === 2
+  ));
+});
+
+test("Core Management levels an existing Spirit when Reserve is healthy and the next Level is valuable", () => {
+  const match = baseMatch("player2");
+  match.phase = "main";
+  match.players.player2.reserve = 3;
+  match.players.player2.hand = [];
+  match.players.player2.field.spirits = [fieldCard("LVL", "cpu-level-target", 1)];
+
+  const action = chooseAIAction(match, "player2", index, { difficulty: "hard" });
+  assert.equal(action.type, "MOVE_CORE");
+  assert.equal(action.move?.to?.instanceId, "cpu-level-target");
+});
+
+test("Core Management prefers a resource-efficient summon line over overcommitting all Reserve", () => {
+  const match = baseMatch("player2");
+  match.phase = "main";
+  match.players.player2.reserve = 4;
+  match.players.player2.soulCore = { zone: "trash", instanceId: null };
+  match.players.player2.hand = [
+    { ...makePhysicalCard("FLEX", index), instanceId: "flex-card" },
+    { ...makePhysicalCard("S0", index), instanceId: "follow-up-card" }
+  ];
+
+  const ranked = rankAIActions(match, "player2", index, { difficulty: "hard" });
+  const minimum = ranked.find((entry) =>
+    entry.action.type === "SUMMON" &&
+    entry.action.instanceId === "flex-card" &&
+    entry.action.options?.coresToPlace == null
+  );
+  const maxLevel = ranked.find((entry) =>
+    entry.action.type === "SUMMON" &&
+    entry.action.instanceId === "flex-card" &&
+    entry.action.options?.coresToPlace === 4
+  );
+
+  assert.ok(minimum && maxLevel);
+  assert.ok(minimum.score > maxLevel.score, `minimum=${minimum.score} max=${maxLevel.score}`);
+});
+
+test("Core Management values field symbols that reduce cards still in its own hand", () => {
+  const red = baseMatch("player2");
+  const blue = structuredClone(red);
+  red.phase = "main";
+  blue.phase = "main";
+  red.players.player2.hand = [{ ...makePhysicalCard("COST2", index), instanceId: "reduced-hand-red" }];
+  blue.players.player2.hand = [{ ...makePhysicalCard("COST2", index), instanceId: "reduced-hand-blue" }];
+  red.players.player2.field.spirits = [fieldCard("S0", "red-symbol", 1)];
+  blue.players.player2.field.spirits = [fieldCard("BLUE0", "blue-symbol", 1)];
+
+  assert.ok(evaluateBoardState(red, "player2", index) > evaluateBoardState(blue, "player2", index));
 });

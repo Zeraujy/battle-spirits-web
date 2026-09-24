@@ -158,14 +158,14 @@ export default function AiSetup({ onBack, onStart }) {
             </article>
           </section>
 
-          <section className="ai-behavior-strip" aria-label="Recursos da CPU Combat Intelligence">
+          <section className="ai-behavior-strip" aria-label="Recursos da CPU Core & Resource Management">
             <div>
               <strong>Ações legais</strong>
               <span>Usa a mesma Rules Engine da partida.</span>
             </div>
             <div>
-              <strong>Combat Intelligence</strong>
-              <span>Planeja pressão, trocas, bloqueios e defesa do próximo turno.</span>
+              <strong>Core & Resource</strong>
+              <span>Planeja Cores, Level, redução e recursos para jogadas futuras.</span>
             </div>
             <div>
               <strong>Sem mão revelada</strong>

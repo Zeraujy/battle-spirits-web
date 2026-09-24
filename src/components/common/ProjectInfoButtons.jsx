@@ -13,6 +13,67 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.2.3",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "CPU Core & Resource Management", en: "CPU Core & Resource Management" },
+    summary: {
+      pt: "A Eternal CPU passa a administrar Cores, níveis e redução de custo com mais planejamento, preservando recursos para jogadas futuras.",
+      en: "Eternal CPU now manages Cores, Levels and cost reduction with more planning while preserving resources for future plays."
+    },
+    sections: [
+      {
+        title: { pt: "Gestão de Cores", en: "Core management" },
+        items: {
+          pt: [
+            "A CPU agora pode colocar Cores da Reserve em cartas no campo para alcançar níveis superiores quando a melhoria compensa o investimento.",
+            "Invocações passam a considerar variantes legais de quantidade de Cores, permitindo entrar diretamente em níveis superiores quando houver recursos.",
+            "A avaliação distingue Cores flexíveis na Reserve de Cores comprometidos em níveis ativos e evita gastar recursos sem ganho estratégico suficiente.",
+            "O Soul Core recebe valor de flexibilidade adicional e tende a ser preservado quando não é necessário."
+          ],
+          en: [
+            "The CPU can now move Cores from Reserve to field cards to reach higher Levels when the upgrade is worth the investment.",
+            "Summons now consider legal Core-placement variants, allowing cards to enter at higher Levels when resources permit.",
+            "Evaluation distinguishes flexible Reserve Cores from Cores committed to active Levels and avoids spending resources without enough strategic gain.",
+            "Soul Core flexibility is valued and it tends to be preserved when it is not required."
+          ]
+        }
+      },
+      {
+        title: { pt: "Redução & planejamento", en: "Reduction & planning" },
+        items: {
+          pt: [
+            "Símbolos no campo agora ganham valor adicional quando reduzem o custo de cartas que a CPU ainda possui na mão.",
+            "A CPU mede quantas jogadas futuras permanecem disponíveis antes e depois de gastar Cores.",
+            "Subir um nível considera ganho de BP, efeitos vinculados ao Level e a capacidade de manter recursos para uma segunda jogada.",
+            "A lógica continua sem consultar a identidade das cartas ocultas do oponente."
+          ],
+          en: [
+            "Field symbols gain extra value when they reduce the cost of cards still in the CPU's hand.",
+            "The CPU measures how many future plays remain available before and after spending Cores.",
+            "Leveling considers BP gains, Level-gated effects and whether resources remain for a follow-up play.",
+            "The logic still never inspects the identity of the opponent's hidden cards."
+          ]
+        }
+      },
+      {
+        title: { pt: "Validação", en: "Validation" },
+        items: {
+          pt: [
+            "Adicionados testes para invocação em Level superior, Level Up por MOVE_CORE, preservação de Reserve e sinergia de redução.",
+            "A suíte automatizada passa de 86 para 90 testes mantendo todas as ações da CPU sob getLegalActions() e applyGameAction().",
+            "Simulação real SD23 vs SD28 completou 110 ações em 6 turnos, com uso de Level Up e nenhuma ação ilegal."
+          ],
+          en: [
+            "Added tests for higher-Level summoning, MOVE_CORE Level Up, Reserve preservation and reduction synergy.",
+            "The automated suite grows from 86 to 90 tests while keeping every CPU action under getLegalActions() and applyGameAction().",
+            "A real SD23 vs SD28 simulation completed 110 actions in 6 turns with Level Up usage and no illegal actions."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.2.2",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "CPU Combat Intelligence", en: "CPU Combat Intelligence" },

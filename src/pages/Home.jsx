@@ -107,7 +107,7 @@ export default function Home({ go }) {
         <div className="v3-brand-mini">
           <span className="v3-live-dot" />
           <span>ETERNAL SIMULATOR</span>
-          <b>V3.2.2</b>
+          <b>V3.2.3</b>
         </div>
 
         <button
@@ -173,7 +173,7 @@ export default function Home({ go }) {
             </span>
 
             <span className="v3-action-copy">
-              <small>{pt ? "SOLO / CPU BETA 2 • COMBAT" : "SOLO / CPU BETA 2 • COMBAT"}</small>
+              <small>{pt ? "SOLO / CPU BETA 2 • RESOURCE" : "SOLO / CPU BETA 2 • RESOURCE"}</small>
               <b>{pt ? "Jogar contra IA" : "Play vs AI"}</b>
               <em>{pt ? "Fácil, normal e difícil" : "Easy, normal and hard"}</em>
             </span>
@@ -220,7 +220,7 @@ export default function Home({ go }) {
               </div>
 
               <div className="v3-stat-card">
-                <strong>3.2.2</strong>
+                <strong>3.2.3</strong>
                 <span>Versão</span>
               </div>
             </div>
@@ -284,7 +284,7 @@ export default function Home({ go }) {
         <div className="v3-home-footer-center">
           <span className="v3-footer-line" />
           <b>ETERNAL SIMULATOR</b>
-          <small>V3.2.2</small>
+          <small>V3.2.3</small>
           <span className="v3-footer-line" />
         </div>
 

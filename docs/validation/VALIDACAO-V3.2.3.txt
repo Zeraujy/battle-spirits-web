@@ -1,0 +1,15 @@
+Battle Spirits Eternal Simulator v3.2.3
+CPU Core & Resource Management
+
+Automated tests: 90/90 PASS
+Structural verify: PASS
+V3 verify: PASS
+Real AI simulation: SD23 vs SD28
+- 110 actions
+- 6 turns
+- winner by Life
+- 9 MOVE_CORE actions
+- 3 higher-Level summon variants
+- 0 illegal actions
+
+Production Vite build is intentionally left to npm install / Cloudflare because GitHub-ready packages do not contain node_modules.

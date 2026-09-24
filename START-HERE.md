@@ -1,4 +1,4 @@
-# START HERE — v3.2.2
+# START HERE — v3.2.3
 
 Se você está aprendendo o projeto, comece por estes caminhos:
 
@@ -70,4 +70,14 @@ A futura IA deve consultar `getLegalActions` em vez de reimplementar regras pró
 - `src/game/ai.test.js`: cobertura de preservação do último bloqueador, ataques suicidas, bloqueio eficiente e lethal.
 - A CPU continua obrigada a executar somente ações retornadas por `getLegalActions()`.
 
-A próxima etapa planejada é **Core & Resource Management**, sem mover regras de custo para a IA.
+A próxima etapa planejada após esta versão era **Core & Resource Management**, sem mover regras de custo para a IA.
+
+
+## v3.2.3 — CPU Core & Resource Management
+
+- `src/game/legalActions.js`: expõe variantes legais de invocação com Cores adicionais e movimentos de Reserve para Level Up.
+- `src/game/ai.js`: avalia flexibilidade de Cores, redução de custo, níveis, efeitos vinculados a Level e capacidade de continuar jogando depois de gastar recursos.
+- `src/game/ai.test.js`: cobre invocação em Level superior, Level Up, preservação de Reserve e sinergia de símbolos/redução.
+- Toda ação continua passando pela Rules Engine; a IA não ganha uma regra paralela de pagamento.
+
+A próxima etapa planejada é **Flash, Magic & Burst Intelligence**.

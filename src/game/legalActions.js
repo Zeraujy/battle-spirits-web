@@ -1,8 +1,33 @@
 import { applyGameAction } from "./reducer.js";
-import { getDatabaseCard } from "./selectors.js";
+import { getCurrentLevel, getDatabaseCard, isCoreLockedNexus } from "./selectors.js";
 import { legalAttackers, legalBlockers } from "./battle.js";
 import { getLegalBraveHosts } from "./brave.js";
 import { getTriggerCounterCards } from "./specialRules.js";
+
+
+function totalCardCores(physical) {
+  return Number(physical?.cores?.regular || 0) + (physical?.cores?.soul ? 1 : 0);
+}
+
+function summonLevelCoreOptions(card) {
+  if (!["spirit", "ultimate", "brave"].includes(card?.cardType)) return [];
+  const requirements = (card.levels || [])
+    .map((level) => Number(level.cores))
+    .filter(Number.isFinite)
+    .sort((a, b) => a - b);
+  if (!requirements.length) return [];
+  const minimum = requirements[0];
+  return [...new Set(requirements.filter((cores) => cores > minimum))];
+}
+
+function nextLevelRequirement(card, physical) {
+  const total = totalCardCores(physical);
+  const current = getCurrentLevel(card, physical);
+  const currentLevel = Number(current?.level || 0);
+  return (card?.levels || [])
+    .filter((level) => Number(level.level || 0) > currentLevel && Number(level.cores) > total)
+    .sort((a, b) => Number(a.cores) - Number(b.cores))[0] || null;
+}
 
 function actionKey(action) {
   return JSON.stringify(action);
@@ -145,6 +170,20 @@ function candidateActions(match, playerId, cardIndex) {
       const card = getDatabaseCard(cardIndex, physical);
       if (["spirit", "ultimate", "brave"].includes(card?.cardType)) {
         pushUnique(list, seen, { type: "SUMMON", instanceId: physical.instanceId }, card.namePT || card.nameEN || card.id, "summon");
+
+        // Core & Resource Management: expose meaningful higher-Level summon
+        // placements as legal action variants. They still go through the same
+        // reducer, so the Rules Engine remains the authority on affordability.
+        for (const coresToPlace of summonLevelCoreOptions(card)) {
+          pushUnique(
+            list,
+            seen,
+            { type: "SUMMON", instanceId: physical.instanceId, options: { coresToPlace } },
+            `${card.namePT || card.nameEN || card.id} • ${coresToPlace} Cores`,
+            "summon"
+          );
+        }
+
         if (card.cardType === "brave") {
           for (const host of player.field?.spirits || []) {
             pushUnique(list, seen, { type: "SUMMON", instanceId: physical.instanceId, options: { directCombineHostInstanceId: host.instanceId } }, `Direct Combine: ${card.namePT || card.nameEN || card.id}`, "brave");
@@ -159,6 +198,37 @@ function candidateActions(match, playerId, cardIndex) {
       }
       pushUnique(list, seen, { type: "SET_BURST", instanceId: physical.instanceId }, "Set Burst", "burst");
       pushUnique(list, seen, { type: "SET_MIRAGE", instanceId: physical.instanceId }, "Set Mirage", "mirage");
+    }
+
+    // Expose one-step Core placement actions that move a regular Core from
+    // Reserve toward the next printed Level. Only forward placement is
+    // enumerated here; payment logic can reclaim safe Cores automatically,
+    // which avoids reserve<->field oscillation in CPU play.
+    if (Number(player.reserve || 0) > 0) {
+      for (const physical of [
+        ...(player.field?.spirits || []),
+        ...(player.field?.nexuses || []),
+        ...(player.field?.other || [])
+      ]) {
+        if (physical.combinedWith || physical.pendingDestruction) continue;
+        const card = getDatabaseCard(cardIndex, physical);
+        if (!card || isCoreLockedNexus(card)) continue;
+        if (!nextLevelRequirement(card, physical)) continue;
+        pushUnique(
+          list,
+          seen,
+          {
+            type: "MOVE_CORE",
+            move: {
+              from: { zone: "reserve" },
+              to: { zone: "card", instanceId: physical.instanceId },
+              coreType: "regular"
+            }
+          },
+          `Core → ${card.namePT || card.nameEN || card.id}`,
+          "core"
+        );
+      }
     }
 
     for (const brave of player.field?.other || []) {

@@ -3,7 +3,7 @@ import { getAppInfo } from "../services/desktop.js";
 
 export default function Updater() {
   const desktop = window.battleSpiritsDesktop;
-  const [info, setInfo] = useState({ version: "3.2.2" });
+  const [info, setInfo] = useState({ version: "3.2.3" });
   const [status, setStatus] = useState("idle");
   const [result, setResult] = useState(null);
   const [progress, setProgress] = useState(null);
