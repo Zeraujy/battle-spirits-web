@@ -1,4 +1,4 @@
-import { resolveCardImage, getCardName } from "../../game/cardAdapter.js";
+import { resolveCardImage, resolveCardThumbnail, getCardName } from "../../game/cardAdapter.js";
 import { getCurrentLevel } from "../../game/selectors.js";
 import { CoreToken } from "../game/CoreArea.jsx";
 
@@ -28,11 +28,15 @@ export default function CardTile({
   onPreviewEnd,
   staticPreview = false,
   unusable = false,
-  dragActive = false
+  dragActive = false,
+  imageVariant = "full",
+  loading = "eager",
+  fetchPriority
 }) {
   const level = physical && card ? getCurrentLevel(card, physical) : null;
   const regular = Number(physical?.cores?.regular || 0);
-  const image = hidden ? "./images/card-back.png" : resolveCardImage(card);
+  const fullImage = hidden ? "./images/card-back.png" : resolveCardImage(card);
+  const image = hidden ? fullImage : (imageVariant === "thumbnail" ? resolveCardThumbnail(card) : fullImage);
   const title = hidden ? "Carta oculta" : getCardName(card);
 
   return (
@@ -58,6 +62,13 @@ export default function CardTile({
         alt={title}
         draggable={false}
         decoding="async"
+        loading={loading}
+        fetchPriority={fetchPriority}
+        onError={imageVariant === "thumbnail" ? (event) => {
+          if (event.currentTarget.dataset.fullFallback === "true") return;
+          event.currentTarget.dataset.fullFallback = "true";
+          event.currentTarget.src = fullImage;
+        } : undefined}
       />
 
       {!hidden && physical && (

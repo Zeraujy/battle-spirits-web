@@ -1,0 +1,11 @@
+/cards-thumbnails/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+/cards-database/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+/images/wallpapers/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

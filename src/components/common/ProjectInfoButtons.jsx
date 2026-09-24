@@ -13,6 +13,42 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.3.1a",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "Image Performance Hotfix", en: "Image Performance Hotfix" },
+    summary: {
+      pt: "O site passa a carregar cartas e wallpapers de forma progressiva, reduzindo drasticamente o tráfego inicial sem diminuir a qualidade usada na Arena e nos detalhes.",
+      en: "The site now loads cards and wallpapers progressively, drastically reducing initial traffic without lowering the quality used in the Arena and card details."
+    },
+    sections: [
+      {
+        title: { pt: "Imagens & carregamento", en: "Images & loading" },
+        items: {
+          pt: [
+            "382 thumbnails WebP de 300 px foram adicionadas para listas e Deck Builder; as artes originais continuam intactas.",
+            "A Home não baixa mais os 10 wallpapers de uma vez: mostra o atual e prepara somente o próximo quando o navegador está ocioso.",
+            "Deck Builder usa lazy loading e prioridade baixa, com prefetch da próxima página somente em idle.",
+            "Se uma thumbnail estiver ausente, o componente cai automaticamente para a arte original."
+          ],
+          en: [
+            "382 300px WebP thumbnails were added for lists and Deck Builder while original artwork stays untouched.",
+            "Home no longer downloads all 10 wallpapers at once: it shows the current one and prepares only the next one while the browser is idle.",
+            "Deck Builder uses lazy loading and low priority, with next-page prefetch only during idle time.",
+            "If a thumbnail is missing, the component automatically falls back to the original artwork."
+          ]
+        }
+      },
+      {
+        title: { pt: "Cache", en: "Cache" },
+        items: {
+          pt: ["Novas regras em `public/_headers` melhoram o cache de thumbnails, cartas, wallpapers e assets versionados no Cloudflare/navegador."],
+          en: ["New `public/_headers` rules improve browser/Cloudflare caching for thumbnails, cards, wallpapers and versioned assets."]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.3.1",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "Archetype Intelligence & AI Debugger", en: "Archetype Intelligence & AI Debugger" },

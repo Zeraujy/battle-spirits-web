@@ -1,4 +1,4 @@
-# START HERE — v3.3.1
+# START HERE — v3.3.1a
 
 Se você está aprendendo o projeto, comece por estes caminhos:
 
@@ -123,3 +123,13 @@ A etapa seguinte é **Card Effect Intelligence**, implementada na v3.2.5.
 - Na database atual, SD23 Eris é reconhecido como **Ultimate / Controle** e SD28 Land of Deep Green como **Ultimate / Brave**.
 
 A próxima evolução planejada é aprofundar **personalidades/arquétipos específicos e memória tática da partida**, permitindo que a CPU ajuste o plano ao comportamento observado do oponente sem consultar informação oculta.
+
+
+## v3.3.1a — Image Performance Hotfix
+
+- `public/cards-thumbnails/`: thumbnails WebP de 300 px para listas e Deck Builder; as artes originais continuam intactas para Arena, zoom e modal.
+- `CardTile.jsx`: suporta `imageVariant="thumbnail"`, lazy loading e fallback automático para a arte original.
+- `DeckBuilder.jsx`: carrega thumbnails sob demanda e faz prefetch da próxima página somente quando o navegador está ocioso.
+- `HomeWallpaperSlideshow.jsx`: deixa de baixar/decodear os 10 wallpapers no primeiro acesso; carrega apenas o atual e prepara o próximo em idle.
+- `public/_headers`: cache de navegador/Cloudflare para thumbnails, cartas e wallpapers.
+- Ao adicionar novas cartas, gere também a thumbnail correspondente preservando a mesma estrutura de pastas em `public/cards-thumbnails/`.

@@ -1,11 +1,11 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import CardTile from "../components/cards/CardTile.jsx";
 import EmptyState from "../components/common/EmptyState.jsx";
 import CardDetailsModal from "../components/cards/CardDetailsModal.jsx";
 import { searchCards, cardIndex } from "../services/cardRepository.js";
 import { deleteDeck, getDecks, upsertDeck } from "../services/storage.js";
 import { validateDeck } from "../game/state.js";
-import { getCardName, resolveCardImage } from "../game/cardAdapter.js";
+import { getCardName, resolveCardImage, resolveCardThumbnail } from "../game/cardAdapter.js";
 import { useLanguage } from "../i18n.jsx";
 
 import "../styles/deckbuilder/deckBuilderPagination.css";
@@ -121,6 +121,28 @@ export default function DeckBuilder({ onBack, deckId = null }) {
   const rangeStart = results.length ? pageStartIndex + 1 : 0;
   const rangeEnd = results.length ? Math.min(pageStartIndex + CARDS_PER_PAGE, results.length) : 0;
 
+  useEffect(() => {
+    const nextStart = currentPage * CARDS_PER_PAGE;
+    const nextCards = results.slice(nextStart, nextStart + CARDS_PER_PAGE);
+    if (!nextCards.length) return undefined;
+
+    const prefetch = () => {
+      nextCards.forEach((card) => {
+        const image = new Image();
+        image.decoding = "async";
+        image.src = resolveCardThumbnail(card);
+      });
+    };
+
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(prefetch, { timeout: 2500 });
+      return () => window.cancelIdleCallback?.(id);
+    }
+
+    const id = window.setTimeout(prefetch, 900);
+    return () => window.clearTimeout(id);
+  }, [results, currentPage]);
+
   const validation = validateDeck(draft.cards, cardIndex);
 
   const deckCardIds = draft.cards
@@ -196,7 +218,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
       format: DECK_FILE_FORMAT,
       version: DECK_FILE_VERSION,
       simulator: "Battle Spirits Eternal Simulator",
-      simulatorVersion: "3.3.1",
+      simulatorVersion: "3.3.1a",
       exportedAt: new Date().toISOString(),
       deck: {
         name: String(draft.name || "").trim() || (pt ? "Deck Importado" : "Imported Deck"),
@@ -345,7 +367,19 @@ export default function DeckBuilder({ onBack, deckId = null }) {
           <div className="deck-builder-v3-cover-panel">
             <div className="deck-builder-v3-cover-frame">
               {coverCard ? (
-                <img src={resolveCardImage(coverCard)} alt={getCardName(coverCard)} draggable="false" />
+                <img
+                  src={resolveCardThumbnail(coverCard)}
+                  alt={getCardName(coverCard)}
+                  draggable="false"
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
+                  onError={(event) => {
+                    if (event.currentTarget.dataset.fullFallback === "true") return;
+                    event.currentTarget.dataset.fullFallback = "true";
+                    event.currentTarget.src = resolveCardImage(coverCard);
+                  }}
+                />
               ) : (
                 <div className="deck-builder-v3-cover-empty">
                   <span>◇</span>
@@ -519,7 +553,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
               <div className="card-grid deck-builder-v3-grid">
                 {pageResults.map((card) => (
                   <div className="builder-card deck-builder-v3-card" key={card.id}>
-                    <CardTile card={card} onClick={() => setDetailsCard(card)} />
+                    <CardTile card={card} imageVariant="thumbnail" loading="lazy" fetchPriority="low" onClick={() => setDetailsCard(card)} />
 
                     <div className="qty-control deck-builder-v3-qty-control">
                       <button onClick={() => setQty(card.id, qty(card.id) - 1)}>-</button>

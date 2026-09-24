@@ -1,0 +1,17 @@
+Battle Spirits Eternal Simulator v3.3.1a — Image Performance Hotfix
+Data: 24/09/2026
+
+VALIDAÇÃO
+- npm run verify: OK
+- npm run verify:v3: OK
+- npm test: 112/112 OK
+- Runtime cards: 365 IDs únicos / 365 artes válidas
+- Card originals: 382 imagens / 64.58 MB
+- Card thumbnails: 382 imagens / 12.16 MB
+- Thumbnail coverage: 382/382
+- BSC49 (12 cartas, amostra inicial): ~3.87 MB originais -> ~0.39 MB thumbnails
+- Home wallpapers: 10 / 20.30 MB; hotfix carrega somente o atual e prepara o próximo em idle
+
+BUILD
+- npm run build não foi executado neste ambiente porque o pacote GitHub-ready não inclui node_modules.
+- O Cloudflare executa npm install antes de npm run build.

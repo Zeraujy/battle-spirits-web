@@ -30,7 +30,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.3.1") throw new Error(`package.json está em ${pkg.version}, esperado 3.3.1`);
+if (pkg.version !== "3.3.1-a") throw new Error(`package.json está em ${pkg.version}, esperado 3.3.1-a`);
 const index = fs.readFileSync(path.join(root, "index.html"), "utf8");
 if (!index.includes("./config/online-config.js")) throw new Error("index.html não carrega a configuração Online em runtime.");
 const serverEnv = fs.readFileSync(path.join(root, "server", ".env.example"), "utf8");

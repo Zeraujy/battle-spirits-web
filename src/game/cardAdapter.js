@@ -108,3 +108,10 @@ export function resolveCardImage(card) {
   if (file) return `./cards-database/${file}`;
   return "./images/card-back.png";
 }
+
+
+export function resolveCardThumbnail(card) {
+  const image = resolveCardImage(card);
+  if (!image || /^(https?:|data:|blob:)/i.test(image)) return image;
+  return image.replace("./cards-database/", "./cards-thumbnails/");
+}

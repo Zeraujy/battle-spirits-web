@@ -14,7 +14,8 @@ import {
 
 import {
   getCardName,
-  resolveCardImage
+  resolveCardImage,
+  resolveCardThumbnail
 } from "../game/cardAdapter.js";
 
 import {
@@ -156,7 +157,7 @@ function safeCoverImage(card) {
   }
 
   const resolved =
-    resolveCardImage(
+    resolveCardThumbnail(
       card
     );
 
@@ -183,18 +184,15 @@ function CoverImage({
     const img =
       event.currentTarget;
 
-    if (
-      img.dataset.fallback ===
-      "true"
-    ) {
+    if (img.dataset.fullFallback !== "true" && card) {
+      img.dataset.fullFallback = "true";
+      img.src = resolveCardImage(card);
       return;
     }
 
-    img.dataset.fallback =
-      "true";
-
-    img.src =
-      "./images/card-back.png";
+    if (img.dataset.fallback === "true") return;
+    img.dataset.fallback = "true";
+    img.src = "./images/card-back.png";
   }
 
   return (
@@ -206,6 +204,9 @@ function CoverImage({
         "Deck cover"
       }
       draggable="false"
+      loading="lazy"
+      decoding="async"
+      fetchPriority="low"
       onError={
         handleError
       }
