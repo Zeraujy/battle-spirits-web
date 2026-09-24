@@ -1,4 +1,4 @@
-# START HERE — v3.2.3
+# START HERE — v3.2.4
 
 Se você está aprendendo o projeto, comece por estes caminhos:
 
@@ -80,4 +80,15 @@ A próxima etapa planejada após esta versão era **Core & Resource Management**
 - `src/game/ai.test.js`: cobre invocação em Level superior, Level Up, preservação de Reserve e sinergia de símbolos/redução.
 - Toda ação continua passando pela Rules Engine; a IA não ganha uma regra paralela de pagamento.
 
-A próxima etapa planejada é **Flash, Magic & Burst Intelligence**.
+A etapa seguinte é **Flash, Magic & Burst Intelligence**, implementada na v3.2.4.
+
+
+## v3.2.4 — Flash, Magic & Burst Intelligence
+
+- `src/game/effects.js`: valida o timing estruturado de Magic sem bloquear cartas antigas ainda não estruturadas.
+- `src/game/legalActions.js`: durante o Main Step, Main e Flash são expostos separadamente e continuam filtrados pela Rules Engine.
+- `src/game/ai.js`: avalia respostas de Flash, decisões pendentes de efeitos, preservação de Magic, Set Burst e ativação de Burst conforme o contexto.
+- `src/game/effectEngine/normalizer.js`: variantes `lifeDecrease` / `afterLifeReduced` agora entram na mesma janela automática de Burst após perda de Life.
+- `src/game/ai.test.js`: cobre timing de Magic, resposta a lethal, economia de Flash, prioridade de Burst suportada e decisão entre ativar/passar.
+
+A próxima etapa planejada é **Card Effect Intelligence**, aprofundando o valor semântico de destruir, exaurir, refresh, BP, compra, retorno e outros efeitos estruturados.

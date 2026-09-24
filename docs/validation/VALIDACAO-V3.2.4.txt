@@ -1,0 +1,25 @@
+Battle Spirits Eternal Simulator v3.2.4
+Flash, Magic & Burst Intelligence
+
+VALIDACAO
+- npm run verify: OK
+- npm run verify:v3: OK
+- npm test: 96/96 OK
+- IDs unicos: 365
+- Runtime artwork: 365/365
+- Imagens auditadas: 382
+- Simulacao SD23 vs SD28 (Hard vs Hard):
+  * 317 acoes
+  * 22 turnos
+  * winner: player2
+  * reason: life
+  * acoes ilegais: 0
+  * SET_BURST: 2
+  * PASS_BURST: 4
+  * USE_MAGIC: 1 (Flash)
+  * PASS_FLASH: 58
+  * DECLARE_ATTACK: 20
+  * DECLARE_BLOCK: 9
+  * RESOLVE_ULTIMATE_TRIGGER: 12
+
+Build Vite nao executado neste pacote GitHub-ready por ausencia intencional de node_modules.

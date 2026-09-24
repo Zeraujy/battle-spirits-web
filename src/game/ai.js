@@ -9,6 +9,7 @@ import {
   isCoreLockedNexus
 } from "./selectors.js";
 import { calculateReduction } from "./cost.js";
+import { getBurstActivationEvent, isBurstCard } from "./burstRules.js";
 import { otherPlayerId } from "./utils.js";
 
 const DIFFICULTIES = new Set(["easy", "normal", "hard"]);
@@ -601,6 +602,185 @@ function declineBlockScore(match, playerId, cardIndex) {
   return score;
 }
 
+
+function pendingDecisionBestGain(match, playerId, cardIndex, depth = 3) {
+  if (depth <= 0 || match?.pendingEffectDecision?.playerId !== playerId) return 0;
+
+  const before = evaluateBoardState(match, playerId, cardIndex);
+  const decisions = getLegalActions(match, playerId, cardIndex)
+    .filter((entry) => entry.action?.type === "RESOLVE_EFFECT_DECISION");
+  if (!decisions.length) return 0;
+
+  let best = -Infinity;
+  for (const candidate of decisions) {
+    const resolved = applyGameAction(match, candidate.action, playerId, cardIndex);
+    if (!resolved?.ok || !resolved.match) continue;
+    let gain = evaluateBoardState(resolved.match, playerId, cardIndex) - before;
+    gain += pendingDecisionBestGain(resolved.match, playerId, cardIndex, depth - 1);
+    best = Math.max(best, gain);
+  }
+  return Number.isFinite(best) ? best : 0;
+}
+
+function actionPreviewPotential(match, playerId, action, cardIndex) {
+  const result = applyGameAction(match, action, playerId, cardIndex);
+  if (!result?.ok || !result.match) return -Infinity;
+  let gain = evaluateBoardState(result.match, playerId, cardIndex) - evaluateBoardState(match, playerId, cardIndex);
+  gain += pendingDecisionBestGain(result.match, playerId, cardIndex);
+  if (result.manualResolutionNeeded && !result.match.pendingEffectDecision) gain -= 70;
+  return gain;
+}
+
+function battleFlashUrgency(match, playerId, cardIndex) {
+  const battle = match?.battle;
+  if (!battle || !["flash1", "flash2"].includes(battle.stage)) return 0;
+
+  const attackerCtx = findPhysicalCard(match, battle.attackerInstanceId);
+  if (!attackerCtx?.card) return 0;
+  const attackerBP = numeric(getEffectiveBP(match, cardIndex, attackerCtx.card));
+  const attackerSymbols = combatSymbols(match, cardIndex, attackerCtx.card);
+  let urgency = 0;
+
+  if (battle.defenderPlayerId === playerId) {
+    const life = numeric(match.players?.[playerId]?.life);
+    if (battle.stage === "flash1") {
+      const blockers = readyBattleCards(match, playerId, cardIndex);
+      const bestBlockerBP = Math.max(
+        ...blockers.map((physical) => numeric(getEffectiveBP(match, cardIndex, physical))),
+        0
+      );
+      if (attackerSymbols >= life && life > 0) urgency += 220;
+      if (!blockers.length) urgency += life <= 2 ? 100 : 48;
+      else if (attackerBP > bestBlockerBP) urgency += 42;
+    } else if (battle.blockerInstanceId) {
+      const blockerCtx = findPhysicalCard(match, battle.blockerInstanceId);
+      const blockerBP = numeric(getEffectiveBP(match, cardIndex, blockerCtx?.card));
+      if (attackerBP > blockerBP) urgency += 88;
+      else if (attackerBP === blockerBP) urgency += 38;
+    }
+  } else if (battle.attackerPlayerId === playerId && battle.stage === "flash2" && battle.blockerInstanceId) {
+    const blockerCtx = findPhysicalCard(match, battle.blockerInstanceId);
+    const blockerBP = numeric(getEffectiveBP(match, cardIndex, blockerCtx?.card));
+    if (attackerBP < blockerBP) urgency += 78;
+    else if (attackerBP === blockerBP) urgency += 34;
+  }
+
+  return urgency;
+}
+
+function bestFlashAlternativePotential(match, playerId, cardIndex, legalActions) {
+  const flashActions = legalActions.filter((entry) =>
+    entry.action?.type === "USE_MAGIC" && entry.action?.options?.mode === "flash"
+  );
+  if (!flashActions.length) return -Infinity;
+  return Math.max(
+    ...flashActions.map((entry) => actionPreviewPotential(match, playerId, entry.action, cardIndex))
+  );
+}
+
+function magicUseBias(match, playerId, action, result, cardIndex) {
+  const ctx = findPhysicalCard(match, action.instanceId);
+  const card = getDatabaseCard(cardIndex, ctx?.card);
+  if (!card) return -40;
+
+  const mode = action.options?.mode === "flash" ? "flash" : "main";
+  const beforeState = evaluateBoardState(match, playerId, cardIndex);
+  const afterState = evaluateBoardState(result.match, playerId, cardIndex);
+  const immediateGain = afterState - beforeState;
+  const decisionGain = pendingDecisionBestGain(result.match, playerId, cardIndex);
+  let score = decisionGain * 1.55;
+
+  if (mode === "flash" && match.battle) {
+    const urgency = battleFlashUrgency(match, playerId, cardIndex);
+    // Reward spending the Magic when it actually improves the current battle.
+    // A card that opens a useful target decision receives the full urgency;
+    // otherwise urgency alone is not enough to justify throwing a card away.
+    if (immediateGain + decisionGain > 2) score += urgency;
+    else if (urgency < 35) score -= 12;
+  }
+
+  if (mode === "flash" && !match.battle) {
+    // Flash cards are a flexible defensive resource. During Main Step the CPU
+    // will still use one for a strong immediate swing, but otherwise keeps it
+    // available for the opponent's Attack Step.
+    const life = numeric(match.players?.[playerId]?.life);
+    score -= life <= 2 ? 34 : life <= 3 ? 24 : 14;
+    if (immediateGain + decisionGain >= 45) score += 18;
+  }
+
+  if (result.match.pendingEffectDecision && decisionGain <= 0) score -= 28;
+  return score;
+}
+
+function passFlashBias(match, playerId, cardIndex, legalActions) {
+  const best = bestFlashAlternativePotential(match, playerId, cardIndex, legalActions);
+  if (!Number.isFinite(best)) return 26;
+  if (best <= 2) return 30;
+
+  let score = -Math.min(190, best * 1.35);
+  const urgency = battleFlashUrgency(match, playerId, cardIndex);
+  if (urgency >= 80 && best > 0) score -= Math.min(180, urgency * 0.8);
+  return score;
+}
+
+function burstSetBias(match, playerId, action, cardIndex) {
+  const ctx = findPhysicalCard(match, action.instanceId);
+  const card = getDatabaseCard(cardIndex, ctx?.card);
+  if (!card || !isBurstCard(card)) return -80;
+
+  const player = match.players?.[playerId];
+  const opponentId = otherPlayerId(match, playerId);
+  const event = getBurstActivationEvent(card);
+  let score = 0;
+
+  if (event === "burstLifeDecrease") {
+    const life = numeric(player?.life);
+    const threats = readyBattleCards(match, opponentId, cardIndex, { includeExhausted: true }).length;
+    score += 18 + Math.min(threats, 4) * 5;
+    if (life <= 2) score += 34;
+    else if (life <= 3) score += 20;
+  } else {
+    // Automatic CPU activation currently has explicit support for Life-decrease
+    // windows. Other official Burst conditions stay legal for human/manual play,
+    // but the CPU avoids parking a card in a trigger it cannot verify itself.
+    score -= 38;
+  }
+
+  if (player?.burst) score -= 26;
+  return score;
+}
+
+function burstActivationPotential(match, playerId, cardIndex, legalActions) {
+  const activation = legalActions.find((entry) => entry.action?.type === "ACTIVATE_BURST");
+  if (!activation) return -Infinity;
+  return actionPreviewPotential(match, playerId, activation.action, cardIndex);
+}
+
+function activateBurstBias(match, playerId, result, cardIndex) {
+  const physical = match.players?.[playerId]?.burst;
+  const card = getDatabaseCard(cardIndex, physical);
+  const decisionGain = pendingDecisionBestGain(result.match, playerId, cardIndex);
+  const immediateGain = evaluateBoardState(result.match, playerId, cardIndex) - evaluateBoardState(match, playerId, cardIndex);
+  let score = 24 + decisionGain * 1.65;
+
+  if (getBurstActivationEvent(card) === "burstLifeDecrease") {
+    const life = numeric(match.players?.[playerId]?.life);
+    const lost = numeric(match.burstOpportunity?.amount);
+    score += lost * 8;
+    if (life <= 2) score += 26;
+  }
+
+  if (immediateGain + decisionGain <= -8) score -= 42;
+  return score;
+}
+
+function passBurstBias(match, playerId, cardIndex, legalActions) {
+  const potential = burstActivationPotential(match, playerId, cardIndex, legalActions);
+  if (!Number.isFinite(potential)) return 20;
+  if (potential <= 0) return 34;
+  return -Math.min(220, 30 + potential * 1.5);
+}
+
 function mulliganScore(match, playerId, cardIndex) {
   const hand = match.players[playerId]?.hand || [];
   if (!hand.length) return 60;
@@ -704,8 +884,8 @@ function categoryBias(match, playerId, candidate, result, cardIndex, legalAction
       break;
     }
     case "MOVE_CORE": score += coreMoveBias(match, playerId, action, result, cardIndex); break;
-    case "USE_MAGIC": score += action.options?.mode === "flash" ? 18 : 14; break;
-    case "SET_BURST": score += match.players[playerId]?.burst ? 2 : 30; break;
+    case "USE_MAGIC": score += 12 + magicUseBias(match, playerId, action, result, cardIndex); break;
+    case "SET_BURST": score += burstSetBias(match, playerId, action, cardIndex); break;
     case "SET_MIRAGE": score += match.players[playerId]?.mirage ? 0 : 24; break;
     case "COMBINE_BRAVE": score += 30; break;
     case "SEPARATE_BRAVE": score -= 55; break;
@@ -713,13 +893,13 @@ function categoryBias(match, playerId, candidate, result, cardIndex, legalAction
     case "DECLARE_ATTACK": score += attackScore(match, playerId, action, cardIndex); break;
     case "DECLARE_BLOCK": score += blockScore(match, playerId, action, cardIndex); break;
     case "DECLINE_BLOCK": score += declineBlockScore(match, playerId, cardIndex); break;
-    case "PASS_FLASH": score += 5; break;
+    case "PASS_FLASH": score += passFlashBias(match, playerId, cardIndex, legalActions); break;
     case "RESOLVE_BATTLE": score += 160; break;
     case "RESOLVE_ULTIMATE_TRIGGER": score += 90; break;
     case "USE_TRIGGER_COUNTER": score += 72; break;
     case "PASS_TRIGGER_COUNTER": score += 4; break;
-    case "ACTIVATE_BURST": score += 72; break;
-    case "PASS_BURST": score -= 12; break;
+    case "ACTIVATE_BURST": score += activateBurstBias(match, playerId, result, cardIndex); break;
+    case "PASS_BURST": score += passBurstBias(match, playerId, cardIndex, legalActions); break;
     case "RESOLVE_EFFECT_DECISION": score += 56; break;
     case "CONFIRM_MANUAL_PLAY":
     case "CONFIRM_MANUAL_COST": score += 100; break;

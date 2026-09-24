@@ -4,6 +4,7 @@ import { findPhysicalCard, getDatabaseCard } from "./selectors.js";
 import { removeHandCard, removeFieldCard, updateFieldCard, addFieldCard } from "./zones.js";
 import { appendLog, otherPlayerId } from "./utils.js";
 import { resolveCardEvent } from "./effectEngine/effectEngine.js";
+import { getTriggeredEntries } from "./effectEngine/normalizer.js";
 import { manualMoveCard } from "./manualMove.js";
 import {
   burstConditionIsAutomaticallySatisfied,
@@ -12,13 +13,31 @@ import {
 } from "./burstRules.js";
 
 
+function magicTimingAvailable(card, mode) {
+  if (!card || card.cardType !== "magic") return false;
+  const entries = [
+    ...(Array.isArray(card.effects) ? card.effects : []),
+    ...(Array.isArray(card.abilities) ? card.abilities : [])
+  ];
+
+  // Older database entries may not have structured timing yet. Keep those
+  // manually playable instead of making legacy cards unusable while the
+  // database is still being completed.
+  if (!entries.length) return true;
+
+  const event = mode === "main" ? "magicMain" : mode === "flash" ? "magicFlash" : "";
+  return Boolean(event && getTriggeredEntries(card, event).length);
+}
+
 export function canUseMagic(match, playerId, instanceId, cardIndex, mode = "main") {
   const ctx = findPhysicalCard(match, instanceId);
   if (!ctx || ctx.playerId !== playerId || ctx.zone !== "hand") return false;
   const card = getDatabaseCard(cardIndex, ctx.card);
-  if (card?.cardType !== "magic") return false;
+  if (card?.cardType !== "magic" || !magicTimingAvailable(card, mode)) return false;
   if (mode === "main") return match.phase === "main" && match.activePlayerId === playerId && !match.battle;
   if (mode === "flash") {
+    // Flash effects are legal during the active player's Main Step as well as
+    // during an actual Flash Timing in battle.
     if (match.phase === "main" && match.activePlayerId === playerId && !match.battle) return true;
     return Boolean(match.battle?.flash?.priorityPlayerId === playerId);
   }

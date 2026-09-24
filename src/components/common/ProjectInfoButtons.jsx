@@ -13,6 +13,65 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.2.4",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "Flash, Magic & Burst Intelligence", en: "Flash, Magic & Burst Intelligence" },
+    summary: {
+      pt: "A Eternal CPU passa a respeitar melhor os timings de Magic, guardar respostas de Flash e avaliar quando Set/ativação de Burst realmente compensa.",
+      en: "Eternal CPU now handles Magic timing more carefully, preserves useful Flash responses and evaluates when setting or activating Burst is actually worthwhile."
+    },
+    sections: [
+      {
+        title: { pt: "Flash & Magic", en: "Flash & Magic" },
+        items: {
+          pt: [
+            "Magic estruturada agora só aparece no timing que realmente possui; cartas antigas ainda sem estrutura permanecem disponíveis para resolução manual.",
+            "Durante o Main Step, efeitos Main e Flash são expostos como ações separadas e continuam validados pela mesma Rules Engine.",
+            "A CPU pré-visualiza decisões de alvo estruturadas antes de gastar a Magic e evita usar cartas sem alvo ou ganho real.",
+            "Em batalha, respostas de Flash recebem valor adicional quando evitam lethal ou mudam uma troca de BP; fora de combate, a CPU tende a preservar respostas defensivas úteis."
+          ],
+          en: [
+            "Structured Magic is now exposed only in timings the card actually has, while older unstructured cards remain available for manual resolution.",
+            "During Main Step, Main and Flash effects are exposed as separate actions and still validated by the same Rules Engine.",
+            "The CPU previews structured target decisions before spending a Magic and avoids cards with no valid target or meaningful gain.",
+            "During battle, Flash responses gain extra value when they prevent lethal or swing a BP trade; outside combat the CPU tends to preserve useful defensive responses."
+          ]
+        }
+      },
+      {
+        title: { pt: "Burst", en: "Burst" },
+        items: {
+          pt: [
+            "Timings `lifeDecrease` e `afterLifeReduced` passam a compartilhar a janela automática já usada por Burst após redução de Life.",
+            "A CPU prioriza Set Burst de condições que consegue verificar automaticamente e evita gastar cartas em condições ainda exclusivamente manuais.",
+            "Ao abrir uma janela de Burst, a CPU compara ativar contra passar e mantém a carta setada quando o efeito não possui alvo legal ou valor suficiente."
+          ],
+          en: [
+            "`lifeDecrease` and `afterLifeReduced` timings now share the automatic window already used by Burst after Life loss.",
+            "The CPU prioritizes Burst conditions it can verify automatically and avoids committing cards to conditions that still require manual confirmation.",
+            "When a Burst window opens, the CPU compares activation against passing and keeps the set card when the effect has no legal target or enough value."
+          ]
+        }
+      },
+      {
+        title: { pt: "Validação", en: "Validation" },
+        items: {
+          pt: [
+            "A suíte automatizada passa de 90 para 96 testes.",
+            "Novos testes cobrem timings Main/Flash, resposta de Flash a lethal, economia de Magic sem alvo, prioridade de Set Burst e ativação/passagem de Burst.",
+            "Toda decisão continua sendo escolhida exclusivamente entre ações retornadas por getLegalActions() e executada por applyGameAction()."
+          ],
+          en: [
+            "The automated suite grows from 90 to 96 tests.",
+            "New tests cover Main/Flash timing, lethal Flash responses, saving Magic with no target, Burst set priority and Burst activate/pass decisions.",
+            "Every decision is still chosen exclusively from actions returned by getLegalActions() and executed through applyGameAction()."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.2.3",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "CPU Core & Resource Management", en: "CPU Core & Resource Management" },

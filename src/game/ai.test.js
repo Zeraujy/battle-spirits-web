@@ -16,7 +16,54 @@ const cards = [
   normalizeCard({ id: "LVL", namePT: "Leveler", cardType: "spirit", colors: ["red"], cost: 0, reduction: [], symbols: ["red"], levels: [{ level: 1, cores: 1, bp: 1000 }, { level: 2, cores: 2, bp: 5000 }], effects: [{ id: "lvl-2", type: "constant", levels: [2], timing: "always" }] }),
   normalizeCard({ id: "FLEX", namePT: "Flexible Body", cardType: "spirit", colors: ["red"], cost: 0, reduction: [], symbols: ["red"], levels: [{ level: 1, cores: 1, bp: 1800 }, { level: 2, cores: 4, bp: 2500 }] }),
   normalizeCard({ id: "BLUE0", namePT: "Blue Scout", cardType: "spirit", colors: ["blue"], cost: 0, reduction: [], symbols: ["blue"], levels: [{ level: 1, cores: 1, bp: 1000 }] }),
-  normalizeCard({ id: "COST2", namePT: "Reduced Magic", cardType: "magic", colors: ["red"], cost: 2, reduction: ["red"], effects: [{ type: "main", timing: "main", operations: [{ type: "draw", count: 1 }] }] })
+  normalizeCard({ id: "COST2", namePT: "Reduced Magic", cardType: "magic", colors: ["red"], cost: 2, reduction: ["red"], effects: [{ type: "main", timing: "main", operations: [{ type: "draw", count: 1 }] }] }),
+  normalizeCard({
+    id: "FLASH-KILL",
+    namePT: "Flash Kill",
+    cardType: "magic",
+    colors: ["red"],
+    cost: 0,
+    reduction: [],
+    effects: [{ id: "flash-kill-display", type: "flash", timing: "flash" }],
+    abilities: [{
+      id: "flash-kill",
+      event: "magicFlash",
+      actions: [{
+        type: "selectTarget",
+        selector: { owner: "opponent", cardTypes: ["spirit"] },
+        onSelect: { type: "destroy" }
+      }]
+    }]
+  }),
+  normalizeCard({
+    id: "BURST-KILL",
+    namePT: "Burst Kill",
+    cardType: "magic",
+    colors: ["red"],
+    cost: 0,
+    reduction: [],
+    subtypes: ["burst"],
+    effects: [{ id: "burst-kill-display", type: "burst", timing: "lifeDecrease" }],
+    abilities: [{
+      id: "burst-kill",
+      event: "burstLifeDecrease",
+      actions: [{
+        type: "selectTarget",
+        selector: { owner: "opponent", cardTypes: ["spirit"], maxBP: 6000 },
+        onSelect: { type: "destroy" }
+      }]
+    }]
+  }),
+  normalizeCard({
+    id: "BURST-OTHER",
+    namePT: "Burst Other Trigger",
+    cardType: "magic",
+    colors: ["yellow"],
+    cost: 0,
+    reduction: [],
+    subtypes: ["burst"],
+    effects: [{ id: "burst-other-display", type: "burst", timing: "opponentHandIncrease" }]
+  })
 ];
 const index = makeCardIndex(cards);
 const deck = Array.from({ length: 40 }, (_, i) => ["S0", "S3", "S6", "N0"][i % 4]);
@@ -273,4 +320,121 @@ test("Core Management values field symbols that reduce cards still in its own ha
   blue.players.player2.field.spirits = [fieldCard("BLUE0", "blue-symbol", 1)];
 
   assert.ok(evaluateBoardState(red, "player2", index) > evaluateBoardState(blue, "player2", index));
+});
+
+
+test("Flash Intelligence exposes only the Magic timings printed on structured cards", () => {
+  const match = baseMatch("player2");
+  match.phase = "main";
+  match.players.player2.hand = [
+    { ...makePhysicalCard("M0", index), instanceId: "main-only" },
+    { ...makePhysicalCard("FLASH-KILL", index), instanceId: "flash-only" }
+  ];
+
+  const legal = getLegalActions(match, "player2", index).map((entry) => entry.action);
+  assert.ok(legal.some((action) => action.type === "USE_MAGIC" && action.instanceId === "main-only" && action.options?.mode === "main"));
+  assert.ok(!legal.some((action) => action.type === "USE_MAGIC" && action.instanceId === "main-only" && action.options?.mode === "flash"));
+  assert.ok(legal.some((action) => action.type === "USE_MAGIC" && action.instanceId === "flash-only" && action.options?.mode === "flash"));
+  assert.ok(!legal.some((action) => action.type === "USE_MAGIC" && action.instanceId === "flash-only" && action.options?.mode === "main"));
+});
+
+test("Flash Intelligence uses a useful Flash response when an attacker threatens lethal", () => {
+  const match = baseMatch("player1");
+  match.phase = "attack";
+  match.players.player2.life = 1;
+  match.players.player1.field.spirits = [fieldCard("S6", "flash-lethal-attacker")];
+  match.players.player2.field.spirits = [];
+  match.players.player2.hand = [{ ...makePhysicalCard("FLASH-KILL", index), instanceId: "flash-answer" }];
+  match.battle = {
+    id: "flash-lethal",
+    attackerPlayerId: "player1",
+    defenderPlayerId: "player2",
+    attackerInstanceId: "flash-lethal-attacker",
+    blockerInstanceId: null,
+    stage: "flash1",
+    flash: { number: 1, priorityPlayerId: "player2", consecutivePasses: 0 },
+    restrictions: {}
+  };
+
+  const action = chooseAIAction(match, "player2", index, { difficulty: "hard" });
+  assert.equal(action.type, "USE_MAGIC");
+  assert.equal(action.instanceId, "flash-answer");
+  assert.equal(action.options?.mode, "flash");
+});
+
+test("Flash Intelligence passes instead of wasting a Flash with no valid target", () => {
+  const match = baseMatch("player1");
+  match.phase = "attack";
+  match.players.player1.field.spirits = [fieldCard("S6", "missing-target-attacker")];
+  // Move the attacker out of the field after creating the battle to emulate a
+  // battle whose relevant opposing body was already removed by another effect.
+  match.players.player1.field.spirits = [];
+  match.players.player2.hand = [{ ...makePhysicalCard("FLASH-KILL", index), instanceId: "dead-flash" }];
+  match.battle = {
+    id: "flash-no-target",
+    attackerPlayerId: "player1",
+    defenderPlayerId: "player2",
+    attackerInstanceId: "missing-target-attacker",
+    blockerInstanceId: null,
+    stage: "flash1",
+    flash: { number: 1, priorityPlayerId: "player2", consecutivePasses: 0 },
+    restrictions: {}
+  };
+
+  const action = chooseAIAction(match, "player2", index, { difficulty: "hard" });
+  assert.equal(action.type, "PASS_FLASH");
+});
+
+test("Burst Intelligence recognizes lifeDecrease as an automatic Life-decrease Burst timing", () => {
+  const match = baseMatch("player2");
+  match.phase = "main";
+  match.players.player2.life = 2;
+  match.players.player2.hand = [
+    { ...makePhysicalCard("BURST-KILL", index), instanceId: "supported-burst" },
+    { ...makePhysicalCard("BURST-OTHER", index), instanceId: "manual-burst" }
+  ];
+
+  const ranked = rankAIActions(match, "player2", index, { difficulty: "hard" });
+  const supported = ranked.find((entry) => entry.action.type === "SET_BURST" && entry.action.instanceId === "supported-burst");
+  const manual = ranked.find((entry) => entry.action.type === "SET_BURST" && entry.action.instanceId === "manual-burst");
+  assert.ok(supported && manual);
+  assert.ok(supported.score > manual.score, `supported=${supported.score} manual=${manual.score}`);
+});
+
+test("Burst Intelligence activates a Life-decrease Burst when it has a valuable legal target", () => {
+  const match = baseMatch("player1");
+  match.phase = "attack";
+  match.players.player2.life = 2;
+  match.players.player1.field.spirits = [fieldCard("S6", "burst-target")];
+  match.players.player2.burst = { ...makePhysicalCard("BURST-KILL", index), instanceId: "set-burst", faceDown: true };
+  match.burstOpportunity = {
+    playerId: "player2",
+    event: "burstLifeDecrease",
+    amount: 1,
+    cause: "unblockedAttack",
+    sourcePlayerId: "player1",
+    battleId: "burst-test"
+  };
+
+  const action = chooseAIAction(match, "player2", index, { difficulty: "hard" });
+  assert.equal(action.type, "ACTIVATE_BURST");
+});
+
+test("Burst Intelligence keeps a set Burst when activation has no legal effect target", () => {
+  const match = baseMatch("player1");
+  match.phase = "attack";
+  match.players.player2.life = 2;
+  match.players.player1.field.spirits = [];
+  match.players.player2.burst = { ...makePhysicalCard("BURST-KILL", index), instanceId: "set-burst-empty", faceDown: true };
+  match.burstOpportunity = {
+    playerId: "player2",
+    event: "burstLifeDecrease",
+    amount: 1,
+    cause: "unblockedAttack",
+    sourcePlayerId: "player1",
+    battleId: "burst-empty-test"
+  };
+
+  const action = chooseAIAction(match, "player2", index, { difficulty: "hard" });
+  assert.equal(action.type, "PASS_BURST");
 });

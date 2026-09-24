@@ -194,7 +194,23 @@ function candidateActions(match, playerId, cardIndex) {
         pushUnique(list, seen, { type: "DEPLOY_NEXUS", instanceId: physical.instanceId }, card.namePT || card.nameEN || card.id, "nexus");
       }
       if (card?.cardType === "magic") {
-        pushUnique(list, seen, { type: "USE_MAGIC", instanceId: physical.instanceId, options: { mode: "main" } }, card.namePT || card.nameEN || card.id, "magic");
+        // During Main Step a Magic may expose either its Main effect, its Flash
+        // effect, or both. applyGameAction()/canUseMagic remains authoritative
+        // and filters out timings the card does not actually possess.
+        pushUnique(
+          list,
+          seen,
+          { type: "USE_MAGIC", instanceId: physical.instanceId, options: { mode: "main" } },
+          `${card.namePT || card.nameEN || card.id} • Main`,
+          "magic"
+        );
+        pushUnique(
+          list,
+          seen,
+          { type: "USE_MAGIC", instanceId: physical.instanceId, options: { mode: "flash" } },
+          `${card.namePT || card.nameEN || card.id} • Flash`,
+          "magic"
+        );
       }
       pushUnique(list, seen, { type: "SET_BURST", instanceId: physical.instanceId }, "Set Burst", "burst");
       pushUnique(list, seen, { type: "SET_MIRAGE", instanceId: physical.instanceId }, "Set Mirage", "mirage");
