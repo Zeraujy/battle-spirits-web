@@ -41,6 +41,23 @@ const PATCHES = [
         }
       },
       {
+        title: { pt: "Online & matchmaking", en: "Online & matchmaking" },
+        items: {
+          pt: [
+            "Corrigido o botão Procurar Partida: o servidor agora mantém a fila de matchmaking e pareia dois jogadores conectados.",
+            "A partida rápida agora cria a sala automaticamente, conecta o segundo jogador e inicia a partida sem exigir código manual.",
+            "Cancelamento, desconexão e tempo limite do matchmaking agora limpam a fila e avisam o outro jogador.",
+            "O bridge Online da versão desktop passou a encaminhar também os eventos de matchmaking."
+          ],
+          en: [
+            "Fixed Find Match: the server now maintains the matchmaking queue and pairs two connected players.",
+            "Quick Match now creates the room automatically, connects the second player and starts the match without a manual code.",
+            "Matchmaking cancellation, disconnection and timeout now clean up the queue and notify the other player.",
+            "The desktop Online bridge now forwards matchmaking events as well."
+          ]
+        }
+      },
+      {
         title: { pt: "Arena & organização", en: "Arena & organization" },
         items: {
           pt: [

@@ -445,7 +445,17 @@ function createDesktopOnlineClient(sender, rawServerUrl) {
   socket.on("connect_error", (error) => {
     sendOnlineEvent(record, "connect_error", { message: error?.message || String(error) });
   });
-  socket.on("room:state", (state) => sendOnlineEvent(record, "room:state", state));
+  for (const eventName of [
+    "room:state",
+    "matchmaking:status",
+    "matchmaking:host",
+    "matchmaking:guest",
+    "matchmaking:room",
+    "matchmaking:start",
+    "matchmaking:failed"
+  ]) {
+    socket.on(eventName, (payload) => sendOnlineEvent(record, eventName, payload));
+  }
 
   sender.once("destroyed", () => destroyDesktopOnlineClient(clientId));
   return { ok: true, clientId, serverUrl };
@@ -477,7 +487,19 @@ ipcMain.handle("online:destroy-client", (_event, { clientId } = {}) => ({
 ipcMain.handle("online:emit", async (_event, { clientId, eventName, payload } = {}) => {
   const record = desktopOnlineClients.get(clientId);
   if (!record) return { ok: false, error: "Cliente online não encontrado." };
-  const allowed = new Set(["room:create", "room:join", "room:resume", "room:start", "room:chat", "game:action"]);
+  const allowed = new Set([
+    "room:create",
+    "room:join",
+    "room:resume",
+    "room:start",
+    "room:chat",
+    "game:action",
+    "matchmaking:join",
+    "matchmaking:cancel",
+    "matchmaking:abort",
+    "matchmaking:roomReady",
+    "matchmaking:joined"
+  ]);
   if (!allowed.has(eventName)) return { ok: false, error: "Evento online não permitido." };
 
   return new Promise((resolve) => {

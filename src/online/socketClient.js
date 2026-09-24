@@ -18,7 +18,7 @@ function hasDesktopOnlineBridge() {
   );
 }
 
-function createEventProxy() {
+function createEventProxy(emitHandler = null) {
   const listeners = new Map();
   let connected = false;
 
@@ -37,6 +37,14 @@ function createEventProxy() {
       else listeners.delete(eventName);
       return this;
     },
+    emit(eventName, payload, callback) {
+      if (typeof emitHandler === "function") {
+        emitHandler(eventName, payload, callback);
+      } else {
+        callback?.({ ok: false, error: "Transporte online indisponível." });
+      }
+      return this;
+    },
     dispatch(eventName, payload) {
       for (const listener of listeners.get(eventName) || []) {
         try { listener(payload); }
@@ -50,7 +58,7 @@ function createEventProxy() {
 function createDesktopOnlineClient(serverUrl) {
   const bridge = window.battleSpiritsDesktop;
   const url = normalizeServerUrl(serverUrl);
-  const socket = createEventProxy();
+  const socket = createEventProxy((eventName, payload, callback) => emitWithAck(eventName, payload, callback));
   let clientId = null;
   let session = null;
   let hasConnectedOnce = false;

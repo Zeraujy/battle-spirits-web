@@ -40,11 +40,23 @@ export async function createBattleSpiritsServer(options = {}) {
   const host = String(options.host ?? process.env.HOST ?? "0.0.0.0");
   const corsOrigin = options.corsOrigin ?? process.env.CORS_ORIGIN ?? "*";
   const rooms = new Map();
+  const matchmakingQueue = [];
+  const matchmakingPairs = new Map();
+  const matchmakingSocketPair = new Map();
 
   const server = http.createServer((req, res) => {
     if (req.url === "/health") {
       res.writeHead(200, { "content-type": "application/json" });
-      res.end(JSON.stringify({ ok: true, version: "3.2.0", rooms: rooms.size, cards: cardIndex.size, host, port }));
+      res.end(JSON.stringify({
+        ok: true,
+        version: "3.2.1",
+        rooms: rooms.size,
+        cards: cardIndex.size,
+        matchmakingQueued: matchmakingQueue.length,
+        matchmakingPairs: matchmakingPairs.size,
+        host,
+        port
+      }));
       return;
     }
     res.writeHead(404);
@@ -132,6 +144,100 @@ export async function createBattleSpiritsServer(options = {}) {
     return null;
   }
 
+  function removeFromMatchmakingQueue(socketId) {
+    let removed = false;
+    for (let index = matchmakingQueue.length - 1; index >= 0; index -= 1) {
+      if (matchmakingQueue[index] !== socketId) continue;
+      matchmakingQueue.splice(index, 1);
+      removed = true;
+    }
+    return removed;
+  }
+
+  function cleanupMatchmakingPair(pairId, { deleteRoom = false } = {}) {
+    const pair = matchmakingPairs.get(pairId);
+    if (!pair) return null;
+
+    if (pair.timeout) clearTimeout(pair.timeout);
+
+    matchmakingSocketPair.delete(pair.hostSocketId);
+    matchmakingSocketPair.delete(pair.guestSocketId);
+    matchmakingPairs.delete(pairId);
+
+    if (deleteRoom && pair.roomCode) {
+      const room = rooms.get(pair.roomCode);
+      if (room && !room.match) {
+        rooms.delete(pair.roomCode);
+        io.sockets.sockets.get(pair.hostSocketId)?.leave(pair.roomCode);
+        io.sockets.sockets.get(pair.guestSocketId)?.leave(pair.roomCode);
+      }
+    }
+
+    return pair;
+  }
+
+  function failMatchmakingPair(pairId, sourceSocketId, error) {
+    const pair = matchmakingPairs.get(pairId);
+    if (!pair) return false;
+
+    const message = String(error || "A partida rápida foi interrompida.");
+    for (const socketId of [pair.hostSocketId, pair.guestSocketId]) {
+      if (socketId === sourceSocketId) continue;
+      io.to(socketId).emit("matchmaking:failed", { pairId, error: message });
+    }
+
+    cleanupMatchmakingPair(pairId, { deleteRoom: true });
+    return true;
+  }
+
+  function createMatchmakingPair(hostSocketId, guestSocketId) {
+    const pairId = crypto.randomUUID();
+    const pair = {
+      pairId,
+      hostSocketId,
+      guestSocketId,
+      roomCode: null,
+      stage: "paired",
+      createdAt: Date.now(),
+      timeout: null
+    };
+
+    pair.timeout = setTimeout(() => {
+      const current = matchmakingPairs.get(pairId);
+      if (!current) return;
+
+      const error = "Tempo limite ao preparar a partida rápida. Tente procurar novamente.";
+      io.to(current.hostSocketId).emit("matchmaking:failed", { pairId, error });
+      io.to(current.guestSocketId).emit("matchmaking:failed", { pairId, error });
+      cleanupMatchmakingPair(pairId, { deleteRoom: true });
+    }, 45_000);
+    pair.timeout.unref?.();
+
+    matchmakingPairs.set(pairId, pair);
+    matchmakingSocketPair.set(hostSocketId, pairId);
+    matchmakingSocketPair.set(guestSocketId, pairId);
+
+    io.to(hostSocketId).emit("matchmaking:host", { pairId });
+    io.to(guestSocketId).emit("matchmaking:guest", { pairId });
+
+    return pair;
+  }
+
+  function takeQueuedOpponent(excludeSocketId) {
+    while (matchmakingQueue.length) {
+      const socketId = matchmakingQueue.shift();
+      if (!socketId || socketId === excludeSocketId) continue;
+      if (matchmakingSocketPair.has(socketId)) continue;
+      if (findRoomBySocket(socketId)) continue;
+
+      const queuedSocket = io.sockets.sockets.get(socketId);
+      if (!queuedSocket?.connected) continue;
+      return socketId;
+    }
+
+    return null;
+  }
+
   function onSafe(socket, eventName, handler) {
     socket.on(eventName, (payload = {}, ack = () => {}) => {
       const reply = typeof ack === "function" ? ack : () => {};
@@ -154,6 +260,91 @@ export async function createBattleSpiritsServer(options = {}) {
     console.log(`[socket.io] conectado ${socket.id} via ${socket.conn.transport.name}`);
     socket.conn.once("upgrade", () => {
       console.log(`[socket.io] ${socket.id} upgrade para ${socket.conn.transport.name}`);
+    });
+
+    onSafe(socket, "matchmaking:join", (_payload, ack) => {
+      if (findRoomBySocket(socket.id)) {
+        return ack({ ok: false, error: "Saia da sala atual antes de procurar outra partida." });
+      }
+
+      const existingPairId = matchmakingSocketPair.get(socket.id);
+      if (existingPairId) {
+        return ack({ ok: true, status: "matched", pairId: existingPairId });
+      }
+
+      if (matchmakingQueue.includes(socket.id)) {
+        socket.emit("matchmaking:status", { status: "searching" });
+        return ack({ ok: true, status: "searching" });
+      }
+
+      const opponentSocketId = takeQueuedOpponent(socket.id);
+      if (!opponentSocketId) {
+        matchmakingQueue.push(socket.id);
+        socket.emit("matchmaking:status", { status: "searching" });
+        return ack({ ok: true, status: "searching" });
+      }
+
+      const pair = createMatchmakingPair(opponentSocketId, socket.id);
+      ack({ ok: true, status: "matched", pairId: pair.pairId });
+    });
+
+    onSafe(socket, "matchmaking:roomReady", (payload, ack) => {
+      const pairId = String(payload.pairId || "");
+      const pair = matchmakingPairs.get(pairId);
+      if (!pair || pair.hostSocketId !== socket.id) {
+        return ack({ ok: false, error: "Par de matchmaking inválido ou expirado." });
+      }
+
+      const roomCode = String(payload.code || "").trim().toUpperCase();
+      const room = rooms.get(roomCode);
+      if (!room || room.players.player1?.socketId !== socket.id) {
+        return ack({ ok: false, error: "A sala criada para a partida rápida não foi encontrada." });
+      }
+
+      pair.roomCode = roomCode;
+      pair.stage = "room-ready";
+      io.to(pair.guestSocketId).emit("matchmaking:room", { pairId, code: roomCode });
+      ack({ ok: true });
+    });
+
+    onSafe(socket, "matchmaking:joined", (payload, ack) => {
+      const pairId = String(payload.pairId || "");
+      const pair = matchmakingPairs.get(pairId);
+      if (!pair || pair.guestSocketId !== socket.id) {
+        return ack({ ok: false, error: "Par de matchmaking inválido ou expirado." });
+      }
+
+      const room = pair.roomCode ? rooms.get(pair.roomCode) : null;
+      if (!room || room.players.player2?.socketId !== socket.id) {
+        return ack({ ok: false, error: "A entrada na sala da partida rápida não foi confirmada." });
+      }
+
+      pair.stage = "joined";
+      io.to(pair.hostSocketId).emit("matchmaking:start", { pairId, code: pair.roomCode });
+      ack({ ok: true });
+    });
+
+    onSafe(socket, "matchmaking:cancel", (_payload, ack) => {
+      const removedFromQueue = removeFromMatchmakingQueue(socket.id);
+      const pairId = matchmakingSocketPair.get(socket.id);
+
+      if (pairId) {
+        failMatchmakingPair(pairId, socket.id, "O outro jogador cancelou a busca.");
+      }
+
+      ack({ ok: true, removedFromQueue, cancelledPair: Boolean(pairId) });
+    });
+
+    onSafe(socket, "matchmaking:abort", (payload, ack) => {
+      removeFromMatchmakingQueue(socket.id);
+      const pairId = String(payload.pairId || matchmakingSocketPair.get(socket.id) || "");
+      const reason = String(payload.reason || "A partida rápida foi interrompida.");
+
+      if (pairId) {
+        failMatchmakingPair(pairId, socket.id, reason);
+      }
+
+      ack({ ok: true });
     });
     onSafe(socket, "room:create", (payload, ack) => {
       const validation = validateDeck(payload.deck || [], cardIndex);
@@ -217,6 +408,10 @@ export async function createBattleSpiritsServer(options = {}) {
         cardIndex
       });
       emitRoom(room);
+
+      const pairId = matchmakingSocketPair.get(socket.id);
+      if (pairId) cleanupMatchmakingPair(pairId);
+
       ack({ ok: true });
     });
 
@@ -252,6 +447,13 @@ export async function createBattleSpiritsServer(options = {}) {
 
     socket.on("disconnect", (reason) => {
       console.log(`[socket.io] desconectado ${socket.id}: ${reason}`);
+
+      removeFromMatchmakingQueue(socket.id);
+      const pairId = matchmakingSocketPair.get(socket.id);
+      if (pairId) {
+        failMatchmakingPair(pairId, socket.id, "O outro jogador desconectou durante o matchmaking.");
+      }
+
       const found = findRoomBySocket(socket.id);
       if (!found) return;
       found.room.players[found.playerId].socketId = null;
@@ -284,7 +486,16 @@ export async function createBattleSpiritsServer(options = {}) {
       const connectedPlayers = [...rooms.values()].reduce((sum, room) => {
         return sum + Object.values(room.players).filter((p) => p?.socketId).length;
       }, 0);
-      return { running: server.listening, port, host, cards: cardIndex.size, rooms: rooms.size, connectedPlayers };
+      return {
+        running: server.listening,
+        port,
+        host,
+        cards: cardIndex.size,
+        rooms: rooms.size,
+        connectedPlayers,
+        matchmakingQueued: matchmakingQueue.length,
+        matchmakingPairs: matchmakingPairs.size
+      };
     },
     async stop() {
       await new Promise((resolve) => io.close(() => resolve()));
