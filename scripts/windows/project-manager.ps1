@@ -1,4 +1,4 @@
-param(
+﻿param(
   [string]$Mode = "menu"
 )
 
@@ -205,7 +205,7 @@ try {
   if ($Mode -eq "check") { Test-Project; exit 0 }
 
   while ($true) {
-    Write-Title "BATTLE SPIRITS — GERENCIADOR DO PROJETO"
+    Write-Title "BATTLE SPIRITS - GERENCIADOR DO PROJETO"
     Write-Host "[1] Aplicar ZIP de update + validar + GitHub + Cloudflare"
     Write-Host "[2] Publicar alterações atuais (sem aplicar ZIP)"
     Write-Host "[3] Somente validar projeto"
@@ -217,14 +217,14 @@ try {
       "2" { Publish-All }
       "3" { Test-Project }
       "4" { npx wrangler@4 login }
-      "0" { break }
+      "0" { return }
       default { Write-Host "Opção inválida." -ForegroundColor Yellow }
     }
   }
 }
 catch {
-  Write-Host ""; Write-Host "ERRO: $($_.Exception.Message)" -ForegroundColor Red
+  Write-Host ""
+  Write-Host "ERRO: $($_.Exception.Message)" -ForegroundColor Red
   Write-Host "O fluxo foi interrompido antes das etapas seguintes." -ForegroundColor Yellow
-  Read-Host "Pressione Enter para fechar"
   exit 1
 }
