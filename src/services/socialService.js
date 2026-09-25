@@ -13,6 +13,17 @@ export const DEFAULT_SOCIAL_PRIVACY = Object.freeze({
 });
 
 let socialSchemaCache = null;
+const typingChannels = new Map();
+
+function schemaAtLeast(version, target = "3.6.1") {
+  const a = String(version || "0").split(".").map(Number);
+  const b = String(target).split(".").map(Number);
+  for (let i = 0; i < Math.max(a.length, b.length); i += 1) {
+    if ((a[i] || 0) > (b[i] || 0)) return true;
+    if ((a[i] || 0) < (b[i] || 0)) return false;
+  }
+  return true;
+}
 
 function currentLocalProfile() {
   return getProfile();
@@ -126,7 +137,7 @@ export async function syncProfileToCloud(profile = currentLocalProfile()) {
 
   const schema = await getSocialSchemaStatus();
   const payload = schema.ready
-    ? { ...basePayload, ...privacyPayload(profile.privacy) }
+    ? { ...basePayload, ...(schemaAtLeast(schema.version) ? { custom_status: String(profile.customStatus || "").trim().slice(0, 80) } : {}), ...privacyPayload(profile.privacy) }
     : basePayload;
 
   const { error } = await supabase.from("bs_profiles").upsert(payload);
@@ -151,6 +162,7 @@ export async function loadCloudProfile() {
     bio: data.bio || "",
     avatar: data.avatar || null,
     banner: data.banner || null,
+    customStatus: data.custom_status || "",
     privacy: privacyFromRow(data)
   };
   saveProfile(profile);
@@ -224,7 +236,7 @@ export async function loadSocialProfile(targetId) {
   }
 
   const { data } = await supabase.from("bs_profiles")
-    .select("id,username,display_name,avatar,banner,bio")
+    .select("id,username,display_name,avatar,banner,bio,custom_status")
     .eq("id", targetId)
     .maybeSingle();
   return data || null;
@@ -294,6 +306,47 @@ export async function unblockUser(targetId) {
   if (!supabase) return { ok: false, error: "Supabase não configurado." };
   const { error } = await supabase.rpc("bs_unblock_user", { target_id: targetId });
   return error ? { ok: false, error: normalizeError(error) } : { ok: true };
+}
+
+export async function setFriendPreference(friendId, patch = {}) {
+  if (!supabase || !friendId) return { ok: false, error: "Supabase não configurado." };
+  const schema = await getSocialSchemaStatus();
+  if (!schema.ready || !schemaAtLeast(schema.version)) return { ok: false, error: "Execute SOCIAL-HUB-3.6.1.sql no Supabase." };
+  const { data, error } = await supabase.rpc("bs_set_friend_preference", {
+    target_id: friendId,
+    next_favorite: patch.favorite ?? null,
+    next_muted: patch.muted ?? null
+  });
+  if (error) return { ok: false, error: normalizeError(error) };
+  return data?.ok === false ? { ok: false, error: normalizeError(data?.error) } : { ok: true };
+}
+
+export async function subscribeConversationTyping(friendId, onTyping) {
+  if (!supabase || !friendId || typeof onTyping !== "function") return () => {};
+  const user = await currentUser();
+  if (!user) return () => {};
+  const pair = [user.id, friendId].sort().join(":");
+  const channel = supabase.channel(`bs-typing-${pair}`, { config: { broadcast: { self: false } } });
+  channel.on("broadcast", { event: "typing" }, ({ payload }) => {
+    if (payload?.user_id === friendId) onTyping(Boolean(payload?.typing));
+  });
+  typingChannels.set(pair, channel);
+  channel.subscribe();
+  return () => {
+    if (typingChannels.get(pair) === channel) typingChannels.delete(pair);
+    supabase.removeChannel(channel);
+  };
+}
+
+export async function sendTypingSignal(friendId, typing = true) {
+  if (!supabase || !friendId) return false;
+  const user = await currentUser();
+  if (!user) return false;
+  const pair = [user.id, friendId].sort().join(":");
+  const channel = typingChannels.get(pair);
+  if (!channel) return false;
+  const result = await channel.send({ type: "broadcast", event: "typing", payload: { user_id: user.id, typing: Boolean(typing) } });
+  return result === "ok";
 }
 
 export async function loadConversations() {

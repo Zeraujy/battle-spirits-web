@@ -17,6 +17,9 @@ import {
   respondFriendRequest,
   savePrivacySettings,
   searchProfiles,
+  sendTypingSignal,
+  setFriendPreference,
+  subscribeConversationTyping,
   sendDirectMessage,
   sendFriendRequest,
   subscribeSocialEvents,
@@ -48,12 +51,14 @@ function formatTime(value, language = "ptBR") {
   if (!value) return "";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "";
-  return date.toLocaleString(language === "en" ? "en-US" : "pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit"
-  });
+  const now = new Date();
+  const sameDay = date.toDateString() === now.toDateString();
+  const yesterday = new Date(now); yesterday.setDate(now.getDate() - 1);
+  const locale = language === "en" ? "en-US" : "pt-BR";
+  const clock = date.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" });
+  if (sameDay) return language === "en" ? `Today · ${clock}` : `Hoje · ${clock}`;
+  if (date.toDateString() === yesterday.toDateString()) return language === "en" ? `Yesterday · ${clock}` : `Ontem · ${clock}`;
+  return date.toLocaleString(locale, { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
 }
 
 function presenceLabel(friend, pt) {
@@ -150,7 +155,7 @@ function MasteryCard({ entry, language }) {
 }
 
 function FriendDock({ friends, pt, onChat, onManage }) {
-  const sorted = [...friends].sort((a, b) => Number(Boolean(b.is_online)) - Number(Boolean(a.is_online)) || personName(a).localeCompare(personName(b)));
+  const sorted = [...friends].sort((a, b) => Number(Boolean(b.is_favorite)) - Number(Boolean(a.is_favorite)) || Number(Boolean(b.is_online)) - Number(Boolean(a.is_online)) || personName(a).localeCompare(personName(b)));
   const online = sorted.filter((friend) => friend.is_online).length;
   return (
     <aside className="social-friend-dock">
@@ -166,8 +171,8 @@ function FriendDock({ friends, pt, onChat, onManage }) {
           <button type="button" key={personId(friend)} className="social-friend-dock-row" onClick={() => onChat(friend)}>
             <SocialAvatar person={friend} size="small" />
             <span>
-              <strong>{personName(friend)}</strong>
-              <small>{presenceLabel(friend, pt)}</small>
+              <strong>{friend.is_favorite ? "★ " : ""}{personName(friend)}</strong>
+              <small>{friend.custom_status || presenceLabel(friend, pt)}</small>
             </span>
             <i className={friend.is_online ? "online" : ""} aria-hidden="true" />
             {Number(friend.unread_count || 0) > 0 && <em>{friend.unread_count}</em>}
@@ -251,6 +256,9 @@ export default function Profile({ onBack }) {
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
   const [saved, setSaved] = useState(false);
+  const [friendFilter, setFriendFilter] = useState("");
+  const [typingFriend, setTypingFriend] = useState(false);
+  const typingStopRef = useRef(null);
   const aliveRef = useRef(true);
 
   const displayName = profile.displayName || profile.name || (pt ? "Jogador" : "Player");
@@ -323,6 +331,23 @@ export default function Profile({ onBack }) {
       active = false;
       clearInterval(timer);
     };
+  }, [selectedFriend]);
+
+  useEffect(() => {
+    if (!selectedFriend || !accountsEnabled) { setTypingFriend(false); return undefined; }
+    let stop = () => {};
+    let active = true;
+    (async () => {
+      stop = await subscribeConversationTyping(personId(selectedFriend), (typing) => {
+        if (!active) return;
+        setTypingFriend(typing);
+        if (typing) {
+          clearTimeout(typingStopRef.current);
+          typingStopRef.current = setTimeout(() => setTypingFriend(false), 2400);
+        }
+      });
+    })();
+    return () => { active = false; clearTimeout(typingStopRef.current); stop?.(); setTypingFriend(false); };
   }, [selectedFriend]);
 
   function flash(message) {
@@ -454,6 +479,20 @@ export default function Profile({ onBack }) {
     await refreshSocial();
   }
 
+  async function changeFriendPreference(friend, patch) {
+    const result = await setFriendPreference(personId(friend), patch);
+    flash(result.ok ? (pt ? "Preferência atualizada." : "Preference updated.") : result.error);
+    if (result.ok) await refreshSocial();
+  }
+
+  function handleTypingChange(value) {
+    setChatText(value);
+    if (!selectedFriend) return;
+    sendTypingSignal(personId(selectedFriend), Boolean(value.trim())).catch(() => {});
+    clearTimeout(typingStopRef.current);
+    typingStopRef.current = setTimeout(() => sendTypingSignal(personId(selectedFriend), false).catch(() => {}), 1300);
+  }
+
   async function openNotifications() {
     setSection("notifications");
     await markAllNotificationsRead();
@@ -501,10 +540,10 @@ export default function Profile({ onBack }) {
         </div>
       </header>
 
-      {!schema.ready && accountsEnabled && sessionUser && (
+      {accountsEnabled && sessionUser && (!schema.ready || schema.version !== "3.6.1") && (
         <div className="social-schema-notice">
           <strong>{pt ? "Atualização Social Hub necessária" : "Social Hub migration required"}</strong>
-          <span>{pt ? "Execute supabase/SOCIAL-HUB-3.6.sql uma vez para liberar pedidos pendentes, privacidade, bloqueios, presença e notificações." : "Run supabase/SOCIAL-HUB-3.6.sql once to enable pending requests, privacy, blocks, presence and notifications."}</span>
+          <span>{schema.ready ? (pt ? "Seu banco ainda está no Social Hub 3.6.0. Execute supabase/SOCIAL-HUB-3.6.1.sql para liberar favoritos, silenciamento, status e polish do chat." : "Your database is still on Social Hub 3.6.0. Run supabase/SOCIAL-HUB-3.6.1.sql to enable favorites, muting, status and chat polish.") : (pt ? "Execute primeiro SOCIAL-HUB-3.6.sql e depois supabase/SOCIAL-HUB-3.6.1.sql para liberar todo o Social Hub v3.6.1." : "Run SOCIAL-HUB-3.6.sql first, then supabase/SOCIAL-HUB-3.6.1.sql to enable all Social Hub v3.6.1 features.")}</span>
         </div>
       )}
 
@@ -605,7 +644,7 @@ export default function Profile({ onBack }) {
               <div className="social-form-grid">
                 <label><span>{pt ? "Nome de exibição" : "Display name"}</span><input maxLength={40} value={profile.displayName || profile.name || ""} onChange={(event) => setProfile({ ...profile, displayName: event.target.value, name: event.target.value })} /></label>
                 <label><span>{pt ? "Nome de usuário" : "Username"}</span><div className="social-username-input"><b>@</b><input maxLength={24} value={profile.username || ""} onChange={(event) => setProfile({ ...profile, username: event.target.value.replace(/[^a-zA-Z0-9_.-]/g, "") })} /></div></label>
-                <label className="wide"><span>Bio <small>{String(profile.bio || "").length}/240</small></span><textarea maxLength={240} value={profile.bio || ""} onChange={(event) => setProfile({ ...profile, bio: event.target.value })} placeholder={pt ? "Conte um pouco sobre você..." : "Tell the community about yourself..."} /></label>
+                <label><span>{pt ? "Status personalizado" : "Custom status"} <small>{String(profile.customStatus || "").length}/80</small></span><input maxLength={80} value={profile.customStatus || ""} onChange={(event) => setProfile({ ...profile, customStatus: event.target.value })} placeholder={pt ? "Ex.: Montando deck Roxo" : "e.g. Building a Purple deck"} /></label><label className="wide"><span>Bio <small>{String(profile.bio || "").length}/240</small></span><textarea maxLength={240} value={profile.bio || ""} onChange={(event) => setProfile({ ...profile, bio: event.target.value })} placeholder={pt ? "Conte um pouco sobre você..." : "Tell the community about yourself..."} /></label>
               </div>
               <footer className="social-view-actions"><span>{accountsEnabled && sessionUser ? (pt ? "Salva localmente e sincroniza com sua conta." : "Saves locally and syncs with your account.") : (pt ? "Salva somente neste dispositivo." : "Saves only on this device.")}</span><button type="button" className="eternal-menu-action active" onClick={saveIdentity}>{pt ? "Salvar perfil" : "Save profile"}</button></footer>
             </div>
@@ -652,12 +691,12 @@ export default function Profile({ onBack }) {
                   )}
 
                   <section className="social-panel social-manage-friends">
-                    <SocialSectionTitle eyebrow="FRIEND LIST" title={pt ? "Sua lista" : "Your list"} description={`${friends.length} ${pt ? "amigos" : "friends"}`} />
+                    <SocialSectionTitle eyebrow="FRIEND LIST" title={pt ? "Sua lista" : "Your list"} description={`${friends.length} ${pt ? "amigos" : "friends"}`} action={<input className="social-inline-filter" value={friendFilter} onChange={(event) => setFriendFilter(event.target.value)} placeholder={pt ? "Filtrar amigos..." : "Filter friends..."} />} />
                     <div className="social-friend-grid">
-                      {friends.map((friend) => (
+                      {[...friends].filter((friend) => personName(friend).toLowerCase().includes(friendFilter.toLowerCase()) || String(friend.username || "").toLowerCase().includes(friendFilter.toLowerCase())).sort((a,b) => Number(Boolean(b.is_favorite))-Number(Boolean(a.is_favorite)) || Number(Boolean(b.is_online))-Number(Boolean(a.is_online)) || personName(a).localeCompare(personName(b))).map((friend) => (
                         <article key={personId(friend)}>
-                          <button type="button" className="social-person-main" onClick={() => inspectProfile(friend)}><SocialAvatar person={friend} /><span><strong>{personName(friend)}</strong><small>{presenceLabel(friend, pt)}</small></span></button>
-                          <button type="button" className="social-message-shortcut" onClick={() => openChat(friend)}>✦</button>
+                          <button type="button" className="social-person-main" onClick={() => inspectProfile(friend)}><SocialAvatar person={friend} /><span><strong>{friend.is_favorite ? "★ " : ""}{personName(friend)}</strong><small>{friend.custom_status || presenceLabel(friend, pt)}</small></span></button>
+                          <div className="social-friend-quick-actions"><button type="button" className={friend.is_favorite ? "active" : ""} title={pt ? "Favorito" : "Favorite"} onClick={() => changeFriendPreference(friend,{ favorite: !friend.is_favorite })}>★</button><button type="button" className={friend.is_muted ? "active" : ""} title={pt ? "Silenciar" : "Mute"} onClick={() => changeFriendPreference(friend,{ muted: !friend.is_muted })}>◌</button><button type="button" className="social-message-shortcut" onClick={() => openChat(friend)}>✦</button></div>
                         </article>
                       ))}
                       {!friends.length && <div className="social-empty-inline">{pt ? "Nenhum amigo aceito ainda." : "No accepted friends yet."}</div>}
@@ -677,7 +716,7 @@ export default function Profile({ onBack }) {
                 <aside className="social-conversation-list">
                   {conversations.map((friend) => (
                     <button type="button" key={personId(friend)} className={personId(selectedFriend) === personId(friend) ? "active" : ""} onClick={() => openChat(friend)}>
-                      <SocialAvatar person={friend} size="small" /><span><strong>{personName(friend)}</strong><small>{Number(friend.unread_count || 0) > 0 ? `${friend.unread_count} ${pt ? "não lidas" : "unread"}` : friend.last_message || presenceLabel(friend, pt)}</small></span>{friend.is_online && <i />}
+                      <SocialAvatar person={friend} size="small" /><span><strong>{friend.is_favorite ? "★ " : ""}{personName(friend)}{friend.is_muted ? " · ◌" : ""}</strong><small>{Number(friend.unread_count || 0) > 0 ? `${friend.unread_count} ${pt ? "não lidas" : "unread"}` : friend.last_message || friend.custom_status || presenceLabel(friend, pt)}</small></span>{friend.is_online && <i />}
                     </button>
                   ))}
                   {!conversations.length && <div className="social-empty-inline">{pt ? "Suas conversas aparecerão aqui." : "Your conversations will appear here."}</div>}
@@ -686,15 +725,15 @@ export default function Profile({ onBack }) {
                 <section className="social-chat-thread">
                   {selectedFriend ? (
                     <>
-                      <header><SocialAvatar person={selectedFriend} /><div><strong>{personName(selectedFriend)}</strong><small>@{selectedFriend.username}</small></div><button type="button" onClick={() => inspectProfile(selectedFriend)}>{pt ? "Perfil" : "Profile"}</button></header>
+                      <header><SocialAvatar person={selectedFriend} /><div><strong>{personName(selectedFriend)}</strong><small>{typingFriend ? (pt ? "digitando…" : "typing…") : (selectedFriend.custom_status || `@${selectedFriend.username}`)}</small></div><button type="button" onClick={() => inspectProfile(selectedFriend)}>{pt ? "Perfil" : "Profile"}</button></header>
                       <div className="social-chat-messages">
                         {messages.map((message) => {
                           const mine = message.sender_id === sessionUser?.id;
-                          return <article key={message.id} className={mine ? "mine" : "theirs"}><span>{message.text}</span><small>{formatTime(message.created_at, language)}</small></article>;
+                          return <article key={message.id} className={mine ? "mine" : "theirs"}><span>{message.text}</span><small>{formatTime(message.created_at, language)}{mine ? ` · ${message.read_at ? (pt ? "Lida" : "Read") : (pt ? "Enviada" : "Sent")}` : ""}</small></article>;
                         })}
                         {!messages.length && <div className="social-big-empty compact"><b>✦</b><strong>{pt ? "Comece a conversa" : "Start the conversation"}</strong></div>}
                       </div>
-                      <form className="social-chat-compose" onSubmit={sendMessage}><input maxLength={1000} value={chatText} onChange={(event) => setChatText(event.target.value)} placeholder={pt ? "Escreva uma mensagem..." : "Write a message..."} /><button type="submit">{pt ? "Enviar" : "Send"}</button></form>
+                      <form className="social-chat-compose" onSubmit={sendMessage}><input maxLength={1000} value={chatText} onChange={(event) => handleTypingChange(event.target.value)} placeholder={pt ? "Escreva uma mensagem..." : "Write a message..."} /><button type="submit">{pt ? "Enviar" : "Send"}</button></form>
                     </>
                   ) : <div className="social-big-empty"><b>✦</b><strong>{pt ? "Selecione um amigo" : "Select a friend"}</strong><span>{pt ? "A conversa privada aparecerá aqui." : "The private conversation will appear here."}</span></div>}
                 </section>
@@ -718,7 +757,7 @@ export default function Profile({ onBack }) {
 
           {section === "mastery" && (
             <div className="social-view social-mastery-view">
-              <SocialSectionTitle eyebrow="CARD MASTERY" title={pt ? "Maestria de cartas" : "Card Mastery"} description={pt ? "A v3.6.0 calcula afinidade a partir da presença, quantidade e uso como capa nos seus decks salvos. Isso não lê informações das partidas Online." : "v3.6.0 calculates affinity from presence, copies and cover-card use across your saved decks. It never reads Online match data."} />
+              <SocialSectionTitle eyebrow="CARD MASTERY" title={pt ? "Maestria de cartas" : "Card Mastery"} description={pt ? "A v3.6.1 mantém a Maestria atual e calcula afinidade a partir da presença, quantidade e uso como capa nos seus decks salvos. Isso não lê informações das partidas Online." : "v3.6.1 keeps the current Mastery model and calculates affinity from presence, copies and cover-card use across your saved decks. It never reads Online match data."} />
               <div className="social-mastery-summary"><article><span>{pt ? "Líder" : "Leader"}</span><strong>{insights.masteryLeader?.name || "—"}</strong><small>{insights.masteryLeader ? formatMasteryLabel(insights.masteryLeader.level, language) : "—"}</small></article><article><span>{pt ? "Cartas rastreadas" : "Tracked cards"}</span><strong>{insights.uniqueCards}</strong><small>{pt ? "nos decks salvos" : "in saved decks"}</small></article><article><span>{pt ? "Cor dominante" : "Dominant color"}</span><strong>{insights.primaryColor?.toUpperCase() || "—"}</strong><small>{pt ? "afinidade de construção" : "deckbuilding affinity"}</small></article></div>
               <div className="social-mastery-grid">
                 {insights.topCards.map((entry) => <MasteryCard key={entry.id} entry={entry} language={language} />)}

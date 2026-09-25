@@ -1,4 +1,4 @@
-# Build Status — Battle Spirits Eternal Simulator v3.6.0
+# Build Status — Battle Spirits Eternal Simulator v3.6.1
 
 ## Social Hub & Player Identity
 - Social Hub em layout de launcher: navegação lateral, workspace central e friend dock à direita.
@@ -30,3 +30,12 @@
 - Parser JSX/TS: **36 arquivos, 0 erros** antes da validação final.
 - Database: **365 IDs únicos**, **382 artes WebP**, **0 artes runtime ausentes**.
 - `npm run build`: será executado pelo `GERENCIAR_PROJETO.bat` no Windows antes do deploy.
+
+
+## v3.6.1 validation
+
+- `node scripts/verify-project.mjs`: OK.
+- `node scripts/verify-v3.mjs`: OK.
+- 119 testes Node existentes: OK.
+- Parse de `Profile.jsx`, `socialService.js` e `ProjectInfoButtons.jsx`: OK.
+- O build Vite não foi regenerado neste ambiente porque o ZIP de origem contém `node_modules` nativo do Windows; rode `npm install`/`npm ci` no ambiente alvo e então `npm run build`. O ZIP de entrega não inclui `node_modules` nem um `dist` potencialmente desatualizado.

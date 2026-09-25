@@ -251,7 +251,7 @@ export default function Settings({
     setAppInfo
   ] = useState({
     version:
-      "3.6.0",
+      "3.6.1",
 
     packaged:
       false,

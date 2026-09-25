@@ -1,6 +1,6 @@
 /* =========================================================
    Battle Spirits Eternal Simulator
-   v3.6.0 — SOCIAL HUB & PLAYER IDENTITY
+   v3.6.1 — SOCIAL HUB POLISH & STABILITY
 ========================================================= */
 
 .social-hub-page {
@@ -748,3 +748,17 @@
   .social-chat-layout { grid-template-columns: 1fr; }
   .social-conversation-list { max-height: 150px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.08); }
 }
+
+
+/* v3.6.1 — Social Hub Polish & Stability */
+.social-inline-filter { width: 190px; height: 34px; padding: 0 10px; border: 1px solid rgba(255,255,255,.12); background: rgba(0,0,0,.34); color: #fff; font-size: 8px; outline: none; }
+.social-inline-filter:focus { border-color: rgba(255,255,255,.42); }
+.social-friend-quick-actions { display: flex; gap: 4px; align-items: center; }
+.social-friend-quick-actions > button { width: 30px; height: 30px; border: 1px solid rgba(255,255,255,.11); background: rgba(255,255,255,.025); color: rgba(255,255,255,.36); cursor: pointer; }
+.social-friend-quick-actions > button:hover, .social-friend-quick-actions > button.active { color: #fff; border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.08); }
+.social-chat-messages article.mine small { text-align: right; }
+.social-chat-thread > header small { min-height: 12px; }
+.social-chat-thread > header small:has(+ *) { transition: opacity .15s ease; }
+.social-conversation-list > button:has(strong) { transition: background .14s ease, color .14s ease, transform .14s ease; }
+.social-conversation-list > button:hover { transform: translateX(2px); }
+@media (max-width: 760px) { .social-inline-filter { width: 132px; } .social-friend-quick-actions { gap: 2px; } }

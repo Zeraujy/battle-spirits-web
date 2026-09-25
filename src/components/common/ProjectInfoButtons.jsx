@@ -13,6 +13,21 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.6.1",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Social Hub Polish & Stability", en: "Social Hub Polish & Stability" },
+    summary: {
+      pt: "Atualização de polimento do Social Hub com busca e ordenação melhores, favoritos, silenciamento, status personalizado, indicador de digitação e recibos de leitura, mantendo a rede das partidas isolada.",
+      en: "Social Hub polish update with better search and sorting, favorites, muting, custom status, typing indicators and read receipts while keeping match networking isolated."
+    },
+    sections: [
+      { title: { pt: "Amigos e presença", en: "Friends & presence" }, items: { pt: ["Favoritos passam à frente da lista e amigos Online continuam priorizados.", "Filtro local permite encontrar rapidamente amigos pelo nome ou @usuário.", "Status personalizado de até 80 caracteres aparece no Social Hub sem entrar no payload das partidas."], en: ["Favorites are pinned first while Online friends remain prioritized.", "A local filter quickly finds friends by display name or @username.", "Custom status up to 80 characters appears in Social Hub without entering match payloads."] } },
+      { title: { pt: "Mensagens", en: "Messages" }, items: { pt: ["Conversas exibem indicador de digitando via Supabase Realtime Broadcast, sem persistir esse estado no banco.", "Mensagens próprias mostram Enviada/Lida usando o read_at já protegido pelo backend.", "Timestamps ficaram mais legíveis com Hoje/Ontem e horário."], en: ["Conversations show typing indicators through Supabase Realtime Broadcast without persisting typing state.", "Your messages now show Sent/Read using the existing protected read_at field.", "Timestamps are easier to scan with Today/Yesterday and time."] } },
+      { title: { pt: "Preferências e segurança", en: "Preferences & safety" }, items: { pt: ["Amigos podem ser marcados como favoritos ou silenciados; preferências são privadas por RLS.", "Nova migração incremental SOCIAL-HUB-3.6.1.sql revisa políticas e RPCs sociais.", "Socket.IO, publicProfile.js e a engine de partida não recebem dependências do Social Hub."], en: ["Friends can be favorited or muted; preferences are private through RLS.", "New incremental SOCIAL-HUB-3.6.1.sql migration reviews social policies and RPCs.", "Socket.IO, publicProfile.js and the match engine receive no Social Hub dependencies."] } }
+    ]
+  },
+
+  {
     version: "3.6.0",
     date: { pt: "25/09/2026", en: "09/25/2026" },
     title: { pt: "Social Hub & Player Identity", en: "Social Hub & Player Identity" },
