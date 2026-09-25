@@ -318,7 +318,7 @@
   letter-spacing: -.12em;
   color: #fff;
   text-shadow: 0 9px 0 rgba(0,0,0,.28), 0 16px 25px rgba(0,0,0,.64);
-  transform: skewX(-8deg);
+  transform: translate(-30px, -14px) skewX(-8deg);
 }
 
 .match-setup-menu-area {
