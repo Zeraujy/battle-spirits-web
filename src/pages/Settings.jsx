@@ -1,3 +1,4 @@
+import EternalCinematicBackdrop from "../components/layout/EternalCinematicBackdrop.jsx";
 import {
   useEffect,
   useMemo,
@@ -28,6 +29,7 @@ import {
 
 import "../styles/theme/themeLibrary.css";
 import "../styles/pages/settingsGame.css";
+import "../styles/pages/eternalInterfaceV350.css";
 
 
 const RESOLUTIONS = [
@@ -249,7 +251,7 @@ export default function Settings({
     setAppInfo
   ] = useState({
     version:
-      "3.3.1e",
+      "3.5.2d",
 
     packaged:
       false,
@@ -703,12 +705,13 @@ export default function Settings({
   ];
 
   return (
-    <main className="settings-game-page">
+    <main className="settings-game-page eternal-page eternal-settings-page">
+      <EternalCinematicBackdrop compact />
       <div className="settings-game-bg" />
 
+      <section className="settings-game-window" role="dialog" aria-label={t("settingsTitle")}>
       <header className="settings-game-topbar">
-        <button className="ghost settings-game-back" onClick={onBack}>
-          <span>←</span>
+        <button className="ghost settings-game-back eternal-menu-action" onClick={onBack}>
           {t("back")}
         </button>
 
@@ -1132,10 +1135,11 @@ export default function Settings({
             <div>
               {saved && <span className="success-text">✓ {t("settingsSaved")}</span>}
             </div>
-            <button className="primary-btn big" onClick={apply}>{t("apply")}</button>
+            <button className="primary-btn big eternal-menu-action active" onClick={apply}>{t("apply")}</button>
           </footer>
         </section>
       </div>
+      </section>
     </main>
   );
 }

@@ -23,6 +23,9 @@ const requiredPaths = [
   "src/components/game/PaymentStatus.jsx",
   "src/components/game/BattleLinkOverlay.jsx",
   "src/components/home",
+  "src/components/match/MatchSetupScreen.jsx",
+  "src/components/layout/EternalCinematicBackdrop.jsx",
+  "src/components/layout/PointerTiltSurface.jsx",
   "src/data",
   "src/game",
   "src/interactions/cardPointerDrag.js",
@@ -37,6 +40,15 @@ const requiredPaths = [
   "src/online/publicProfile.js",
   "src/online/publicProfile.test.js",
   "src/pages/AiSetup.jsx",
+  "src/pages/Home.jsx",
+  "src/pages/RankedLobby.jsx",
+  "src/pages/Store.jsx",
+  "src/config/appVersion.js",
+  "src/styles/pages/mainMenuV340.css",
+  "src/styles/pages/matchSetupV341.css",
+  "src/styles/pages/modeScaffoldV340.css",
+  "src/styles/pages/eternalInterfaceV350.css",
+  "src/styles/pages/gameFlowV351.css",
   "src/styles/pages/aiSetup.css",
   "src/game/stateValidation.js",
   "src/game/actionLog.js",
@@ -64,7 +76,7 @@ const requiredPaths = [
   "scripts/windows"
 ];
 
-console.log("Battle Spirits Simulator v3.3.1e — verificação estrutural\n");
+console.log("Battle Spirits Simulator v3.5.2d — verificação estrutural\n");
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -154,4 +166,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v3.3.1e validada.");
+console.log("\nVERIFY OK — estrutura v3.5.2d validada.");

@@ -1,4 +1,7 @@
-import { useMemo, useState } from "react";
+import EternalCinematicBackdrop from "../components/layout/EternalCinematicBackdrop.jsx";
+import PointerTiltSurface from "../components/layout/PointerTiltSurface.jsx";
+import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 
 import EmptyState from "../components/common/EmptyState.jsx";
 
@@ -33,6 +36,7 @@ import {
 
 import "../styles/deckbuilder/deckLibrary.css";
 import "../styles/deckbuilder/prebuiltDecks.css";
+import "../styles/pages/eternalInterfaceV350.css";
 
 
 const COLOR_ACCENTS = {
@@ -44,6 +48,19 @@ const COLOR_ACCENTS = {
   blue: "#c0c0c0",
   ultimate: "#d4d4d4"
 };
+
+const DEFAULT_DECKS_PER_PAGE = 8;
+const COMPACT_DECKS_PER_PAGE = 4;
+
+function getDecksPerPageForViewport() {
+  if (typeof window === "undefined") {
+    return DEFAULT_DECKS_PER_PAGE;
+  }
+
+  return window.innerHeight < 960
+    ? COMPACT_DECKS_PER_PAGE
+    : DEFAULT_DECKS_PER_PAGE;
+}
 
 
 function deckSize(deck) {
@@ -283,13 +300,14 @@ function DeckLibraryCard({
 
 
   return (
-    <article
-      className="deck-library-v2-card"
-      style={{
-        "--deck-accent":
-          accent
-      }}
-    >
+    <PointerTiltSurface className="deck-library-v2-tilt" maxTilt={4.2}>
+      <article
+        className="deck-library-v2-card"
+        style={{
+          "--deck-accent":
+            accent
+        }}
+      >
 
       <button
         type="button"
@@ -453,7 +471,8 @@ function DeckLibraryCard({
 
       </button>
 
-    </article>
+      </article>
+    </PointerTiltSurface>
   );
 }
 
@@ -609,8 +628,8 @@ function CreateDeckOverlay({
 
               <span className="deck-create-option-action">
                 {pt
-                  ? "ABRIR DECK BUILDER"
-                  : "OPEN DECK BUILDER"}
+                  ? "Abrir Deck Builder"
+                  : "Open Deck Builder"}
                 <b>→</b>
               </span>
             </button>
@@ -649,8 +668,8 @@ function CreateDeckOverlay({
 
               <span className="deck-create-option-action">
                 {pt
-                  ? "ESCOLHER DECK PRONTO"
-                  : "CHOOSE PREBUILT DECK"}
+                  ? "Escolher deck pronto"
+                  : "Choose prebuilt deck"}
                 <b>→</b>
               </span>
             </button>
@@ -660,13 +679,12 @@ function CreateDeckOverlay({
             <aside className="prebuilt-list-panel">
               <button
                 type="button"
-                className="ghost prebuilt-back-button"
+                className="ghost prebuilt-back-button eternal-menu-action compact"
                 onClick={() => {
                   setError("");
                   setStep("choice");
                 }}
               >
-                <span aria-hidden="true">←</span>
                 {pt
                   ? "Voltar"
                   : "Back"}
@@ -754,12 +772,14 @@ function CreateDeckOverlay({
                 }}
               >
                 <div className="prebuilt-detail-hero">
-                  <div className="prebuilt-detail-cover">
-                    <CoverImage
-                      card={selected.cover}
-                      name={selected.template.title}
-                    />
-                  </div>
+                  <PointerTiltSurface className="prebuilt-detail-cover-tilt" maxTilt={5.4}>
+                    <div className="prebuilt-detail-cover">
+                      <CoverImage
+                        card={selected.cover}
+                        name={selected.template.title}
+                      />
+                    </div>
+                  </PointerTiltSurface>
 
                   <div className="prebuilt-detail-copy">
                     <span className="prebuilt-set-code">
@@ -924,7 +944,7 @@ function CreateDeckOverlay({
 
                   <button
                     type="button"
-                    className="primary-btn prebuilt-create-button"
+                    className="primary-btn prebuilt-create-button eternal-menu-action active"
                     disabled={!selected.ready}
                     onClick={createSelected}
                   >
@@ -933,9 +953,7 @@ function CreateDeckOverlay({
                         ? "Criar este Deck"
                         : "Create this Deck"}
                     </span>
-                    <b aria-hidden="true">
-                      →
-                    </b>
+
                   </button>
                 </footer>
               </section>
@@ -972,6 +990,16 @@ export default function Decks({
     setCreateOpen
   ] =
     useState(false);
+
+  const [
+    libraryPage,
+    setLibraryPage
+  ] = useState(1);
+
+  const [
+    decksPerPage,
+    setDecksPerPage
+  ] = useState(getDecksPerPageForViewport);
 
 
   const builtTemplates =
@@ -1044,6 +1072,33 @@ export default function Decks({
     );
 
 
+  const libraryPages = Math.max(1, Math.ceil(filteredDecks.length / decksPerPage));
+  const pagedDecks = filteredDecks.slice((libraryPage - 1) * decksPerPage, libraryPage * decksPerPage);
+
+  useEffect(() => {
+    setLibraryPage(1);
+  }, [query, language, decksPerPage]);
+
+  useEffect(() => {
+    if (libraryPage > libraryPages) setLibraryPage(libraryPages);
+  }, [libraryPage, libraryPages]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    function syncDeckPageSize() {
+      setDecksPerPage(getDecksPerPageForViewport());
+    }
+
+    syncDeckPageSize();
+    window.addEventListener("resize", syncDeckPageSize);
+
+    return () => {
+      window.removeEventListener("resize", syncDeckPageSize);
+    };
+  }, []);
+
+
   const stats =
     useMemo(
       () => {
@@ -1096,7 +1151,7 @@ export default function Decks({
             "Manage your saved Eternal decks and choose one to edit.",
 
           newDeck:
-            "+ New Deck",
+            "New Deck",
 
           search:
             "Search deck or cover card...",
@@ -1139,7 +1194,7 @@ export default function Decks({
             "Gerencie seus decks salvos do formato Eternal e escolha um para editar.",
 
           newDeck:
-            "+ Novo Deck",
+            "Novo Deck",
 
           search:
             "Buscar deck ou carta de capa...",
@@ -1227,20 +1282,17 @@ export default function Decks({
 
 
   return (
-    <main className="standard-page deck-library-v2-page">
+    <main className="standard-page deck-library-v2-page eternal-page eternal-decks-page">
+      <EternalCinematicBackdrop />
 
       <header className="deck-library-v2-topbar">
 
         <button
-          className="ghost deck-library-v2-back"
+          className="ghost deck-library-v2-back eternal-menu-action"
           onClick={
             onBack
           }
         >
-          <span aria-hidden="true">
-            ←
-          </span>
-
           {language === "en"
             ? "Back"
             : "Voltar"}
@@ -1265,7 +1317,7 @@ export default function Decks({
 
 
         <button
-          className="primary-btn deck-library-v2-new"
+          className="primary-btn deck-library-v2-new eternal-menu-action active"
           onClick={() =>
             setCreateOpen(
               true
@@ -1276,9 +1328,7 @@ export default function Decks({
             {copy.newDeck}
           </span>
 
-          <b aria-hidden="true">
-            →
-          </b>
+
         </button>
 
       </header>
@@ -1432,7 +1482,7 @@ export default function Decks({
         ) : (
           <div className="deck-library-v2-grid">
 
-            {filteredDecks.map(
+            {pagedDecks.map(
               (deck) => (
                 <DeckLibraryCard
                   key={
@@ -1452,39 +1502,34 @@ export default function Decks({
             )}
 
 
-            <button
-              type="button"
-              className="deck-library-v2-add-card"
-              onClick={() =>
-                setCreateOpen(
-                  true
-                )
-              }
-            >
-              <span>
-                +
-              </span>
-
-              <strong>
-                {language === "en"
-                  ? "Create new deck"
-                  : "Criar novo deck"}
-              </strong>
-
-              <small>
-                {language === "en"
-                  ? "Empty deck or prebuilt list"
-                  : "Deck vazio ou lista pré-construída"}
-              </small>
-            </button>
-
           </div>
+        )}
+
+        {filteredDecks.length > decksPerPage && (
+          <nav className="deck-library-v2-pagination" aria-label={language === "en" ? "Deck pages" : "Páginas de decks"}>
+            <button disabled={libraryPage === 1} onClick={() => setLibraryPage((page) => Math.max(1, page - 1))}>
+              {language === "en" ? "Previous" : "Anterior"}
+            </button>
+            {Array.from({ length: libraryPages }, (_, index) => index + 1).map((page) => (
+              <button
+                key={page}
+                className={page === libraryPage ? "active" : ""}
+                aria-current={page === libraryPage ? "page" : undefined}
+                onClick={() => setLibraryPage(page)}
+              >
+                {page}
+              </button>
+            ))}
+            <button disabled={libraryPage === libraryPages} onClick={() => setLibraryPage((page) => Math.min(libraryPages, page + 1))}>
+              {language === "en" ? "Next" : "Próxima"}
+            </button>
+          </nav>
         )}
 
       </section>
 
 
-      {createOpen && (
+      {createOpen && typeof document !== "undefined" && createPortal(
         <CreateDeckOverlay
           language={language}
           builtTemplates={builtTemplates}
@@ -1499,7 +1544,8 @@ export default function Decks({
           onCreatePrebuilt={
             createPrebuilt
           }
-        />
+        />,
+        document.body
       )}
 
     </main>

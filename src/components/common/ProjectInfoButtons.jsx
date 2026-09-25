@@ -13,6 +13,453 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.5.2d",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Alinhamento de VS e Banners", en: "VS & Banner Alignment Fix" },
+    summary: {
+      pt: "Normaliza o tamanho dos dois banners e alinha o VS pelo centro real das molduras, independentemente de um lado possuir ou não o botão Trocar deck.",
+      en: "Normalizes both banner sizes and aligns the VS to the true center of the frames, regardless of whether one side has the Change Deck button."
+    },
+    sections: [
+      {
+        title: { pt: "Geometria compartilhada", en: "Shared geometry" },
+        items: {
+          pt: [
+            "Jogador e adversário passam a reservar exatamente a mesma altura de cabeçalho, banner e área inferior.",
+            "O espaço do botão Trocar deck é reservado mesmo quando o oponente/CPU não possui essa ação, evitando deslocamento vertical.",
+            "O VS agora ocupa a mesma linha estrutural dos banners e é centralizado pela moldura, não pelo bloco inteiro do jogador."
+          ],
+          en: [
+            "Player and opponent now reserve the exact same header, banner and lower-action heights.",
+            "The Change Deck action slot is reserved even when the opponent/CPU does not have that action, preventing vertical drift.",
+            "VS now occupies the same structural row as the banners and is centered on the frame instead of the whole player block."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
+    version: "3.5.2c",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Correção das Imagens dos Banners", en: "Banner Image Wiring Fix" },
+    summary: {
+      pt: "Corrige os banners que estavam caindo para as iniciais em vez de mostrar a carta de capa e a foto de perfil, tornando o patch cumulativo para todos os modos de jogo.",
+      en: "Fixes banners falling back to initials instead of showing deck cover art and profile pictures, while making the patch cumulative across all match setup modes."
+    },
+    sections: [
+      {
+        title: { pt: "Imagens restauradas", en: "Images restored" },
+        items: {
+          pt: [
+            "Jogo Livre, Eternal CPU, Online Normal e Ranked passam novamente a enviar separadamente a carta de capa do deck e o avatar do jogador para o banner.",
+            "A resolução da carta de capa agora aceita IDs de capa e formatos legados com mais tolerância, usando a primeira carta válida como fallback.",
+            "O patch passa a incluir explicitamente as quatro telas de preparação para não depender da ordem em que as revisões 3.5.2 foram aplicadas."
+          ],
+          en: [
+            "Free Play, Eternal CPU, Online Normal and Ranked once again send deck cover art and player avatar separately to the banner.",
+            "Deck-cover resolution now accepts cover IDs and legacy formats more robustly, falling back to the first valid card.",
+            "The patch now explicitly includes all four match setup screens so it no longer depends on the order in which the 3.5.2 revisions were applied."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
+    version: "3.5.2b",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Limpeza Visual do Banner de Perfil", en: "Profile Banner Visual Cleanup" },
+    summary: {
+      pt: "Refina o novo banner VS para ficar mais limpo: a capa do deck vira a arte principal, o avatar ocupa o quadro lateral e os textos auxiliares foram removidos.",
+      en: "Refines the new VS banner into a cleaner presentation: the deck cover becomes the main art, the avatar occupies the side frame and auxiliary texts were removed."
+    },
+    sections: [
+      {
+        title: { pt: "Layout do banner", en: "Banner layout" },
+        items: {
+          pt: [
+            "A imagem principal do banner agora usa de forma fixa a carta de capa do deck selecionado pelo jogador.",
+            "O quadro menor passa a priorizar a foto de perfil do jogador; quando não existir avatar, o fallback por iniciais continua disponível.",
+            "O nome do deck, contagem de cartas e demais textos auxiliares ao lado do avatar foram removidos para deixar o banner mais limpo."
+          ],
+          en: [
+            "The main banner art now consistently uses the selected deck's cover card.",
+            "The smaller framed area now prioritizes the player's profile picture; when no avatar exists, the initials fallback remains available.",
+            "Deck name, card count and other auxiliary texts next to the avatar were removed for a cleaner banner presentation."
+          ]
+        }
+      },
+      {
+        title: { pt: "Informação revelada", en: "Revealed information" },
+        items: {
+          pt: [
+            "O aviso \"Clique na capa para ver detalhes\" foi removido do topo da arte.",
+            "Os avisos curtos no canto superior direito, como status de erro, online ou pré-temporada, deixam de aparecer sobre o banner.",
+            "O clique continua disponível apenas para revelar Rank/Status quando existir algo relevante para mostrar, mantendo o visual principal mais limpo."
+          ],
+          en: [
+            "The \"Click the cover to view details\" hint was removed from the top of the art.",
+            "Short notices in the top-right corner such as error, online or preseason states no longer appear over the banner.",
+            "Clicking remains available only to reveal Rank/Status when there is something relevant to show, keeping the main visual cleaner."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
+    version: "3.5.2a",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Polimento dos Banners Ranqueados", en: "Ranked Banner Visual Polish" },
+    summary: {
+      pt: "Segunda passada visual nos banners VS: molduras por tier, crest de Rank, avatar mais integrado e animação de reveal mais cinematográfica.",
+      en: "Second visual pass on VS banners: tier-based frames, Rank crest, better avatar integration and a more cinematic reveal animation."
+    },
+    sections: [
+      {
+        title: { pt: "Molduras por Rank", en: "Rank frames" },
+        items: {
+          pt: [
+            "Ranked Bronze passa a usar uma moldura Bronze real; a estrutura também já suporta Silver, Gold, Platinum, Diamond e Master.",
+            "Modos sem Rank continuam usando a versão Eternal monocromática para preservar a identidade visual principal do simulador.",
+            "Avatar e moldura agora compartilham o mesmo acabamento do tier, deixando o perfil mais integrado ao banner."
+          ],
+          en: [
+            "Ranked Bronze now uses an actual Bronze frame; the same system is ready for Silver, Gold, Platinum, Diamond and Master.",
+            "Unranked modes keep the monochrome Eternal frame to preserve the simulator's main visual identity.",
+            "Avatar and frame now share the same tier finish, integrating the profile more naturally into the banner."
+          ]
+        }
+      },
+      {
+        title: { pt: "Reveal e acabamento", en: "Reveal & polish" },
+        items: {
+          pt: [
+            "Ao clicar na capa, o Rank/Status entra com animação curta, crest central e glow correspondente ao tier.",
+            "A arte da carta escurece e aproxima levemente durante o reveal para destacar a informação sem abandonar a capa do deck.",
+            "Ornamentos laterais, topo, avatar e reflexos foram refinados sem alterar o fluxo de Trocar Deck."
+          ],
+          en: [
+            "Clicking the cover now reveals Rank/Status with a short animation, centered crest and tier-matched glow.",
+            "The deck-cover art darkens and subtly zooms during reveal so the information stands out without replacing the card art.",
+            "Side ornaments, top crest, avatar frame and highlights were refined without changing the Change Deck flow."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
+    version: "3.5.2",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Banners de Jogador nos Modos de Jogo", en: "Player Banners in Match Setup" },
+    summary: {
+      pt: "As telas VS de Jogo Livre, Eternal CPU, Online Normal e Ranked agora usam banners inspirados em jogos competitivos, combinando capa do deck, avatar do perfil, nome do jogador e Rank/Status ao clicar na arte.",
+      en: "The VS screens for Free Play, Eternal CPU, Online Normal and Ranked now use banners inspired by competitive game loading screens, combining deck cover art, profile avatar, player name and Rank/Status on art click."
+    },
+    sections: [
+      {
+        title: { pt: "Visual dos jogadores", en: "Player visuals" },
+        items: {
+          pt: [
+            "A antiga caixa horizontal foi substituída por um banner vertical com moldura, aproximando a apresentação do estilo de loading banner que você sugeriu.",
+            "A carta de capa do deck passa a ocupar a arte principal do banner, enquanto o avatar do perfil fica sobreposto em destaque, com o nome do jogador preservado no topo.",
+            "O botão de Trocar Deck continua disponível abaixo de cada banner, mantendo o fluxo rápido de preparação da partida."
+          ],
+          en: [
+            "The old horizontal panel has been replaced by a framed vertical banner, bringing the presentation closer to the loading-banner style you suggested.",
+            "The deck cover card now fills the main banner art while the profile avatar is overlaid in focus, with the player name preserved at the top.",
+            "The Change Deck button remains available below each banner, keeping match preparation quick."
+          ]
+        }
+      },
+      {
+        title: { pt: "Interação e consistência", en: "Interaction & consistency" },
+        items: {
+          pt: [
+            "Ao clicar na arte do banner, o simulador revela um painel com Rank, Status ou detalhes do deck, dependendo do modo de jogo.",
+            "O banner recebe efeito de perspectiva/tilt no hover para manter a linguagem Eternal e dar mais presença à capa do deck.",
+            "Jogo Livre, Eternal CPU, Online Normal e Ranked compartilham o mesmo componente visual, reduzindo diferenças entre os modos."
+          ],
+          en: [
+            "Clicking the banner art reveals a panel with Rank, Status or deck details depending on the game mode.",
+            "The banner now uses a perspective/tilt hover effect to keep the Eternal visual language and give the deck cover more presence.",
+            "Free Play, Eternal CPU, Online Normal and Ranked now share the same visual component, reducing mode-to-mode inconsistencies."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
+    version: "3.5.1a",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Correção da Biblioteca de Decks", en: "Deck Library Visibility Fix" },
+    summary: {
+      pt: "Corrige o colapso visual dos cards de decks salvos após o redesign v3.5.1 e adapta a paginação à altura disponível da tela.",
+      en: "Fixes saved deck cards collapsing after the v3.5.1 redesign and adapts pagination to the available viewport height."
+    },
+    sections: [
+      {
+        title: { pt: "Meus Decks", en: "My Decks" },
+        items: {
+          pt: [
+            "Os decks salvos voltam a aparecer normalmente; nenhum dado de deck foi perdido ou alterado.",
+            "O contêiner do efeito 3D agora possui altura própria e os cards preenchem essa área de forma estável, independentemente da ordem de carregamento do CSS.",
+            "Em telas mais baixas, como 864p/900p, a biblioteca mostra 4 decks por página; em telas mais altas, mostra até 8, evitando scroll vertical do documento.",
+            "O efeito 3D/Perspectiva das capas de deck permanece ativo."
+          ],
+          en: [
+            "Saved decks are visible again; no deck data was lost or modified.",
+            "The 3D wrapper now owns a stable height and deck cards fill it regardless of CSS loading order.",
+            "On shorter viewports such as 864p/900p the library shows 4 decks per page; taller viewports show up to 8, avoiding document scrolling.",
+            "Deck-cover 3D/Perspective remains enabled."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
+    version: "3.5.1",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Fluxo de Jogo e Modais", en: "Game Flow & Modal UX" },
+    summary: {
+      pt: "As telas Eternal passam a se comportar mais como um jogo: ações usam a linguagem do Menu Principal, páginas evitam scroll vertical e modais ficam realmente centralizados no viewport.",
+      en: "Eternal screens now behave more like a game: actions use the Main Menu language, pages avoid document scrolling and dialogs are truly centered in the viewport."
+    },
+    sections: [
+      {
+        title: { pt: "Navegação e fluxo", en: "Navigation & flow" },
+        items: {
+          pt: [
+            "Voltar, Aplicar, Novo Deck, Salvar e ações de conta usam a mesma linguagem tipográfica e interação do Menu Principal, sem setas decorativas no botão Voltar.",
+            "Configurações agora funciona como uma janela central sobre o wallpaper; apenas o conteúdo interno rola quando necessário.",
+            "Meus Decks e Deck Builder ficam presos ao viewport no desktop, usando paginação/áreas internas em vez de empurrar a página para baixo.",
+            "A biblioteca de decks mostra até 8 decks por página para manter a composição centralizada."
+          ],
+          en: [
+            "Back, Apply, New Deck, Save and account actions now use the Main Menu typography and interaction language, without decorative arrows on Back.",
+            "Settings now behaves as a centered window over the wallpaper; only its internal content scrolls when needed.",
+            "My Decks and Deck Builder stay viewport-bound on desktop, using pagination/internal work areas instead of pushing the document downward.",
+            "The deck library shows up to 8 decks per page to preserve the centered game composition."
+          ]
+        }
+      },
+      {
+        title: { pt: "Deck Builder e modais", en: "Deck Builder & dialogs" },
+        items: {
+          pt: [
+            "Novo Deck e detalhes de carta agora usam portals e permanecem centralizados no meio da tela, independentemente da posição da página.",
+            "Deck Builder passa a mostrar 14 cartas por página.",
+            "O modal de detalhes mantém integralmente o 3D/Perspectiva, glare e resposta ao movimento do mouse."
+          ],
+          en: [
+            "New Deck and card-details dialogs now use portals and remain centered in the viewport regardless of page layout.",
+            "Deck Builder now shows 14 cards per page.",
+            "The card-details dialog fully preserves its 3D/Perspective, glare and pointer response."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
+    version: "3.5.0",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Interface Eternal Unificada", en: "Unified Eternal Interface" },
+    summary: {
+      pt: "Meus Decks, Deck Builder, Configurações, Conta/Perfil e Loja passam a compartilhar a mesma linguagem cinematográfica do Menu Principal e do Match Setup.",
+      en: "My Decks, Deck Builder, Settings, Account/Profile and Store now share the same cinematic language as the Main Menu and Match Setup."
+    },
+    sections: [
+      {
+        title: { pt: "Redesign visual", en: "Visual redesign" },
+        items: {
+          pt: [
+            "Wallpapers locais agora acompanham as principais telas de sistema com gradiente, grain e contraste iguais à identidade da Home.",
+            "Meus Decks ganhou cabeçalho cinematográfico, biblioteca mais limpa e cards de deck com perspectiva 3D sutil no mouse.",
+            "Deck Builder recebeu composição mais limpa e translúcida, mantendo filtros, paginação, importação/exportação, capas e todas as funções atuais.",
+            "Configurações usa navegação lateral inspirada no Menu Principal, com barra branca de seleção e painéis menos parecidos com dashboard web.",
+            "Conta, Perfil e Loja foram integrados ao mesmo sistema visual, mantendo login, sincronização e fluxos existentes."
+          ],
+          en: [
+            "Local wallpapers now follow the main system screens with the same gradient, grain and contrast identity used by Home.",
+            "My Decks gains a cinematic header, cleaner library and subtle pointer-responsive 3D perspective on deck cards.",
+            "Deck Builder receives a cleaner translucent composition while preserving filters, pagination, import/export, covers and current features.",
+            "Settings uses Main Menu-inspired side navigation with a white selector bar and less dashboard-like panels.",
+            "Account, Profile and Store are integrated into the same visual system while keeping login, sync and existing flows."
+          ]
+        }
+      },
+      {
+        title: { pt: "Cartas e perspectiva", en: "Cards & perspective" },
+        items: {
+          pt: [
+            "O efeito 3D/Perspectiva do modal de detalhes da carta foi preservado integralmente.",
+            "Capas na biblioteca de decks, preview do deck pronto e capa atual do Deck Builder recebem uma versão mais sutil do efeito 3D para manter a sensação física das cartas sem sobrecarregar a interface."
+          ],
+          en: [
+            "The card-details 3D/Perspective effect is fully preserved.",
+            "Deck-library covers, prebuilt preview and the current Deck Builder cover receive a subtler 3D effect to keep the physical-card feel without overloading the interface."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
+    version: "3.4.1b",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Coerência do Menu de Partida", en: "Match Menu Consistency" },
+    summary: {
+      pt: "As telas de preparação passam a usar menu e títulos à esquerda, tipografia alinhada à Home e menos controles duplicados.",
+      en: "Match setup screens now use left-side menus and titles, Home-matched typography and fewer duplicated controls."
+    },
+    sections: [
+      {
+        title: { pt: "Interface", en: "Interface" },
+        items: {
+          pt: [
+            "Título, status e opções dos modos foram movidos para o lado esquerdo, seguindo a composição do Menu Principal.",
+            "Os botões do Match Setup agora usam a mesma tipografia, peso, tamanho e comportamento de hover do Menu Principal.",
+            "Troca de deck duplicada foi removida dos menus: o controle permanece abaixo do retrato do respectivo jogador.",
+            "O seletor de cor foi removido do Online Normal; a preferência de cor já salva continua sendo utilizada.",
+            "Jogo Livre, Eternal CPU, Online Normal e Ranked receberam o mesmo tratamento visual sem alteração de gameplay."
+          ],
+          en: [
+            "Mode title, status and options moved to the left side following the Main Menu composition.",
+            "Match Setup buttons now use the Main Menu typography, weight, sizing and hover behavior.",
+            "Duplicated deck-change actions were removed from menus; the control remains below each player's portrait.",
+            "The color selector was removed from Normal Online while the saved color preference continues to be used.",
+            "Free Play, Eternal CPU, Normal Online and Ranked received the same visual treatment without gameplay changes."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
+    version: "3.4.1a",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Polimento Visual do Match Setup", en: "Match Setup Visual Polish" },
+    summary: {
+      pt: "Ajuste visual do Match Setup para alinhar títulos, informações e opções pela mesma margem esquerda, além de padronizar os botões com a escrita do menu principal.",
+      en: "Visual Match Setup polish aligning titles, information and options to the same left edge while matching button capitalization with the main menu."
+    },
+    sections: [
+      {
+        title: { pt: "Interface", en: "Interface" },
+        items: {
+          pt: [
+            "Títulos, status e opções do menu lateral agora compartilham a mesma referência de alinhamento à esquerda.",
+            "Botões deixam de usar CAPS LOCK e passam a seguir o padrão do menu principal, como Iniciar partida, Trocar deck e Voltar.",
+            "Jogo Livre, Eternal CPU, Online Normal e Ranked recebem o mesmo ajuste sem alterar suas regras ou fluxos."
+          ],
+          en: [
+            "Titles, status and side-menu options now share the same left alignment reference.",
+            "Buttons no longer use all caps and now follow the main-menu writing style, such as Start match, Change deck and Back.",
+            "Free Play, Eternal CPU, Normal Online and Ranked receive the same polish without changing rules or flows."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
+    version: "3.4.1",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Match Setup e Versus Screen", en: "Match Setup & Versus Screen" },
+    summary: {
+      pt: "Jogo Livre, Eternal CPU, Online Normal e Ranked ganham uma nova preparação de partida inspirada no mockup do Photoshop, mantendo a mesma identidade visual da Home.",
+      en: "Free Play, Eternal CPU, Normal Online and Ranked gain a new Photoshop-mockup-inspired match setup while keeping the same visual identity as Home."
+    },
+    sections: [
+      {
+        title: { pt: "Pré-batalha", en: "Pre-battle" },
+        items: {
+          pt: [
+            "Novo layout VS compartilhado com jogador, oponente, deck, moldura e menu lateral sobre os wallpapers locais.",
+            "Jogo Livre mantém dois decks, nomes editáveis e escolha de primeiro jogador.",
+            "Eternal CPU mantém dificuldade, Archetype Intelligence e AI Debugger dentro da nova interface.",
+            "Online mostra estados Aguardando/Buscando/Conectado sem alterar o matchmaking, criar sala ou entrar por código.",
+            "Ranked adota a mesma linguagem competitiva com Bronze III / 1000 RP como pré-temporada visual."
+          ],
+          en: [
+            "New shared VS layout with player, opponent, deck, frame and side menu over the local wallpapers.",
+            "Free Play keeps two decks, editable names and first-player selection.",
+            "Eternal CPU keeps difficulty, Archetype Intelligence and AI Debugger inside the new interface.",
+            "Online shows Waiting/Searching/Connected states without changing matchmaking, room creation or code joining.",
+            "Ranked adopts the same competitive language with Bronze III / 1000 RP as a visual pre-season."
+          ]
+        }
+      },
+      {
+        title: { pt: "Fluxo e navegação", en: "Flow & navigation" },
+        items: {
+          pt: [
+            "Novo seletor de deck rápido abre sobre a tela sem abandonar a preparação da partida.",
+            "O wallpaper atual é lembrado durante a sessão para diminuir cortes visuais entre Home e Match Setup.",
+            "Deck Builder aberto a partir de um setup retorna ao modo de origem."
+          ],
+          en: [
+            "A new quick deck selector opens over the setup screen without leaving match preparation.",
+            "The current wallpaper is remembered during the session to reduce visual cuts between Home and Match Setup.",
+            "Deck Builder opened from a setup returns to the originating mode."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
+    version: "3.4.0",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "Novo Menu Principal e Modos de Jogo", en: "Main Menu & Game Modes Redesign" },
+    summary: {
+      pt: "A Home foi reconstruída com navegação inspirada no mockup do Photoshop, usando os wallpapers locais e separando Partida Local, Online Normal/Ranqueada, Loja, Deck Builder e Configurações.",
+      en: "Home was rebuilt with navigation inspired by the Photoshop mockup, using local wallpapers and separating Local Match, Normal/Ranked Online, Store, Deck Builder and Settings."
+    },
+    sections: [
+      {
+        title: { pt: "Menu principal", en: "Main menu" },
+        items: {
+          pt: [
+            "Novo layout em tela cheia com gradiente escuro à esquerda, logo e menu vertical, preservando o slideshow otimizado de public/images/wallpapers.",
+            "Partida Local agora abre um submenu com Jogo Livre e Eternal CPU.",
+            "Multiplayer Online agora abre um submenu com Partida Normal e Partida Ranqueada.",
+            "O botão Voltar dos setups retorna ao submenu correto, mantendo o contexto da navegação.",
+            "Conta do jogador, Patch Notes e Sobre continuam acessíveis de forma compacta no topo."
+          ],
+          en: [
+            "New fullscreen layout with a dark left gradient, logo and vertical menu while preserving the optimized public/images/wallpapers slideshow.",
+            "Local Match now opens a submenu with Free Play and Eternal CPU.",
+            "Online Multiplayer now opens a submenu with Normal Match and Ranked Match.",
+            "Setup back buttons return to the correct submenu, preserving navigation context.",
+            "Player account, Patch Notes and About remain available through compact top controls."
+          ]
+        }
+      },
+      {
+        title: { pt: "Fundação dos novos modos", en: "New mode foundations" },
+        items: {
+          pt: [
+            "Partida Normal continua usando o Online existente: matchmaking rápido, criar sala e entrar por código.",
+            "Nova tela de pré-temporada Ranqueada prepara login obrigatório, deck válido, tiers e rating sem alterar a fila Normal ainda.",
+            "A entrada Loja já existe no novo menu e abre uma área própria em desenvolvimento, isolada das regras do simulador."
+          ],
+          en: [
+            "Normal Match continues to use the existing Online flow: quick matchmaking, create room and join by code.",
+            "A new Ranked pre-season screen prepares account requirements, legal decks, tiers and rating without changing the Normal queue yet.",
+            "The Store entry now exists in the new menu and opens its own in-development area, isolated from simulator rules."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.3.1e",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "Compatibilidade Conta + Online", en: "Account + Online Compatibility" },

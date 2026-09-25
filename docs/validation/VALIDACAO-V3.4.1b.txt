@@ -1,0 +1,10 @@
+Battle Spirits Eternal Simulator v3.4.1b — Validation
+
+Checklist:
+1. Match Setup menu/title on the left on desktop.
+2. Match menu button typography matches Main Menu sizing/weight/hover behavior.
+3. Duplicate deck change menu items removed from Local, CPU, Online and Ranked.
+4. Online Match Setup color selector removed.
+5. Player portrait deck-change controls remain available.
+6. Patch Notes lists v3.4.1b first.
+7. npm test / npm run verify / npm run verify:v3 pass.

@@ -1,0 +1,10 @@
+Battle Spirits Eternal Simulator v3.4.1 — Validation
+
+1. Jogo Livre usa Match Setup compartilhado.
+2. Eternal CPU usa Match Setup compartilhado.
+3. Online Normal preserva matchmaking/salas/código.
+4. Ranked continua pré-temporada.
+5. Seletor de deck reutilizável presente.
+6. Wallpaper da sessão preservado entre Home e setup.
+7. Patch Notes lista v3.4.1 no topo.
+8. npm run verify / verify:v3 / test devem passar.

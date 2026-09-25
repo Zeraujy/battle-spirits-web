@@ -5,6 +5,19 @@ const WALLPAPERS = Array.from({ length: 10 }, (_, index) =>
   `./images/wallpapers/wallpaper-${String(index + 1).padStart(2, "0")}.webp`
 );
 const DISPLAY_TIME = 12000;
+const WALLPAPER_SESSION_KEY = "battle-spirits-current-wallpaper";
+
+function savedWallpaperIndex() {
+  try {
+    const value = Number(window.sessionStorage?.getItem(WALLPAPER_SESSION_KEY));
+    if (Number.isInteger(value) && value >= 0 && value < WALLPAPERS.length) return value;
+  } catch {}
+  return Math.floor(Math.random() * WALLPAPERS.length);
+}
+
+function rememberWallpaperIndex(index) {
+  try { window.sessionStorage?.setItem(WALLPAPER_SESSION_KEY, String(index)); } catch {}
+}
 
 function shuffledIndexes(length, excludedIndex = null) {
   const indexes = Array.from({ length }, (_, index) => index);
@@ -32,7 +45,7 @@ function preloadAndDecode(src) {
 }
 
 export default function HomeWallpaperSlideshow() {
-  const firstIndexRef = useRef(Math.floor(Math.random() * WALLPAPERS.length));
+  const firstIndexRef = useRef(savedWallpaperIndex());
   const queueRef = useRef(shuffledIndexes(WALLPAPERS.length, firstIndexRef.current));
   const currentIndexRef = useRef(firstIndexRef.current);
   const activeLayerRef = useRef("a");
@@ -70,6 +83,7 @@ export default function HomeWallpaperSlideshow() {
               activeLayerRef.current = "b";
               setActiveLayer("b");
               currentIndexRef.current = nextIndex;
+              rememberWallpaperIndex(nextIndex);
               scheduleNext();
             }));
           } else {
@@ -78,6 +92,7 @@ export default function HomeWallpaperSlideshow() {
               activeLayerRef.current = "a";
               setActiveLayer("a");
               currentIndexRef.current = nextIndex;
+              rememberWallpaperIndex(nextIndex);
               scheduleNext();
             }));
           }
@@ -94,6 +109,7 @@ export default function HomeWallpaperSlideshow() {
     (async () => {
       await preloadAndDecode(WALLPAPERS[firstIndexRef.current]);
       if (cancelled) return;
+      rememberWallpaperIndex(firstIndexRef.current);
       setReady(true);
       scheduleNext();
     })();

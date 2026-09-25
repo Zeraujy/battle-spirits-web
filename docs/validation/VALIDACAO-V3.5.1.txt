@@ -1,0 +1,11 @@
+Battle Spirits Eternal Simulator v3.5.1 — Validation
+
+Checklist:
+1. npm test passes.
+2. npm run verify passes.
+3. npm run verify:v3 passes.
+4. Deck Builder uses 14 cards per page.
+5. New Deck and Card Details use centered portals.
+6. CardDetailsModal still contains 3D/Perspective pointer logic.
+7. Settings uses the centered settings-game-window layout.
+8. Patch Notes lists v3.5.1 first.

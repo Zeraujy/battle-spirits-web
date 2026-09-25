@@ -2,877 +2,149 @@ import { useMemo, useState } from "react";
 import { getDecks, getProfile } from "../services/storage.js";
 import { cardIndex } from "../services/cardRepository.js";
 import { createMatch, validateDeck } from "../game/state.js";
-import { getCardName, resolveCardImage } from "../game/cardAdapter.js";
-import EmptyState from "../components/common/EmptyState.jsx";
+import {
+  DeckPicker,
+  MatchMenuButton,
+  MatchSetupMenu,
+  MatchSetupScreen,
+  PlayerBattlePreview,
+  VersusMark,
+  deckIsValid,
+  deckSize,
+  getDeckPortrait
+} from "../components/match/MatchSetupScreen.jsx";
 
-import "../styles/pages/localSetup.css";
-
-
-function deckSize(deck) {
-  return (
-    deck?.cards?.reduce(
-      (sum, entry) =>
-        sum +
-        Number(
-          entry.quantity ||
-          0
-        ),
-      0
-    ) || 0
-  );
+function firstLabel(value) {
+  if (value === "player1") return "Jogador 1";
+  if (value === "player2") return "Jogador 2";
+  return "Aleatório";
 }
 
-
-function getDeckCoverCard(deck) {
-  if (!deck) {
-    return null;
-  }
-
-  const fallbackId =
-    deck.cards?.find(
-      (entry) =>
-        Number(
-          entry.quantity ||
-          0
-        ) > 0
-    )?.cardId ||
-    deck.cards?.find(
-      (entry) =>
-        Number(
-          entry.quantity ||
-          0
-        ) > 0
-    )?.id ||
-    null;
-
-  const coverId =
-    deck.coverCardId ||
-    fallbackId;
-
-  if (!coverId) {
-    return null;
-  }
-
-  return (
-    cardIndex.get(
-      coverId
-    ) ||
-    null
-  );
+function nextFirst(value) {
+  if (value === "random") return "player1";
+  if (value === "player1") return "player2";
+  return "random";
 }
 
+export default function LocalSetup({ onBack, onStart, onDeckBuilder }) {
+  const decks = useMemo(() => getDecks(), []);
+  const profile = useMemo(() => getProfile() || {}, []);
+  const [p1DeckId, setP1DeckId] = useState(decks[0]?.id || "");
+  const [p2DeckId, setP2DeckId] = useState(decks[1]?.id || decks[0]?.id || "");
+  const [p1Name, setP1Name] = useState(profile.displayName || profile.name || "Jogador 1");
+  const [p2Name, setP2Name] = useState("Jogador 2");
+  const [first, setFirst] = useState("random");
+  const [picker, setPicker] = useState(null);
+  const [error, setError] = useState("");
 
-function getInitials(name) {
-  const parts =
-    String(
-      name ||
-      "Player"
-    )
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean);
-
-  if (!parts.length) {
-    return "P";
-  }
-
-  if (parts.length === 1) {
-    return parts[0]
-      .slice(0, 2)
-      .toUpperCase();
-  }
-
-  return (
-    parts[0][0] +
-    parts[
-      parts.length - 1
-    ][0]
-  ).toUpperCase();
-}
-
-
-function DuelistPanel({
-  side,
-  label,
-  name,
-  setName,
-  deckId,
-  setDeckId,
-  decks,
-  deck,
-  avatar
-}) {
-  const coverCard =
-    useMemo(
-      () =>
-        getDeckCoverCard(
-          deck
-        ),
-      [deck]
-    );
-
-  const validation =
-    useMemo(
-      () =>
-        deck
-          ? validateDeck(
-              deck.cards,
-              cardIndex
-            )
-          : null,
-      [deck]
-    );
-
-  const coverImage =
-    coverCard
-      ? resolveCardImage(
-          coverCard
-        )
-      : "./images/card-back.webp";
-
-  const coverName =
-    coverCard
-      ? getCardName(
-          coverCard
-        )
-      : "Carta de capa";
-
-  const totalCards =
-    deckSize(
-      deck
-    );
-
-  return (
-    <section
-      className={
-        `local-duelist local-duelist-${side}`
-      }
-    >
-      <div
-        className="local-duelist-glow"
-        aria-hidden="true"
-      />
-
-      <div
-        className="local-cover-column"
-        aria-hidden="true"
-      >
-        <div className="local-cover-frame">
-          <img
-            src={
-              coverImage
-            }
-            alt=""
-          />
-
-          <span className="local-cover-shine" />
-        </div>
-
-        <span className="local-cover-label">
-          DECK COVER
-        </span>
-      </div>
-
-
-      <div className="local-duelist-content">
-
-        <header className="local-duelist-header">
-          <div className="local-duelist-identity">
-
-            <div className="local-avatar">
-              {avatar
-                ? (
-                  <img
-                    src={avatar}
-                    alt=""
-                  />
-                )
-                : (
-                  <span>
-                    {getInitials(
-                      name
-                    )}
-                  </span>
-                )}
-            </div>
-
-
-            <div>
-              <span className="local-player-kicker">
-                {side === "p1"
-                  ? "PLAYER 01"
-                  : "PLAYER 02"}
-              </span>
-
-              <h2>
-                {label}
-              </h2>
-            </div>
-
-          </div>
-
-
-          <div
-            className={
-              `local-ready-pill ${
-                validation?.ok
-                  ? "ready"
-                  : "warning"
-              }`
-            }
-          >
-            <i />
-
-            <span>
-              {validation?.ok
-                ? "PRONTO"
-                : "REVISAR"}
-            </span>
-          </div>
-        </header>
-
-
-        <div className="local-duelist-form">
-
-          <label>
-            <span>Nome</span>
-
-            <input
-              value={
-                name
-              }
-              onChange={(
-                event
-              ) =>
-                setName(
-                  event.target.value
-                )
-              }
-              autoComplete="off"
-            />
-          </label>
-
-
-          <label>
-            <span>Deck</span>
-
-            <select
-              value={
-                deckId
-              }
-              onChange={(
-                event
-              ) =>
-                setDeckId(
-                  event.target.value
-                )
-              }
-            >
-              {decks.map(
-                (item) => (
-                  <option
-                    value={
-                      item.id
-                    }
-                    key={
-                      item.id
-                    }
-                  >
-                    {
-                      item.name
-                    }
-                  </option>
-                )
-              )}
-            </select>
-          </label>
-
-        </div>
-
-
-        <footer className="local-deck-info">
-
-          <div>
-            <span>DECK</span>
-
-            <strong>
-              {deck?.name ||
-                "Nenhum deck"}
-            </strong>
-          </div>
-
-
-          <div>
-            <span>CARTAS</span>
-
-            <strong>
-              {totalCards}
-            </strong>
-          </div>
-
-
-          <div className="local-cover-name">
-            <span>CAPA</span>
-
-            <strong
-              title={
-                coverName
-              }
-            >
-              {coverName}
-            </strong>
-          </div>
-
-        </footer>
-
-      </div>
-    </section>
-  );
-}
-
-
-export default function LocalSetup({
-  onBack,
-  onStart
-}) {
-  const decks =
-    getDecks();
-
-  const profile =
-    getProfile();
-
-  const [
-    p1Deck,
-    setP1Deck
-  ] =
-    useState(
-      decks[0]?.id ||
-      ""
-    );
-
-  const [
-    p2Deck,
-    setP2Deck
-  ] =
-    useState(
-      decks[1]?.id ||
-      decks[0]?.id ||
-      ""
-    );
-
-  const [
-    p1Name,
-    setP1Name
-  ] =
-    useState(
-      profile.name ||
-      "Jogador 1"
-    );
-
-  const [
-    p2Name,
-    setP2Name
-  ] =
-    useState(
-      "Jogador 2"
-    );
-
-  const [
-    first,
-    setFirst
-  ] =
-    useState(
-      "random"
-    );
-
-  const [
-    error,
-    setError
-  ] =
-    useState(
-      ""
-    );
-
-
-  const selectedP1Deck =
-    useMemo(
-      () =>
-        decks.find(
-          (deck) =>
-            deck.id ===
-            p1Deck
-        ) ||
-        null,
-      [
-        decks,
-        p1Deck
-      ]
-    );
-
-
-  const selectedP2Deck =
-    useMemo(
-      () =>
-        decks.find(
-          (deck) =>
-            deck.id ===
-            p2Deck
-        ) ||
-        null,
-      [
-        decks,
-        p2Deck
-      ]
-    );
-
+  const p1Deck = decks.find((deck) => deck.id === p1DeckId) || null;
+  const p2Deck = decks.find((deck) => deck.id === p2DeckId) || null;
 
   function start() {
-    const d1 =
-      decks.find(
-        (deck) =>
-          deck.id ===
-          p1Deck
-      );
-
-    const d2 =
-      decks.find(
-        (deck) =>
-          deck.id ===
-          p2Deck
-      );
-
-
-    if (
-      !d1 ||
-      !d2
-    ) {
-      setError(
-        "Escolha dois decks."
-      );
-
+    if (!p1Deck || !p2Deck) {
+      setError("Escolha um deck para cada jogador.");
       return;
     }
 
-
-    const v1 =
-      validateDeck(
-        d1.cards,
-        cardIndex
-      );
-
-    const v2 =
-      validateDeck(
-        d2.cards,
-        cardIndex
-      );
-
-
-    if (
-      !v1.ok ||
-      !v2.ok
-    ) {
-      setError(
-        `Deck inválido. ${
-          [
-            ...v1.errors,
-            ...v2.errors
-          ].join(
-            " "
-          )
-        }`
-      );
-
+    const v1 = validateDeck(p1Deck.cards, cardIndex);
+    const v2 = validateDeck(p2Deck.cards, cardIndex);
+    if (!v1.ok || !v2.ok) {
+      setError([...v1.errors, ...v2.errors].join(" ") || "Revise os decks antes de iniciar.");
       return;
     }
 
+    setError("");
+    const firstPlayerId = first === "random"
+      ? (Math.random() < 0.5 ? "player1" : "player2")
+      : first;
 
-    setError(
-      ""
-    );
-
-
-    const firstPlayerId =
-      first ===
-      "random"
-        ? (
-          Math.random() <
-          .5
-            ? "player1"
-            : "player2"
-        )
-        : first;
-
-
-    onStart(
-      createMatch({
-        player1: {
-          name:
-            p1Name.trim() ||
-            "Jogador 1",
-
-          avatar:
-            profile.avatar,
-
-          deck:
-            d1.cards
-        },
-
-        player2: {
-          name:
-            p2Name.trim() ||
-            "Jogador 2",
-
-          avatar:
-            null,
-
-          deck:
-            d2.cards
-        },
-
-        firstPlayerId,
-
-        cardIndex
-      })
-    );
+    onStart(createMatch({
+      player1: {
+        name: p1Name.trim() || "Jogador 1",
+        avatar: profile.avatar || null,
+        deck: p1Deck.cards
+      },
+      player2: {
+        name: p2Name.trim() || "Jogador 2",
+        avatar: null,
+        deck: p2Deck.cards
+      },
+      firstPlayerId,
+      cardIndex
+    }));
   }
 
+  const noDecks = !decks.length;
 
   return (
-    <main className="standard-page local-setup-page">
+    <>
+      <MatchSetupScreen
+        className="free-play-match-setup"
+        error={error}
+        footer="JOGO LIVRE · VOCÊ CONTROLA OS DOIS LADOS · DECKS VALIDADOS ANTES DA PARTIDA"
+        menu={
+          <MatchSetupMenu eyebrow="PARTIDA LOCAL" titleTop="JOGO" titleBottom="LIVRE" status="1V1 LOCAL · CONTROLE TOTAL">
+            <MatchMenuButton label="Iniciar partida" detail="Começar o duelo" active disabled={noDecks} onClick={start} />
+            <MatchMenuButton
+              label={`Primeiro: ${firstLabel(first)}`}
+              detail="Clique para alternar"
+              disabled={noDecks}
+              onClick={() => setFirst(nextFirst(first))}
+            />
+            <MatchMenuButton label="Deck Builder" detail="Criar ou editar decks" onClick={onDeckBuilder} />
+            <MatchMenuButton label="Voltar" onClick={onBack} />
+          </MatchSetupMenu>
+        }
+      >
+        <div className="match-setup-duel">
+          <PlayerBattlePreview
+            side="left"
+            kicker="PLAYER 01"
+            name={p1Name}
+            onNameChange={setP1Name}
+            avatarSrc={profile.avatar || profile.avatarUrl || profile.avatar_url || profile.photoURL || profile.photo || null}
+            bannerSrc={getDeckPortrait(p1Deck)}
+            deck={p1Deck}
+            deckName={p1Deck?.name || "Nenhum deck"}
+            deckMeta={p1Deck ? `${deckSize(p1Deck)} cartas · ${deckIsValid(p1Deck) ? "pronto" : "revisar"}` : "crie um deck no Deck Builder"}
+            onChangeDeck={noDecks ? null : () => setPicker("p1")}
+          />
 
-      <header className="local-setup-topbar">
+          <VersusMark />
 
-        <button
-          className="ghost local-back-button"
-          onClick={
-            onBack
-          }
-        >
-          <span aria-hidden="true">
-            ←
-          </span>
-
-          Voltar
-        </button>
-
-
-        <div className="local-setup-title">
-
-          <span className="eyebrow">
-            LOCAL 1V1
-          </span>
-
-          <h1>
-            Preparar batalha
-          </h1>
-
-          <p>
-            Escolha os duelistas, os decks e quem começa a partida.
-          </p>
-
+          <PlayerBattlePreview
+            side="right"
+            kicker="PLAYER 02"
+            name={p2Name}
+            onNameChange={setP2Name}
+            avatarSrc={null}
+            bannerSrc={getDeckPortrait(p2Deck)}
+            deck={p2Deck}
+            deckName={p2Deck?.name || "Nenhum deck"}
+            deckMeta={p2Deck ? `${deckSize(p2Deck)} cartas · ${deckIsValid(p2Deck) ? "pronto" : "revisar"}` : "selecione um deck"}
+            onChangeDeck={noDecks ? null : () => setPicker("p2")}
+          />
         </div>
+      </MatchSetupScreen>
 
-
-        <div className="local-mode-status">
-          <i />
-
-          <div>
-            <span>MODO</span>
-
-            <strong>
-              LOCAL
-            </strong>
-          </div>
-        </div>
-
-      </header>
-
-
-      {!decks.length
-        ? (
-          <EmptyState
-            title="Você ainda não tem decks"
-          >
-            Volte ao Deck Builder,
-            importe seu `src/data`
-            e salve pelo menos
-            um deck de 40+
-            cartas.
-          </EmptyState>
-        )
-        : (
-          <section className="local-battle-shell">
-
-            <div className="local-duelists-row">
-
-              <DuelistPanel
-                side="p1"
-                label="Jogador 1"
-                name={
-                  p1Name
-                }
-                setName={
-                  setP1Name
-                }
-                deckId={
-                  p1Deck
-                }
-                setDeckId={
-                  setP1Deck
-                }
-                decks={
-                  decks
-                }
-                deck={
-                  selectedP1Deck
-                }
-                avatar={
-                  profile.avatar
-                }
-              />
-
-
-              <div
-                className="local-versus-column"
-                aria-hidden="true"
-              >
-
-                <span className="local-versus-line" />
-
-                <div className="local-versus-emblem">
-                  <small>
-                    BATTLE
-                  </small>
-
-                  <strong>
-                    VS
-                  </strong>
-
-                  <span>
-                    SPIRITS
-                  </span>
-                </div>
-
-                <span className="local-versus-line" />
-
-              </div>
-
-
-              <DuelistPanel
-                side="p2"
-                label="Jogador 2"
-                name={
-                  p2Name
-                }
-                setName={
-                  setP2Name
-                }
-                deckId={
-                  p2Deck
-                }
-                setDeckId={
-                  setP2Deck
-                }
-                decks={
-                  decks
-                }
-                deck={
-                  selectedP2Deck
-                }
-                avatar={
-                  null
-                }
-              />
-
-            </div>
-
-
-            <section className="local-first-player">
-
-              <div className="local-first-copy">
-
-                <span className="eyebrow">
-                  INICIATIVA
-                </span>
-
-                <div>
-                  <h3>
-                    Primeiro jogador
-                  </h3>
-
-                  <p>
-                    Escolha manualmente
-                    ou deixe o simulador
-                    decidir.
-                  </p>
-                </div>
-
-              </div>
-
-
-              <div
-                className="local-first-options"
-                role="group"
-                aria-label="Primeiro jogador"
-              >
-
-                <button
-                  type="button"
-                  className={
-                    first ===
-                    "random"
-                      ? "active"
-                      : ""
-                  }
-                  aria-pressed={
-                    first ===
-                    "random"
-                  }
-                  onClick={() =>
-                    setFirst(
-                      "random"
-                    )
-                  }
-                >
-                  <span>
-                    ◈
-                  </span>
-
-                  <div>
-                    <b>
-                      Aleatório
-                    </b>
-
-                    <small>
-                      Sorteio automático
-                    </small>
-                  </div>
-                </button>
-
-
-                <button
-                  type="button"
-                  className={
-                    first ===
-                    "player1"
-                      ? "active p1"
-                      : ""
-                  }
-                  aria-pressed={
-                    first ===
-                    "player1"
-                  }
-                  onClick={() =>
-                    setFirst(
-                      "player1"
-                    )
-                  }
-                >
-                  <span>
-                    01
-                  </span>
-
-                  <div>
-                    <b>
-                      Jogador 1
-                    </b>
-
-                    <small>
-                      {
-                        p1Name ||
-                        "Jogador 1"
-                      }
-                    </small>
-                  </div>
-                </button>
-
-
-                <button
-                  type="button"
-                  className={
-                    first ===
-                    "player2"
-                      ? "active p2"
-                      : ""
-                  }
-                  aria-pressed={
-                    first ===
-                    "player2"
-                  }
-                  onClick={() =>
-                    setFirst(
-                      "player2"
-                    )
-                  }
-                >
-                  <span>
-                    02
-                  </span>
-
-                  <div>
-                    <b>
-                      Jogador 2
-                    </b>
-
-                    <small>
-                      {
-                        p2Name ||
-                        "Jogador 2"
-                      }
-                    </small>
-                  </div>
-                </button>
-
-              </div>
-
-            </section>
-
-
-            {error && (
-              <div className="local-setup-error">
-                <strong>
-                  Não foi possível iniciar
-                </strong>
-
-                <span>
-                  {error}
-                </span>
-              </div>
-            )}
-
-
-            <footer className="local-start-row">
-
-              <div className="local-start-hint">
-                <i />
-
-                <span>
-                  Os dois decks serão
-                  validados antes do início.
-                </span>
-              </div>
-
-
-              <button
-                className="primary-btn big local-start-button"
-                onClick={
-                  start
-                }
-              >
-                <span>
-                  Iniciar partida
-                </span>
-
-                <b aria-hidden="true">
-                  →
-                </b>
-              </button>
-
-            </footer>
-
-          </section>
-        )}
-
-    </main>
+      <DeckPicker
+        open={picker === "p1"}
+        title="Deck do Player 1"
+        decks={decks}
+        selectedId={p1DeckId}
+        onSelect={setP1DeckId}
+        onClose={() => setPicker(null)}
+        onDeckBuilder={onDeckBuilder}
+      />
+      <DeckPicker
+        open={picker === "p2"}
+        title="Deck do Player 2"
+        decks={decks}
+        selectedId={p2DeckId}
+        onSelect={setP2DeckId}
+        onClose={() => setPicker(null)}
+        onDeckBuilder={onDeckBuilder}
+      />
+    </>
   );
 }

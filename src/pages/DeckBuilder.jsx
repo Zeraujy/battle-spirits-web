@@ -1,4 +1,7 @@
+import PointerTiltSurface from "../components/layout/PointerTiltSurface.jsx";
+import EternalCinematicBackdrop from "../components/layout/EternalCinematicBackdrop.jsx";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import CardTile from "../components/cards/CardTile.jsx";
 import EmptyState from "../components/common/EmptyState.jsx";
 import CardDetailsModal from "../components/cards/CardDetailsModal.jsx";
@@ -11,8 +14,9 @@ import { useLanguage } from "../i18n.jsx";
 import "../styles/deckbuilder/deckBuilderPagination.css";
 import "../styles/deckbuilder/deckImportExport.css";
 import "../styles/deckbuilder/deckBuilderV3.css";
+import "../styles/pages/eternalInterfaceV350.css";
 
-const CARDS_PER_PAGE = 12;
+const CARDS_PER_PAGE = 14;
 const DECK_FILE_FORMAT = "battle-spirits-eternal-deck";
 const DECK_FILE_VERSION = 1;
 
@@ -218,7 +222,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
       format: DECK_FILE_FORMAT,
       version: DECK_FILE_VERSION,
       simulator: "Battle Spirits Eternal Simulator",
-      simulatorVersion: "3.3.1e",
+      simulatorVersion: "3.5.2d",
       exportedAt: new Date().toISOString(),
       deck: {
         name: String(draft.name || "").trim() || (pt ? "Deck Importado" : "Imported Deck"),
@@ -314,15 +318,15 @@ export default function DeckBuilder({ onBack, deckId = null }) {
     const boundedPage = Math.max(1, Math.min(totalPages, nextPage));
     setPage(boundedPage);
     requestAnimationFrame(() => {
-      browserRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      browserRef.current?.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
 
   return (
-    <main className="deck-page deck-builder-v3-page">
+    <main className="deck-page deck-builder-v3-page eternal-page eternal-builder-page">
+      <EternalCinematicBackdrop compact />
       <header className="page-header deck-builder-v3-topbar">
-        <button className="ghost deck-builder-v3-back" onClick={onBack}>
-          <span>←</span>
+        <button className="ghost deck-builder-v3-back eternal-menu-action" onClick={onBack}>
           {t("back")}
         </button>
 
@@ -350,8 +354,8 @@ export default function DeckBuilder({ onBack, deckId = null }) {
             {pt ? "Exportar Deck" : "Export Deck"}
           </button>
 
-          <button className="ghost" onClick={fresh}>{t("newDeck")}</button>
-          <button className="primary-btn" onClick={save}>{t("save")}</button>
+          <button className="ghost eternal-menu-action compact" onClick={fresh}>{t("newDeck")}</button>
+          <button className="primary-btn eternal-menu-action compact active" onClick={save}>{t("save")}</button>
         </div>
       </header>
 
@@ -365,7 +369,8 @@ export default function DeckBuilder({ onBack, deckId = null }) {
       <div className="deck-layout deck-builder-v3-layout">
         <aside className="panel deck-sidebar deck-builder-v3-sidebar">
           <div className="deck-builder-v3-cover-panel">
-            <div className="deck-builder-v3-cover-frame">
+            <PointerTiltSurface className="deck-builder-v3-cover-tilt" maxTilt={4.4}>
+              <div className="deck-builder-v3-cover-frame">
               {coverCard ? (
                 <img
                   src={resolveCardThumbnail(coverCard)}
@@ -387,7 +392,8 @@ export default function DeckBuilder({ onBack, deckId = null }) {
                   <small>{pt ? "Adicione cartas para escolher uma capa." : "Add cards to choose a cover."}</small>
                 </div>
               )}
-            </div>
+              </div>
+            </PointerTiltSurface>
 
             <div className="deck-builder-v3-cover-copy">
               <span>{pt ? "Deck atual" : "Current deck"}</span>
@@ -615,12 +621,13 @@ export default function DeckBuilder({ onBack, deckId = null }) {
         </section>
       </div>
 
-      {detailsCard && (
+      {detailsCard && typeof document !== "undefined" && createPortal(
         <CardDetailsModal
           card={detailsCard}
           initialLanguage={language === "en" ? "en" : "ptBR"}
           onClose={() => setDetailsCard(null)}
-        />
+        />,
+        document.body
       )}
     </main>
   );

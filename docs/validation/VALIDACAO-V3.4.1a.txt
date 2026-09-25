@@ -1,0 +1,13 @@
+Battle Spirits Eternal Simulator v3.4.1a
+Match Setup Visual Polish
+
+Escopo:
+- alinhamento do menu lateral
+- capitalização dos botões
+- nenhuma alteração de gameplay
+
+Validações executadas:
+- npm test
+- npm run verify
+- npm run verify:v3
+- auditoria de sintaxe/imports

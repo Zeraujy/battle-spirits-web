@@ -1,0 +1,10 @@
+Battle Spirits Eternal Simulator v3.5.0 — Validation
+
+1. npm run verify passes.
+2. npm run verify:v3 passes.
+3. npm test passes: 117/117 tests.
+4. CardDetailsModal still contains the pointer-responsive 3D/Perspective implementation.
+5. EternalCinematicBackdrop and PointerTiltSurface are required by verification.
+6. Patch Notes lists v3.5.0 first.
+7. No Rules Engine / Online protocol changes are introduced by the UI redesign.
+8. Final Vite production build is executed on Windows by GERENCIAR_PROJETO.bat before publishing.

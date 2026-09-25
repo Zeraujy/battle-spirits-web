@@ -1,3 +1,4 @@
+import EternalCinematicBackdrop from "../components/layout/EternalCinematicBackdrop.jsx";
 import {
   useEffect,
   useMemo,
@@ -27,6 +28,7 @@ import {
 } from "../i18n.jsx";
 
 import "../styles/pages/profile.css";
+import "../styles/pages/eternalInterfaceV350.css";
 
 
 function readImage(
@@ -468,20 +470,17 @@ export default function Profile({
 
 
   return (
-    <main className="standard-page profile-v2-page">
+    <main className="standard-page profile-v2-page eternal-page eternal-profile-page">
+      <EternalCinematicBackdrop compact />
 
       <header className="profile-v2-topbar">
 
         <button
-          className="ghost profile-v2-back"
+          className="ghost profile-v2-back eternal-menu-action"
           onClick={
             onBack
           }
         >
-          <span aria-hidden="true">
-            ←
-          </span>
-
           {pt
             ? "Voltar"
             : "Back"}

@@ -1,166 +1,20 @@
-# START HERE — v3.3.1e
+# START HERE — v3.5.2d
 
-Se você está aprendendo o projeto, comece por estes caminhos:
+Arquivos principais desta revisão:
 
-1. `src/pages/Simulator.jsx` — composição geral da Arena.
-2. `src/styles/arena/arenaV31.css` — estrutura visual principal da Arena; `arenaLayoutV321.css` concentra os ajustes consolidados atuais.
-3. `src/styles/arena/cardPresentationV317.css` — tamanho, LV/BP, Brave e glow das cartas em campo.
-4. `src/styles/arena/battleEmphasisV317.css` — feedback visual de atacante, bloqueador e bloqueadores legais.
-5. `src/components/cards/CardTile.jsx` — visual compartilhado de uma carta.
-6. `src/interactions/cardPointerDrag.js` — utilitários do novo arraste de cartas.
-7. `src/game/` — regras e estado da partida. Evite colocar regras dentro de componentes React.
-8. `src/services/cardRepository.js` — carregamento dos JSONs de cartas.
-9. `public/cards-database/` — imagens organizadas por coleção.
+- `src/components/match/MatchSetupScreen.jsx` — componente compartilhado dos banners VS.
+- `src/styles/pages/matchSetupV341.css` — alinhamento e dimensões compartilhadas dos banners/VS.
+- `src/components/common/ProjectInfoButtons.jsx` — Patch Notes internos.
+- `src/config/appVersion.js` — versão atual do simulador.
 
-Antes de entregar uma alteração:
+## v3.5.2d — VS & Banner Alignment Fix
+
+- Os dois jogadores reservam a mesma altura de cabeçalho, banner e área inferior.
+- O oponente/CPU reserva o espaço do botão mesmo quando não possui ação `Trocar deck`.
+- O `VS` é alinhado pela linha do banner, evitando o deslocamento visto na v3.5.2c.
+
+Antes de publicar:
 
 ```powershell
 npm run check
 ```
-
-Isso verifica estrutura/imagens, roda os testes e gera o build de produção.
-
-
-## v3.1.8 — Core & Combat UX
-
-- `src/components/game/PaymentStatus.jsx`: mostra custo/redução/progresso.
-- `src/components/game/BattleLinkOverlay.jsx`: seta/ligação visual de batalha.
-- `src/styles/arena/coreCombatV318.css`: estilos da atualização.
-
-A lógica de regras continua em `src/game/`.
-
-
-## v3.1.9 — Card Interaction
-
-A interação de cartas e Cores foi refinada sem mover regras para a UI.
-
-- `src/interactions/coreClickPolicy.js`: decide apenas o destino sugerido de um clique em Core.
-- `src/game/cores.js`: continua sendo a autoridade que valida e executa MOVE_CORE.
-- `src/styles/arena/cardInteractionV319.css`: feedback visual da v3.1.9.
-- `CoreArea.jsx` e `CardTile.jsx`: aceitam clique nos Core tokens além do drag existente.
-
-
-## v3.2.0 — Rules & Effects Expansion
-
-- `src/game/burstRules.js`: timing automático e janela de Burst.
-- `src/game/effectEngine/actionResolver.js`: operações estruturadas e proteções temporárias.
-- `src/game/databaseEffectCoverage.test.js`: garante cobertura dos tipos de operações da database atual.
-- `src/styles/arena/rulesEffectsV320.css`: painel visual da janela de Burst.
-- `src/components/common/ProjectInfoButtons.jsx`: Patch Notes internos do jogo. Atualize este arquivo em **toda nova versão**.
-
-A Reserve e o Core Trash não devem receber caixas extras de orientação durante pagamento; o feedback de custo fica no painel da jogada pendente.
-
-
-## v3.2.1 — Match Stability & AI Readiness
-
-- `src/game/legalActions.js`: fonte central para enumerar ações válidas de um jogador.
-- `src/game/stateValidation.js`: auditoria de integridade do estado da partida.
-- `src/game/actionLog.js`: registro estruturado de ações bem-sucedidas.
-- `src/game/snapshots.js`: snapshot, restauração e replay de Action Log.
-- `src/game/random.js`: RNG determinístico opcional por seed.
-- `src/game/devTools.js`: snapshot técnico com ações legais e integridade para debug.
-- `src/styles/arena/arenaLayoutV321.css`: base consolidada de Decks, mãos e zonas da Arena.
-
-A futura IA deve consultar `getLegalActions` em vez de reimplementar regras próprias.
-
-
-## v3.2.2 — CPU Combat Intelligence
-
-- `src/game/ai.js`: avaliação do Attack Step agora considera pressão total, trocas de BP e risco defensivo do turno seguinte.
-- `src/game/ai.test.js`: cobertura de preservação do último bloqueador, ataques suicidas, bloqueio eficiente e lethal.
-- A CPU continua obrigada a executar somente ações retornadas por `getLegalActions()`.
-
-A próxima etapa planejada após esta versão era **Core & Resource Management**, sem mover regras de custo para a IA.
-
-
-## v3.2.3 — CPU Core & Resource Management
-
-- `src/game/legalActions.js`: expõe variantes legais de invocação com Cores adicionais e movimentos de Reserve para Level Up.
-- `src/game/ai.js`: avalia flexibilidade de Cores, redução de custo, níveis, efeitos vinculados a Level e capacidade de continuar jogando depois de gastar recursos.
-- `src/game/ai.test.js`: cobre invocação em Level superior, Level Up, preservação de Reserve e sinergia de símbolos/redução.
-- Toda ação continua passando pela Rules Engine; a IA não ganha uma regra paralela de pagamento.
-
-A etapa seguinte é **Flash, Magic & Burst Intelligence**, implementada na v3.2.4.
-
-
-## v3.2.4 — Flash, Magic & Burst Intelligence
-
-- `src/game/effects.js`: valida o timing estruturado de Magic sem bloquear cartas antigas ainda não estruturadas.
-- `src/game/legalActions.js`: durante o Main Step, Main e Flash são expostos separadamente e continuam filtrados pela Rules Engine.
-- `src/game/ai.js`: avalia respostas de Flash, decisões pendentes de efeitos, preservação de Magic, Set Burst e ativação de Burst conforme o contexto.
-- `src/game/effectEngine/normalizer.js`: variantes `lifeDecrease` / `afterLifeReduced` agora entram na mesma janela automática de Burst após perda de Life.
-- `src/game/ai.test.js`: cobre timing de Magic, resposta a lethal, economia de Flash, prioridade de Burst suportada e decisão entre ativar/passar.
-
-A etapa seguinte é **Card Effect Intelligence**, implementada na v3.2.5.
-
-
-## v3.2.5 — Card Effect Intelligence
-
-- `src/game/aiEffectSemantics.js`: camada dedicada que mede o valor estratégico dos efeitos estruturados a partir da transição real de estado.
-- `src/game/ai.js`: Decision Queue, Magic, Burst e Trigger passam a combinar avaliação geral do tabuleiro com score semântico dos efeitos.
-- Destruição, retorno à mão/deck, Exhaust, Refresh, alterações de BP, compra/recuperação de cartas, geração de Core, Life e proteções recebem sinais próprios.
-- As decisões ranqueadas guardam `effectScore` e `effectReasons`, preparando o futuro AI Debugger.
-- A camada semântica acompanha apenas cartas que já eram públicas e contagens públicas; a identidade da mão/deck ocultos do oponente não é usada.
-
-
-## v3.3.0 — Planning / Lookahead
-
-- `src/game/ai.js`: adiciona `rankAIPlans()` com busca em largura limitada, orçamento determinístico de nós e desconto de ações futuras.
-- Normal compara a jogada atual com uma continuação; Hard pode planejar até três decisões futuras além da ação raiz, recalculando o plano após cada ação real.
-- A busca sempre usa `getLegalActions()` + `applyGameAction()` e para assim que o controle passa ao adversário.
-- Ações de progresso como Main → Attack são mantidas no feixe de busca mesmo quando possuem score imediato menor, permitindo enxergar pressão e lethal do Attack Step.
-- Mudanças que revelam informação antes oculta do deck encerram o lookahead; a CPU executa a ação e só então replana com a informação realmente conhecida.
-- Os resultados ranqueados passam a expor `planScore`, `planBonus`, `planDepth`, `planNodes` e `planActions`, preparando o AI Debugger visual.
-
-## v3.3.1 — Archetype Intelligence & AI Debugger
-
-- `src/game/aiArchetypes.js`: detecta afinidades Agressivo, Controle, Defensivo, Ultimate, Brave, Recursos e Equilibrado a partir da decklist conhecida antes da partida.
-- A CPU usa essas afinidades como pesos adicionais para ataque, bloqueio, Magic, Burst, Nexus, Ultimate, Brave e gerenciamento de recursos.
-- O perfil fica salvo em `match.ai.archetypeProfile`; sem perfil pré-calculado, a IA usa Equilibrado e não lê a ordem escondida do deck para inferir estratégia.
-- `chooseAIDecision()` expõe a mesma decisão real usada pela CPU com scores, plano previsto e alternativas, mantendo `chooseAIAction()` como wrapper compatível.
-- A tela Contra IA mostra o estilo detectado e permite ativar o **AI Debugger**.
-- O painel de debug na Arena mostra score total, imediato, lookahead, arquétipo, efeito, linha prevista e as melhores alternativas.
-- Na database atual, SD23 Eris é reconhecido como **Ultimate / Controle** e SD28 Land of Deep Green como **Ultimate / Brave**.
-
-A próxima evolução planejada é aprofundar **personalidades/arquétipos específicos e memória tática da partida**, permitindo que a CPU ajuste o plano ao comportamento observado do oponente sem consultar informação oculta.
-
-
-## v3.3.1b — Card Back Loading Placeholder
-
-- Database/Deck Builder mostra o verso oficial da carta enquanto a thumbnail ainda está inativa ou carregando.
-- A frente aparece com um fade curto somente depois do `load`.
-- Se a thumbnail falhar, o simulador tenta a arte original; se ambas falharem, o verso permanece no lugar sem ícone de imagem quebrada.
-- A Arena e os modais continuam usando as imagens originais normalmente.
-
-## v3.3.1a — Image Performance Hotfix
-
-- `public/cards-thumbnails/`: thumbnails WebP de 300 px para listas e Deck Builder; as artes originais continuam intactas para Arena, zoom e modal.
-- `CardTile.jsx`: suporta `imageVariant="thumbnail"`, lazy loading e fallback automático para a arte original.
-- `DeckBuilder.jsx`: carrega thumbnails sob demanda e faz prefetch da próxima página somente quando o navegador está ocioso.
-- `HomeWallpaperSlideshow.jsx`: deixa de baixar/decodear os 10 wallpapers no primeiro acesso; carrega apenas o atual e prepara o próximo em idle.
-- `public/_headers`: cache de navegador/Cloudflare para thumbnails, cartas e wallpapers.
-- Ao adicionar novas cartas, gere também a thumbnail correspondente preservando a mesma estrutura de pastas em `public/cards-thumbnails/`.
-
-
-## v3.3.1c — Fast Update & Deploy Workflow
-
-- `GERENCIAR_PROJETO.bat`: menu principal para aplicar patch, validar, publicar no GitHub e fazer deploy no Cloudflare.
-- `scripts/windows/project-manager.ps1`: automação por trás do menu.
-- `UPDATE-WORKFLOW.md`: instruções do novo fluxo.
-- Cards atuais já são 300×437 WebP e são reutilizados diretamente no Database/Deck Builder.
-- Wallpapers, card back e indicadores de Level foram otimizados para reduzir carregamento e deploy.
-
-
-## v3.3.1d — Update Pipeline Test
-
-Atualização mínima para testar o novo fluxo. Depois de publicar, confirme na Home o selo `UPDATE OK` ao lado de `V3.3.1d`.
-
-
-## v3.3.1e — Online Account Compatibility Fix
-
-- `src/online/publicProfile.js`: cria uma identidade pública mínima para salas e matchmaking.
-- Banner, bio, e-mail, sessão Supabase e outros campos locais não são enviados ao Socket.IO.
-- Avatares Base64 grandes são reduzidos para uma versão pequena antes de entrar no Online; URLs públicas curtas continuam suportadas.
-- `src/online/socketClient.js` bloqueia no cliente um perfil que exceda o orçamento de payload em vez de derrubar o transporte.
-- `server/index.mjs` sanitiza novamente o perfil e aplica limite conservador ao payload do Socket.IO.
-- Conta logada e Online agora usam o mesmo fluxo de sala/matchmaking do modo sem login, sem transportar o perfil completo.

@@ -1,0 +1,540 @@
+/* =========================================================
+   BATTLE SPIRITS ETERNAL SIMULATOR
+   v3.5.1 — Game Flow & Modal UX
+   Full-screen game flow, menu-consistent actions and centered overlays.
+========================================================= */
+
+/* ---------------------------------------------------------
+   SHARED MENU-LIKE ACTIONS
+   Mirrors the Main Menu interaction language.
+--------------------------------------------------------- */
+.eternal-menu-action {
+  position: relative;
+  min-height: 38px !important;
+  padding: 7px 14px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255,255,255,.48) !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: clamp(15px, 1.05vw, 19px) !important;
+  font-style: italic !important;
+  font-weight: 720 !important;
+  line-height: 1.1;
+  text-align: left;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  filter: none !important;
+  cursor: pointer;
+  transform: translateX(0);
+  transition: color .16s ease, transform .16s ease, text-shadow .16s ease, opacity .16s ease !important;
+}
+
+.eternal-menu-action::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 0;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 0 9px #fff, 0 0 18px rgba(255,255,255,.55);
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: height .16s ease, opacity .16s ease;
+}
+
+.eternal-menu-action::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 1px;
+  opacity: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,.13), transparent);
+  transition: opacity .16s ease;
+}
+
+.eternal-menu-action:hover:not(:disabled),
+.eternal-menu-action:focus-visible:not(:disabled),
+.eternal-menu-action.active:not(:disabled) {
+  color: #fff !important;
+  transform: translateX(8px) !important;
+  text-shadow: 0 0 12px rgba(255,255,255,.38);
+  outline: none;
+}
+
+.eternal-menu-action:hover:not(:disabled)::before,
+.eternal-menu-action:focus-visible:not(:disabled)::before,
+.eternal-menu-action.active:not(:disabled)::before {
+  height: 34px;
+  opacity: 1;
+}
+
+.eternal-menu-action:hover:not(:disabled)::after,
+.eternal-menu-action:focus-visible:not(:disabled)::after,
+.eternal-menu-action.active:not(:disabled)::after {
+  opacity: .72;
+}
+
+.eternal-menu-action.compact {
+  min-height: 34px !important;
+  padding-block: 5px !important;
+  font-size: 14px !important;
+}
+
+.eternal-menu-action:disabled {
+  opacity: .25 !important;
+  cursor: default;
+}
+
+/* Prevent legacy arrows/icons from reserving space on converted controls. */
+.eternal-menu-action > b[aria-hidden="true"],
+.eternal-menu-action > span[aria-hidden="true"] {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------
+   TRUE CENTERED OVERLAYS
+   Portals already escape page layout; these rules keep them viewport-bound.
+--------------------------------------------------------- */
+.deck-create-overlay,
+.card-details-backdrop,
+.modal-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9000 !important;
+  width: 100vw;
+  height: 100dvh;
+  margin: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden;
+}
+
+.deck-create-shell {
+  max-height: min(860px, calc(100dvh - 40px)) !important;
+}
+
+.deck-create-shell.prebuilt-mode {
+  height: min(820px, calc(100dvh - 40px));
+  display: grid;
+  grid-template-rows: auto minmax(0,1fr);
+}
+
+.deck-create-shell.prebuilt-mode .prebuilt-browser {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.card-details-shell {
+  max-height: calc(100dvh - 40px) !important;
+}
+
+/* ---------------------------------------------------------
+   SETTINGS AS A GAME WINDOW
+--------------------------------------------------------- */
+.eternal-settings-page.settings-game-page {
+  width: 100%;
+  height: 100dvh;
+  min-height: 0 !important;
+  padding: 20px !important;
+  overflow: hidden !important;
+  display: grid;
+  place-items: center;
+}
+
+.settings-game-window {
+  position: relative;
+  z-index: 4;
+  width: min(1540px, calc(100vw - 40px));
+  height: min(900px, calc(100dvh - 40px));
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0,1fr);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 8px;
+  background: rgba(3,3,3,.73);
+  box-shadow: 0 32px 110px rgba(0,0,0,.62), inset 0 1px 0 rgba(255,255,255,.025);
+  backdrop-filter: blur(22px) saturate(.82);
+}
+
+.eternal-settings-page .settings-game-topbar {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.11);
+}
+
+.eternal-settings-page .settings-game-shell {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 16px 20px 20px;
+  overflow: hidden;
+}
+
+.eternal-settings-page .settings-game-nav,
+.eternal-settings-page .settings-game-content {
+  min-height: 0;
+}
+
+.eternal-settings-page .settings-game-nav {
+  overflow: hidden;
+}
+
+.eternal-settings-page .settings-game-content {
+  height: 100%;
+  grid-template-rows: minmax(0,1fr) auto;
+  overflow: hidden;
+}
+
+.eternal-settings-page .settings-game-panel {
+  height: 100%;
+  min-height: 0 !important;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.eternal-settings-page .settings-game-actions {
+  min-height: 54px;
+  padding: 6px 10px;
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,.11);
+  border-radius: 0;
+  background: rgba(0,0,0,.28);
+  box-shadow: none;
+}
+
+.eternal-settings-page .settings-game-actions .eternal-menu-action {
+  min-width: 0 !important;
+}
+
+/* ---------------------------------------------------------
+   DECK BUILDER — FIXED VIEWPORT, INTERNAL WORK AREAS
+--------------------------------------------------------- */
+.eternal-builder-page.deck-builder-v3-page {
+  height: 100dvh;
+  min-height: 0 !important;
+  padding: 18px 26px !important;
+  overflow: hidden !important;
+  display: grid;
+  grid-template-rows: auto auto minmax(0,1fr);
+}
+
+.eternal-builder-page .deck-builder-v3-topbar {
+  width: min(1600px,100%);
+  max-width: none;
+  margin: 0 auto 10px;
+}
+
+.eternal-builder-page .deck-transfer-notice {
+  width: min(1500px,100%);
+  margin: 0 auto 8px;
+}
+
+.eternal-builder-page .deck-builder-v3-layout {
+  width: min(1600px,100%);
+  max-width: none;
+  height: 100%;
+  min-height: 0;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.eternal-builder-page .deck-builder-v3-sidebar,
+.eternal-builder-page .deck-builder-v3-browser {
+  height: 100%;
+  min-height: 0;
+}
+
+.eternal-builder-page .deck-builder-v3-sidebar {
+  max-height: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.eternal-builder-page .deck-builder-v3-browser {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.eternal-builder-page .deck-builder-v3-grid {
+  grid-template-columns: repeat(7, minmax(112px,1fr));
+  gap: 11px 9px;
+}
+
+.eternal-builder-page .deck-builder-v3-card {
+  padding: 7px;
+  border-radius: 10px;
+}
+
+.eternal-builder-page .deck-builder-v3-qty-control {
+  margin-top: 6px;
+  grid-template-columns: 32px 1fr 32px;
+  gap: 5px;
+}
+
+.eternal-builder-page .deck-builder-v3-qty-control button,
+.eternal-builder-page .deck-builder-v3-qty-control b {
+  min-height: 29px;
+}
+
+.eternal-builder-page .deck-builder-v3-card .cover-card-btn {
+  min-height: 28px;
+  margin-top: 5px;
+}
+
+.eternal-builder-page .deck-builder-v3-pagination {
+  position: sticky;
+  z-index: 12;
+  bottom: -16px;
+  margin: 12px -16px -16px;
+  padding: 11px 16px 14px;
+  background: linear-gradient(180deg, rgba(7,7,7,.15), rgba(7,7,7,.96) 32%);
+  backdrop-filter: blur(12px);
+}
+
+/* ---------------------------------------------------------
+   MY DECKS — SCREEN-BOUND LIBRARY
+--------------------------------------------------------- */
+.eternal-decks-page.deck-library-v2-page {
+  height: 100dvh;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  display: grid;
+  grid-template-rows: auto auto minmax(0,1fr);
+  padding: 22px 34px 24px !important;
+}
+
+.eternal-decks-page .deck-library-v2-topbar {
+  margin-bottom: 16px;
+}
+
+.eternal-decks-page .deck-library-v2-summary {
+  margin-bottom: 14px;
+}
+
+.eternal-decks-page .deck-library-v2-library {
+  min-height: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0,1fr) auto;
+}
+
+.eternal-decks-page .deck-library-v2-grid {
+  min-height: 0;
+  align-content: start;
+}
+
+.deck-library-v2-pagination {
+  min-height: 44px;
+  padding-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.deck-library-v2-pagination button {
+  min-width: 36px;
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: rgba(255,255,255,.42);
+  font-style: italic;
+  font-weight: 750;
+}
+
+.deck-library-v2-pagination button:hover:not(:disabled),
+.deck-library-v2-pagination button.active {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,.38);
+}
+
+.deck-library-v2-pagination button.active {
+  border-bottom: 2px solid #fff;
+}
+
+/* ---------------------------------------------------------
+   ACCOUNT / PROFILE / STORE — NO DOCUMENT SCROLL
+--------------------------------------------------------- */
+.eternal-account-page.account-v2-page,
+.eternal-profile-page.profile-v2-page,
+.eternal-store-page.store-scaffold {
+  height: 100dvh;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.eternal-account-page .account-v2-shell,
+.eternal-profile-page .profile-v2-shell {
+  max-height: calc(100dvh - 190px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Account auth buttons follow the menu language instead of web-form slabs. */
+.eternal-account-page .account-v2-auth-actions {
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 8px;
+}
+
+.eternal-account-page .account-v2-auth-actions .eternal-menu-action {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE FALLBACKS
+--------------------------------------------------------- */
+@media (max-width: 1500px) {
+  .eternal-builder-page .deck-builder-v3-grid {
+    grid-template-columns: repeat(6, minmax(108px,1fr));
+  }
+}
+
+@media (max-width: 1180px) {
+  .eternal-builder-page .deck-builder-v3-grid {
+    grid-template-columns: repeat(5, minmax(108px,1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .eternal-settings-page.settings-game-page,
+  .eternal-builder-page.deck-builder-v3-page,
+  .eternal-decks-page.deck-library-v2-page,
+  .eternal-account-page.account-v2-page,
+  .eternal-profile-page.profile-v2-page,
+  .eternal-store-page.store-scaffold {
+    height: auto;
+    min-height: 100dvh !important;
+    overflow-y: auto !important;
+  }
+
+  .settings-game-window {
+    width: 100%;
+    height: auto;
+    min-height: calc(100dvh - 28px);
+  }
+
+  .eternal-settings-page .settings-game-shell,
+  .eternal-builder-page .deck-builder-v3-layout {
+    overflow: visible;
+  }
+
+  .eternal-builder-page .deck-builder-v3-sidebar,
+  .eternal-builder-page .deck-builder-v3-browser,
+  .eternal-account-page .account-v2-shell,
+  .eternal-profile-page .profile-v2-shell {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+/* Portalized deck creation keeps the v3.5 cinematic appearance even outside .eternal-page. */
+.deck-create-overlay {
+  background: rgba(0,0,0,.84) !important;
+  backdrop-filter: blur(18px) saturate(.8) !important;
+}
+
+.deck-create-shell {
+  border-radius: 6px !important;
+  border-color: rgba(255,255,255,.23) !important;
+  background: linear-gradient(135deg, rgba(10,10,10,.96), rgba(3,3,3,.92)) !important;
+  box-shadow: 0 32px 100px rgba(0,0,0,.72) !important;
+}
+
+.deck-create-header h2 {
+  font-size: clamp(32px,3.2vw,50px);
+  font-style: italic;
+  letter-spacing: -.045em;
+}
+
+.deck-create-option,
+.prebuilt-list-panel,
+.prebuilt-detail {
+  border-radius: 4px !important;
+  background: rgba(255,255,255,.025) !important;
+  border-color: rgba(255,255,255,.13) !important;
+}
+
+.deck-create-option:hover:not(:disabled) {
+  background: rgba(255,255,255,.055) !important;
+}
+
+/* Compact two-row deck library: 8 items fit a 1080p game viewport without page scroll. */
+.eternal-decks-page .deck-library-v2-grid {
+  grid-template-columns: repeat(4, minmax(210px,1fr));
+  gap: 12px 16px;
+}
+
+.eternal-decks-page .deck-library-v2-card {
+  height: clamp(285px, 31vh, 330px);
+}
+
+.eternal-decks-page .deck-library-v2-content {
+  gap: 6px;
+  padding: 48px 14px 11px;
+}
+
+.eternal-decks-page .deck-library-v2-card-header h2 {
+  max-width: 190px;
+  font-size: 19px;
+}
+
+.eternal-decks-page .deck-library-v2-meta {
+  gap: 6px;
+}
+
+.eternal-decks-page .deck-library-v2-footer {
+  min-height: 28px;
+}
+
+/* ---------------------------------------------------------
+   v3.5.1a — DECK LIBRARY VISIBILITY HOTFIX
+   The lazy-loaded v3.5.0 deck CSS can arrive after this file and
+   restore height:100% on the card. Give the tilt wrapper the real
+   row height and force the card to fill that wrapper instead of an
+   indefinite percentage height.
+--------------------------------------------------------- */
+.eternal-decks-page .deck-library-v2-tilt {
+  display: block;
+  min-width: 0;
+  height: clamp(285px, 31vh, 330px);
+  min-height: 285px;
+}
+
+.eternal-decks-page .deck-library-v2-card {
+  height: 100% !important;
+  min-height: 0;
+}
+
+/* Short game viewports use one row / four decks per page so the
+   library remains fully visible without document scrolling. */
+@media (max-height: 959px) and (min-width: 901px) {
+  .eternal-decks-page .deck-library-v2-grid {
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .eternal-decks-page .deck-library-v2-tilt {
+    height: clamp(300px, 43vh, 360px);
+    min-height: 300px;
+  }
+}

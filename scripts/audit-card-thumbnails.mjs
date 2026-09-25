@@ -20,7 +20,7 @@ console.log("Card image performance audit");
 console.log(`- cartas WebP: ${files.length}`);
 console.log(`- peso total: ${(bytes / 1024 / 1024).toFixed(2)} MB`);
 console.log(`- acima de 180 KB: ${oversized.length}`);
-console.log("- estratégia v3.3.1e: Database/Deck Builder reutilizam a arte WebP canônica; sem árvore duplicada de thumbnails.");
+console.log("- estratégia preservada em v3.5.2d: Database/Deck Builder reutilizam a arte WebP canônica; sem árvore duplicada de thumbnails.");
 
 for (const file of oversized.slice(0, 20)) {
   console.warn(`  AVISO PESO: ${path.relative(root, file)} (${(fs.statSync(file).size / 1024).toFixed(0)} KB)`);

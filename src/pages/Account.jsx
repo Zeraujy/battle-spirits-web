@@ -1,3 +1,4 @@
+import EternalCinematicBackdrop from "../components/layout/EternalCinematicBackdrop.jsx";
 import {
   useCallback,
   useEffect,
@@ -30,6 +31,7 @@ import {
 } from "../i18n.jsx";
 
 import "../styles/pages/account.css";
+import "../styles/pages/eternalInterfaceV350.css";
 
 
 function getInitials(value) {
@@ -391,20 +393,17 @@ export default function Account({
 
 
   return (
-    <main className="standard-page account-v2-page">
+    <main className="standard-page account-v2-page eternal-page eternal-account-page">
+      <EternalCinematicBackdrop />
 
       <header className="account-v2-topbar">
 
         <button
-          className="ghost account-v2-back"
+          className="ghost account-v2-back eternal-menu-action"
           onClick={
             onBack
           }
         >
-          <span aria-hidden="true">
-            ←
-          </span>
-
           {pt
             ? "Voltar"
             : "Back"}
@@ -949,7 +948,7 @@ export default function Account({
             <div className="account-v2-auth-actions">
 
               <button
-                className="primary-btn big"
+                className="primary-btn big eternal-menu-action active"
                 disabled={
                   loading ||
                   !email.trim() ||
@@ -973,6 +972,7 @@ export default function Account({
 
 
               <button
+                className="eternal-menu-action"
                 disabled={
                   loading ||
                   !email.trim() ||

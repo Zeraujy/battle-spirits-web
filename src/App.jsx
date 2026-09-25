@@ -17,6 +17,8 @@ const Settings = lazy(() => import("./pages/Settings.jsx"));
 const LocalSetup = lazy(() => import("./pages/LocalSetup.jsx"));
 const AiSetup = lazy(() => import("./pages/AiSetup.jsx"));
 const OnlineLobby = lazy(() => import("./pages/OnlineLobby.jsx"));
+const RankedLobby = lazy(() => import("./pages/RankedLobby.jsx"));
+const Store = lazy(() => import("./pages/Store.jsx"));
 const Simulator = lazy(() => import("./pages/Simulator.jsx"));
 const Updater = lazy(() => import("./pages/Updater.jsx"));
 const ServerConsole = lazy(() => import("./pages/ServerConsole.jsx"));
@@ -50,13 +52,19 @@ export default function App() {
   else if (screen.name === "profile") content = <Profile onBack={() => go("home")} />;
   else if (screen.name === "account") content = <Account onBack={() => go("home")} onProfile={() => go("profile")} />;
   else if (screen.name === "settings") content = <Settings onBack={() => go("home")} />;
-  else if (screen.name === "decks") content = <Decks onBack={() => go("home")} onNew={() => go("deck", { deckId: null })} onEdit={(deckId) => go("deck", { deckId })} />;
-  else if (screen.name === "deck") content = <DeckBuilder deckId={screen.deckId} onBack={() => go("decks")} />;
-  else if (screen.name === "local") content = <LocalSetup onBack={() => go("home")} onStart={(match) => go("simulator", { match, mode: "local" })} />;
-  else if (screen.name === "ai") content = <AiSetup onBack={() => go("home")} onStart={(match) => go("simulator", { match, mode: "ai", viewerPlayerId: "player1" })} />;
-  else if (screen.name === "online") content = <OnlineLobby onBack={() => go("home")} onMatch={(payload) => go("simulator", { ...payload, mode: "online" })} />;
+  else if (screen.name === "decks") content = <Decks
+    onBack={() => screen.backTo ? go(screen.backTo) : go("home")}
+    onNew={() => go("deck", { deckId: null, backTo: screen.backTo })}
+    onEdit={(deckId) => go("deck", { deckId, backTo: screen.backTo })}
+  />;
+  else if (screen.name === "deck") content = <DeckBuilder deckId={screen.deckId} onBack={() => go("decks", { backTo: screen.backTo })} />;
+  else if (screen.name === "local") content = <LocalSetup onBack={() => go("home", { menu: "local" })} onDeckBuilder={() => go("decks", { backTo: "local" })} onStart={(match) => go("simulator", { match, mode: "local" })} />;
+  else if (screen.name === "ai") content = <AiSetup onBack={() => go("home", { menu: "local" })} onDeckBuilder={() => go("decks", { backTo: "ai" })} onStart={(match) => go("simulator", { match, mode: "ai", viewerPlayerId: "player1" })} />;
+  else if (screen.name === "online") content = <OnlineLobby onBack={() => go("home", { menu: "online" })} onDeckBuilder={() => go("decks", { backTo: "online" })} onMatch={(payload) => go("simulator", { ...payload, mode: "online" })} />;
+  else if (screen.name === "ranked") content = <RankedLobby onBack={() => go("home", { menu: "online" })} onAccount={() => go("account")} onDeckBuilder={() => go("decks", { backTo: "ranked" })} />;
+  else if (screen.name === "store") content = <Store onBack={() => go("home")} />;
   else if (screen.name === "simulator") content = <Simulator {...screen} onExit={() => go("home")} />;
-  else content = <Home go={go} />;
+  else content = <Home go={go} initialSection={screen.menu || "root"} />;
 
   return <Suspense fallback={<LoadingScreen />}>{content}</Suspense>;
 }

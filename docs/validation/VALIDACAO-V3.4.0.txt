@@ -1,0 +1,31 @@
+Battle Spirits Eternal Simulator v3.4.0 — Validation
+
+Release: Main Menu & Game Modes Redesign
+
+Checks esperados:
+- npm run verify
+- npm run verify:v3
+- npm test
+- npm run build (na máquina Windows/Cloudflare com dependências instaladas)
+
+Validação funcional manual:
+1. Home usa wallpapers de public/images/wallpapers.
+2. Partida Local -> Jogo Livre abre LocalSetup.
+3. Partida Local -> Eternal CPU abre AiSetup.
+4. Multiplayer Online -> Partida Normal abre OnlineLobby.
+5. Multiplayer Online -> Partida Ranqueada abre a tela de pré-temporada.
+6. Loja abre a tela própria em desenvolvimento.
+7. Deck Builder abre a biblioteca atual.
+8. Configurações abre Settings.
+9. Voltar de Local/CPU/Online retorna ao submenu correto.
+10. Patch Notes lista v3.4.0 no topo.
+
+Nenhuma regra de Battle Spirits, IA, matchmaking Normal ou database foi alterada por este redesign.
+
+Resultado neste pacote:
+- npm test: 117/117 PASS
+- npm run verify: PASS
+- npm run verify:v3: PASS
+- JSX/JS parse audit: 88 arquivos, 0 erros
+- Card artwork audit: 382 imagens, 0 abaixo do mínimo
+- Runtime artwork: 365/365 referências válidas

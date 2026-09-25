@@ -10,8 +10,7 @@ import EmptyState from "../components/common/EmptyState.jsx";
 import {
   getDecks,
   getProfile,
-  getSettings,
-  saveSettings
+  getSettings
 } from "../services/storage.js";
 
 import {
@@ -26,39 +25,26 @@ import {
   createOnlinePublicProfile
 } from "../online/publicProfile.js";
 
+import {
+  DeckPicker,
+  MatchMenuButton,
+  MatchSetupMenu,
+  MatchSetupScreen,
+  PlayerBattlePreview,
+  VersusMark,
+  deckIsValid,
+  deckSize,
+  getDeckPortrait
+} from "../components/match/MatchSetupScreen.jsx";
+
 import "../styles/theme/v230.css";
 import "../styles/pages/onlineLobbySafe.css";
 
-const PLAYER_COLORS = [
-  {
-    value: "#f0f0f0",
-    label: "Branco"
-  },
-  {
-    value: "#d8d8d8",
-    label: "Prata"
-  },
-  {
-    value: "#b8b8b8",
-    label: "Cinza claro"
-  },
-  {
-    value: "#929292",
-    label: "Cinza"
-  },
-  {
-    value: "#6f6f6f",
-    label: "Grafite"
-  },
-  {
-    value: "#4d4d4d",
-    label: "Chumbo"
-  }
-];
 
 export default function OnlineLobby({
   onBack,
-  onMatch
+  onMatch,
+  onDeckBuilder
 }) {
   const decks = getDecks();
   const profile = getProfile();
@@ -86,6 +72,9 @@ export default function OnlineLobby({
 
   const [error, setError] =
     useState("");
+
+  const [panelMode, setPanelMode] = useState("root");
+  const [deckPickerOpen, setDeckPickerOpen] = useState(false);
 
   const [
     searching,
@@ -609,19 +598,6 @@ export default function OnlineLobby({
     onMatch
   ]);
 
-  function chooseColor(
-    color
-  ) {
-    setPlayerColor(color);
-
-    saveSettings({
-      ...getSettings(),
-
-      onlinePlayerColor:
-        color
-    });
-  }
-
   function cancelSearch() {
     client.socket.emit(
       "matchmaking:cancel",
@@ -811,333 +787,166 @@ export default function OnlineLobby({
     );
   }
 
-  if (!decks.length) {
-    return (
-      <main className="standard-page">
-        <header className="page-header">
-          <button
-            className="ghost online-back-button"
-            onClick={onBack}
-          >
-            <span aria-hidden="true">←</span>
-            Voltar
-          </button>
+  const selectedDeck = decks.find((deck) => deck.id === deckId) || null;
+  const viewerId = room?.viewerPlayerId || null;
+  const ownRoomPlayer = viewerId ? room?.players?.[viewerId] : null;
+  const opponentId = viewerId === "player1" ? "player2" : viewerId === "player2" ? "player1" : null;
+  const opponentRoomPlayer = opponentId ? room?.players?.[opponentId] : null;
+  const ownName = ownRoomPlayer?.profile?.name || profile?.displayName || profile?.name || "Jogador";
+  const opponentName = searching
+    ? "PROCURANDO..."
+    : opponentRoomPlayer?.profile?.name || (room ? "AGUARDANDO..." : "AGUARDANDO OPONENTE");
+  const opponentConnected = Boolean(opponentRoomPlayer?.connected);
 
-          <h1>
-            Online
-          </h1>
-        </header>
-
-        <EmptyState title="Nenhum deck salvo">
-          Crie um deck válido antes de entrar no online.
-        </EmptyState>
-      </main>
-    );
+  function copyRoomCode() {
+    if (!room?.code) return;
+    try { navigator.clipboard?.writeText(room.code); } catch {}
+    setSearchMessage(`Código ${room.code} copiado.`);
   }
 
+  const normalMenu = (() => {
+    if (room) {
+      const isHost = room.viewerPlayerId === "player1";
+      return (
+        <MatchSetupMenu
+          eyebrow="MULTIPLAYER ONLINE"
+          titleTop="PARTIDA"
+          titleBottom="NORMAL"
+          status={`SALA ${room.code} · ${status.toUpperCase()}`}
+          badge="ROOM"
+        >
+          {isHost && !room.started && (
+            <MatchMenuButton
+              label="Iniciar partida"
+              detail={room.players?.player2 ? "Os dois jogadores estão prontos" : "Aguardando o segundo jogador"}
+              active={Boolean(room.players?.player2)}
+              disabled={!room.players?.player2}
+              onClick={start}
+            />
+          )}
+          {!isHost && (
+            <MatchMenuButton
+              label="Aguardando host"
+              detail="O criador da sala inicia a partida"
+              active
+              disabled
+            />
+          )}
+          <MatchMenuButton label={`Código: ${room.code}`} detail="Copiar código da sala" onClick={copyRoomCode} />
+          <MatchMenuButton label="Voltar" detail="Sair desta tela e desconectar" onClick={onBack} />
+        </MatchSetupMenu>
+      );
+    }
+
+    if (searching) {
+      return (
+        <MatchSetupMenu
+          eyebrow="MULTIPLAYER ONLINE"
+          titleTop="PARTIDA"
+          titleBottom="NORMAL"
+          status={searchMessage || "Procurando adversário..."}
+          badge={status.toUpperCase()}
+        >
+          <MatchMenuButton label="Cancelar busca" detail="Sair da fila de matchmaking" active onClick={cancelSearch} />
+          <MatchMenuButton label="Voltar" disabled />
+        </MatchSetupMenu>
+      );
+    }
+
+    if (panelMode === "join") {
+      return (
+        <MatchSetupMenu
+          eyebrow="MULTIPLAYER ONLINE"
+          titleTop="ENTRAR EM"
+          titleBottom="SALA"
+          status={`SERVIDOR · ${status.toUpperCase()}`}
+        >
+          <div className="match-menu-inline">
+            <input
+              autoFocus
+              placeholder="CÓDIGO"
+              value={joinCode}
+              maxLength={6}
+              onChange={(event) => setJoinCode(event.target.value.toUpperCase())}
+              onKeyDown={(event) => { if (event.key === "Enter") joinRoom(); }}
+            />
+            <button type="button" onClick={joinRoom}>Entrar</button>
+          </div>
+          <MatchMenuButton label="Voltar" onClick={() => setPanelMode("root")} />
+        </MatchSetupMenu>
+      );
+    }
+
+    return (
+      <MatchSetupMenu
+        eyebrow="MULTIPLAYER ONLINE"
+        titleTop="TIPO DE"
+        titleBottom="PARTIDA"
+        status={`SERVIDOR · ${status.toUpperCase()}`}
+        badge="NORMAL"
+      >
+        <MatchMenuButton
+          label="Procurar partida"
+          detail="Matchmaking rápido"
+          active
+          disabled={status !== "conectado" || !selectedDeck}
+          onClick={findRandomMatch}
+        />
+        <MatchMenuButton label="Criar sala" detail="Abra uma sala privada" disabled={status !== "conectado" || !selectedDeck} onClick={createRoom} />
+        <MatchMenuButton label="Entrar em uma sala" detail="Use um código de convite" disabled={status !== "conectado" || !selectedDeck} onClick={() => setPanelMode("join")} />
+        <MatchMenuButton label="Deck Builder" onClick={onDeckBuilder} />
+        <MatchMenuButton label="Voltar" onClick={onBack} />
+      </MatchSetupMenu>
+    );
+  })();
+
   return (
-    <main className="standard-page online-v230-page">
-      <header className="page-header">
-        <button
-          className="ghost online-back-button"
-          onClick={onBack}
-        >
-          <span aria-hidden="true">←</span>
-          Voltar
-        </button>
+    <>
+      <MatchSetupScreen
+        className="online-match-setup"
+        error={error}
+        footer={room ? `ONLINE 1V1 · SALA ${room.code}` : searching ? "ONLINE 1V1 · MATCHMAKING EM ANDAMENTO" : "ONLINE 1V1 · MATCHMAKING, SALAS PRIVADAS E CÓDIGO"}
+        menu={normalMenu}
+      >
+        <div className="match-setup-duel">
+          <PlayerBattlePreview
+            side="left"
+            kicker="VOCÊ"
+            name={ownName}
+            avatarSrc={profile?.avatar || profile?.avatarUrl || profile?.avatar_url || profile?.photoURL || profile?.photo || null}
+            bannerSrc={getDeckPortrait(selectedDeck)}
+            deck={selectedDeck}
+            deckName={selectedDeck?.name || "Nenhum deck"}
+            deckMeta={selectedDeck ? `${deckSize(selectedDeck)} cartas · ${deckIsValid(selectedDeck) ? "pronto" : "revisar"}` : "crie um deck para jogar"}
+            onChangeDeck={!room && !searching && decks.length ? () => setDeckPickerOpen(true) : null}
+            status={status === "conectado" ? "ONLINE" : status.toUpperCase()}
+          />
 
-        <div>
-          <span className="eyebrow">
-            ONLINE 1V1
-          </span>
+          <VersusMark />
 
-          <h1>
-            Partida online
-          </h1>
+          <PlayerBattlePreview
+            side="right"
+            kicker={room ? "OPONENTE" : "MATCHMAKING"}
+            name={opponentName}
+            avatarSrc={opponentRoomPlayer?.profile?.avatar || opponentRoomPlayer?.profile?.avatarUrl || opponentRoomPlayer?.profile?.avatar_url || null}
+            bannerSrc={opponentRoomPlayer ? "./images/card-back.webp" : null}
+            deckName={opponentRoomPlayer ? "Deck adversário" : searching ? "Buscando jogador" : "Aguardando conexão"}
+            deckMeta={opponentRoomPlayer ? (opponentConnected ? "conectado · identidade pública" : "offline") : "o deck será revelado apenas quando permitido"}
+            status={opponentRoomPlayer ? (opponentConnected ? "CONECTADO" : "OFFLINE") : searching ? "BUSCANDO" : "ESPERA"}
+            waiting={!opponentRoomPlayer}
+          />
         </div>
+      </MatchSetupScreen>
 
-        <span
-          className={`connection-pill ${status}`}
-        >
-          {status}
-        </span>
-      </header>
-
-      <section className="panel online-panel online-v230-panel">
-        {!room && (
-          <>
-            <div className="online-setup-grid">
-              <label>
-                Deck
-
-                <select
-                  value={deckId}
-                  disabled={
-                    searching
-                  }
-                  onChange={(
-                    event
-                  ) =>
-                    setDeckId(
-                      event
-                        .target
-                        .value
-                    )
-                  }
-                >
-                  {decks.map(
-                    (deck) => (
-                      <option
-                        value={
-                          deck.id
-                        }
-                        key={
-                          deck.id
-                        }
-                      >
-                        {
-                          deck.name
-                        }
-                      </option>
-                    )
-                  )}
-                </select>
-              </label>
-
-              <div className="online-color-picker">
-                <span>
-                  Cor do jogador
-                </span>
-
-                <div>
-                  {PLAYER_COLORS.map(
-                    (color) => (
-                      <button
-                        type="button"
-                        key={
-                          color.value
-                        }
-                        title={
-                          color.label
-                        }
-                        aria-label={
-                          color.label
-                        }
-                        disabled={
-                          searching
-                        }
-                        className={
-                          playerColor ===
-                          color.value
-                            ? "selected"
-                            : ""
-                        }
-                        style={{
-                          background:
-                            color.value
-                        }}
-                        onClick={() =>
-                          chooseColor(
-                            color.value
-                          )
-                        }
-                      />
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <section className="quick-match-card">
-              <div>
-                <span className="eyebrow">
-                  PARTIDA RÁPIDA
-                </span>
-
-                <h2>
-                  Procurar partida
-                </h2>
-
-                <p>
-                  Encontre automaticamente outro jogador disponível.
-                </p>
-              </div>
-
-              {!searching ? (
-                <button
-                  className="primary-btn big"
-                  disabled={
-                    status !==
-                    "conectado"
-                  }
-                  onClick={
-                    findRandomMatch
-                  }
-                >
-                  Procurar partida
-                </button>
-              ) : (
-                <div className="matchmaking-searching">
-                  <div className="matchmaking-pulse" />
-
-                  <strong>
-                    {
-                      searchMessage
-                    }
-                  </strong>
-
-                  <button
-                    className="ghost"
-                    onClick={
-                      cancelSearch
-                    }
-                  >
-                    Cancelar busca
-                  </button>
-                </div>
-              )}
-            </section>
-
-            <div className="online-divider">
-              <span>
-                OU JOGUE COM UM AMIGO
-              </span>
-            </div>
-
-            <div className="online-room-options">
-              <button
-                className="primary-btn"
-                disabled={
-                  searching
-                }
-                onClick={
-                  createRoom
-                }
-              >
-                Criar sala
-              </button>
-
-              <div className="join-box">
-                <input
-                  placeholder="CÓDIGO"
-                  value={
-                    joinCode
-                  }
-                  maxLength={6}
-                  disabled={
-                    searching
-                  }
-                  onChange={(
-                    event
-                  ) =>
-                    setJoinCode(
-                      event
-                        .target
-                        .value
-                        .toUpperCase()
-                    )
-                  }
-                />
-
-                <button
-                  disabled={
-                    searching
-                  }
-                  onClick={
-                    joinRoom
-                  }
-                >
-                  Entrar
-                </button>
-              </div>
-            </div>
-          </>
-        )}
-
-        {room && (
-          <div className="room-card">
-            <span>
-              CÓDIGO DA SALA
-            </span>
-
-            <strong>
-              {room.code}
-            </strong>
-
-            <div className="room-players">
-              {[
-                "player1",
-                "player2"
-              ].map(
-                (id) => {
-                  const roomPlayer =
-                    room.players?.[
-                      id
-                    ];
-
-                  const color =
-                    roomPlayer
-                      ?.profile
-                      ?.playerColor ||
-                    (id ===
-                    "player1"
-                      ? "#d8d8d8"
-                      : "#929292");
-
-                  return (
-                    <div
-                      key={id}
-                      style={{
-                        "--room-player-color":
-                          color
-                      }}
-                    >
-                      <span className="room-color-dot" />
-
-                      <b>
-                        {roomPlayer
-                          ?.profile
-                          ?.name ||
-                          "Aguardando..."}
-                      </b>
-
-                      <small>
-                        {roomPlayer
-                          ?.connected
-                          ? "conectado"
-                          : "offline"}
-                      </small>
-                    </div>
-                  );
-                }
-              )}
-            </div>
-
-            {room.viewerPlayerId ===
-              "player1" &&
-              !room.started && (
-                <button
-                  className="primary-btn big"
-                  disabled={
-                    !room.players
-                      ?.player2
-                  }
-                  onClick={
-                    start
-                  }
-                >
-                  Iniciar partida
-                </button>
-              )}
-          </div>
-        )}
-
-        {error && (
-          <div className="online-error-box">
-            {error}
-          </div>
-        )}
-      </section>
-    </main>
+      <DeckPicker
+        open={deckPickerOpen}
+        title="DECK PARA O ONLINE"
+        decks={decks}
+        selectedId={deckId}
+        onSelect={setDeckId}
+        onClose={() => setDeckPickerOpen(false)}
+        onDeckBuilder={onDeckBuilder}
+      />
+    </>
   );
 }
