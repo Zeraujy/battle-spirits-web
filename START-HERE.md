@@ -1,4 +1,4 @@
-# START HERE — v3.3.1d
+# START HERE — v3.3.1e
 
 Se você está aprendendo o projeto, comece por estes caminhos:
 
@@ -154,3 +154,13 @@ A próxima evolução planejada é aprofundar **personalidades/arquétipos espec
 ## v3.3.1d — Update Pipeline Test
 
 Atualização mínima para testar o novo fluxo. Depois de publicar, confirme na Home o selo `UPDATE OK` ao lado de `V3.3.1d`.
+
+
+## v3.3.1e — Online Account Compatibility Fix
+
+- `src/online/publicProfile.js`: cria uma identidade pública mínima para salas e matchmaking.
+- Banner, bio, e-mail, sessão Supabase e outros campos locais não são enviados ao Socket.IO.
+- Avatares Base64 grandes são reduzidos para uma versão pequena antes de entrar no Online; URLs públicas curtas continuam suportadas.
+- `src/online/socketClient.js` bloqueia no cliente um perfil que exceda o orçamento de payload em vez de derrubar o transporte.
+- `server/index.mjs` sanitiza novamente o perfil e aplica limite conservador ao payload do Socket.IO.
+- Conta logada e Online agora usam o mesmo fluxo de sala/matchmaking do modo sem login, sem transportar o perfil completo.

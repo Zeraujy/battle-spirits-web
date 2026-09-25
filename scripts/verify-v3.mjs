@@ -16,6 +16,7 @@ const required = [
   "src/game/aiEffectSemantics.js",
   "src/game/stateValidation.js",
   "src/game/snapshots.js",
+  "src/online/publicProfile.js",
   "src/components/cards/CardDetailsModal.jsx",
   "src/components/home/HomeWallpaperSlideshow.jsx",
   "scripts/windows/CONFIGURAR-ONLINE.bat",
@@ -30,7 +31,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.3.1-c") throw new Error(`package.json está em ${pkg.version}, esperado 3.3.1-c`);
+if (pkg.version !== "3.3.1-e") throw new Error(`package.json está em ${pkg.version}, esperado 3.3.1-e`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");

@@ -13,6 +13,50 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.3.1e",
+    date: { pt: "24/09/2026", en: "09/24/2026" },
+    title: { pt: "Compatibilidade Conta + Online", en: "Account + Online Compatibility" },
+    summary: {
+      pt: "Perfis logados deixam de transportar avatar/banner e dados locais em excesso ao entrar em salas ou matchmaking, evitando desconexões do Socket.IO.",
+      en: "Signed-in profiles no longer transport oversized avatar/banner and local profile data when joining rooms or matchmaking, preventing Socket.IO disconnects."
+    },
+    sections: [
+      {
+        title: { pt: "Perfil público Online", en: "Online public profile" },
+        items: {
+          pt: [
+            "O Online envia somente nome, username, cor do jogador e um avatar compacto.",
+            "Banner, bio, e-mail e quaisquer outros campos locais/da conta não entram no payload da sala.",
+            "Avatares Base64 grandes são reduzidos para uma versão de até 128 px; se não puderem ser reduzidos, a partida segue sem avatar.",
+            "URLs públicas curtas de avatar continuam suportadas."
+          ],
+          en: [
+            "Online now sends only player name, username, player color and a compact avatar.",
+            "Banner, bio, email and any other local/account fields are excluded from room payloads.",
+            "Large Base64 avatars are reduced to a version up to 128 px; if resizing fails, the match continues without an avatar.",
+            "Short public avatar URLs remain supported."
+          ]
+        }
+      },
+      {
+        title: { pt: "Proteção de transporte", en: "Transport protection" },
+        items: {
+          pt: [
+            "O cliente bloqueia perfis fora do orçamento antes de emitir pelo Socket.IO.",
+            "O servidor sanitiza novamente o perfil e rejeita payloads exagerados com mensagem clara.",
+            "Salas privadas e matchmaking usam a mesma identidade pública compacta."
+          ],
+          en: [
+            "The client blocks profiles over budget before emitting them through Socket.IO.",
+            "The server sanitizes the profile again and rejects oversized payloads with a clear message.",
+            "Private rooms and matchmaking use the same compact public identity."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.3.1d",
     date: { pt: "24/09/2026", en: "09/24/2026" },
     title: { pt: "Teste do Pipeline de Atualização", en: "Update Pipeline Test" },

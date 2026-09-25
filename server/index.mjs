@@ -49,7 +49,7 @@ export async function createBattleSpiritsServer(options = {}) {
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify({
         ok: true,
-        version: "3.3.1d",
+        version: "3.3.1e",
         rooms: rooms.size,
         cards: cardIndex.size,
         matchmakingQueued: matchmakingQueue.length,
@@ -64,6 +64,10 @@ export async function createBattleSpiritsServer(options = {}) {
   });
 
   const io = new Server(server, {
+    // Online identity is intentionally tiny in v3.3.1e. Keep a conservative
+    // transport ceiling so an accidental banner/base64 profile cannot flood
+    // the room server.
+    maxHttpBufferSize: 512 * 1024,
     cors: {
       origin: corsOrigin,
       methods: ["GET", "POST"]
@@ -87,12 +91,41 @@ export async function createBattleSpiritsServer(options = {}) {
     return crypto.randomBytes(24).toString("base64url");
   }
 
+  const ONLINE_AVATAR_MAX_CHARS = 120_000;
+  const ONLINE_PROFILE_MAX_JSON_CHARS = 160_000;
+  const DATA_IMAGE_PATTERN = /^data:image\/(?:png|jpe?g|webp|gif);base64,/i;
+  const REMOTE_IMAGE_PATTERN = /^https?:\/\//i;
+
+  function sanitizePublicAvatar(value) {
+    if (typeof value !== "string") return null;
+    const source = value.trim();
+    if (!source) return null;
+    if (REMOTE_IMAGE_PATTERN.test(source)) return source.length <= 2_048 ? source : null;
+    if (DATA_IMAGE_PATTERN.test(source)) return source.length <= ONLINE_AVATAR_MAX_CHARS ? source : null;
+    return null;
+  }
+
+  function validateOnlineProfilePayload(profile = {}) {
+    let size = 0;
+    try { size = JSON.stringify(profile || {}).length; }
+    catch { return { ok: false, error: "Perfil Online inválido." }; }
+
+    if (size > ONLINE_PROFILE_MAX_JSON_CHARS) {
+      return {
+        ok: false,
+        error: "O perfil enviado ao Online está muito grande. Atualize o simulador e tente novamente."
+      };
+    }
+
+    return { ok: true };
+  }
+
   function publicProfile(profile = {}) {
     return {
-      name: String(profile.displayName || profile.name || "Jogador").slice(0, 40),
-      username: String(profile.username || "").slice(0, 24),
+      name: String(profile.displayName || profile.name || "Jogador").replace(/\s+/g, " ").trim().slice(0, 40) || "Jogador",
+      username: String(profile.username || "").replace(/\s+/g, " ").trim().slice(0, 24),
       playerColor: /^#[0-9a-f]{6}$/i.test(String(profile.playerColor || "")) ? profile.playerColor : null,
-      avatar: typeof profile.avatar === "string" ? profile.avatar.slice(0, 250000) : null
+      avatar: sanitizePublicAvatar(profile.avatar)
     };
   }
 
@@ -347,6 +380,8 @@ export async function createBattleSpiritsServer(options = {}) {
       ack({ ok: true });
     });
     onSafe(socket, "room:create", (payload, ack) => {
+      const profileValidation = validateOnlineProfilePayload(payload.profile);
+      if (!profileValidation.ok) return ack(profileValidation);
       const validation = validateDeck(payload.deck || [], cardIndex);
       if (!validation.ok) return ack({ ok: false, error: validation.errors.join(" ") });
       let roomCode = code();
@@ -368,6 +403,8 @@ export async function createBattleSpiritsServer(options = {}) {
     });
 
     onSafe(socket, "room:join", (payload, ack) => {
+      const profileValidation = validateOnlineProfilePayload(payload.profile);
+      if (!profileValidation.ok) return ack(profileValidation);
       const roomCode = String(payload.code || "").trim().toUpperCase();
       const room = rooms.get(roomCode);
       if (!room) return ack({ ok: false, error: "Sala não encontrada." });

@@ -1,0 +1,26 @@
+Battle Spirits Eternal Simulator v3.3.1e — Validation
+Date: 2026-09-24
+
+Focus: Online Account Compatibility
+
+RESULTS
+- npm test: PASS — 117 / 117 tests
+- npm run verify: PASS
+- npm run verify:v3: PASS
+- JSX parser check: PASS for OnlineLobby/Home/ProjectInfoButtons
+- Node syntax check: PASS for server/publicProfile/socketClient
+- Local Socket.IO integration: PASS
+  - oversized legacy-like profile (~220k chars): rejected with ACK while socket stayed connected
+  - compact public profile: accepted by profile layer; room validation continued normally
+  - two WebSocket clients created and joined a valid 40-card room successfully
+
+PRIVACY / TRANSPORT
+- Online public profile fields: name, username, playerColor, avatar only.
+- banner/bio/email/session/token fields are not copied into room payloads.
+- oversized Data URL avatar is compacted in browser or omitted.
+- client profile JSON budget: 160000 characters.
+- server Socket.IO maxHttpBufferSize: 512 KiB.
+- server public avatar budget: 120000 characters.
+
+BUILD NOTE
+- Vite production build was not executed in the Linux validation container because the available node_modules came from the user's Windows project and contains the Windows Rolldown native binding. The project manager on Windows runs npm run build with the native Windows dependencies.

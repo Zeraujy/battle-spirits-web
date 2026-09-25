@@ -1,17 +1,22 @@
-# Build Status — Battle Spirits Eternal Simulator v3.3.1d
+# Build Status — Battle Spirits Eternal Simulator v3.3.1e
+
+## Online Account Compatibility Fix
+- O Online não envia mais o objeto completo retornado por `getProfile()`.
+- O payload público contém somente nome, username, cor do jogador e avatar Online compacto.
+- `banner`, `bio` e quaisquer outros campos da conta ficam fora do Socket.IO.
+- Avatar Data URL acima do orçamento é redimensionado no cliente; se não puder ser reduzido, a partida continua sem avatar.
+- `socketClient.js` possui uma segunda barreira antes do emit.
+- O servidor sanitiza o perfil novamente e usa `maxHttpBufferSize` de 512 KiB.
 
 ## Fast Update & Deploy Workflow
-- `GERENCIAR_PROJETO.bat` automatiza aplicação de PATCH-ONLY, validação, build, commit/push e deploy Wrangler.
+- `GERENCIAR_PROJETO.bat` continua automatizando PATCH-ONLY, validação, build, commit/push e deploy Wrangler.
 - `.git`, `node_modules`, `dist`, `release`, `.env` e `server/.env` são preservados durante updates.
-- `npm install` só roda quando necessário.
-- Deploy local via Wrangler pode substituir o build remoto do Cloudflare, evitando a espera de inicialização do ambiente.
+- O script PowerShell permanece compatível com Windows PowerShell 5.1.
 
-## Asset optimization
-- Wallpapers 1920×1080: ~20,3 MB → ~1,7 MB.
-- Card back: PNG ~412 KB → WebP ~62 KB.
-- Indicadores de Level: ~3,0 MB → ~0,28 MB em WebP.
-- As 382 artes de carta atuais já são WebP 300×437 (~12,2 MB total), então listas usam a própria arte canônica sem thumbnail duplicada.
-- Remove o custo de requisições para `cards-thumbnails` inexistentes + fallback.
+## Asset optimization preservada
+- Wallpapers continuam otimizados em 1920×1080.
+- Card back e indicadores de Level continuam em WebP.
+- Database reutiliza as artes WebP canônicas e mantém placeholder de verso durante carregamento.
 
 ## Validação esperada
 - `npm run verify`
@@ -19,9 +24,4 @@
 - `npm test`
 - `npm run build` (com dependências instaladas)
 
-A v3.3.1d preserva IA, AI Debugger, Lookahead, Online/Matchmaking e o placeholder de verso da v3.3.1b.
-
-
-## v3.3.1d — Pipeline Test
-
-Atualização mínima para validar o novo GERENCIAR_PROJETO.bat. Confirmação visual: `V3.3.1d` + `UPDATE OK` na Home.
+A v3.3.1e preserva IA, AI Debugger, Lookahead, Matchmaking, regras e database da linha 3.3.1.

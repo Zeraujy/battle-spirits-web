@@ -1,0 +1,2 @@
+This patch includes the Windows PowerShell 5.1 TrimStart fix.
+Use this revised patch instead of the previous v3.3.1e patch.

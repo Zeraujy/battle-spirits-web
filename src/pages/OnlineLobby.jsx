@@ -22,6 +22,10 @@ import {
   ONLINE_SERVER_URL
 } from "../config/online.js";
 
+import {
+  createOnlinePublicProfile
+} from "../online/publicProfile.js";
+
 import "../styles/theme/v230.css";
 import "../styles/pages/onlineLobbySafe.css";
 
@@ -145,12 +149,11 @@ export default function OnlineLobby({
     );
   }
 
-  function currentProfile() {
-    return {
-      ...(profile || {}),
-      playerColor:
-        playerColorRef.current
-    };
+  async function currentOnlineProfile() {
+    return createOnlinePublicProfile(
+      profile || {},
+      playerColorRef.current
+    );
   }
 
   function abortMatchmaking(
@@ -251,7 +254,7 @@ export default function OnlineLobby({
      * o mesmo sistema de Criar Sala
      * já utilizado pelo online atual.
      */
-    const onMatchmakingHost = (
+    const onMatchmakingHost = async (
       payload
     ) => {
       const pairId =
@@ -284,7 +287,7 @@ export default function OnlineLobby({
       client.createRoom(
         {
           profile:
-            currentProfile(),
+            await currentOnlineProfile(),
 
           deck:
             deck.cards
@@ -348,7 +351,7 @@ export default function OnlineLobby({
      * a sala, o segundo jogador entra
      * usando o joinRoom original.
      */
-    const onMatchmakingRoom = (
+    const onMatchmakingRoom = async (
       payload
     ) => {
       const pairId =
@@ -392,7 +395,7 @@ export default function OnlineLobby({
             roomCode,
 
           profile:
-            currentProfile(),
+            await currentOnlineProfile(),
 
           deck:
             deck.cards
@@ -681,7 +684,7 @@ export default function OnlineLobby({
     );
   }
 
-  function createRoom() {
+  async function createRoom() {
     const deck =
       currentDeck();
 
@@ -704,7 +707,7 @@ export default function OnlineLobby({
     client.createRoom(
       {
         profile:
-          currentProfile(),
+          await currentOnlineProfile(),
 
         deck:
           deck.cards
@@ -726,7 +729,7 @@ export default function OnlineLobby({
     );
   }
 
-  function joinRoom() {
+  async function joinRoom() {
     const deck =
       currentDeck();
 
@@ -764,7 +767,7 @@ export default function OnlineLobby({
         code,
 
         profile:
-          currentProfile(),
+          await currentOnlineProfile(),
 
         deck:
           deck.cards

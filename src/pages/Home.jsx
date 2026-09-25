@@ -107,12 +107,12 @@ export default function Home({ go }) {
         <div className="v3-brand-mini">
           <span className="v3-live-dot" />
           <span>ETERNAL SIMULATOR</span>
-          <b>V3.3.1d</b>
+          <b>V3.3.1e</b>
           <span
             className="v3-update-pipeline-badge"
-            title={pt ? "Teste do novo fluxo de atualização concluído" : "New update workflow test completed"}
+            title={pt ? "Correção de compatibilidade entre conta e Online ativa" : "Account + Online compatibility fix active"}
           >
-            UPDATE OK
+            ONLINE FIX
           </span>
         </div>
 
@@ -226,7 +226,7 @@ export default function Home({ go }) {
               </div>
 
               <div className="v3-stat-card">
-                <strong>3.3.1d</strong>
+                <strong>3.3.1e</strong>
                 <span>Versão</span>
               </div>
             </div>
@@ -290,7 +290,7 @@ export default function Home({ go }) {
         <div className="v3-home-footer-center">
           <span className="v3-footer-line" />
           <b>ETERNAL SIMULATOR</b>
-          <small>V3.3.1d</small>
+          <small>V3.3.1e</small>
           <span className="v3-footer-line" />
         </div>
 

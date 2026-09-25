@@ -34,6 +34,8 @@ const requiredPaths = [
   "src/game/aiEffectSemantics.js",
   "src/game/aiArchetypes.js",
   "src/game/ai.test.js",
+  "src/online/publicProfile.js",
+  "src/online/publicProfile.test.js",
   "src/pages/AiSetup.jsx",
   "src/styles/pages/aiSetup.css",
   "src/game/stateValidation.js",
@@ -62,7 +64,7 @@ const requiredPaths = [
   "scripts/windows"
 ];
 
-console.log("Battle Spirits Simulator v3.3.1d — verificação estrutural\n");
+console.log("Battle Spirits Simulator v3.3.1e — verificação estrutural\n");
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -152,4 +154,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v3.3.1d validada.");
+console.log("\nVERIFY OK — estrutura v3.3.1e validada.");

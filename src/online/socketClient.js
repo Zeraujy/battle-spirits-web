@@ -1,4 +1,18 @@
 import { io } from "socket.io-client";
+import { ONLINE_PROFILE_MAX_JSON_CHARS } from "./publicProfile.js";
+
+
+function validateRoomPayload(payload) {
+  try {
+    const profileSize = JSON.stringify(payload?.profile || {}).length;
+    if (profileSize > ONLINE_PROFILE_MAX_JSON_CHARS) {
+      return "Perfil Online muito grande. O avatar foi bloqueado para evitar desconexão; tente novamente.";
+    }
+  } catch {
+    return "Perfil Online inválido.";
+  }
+  return null;
+}
 
 function normalizeServerUrl(value) {
   return String(value || "")
@@ -139,8 +153,16 @@ function createDesktopOnlineClient(serverUrl) {
       socket.clear();
       ready.then((id) => bridge.onlineDestroyClient(id)).catch(() => {});
     },
-    createRoom(payload, callback) { emitWithAck("room:create", payload, callback); },
-    joinRoom(payload, callback) { emitWithAck("room:join", payload, callback); },
+    createRoom(payload, callback) {
+      const error = validateRoomPayload(payload);
+      if (error) return callback?.({ ok: false, error });
+      emitWithAck("room:create", payload, callback);
+    },
+    joinRoom(payload, callback) {
+      const error = validateRoomPayload(payload);
+      if (error) return callback?.({ ok: false, error });
+      emitWithAck("room:join", payload, callback);
+    },
     startRoom(payload, callback) { emitWithAck("room:start", payload, callback); },
     action(payload, callback) { emitWithAck("game:action", payload, callback); },
     sendChat(text, callback) { emitWithAck("room:chat", { text }, callback); },
@@ -183,9 +205,13 @@ function createBrowserOnlineClient(serverUrl) {
     disconnect() { socket.disconnect(); },
     close() { socket.disconnect(); },
     createRoom(payload, callback) {
+      const error = validateRoomPayload(payload);
+      if (error) return callback?.({ ok: false, error });
       socket.emit("room:create", payload, (result) => { captureSession(result); callback?.(result); });
     },
     joinRoom(payload, callback) {
+      const error = validateRoomPayload(payload);
+      if (error) return callback?.({ ok: false, error });
       socket.emit("room:join", payload, (result) => { captureSession(result); callback?.(result); });
     },
     startRoom(payload, callback) { socket.emit("room:start", payload, callback); },

@@ -59,12 +59,13 @@ function Copy-UpdateTree($Source, $Destination) {
   $sourceRoot = (Resolve-Path $Source).Path
 
   Get-ChildItem -LiteralPath $sourceRoot -Recurse -Force -File | ForEach-Object {
-    $rel = $_.FullName.Substring($sourceRoot.Length).TrimStart('\\', '/')
+    $rel = [regex]::Replace($_.FullName.Substring($sourceRoot.Length), '^[\\/]+', '')
     if (-not $rel) { return }
     $parts = $rel -split '[\\/]'
     if ($blockedTop -contains $parts[0]) { return }
     if ($rel -eq ".env" -or $rel -eq "server\.env" -or $rel -eq "server/.env") { return }
-    if ($rel -eq ".update-delete.txt") { return }
+    $updateMetadata = @(".update-delete.txt", "PATCH-README.txt", "MANAGER-HOTFIX.txt")
+    if ($updateMetadata -contains $rel) { return }
 
     $target = Join-Path $Destination $rel
     $parent = Split-Path -Parent $target
