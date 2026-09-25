@@ -1,10 +1,10 @@
 @echo off
 setlocal
 cd /d "%~dp0..\.."
-title BATTLE SPIRITS v3.5.2d - GERAR APLICATIVO WINDOWS
+title BATTLE SPIRITS v3.6.0 - GERAR APLICATIVO WINDOWS
 
 echo ======================================================
-echo   BATTLE SPIRITS v3.5.2d - GERAR APLICATIVO WINDOWS
+echo   BATTLE SPIRITS v3.6.0 - GERAR APLICATIVO WINDOWS
 echo ======================================================
 echo.
 where node >nul 2>&1 || (echo ERRO: Node.js nao encontrado.& pause & exit /b 1)

@@ -267,7 +267,18 @@ export function getProfile() {
         null,
 
       banner:
-        null
+        null,
+
+      privacy: {
+        profileVisibility: "public",
+        friendRequestPolicy: "everyone",
+        messagePolicy: "friends",
+        discoverable: true,
+        showOnlineStatus: true,
+        showStats: true,
+        showDecks: true,
+        showMastery: true
+      }
     }
   );
 }

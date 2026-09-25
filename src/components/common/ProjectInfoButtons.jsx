@@ -13,6 +13,78 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.6.0",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Social Hub & Player Identity", en: "Social Hub & Player Identity" },
+    summary: {
+      pt: "Grande atualização social: novo hub de perfil, privacidade avançada, pedidos de amizade pendentes, mensagens privadas, notificações, presença, bloqueios e Maestria de cartas, mantendo a camada das partidas Online isolada.",
+      en: "Major social update: a new profile hub, advanced privacy, pending friend requests, private messages, notifications, presence, blocks and Card Mastery while keeping Online match networking isolated."
+    },
+    sections: [
+      {
+        title: { pt: "Perfil e privacidade", en: "Profile & privacy" },
+        items: {
+          pt: [
+            "O antigo Perfil foi reorganizado como Social Hub em estilo launcher, com navegação lateral, conteúdo central e lista de amigos persistente à direita.",
+            "Perfil Público, Somente Amigos ou Privado, regras de pedidos de amizade, mensagens, descoberta, status Online, estatísticas, decks e Maestria podem ser configurados separadamente.",
+            "Avatares e banners passam por compactação local antes de serem salvos, reduzindo peso no perfil social."
+          ],
+          en: [
+            "The old Profile page is now a launcher-style Social Hub with side navigation, a central workspace and a persistent friends dock.",
+            "Public, Friends-only or Private profiles plus request, messaging, discovery, Online status, stats, decks and Mastery visibility can be configured independently.",
+            "Avatars and banners are compressed locally before being stored, reducing social-profile payload size."
+          ]
+        }
+      },
+      {
+        title: { pt: "Amigos, chat e notificações", en: "Friends, chat & notifications" },
+        items: {
+          pt: [
+            "Pedidos de amizade agora ficam Pendentes até serem aceitos ou recusados; não existe mais auto-aceite.",
+            "Lista de amigos estilo launcher mostra presença, mensagens não lidas e atalho direto para conversas privadas.",
+            "Notificações registram pedidos, amizades aceitas e mensagens; bloqueios e políticas de contato são aplicados pelo Supabase."
+          ],
+          en: [
+            "Friend requests now remain Pending until accepted or declined; requests are no longer auto-approved.",
+            "The launcher-style friends list shows presence, unread messages and direct shortcuts into private conversations.",
+            "Notifications track requests, accepted friendships and messages; blocks and contact policies are enforced by Supabase."
+          ]
+        }
+      },
+      {
+        title: { pt: "Estatísticas e Maestria", en: "Statistics & Mastery" },
+        items: {
+          pt: [
+            "O perfil mostra decks válidos, cartas únicas, cor de afinidade e decks recentes sem precisar ler dados ocultos de partidas.",
+            "A Maestria de cartas possui sete níveis e usa presença, quantidade e uso como capa nos decks salvos como sinal inicial de afinidade.",
+            "Cartas de Maestria reutilizam o efeito 3D/Perspectiva da identidade Eternal."
+          ],
+          en: [
+            "Profiles now show valid decks, unique cards, color affinity and recent decks without reading hidden match data.",
+            "Card Mastery has seven levels and initially uses presence, copies and cover-card use across saved decks as affinity signals.",
+            "Mastery cards reuse the Eternal 3D/Perspective effect."
+          ]
+        }
+      },
+      {
+        title: { pt: "Isolamento do Online", en: "Online isolation" },
+        items: {
+          pt: [
+            "O Social Hub usa Supabase e só fica ativo enquanto a tela social está aberta.",
+            "A rede de partidas continua usando exclusivamente src/online/publicProfile.js + Socket.IO com o perfil mínimo e compacto criado na v3.3.1e.",
+            "Bio, banner, privacidade, lista de amigos, notificações e mensagens não entram no payload das partidas Online."
+          ],
+          en: [
+            "Social Hub uses Supabase and is active only while the social screen is open.",
+            "Match networking still exclusively uses src/online/publicProfile.js + Socket.IO with the tiny public match profile introduced in v3.3.1e.",
+            "Bio, banner, privacy, friends, notifications and direct messages never enter Online match payloads."
+          ]
+        }
+      }
+    ]
+  },
+
+  {
     version: "3.5.2d",
     date: { pt: "25/09/2026", en: "09/25/2026" },
     title: { pt: "Alinhamento de VS e Banners", en: "VS & Banner Alignment Fix" },

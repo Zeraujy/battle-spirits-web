@@ -137,7 +137,7 @@ export default function Home({ go, initialSection = "root" }) {
           </span>
           <span className="bs-account-copy">
             <strong>{name}</strong>
-            <small>{pt ? "Conta e perfil" : "Account & profile"}</small>
+            <small>{pt ? "Conta & Social Hub" : "Account & Social Hub"}</small>
           </span>
         </button>
 

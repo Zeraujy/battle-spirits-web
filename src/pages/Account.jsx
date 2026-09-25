@@ -562,8 +562,8 @@ export default function Account({
             >
               <span>
                 {pt
-                  ? "Abrir meu perfil"
-                  : "Open my profile"}
+                  ? "Abrir Social Hub"
+                  : "Open Social Hub"}
               </span>
 
               <b aria-hidden="true">
@@ -826,8 +826,8 @@ export default function Account({
               >
                 <span>
                   {pt
-                    ? "Abrir perfil social"
-                    : "Open social profile"}
+                    ? "Abrir Social Hub"
+                    : "Open Social Hub"}
                 </span>
 
                 <b aria-hidden="true">

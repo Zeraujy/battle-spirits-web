@@ -5,7 +5,7 @@ cd /d "%~dp0..\.."
 title Battle Spirits Eternal Simulator v3
 
 echo ================================================
-echo  BATTLE SPIRITS ETERNAL SIMULATOR - v3.5.2d
+echo  BATTLE SPIRITS ETERNAL SIMULATOR - v3.6.0
 echo ================================================
 echo.
 where node >nul 2>&1 || (echo [ERRO] Node.js nao encontrado.& pause & exit /b 1)

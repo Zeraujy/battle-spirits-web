@@ -39,6 +39,12 @@ const requiredPaths = [
   "src/game/ai.test.js",
   "src/online/publicProfile.js",
   "src/online/publicProfile.test.js",
+  "src/online/socialInsights.test.js",
+  "src/services/socialService.js",
+  "src/services/socialInsights.js",
+  "src/pages/Profile.jsx",
+  "src/styles/pages/socialHubV360.css",
+  "supabase/SOCIAL-HUB-3.6.sql",
   "src/pages/AiSetup.jsx",
   "src/pages/Home.jsx",
   "src/pages/RankedLobby.jsx",
@@ -76,7 +82,7 @@ const requiredPaths = [
   "scripts/windows"
 ];
 
-console.log("Battle Spirits Simulator v3.5.2d — verificação estrutural\n");
+console.log("Battle Spirits Simulator v3.6.0 — verificação estrutural\n");
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -166,4 +172,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v3.5.2d validada.");
+console.log("\nVERIFY OK — estrutura v3.6.0 validada.");
