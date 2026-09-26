@@ -26,6 +26,10 @@ import {
 } from "../online/publicProfile.js";
 
 import {
+  deckValidationOptionsForSettings
+} from "../online/customMatchSettings.js";
+
+import {
   DeckPicker,
   MatchMenuButton,
   MatchSetupMenu,
@@ -72,7 +76,7 @@ export default function OnlineLobby({
   const [firstPlayerMode, setFirstPlayerMode] = useState("random");
   const [turnTimerSeconds, setTurnTimerSeconds] = useState(0);
   const [mulliganEnabled, setMulliganEnabled] = useState(true);
-  const [roomRuleset, setRoomRuleset] = useState("standard");
+  const [roomRuleset, setRoomRuleset] = useState("eternal");
   const [lobbySnapshot, setLobbySnapshot] = useState({ rooms: [], players: [], counts: {} });
   const [roomFilter, setRoomFilter] = useState("open");
 
@@ -650,6 +654,15 @@ export default function OnlineLobby({
       return;
     }
 
+    if (!deckIsValid(deck, deckValidationOptionsForSettings({ ruleset: roomRuleset }))) {
+      setError(roomRuleset === "official"
+        ? "Este deck precisa estar apto ao regulamento oficial atual."
+        : roomRuleset === "lab"
+          ? "Revise o deck antes de criar a sala LAB."
+          : "Este deck precisa estar válido no formato Eternal.");
+      return;
+    }
+
     if (
       status !==
       "conectado"
@@ -873,7 +886,7 @@ export default function OnlineLobby({
             <span><b>Início</b>{room.settings?.firstPlayerMode === "host" ? "Host" : room.settings?.firstPlayerMode === "guest" ? "Convidado" : "Aleatório"}</span>
             <span><b>Turno</b>{room.settings?.turnTimerSeconds ? `${room.settings.turnTimerSeconds}s` : "Sem limite"}</span>
             <span><b>Mulligan</b>{room.settings?.mulliganEnabled === false ? "Desativado" : "Ativo"}</span>
-            <span><b>Regras</b>{room.settings?.ruleset === "lab" ? "LAB" : "Eternal"}</span>
+            <span><b>Regras</b>{room.settings?.ruleset === "lab" ? "LAB" : room.settings?.ruleset === "official" ? "Eternal Oficial" : "Eternal"}</span>
           </div>
           {isHost && !room.started && (
             <MatchMenuButton
@@ -964,9 +977,11 @@ export default function OnlineLobby({
               <label>
                 <span>Regras do deck</span>
                 <select value={roomRuleset} onChange={(event) => setRoomRuleset(event.target.value)}>
-                  <option value="standard">Eternal padrão</option>
+                  <option value="eternal">Eternal · partida casual</option>
+                  <option value="official">Eternal · regulamento oficial</option>
                   <option value="lab">LAB · teste de decks</option>
                 </select>
+                {roomRuleset === "official" && <small className="online-custom-warning">Usa a lista oficial de cartas proibidas e limitadas vigente.</small>}
                 {roomRuleset === "lab" && <small className="online-custom-warning">LAB permite decks a partir de 1 carta e até 99 cópias pelo mesmo nome. Use apenas para testes.</small>}
               </label>
               <label className="online-lobby2-check">
@@ -979,7 +994,7 @@ export default function OnlineLobby({
               <span>Permitir espectadores quando o modo estiver disponível</span>
             </label>
           </div>
-          <MatchMenuButton label="Criar sala" detail={roomVisibility === "public" ? "Publicar no Lobby Online" : "Gerar código privado"} active disabled={status !== "conectado" || !selectedDeck} onClick={createRoom} />
+          <MatchMenuButton label="Criar sala" detail={roomVisibility === "public" ? "Publicar no Lobby Online" : "Gerar código privado"} active disabled={status !== "conectado" || !selectedDeck || !deckIsValid(selectedDeck, deckValidationOptionsForSettings({ ruleset: roomRuleset }))} onClick={createRoom} />
           <MatchMenuButton label="Voltar" onClick={() => setPanelMode("root")} />
         </MatchSetupMenu>
       );
@@ -1113,6 +1128,7 @@ export default function OnlineLobby({
                         {entry.locked && <em>LOCK</em>}
                         {entry.spectatorsAllowed && <em>WATCH</em>}
                         {entry.custom?.turnTimerSeconds > 0 && <em>{entry.custom.turnTimerSeconds}s</em>}
+                        {entry.custom?.ruleset === "official" && <em>OFICIAL</em>}
                         {entry.custom?.ruleset === "lab" && <em>LAB</em>}
                         {entry.custom?.firstPlayerMode !== "random" && <em>{entry.custom.firstPlayerMode === "host" ? "HOST 1ST" : "GUEST 1ST"}</em>}
                         <em>{entry.started ? "EM JOGO" : `${entry.players}/${entry.capacity}`}</em>

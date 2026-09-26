@@ -62,7 +62,7 @@ export async function createBattleSpiritsServer(options = {}) {
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify({
         ok: true,
-        version: "3.9.3",
+        version: "3.9.4",
         rooms: rooms.size,
         cards: cardIndex.size,
         matchmakingQueued: matchmakingQueue.length,
@@ -593,7 +593,7 @@ export async function createBattleSpiritsServer(options = {}) {
       if (!identity.ok) return ack(identity);
       const profileValidation = validateOnlineProfilePayload(payload.profile);
       if (!profileValidation.ok) return ack(profileValidation);
-      const validation = validateDeck(payload.deck || [], cardIndex);
+      const validation = validateDeck(payload.deck || [], cardIndex, { regulation: "official" });
       if (!validation.ok) return ack({ ok: false, error: validation.errors.join(" ") });
       const rankedProfile = await ensureRankedProfile(identity.user.id);
       const entry = { socketId: socket.id, userId: identity.user.id, rp: Number(rankedProfile.rp || 1000), profile: payload.profile, deck: payload.deck, deckId: String(payload.deckId || "").slice(0, 96) || null, deckName: String(payload.deckName || "Deck").slice(0, 120), queuedAt: Date.now() };

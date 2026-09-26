@@ -19,6 +19,8 @@ const required = [
   "src/game/aiEffectSemantics.js",
   "src/game/aiTacticalMemory.js",
   "src/game/stateValidation.js",
+  "src/game/eternalDeckRules.js",
+  "src/game/deckRules.test.js",
   "src/game/snapshots.js",
   "src/online/publicProfile.js",
   "src/online/customMatchSettings.js",
@@ -62,7 +64,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.9.3") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.3`);
+if (pkg.version !== "3.9.4") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.4`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -143,6 +145,16 @@ if (!onlineLobbyCss.includes("online-lobby2-dashboard") || !onlineLobbyCss.inclu
 const customMatchSettings = fs.readFileSync(path.join(root, "src", "online", "customMatchSettings.js"), "utf8");
 if (!customMatchSettings.includes("resolveFirstPlayerId") || !customMatchSettings.includes("deckValidationOptionsForSettings")) throw new Error("A normalização Custom Match v3.9.2 está incompleta.");
 
+
+// v3.9.4 — Eternal deck validation and official Japanese regulation.
+const eternalDeckRules = fs.readFileSync(path.join(root, "src", "game", "eternalDeckRules.js"), "utf8");
+const stateEngine = fs.readFileSync(path.join(root, "src", "game", "state.js"), "utf8");
+if (!eternalDeckRules.includes('ETERNAL_RULES_VERSION = "17.1"') || !eternalDeckRules.includes('ETERNAL_OFFICIAL_LIST_DATE = "2026-09-01"')) throw new Error("As referências oficiais Eternal v3.9.4 estão incompletas.");
+for (const id of ["BS13-059", "BS13-062", "P16-26"]) if (!eternalDeckRules.includes(id)) throw new Error(`A lista oficial v3.9.4 não contém ${id}.`);
+if (!stateEngine.includes("multiple_contract_types") || !stateEngine.includes("eternal_banned") || !stateEngine.includes("official_copy_limit")) throw new Error("A validação Eternal v3.9.4 está incompleta.");
+if (!rankedLobby.includes('regulation: "official"') || !onlineServer.includes('regulation: "official"')) throw new Error("Ranked precisa aplicar o regulamento oficial Eternal no cliente e no servidor.");
+if (!onlineLobby.includes('value="official"') || !onlineLobby.includes('value="eternal"')) throw new Error("As opções Eternal/Eternal Oficial não estão disponíveis nas salas personalizadas.");
+if (!deckBuilderPage.includes("officialValidation") || !deckBuilderPage.includes("officialRestrictionSummary")) throw new Error("O feedback de regulamento oficial do Deck Builder está incompleto.");
 
 // v3.9.3 — player-facing copy must not expose development internals.
 const playerFacingFiles = [

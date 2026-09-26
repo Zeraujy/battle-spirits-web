@@ -35,7 +35,7 @@ export default function RankedLobby({ onBack, onAccount, onDeckBuilder, onMatch 
   const client = useMemo(() => createOnlineClient(ONLINE_SERVER_URL), []);
 
   const deck = decks.find((item) => item.id === deckId) || null;
-  const validDeck = deckIsValid(deck);
+  const validDeck = deckIsValid(deck, { regulation: "official" });
   const playerName = profile.displayName || profile.name || "Jogador";
   const rankLabel = ranked?.rank?.label || "BRONZE III";
   const rp = Number(ranked?.rp ?? 1000);
@@ -176,7 +176,7 @@ export default function RankedLobby({ onBack, onAccount, onDeckBuilder, onMatch 
               onClick={searching ? cancelSearch : findRankedMatch}
             />
             {!accessToken && <MatchMenuButton label="Entrar na conta" detail="Conta obrigatória no Ranked" onClick={onAccount} />}
-            <MatchMenuButton label="Deck Builder" detail={deck ? `${deck.name} · ${deckSize(deck)} cartas` : "Selecionar deck"} onClick={onDeckBuilder} />
+            <MatchMenuButton label="Deck Builder" detail={deck ? `${deck.name} · ${deckSize(deck)} cartas · ${validDeck ? "apto ao Ranked" : "revisar regulamento"}` : "Selecionar deck"} onClick={onDeckBuilder} />
             <MatchMenuButton label="Trocar deck" onClick={() => setPickerOpen(true)} />
             <MatchMenuButton label="Voltar" onClick={onBack} />
           </MatchSetupMenu>

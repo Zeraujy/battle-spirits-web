@@ -4,6 +4,47 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.9.4",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Deck Validation & Format Rules", en: "Deck Validation & Format Rules" },
+    summary: {
+      pt: "O Deck Builder e os modos Online agora validam os decks com regras mais fiéis ao formato Eternal japonês.",
+      en: "Deck Builder and Online modes now validate decks with rules closer to the Japanese Eternal format."
+    },
+    sections: [
+      {
+        title: { pt: "Regras Eternal", en: "Eternal rules" },
+        items: {
+          pt: [
+            "Decks Eternal precisam ter pelo menos 40 cartas e respeitar o limite de até 3 cartas com o mesmo nome, salvo exceções da própria carta.",
+            "Cartas de Contrato seguem a regra de apenas 1 tipo por deck, com até 3 cópias.",
+            "Cartas proibidas no formato Eternal são identificadas antes da partida."
+          ],
+          en: [
+            "Eternal decks require at least 40 cards and normally allow up to 3 cards with the same name, except where a card itself changes that limit.",
+            "Contract Cards follow the one-type-per-deck rule, with up to 3 copies.",
+            "Cards banned from the Eternal format are identified before a match."
+          ]
+        }
+      },
+      {
+        title: { pt: "Regulamento oficial", en: "Official regulation" },
+        items: {
+          pt: [
+            "O Deck Builder mostra se o deck também está apto ao regulamento oficial atual.",
+            "Ranked usa o regulamento oficial Eternal vigente.",
+            "Salas personalizadas podem usar Eternal, Eternal Oficial ou LAB."
+          ],
+          en: [
+            "Deck Builder shows whether a deck is also valid under the current official regulation.",
+            "Ranked uses the current official Eternal regulation.",
+            "Custom rooms can use Eternal, Official Eternal or LAB."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "3.9.3",
     date: { pt: "25/09/2026", en: "09/25/2026" },
     title: { pt: "Player Experience Cleanup", en: "Player Experience Cleanup" },

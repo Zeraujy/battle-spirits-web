@@ -2,6 +2,15 @@ import { GAME_DEFAULTS } from "./constants.js";
 import { getCardName } from "./cardAdapter.js";
 import { shuffle, uid } from "./utils.js";
 import { createSeededRandom, normalizeSeed } from "./random.js";
+import {
+  ETERNAL_OFFICIAL_LIST_DATE,
+  ETERNAL_RULES_VERSION,
+  cardPrintedDeckCopyLimit,
+  copyLimitForCard,
+  eternalDeckNameKey,
+  officialDeckPairViolation,
+  officialRestrictionForCard
+} from "./eternalDeckRules.js";
 
 export function expandDeck(deck = []) {
   const result = [];
@@ -21,25 +30,113 @@ export function validateDeck(deck, cardIndex, options = {}) {
   const ids = expandDeck(deck);
   const errors = [];
   const warnings = [];
+  const issues = [];
+  const regulation = options.regulation === "official"
+    ? "official"
+    : options.regulation === "lab"
+      ? "lab"
+      : "eternal";
+  const official = regulation === "official";
   const minimum = options.minimumDeckSize ?? GAME_DEFAULTS.minimumDeckSize;
   const maxSameName = options.maxSameName ?? GAME_DEFAULTS.maxSameName;
-  if (ids.length < minimum) errors.push(`O deck precisa ter pelo menos ${minimum} cartas.`);
+
+  const addError = (code, message, detail = {}) => {
+    errors.push(message);
+    issues.push({ severity: "error", code, message, ...detail });
+  };
+  const addWarning = (code, message, detail = {}) => {
+    warnings.push(message);
+    issues.push({ severity: "warning", code, message, ...detail });
+  };
+
+  if (ids.length < minimum) {
+    addError("minimum_deck_size", `O deck precisa ter pelo menos ${minimum} cartas.`, { minimum, current: ids.length });
+  }
 
   const byName = new Map();
+  const resolvedCards = [];
+  const contractTypes = new Map();
+
   for (const id of ids) {
     const card = cardIndex.get(id);
     if (!card) {
-      errors.push(`Carta não encontrada no database: ${id}`);
+      addError("card_unavailable", `A carta ${id} não está disponível nesta versão.`, { cardId: id });
       continue;
     }
-    const key = getCardName(card).trim().toLocaleLowerCase("pt-BR");
-    byName.set(key, (byName.get(key) || 0) + 1);
+    resolvedCards.push(card);
+    const key = eternalDeckNameKey(card);
+    const entry = byName.get(key) || { count: 0, cards: [], name: getCardName(card) };
+    entry.count += 1;
+    entry.cards.push(card);
+    byName.set(key, entry);
+
+    if (regulation !== "lab") {
+      const subtypes = Array.isArray(card.subtypes) ? card.subtypes.map((value) => String(value).toLowerCase()) : [];
+      const isContract = Boolean(card.contractNexus)
+        || String(card.cardType || "").toLowerCase().startsWith("contract")
+        || subtypes.includes("contract");
+      if (isContract) {
+        const contractKey = String(card.contractType ?? card.contractName ?? card.nameKey ?? getCardName(card)).trim().toLocaleLowerCase("pt-BR");
+        contractTypes.set(contractKey, getCardName(card));
+      }
+
+      const isToken = String(card.cardType || "").toLowerCase() === "token" || subtypes.includes("token");
+      if (isToken) addError("token_in_deck", `${getCardName(card)} é um Token e não faz parte do deck.`, { cardId: card.id });
+    }
   }
-  for (const [name, count] of byName) {
-    if (count > maxSameName) errors.push(`${name}: máximo de ${maxSameName} cópias pelo mesmo nome.`);
+
+  for (const [nameKey, entry] of byName) {
+    let limit = maxSameName;
+    for (const card of entry.cards) {
+      const printed = cardPrintedDeckCopyLimit(card);
+      if (printed === Infinity) {
+        limit = Infinity;
+        break;
+      }
+      if (printed != null) limit = Math.max(limit, printed);
+    }
+    const restriction = regulation !== "lab" ? officialRestrictionForCard(entry.cards[0]) : null;
+    // No formato Eternal, cartas da categoria "Proibida" não podem ser usadas.
+    // As demais limitações (<1>/<2>/<20>) são aplicadas pela regulação oficial de eventos.
+    if (restriction?.kind === "banned") limit = 0;
+    if (official && restriction && restriction.kind !== "banned") {
+      limit = Math.min(limit, copyLimitForCard(entry.cards[0], { official: true, fallbackMaxSameName: maxSameName }));
+    }
+    if (entry.count > limit) {
+      const code = restriction?.kind === "banned" ? "eternal_banned" : official && restriction ? "official_copy_limit" : "same_name_limit";
+      const message = restriction?.kind === "banned"
+        ? `${entry.name} é uma carta proibida no formato Eternal atual.`
+        : official && restriction
+          ? `${entry.name}: máximo de ${limit} cópia${limit === 1 ? "" : "s"} no regulamento oficial atual.`
+          : `${entry.name}: máximo de ${limit} cópias pelo mesmo nome.`;
+      addError(code, message, { nameKey, count: entry.count, limit, cardId: entry.cards[0]?.id });
+    }
   }
-  if (ids.length > 80) warnings.push("O formato Eternal não possui limite superior geral; decks muito grandes podem deixar o jogo mais lento.");
-  return { ok: errors.length === 0, errors, warnings, size: ids.length };
+
+  if (regulation !== "lab" && contractTypes.size > 1) {
+    addError("multiple_contract_types", "O deck pode conter somente 1 tipo de Carta de Contrato.", {
+      contracts: [...contractTypes.values()]
+    });
+  }
+
+  if (official) {
+    const bannedPair = officialDeckPairViolation(resolvedCards);
+    if (bannedPair) addError("official_banned_pair", "Este deck contém uma combinação de cartas que não pode ser usada junta no regulamento oficial atual.", { pair: bannedPair });
+  }
+
+  if (ids.length > 80) addWarning("large_deck", "Decks muito grandes podem tornar as partidas mais longas.");
+
+  return {
+    ok: errors.length === 0,
+    errors,
+    warnings,
+    issues,
+    size: ids.length,
+    format: "eternal",
+    rulesVersion: ETERNAL_RULES_VERSION,
+    regulation,
+    officialListDate: official ? ETERNAL_OFFICIAL_LIST_DATE : null
+  };
 }
 
 export function makePhysicalCard(cardId, cardIndex) {
@@ -99,8 +196,8 @@ export function createMatch({ player1, player2, firstPlayerId = "player1", cardI
   return {
     id: uid("match"),
     format: "eternal",
-    rulesVersion: "17.1",
-    simulatorVersion: "3.9.3",
+    rulesVersion: ETERNAL_RULES_VERSION,
+    simulatorVersion: "3.9.4",
     stateSchemaVersion: 1,
     randomSeed,
     turnNumber: 1,

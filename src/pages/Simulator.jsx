@@ -5388,7 +5388,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v3.9.3 • Arena 2D
+            Eternal v3.9.4 • Arena 2D
           </span>
 
           <strong>

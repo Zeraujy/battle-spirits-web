@@ -62,8 +62,8 @@ export function getDeckPortrait(deck) {
   return card ? resolveCardImage(card) : "./images/card-back.webp";
 }
 
-export function deckIsValid(deck) {
-  return deck ? validateDeck(deck.cards, cardIndex).ok : false;
+export function deckIsValid(deck, options = {}) {
+  return deck ? validateDeck(deck.cards, cardIndex, options).ok : false;
 }
 
 export function MatchSetupScreen({ children, menu, footer, error, className = "" }) {

@@ -2,12 +2,12 @@ export const CUSTOM_MATCH_DEFAULTS = Object.freeze({
   firstPlayerMode: "random",
   turnTimerSeconds: 0,
   mulliganEnabled: true,
-  ruleset: "standard"
+  ruleset: "eternal"
 });
 
 const TURN_TIMER_OPTIONS = new Set([0, 60, 90, 120, 180]);
 const FIRST_PLAYER_MODES = new Set(["random", "host", "guest"]);
-const RULESETS = new Set(["standard", "lab"]);
+const RULESETS = new Set(["eternal", "official", "lab"]);
 
 export function normalizeCustomMatchSettings(input = {}) {
   const firstPlayerMode = FIRST_PLAYER_MODES.has(input?.firstPlayerMode)
@@ -17,8 +17,9 @@ export function normalizeCustomMatchSettings(input = {}) {
   const turnTimerSeconds = TURN_TIMER_OPTIONS.has(parsedTimer)
     ? parsedTimer
     : CUSTOM_MATCH_DEFAULTS.turnTimerSeconds;
-  const ruleset = RULESETS.has(input?.ruleset)
-    ? input.ruleset
+  const incomingRuleset = input?.ruleset === "standard" ? "eternal" : input?.ruleset;
+  const ruleset = RULESETS.has(incomingRuleset)
+    ? incomingRuleset
     : CUSTOM_MATCH_DEFAULTS.ruleset;
 
   return {
@@ -41,10 +42,12 @@ export function deckValidationOptionsForSettings(settings = {}) {
   if (normalized.ruleset === "lab") {
     return {
       minimumDeckSize: 1,
-      maxSameName: 99
+      maxSameName: 99,
+      regulation: "lab"
     };
   }
-  return {};
+  if (normalized.ruleset === "official") return { regulation: "official" };
+  return { regulation: "eternal" };
 }
 
 export function customMatchSettingsSummary(settings = {}) {
@@ -52,6 +55,7 @@ export function customMatchSettingsSummary(settings = {}) {
   return {
     ...normalized,
     timed: normalized.turnTimerSeconds > 0,
+    official: normalized.ruleset === "official",
     experimental: normalized.ruleset === "lab"
   };
 }

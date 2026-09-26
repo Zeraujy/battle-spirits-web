@@ -9,6 +9,12 @@ import { searchCards, cardIndex } from "../services/cardRepository.js";
 import { deleteDeck, getDecks, upsertDeck } from "../services/storage.js";
 import { validateDeck } from "../game/state.js";
 import { getCardName, resolveCardImage, resolveCardThumbnail } from "../game/cardAdapter.js";
+import {
+  ETERNAL_OFFICIAL_LIST_DATE,
+  copyLimitForCard,
+  eternalDeckNameKey,
+  officialRestrictionSummary
+} from "../game/eternalDeckRules.js";
 import { useLanguage } from "../i18n.jsx";
 
 import "../styles/deckbuilder/deckBuilderPagination.css";
@@ -147,7 +153,8 @@ export default function DeckBuilder({ onBack, deckId = null }) {
     return () => window.clearTimeout(id);
   }, [results, currentPage]);
 
-  const validation = validateDeck(draft.cards, cardIndex);
+  const validation = validateDeck(draft.cards, cardIndex, { regulation: "eternal" });
+  const officialValidation = validateDeck(draft.cards, cardIndex, { regulation: "official" });
 
   const deckCardIds = draft.cards
     .filter((e) => Number(e.quantity || 0) > 0)
@@ -167,12 +174,13 @@ export default function DeckBuilder({ onBack, deckId = null }) {
 
     const sameNameCount = draft.cards.reduce((sum, e) => {
       const c = cardIndex.get(e.cardId || e.id);
-      return getCardName(c).toLowerCase() === getCardName(card).toLowerCase()
+      return eternalDeckNameKey(c) === eternalDeckNameKey(card)
         ? sum + Number(e.quantity || 0)
         : sum;
     }, 0) - qty(cardId);
 
-    const allowed = Math.max(0, Math.min(3 - sameNameCount, nextQty));
+    const cardLimit = copyLimitForCard(card, { official: false, fallbackMaxSameName: 3 });
+    const allowed = Math.max(0, Math.min(cardLimit - sameNameCount, nextQty));
 
     setDraft((d) => {
       const cards = [
@@ -222,7 +230,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
       format: DECK_FILE_FORMAT,
       version: DECK_FILE_VERSION,
       simulator: "Battle Spirits Eternal Simulator",
-      simulatorVersion: "3.6.2",
+      simulatorVersion: "3.9.4",
       exportedAt: new Date().toISOString(),
       deck: {
         name: String(draft.name || "").trim() || (pt ? "Deck Importado" : "Imported Deck"),
@@ -446,11 +454,22 @@ export default function DeckBuilder({ onBack, deckId = null }) {
             <div className="deck-validation deck-builder-v3-validation">
               <strong>{validation.size} {t("cards")}</strong>
               {validation.ok ? (
-                <span className="success-text">{t("validDeck")}</span>
+                <span className="success-text">✓ Válido no formato Eternal</span>
               ) : (
                 validation.errors.map((e) => (
                   <span className="error-text" key={e}>{e}</span>
                 ))
+              )}
+              {validation.ok && (
+                <div className={`deck-regulation-status ${officialValidation.ok ? "is-valid" : "is-warning"}`}>
+                  <b>{officialValidation.ok ? "✓ Apto ao regulamento oficial" : "Regulamento oficial · revisar"}</b>
+                  {!officialValidation.ok && (
+                    <>
+                      <small>Lista vigente em {ETERNAL_OFFICIAL_LIST_DATE.split("-").reverse().join("/")}</small>
+                      {officialValidation.errors.map((error) => <span key={error}>{error}</span>)}
+                    </>
+                  )}
+                </div>
               )}
             </div>
           </section>
@@ -559,6 +578,11 @@ export default function DeckBuilder({ onBack, deckId = null }) {
               <div className="card-grid deck-builder-v3-grid">
                 {pageResults.map((card) => (
                   <div className="builder-card deck-builder-v3-card" key={card.id}>
+                    {officialRestrictionSummary(card) && (
+                      <span className={`deck-official-restriction ${officialRestrictionSummary(card) === "Proibida" ? "is-banned" : "is-limited"}`}>
+                        {officialRestrictionSummary(card)}
+                      </span>
+                    )}
                     <CardTile card={card} imageVariant="thumbnail" loading="lazy" fetchPriority="low" onClick={() => setDetailsCard(card)} />
 
                     <div className="qty-control deck-builder-v3-qty-control">

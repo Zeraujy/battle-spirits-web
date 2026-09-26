@@ -462,3 +462,14 @@
   .deck-builder-v3-summary { grid-template-columns: 1fr; }
   .deck-builder-v3-grid { grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); }
 }
+
+/* v3.9.4 — Eternal deck / official regulation feedback */
+.deck-builder-v3-card{position:relative}
+.deck-official-restriction{position:absolute;z-index:6;top:8px;left:8px;padding:4px 7px;border-radius:999px;background:rgba(8,8,10,.88);border:1px solid rgba(255,255,255,.28);font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;backdrop-filter:blur(8px);pointer-events:none}
+.deck-official-restriction.is-banned{border-color:rgba(255,255,255,.54)}
+.deck-official-restriction.is-limited{opacity:.9}
+.deck-regulation-status{display:grid;gap:3px;margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.09);font-size:11px}
+.deck-regulation-status b{font-size:11px;letter-spacing:.03em}
+.deck-regulation-status small,.deck-regulation-status span{font-size:10px;line-height:1.35;opacity:.72}
+.deck-regulation-status.is-valid b{opacity:.9}
+.deck-regulation-status.is-warning b{opacity:.82}
