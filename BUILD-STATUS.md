@@ -1,15 +1,18 @@
-# Build Status — Battle Spirits Eternal Simulator v3.9.9
+# Build Status — Battle Spirits Eternal Simulator v4.0.0
 
-## Release validation
-- Performance & Network Optimization: implemented.
-- Engine/services tests: 138/138 passed.
-- Structural v3 verifier: 61 essential files passed.
-- UI audit: passed.
-- Release audit: passed.
-- Runtime catalog: 365 unique cards.
-- Card artwork audit: 382 WebP files, 0 missing runtime artwork references.
-- Node syntax: 90 JS/MJS/CJS files passed.
-- Relative imports: 371 checked, 0 missing.
+Data da validação: 26/09/2026
 
-## Build environment note
-A temporary dependency installation timed out in this Linux environment, so no new `dist` was included. Partial `node_modules` was removed. Build on the Windows development machine with `npm install` followed by `npm run build`.
+## Aprovado
+- 138/138 testes automatizados.
+- Verificação estrutural do projeto.
+- Auditoria de artes das cartas.
+- Auditoria de referências de imagens em runtime.
+- Auditoria de UI/responsividade.
+- Auditoria de release e informações técnicas expostas ao jogador.
+- 130 arquivos JS/JSX/MJS/CJS analisados sintaticamente.
+- 326 imports relativos verificados sem referências quebradas.
+
+## Build Vite neste ambiente
+O bundle Vite não pôde ser produzido neste ambiente Linux porque o conjunto de dependências disponível para validação contém o binding nativo do Rolldown de outra plataforma e não inclui `@rolldown/binding-linux-x64-gnu`.
+
+Nenhum `node_modules` ou build parcial é incluído no pacote final. Em uma instalação normal do projeto, execute `npm install` no sistema de destino antes de `npm run build`.

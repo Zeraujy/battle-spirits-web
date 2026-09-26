@@ -76,5 +76,11 @@ export default function App() {
   />;
   else content = <Home go={go} initialSection={screen.menu || "root"} />;
 
-  return <Suspense fallback={<LoadingScreen />}>{content}</Suspense>;
+  const routeKey = mode !== "game" ? mode : screen.name;
+
+  return (
+    <Suspense fallback={<LoadingScreen />}>
+      <div className="app-route-shell" key={routeKey}>{content}</div>
+    </Suspense>
+  );
 }

@@ -42,7 +42,9 @@ export default function Home({ go, initialSection = "root" }) {
   const profile = useMemo(() => getProfile() || {}, []);
   const name = playerName(profile, language);
   const [section, setSection] = useState(initialSection || "root");
-  const [tutorialWelcome, setTutorialWelcome] = useState(() => !getTutorialProgress().dismissedWelcome);
+  const tutorialProgress = useMemo(() => getTutorialProgress(), []);
+  const tutorialComplete = tutorialProgress.practiceCompleted && tutorialProgress.completed.length >= 6;
+  const [tutorialWelcome, setTutorialWelcome] = useState(() => !tutorialProgress.dismissedWelcome);
 
   useEffect(() => {
     setSection(initialSection || "root");
@@ -53,8 +55,10 @@ export default function Home({ go, initialSection = "root" }) {
     <>
       <MainMenuItem
         label={pt ? "Aprenda a Jogar" : "Learn to Play"}
-        detail={pt ? "Tutorial rápido · Regras Eternal" : "Quick tutorial · Eternal rules"}
-        badge={pt ? "NOVO" : "NEW"}
+        detail={tutorialComplete
+          ? (pt ? "Rever tutorial e consulta rápida" : "Review tutorial and quick reference")
+          : (pt ? "Tutorial rápido · Regras Eternal" : "Quick tutorial · Eternal rules")}
+        badge={tutorialComplete ? null : (pt ? "NOVO" : "NEW")}
         onClick={() => { dismissTutorialWelcome(); setTutorialWelcome(false); go("tutorial"); }}
       />
       <MainMenuItem

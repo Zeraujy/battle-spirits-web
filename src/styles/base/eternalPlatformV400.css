@@ -1,0 +1,80 @@
+/* =========================================================
+   Battle Spirits Eternal Simulator
+   v4.0.0 — Platform polish
+========================================================= */
+
+:root {
+  --eternal-surface: rgba(8, 8, 10, .82);
+  --eternal-surface-soft: rgba(255, 255, 255, .035);
+  --eternal-border: rgba(255, 255, 255, .12);
+  --eternal-border-strong: rgba(255, 255, 255, .24);
+  --eternal-text-muted: rgba(255, 255, 255, .52);
+  --eternal-text-soft: rgba(255, 255, 255, .34);
+  --eternal-radius: 12px;
+}
+
+html,
+body,
+#root,
+.app-route-shell {
+  min-width: 0;
+  min-height: 100%;
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+.app-route-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  animation: eternalRouteIn .18s ease both;
+}
+
+@keyframes eternalRouteIn {
+  from { opacity: .55; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+button,
+[role="button"],
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(255,255,255,.82);
+  outline-offset: 3px;
+}
+
+.route-loading {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255,255,255,.045), transparent 24%),
+    #020202;
+}
+
+.route-loading strong {
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.route-loading span {
+  letter-spacing: .08em;
+}
+
+@media (max-width: 520px) {
+  .app-route-shell { overflow-x: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-route-shell { animation: none; }
+}

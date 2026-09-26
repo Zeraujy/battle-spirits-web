@@ -56,6 +56,8 @@ const requiredPaths = [
   "src/config/appVersion.js",
   "src/styles/pages/mainMenuV340.css",
   "src/styles/pages/matchSetupV341.css",
+  "src/styles/pages/rankedV400.css",
+  "src/styles/base/eternalPlatformV400.css",
   "src/styles/pages/modeScaffoldV340.css",
   "src/styles/pages/eternalInterfaceV350.css",
   "src/styles/pages/gameFlowV351.css",
@@ -91,7 +93,7 @@ const requiredPaths = [
   "scripts/windows"
 ];
 
-console.log("Battle Spirits Simulator v3.9.9 — verificação estrutural\n");
+console.log("Battle Spirits Simulator v4.0.0 — verificação estrutural\n");
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -181,4 +183,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v3.9.9 validada.");
+console.log("\nVERIFY OK — estrutura v4.0.0 validada.");

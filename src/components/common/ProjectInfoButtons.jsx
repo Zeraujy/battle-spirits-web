@@ -4,6 +4,47 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.0.0",
+    date: { pt: "26/09/2026", en: "09/26/2026" },
+    title: { pt: "Battle Spirits Eternal Platform", en: "Battle Spirits Eternal Platform" },
+    summary: {
+      pt: "A versão 4.0 consolida as principais áreas do simulador e melhora a experiência competitiva, navegação e consistência visual.",
+      en: "Version 4.0 consolidates the simulator's main areas and improves the competitive experience, navigation and visual consistency."
+    },
+    sections: [
+      {
+        title: { pt: "Ranked renovado", en: "Refined Ranked" },
+        items: {
+          pt: [
+            "A tela Ranked foi reorganizada para manter jogadores, RP, estatísticas e histórico no lugar certo em diferentes resoluções.",
+            "A fila competitiva mostra com mais clareza conexão, deck selecionado e estado da busca.",
+            "O histórico ganhou leitura mais limpa e um estado inicial para quem ainda não jogou na temporada."
+          ],
+          en: [
+            "The Ranked screen was reorganized to keep players, RP, statistics and history properly positioned across resolutions.",
+            "The competitive queue now communicates connection, selected deck and search state more clearly.",
+            "Match history is easier to scan and now has a proper first-season empty state."
+          ]
+        }
+      },
+      {
+        title: { pt: "Experiência unificada", en: "Unified experience" },
+        items: {
+          pt: [
+            "Transições e estados de carregamento ficaram mais consistentes entre as principais áreas do jogo.",
+            "Foco por teclado e navegação receberam um passe geral de acessibilidade.",
+            "O menu principal reconhece quando o tutorial já foi concluído e passa a tratá-lo como consulta, sem manter o selo de novidade."
+          ],
+          en: [
+            "Transitions and loading states are now more consistent across the game's main areas.",
+            "Keyboard focus and navigation received a broader accessibility pass.",
+            "The main menu now recognizes completed tutorials and treats them as a reference instead of permanently showing a new badge."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "3.9.9",
     date: { pt: "26/09/2026", en: "09/26/2026" },
     title: { pt: "Performance & Network Optimization", en: "Performance & Network Optimization" },

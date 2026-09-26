@@ -38,7 +38,8 @@ const required = [
   "supabase/SOCIAL-HUB-3.7.0.sql",
   "supabase/SOCIAL-HUB-3.7.1.sql",
   "src/services/rankedService.js",
-  "src/styles/pages/rankedV370.css",
+  "src/styles/pages/rankedV400.css",
+  "src/styles/base/eternalPlatformV400.css",
   "src/styles/pages/onlineLobbySafe.css",
   "src/components/cards/CardDetailsModal.jsx",
   "src/components/home/HomeWallpaperSlideshow.jsx",
@@ -72,7 +73,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.9.9") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.9`);
+if (pkg.version !== "4.0.0") throw new Error(`package.json está em ${pkg.version}, esperado 4.0.0`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -243,6 +244,13 @@ for (const rel of playerFacingFiles) {
 const exposedServerErrors = [...onlineServer.matchAll(/error\s*:\s*["'`]([^"'`]+)["'`]/g)].map((match) => match[1]).join("\n");
 const serverCopyHit = forbiddenPlayerCopy.find((pattern) => pattern.test(exposedServerErrors));
 if (serverCopyHit) throw new Error(`Mensagem técnica do servidor pode chegar ao jogador: ${serverCopyHit}`);
+
+// v4.0.0 — Eternal Platform consolidation and Ranked UX.
+const platformCss = fs.readFileSync(path.join(root, "src", "styles", "base", "eternalPlatformV400.css"), "utf8");
+const rankedV400Css = fs.readFileSync(path.join(root, "src", "styles", "pages", "rankedV400.css"), "utf8");
+if (!platformCss.includes("app-route-shell") || !platformCss.includes("prefers-reduced-motion")) throw new Error("O polish geral da Eternal Platform v4.0.0 está incompleto.");
+if (!rankedLobby.includes("ranked-v400-content") || !rankedLobby.includes("ranked-v400-header") || !rankedV400Css.includes("flex-direction") && !rankedV400Css.includes("ranked-v400-content")) throw new Error("O redesign de UX do Ranked v4.0.0 está incompleto.");
+if (!rankedV400Css.includes("@media (max-width: 520px)") || !rankedV400Css.includes("overflow-x: hidden")) throw new Error("A responsividade Ranked v4.0.0 está incompleta.");
 
 const publicProfile = fs.readFileSync(path.join(root, "src", "online", "publicProfile.js"), "utf8");
 const socketClient = fs.readFileSync(path.join(root, "src", "online", "socketClient.js"), "utf8");

@@ -5,6 +5,7 @@ import AppErrorBoundary from "./components/common/AppErrorBoundary.jsx";
 import { LanguageProvider } from "./i18n.jsx";
 import "./styles/base/global.css";
 import "./styles/base/v3.css";
+import "./styles/base/eternalPlatformV400.css";
 import "./styles/pages/gameFlowV351.css";
 
 createRoot(document.getElementById("root")).render(
