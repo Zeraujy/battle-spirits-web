@@ -1,0 +1,750 @@
+[
+  {
+    "id": "SD22-001",
+    "name": "Speant",
+    "nameEN": "Speant",
+    "namePT": "Speant",
+    "nameJP": "スピアント",
+    "nameKey": "speant",
+    "set": "SD22",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Blade Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "",
+      "ptBR": ""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-001.webp"
+  },
+  {
+    "id": "SD22-002",
+    "name": "Ladybird",
+    "nameEN": "Ladybird",
+    "namePT": "Ladybird",
+    "nameJP": "レディバド",
+    "nameKey": "ladybird",
+    "set": "SD22",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Blade Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [High Speed]\nYou may summon this Spirit card from your Hand by paying its summon cost and placing its required Cores using only Cores from your Reserve.",
+      "ptBR": "Flash [High Speed]\nVocê pode invocar esta carta de Spirit da sua Hand pagando o custo de invocação e colocando os Cores necessários usando apenas Cores do seu Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-002.webp"
+  },
+  {
+    "id": "SD22-003",
+    "name": "Claw Fox",
+    "nameEN": "Claw Fox",
+    "namePT": "Claw Fox",
+    "nameJP": "クローフォックス",
+    "nameKey": "claw-fox",
+    "set": "SD22",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Sword Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Summoned\nPut 1 Core from the Void onto one of your Spirits/Ultimates with the New Generation or Blade Insect family.\nLV2 When This Spirit Attacks\nPut 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Quando Este Spirit É Invocado\nColoque 1 Core do Void sobre 1 dos seus Spirits/Ultimates com a família New Generation ou Blade Insect.\nLV2 Quando Este Spirit Ataca\nColoque 1 Core do Void no seu Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-003.webp"
+  },
+  {
+    "id": "SD22-004",
+    "name": "Nokogiru Kuwagata",
+    "nameEN": "Nokogiru Kuwagata",
+    "namePT": "Nokogiru Kuwagata",
+    "nameJP": "ノコギールクワガタ",
+    "nameKey": "nokogiru-kuwagata",
+    "set": "SD22",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Blade Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [High Speed]\nYou may summon this Spirit card from your Hand by paying its summon cost and placing its required Cores using only Cores from your Reserve.\nLV2 When This Spirit Is Destroyed\nIf you have an Ultimate, put 1 Core from the Void into your Reserve.",
+      "ptBR": "Flash [High Speed]\nVocê pode invocar esta carta de Spirit da sua Hand pagando o custo de invocação e colocando os Cores necessários usando apenas Cores do seu Reserve.\nLV2 Quando Este Spirit É Destruído\nSe você tiver um Ultimate, coloque 1 Core do Void no seu Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-004.webp"
+  },
+  {
+    "id": "SD22-005",
+    "name": "Wald-Jaeger",
+    "nameEN": "Wald-Jaeger",
+    "namePT": "Wald-Jaeger",
+    "nameJP": "ヴァルト・イエーガー",
+    "nameKey": "wald-jaeger",
+    "set": "SD22",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Sword Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [High Speed]\nYou may summon this Spirit card from your Hand by paying its summon cost and placing its required Cores using only Cores from your Reserve.\nLV1/LV2 When This Spirit Is Summoned\nIf this Spirit was summoned during either player's Attack Step, put 1 Core from the Void into your Reserve.",
+      "ptBR": "Flash [High Speed]\nVocê pode invocar esta carta de Spirit da sua Hand pagando o custo de invocação e colocando os Cores necessários usando apenas Cores do seu Reserve.\nLV1/LV2 Quando Este Spirit É Invocado\nSe este Spirit foi invocado durante o Attack Step de qualquer jogador, coloque 1 Core do Void no seu Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-005.webp"
+  },
+  {
+    "id": "SD22-006",
+    "name": "Mugendragon",
+    "nameEN": "Mugendragon",
+    "namePT": "Mugendragon",
+    "nameJP": "ムゲンドラゴン",
+    "nameKey": "mugendragon",
+    "set": "SD22",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple",
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "New Generation"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1\nThis Spirit's color and symbol are also treated as Purple.\nLV2\nThis Spirit's color and symbol are also treated as Red.\nLV3\nThis Spirit's color and symbol are also treated as White.",
+      "ptBR": "LV1\nA cor e o símbolo deste Spirit também são tratados como Purple.\nLV2\nA cor e o símbolo deste Spirit também são tratados como Red.\nLV3\nA cor e o símbolo deste Spirit também são tratados como White."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-006.webp"
+  },
+  {
+    "id": "SD22-007",
+    "name": "Gladitiger",
+    "nameEN": "Gladitiger",
+    "namePT": "Gladitiger",
+    "nameJP": "グラディタイガー",
+    "nameKey": "gladitiger",
+    "set": "SD22",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Sword Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Your Attack Step\nAll your Spirits/Ultimates with [High Speed] get +3000 BP.\nLV2/LV3 When This Spirit Attacks\nPut 1 Core from the Void onto each of up to 2 of your Spirits/Ultimates.",
+      "ptBR": "LV1/LV2/LV3 Durante Seu Attack Step\nTodos os seus Spirits/Ultimates com [High Speed] recebem +3000 BP.\nLV2/LV3 Quando Este Spirit Ataca\nColoque 1 Core do Void sobre cada um de até 2 dos seus Spirits/Ultimates."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-007.webp"
+  },
+  {
+    "id": "SD22-008",
+    "name": "Ultimate-Tigald",
+    "nameEN": "Ultimate-Tigald",
+    "namePT": "Ultimate-Tigald",
+    "nameJP": "アルティメット・ティガルド",
+    "nameKey": "ultimate-tigald",
+    "set": "SD22",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 3,
+    "families": [
+      "New Generation",
+      "Sword Beast"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "[Summon Condition: You have at least 1 Green Spirit.]\nFlash [High Speed]\nYou may summon this Ultimate card from your Hand by paying its summon cost and placing its required Cores using only Cores from your Reserve.\nLV4 [Ultimate Trigger] When This Ultimate Battles\nIf the Ultimate Trigger hits, when only an opposing Spirit is destroyed by BP comparison, refresh this Ultimate.\n(Ultimate Trigger: Discard the top card of the opposing deck. If its cost is lower than this Ultimate's cost, it hits.)",
+      "ptBR": "[Condição de Invocação: você tem pelo menos 1 Spirit Green.]\nFlash [High Speed]\nVocê pode invocar esta carta de Ultimate da sua Hand pagando o custo de invocação e colocando os Cores necessários usando apenas Cores do seu Reserve.\nLV4 [Ultimate Trigger] Quando Este Ultimate Batalha\nSe o Ultimate Trigger acertar, quando apenas um Spirit do oponente for destruído por comparação de BP, dê refresh neste Ultimate.\n(Ultimate Trigger: descarte a carta do topo do deck do oponente. Se o custo dela for menor que o custo deste Ultimate, o Trigger acerta.)"
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-008.webp"
+  },
+  {
+    "id": "SD22-009",
+    "name": "Ultimate-Monoqueiroz",
+    "nameEN": "Ultimate-Monoqueiroz",
+    "namePT": "Ultimate-Monoqueiroz",
+    "nameJP": "アルティメット・モノケイロス",
+    "nameKey": "ultimate-monoqueiroz",
+    "set": "SD22",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "New Generation",
+      "Shellman"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 8000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 12000
+      },
+      {
+        "level": 5,
+        "cores": 4,
+        "bp": 14000
+      }
+    ],
+    "effectText": {
+      "en": "[Summon Condition: You have at least 1 Green Spirit.]\nLV3/LV4/LV5 [Ultimate Trigger] When This Ultimate Attacks\nIf the Ultimate Trigger hits, you may summon 1 Green Spirit/Ultimate card with [High Speed] from your Hand without paying its cost.\n(Ultimate Trigger: Discard the top card of the opposing deck. If its cost is lower than this Ultimate's cost, it hits.)",
+      "ptBR": "[Condição de Invocação: você tem pelo menos 1 Spirit Green.]\nLV3/LV4/LV5 [Ultimate Trigger] Quando Este Ultimate Ataca\nSe o Ultimate Trigger acertar, você pode invocar 1 carta de Spirit/Ultimate Green com [High Speed] da sua Hand sem pagar seu custo.\n(Ultimate Trigger: descarte a carta do topo do deck do oponente. Se o custo dela for menor que o custo deste Ultimate, o Trigger acerta.)"
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-009.webp"
+  },
+  {
+    "id": "SD22-010",
+    "name": "Ultimate-Xen-Fu",
+    "nameEN": "Ultimate-Xen-Fu",
+    "namePT": "Ultimate-Xen-Fu",
+    "nameJP": "アルティメット・ジェン・フー",
+    "nameKey": "ultimate-xen-fu",
+    "set": "SD22",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "M",
+    "includedQuantity": 2,
+    "families": [
+      "New Generation",
+      "Sword Beast"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 10000
+      },
+      {
+        "level": 4,
+        "cores": 2,
+        "bp": 13000
+      },
+      {
+        "level": 5,
+        "cores": 4,
+        "bp": 16000
+      }
+    ],
+    "effectText": {
+      "en": "[Summon Condition: You have at least 1 Green Spirit.]\nLV3/LV4/LV5 [Ultimate Trigger] When This Ultimate Attacks\nIf the Ultimate Trigger hits, exhaust 2 opposing Spirits.\n(Ultimate Trigger: Discard the top card of the opposing deck. If its cost is lower than this Ultimate's cost, it hits.)\nLV4/LV5 When This Ultimate Battles\nThe opponent cannot activate Burst.",
+      "ptBR": "[Condição de Invocação: você tem pelo menos 1 Spirit Green.]\nLV3/LV4/LV5 [Ultimate Trigger] Quando Este Ultimate Ataca\nSe o Ultimate Trigger acertar, deixe 2 Spirits do oponente Exhausted.\n(Ultimate Trigger: descarte a carta do topo do deck do oponente. Se o custo dela for menor que o custo deste Ultimate, o Trigger acerta.)\nLV4/LV5 Quando Este Ultimate Batalha\nO oponente não pode ativar Burst."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-010.webp"
+  },
+  {
+    "id": "SD22-011",
+    "name": "The Clouded Highlands",
+    "nameEN": "The Clouded Highlands",
+    "namePT": "The Clouded Highlands",
+    "nameJP": "クラウデッド高地",
+    "nameKey": "the-clouded-highlands",
+    "set": "SD22",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step\nWhen you summon a Spirit/Ultimate with [High Speed], that Spirit/Ultimate gets +4000 BP during this turn.\nLV2 During Either Attack Step\nWhen you summon a Spirit/Ultimate with [High Speed], put 1 Core from the Void onto that Spirit/Ultimate. This effect can only be used once per turn.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador\nQuando você invocar um Spirit/Ultimate com [High Speed], aquele Spirit/Ultimate recebe +4000 BP durante este turno.\nLV2 Durante o Attack Step de qualquer jogador\nQuando você invocar um Spirit/Ultimate com [High Speed], coloque 1 Core do Void sobre aquele Spirit/Ultimate. Este efeito só pode ser usado uma vez por turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-011.webp"
+  },
+  {
+    "id": "SD22-012",
+    "name": "The Great Tree of the Lush Grounds",
+    "nameEN": "The Great Tree of the Lush Grounds",
+    "namePT": "The Great Tree of the Lush Grounds",
+    "nameJP": "大地茂る大樹",
+    "nameKey": "the-great-tree-of-the-lush-grounds",
+    "set": "SD22",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step\nWhen your Life decreases due to an opposing Spirit/Ultimate, draw 1 card.\nLV2\nWhen you summon an Ultimate, exhaust 1 opposing Spirit.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente\nQuando seu Life diminuir por causa de um Spirit/Ultimate do oponente, compre 1 carta.\nLV2\nQuando você invocar um Ultimate, deixe 1 Spirit do oponente Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-012.webp"
+  },
+  {
+    "id": "SD22-013",
+    "name": "Triangle Burst",
+    "nameEN": "Triangle Burst",
+    "namePT": "Triangle Burst",
+    "nameJP": "トライアングルバースト",
+    "nameKey": "triangle-burst",
+    "set": "SD22",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "[Burst: After an Opposing Spirit Attacks]\nSummon 1 Spirit/Ultimate card with cost 4 or less from your Hand. Its When Summoned effect cannot activate. After this effect resolves, you may pay this card's cost to activate its Flash effect.\nFlash\nExhaust 1 opposing Spirit, or exhaust 3 opposing Spirits with cost 4 or less.",
+      "ptBR": "[Burst: Depois que um Spirit do Oponente Atacar]\nInvoque 1 carta de Spirit/Ultimate de custo 4 ou menos da sua Hand. O efeito When Summoned dela não pode ser ativado. Depois que este efeito resolver, você pode pagar o custo desta carta para ativar seu efeito Flash.\nFlash\nDeixe 1 Spirit do oponente Exhausted, ou deixe 3 Spirits do oponente de custo 4 ou menos Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-013.webp"
+  },
+  {
+    "id": "SD22-014",
+    "name": "High Stampede",
+    "nameEN": "High Stampede",
+    "namePT": "High Stampede",
+    "nameJP": "ハイスタンピード",
+    "nameKey": "high-stampede",
+    "set": "SD22",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main\nDuring this turn, all your Spirits with [High Speed] get +5000 BP.\nFlash\nDuring this turn, 1 Spirit/Ultimate gets +5000 BP.",
+      "ptBR": "Main\nDurante este turno, todos os seus Spirits com [High Speed] recebem +5000 BP.\nFlash\nDurante este turno, 1 Spirit/Ultimate recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-014.webp"
+  },
+  {
+    "id": "SD22-015",
+    "name": "Neo-Hand Reverse",
+    "nameEN": "Neo-Hand Reverse",
+    "namePT": "Neo-Hand Reverse",
+    "nameJP": "ネオ・ハンドリバース",
+    "nameKey": "neo-hand-reverse",
+    "set": "SD22",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main\nBy discarding your entire Hand (at least 1 card), draw 3 cards.\nFlash\nDuring this turn, 1 Spirit/Ultimate gets +5000 BP.",
+      "ptBR": "Main\nAo descartar toda a sua Hand (pelo menos 1 carta), compre 3 cartas.\nFlash\nDurante este turno, 1 Spirit/Ultimate recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-015.webp"
+  },
+  {
+    "id": "SD22-016",
+    "name": "Neo-Binding Thorn",
+    "nameEN": "Neo-Binding Thorn",
+    "namePT": "Neo-Binding Thorn",
+    "nameJP": "ネオ・バインディングソーン",
+    "nameKey": "neo-binding-thorn",
+    "set": "SD22",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 7,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "[Burst: After Your Life Decreases]\nExhaust 1 opposing Spirit. After this effect resolves, you may pay this card's cost to activate its Flash effect.\nFlash\nExhaust 1 opposing Spirit/Ultimate.",
+      "ptBR": "[Burst: Depois que Seu Life Diminuir]\nDeixe 1 Spirit do oponente Exhausted. Depois que este efeito resolver, você pode pagar o custo desta carta para ativar seu efeito Flash.\nFlash\nDeixe 1 Spirit/Ultimate do oponente Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-016.webp"
+  },
+  {
+    "id": "SD22-X01",
+    "name": "Ultimate-Kingtaurus",
+    "nameEN": "Ultimate-Kingtaurus",
+    "namePT": "Ultimate-Kingtaurus",
+    "nameJP": "アルティメット・キングタウロス",
+    "nameKey": "ultimate-kingtaurus",
+    "set": "SD22",
+    "cardType": "ultimate",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 7,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "New Generation",
+      "Sword Beast"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 11000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 14000
+      },
+      {
+        "level": 5,
+        "cores": 4,
+        "bp": 18000
+      }
+    ],
+    "effectText": {
+      "en": "[Summon Condition: You have at least 1 Green Spirit.]\nLV3/LV4/LV5 [Ultimate Trigger] When This Ultimate Attacks\nIf the Ultimate Trigger hits, exhaust 2 opposing Spirits.\n[Critical Hit]: In addition, if the hit card has cost 3 or less, move 1 Core from the opponent's Life to their Reserve.\n(Ultimate Trigger: Discard the top card of the opposing deck. If its cost is lower than this Ultimate's cost, it hits.)\nLV4/LV5 When This Ultimate Attacks\nThis Ultimate gets +1000 BP for each Core on it.",
+      "ptBR": "[Condição de Invocação: você tem pelo menos 1 Spirit Green.]\nLV3/LV4/LV5 [Ultimate Trigger] Quando Este Ultimate Ataca\nSe o Ultimate Trigger acertar, deixe 2 Spirits do oponente Exhausted.\n[Critical Hit]: além disso, se a carta acertada tiver custo 3 ou menos, mova 1 Core do Life do oponente para o Reserve dele.\n(Ultimate Trigger: descarte a carta do topo do deck do oponente. Se o custo dela for menor que o custo deste Ultimate, o Trigger acerta.)\nLV4/LV5 Quando Este Ultimate Ataca\nEste Ultimate recebe +1000 BP para cada Core sobre ele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD22/SD22-X01.webp"
+  }
+]

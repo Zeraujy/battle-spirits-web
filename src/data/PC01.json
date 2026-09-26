@@ -1,0 +1,440 @@
+[
+  {
+    "id": "BS52-TX03",
+    "name": "The Blue World",
+    "nameEN": "The Blue World",
+    "namePT": "The Blue World",
+    "nameJP": "青の世界",
+    "nameKey": "the-blue-world",
+    "set": "PC01",
+    "cardType": "nexus",
+    "subtypes": [
+      "Rebirth"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "TX",
+    "includedQuantity": 1,
+    "families": [
+      "Primal"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1 [Rebirth: Your Counter 5 or less] When either player's Life decreases, or when this Nexus would leave the Field due to an opposing effect, you may place your Soul Core on this Nexus and flip it. LV1 When This Nexus Is Deployed: Send all cores from all opposing Grandwalker Nexuses to the Void. LV1: Before an opposing Spirit's When Summoned/When Advents/When Reborn effect activates, you may exhaust 1 of your mono-Blue Primal Spirits to immediately negate that effect.",
+      "ptBR": "LV1 [Rebirth: Seu Counter 5 ou menos] Quando o Life de qualquer jogador diminuir, ou quando este Nexus for sair do Campo por um efeito do oponente, você pode colocar sua Soul Core neste Nexus e virá-lo. LV1 Quando Este Nexus É Colocado: envie todos os Cores de todos os Grandwalker Nexus do oponente para o Void. LV1: Antes de um efeito Quando Invocado/Quando Faz Advent/Quando Faz Rebirth de um Spirit do oponente ser ativado, você pode deixar 1 dos seus Spirits Primal de cor somente Azul Exhausted para negar imediatamente esse efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC01/BS52-TX03.webp"
+  },
+  {
+    "id": "BS52-TX03_b",
+    "name": "The Blue Abyss Deity",
+    "nameEN": "The Blue Abyss Deity",
+    "namePT": "The Blue Abyss Deity",
+    "nameJP": "青き異神",
+    "nameKey": "the-blue-abyss-deity",
+    "set": "PC01",
+    "cardType": "spirit",
+    "subtypes": [
+      "Rebirth"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "cost": 6,
+    "reduction": [],
+    "rarity": "TX",
+    "includedQuantity": 0,
+    "families": [
+      "Primal",
+      "Fusion Beast"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "When this card flips to this side, it remains on the Field and your Counter +1. LV1 When This Spirit Reborns: You may destroy 1 opposing Spirit or 1 opposing Grandwalker Nexus that does not have the Primal family. LV1 [Primal Illusion Return]: When this Spirit would leave the Field due to an opposing effect, you may flip it and deploy it. LV1 During Your Attack Step: All your Blue Primal Spirits cannot be destroyed by BP comparison.",
+      "ptBR": "Quando esta carta virar para este lado, ela permanece no Campo e seu Counter +1. LV1 Quando Este Spirit Faz Rebirth: você pode destruir 1 Spirit do oponente ou 1 Grandwalker Nexus do oponente que não tenha a família Primal. LV1 [Primal Illusion Return]: quando este Spirit for sair do Campo por um efeito do oponente, você pode virá-lo e colocá-lo como Nexus. LV1 Durante Seu Attack Step: todos os seus Spirits Azuis da família Primal não podem ser destruídos por comparação de BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC01/BS52-TX03_b.webp"
+  },
+  {
+    "id": "PC01-001",
+    "name": "The Ruins of the Hill Where Shooting Stars Fall",
+    "nameEN": "The Ruins of the Hill Where Shooting Stars Fall",
+    "namePT": "The Ruins of the Hill Where Shooting Stars Fall",
+    "nameJP": "流星降る丘の遺跡",
+    "nameKey": "the-ruins-of-the-hill-where-shooting-stars-fall",
+    "set": "PC01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "P",
+    "includedQuantity": 1,
+    "families": [
+      "Incarnate"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: The opponent cannot use Magic cards whose colors do not include a color matching a symbol on their Field. In addition, while your Counter is 5 or more, the opponent cannot use [Accel] whose colors do not include a color matching a symbol on their Field. LV2 At the Start of Your Attack Step: [Cannot Stack] You may summon 1 Incarnate Spirit card from under one of your Spirits by paying 1 cost.",
+      "ptBR": "LV1/LV2: o oponente não pode usar cartas de Magic cujas cores não incluam uma cor correspondente a um símbolo no Campo dele. Além disso, enquanto seu Counter for 5 ou mais, o oponente não pode usar [Accel] cujas cores não incluam uma cor correspondente a um símbolo no Campo dele. LV2 No Início do Seu Attack Step: [Não Acumula] você pode invocar 1 carta de Spirit da família Incarnate que esteja como carta de Advent Source de um dos seus Spirits pagando 1 de custo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC01/PC01-001.webp"
+  },
+  {
+    "id": "PC01-CP01",
+    "name": "Ultimate-Drian",
+    "nameEN": "Ultimate-Drian",
+    "namePT": "Ultimate-Drian",
+    "nameJP": "アルティメット・ドライアン",
+    "nameKey": "ultimate-drian",
+    "set": "PC01",
+    "cardType": "ultimate",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "cost": 7,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "ultimate"
+    ],
+    "rarity": "CP",
+    "includedQuantity": 1,
+    "families": [
+      "Azure Wave",
+      "Incarnate",
+      "Ultimate Dragon"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 10000
+      },
+      {
+        "level": 4,
+        "cores": 2,
+        "bp": 17000
+      },
+      {
+        "level": 5,
+        "cores": 4,
+        "bp": 25000
+      },
+      {
+        "level": 6,
+        "cores": 6,
+        "bp": 28000
+      }
+    ],
+    "effectText": {
+      "en": "[Summon Condition: You control at least 1 'Ian', including one in Soul State or as an Advent Source.] LV3/LV4/LV5/LV6 [Triple Ultimate Trigger] When This Ultimate Attacks: For each hit by this Ultimate Trigger, during this turn treat the Levels of all your Incarnate Spirits/Ultimates as 1 Level higher. [Double Hit]: If the Ultimate Trigger hits 2 or more times, destroy 1 opposing Spirit with the highest cost. [Triple Hit]: If the Ultimate Trigger hits 3 times, refresh this Ultimate. (Triple Ultimate Trigger: Discard the top 3 cards of the opposing deck. Each card whose cost is lower than this Ultimate's cost counts as a hit.)",
+      "ptBR": "[Condição de Invocação: você controla pelo menos 1 'Ian', incluindo um que esteja em Soul State ou como Advent Source.] LV3/LV4/LV5/LV6 [Triple Ultimate Trigger] Quando Este Ultimate Ataca: para cada acerto deste Ultimate Trigger, durante este turno trate os Levels de todos os seus Spirits/Ultimates da família Incarnate como 1 Level acima. [Double Hit]: se o Ultimate Trigger acertar 2 ou mais vezes, destrua 1 Spirit do oponente com o maior custo. [Triple Hit]: se o Ultimate Trigger acertar 3 vezes, refresque este Ultimate. (Triple Ultimate Trigger: descarte as 3 cartas do topo do deck do oponente. Cada carta cujo custo seja menor que o custo deste Ultimate conta como um acerto.)"
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC01/PC01-CP01.webp"
+  },
+  {
+    "id": "PC01-CX01",
+    "name": "Ian",
+    "nameEN": "Ian",
+    "namePT": "Ian",
+    "nameJP": "イアン",
+    "nameKey": "ian",
+    "set": "PC01",
+    "cardType": "spirit",
+    "subtypes": [
+      "Contract Spirit"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "CX",
+    "includedQuantity": 1,
+    "families": [
+      "Azure Wave",
+      "Incarnate"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "You may Contract Advent onto this card while it is in Soul State. When doing so, you may place any number of cores from your Field/Reserve onto the card being Advented. [Soul State][Contract Advent Source]/LV1/LV2: [Once per Turn: Same Name] When your Counter increases by an effect of one of your Incarnate Spirits, you may put 1 core from the Void onto one of your Incarnate Spirits. [Contract Advent Source]/LV1/LV2 When This Spirit Attacks: Your Counter +2. Then, ignoring Brave costs, destroy 1 opposing Spirit/Ultimate with cost 4 or less.",
+      "ptBR": "Você pode fazer Contract Advent sobre esta carta enquanto ela estiver em Soul State. Ao fazer isso, você pode colocar qualquer quantidade de Cores do seu Campo/Reserve sobre a carta que está fazendo Advent. [Soul State][Contract Advent Source]/LV1/LV2: [Uma Vez por Turno: Mesmo Nome] quando seu Counter aumentar por um efeito de um dos seus Spirits da família Incarnate, você pode colocar 1 Core do Void sobre 1 dos seus Spirits da família Incarnate. [Contract Advent Source]/LV1/LV2 Quando Este Spirit Ataca: seu Counter +2. Depois, ignorando o custo dos Braves, destrua 1 Spirit/Ultimate do oponente de custo 4 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC01/PC01-CX01.webp"
+  },
+  {
+    "id": "PC01-RV001",
+    "name": "Drian",
+    "nameEN": "Drian",
+    "namePT": "Drian",
+    "nameJP": "ドライアン",
+    "nameKey": "drian",
+    "set": "PC01",
+    "cardType": "spirit",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Azure Wave",
+      "Incarnate"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "[Mirage: Cost 2 (1)] You may set this card from your Hand. [While Set] During Your Attack Step: When one of your Incarnate Spirits attacks, discard the top card of the opposing deck. If that card's cost is lower than the attacking Spirit's cost, destroy 1 opposing Spirit with the lowest cost. LV1/LV2 [Spirit Soul: Blue]: When you summon an Ultimate card, add 1 Blue symbol to this Spirit for that summon.",
+      "ptBR": "[Mirage: Custo 2 (1)] Você pode colocar esta carta da sua mão como Mirage. [Enquanto Estiver Setada] Durante Seu Attack Step: quando 1 dos seus Spirits da família Incarnate atacar, descarte a carta do topo do deck do oponente. Se o custo daquela carta for menor que o custo do Spirit atacante, destrua 1 Spirit do oponente com o menor custo. LV1/LV2 [Spirit Soul: Azul]: quando você invocar uma carta de Ultimate, adicione 1 símbolo Azul a este Spirit para aquela invocação."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC01/PC01-RV001.webp"
+  },
+  {
+    "id": "PC01-RV002",
+    "name": "Star Drian",
+    "nameEN": "Star Drian",
+    "namePT": "Star Drian",
+    "nameJP": "スタードライアン",
+    "nameKey": "star-drian",
+    "set": "PC01",
+    "cardType": "spirit",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Azure Wave",
+      "Incarnate"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Contract Advent: Azure Contract/Incarnate] During Your Turn: By sending your Soul Core to the Trash, place this card from your Hand on top of one of your qualifying Spirits in the same state. LV1/LV2 When This Spirit Advents/Attacks: Once per turn, if this Spirit has an Incarnate Spirit card in its Advent Source, draw 2 cards, then discard 1 card. OC Condition: Counter 4 or more. [During OC] LV1/LV2 During Your Attack Step: When one of your Incarnate Spirits/Ultimates attacks for the first time this turn, the opponent cannot activate Burst effects of Spirit cards during this turn.",
+      "ptBR": "Flash [Contract Advent: Azure Contract/Incarnate] Durante Seu Turno: ao enviar sua Soul Core para o Trash, coloque esta carta da sua mão sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado. LV1/LV2 Quando Este Spirit Faz Advent/Ataca: uma vez por turno, se este Spirit tiver uma carta de Spirit da família Incarnate em seu Advent Source, compre 2 cartas e depois descarte 1 carta. Condição de OC: Counter 4 ou mais. [Durante OC] LV1/LV2 Durante Seu Attack Step: quando 1 dos seus Spirits/Ultimates da família Incarnate atacar pela primeira vez neste turno, o oponente não pode ativar efeitos de Burst de cartas de Spirit durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC01/PC01-RV002.webp"
+  },
+  {
+    "id": "PC01-RV003",
+    "name": "Meteodrian",
+    "nameEN": "Meteodrian",
+    "namePT": "Meteodrian",
+    "nameJP": "メテオドライアン",
+    "nameKey": "meteodrian",
+    "set": "PC01",
+    "cardType": "spirit",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Azure Wave",
+      "Incarnate"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Contract Advent: Azure Contract/Incarnate & Counter 3+] During Either Attack Step: By sending your Soul Core to the Trash, place this card from your Hand on top of one of your qualifying Spirits in the same state. LV1/LV2 When This Spirit Advents/Attacks: Your Counter +1. Then, ignoring Brave costs, destroy 1 opposing Spirit/Ultimate with cost 7 or less. OC Condition: Counter 7 or more. [During OC] LV1/LV2 During Your Attack Step: When one of your Incarnate Spirits/Ultimates attacks for the first time this turn, look at the opponent's entire Hand and discard 1 Magic card from it.",
+      "ptBR": "Flash [Contract Advent: Azure Contract/Incarnate & Counter 3+] Durante o Attack Step de qualquer jogador: ao enviar sua Soul Core para o Trash, coloque esta carta da sua mão sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado. LV1/LV2 Quando Este Spirit Faz Advent/Ataca: seu Counter +1. Depois, ignorando o custo dos Braves, destrua 1 Spirit/Ultimate do oponente de custo 7 ou menos. Condição de OC: Counter 7 ou mais. [Durante OC] LV1/LV2 Durante Seu Attack Step: quando 1 dos seus Spirits/Ultimates da família Incarnate atacar pela primeira vez neste turno, veja toda a mão do oponente e descarte 1 carta de Magic dela."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC01/PC01-RV003.webp"
+  },
+  {
+    "id": "PC01-X01",
+    "name": "Drian-the-Shooting-Star",
+    "nameEN": "Drian-the-Shooting-Star",
+    "namePT": "Drian-the-Shooting-Star",
+    "nameJP": "ドライアン・ザ・シューティングスター",
+    "nameKey": "drian-the-shooting-star",
+    "set": "PC01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 8,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Azure Wave",
+      "Incarnate",
+      "Ultimate Dragon"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 12000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 15000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Contract Advent: Azure Contract/Incarnate & Counter 5+] During Your Turn: By sending your Soul Core to the Trash, place this card from your Hand on top of one of your qualifying Spirits in the same state. When an opposing effect would end your Turn/Attack Step, you may Contract Advent this card from your Hand onto 'Ian'. LV1/LV2 During Your Turn: The opponent cannot end the Turn/Attack Step by effects. OC Condition: Counter 7 or more. [During OC] LV1/LV2 When This Spirit Attacks: Destroy 1 opposing Spirit/Ultimate with cost 10 or less. Then, by exhausting 1 of your Nexuses, refresh up to 2 of your Incarnate Spirits/Ultimates.",
+      "ptBR": "Flash [Contract Advent: Azure Contract/Incarnate & Counter 5+] Durante Seu Turno: ao enviar sua Soul Core para o Trash, coloque esta carta da sua mão sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado. Quando um efeito do oponente for encerrar seu Turno/Attack Step, você pode fazer Contract Advent desta carta da sua mão sobre 'Ian'. LV1/LV2 Durante Seu Turno: o oponente não pode encerrar o Turno/Attack Step por efeitos. Condição de OC: Counter 7 ou mais. [Durante OC] LV1/LV2 Quando Este Spirit Ataca: destrua 1 Spirit/Ultimate do oponente de custo 10 ou menos. Depois, ao deixar 1 dos seus Nexus Exhausted, refresque até 2 dos seus Spirits/Ultimates da família Incarnate."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC01/PC01-X01.webp"
+  }
+]

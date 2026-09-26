@@ -1,0 +1,820 @@
+[
+  {
+    "id": "BS52-RV007",
+    "name": "The ChosenSearcher Alex",
+    "nameEN": "The ChosenSearcher Alex",
+    "namePT": "The ChosenSearcher Alex",
+    "nameJP": "選ばれし探索者アレックス",
+    "nameKey": "the-chosensearcher-alex",
+    "set": "SD64",
+    "cardType": "spirit",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red",
+      "purple",
+      "green",
+      "white",
+      "yellow",
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "purple",
+      "green",
+      "white",
+      "yellow",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 2,
+    "families": [
+      "Primal",
+      "Firing Squad"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card while Set/in your Trash is unaffected by any effects.\n[Burst: After Your Life Decreases]\nSummon this card without paying its cost. Then, when this battle ends, end the Attack Step.\nLV1/LV2\nThis Spirit's symbol is also treated as Red/Purple/Green/Yellow/Blue.\nLV1/LV2 During Your Main Step\n[Once per Turn: Same Name] By exhausting this Spirit, either draw 1 card or put 1 Core from the Void onto this Spirit.",
+      "ptBR": "Esta carta, enquanto estiver Setada/no seu Trash, não é afetada por nenhum efeito.\n[Burst: Depois que Seu Life Diminuir]\nInvoque esta carta sem pagar seu custo. Depois, quando esta batalha terminar, encerre o Attack Step.\nLV1/LV2\nO símbolo deste Spirit também é tratado como Red/Purple/Green/Yellow/Blue.\nLV1/LV2 Durante Seu Main Step\n[Uma Vez por Turno: Mesmo Nome] Ao deixar este Spirit Exhausted, escolha: compre 1 carta; ou coloque 1 Core do Void neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/BS52-RV007.webp"
+  },
+  {
+    "id": "SD64-001",
+    "name": "Ryuuman-Polaris",
+    "nameEN": "Ryuuman-Polaris",
+    "namePT": "Ryuuman-Polaris",
+    "nameJP": "リューマン・ポラリス",
+    "nameKey": "ryuuman-polaris",
+    "set": "SD64",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 7,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 2,
+    "families": [
+      "Scarlet Flame",
+      "Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 11000
+      }
+    ],
+    "effectText": {
+      "en": "This card's symbols and reduction symbols are also treated as Yellow and Blue.\n[Burst: After an Opposing Spirit's When Summoned/When Reborn Effect Resolves]\nDraw 2 cards. Then, summon this card without paying its cost.\nLV1/LV2 When This Spirit Is Summoned\nYou may destroy 1 opposing Spirit with 12000 BP or less. Then, if you have a Contract Spirit, including one in Soul State or as an Advent Source, you may destroy 1 opposing Spirit/Nexus with 1 symbol. Effects of cards destroyed by these effects cannot activate.",
+      "ptBR": "Os símbolos e os símbolos de redução desta carta também são tratados como Yellow e Blue.\n[Burst: Depois que um efeito When Summoned/When Reborn de um Spirit do oponente resolver]\nCompre 2 cartas. Depois, invoque esta carta sem pagar seu custo.\nLV1/LV2 Quando Este Spirit É Invocado\nVocê pode destruir 1 Spirit do oponente com 12000 BP ou menos. Depois, se você tiver um Contract Spirit, incluindo um em Soul State ou como Advent Source, você pode destruir 1 Spirit/Nexus do oponente com 1 símbolo. Os efeitos das cartas destruídas por estes efeitos não podem ser ativados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-001.webp"
+  },
+  {
+    "id": "SD64-002",
+    "name": "Ryuuman-Medieval",
+    "nameEN": "Ryuuman-Medieval",
+    "namePT": "Ryuuman-Medieval",
+    "nameJP": "リューマン・メディーバル",
+    "nameKey": "ryuuman-medieval",
+    "set": "SD64",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 8,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red",
+      "ultimate"
+    ],
+    "rarity": "R",
+    "includedQuantity": 2,
+    "families": [
+      "Scarlet Flame",
+      "Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 8000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 12000
+      }
+    ],
+    "effectText": {
+      "en": "This card's symbols and reduction symbols are also treated as Yellow and Blue.\nLV1/LV2 When This Spirit Is Summoned\nYou may summon up to 3 Spirit/Ultimate cards with the Incarnate family from your Hand by paying 1 cost for each. For each card whose name includes \"Mugen\", \"Choco\", or \"Ian\" summoned by this effect, draw 1 card.\nLV2 When This Spirit Attacks\nDestroy 1 opposing Spirit with 12000 BP or less.",
+      "ptBR": "Os símbolos e os símbolos de redução desta carta também são tratados como Yellow e Blue.\nLV1/LV2 Quando Este Spirit É Invocado\nVocê pode invocar até 3 cartas de Spirit/Ultimate com a família Incarnate da sua Hand pagando 1 de custo por cada uma. Para cada carta cujo nome inclua \"Mugen\", \"Choco\" ou \"Ian\" invocada por este efeito, compre 1 carta.\nLV2 Quando Este Spirit Ataca\nDestrua 1 Spirit do oponente com 12000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-002.webp"
+  },
+  {
+    "id": "SD64-003",
+    "name": "Trinity Star",
+    "nameEN": "Trinity Star",
+    "namePT": "Trinity Star",
+    "nameJP": "トリニティスター",
+    "nameKey": "trinity-star",
+    "set": "SD64",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red",
+      "yellow",
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "yellow",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 2,
+    "families": [
+      "Incarnate"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash\nImmediately end this battle. Then, destroy 1 opposing Spirit with 7000 BP or less. In addition, if you have an Incarnate Spirit, opposing Spirits/Ultimates with cost 4 or more cannot attack during this turn. After this effect resolves, remove this card from the game.",
+      "ptBR": "Flash\nEncerre imediatamente esta batalha. Depois, destrua 1 Spirit do oponente com 7000 BP ou menos. Além disso, se você tiver um Spirit da família Incarnate, Spirits/Ultimates do oponente de custo 4 ou mais não podem atacar durante este turno. Depois que este efeito resolver, remova esta carta do jogo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-003.webp"
+  },
+  {
+    "id": "SD64-CP01",
+    "name": "Ultimate-Mugendragon",
+    "nameEN": "Ultimate-Mugendragon",
+    "namePT": "Ultimate-Mugendragon",
+    "nameJP": "アルティメット・ムゲンドラゴン",
+    "nameKey": "ultimate-mugendragon",
+    "set": "SD64",
+    "cardType": "ultimate",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 7,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "ultimate"
+    ],
+    "rarity": "CP",
+    "includedQuantity": 2,
+    "families": [
+      "Scarlet Flame",
+      "Incarnate",
+      "Ultimate Dragon"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 11000
+      },
+      {
+        "level": 4,
+        "cores": 3,
+        "bp": 19000
+      },
+      {
+        "level": 5,
+        "cores": 4,
+        "bp": 27000
+      },
+      {
+        "level": 6,
+        "cores": 7,
+        "bp": 30000
+      }
+    ],
+    "effectText": {
+      "en": "[Summon Condition: You have at least 1 card whose name includes \"Mugen\", including one in Soul State or as an Advent Source.]\nLV3/LV4/LV5/LV6 When This Ultimate Is Summoned/Attacks\nYou may destroy 1 opposing Spirit with the highest BP.\nLV3/LV4/LV5/LV6 [WU Trigger] When This Ultimate Attacks\nFor each hit by this Ultimate Trigger, all your Ultimate Dragon/Three Dragon Deities Spirits/Ultimates gain 1 Red symbol during this turn.\n[Double Hit]: If both Ultimate Triggers hit, destroy all opposing Spirits with 10000 BP or less. If at least 1 Spirit is destroyed by this effect, you may draw 2 cards.\n(WU Trigger: Discard the top 2 cards of the opposing deck. Each card whose cost is lower than this Ultimate's cost counts as a hit.)",
+      "ptBR": "[Condição de Invocação: você tem pelo menos 1 carta cujo nome inclua \"Mugen\", incluindo uma em Soul State ou como Advent Source.]\nLV3/LV4/LV5/LV6 Quando Este Ultimate É Invocado/Ataca\nVocê pode destruir 1 Spirit do oponente com o maior BP.\nLV3/LV4/LV5/LV6 [WU Trigger] Quando Este Ultimate Ataca\nPara cada acerto deste Ultimate Trigger, todos os seus Spirits/Ultimates das famílias Ultimate Dragon/Three Dragon Deities ganham 1 símbolo Red durante este turno.\n[Double Hit]: se os dois Ultimate Triggers acertarem, destrua todos os Spirits do oponente com 10000 BP ou menos. Se pelo menos 1 Spirit for destruído por este efeito, você pode comprar 2 cartas.\n(WU Trigger: descarte as 2 cartas do topo do deck do oponente. Cada carta cujo custo seja menor que o custo deste Ultimate conta como um acerto.)"
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-CP01.webp"
+  },
+  {
+    "id": "SD64-CX01",
+    "name": "Mugen",
+    "nameEN": "Mugen",
+    "namePT": "Mugen",
+    "nameJP": "ムゲン",
+    "nameKey": "mugen",
+    "set": "SD64",
+    "cardType": "spirit",
+    "subtypes": [
+      "Contract Spirit"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "CX",
+    "includedQuantity": 2,
+    "families": [
+      "Scarlet Flame",
+      "Incarnate"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "You may Contract Advent onto this card while it is in Soul State. When doing so, you may place any number of Cores from your Field/Reserve onto the card being Advented.\n[Soul State][Contract Advent Source]/LV1/LV2\n[Once per Turn: Same Name] When your Counter increases by an effect of one of your Incarnate cards, you may place your Soul Core from the Trash onto 1 of your Spirits/Ultimates.\n[Contract Advent Source]/LV1/LV2 When This Spirit Attacks\nYour Counter +2. Then, destroy 1 opposing Spirit/Ultimate with 5000 BP or less. Effects of a card destroyed by this effect cannot activate.\nOC Condition: Counter 2 or more\n[During OC] This Spirit gets +5000 BP.",
+      "ptBR": "Você pode fazer Contract Advent sobre esta carta enquanto ela estiver em Soul State. Ao fazer isso, você pode colocar qualquer quantidade de Cores do seu Field/Reserve sobre a carta que está fazendo Advent.\n[Soul State][Contract Advent Source]/LV1/LV2\n[Uma Vez por Turno: Mesmo Nome] Quando seu Counter aumentar por um efeito de 1 das suas cartas da família Incarnate, você pode colocar sua Soul Core do Trash sobre 1 dos seus Spirits/Ultimates.\n[Contract Advent Source]/LV1/LV2 Quando Este Spirit Ataca\nSeu Counter +2. Depois, destrua 1 Spirit/Ultimate do oponente com 5000 BP ou menos. Os efeitos de uma carta destruída por este efeito não podem ser ativados.\nCondição de OC: Counter 2 ou mais\n[Durante OC] Este Spirit recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-CX01.webp"
+  },
+  {
+    "id": "SD64-RV001",
+    "name": "Fizard",
+    "nameEN": "Fizard",
+    "namePT": "Fizard",
+    "nameJP": "ファイザード",
+    "nameKey": "fizard",
+    "set": "SD64",
+    "cardType": "spirit",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Scarlet Flame",
+      "Winged Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "[Mirage: Cost 1 (0)] You may Set this card from your Hand.\n[While Set] During Your Attack Step\n[Once per Turn] When one of your Incarnate Spirits/Ultimates attacks, you may increase that attacking card's cost by 1 during this battle.\nLV2 During Your Attack Step\nYour attacking Incarnate Spirits/Ultimates get +3000 BP.",
+      "ptBR": "[Mirage: Custo 1 (0)] Você pode Setar esta carta da sua Hand.\n[Enquanto Estiver Setada] Durante Seu Attack Step\n[Uma Vez por Turno] Quando 1 dos seus Spirits/Ultimates da família Incarnate atacar, você pode aumentar o custo daquela carta atacante em +1 durante esta batalha.\nLV2 Durante Seu Attack Step\nSeus Spirits/Ultimates da família Incarnate que estiverem atacando recebem +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-RV001.webp"
+  },
+  {
+    "id": "SD64-RV002",
+    "name": "Mugendra",
+    "nameEN": "Mugendra",
+    "namePT": "Mugendra",
+    "nameJP": "ムゲンドラ",
+    "nameKey": "mugendra",
+    "set": "SD64",
+    "cardType": "spirit",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 1,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Scarlet Flame",
+      "Incarnate"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "[Mirage: Cost 2 (1)] You may Set this card from your Hand.\n[While Set] During Your Attack Step\nWhen one of your Incarnate Spirits attacks, discard the top card of the opposing deck. If that card's cost is lower than the attacking Spirit's cost, destroy 1 opposing Spirit with 10000 BP or less and 1 opposing Nexus.\nLV1/LV2 [Spirit Soul: Red]\nWhen you summon an Ultimate card, add 1 Red symbol to this Spirit for that summon.",
+      "ptBR": "[Mirage: Custo 2 (1)] Você pode Setar esta carta da sua Hand.\n[Enquanto Estiver Setada] Durante Seu Attack Step\nQuando 1 dos seus Spirits da família Incarnate atacar, descarte a carta do topo do deck do oponente. Se o custo daquela carta for menor que o custo do Spirit atacante, destrua 1 Spirit do oponente com 10000 BP ou menos e 1 Nexus do oponente.\nLV1/LV2 [Spirit Soul: Red]\nQuando você invocar uma carta de Ultimate, adicione 1 símbolo Red a este Spirit para aquela invocação."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-RV002.webp"
+  },
+  {
+    "id": "SD64-RV003",
+    "name": "Edge-Wolf",
+    "nameEN": "Edge-Wolf",
+    "namePT": "Edge-Wolf",
+    "nameJP": "エッジ・ウルフ",
+    "nameKey": "edge-wolf",
+    "set": "SD64",
+    "cardType": "spirit",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Scarlet Flame",
+      "Emperor Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card's symbols and reduction symbols are also treated as Yellow and Blue.\nLV1/LV2/LV3 During Your Main Step\nWhen you summon an Incarnate Spirit/Ultimate card, add 1 Red symbol to this Spirit for that summon.\nLV1/LV2/LV3 When This Spirit Attacks\nThis Spirit gets +3000 BP during this turn.",
+      "ptBR": "Os símbolos e os símbolos de redução desta carta também são tratados como Yellow e Blue.\nLV1/LV2/LV3 Durante Seu Main Step\nQuando você invocar uma carta de Spirit/Ultimate com a família Incarnate, adicione 1 símbolo Red a este Spirit para aquela invocação.\nLV1/LV2/LV3 Quando Este Spirit Ataca\nEste Spirit recebe +3000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-RV003.webp"
+  },
+  {
+    "id": "SD64-RV004",
+    "name": "Mugendragon",
+    "nameEN": "Mugendragon",
+    "namePT": "Mugendragon",
+    "nameJP": "ムゲンドラゴン",
+    "nameKey": "mugendragon",
+    "set": "SD64",
+    "cardType": "spirit",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Scarlet Flame",
+      "Incarnate"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Contract Advent: Flame Contract/Incarnate] During Your Turn\nBy sending your Soul Core to the Trash, place this card from your Hand on top of one of your qualifying Spirits in the same state.\nLV1/LV2 When This Spirit Is Summoned/Advents\nYour Counter +1. Then, you may return 1 Incarnate Spirit card from your Trash to your Hand.\nOC Condition: Counter 5 or more\n[During OC] This Spirit gets +6000 BP.\n[During OC] LV1/LV2 During Your Attack Step\nWhen one of your Incarnate Spirits/Ultimates attacks for the first time this turn, you may destroy 1 opposing Spirit/Ultimate with BP less than or equal to that attacking Spirit/Ultimate's BP.",
+      "ptBR": "Flash [Contract Advent: Flame Contract/Incarnate] Durante Seu Turno\nAo enviar sua Soul Core para o Trash, coloque esta carta da sua Hand sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado.\nLV1/LV2 Quando Este Spirit É Invocado/Faz Advent\nSeu Counter +1. Depois, você pode retornar 1 carta de Spirit com a família Incarnate do seu Trash para sua Hand.\nCondição de OC: Counter 5 ou mais\n[Durante OC] Este Spirit recebe +6000 BP.\n[Durante OC] LV1/LV2 Durante Seu Attack Step\nQuando 1 dos seus Spirits/Ultimates da família Incarnate atacar pela primeira vez neste turno, você pode destruir 1 Spirit/Ultimate do oponente com BP menor ou igual ao BP daquele Spirit/Ultimate atacante."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-RV004.webp"
+  },
+  {
+    "id": "SD64-RV005",
+    "name": "Aizendragon",
+    "nameEN": "Aizendragon",
+    "namePT": "Aizendragon",
+    "nameJP": "アイゼンドラゴン",
+    "nameKey": "aizendragon",
+    "set": "SD64",
+    "cardType": "spirit",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Scarlet Flame",
+      "Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks/Blocks\nDestroy 1 opposing Spirit with 7000 BP or less. Then, if you have an Incarnate Spirit/Ultimate, destroy 2 opposing Nexuses.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca/Bloqueia\nDestrua 1 Spirit do oponente com 7000 BP ou menos. Depois, se você tiver um Spirit/Ultimate da família Incarnate, destrua 2 Nexus do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-RV005.webp"
+  },
+  {
+    "id": "SD64-RV006",
+    "name": "Mugendragon-Nova",
+    "nameEN": "Mugendragon-Nova",
+    "namePT": "Mugendragon-Nova",
+    "nameJP": "ムゲンドラゴン・ノヴァ",
+    "nameKey": "mugendragon-nova",
+    "set": "SD64",
+    "cardType": "spirit",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 2,
+    "families": [
+      "Scarlet Flame",
+      "Incarnate"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Contract Advent: Flame Contract/Incarnate & Counter 3+] During Either Attack Step\nBy sending your Soul Core to the Trash, place this card from your Hand on top of one of your qualifying Spirits in the same state.\nLV1/LV2 When This Spirit Advents/Attacks\nYour Counter +1. Then, destroy 1 opposing Spirit/Ultimate with 12000 BP or less.\nOC Condition: Counter 5 or more\n[During OC] This Spirit gets +6000 BP.\n[During OC] LV1/LV2 During Either Attack Step\nWhen one of your Incarnate Spirits/Ultimates attacks or blocks for the first time this turn, you may refresh it.",
+      "ptBR": "Flash [Contract Advent: Flame Contract/Incarnate & Counter 3+] Durante o Attack Step de qualquer jogador\nAo enviar sua Soul Core para o Trash, coloque esta carta da sua Hand sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado.\nLV1/LV2 Quando Este Spirit Faz Advent/Ataca\nSeu Counter +1. Depois, destrua 1 Spirit/Ultimate do oponente com 12000 BP ou menos.\nCondição de OC: Counter 5 ou mais\n[Durante OC] Este Spirit recebe +6000 BP.\n[Durante OC] LV1/LV2 Durante o Attack Step de qualquer jogador\nQuando 1 dos seus Spirits/Ultimates da família Incarnate atacar ou bloquear pela primeira vez neste turno, você pode dar refresh nele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-RV006.webp"
+  },
+  {
+    "id": "SD64-RV007",
+    "name": "The Red Dawn Sky",
+    "nameEN": "The Red Dawn Sky",
+    "namePT": "The Red Dawn Sky",
+    "nameJP": "赤き黎明の空",
+    "nameKey": "the-red-dawn-sky",
+    "set": "SD64",
+    "cardType": "nexus",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Incarnate"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "[Mirage: Cost 1 (0)] You may Set this card from your Hand.\n[While Set] During Your Attack Step\nWhen one of your Incarnate Spirits/Ultimates attacks, your Counter +1.\nLV1 At the Start of Your Attack Step\n[Cannot Stack] If your Counter is 5 or less, your Counter +1. Or, if your Counter is 6 or more, during this turn all your Incarnate Spirits/Ultimates get +1 cost.",
+      "ptBR": "[Mirage: Custo 1 (0)] Você pode Setar esta carta da sua Hand.\n[Enquanto Estiver Setada] Durante Seu Attack Step\nQuando 1 dos seus Spirits/Ultimates da família Incarnate atacar, seu Counter +1.\nLV1 No Início do Seu Attack Step\n[Cannot Stack] Se seu Counter for 5 ou menos, seu Counter +1. Ou, se seu Counter for 6 ou mais, durante este turno todos os seus Spirits/Ultimates da família Incarnate recebem +1 de custo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-RV007.webp"
+  },
+  {
+    "id": "SD64-RV008",
+    "name": "The Village of Hunters",
+    "nameEN": "The Village of Hunters",
+    "namePT": "The Village of Hunters",
+    "nameJP": "狩る者の集落",
+    "nameKey": "the-village-of-hunters",
+    "set": "SD64",
+    "cardType": "nexus",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Incarnate"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2\n[Once per Turn: Same Name] When you summon/Contract Advent an Incarnate Spirit/Ultimate, you may have your Counter +1. Then, you may draw 1 card.\nLV2 During the Opponent's Attack Step\nWhen your Life decreases due to the opponent, destroy 1 opposing Spirit with 5000 BP or less. In addition, if you have a Contract Spirit, including one in Soul State or as an Advent Source, destroy 1 opposing Spirit with 10000 BP or less.",
+      "ptBR": "LV1/LV2\n[Uma Vez por Turno: Mesmo Nome] Quando você invocar/fizer Contract Advent de um Spirit/Ultimate da família Incarnate, você pode aumentar seu Counter em +1. Depois, você pode comprar 1 carta.\nLV2 Durante o Attack Step do Oponente\nQuando seu Life diminuir por causa do oponente, destrua 1 Spirit do oponente com 5000 BP ou menos. Além disso, se você tiver um Contract Spirit, incluindo um em Soul State ou como Advent Source, destrua 1 Spirit do oponente com 10000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-RV008.webp"
+  },
+  {
+    "id": "SD64-RV009",
+    "name": "Neo-Double Draw",
+    "nameEN": "Neo-Double Draw",
+    "namePT": "Neo-Double Draw",
+    "nameJP": "ネオ・ダブルドロー",
+    "nameKey": "neo-double-draw",
+    "set": "SD64",
+    "cardType": "magic",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 2,
+    "families": [
+      "Incarnate"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main\nDraw 2 cards. Then, if you have an Ultimate or an Incarnate Contract Spirit, including one in Soul State or as an Advent Source, destroy 1 opposing Spirit/Ultimate with 3000 BP or less and draw 1 card.\nFlash\nDuring this turn, 1 of your Spirits/Ultimates gets +3000 BP.",
+      "ptBR": "Main\nCompre 2 cartas. Depois, se você tiver um Ultimate ou um Contract Spirit da família Incarnate, incluindo um em Soul State ou como Advent Source, destrua 1 Spirit/Ultimate do oponente com 3000 BP ou menos e compre 1 carta.\nFlash\nDurante este turno, 1 dos seus Spirits/Ultimates recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-RV009.webp"
+  },
+  {
+    "id": "SD64-RV010",
+    "name": "Flame Spark",
+    "nameEN": "Flame Spark",
+    "namePT": "Flame Spark",
+    "nameJP": "フレイムスパーク",
+    "nameKey": "flame-spark",
+    "set": "SD64",
+    "cardType": "magic",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Incarnate"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash\nDestroy any number of opposing Spirits/Ultimates whose total BP is 12000 or less. If at least 1 card was destroyed by this effect, return 1 Spirit/Ultimate card from your Trash to your Hand. Then, if you have a Spirit/Ultimate whose name includes \"Mugen\", including one in Soul State or as an Advent Source, destroy 1 opposing Spirit/Ultimate with 1 symbol or less.",
+      "ptBR": "Flash\nDestrua qualquer quantidade de Spirits/Ultimates do oponente cuja soma de BP seja 12000 ou menos. Se pelo menos 1 carta for destruída por este efeito, retorne 1 carta de Spirit/Ultimate do seu Trash para sua Hand. Depois, se você tiver um Spirit/Ultimate cujo nome inclua \"Mugen\", incluindo um em Soul State ou como Advent Source, destrua 1 Spirit/Ultimate do oponente com 1 símbolo ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-RV010.webp"
+  },
+  {
+    "id": "SD64-X01",
+    "name": "Mugendragon-the-First-Star",
+    "nameEN": "Mugendragon-the-First-Star",
+    "namePT": "Mugendragon-the-First-Star",
+    "nameJP": "ムゲンドラゴン・ザ・ファーストスター",
+    "nameKey": "mugendragon-the-first-star",
+    "set": "SD64",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 8,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 2,
+    "families": [
+      "Scarlet Flame",
+      "Incarnate",
+      "Ultimate Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 10000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 15000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Contract Advent: Flame Contract/Incarnate & Counter 6+] During Your Turn\nBy sending your Soul Core to the Trash, place this card from your Hand on top of one of your qualifying Spirits in the same state.\nLV1/LV2 When This Spirit Attacks\nThe opponent cannot use Magic/[Accel] unless they put 1 Core from their Life into their Trash. If this Spirit has a card whose name includes \"Mugen\" in its Advent Source, increase the number of Cores required by this effect by 1.\nOC Condition: Counter 8 or more\n[During OC] This Spirit gets +12000 BP.\n[During OC & While Advented] LV1/LV2 During Your Attack Step\nWhen one of your Incarnate Spirits attacks for the first time this turn, you may give that Spirit 2 additional Red symbols during this turn.",
+      "ptBR": "Flash [Contract Advent: Flame Contract/Incarnate & Counter 6+] Durante Seu Turno\nAo enviar sua Soul Core para o Trash, coloque esta carta da sua Hand sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado.\nLV1/LV2 Quando Este Spirit Ataca\nO oponente não pode usar Magic/[Accel] a menos que coloque 1 Core do Life dele no Trash. Se este Spirit tiver uma carta cujo nome inclua \"Mugen\" em seu Advent Source, aumente em +1 a quantidade de Cores exigida por este efeito.\nCondição de OC: Counter 8 ou mais\n[Durante OC] Este Spirit recebe +12000 BP.\n[Durante OC & Enquanto Estiver em Advent] LV1/LV2 Durante Seu Attack Step\nQuando 1 dos seus Spirits da família Incarnate atacar pela primeira vez neste turno, você pode dar a esse Spirit 2 símbolos Red adicionais durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD64/SD64-X01.webp"
+  }
+]

@@ -1,0 +1,973 @@
+[
+  {
+    "id": "SD03-001",
+    "name": "Bladra",
+    "nameEN": "Bladra",
+    "namePT": "Bladra",
+    "nameJP": "ブレイドラ",
+    "nameKey": "bladra",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Winged Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-001.webp"
+  },
+  {
+    "id": "SD03-002",
+    "name": "The SwordDinoman Stegorus",
+    "nameEN": "The SwordDinoman Stegorus",
+    "namePT": "The SwordDinoman Stegorus",
+    "nameJP": "剣竜人ステゴラス",
+    "nameKey": "the-sworddinoman-stegorus",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Dragonfolk",
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: While you control two or fewer Spirits, treat this Spirit as LV3.",
+      "ptBR": "LV1/LV2/LV3: Enquanto você controlar dois ou menos Spirits, trate este Spirit como LV3."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-002.webp"
+  },
+  {
+    "id": "SD03-003",
+    "name": "Morgesaurus",
+    "nameEN": "Morgesaurus",
+    "namePT": "Morgesaurus",
+    "nameJP": "モルゲザウルス",
+    "nameKey": "morgesaurus",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: This Spirit gets +2000 BP during this battle.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Este Spirit recebe +2000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-003.webp"
+  },
+  {
+    "id": "SD03-004",
+    "name": "The HornBeast Gulnearl",
+    "nameEN": "The HornBeast Gulnearl",
+    "namePT": "The HornBeast Gulnearl",
+    "nameJP": "角獣ガルナール",
+    "nameKey": "the-hornbeast-gulnearl",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Imperial Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: Reveal the top three cards of your deck. Add one Astral Dragon Spirit card or one Astral Dragon Brave card among them to your Hand. Return the remaining cards to the bottom of your deck in any order.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Revele as três cartas do topo do seu deck. Adicione à sua Hand 1 carta de Spirit Astral Dragon ou 1 carta de Brave Astral Dragon entre elas. Coloque as cartas restantes no fundo do seu deck em qualquer ordem."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-004.webp"
+  },
+  {
+    "id": "SD03-005",
+    "name": "Big-Horn",
+    "nameEN": "Big-Horn",
+    "namePT": "Big-Horn",
+    "nameJP": "ビッグ・ホーン",
+    "nameKey": "big-horn",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Imperial Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-005.webp"
+  },
+  {
+    "id": "SD03-006",
+    "name": "The SunDragon Sieg-Apollodragon",
+    "nameEN": "The SunDragon Sieg-Apollodragon",
+    "namePT": "The SunDragon Sieg-Apollodragon",
+    "nameJP": "太陽龍ジーク・アポロドラゴン",
+    "nameKey": "the-sundragon-sieg-apollodragon",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "blue",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Astral Deity",
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: You may target one opposing refreshed Spirit and attack it. [When Braved] LV3 When This Spirit Attacks: Destroy one opposing Spirit with 9000 BP or less.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Você pode escolher 1 Spirit do oponente que esteja em estado Refresh e atacá-lo. [Quando Combinado com Brave] LV3 Quando Este Spirit Ataca: Destrua 1 Spirit do oponente com 9000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-006.webp"
+  },
+  {
+    "id": "SD03-006A",
+    "name": "The SunDragon Sieg-Apollodragon",
+    "nameEN": "The SunDragon Sieg-Apollodragon",
+    "namePT": "The SunDragon Sieg-Apollodragon",
+    "nameJP": "太陽龍ジーク・アポロドラゴン",
+    "nameKey": "the-sundragon-sieg-apollodragon",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "blue",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Astral Deity",
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: You may target one opposing refreshed Spirit and attack it. [When Braved] LV3 When This Spirit Attacks: Destroy one opposing Spirit with 9000 BP or less.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Você pode escolher 1 Spirit do oponente que esteja em estado Refresh e atacá-lo. [Quando Combinado com Brave] LV3 Quando Este Spirit Ataca: Destrua 1 Spirit do oponente com 9000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-006A.webp"
+  },
+  {
+    "id": "SD03-006B",
+    "name": "The SunDragon Sieg-Apollodragon",
+    "nameEN": "The SunDragon Sieg-Apollodragon",
+    "namePT": "The SunDragon Sieg-Apollodragon",
+    "nameJP": "太陽龍ジーク・アポロドラゴン",
+    "nameKey": "the-sundragon-sieg-apollodragon",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "blue",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Astral Deity",
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: You may target one opposing refreshed Spirit and attack it. [When Braved] LV3 When This Spirit Attacks: Destroy one opposing Spirit with 9000 BP or less.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Você pode escolher 1 Spirit do oponente que esteja em estado Refresh e atacá-lo. [Quando Combinado com Brave] LV3 Quando Este Spirit Ataca: Destrua 1 Spirit do oponente com 9000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-006B.webp"
+  },
+  {
+    "id": "SD03-006C",
+    "name": "The SunDragon Sieg-Apollodragon",
+    "nameEN": "The SunDragon Sieg-Apollodragon",
+    "namePT": "The SunDragon Sieg-Apollodragon",
+    "nameJP": "太陽龍ジーク・アポロドラゴン",
+    "nameKey": "the-sundragon-sieg-apollodragon",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "blue",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Astral Deity",
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: You may target one opposing refreshed Spirit and attack it. [When Braved] LV3 When This Spirit Attacks: Destroy one opposing Spirit with 9000 BP or less.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Você pode escolher 1 Spirit do oponente que esteja em estado Refresh e atacá-lo. [Quando Combinado com Brave] LV3 Quando Este Spirit Ataca: Destrua 1 Spirit do oponente com 9000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-006C.webp"
+  },
+  {
+    "id": "SD03-006D",
+    "name": "The SunDragon Sieg-Apollodragon",
+    "nameEN": "The SunDragon Sieg-Apollodragon",
+    "namePT": "The SunDragon Sieg-Apollodragon",
+    "nameJP": "太陽龍ジーク・アポロドラゴン",
+    "nameKey": "the-sundragon-sieg-apollodragon",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "blue",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Astral Deity",
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: You may target one opposing refreshed Spirit and attack it. [When Braved] LV3 When This Spirit Attacks: Destroy one opposing Spirit with 9000 BP or less.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Você pode escolher 1 Spirit do oponente que esteja em estado Refresh e atacá-lo. [Quando Combinado com Brave] LV3 Quando Este Spirit Ataca: Destrua 1 Spirit do oponente com 9000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-006D.webp"
+  },
+  {
+    "id": "SD03-007",
+    "name": "The BattleDragon Elginius",
+    "nameEN": "The BattleDragon Elginius",
+    "namePT": "The BattleDragon Elginius",
+    "nameJP": "戦竜エルギニアス",
+    "nameKey": "the-battledragon-elginius",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [
+      "blue",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Fighting Beast"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: This Spirit is also treated as a Red Spirit.",
+      "ptBR": "LV1/LV2: Este Spirit também é tratado como um Spirit Red."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-007.webp"
+  },
+  {
+    "id": "SD03-008",
+    "name": "The MasterCarpenter Mccoy",
+    "nameEN": "The MasterCarpenter Mccoy",
+    "namePT": "The MasterCarpenter Mccoy",
+    "nameJP": "棟梁マッコイ",
+    "nameKey": "the-mastercarpenter-mccoy",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Creator"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: Put a number of Cores from the Void onto one of your Nexuses equal to this Spirit's LV.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Coloque do Void sobre 1 dos seus Nexuses uma quantidade de Cores igual ao LV deste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-008.webp"
+  },
+  {
+    "id": "SD03-009",
+    "name": "The StarMonster Sea-Serpendar",
+    "nameEN": "The StarMonster Sea-Serpendar",
+    "namePT": "The StarMonster Sea-Serpendar",
+    "nameJP": "星海獣シー・サーペンダー",
+    "nameKey": "the-starmonster-sea-serpendar",
+    "set": "SD03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Fusion Beast",
+      "Astral Soul"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Summoned: Destroy one opposing Spirit with cost 4 or less.\nLV1/LV2 [Assault: 1] When This Spirit Attacks: Once per turn, by exhausting one of your Nexuses, refresh this Spirit.\nLV2 During the Opponent's Attack Step: While you control a Braved Spirit, Spirits with cost 4 or less cannot attack.",
+      "ptBR": "LV1/LV2 Quando Este Spirit É Invocado: Destrua 1 Spirit do oponente de custo 4 ou menos.\nLV1/LV2 [Assault: 1] Quando Este Spirit Ataca: Uma vez por turno, ao deixar 1 dos seus Nexuses Exhausted, dê Refresh neste Spirit.\nLV2 Durante o Attack Step do Oponente: Enquanto você controlar um Spirit combinado com Brave, Spirits de custo 4 ou menos não podem atacar."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-009.webp"
+  },
+  {
+    "id": "SD03-010",
+    "name": "The CannonDragon Bal-Gunner",
+    "nameEN": "The CannonDragon Bal-Gunner",
+    "namePT": "The CannonDragon Bal-Gunner",
+    "nameJP": "砲竜バル・ガンナー",
+    "nameKey": "the-cannondragon-bal-gunner",
+    "set": "SD03",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Terra Dragon",
+      "Astral Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "[Brave Condition: Cost 4 or more]\n[When Braved] When This Spirit Attacks: Draw one card, then destroy one opposing Spirit with 4000 BP or less. This Brave gives +2000 BP while Braved.",
+      "ptBR": "[Condição de Brave: Custo 4 ou mais]\n[Quando Combinado com Brave] Quando Este Spirit Ataca: Compre 1 carta e depois destrua 1 Spirit do oponente com 4000 BP ou menos. Este Brave concede +2000 BP enquanto estiver combinado."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-010.webp"
+  },
+  {
+    "id": "SD03-011",
+    "name": "The CrustDragon Groun-Giras",
+    "nameEN": "The CrustDragon Groun-Giras",
+    "namePT": "The CrustDragon Groun-Giras",
+    "nameJP": "鎧殻竜グラウン・ギラス",
+    "nameKey": "the-crustdragon-groun-giras",
+    "set": "SD03",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red",
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Astral Dragon"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 When This Brave Is Summoned: Destroy one opposing Nexus.\n[Brave Condition: Cost 3 or more]\n[When Braved] When This Spirit Attacks: Destroy one opposing Nexus. This Brave gives +3000 BP while Braved.",
+      "ptBR": "LV1 Quando Este Brave É Invocado: Destrua 1 Nexus do oponente.\n[Condição de Brave: Custo 3 ou mais]\n[Quando Combinado com Brave] Quando Este Spirit Ataca: Destrua 1 Nexus do oponente. Este Brave concede +3000 BP enquanto estiver combinado."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-011.webp"
+  },
+  {
+    "id": "SD03-012",
+    "name": "The FangEmperor Cerbelord",
+    "nameEN": "The FangEmperor Cerbelord",
+    "namePT": "The FangEmperor Cerbelord",
+    "nameJP": "牙皇ケルベロード",
+    "nameKey": "the-fangemperor-cerbelord",
+    "set": "SD03",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Fusion Beast",
+      "Imperial Beast"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "[Brave Condition: Cost 5 or more]\n[When Braved] When This Spirit Attacks: Once per turn, by discarding the top five cards of your deck, refresh this Spirit. This Brave gives +5000 BP while Braved.",
+      "ptBR": "[Condição de Brave: Custo 5 ou mais]\n[Quando Combinado com Brave] Quando Este Spirit Ataca: Uma vez por turno, ao descartar as cinco cartas do topo do seu deck, dê Refresh neste Spirit. Este Brave concede +5000 BP enquanto estiver combinado."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-012.webp"
+  },
+  {
+    "id": "SD03-013",
+    "name": "The Fire Paradise",
+    "nameEN": "The Fire Paradise",
+    "namePT": "The Fire Paradise",
+    "nameJP": "炎の楽園",
+    "nameKey": "the-fire-paradise",
+    "set": "SD03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All Brave cards in your Hand gain one additional Red reduction symbol.\nLV2 During Your Draw Step: Draw one additional card.",
+      "ptBR": "LV1/LV2: Todas as cartas de Brave na sua Hand ganham 1 símbolo de redução Red adicional.\nLV2 Durante Seu Draw Step: Compre 1 carta adicional."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-013.webp"
+  },
+  {
+    "id": "SD03-014",
+    "name": "The Olymspia Stadium",
+    "nameEN": "The Olymspia Stadium",
+    "namePT": "The Olymspia Stadium",
+    "nameJP": "オリンスピア競技場",
+    "nameKey": "the-olymspia-stadium",
+    "set": "SD03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Main Step: Spirits cannot be summoned by Spirit, Nexus, or Magic effects.\nLV2 During the Opponent's Attack Step: When an opposing non-Braved Spirit would attack, unless the opponent sends one Core from their Reserve to the Trash, that Spirit cannot attack.",
+      "ptBR": "LV1/LV2 Durante o Main Step de qualquer jogador: Spirits não podem ser invocados por efeitos de Spirit, Nexus ou Magic.\nLV2 Durante o Attack Step do Oponente: Quando um Spirit do oponente que não esteja combinado com Brave for atacar, a menos que o oponente envie 1 Core da Reserve dele para o Trash, aquele Spirit não pode atacar."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-014.webp"
+  },
+  {
+    "id": "SD03-015",
+    "name": "Brave Draw",
+    "nameEN": "Brave Draw",
+    "namePT": "Brave Draw",
+    "nameJP": "ブレイヴドロー",
+    "nameKey": "brave-draw",
+    "set": "SD03",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Draw two cards. Then reveal the top three cards of your deck, add one Brave card among them to your Hand, and return the remaining cards to the top of your deck in any order.\nFlash: During this turn, one Spirit gets +2000 BP.",
+      "ptBR": "Main: Compre 2 cartas. Depois, revele as três cartas do topo do seu deck, adicione 1 carta de Brave entre elas à sua Hand e devolva as cartas restantes ao topo do seu deck em qualquer ordem.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-015.webp"
+  },
+  {
+    "id": "SD03-016",
+    "name": "Sagitta Flame",
+    "nameEN": "Sagitta Flame",
+    "namePT": "Sagitta Flame",
+    "nameJP": "サジッタフレイム",
+    "nameKey": "sagitta-flame",
+    "set": "SD03",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Choose one — destroy any number of opposing Spirits whose combined BP totals 5000 or less; or destroy one opposing Nexus.",
+      "ptBR": "Flash: Escolha 1 — destrua qualquer quantidade de Spirits do oponente cuja soma de BP seja 5000 ou menos; ou destrua 1 Nexus do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-016.webp"
+  },
+  {
+    "id": "SD03-017",
+    "name": "Blue Splash",
+    "nameEN": "Blue Splash",
+    "namePT": "Blue Splash",
+    "nameJP": "ブルースプラッシュ",
+    "nameKey": "blue-splash",
+    "set": "SD03",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Choose one — destroy one opposing Spirit with cost 3 or less; or return one Nexus card from your Trash to your Hand.",
+      "ptBR": "Flash: Escolha 1 — destrua 1 Spirit do oponente de custo 3 ou menos; ou devolva 1 carta de Nexus do seu Trash para a sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD03/SD03-017.webp"
+  }
+]

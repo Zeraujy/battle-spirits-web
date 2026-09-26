@@ -1,0 +1,430 @@
+[
+  {
+    "id": "BS53-TX04",
+    "name": "The Yellow World",
+    "nameEN": "The Yellow World",
+    "namePT": "The Yellow World",
+    "nameJP": "黄の世界",
+    "nameKey": "the-yellow-world",
+    "set": "PC02",
+    "cardType": "nexus",
+    "subtypes": [
+      "Rebirth"
+    ],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "TX",
+    "includedQuantity": 1,
+    "families": [
+      "Primal"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1 [Rebirth: Your Counter 5 or less] When your Life decreases, when your Life increases by an effect with the Primal family, or when this Nexus would leave the Field due to an opposing effect, you may place your Soul Core on this Nexus and flip it. LV1 When This Nexus Is Deployed: During this turn, give 1 opposing Spirit -6000 BP and destroy it if it becomes BP0. LV1 During the Opponent's Attack Step: All opposing Spirits with original cost 6 or less cannot be refreshed by effects.",
+      "ptBR": "LV1 [Rebirth: Seu Counter 5 ou menos] Quando seu Life diminuir, quando seu Life aumentar por um efeito com a família Primal, ou quando este Nexus for sair do Field por um efeito do oponente, você pode colocar sua Soul Core neste Nexus e virá-lo. LV1 Quando Este Nexus É Colocado: durante este turno, dê -6000 BP a 1 Spirit do oponente e destrua-o se ficar com BP0. LV1 Durante o Attack Step do Oponente: todos os Spirits do oponente com custo original 6 ou menos não podem ser refreshed por efeitos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC02/BS53-TX04.webp"
+  },
+  {
+    "id": "BS53-TX04_b",
+    "name": "The Yellow Dream Deity",
+    "nameEN": "The Yellow Dream Deity",
+    "namePT": "The Yellow Dream Deity",
+    "nameJP": "黄の夢想神",
+    "nameKey": "the-yellow-dream-deity",
+    "set": "PC02",
+    "cardType": "spirit",
+    "subtypes": [
+      "Rebirth"
+    ],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [],
+    "rarity": "TX",
+    "includedQuantity": 0,
+    "families": [
+      "Primal",
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "When this card flips to this side, it remains on the Field and your Counter +1. LV1 When This Spirit Reborns: For each Counter you have, during this turn 1 opposing Spirit cannot attack or block. LV1 [Primal Illusion Return]: When this Spirit would leave the Field due to an opposing effect, you may flip it and deploy it. LV1 During Your Attack Step: When one of your Reborn Spirits or one of your Yellow Spirits with the Primal family attacks, during this turn you may give 1 opposing Spirit -5000 BP and destroy it if it becomes BP0.",
+      "ptBR": "Quando esta carta virar para este lado, ela permanece no Field e seu Counter +1. LV1 Quando Este Spirit Faz Rebirth: para cada Counter que você tiver, durante este turno 1 Spirit do oponente não pode atacar nem bloquear. LV1 [Primal Illusion Return]: quando este Spirit for sair do Field por um efeito do oponente, você pode virá-lo e colocá-lo como Nexus. LV1 Durante Seu Attack Step: quando 1 dos seus Spirits que já fez Rebirth ou 1 dos seus Spirits Yellow com a família Primal atacar, durante este turno você pode dar -5000 BP a 1 Spirit do oponente e destruí-lo se ficar com BP0."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC02/BS53-TX04_b.webp"
+  },
+  {
+    "id": "PC02-001",
+    "name": "Chocodra-Ange",
+    "nameEN": "Chocodra-Ange",
+    "namePT": "Chocodra-Ange",
+    "nameJP": "ショコドラ・アンジェ",
+    "nameKey": "chocodra-ange",
+    "set": "PC02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Golden Cloud",
+      "Incarnate"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Contract Advent: Cloud Contract/Incarnate] During Either Attack Step: By sending your Soul Core to the Trash, place this card from your Hand on top of one of your qualifying Spirits in the same state. LV1/LV2 When This Spirit Is Summoned/Advents: Your Counter +1. Then, you may return 1 Magic card with the Incarnate family from your Trash to your Hand. OC Condition: Counter 4 or more. [During OC] This Spirit gets +5000 BP. [During OC] LV1/LV2 During Either Attack Step: When one of your Incarnate Spirits/Ultimates attacks or blocks for the first time this turn, during this turn you may give all opposing Spirits/Ultimates -5000 BP, and destroy any that become BP0.",
+      "ptBR": "Flash [Contract Advent: Cloud Contract/Incarnate] Durante o Attack Step de qualquer jogador: ao enviar sua Soul Core para o Trash, coloque esta carta da sua Hand sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado. LV1/LV2 Quando Este Spirit É Invocado/Faz Advent: seu Counter +1. Depois, você pode retornar 1 carta de Magic com a família Incarnate do seu Trash para sua Hand. Condição de OC: Counter 4 ou mais. [Durante OC] Este Spirit recebe +5000 BP. [Durante OC] LV1/LV2 Durante o Attack Step de qualquer jogador: quando 1 dos seus Spirits/Ultimates da família Incarnate atacar ou bloquear pela primeira vez neste turno, durante este turno você pode dar -5000 BP a todos os Spirits/Ultimates do oponente e destruir os que ficarem com BP0."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC02/PC02-001.webp"
+  },
+  {
+    "id": "PC02-002",
+    "name": "Chocodra-Lucife",
+    "nameEN": "Chocodra-Lucife",
+    "namePT": "Chocodra-Lucife",
+    "nameJP": "ショコドラ・ルシフェ",
+    "nameKey": "chocodra-lucife",
+    "set": "PC02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Golden Cloud",
+      "Incarnate"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Contract Advent: Cloud Contract/Incarnate & Counter 3+] During Either Attack Step: By sending your Soul Core to the Trash, place this card from your Hand on top of one of your qualifying Spirits in the same state. LV1/LV2 When This Spirit Is Summoned/Advents: You may draw 2 cards from the bottom of your deck. OC Condition: Counter 4 or more. [During OC] This Spirit gets +5000 BP. [During OC] LV1/LV2 During Either Attack Step: When one of your Incarnate Spirits/Ultimates attacks or blocks for the first time this turn, during this turn all opposing Nexus/Grandwalker Nexus effects cannot activate.",
+      "ptBR": "Flash [Contract Advent: Cloud Contract/Incarnate & Counter 3+] Durante o Attack Step de qualquer jogador: ao enviar sua Soul Core para o Trash, coloque esta carta da sua Hand sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado. LV1/LV2 Quando Este Spirit É Invocado/Faz Advent: você pode comprar 2 cartas do fundo do seu deck. Condição de OC: Counter 4 ou mais. [Durante OC] Este Spirit recebe +5000 BP. [Durante OC] LV1/LV2 Durante o Attack Step de qualquer jogador: quando 1 dos seus Spirits/Ultimates da família Incarnate atacar ou bloquear pela primeira vez neste turno, durante este turno todos os efeitos dos Nexus/Grandwalker Nexus do oponente não podem ser ativados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC02/PC02-002.webp"
+  },
+  {
+    "id": "PC02-CP01",
+    "name": "Ultimate-Chocodra",
+    "nameEN": "Ultimate-Chocodra",
+    "namePT": "Ultimate-Chocodra",
+    "nameJP": "アルティメット・ショコドラ",
+    "nameKey": "ultimate-chocodra",
+    "set": "PC02",
+    "cardType": "ultimate",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "ultimate"
+    ],
+    "rarity": "CP",
+    "includedQuantity": 1,
+    "families": [
+      "Golden Cloud",
+      "Incarnate",
+      "Ultimate Dragon"
+    ],
+    "symbols": [
+      "ultimate"
+    ],
+    "levels": [
+      {
+        "level": 3,
+        "cores": 1,
+        "bp": 10000
+      },
+      {
+        "level": 4,
+        "cores": 2,
+        "bp": 14000
+      },
+      {
+        "level": 5,
+        "cores": 3,
+        "bp": 17000
+      },
+      {
+        "level": 6,
+        "cores": 5,
+        "bp": 23000
+      }
+    ],
+    "effectText": {
+      "en": "[Summon Condition: You have at least 1 card whose name includes \"Choco\", including in Soul State or as an Advent Source.] [Burst: After an Opposing Spirit/Ultimate Attacks] During this turn, 2 opposing Spirits cannot attack. After this effect resolves, summon this card without paying its cost. LV3/LV4/LV5/LV6 [Ultimate Trigger] When This Ultimate Attacks: If the Ultimate Trigger hits, you may summon/deploy 1 card with the Incarnate family from your Hand without paying its cost. Then, return 1 opposing Lv1/Lv2 Spirit to the bottom of its deck. (Ultimate Trigger: Discard the top card of the opposing deck. If its cost is lower than this Ultimate's cost, it hits.)",
+      "ptBR": "[Condição de Invocação: você tem pelo menos 1 carta cujo nome inclua \"Choco\", incluindo em Soul State ou como Advent Source.] [Burst: Depois que um Spirit/Ultimate do Oponente Atacar] Durante este turno, 2 Spirits do oponente não podem atacar. Depois que este efeito resolver, invoque esta carta sem pagar seu custo. LV3/LV4/LV5/LV6 [Ultimate Trigger] Quando Este Ultimate Ataca: se o Ultimate Trigger acertar, você pode invocar/colocar 1 carta com a família Incarnate da sua Hand sem pagar seu custo. Depois, retorne 1 Spirit Lv1/Lv2 do oponente para o fundo do deck dele. (Ultimate Trigger: descarte a carta do topo do deck do oponente. Se o custo dela for menor que o custo deste Ultimate, o Trigger acerta.)"
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC02/PC02-CP01.webp"
+  },
+  {
+    "id": "PC02-CX01",
+    "name": "Chocola",
+    "nameEN": "Chocola",
+    "namePT": "Chocola",
+    "nameJP": "ショコラ",
+    "nameKey": "chocola",
+    "set": "PC02",
+    "cardType": "spirit",
+    "subtypes": [
+      "Contract Spirit"
+    ],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "CX",
+    "includedQuantity": 1,
+    "families": [
+      "Golden Cloud",
+      "Incarnate"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "You may Contract Advent onto this card while it is in Soul State. When doing so, you may place any number of cores from your Field/Reserve onto the card being Advented. [Soul State][Contract Advent Source]/[Spirit] LV1/LV2: [Once per Turn: Same Name] When your Counter increases by an effect of one of your Incarnate Spirits, you may draw 1 card. [Contract Advent Source]/[Spirit] LV1/LV2 When This Spirit Attacks: Your Counter +2. Then, during this turn, you may give 1 opposing Spirit/Ultimate -6000 BP and destroy it if it becomes BP0. OC Condition: Counter 2 or more. [During OC] This Spirit gets +5000 BP.",
+      "ptBR": "Você pode fazer Contract Advent sobre esta carta enquanto ela estiver em Soul State. Ao fazer isso, você pode colocar qualquer quantidade de Cores do seu Field/Reserve sobre a carta que está fazendo Advent. [Soul State][Contract Advent Source]/[Spirit] LV1/LV2: [Uma Vez por Turno: Mesmo Nome] quando seu Counter aumentar por um efeito de 1 dos seus Spirits da família Incarnate, você pode comprar 1 carta. [Contract Advent Source]/[Spirit] LV1/LV2 Quando Este Spirit Ataca: seu Counter +2. Depois, durante este turno, você pode dar -6000 BP a 1 Spirit/Ultimate do oponente e destruí-lo se ficar com BP0. Condição de OC: Counter 2 ou mais. [Durante OC] Este Spirit recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC02/PC02-CX01.webp"
+  },
+  {
+    "id": "PC02-RV001",
+    "name": "Chocodra",
+    "nameEN": "Chocodra",
+    "namePT": "Chocodra",
+    "nameJP": "ショコドラ",
+    "nameKey": "chocodra",
+    "set": "PC02",
+    "cardType": "spirit",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 1,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Golden Cloud",
+      "Incarnate"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "[Mirage: Cost 2 (1)] You may set this card from your Hand. [While Set] During Your Attack Step: When one of your Incarnate Spirits attacks, discard the top card of the opposing deck. If that card's cost is lower than the attacking Spirit's cost, that Spirit cannot be blocked during this battle. LV1/LV2/LV3 [Spirit Soul: Yellow]: When you summon an Ultimate card, add 1 Yellow symbol to this Spirit for that summon.",
+      "ptBR": "[Mirage: Custo 2 (1)] Você pode colocar esta carta da sua Hand como Mirage. [Enquanto Estiver Setada] Durante Seu Attack Step: quando 1 dos seus Spirits da família Incarnate atacar, descarte a carta do topo do deck do oponente. Se o custo daquela carta for menor que o custo do Spirit atacante, aquele Spirit não pode ser bloqueado durante esta batalha. LV1/LV2/LV3 [Spirit Soul: Yellow]: quando você invocar uma carta de Ultimate, adicione 1 símbolo Yellow a este Spirit para aquela invocação."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC02/PC02-RV001.webp"
+  },
+  {
+    "id": "PC02-RV002",
+    "name": "Angel Strike",
+    "nameEN": "Angel Strike",
+    "namePT": "Angel Strike",
+    "nameJP": "エンジェルストライク",
+    "nameKey": "angel-strike",
+    "set": "PC02",
+    "cardType": "magic",
+    "subtypes": [
+      "Revival"
+    ],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Incarnate"
+    ],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, give 1 opposing Spirit/Ultimate -7000 BP, and destroy it if it becomes BP0. If you have a card whose name includes \"Choco\", including in Soul State or as an Advent Source, you may activate this effect 1 additional time. Then, [Once per Turn: Same Name] your Counter +1.",
+      "ptBR": "Flash: durante este turno, dê -7000 BP a 1 Spirit/Ultimate do oponente e destrua-o se ficar com BP0. Se você tiver uma carta cujo nome inclua \"Choco\", incluindo em Soul State ou como Advent Source, você pode ativar este efeito 1 vez adicional. Depois, [Uma Vez por Turno: Mesmo Nome] seu Counter +1."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC02/PC02-RV002.webp"
+  },
+  {
+    "id": "PC02-X01",
+    "name": "Chocodra-the-Morning-Star",
+    "nameEN": "Chocodra-the-Morning-Star",
+    "namePT": "Chocodra-the-Morning-Star",
+    "nameJP": "ショコドラ・ザ・モーニングスター",
+    "nameKey": "chocodra-the-morning-star",
+    "set": "PC02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 8,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Golden Cloud",
+      "Incarnate",
+      "Ultimate Dragon"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 12000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 15000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Contract Advent: Cloud Contract/Incarnate & Counter 5+] During Either Attack Step: By sending your Soul Core to the Trash, place this card from your Hand on top of one of your qualifying Spirits in the same state. LV1/LV2 When This Spirit Advents/Attacks: Your Counter +1. Then, for every 2 Counter you have, during this turn 1 opposing Spirit cannot attack or block. OC Condition: Counter 8 or more. [During OC] This Spirit gets +12000 BP. [During OC & While Advented] LV1/LV2 Flash When This Spirit Attacks: Once per turn, return all opposing Spirits affected by a \"cannot block\" effect to the bottom of their deck. If this Spirit has a card whose name includes \"Choco\" in its Advent Source, for each Spirit returned by this effect, move 1 core from the opponent's Life to their Reserve (maximum 3).",
+      "ptBR": "Flash [Contract Advent: Cloud Contract/Incarnate & Counter 5+] Durante o Attack Step de qualquer jogador: ao enviar sua Soul Core para o Trash, coloque esta carta da sua Hand sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado. LV1/LV2 Quando Este Spirit Faz Advent/Ataca: seu Counter +1. Depois, para cada 2 Counter que você tiver, durante este turno 1 Spirit do oponente não pode atacar nem bloquear. Condição de OC: Counter 8 ou mais. [Durante OC] Este Spirit recebe +12000 BP. [Durante OC & Enquanto Estiver em Advent] LV1/LV2 Flash Quando Este Spirit Ataca: uma vez por turno, retorne todos os Spirits do oponente afetados por um efeito de \"não pode bloquear\" para o fundo do deck dele. Se este Spirit tiver uma carta cujo nome inclua \"Choco\" em seu Advent Source, para cada Spirit retornado por este efeito, mova 1 Core do Life do oponente para o Reserve dele (máximo 3)."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/PC02/PC02-X01.webp"
+  }
+]

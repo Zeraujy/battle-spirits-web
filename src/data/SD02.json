@@ -1,0 +1,961 @@
+[
+  {
+    "id": "SD02-001",
+    "name": "The MysteriousBeast Pooxan",
+    "nameEN": "The MysteriousBeast Pooxan",
+    "namePT": "The MysteriousBeast Pooxan",
+    "nameJP": "奇獣プーシャン",
+    "nameKey": "the-mysteriousbeast-pooxan",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 1,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3: This Spirit is also treated as a Blue Spirit.",
+      "ptBR": "LV2/LV3: Este Spirit também é tratado como um Spirit Blue."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-001.webp"
+  },
+  {
+    "id": "SD02-002",
+    "name": "Misaal",
+    "nameEN": "Misaal",
+    "namePT": "Misaal",
+    "nameJP": "ミザール",
+    "nameKey": "misaal",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: Exhaust all Spirits with the same cost as the attacking opposing Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Deixe Exhausted todos os Spirits com o mesmo custo do Spirit atacante do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-002.webp"
+  },
+  {
+    "id": "SD02-003",
+    "name": "The Angelia Dunamis",
+    "nameEN": "The Angelia Dunamis",
+    "namePT": "The Angelia Dunamis",
+    "nameJP": "天使デュナミス",
+    "nameKey": "the-angelia-dunamis",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Divine Spirit",
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Blocks: When this Spirit blocks an opposing Spirit with cost 2 or less, end the Attack Step at the end of the battle.\nLV2/LV3 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle to your Hand.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Bloqueia: Quando este Spirit bloquear um Spirit do oponente de custo 2 ou menos, encerre o Attack Step ao fim da batalha.\nLV2/LV3 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-003.webp"
+  },
+  {
+    "id": "SD02-004",
+    "name": "The SacredBeast Haktak",
+    "nameEN": "The SacredBeast Haktak",
+    "namePT": "The SacredBeast Haktak",
+    "nameJP": "神獣ハクタク",
+    "nameKey": "the-sacredbeast-haktak",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 3 or more → Trash]\nAfter paying the summon cost, send all Cores from one of your Cost 3 or more Spirits to the Trash.\nLV1/LV2/LV3 When Summoned: Choose either the Imaginary Beast or Beast Head family. Draw one card for each Spirit you control in the chosen family.\nLV2/LV3 During Your Attack Step: When one of your Spirits is blocked by an opposing Spirit with cost 4 or less, Refresh one of your Spirits with Tribute.",
+      "ptBR": "[Tribute: Custo 3 ou mais → Trash]\nDepois de pagar o custo de invocação, envie todos os Cores de 1 dos seus Spirits de custo 3 ou mais para o Trash.\nLV1/LV2/LV3 Quando Invocado: Escolha a família Imaginary Beast ou Beast Head. Compre 1 carta para cada Spirit que você controla da família escolhida.\nLV2/LV3 Durante Seu Attack Step: Quando 1 dos seus Spirits for bloqueado por um Spirit do oponente de custo 4 ou menos, dê Refresh em 1 dos seus Spirits com Tribute."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-004.webp"
+  },
+  {
+    "id": "SD02-005",
+    "name": "The Angelia Cherubim",
+    "nameEN": "The Angelia Cherubim",
+    "namePT": "The Angelia Cherubim",
+    "nameJP": "天使ヘルヴィム",
+    "nameKey": "the-angelia-cherubim",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: For each Yellow symbol you control, reveal one card from the top of your deck. Add one Magic card among them to your Hand, then return the remaining cards to the bottom of your deck in any order.\nLV2/LV3 During Your Attack Step: All opposing Spirits blocking one of your Spirits with Brilliance are treated as LV1.\nLV3 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle to your Hand.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Para cada símbolo Yellow que você controla, revele 1 carta do topo do seu deck. Adicione 1 carta de Magic entre elas à sua Hand e coloque as cartas restantes no fundo do seu deck em qualquer ordem.\nLV2/LV3 Durante Seu Attack Step: Todos os Spirits do oponente que bloquearem 1 dos seus Spirits com Brilliance são tratados como LV1.\nLV3 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-005.webp"
+  },
+  {
+    "id": "SD02-006",
+    "name": "The Assassin Weaseve",
+    "nameEN": "The Assassin Weaseve",
+    "namePT": "The Assassin Weaseve",
+    "nameJP": "鼬の暗殺者ウィゼーブ",
+    "nameKey": "the-assassin-weaseve",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Is Destroyed: You may place one Nexus card from your Trash without paying its cost.",
+      "ptBR": "LV2 Quando Este Spirit For Destruído: Você pode colocar em campo 1 carta de Nexus do seu Trash sem pagar o custo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-006.webp"
+  },
+  {
+    "id": "SD02-007",
+    "name": "The DogPoliceman Bernald",
+    "nameEN": "The DogPoliceman Bernald",
+    "namePT": "The DogPoliceman Bernald",
+    "nameJP": "犬兵バーナルド",
+    "nameKey": "the-dogpoliceman-bernald",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: This Spirit can block opposing Spirits with cost 3 or less while Exhausted.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Este Spirit pode bloquear Spirits do oponente de custo 3 ou menos mesmo estando Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-007.webp"
+  },
+  {
+    "id": "SD02-008",
+    "name": "The RhinoMousquetair Grhinos",
+    "nameEN": "The RhinoMousquetair Grhinos",
+    "namePT": "The RhinoMousquetair Grhinos",
+    "nameJP": "犀銃士グライノス",
+    "nameKey": "the-rhinomousquetair-grhinos",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: Destroy one opposing Spirit with cost 1 or less.\nLV2 [Assault: 1] When This Spirit Attacks: Once per turn, by exhausting one of your Nexuses, Refresh this Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Destrua 1 Spirit do oponente de custo 1 ou menos.\nLV2 [Assault: 1] Quando Este Spirit Ataca: Uma vez por turno, ao deixar 1 dos seus Nexuses Exhausted, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-008.webp"
+  },
+  {
+    "id": "SD02-009",
+    "name": "The BeastCommander Kuyultha",
+    "nameEN": "The BeastCommander Kuyultha",
+    "namePT": "The BeastCommander Kuyultha",
+    "nameJP": "獣将軍クジャルタ",
+    "nameKey": "the-beastcommander-kuyultha",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Beast Head",
+      "Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When this Spirit becomes the target of Tribute, you may return this Spirit to your Hand instead; if you do, treat all Cores on it as though they were sent to the specified zone.\nLV2: This Spirit and all of your Spirits with Tribute gain the following effect: 'When This Spirit Battles: This Spirit gets +2000 BP during this battle.'",
+      "ptBR": "LV1/LV2: Quando este Spirit se tornar alvo de Tribute, você pode devolvê-lo para sua Hand; se fizer isso, trate todos os Cores sobre ele como se tivessem sido enviados para a zona especificada.\nLV2: Este Spirit e todos os seus Spirits com Tribute ganham o seguinte efeito: 'Quando Este Spirit Batalha: Este Spirit recebe +2000 BP durante esta batalha.'"
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-009.webp"
+  },
+  {
+    "id": "SD02-010",
+    "name": "The RoaringSwordmaster Lowen",
+    "nameEN": "The RoaringSwordmaster Lowen",
+    "namePT": "The RoaringSwordmaster Lowen",
+    "nameJP": "轟剣士レーヴェン",
+    "nameKey": "the-roaringswordmaster-lowen",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 6,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head",
+      "Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 8000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Destroy one opposing Spirit of each cost 0, 1, 2, 3, and 4.\nLV2/LV3 [Assault: 1] When This Spirit Attacks: Once per turn, by exhausting one of your Nexuses, Refresh this Spirit.\nLV3 During Your Attack Step: All your Spirits with Assault get +3000 BP.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Destrua 1 Spirit do oponente de cada custo 0, 1, 2, 3 e 4.\nLV2/LV3 [Assault: 1] Quando Este Spirit Ataca: Uma vez por turno, ao deixar 1 dos seus Nexuses Exhausted, dê Refresh neste Spirit.\nLV3 Durante Seu Attack Step: Todos os seus Spirits com Assault recebem +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-010.webp"
+  },
+  {
+    "id": "SD02-011",
+    "name": "The BeastPrince Bahamunt",
+    "nameEN": "The BeastPrince Bahamunt",
+    "namePT": "The BeastPrince Bahamunt",
+    "nameJP": "獣皇子バハムンド",
+    "nameKey": "the-beastprince-bahamunt",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 6,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Beast Head",
+      "Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 3 or more → Trash]\nAfter paying the summon cost, send all Cores from one of your Cost 3 or more Spirits to the Trash.\nLV1/LV2/LV3 When Summoned: Look at the opponent's entire Hand and discard one Magic card from it.\nLV2/LV3 During Your Attack Step: The opponent cannot use Magic effects of any color matching a Magic card in their Trash.",
+      "ptBR": "[Tribute: Custo 3 ou mais → Trash]\nDepois de pagar o custo de invocação, envie todos os Cores de 1 dos seus Spirits de custo 3 ou mais para o Trash.\nLV1/LV2/LV3 Quando Invocado: Veja toda a Hand do oponente e descarte 1 carta de Magic dela.\nLV2/LV3 Durante Seu Attack Step: O oponente não pode usar efeitos de Magic de uma cor que corresponda à cor de alguma carta de Magic no Trash dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-011.webp"
+  },
+  {
+    "id": "SD02-012",
+    "name": "The Heaven's Door",
+    "nameEN": "The Heaven's Door",
+    "namePT": "The Heaven's Door",
+    "nameJP": "天の城門",
+    "nameKey": "the-heavens-door",
+    "set": "SD02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: When your Life would be reduced by an attack from an opposing LV1 Spirit without Tribute, discard the top card of your deck. If it is a Spirit card, your Life is not reduced. If that Spirit card has Tribute, add it to your Hand.\nLV2 During Your Attack Step: Attacks by your Spirits with Tribute cannot be blocked by opposing Spirits whose LV is equal to or lower than the attacking Spirit's LV.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Quando sua Life seria reduzida pelo ataque de um Spirit LV1 do oponente sem Tribute, descarte a carta do topo do seu deck. Se ela for uma carta de Spirit, sua Life não é reduzida. Se essa carta de Spirit tiver Tribute, adicione-a à sua Hand.\nLV2 Durante Seu Attack Step: Ataques dos seus Spirits com Tribute não podem ser bloqueados por Spirits do oponente cujo LV seja igual ou menor que o LV do Spirit atacante."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-012.webp"
+  },
+  {
+    "id": "SD02-013",
+    "name": "The Generate Altar",
+    "nameEN": "The Generate Altar",
+    "namePT": "The Generate Altar",
+    "nameJP": "転召の祭壇",
+    "nameKey": "the-generate-altar",
+    "set": "SD02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When the opponent summons a Spirit card with cost 3 or less that does not have Tribute, they must pay 1 additional cost.\nLV2 During Your Main Step: When you summon a Spirit with Tribute, all your Spirits sharing a family with that Spirit card are treated as having +3 cost.",
+      "ptBR": "LV1/LV2: Quando o oponente invocar uma carta de Spirit de custo 3 ou menos que não possua Tribute, ele deve pagar 1 de custo adicional.\nLV2 Durante Seu Main Step: Quando você invocar um Spirit com Tribute, todos os seus Spirits que compartilhem uma família com aquela carta de Spirit são tratados como tendo +3 de custo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-013.webp"
+  },
+  {
+    "id": "SD02-014",
+    "name": "The Magic Control Tower",
+    "nameEN": "The Magic Control Tower",
+    "namePT": "The Magic Control Tower",
+    "nameJP": "魔法監視塔",
+    "nameKey": "the-magic-control-tower",
+    "set": "SD02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Nexuses would be destroyed, by sending one Core from your Field or Reserve to your Trash, keep one of those destroyed Nexuses on the Field in the same state.\nLV2: When the opponent uses a Magic effect, you may negate that effect. If you do, return this Nexus to the bottom of your deck.",
+      "ptBR": "LV1/LV2: Quando 1 dos seus Nexuses seria destruído, ao enviar 1 Core do seu Field ou Reserve para o Trash, mantenha 1 daqueles Nexuses destruídos no Field no mesmo estado.\nLV2: Quando o oponente usar um efeito de Magic, você pode anular aquele efeito. Se fizer isso, devolva este Nexus para o fundo do seu deck."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-014.webp"
+  },
+  {
+    "id": "SD02-015",
+    "name": "Friendly Power",
+    "nameEN": "Friendly Power",
+    "namePT": "Friendly Power",
+    "nameJP": "フレンドリーパワー",
+    "nameKey": "friendly-power",
+    "set": "SD02",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, choose one of your Spirits. It gets +1000 BP for each Spirit you control that shares a family with it.",
+      "ptBR": "Flash: Durante este turno, escolha 1 dos seus Spirits. Ele recebe +1000 BP para cada Spirit que você controla que compartilhe uma família com ele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-015.webp"
+  },
+  {
+    "id": "SD02-016",
+    "name": "Wing Boots",
+    "nameEN": "Wing Boots",
+    "namePT": "Wing Boots",
+    "nameJP": "ウィングブーツ",
+    "nameKey": "wing-boots",
+    "set": "SD02",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Choose one of your Spirits. During this turn, when resolving a battle in which that Spirit is blocked by an opposing Spirit whose LV is equal to or lower than that Spirit's LV, do not compare BP and treat that attack as though it was not blocked.",
+      "ptBR": "Flash: Escolha 1 dos seus Spirits. Durante este turno, ao resolver uma batalha em que aquele Spirit seja bloqueado por um Spirit do oponente cujo LV seja igual ou menor que o LV daquele Spirit, não compare BP e trate o ataque como se não tivesse sido bloqueado."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-016.webp"
+  },
+  {
+    "id": "SD02-017",
+    "name": "Strong Draw",
+    "nameEN": "Strong Draw",
+    "namePT": "Strong Draw",
+    "nameJP": "ストロングドロー",
+    "nameKey": "strong-draw",
+    "set": "SD02",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Draw three cards, then discard two cards from your Hand.\nFlash: During this turn, one Spirit gets +3000 BP.",
+      "ptBR": "Main: Compre 3 cartas e depois descarte 2 cartas da sua Hand.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-017.webp"
+  },
+  {
+    "id": "SD02-018",
+    "name": "The BraveColonel Dragron",
+    "nameEN": "The BraveColonel Dragron",
+    "namePT": "The BraveColonel Dragron",
+    "nameJP": "猛将ドラグロン",
+    "nameKey": "the-bravecolonel-dragron",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Dragonfolk"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: When this Spirit becomes the target of Tribute, destroy two opposing Spirits without Tribute with 4000 BP or less.",
+      "ptBR": "LV1/LV2/LV3: Quando este Spirit se tornar alvo de Tribute, destrua 2 Spirits do oponente sem Tribute com 4000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-018.webp"
+  },
+  {
+    "id": "SD02-019",
+    "name": "The DarkKnight Schwart",
+    "nameEN": "The DarkKnight Schwart",
+    "namePT": "The DarkKnight Schwart",
+    "nameJP": "黒騎士シュヴァルト",
+    "nameKey": "the-darkknight-schwart",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Evil Shadow"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: When this Spirit becomes the target of Tribute, send two Cores from opposing Spirits without Tribute to the opponent's Trash.",
+      "ptBR": "LV1/LV2/LV3: Quando este Spirit se tornar alvo de Tribute, envie 2 Cores de Spirits do oponente sem Tribute para o Trash do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-019.webp"
+  },
+  {
+    "id": "SD02-020",
+    "name": "The RainbowWings Jewelg",
+    "nameEN": "The RainbowWings Jewelg",
+    "namePT": "The RainbowWings Jewelg",
+    "nameJP": "虹翼のジュエルグ",
+    "nameKey": "the-rainbowwings-jewelg",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Shellman"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When this Spirit becomes the target of Tribute, put two Cores from the Void into your Reserve.",
+      "ptBR": "LV1/LV2: Quando este Spirit se tornar alvo de Tribute, coloque 2 Cores do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-020.webp"
+  },
+  {
+    "id": "SD02-021",
+    "name": "The BeastMachine Sai-Drill",
+    "nameEN": "The BeastMachine Sai-Drill",
+    "namePT": "The BeastMachine Sai-Drill",
+    "nameJP": "獣機セイ・ドリル",
+    "nameKey": "the-beastmachine-sai-drill",
+    "set": "SD02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When this Spirit becomes the target of Tribute, return one opposing Spirit without Tribute with 5000 BP or less to the top of the opponent's deck.",
+      "ptBR": "LV1/LV2: Quando este Spirit se tornar alvo de Tribute, devolva 1 Spirit do oponente sem Tribute com 5000 BP ou menos para o topo do deck do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD02/SD02-021.webp"
+  }
+]
