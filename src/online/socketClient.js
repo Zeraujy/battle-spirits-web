@@ -185,7 +185,11 @@ function createBrowserOnlineClient(serverUrl) {
   const socket = io(url, {
     transports: ["websocket", "polling"],
     autoConnect: false,
-    reconnection: true
+    reconnection: true,
+    reconnectionDelay: 500,
+    reconnectionDelayMax: 4000,
+    randomizationFactor: 0.35,
+    timeout: 10000
   });
 
   let session = null;

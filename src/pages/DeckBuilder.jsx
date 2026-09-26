@@ -85,7 +85,9 @@ export default function DeckBuilder({ onBack, deckId = null }) {
   const { t, language } = useLanguage();
   const pt = language !== "en";
 
-  const initialDecks = getDecks();
+  const initialDecksRef = useRef(null);
+  if (initialDecksRef.current === null) initialDecksRef.current = getDecks();
+  const initialDecks = initialDecksRef.current;
   const requested = initialDecks.find((d) => d.id === deckId) || null;
 
   const [decks, setDecks] = useState(initialDecks);
@@ -174,23 +176,45 @@ export default function DeckBuilder({ onBack, deckId = null }) {
     return () => window.clearTimeout(id);
   }, [results, currentPage]);
 
-  const validation = validateDeck(draft.cards, cardIndex, { regulation: "eternal" });
-  const officialValidation = validateDeck(draft.cards, cardIndex, { regulation: "official" });
+  const validation = useMemo(
+    () => validateDeck(draft.cards, cardIndex, { regulation: "eternal" }),
+    [draft.cards]
+  );
+  const officialValidation = useMemo(
+    () => validateDeck(draft.cards, cardIndex, { regulation: "official" }),
+    [draft.cards]
+  );
 
-  const deckCardIds = draft.cards
-    .filter((e) => Number(e.quantity || 0) > 0)
-    .map((e) => e.cardId || e.id);
+  const deckQuantityById = useMemo(() => {
+    const map = new Map();
+    for (const entry of draft.cards) {
+      const id = entry.cardId || entry.id;
+      if (!id) continue;
+      map.set(id, Number(entry.quantity || 0));
+    }
+    return map;
+  }, [draft.cards]);
 
-  const uniqueCards = draft.cards.filter((e) => Number(e.quantity || 0) > 0).length;
-  const coverCard = cardIndex.get(draft.coverCardId || draft.cards[0]?.cardId || draft.cards[0]?.id || "");
+  const deckCardIds = useMemo(
+    () => draft.cards
+      .filter((e) => Number(e.quantity || 0) > 0)
+      .map((e) => e.cardId || e.id),
+    [draft.cards]
+  );
+
+  const uniqueCards = deckCardIds.length;
+  const coverCard = useMemo(
+    () => cardIndex.get(draft.coverCardId || draft.cards[0]?.cardId || draft.cards[0]?.id || ""),
+    [draft.coverCardId, draft.cards]
+  );
   const hasDeck = draft.cards.length > 0;
   const analytics = useMemo(() => analyzeDeck(draft.cards, cardIndex), [draft.cards]);
-  const maxCurve = Math.max(1, ...analytics.costCurve);
+  const maxCurve = useMemo(() => Math.max(1, ...analytics.costCurve), [analytics.costCurve]);
   const relatedCards = useMemo(() => getRelatedCards(detailsCard, { limit: 6 }), [detailsCard]);
   const activeAdvancedFilters = [setCode, rarity, family, costMin, costMax, reduction, symbol, restriction].filter((value) => String(value ?? "").trim() !== "").length;
 
   function qty(cardId) {
-    return draft.cards.find((e) => (e.cardId || e.id) === cardId)?.quantity || 0;
+    return deckQuantityById.get(cardId) || 0;
   }
 
   function setQty(cardId, nextQty) {
@@ -255,7 +279,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
       format: DECK_FILE_FORMAT,
       version: DECK_FILE_VERSION,
       simulator: "Battle Spirits Eternal Simulator",
-      simulatorVersion: "3.9.8",
+      simulatorVersion: "3.9.9",
       exportedAt: new Date().toISOString(),
       deck: {
         name: String(draft.name || "").trim() || (pt ? "Deck Importado" : "Imported Deck"),

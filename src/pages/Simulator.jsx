@@ -594,7 +594,7 @@ export default function Simulator({
   useEffect(() => {
     if (!roomState?.turnClock?.deadline || match?.winnerId) return undefined;
     setTurnClockNow(Date.now());
-    const interval = setInterval(() => setTurnClockNow(Date.now()), 250);
+    const interval = setInterval(() => setTurnClockNow(Date.now()), 1000);
     return () => clearInterval(interval);
   }, [roomState?.turnClock?.deadline, match?.winnerId]);
 
@@ -773,9 +773,10 @@ export default function Simulator({
     const handler = (
       state
     ) => {
-      setRoomState(
-        state
-      );
+      setRoomState((previous) => ({
+        ...state,
+        chat: state.chat ?? previous?.chat ?? []
+      }));
 
       if (
         state.match
@@ -5388,7 +5389,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v3.9.8 • Arena 2D
+            Eternal v3.9.9 • Arena 2D
           </span>
 
           <strong>

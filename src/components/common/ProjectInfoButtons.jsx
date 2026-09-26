@@ -4,6 +4,47 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.9.9",
+    date: { pt: "26/09/2026", en: "09/26/2026" },
+    title: { pt: "Performance & Network Optimization", en: "Performance & Network Optimization" },
+    summary: {
+      pt: "O simulador ficou mais leve no Deck Builder, na arena e no Online sem alterar regras ou aparência do jogo.",
+      en: "The simulator is now lighter in Deck Builder, the arena and Online without changing game rules or presentation."
+    },
+    sections: [
+      {
+        title: { pt: "Mais fluidez", en: "Smoother play" },
+        items: {
+          pt: [
+            "Buscas e cartas relacionadas agora reaproveitam resultados recentes para responder mais rápido em catálogos grandes.",
+            "O Deck Builder evita recalcular validação e análise quando apenas filtros ou busca mudam.",
+            "O relógio de turno reduz atualizações desnecessárias sem perder precisão visual."
+          ],
+          en: [
+            "Searches and related-card suggestions now reuse recent results for faster response in large catalogs.",
+            "Deck Builder avoids recalculating validation and analysis when only search or filters change.",
+            "The turn clock performs fewer unnecessary updates without losing visible accuracy."
+          ]
+        }
+      },
+      {
+        title: { pt: "Online mais eficiente", en: "More efficient Online" },
+        items: {
+          pt: [
+            "Entrar em salas e jogar Online ficou mais responsivo em sessões longas.",
+            "O lobby evita atualizações repetidas quando nada realmente mudou.",
+            "Reconexões ficaram mais rápidas e consistentes em conexões instáveis."
+          ],
+          en: [
+            "Joining rooms and playing Online is more responsive during long sessions.",
+            "The lobby avoids repeated updates when nothing actually changed.",
+            "Reconnects are faster and more consistent on unstable connections."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "3.9.8",
     date: { pt: "26/09/2026", en: "09/26/2026" },
     title: { pt: "Deckbuilder & Database 2.0", en: "Deckbuilder & Database 2.0" },

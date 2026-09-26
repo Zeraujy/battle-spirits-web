@@ -62,6 +62,39 @@ function uniqueSorted(values) {
     .sort((a, b) => a.localeCompare(b, "pt-BR", { numeric: true, sensitivity: "base" }));
 }
 
+
+const SEARCH_CACHE_LIMIT = 80;
+const RELATED_CACHE_LIMIT = 160;
+const searchCache = new Map();
+const relatedCache = new Map();
+
+function remember(cache, key, value, limit) {
+  if (cache.has(key)) cache.delete(key);
+  cache.set(key, value);
+  if (cache.size > limit) {
+    const oldestKey = cache.keys().next().value;
+    cache.delete(oldestKey);
+  }
+  return value;
+}
+
+function normalizedSearchKey(query, filters = {}) {
+  return JSON.stringify([
+    fold(query),
+    filters.cardType || "",
+    filters.color || "",
+    filters.set || "",
+    filters.rarity || "",
+    filters.family || "",
+    filters.costMin ?? "",
+    filters.costMax ?? "",
+    filters.reduction || "",
+    filters.symbol || "",
+    filters.restriction || "",
+    filters.sort || "code"
+  ]);
+}
+
 export const catalogMeta = Object.freeze({
   sets: uniqueSorted(cards.map((card) => card.set || String(card.id || "").split("-")[0])),
   rarities: uniqueSorted(cards.map((card) => card.rarity)),
@@ -86,6 +119,14 @@ function compareCards(a, b, sort = "code") {
 }
 
 export function searchCards(query = "", filters = {}) {
+  const cacheKey = normalizedSearchKey(query, filters);
+  const cached = searchCache.get(cacheKey);
+  if (cached) {
+    searchCache.delete(cacheKey);
+    searchCache.set(cacheKey, cached);
+    return cached;
+  }
+
   const q = fold(query);
   const terms = q.split(/\s+/).filter(Boolean);
   const minCost = filters.costMin === "" || filters.costMin == null ? null : Number(filters.costMin);
@@ -113,16 +154,24 @@ export function searchCards(query = "", filters = {}) {
     return true;
   });
 
-  return result.sort((a, b) => compareCards(a, b, filters.sort));
+  result.sort((a, b) => compareCards(a, b, filters.sort));
+  return remember(searchCache, cacheKey, result, SEARCH_CACHE_LIMIT);
 }
 
 export function getRelatedCards(card, { limit = 8 } = {}) {
   if (!card) return [];
+  const cacheKey = `${card.id || "unknown"}:${limit}`;
+  const cached = relatedCache.get(cacheKey);
+  if (cached) {
+    relatedCache.delete(cacheKey);
+    relatedCache.set(cacheKey, cached);
+    return cached;
+  }
   const families = new Set(card.families || []);
   const colors = new Set(card.colors || []);
   const set = card.set || String(card.id || "").split("-")[0];
 
-  return cards
+  const related = cards
     .filter((candidate) => candidate.id !== card.id)
     .map((candidate) => {
       let score = 0;
@@ -139,4 +188,6 @@ export function getRelatedCards(card, { limit = 8 } = {}) {
     .sort((a, b) => b.score - a.score || String(a.candidate.id).localeCompare(String(b.candidate.id), undefined, { numeric: true }))
     .slice(0, limit)
     .map((entry) => entry.candidate);
+
+  return remember(relatedCache, cacheKey, related, RELATED_CACHE_LIMIT);
 }

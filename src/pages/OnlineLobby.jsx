@@ -221,7 +221,10 @@ export default function OnlineLobby({
     const onState = (
       state
     ) => {
-      setRoom(state);
+      setRoom((previous) => ({
+        ...state,
+        chat: state.chat ?? previous?.chat ?? []
+      }));
 
       if (
         state.started &&
