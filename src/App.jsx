@@ -61,7 +61,7 @@ export default function App() {
   else if (screen.name === "local") content = <LocalSetup onBack={() => go("home", { menu: "local" })} onDeckBuilder={() => go("decks", { backTo: "local" })} onStart={(match) => go("simulator", { match, mode: "local" })} />;
   else if (screen.name === "ai") content = <AiSetup onBack={() => go("home", { menu: "local" })} onDeckBuilder={() => go("decks", { backTo: "ai" })} onStart={(match) => go("simulator", { match, mode: "ai", viewerPlayerId: "player1" })} />;
   else if (screen.name === "online") content = <OnlineLobby onBack={() => go("home", { menu: "online" })} onDeckBuilder={() => go("decks", { backTo: "online" })} onMatch={(payload) => go("simulator", { ...payload, mode: "online" })} />;
-  else if (screen.name === "ranked") content = <RankedLobby onBack={() => go("home", { menu: "online" })} onAccount={() => go("account")} onDeckBuilder={() => go("decks", { backTo: "ranked" })} />;
+  else if (screen.name === "ranked") content = <RankedLobby onBack={() => go("home", { menu: "online" })} onAccount={() => go("account")} onDeckBuilder={() => go("decks", { backTo: "ranked" })} onMatch={(payload) => go("simulator", { ...payload, mode: "ranked" })} />;
   else if (screen.name === "store") content = <Store onBack={() => go("home")} />;
   else if (screen.name === "simulator") content = <Simulator {...screen} onExit={() => go("home")} />;
   else content = <Home go={go} initialSection={screen.menu || "root"} />;

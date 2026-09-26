@@ -170,7 +170,10 @@ function createDesktopOnlineClient(serverUrl) {
       if (!session) return callback?.({ ok: false, error: "Sem sessão para retomar." });
       emitWithAck("room:resume", session, callback);
     },
-    getSession() { return session ? { ...session } : null; }
+    getSession() { return session ? { ...session } : null; },
+    adoptSession(value) {
+      if (value?.code && value?.playerId && value?.resumeToken) session = { code: value.code, playerId: value.playerId, resumeToken: value.resumeToken };
+    }
   };
 }
 
@@ -221,7 +224,10 @@ function createBrowserOnlineClient(serverUrl) {
       if (!session) return callback?.({ ok: false, error: "Sem sessão para retomar." });
       socket.emit("room:resume", session, callback);
     },
-    getSession() { return session ? { ...session } : null; }
+    getSession() { return session ? { ...session } : null; },
+    adoptSession(value) {
+      if (value?.code && value?.playerId && value?.resumeToken) session = { code: value.code, playerId: value.playerId, resumeToken: value.resumeToken };
+    }
   };
 }
 

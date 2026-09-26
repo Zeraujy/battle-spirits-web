@@ -4,6 +4,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { Server } from "socket.io";
+import { createClient } from "@supabase/supabase-js";
 import { normalizeCard, makeCardIndex } from "../src/game/cardAdapter.js";
 import { createMatch, validateDeck } from "../src/game/state.js";
 import { applyGameAction } from "../src/game/reducer.js";
@@ -43,17 +44,25 @@ export async function createBattleSpiritsServer(options = {}) {
   const matchmakingQueue = [];
   const matchmakingPairs = new Map();
   const matchmakingSocketPair = new Map();
+  const rankedQueue = [];
+  const rankedBySocket = new Map();
+  const rankedSeason = "S0";
+  const supabaseUrl = String(options.supabaseUrl ?? process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "");
+  const supabaseServiceKey = String(options.supabaseServiceKey ?? process.env.SUPABASE_SERVICE_ROLE_KEY ?? "");
+  const rankedSupabase = supabaseUrl && supabaseServiceKey ? createClient(supabaseUrl, supabaseServiceKey, { auth: { persistSession: false, autoRefreshToken: false } }) : null;
 
   const server = http.createServer((req, res) => {
     if (req.url === "/health") {
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify({
         ok: true,
-        version: "3.5.1a",
+        version: "3.7.0",
         rooms: rooms.size,
         cards: cardIndex.size,
         matchmakingQueued: matchmakingQueue.length,
         matchmakingPairs: matchmakingPairs.size,
+        rankedQueued: rankedQueue.length,
+        rankedReady: Boolean(rankedSupabase),
         host,
         port
       }));
@@ -157,7 +166,8 @@ export async function createBattleSpiritsServer(options = {}) {
       started: Boolean(room.match),
       players,
       chat: (room.chat || []).slice(-100),
-      match: sanitizeMatch(room.match, viewerId)
+      match: sanitizeMatch(room.match, viewerId),
+      ranked: room.ranked ? { season: room.ranked.season } : null
     };
   }
 
@@ -271,6 +281,139 @@ export async function createBattleSpiritsServer(options = {}) {
     return null;
   }
 
+
+
+  function rankedProfileLabel(rp = 1000) {
+    const value = Math.max(0, Number(rp || 0));
+    const div = (floor) => value - floor >= 200 ? "I" : value - floor >= 100 ? "II" : "III";
+    if (value >= 2400) return "MASTER";
+    if (value >= 2100) return `DIAMOND ${div(2100)}`;
+    if (value >= 1800) return `PLATINUM ${div(1800)}`;
+    if (value >= 1500) return `GOLD ${div(1500)}`;
+    if (value >= 1200) return `SILVER ${div(1200)}`;
+    return `BRONZE ${div(900)}`;
+  }
+
+  function removeFromRankedQueue(socketId) {
+    const index = rankedQueue.findIndex((entry) => entry.socketId === socketId);
+    if (index < 0) return null;
+    const [entry] = rankedQueue.splice(index, 1);
+    rankedBySocket.delete(socketId);
+    return entry;
+  }
+
+  async function rankedIdentity(accessToken) {
+    if (!rankedSupabase) return { ok: false, error: "Ranked indisponível: servidor sem SUPABASE_SERVICE_ROLE_KEY." };
+    const token = String(accessToken || "").trim();
+    if (!token) return { ok: false, error: "Sessão Ranked inválida." };
+    const { data, error } = await rankedSupabase.auth.getUser(token);
+    if (error || !data?.user) return { ok: false, error: "Não foi possível validar sua conta Ranked." };
+    return { ok: true, user: data.user };
+  }
+
+  async function ensureRankedProfile(userId) {
+    const { data: found } = await rankedSupabase.from("bs_ranked_profiles")
+      .select("user_id,season,rp,peak_rp,wins,losses,placements")
+      .eq("user_id", userId).eq("season", rankedSeason).maybeSingle();
+    if (found) return found;
+    const row = { user_id: userId, season: rankedSeason, rp: 1000, peak_rp: 1000, wins: 0, losses: 0, placements: 0 };
+    const { data, error } = await rankedSupabase.from("bs_ranked_profiles").insert(row).select().single();
+    if (error) throw error;
+    return data;
+  }
+
+  function rankedSearchWindow(entry) {
+    const seconds = Math.max(0, (Date.now() - entry.queuedAt) / 1000);
+    return Math.min(600, 150 + Math.floor(seconds / 20) * 50);
+  }
+
+  function findRankedOpponent(entry) {
+    let bestIndex = -1;
+    let bestGap = Infinity;
+    for (let i = 0; i < rankedQueue.length; i += 1) {
+      const candidate = rankedQueue[i];
+      if (!candidate || candidate.socketId === entry.socketId || candidate.userId === entry.userId) continue;
+      const gap = Math.abs(Number(candidate.rp) - Number(entry.rp));
+      if (gap > Math.max(rankedSearchWindow(entry), rankedSearchWindow(candidate))) continue;
+      if (gap < bestGap) { bestGap = gap; bestIndex = i; }
+    }
+    return bestIndex;
+  }
+
+  function createRankedRoom(a, b) {
+    let roomCode = code();
+    while (rooms.has(roomCode)) roomCode = code();
+    const firstPlayerId = Math.random() < 0.5 ? "player1" : "player2";
+    const room = {
+      code: roomCode,
+      players: {
+        player1: { socketId: a.socketId, profile: publicProfile(a.profile), deck: a.deck, resumeToken: resumeToken() },
+        player2: { socketId: b.socketId, profile: publicProfile(b.profile), deck: b.deck, resumeToken: resumeToken() }
+      },
+      match: null, chat: [], createdAt: Date.now(),
+      ranked: { season: rankedSeason, settled: false, players: {
+        player1: { userId: a.userId, rp: a.rp },
+        player2: { userId: b.userId, rp: b.rp }
+      } }
+    };
+    room.match = createMatch({
+      player1: { ...room.players.player1.profile, deck: room.players.player1.deck },
+      player2: { ...room.players.player2.profile, deck: room.players.player2.deck },
+      firstPlayerId, cardIndex
+    });
+    rooms.set(roomCode, room);
+    io.sockets.sockets.get(a.socketId)?.join(roomCode);
+    io.sockets.sockets.get(b.socketId)?.join(roomCode);
+    rankedBySocket.delete(a.socketId); rankedBySocket.delete(b.socketId);
+    io.to(a.socketId).emit("ranked:matched", { code: roomCode, playerId: "player1", resumeToken: room.players.player1.resumeToken, opponentRank: rankedProfileLabel(b.rp) });
+    io.to(b.socketId).emit("ranked:matched", { code: roomCode, playerId: "player2", resumeToken: room.players.player2.resumeToken, opponentRank: rankedProfileLabel(a.rp) });
+    emitRoom(room);
+    return room;
+  }
+
+  async function settleRankedRoom(room, winnerId, reason = "game") {
+    if (!room?.ranked || room.ranked.settled || !winnerId || !rankedSupabase) return;
+    const loserId = winnerId === "player1" ? "player2" : "player1";
+    const winnerMeta = room.ranked.players[winnerId];
+    const loserMeta = room.ranked.players[loserId];
+    if (!winnerMeta || !loserMeta) return;
+
+    const expectedWinner = 1 / (1 + Math.pow(10, (loserMeta.rp - winnerMeta.rp) / 400));
+    const winDelta = Math.max(12, Math.round(32 * (1 - expectedWinner)));
+    const lossDelta = -Math.max(12, Math.round(32 * expectedWinner));
+    const winnerAfter = Math.max(0, Number(winnerMeta.rp) + winDelta);
+    const loserAfter = Math.max(0, Number(loserMeta.rp) + lossDelta);
+    const winnerProfile = room.players[winnerId]?.profile || {};
+    const loserProfile = room.players[loserId]?.profile || {};
+
+    const { error } = await rankedSupabase.rpc("bs_ranked_settle_match", {
+      p_match_uid: String(room.match?.id || room.code),
+      p_season: rankedSeason,
+      p_winner_id: winnerMeta.userId,
+      p_loser_id: loserMeta.userId,
+      p_winner_before: Number(winnerMeta.rp),
+      p_loser_before: Number(loserMeta.rp),
+      p_winner_delta: winDelta,
+      p_loser_delta: lossDelta,
+      p_winner_name: winnerProfile.name || "Jogador",
+      p_winner_username: winnerProfile.username || null,
+      p_loser_name: loserProfile.name || "Jogador",
+      p_loser_username: loserProfile.username || null,
+      p_reason: reason
+    });
+    if (error) {
+      console.error("[ranked:settle]", error);
+      room.ranked.settleError = error.message;
+      return;
+    }
+
+    room.ranked.settled = true;
+    const winnerSocket = room.players[winnerId]?.socketId;
+    const loserSocket = room.players[loserId]?.socketId;
+    if (winnerSocket) io.to(winnerSocket).emit("ranked:result", { result: "win", rpBefore: winnerMeta.rp, rpAfter: winnerAfter, rpDelta: winDelta, rank: rankedProfileLabel(winnerAfter), reason });
+    if (loserSocket) io.to(loserSocket).emit("ranked:result", { result: "loss", rpBefore: loserMeta.rp, rpAfter: loserAfter, rpDelta: lossDelta, rank: rankedProfileLabel(loserAfter), reason });
+  }
+
   function onSafe(socket, eventName, handler) {
     socket.on(eventName, (payload = {}, ack = () => {}) => {
       const reply = typeof ack === "function" ? ack : () => {};
@@ -293,6 +436,35 @@ export async function createBattleSpiritsServer(options = {}) {
     console.log(`[socket.io] conectado ${socket.id} via ${socket.conn.transport.name}`);
     socket.conn.once("upgrade", () => {
       console.log(`[socket.io] ${socket.id} upgrade para ${socket.conn.transport.name}`);
+    });
+
+    onSafe(socket, "ranked:join", async (payload, ack) => {
+      if (findRoomBySocket(socket.id)) return ack({ ok: false, error: "Saia da sala atual antes de procurar Ranked." });
+      if (rankedBySocket.has(socket.id)) return ack({ ok: true, status: "searching" });
+      const identity = await rankedIdentity(payload.accessToken);
+      if (!identity.ok) return ack(identity);
+      const profileValidation = validateOnlineProfilePayload(payload.profile);
+      if (!profileValidation.ok) return ack(profileValidation);
+      const validation = validateDeck(payload.deck || [], cardIndex);
+      if (!validation.ok) return ack({ ok: false, error: validation.errors.join(" ") });
+      const rankedProfile = await ensureRankedProfile(identity.user.id);
+      const entry = { socketId: socket.id, userId: identity.user.id, rp: Number(rankedProfile.rp || 1000), profile: payload.profile, deck: payload.deck, queuedAt: Date.now() };
+      const opponentIndex = findRankedOpponent(entry);
+      if (opponentIndex < 0) {
+        rankedQueue.push(entry); rankedBySocket.set(socket.id, entry);
+        socket.emit("ranked:status", { status: "searching", rp: entry.rp, rank: rankedProfileLabel(entry.rp) });
+        return ack({ ok: true, status: "searching", rp: entry.rp, rank: rankedProfileLabel(entry.rp) });
+      }
+      const [opponent] = rankedQueue.splice(opponentIndex, 1);
+      rankedBySocket.delete(opponent.socketId);
+      rankedBySocket.set(socket.id, entry);
+      createRankedRoom(opponent, entry);
+      ack({ ok: true, status: "matched" });
+    });
+
+    onSafe(socket, "ranked:cancel", (_payload, ack) => {
+      const removed = removeFromRankedQueue(socket.id);
+      ack({ ok: true, cancelled: Boolean(removed) });
     });
 
     onSafe(socket, "matchmaking:join", (_payload, ack) => {
@@ -370,6 +542,7 @@ export async function createBattleSpiritsServer(options = {}) {
 
     onSafe(socket, "matchmaking:abort", (payload, ack) => {
       removeFromMatchmakingQueue(socket.id);
+      removeFromRankedQueue(socket.id);
       const pairId = String(payload.pairId || matchmakingSocketPair.get(socket.id) || "");
       const reason = String(payload.reason || "A partida rápida foi interrompida.");
 
@@ -426,6 +599,7 @@ export async function createBattleSpiritsServer(options = {}) {
         return ack({ ok: false, error: "Não foi possível retomar esta sessão." });
       }
       player.socketId = socket.id;
+      if (player.rankedDisconnectTimer) { clearTimeout(player.rankedDisconnectTimer); player.rankedDisconnectTimer = null; }
       socket.join(roomCode);
       ack({ ok: true, state: roomSummary(room, playerId) });
       emitRoom(room);
@@ -470,7 +644,7 @@ export async function createBattleSpiritsServer(options = {}) {
       ack({ ok:true, message });
     });
 
-    onSafe(socket, "game:action", (payload, ack) => {
+    onSafe(socket, "game:action", async (payload, ack) => {
       const found = findRoomBySocket(socket.id);
       if (!found) return ack({ ok: false, error: "Sala não encontrada." });
       const { room, playerId } = found;
@@ -478,6 +652,7 @@ export async function createBattleSpiritsServer(options = {}) {
       const result = applyGameAction(room.match, payload.action, playerId, cardIndex);
       if (!result.ok) return ack(result);
       room.match = result.match;
+      if (room.ranked && room.match?.winnerId) await settleRankedRoom(room, room.match.winnerId, room.match.winnerReason || "game");
       emitRoom(room);
       ack({ ok: true, manualResolutionNeeded: result.manualResolutionNeeded, notes: result.notes });
     });
@@ -486,6 +661,7 @@ export async function createBattleSpiritsServer(options = {}) {
       console.log(`[socket.io] desconectado ${socket.id}: ${reason}`);
 
       removeFromMatchmakingQueue(socket.id);
+      removeFromRankedQueue(socket.id);
       const pairId = matchmakingSocketPair.get(socket.id);
       if (pairId) {
         failMatchmakingPair(pairId, socket.id, "O outro jogador desconectou durante o matchmaking.");
@@ -494,6 +670,18 @@ export async function createBattleSpiritsServer(options = {}) {
       const found = findRoomBySocket(socket.id);
       if (!found) return;
       found.room.players[found.playerId].socketId = null;
+      if (found.room.ranked && found.room.match && !found.room.match.winnerId) {
+        const disconnectedId = found.playerId;
+        const opponentId = disconnectedId === "player1" ? "player2" : "player1";
+        found.room.players[disconnectedId].rankedDisconnectTimer = setTimeout(async () => {
+          const room = rooms.get(found.room.code);
+          if (!room?.ranked || room.match?.winnerId || room.players[disconnectedId]?.socketId) return;
+          room.match = { ...room.match, winnerId: opponentId, winnerReason: "ranked_disconnect" };
+          await settleRankedRoom(room, opponentId, "disconnect");
+          emitRoom(room);
+        }, 90_000);
+        found.room.players[disconnectedId].rankedDisconnectTimer.unref?.();
+      }
       emitRoom(found.room);
       setTimeout(() => {
         const room = rooms.get(found.room.code);
@@ -531,7 +719,9 @@ export async function createBattleSpiritsServer(options = {}) {
         rooms: rooms.size,
         connectedPlayers,
         matchmakingQueued: matchmakingQueue.length,
-        matchmakingPairs: matchmakingPairs.size
+        matchmakingPairs: matchmakingPairs.size,
+        rankedQueued: rankedQueue.length,
+        rankedReady: Boolean(rankedSupabase)
       };
     },
     async stop() {

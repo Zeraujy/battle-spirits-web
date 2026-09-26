@@ -13,6 +13,45 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.7.0",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Ranked Season 0", en: "Ranked Season 0" },
+    summary: { pt: "A Pré-Temporada competitiva entra no ar com matchmaking por RP, validação de conta e deck no servidor, histórico Ranked e progressão Bronze → Master.", en: "The competitive Pre-Season goes live with RP matchmaking, server-side account/deck validation, Ranked history and Bronze → Master progression." },
+    sections: [
+      { title: { pt: "Fila competitiva", en: "Competitive queue" }, items: { pt: ["Ranked exige conta Supabase conectada e deck válido.", "O servidor valida a sessão, lê o RP real e procura oponente próximo sem confiar no RP enviado pelo cliente.", "A faixa de busca começa restrita e aumenta gradualmente para evitar filas eternas."], en: ["Ranked requires a connected Supabase account and a valid deck.", "The server validates the session, reads the real RP and searches nearby opponents without trusting client-provided RP.", "The search range starts narrow and gradually expands to avoid endless queues."] } },
+      { title: { pt: "Season 0 & RP", en: "Season 0 & RP" }, items: { pt: ["Todos começam com 1000 RP e a progressão visual vai de Bronze, Silver, Gold, Platinum e Diamond até Master.", "Vitória/derrota atualiza RP server-side com ajuste baseado na diferença de rating entre os jogadores.", "O lobby mostra RP atual, pico, vitórias, derrotas, win rate e últimas partidas Ranked."], en: ["Everyone starts at 1000 RP and visual progression goes from Bronze, Silver, Gold, Platinum and Diamond up to Master.", "Wins/losses update RP server-side with an adjustment based on rating difference.", "The lobby shows current RP, peak, wins, losses, win rate and recent Ranked matches."] } },
+      { title: { pt: "Integridade competitiva", en: "Competitive integrity" }, items: { pt: ["bs_ranked_profiles e bs_ranked_matches são leitura do próprio jogador; escrita de RP fica reservada ao servidor com Service Role.", "Desconexões durante a partida recebem 90 segundos para retomar a sessão antes de virarem derrota por abandono.", "O Socket.IO continua transmitindo apenas a partida; Social Hub, Maestria e estatísticas seguem serviços separados."], en: ["bs_ranked_profiles and bs_ranked_matches are readable by their owner; RP writes are reserved to the server Service Role.", "Mid-match disconnects get a 90-second reconnect grace before becoming a forfeit loss.", "Socket.IO still carries only match traffic; Social Hub, Mastery and statistics remain separate services."] } }
+    ]
+  },
+
+  {
+    version: "3.6.3",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Card Mastery 2.0", en: "Card Mastery 2.0" },
+    summary: { pt: "A Maestria passa a progredir com partidas reais: cartas do deck utilizado recebem XP, vitórias e carta de capa dão bônus, e cada carta ganha uma página detalhada de progresso.", en: "Mastery now progresses from real matches: cards in the used deck earn XP, wins and cover-card use grant bonuses, and every card gets a detailed progress view." },
+    sections: [
+      { title: { pt: "Progressão real", en: "Real progression" }, items: { pt: ["Cada carta presente no deck usado em uma partida finalizada recebe 40 XP.", "Vitória concede +20 XP e a carta de capa do deck recebe +15 XP adicionais.", "O ledger por match_uid + card_id impede que a mesma partida conceda XP duas vezes."], en: ["Each card in the deck used for a finished match receives 40 XP.", "A win grants +20 XP and the deck cover card receives an additional +15 XP.", "A match_uid + card_id ledger prevents the same match from granting XP twice."] } },
+      { title: { pt: "Níveis I–VII", en: "Levels I–VII" }, items: { pt: ["Sete níveis agora usam XP persistente em vez de afinidade calculada apenas pelos decks salvos.", "A tela de detalhes mostra XP, progresso para o próximo nível, partidas, vitórias, taxa de vitória e vezes como carta de capa.", "A Visão Geral utiliza as cartas de Maestria real como destaques."], en: ["Seven levels now use persistent XP instead of affinity calculated only from saved decks.", "The detail view shows XP, next-level progress, matches, wins, win rate and cover-card appearances.", "Profile Overview now features real Mastery cards."] } },
+      { title: { pt: "Persistência e segurança", en: "Persistence & safety" }, items: { pt: ["SOCIAL-HUB-3.6.3.sql adiciona bs_card_mastery e um ledger interno protegido.", "Sem a migração, a Maestria continua funcionando localmente e pode ser reconciliada depois.", "Nenhum dado de Maestria entra no Socket.IO; o processamento continua ocorrendo só após o resultado final."], en: ["SOCIAL-HUB-3.6.3.sql adds bs_card_mastery and a protected internal ledger.", "Without the migration, Mastery keeps working locally and can be reconciled later.", "No Mastery data enters Socket.IO; processing still happens only after the final result."] } }
+    ]
+  },
+
+  {
+    version: "3.6.2",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Match History & Player Statistics", en: "Match History & Player Statistics" },
+    summary: {
+      pt: "Histórico de partidas e estatísticas reais do jogador passam a usar resultados finais de duelos Local, Eternal CPU e Online, com fallback local e sincronização opcional pelo Supabase.",
+      en: "Match history and real player statistics now use final results from Local, Eternal CPU and Online duels, with a local fallback and optional Supabase sync."
+    },
+    sections: [
+      { title: { pt: "Histórico de partidas", en: "Match history" }, items: { pt: ["O resultado só é registrado depois que a engine confirma winnerId; nada muda durante o duelo.", "Histórico salva vitória/derrota, modo, duração, turnos, oponente, deck identificado, cores e Life restante.", "Uma trava por match_uid evita duplicar a mesma partida no histórico."], en: ["Results are recorded only after the engine confirms winnerId; nothing changes during the duel.", "History stores win/loss, mode, duration, turns, opponent, identified deck, colors and remaining Life.", "A match_uid guard prevents the same match from being recorded twice."] } },
+      { title: { pt: "Estatísticas do perfil", en: "Profile statistics" }, items: { pt: ["Nova aba Estatísticas exibe partidas, vitórias, derrotas, taxa de vitória e duração média.", "Deck mais utilizado, cor mais utilizada e modo mais frequente são calculados a partir do histórico real.", "A Visão Geral do perfil agora aproveita os dados reais quando eles existem."], en: ["A new Statistics tab shows matches, wins, losses, win rate and average duration.", "Most-used deck, most-used color and most frequent mode are calculated from real history.", "The Profile Overview now uses real match data whenever available."] } },
+      { title: { pt: "Arquitetura & Supabase", en: "Architecture & Supabase" }, items: { pt: ["Novo matchHistoryService mantém o pipeline de estatísticas separado da engine e do Socket.IO.", "SOCIAL-HUB-3.6.2.sql cria bs_match_history com RLS: cada conta lê e registra apenas o próprio histórico.", "Sem conta ou antes da migração, o histórico continua funcionando localmente; Ranked terá validação server-side própria na v3.7.0."], en: ["A new matchHistoryService keeps the statistics pipeline separate from the engine and Socket.IO.", "SOCIAL-HUB-3.6.2.sql creates bs_match_history with RLS: each account can read and insert only its own history.", "Without an account or before migration, history keeps working locally; Ranked will get its own server-side validation in v3.7.0."] } }
+    ]
+  },
+
+  {
     version: "3.6.1",
     date: { pt: "25/09/2026", en: "09/25/2026" },
     title: { pt: "Social Hub Polish & Stability", en: "Social Hub Polish & Stability" },

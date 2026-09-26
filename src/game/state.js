@@ -57,12 +57,13 @@ export function makePhysicalCard(cardId, cardIndex) {
   };
 }
 
-export function createPlayer({ id, name, avatar, playerColor, deck }, cardIndex, random = Math.random) {
+export function createPlayer({ id, name, username, avatar, playerColor, deck }, cardIndex, random = Math.random) {
   const physicalDeck = shuffle(expandDeck(deck).map((cardId) => makePhysicalCard(cardId, cardIndex)), random);
   const hand = physicalDeck.splice(0, GAME_DEFAULTS.startingHand);
   return {
     id,
     name: name || id,
+    username: username || null,
     avatar: avatar || null,
     playerColor: playerColor || null,
     deck: physicalDeck,
@@ -98,7 +99,7 @@ export function createMatch({ player1, player2, firstPlayerId = "player1", cardI
     id: uid("match"),
     format: "eternal",
     rulesVersion: "17.1",
-    simulatorVersion: "3.6.1",
+    simulatorVersion: "3.6.2",
     stateSchemaVersion: 1,
     randomSeed,
     turnNumber: 1,

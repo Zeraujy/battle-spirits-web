@@ -37,6 +37,7 @@ import {
   getLegalBraveHosts
 } from "../game/brave.js";
 import { useLanguage } from "../i18n.jsx";
+import { identifySavedDeck, recordMatchResult } from "../services/matchHistoryService.js";
 import { getSmartCoreClickTarget } from "../interactions/coreClickPolicy.js";
 import {
   CARD_DRAG_THRESHOLD,
@@ -523,6 +524,31 @@ export default function Simulator({
     initialMatch
   );
 
+  const matchStartedAtRef = useRef(Date.now());
+  const matchRecordedRef = useRef(null);
+  const initialTrackedPlayerId = mode === "online"
+    ? viewerPlayerId
+    : mode === "ai"
+      ? initialMatch?.ai?.humanPlayerId || "player1"
+      : "player1";
+  const trackedDeckRef = useRef(
+    identifySavedDeck(initialMatch?.players?.[initialTrackedPlayerId])
+  );
+
+  useEffect(() => {
+    if (!match?.winnerId || matchRecordedRef.current === match.id) return;
+    matchRecordedRef.current = match.id;
+    recordMatchResult({
+      match,
+      mode,
+      viewerPlayerId,
+      startedAt: matchStartedAtRef.current,
+      deckSnapshot: trackedDeckRef.current
+    }).catch((historyError) => {
+      console.warn("[match-history] resultado não sincronizado:", historyError?.message || historyError);
+    });
+  }, [match?.winnerId, match?.id, mode, viewerPlayerId]);
+
   const [
     roomState,
     setRoomState
@@ -545,6 +571,17 @@ export default function Simulator({
     notice,
     setNotice
   ] = useState("");
+
+  useEffect(() => {
+    if (mode !== "ranked" || !onlineClient?.socket) return undefined;
+    const onRankedResult = (payload) => {
+      if (!payload) return;
+      const delta = Number(payload.rpDelta || 0);
+      setNotice(`${payload.result === "win" ? "Vitória" : "Derrota"} Ranked · ${delta >= 0 ? "+" : ""}${delta} RP · ${payload.rank || `${payload.rpAfter || 0} RP`}`);
+    };
+    onlineClient.socket.on("ranked:result", onRankedResult);
+    return () => onlineClient.socket.off("ranked:result", onRankedResult);
+  }, [mode, onlineClient]);
 
   const [
     aiDebugOpen,
@@ -5232,7 +5269,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v3.6.1 • Arena 2D
+            Eternal v3.6.2 • Arena 2D
           </span>
 
           <strong>

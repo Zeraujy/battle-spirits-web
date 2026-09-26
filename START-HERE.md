@@ -1,4 +1,4 @@
-# START HERE — v3.6.1
+# START HERE — v3.7.0
 
 ## Social Hub & Player Identity
 
@@ -20,11 +20,11 @@ Não importe `socialService.js` em `src/online/publicProfile.js`, `src/online/so
 
 A camada Social e o transporte das partidas devem continuar independentes.
 
-## Social Hub v3.6.1
+## Social Hub v3.6.3
 
-Depois da migração base `supabase/SOCIAL-HUB-3.6.sql`, execute também `supabase/SOCIAL-HUB-3.6.1.sql`. Esta atualização adiciona favoritos, silenciamento de DMs, status personalizado, indicador de digitação e recibos de leitura sem acoplar o Social Hub ao Socket.IO das partidas.
+Depois da migração base `supabase/SOCIAL-HUB-3.6.sql`, execute também `supabase/SOCIAL-HUB-3.6.2.sql`. Esta atualização adiciona favoritos, silenciamento de DMs, status personalizado, indicador de digitação e recibos de leitura sem acoplar o Social Hub ao Socket.IO das partidas.
 
-## Maestria v3.6.1
+## Maestria v3.6.3
 
 A primeira versão usa dados que já existem no dispositivo:
 

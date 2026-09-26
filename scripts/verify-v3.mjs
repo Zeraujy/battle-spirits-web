@@ -19,10 +19,14 @@ const required = [
   "src/online/publicProfile.js",
   "src/services/socialService.js",
   "src/services/socialInsights.js",
+  "src/services/matchHistoryService.js",
   "src/pages/Profile.jsx",
   "src/styles/pages/socialHubV360.css",
   "supabase/SOCIAL-HUB-3.6.sql",
-  "supabase/SOCIAL-HUB-3.6.1.sql",
+  "supabase/SOCIAL-HUB-3.6.2.sql",
+  "supabase/SOCIAL-HUB-3.7.0.sql",
+  "src/services/rankedService.js",
+  "src/styles/pages/rankedV370.css",
   "src/components/cards/CardDetailsModal.jsx",
   "src/components/home/HomeWallpaperSlideshow.jsx",
   "src/components/match/MatchSetupScreen.jsx",
@@ -49,7 +53,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.6.1") throw new Error(`package.json está em ${pkg.version}, esperado 3.6.1`);
+if (pkg.version !== "3.7.0") throw new Error(`package.json está em ${pkg.version}, esperado 3.7.0`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -87,6 +91,21 @@ const socialPolishSql = fs.readFileSync(path.join(root, "supabase", "SOCIAL-HUB-
 if (!socialSql.includes("status = 'pending'") || !socialSql.includes("bs_notifications") || !socialSql.includes("profile_visibility")) throw new Error("A migração Social Hub base está incompleta.");
 if (!socialPolishSql.includes("bs_social_preferences") || !socialPolishSql.includes("custom_status") || !socialPolishSql.includes("bs_set_friend_preference")) throw new Error("A migração Social Hub v3.6.1 está incompleta.");
 if (!socialPage.includes("typingFriend") || !socialPage.includes("is_favorite") || !socialService.includes("subscribeConversationTyping")) throw new Error("O polish social v3.6.1 está incompleto.");
+const matchHistoryService = fs.readFileSync(path.join(root, "src", "services", "matchHistoryService.js"), "utf8");
+const matchHistorySql = fs.readFileSync(path.join(root, "supabase", "SOCIAL-HUB-3.6.2.sql"), "utf8");
+if (!matchHistoryService.includes("recordMatchResult") || !matchHistoryService.includes("summarizeMatchHistory")) throw new Error("A camada de histórico v3.6.2 está incompleta.");
+if (!matchHistorySql.includes("bs_match_history") || !matchHistorySql.includes("match history owner read")) throw new Error("A migração de histórico v3.6.2 está incompleta.");
+if (!socialPage.includes('section === "statistics"') || !socialPage.includes("social-match-history-list")) throw new Error("A interface de estatísticas v3.6.2 está incompleta.");
+
+const rankedLobby = fs.readFileSync(path.join(root, "src", "pages", "RankedLobby.jsx"), "utf8");
+const rankedService = fs.readFileSync(path.join(root, "src", "services", "rankedService.js"), "utf8");
+const rankedSql = fs.readFileSync(path.join(root, "supabase", "SOCIAL-HUB-3.7.0.sql"), "utf8");
+const onlineServer = fs.readFileSync(path.join(root, "server", "index.mjs"), "utf8");
+if (!rankedLobby.includes("ranked:join") || !rankedLobby.includes("SEASON 0")) throw new Error("A interface Ranked v3.7.0 está incompleta.");
+if (!rankedService.includes("loadRankedProfile") || !rankedService.includes("rankFromRp")) throw new Error("O serviço Ranked v3.7.0 está incompleto.");
+if (!rankedSql.includes("bs_ranked_profiles") || !rankedSql.includes("bs_ranked_matches")) throw new Error("A migração Ranked v3.7.0 está incompleta.");
+if (!onlineServer.includes("rankedIdentity") || !onlineServer.includes("settleRankedRoom") || !onlineServer.includes("SUPABASE_SERVICE_ROLE_KEY")) throw new Error("A validação server-side Ranked v3.7.0 está incompleta.");
+
 const publicProfile = fs.readFileSync(path.join(root, "src", "online", "publicProfile.js"), "utf8");
 const socketClient = fs.readFileSync(path.join(root, "src", "online", "socketClient.js"), "utf8");
 if (publicProfile.includes("socialService") || socketClient.includes("socialService")) throw new Error("O Social Hub não pode ser acoplado ao transporte das partidas Online.");

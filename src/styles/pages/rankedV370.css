@@ -1,0 +1,35 @@
+.ranked-v370 .match-setup-versus-area { align-content: start; }
+.ranked-duel-grid { margin-bottom: 14px; }
+.ranked-season-panel {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  width: min(920px, 92%);
+  margin: 0 auto 10px;
+}
+.ranked-season-panel > div,
+.ranked-recent-panel {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(5,5,7,.76);
+  backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px rgba(255,255,255,.04);
+}
+.ranked-season-panel > div { padding: 12px 14px; display: grid; gap: 3px; }
+.ranked-season-panel span,
+.ranked-recent-panel header span { font-size: 9px; letter-spacing: .18em; color: rgba(255,255,255,.42); }
+.ranked-season-panel strong { font-size: 21px; line-height: 1; }
+.ranked-season-panel small { font-size: 10px; color: rgba(255,255,255,.58); }
+.ranked-recent-panel { width: min(920px, 92%); margin: 0 auto; padding: 12px 14px; }
+.ranked-recent-panel header { display: flex; align-items: end; justify-content: space-between; margin-bottom: 9px; }
+.ranked-recent-panel header strong { font-size: 12px; }
+.ranked-recent-list { display: grid; gap: 5px; }
+.ranked-recent-list article { display: grid; grid-template-columns: 82px 1fr auto; gap: 12px; align-items: center; padding: 7px 9px; border: 1px solid rgba(255,255,255,.07); background: rgba(255,255,255,.025); }
+.ranked-recent-list article b { font-size: 9px; letter-spacing: .12em; }
+.ranked-recent-list article span { font-size: 11px; color: rgba(255,255,255,.72); }
+.ranked-recent-list article em { font-size: 11px; font-style: normal; font-weight: 800; }
+.ranked-recent-list article.win b,
+.ranked-recent-list article.win em { color: #e9e9e9; }
+.ranked-recent-list article.loss { opacity: .72; }
+@media (max-width: 900px) {
+  .ranked-season-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

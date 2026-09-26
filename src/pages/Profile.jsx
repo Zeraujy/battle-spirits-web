@@ -28,6 +28,8 @@ import {
   unblockUser
 } from "../services/socialService.js";
 import { buildPlayerSocialInsights, formatMasteryLabel } from "../services/socialInsights.js";
+import { loadMatchHistory, summarizeMatchHistory } from "../services/matchHistoryService.js";
+import { loadCardMastery, reconcileMasteryFromHistory, summarizeCardMastery } from "../services/cardMasteryService.js";
 import { useLanguage } from "../i18n.jsx";
 import "../styles/pages/socialHubV360.css";
 import "../styles/pages/eternalInterfaceV350.css";
@@ -134,12 +136,12 @@ function PrivacySelect({ title, description, value, onChange, options, disabled 
   );
 }
 
-function MasteryCard({ entry, language }) {
+function MasteryCard({ entry, language, onClick }) {
   if (!entry) return null;
   const label = formatMasteryLabel(entry.level, language);
   return (
     <PointerTiltSurface className="social-mastery-tilt" maxTilt={6} glare>
-      <article className="social-mastery-card">
+      <article className="social-mastery-card" role={onClick ? "button" : undefined} tabIndex={onClick ? 0 : undefined} onClick={() => onClick?.(entry)} onKeyDown={(event) => { if (onClick && (event.key === "Enter" || event.key === " ")) onClick(entry); }}>
         <div className="social-mastery-art">
           {entry.image ? <img src={entry.image} alt="" /> : <span>{getInitials(entry.name)}</span>}
           <div className="social-mastery-shade" />
@@ -147,7 +149,7 @@ function MasteryCard({ entry, language }) {
         <div className="social-mastery-copy">
           <span>{label}</span>
           <strong title={entry.name}>{entry.name}</strong>
-          <small>{entry.points} pts · {entry.deckCount} deck{entry.deckCount === 1 ? "" : "s"}</small>
+          <small>{entry.xp ?? entry.points} XP · {entry.matches ?? entry.deckCount ?? 0} {language === "en" ? "matches" : "partidas"}</small>
         </div>
       </article>
     </PointerTiltSurface>
@@ -258,6 +260,11 @@ export default function Profile({ onBack }) {
   const [saved, setSaved] = useState(false);
   const [friendFilter, setFriendFilter] = useState("");
   const [typingFriend, setTypingFriend] = useState(false);
+  const [matchHistory, setMatchHistory] = useState([]);
+  const [historySource, setHistorySource] = useState("local");
+  const [masteryRows, setMasteryRows] = useState([]);
+  const [masterySource, setMasterySource] = useState("local");
+  const [selectedMastery, setSelectedMastery] = useState(null);
   const typingStopRef = useRef(null);
   const aliveRef = useRef(true);
 
@@ -269,6 +276,8 @@ export default function Profile({ onBack }) {
   const unreadMessages = conversations.reduce((sum, item) => sum + Number(item.unread_count || 0), 0);
   const unreadNotifications = notifications.filter((item) => !item.read_at).length;
   const incomingCount = requests.incoming.length;
+  const matchStats = useMemo(() => summarizeMatchHistory(matchHistory), [matchHistory]);
+  const masteryStats = useMemo(() => summarizeCardMastery(masteryRows), [masteryRows]);
 
   async function refreshSocial() {
     if (!accountsEnabled) return;
@@ -315,6 +324,22 @@ export default function Profile({ onBack }) {
     // It is never opened during a match and does not share the Socket.IO channel.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const history = await loadMatchHistory({ limit: 120 });
+      if (!active) return;
+      setMatchHistory(history.rows || []);
+      setHistorySource(history.source || "local");
+      await reconcileMasteryFromHistory(history.rows || []);
+      const mastery = await loadCardMastery({ limit: 100 });
+      if (!active) return;
+      setMasteryRows(mastery.rows || []);
+      setMasterySource(mastery.source || "local");
+    })();
+    return () => { active = false; };
+  }, [sessionUser, schema.version]);
 
   useEffect(() => {
     if (!selectedFriend || !accountsEnabled) return undefined;
@@ -513,6 +538,7 @@ export default function Profile({ onBack }) {
     ["friends", "＋", pt ? "Amigos" : "Friends", incomingCount],
     ["messages", "✦", pt ? "Mensagens" : "Messages", unreadMessages],
     ["notifications", "•", pt ? "Notificações" : "Notifications", unreadNotifications],
+    ["statistics", "▥", pt ? "Estatísticas" : "Statistics", 0],
     ["mastery", "◆", pt ? "Maestria" : "Mastery", 0],
     ["privacy", "▣", pt ? "Privacidade" : "Privacy", 0]
   ];
@@ -540,10 +566,10 @@ export default function Profile({ onBack }) {
         </div>
       </header>
 
-      {accountsEnabled && sessionUser && (!schema.ready || schema.version !== "3.6.1") && (
+      {accountsEnabled && sessionUser && (!schema.ready || schema.version !== "3.6.3") && (
         <div className="social-schema-notice">
           <strong>{pt ? "Atualização Social Hub necessária" : "Social Hub migration required"}</strong>
-          <span>{schema.ready ? (pt ? "Seu banco ainda está no Social Hub 3.6.0. Execute supabase/SOCIAL-HUB-3.6.1.sql para liberar favoritos, silenciamento, status e polish do chat." : "Your database is still on Social Hub 3.6.0. Run supabase/SOCIAL-HUB-3.6.1.sql to enable favorites, muting, status and chat polish.") : (pt ? "Execute primeiro SOCIAL-HUB-3.6.sql e depois supabase/SOCIAL-HUB-3.6.1.sql para liberar todo o Social Hub v3.6.1." : "Run SOCIAL-HUB-3.6.sql first, then supabase/SOCIAL-HUB-3.6.1.sql to enable all Social Hub v3.6.1 features.")}</span>
+          <span>{schema.ready ? (schema.version === "3.6.2" ? (pt ? "Execute supabase/SOCIAL-HUB-3.6.3.sql para sincronizar a Maestria 2.0. Até lá, o XP continua salvo localmente." : "Run supabase/SOCIAL-HUB-3.6.3.sql to sync Mastery 2.0. Until then, XP remains saved locally.") : (pt ? "Atualize as migrações incrementais do Social Hub até a versão 3.6.3." : "Apply the incremental Social Hub migrations through version 3.6.3.")) : (pt ? "Execute SOCIAL-HUB-3.6.sql, 3.6.1, 3.6.2 e 3.6.3 em ordem para ativar todos os recursos sociais." : "Run SOCIAL-HUB-3.6.sql, 3.6.1, 3.6.2 and 3.6.3 in order to enable all social features.")}</span>
         </div>
       )}
 
@@ -593,18 +619,18 @@ export default function Profile({ onBack }) {
               </section>
 
               <div className="social-stat-strip">
-                <article><span>{pt ? "Amigos" : "Friends"}</span><strong>{friends.length}</strong><small>{friends.filter((item) => item.is_online).length} online</small></article>
-                <article><span>{pt ? "Decks válidos" : "Valid decks"}</span><strong>{insights.validDecks}</strong><small>{insights.totalDecks} {pt ? "salvos" : "saved"}</small></article>
-                <article><span>{pt ? "Cartas únicas" : "Unique cards"}</span><strong>{insights.uniqueCards}</strong><small>{insights.totalCopies} {pt ? "cópias em decks" : "deck copies"}</small></article>
-                <article><span>{pt ? "Afinidade" : "Affinity"}</span><strong>{insights.primaryColor ? insights.primaryColor.toUpperCase() : "—"}</strong><small>{pt ? "baseada nos decks" : "based on decks"}</small></article>
+                <article><span>{pt ? "Partidas" : "Matches"}</span><strong>{matchStats.total}</strong><small>{matchStats.wins} {pt ? "vitórias" : "wins"}</small></article>
+                <article><span>{pt ? "Taxa de vitória" : "Win rate"}</span><strong>{matchStats.total ? `${matchStats.winRate}%` : "—"}</strong><small>{matchStats.losses} {pt ? "derrotas" : "losses"}</small></article>
+                <article><span>{pt ? "Deck favorito" : "Favorite deck"}</span><strong>{matchStats.favoriteDeck?.name || "—"}</strong><small>{matchStats.favoriteDeck ? `${matchStats.favoriteDeck.matches} ${pt ? "partidas" : "matches"}` : (pt ? "sem dados" : "no data")}</small></article>
+                <article><span>{pt ? "Afinidade" : "Affinity"}</span><strong>{(matchStats.primaryColor || insights.primaryColor || "—").toUpperCase()}</strong><small>{matchStats.primaryColor ? (pt ? "baseada em partidas" : "based on matches") : (pt ? "baseada nos decks" : "based on decks")}</small></article>
               </div>
 
               <section className="social-overview-grid">
                 <div className="social-panel social-overview-mastery">
                   <SocialSectionTitle eyebrow="CARD MASTERY" title={pt ? "Cartas em destaque" : "Featured cards"} description={pt ? "Maestria baseada na presença das cartas nos seus decks salvos." : "Mastery based on how strongly cards appear across your saved decks."} action={<button type="button" className="social-text-button" onClick={() => setSection("mastery")}>{pt ? "Ver tudo" : "See all"}</button>} />
                   <div className="social-mastery-row">
-                    {insights.topCards.slice(0, 3).map((entry) => <MasteryCard key={entry.id} entry={entry} language={language} />)}
-                    {!insights.topCards.length && <div className="social-empty-inline">{pt ? "Crie decks para começar a construir sua Maestria." : "Create decks to start building Mastery."}</div>}
+                    {masteryRows.slice(0, 3).map((entry) => <MasteryCard key={entry.id} entry={entry} language={language} onClick={setSelectedMastery} />)}
+                    {!masteryRows.length && <div className="social-empty-inline">{pt ? "Finalize partidas com um deck salvo para começar sua Maestria." : "Finish matches with a saved deck to start your Mastery."}</div>}
                   </div>
                 </div>
 
@@ -755,13 +781,60 @@ export default function Profile({ onBack }) {
             </div>
           )}
 
+          {section === "statistics" && (
+            <div className="social-view social-statistics-view">
+              <SocialSectionTitle
+                eyebrow="MATCH HISTORY"
+                title={pt ? "Histórico & Estatísticas" : "History & Statistics"}
+                description={pt ? "Resultados finais são registrados somente depois que a engine encerra a partida. Nenhuma estatística social trafega pelo Socket.IO durante o duelo." : "Final results are recorded only after the engine ends the match. No social statistics travel through Socket.IO during the duel."}
+                action={<span className="social-history-source">{historySource === "cloud" ? (pt ? "NUVEM" : "CLOUD") : (pt ? "LOCAL" : "LOCAL")}</span>}
+              />
+
+              <div className="social-match-stat-grid">
+                <article><span>{pt ? "Partidas" : "Matches"}</span><strong>{matchStats.total}</strong><small>{pt ? "resultados registrados" : "recorded results"}</small></article>
+                <article><span>{pt ? "Vitórias" : "Wins"}</span><strong>{matchStats.wins}</strong><small>{matchStats.total ? `${matchStats.winRate}% ${pt ? "de aproveitamento" : "win rate"}` : "—"}</small></article>
+                <article><span>{pt ? "Derrotas" : "Losses"}</span><strong>{matchStats.losses}</strong><small>{pt ? "histórico normal" : "normal history"}</small></article>
+                <article><span>{pt ? "Duração média" : "Average duration"}</span><strong>{matchStats.averageDuration ? `${Math.floor(matchStats.averageDuration / 60)}m ${matchStats.averageDuration % 60}s` : "—"}</strong><small>{pt ? "tempo de duelo" : "duel time"}</small></article>
+                <article><span>{pt ? "Deck mais usado" : "Most used deck"}</span><strong>{matchStats.favoriteDeck?.name || "—"}</strong><small>{matchStats.favoriteDeck ? `${matchStats.favoriteDeck.matches}x` : (pt ? "aguardando partidas" : "waiting for matches")}</small></article>
+                <article><span>{pt ? "Cor mais usada" : "Most used color"}</span><strong>{matchStats.primaryColor?.toUpperCase() || "—"}</strong><small>{matchStats.favoriteMode ? `${pt ? "modo" : "mode"}: ${matchStats.favoriteMode.toUpperCase()}` : "—"}</small></article>
+              </div>
+
+              <section className="social-panel social-match-history-panel">
+                <SocialSectionTitle eyebrow="RECENT MATCHES" title={pt ? "Partidas recentes" : "Recent matches"} description={pt ? "As partidas mais recentes registradas neste perfil." : "The most recent matches recorded on this profile."} />
+                <div className="social-match-history-list">
+                  {matchHistory.slice(0, 20).map((row) => (
+                    <article key={row.match_uid}>
+                      <span className={`social-match-result ${row.result === "win" ? "win" : "loss"}`}>{row.result === "win" ? (pt ? "VITÓRIA" : "WIN") : (pt ? "DERROTA" : "LOSS")}</span>
+                      <div className="social-match-opponent">
+                        <strong>{row.opponent_name || (pt ? "Oponente" : "Opponent")}</strong>
+                        <small>{row.opponent_username ? `@${row.opponent_username} · ` : ""}{row.mode === "ai" ? "ETERNAL CPU" : row.mode === "online" ? "ONLINE" : (pt ? "LOCAL" : "LOCAL")}</small>
+                      </div>
+                      <div className="social-match-deck">
+                        <strong>{row.deck_name || (pt ? "Deck não identificado" : "Unidentified deck")}</strong>
+                        <small>{Array.isArray(row.deck_colors) && row.deck_colors.length ? row.deck_colors.map((color) => color.toUpperCase()).join(" · ") : (pt ? "sem cor registrada" : "no recorded color")}</small>
+                      </div>
+                      <div className="social-match-meta">
+                        <strong>{Math.floor(Number(row.duration_seconds || 0) / 60)}:{String(Number(row.duration_seconds || 0) % 60).padStart(2, "0")}</strong>
+                        <small>{row.turns || 1} {pt ? "turnos" : "turns"} · {formatTime(row.played_at, language)}</small>
+                      </div>
+                    </article>
+                  ))}
+                  {!matchHistory.length && <div className="social-big-empty"><b>▥</b><strong>{pt ? "Nenhuma partida registrada" : "No matches recorded"}</strong><span>{pt ? "Finalize uma partida Local, contra a Eternal CPU ou Online para começar seu histórico." : "Finish a Local, Eternal CPU or Online match to start your history."}</span></div>}
+                </div>
+              </section>
+
+              <section className="social-safety-card"><div><span>RESULT-ONLY PIPELINE</span><h3>{pt ? "Estatísticas fora da rede da partida" : "Statistics outside match networking"}</h3><p>{pt ? "A engine termina o duelo normalmente. Só depois do winnerId confirmado, um resumo compacto é gravado no histórico. Ranked continuará exigindo validação server-side própria na v3.7.0." : "The engine ends the duel normally. Only after winnerId is confirmed is a compact summary written to history. Ranked will still require its own server-side validation in v3.7.0."}</p></div><strong>✓</strong></section>
+            </div>
+          )}
+
           {section === "mastery" && (
             <div className="social-view social-mastery-view">
-              <SocialSectionTitle eyebrow="CARD MASTERY" title={pt ? "Maestria de cartas" : "Card Mastery"} description={pt ? "A v3.6.1 mantém a Maestria atual e calcula afinidade a partir da presença, quantidade e uso como capa nos seus decks salvos. Isso não lê informações das partidas Online." : "v3.6.1 keeps the current Mastery model and calculates affinity from presence, copies and cover-card use across your saved decks. It never reads Online match data."} />
-              <div className="social-mastery-summary"><article><span>{pt ? "Líder" : "Leader"}</span><strong>{insights.masteryLeader?.name || "—"}</strong><small>{insights.masteryLeader ? formatMasteryLabel(insights.masteryLeader.level, language) : "—"}</small></article><article><span>{pt ? "Cartas rastreadas" : "Tracked cards"}</span><strong>{insights.uniqueCards}</strong><small>{pt ? "nos decks salvos" : "in saved decks"}</small></article><article><span>{pt ? "Cor dominante" : "Dominant color"}</span><strong>{insights.primaryColor?.toUpperCase() || "—"}</strong><small>{pt ? "afinidade de construção" : "deckbuilding affinity"}</small></article></div>
+              <SocialSectionTitle eyebrow="CARD MASTERY 2.0" title={pt ? "Maestria de cartas" : "Card Mastery"} description={pt ? "Agora a progressão vem das cartas presentes no deck realmente usado em partidas finalizadas. Cada partida concede XP; vitórias e a carta de capa concedem bônus." : "Progress now comes from cards in the deck actually used in finished matches. Each match grants XP, with bonuses for wins and the deck cover card."} />
+              <div className="social-mastery-summary"><article><span>{pt ? "Líder" : "Leader"}</span><strong>{masteryStats.leader?.name || "—"}</strong><small>{masteryStats.leader ? formatMasteryLabel(masteryStats.leader.level, language) : "—"}</small></article><article><span>{pt ? "Cartas rastreadas" : "Tracked cards"}</span><strong>{masteryStats.trackedCards}</strong><small>{masteryStats.totalXp} XP {pt ? "acumulado" : "earned"}</small></article><article><span>{pt ? "Maior nível" : "Highest level"}</span><strong>{masteryStats.maxLevel ? formatMasteryLabel(masteryStats.maxLevel, language) : "—"}</strong><small>{masterySource === "cloud" ? (pt ? "sincronizado" : "synced") : (pt ? "progresso local" : "local progress")}</small></article></div>
+              <div className="social-mastery-rules"><span>XP</span><b>+40 {pt ? "por partida" : "per match"}</b><b>+20 {pt ? "por vitória" : "per win"}</b><b>+15 {pt ? "se for carta de capa" : "when used as cover"}</b><small>{pt ? "Uma carta recebe XP no máximo uma vez por partida, independentemente da quantidade de cópias no deck." : "A card receives XP at most once per match, regardless of how many copies are in the deck."}</small></div>
               <div className="social-mastery-grid">
-                {insights.topCards.map((entry) => <MasteryCard key={entry.id} entry={entry} language={language} />)}
-                {!insights.topCards.length && <div className="social-big-empty"><b>◆</b><strong>{pt ? "Maestria ainda vazia" : "Mastery is empty"}</strong><span>{pt ? "Salve decks para começar a construir seu perfil de cartas." : "Save decks to start building your card profile."}</span></div>}
+                {masteryRows.map((entry) => <MasteryCard key={entry.id} entry={entry} language={language} onClick={setSelectedMastery} />)}
+                {!masteryRows.length && <div className="social-big-empty"><b>◆</b><strong>{pt ? "Maestria ainda vazia" : "Mastery is empty"}</strong><span>{pt ? "Finalize uma partida usando um deck salvo para registrar as cartas e começar a ganhar XP." : "Finish a match using a saved deck to register its cards and start earning XP."}</span></div>}
               </div>
             </div>
           )}
@@ -816,6 +889,27 @@ export default function Profile({ onBack }) {
           </section>
         </div>
       )}
+
+
+      {selectedMastery && (() => {
+        const next = selectedMastery.nextPoints;
+        const currentFloor = Math.max(0, Number(selectedMastery.level > 1 ? [0,250,650,1300,2300,3800,6000][selectedMastery.level - 1] : 0));
+        const progress = next ? Math.max(0, Math.min(100, ((selectedMastery.xp - currentFloor) / Math.max(1, next - currentFloor)) * 100)) : 100;
+        const winRate = selectedMastery.matches ? Math.round((selectedMastery.wins / selectedMastery.matches) * 100) : 0;
+        return <div className="social-profile-preview-backdrop" onMouseDown={(event) => event.target === event.currentTarget && setSelectedMastery(null)}>
+          <section className="social-mastery-detail">
+            <button type="button" className="social-profile-preview-close" onClick={() => setSelectedMastery(null)}>×</button>
+            <div className="social-mastery-detail-art">{selectedMastery.image ? <img src={selectedMastery.image} alt="" /> : <b>{getInitials(selectedMastery.name)}</b>}</div>
+            <div className="social-mastery-detail-copy">
+              <span>CARD MASTERY 2.0</span><h2>{selectedMastery.name}</h2><small>{selectedMastery.cardId}</small>
+              <div className="social-mastery-level-line"><strong>{formatMasteryLabel(selectedMastery.level, language)}</strong><b>{selectedMastery.xp} XP</b></div>
+              <div className="social-mastery-progress"><i style={{ width: `${progress}%` }} /></div>
+              <p>{next ? `${next - selectedMastery.xp} XP ${pt ? "para o próximo nível" : "to the next level"}` : (pt ? "Nível máximo alcançado" : "Maximum level reached")}</p>
+              <div className="social-mastery-detail-stats"><article><span>{pt ? "Partidas" : "Matches"}</span><strong>{selectedMastery.matches}</strong></article><article><span>{pt ? "Vitórias" : "Wins"}</span><strong>{selectedMastery.wins}</strong><small>{winRate}%</small></article><article><span>{pt ? "Carta de capa" : "Cover card"}</span><strong>{selectedMastery.coverMatches}</strong></article></div>
+            </div>
+          </section>
+        </div>;
+      })()}
     </main>
   );
 }

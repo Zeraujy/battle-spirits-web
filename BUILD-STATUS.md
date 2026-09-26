@@ -1,4 +1,4 @@
-# Build Status — Battle Spirits Eternal Simulator v3.6.1
+# Build Status — Battle Spirits Eternal Simulator v3.7.0
 
 ## Social Hub & Player Identity
 - Social Hub em layout de launcher: navegação lateral, workspace central e friend dock à direita.
@@ -32,7 +32,7 @@
 - `npm run build`: será executado pelo `GERENCIAR_PROJETO.bat` no Windows antes do deploy.
 
 
-## v3.6.1 validation
+## v3.6.3 validation
 
 - `node scripts/verify-project.mjs`: OK.
 - `node scripts/verify-v3.mjs`: OK.
