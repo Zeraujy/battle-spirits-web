@@ -159,7 +159,7 @@ export async function recordMatchResult(input) {
     ...cloudRecord
   }, { onConflict: "user_id,match_uid", ignoreDuplicates: true });
 
-  if (error) return { ok: false, error: error.message, record };
+  if (error) return { ok: false, error: "Não foi possível sincronizar o resultado agora.", record };
   const mastery = await applyMasteryForMatch(record);
   return { ok: mastery.ok !== false, mode: "cloud", record, mastery, error: mastery.ok === false ? mastery.error : undefined };
 }
@@ -187,7 +187,7 @@ export async function loadMatchHistory({ limit = 60 } = {}) {
     .order("played_at", { ascending: false })
     .limit(limit);
 
-  if (error) return { ok: false, error: error.message, rows: localRows.slice(0, limit), source: "local" };
+  if (error) return { ok: false, error: "Não foi possível sincronizar o histórico agora.", rows: localRows.slice(0, limit), source: "local" };
 
   const merged = new Map();
   for (const row of [...(data || []), ...localRows]) {

@@ -100,12 +100,12 @@ const PATCHES = [
         title: { pt: "Interface mais limpa", en: "Cleaner interface" },
         items: {
           pt: [
-            "Textos técnicos foram removidos das áreas destinadas aos jogadores.",
+            "Menus e mensagens foram simplificados para deixar a experiência mais clara durante o jogo.",
             "Perfil, privacidade, Online, Ranked, configurações e atualizações agora usam mensagens mais curtas e naturais.",
             "Avisos de indisponibilidade agora explicam apenas o que o jogador precisa saber e fazer."
           ],
           en: [
-            "Technical text has been removed from player-facing areas.",
+            "Menus and messages were simplified to keep the experience clearer during play.",
             "Profile, privacy, Online, Ranked, settings and updates now use shorter, more natural messages.",
             "Availability notices now explain only what the player needs to know and do."
           ]
@@ -116,11 +116,11 @@ const PATCHES = [
         items: {
           pt: [
             "O histórico de atualizações foi reescrito para destacar novidades visíveis e mudanças de experiência.",
-            "Detalhes internos de desenvolvimento deixaram de aparecer dentro do jogo."
+            "As informações exibidas agora priorizam novidades, regras e mudanças que afetam diretamente a experiência."
           ],
           en: [
             "Update history was rewritten to highlight visible features and experience changes.",
-            "Internal development details are no longer shown inside the game."
+            "Displayed information now prioritizes features, rules and changes that directly affect the experience."
           ]
         }
       }
@@ -276,7 +276,7 @@ export default function ProjectInfoButtons() {
                 <h3>{pt ? "O que você encontra aqui" : "What you'll find here"}</h3>
                 <p>{pt ? "Partidas locais e Online, Eternal CPU, Deck Builder, coleção de cartas, perfis sociais, Maestria e modos competitivos em uma única experiência." : "Local and Online matches, Eternal CPU, Deck Builder, card collection, social profiles, Mastery and competitive modes in one experience."}</p>
                 <h3>{pt ? "Em evolução" : "Always evolving"}</h3>
-                <p>{pt ? "Novas cartas, recursos e melhorias de experiência são adicionados ao longo do desenvolvimento." : "New cards, features and experience improvements are added over time."}</p>
+                <p>{pt ? "Novas cartas, recursos e melhorias de experiência chegam ao simulador por meio das atualizações." : "New cards, features and experience improvements are added over time."}</p>
                 <strong className="about-thanks">{pt ? "Obrigado por jogar e acompanhar o projeto." : "Thank you for playing and following the project."}</strong>
                 <small className="about-disclaimer">Battle Spirits é propriedade da BANDAI. {pt ? "Este é um projeto de fã não oficial e sem afiliação com a BANDAI." : "This is an unofficial fan project and is not affiliated with BANDAI."}</small>
               </div>

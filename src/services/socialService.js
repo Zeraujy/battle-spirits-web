@@ -75,7 +75,12 @@ function normalizeError(error, fallback = "Não foi possível concluir esta aç�
   if (/PROFILE_NOT_FOUND/i.test(message)) return "Perfil não encontrado.";
   if (/REQUEST_NOT_FOUND/i.test(message)) return "Este pedido não está mais disponível.";
   if (/duplicate key|unique constraint/i.test(message)) return "Esse pedido já existe.";
-  return message;
+  if (/invalid login credentials|invalid credentials/i.test(message)) return "E-mail ou senha incorretos.";
+  if (/email not confirmed/i.test(message)) return "Confirme seu e-mail antes de entrar.";
+  if (/user already registered|already registered/i.test(message)) return "Já existe uma conta com este e-mail.";
+  if (/password/i.test(message) && /least|short|characters/i.test(message)) return "A senha precisa ser mais longa.";
+  if (/rate limit|too many requests/i.test(message)) return "Muitas tentativas em pouco tempo. Tente novamente em instantes.";
+  return fallback;
 }
 
 async function currentUser() {
@@ -93,13 +98,13 @@ export async function getAccountSession() {
 export async function signUp(email, password) {
   if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const { data, error } = await supabase.auth.signUp({ email, password });
-  return error ? { ok: false, error: error.message } : { ok: true, user: data.user };
+  return error ? { ok: false, error: normalizeError(error, "Não foi possível criar a conta agora.") } : { ok: true, user: data.user };
 }
 
 export async function signIn(email, password) {
   if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  return error ? { ok: false, error: error.message } : { ok: true, user: data.user };
+  return error ? { ok: false, error: normalizeError(error, "Não foi possível entrar na conta agora.") } : { ok: true, user: data.user };
 }
 
 export async function signOut() {

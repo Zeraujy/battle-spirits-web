@@ -17,8 +17,6 @@ export default class AppErrorBoundary extends React.Component {
   render() {
     if (!this.state.error) return this.props.children;
 
-    const message = this.state.error?.message || String(this.state.error);
-
     return (
       <main className="fatal-error-page">
         <section className="fatal-error-card">
@@ -28,7 +26,6 @@ export default class AppErrorBoundary extends React.Component {
             A interface foi protegida para não ficar em uma tela vazia. Você pode
             voltar ao menu recarregando a janela.
           </p>
-          <pre>{message}</pre>
           <div className="row-actions">
             <button
               type="button"

@@ -756,3 +756,25 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Player experience polish — compact screens */
+@media (max-width: 520px) {
+  .account-v2-page {
+    padding: 15px 11px 30px;
+  }
+
+  .account-v2-topbar {
+    gap: 12px;
+  }
+
+  .account-v2-status {
+    min-width: 0;
+    max-width: 150px;
+  }
+
+  .account-v2-shell,
+  .account-v2-card,
+  .account-v2-auth-card {
+    border-radius: 16px;
+  }
+}

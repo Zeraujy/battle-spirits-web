@@ -94,7 +94,7 @@ export async function applyMasteryForMatch(record) {
     p_cover_card_id: record.cover_card_id ? String(record.cover_card_id) : null,
     p_played_at: record.played_at || new Date().toISOString()
   });
-  if (error) return { ok: false, error: error.message, source: "local", rows: localRows };
+  if (error) return { ok: false, error: "Não foi possível sincronizar a Maestria agora.", source: "local", rows: localRows };
   return { ok: true, source: "cloud", rows: localRows };
 }
 
@@ -109,7 +109,7 @@ export async function reconcileMasteryFromHistory(history = []) {
   if (!schema.ready || !schemaAtLeast(schema.version)) return { ok: true, source: "local", needsMigration: true };
 
   const { error } = await supabase.rpc("bs_reconcile_card_mastery", { p_matches: compact });
-  if (error) return { ok: false, error: error.message, source: "local" };
+  if (error) return { ok: false, error: "Não foi possível sincronizar a Maestria agora.", source: "local" };
   return { ok: true, source: "cloud" };
 }
 
@@ -132,7 +132,7 @@ export async function loadCardMastery({ limit = 100 } = {}) {
     .eq("user_id", user.id)
     .order("xp", { ascending: false })
     .limit(limit);
-  if (error) return { ok: false, error: error.message, rows: sortRows(local), source: "local" };
+  if (error) return { ok: false, error: "Não foi possível carregar a Maestria agora.", rows: sortRows(local), source: "local" };
 
   const merged = new Map(local.map((row) => [row.cardId, row]));
   for (const row of data || []) {

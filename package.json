@@ -22,9 +22,10 @@
     "verify:v3": "node scripts/verify-v3.mjs",
     "deploy:cloudflare": "npm run build && npx wrangler@4 deploy",
     "preview:cloudflare": "npm run build && npx wrangler@4 dev",
-    "project:check": "npm run verify && npm test && npm run release:audit",
+    "project:check": "npm run verify && npm test && npm run ui:audit && npm run release:audit",
     "publish:cloudflare": "npm run check && npx wrangler@4 deploy",
-    "release:audit": "node scripts/release-audit.mjs"
+    "release:audit": "node scripts/release-audit.mjs",
+    "ui:audit": "node scripts/ui-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",

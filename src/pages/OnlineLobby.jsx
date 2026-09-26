@@ -45,6 +45,16 @@ import "../styles/theme/v230.css";
 import "../styles/pages/onlineLobbySafe.css";
 
 
+function safeOnlineError(message, fallback = "Não foi possível concluir esta ação no Online.") {
+  const text = String(message || "").trim();
+  if (!text) return fallback;
+  if (/supabase|socket|service[_ -]?role|localhost|127\.0\.0\.1|\.sql\b|\brpc\b|\brls\b|node_modules|package\.json|vite|npm|stack|exception|database/i.test(text)) {
+    return fallback;
+  }
+  return text.length > 180 ? fallback : text;
+}
+
+
 export default function OnlineLobby({
   onBack,
   onMatch,
@@ -179,7 +189,7 @@ export default function OnlineLobby({
     updateSearching(false);
 
     if (reason) {
-      setError(reason);
+      setError(safeOnlineError(reason));
     }
   }
 
@@ -205,11 +215,7 @@ export default function OnlineLobby({
 
     const onConnectError = (connectionError) => {
       setStatus("erro");
-      setError(
-        connectionError?.message
-          ? `Não foi possível conectar ao Online: ${connectionError.message}`
-          : "Não foi possível conectar ao Online."
-      );
+      setError("Não foi possível conectar ao Online. Verifique sua conexão e tente novamente.");
     };
 
     const onState = (
@@ -691,8 +697,7 @@ export default function OnlineLobby({
           );
 
           setError(
-            result?.error ||
-              "Não foi possível iniciar a busca."
+            safeOnlineError(result?.error, "Não foi possível iniciar a busca.")
           );
         }
       }
@@ -747,8 +752,7 @@ export default function OnlineLobby({
           );
         } else {
           setError(
-            result?.error ||
-              "Não foi possível criar a sala."
+            safeOnlineError(result?.error, "Não foi possível criar a sala.")
           );
         }
       }
@@ -811,8 +815,7 @@ export default function OnlineLobby({
           setJoinPassword("");
         } else {
           setError(
-            result?.error ||
-              "Não foi possível entrar na sala."
+            safeOnlineError(result?.error, "Não foi possível entrar na sala.")
           );
         }
       }
@@ -827,8 +830,7 @@ export default function OnlineLobby({
           !result?.ok
         ) {
           setError(
-            result?.error ||
-              "Não foi possível iniciar a partida."
+            safeOnlineError(result?.error, "Não foi possível iniciar a partida.")
           );
         }
       }

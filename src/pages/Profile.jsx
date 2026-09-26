@@ -446,7 +446,7 @@ export default function Profile({ onBack, initialUsername = null }) {
         : { maxBytes: 8_000_000, width: 1600, height: 640, quality: 0.78 });
       setProfile((current) => ({ ...current, [kind]: nextImage }));
     } catch (error) {
-      flash(error?.message || String(error));
+      flash(pt ? "Não foi possível usar esta imagem. Tente outro arquivo." : "Could not use this image. Try another file.");
     }
   }
 

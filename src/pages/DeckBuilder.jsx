@@ -300,7 +300,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
       console.error("Falha ao importar deck:", error);
       setTransferNotice({
         type: "error",
-        text: error?.message || (pt ? "Não foi possível importar este deck." : "Could not import this deck.")
+        text: pt ? "Não foi possível importar este deck. Verifique o arquivo e tente novamente." : "Could not import this deck. Check the file and try again."
       });
     } finally {
       if (importInputRef.current) importInputRef.current.value = "";

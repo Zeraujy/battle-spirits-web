@@ -327,3 +327,16 @@
   .settings-game-actions { flex-direction: column; }
   .settings-game-actions .primary-btn.big { width: 100%; }
 }
+
+/* Player experience polish — compact screens */
+@media (max-width: 520px) {
+  .settings-game-page { padding: 12px 10px 26px; }
+  .settings-game-topbar { gap: 12px; }
+  .settings-game-heading { text-align: left; justify-self: stretch; }
+  .settings-game-back,
+  .settings-game-version { justify-self: start; }
+  .settings-game-nav { padding: 10px; }
+  .settings-game-nav nav button { min-width: 168px; }
+  .settings-game-panel { padding: 16px 14px; border-radius: 16px; }
+  .settings-game-actions { padding: 10px; }
+}

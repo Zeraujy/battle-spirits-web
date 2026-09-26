@@ -52,7 +52,7 @@ export async function loadRankedProfile() {
     .eq("user_id", access.user.id)
     .eq("season", RANKED_SEASON)
     .maybeSingle();
-  if (error) return { ok: false, signedIn: true, error: error.message, profile: null, accessToken: access.accessToken };
+  if (error) return { ok: false, signedIn: true, error: "Não foi possível carregar seu perfil Ranked agora.", profile: null, accessToken: access.accessToken };
   const profile = data || { season: RANKED_SEASON, rp: 1000, peak_rp: 1000, wins: 0, losses: 0, placements: 0 };
   return { ok: true, signedIn: true, profile: { ...profile, rank: rankFromRp(profile.rp) }, accessToken: access.accessToken, user: access.user };
 }
@@ -67,7 +67,7 @@ export async function loadRankedHistory({ limit = 12 } = {}) {
     .eq("season", RANKED_SEASON)
     .order("played_at", { ascending: false })
     .limit(limit);
-  return error ? { ok: false, error: error.message, rows: [] } : { ok: true, rows: data || [] };
+  return error ? { ok: false, error: "Não foi possível carregar o histórico Ranked agora.", rows: [] } : { ok: true, rows: data || [] };
 }
 
 export function summarizeRankedHistory(rows = []) {

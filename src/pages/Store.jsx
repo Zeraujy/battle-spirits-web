@@ -12,7 +12,7 @@ export default function Store({ onBack }) {
       <EternalCinematicBackdrop />
       <header className="mode-scaffold-header">
         <button type="button" className="ghost eternal-menu-action" onClick={onBack}>{pt ? "Voltar" : "Back"}</button>
-        <span>STORE · BETA</span>
+        <span>{pt ? "LOJA · EM BREVE" : "STORE · COMING SOON"}</span>
       </header>
 
       <section className="mode-scaffold-shell store-shell">
@@ -21,15 +21,15 @@ export default function Store({ onBack }) {
           <h1>{pt ? "Loja" : "Store"}</h1>
           <p>
             {pt
-              ? "A entrada da Loja já faz parte do novo menu. O conteúdo será desenvolvido separadamente para não misturar economia/coleção com as regras do simulador."
-              : "The Store entry is now part of the new menu. Its content will be developed separately so collection/economy systems do not interfere with simulator rules."}
+              ? "A Loja será o espaço para futuros conteúdos de coleção e personalização."
+              : "The Store will be the home for future collection and customization content."}
           </p>
         </div>
 
         <article className="store-coming-card">
           <span>COMING SOON</span>
-          <strong>{pt ? "Área em desenvolvimento" : "Area in development"}</strong>
-          <p>{pt ? "A estrutura está pronta para receber boosters, itens cosméticos ou outros recursos futuramente." : "The structure is ready for boosters, cosmetics or other future features."}</p>
+          <strong>{pt ? "Novidades a caminho" : "More to come"}</strong>
+          <p>{pt ? "Boosters, itens cosméticos e outros conteúdos poderão aparecer aqui futuramente." : "Boosters, cosmetics and other content may appear here in future updates."}</p>
         </article>
       </section>
     </main>

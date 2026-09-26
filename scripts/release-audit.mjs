@@ -6,7 +6,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
 const problems = [];
 
-const disposableDirs = new Set(["node_modules", "dist", "release", "coverage", ".cache", ".parcel-cache", ".vite"]);
+const disposableDirs = new Set([".git", "node_modules", "dist", "release", "coverage", ".cache", ".parcel-cache", ".vite", ".vite-temp", ".turbo"]);
 const disposableFilePatterns = [/\.log$/i, /\.tmp$/i, /\.temp$/i, /\.bak$/i, /\.old$/i, /^\.DS_Store$/i, /^Thumbs\.db$/i];
 
 function walk(dir, rel = "") {
@@ -18,7 +18,6 @@ function walk(dir, rel = "") {
         problems.push(`Diretório descartável no release: ${childRel}`);
         continue;
       }
-      if (entry.name === ".git") continue;
       walk(full, childRel);
     } else {
       if (disposableFilePatterns.some((pattern) => pattern.test(entry.name))) problems.push(`Arquivo descartável no release: ${childRel}`);
@@ -67,6 +66,29 @@ function scanPlayerDir(dir) {
   }
 }
 for (const dir of playerRoots) if (fs.existsSync(dir)) scanPlayerDir(dir);
+
+const rawPlayerErrorPatterns = [
+  /\b(?:error|err|exception|connectionError)\?*\.message\b/,
+  /String\(\s*(?:error|err|exception|connectionError)\s*\)/,
+  /<pre[^>]*>\s*\{[^}]*error/i
+];
+function scanRawPlayerErrors(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) scanRawPlayerErrors(full);
+    else if (/\.(?:jsx?|tsx?)$/i.test(entry.name)) {
+      const source = fs.readFileSync(full, "utf8");
+      if (rawPlayerErrorPatterns.some((pattern) => pattern.test(source))) {
+        problems.push(`Erro técnico bruto pode chegar ao jogador em ${path.relative(root, full)}`);
+      }
+    }
+  }
+}
+for (const dir of playerRoots) if (fs.existsSync(dir)) scanRawPlayerErrors(dir);
+
+if (fs.existsSync(path.join(root, "src/pages/ServerConsole.jsx"))) {
+  problems.push("Tela antiga ServerConsole.jsx não deve fazer parte do frontend de release.");
+}
 
 const serverSource = fs.readFileSync(path.join(root, "server", "index.mjs"), "utf8");
 const exposedErrors = [...serverSource.matchAll(/error\s*:\s*["'`]([^"'`]+)["'`]/g)].map((m) => m[1]).join("\n");
