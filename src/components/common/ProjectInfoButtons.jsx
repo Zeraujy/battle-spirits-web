@@ -13,6 +13,18 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.7.1",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Ranked Profile & Competitive Identity", en: "Ranked Profile & Competitive Identity" },
+    summary: { pt: "A identidade competitiva da Season 0 chega ao Social Hub com Rank real, RP, pico da temporada, histórico, deck mais usado e molduras por tier.", en: "Season 0 competitive identity arrives in Social Hub with real Rank, RP, season peak, history, most-used deck and tier frames." },
+    sections: [
+      { title: { pt: "Perfil competitivo", en: "Competitive profile" }, items: { pt: ["Nova aba Competitivo separa Ranked das estatísticas casuais.", "Rank, RP, pico, vitórias, derrotas e win rate são carregados da Season 0.", "A Visão Geral recebe badge e moldura visual coerentes com Bronze → Master."], en: ["A new Competitive tab separates Ranked from casual statistics.", "Rank, RP, peak, wins, losses and win rate are loaded from Season 0.", "Overview gets a badge and visual frame matching Bronze → Master."] } },
+      { title: { pt: "Histórico & deck", en: "History & deck" }, items: { pt: ["Partidas Ranked passam a registrar deck usado a partir da v3.7.1.", "O perfil calcula o deck mais utilizado no competitivo sem misturar partidas casuais.", "Histórico mostra adversário, variação de RP e abandono quando aplicável."], en: ["Ranked matches now record the used deck starting in v3.7.1.", "The profile calculates the most-used competitive deck without mixing casual matches.", "History shows opponent, RP change and forfeits when applicable."] } },
+      { title: { pt: "Social & privacidade", en: "Social & privacy" }, items: { pt: ["Amigos podem exibir um mini badge de Rank na lista social.", "Ao abrir outro perfil, a identidade Ranked respeita a opção existente Mostrar estatísticas e a visibilidade do perfil.", "RP continua sendo escrito somente pelo servidor com Service Role."], en: ["Friends can display a mini Rank badge in social lists.", "Opening another profile shows Ranked identity only when existing Show statistics and profile visibility rules allow it.", "RP remains server-written only through the Service Role."] } }
+    ]
+  },
+
+  {
     version: "3.7.0",
     date: { pt: "25/09/2026", en: "09/25/2026" },
     title: { pt: "Ranked Season 0", en: "Ranked Season 0" },

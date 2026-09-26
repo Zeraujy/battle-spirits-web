@@ -25,6 +25,7 @@ const required = [
   "supabase/SOCIAL-HUB-3.6.sql",
   "supabase/SOCIAL-HUB-3.6.2.sql",
   "supabase/SOCIAL-HUB-3.7.0.sql",
+  "supabase/SOCIAL-HUB-3.7.1.sql",
   "src/services/rankedService.js",
   "src/styles/pages/rankedV370.css",
   "src/components/cards/CardDetailsModal.jsx",
@@ -53,7 +54,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.7.0") throw new Error(`package.json está em ${pkg.version}, esperado 3.7.0`);
+if (pkg.version !== "3.7.1") throw new Error(`package.json está em ${pkg.version}, esperado 3.7.1`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -100,11 +101,15 @@ if (!socialPage.includes('section === "statistics"') || !socialPage.includes("so
 const rankedLobby = fs.readFileSync(path.join(root, "src", "pages", "RankedLobby.jsx"), "utf8");
 const rankedService = fs.readFileSync(path.join(root, "src", "services", "rankedService.js"), "utf8");
 const rankedSql = fs.readFileSync(path.join(root, "supabase", "SOCIAL-HUB-3.7.0.sql"), "utf8");
+const rankedIdentitySql = fs.readFileSync(path.join(root, "supabase", "SOCIAL-HUB-3.7.1.sql"), "utf8");
 const onlineServer = fs.readFileSync(path.join(root, "server", "index.mjs"), "utf8");
 if (!rankedLobby.includes("ranked:join") || !rankedLobby.includes("SEASON 0")) throw new Error("A interface Ranked v3.7.0 está incompleta.");
 if (!rankedService.includes("loadRankedProfile") || !rankedService.includes("rankFromRp")) throw new Error("O serviço Ranked v3.7.0 está incompleto.");
 if (!rankedSql.includes("bs_ranked_profiles") || !rankedSql.includes("bs_ranked_matches")) throw new Error("A migração Ranked v3.7.0 está incompleta.");
 if (!onlineServer.includes("rankedIdentity") || !onlineServer.includes("settleRankedRoom") || !onlineServer.includes("SUPABASE_SERVICE_ROLE_KEY")) throw new Error("A validação server-side Ranked v3.7.0 está incompleta.");
+if (!socialPage.includes('section === "competitive"') || !socialPage.includes("social-competitive-hero")) throw new Error("A identidade competitiva v3.7.1 está incompleta.");
+if (!rankedService.includes("loadPublicRankedIdentity") || !rankedService.includes("loadFriendRankedIdentities")) throw new Error("O serviço de identidade Ranked v3.7.1 está incompleto.");
+if (!rankedIdentitySql.includes("bs_get_ranked_identity") || !rankedIdentitySql.includes("deck_name")) throw new Error("A migração Ranked v3.7.1 está incompleta.");
 
 const publicProfile = fs.readFileSync(path.join(root, "src", "online", "publicProfile.js"), "utf8");
 const socketClient = fs.readFileSync(path.join(root, "src", "online", "socketClient.js"), "utf8");

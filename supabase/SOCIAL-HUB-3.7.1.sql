@@ -1,0 +1,70 @@
+-- Battle Spirits Eternal Simulator v3.7.1 — Ranked Profile & Competitive Identity
+begin;
+
+alter table public.bs_ranked_matches add column if not exists deck_id text;
+alter table public.bs_ranked_matches add column if not exists deck_name text;
+
+-- O servidor continua sendo o único escritor de RP e histórico competitivo.
+drop function if exists public.bs_ranked_settle_match(text,text,uuid,uuid,integer,integer,integer,integer,text,text,text,text,text);
+create or replace function public.bs_ranked_settle_match(
+  p_match_uid text, p_season text, p_winner_id uuid, p_loser_id uuid,
+  p_winner_before integer, p_loser_before integer, p_winner_delta integer, p_loser_delta integer,
+  p_winner_name text, p_winner_username text, p_loser_name text, p_loser_username text,
+  p_winner_deck_id text default null, p_winner_deck_name text default null,
+  p_loser_deck_id text default null, p_loser_deck_name text default null,
+  p_reason text default 'game'
+) returns void language plpgsql security definer set search_path = public as $$
+declare
+  v_winner_after integer := greatest(0, p_winner_before + p_winner_delta);
+  v_loser_after integer := greatest(0, p_loser_before + p_loser_delta);
+begin
+  if p_winner_id is null or p_loser_id is null or p_winner_id = p_loser_id then raise exception 'invalid ranked players'; end if;
+  if coalesce(trim(p_match_uid), '') = '' then raise exception 'match uid required'; end if;
+
+  insert into public.bs_ranked_profiles(user_id, season, rp, peak_rp, wins, losses, placements, updated_at)
+  values (p_winner_id,p_season,v_winner_after,greatest(p_winner_before,v_winner_after),1,0,0,now())
+  on conflict (user_id,season) do update set rp=v_winner_after, peak_rp=greatest(bs_ranked_profiles.peak_rp,v_winner_after), wins=bs_ranked_profiles.wins+1, updated_at=now();
+
+  insert into public.bs_ranked_profiles(user_id, season, rp, peak_rp, wins, losses, placements, updated_at)
+  values (p_loser_id,p_season,v_loser_after,greatest(p_loser_before,v_loser_after),0,1,0,now())
+  on conflict (user_id,season) do update set rp=v_loser_after, peak_rp=greatest(bs_ranked_profiles.peak_rp,v_loser_after), losses=bs_ranked_profiles.losses+1, updated_at=now();
+
+  insert into public.bs_ranked_matches(user_id,season,match_uid,result,rp_before,rp_after,rp_delta,opponent_name,opponent_username,deck_id,deck_name,end_reason,played_at)
+  values
+    (p_winner_id,p_season,p_match_uid,'win',p_winner_before,v_winner_after,p_winner_delta,p_loser_name,p_loser_username,p_winner_deck_id,p_winner_deck_name,p_reason,now()),
+    (p_loser_id,p_season,p_match_uid,'loss',p_loser_before,v_loser_after,p_loser_delta,p_winner_name,p_winner_username,p_loser_deck_id,p_loser_deck_name,p_reason,now())
+  on conflict (user_id,match_uid) do nothing;
+end; $$;
+revoke all on function public.bs_ranked_settle_match(text,text,uuid,uuid,integer,integer,integer,integer,text,text,text,text,text,text,text,text,text) from public,anon,authenticated;
+grant execute on function public.bs_ranked_settle_match(text,text,uuid,uuid,integer,integer,integer,integer,text,text,text,text,text,text,text,text,text) to service_role;
+
+create or replace function public.bs_get_ranked_identity(target_id uuid)
+returns jsonb language plpgsql stable security definer set search_path=public as $$
+declare p public.bs_profiles%rowtype; r public.bs_ranked_profiles%rowtype; allowed boolean;
+begin
+  if auth.uid() is null or public.bs_is_blocked(auth.uid(),target_id) then return null; end if;
+  select * into p from public.bs_profiles where id=target_id;
+  if not found then return null; end if;
+  allowed := auth.uid()=target_id or ((p.profile_visibility='public' or (p.profile_visibility='friends' and public.bs_are_friends(auth.uid(),target_id))) and p.show_stats);
+  if not allowed then return jsonb_build_object('visible',false); end if;
+  select * into r from public.bs_ranked_profiles where user_id=target_id and season='S0';
+  return jsonb_build_object('visible',true,'season','S0','rp',coalesce(r.rp,1000),'peak_rp',coalesce(r.peak_rp,1000),'wins',coalesce(r.wins,0),'losses',coalesce(r.losses,0),'placements',coalesce(r.placements,0));
+end; $$;
+
+create or replace function public.bs_list_friend_ranked_profiles()
+returns table(user_id uuid,rp integer,peak_rp integer,wins integer,losses integer)
+language sql stable security definer set search_path=public as $$
+  select p.id, coalesce(r.rp,1000), coalesce(r.peak_rp,1000), coalesce(r.wins,0), coalesce(r.losses,0)
+  from public.bs_profiles p
+  left join public.bs_ranked_profiles r on r.user_id=p.id and r.season='S0'
+  where auth.uid() is not null and p.show_stats=true and p.profile_visibility in ('public','friends') and public.bs_are_friends(auth.uid(),p.id) and not public.bs_is_blocked(auth.uid(),p.id);
+$$;
+
+grant execute on function public.bs_get_ranked_identity(uuid) to authenticated;
+grant execute on function public.bs_list_friend_ranked_profiles() to authenticated;
+
+create or replace function public.bs_social_health() returns jsonb language sql stable security definer set search_path=public as $$
+  select jsonb_build_object('ok',true,'version','3.7.1');
+$$;
+grant execute on function public.bs_social_health() to authenticated;
+commit;

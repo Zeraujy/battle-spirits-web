@@ -127,7 +127,9 @@ export default function RankedLobby({ onBack, onAccount, onDeckBuilder, onMatch 
     client.socket.emit("ranked:join", {
       accessToken,
       profile: publicProfile,
-      deck: deck.cards
+      deck: deck.cards,
+      deckId: deck.id || null,
+      deckName: deck.name || "Deck"
     }, (result) => {
       if (!result?.ok) {
         searchingRef.current = false;

@@ -352,8 +352,8 @@ export async function createBattleSpiritsServer(options = {}) {
       },
       match: null, chat: [], createdAt: Date.now(),
       ranked: { season: rankedSeason, settled: false, players: {
-        player1: { userId: a.userId, rp: a.rp },
-        player2: { userId: b.userId, rp: b.rp }
+        player1: { userId: a.userId, rp: a.rp, deckId: a.deckId || null, deckName: a.deckName || "Deck" },
+        player2: { userId: b.userId, rp: b.rp, deckId: b.deckId || null, deckName: b.deckName || "Deck" }
       } }
     };
     room.match = createMatch({
@@ -399,6 +399,10 @@ export async function createBattleSpiritsServer(options = {}) {
       p_winner_username: winnerProfile.username || null,
       p_loser_name: loserProfile.name || "Jogador",
       p_loser_username: loserProfile.username || null,
+      p_winner_deck_id: winnerMeta.deckId || null,
+      p_winner_deck_name: winnerMeta.deckName || "Deck",
+      p_loser_deck_id: loserMeta.deckId || null,
+      p_loser_deck_name: loserMeta.deckName || "Deck",
       p_reason: reason
     });
     if (error) {
@@ -448,7 +452,7 @@ export async function createBattleSpiritsServer(options = {}) {
       const validation = validateDeck(payload.deck || [], cardIndex);
       if (!validation.ok) return ack({ ok: false, error: validation.errors.join(" ") });
       const rankedProfile = await ensureRankedProfile(identity.user.id);
-      const entry = { socketId: socket.id, userId: identity.user.id, rp: Number(rankedProfile.rp || 1000), profile: payload.profile, deck: payload.deck, queuedAt: Date.now() };
+      const entry = { socketId: socket.id, userId: identity.user.id, rp: Number(rankedProfile.rp || 1000), profile: payload.profile, deck: payload.deck, deckId: String(payload.deckId || "").slice(0, 96) || null, deckName: String(payload.deckName || "Deck").slice(0, 120), queuedAt: Date.now() };
       const opponentIndex = findRankedOpponent(entry);
       if (opponentIndex < 0) {
         rankedQueue.push(entry); rankedBySocket.set(socket.id, entry);

@@ -30,6 +30,7 @@ import {
 import { buildPlayerSocialInsights, formatMasteryLabel } from "../services/socialInsights.js";
 import { loadMatchHistory, summarizeMatchHistory } from "../services/matchHistoryService.js";
 import { loadCardMastery, reconcileMasteryFromHistory, summarizeCardMastery } from "../services/cardMasteryService.js";
+import { loadFriendRankedIdentities, loadPublicRankedIdentity, loadRankedHistory, loadRankedProfile, summarizeRankedHistory } from "../services/rankedService.js";
 import { useLanguage } from "../i18n.jsx";
 import "../styles/pages/socialHubV360.css";
 import "../styles/pages/eternalInterfaceV350.css";
@@ -156,7 +157,7 @@ function MasteryCard({ entry, language, onClick }) {
   );
 }
 
-function FriendDock({ friends, pt, onChat, onManage }) {
+function FriendDock({ friends, friendRanks = {}, pt, onChat, onManage }) {
   const sorted = [...friends].sort((a, b) => Number(Boolean(b.is_favorite)) - Number(Boolean(a.is_favorite)) || Number(Boolean(b.is_online)) - Number(Boolean(a.is_online)) || personName(a).localeCompare(personName(b)));
   const online = sorted.filter((friend) => friend.is_online).length;
   return (
@@ -173,7 +174,7 @@ function FriendDock({ friends, pt, onChat, onManage }) {
           <button type="button" key={personId(friend)} className="social-friend-dock-row" onClick={() => onChat(friend)}>
             <SocialAvatar person={friend} size="small" />
             <span>
-              <strong>{friend.is_favorite ? "★ " : ""}{personName(friend)}</strong>
+              <strong>{friend.is_favorite ? "★ " : ""}{personName(friend)} {friendRanks[personId(friend)]?.rank?.label && <em className={`social-rank-mini rank-${friendRanks[personId(friend)].rank.tier.toLowerCase()}`}>{friendRanks[personId(friend)].rank.label}</em>}</strong>
               <small>{friend.custom_status || presenceLabel(friend, pt)}</small>
             </span>
             <i className={friend.is_online ? "online" : ""} aria-hidden="true" />
@@ -265,6 +266,9 @@ export default function Profile({ onBack }) {
   const [masteryRows, setMasteryRows] = useState([]);
   const [masterySource, setMasterySource] = useState("local");
   const [selectedMastery, setSelectedMastery] = useState(null);
+  const [rankedProfile, setRankedProfile] = useState(null);
+  const [rankedHistory, setRankedHistory] = useState([]);
+  const [friendRanks, setFriendRanks] = useState({});
   const typingStopRef = useRef(null);
   const aliveRef = useRef(true);
 
@@ -278,6 +282,10 @@ export default function Profile({ onBack }) {
   const incomingCount = requests.incoming.length;
   const matchStats = useMemo(() => summarizeMatchHistory(matchHistory), [matchHistory]);
   const masteryStats = useMemo(() => summarizeCardMastery(masteryRows), [masteryRows]);
+  const rankedStats = useMemo(() => summarizeRankedHistory(rankedHistory), [rankedHistory]);
+  const rankedMatches = Number(rankedProfile?.wins || 0) + Number(rankedProfile?.losses || 0);
+  const rankedWinRate = rankedMatches ? Math.round((Number(rankedProfile?.wins || 0) / rankedMatches) * 100) : 0;
+  const rankTier = String(rankedProfile?.rank?.tier || "unranked").toLowerCase();
 
   async function refreshSocial() {
     if (!accountsEnabled) return;
@@ -340,6 +348,24 @@ export default function Profile({ onBack }) {
     })();
     return () => { active = false; };
   }, [sessionUser, schema.version]);
+
+  useEffect(() => {
+    let active = true;
+    if (!accountsEnabled || !sessionUser || !schema.ready) {
+      setRankedProfile(null); setRankedHistory([]); setFriendRanks({});
+      return () => { active = false; };
+    }
+    (async () => {
+      const [profileResult, historyResult, ranks] = await Promise.all([
+        loadRankedProfile(), loadRankedHistory({ limit: 40 }), loadFriendRankedIdentities()
+      ]);
+      if (!active) return;
+      if (profileResult.ok) setRankedProfile(profileResult.profile);
+      if (historyResult.ok) setRankedHistory(historyResult.rows || []);
+      setFriendRanks(ranks || {});
+    })();
+    return () => { active = false; };
+  }, [sessionUser, schema.version, schema.ready]);
 
   useEffect(() => {
     if (!selectedFriend || !accountsEnabled) return undefined;
@@ -478,7 +504,8 @@ export default function Profile({ onBack }) {
     const id = personId(person);
     if (!id) return;
     setBusy(true);
-    setRemoteProfile(await loadSocialProfile(id));
+    const [social, competitive] = await Promise.all([loadSocialProfile(id), loadPublicRankedIdentity(id)]);
+    setRemoteProfile(social ? { ...social, ranked: competitive?.visible === false ? null : competitive } : null);
     setBusy(false);
   }
 
@@ -539,6 +566,7 @@ export default function Profile({ onBack }) {
     ["messages", "✦", pt ? "Mensagens" : "Messages", unreadMessages],
     ["notifications", "•", pt ? "Notificações" : "Notifications", unreadNotifications],
     ["statistics", "▥", pt ? "Estatísticas" : "Statistics", 0],
+    ["competitive", "♢", pt ? "Competitivo" : "Competitive", 0],
     ["mastery", "◆", pt ? "Maestria" : "Mastery", 0],
     ["privacy", "▣", pt ? "Privacidade" : "Privacy", 0]
   ];
@@ -604,12 +632,13 @@ export default function Profile({ onBack }) {
 
           {section === "overview" && (
             <div className="social-view social-overview-view">
-              <section className="social-overview-hero" style={profile.banner ? { backgroundImage: `linear-gradient(90deg,rgba(0,0,0,.2),rgba(0,0,0,.82)),url(${profile.banner})` } : undefined}>
+              <section className={`social-overview-hero social-ranked-frame rank-${rankTier}`} style={profile.banner ? { backgroundImage: `linear-gradient(90deg,rgba(0,0,0,.2),rgba(0,0,0,.82)),url(${profile.banner})` } : undefined}>
                 <div className="social-overview-avatar"><SocialAvatar person={{ ...profile, display_name: displayName }} size="hero" /></div>
                 <div className="social-overview-copy">
                   <span>{pt ? "DUELISTA" : "DUELIST"}</span>
                   <h2>{displayName}</h2>
                   <small>@{username}</small>
+                  {rankedProfile && <div className={`social-rank-badge rank-${rankTier}`}><b>{rankedProfile.rank?.label}</b><span>{rankedProfile.rp} RP · Season 0</span></div>}
                   <p>{profile.bio || (pt ? "Adicione uma bio para contar um pouco sobre você à comunidade." : "Add a bio to tell the community a little about yourself.")}</p>
                 </div>
                 <div className="social-overview-actions">
@@ -721,7 +750,7 @@ export default function Profile({ onBack }) {
                     <div className="social-friend-grid">
                       {[...friends].filter((friend) => personName(friend).toLowerCase().includes(friendFilter.toLowerCase()) || String(friend.username || "").toLowerCase().includes(friendFilter.toLowerCase())).sort((a,b) => Number(Boolean(b.is_favorite))-Number(Boolean(a.is_favorite)) || Number(Boolean(b.is_online))-Number(Boolean(a.is_online)) || personName(a).localeCompare(personName(b))).map((friend) => (
                         <article key={personId(friend)}>
-                          <button type="button" className="social-person-main" onClick={() => inspectProfile(friend)}><SocialAvatar person={friend} /><span><strong>{friend.is_favorite ? "★ " : ""}{personName(friend)}</strong><small>{friend.custom_status || presenceLabel(friend, pt)}</small></span></button>
+                          <button type="button" className="social-person-main" onClick={() => inspectProfile(friend)}><SocialAvatar person={friend} /><span><strong>{friend.is_favorite ? "★ " : ""}{personName(friend)} {friendRanks[personId(friend)]?.rank?.label && <em className={`social-rank-mini rank-${friendRanks[personId(friend)].rank.tier.toLowerCase()}`}>{friendRanks[personId(friend)].rank.label}</em>}</strong><small>{friend.custom_status || presenceLabel(friend, pt)}</small></span></button>
                           <div className="social-friend-quick-actions"><button type="button" className={friend.is_favorite ? "active" : ""} title={pt ? "Favorito" : "Favorite"} onClick={() => changeFriendPreference(friend,{ favorite: !friend.is_favorite })}>★</button><button type="button" className={friend.is_muted ? "active" : ""} title={pt ? "Silenciar" : "Mute"} onClick={() => changeFriendPreference(friend,{ muted: !friend.is_muted })}>◌</button><button type="button" className="social-message-shortcut" onClick={() => openChat(friend)}>✦</button></div>
                         </article>
                       ))}
@@ -823,7 +852,38 @@ export default function Profile({ onBack }) {
                 </div>
               </section>
 
-              <section className="social-safety-card"><div><span>RESULT-ONLY PIPELINE</span><h3>{pt ? "Estatísticas fora da rede da partida" : "Statistics outside match networking"}</h3><p>{pt ? "A engine termina o duelo normalmente. Só depois do winnerId confirmado, um resumo compacto é gravado no histórico. Ranked continuará exigindo validação server-side própria na v3.7.0." : "The engine ends the duel normally. Only after winnerId is confirmed is a compact summary written to history. Ranked will still require its own server-side validation in v3.7.0."}</p></div><strong>✓</strong></section>
+              <section className="social-safety-card"><div><span>RESULT-ONLY PIPELINE</span><h3>{pt ? "Estatísticas fora da rede da partida" : "Statistics outside match networking"}</h3><p>{pt ? "A engine termina o duelo normalmente. Só depois do winnerId confirmado, um resumo compacto é gravado no histórico. Ranked usa validação server-side própria e permanece separado deste histórico geral." : "The engine ends the duel normally. Only after winnerId is confirmed is a compact summary written to history. Ranked uses its own server-side validation and remains separate from this general history."}</p></div><strong>✓</strong></section>
+            </div>
+          )}
+
+          {section === "competitive" && (
+            <div className="social-view social-competitive-view">
+              <SocialSectionTitle eyebrow="RANKED · SEASON 0" title={pt ? "Identidade competitiva" : "Competitive identity"} description={pt ? "Rank, RP e histórico ranqueado ficam separados das estatísticas casuais. O RP continua sendo calculado e gravado somente pelo servidor." : "Rank, RP and Ranked history stay separate from casual statistics. RP is still calculated and written only by the server."} />
+              {rankedProfile ? <>
+                <section className={`social-competitive-hero rank-${rankTier}`}>
+                  <div className="social-rank-emblem"><span>{rankedProfile.rank?.tier?.slice(0,1) || "R"}</span></div>
+                  <div><span>SEASON 0 / PRÉ-TEMPORADA</span><h2>{rankedProfile.rank?.label}</h2><p>{rankedProfile.rp} RP</p></div>
+                  <aside><span>{pt ? "Pico da temporada" : "Season peak"}</span><strong>{rankedProfile.peak_rp}</strong><small>{rankedProfile.rank?.label}</small></aside>
+                </section>
+                <div className="social-match-stat-grid competitive">
+                  <article><span>{pt ? "Partidas Ranked" : "Ranked matches"}</span><strong>{rankedMatches}</strong><small>Season 0</small></article>
+                  <article><span>{pt ? "Vitórias" : "Wins"}</span><strong>{rankedProfile.wins || 0}</strong><small>{rankedWinRate}% win rate</small></article>
+                  <article><span>{pt ? "Derrotas" : "Losses"}</span><strong>{rankedProfile.losses || 0}</strong><small>{pt ? "competitivo" : "competitive"}</small></article>
+                  <article><span>{pt ? "Deck mais usado" : "Most used deck"}</span><strong>{rankedStats.favoriteDeck?.name || "—"}</strong><small>{rankedStats.favoriteDeck ? `${rankedStats.favoriteDeck.matches}x` : (pt ? "a partir da v3.7.1" : "from v3.7.1 onward")}</small></article>
+                </div>
+                <section className="social-panel social-ranked-history-panel">
+                  <SocialSectionTitle eyebrow="COMPETITIVE HISTORY" title={pt ? "Histórico Ranked" : "Ranked history"} description={pt ? "Variação de RP e adversários das partidas competitivas recentes." : "RP changes and opponents from recent competitive matches."} />
+                  <div className="social-ranked-history-list">
+                    {rankedHistory.slice(0,20).map((row) => <article key={row.match_uid} className={row.result}>
+                      <b>{row.result === "win" ? (pt ? "VITÓRIA" : "WIN") : (pt ? "DERROTA" : "LOSS")}</b>
+                      <div><strong>{row.opponent_name || (pt ? "Oponente" : "Opponent")}</strong><small>{row.opponent_username ? `@${row.opponent_username}` : formatTime(row.played_at, language)}</small></div>
+                      <div><strong>{row.deck_name || (pt ? "Deck não registrado" : "Deck not recorded")}</strong><small>{row.end_reason === "forfeit" ? (pt ? "abandono" : "forfeit") : "Season 0"}</small></div>
+                      <em>{Number(row.rp_delta) >= 0 ? "+" : ""}{row.rp_delta} RP</em>
+                    </article>)}
+                    {!rankedHistory.length && <div className="social-big-empty"><b>♢</b><strong>{pt ? "Sem partidas Ranked ainda" : "No Ranked matches yet"}</strong><span>{pt ? "As próximas partidas da Season 0 aparecerão aqui." : "Your next Season 0 matches will appear here."}</span></div>}
+                  </div>
+                </section>
+              </> : <div className="social-big-empty"><b>♢</b><strong>{pt ? "Identidade competitiva indisponível" : "Competitive identity unavailable"}</strong><span>{pt ? "Entre na conta e execute SOCIAL-HUB-3.7.1.sql para ativar esta área." : "Sign in and run SOCIAL-HUB-3.7.1.sql to enable this area."}</span></div>}
             </div>
           )}
 
@@ -869,7 +929,7 @@ export default function Profile({ onBack }) {
           )}
         </section>
 
-        <FriendDock friends={friends} pt={pt} onChat={openChat} onManage={() => setSection("friends")} />
+        <FriendDock friends={friends} friendRanks={friendRanks} pt={pt} onChat={openChat} onManage={() => setSection("friends")} />
       </section>
 
       {remoteProfile && (
@@ -880,6 +940,7 @@ export default function Profile({ onBack }) {
             <span>{remoteProfile.can_view === false ? (pt ? "PERFIL PRIVADO" : "PRIVATE PROFILE") : "PLAYER PROFILE"}</span>
             <h2>{personName(remoteProfile)}</h2>
             <small>@{remoteProfile.username}</small>
+            {remoteProfile.ranked && <div className={`social-rank-badge remote rank-${String(remoteProfile.ranked.rank?.tier || "unranked").toLowerCase()}`}><b>{remoteProfile.ranked.rank?.label}</b><span>{remoteProfile.ranked.rp} RP · Season 0</span></div>}
             <p>{remoteProfile.bio || (remoteProfile.can_view === false ? (pt ? "Este jogador limitou a visualização do perfil." : "This player limited profile visibility.") : "")}</p>
             <div className="social-profile-preview-actions">
               {(remoteProfile.is_friend || remoteProfile.can_message) && <button type="button" onClick={() => { openChat(remoteProfile); setRemoteProfile(null); }}>{pt ? "Mensagem" : "Message"}</button>}

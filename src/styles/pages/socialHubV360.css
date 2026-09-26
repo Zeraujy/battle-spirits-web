@@ -811,3 +811,26 @@
 .social-mastery-detail-stats strong { display: inline-block; margin-top: 3px; font-size: 20px; }
 .social-mastery-detail-stats small { margin-left: 5px; color: rgba(255,255,255,.38); font-size: 7px; }
 @media (max-width: 660px) { .social-mastery-detail { grid-template-columns: 1fr; max-height: 90vh; overflow: auto; } .social-mastery-detail-art { min-height: 280px; height: 42vh; } .social-mastery-detail-copy { padding: 28px 22px; } }
+
+/* v3.7.1 — Ranked Profile & Competitive Identity */
+.social-ranked-frame{position:relative;overflow:hidden}
+.social-ranked-frame::after{content:"";position:absolute;inset:0;pointer-events:none;border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 0 42px rgba(255,255,255,.025)}
+.social-rank-badge{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:6px 9px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.48);font-size:8px;letter-spacing:.08em;text-transform:uppercase}
+.social-rank-badge b{font-size:9px}.social-rank-badge span{color:rgba(255,255,255,.46);font-size:7px}.social-rank-badge.remote{margin:10px auto 0}
+.social-rank-mini{display:inline-block;margin-left:5px;padding:2px 5px;border:1px solid rgba(255,255,255,.12);font-size:6px!important;font-style:normal;letter-spacing:.06em;vertical-align:middle;color:rgba(255,255,255,.64)}
+.social-competitive-hero{display:grid;grid-template-columns:84px 1fr minmax(160px,.32fr);gap:20px;align-items:center;padding:22px 24px;margin-bottom:12px;border:1px solid rgba(255,255,255,.13);background:linear-gradient(120deg,rgba(255,255,255,.055),rgba(0,0,0,.1));position:relative;overflow:hidden}
+.social-competitive-hero::before{content:"";position:absolute;inset:0;opacity:.14;pointer-events:none;background:radial-gradient(circle at 12% 50%,rgba(255,255,255,.55),transparent 30%)}
+.social-rank-emblem{width:72px;height:72px;display:grid;place-items:center;transform:rotate(45deg);border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.035);box-shadow:0 0 28px rgba(255,255,255,.08)}
+.social-rank-emblem span{transform:rotate(-45deg);font-size:24px;font-weight:1000;font-style:italic}
+.social-competitive-hero>div:nth-child(2)>span,.social-competitive-hero aside span{font-size:7px;letter-spacing:.18em;color:rgba(255,255,255,.38);font-weight:950}
+.social-competitive-hero h2{margin:4px 0 2px;font-size:clamp(26px,3vw,42px);line-height:.95;font-style:italic}.social-competitive-hero p{margin:0;color:rgba(255,255,255,.6);font-size:12px}
+.social-competitive-hero aside{text-align:right}.social-competitive-hero aside strong{display:block;font-size:28px}.social-competitive-hero aside small{color:rgba(255,255,255,.42);font-size:8px}
+.social-match-stat-grid.competitive{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:12px}
+.social-ranked-history-list{display:grid;gap:6px}.social-ranked-history-list article{display:grid;grid-template-columns:90px 1fr 1fr auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid rgba(255,255,255,.075);background:rgba(255,255,255,.02)}
+.social-ranked-history-list article>b{font-size:8px;letter-spacing:.12em}.social-ranked-history-list article>div{display:grid;min-width:0}.social-ranked-history-list article strong{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.social-ranked-history-list article small{font-size:8px;color:rgba(255,255,255,.38)}.social-ranked-history-list article em{font-size:11px;font-style:normal;font-weight:950}.social-ranked-history-list article.loss{opacity:.68}
+.rank-bronze{--rank-accent:#b07a55}.rank-silver{--rank-accent:#c8d0d5}.rank-gold{--rank-accent:#d8b45f}.rank-platinum{--rank-accent:#8fb8b3}.rank-diamond{--rank-accent:#8ea7d9}.rank-master{--rank-accent:#d7d7d7}
+.social-rank-badge[class*="rank-"],.social-rank-mini[class*="rank-"],.social-competitive-hero[class*="rank-"]{border-color:color-mix(in srgb,var(--rank-accent,#aaa) 45%,transparent)}
+.social-competitive-hero[class*="rank-"] .social-rank-emblem{border-color:color-mix(in srgb,var(--rank-accent,#aaa) 58%,transparent);box-shadow:0 0 32px color-mix(in srgb,var(--rank-accent,#aaa) 18%,transparent)}
+.social-rank-badge[class*="rank-"] b,.social-rank-mini[class*="rank-"]{color:var(--rank-accent,#ddd)}
+@media(max-width:850px){.social-competitive-hero{grid-template-columns:70px 1fr}.social-competitive-hero aside{grid-column:1/-1;text-align:left}.social-match-stat-grid.competitive{grid-template-columns:repeat(2,1fr)}.social-ranked-history-list article{grid-template-columns:80px 1fr auto}.social-ranked-history-list article>div:nth-of-type(2){display:none}}
+@media(max-width:560px){.social-competitive-hero{grid-template-columns:1fr;text-align:center}.social-rank-emblem{margin:auto}.social-competitive-hero aside{text-align:center}.social-match-stat-grid.competitive{grid-template-columns:1fr}}
