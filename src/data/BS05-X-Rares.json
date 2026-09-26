@@ -1,0 +1,229 @@
+[
+  {
+    "id": "BS05-X17",
+    "name": "The PhantomLord Rean",
+    "nameEN": "The PhantomLord Rean",
+    "namePT": "The PhantomLord Rean",
+    "nameJP": "幻獣王リーン",
+    "nameKey": "the-phantomlord-rean",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 9,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow",
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 6 or more → Void]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 6 or higher Spirits to the Void.\nLV1/LV2/LV3 When Summoned: For each Nexus your opponent controls, return 1 opposing Spirit to its owner's Hand.\nLV3 When This Spirit Attacks: If you control three or more cost 2 Spirits, this Spirit cannot be blocked by Spirits with effect text.",
+      "ptBR": "[Tribute: Cost 6 ou mais → Void]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 6 ou mais para o Void.\nLV1/LV2/LV3 Quando Invocado: Para cada Nexus que o oponente controla, devolva 1 Spirit do oponente para a Hand do dono.\nLV3 Quando Este Spirit Ataca: Se você controlar 3 ou mais Spirits de custo 2, este Spirit não pode ser bloqueado por Spirits com texto de efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-X17.webp"
+  },
+  {
+    "id": "BS05-X18",
+    "name": "The HugeBeastLord Behedoth",
+    "nameEN": "The HugeBeastLord Behedoth",
+    "namePT": "The HugeBeastLord Behedoth",
+    "nameJP": "超獣王ベヒードス",
+    "nameKey": "the-hugebeastlord-behedoth",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 9,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head",
+      "Heroic"
+    ],
+    "symbols": [
+      "blue",
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 8000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 6 or more → Void]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 6 or higher Spirits to the Void.\nLV1/LV2/LV3 When Summoned: For each different color among Magic cards in your opponent's Trash, destroy 1 opposing Spirit.\nLV3 When This Spirit Battles: Until the end of this battle, your opponent cannot use Magic effects during Flash Timing.",
+      "ptBR": "[Tribute: Cost 6 ou mais → Void]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 6 ou mais para o Void.\nLV1/LV2/LV3 Quando Invocado: Para cada cor diferente entre as cartas de Magic no Trash do oponente, destrua 1 Spirit do oponente.\nLV3 Quando Este Spirit Batalha: Até o fim desta batalha, o oponente não pode usar efeitos de Magic durante o Flash Timing."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-X18.webp"
+  },
+  {
+    "id": "BS05-X19",
+    "name": "The SacredEmperor Siegfrieden",
+    "nameEN": "The SacredEmperor Siegfrieden",
+    "namePT": "The SacredEmperor Siegfrieden",
+    "nameJP": "聖皇ジークフリーデン",
+    "nameKey": "the-sacredemperor-siegfrieden",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red",
+      "white"
+    ],
+    "cost": 9,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Ancient Dragon",
+      "Moving Tool"
+    ],
+    "symbols": [
+      "red",
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 15000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 6 or more → Void]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 6 or higher Spirits to the Void.\nLV1/LV2/LV3 When Summoned: Destroy any number of opposing Spirits whose combined costs total 5 or less. If the Spirit used for this card's [Tribute] was named \"The DragonEmperor Siegfried\" or \"The FortressEmperor Odin\", instead destroy any number of opposing Spirits whose combined costs total 8 or less.\nLV3 When This Spirit Attacks: Destroy 2 opposing Spirits with 7000 BP or less.",
+      "ptBR": "[Tribute: Cost 6 ou mais → Void]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 6 ou mais para o Void.\nLV1/LV2/LV3 Quando Invocado: Destrua qualquer quantidade de Spirits do oponente cuja soma dos custos seja 5 ou menos. Se o Spirit usado para o [Tribute] desta carta se chamava \"The DragonEmperor Siegfried\" ou \"The FortressEmperor Odin\", em vez disso destrua qualquer quantidade de Spirits do oponente cuja soma dos custos seja 8 ou menos.\nLV3 Quando Este Spirit Ataca: Destrua 2 Spirits do oponente com 7000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-X19.webp"
+  },
+  {
+    "id": "BS05-X20",
+    "name": "The GreatArmoredLord Deathtaurus",
+    "nameEN": "The GreatArmoredLord Deathtaurus",
+    "namePT": "The GreatArmoredLord Deathtaurus",
+    "nameJP": "大甲帝デスタウロス",
+    "nameKey": "the-greatarmoredlord-deathtaurus",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple",
+      "green"
+    ],
+    "cost": 9,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple",
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Curse Demon",
+      "Shell Insect"
+    ],
+    "symbols": [
+      "purple",
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 9000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 13000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 6 or more → Void]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 6 or higher Spirits to the Void.\nLV1/LV2/LV3 When Summoned: For each Exhausted Spirit, put 1 Core from the Void onto this Spirit.\nLV3 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, move 2 Cores from opposing Spirits to the Void.",
+      "ptBR": "[Tribute: Cost 6 ou mais → Void]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 6 ou mais para o Void.\nLV1/LV2/LV3 Quando Invocado: Para cada Spirit Exhausted, coloque 1 Core do Void sobre este Spirit.\nLV3 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, mova 2 Cores dos Spirits do oponente para o Void."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-X20.webp"
+  }
+]

@@ -1,0 +1,602 @@
+[
+  {
+    "id": "BS04-046",
+    "name": "The Fairy Dorothy",
+    "nameEN": "The Fairy Dorothy",
+    "namePT": "The Fairy Dorothy",
+    "nameJP": "妖精ドロシー",
+    "nameKey": "the-fairy-dorothy",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 1,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-046.webp"
+  },
+  {
+    "id": "BS04-047",
+    "name": "Wiseless-Scarecrow",
+    "nameEN": "Wiseless-Scarecrow",
+    "namePT": "Wiseless-Scarecrow",
+    "nameJP": "ワイズレス・スケアクロウ",
+    "nameKey": "wiseless-scarecrow",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Moving Toy"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.",
+      "ptBR": "LV2 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-047.webp"
+  },
+  {
+    "id": "BS04-048",
+    "name": "DarkPiyon",
+    "nameEN": "DarkPiyon",
+    "namePT": "DarkPiyon",
+    "nameJP": "ダークピヨン",
+    "nameKey": "darkpiyon",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Song Bird"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-048.webp"
+  },
+  {
+    "id": "BS04-049",
+    "name": "The BlackFairy Ti-Tanya",
+    "nameEN": "The BlackFairy Ti-Tanya",
+    "namePT": "The BlackFairy Ti-Tanya",
+    "nameJP": "黒の妖精ティ・ターニャ",
+    "nameKey": "the-blackfairy-ti-tanya",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: While you control three or more Yellow Spirits, all Magic cards in your Hand gain 1 Yellow reduction symbol.",
+      "ptBR": "LV1/LV2: Enquanto você controlar 3 ou mais Spirits Yellow, todas as cartas de Magic na sua Hand ganham 1 símbolo de redução Yellow."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-049.webp"
+  },
+  {
+    "id": "BS04-050",
+    "name": "Heartless-Tin",
+    "nameEN": "Heartless-Tin",
+    "namePT": "Heartless-Tin",
+    "nameJP": "ハートレス・ティン",
+    "nameKey": "heartless-tin",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Moving Toy",
+      "Machine"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: All your White Spirits get +1000 BP.\nLV2 During the Opponent's End Step: If you have three or more White symbols on your Field and your opponent did not attack this turn, draw 1 card.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Todos os seus Spirits White recebem +1000 BP.\nLV2 Durante o End Step do Oponente: Se você tiver 3 ou mais símbolos White no seu Field e o oponente não tiver atacado neste turno, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-050.webp"
+  },
+  {
+    "id": "BS04-051",
+    "name": "Arcanabeast-Hart",
+    "nameEN": "Arcanabeast-Hart",
+    "namePT": "Arcanabeast-Hart",
+    "nameJP": "アルカナビースト・ハルト",
+    "nameKey": "arcanabeast-hart",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV3: All your Spirits with \"Arcana\" in their card name gain: \"When This Spirit Attacks: This Spirit gets +2000 BP during this turn.\"",
+      "ptBR": "LV3: Todos os seus Spirits com \"Arcana\" no nome da carta ganham: \"Quando Este Spirit Ataca: Este Spirit recebe +2000 BP durante este turno.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-051.webp"
+  },
+  {
+    "id": "BS04-052",
+    "name": "The Postman Pentan",
+    "nameEN": "The Postman Pentan",
+    "namePT": "The Postman Pentan",
+    "nameJP": "郵便ペンタン",
+    "nameKey": "the-postman-pentan",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Song Bird",
+      "Drifting Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV3 During Your Draw Step: If you control a total of three or more Spirits with \"Pentan\" and/or \"Empereur\" in their card names, draw 1 additional card during this Draw Step.",
+      "ptBR": "LV3 Durante Seu Draw Step: Se você controlar um total de 3 ou mais Spirits com \"Pentan\" e/ou \"Empereur\" no nome da carta, compre 1 carta adicional durante este Draw Step."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-052.webp"
+  },
+  {
+    "id": "BS04-053",
+    "name": "The Angelia Throne",
+    "nameEN": "The Angelia Throne",
+    "namePT": "The Angelia Throne",
+    "nameJP": "天使スローン",
+    "nameKey": "the-angelia-throne",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 During Your Start Step: Choose 2 opposing Spirits. Exchange all Cores on those 2 Spirits.\nLV3: Treat this Spirit as a Purple Spirit as well.",
+      "ptBR": "LV2/LV3 Durante Seu Start Step: Escolha 2 Spirits do oponente. Troque entre eles todos os Cores que estiverem sobre esses 2 Spirits.\nLV3: Trate este Spirit também como um Spirit Purple."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-053.webp"
+  },
+  {
+    "id": "BS04-054",
+    "name": "Arcanasoldier-Cinq",
+    "nameEN": "Arcanasoldier-Cinq",
+    "namePT": "Arcanasoldier-Cinq",
+    "nameJP": "アルカナソルジャー・サンク",
+    "nameKey": "arcanasoldier-cinq",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 During the Opponent's Turn: When your opponent uses a Magic effect that targets this Spirit, that Magic effect may be made to target only this Spirit.",
+      "ptBR": "LV2 Durante o Turno do Oponente: Quando o oponente usar um efeito de Magic que tenha este Spirit como alvo, aquele efeito de Magic pode ser feito para ter apenas este Spirit como alvo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-054.webp"
+  },
+  {
+    "id": "BS04-055",
+    "name": "The LightDragon Lumiere",
+    "nameEN": "The LightDragon Lumiere",
+    "namePT": "The LightDragon Lumiere",
+    "nameJP": "光帝リュミエール",
+    "nameKey": "the-lightdragon-lumiere",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Emperor",
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow",
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 5 or more → Trash]\nAfter paying this Spirit's summon cost, you must send all Cores from 1 of your Spirits with cost 5 or more to your Trash.",
+      "ptBR": "[Tribute: Cost 5 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 5 ou mais para o seu Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-055.webp"
+  },
+  {
+    "id": "BS04-056",
+    "name": "Braveless-Leo",
+    "nameEN": "Braveless-Leo",
+    "namePT": "Braveless-Leo",
+    "nameJP": "ブレイブレス・レオ",
+    "nameKey": "braveless-leo",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Hunter Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-056.webp"
+  },
+  {
+    "id": "BS04-057",
+    "name": "The GreatAngelia Seraphy",
+    "nameEN": "The GreatAngelia Seraphy",
+    "namePT": "The GreatAngelia Seraphy",
+    "nameJP": "天使長セラフィー",
+    "nameKey": "the-greatangelia-seraphy",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 8,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: For each cost 6 or lower Spirit card in your Hand with the family \"Divine Spirit\", by moving 1 Core from your Reserve to your Trash, you may summon that card without paying its cost. Its When Summoned effect does not activate.\nLV2/LV3 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Para cada carta de Spirit de custo 6 ou menos na sua Hand com a família \"Divine Spirit\", ao mover 1 Core da sua Reserve para o Trash, você pode invocar aquela carta sem pagar o custo. O efeito When Summoned dela não é ativado.\nLV2/LV3 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-057.webp"
+  }
+]

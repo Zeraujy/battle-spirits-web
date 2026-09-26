@@ -1,0 +1,1066 @@
+[
+  {
+    "id": "BS03-049",
+    "name": "Mikene",
+    "nameEN": "Mikene",
+    "namePT": "Mikene",
+    "nameJP": "ミケネ",
+    "nameKey": "mikene",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Play Sprite"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Refresh 1 of your Spirits.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Dê Refresh em 1 dos seus Spirits."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-049.webp"
+  },
+  {
+    "id": "BS03-050",
+    "name": "Kinokonoko",
+    "nameEN": "Kinokonoko",
+    "namePT": "Kinokonoko",
+    "nameJP": "キノコノコ",
+    "nameKey": "kinokonoko",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 1,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Attacks: Whenever you use a Magic effect, this Spirit gets +1000 BP during this turn.",
+      "ptBR": "LV2 Quando Este Spirit Ataca: Sempre que você usar um efeito de Magic, este Spirit recebe +1000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-050.webp"
+  },
+  {
+    "id": "BS03-051",
+    "name": "Dongurin",
+    "nameEN": "Dongurin",
+    "namePT": "Dongurin",
+    "nameJP": "ドングリン",
+    "nameKey": "dongurin",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-051.webp"
+  },
+  {
+    "id": "BS03-052",
+    "name": "Froger",
+    "nameEN": "Froger",
+    "namePT": "Froger",
+    "nameJP": "フロッガー",
+    "nameKey": "froger",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Play Sprite"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-052.webp"
+  },
+  {
+    "id": "BS03-053",
+    "name": "The HundredFaces Flatface",
+    "nameEN": "The HundredFaces Flatface",
+    "namePT": "The HundredFaces Flatface",
+    "nameJP": "百面相のフラットフェイス",
+    "nameKey": "the-hundredfaces-flatface",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV2: Treat this Spirit as a White Spirit as well.\nLV3: Treat this Spirit as a Purple Spirit as well.",
+      "ptBR": "LV2: Trate este Spirit também como um Spirit White.\nLV3: Trate este Spirit também como um Spirit Purple."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-053.webp"
+  },
+  {
+    "id": "BS03-054",
+    "name": "Arcanadoll-Tria",
+    "nameEN": "Arcanadoll-Tria",
+    "namePT": "Arcanadoll-Tria",
+    "nameJP": "アルカナドール・トリア",
+    "nameKey": "arcanadoll-tria",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.",
+      "ptBR": "LV2 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-054.webp"
+  },
+  {
+    "id": "BS03-055",
+    "name": "Gomazarashi",
+    "nameEN": "Gomazarashi",
+    "namePT": "Gomazarashi",
+    "nameJP": "ゴマザラシ",
+    "nameKey": "gomazarashi",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Play Sprite"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: While you control a White Spirit, this Spirit gets +1000 BP.\nLV2 During the Opponent's Attack Step: All your White Spirits get +1000 BP.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Enquanto você controlar um Spirit White, este Spirit recebe +1000 BP.\nLV2 Durante o Attack Step do Oponente: Todos os seus Spirits White recebem +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-055.webp"
+  },
+  {
+    "id": "BS03-056",
+    "name": "Ochogo",
+    "nameEN": "Ochogo",
+    "namePT": "Ochogo",
+    "nameJP": "オチョゴ",
+    "nameKey": "ochogo",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Play Sprite"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: If you control a Green Spirit, put 1 Core from the Void onto this Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Se você controlar um Spirit Green, coloque 1 Core do Void sobre este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-056.webp"
+  },
+  {
+    "id": "BS03-057",
+    "name": "Jellfy",
+    "nameEN": "Jellfy",
+    "namePT": "Jellfy",
+    "nameJP": "ジェルフィ",
+    "nameKey": "jellfy",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Play Sprite"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Attacks: If you control a Purple Spirit, draw 1 card.",
+      "ptBR": "LV2 Quando Este Spirit Ataca: Se você controlar um Spirit Purple, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-057.webp"
+  },
+  {
+    "id": "BS03-058",
+    "name": "The Fairy Tinguly",
+    "nameEN": "The Fairy Tinguly",
+    "namePT": "The Fairy Tinguly",
+    "nameJP": "妖精ティングリー",
+    "nameKey": "the-fairy-tinguly",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: During this turn, treat all your Spirits as Yellow Spirits as well.",
+      "ptBR": "LV1/LV2 Quando Invocado: Durante este turno, trate todos os seus Spirits também como Spirits Yellow."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-058.webp"
+  },
+  {
+    "id": "BS03-059",
+    "name": "Arcanabeast-Paira",
+    "nameEN": "Arcanabeast-Paira",
+    "namePT": "Arcanabeast-Paira",
+    "nameJP": "アルカナビースト・ペイラ",
+    "nameKey": "arcanabeast-paira",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.\nLV3 During Your Attack Step: All your Spirits with \"Arcana\" in their card name get +2000 BP.",
+      "ptBR": "LV2/LV3 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha.\nLV3 Durante Seu Attack Step: Todos os seus Spirits com \"Arcana\" no nome da carta recebem +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-059.webp"
+  },
+  {
+    "id": "BS03-060",
+    "name": "Rumpkin",
+    "nameEN": "Rumpkin",
+    "namePT": "Rumpkin",
+    "nameJP": "ランプキン",
+    "nameKey": "rumpkin",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Small Toy"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-060.webp"
+  },
+  {
+    "id": "BS03-061",
+    "name": "The StrawberryGirl Strawberi",
+    "nameEN": "The StrawberryGirl Strawberi",
+    "namePT": "The StrawberryGirl Strawberi",
+    "nameJP": "苺っ娘ストロベリ",
+    "nameKey": "the-strawberrygirl-strawberi",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Is Destroyed: Refresh 1 of your Spirits with [Brilliance].",
+      "ptBR": "LV2 Quando Este Spirit For Destruído: Dê Refresh em 1 dos seus Spirits com [Brilliance]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-061.webp"
+  },
+  {
+    "id": "BS03-062",
+    "name": "Chihuahl",
+    "nameEN": "Chihuahl",
+    "namePT": "Chihuahl",
+    "nameJP": "チワール",
+    "nameKey": "chihuahl",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Play Sprite"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: All your Spirits with the family \"Play Sprite\" get +1000 BP.\nLV2/LV3: When one of your Spirits with the family \"Small Toy\" is destroyed, return all such destroyed Spirits to your Hand.",
+      "ptBR": "LV1/LV2/LV3: Todos os seus Spirits com a família \"Play Sprite\" recebem +1000 BP.\nLV2/LV3: Quando 1 dos seus Spirits com a família \"Small Toy\" for destruído, devolva todos esses Spirits destruídos para sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-062.webp"
+  },
+  {
+    "id": "BS03-063",
+    "name": "Ponysus",
+    "nameEN": "Ponysus",
+    "namePT": "Ponysus",
+    "nameJP": "ポニサス",
+    "nameKey": "ponysus",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-063.webp"
+  },
+  {
+    "id": "BS03-064",
+    "name": "The RoseLady Barossa",
+    "nameEN": "The RoseLady Barossa",
+    "namePT": "The RoseLady Barossa",
+    "nameJP": "薔薇人バロッサ",
+    "nameKey": "the-roselady-barossa",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 During Your Attack Step: You may use all Yellow Magic cards without paying their costs.",
+      "ptBR": "LV2 Durante Seu Attack Step: Você pode usar todas as cartas de Magic Yellow sem pagar seus custos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-064.webp"
+  },
+  {
+    "id": "BS03-065",
+    "name": "The Angelia Curio",
+    "nameEN": "The Angelia Curio",
+    "namePT": "The Angelia Curio",
+    "nameJP": "天使キュリオ",
+    "nameKey": "the-angelia-curio",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Blocks: If you control a Green Nexus, put 1 Core from the Void onto this Spirit.\nLV2/LV3 When This Spirit Attacks: If you control a Green Nexus, put 1 Core from the Void onto this Spirit.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Bloqueia: Se você controlar um Nexus Green, coloque 1 Core do Void sobre este Spirit.\nLV2/LV3 Quando Este Spirit Ataca: Se você controlar um Nexus Green, coloque 1 Core do Void sobre este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-065.webp"
+  },
+  {
+    "id": "BS03-066",
+    "name": "The Angelia Archre",
+    "nameEN": "The Angelia Archre",
+    "namePT": "The Angelia Archre",
+    "nameJP": "天使アルケー",
+    "nameKey": "the-angelia-archre",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All Yellow Magic cards in your Hand gain 2 Yellow reduction symbols.\nLV2: All Yellow Spirit cards in your Hand gain 2 Yellow reduction symbols.",
+      "ptBR": "LV1/LV2: Todas as cartas de Magic Yellow na sua Hand ganham 2 símbolos de redução Yellow.\nLV2: Todas as cartas de Spirit Yellow na sua Hand ganham 2 símbolos de redução Yellow."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-066.webp"
+  },
+  {
+    "id": "BS03-067",
+    "name": "Arcanaprincess-Un",
+    "nameEN": "Arcanaprincess-Un",
+    "namePT": "Arcanaprincess-Un",
+    "nameJP": "アルカナプリンセス・アン",
+    "nameKey": "arcanaprincess-un",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: This Spirit gets +1000 BP for each Spirit you control with \"Arcana\" in its card name.\nLV2/LV3: Treat all your cost 3 Spirits as having \"Arcana\" in their card name.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP para cada Spirit que você controla com \"Arcana\" no nome da carta.\nLV2/LV3: Trate todos os seus Spirits de custo 3 como se tivessem \"Arcana\" no nome da carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-067.webp"
+  },
+  {
+    "id": "BS03-068",
+    "name": "Forthros",
+    "nameEN": "Forthros",
+    "namePT": "Forthros",
+    "nameJP": "フォルトロス",
+    "nameKey": "forthros",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-068.webp"
+  },
+  {
+    "id": "BS03-069",
+    "name": "The Rockhopper Pentan",
+    "nameEN": "The Rockhopper Pentan",
+    "namePT": "The Rockhopper Pentan",
+    "nameJP": "イワトビペンタン",
+    "nameKey": "the-rockhopper-pentan",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Song Bird",
+      "Drifting Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Turn: When your opponent uses a Magic effect, reduction symbols cannot reduce its cost.\nLV2 During Your Turn: When your opponent uses a Magic effect, reduction symbols cannot reduce its cost.",
+      "ptBR": "LV1/LV2 Durante o Turno do Oponente: Quando o oponente usar um efeito de Magic, símbolos de redução não podem reduzir seu custo.\nLV2 Durante Seu Turno: Quando o oponente usar um efeito de Magic, símbolos de redução não podem reduzir seu custo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-069.webp"
+  },
+  {
+    "id": "BS03-070",
+    "name": "The GreatAngelia Exsia",
+    "nameEN": "The GreatAngelia Exsia",
+    "namePT": "The GreatAngelia Exsia",
+    "nameJP": "天使長エクスシア",
+    "nameKey": "the-greatangelia-exsia",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 8,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.\nLV2/LV3 When This Spirit Attacks: If you control a Purple Nexus, draw 1 card.",
+      "ptBR": "LV1/LV2/LV3 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha.\nLV2/LV3 Quando Este Spirit Ataca: Se você controlar um Nexus Purple, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-070.webp"
+  }
+]

@@ -1,0 +1,443 @@
+[
+  {
+    "id": "BS05-028",
+    "name": "Armetcrab",
+    "nameEN": "Armetcrab",
+    "namePT": "Armetcrab",
+    "nameJP": "アーメットクラブ",
+    "nameKey": "armetcrab",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fish"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Armor: Yellow]: This Spirit is unaffected by opposing Yellow Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2 [Armor: Yellow]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Yellow do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-028.webp"
+  },
+  {
+    "id": "BS05-029",
+    "name": "The Artifact Embla",
+    "nameEN": "The Artifact Embla",
+    "namePT": "The Artifact Embla",
+    "nameJP": "機人エムブラ",
+    "nameKey": "the-artifact-embla",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-029.webp"
+  },
+  {
+    "id": "BS05-030",
+    "name": "Pantomeister",
+    "nameEN": "Pantomeister",
+    "namePT": "Pantomeister",
+    "nameJP": "パントマイスター",
+    "nameKey": "pantomeister",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2: Treat the cost of all Spirit cards in your Hand with the family \"Ice Princess\" as 5.",
+      "ptBR": "LV2: Trate o custo de todas as cartas de Spirit na sua Hand com a família \"Ice Princess\" como 5."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-030.webp"
+  },
+  {
+    "id": "BS05-031",
+    "name": "The GunKnight Heavybarrel",
+    "nameEN": "The GunKnight Heavybarrel",
+    "namePT": "The GunKnight Heavybarrel",
+    "nameJP": "銃騎士ヘビーバレル",
+    "nameKey": "the-gunknight-heavybarrel",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-031.webp"
+  },
+  {
+    "id": "BS05-032",
+    "name": "The CoralCrab Siomanekid",
+    "nameEN": "The CoralCrab Siomanekid",
+    "namePT": "The CoralCrab Siomanekid",
+    "nameJP": "珊瑚蟹シオマネキッド",
+    "nameKey": "the-coralcrab-siomanekid",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast",
+      "Shell Insect"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Armor: Red/White]: This Spirit is unaffected by opposing Red and White Spirit, Nexus, and Magic effects.\nLV2: All your Green Spirits gain [Armor: Red/White].",
+      "ptBR": "LV1/LV2 [Armor: Red/White]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red e White do oponente.\nLV2: Todos os seus Spirits Green ganham [Armor: Red/White]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-032.webp"
+  },
+  {
+    "id": "BS05-033",
+    "name": "The GiantMobile Ymir",
+    "nameEN": "The GiantMobile Ymir",
+    "namePT": "The GiantMobile Ymir",
+    "nameJP": "巨人機ユミール",
+    "nameKey": "the-giantmobile-ymir",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Moving Tool"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-033.webp"
+  },
+  {
+    "id": "BS05-034",
+    "name": "The WhiteDragonRider Albus",
+    "nameEN": "The WhiteDragonRider Albus",
+    "namePT": "The WhiteDragonRider Albus",
+    "nameJP": "白亜の竜使いアルブス",
+    "nameKey": "the-whitedragonrider-albus",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Knight",
+      "Artifact"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: When this Spirit becomes the target of Tribute, by Exhausting this Spirit, treat all Cores on this Spirit as having been sent to the designated place.\nLV2/LV3: This Spirit and all your Spirits with the family \"Dragon Emperor\" and/or \"Vanity Deity\" are unaffected by opposing Magic effects.",
+      "ptBR": "LV1/LV2/LV3: Quando este Spirit se tornar alvo de Tribute, ao deixar este Spirit Exhausted, trate todos os Cores sobre ele como tendo sido enviados para o local designado.\nLV2/LV3: Este Spirit e todos os seus Spirits com a família \"Dragon Emperor\" e/ou \"Vanity Deity\" não são afetados por efeitos de Magic do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-034.webp"
+  },
+  {
+    "id": "BS05-035",
+    "name": "The EvilDeity Big-Loki",
+    "nameEN": "The EvilDeity Big-Loki",
+    "namePT": "The EvilDeity Big-Loki",
+    "nameJP": "魔神機ビッグ・ロキ",
+    "nameKey": "the-evildeity-big-loki",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 7,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Moving Tool",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Blocks: This Spirit gets +3000 BP during this battle.\nLV3 When This Spirit Attacks: When this Spirit's attack reduces your opponent's Life, Refresh 1 of your Spirits with two or more symbols other than a Spirit named \"The EvilDeity Big-Loki\".",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Bloqueia: Este Spirit recebe +3000 BP durante esta batalha.\nLV3 Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, dê Refresh em 1 dos seus Spirits com 2 ou mais símbolos que não seja um Spirit chamado \"The EvilDeity Big-Loki\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-035.webp"
+  },
+  {
+    "id": "BS05-036",
+    "name": "The Ice Witch Hel",
+    "nameEN": "The Ice Witch Hel",
+    "namePT": "The Ice Witch Hel",
+    "nameJP": "氷の魔女ヘル",
+    "nameKey": "the-ice-witch-hel",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 8,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Ice Princess"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: You may summon 1 Spirit card with the family \"Ice Princess\" from your Hand without paying its cost. Its When Summoned effect does not activate.\nLV2 During Either Attack Step: Whenever one of your Spirits with the family \"Ice Princess\", other than a Spirit named \"The Ice Witch Hel\", is destroyed, return it to your Hand.",
+      "ptBR": "LV1/LV2 Quando Invocado: Você pode invocar 1 carta de Spirit com a família \"Ice Princess\" da sua Hand sem pagar o custo. O efeito When Summoned dela não é ativado.\nLV2 Durante o Attack Step de qualquer jogador: Sempre que 1 dos seus Spirits com a família \"Ice Princess\", que não seja um Spirit chamado \"The Ice Witch Hel\", for destruído, devolva-o para sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-036.webp"
+  }
+]

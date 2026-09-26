@@ -1,0 +1,462 @@
+[
+  {
+    "id": "BS05-037",
+    "name": "The Angelia Kleio",
+    "nameEN": "The Angelia Kleio",
+    "namePT": "The Angelia Kleio",
+    "nameJP": "天使クレイオ",
+    "nameKey": "the-angelia-kleio",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Either Attack Step: When one of your cost 2 Spirits is destroyed, draw 1 card.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits de custo 2 for destruído, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-037.webp"
+  },
+  {
+    "id": "BS05-038",
+    "name": "Shesas",
+    "nameEN": "Shesas",
+    "namePT": "Shesas",
+    "nameJP": "シーサーズ",
+    "nameKey": "shesas",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: You may summon 1 cost 2 Spirit card from your Hand without paying its cost. Its When Summoned effect does not activate.\nLV2: When one of your Spirit or Magic effects counts the number of Spirits you control, count this Spirit as 2 Spirits.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Você pode invocar 1 carta de Spirit de custo 2 da sua Hand sem pagar o custo. O efeito When Summoned dela não é ativado.\nLV2: Quando 1 dos seus efeitos de Spirit ou Magic contar a quantidade de Spirits que você controla, conte este Spirit como 2 Spirits."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-038.webp"
+  },
+  {
+    "id": "BS05-039",
+    "name": "The MorningFairy Napalco",
+    "nameEN": "The MorningFairy Napalco",
+    "namePT": "The MorningFairy Napalco",
+    "nameJP": "アサガオの妖精ナパルコ",
+    "nameKey": "the-morningfairy-napalco",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-039.webp"
+  },
+  {
+    "id": "BS05-040",
+    "name": "The Princess-Snowwhite",
+    "nameEN": "The Princess-Snowwhite",
+    "namePT": "The Princess-Snowwhite",
+    "nameJP": "プリンセス・スノーホワイト",
+    "nameKey": "the-princess-snowwhite",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Musician",
+      "Ice Princess"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During the Opponent's Turn: When your opponent uses a Spirit or Magic effect that targets one of your Spirits with the family \"Ice Princess\", you may have that effect target only this Spirit instead.\nLV2/LV3 When This Spirit Is Destroyed: If you control a Spirit named \"Dwarf-Seven\", return this Spirit to your Hand.",
+      "ptBR": "LV1/LV2/LV3 Durante o Turno do Oponente: Quando o oponente usar um efeito de Spirit ou Magic que tenha como alvo 1 dos seus Spirits com a família \"Ice Princess\", você pode fazer aquele efeito ter apenas este Spirit como alvo.\nLV2/LV3 Quando Este Spirit For Destruído: Se você controlar um Spirit chamado \"Dwarf-Seven\", devolva este Spirit para sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-040.webp"
+  },
+  {
+    "id": "BS05-041",
+    "name": "Arcanafighter-Quatre",
+    "nameEN": "Arcanafighter-Quatre",
+    "namePT": "Arcanafighter-Quatre",
+    "nameJP": "アルカナファイター・カトル",
+    "nameKey": "arcanafighter-quatre",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-041.webp"
+  },
+  {
+    "id": "BS05-042",
+    "name": "The GreatAngelia Sophia",
+    "nameEN": "The GreatAngelia Sophia",
+    "namePT": "The GreatAngelia Sophia",
+    "nameJP": "天使長ソフィア",
+    "nameKey": "the-greatangelia-sophia",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: You may summon 1 Spirit card with the family \"Imaginary Beast\" from your Hand without paying its cost. Its When Summoned effect does not activate.\nLV2/LV3 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Você pode invocar 1 carta de Spirit com a família \"Imaginary Beast\" da sua Hand sem pagar o custo. O efeito When Summoned dela não é ativado.\nLV2/LV3 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-042.webp"
+  },
+  {
+    "id": "BS05-043",
+    "name": "The YellowDragonRider Flavum",
+    "nameEN": "The YellowDragonRider Flavum",
+    "namePT": "The YellowDragonRider Flavum",
+    "nameJP": "黄昏の竜使いフラウム",
+    "nameKey": "the-yellowdragonrider-flavum",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Knight",
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: When this Spirit becomes the target of Tribute, by Exhausting this Spirit, treat all Cores on this Spirit as having been sent to the designated place.\nLV3: This Spirit and all your Spirits with the family \"Dragon Emperor\" and/or \"Vanity Deity\" gain: \"During Your End Step: Refresh this Spirit.\"",
+      "ptBR": "LV1/LV2/LV3: Quando este Spirit se tornar alvo de Tribute, ao deixar este Spirit Exhausted, trate todos os Cores sobre ele como tendo sido enviados para o local designado.\nLV3: Este Spirit e todos os seus Spirits com a família \"Dragon Emperor\" e/ou \"Vanity Deity\" ganham: \"Durante Seu End Step: Dê Refresh neste Spirit.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-043.webp"
+  },
+  {
+    "id": "BS05-044",
+    "name": "LittleKnight-Lancelot",
+    "nameEN": "LittleKnight-Lancelot",
+    "namePT": "LittleKnight-Lancelot",
+    "nameJP": "リトルナイト・ランスロット",
+    "nameKey": "littleknight-lancelot",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: While you control three or more cost 2 Spirits, all your Yellow Spirits are unaffected by opposing Magic effects.\nLV3: This Spirit is unaffected by all opposing Spirits' When Summoned effects.",
+      "ptBR": "LV1/LV2/LV3: Enquanto você controlar 3 ou mais Spirits de custo 2, todos os seus Spirits Yellow não são afetados por efeitos de Magic do oponente.\nLV3: Este Spirit não é afetado por efeitos When Summoned de Spirits do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-044.webp"
+  },
+  {
+    "id": "BS05-045",
+    "name": "Dwarf-Seven",
+    "nameEN": "Dwarf-Seven",
+    "namePT": "Dwarf-Seven",
+    "nameJP": "ドワッフー・セブン",
+    "nameKey": "dwarf-seven",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-045.webp"
+  }
+]

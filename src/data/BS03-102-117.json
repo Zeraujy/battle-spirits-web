@@ -1,0 +1,715 @@
+[
+  {
+    "id": "BS03-102",
+    "name": "The Outlaw Wasteland",
+    "nameEN": "The Outlaw Wasteland",
+    "namePT": "The Outlaw Wasteland",
+    "nameJP": "無法者の荒野",
+    "nameKey": "the-outlaw-wasteland",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your Spirits with no effect text get +2000 BP.\nLV2 During Your Attack Step: When one of your Spirits with no effect text is destroyed by an opposing Spirit through BP comparison, keep that Spirit on your Field in Exhausted state.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits sem texto de efeito recebem +2000 BP.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits sem texto de efeito for destruído por um Spirit do oponente pela comparação de BP, mantenha aquele Spirit no seu Field em estado Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-102.webp"
+  },
+  {
+    "id": "BS03-103",
+    "name": "The Middle of Hard Battle",
+    "nameEN": "The Middle of Hard Battle",
+    "namePT": "The Middle of Hard Battle",
+    "nameJP": "熾烈極める最前線",
+    "nameKey": "the-middle-of-hard-battle",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: At the start of the step, destroy 1 opposing Spirit with 1000 BP or less.\nLV2 During Your Attack Step: When one of your Spirits with [Awaken] destroys only an opposing Spirit by comparing BP, destroy 1 opposing Spirit with the same BP as the destroyed Spirit.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: No início do Step, destrua 1 Spirit do oponente com 1000 BP ou menos.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com [Awaken] destruir apenas um Spirit do oponente pela comparação de BP, destrua 1 Spirit do oponente com o mesmo BP do Spirit destruído."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-103.webp"
+  },
+  {
+    "id": "BS03-104",
+    "name": "The Crossroads of Destiny",
+    "nameEN": "The Crossroads of Destiny",
+    "namePT": "The Crossroads of Destiny",
+    "nameJP": "運命分かつ岐路",
+    "nameKey": "the-crossroads-of-destiny",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: When one of your Spirits with no effect text is destroyed by an opposing Spirit through BP comparison, draw 1 card.\nLV2 During Either Attack Step: When one of your Spirits with no effect text destroys only an opposing Spirit by comparing BP, Exhaust 1 Spirit you or the opponent controls.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits sem texto de efeito for destruído por um Spirit do oponente pela comparação de BP, compre 1 carta.\nLV2 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits sem texto de efeito destruir apenas um Spirit do oponente pela comparação de BP, deixe Exhausted 1 Spirit seu ou do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-104.webp"
+  },
+  {
+    "id": "BS03-105",
+    "name": "The Dark Reef Sea Area",
+    "nameEN": "The Dark Reef Sea Area",
+    "namePT": "The Dark Reef Sea Area",
+    "nameJP": "暗礁海域",
+    "nameKey": "the-dark-reef-sea-area",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Turn: All Spirits with 2 or fewer Cores on them are treated as having no families and cannot gain new families.\nLV2 During Your Attack Step: All your cost 2 Spirits gain [Curse]: When This Spirit Attacks: At the end of the battle, destroy the opposing Spirit that blocked this Spirit.",
+      "ptBR": "LV1/LV2 Durante Seu Turno: Todos os Spirits com 2 Cores ou menos sobre eles são tratados como sem famílias e não podem ganhar novas famílias.\nLV2 Durante Seu Attack Step: Todos os seus Spirits de custo 2 ganham [Curse]: Quando Este Spirit Ataca: Ao fim da batalha, destrua o Spirit do oponente que bloqueou este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-105.webp"
+  },
+  {
+    "id": "BS03-106",
+    "name": "The Sea of Trees in Dark Green",
+    "nameEN": "The Sea of Trees in Dark Green",
+    "namePT": "The Sea of Trees in Dark Green",
+    "nameJP": "深緑の樹海",
+    "nameKey": "the-sea-of-trees-in-dark-green",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: Whenever one of your Spirits with no effect text destroys only an opposing Spirit by comparing BP, put 1 Core from the Void onto this Nexus.\nLV2 During Your Attack Step: When one of your Spirits with no effect text is destroyed by an opposing Spirit through BP comparison, return that Spirit to your Hand.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Sempre que 1 dos seus Spirits sem texto de efeito destruir apenas um Spirit do oponente pela comparação de BP, coloque 1 Core do Void sobre este Nexus.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits sem texto de efeito for destruído por um Spirit do oponente pela comparação de BP, devolva aquele Spirit para sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-106.webp"
+  },
+  {
+    "id": "BS03-107",
+    "name": "The Endless Horizon",
+    "nameEN": "The Endless Horizon",
+    "namePT": "The Endless Horizon",
+    "nameJP": "果て無き地平線",
+    "nameKey": "the-endless-horizon",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: When your LV1 Spirits perform BP comparison during battle, use their LV2 BP instead.\nLV2 During Either Attack Step: When one of your Spirits with [High Speed] is destroyed by an opposing Spirit through BP comparison, by moving 1 Core from your Reserve to your Trash, return that Spirit to your Hand.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Quando seus Spirits LV1 realizarem comparação de BP durante a batalha, use o BP de LV2 deles.\nLV2 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits com [High Speed] for destruído por um Spirit do oponente pela comparação de BP, ao mover 1 Core da sua Reserve para o Trash, devolva aquele Spirit para sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-107.webp"
+  },
+  {
+    "id": "BS03-108",
+    "name": "The High Sky Covered by Metal",
+    "nameEN": "The High Sky Covered by Metal",
+    "namePT": "The High Sky Covered by Metal",
+    "nameJP": "鋼に覆われた高空",
+    "nameKey": "the-high-sky-covered-by-metal",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1 During the Opponent's Attack Step: At the start of the step, Refresh 1 of your Spirits with no effect text.\nLV2 During the Opponent's Attack Step: At the start of the step, Refresh all your Spirits with no effect text.",
+      "ptBR": "LV1 Durante o Attack Step do Oponente: No início do Step, dê Refresh em 1 dos seus Spirits sem texto de efeito.\nLV2 Durante o Attack Step do Oponente: No início do Step, dê Refresh em todos os seus Spirits sem texto de efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-108.webp"
+  },
+  {
+    "id": "BS03-109",
+    "name": "The Earth of Aurora",
+    "nameEN": "The Earth of Aurora",
+    "namePT": "The Earth of Aurora",
+    "nameJP": "極光の大地",
+    "nameKey": "the-earth-of-aurora",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: Whenever Cores on one of your Spirits are moved to your Reserve or Trash by an opposing Spirit, Nexus, or Magic effect, put 1 Core from the Void into your Reserve for each Spirit whose Cores were moved.\nLV2 During Your Core Step: If you control a Spirit with the family \"Armed Machine\", gain 1 additional Core during this Core Step.",
+      "ptBR": "LV1/LV2: Sempre que Cores de 1 dos seus Spirits forem movidos para sua Reserve ou Trash por um efeito de Spirit, Nexus ou Magic do oponente, coloque 1 Core do Void na sua Reserve para cada Spirit cujos Cores foram movidos.\nLV2 Durante Seu Core Step: Se você controlar um Spirit com a família \"Armed Machine\", ganhe 1 Core adicional durante este Core Step."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-109.webp"
+  },
+  {
+    "id": "BS03-110",
+    "name": "The Sacred Place in Falling Stars",
+    "nameEN": "The Sacred Place in Falling Stars",
+    "namePT": "The Sacred Place in Falling Stars",
+    "nameJP": "星降る巡礼地",
+    "nameKey": "the-sacred-place-in-falling-stars",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: All your Spirits with [Brilliance] get +2000 BP.\nLV2 During the Opponent's Attack Step: The [Brilliance] effects of your Spirits also activate when those Spirits block.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Todos os seus Spirits com [Brilliance] recebem +2000 BP.\nLV2 Durante o Attack Step do Oponente: Os efeitos de [Brilliance] dos seus Spirits também são ativados quando esses Spirits bloqueiam."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-110.webp"
+  },
+  {
+    "id": "BS03-111",
+    "name": "The Child's Room in Midnight",
+    "nameEN": "The Child's Room in Midnight",
+    "namePT": "The Child's Room in Midnight",
+    "nameJP": "子供部屋 午前0時",
+    "nameKey": "the-childs-room-in-midnight",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: When one of your Spirits with no effect text is destroyed by an opposing LV1 Spirit through BP comparison, keep that Spirit on your Field in Exhausted state.\nLV2 During the Opponent's Attack Step: When one of your Spirits with no effect text is destroyed by an opposing LV3 Spirit through BP comparison, keep that Spirit on your Field in Exhausted state.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Quando 1 dos seus Spirits sem texto de efeito for destruído por um Spirit LV1 do oponente pela comparação de BP, mantenha aquele Spirit no seu Field em estado Exhausted.\nLV2 Durante o Attack Step do Oponente: Quando 1 dos seus Spirits sem texto de efeito for destruído por um Spirit LV3 do oponente pela comparação de BP, mantenha aquele Spirit no seu Field em estado Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-111.webp"
+  },
+  {
+    "id": "BS03-112",
+    "name": "The Kingdom of Cards",
+    "nameEN": "The Kingdom of Cards",
+    "namePT": "The Kingdom of Cards",
+    "nameJP": "トランプの王国",
+    "nameKey": "the-kingdom-of-cards",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your Spirits with the family \"Four Paths\" cannot be Exhausted by opposing Spirit, Nexus, or Magic effects.\nLV2 During Your Attack Step: When one of your Yellow Spirits is destroyed, Refresh 1 of your Spirits with the family \"Four Paths\".",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits com a família \"Four Paths\" não podem ficar Exhausted por efeitos de Spirit, Nexus ou Magic do oponente.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits Yellow for destruído, dê Refresh em 1 dos seus Spirits com a família \"Four Paths\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-112.webp"
+  },
+  {
+    "id": "BS03-113",
+    "name": "The Absorption Triumphal Arch",
+    "nameEN": "The Absorption Triumphal Arch",
+    "namePT": "The Absorption Triumphal Arch",
+    "nameJP": "力奪う凱旋門",
+    "nameKey": "the-absorption-triumphal-arch",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: Your opponent can only use Magic cards whose colors match symbols on their Field.\nLV2: Your opponent cannot use Magic effects without paying their costs.",
+      "ptBR": "LV1/LV2: O oponente só pode usar cartas de Magic cujas cores correspondam aos símbolos no Field dele.\nLV2: O oponente não pode usar efeitos de Magic sem pagar seus custos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-113.webp"
+  },
+  {
+    "id": "BS03-114",
+    "name": "The Rampart of Sapphire",
+    "nameEN": "The Rampart of Sapphire",
+    "namePT": "The Rampart of Sapphire",
+    "nameJP": "サファイアの城壁",
+    "nameKey": "the-rampart-of-sapphire",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: Treat all your Spirits with no effect text as LV1 with 1 Core, LV2 with 2 Cores, and their highest Level with 3 or more Cores.\nLV2: While you control three or more Spirits with no effect text, all your Nexuses cannot be destroyed by opposing Spirit, Nexus, or Magic effects.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Trate todos os seus Spirits sem texto de efeito como LV1 com 1 Core, LV2 com 2 Cores e no Level máximo deles com 3 ou mais Cores.\nLV2: Enquanto você controlar 3 ou mais Spirits sem texto de efeito, todos os seus Nexuses não podem ser destruídos por efeitos de Spirit, Nexus ou Magic do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-114.webp"
+  },
+  {
+    "id": "BS03-115",
+    "name": "The Collapse of Battie Line",
+    "nameEN": "The Collapse of Battie Line",
+    "namePT": "The Collapse of Battie Line",
+    "nameJP": "崩壊する戦線",
+    "nameKey": "the-collapse-of-battie-line",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: Whenever cards are discarded from your opponent's deck by a [Crush] effect, increase the number discarded by 2.\nLV2 During Your Attack Step: Treat all your Spirits with [Crush] as their highest Level.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Sempre que cartas forem descartadas do deck do oponente por um efeito de [Crush], aumente em 2 a quantidade descartada.\nLV2 Durante Seu Attack Step: Trate todos os seus Spirits com [Crush] como estando no Level máximo deles."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-115.webp"
+  },
+  {
+    "id": "BS03-116",
+    "name": "The Loss of Heroes",
+    "nameEN": "The Loss of Heroes",
+    "namePT": "The Loss of Heroes",
+    "nameJP": "英雄の喪失",
+    "nameKey": "the-loss-of-heroes",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Main Step: Whenever cards are added to your opponent's Hand, for each card added, discard 1 card from the top of their deck.\nLV2 During Either Attack Step: When one of your Spirits with the family \"Heroic\" is destroyed by an opposing Spirit through BP comparison, discard 5 cards from the top of your opponent's deck.",
+      "ptBR": "LV1/LV2 Durante a Main Step do Oponente: Sempre que cartas forem adicionadas à Hand do oponente, para cada carta adicionada, descarte 1 carta do topo do deck dele.\nLV2 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits com a família \"Heroic\" for destruído por um Spirit do oponente pela comparação de BP, descarte 5 cartas do topo do deck do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-116.webp"
+  },
+  {
+    "id": "BS03-117",
+    "name": "The H.Q. filled with Fighting Spirits",
+    "nameEN": "The H.Q. filled with Fighting Spirits",
+    "namePT": "The H.Q. filled with Fighting Spirits",
+    "nameJP": "士気高き大本営",
+    "nameKey": "the-h-q-filled-with-fighting-spirits",
+    "set": "BS03",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: The [Crush] effects of your Spirits also activate when those Spirits block.\nLV2 During Either Attack Step: Whenever cards are discarded from your opponent's deck by a [Crush] effect, put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Os efeitos de [Crush] dos seus Spirits também são ativados quando esses Spirits bloqueiam.\nLV2 Durante o Attack Step de qualquer jogador: Sempre que cartas forem descartadas do deck do oponente por um efeito de [Crush], coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-117.webp"
+  }
+]

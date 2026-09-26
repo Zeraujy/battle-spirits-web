@@ -1,0 +1,568 @@
+[
+  {
+    "id": "BS03-037",
+    "name": "Ratatoscr",
+    "nameEN": "Ratatoscr",
+    "namePT": "Ratatoscr",
+    "nameJP": "ラタトスカ",
+    "nameKey": "ratatoscr",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Armor: Red]: This Spirit is unaffected by opposing Red Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2 [Armor: Red]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-037.webp"
+  },
+  {
+    "id": "BS03-038",
+    "name": "Angelafish",
+    "nameEN": "Angelafish",
+    "namePT": "Angelafish",
+    "nameJP": "アンジェラフィッシュ",
+    "nameKey": "angelafish",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fish"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-038.webp"
+  },
+  {
+    "id": "BS03-039",
+    "name": "The Piper Heimdall",
+    "nameEN": "The Piper Heimdall",
+    "namePT": "The Piper Heimdall",
+    "nameJP": "笛吹きのヘイムダル",
+    "nameKey": "the-piper-heimdall",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Blocks: Until the end of this battle, your opponent cannot use cards from their Hand during Flash Timing.",
+      "ptBR": "LV2 Quando Este Spirit Bloqueia: Até o fim desta batalha, o oponente não pode usar cartas da Hand durante o Flash Timing."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-039.webp"
+  },
+  {
+    "id": "BS03-040",
+    "name": "Ver-Thandia",
+    "nameEN": "Ver-Thandia",
+    "namePT": "Ver-Thandia",
+    "nameJP": "ベル・ダンディア",
+    "nameKey": "ver-thandia",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Demon"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 When This Spirit Blocks: Refresh 1 of your Spirits with the family \"Giant Beast\".\nLV3 During Your Core Step: If you control \"Ur-Dine\", \"Ver-Thandia\", and \"Skuldia\", gain 1 additional Core during this Core Step.",
+      "ptBR": "LV2/LV3 Quando Este Spirit Bloqueia: Dê Refresh em 1 dos seus Spirits com a família \"Giant Beast\".\nLV3 Durante Seu Core Step: Se você controlar \"Ur-Dine\", \"Ver-Thandia\" e \"Skuldia\", ganhe 1 Core adicional durante este Core Step."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-040.webp"
+  },
+  {
+    "id": "BS03-041",
+    "name": "The Artifact Asc",
+    "nameEN": "The Artifact Asc",
+    "namePT": "The Artifact Asc",
+    "nameJP": "機人アスク",
+    "nameKey": "the-artifact-asc",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-041.webp"
+  },
+  {
+    "id": "BS03-042",
+    "name": "The SeaCreature Dugong",
+    "nameEN": "The SeaCreature Dugong",
+    "namePT": "The SeaCreature Dugong",
+    "nameJP": "海獣ジューゴン",
+    "nameKey": "the-seacreature-dugong",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Giant Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-042.webp"
+  },
+  {
+    "id": "BS03-043",
+    "name": "Hotaruri",
+    "nameEN": "Hotaruri",
+    "namePT": "Hotaruri",
+    "nameJP": "ホタルリ",
+    "nameKey": "hotaruri",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Glow Insect"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Armor: Red/Purple]: This Spirit is unaffected by opposing Red and Purple Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2 [Armor: Red/Purple]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red e Purple do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-043.webp"
+  },
+  {
+    "id": "BS03-044",
+    "name": "The MetalMan Surtr",
+    "nameEN": "The MetalMan Surtr",
+    "namePT": "The MetalMan Surtr",
+    "nameJP": "鋼人スルト",
+    "nameKey": "the-metalman-surtr",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 [Armor: Red/White]: This Spirit is unaffected by opposing Red and White Spirit, Nexus, and Magic effects.\nLV2 [Armor: Red/Purple/White]: This Spirit is unaffected by opposing Red, Purple, and White Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1 [Armor: Red/White]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red e White do oponente.\nLV2 [Armor: Red/Purple/White]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red, Purple e White do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-044.webp"
+  },
+  {
+    "id": "BS03-045",
+    "name": "The SilverFox Hati",
+    "nameEN": "The SilverFox Hati",
+    "namePT": "The SilverFox Hati",
+    "nameJP": "銀狐ハティ",
+    "nameKey": "the-silverfox-hati",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: This Spirit gets +5000 BP during this battle.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +5000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-045.webp"
+  },
+  {
+    "id": "BS03-046",
+    "name": "The Unicorn Einhorn",
+    "nameEN": "The Unicorn Einhorn",
+    "namePT": "The Unicorn Einhorn",
+    "nameJP": "一角獣アインホルン",
+    "nameKey": "the-unicorn-einhorn",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: This Spirit gets +1000 BP for each Nexus you control during this battle.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +1000 BP para cada Nexus que você controla durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-046.webp"
+  },
+  {
+    "id": "BS03-047",
+    "name": "The CrystalGoddess Freyr",
+    "nameEN": "The CrystalGoddess Freyr",
+    "namePT": "The CrystalGoddess Freyr",
+    "nameJP": "硝子の女神フレイア",
+    "nameKey": "the-crystalgoddess-freyr",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 7,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Ice Princess"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During the Opponent's Attack Step: Your Life cannot be reduced by attacks from opposing Spirits whose BP is equal to or less than this Spirit's BP unless this Spirit has blocked that attacking Spirit.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step do Oponente: Sua Life não pode ser reduzida por ataques de Spirits do oponente cujo BP seja igual ou menor que o BP deste Spirit, a menos que este Spirit tenha bloqueado aquele Spirit atacante."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-047.webp"
+  },
+  {
+    "id": "BS03-048",
+    "name": "The ArmoredSnake Mithgarth",
+    "nameEN": "The ArmoredSnake Mithgarth",
+    "namePT": "The ArmoredSnake Mithgarth",
+    "nameJP": "鎧蛇竜ミッドガルズ",
+    "nameKey": "the-armoredsnake-mithgarth",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 8,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Dragon",
+      "Giant Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: This Spirit gets +1000 BP for each Spirit you control with the family \"Giant Beast\" during this battle.\nLV2 When This Spirit Blocks: When only the opposing Spirit is destroyed by comparing BP, Refresh this Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +1000 BP para cada Spirit que você controla com a família \"Giant Beast\" durante esta batalha.\nLV2 Quando Este Spirit Bloqueia: Quando apenas o Spirit do oponente for destruído pela comparação de BP, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-048.webp"
+  }
+]

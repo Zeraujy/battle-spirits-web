@@ -1,0 +1,211 @@
+[
+  {
+    "id": "BS04-X13",
+    "name": "The DarkDragonEmperor Siegfried",
+    "nameEN": "The DarkDragonEmperor Siegfried",
+    "namePT": "The DarkDragonEmperor Siegfried",
+    "nameJP": "魔龍帝ジークフリード",
+    "nameKey": "the-darkdragonemperor-siegfried",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 9,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Emperor",
+      "Ancient Dragon"
+    ],
+    "symbols": [
+      "red",
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 12000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 6 or more → Void]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 6 or higher Spirits to the Void.\nLV2/LV3 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, draw 1 card.\nLV3 When This Spirit Attacks: Destroy all non-Red Spirits with 4000 BP or less.",
+      "ptBR": "[Tribute: Cost 6 ou mais → Void]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 6 ou mais para o Void.\nLV2/LV3 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, compre 1 carta.\nLV3 Quando Este Spirit Ataca: Destrua todos os Spirits que não sejam Red com 4000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-X13.webp"
+  },
+  {
+    "id": "BS04-X14",
+    "name": "The SevenShogun Pandemium",
+    "nameEN": "The SevenShogun Pandemium",
+    "namePT": "The SevenShogun Pandemium",
+    "nameJP": "魔界七将パンデミウム",
+    "nameKey": "the-sevenshogun-pandemium",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 8,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Evil Deity",
+      "Dark Snake"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Either Attack Step: Whenever an opposing Spirit is destroyed, draw 1 card.\nLV2/LV3 During Either Attack Step: When one of your Spirits is destroyed by an opposing Spirit through BP comparison, Exhaust 1 opposing Spirit.\nLV3 When This Spirit Is Destroyed: Each player discards 5 cards from their Hand.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step de qualquer jogador: Sempre que um Spirit do oponente for destruído, compre 1 carta.\nLV2/LV3 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits for destruído por um Spirit do oponente pela comparação de BP, deixe 1 Spirit do oponente Exhausted.\nLV3 Quando Este Spirit For Destruído: Cada jogador descarta 5 cartas da própria Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-X14.webp"
+  },
+  {
+    "id": "BS04-X15",
+    "name": "The Emperor Kaiseratlas",
+    "nameEN": "The Emperor Kaiseratlas",
+    "namePT": "The Emperor Kaiseratlas",
+    "nameJP": "カイザーアトラス皇帝",
+    "nameKey": "the-emperor-kaiseratlas",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 9,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Mounted Warrior",
+      "Shellman"
+    ],
+    "symbols": [
+      "green",
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 6 or more → Void]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 6 or higher Spirits to the Void.\nLV2 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, by moving 1 Core from your Reserve to the Void, move 2 Cores from your opponent's Life to their Reserve.",
+      "ptBR": "[Tribute: Cost 6 ou mais → Void]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 6 ou mais para o Void.\nLV2 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, ao mover 1 Core da sua Reserve para o Void, mova 2 Cores da Life do oponente para a Reserve dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-X15.webp"
+  },
+  {
+    "id": "BS04-X16",
+    "name": "The MobileFortress Castle-Golem",
+    "nameEN": "The MobileFortress Castle-Golem",
+    "namePT": "The MobileFortress Castle-Golem",
+    "nameJP": "機動要塞キャッスル・ゴレム",
+    "nameKey": "the-mobilefortress-castle-golem",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 8,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 6,
+        "bp": 12000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: For each Nexus you control, discard 5 cards from the top of your opponent's deck, up to 15 cards.\nLV2 When This Spirit Attacks: For each Blue symbol you have, discard 1 card from the top of your opponent's deck.",
+      "ptBR": "LV1/LV2 Quando Invocado: Para cada Nexus que você controla, descarte 5 cartas do topo do deck do oponente, até o máximo de 15 cartas.\nLV2 Quando Este Spirit Ataca: Para cada símbolo Blue que você possui, descarte 1 carta do topo do deck do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-X16.webp"
+  }
+]

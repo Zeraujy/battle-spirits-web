@@ -1,0 +1,531 @@
+[
+  {
+    "id": "BS05-055",
+    "name": "The Ruby Empty Sky",
+    "nameEN": "The Ruby Empty Sky",
+    "namePT": "The Ruby Empty Sky",
+    "nameJP": "紅蓮の虚空",
+    "nameKey": "the-ruby-empty-sky",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: While you control a Spirit with the family \"Dragon Emperor\", \"Dragon Knight\", and/or \"Vanity Deity\", all your Spirits get +2000 BP.\nLV2: All your Spirits with [Tribute] gain [Awaken]: During Flash Timing, you may move any number of Cores from your Spirits to that Spirit.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Enquanto você controlar um Spirit com a família \"Dragon Emperor\", \"Dragon Knight\" e/ou \"Vanity Deity\", todos os seus Spirits recebem +2000 BP.\nLV2: Todos os seus Spirits com [Tribute] ganham [Awaken]: Durante o Flash Timing, você pode mover qualquer quantidade de Cores dos seus Spirits para aquele Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-055.webp"
+  },
+  {
+    "id": "BS05-056",
+    "name": "The Great Ancient Dragon's Jaw",
+    "nameEN": "The Great Ancient Dragon's Jaw",
+    "namePT": "The Great Ancient Dragon's Jaw",
+    "nameJP": "最古龍の顎",
+    "nameKey": "the-great-ancient-dragons-jaw",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Main Step: When you summon a Spirit with [Tribute], destroy 1 opposing Spirit with 6000 BP or less.\nLV2 During Your Attack Step: When one of your Spirits with two or more symbols attacks, you may choose 1 opposing Spirit with 4000 BP or more. If you do, that Spirit must block if possible.",
+      "ptBR": "LV1/LV2 Durante Sua Main Step: Quando você invocar um Spirit com [Tribute], destrua 1 Spirit do oponente com 6000 BP ou menos.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com 2 ou mais símbolos atacar, você pode escolher 1 Spirit do oponente com 4000 BP ou mais. Se fizer isso, aquele Spirit deve bloquear se possível."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-056.webp"
+  },
+  {
+    "id": "BS05-057",
+    "name": "The Amethyst Empty Sky",
+    "nameEN": "The Amethyst Empty Sky",
+    "namePT": "The Amethyst Empty Sky",
+    "nameJP": "藍紫の虚空",
+    "nameKey": "the-amethyst-empty-sky",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: When a cost 1 or lower Spirit becomes Exhausted, move 2 Cores from that Spirit to its owner's Trash.\nLV2: All your Spirits with [Tribute] gain: \"When This Spirit Attacks: Destroy 1 opposing Exhausted Spirit.\"",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Quando um Spirit de custo 1 ou menos ficar Exhausted, mova 2 Cores daquele Spirit para o Trash do dono.\nLV2: Todos os seus Spirits com [Tribute] ganham: \"Quando Este Spirit Ataca: Destrua 1 Spirit Exhausted do oponente.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-057.webp"
+  },
+  {
+    "id": "BS05-058",
+    "name": "The Remain of Scaffold",
+    "nameEN": "The Remain of Scaffold",
+    "namePT": "The Remain of Scaffold",
+    "nameJP": "打ち棄てられた処刑場",
+    "nameKey": "the-remain-of-scaffold",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your Spirits with the family \"Evil Shadow\" get +2000 BP.\nLV2 During Your Start Step: If you control a Spirit with the family \"Evil Shadow\", Exhaust 1 opposing Spirit.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits com a família \"Evil Shadow\" recebem +2000 BP.\nLV2 Durante Seu Start Step: Se você controlar um Spirit com a família \"Evil Shadow\", deixe 1 Spirit do oponente Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-058.webp"
+  },
+  {
+    "id": "BS05-059",
+    "name": "The Emerald Empty Sky",
+    "nameEN": "The Emerald Empty Sky",
+    "namePT": "The Emerald Empty Sky",
+    "nameJP": "緑眼の虚空",
+    "nameKey": "the-emerald-empty-sky",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: Cost 0 and cost 3 Spirits cannot attack or block.\nLV2: All your Spirits with [Tribute] gain: \"When This Spirit Attacks: Exhaust 1 opposing Spirit.\"",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Spirits de custo 0 e custo 3 não podem atacar nem bloquear.\nLV2: Todos os seus Spirits com [Tribute] ganham: \"Quando Este Spirit Ataca: Deixe 1 Spirit do oponente Exhausted.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-059.webp"
+  },
+  {
+    "id": "BS05-060",
+    "name": "The Thorny Colosseum",
+    "nameEN": "The Thorny Colosseum",
+    "namePT": "The Thorny Colosseum",
+    "nameJP": "茨の決戦地",
+    "nameKey": "the-thorny-colosseum",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: Cores cannot be removed from either battling Spirit.\nLV2 During Your Attack Step: Both battling Spirits are unaffected by Spirit and Magic effects.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Cores não podem ser removidos de nenhum dos Spirits que estão batalhando.\nLV2 Durante Seu Attack Step: Ambos os Spirits que estão batalhando não são afetados por efeitos de Spirit e Magic."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-060.webp"
+  },
+  {
+    "id": "BS05-061",
+    "name": "The Diamond Empty Sky",
+    "nameEN": "The Diamond Empty Sky",
+    "namePT": "The Diamond Empty Sky",
+    "nameJP": "白夜の虚空",
+    "nameKey": "the-diamond-empty-sky",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: Cost 0 and cost 3 Spirits cannot attack or block.\nLV2: All your Spirits with [Tribute] gain [Armor: Red/Purple/Green/White]: They are unaffected by opposing Red, Purple, Green, and White Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Spirits de custo 0 e custo 3 não podem atacar nem bloquear.\nLV2: Todos os seus Spirits com [Tribute] ganham [Armor: Red/Purple/Green/White]: Eles não são afetados por efeitos de Spirit, Nexus e Magic Red, Purple, Green e White do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-061.webp"
+  },
+  {
+    "id": "BS05-062",
+    "name": "The Eternal Glacier Palace",
+    "nameEN": "The Eternal Glacier Palace",
+    "namePT": "The Eternal Glacier Palace",
+    "nameJP": "永久氷殿",
+    "nameKey": "the-eternal-glacier-palace",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All your Spirits with the family \"Ice Princess\" get +1000 BP.\nLV2 During Either Attack Step: When one of your Spirits with the family \"Ice Princess\" is destroyed, return 1 opposing Spirit with BP equal to or less than that destroyed Spirit to its owner's Hand.",
+      "ptBR": "LV1/LV2: Todos os seus Spirits com a família \"Ice Princess\" recebem +1000 BP.\nLV2 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits com a família \"Ice Princess\" for destruído, devolva 1 Spirit do oponente com BP igual ou menor ao daquele Spirit destruído para a Hand do dono."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-062.webp"
+  },
+  {
+    "id": "BS05-063",
+    "name": "The Topaz Empty Sky",
+    "nameEN": "The Topaz Empty Sky",
+    "namePT": "The Topaz Empty Sky",
+    "nameJP": "黄道の虚空",
+    "nameKey": "the-topaz-empty-sky",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: While you control a Spirit with the family \"Dragon Emperor\", \"Dragon Knight\", and/or \"Vanity Deity\", all your Spirits get +2000 BP.\nLV2: All your Spirits with [Tribute] gain [Brilliance]: When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Enquanto você controlar um Spirit com a família \"Dragon Emperor\", \"Dragon Knight\" e/ou \"Vanity Deity\", todos os seus Spirits recebem +2000 BP.\nLV2: Todos os seus Spirits com [Tribute] ganham [Brilliance]: Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-063.webp"
+  },
+  {
+    "id": "BS05-064",
+    "name": "The Empire of Pentan",
+    "nameEN": "The Empire of Pentan",
+    "namePT": "The Empire of Pentan",
+    "nameJP": "ペンタン帝国",
+    "nameKey": "the-empire-of-pentan",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Turn: When one of your Yellow Spirits is destroyed, you may summon 1 Spirit card from your Hand with \"Pentan\" in its card name without paying its cost. Its When Summoned effect does not activate.\nLV2 During Your Attack Step: When one of your attacking Spirits with \"Pentan\" and/or \"Empereur\" in its card name is blocked by an opposing Spirit with the same Level, Refresh your attacking Spirit.",
+      "ptBR": "LV1/LV2 Durante o Turno do Oponente: Quando 1 dos seus Spirits Yellow for destruído, você pode invocar 1 carta de Spirit da sua Hand com \"Pentan\" no nome da carta sem pagar o custo. O efeito When Summoned dela não é ativado.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits atacantes com \"Pentan\" e/ou \"Empereur\" no nome da carta for bloqueado por um Spirit do oponente do mesmo Level, dê Refresh no seu Spirit atacante."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-064.webp"
+  },
+  {
+    "id": "BS05-065",
+    "name": "The Sapphire Empty Sky",
+    "nameEN": "The Sapphire Empty Sky",
+    "namePT": "The Sapphire Empty Sky",
+    "nameJP": "青嵐の虚空",
+    "nameKey": "the-sapphire-empty-sky",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: Cost 0 and cost 2 Spirits cannot attack or block.\nLV2 During Either Attack Step: While you control a Spirit with [Tribute], neither player can use cost 4 or lower Magic effects.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Spirits de custo 0 e custo 2 não podem atacar nem bloquear.\nLV2 Durante o Attack Step de qualquer jogador: Enquanto você controlar um Spirit com [Tribute], nenhum jogador pode usar efeitos de Magic de custo 4 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-065.webp"
+  },
+  {
+    "id": "BS05-066",
+    "name": "The Sacred Torch scorched the Sky",
+    "nameEN": "The Sacred Torch scorched the Sky",
+    "namePT": "The Sacred Torch scorched the Sky",
+    "nameJP": "天焦がす大聖火",
+    "nameKey": "the-sacred-torch-scorched-the-sky",
+    "set": "BS05",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: When one of your Blue Spirits attacks, reveal the top card of your deck. If it is a Spirit card with \"Giant\" in its card name, add it to your Hand. Otherwise, discard it.\nLV2 During Your Attack Step: When one of your Spirits with \"Giant\" in its card name attacks, you may choose 1 opposing cost 5 or higher Spirit. If you do, that Spirit must block if possible.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Quando 1 dos seus Spirits Blue atacar, revele a carta do topo do seu deck. Se ela for uma carta de Spirit com \"Giant\" no nome da carta, adicione-a à sua Hand. Caso contrário, descarte-a.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com \"Giant\" no nome da carta atacar, você pode escolher 1 Spirit do oponente de custo 5 ou mais. Se fizer isso, aquele Spirit deve bloquear se possível."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-066.webp"
+  }
+]

@@ -1,0 +1,5300 @@
+[
+  {
+    "id": "BS04-001",
+    "name": "Kunanomi",
+    "nameEN": "Kunanomi",
+    "namePT": "Kunanomi",
+    "nameJP": "クナノミ",
+    "nameKey": "kunanomi",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 1,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Molten Fish"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: If you control a Spirit with [Awaken], this Spirit gets +2000 BP during this turn.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Se você controlar um Spirit com [Awaken], este Spirit recebe +2000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-001.webp"
+  },
+  {
+    "id": "BS04-002",
+    "name": "Chamelewhip",
+    "nameEN": "Chamelewhip",
+    "namePT": "Chamelewhip",
+    "nameJP": "カメレウィップ",
+    "nameKey": "chamelewhip",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Reptile Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 During the Opponent's Attack Step: This Spirit cannot block opposing Spirits.\nLV2 When This Spirit Attacks: This Spirit gets +1000 BP during this turn.",
+      "ptBR": "LV1 Durante o Attack Step do Oponente: Este Spirit não pode bloquear Spirits do oponente.\nLV2 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-002.webp"
+  },
+  {
+    "id": "BS04-003",
+    "name": "DarkGoradon",
+    "nameEN": "DarkGoradon",
+    "namePT": "DarkGoradon",
+    "nameJP": "ダークゴラドン",
+    "nameKey": "darkgoradon",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Reptile Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-003.webp"
+  },
+  {
+    "id": "BS04-004",
+    "name": "DarkDinohound",
+    "nameEN": "DarkDinohound",
+    "namePT": "DarkDinohound",
+    "nameJP": "ダークディノハウンド",
+    "nameKey": "darkdinohound",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 Flash [Awaken]: You may move any number of Cores from your Spirits to this Spirit.\nLV3 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, Refresh 1 of your other Spirits with [Awaken].",
+      "ptBR": "LV1/LV2/LV3 Flash [Awaken]: Você pode mover qualquer quantidade de Cores dos seus Spirits para este Spirit.\nLV3 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, dê Refresh em 1 dos seus outros Spirits com [Awaken]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-004.webp"
+  },
+  {
+    "id": "BS04-005",
+    "name": "Chain-Dragon",
+    "nameEN": "Chain-Dragon",
+    "namePT": "Chain-Dragon",
+    "nameJP": "チェイン・ドラゴン",
+    "nameKey": "chain-dragon",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-005.webp"
+  },
+  {
+    "id": "BS04-006",
+    "name": "The ZombieDragon Zom-Sauru",
+    "nameEN": "The ZombieDragon Zom-Sauru",
+    "namePT": "The ZombieDragon Zom-Sauru",
+    "nameJP": "骸竜ゾン・サウル",
+    "nameKey": "the-zombiedragon-zom-sauru",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon",
+      "Zombie"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Your Attack Step: All your Purple Spirits get +1000 BP.\nLV3 When This Spirit Attacks: Destroy 1 Exhausted Spirit.",
+      "ptBR": "LV1/LV2/LV3 Durante Seu Attack Step: Todos os seus Spirits Purple recebem +1000 BP.\nLV3 Quando Este Spirit Ataca: Destrua 1 Spirit Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-006.webp"
+  },
+  {
+    "id": "BS04-007",
+    "name": "The Guardsman Dragno",
+    "nameEN": "The Guardsman Dragno",
+    "namePT": "The Guardsman Dragno",
+    "nameJP": "ドラグノ近衛兵",
+    "nameKey": "the-guardsman-dragno",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: All \"When This Spirit Attacks\" effects of your Spirits with the family \"Dragon\" also activate when those Spirits block.\nLV2 When This Spirit Attacks: This Spirit gets +2000 BP during this turn.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Todos os efeitos \"Quando Este Spirit Ataca\" dos seus Spirits com a família \"Dragon\" também são ativados quando esses Spirits bloqueiam.\nLV2 Quando Este Spirit Ataca: Este Spirit recebe +2000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-007.webp"
+  },
+  {
+    "id": "BS04-008",
+    "name": "The AncientDragon Ba-Gaw",
+    "nameEN": "The AncientDragon Ba-Gaw",
+    "namePT": "The AncientDragon Ba-Gaw",
+    "nameJP": "古竜魔人バ・ゴゥ",
+    "nameKey": "the-ancientdragon-ba-gaw",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon",
+      "Ancient Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: This Spirit gets +5000 BP during this turn.\nLV2/LV3 During Your Attack Step: Whenever one of your Spirits with the family \"Dragon\" and/or \"Ancient Dragon\" destroys only an opposing Spirit by comparing BP, draw 1 card.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Este Spirit recebe +5000 BP durante este turno.\nLV2/LV3 Durante Seu Attack Step: Sempre que 1 dos seus Spirits com a família \"Dragon\" e/ou \"Ancient Dragon\" destruir apenas um Spirit do oponente pela comparação de BP, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-008.webp"
+  },
+  {
+    "id": "BS04-009",
+    "name": "The FlameEmperor Kujaraku",
+    "nameEN": "The FlameEmperor Kujaraku",
+    "namePT": "The FlameEmperor Kujaraku",
+    "nameJP": "炎皇クジャラク",
+    "nameKey": "the-flameemperor-kujaraku",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Emperor Beast",
+      "Flying Fang"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-009.webp"
+  },
+  {
+    "id": "BS04-010",
+    "name": "The ThunderDragon El-Clair",
+    "nameEN": "The ThunderDragon El-Clair",
+    "namePT": "The ThunderDragon El-Clair",
+    "nameJP": "雷帝エール・クレル",
+    "nameKey": "the-thunderdragon-el-clair",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Emperor",
+      "Winged Dragon"
+    ],
+    "symbols": [
+      "red",
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 8000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 5 or more → Trash]\nAfter paying this Spirit's summon cost, you must send all Cores from 1 of your Spirits with cost 5 or more to your Trash.",
+      "ptBR": "[Tribute: Cost 5 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 5 ou mais para o seu Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-010.webp"
+  },
+  {
+    "id": "BS04-011",
+    "name": "The Tyrant Fuhjaus",
+    "nameEN": "The Tyrant Fuhjaus",
+    "namePT": "The Tyrant Fuhjaus",
+    "nameJP": "風龍王フージャオス",
+    "nameKey": "the-tyrant-fuhjaus",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 7,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Emperor Beast",
+      "Winged Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Destroy all opposing Nexuses.\nLV2/LV3 When This Spirit Attacks: Refresh 1 of your other Spirits with the family \"Winged Dragon\".\nLV3 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, destroy 1 opposing cost 3 or less Spirit.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Destrua todos os Nexuses do oponente.\nLV2/LV3 Quando Este Spirit Ataca: Dê Refresh em 1 dos seus outros Spirits com a família \"Winged Dragon\".\nLV3 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, destrua 1 Spirit do oponente de custo 3 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-011.webp"
+  },
+  {
+    "id": "BS04-012",
+    "name": "Banshee",
+    "nameEN": "Banshee",
+    "namePT": "Banshee",
+    "nameJP": "バンシィ",
+    "nameKey": "banshee",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 1,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Darkling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-012.webp"
+  },
+  {
+    "id": "BS04-013",
+    "name": "Skulldemon",
+    "nameEN": "Skulldemon",
+    "namePT": "Skulldemon",
+    "nameJP": "スカルデーモン",
+    "nameKey": "skulldemon",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 2,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Ogre Wizard"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "[LV2/LV3] [Curse] When This Spirit Attacks: At the end of the battle, destroy the opposing Spirit that blocked this Spirit.",
+      "ptBR": "[LV2/LV3] [Curse] Quando Este Spirit Ataca: Ao fim da batalha, destrua o Spirit do oponente que bloqueou este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-013.webp"
+  },
+  {
+    "id": "BS04-014",
+    "name": "Shadowjuggler",
+    "nameEN": "Shadowjuggler",
+    "namePT": "Shadowjuggler",
+    "nameJP": "シャドウジャグラー",
+    "nameKey": "shadowjuggler",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Evil Shadow"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Draw 1 card.\nLV2 [Curse] When This Spirit Attacks: At the end of the battle, destroy the opposing Spirit that blocked this Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Compre 1 carta.\nLV2 [Curse] Quando Este Spirit Ataca: Ao fim da batalha, destrua o Spirit do oponente que bloqueou este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-014.webp"
+  },
+  {
+    "id": "BS04-015",
+    "name": "Cyclo-Winder",
+    "nameEN": "Cyclo-Winder",
+    "namePT": "Cyclo-Winder",
+    "nameJP": "サイクロ・ワインダー",
+    "nameKey": "cyclo-winder",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Dark Snake"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-015.webp"
+  },
+  {
+    "id": "BS04-016",
+    "name": "The FallenAngelia Azel",
+    "nameEN": "The FallenAngelia Azel",
+    "namePT": "The FallenAngelia Azel",
+    "nameJP": "堕天使アゼル",
+    "nameKey": "the-fallenangelia-azel",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Evil Deity",
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, draw 1 card for each Spirit you control with the family \"Divine Spirit\".",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, compre 1 carta para cada Spirit que você controla com a família \"Divine Spirit\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-016.webp"
+  },
+  {
+    "id": "BS04-017",
+    "name": "Hellwitch",
+    "nameEN": "Hellwitch",
+    "namePT": "Hellwitch",
+    "nameJP": "ヘルウィッチ",
+    "nameKey": "hellwitch",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Ogre Wizard"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 When This Spirit Attacks: Destroy 1 opposing Exhausted cost 6 or less Spirit.\nLV3 When This Spirit Attacks: Destroy 1 opposing Exhausted cost 1 or less Spirit.",
+      "ptBR": "LV2/LV3 Quando Este Spirit Ataca: Destrua 1 Spirit Exhausted do oponente de custo 6 ou menos.\nLV3 Quando Este Spirit Ataca: Destrua 1 Spirit Exhausted do oponente de custo 1 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-017.webp"
+  },
+  {
+    "id": "BS04-018",
+    "name": "The WaterSnake Seaserpenta",
+    "nameEN": "The WaterSnake Seaserpenta",
+    "namePT": "The WaterSnake Seaserpenta",
+    "nameJP": "水蛇シーサーペンタ",
+    "nameKey": "the-watersnake-seaserpenta",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Dark Snake"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 During the Opponent's Start Step: If you have 10 or more cards in your Hand, return 1 opposing Spirit to its owner's Hand.\nLV2 During the Opponent's Start Step: If you have 8 or more cards in your Hand, return 1 opposing Spirit to its owner's Hand.\nLV3 During the Opponent's Start Step: If you have 6 or more cards in your Hand, return 1 opposing Spirit to its owner's Hand.",
+      "ptBR": "LV1 Durante o Start Step do Oponente: Se você tiver 10 ou mais cartas na sua Hand, devolva 1 Spirit do oponente para a Hand do dono.\nLV2 Durante o Start Step do Oponente: Se você tiver 8 ou mais cartas na sua Hand, devolva 1 Spirit do oponente para a Hand do dono.\nLV3 Durante o Start Step do Oponente: Se você tiver 6 ou mais cartas na sua Hand, devolva 1 Spirit do oponente para a Hand do dono."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-018.webp"
+  },
+  {
+    "id": "BS04-019",
+    "name": "Headless Carriage",
+    "nameEN": "Headless Carriage",
+    "namePT": "Headless Carriage",
+    "nameJP": "首無し馬車",
+    "nameKey": "headless-carriage",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-019.webp"
+  },
+  {
+    "id": "BS04-020",
+    "name": "The DarkDragon Ops-Curite",
+    "nameEN": "The DarkDragon Ops-Curite",
+    "namePT": "The DarkDragon Ops-Curite",
+    "nameJP": "闇帝オプス・キュリテ",
+    "nameKey": "the-darkdragon-ops-curite",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Emperor",
+      "Evil Deity"
+    ],
+    "symbols": [
+      "purple",
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 5 or more → Trash]\nAfter paying this Spirit's summon cost, you must send all Cores from 1 of your Spirits with cost 5 or more to your Trash.",
+      "ptBR": "[Tribute: Cost 5 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 5 ou mais para o seu Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-020.webp"
+  },
+  {
+    "id": "BS04-021",
+    "name": "The Vampire Dampeel",
+    "nameEN": "The Vampire Dampeel",
+    "namePT": "The Vampire Dampeel",
+    "nameJP": "吸血鬼ダンピール",
+    "nameKey": "the-vampire-dampeel",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 7,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Nightling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Send 1 Core from each opposing cost 4 or less Spirit to your opponent's Trash.\nLV2/LV3 When This Spirit Attacks: This Spirit gets +1000 BP for each Core in your opponent's Trash during this turn.\nLV3 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, draw 1 card.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Mova 1 Core de cada Spirit do oponente de custo 4 ou menos para o Trash dele.\nLV2/LV3 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP para cada Core no Trash do oponente durante este turno.\nLV3 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-021.webp"
+  },
+  {
+    "id": "BS04-022",
+    "name": "The KingSnake Quetzalcoatl",
+    "nameEN": "The KingSnake Quetzalcoatl",
+    "namePT": "The KingSnake Quetzalcoatl",
+    "nameJP": "王蛇ケツァルカトル",
+    "nameKey": "the-kingsnake-quetzalcoatl",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 8,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Dark Snake"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Draw 2 cards.\nLV2/LV3 When This Spirit Attacks: You may discard any number of cards from your Hand. For each card discarded, send 1 Core from an opposing Spirit to your opponent's Trash.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Compre 2 cartas.\nLV2/LV3 Quando Este Spirit Ataca: Você pode descartar qualquer quantidade de cartas da sua Hand. Para cada carta descartada, mova 1 Core de um Spirit do oponente para o Trash dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-022.webp"
+  },
+  {
+    "id": "BS04-023",
+    "name": "Giraffen",
+    "nameEN": "Giraffen",
+    "namePT": "Giraffen",
+    "nameJP": "ジラーファン",
+    "nameKey": "giraffen",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 1,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Imp"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-023.webp"
+  },
+  {
+    "id": "BS04-024",
+    "name": "Duckle",
+    "nameEN": "Duckle",
+    "namePT": "Duckle",
+    "nameJP": "ダックル",
+    "nameKey": "duckle",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 2,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Song Bird"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: If this is your first attack this turn, this Spirit gets +2000 BP during this turn.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Se este for o seu primeiro ataque neste turno, este Spirit recebe +2000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-024.webp"
+  },
+  {
+    "id": "BS04-025",
+    "name": "Fal-Condor",
+    "nameEN": "Fal-Condor",
+    "namePT": "Fal-Condor",
+    "nameJP": "ファル・コンドル",
+    "nameKey": "fal-condor",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Talon Bird"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, put 1 Core from the Void into your Reserve.\nLV2 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, Refresh this Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, coloque 1 Core do Void na sua Reserve.\nLV2 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-025.webp"
+  },
+  {
+    "id": "BS04-026",
+    "name": "BlackMachG",
+    "nameEN": "BlackMachG",
+    "namePT": "BlackMachG",
+    "nameJP": "ブラックマッハジー",
+    "nameKey": "blackmachg",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Strange Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-026.webp"
+  },
+  {
+    "id": "BS04-027",
+    "name": "Alligade",
+    "nameEN": "Alligade",
+    "namePT": "Alligade",
+    "nameJP": "アリゲイド",
+    "nameKey": "alligade",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast",
+      "Beast Head"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 During Your Turn: When five or more cards are discarded from the top of your opponent's deck at the same time, Exhaust 1 opposing Spirit.",
+      "ptBR": "LV2 Durante Seu Turno: Quando 5 ou mais cartas forem descartadas do topo do deck do oponente de uma só vez, deixe 1 Spirit do oponente Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-027.webp"
+  },
+  {
+    "id": "BS04-028",
+    "name": "Sevenspot",
+    "nameEN": "Sevenspot",
+    "namePT": "Sevenspot",
+    "nameJP": "セブンスポット",
+    "nameKey": "sevenspot",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Shell Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [High Speed]: You may summon this Spirit card from your Hand during Flash Timing. When doing so, both the summon cost and the Cores placed on this Spirit must come from your Reserve.\nLV2: Whenever Cores are placed on this Spirit by a Spirit, Nexus, or Magic effect, increase the number of Cores placed by 1.",
+      "ptBR": "Flash [High Speed]: Você pode invocar esta carta de Spirit da sua Hand durante o Flash Timing. Ao fazer isso, tanto o custo de invocação quanto os Cores colocados neste Spirit devem vir da sua Reserve.\nLV2: Sempre que Cores forem colocados neste Spirit por um efeito de Spirit, Nexus ou Magic, aumente em 1 a quantidade de Cores colocados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-028.webp"
+  },
+  {
+    "id": "BS04-029",
+    "name": "BlackMonoqueiroz",
+    "nameEN": "BlackMonoqueiroz",
+    "namePT": "BlackMonoqueiroz",
+    "nameJP": "ブラックモノケイロス",
+    "nameKey": "blackmonoqueiroz",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Shellman"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: During this turn, all your Spirits with the family \"Shellman\" and/or \"Shell Insect\" get +3000 BP.",
+      "ptBR": "LV1/LV2 Quando Invocado: Durante este turno, todos os seus Spirits com a família \"Shellman\" e/ou \"Shell Insect\" recebem +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-029.webp"
+  },
+  {
+    "id": "BS04-030",
+    "name": "The AppetiteFlower Bug-Lesia",
+    "nameEN": "The AppetiteFlower Bug-Lesia",
+    "namePT": "The AppetiteFlower Bug-Lesia",
+    "nameJP": "食蟲花バグ・レシア",
+    "nameKey": "the-appetiteflower-bug-lesia",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Tree Spirit"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-030.webp"
+  },
+  {
+    "id": "BS04-031",
+    "name": "The GroundDragon Fon-Daxion",
+    "nameEN": "The GroundDragon Fon-Daxion",
+    "namePT": "The GroundDragon Fon-Daxion",
+    "nameJP": "陸帝フォン・ダシオン",
+    "nameKey": "the-grounddragon-fon-daxion",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Emperor",
+      "Tree Spirit"
+    ],
+    "symbols": [
+      "green",
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 5 or more → Trash]\nAfter paying this Spirit's summon cost, you must send all Cores from 1 of your Spirits with cost 5 or more to your Trash.",
+      "ptBR": "[Tribute: Cost 5 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 5 ou mais para o seu Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-031.webp"
+  },
+  {
+    "id": "BS04-032",
+    "name": "The SpearBeetle Lucanidos",
+    "nameEN": "The SpearBeetle Lucanidos",
+    "namePT": "The SpearBeetle Lucanidos",
+    "nameJP": "槍蟲ルカニドス",
+    "nameKey": "the-spearbeetle-lucanidos",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 7,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Shell Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Battles: When only the opposing Spirit is destroyed by comparing BP, Refresh this Spirit.",
+      "ptBR": "LV2 Quando Este Spirit Batalha: Quando apenas o Spirit do oponente for destruído pela comparação de BP, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-032.webp"
+  },
+  {
+    "id": "BS04-033",
+    "name": "The CrustaceanFighter Longhorn",
+    "nameEN": "The CrustaceanFighter Longhorn",
+    "namePT": "The CrustaceanFighter Longhorn",
+    "nameJP": "甲殻戦士ロングホーン",
+    "nameKey": "the-crustaceanfighter-longhorn",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 8,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Shellman"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Put 1 Core from the Void onto each of your Spirits with [High Speed].\nLV2/LV3 During Your Attack Step: The [High Speed] effect of all Spirit cards in your Hand becomes: \"[High Speed] You may summon this Spirit card from your Hand during Flash Timing by paying all of its summon cost and the Cores placed on it from your Reserve and/or The CrustaceanFighter Longhorn.\"",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Coloque 1 Core do Void sobre cada um dos seus Spirits com [High Speed].\nLV2/LV3 Durante Seu Attack Step: O efeito [High Speed] de todas as cartas de Spirit na sua Hand passa a ser: \"[High Speed] Você pode invocar esta carta de Spirit da sua Hand durante o Flash Timing pagando todo o custo de invocação e os Cores colocados nela usando sua Reserve e/ou The CrustaceanFighter Longhorn.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-033.webp"
+  },
+  {
+    "id": "BS04-034",
+    "name": "Vidohunir",
+    "nameEN": "Vidohunir",
+    "namePT": "Vidohunir",
+    "nameJP": "ヴィゾフニル",
+    "nameKey": "vidohunir",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fish"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Armor: Purple]: This Spirit is unaffected by opposing Purple Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2 [Armor: Purple]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Purple do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-034.webp"
+  },
+  {
+    "id": "BS04-035",
+    "name": "Berserker-Magnum",
+    "nameEN": "Berserker-Magnum",
+    "namePT": "Berserker-Magnum",
+    "nameJP": "バーサーカー・マグナム",
+    "nameKey": "berserker-magnum",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-035.webp"
+  },
+  {
+    "id": "BS04-036",
+    "name": "Oddsay",
+    "nameEN": "Oddsay",
+    "namePT": "Oddsay",
+    "nameJP": "オッドセイ",
+    "nameKey": "oddsay",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: This Spirit cannot attack.\nLV1/LV2: When your Life is reduced, Refresh this Spirit.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Este Spirit não pode atacar.\nLV1/LV2: Quando sua Life for reduzida, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-036.webp"
+  },
+  {
+    "id": "BS04-037",
+    "name": "The ArmoredBeast Heith-Rune",
+    "nameEN": "The ArmoredBeast Heith-Rune",
+    "namePT": "The ArmoredBeast Heith-Rune",
+    "nameJP": "鎧装獣ヘイズ・ルーン",
+    "nameKey": "the-armoredbeast-heith-rune",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: While your opponent controls no Red Spirits, this Spirit cannot attack.\nLV1/LV2 During the Opponent's Attack Step: When an opposing cost 1 or lower Spirit attacks, Refresh this Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Enquanto o oponente não controlar nenhum Spirit Red, este Spirit não pode atacar.\nLV1/LV2 Durante o Attack Step do Oponente: Quando um Spirit do oponente de custo 1 ou menos atacar, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-037.webp"
+  },
+  {
+    "id": "BS04-038",
+    "name": "The Reconnaissance Magni",
+    "nameEN": "The Reconnaissance Magni",
+    "namePT": "The Reconnaissance Magni",
+    "nameJP": "偵察機マグニ",
+    "nameKey": "the-reconnaissance-magni",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-038.webp"
+  },
+  {
+    "id": "BS04-039",
+    "name": "The JewelBug Scaraveil",
+    "nameEN": "The JewelBug Scaraveil",
+    "namePT": "The JewelBug Scaraveil",
+    "nameJP": "宝石虫スカラベール",
+    "nameKey": "the-jewelbug-scaraveil",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Glow Insect",
+      "Shell Insect"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your Spirits with [High Speed] get +1000 BP.\nLV2 During Your Attack Step: When one of your Spirits with [High Speed] is destroyed by an opposing Spirit through BP comparison, by moving 1 Core from your Field or Reserve to your Trash, return that Spirit to your Hand instead of sending it to your Trash.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits com [High Speed] recebem +1000 BP.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com [High Speed] for destruído por um Spirit do oponente pela comparação de BP, ao mover 1 Core do seu Field ou Reserve para o Trash, devolva aquele Spirit para sua Hand em vez de enviá-lo ao Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-039.webp"
+  },
+  {
+    "id": "BS04-040",
+    "name": "The ArmoredBeast Gullin-Bullsty",
+    "nameEN": "The ArmoredBeast Gullin-Bullsty",
+    "namePT": "The ArmoredBeast Gullin-Bullsty",
+    "nameJP": "鎧装獣グリン・ブルスティ",
+    "nameKey": "the-armoredbeast-gullin-bullsty",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast",
+      "Giant Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-040.webp"
+  },
+  {
+    "id": "BS04-041",
+    "name": "Fenrircannon Mk-II",
+    "nameEN": "Fenrircannon Mk-II",
+    "namePT": "Fenrircannon Mk-II",
+    "nameJP": "フェンリルキャノンMk-II",
+    "nameKey": "fenrircannon-mk-ii",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Blocks: When this Spirit blocks a Spirit with the same Level, this Spirit gets +3000 BP during this battle.\nLV2/LV3 [Armor: Red/Green]: This Spirit is unaffected by opposing Red and Green Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Bloqueia: Quando este Spirit bloquear um Spirit do mesmo Level, este Spirit recebe +3000 BP durante esta batalha.\nLV2/LV3 [Armor: Red/Green]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red e Green do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-041.webp"
+  },
+  {
+    "id": "BS04-042",
+    "name": "The BeastMaster Dvergr",
+    "nameEN": "The BeastMaster Dvergr",
+    "namePT": "The BeastMaster Dvergr",
+    "nameJP": "獣使いドヴェルグ",
+    "nameKey": "the-beastmaster-dvergr",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Your Attack Step: The \"cannot attack\" effects of all your Spirits with \"ArmoredBeast\" in their card names do not activate.\nLV2/LV3 During Your Attack Step: Whenever one of your Spirits with \"ArmoredBeast\" in its card name destroys only an opposing Spirit by comparing BP, Exhaust 1 opposing Spirit of the same color as the destroyed Spirit.",
+      "ptBR": "LV1/LV2/LV3 Durante Seu Attack Step: Os efeitos de \"não pode atacar\" de todos os seus Spirits com \"ArmoredBeast\" no nome da carta não são ativados.\nLV2/LV3 Durante Seu Attack Step: Sempre que 1 dos seus Spirits com \"ArmoredBeast\" no nome da carta destruir apenas um Spirit do oponente pela comparação de BP, deixe Exhausted 1 Spirit do oponente da mesma cor do Spirit destruído."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-042.webp"
+  },
+  {
+    "id": "BS04-043",
+    "name": "The Valkyrie-Hildr",
+    "nameEN": "The Valkyrie-Hildr",
+    "namePT": "The Valkyrie-Hildr",
+    "nameJP": "ワルキューレ・ヒルド",
+    "nameKey": "the-valkyrie-hildr",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: This Spirit is unaffected by opposing Spirit and Magic effects.\nLV2: When your Life is reduced, Refresh this Spirit.",
+      "ptBR": "LV1/LV2: Este Spirit não é afetado por efeitos de Spirit e Magic do oponente.\nLV2: Quando sua Life for reduzida, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-043.webp"
+  },
+  {
+    "id": "BS04-044",
+    "name": "The SkyDragon Le-Ciel",
+    "nameEN": "The SkyDragon Le-Ciel",
+    "namePT": "The SkyDragon Le-Ciel",
+    "nameJP": "空帝ル・シエル",
+    "nameKey": "the-skydragon-le-ciel",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Emperor",
+      "Flying Fish"
+    ],
+    "symbols": [
+      "white",
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 5 or more → Trash]\nAfter paying this Spirit's summon cost, you must send all Cores from 1 of your Spirits with cost 5 or more to your Trash.",
+      "ptBR": "[Tribute: Cost 5 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 5 ou mais para o seu Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-044.webp"
+  },
+  {
+    "id": "BS04-045",
+    "name": "The IceGoddess Frigg",
+    "nameEN": "The IceGoddess Frigg",
+    "namePT": "The IceGoddess Frigg",
+    "nameJP": "氷の女神フリッグ",
+    "nameKey": "the-icegoddess-frigg",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 7,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Ice Princess"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: When your opponent uses a cost 4 Magic effect during Flash Timing, choose 4 Cores from their Field and/or Reserve and move them to their Trash.\nLV2 During Either Attack Step: When your opponent uses a cost 3 Magic effect during Flash Timing, choose 3 Cores from their Field and/or Reserve and move them to their Trash.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Quando o oponente usar um efeito de Magic de custo 4 durante o Flash Timing, escolha 4 Cores do Field e/ou Reserve dele e mova-os para o Trash dele.\nLV2 Durante o Attack Step de qualquer jogador: Quando o oponente usar um efeito de Magic de custo 3 durante o Flash Timing, escolha 3 Cores do Field e/ou Reserve dele e mova-os para o Trash dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-045.webp"
+  },
+  {
+    "id": "BS04-046",
+    "name": "The Fairy Dorothy",
+    "nameEN": "The Fairy Dorothy",
+    "namePT": "The Fairy Dorothy",
+    "nameJP": "妖精ドロシー",
+    "nameKey": "the-fairy-dorothy",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 1,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-046.webp"
+  },
+  {
+    "id": "BS04-047",
+    "name": "Wiseless-Scarecrow",
+    "nameEN": "Wiseless-Scarecrow",
+    "namePT": "Wiseless-Scarecrow",
+    "nameJP": "ワイズレス・スケアクロウ",
+    "nameKey": "wiseless-scarecrow",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Moving Toy"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.",
+      "ptBR": "LV2 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-047.webp"
+  },
+  {
+    "id": "BS04-048",
+    "name": "DarkPiyon",
+    "nameEN": "DarkPiyon",
+    "namePT": "DarkPiyon",
+    "nameJP": "ダークピヨン",
+    "nameKey": "darkpiyon",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Song Bird"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-048.webp"
+  },
+  {
+    "id": "BS04-049",
+    "name": "The BlackFairy Ti-Tanya",
+    "nameEN": "The BlackFairy Ti-Tanya",
+    "namePT": "The BlackFairy Ti-Tanya",
+    "nameJP": "黒の妖精ティ・ターニャ",
+    "nameKey": "the-blackfairy-ti-tanya",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: While you control three or more Yellow Spirits, all Magic cards in your Hand gain 1 Yellow reduction symbol.",
+      "ptBR": "LV1/LV2: Enquanto você controlar 3 ou mais Spirits Yellow, todas as cartas de Magic na sua Hand ganham 1 símbolo de redução Yellow."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-049.webp"
+  },
+  {
+    "id": "BS04-050",
+    "name": "Heartless-Tin",
+    "nameEN": "Heartless-Tin",
+    "namePT": "Heartless-Tin",
+    "nameJP": "ハートレス・ティン",
+    "nameKey": "heartless-tin",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Moving Toy",
+      "Machine"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: All your White Spirits get +1000 BP.\nLV2 During the Opponent's End Step: If you have three or more White symbols on your Field and your opponent did not attack this turn, draw 1 card.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Todos os seus Spirits White recebem +1000 BP.\nLV2 Durante o End Step do Oponente: Se você tiver 3 ou mais símbolos White no seu Field e o oponente não tiver atacado neste turno, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-050.webp"
+  },
+  {
+    "id": "BS04-051",
+    "name": "Arcanabeast-Hart",
+    "nameEN": "Arcanabeast-Hart",
+    "namePT": "Arcanabeast-Hart",
+    "nameJP": "アルカナビースト・ハルト",
+    "nameKey": "arcanabeast-hart",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV3: All your Spirits with \"Arcana\" in their card name gain: \"When This Spirit Attacks: This Spirit gets +2000 BP during this turn.\"",
+      "ptBR": "LV3: Todos os seus Spirits com \"Arcana\" no nome da carta ganham: \"Quando Este Spirit Ataca: Este Spirit recebe +2000 BP durante este turno.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-051.webp"
+  },
+  {
+    "id": "BS04-052",
+    "name": "The Postman Pentan",
+    "nameEN": "The Postman Pentan",
+    "namePT": "The Postman Pentan",
+    "nameJP": "郵便ペンタン",
+    "nameKey": "the-postman-pentan",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Song Bird",
+      "Drifting Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV3 During Your Draw Step: If you control a total of three or more Spirits with \"Pentan\" and/or \"Empereur\" in their card names, draw 1 additional card during this Draw Step.",
+      "ptBR": "LV3 Durante Seu Draw Step: Se você controlar um total de 3 ou mais Spirits com \"Pentan\" e/ou \"Empereur\" no nome da carta, compre 1 carta adicional durante este Draw Step."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-052.webp"
+  },
+  {
+    "id": "BS04-053",
+    "name": "The Angelia Throne",
+    "nameEN": "The Angelia Throne",
+    "namePT": "The Angelia Throne",
+    "nameJP": "天使スローン",
+    "nameKey": "the-angelia-throne",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 During Your Start Step: Choose 2 opposing Spirits. Exchange all Cores on those 2 Spirits.\nLV3: Treat this Spirit as a Purple Spirit as well.",
+      "ptBR": "LV2/LV3 Durante Seu Start Step: Escolha 2 Spirits do oponente. Troque entre eles todos os Cores que estiverem sobre esses 2 Spirits.\nLV3: Trate este Spirit também como um Spirit Purple."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-053.webp"
+  },
+  {
+    "id": "BS04-054",
+    "name": "Arcanasoldier-Cinq",
+    "nameEN": "Arcanasoldier-Cinq",
+    "namePT": "Arcanasoldier-Cinq",
+    "nameJP": "アルカナソルジャー・サンク",
+    "nameKey": "arcanasoldier-cinq",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 During the Opponent's Turn: When your opponent uses a Magic effect that targets this Spirit, that Magic effect may be made to target only this Spirit.",
+      "ptBR": "LV2 Durante o Turno do Oponente: Quando o oponente usar um efeito de Magic que tenha este Spirit como alvo, aquele efeito de Magic pode ser feito para ter apenas este Spirit como alvo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-054.webp"
+  },
+  {
+    "id": "BS04-055",
+    "name": "The LightDragon Lumiere",
+    "nameEN": "The LightDragon Lumiere",
+    "namePT": "The LightDragon Lumiere",
+    "nameJP": "光帝リュミエール",
+    "nameKey": "the-lightdragon-lumiere",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Emperor",
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow",
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 5 or more → Trash]\nAfter paying this Spirit's summon cost, you must send all Cores from 1 of your Spirits with cost 5 or more to your Trash.",
+      "ptBR": "[Tribute: Cost 5 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 5 ou mais para o seu Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-055.webp"
+  },
+  {
+    "id": "BS04-056",
+    "name": "Braveless-Leo",
+    "nameEN": "Braveless-Leo",
+    "namePT": "Braveless-Leo",
+    "nameJP": "ブレイブレス・レオ",
+    "nameKey": "braveless-leo",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Hunter Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-056.webp"
+  },
+  {
+    "id": "BS04-057",
+    "name": "The GreatAngelia Seraphy",
+    "nameEN": "The GreatAngelia Seraphy",
+    "namePT": "The GreatAngelia Seraphy",
+    "nameJP": "天使長セラフィー",
+    "nameKey": "the-greatangelia-seraphy",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 8,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: For each cost 6 or lower Spirit card in your Hand with the family \"Divine Spirit\", by moving 1 Core from your Reserve to your Trash, you may summon that card without paying its cost. Its When Summoned effect does not activate.\nLV2/LV3 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Para cada carta de Spirit de custo 6 ou menos na sua Hand com a família \"Divine Spirit\", ao mover 1 Core da sua Reserve para o Trash, você pode invocar aquela carta sem pagar o custo. O efeito When Summoned dela não é ativado.\nLV2/LV3 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-057.webp"
+  },
+  {
+    "id": "BS04-058",
+    "name": "The RatMan Zurich",
+    "nameEN": "The RatMan Zurich",
+    "namePT": "The RatMan Zurich",
+    "nameJP": "鼠人チューリヒ",
+    "nameKey": "the-ratman-zurich",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 6,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: While you control a Spirit with the family \"Battle Beast\", treat this Spirit as LV2.",
+      "ptBR": "LV1/LV2: Enquanto você controlar um Spirit com a família \"Battle Beast\", trate este Spirit como LV2."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-058.webp"
+  },
+  {
+    "id": "BS04-059",
+    "name": "The Pharmacist Girmamarl",
+    "nameEN": "The Pharmacist Girmamarl",
+    "namePT": "The Pharmacist Girmamarl",
+    "nameJP": "薬師ギルママール",
+    "nameKey": "the-pharmacist-girmamarl",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Creator"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Put 1 Core from the Void onto 1 Nexus you control.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Coloque 1 Core do Void sobre 1 Nexus que você controla."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-059.webp"
+  },
+  {
+    "id": "BS04-060",
+    "name": "The Soldier Gustav",
+    "nameEN": "The Soldier Gustav",
+    "namePT": "The Soldier Gustav",
+    "nameJP": "戦士グスタフ",
+    "nameKey": "the-soldier-gustav",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-060.webp"
+  },
+  {
+    "id": "BS04-061",
+    "name": "The BattleBeast Jacker",
+    "nameEN": "The BattleBeast Jacker",
+    "namePT": "The BattleBeast Jacker",
+    "nameJP": "戦闘獣ジャッカー",
+    "nameKey": "the-battlebeast-jacker",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Battle Beast"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When 1 of your Nexuses is destroyed, by moving all Cores from this Spirit to your Trash, keep that destroyed Nexus on your Field.",
+      "ptBR": "LV1/LV2: Quando 1 dos seus Nexuses for destruído, ao mover todos os Cores deste Spirit para o seu Trash, mantenha aquele Nexus destruído no seu Field."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-061.webp"
+  },
+  {
+    "id": "BS04-062",
+    "name": "The ApeMan Mongoku",
+    "nameEN": "The ApeMan Mongoku",
+    "namePT": "The ApeMan Mongoku",
+    "nameJP": "猿人モンゴクウ",
+    "nameKey": "the-apeman-mongoku",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head",
+      "Heroic"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-062.webp"
+  },
+  {
+    "id": "BS04-063",
+    "name": "The Two-Sword Ambrose",
+    "nameEN": "The Two-Sword Ambrose",
+    "namePT": "The Two-Sword Ambrose",
+    "nameJP": "二刀流のアムブローズ",
+    "nameKey": "the-two-sword-ambrose",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Crush] When This Spirit Attacks: Discard cards from the top of your opponent's deck equal to this Spirit's Level.\nLV2/LV3 When This Spirit Attacks: For each Spirit card discarded by this Spirit's [Crush] effect, this Spirit gets +1000 BP during this turn.",
+      "ptBR": "LV1/LV2/LV3 [Crush] Quando Este Spirit Ataca: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit.\nLV2/LV3 Quando Este Spirit Ataca: Para cada carta de Spirit descartada pelo efeito de [Crush] deste Spirit, este Spirit recebe +1000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-063.webp"
+  },
+  {
+    "id": "BS04-064",
+    "name": "Ugarurum",
+    "nameEN": "Ugarurum",
+    "namePT": "Ugarurum",
+    "nameJP": "ウガルルム",
+    "nameKey": "ugarurum",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Aberration"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-064.webp"
+  },
+  {
+    "id": "BS04-065",
+    "name": "The Spinner Harfelicite",
+    "nameEN": "The Spinner Harfelicite",
+    "namePT": "The Spinner Harfelicite",
+    "nameJP": "機織のハーフェレシテ",
+    "nameKey": "the-spinner-harfelicite",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Creator"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Main Step: At the start of the step, by discarding 1 Nexus card from your Hand, put 1 Core from the Void onto this Spirit.\nLV2 When This Spirit Is Destroyed: You may place 1 Nexus card from your Trash without paying its cost.",
+      "ptBR": "LV1/LV2 Durante Sua Main Step: No início do Step, ao descartar 1 carta de Nexus da sua Hand, coloque 1 Core do Void sobre este Spirit.\nLV2 Quando Este Spirit For Destruído: Você pode colocar 1 carta de Nexus do seu Trash sem pagar o custo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-065.webp"
+  },
+  {
+    "id": "BS04-066",
+    "name": "The CatLady Abyssinia",
+    "nameEN": "The CatLady Abyssinia",
+    "namePT": "The CatLady Abyssinia",
+    "nameJP": "猫人アビシニア",
+    "nameKey": "the-catlady-abyssinia",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-066.webp"
+  },
+  {
+    "id": "BS04-067",
+    "name": "Dra-Golem",
+    "nameEN": "Dra-Golem",
+    "namePT": "Dra-Golem",
+    "nameJP": "ドラ・ゴレム",
+    "nameKey": "dra-golem",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier",
+      "Winged Dragon"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 During Your Attack Step: Treat all your Spirits with [Awaken] as LV1 with 1 Core, LV2 with 2 Cores, and at their highest Level with 3 or more Cores.",
+      "ptBR": "LV2 Durante Seu Attack Step: Trate todos os seus Spirits com [Awaken] como LV1 com 1 Core, LV2 com 2 Cores e no Level máximo deles com 3 ou mais Cores."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-067.webp"
+  },
+  {
+    "id": "BS04-068",
+    "name": "Iron-Golem",
+    "nameEN": "Iron-Golem",
+    "namePT": "Iron-Golem",
+    "nameJP": "アイアン・ゴレム",
+    "nameKey": "iron-golem",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: By discarding 1 Nexus card from your Hand, this Spirit gets +4000 BP during this battle.\nLV2 When This Spirit Attacks: By discarding 1 Nexus card from your Hand, this Spirit gets +4000 BP during this battle.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Ao descartar 1 carta de Nexus da sua Hand, este Spirit recebe +4000 BP durante esta batalha.\nLV2 Quando Este Spirit Ataca: Ao descartar 1 carta de Nexus da sua Hand, este Spirit recebe +4000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-068.webp"
+  },
+  {
+    "id": "BS04-069",
+    "name": "The Illusionist Mirage",
+    "nameEN": "The Illusionist Mirage",
+    "namePT": "The Illusionist Mirage",
+    "nameJP": "幻影士のミラージ",
+    "nameKey": "the-illusionist-mirage",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: During this turn, treat all your Spirits as their highest Level.",
+      "ptBR": "LV1/LV2 Quando Invocado: Durante este turno, trate todos os seus Spirits como estando no Level máximo deles."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-069.webp"
+  },
+  {
+    "id": "BS04-070",
+    "name": "The BattleBeast Diatryma",
+    "nameEN": "The BattleBeast Diatryma",
+    "namePT": "The BattleBeast Diatryma",
+    "nameJP": "戦闘獣ディアトリマー",
+    "nameKey": "the-battlebeast-diatryma",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Battle Beast"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-070.webp"
+  },
+  {
+    "id": "BS04-071",
+    "name": "Steam-Golem",
+    "nameEN": "Steam-Golem",
+    "namePT": "Steam-Golem",
+    "nameJP": "スチーム・ゴレム",
+    "nameKey": "steam-golem",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Crush] When This Spirit Attacks: Discard cards from the top of your opponent's deck equal to this Spirit's Level.\nLV2: When this Spirit's [Crush] effect discards cards from your opponent's deck, increase the number of cards discarded by 1.\nLV3: When this Spirit's [Crush] effect discards cards from your opponent's deck, increase the number of cards discarded by 2.",
+      "ptBR": "LV1/LV2/LV3 [Crush] Quando Este Spirit Ataca: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit.\nLV2: Quando o efeito de [Crush] deste Spirit descartar cartas do deck do oponente, aumente em 1 a quantidade de cartas descartadas.\nLV3: Quando o efeito de [Crush] deste Spirit descartar cartas do deck do oponente, aumente em 2 a quantidade de cartas descartadas."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-071.webp"
+  },
+  {
+    "id": "BS04-072",
+    "name": "Rabirabi",
+    "nameEN": "Rabirabi",
+    "namePT": "Rabirabi",
+    "nameJP": "ラビラビ",
+    "nameKey": "rabirabi",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 9,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-072.webp"
+  },
+  {
+    "id": "BS04-073",
+    "name": "The SeaDragon Courant-Marin",
+    "nameEN": "The SeaDragon Courant-Marin",
+    "namePT": "The SeaDragon Courant-Marin",
+    "nameJP": "海帝クラン・マラン",
+    "nameKey": "the-seadragon-courant-marin",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 6,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Emperor",
+      "Aberration"
+    ],
+    "symbols": [
+      "blue",
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 5 or more → Trash]\nAfter paying this Spirit's summon cost, you must send all Cores from 1 of your Spirits with cost 5 or more to your Trash.",
+      "ptBR": "[Tribute: Cost 5 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 5 ou mais para o seu Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-073.webp"
+  },
+  {
+    "id": "BS04-074",
+    "name": "The ChimeraDragon Hydrus",
+    "nameEN": "The ChimeraDragon Hydrus",
+    "namePT": "The ChimeraDragon Hydrus",
+    "nameJP": "異合竜ハイドラス",
+    "nameKey": "the-chimeradragon-hydrus",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 7,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Aberration",
+      "Heroic"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: Each player can use only 1 Magic effect during each turn.\nLV2/LV3: Your opponent cannot use Magic effects without paying their costs.",
+      "ptBR": "LV1/LV2/LV3: Cada jogador pode usar apenas 1 efeito de Magic durante cada turno.\nLV2/LV3: O oponente não pode usar efeitos de Magic sem pagar seus custos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-074.webp"
+  },
+  {
+    "id": "BS04-075",
+    "name": "The LegendaryGiant Jude",
+    "nameEN": "The LegendaryGiant Jude",
+    "namePT": "The LegendaryGiant Jude",
+    "nameJP": "伝説巨人ジュード",
+    "nameKey": "the-legendarygiant-jude",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 8,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit",
+      "Heroic"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Crush] When This Spirit Attacks: Discard cards from the top of your opponent's deck equal to this Spirit's Level.\nLV2/LV3 When This Spirit Attacks: If this Spirit's [Crush] effect discards a Nexus card, Refresh this Spirit at the end of the battle.",
+      "ptBR": "LV1/LV2/LV3 [Crush] Quando Este Spirit Ataca: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit.\nLV2/LV3 Quando Este Spirit Ataca: Se o efeito de [Crush] deste Spirit descartar uma carta de Nexus, dê Refresh neste Spirit ao fim da batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-075.webp"
+  },
+  {
+    "id": "BS04-076",
+    "name": "The Airspace of Pterosaurs",
+    "nameEN": "The Airspace of Pterosaurs",
+    "namePT": "The Airspace of Pterosaurs",
+    "nameJP": "翼持つ者の空域",
+    "nameKey": "the-airspace-of-pterosaurs",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your Spirits with the family \"Winged Dragon\" and/or \"Flying Fang\" get +2000 BP.\nLV2 During Your Attack Step: When one of your Spirits with the family \"Winged Dragon\" and/or \"Flying Fang\" attacks, your opponent must block if possible.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits com a família \"Winged Dragon\" e/ou \"Flying Fang\" recebem +2000 BP.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com a família \"Winged Dragon\" e/ou \"Flying Fang\" atacar, o oponente deve bloquear se possível."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-076.webp"
+  },
+  {
+    "id": "BS04-077",
+    "name": "The Seven Dragons' Throne",
+    "nameEN": "The Seven Dragons' Throne",
+    "namePT": "The Seven Dragons' Throne",
+    "nameJP": "七龍帝の玉座",
+    "nameKey": "the-seven-dragons-throne",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All Spirit cards in your Hand with the family \"Ancient Dragon\" and/or \"Dragon Emperor\" gain 1 Red reduction symbol.\nLV2 During Your Main Step: When you summon a Spirit with the family \"Ancient Dragon\" and/or \"Dragon Emperor\", destroy 1 opposing Spirit with BP equal to or less than that summoned Spirit.",
+      "ptBR": "LV1/LV2: Todas as cartas de Spirit na sua Hand com a família \"Ancient Dragon\" e/ou \"Dragon Emperor\" ganham 1 símbolo de redução Red.\nLV2 Durante Sua Main Step: Quando você invocar um Spirit com a família \"Ancient Dragon\" e/ou \"Dragon Emperor\", destrua 1 Spirit do oponente com BP igual ou menor ao daquele Spirit invocado."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-077.webp"
+  },
+  {
+    "id": "BS04-078",
+    "name": "The Devil Shadow Street",
+    "nameEN": "The Devil Shadow Street",
+    "namePT": "The Devil Shadow Street",
+    "nameJP": "魔影街",
+    "nameKey": "the-devil-shadow-street",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: When an opposing Spirit is destroyed by a [Curse] effect, move 1 Core from that Spirit to the Void.\nLV2 During the Opponent's Main Step: Exhaust all Spirits whose number of Cores was increased by something other than a Spirit, Nexus, or Magic effect.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Quando um Spirit do oponente for destruído por um efeito de [Curse], mova 1 Core daquele Spirit para o Void.\nLV2 Durante a Main Step do Oponente: Deixe Exhausted todos os Spirits cuja quantidade de Cores foi aumentada por algo que não seja efeito de Spirit, Nexus ou Magic."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-078.webp"
+  },
+  {
+    "id": "BS04-079",
+    "name": "The King Snake Nest",
+    "nameEN": "The King Snake Nest",
+    "namePT": "The King Snake Nest",
+    "nameJP": "王蛇の住処",
+    "nameKey": "the-king-snake-nest",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Draw Step: If you control a total of three or more Spirits with the family \"Dark Snake\" and/or \"Evil Deity\", draw 1 additional card during this Draw Step.\nLV2 During Your Start Step: For each Spirit you control with the family \"Dark Snake\", move 1 Core from an opposing Spirit to your opponent's Reserve. This effect cannot reduce a Spirit to 0 Cores.",
+      "ptBR": "LV1/LV2 Durante Seu Draw Step: Se você controlar um total de 3 ou mais Spirits com a família \"Dark Snake\" e/ou \"Evil Deity\", compre 1 carta adicional durante este Draw Step.\nLV2 Durante Seu Start Step: Para cada Spirit que você controla com a família \"Dark Snake\", mova 1 Core de um Spirit do oponente para a Reserve dele. Este efeito não pode deixar um Spirit com 0 Cores."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-079.webp"
+  },
+  {
+    "id": "BS04-080",
+    "name": "The Whirlwind Ravine",
+    "nameEN": "The Whirlwind Ravine",
+    "namePT": "The Whirlwind Ravine",
+    "nameJP": "旋風渦巻く渓谷",
+    "nameKey": "the-whirlwind-ravine",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Main Step: Neither player can control five or more Spirits.\nLV2 During Your Attack Step: The [High Speed] effect of all Spirit cards in your Hand becomes: \"[High Speed] You may summon this Spirit card from your Hand during Flash Timing.\"",
+      "ptBR": "LV1/LV2 Durante a Main Step de qualquer jogador: Nenhum jogador pode controlar 5 ou mais Spirits.\nLV2 Durante Seu Attack Step: O efeito [High Speed] de todas as cartas de Spirit na sua Hand passa a ser: \"[High Speed] Você pode invocar esta carta de Spirit da sua Hand durante o Flash Timing.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-080.webp"
+  },
+  {
+    "id": "BS04-081",
+    "name": "The Strong-Dominated Earth",
+    "nameEN": "The Strong-Dominated Earth",
+    "namePT": "The Strong-Dominated Earth",
+    "nameJP": "強者統べる大地",
+    "nameKey": "the-strong-dominated-earth",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: When one of your Spirits with 6000 BP or more is destroyed by an opposing Spirit through BP comparison, keep it on your Field in Exhausted state.\nLV2 During Your Attack Step: At the start of the step, choose 1 of your Spirits with 10000 BP or more. Once per turn, the chosen Spirit cannot be blocked by an opposing Spirit.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com 6000 BP ou mais for destruído por um Spirit do oponente pela comparação de BP, mantenha-o no seu Field em estado Exhausted.\nLV2 Durante Seu Attack Step: No início do Step, escolha 1 dos seus Spirits com 10000 BP ou mais. Uma vez por turno, o Spirit escolhido não pode ser bloqueado por um Spirit do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-081.webp"
+  },
+  {
+    "id": "BS04-082",
+    "name": "The Inviolable Sanctuary",
+    "nameEN": "The Inviolable Sanctuary",
+    "namePT": "The Inviolable Sanctuary",
+    "nameJP": "侵されざる聖域",
+    "nameKey": "the-inviolable-sanctuary",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All your cost 8 or higher Spirits gain [Armor: Purple/Green/White/Yellow/Blue]: They are unaffected by opposing Purple, Green, White, Yellow, and Blue Spirit, Nexus, and Magic effects.\nLV2: Your deck cannot have six or more cards discarded from it during a single turn by opposing Spirit, Nexus, or Magic effects.",
+      "ptBR": "LV1/LV2: Todos os seus Spirits de custo 8 ou mais ganham [Armor: Purple/Green/White/Yellow/Blue]: Eles não são afetados por efeitos de Spirit, Nexus e Magic Purple, Green, White, Yellow e Blue do oponente.\nLV2: Seu deck não pode ter 6 ou mais cartas descartadas dele durante um único turno por efeitos de Spirit, Nexus ou Magic do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-082.webp"
+  },
+  {
+    "id": "BS04-083",
+    "name": "The Steel Forest",
+    "nameEN": "The Steel Forest",
+    "namePT": "The Steel Forest",
+    "nameJP": "鋼葉の樹林",
+    "nameKey": "the-steel-forest",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Start Step: Return 1 Spirit card with the family \"Armored Beast\" from your Trash to your Hand.\nLV2 During Your Main Step: When you summon a Spirit with the family \"Armored Beast\" and/or \"Giant Beast\", return 1 opposing Spirit with BP equal to or less than that summoned Spirit to its owner's Hand.",
+      "ptBR": "LV1/LV2 Durante Seu Start Step: Devolva 1 carta de Spirit com a família \"Armored Beast\" do seu Trash para sua Hand.\nLV2 Durante Sua Main Step: Quando você invocar um Spirit com a família \"Armored Beast\" e/ou \"Giant Beast\", devolva 1 Spirit do oponente com BP igual ou menor ao daquele Spirit invocado para a Hand do dono."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-083.webp"
+  },
+  {
+    "id": "BS04-084",
+    "name": "The Miraculous Hill",
+    "nameEN": "The Miraculous Hill",
+    "namePT": "The Miraculous Hill",
+    "nameJP": "奇跡の丘",
+    "nameKey": "the-miraculous-hill",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your Spirits with the family \"Divine Spirit\" get +1000 BP.\nLV2 During Your Attack Step: When one of your Spirits with the family \"Divine Spirit\" is destroyed by an opposing Spirit through BP comparison, return it to your Hand.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits com a família \"Divine Spirit\" recebem +1000 BP.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com a família \"Divine Spirit\" for destruído por um Spirit do oponente pela comparação de BP, devolva-o para sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-084.webp"
+  },
+  {
+    "id": "BS04-085",
+    "name": "The Spring of Full Magical Powers",
+    "nameEN": "The Spring of Full Magical Powers",
+    "namePT": "The Spring of Full Magical Powers",
+    "nameJP": "魔力満ちる泉",
+    "nameKey": "the-spring-of-full-magical-powers",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Main Step: While you control three or more Spirits with the family \"Four Paths\", whenever your opponent summons a Spirit, they must pay 1 additional cost.\nLV2 During the Opponent's Attack Step: While you control three or more Spirits with the family \"Four Paths\", whenever an opposing Spirit attacks, move 1 Core from your opponent's Field or Reserve to their Trash.",
+      "ptBR": "LV1/LV2 Durante a Main Step do Oponente: Enquanto você controlar 3 ou mais Spirits com a família \"Four Paths\", sempre que o oponente invocar um Spirit, ele deve pagar 1 custo adicional.\nLV2 Durante o Attack Step do Oponente: Enquanto você controlar 3 ou mais Spirits com a família \"Four Paths\", sempre que um Spirit do oponente atacar, mova 1 Core do Field ou Reserve dele para o Trash dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-085.webp"
+  },
+  {
+    "id": "BS04-086",
+    "name": "The Ancient Arena",
+    "nameEN": "The Ancient Arena",
+    "namePT": "The Ancient Arena",
+    "nameJP": "古代闘技場",
+    "nameKey": "the-ancient-arena",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: Effects of opposing Spirits, Nexuses, and Magic that would increase BP do not activate.\nLV2 During Your Main Step: All \"When Summoned\" effects of opposing Spirits do not activate.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Efeitos de Spirit, Nexus e Magic do oponente que aumentariam BP não são ativados.\nLV2 Durante Sua Main Step: Todos os efeitos \"When Summoned\" dos Spirits do oponente não são ativados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-086.webp"
+  },
+  {
+    "id": "BS04-087",
+    "name": "The Heart-Buster Huge Slope",
+    "nameEN": "The Heart-Buster Huge Slope",
+    "namePT": "The Heart-Buster Huge Slope",
+    "nameJP": "心臓破りの巨大坂",
+    "nameKey": "the-heart-buster-huge-slope",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Start Step: Discard 1 card from the top of your opponent's deck.\nLV2: Treat all your Spirits with no effect text as their highest Level during the turn they are summoned.",
+      "ptBR": "LV1/LV2 Durante o Start Step do Oponente: Descarte 1 carta do topo do deck do oponente.\nLV2: Trate todos os seus Spirits sem texto de efeito como estando no Level máximo deles durante o turno em que forem invocados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-087.webp"
+  },
+  {
+    "id": "BS04-088",
+    "name": "The Victory Stand of the Glory",
+    "nameEN": "The Victory Stand of the Glory",
+    "namePT": "The Victory Stand of the Glory",
+    "nameJP": "栄光の表彰台",
+    "nameKey": "the-victory-stand-of-the-glory",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Main Step: When paying the placement cost of one of your Nexuses, for each 1 cost you would pay, you may instead discard 1 card from the top of your deck to count as paying 1 cost.\nLV2: Whenever you place a Nexus, put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Durante Sua Main Step: Ao pagar o custo para colocar 1 dos seus Nexuses, para cada 1 de custo que você pagaria, você pode em vez disso descartar 1 carta do topo do seu deck para contar como o pagamento de 1 custo.\nLV2: Sempre que você colocar um Nexus, coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-088.webp"
+  },
+  {
+    "id": "BS04-089",
+    "name": "Great Link",
+    "nameEN": "Great Link",
+    "namePT": "Great Link",
+    "nameJP": "グレートリンク",
+    "nameKey": "great-link",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Move all Cores from your Trash onto 1 of your Spirits with [Awaken]. This effect cannot be used during the Main Step.",
+      "ptBR": "Flash: Mova todos os Cores do seu Trash para 1 dos seus Spirits com [Awaken]. Este efeito não pode ser usado durante a Main Step."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-089.webp"
+  },
+  {
+    "id": "BS04-090",
+    "name": "Der Ring des Nibelungen",
+    "nameEN": "Der Ring des Nibelungen",
+    "namePT": "Der Ring des Nibelungen",
+    "nameJP": "ニーベルングリング",
+    "nameKey": "der-ring-des-nibelungen",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, whenever one of your Spirits with \"Sieg\" in its card name destroys only an opposing Spirit by comparing BP, destroy all opposing Spirits with the same families as the destroyed Spirit.",
+      "ptBR": "Flash: Durante este turno, sempre que 1 dos seus Spirits com \"Sieg\" no nome da carta destruir apenas um Spirit do oponente pela comparação de BP, destrua todos os Spirits do oponente com as mesmas famílias do Spirit destruído."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-090.webp"
+  },
+  {
+    "id": "BS04-091",
+    "name": "Lightning Ballista",
+    "nameEN": "Lightning Ballista",
+    "namePT": "Lightning Ballista",
+    "nameJP": "ライトニングバリスタ",
+    "nameKey": "lightning-ballista",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Destroy 1 opposing Spirit with 7000 BP or less. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Destrua 1 Spirit do oponente com 7000 BP ou menos. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-091.webp"
+  },
+  {
+    "id": "BS04-092",
+    "name": "Dragons' Rush",
+    "nameEN": "Dragons' Rush",
+    "namePT": "Dragons' Rush",
+    "nameJP": "ドラゴンズラッシュ",
+    "nameKey": "dragons-rush",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, whenever one of your Spirits with the family \"Winged Dragon\", \"Dragon\", and/or \"Ancient Dragon\" destroys only an opposing Spirit by comparing BP, Refresh that Spirit.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Durante este turno, sempre que 1 dos seus Spirits com a família \"Winged Dragon\", \"Dragon\" e/ou \"Ancient Dragon\" destruir apenas um Spirit do oponente pela comparação de BP, dê Refresh naquele Spirit.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-092.webp"
+  },
+  {
+    "id": "BS04-093",
+    "name": "Euthanasia",
+    "nameEN": "Euthanasia",
+    "namePT": "Euthanasia",
+    "nameJP": "ユーサネイジア",
+    "nameKey": "euthanasia",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all opposing Spirits' When Destroyed effects do not activate.",
+      "ptBR": "Flash: Durante este turno, todos os efeitos When Destroyed dos Spirits do oponente não são ativados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-093.webp"
+  },
+  {
+    "id": "BS04-094",
+    "name": "Danse Macabre",
+    "nameEN": "Danse Macabre",
+    "namePT": "Danse Macabre",
+    "nameJP": "ダンスマカブル",
+    "nameKey": "danse-macabre",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Discard any number of cards from your Hand. For each card discarded, move 1 Core from an opposing Spirit to your opponent's Trash.",
+      "ptBR": "Flash: Descarte qualquer quantidade de cartas da sua Hand. Para cada carta descartada, mova 1 Core de um Spirit do oponente para o Trash dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-094.webp"
+  },
+  {
+    "id": "BS04-095",
+    "name": "Venom Shot",
+    "nameEN": "Venom Shot",
+    "namePT": "Venom Shot",
+    "nameJP": "ヴェノムショット",
+    "nameKey": "venom-shot",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Move 1 Core from an opposing Spirit to the Void.\nFlash: During this turn, 1 Spirit gets +1000 BP.",
+      "ptBR": "Main: Mova 1 Core de um Spirit do oponente para o Void.\nFlash: Durante este turno, 1 Spirit recebe +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-095.webp"
+  },
+  {
+    "id": "BS04-096",
+    "name": "Inferno Eyes",
+    "nameEN": "Inferno Eyes",
+    "namePT": "Inferno Eyes",
+    "nameJP": "インフェルノアイズ",
+    "nameKey": "inferno-eyes",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Each player moves 4 Cores from their Spirits and/or Nexuses to the Void. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Cada jogador move 4 Cores dos próprios Spirits e/ou Nexuses para o Void. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-096.webp"
+  },
+  {
+    "id": "BS04-097",
+    "name": "Forest Aura",
+    "nameEN": "Forest Aura",
+    "namePT": "Forest Aura",
+    "nameJP": "フォレストオーラ",
+    "nameKey": "forest-aura",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all your attacking Spirits with the family \"Talon Bird\" and/or \"Tree Spirit\" get +3000 BP.",
+      "ptBR": "Flash: Durante este turno, todos os seus Spirits atacantes com a família \"Talon Bird\" e/ou \"Tree Spirit\" recebem +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-097.webp"
+  },
+  {
+    "id": "BS04-098",
+    "name": "Full Add",
+    "nameEN": "Full Add",
+    "namePT": "Full Add",
+    "nameJP": "フルアッド",
+    "nameKey": "full-add",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Choose 1 Nexus you control. Put Cores from the Void onto that Nexus until it has enough Cores to maintain LV2.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Escolha 1 Nexus que você controla. Coloque Cores do Void sobre aquele Nexus até que ele tenha Cores suficientes para manter LV2.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-098.webp"
+  },
+  {
+    "id": "BS04-099",
+    "name": "Ground Howling",
+    "nameEN": "Ground Howling",
+    "namePT": "Ground Howling",
+    "nameJP": "グラウンドハウリング",
+    "nameKey": "ground-howling",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Exhaust all opposing Spirits with 4000 BP or more. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Deixe Exhausted todos os Spirits do oponente com 4000 BP ou mais. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-099.webp"
+  },
+  {
+    "id": "BS04-100",
+    "name": "Jungle Law",
+    "nameEN": "Jungle Law",
+    "namePT": "Jungle Law",
+    "nameJP": "ジャングルロウ",
+    "nameKey": "jungle-law",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Exhaust all LV1 Spirits.\nFlash: During this turn, 1 Spirit gets +4000 BP.",
+      "ptBR": "Main: Deixe Exhausted todos os Spirits LV1.\nFlash: Durante este turno, 1 Spirit recebe +4000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-100.webp"
+  },
+  {
+    "id": "BS04-101",
+    "name": "Mist Curtain",
+    "nameEN": "Mist Curtain",
+    "namePT": "Mist Curtain",
+    "nameJP": "ミストカーテン",
+    "nameKey": "mist-curtain",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Choose 1 opposing Spirit. During this turn, if you do not block that Spirit's attack, your Life cannot be reduced by that attack.",
+      "ptBR": "Flash: Escolha 1 Spirit do oponente. Durante este turno, se você não bloquear o ataque daquele Spirit, sua Life não pode ser reduzida por aquele ataque."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-101.webp"
+  },
+  {
+    "id": "BS04-102",
+    "name": "Dream Hand",
+    "nameEN": "Dream Hand",
+    "namePT": "Dream Hand",
+    "nameJP": "ドリームハンド",
+    "nameKey": "dream-hand",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Return all cost 1 or lower Spirits to their owners' Hands.",
+      "ptBR": "Flash: Devolva todos os Spirits de custo 1 ou menos para as Hands de seus donos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-102.webp"
+  },
+  {
+    "id": "BS04-103",
+    "name": "High Ether",
+    "nameEN": "High Ether",
+    "namePT": "High Ether",
+    "nameJP": "ハイエーテル",
+    "nameKey": "high-ether",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Refresh 3 of your Spirits with the family \"Giant Beast\" and/or \"Armored Beast\".",
+      "ptBR": "Flash: Dê Refresh em 3 dos seus Spirits com a família \"Giant Beast\" e/ou \"Armored Beast\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-103.webp"
+  },
+  {
+    "id": "BS04-104",
+    "name": "Glacial Breath",
+    "nameEN": "Glacial Breath",
+    "namePT": "Glacial Breath",
+    "nameJP": "グラシアルブレス",
+    "nameKey": "glacial-breath",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Return 2 of your Spirits to the bottom of your deck in any order. Then return 2 opposing Spirits to the bottom of their owner's deck in any order. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Coloque 2 dos seus Spirits no fundo do seu deck em qualquer ordem. Depois, coloque 2 Spirits do oponente no fundo do deck do dono em qualquer ordem. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-104.webp"
+  },
+  {
+    "id": "BS04-105",
+    "name": "Trick Prank",
+    "nameEN": "Trick Prank",
+    "namePT": "Trick Prank",
+    "nameJP": "トリックプランク",
+    "nameKey": "trick-prank",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Return 5 Spirit cards from your Trash to the bottom of your deck in any order.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Coloque 5 cartas de Spirit do seu Trash no fundo do seu deck em qualquer ordem.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-105.webp"
+  },
+  {
+    "id": "BS04-106",
+    "name": "Gleam Hope",
+    "nameEN": "Gleam Hope",
+    "namePT": "Gleam Hope",
+    "nameJP": "グリームホープ",
+    "nameKey": "gleam-hope",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, 1 of your Spirits gains [Brilliance]: When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Durante este turno, 1 dos seus Spirits ganha [Brilliance]: Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-106.webp"
+  },
+  {
+    "id": "BS04-107",
+    "name": "Judgment Lights",
+    "nameEN": "Judgment Lights",
+    "namePT": "Judgment Lights",
+    "nameJP": "ジャッジメントライツ",
+    "nameKey": "judgment-lights",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, treat all opposing Spirits as LV1. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Durante este turno, trate todos os Spirits do oponente como LV1. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-107.webp"
+  },
+  {
+    "id": "BS04-108",
+    "name": "Straight Flush",
+    "nameEN": "Straight Flush",
+    "namePT": "Straight Flush",
+    "nameJP": "ストレートフラッシュ",
+    "nameKey": "straight-flush",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: If you control five or more Spirits with the family \"Four Paths\", destroy all your Spirits with the family \"Four Paths\", then destroy all opposing Spirits.\nFlash: During this turn, 1 Spirit gets +4000 BP.",
+      "ptBR": "Main: Se você controlar 5 ou mais Spirits com a família \"Four Paths\", destrua todos os seus Spirits com a família \"Four Paths\" e depois destrua todos os Spirits do oponente.\nFlash: Durante este turno, 1 Spirit recebe +4000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-108.webp"
+  },
+  {
+    "id": "BS04-109",
+    "name": "Switch Hitter",
+    "nameEN": "Switch Hitter",
+    "namePT": "Switch Hitter",
+    "nameJP": "スイッチヒッター",
+    "nameKey": "switch-hitter",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, all your Spirits with the family \"Artificial Soldier\" are also treated as Spirits with no effect text.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Durante este turno, todos os seus Spirits com a família \"Artificial Soldier\" também são tratados como Spirits sem texto de efeito.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-109.webp"
+  },
+  {
+    "id": "BS04-110",
+    "name": "Lead Wall",
+    "nameEN": "Lead Wall",
+    "namePT": "Lead Wall",
+    "nameJP": "レッドウォール",
+    "nameKey": "lead-wall",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all your Spirits can block Spirits with effects that say they cannot be blocked.",
+      "ptBR": "Flash: Durante este turno, todos os seus Spirits podem bloquear Spirits com efeitos que dizem que eles não podem ser bloqueados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-110.webp"
+  },
+  {
+    "id": "BS04-111",
+    "name": "Magic Drill",
+    "nameEN": "Magic Drill",
+    "namePT": "Magic Drill",
+    "nameJP": "マジックドリル",
+    "nameKey": "magic-drill",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: For each card in your opponent's Hand, discard 1 card from the top of their deck.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Para cada carta na Hand do oponente, descarte 1 carta do topo do deck dele.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-111.webp"
+  },
+  {
+    "id": "BS04-112",
+    "name": "Massive Up",
+    "nameEN": "Massive Up",
+    "namePT": "Massive Up",
+    "nameJP": "マッシブアップ",
+    "nameKey": "massive-up",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, treat 1 Blue Spirit that has LV3 as LV3.",
+      "ptBR": "Flash: Durante este turno, trate 1 Spirit Blue que possua LV3 como LV3."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-112.webp"
+  },
+  {
+    "id": "BS04-113",
+    "name": "Nexus Repair",
+    "nameEN": "Nexus Repair",
+    "namePT": "Nexus Repair",
+    "nameJP": "ネクサスリペアー",
+    "nameKey": "nexus-repair",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Place 1 Nexus card from your Trash without paying its cost.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Coloque 1 carta de Nexus do seu Trash sem pagar o custo.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-113.webp"
+  },
+  {
+    "id": "BS04-114",
+    "name": "Tidal Tide",
+    "nameEN": "Tidal Tide",
+    "namePT": "Tidal Tide",
+    "nameJP": "タイダルタイド",
+    "nameKey": "tidal-tide",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Destroy any number of Nexuses you control. For each Nexus destroyed by this effect, destroy 1 opposing Spirit. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Destrua qualquer quantidade de Nexuses que você controla. Para cada Nexus destruído por este efeito, destrua 1 Spirit do oponente. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-114.webp"
+  },
+  {
+    "id": "BS04-X13",
+    "name": "The DarkDragonEmperor Siegfried",
+    "nameEN": "The DarkDragonEmperor Siegfried",
+    "namePT": "The DarkDragonEmperor Siegfried",
+    "nameJP": "魔龍帝ジークフリード",
+    "nameKey": "the-darkdragonemperor-siegfried",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 9,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Emperor",
+      "Ancient Dragon"
+    ],
+    "symbols": [
+      "red",
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 12000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 6 or more → Void]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 6 or higher Spirits to the Void.\nLV2/LV3 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, draw 1 card.\nLV3 When This Spirit Attacks: Destroy all non-Red Spirits with 4000 BP or less.",
+      "ptBR": "[Tribute: Cost 6 ou mais → Void]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 6 ou mais para o Void.\nLV2/LV3 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, compre 1 carta.\nLV3 Quando Este Spirit Ataca: Destrua todos os Spirits que não sejam Red com 4000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-X13.webp"
+  },
+  {
+    "id": "BS04-X14",
+    "name": "The SevenShogun Pandemium",
+    "nameEN": "The SevenShogun Pandemium",
+    "namePT": "The SevenShogun Pandemium",
+    "nameJP": "魔界七将パンデミウム",
+    "nameKey": "the-sevenshogun-pandemium",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 8,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Evil Deity",
+      "Dark Snake"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Either Attack Step: Whenever an opposing Spirit is destroyed, draw 1 card.\nLV2/LV3 During Either Attack Step: When one of your Spirits is destroyed by an opposing Spirit through BP comparison, Exhaust 1 opposing Spirit.\nLV3 When This Spirit Is Destroyed: Each player discards 5 cards from their Hand.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step de qualquer jogador: Sempre que um Spirit do oponente for destruído, compre 1 carta.\nLV2/LV3 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits for destruído por um Spirit do oponente pela comparação de BP, deixe 1 Spirit do oponente Exhausted.\nLV3 Quando Este Spirit For Destruído: Cada jogador descarta 5 cartas da própria Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-X14.webp"
+  },
+  {
+    "id": "BS04-X15",
+    "name": "The Emperor Kaiseratlas",
+    "nameEN": "The Emperor Kaiseratlas",
+    "namePT": "The Emperor Kaiseratlas",
+    "nameJP": "カイザーアトラス皇帝",
+    "nameKey": "the-emperor-kaiseratlas",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 9,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Mounted Warrior",
+      "Shellman"
+    ],
+    "symbols": [
+      "green",
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 6 or more → Void]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 6 or higher Spirits to the Void.\nLV2 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, by moving 1 Core from your Reserve to the Void, move 2 Cores from your opponent's Life to their Reserve.",
+      "ptBR": "[Tribute: Cost 6 ou mais → Void]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 6 ou mais para o Void.\nLV2 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, ao mover 1 Core da sua Reserve para o Void, mova 2 Cores da Life do oponente para a Reserve dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-X15.webp"
+  },
+  {
+    "id": "BS04-X16",
+    "name": "The MobileFortress Castle-Golem",
+    "nameEN": "The MobileFortress Castle-Golem",
+    "namePT": "The MobileFortress Castle-Golem",
+    "nameJP": "機動要塞キャッスル・ゴレム",
+    "nameKey": "the-mobilefortress-castle-golem",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 8,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 6,
+        "bp": 12000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: For each Nexus you control, discard 5 cards from the top of your opponent's deck, up to 15 cards.\nLV2 When This Spirit Attacks: For each Blue symbol you have, discard 1 card from the top of your opponent's deck.",
+      "ptBR": "LV1/LV2 Quando Invocado: Para cada Nexus que você controla, descarte 5 cartas do topo do deck do oponente, até o máximo de 15 cartas.\nLV2 Quando Este Spirit Ataca: Para cada símbolo Blue que você possui, descarte 1 carta do topo do deck do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-X16.webp"
+  }
+]

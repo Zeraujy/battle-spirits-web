@@ -1,0 +1,564 @@
+[
+  {
+    "id": "BS03-025",
+    "name": "Stagscissor",
+    "nameEN": "Stagscissor",
+    "namePT": "Stagscissor",
+    "nameJP": "スタッグシザー",
+    "nameKey": "stagscissor",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Shell Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-025.webp"
+  },
+  {
+    "id": "BS03-026",
+    "name": "The WoodenSpirit Dryadena",
+    "nameEN": "The WoodenSpirit Dryadena",
+    "namePT": "The WoodenSpirit Dryadena",
+    "nameJP": "木精ドリアドナ",
+    "nameKey": "the-woodenspirit-dryadena",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 1,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Tree Spirit",
+      "Musician"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-026.webp"
+  },
+  {
+    "id": "BS03-027",
+    "name": "Fullmingo",
+    "nameEN": "Fullmingo",
+    "namePT": "Fullmingo",
+    "nameJP": "フルミンゴ",
+    "nameKey": "fullmingo",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 2,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Talon Bird"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2: All Spirit cards in your Hand with [High Speed] gain 1 Green reduction symbol.",
+      "ptBR": "LV2: Todas as cartas de Spirit na sua Hand com [High Speed] ganham 1 símbolo de redução Green."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-027.webp"
+  },
+  {
+    "id": "BS03-028",
+    "name": "Mogrunner",
+    "nameEN": "Mogrunner",
+    "namePT": "Mogrunner",
+    "nameJP": "モグランナー",
+    "nameKey": "mogrunner",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Play Sprite"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [High Speed]: You may summon this Spirit card from your Hand during Flash Timing. When doing so, both the summon cost and the Cores placed on this Spirit must come from your Reserve.\nLV2: Whenever your opponent draws 1 or more cards from their deck, Refresh this Spirit.",
+      "ptBR": "Flash [High Speed]: Você pode invocar esta carta de Spirit da sua Hand durante o Flash Timing. Ao fazer isso, tanto o custo de invocação quanto os Cores colocados neste Spirit devem vir da sua Reserve.\nLV2: Sempre que o oponente comprar 1 ou mais cartas do deck, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-028.webp"
+  },
+  {
+    "id": "BS03-029",
+    "name": "Machfly",
+    "nameEN": "Machfly",
+    "namePT": "Machfly",
+    "nameJP": "マッハフライ",
+    "nameKey": "machfly",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Strange Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-029.webp"
+  },
+  {
+    "id": "BS03-030",
+    "name": "The BeastMaster Rainer Bros.",
+    "nameEN": "The BeastMaster Rainer Bros.",
+    "namePT": "The BeastMaster Rainer Bros.",
+    "nameJP": "調教師ライナ兄弟",
+    "nameKey": "the-beastmaster-rainer-bros",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: For each Nexus you control, put 1 Core from the Void onto this Spirit.",
+      "ptBR": "LV1/LV2 Quando Invocado: Para cada Nexus que você controla, coloque 1 Core do Void sobre este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-030.webp"
+  },
+  {
+    "id": "BS03-031",
+    "name": "The BlackWind Panther",
+    "nameEN": "The BlackWind Panther",
+    "namePT": "The BlackWind Panther",
+    "nameJP": "黒風のパンター",
+    "nameKey": "the-blackwind-panther",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Attacks: This Spirit gets +1000 BP for each Core in your Reserve during this turn.",
+      "ptBR": "LV2 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP para cada Core na sua Reserve durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-031.webp"
+  },
+  {
+    "id": "BS03-032",
+    "name": "The SpiderWoman Arachnet",
+    "nameEN": "The SpiderWoman Arachnet",
+    "namePT": "The SpiderWoman Arachnet",
+    "nameJP": "蜘蛛女アラクネット",
+    "nameKey": "the-spiderwoman-arachnet",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Strange Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Attacks: Exhaust 1 opposing LV1 Spirit.",
+      "ptBR": "LV2 Quando Este Spirit Ataca: Deixe 1 Spirit LV1 do oponente Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-032.webp"
+  },
+  {
+    "id": "BS03-033",
+    "name": "The Beatpriest",
+    "nameEN": "The Beatpriest",
+    "namePT": "The Beatpriest",
+    "nameJP": "ビートプリースト",
+    "nameKey": "the-beatpriest",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Shellman"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 Flash: By moving 1 Core from your Reserve to your Trash, during this turn 1 Spirit card in your Hand with the family \"Shell Insect\" gains [High Speed]: You may summon this Spirit card from your Hand during Flash Timing. When doing so, both the summon cost and the Cores placed on it must come from your Reserve.",
+      "ptBR": "LV2 Flash: Ao mover 1 Core da sua Reserve para o Trash, durante este turno 1 carta de Spirit na sua Hand com a família \"Shell Insect\" ganha [High Speed]: Você pode invocar essa carta de Spirit da sua Hand durante o Flash Timing. Ao fazer isso, tanto o custo de invocação quanto os Cores colocados nela devem vir da sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-033.webp"
+  },
+  {
+    "id": "BS03-034",
+    "name": "The Gamecock Bishamon",
+    "nameEN": "The Gamecock Bishamon",
+    "namePT": "The Gamecock Bishamon",
+    "nameJP": "闘鶏ビシャモン",
+    "nameKey": "the-gamecock-bishamon",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Talon Bird"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3: All your Spirits with the family \"Talon Bird\" get +1000 BP.",
+      "ptBR": "LV2/LV3: Todos os seus Spirits com a família \"Talon Bird\" recebem +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-034.webp"
+  },
+  {
+    "id": "BS03-035",
+    "name": "The GoldenFlower Zonne-Bloem",
+    "nameEN": "The GoldenFlower Zonne-Bloem",
+    "namePT": "The GoldenFlower Zonne-Bloem",
+    "nameJP": "太陽花ゾンネ・ブルム",
+    "nameKey": "the-goldenflower-zonne-bloem",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 7,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Tree Spirit"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Put 1 Core from the Void onto each of your Spirits with the family \"Tree Spirit\" and/or \"Talon Bird\".",
+      "ptBR": "LV1/LV2 Quando Invocado: Coloque 1 Core do Void sobre cada um dos seus Spirits com a família \"Tree Spirit\" e/ou \"Talon Bird\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-035.webp"
+  },
+  {
+    "id": "BS03-036",
+    "name": "The GodBird Peagod",
+    "nameEN": "The GodBird Peagod",
+    "namePT": "The GodBird Peagod",
+    "nameJP": "神鳥ピーゴッド",
+    "nameKey": "the-godbird-peagod",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 8,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Talon Bird"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Battles: When only the opposing Spirit is destroyed by comparing BP, put 4 Cores from the Void into your Reserve.\nLV2 When This Spirit Attacks: This Spirit gets +1000 BP for each Spirit you control with the family \"Talon Bird\".",
+      "ptBR": "LV1/LV2 Quando Este Spirit Batalha: Quando apenas o Spirit do oponente for destruído pela comparação de BP, coloque 4 Cores do Void na sua Reserve.\nLV2 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP para cada Spirit que você controla com a família \"Talon Bird\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-036.webp"
+  }
+]

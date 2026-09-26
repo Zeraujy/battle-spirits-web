@@ -1,0 +1,446 @@
+[
+  {
+    "id": "BS05-046",
+    "name": "The BattleBeast Babeaver",
+    "nameEN": "The BattleBeast Babeaver",
+    "namePT": "The BattleBeast Babeaver",
+    "nameJP": "戦闘獣バビーバー",
+    "nameKey": "the-battlebeast-babeaver",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Battle Beast"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-046.webp"
+  },
+  {
+    "id": "BS05-047",
+    "name": "Bronze-Golem",
+    "nameEN": "Bronze-Golem",
+    "namePT": "Bronze-Golem",
+    "nameJP": "ブロンズ・ゴレム",
+    "nameKey": "bronze-golem",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Crush] When This Spirit Attacks: Discard cards from the top of your opponent's deck equal to this Spirit's Level.\nLV1/LV2/LV3: When 1 of your Nexuses is destroyed, by moving 1 Core from this Spirit to your Trash, keep that destroyed Nexus on your Field.",
+      "ptBR": "LV1/LV2/LV3 [Crush] Quando Este Spirit Ataca: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit.\nLV1/LV2/LV3: Quando 1 dos seus Nexuses for destruído, ao mover 1 Core deste Spirit para o seu Trash, mantenha aquele Nexus destruído no seu Field."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-047.webp"
+  },
+  {
+    "id": "BS05-048",
+    "name": "The ChimeraDinosaur Dinozaur",
+    "nameEN": "The ChimeraDinosaur Dinozaur",
+    "namePT": "The ChimeraDinosaur Dinozaur",
+    "nameJP": "合成恐竜ディノゾール",
+    "nameKey": "the-chimeradinosaur-dinozaur",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Aberration",
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2: Change the [Awaken] effect of all your Spirits to: \"[Awaken] During Flash Timing, you may move any number of Cores from your Spirits and/or Reserve to this Spirit.\"",
+      "ptBR": "LV2: Altere o efeito [Awaken] de todos os seus Spirits para: \"[Awaken] Durante o Flash Timing, você pode mover qualquer quantidade de Cores dos seus Spirits e/ou Reserve para este Spirit.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-048.webp"
+  },
+  {
+    "id": "BS05-049",
+    "name": "The WolfMan Wolfy",
+    "nameEN": "The WolfMan Wolfy",
+    "namePT": "The WolfMan Wolfy",
+    "nameJP": "狼人ウルフィ",
+    "nameKey": "the-wolfman-wolfy",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-049.webp"
+  },
+  {
+    "id": "BS05-050",
+    "name": "MCPanther",
+    "nameEN": "MCPanther",
+    "namePT": "MCPanther",
+    "nameJP": "MCパンサー",
+    "nameKey": "mcpanther",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 When This Spirit Attacks: Destroy 1 opposing cost 1 or lower Spirit.\nLV2 When This Spirit Attacks: Destroy all cost 1 or lower Spirits.",
+      "ptBR": "LV1 Quando Este Spirit Ataca: Destrua 1 Spirit do oponente de custo 1 ou menos.\nLV2 Quando Este Spirit Ataca: Destrua todos os Spirits de custo 1 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-050.webp"
+  },
+  {
+    "id": "BS05-051",
+    "name": "The GiantKnight Aldous",
+    "nameEN": "The GiantKnight Aldous",
+    "namePT": "The GiantKnight Aldous",
+    "nameJP": "巨人騎士アルダス",
+    "nameKey": "the-giantknight-aldous",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit",
+      "Heroic"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All your Nexuses cannot be destroyed by opposing Spirit, Nexus, or Magic effects.\nLV2 When This Spirit Attacks: For each Nexus you control, discard 2 cards from the top of your opponent's deck, up to 6 cards.",
+      "ptBR": "LV1/LV2: Todos os seus Nexuses não podem ser destruídos por efeitos de Spirit, Nexus ou Magic do oponente.\nLV2 Quando Este Spirit Ataca: Para cada Nexus que você controla, descarte 2 cartas do topo do deck do oponente, até o máximo de 6 cartas."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-051.webp"
+  },
+  {
+    "id": "BS05-052",
+    "name": "Mithril-Golem",
+    "nameEN": "Mithril-Golem",
+    "namePT": "Mithril-Golem",
+    "nameJP": "ミスリル・ゴレム",
+    "nameKey": "mithril-golem",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 6,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-052.webp"
+  },
+  {
+    "id": "BS05-053",
+    "name": "The BlueDragonRider Azure",
+    "nameEN": "The BlueDragonRider Azure",
+    "namePT": "The BlueDragonRider Azure",
+    "nameJP": "蒼海の竜使いアズール",
+    "nameKey": "the-bluedragonrider-azure",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 6,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Knight",
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When this Spirit becomes the target of Tribute, by Exhausting this Spirit, treat all Cores on this Spirit as having been sent to the designated place.\nLV2: This Spirit and all your Spirits with the family \"Dragon Emperor\" and/or \"Vanity Deity\" gain: \"When This Spirit Battles: Discard 5 cards from the top of your opponent's deck.\"",
+      "ptBR": "LV1/LV2: Quando este Spirit se tornar alvo de Tribute, ao deixar este Spirit Exhausted, trate todos os Cores sobre ele como tendo sido enviados para o local designado.\nLV2: Este Spirit e todos os seus Spirits com a família \"Dragon Emperor\" e/ou \"Vanity Deity\" ganham: \"Quando Este Spirit Batalha: Descarte 5 cartas do topo do deck do oponente.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-053.webp"
+  },
+  {
+    "id": "BS05-054",
+    "name": "The IronHammer Oswld",
+    "nameEN": "The IronHammer Oswld",
+    "namePT": "The IronHammer Oswld",
+    "nameJP": "鉄槌のオズワルド",
+    "nameKey": "the-ironhammer-oswld",
+    "set": "BS05",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 7,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 6,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: Destroy 1 Nexus controlled by either player.\nLV2: When this Spirit's effect destroys a Nexus controlled by either player, your opponent discards 1 card from their Hand.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Destrua 1 Nexus controlado por qualquer jogador.\nLV2: Quando o efeito deste Spirit destruir um Nexus controlado por qualquer jogador, o oponente descarta 1 carta da Hand dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-054.webp"
+  }
+]

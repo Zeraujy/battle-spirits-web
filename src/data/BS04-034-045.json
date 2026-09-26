@@ -1,0 +1,585 @@
+[
+  {
+    "id": "BS04-034",
+    "name": "Vidohunir",
+    "nameEN": "Vidohunir",
+    "namePT": "Vidohunir",
+    "nameJP": "ヴィゾフニル",
+    "nameKey": "vidohunir",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fish"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Armor: Purple]: This Spirit is unaffected by opposing Purple Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2 [Armor: Purple]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Purple do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-034.webp"
+  },
+  {
+    "id": "BS04-035",
+    "name": "Berserker-Magnum",
+    "nameEN": "Berserker-Magnum",
+    "namePT": "Berserker-Magnum",
+    "nameJP": "バーサーカー・マグナム",
+    "nameKey": "berserker-magnum",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-035.webp"
+  },
+  {
+    "id": "BS04-036",
+    "name": "Oddsay",
+    "nameEN": "Oddsay",
+    "namePT": "Oddsay",
+    "nameJP": "オッドセイ",
+    "nameKey": "oddsay",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: This Spirit cannot attack.\nLV1/LV2: When your Life is reduced, Refresh this Spirit.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Este Spirit não pode atacar.\nLV1/LV2: Quando sua Life for reduzida, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-036.webp"
+  },
+  {
+    "id": "BS04-037",
+    "name": "The ArmoredBeast Heith-Rune",
+    "nameEN": "The ArmoredBeast Heith-Rune",
+    "namePT": "The ArmoredBeast Heith-Rune",
+    "nameJP": "鎧装獣ヘイズ・ルーン",
+    "nameKey": "the-armoredbeast-heith-rune",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: While your opponent controls no Red Spirits, this Spirit cannot attack.\nLV1/LV2 During the Opponent's Attack Step: When an opposing cost 1 or lower Spirit attacks, Refresh this Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Enquanto o oponente não controlar nenhum Spirit Red, este Spirit não pode atacar.\nLV1/LV2 Durante o Attack Step do Oponente: Quando um Spirit do oponente de custo 1 ou menos atacar, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-037.webp"
+  },
+  {
+    "id": "BS04-038",
+    "name": "The Reconnaissance Magni",
+    "nameEN": "The Reconnaissance Magni",
+    "namePT": "The Reconnaissance Magni",
+    "nameJP": "偵察機マグニ",
+    "nameKey": "the-reconnaissance-magni",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-038.webp"
+  },
+  {
+    "id": "BS04-039",
+    "name": "The JewelBug Scaraveil",
+    "nameEN": "The JewelBug Scaraveil",
+    "namePT": "The JewelBug Scaraveil",
+    "nameJP": "宝石虫スカラベール",
+    "nameKey": "the-jewelbug-scaraveil",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Glow Insect",
+      "Shell Insect"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your Spirits with [High Speed] get +1000 BP.\nLV2 During Your Attack Step: When one of your Spirits with [High Speed] is destroyed by an opposing Spirit through BP comparison, by moving 1 Core from your Field or Reserve to your Trash, return that Spirit to your Hand instead of sending it to your Trash.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits com [High Speed] recebem +1000 BP.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com [High Speed] for destruído por um Spirit do oponente pela comparação de BP, ao mover 1 Core do seu Field ou Reserve para o Trash, devolva aquele Spirit para sua Hand em vez de enviá-lo ao Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-039.webp"
+  },
+  {
+    "id": "BS04-040",
+    "name": "The ArmoredBeast Gullin-Bullsty",
+    "nameEN": "The ArmoredBeast Gullin-Bullsty",
+    "namePT": "The ArmoredBeast Gullin-Bullsty",
+    "nameJP": "鎧装獣グリン・ブルスティ",
+    "nameKey": "the-armoredbeast-gullin-bullsty",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast",
+      "Giant Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-040.webp"
+  },
+  {
+    "id": "BS04-041",
+    "name": "Fenrircannon Mk-II",
+    "nameEN": "Fenrircannon Mk-II",
+    "namePT": "Fenrircannon Mk-II",
+    "nameJP": "フェンリルキャノンMk-II",
+    "nameKey": "fenrircannon-mk-ii",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Blocks: When this Spirit blocks a Spirit with the same Level, this Spirit gets +3000 BP during this battle.\nLV2/LV3 [Armor: Red/Green]: This Spirit is unaffected by opposing Red and Green Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Bloqueia: Quando este Spirit bloquear um Spirit do mesmo Level, este Spirit recebe +3000 BP durante esta batalha.\nLV2/LV3 [Armor: Red/Green]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red e Green do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-041.webp"
+  },
+  {
+    "id": "BS04-042",
+    "name": "The BeastMaster Dvergr",
+    "nameEN": "The BeastMaster Dvergr",
+    "namePT": "The BeastMaster Dvergr",
+    "nameJP": "獣使いドヴェルグ",
+    "nameKey": "the-beastmaster-dvergr",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Your Attack Step: The \"cannot attack\" effects of all your Spirits with \"ArmoredBeast\" in their card names do not activate.\nLV2/LV3 During Your Attack Step: Whenever one of your Spirits with \"ArmoredBeast\" in its card name destroys only an opposing Spirit by comparing BP, Exhaust 1 opposing Spirit of the same color as the destroyed Spirit.",
+      "ptBR": "LV1/LV2/LV3 Durante Seu Attack Step: Os efeitos de \"não pode atacar\" de todos os seus Spirits com \"ArmoredBeast\" no nome da carta não são ativados.\nLV2/LV3 Durante Seu Attack Step: Sempre que 1 dos seus Spirits com \"ArmoredBeast\" no nome da carta destruir apenas um Spirit do oponente pela comparação de BP, deixe Exhausted 1 Spirit do oponente da mesma cor do Spirit destruído."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-042.webp"
+  },
+  {
+    "id": "BS04-043",
+    "name": "The Valkyrie-Hildr",
+    "nameEN": "The Valkyrie-Hildr",
+    "namePT": "The Valkyrie-Hildr",
+    "nameJP": "ワルキューレ・ヒルド",
+    "nameKey": "the-valkyrie-hildr",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: This Spirit is unaffected by opposing Spirit and Magic effects.\nLV2: When your Life is reduced, Refresh this Spirit.",
+      "ptBR": "LV1/LV2: Este Spirit não é afetado por efeitos de Spirit e Magic do oponente.\nLV2: Quando sua Life for reduzida, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-043.webp"
+  },
+  {
+    "id": "BS04-044",
+    "name": "The SkyDragon Le-Ciel",
+    "nameEN": "The SkyDragon Le-Ciel",
+    "namePT": "The SkyDragon Le-Ciel",
+    "nameJP": "空帝ル・シエル",
+    "nameKey": "the-skydragon-le-ciel",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon Emperor",
+      "Flying Fish"
+    ],
+    "symbols": [
+      "white",
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 5 or more → Trash]\nAfter paying this Spirit's summon cost, you must send all Cores from 1 of your Spirits with cost 5 or more to your Trash.",
+      "ptBR": "[Tribute: Cost 5 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 5 ou mais para o seu Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-044.webp"
+  },
+  {
+    "id": "BS04-045",
+    "name": "The IceGoddess Frigg",
+    "nameEN": "The IceGoddess Frigg",
+    "namePT": "The IceGoddess Frigg",
+    "nameJP": "氷の女神フリッグ",
+    "nameKey": "the-icegoddess-frigg",
+    "set": "BS04",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 7,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Ice Princess"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: When your opponent uses a cost 4 Magic effect during Flash Timing, choose 4 Cores from their Field and/or Reserve and move them to their Trash.\nLV2 During Either Attack Step: When your opponent uses a cost 3 Magic effect during Flash Timing, choose 3 Cores from their Field and/or Reserve and move them to their Trash.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Quando o oponente usar um efeito de Magic de custo 4 durante o Flash Timing, escolha 4 Cores do Field e/ou Reserve dele e mova-os para o Trash dele.\nLV2 Durante o Attack Step de qualquer jogador: Quando o oponente usar um efeito de Magic de custo 3 durante o Flash Timing, escolha 3 Cores do Field e/ou Reserve dele e mova-os para o Trash dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-045.webp"
+  }
+]

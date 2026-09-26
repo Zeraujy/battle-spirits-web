@@ -1,0 +1,553 @@
+[
+  {
+    "id": "BS03-071",
+    "name": "The BattleBeast Bulltop",
+    "nameEN": "The BattleBeast Bulltop",
+    "namePT": "The BattleBeast Bulltop",
+    "nameJP": "戦闘獣ブルトップ",
+    "nameKey": "the-battlebeast-bulltop",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Battle Beast"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-071.webp"
+  },
+  {
+    "id": "BS03-072",
+    "name": "The Pikeman Jeffrey",
+    "nameEN": "The Pikeman Jeffrey",
+    "namePT": "The Pikeman Jeffrey",
+    "nameJP": "槍兵のジェフリー",
+    "nameKey": "the-pikeman-jeffrey",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-072.webp"
+  },
+  {
+    "id": "BS03-073",
+    "name": "Stone-Statue",
+    "nameEN": "Stone-Statue",
+    "namePT": "Stone-Statue",
+    "nameJP": "ストン・スタチュー",
+    "nameKey": "stone-statue",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Discard 1 card from the top of your opponent's deck.",
+      "ptBR": "LV1/LV2 Quando Invocado: Descarte 1 carta do topo do deck do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-073.webp"
+  },
+  {
+    "id": "BS03-074",
+    "name": "The BattleBeast Doben",
+    "nameEN": "The BattleBeast Doben",
+    "namePT": "The BattleBeast Doben",
+    "nameJP": "戦闘獣ドーベン",
+    "nameKey": "the-battlebeast-doben",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Battle Beast"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: This Spirit gets +1000 BP during this turn.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-074.webp"
+  },
+  {
+    "id": "BS03-075",
+    "name": "The DogMan Murdoch",
+    "nameEN": "The DogMan Murdoch",
+    "namePT": "The DogMan Murdoch",
+    "nameJP": "犬人マードック",
+    "nameKey": "the-dogman-murdoch",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Main Step: Whenever the number of cards in your opponent's Hand increases due to one of their Magic or Nexus effects, for each card added, move 1 Core from their Field or Reserve to their Trash.",
+      "ptBR": "LV1/LV2 Durante a Main Step do Oponente: Sempre que a quantidade de cartas na Hand do oponente aumentar por um efeito de Magic ou Nexus dele, para cada carta adicionada, mova 1 Core do Field ou da Reserve dele para o Trash dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-075.webp"
+  },
+  {
+    "id": "BS03-076",
+    "name": "The ClawSword Lazarus",
+    "nameEN": "The ClawSword Lazarus",
+    "namePT": "The ClawSword Lazarus",
+    "nameJP": "爪剣のラザラス",
+    "nameKey": "the-clawsword-lazarus",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Crush] When This Spirit Attacks: Discard cards from the top of your opponent's deck equal to this Spirit's Level.",
+      "ptBR": "LV1/LV2/LV3 [Crush] Quando Este Spirit Ataca: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-076.webp"
+  },
+  {
+    "id": "BS03-077",
+    "name": "The AssaultSoldier Norman",
+    "nameEN": "The AssaultSoldier Norman",
+    "namePT": "The AssaultSoldier Norman",
+    "nameJP": "強襲兵のノーマン",
+    "nameKey": "the-assaultsoldier-norman",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: You may place 1 Blue Nexus card from your Hand without paying its cost.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Você pode colocar 1 carta de Nexus Blue da sua Hand sem pagar o custo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-077.webp"
+  },
+  {
+    "id": "BS03-078",
+    "name": "The Berserker Troll",
+    "nameEN": "The Berserker Troll",
+    "namePT": "The Berserker Troll",
+    "nameJP": "暴れトロル",
+    "nameKey": "the-berserker-troll",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Creator"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-078.webp"
+  },
+  {
+    "id": "BS03-079",
+    "name": "The StaffOfficer Foxin",
+    "nameEN": "The StaffOfficer Foxin",
+    "namePT": "The StaffOfficer Foxin",
+    "nameJP": "作戦参謀フォクシン",
+    "nameKey": "the-staffofficer-foxin",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: Each player can use only 1 Magic effect during each turn.",
+      "ptBR": "LV1/LV2: Cada jogador pode usar apenas 1 efeito de Magic durante cada turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-079.webp"
+  },
+  {
+    "id": "BS03-080",
+    "name": "Rock-Golem",
+    "nameEN": "Rock-Golem",
+    "namePT": "Rock-Golem",
+    "nameJP": "ロック・ゴレム",
+    "nameKey": "rock-golem",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Crush] When This Spirit Attacks: Discard cards from the top of your opponent's deck equal to this Spirit's Level.",
+      "ptBR": "LV1/LV2/LV3 [Crush] Quando Este Spirit Ataca: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-080.webp"
+  },
+  {
+    "id": "BS03-081",
+    "name": "The GiantCentaurusSoldier Danston",
+    "nameEN": "The GiantCentaurusSoldier Danston",
+    "namePT": "The GiantCentaurusSoldier Danston",
+    "nameJP": "人馬巨兵ダンストン",
+    "nameKey": "the-giantcentaurussoldier-danston",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Aberration"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 6,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-081.webp"
+  },
+  {
+    "id": "BS03-082",
+    "name": "Sharkhammer",
+    "nameEN": "Sharkhammer",
+    "namePT": "Sharkhammer",
+    "nameJP": "シャークハンマー",
+    "nameKey": "sharkhammer",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: Whenever one of your Nexuses is destroyed, Refresh this Spirit.",
+      "ptBR": "LV1/LV2: Sempre que 1 dos seus Nexuses for destruído, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-082.webp"
+  }
+]

@@ -1,0 +1,577 @@
+[
+  {
+    "id": "BS04-076",
+    "name": "The Airspace of Pterosaurs",
+    "nameEN": "The Airspace of Pterosaurs",
+    "namePT": "The Airspace of Pterosaurs",
+    "nameJP": "翼持つ者の空域",
+    "nameKey": "the-airspace-of-pterosaurs",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your Spirits with the family \"Winged Dragon\" and/or \"Flying Fang\" get +2000 BP.\nLV2 During Your Attack Step: When one of your Spirits with the family \"Winged Dragon\" and/or \"Flying Fang\" attacks, your opponent must block if possible.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits com a família \"Winged Dragon\" e/ou \"Flying Fang\" recebem +2000 BP.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com a família \"Winged Dragon\" e/ou \"Flying Fang\" atacar, o oponente deve bloquear se possível."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-076.webp"
+  },
+  {
+    "id": "BS04-077",
+    "name": "The Seven Dragons' Throne",
+    "nameEN": "The Seven Dragons' Throne",
+    "namePT": "The Seven Dragons' Throne",
+    "nameJP": "七龍帝の玉座",
+    "nameKey": "the-seven-dragons-throne",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All Spirit cards in your Hand with the family \"Ancient Dragon\" and/or \"Dragon Emperor\" gain 1 Red reduction symbol.\nLV2 During Your Main Step: When you summon a Spirit with the family \"Ancient Dragon\" and/or \"Dragon Emperor\", destroy 1 opposing Spirit with BP equal to or less than that summoned Spirit.",
+      "ptBR": "LV1/LV2: Todas as cartas de Spirit na sua Hand com a família \"Ancient Dragon\" e/ou \"Dragon Emperor\" ganham 1 símbolo de redução Red.\nLV2 Durante Sua Main Step: Quando você invocar um Spirit com a família \"Ancient Dragon\" e/ou \"Dragon Emperor\", destrua 1 Spirit do oponente com BP igual ou menor ao daquele Spirit invocado."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-077.webp"
+  },
+  {
+    "id": "BS04-078",
+    "name": "The Devil Shadow Street",
+    "nameEN": "The Devil Shadow Street",
+    "namePT": "The Devil Shadow Street",
+    "nameJP": "魔影街",
+    "nameKey": "the-devil-shadow-street",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: When an opposing Spirit is destroyed by a [Curse] effect, move 1 Core from that Spirit to the Void.\nLV2 During the Opponent's Main Step: Exhaust all Spirits whose number of Cores was increased by something other than a Spirit, Nexus, or Magic effect.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Quando um Spirit do oponente for destruído por um efeito de [Curse], mova 1 Core daquele Spirit para o Void.\nLV2 Durante a Main Step do Oponente: Deixe Exhausted todos os Spirits cuja quantidade de Cores foi aumentada por algo que não seja efeito de Spirit, Nexus ou Magic."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-078.webp"
+  },
+  {
+    "id": "BS04-079",
+    "name": "The King Snake Nest",
+    "nameEN": "The King Snake Nest",
+    "namePT": "The King Snake Nest",
+    "nameJP": "王蛇の住処",
+    "nameKey": "the-king-snake-nest",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Draw Step: If you control a total of three or more Spirits with the family \"Dark Snake\" and/or \"Evil Deity\", draw 1 additional card during this Draw Step.\nLV2 During Your Start Step: For each Spirit you control with the family \"Dark Snake\", move 1 Core from an opposing Spirit to your opponent's Reserve. This effect cannot reduce a Spirit to 0 Cores.",
+      "ptBR": "LV1/LV2 Durante Seu Draw Step: Se você controlar um total de 3 ou mais Spirits com a família \"Dark Snake\" e/ou \"Evil Deity\", compre 1 carta adicional durante este Draw Step.\nLV2 Durante Seu Start Step: Para cada Spirit que você controla com a família \"Dark Snake\", mova 1 Core de um Spirit do oponente para a Reserve dele. Este efeito não pode deixar um Spirit com 0 Cores."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-079.webp"
+  },
+  {
+    "id": "BS04-080",
+    "name": "The Whirlwind Ravine",
+    "nameEN": "The Whirlwind Ravine",
+    "namePT": "The Whirlwind Ravine",
+    "nameJP": "旋風渦巻く渓谷",
+    "nameKey": "the-whirlwind-ravine",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Main Step: Neither player can control five or more Spirits.\nLV2 During Your Attack Step: The [High Speed] effect of all Spirit cards in your Hand becomes: \"[High Speed] You may summon this Spirit card from your Hand during Flash Timing.\"",
+      "ptBR": "LV1/LV2 Durante a Main Step de qualquer jogador: Nenhum jogador pode controlar 5 ou mais Spirits.\nLV2 Durante Seu Attack Step: O efeito [High Speed] de todas as cartas de Spirit na sua Hand passa a ser: \"[High Speed] Você pode invocar esta carta de Spirit da sua Hand durante o Flash Timing.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-080.webp"
+  },
+  {
+    "id": "BS04-081",
+    "name": "The Strong-Dominated Earth",
+    "nameEN": "The Strong-Dominated Earth",
+    "namePT": "The Strong-Dominated Earth",
+    "nameJP": "強者統べる大地",
+    "nameKey": "the-strong-dominated-earth",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: When one of your Spirits with 6000 BP or more is destroyed by an opposing Spirit through BP comparison, keep it on your Field in Exhausted state.\nLV2 During Your Attack Step: At the start of the step, choose 1 of your Spirits with 10000 BP or more. Once per turn, the chosen Spirit cannot be blocked by an opposing Spirit.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com 6000 BP ou mais for destruído por um Spirit do oponente pela comparação de BP, mantenha-o no seu Field em estado Exhausted.\nLV2 Durante Seu Attack Step: No início do Step, escolha 1 dos seus Spirits com 10000 BP ou mais. Uma vez por turno, o Spirit escolhido não pode ser bloqueado por um Spirit do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-081.webp"
+  },
+  {
+    "id": "BS04-082",
+    "name": "The Inviolable Sanctuary",
+    "nameEN": "The Inviolable Sanctuary",
+    "namePT": "The Inviolable Sanctuary",
+    "nameJP": "侵されざる聖域",
+    "nameKey": "the-inviolable-sanctuary",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All your cost 8 or higher Spirits gain [Armor: Purple/Green/White/Yellow/Blue]: They are unaffected by opposing Purple, Green, White, Yellow, and Blue Spirit, Nexus, and Magic effects.\nLV2: Your deck cannot have six or more cards discarded from it during a single turn by opposing Spirit, Nexus, or Magic effects.",
+      "ptBR": "LV1/LV2: Todos os seus Spirits de custo 8 ou mais ganham [Armor: Purple/Green/White/Yellow/Blue]: Eles não são afetados por efeitos de Spirit, Nexus e Magic Purple, Green, White, Yellow e Blue do oponente.\nLV2: Seu deck não pode ter 6 ou mais cartas descartadas dele durante um único turno por efeitos de Spirit, Nexus ou Magic do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-082.webp"
+  },
+  {
+    "id": "BS04-083",
+    "name": "The Steel Forest",
+    "nameEN": "The Steel Forest",
+    "namePT": "The Steel Forest",
+    "nameJP": "鋼葉の樹林",
+    "nameKey": "the-steel-forest",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Start Step: Return 1 Spirit card with the family \"Armored Beast\" from your Trash to your Hand.\nLV2 During Your Main Step: When you summon a Spirit with the family \"Armored Beast\" and/or \"Giant Beast\", return 1 opposing Spirit with BP equal to or less than that summoned Spirit to its owner's Hand.",
+      "ptBR": "LV1/LV2 Durante Seu Start Step: Devolva 1 carta de Spirit com a família \"Armored Beast\" do seu Trash para sua Hand.\nLV2 Durante Sua Main Step: Quando você invocar um Spirit com a família \"Armored Beast\" e/ou \"Giant Beast\", devolva 1 Spirit do oponente com BP igual ou menor ao daquele Spirit invocado para a Hand do dono."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-083.webp"
+  },
+  {
+    "id": "BS04-084",
+    "name": "The Miraculous Hill",
+    "nameEN": "The Miraculous Hill",
+    "namePT": "The Miraculous Hill",
+    "nameJP": "奇跡の丘",
+    "nameKey": "the-miraculous-hill",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your Spirits with the family \"Divine Spirit\" get +1000 BP.\nLV2 During Your Attack Step: When one of your Spirits with the family \"Divine Spirit\" is destroyed by an opposing Spirit through BP comparison, return it to your Hand.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits com a família \"Divine Spirit\" recebem +1000 BP.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com a família \"Divine Spirit\" for destruído por um Spirit do oponente pela comparação de BP, devolva-o para sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-084.webp"
+  },
+  {
+    "id": "BS04-085",
+    "name": "The Spring of Full Magical Powers",
+    "nameEN": "The Spring of Full Magical Powers",
+    "namePT": "The Spring of Full Magical Powers",
+    "nameJP": "魔力満ちる泉",
+    "nameKey": "the-spring-of-full-magical-powers",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Main Step: While you control three or more Spirits with the family \"Four Paths\", whenever your opponent summons a Spirit, they must pay 1 additional cost.\nLV2 During the Opponent's Attack Step: While you control three or more Spirits with the family \"Four Paths\", whenever an opposing Spirit attacks, move 1 Core from your opponent's Field or Reserve to their Trash.",
+      "ptBR": "LV1/LV2 Durante a Main Step do Oponente: Enquanto você controlar 3 ou mais Spirits com a família \"Four Paths\", sempre que o oponente invocar um Spirit, ele deve pagar 1 custo adicional.\nLV2 Durante o Attack Step do Oponente: Enquanto você controlar 3 ou mais Spirits com a família \"Four Paths\", sempre que um Spirit do oponente atacar, mova 1 Core do Field ou Reserve dele para o Trash dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-085.webp"
+  },
+  {
+    "id": "BS04-086",
+    "name": "The Ancient Arena",
+    "nameEN": "The Ancient Arena",
+    "namePT": "The Ancient Arena",
+    "nameJP": "古代闘技場",
+    "nameKey": "the-ancient-arena",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: Effects of opposing Spirits, Nexuses, and Magic that would increase BP do not activate.\nLV2 During Your Main Step: All \"When Summoned\" effects of opposing Spirits do not activate.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Efeitos de Spirit, Nexus e Magic do oponente que aumentariam BP não são ativados.\nLV2 Durante Sua Main Step: Todos os efeitos \"When Summoned\" dos Spirits do oponente não são ativados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-086.webp"
+  },
+  {
+    "id": "BS04-087",
+    "name": "The Heart-Buster Huge Slope",
+    "nameEN": "The Heart-Buster Huge Slope",
+    "namePT": "The Heart-Buster Huge Slope",
+    "nameJP": "心臓破りの巨大坂",
+    "nameKey": "the-heart-buster-huge-slope",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Start Step: Discard 1 card from the top of your opponent's deck.\nLV2: Treat all your Spirits with no effect text as their highest Level during the turn they are summoned.",
+      "ptBR": "LV1/LV2 Durante o Start Step do Oponente: Descarte 1 carta do topo do deck do oponente.\nLV2: Trate todos os seus Spirits sem texto de efeito como estando no Level máximo deles durante o turno em que forem invocados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-087.webp"
+  },
+  {
+    "id": "BS04-088",
+    "name": "The Victory Stand of the Glory",
+    "nameEN": "The Victory Stand of the Glory",
+    "namePT": "The Victory Stand of the Glory",
+    "nameJP": "栄光の表彰台",
+    "nameKey": "the-victory-stand-of-the-glory",
+    "set": "BS04",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Main Step: When paying the placement cost of one of your Nexuses, for each 1 cost you would pay, you may instead discard 1 card from the top of your deck to count as paying 1 cost.\nLV2: Whenever you place a Nexus, put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Durante Sua Main Step: Ao pagar o custo para colocar 1 dos seus Nexuses, para cada 1 de custo que você pagaria, você pode em vez disso descartar 1 carta do topo do seu deck para contar como o pagamento de 1 custo.\nLV2: Sempre que você colocar um Nexus, coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-088.webp"
+  }
+]

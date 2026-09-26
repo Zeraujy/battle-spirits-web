@@ -1,0 +1,832 @@
+[
+  {
+    "id": "BS04-089",
+    "name": "Great Link",
+    "nameEN": "Great Link",
+    "namePT": "Great Link",
+    "nameJP": "グレートリンク",
+    "nameKey": "great-link",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Move all Cores from your Trash onto 1 of your Spirits with [Awaken]. This effect cannot be used during the Main Step.",
+      "ptBR": "Flash: Mova todos os Cores do seu Trash para 1 dos seus Spirits com [Awaken]. Este efeito não pode ser usado durante a Main Step."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-089.webp"
+  },
+  {
+    "id": "BS04-090",
+    "name": "Der Ring des Nibelungen",
+    "nameEN": "Der Ring des Nibelungen",
+    "namePT": "Der Ring des Nibelungen",
+    "nameJP": "ニーベルングリング",
+    "nameKey": "der-ring-des-nibelungen",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, whenever one of your Spirits with \"Sieg\" in its card name destroys only an opposing Spirit by comparing BP, destroy all opposing Spirits with the same families as the destroyed Spirit.",
+      "ptBR": "Flash: Durante este turno, sempre que 1 dos seus Spirits com \"Sieg\" no nome da carta destruir apenas um Spirit do oponente pela comparação de BP, destrua todos os Spirits do oponente com as mesmas famílias do Spirit destruído."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-090.webp"
+  },
+  {
+    "id": "BS04-091",
+    "name": "Lightning Ballista",
+    "nameEN": "Lightning Ballista",
+    "namePT": "Lightning Ballista",
+    "nameJP": "ライトニングバリスタ",
+    "nameKey": "lightning-ballista",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Destroy 1 opposing Spirit with 7000 BP or less. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Destrua 1 Spirit do oponente com 7000 BP ou menos. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-091.webp"
+  },
+  {
+    "id": "BS04-092",
+    "name": "Dragons' Rush",
+    "nameEN": "Dragons' Rush",
+    "namePT": "Dragons' Rush",
+    "nameJP": "ドラゴンズラッシュ",
+    "nameKey": "dragons-rush",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, whenever one of your Spirits with the family \"Winged Dragon\", \"Dragon\", and/or \"Ancient Dragon\" destroys only an opposing Spirit by comparing BP, Refresh that Spirit.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Durante este turno, sempre que 1 dos seus Spirits com a família \"Winged Dragon\", \"Dragon\" e/ou \"Ancient Dragon\" destruir apenas um Spirit do oponente pela comparação de BP, dê Refresh naquele Spirit.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-092.webp"
+  },
+  {
+    "id": "BS04-093",
+    "name": "Euthanasia",
+    "nameEN": "Euthanasia",
+    "namePT": "Euthanasia",
+    "nameJP": "ユーサネイジア",
+    "nameKey": "euthanasia",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all opposing Spirits' When Destroyed effects do not activate.",
+      "ptBR": "Flash: Durante este turno, todos os efeitos When Destroyed dos Spirits do oponente não são ativados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-093.webp"
+  },
+  {
+    "id": "BS04-094",
+    "name": "Danse Macabre",
+    "nameEN": "Danse Macabre",
+    "namePT": "Danse Macabre",
+    "nameJP": "ダンスマカブル",
+    "nameKey": "danse-macabre",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Discard any number of cards from your Hand. For each card discarded, move 1 Core from an opposing Spirit to your opponent's Trash.",
+      "ptBR": "Flash: Descarte qualquer quantidade de cartas da sua Hand. Para cada carta descartada, mova 1 Core de um Spirit do oponente para o Trash dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-094.webp"
+  },
+  {
+    "id": "BS04-095",
+    "name": "Venom Shot",
+    "nameEN": "Venom Shot",
+    "namePT": "Venom Shot",
+    "nameJP": "ヴェノムショット",
+    "nameKey": "venom-shot",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Move 1 Core from an opposing Spirit to the Void.\nFlash: During this turn, 1 Spirit gets +1000 BP.",
+      "ptBR": "Main: Mova 1 Core de um Spirit do oponente para o Void.\nFlash: Durante este turno, 1 Spirit recebe +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-095.webp"
+  },
+  {
+    "id": "BS04-096",
+    "name": "Inferno Eyes",
+    "nameEN": "Inferno Eyes",
+    "namePT": "Inferno Eyes",
+    "nameJP": "インフェルノアイズ",
+    "nameKey": "inferno-eyes",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Each player moves 4 Cores from their Spirits and/or Nexuses to the Void. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Cada jogador move 4 Cores dos próprios Spirits e/ou Nexuses para o Void. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-096.webp"
+  },
+  {
+    "id": "BS04-097",
+    "name": "Forest Aura",
+    "nameEN": "Forest Aura",
+    "namePT": "Forest Aura",
+    "nameJP": "フォレストオーラ",
+    "nameKey": "forest-aura",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all your attacking Spirits with the family \"Talon Bird\" and/or \"Tree Spirit\" get +3000 BP.",
+      "ptBR": "Flash: Durante este turno, todos os seus Spirits atacantes com a família \"Talon Bird\" e/ou \"Tree Spirit\" recebem +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-097.webp"
+  },
+  {
+    "id": "BS04-098",
+    "name": "Full Add",
+    "nameEN": "Full Add",
+    "namePT": "Full Add",
+    "nameJP": "フルアッド",
+    "nameKey": "full-add",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Choose 1 Nexus you control. Put Cores from the Void onto that Nexus until it has enough Cores to maintain LV2.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Escolha 1 Nexus que você controla. Coloque Cores do Void sobre aquele Nexus até que ele tenha Cores suficientes para manter LV2.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-098.webp"
+  },
+  {
+    "id": "BS04-099",
+    "name": "Ground Howling",
+    "nameEN": "Ground Howling",
+    "namePT": "Ground Howling",
+    "nameJP": "グラウンドハウリング",
+    "nameKey": "ground-howling",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Exhaust all opposing Spirits with 4000 BP or more. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Deixe Exhausted todos os Spirits do oponente com 4000 BP ou mais. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-099.webp"
+  },
+  {
+    "id": "BS04-100",
+    "name": "Jungle Law",
+    "nameEN": "Jungle Law",
+    "namePT": "Jungle Law",
+    "nameJP": "ジャングルロウ",
+    "nameKey": "jungle-law",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Exhaust all LV1 Spirits.\nFlash: During this turn, 1 Spirit gets +4000 BP.",
+      "ptBR": "Main: Deixe Exhausted todos os Spirits LV1.\nFlash: Durante este turno, 1 Spirit recebe +4000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-100.webp"
+  },
+  {
+    "id": "BS04-101",
+    "name": "Mist Curtain",
+    "nameEN": "Mist Curtain",
+    "namePT": "Mist Curtain",
+    "nameJP": "ミストカーテン",
+    "nameKey": "mist-curtain",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Choose 1 opposing Spirit. During this turn, if you do not block that Spirit's attack, your Life cannot be reduced by that attack.",
+      "ptBR": "Flash: Escolha 1 Spirit do oponente. Durante este turno, se você não bloquear o ataque daquele Spirit, sua Life não pode ser reduzida por aquele ataque."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-101.webp"
+  },
+  {
+    "id": "BS04-102",
+    "name": "Dream Hand",
+    "nameEN": "Dream Hand",
+    "namePT": "Dream Hand",
+    "nameJP": "ドリームハンド",
+    "nameKey": "dream-hand",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Return all cost 1 or lower Spirits to their owners' Hands.",
+      "ptBR": "Flash: Devolva todos os Spirits de custo 1 ou menos para as Hands de seus donos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-102.webp"
+  },
+  {
+    "id": "BS04-103",
+    "name": "High Ether",
+    "nameEN": "High Ether",
+    "namePT": "High Ether",
+    "nameJP": "ハイエーテル",
+    "nameKey": "high-ether",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Refresh 3 of your Spirits with the family \"Giant Beast\" and/or \"Armored Beast\".",
+      "ptBR": "Flash: Dê Refresh em 3 dos seus Spirits com a família \"Giant Beast\" e/ou \"Armored Beast\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-103.webp"
+  },
+  {
+    "id": "BS04-104",
+    "name": "Glacial Breath",
+    "nameEN": "Glacial Breath",
+    "namePT": "Glacial Breath",
+    "nameJP": "グラシアルブレス",
+    "nameKey": "glacial-breath",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Return 2 of your Spirits to the bottom of your deck in any order. Then return 2 opposing Spirits to the bottom of their owner's deck in any order. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Coloque 2 dos seus Spirits no fundo do seu deck em qualquer ordem. Depois, coloque 2 Spirits do oponente no fundo do deck do dono em qualquer ordem. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-104.webp"
+  },
+  {
+    "id": "BS04-105",
+    "name": "Trick Prank",
+    "nameEN": "Trick Prank",
+    "namePT": "Trick Prank",
+    "nameJP": "トリックプランク",
+    "nameKey": "trick-prank",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Return 5 Spirit cards from your Trash to the bottom of your deck in any order.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Coloque 5 cartas de Spirit do seu Trash no fundo do seu deck em qualquer ordem.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-105.webp"
+  },
+  {
+    "id": "BS04-106",
+    "name": "Gleam Hope",
+    "nameEN": "Gleam Hope",
+    "namePT": "Gleam Hope",
+    "nameJP": "グリームホープ",
+    "nameKey": "gleam-hope",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, 1 of your Spirits gains [Brilliance]: When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Durante este turno, 1 dos seus Spirits ganha [Brilliance]: Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-106.webp"
+  },
+  {
+    "id": "BS04-107",
+    "name": "Judgment Lights",
+    "nameEN": "Judgment Lights",
+    "namePT": "Judgment Lights",
+    "nameJP": "ジャッジメントライツ",
+    "nameKey": "judgment-lights",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, treat all opposing Spirits as LV1. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Durante este turno, trate todos os Spirits do oponente como LV1. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-107.webp"
+  },
+  {
+    "id": "BS04-108",
+    "name": "Straight Flush",
+    "nameEN": "Straight Flush",
+    "namePT": "Straight Flush",
+    "nameJP": "ストレートフラッシュ",
+    "nameKey": "straight-flush",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: If you control five or more Spirits with the family \"Four Paths\", destroy all your Spirits with the family \"Four Paths\", then destroy all opposing Spirits.\nFlash: During this turn, 1 Spirit gets +4000 BP.",
+      "ptBR": "Main: Se você controlar 5 ou mais Spirits com a família \"Four Paths\", destrua todos os seus Spirits com a família \"Four Paths\" e depois destrua todos os Spirits do oponente.\nFlash: Durante este turno, 1 Spirit recebe +4000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-108.webp"
+  },
+  {
+    "id": "BS04-109",
+    "name": "Switch Hitter",
+    "nameEN": "Switch Hitter",
+    "namePT": "Switch Hitter",
+    "nameJP": "スイッチヒッター",
+    "nameKey": "switch-hitter",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, all your Spirits with the family \"Artificial Soldier\" are also treated as Spirits with no effect text.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Durante este turno, todos os seus Spirits com a família \"Artificial Soldier\" também são tratados como Spirits sem texto de efeito.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-109.webp"
+  },
+  {
+    "id": "BS04-110",
+    "name": "Lead Wall",
+    "nameEN": "Lead Wall",
+    "namePT": "Lead Wall",
+    "nameJP": "レッドウォール",
+    "nameKey": "lead-wall",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all your Spirits can block Spirits with effects that say they cannot be blocked.",
+      "ptBR": "Flash: Durante este turno, todos os seus Spirits podem bloquear Spirits com efeitos que dizem que eles não podem ser bloqueados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-110.webp"
+  },
+  {
+    "id": "BS04-111",
+    "name": "Magic Drill",
+    "nameEN": "Magic Drill",
+    "namePT": "Magic Drill",
+    "nameJP": "マジックドリル",
+    "nameKey": "magic-drill",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: For each card in your opponent's Hand, discard 1 card from the top of their deck.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Para cada carta na Hand do oponente, descarte 1 carta do topo do deck dele.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-111.webp"
+  },
+  {
+    "id": "BS04-112",
+    "name": "Massive Up",
+    "nameEN": "Massive Up",
+    "namePT": "Massive Up",
+    "nameJP": "マッシブアップ",
+    "nameKey": "massive-up",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, treat 1 Blue Spirit that has LV3 as LV3.",
+      "ptBR": "Flash: Durante este turno, trate 1 Spirit Blue que possua LV3 como LV3."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-112.webp"
+  },
+  {
+    "id": "BS04-113",
+    "name": "Nexus Repair",
+    "nameEN": "Nexus Repair",
+    "namePT": "Nexus Repair",
+    "nameJP": "ネクサスリペアー",
+    "nameKey": "nexus-repair",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Place 1 Nexus card from your Trash without paying its cost.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Coloque 1 carta de Nexus do seu Trash sem pagar o custo.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-113.webp"
+  },
+  {
+    "id": "BS04-114",
+    "name": "Tidal Tide",
+    "nameEN": "Tidal Tide",
+    "namePT": "Tidal Tide",
+    "nameJP": "タイダルタイド",
+    "nameKey": "tidal-tide",
+    "set": "BS04",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Destroy any number of Nexuses you control. For each Nexus destroyed by this effect, destroy 1 opposing Spirit. You cannot use this effect unless you control a Spirit with two or more symbols.\nFlash: During this turn, 1 Spirit with two or more symbols gets +5000 BP.",
+      "ptBR": "Main: Destrua qualquer quantidade de Nexuses que você controla. Para cada Nexus destruído por este efeito, destrua 1 Spirit do oponente. Você não pode usar este efeito a menos que controle um Spirit com 2 ou mais símbolos.\nFlash: Durante este turno, 1 Spirit com 2 ou mais símbolos recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS04/BS04-114.webp"
+  }
+]

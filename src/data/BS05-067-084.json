@@ -1,0 +1,569 @@
+[
+  {
+    "id": "BS05-067",
+    "name": "Warning Attack",
+    "nameEN": "Warning Attack",
+    "namePT": "Warning Attack",
+    "nameJP": "ワーニングアタック",
+    "nameKey": "warning-attack",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, whenever one of your Spirits with the family \"Winged Dragon\" and/or \"Flying Fang\" attacks, your opponent must block with a Spirit with 3000 BP or less if possible.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Durante este turno, sempre que 1 dos seus Spirits com a família \"Winged Dragon\" e/ou \"Flying Fang\" atacar, o oponente deve bloquear com um Spirit de 3000 BP ou menos se possível.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-067.webp"
+  },
+  {
+    "id": "BS05-068",
+    "name": "Synchronicity",
+    "nameEN": "Synchronicity",
+    "namePT": "Synchronicity",
+    "nameJP": "シンクロニシティ",
+    "nameKey": "synchronicity",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, when one of your Spirits with [Awaken] attacks, it may select 1 opposing Spirit with 4000 BP or more and attack that Spirit.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Durante este turno, quando 1 dos seus Spirits com [Awaken] atacar, ele pode escolher 1 Spirit do oponente com 4000 BP ou mais e atacar aquele Spirit.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-068.webp"
+  },
+  {
+    "id": "BS05-069",
+    "name": "Transmigration",
+    "nameEN": "Transmigration",
+    "namePT": "Transmigration",
+    "nameJP": "トランスマイグレーション",
+    "nameKey": "transmigration",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Reveal the top 3 cards of your deck. You may summon 1 Spirit card with [Tribute] among them without paying its cost and without activating its [Tribute] effect. Discard the remaining cards. During your End Step, return the Spirit summoned by this effect to the bottom of your deck.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Revele as 3 cartas do topo do seu deck. Você pode invocar 1 carta de Spirit com [Tribute] entre elas sem pagar o custo e sem ativar seu efeito [Tribute]. Descarte as cartas restantes. Durante seu End Step, coloque o Spirit invocado por este efeito no fundo do seu deck.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-069.webp"
+  },
+  {
+    "id": "BS05-070",
+    "name": "Soul Crash",
+    "nameEN": "Soul Crash",
+    "namePT": "Soul Crash",
+    "nameJP": "ソウルクラッシュ",
+    "nameKey": "soul-crash",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, when you summon a Spirit with \"SevenShogun\" in its card name, destroy all Exhausted Spirits.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Durante este turno, quando você invocar um Spirit com \"SevenShogun\" no nome da carta, destrua todos os Spirits Exhausted.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-070.webp"
+  },
+  {
+    "id": "BS05-071",
+    "name": "Reanimate",
+    "nameEN": "Reanimate",
+    "namePT": "Reanimate",
+    "nameJP": "リアニメイト",
+    "nameKey": "reanimate",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, when any of your Spirits with [Curse] would be destroyed by an opposing Spirit through BP comparison, keep it on your Field in Exhausted state.",
+      "ptBR": "Flash: Durante este turno, quando qualquer um dos seus Spirits com [Curse] seria destruído por um Spirit do oponente pela comparação de BP, mantenha-o no seu Field em estado Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-071.webp"
+  },
+  {
+    "id": "BS05-072",
+    "name": "Absorb Symbol",
+    "nameEN": "Absorb Symbol",
+    "namePT": "Absorb Symbol",
+    "nameJP": "アブソーブシンボル",
+    "nameKey": "absorb-symbol",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, Exhaust all opposing Spirits that had Cores placed on them or removed from them by Spirit, Nexus, or Magic effects.",
+      "ptBR": "Flash: Durante este turno, deixe Exhausted todos os Spirits do oponente que tiveram Cores colocados sobre eles ou removidos deles por efeitos de Spirit, Nexus ou Magic."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-072.webp"
+  },
+  {
+    "id": "BS05-073",
+    "name": "God Speed",
+    "nameEN": "God Speed",
+    "namePT": "God Speed",
+    "nameJP": "ゴッドスピード",
+    "nameKey": "god-speed",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all Spirit cards in your Hand with [High Speed] and cost 6 or more become cost 4. This effect cannot be used during the Main Step.",
+      "ptBR": "Flash: Durante este turno, todas as cartas de Spirit na sua Hand com [High Speed] e custo 6 ou mais passam a ter custo 4. Este efeito não pode ser usado durante a Main Step."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-073.webp"
+  },
+  {
+    "id": "BS05-074",
+    "name": "Branch Lock",
+    "nameEN": "Branch Lock",
+    "namePT": "Branch Lock",
+    "nameJP": "ブランチロック",
+    "nameKey": "branch-lock",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: If you have two or more different symbol colors on your Field, Exhaust 2 opposing Spirits.",
+      "ptBR": "Flash: Se você tiver 2 ou mais cores diferentes de símbolos no seu Field, deixe 2 Spirits do oponente Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-074.webp"
+  },
+  {
+    "id": "BS05-075",
+    "name": "Brave Charge",
+    "nameEN": "Brave Charge",
+    "namePT": "Brave Charge",
+    "nameJP": "ブレイブチャージ",
+    "nameKey": "brave-charge",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all \"When This Spirit Attacks\" effects of 1 of your Spirits also activate when that Spirit blocks.",
+      "ptBR": "Flash: Durante este turno, todos os efeitos \"Quando Este Spirit Ataca\" de 1 dos seus Spirits também são ativados quando aquele Spirit bloqueia."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-075.webp"
+  },
+  {
+    "id": "BS05-076",
+    "name": "Eternal Shield",
+    "nameEN": "Eternal Shield",
+    "namePT": "Eternal Shield",
+    "nameJP": "エターナルシールド",
+    "nameKey": "eternal-shield",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, your deck cannot have six or more cards discarded from it by opposing Spirit, Nexus, or Magic effects.",
+      "ptBR": "Flash: Durante este turno, seu deck não pode ter 6 ou mais cartas descartadas dele por efeitos de Spirit, Nexus ou Magic do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-076.webp"
+  },
+  {
+    "id": "BS05-077",
+    "name": "Crystal Aura",
+    "nameEN": "Crystal Aura",
+    "namePT": "Crystal Aura",
+    "nameJP": "クリスタルオーラ",
+    "nameKey": "crystal-aura",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Put 1 Core from the Void onto each of your Spirits with the family \"Ice Princess\".\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Coloque 1 Core do Void sobre cada um dos seus Spirits com a família \"Ice Princess\".\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-077.webp"
+  },
+  {
+    "id": "BS05-078",
+    "name": "Icicle Assault",
+    "nameEN": "Icicle Assault",
+    "namePT": "Icicle Assault",
+    "nameJP": "アイシクルアサルト",
+    "nameKey": "icicle-assault",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, for each color specified by an [Armor] effect on each of your Spirits, that Spirit gets +1000 BP.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Durante este turno, para cada cor especificada por um efeito [Armor] em cada um dos seus Spirits, aquele Spirit recebe +1000 BP.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-078.webp"
+  },
+  {
+    "id": "BS05-079",
+    "name": "Three Cards",
+    "nameEN": "Three Cards",
+    "namePT": "Three Cards",
+    "nameJP": "スリーカード",
+    "nameKey": "three-cards",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Choose 1 Spirit. During this turn, when your Spirit or Nexus effects count the number of Spirits you control, count the chosen Spirit as 3 Spirits. This effect cannot be used during the Main Step.",
+      "ptBR": "Flash: Escolha 1 Spirit. Durante este turno, quando seus efeitos de Spirit ou Nexus contarem a quantidade de Spirits que você controla, conte o Spirit escolhido como 3 Spirits. Este efeito não pode ser usado durante a Main Step."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-079.webp"
+  },
+  {
+    "id": "BS05-080",
+    "name": "Chorus Birds",
+    "nameEN": "Chorus Birds",
+    "namePT": "Chorus Birds",
+    "nameJP": "コーラスバード",
+    "nameKey": "chorus-birds",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Return 3 Spirit cards with the family \"Song Bird\" from your Trash to your Hand.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Devolva 3 cartas de Spirit com a família \"Song Bird\" do seu Trash para sua Hand.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-080.webp"
+  },
+  {
+    "id": "BS05-081",
+    "name": "Nexus Blockade",
+    "nameEN": "Nexus Blockade",
+    "namePT": "Nexus Blockade",
+    "nameJP": "ネクサスブロケイド",
+    "nameKey": "nexus-blockade",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: If you control three or more Spirits with the family \"Imaginary Beast\", all opposing Nexuses lose their effects during this turn.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Se você controlar 3 ou mais Spirits com a família \"Imaginary Beast\", todos os Nexuses do oponente perdem seus efeitos durante este turno.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-081.webp"
+  },
+  {
+    "id": "BS05-082",
+    "name": "CircularSaw Arm",
+    "nameEN": "CircularSaw Arm",
+    "namePT": "CircularSaw Arm",
+    "nameJP": "サーキュラーソー・アーム",
+    "nameKey": "circularsaw-arm",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all your Spirits with no effect text gain: \"[Crush] When This Spirit Attacks: Discard cards from the top of your opponent's deck equal to this Spirit's Level.\"",
+      "ptBR": "Flash: Durante este turno, todos os seus Spirits sem texto de efeito ganham: \"[Crush] Quando Este Spirit Ataca: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-082.webp"
+  },
+  {
+    "id": "BS05-083",
+    "name": "Magic Spanner",
+    "nameEN": "Magic Spanner",
+    "namePT": "Magic Spanner",
+    "nameJP": "マジックスパナ",
+    "nameKey": "magic-spanner",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Move all Cores from 1 of your Spirits with the family \"Artificial Soldier\" to the Void. Discard cards from the top of your opponent's deck equal to that Spirit's cost.",
+      "ptBR": "Flash: Mova todos os Cores de 1 dos seus Spirits com a família \"Artificial Soldier\" para o Void. Descarte do topo do deck do oponente uma quantidade de cartas igual ao custo daquele Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-083.webp"
+  },
+  {
+    "id": "BS05-084",
+    "name": "Potential Power",
+    "nameEN": "Potential Power",
+    "namePT": "Potential Power",
+    "nameJP": "ポテンシャルパワー",
+    "nameKey": "potential-power",
+    "set": "BS05",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 6,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, attacks from all your Spirits with no effect text cannot be blocked by Spirits with the same cost or lower.\nFlash: During this turn, 1 Spirit gets +4000 BP.",
+      "ptBR": "Main: Durante este turno, os ataques de todos os seus Spirits sem texto de efeito não podem ser bloqueados por Spirits de custo igual ou menor.\nFlash: Durante este turno, 1 Spirit recebe +4000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS05/BS05-084.webp"
+  }
+]

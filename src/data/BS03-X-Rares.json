@@ -1,0 +1,204 @@
+[
+  {
+    "id": "BS03-X09",
+    "name": "The SavageKnight Hercules",
+    "nameEN": "The SavageKnight Hercules",
+    "namePT": "The SavageKnight Hercules",
+    "nameJP": "蛮騎士ハーキュリー",
+    "nameKey": "the-savageknight-hercules",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 7,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Mounted Warrior"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 Flash [High Speed]: You may summon this Spirit card from your Hand during Flash Timing. When doing so, both the summon cost and the Cores placed on this Spirit must come from your Reserve.\nLV1/LV2 When Summoned: Refresh all Spirits with [High Speed].",
+      "ptBR": "LV1/LV2 Flash [High Speed]: Você pode invocar esta carta de Spirit da sua Hand durante o Flash Timing. Ao fazer isso, tanto o custo de invocação quanto os Cores colocados neste Spirit devem vir da sua Reserve.\nLV1/LV2 Quando Invocado: Dê Refresh em todos os Spirits com [High Speed]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-X09.webp"
+  },
+  {
+    "id": "BS03-X10",
+    "name": "The IceBeast Mam-Morl",
+    "nameEN": "The IceBeast Mam-Morl",
+    "namePT": "The IceBeast Mam-Morl",
+    "nameJP": "凍獣マン・モール",
+    "nameKey": "the-icebeast-mam-morl",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 8,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Giant Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 9000
+      },
+      {
+        "level": 3,
+        "cores": 8,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: All your White Spirits gain: \"When This Spirit Blocks: This Spirit gets +2000 BP during this battle.\"\nLV2: All your Spirits gain [Armor: Red/Purple/Green]: They are unaffected by opposing Red, Purple, and Green Spirit, Nexus, and Magic effects.\nLV3: All your Spirits gain [Armor: Red/Purple/Green/Yellow/Blue].",
+      "ptBR": "LV1/LV2/LV3: Todos os seus Spirits White ganham: \"Quando Este Spirit Bloqueia: Este Spirit recebe +2000 BP durante esta batalha.\"\nLV2: Todos os seus Spirits ganham [Armor: Red/Purple/Green]: Eles não são afetados por efeitos de Spirit, Nexus e Magic Red, Purple e Green do oponente.\nLV3: Todos os seus Spirits ganham [Armor: Red/Purple/Green/Yellow/Blue]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-X10.webp"
+  },
+  {
+    "id": "BS03-X11",
+    "name": "The ArcAngelia Valiero",
+    "nameEN": "The ArcAngelia Valiero",
+    "namePT": "The ArcAngelia Valiero",
+    "nameJP": "大天使ヴァリエル",
+    "nameKey": "the-arcangelia-valiero",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 8,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Choose Green or Yellow. Return all Magic cards of the chosen color from your Trash to your Hand.\nLV2/LV3 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Escolha Green ou Yellow. Devolva todas as cartas de Magic da cor escolhida do seu Trash para sua Hand.\nLV2/LV3 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-X11.webp"
+  },
+  {
+    "id": "BS03-X12",
+    "name": "The GiantHero Titus",
+    "nameEN": "The GiantHero Titus",
+    "namePT": "The GiantHero Titus",
+    "nameJP": "英雄巨人タイタス",
+    "nameKey": "the-gianthero-titus",
+    "set": "BS03",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 8,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit",
+      "Heroic"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Discard 10 cards from the top of your opponent's deck.\nLV2 When This Spirit Attacks: When only the opposing Spirit is destroyed by comparing BP, discard 10 cards from the top of your opponent's deck.",
+      "ptBR": "LV1/LV2 Quando Invocado: Descarte 10 cartas do topo do deck do oponente.\nLV2 Quando Este Spirit Ataca: Quando apenas o Spirit do oponente for destruído pela comparação de BP, descarte 10 cartas do topo do deck do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS03/BS03-X12.webp"
+  }
+]
