@@ -64,7 +64,7 @@ export async function createBattleSpiritsServer(options = {}) {
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify({
         ok: true,
-        version: "4.0.0",
+        version: "4.1.0",
         rooms: rooms.size,
         cards: cardIndex.size,
         matchmakingQueued: matchmakingQueue.length,

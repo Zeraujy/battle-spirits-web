@@ -12,3 +12,6 @@ Thumbs.db
 
 # Pacotes locais de atualização
 *.zip
+
+# Local staging area for card-set imports
+card-imports/

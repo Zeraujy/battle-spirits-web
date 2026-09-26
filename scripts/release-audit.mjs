@@ -6,7 +6,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
 const problems = [];
 
-const disposableDirs = new Set([".git", "node_modules", "dist", "release", "coverage", ".cache", ".parcel-cache", ".vite", ".vite-temp", ".turbo"]);
+const disposableDirs = new Set([".git", "node_modules", "dist", "release", "coverage", ".cache", ".parcel-cache", ".vite", ".vite-temp", ".turbo", "card-imports"]);
 const disposableFilePatterns = [/\.log$/i, /\.tmp$/i, /\.temp$/i, /\.bak$/i, /\.old$/i, /^\.DS_Store$/i, /^Thumbs\.db$/i];
 
 function walk(dir, rel = "") {

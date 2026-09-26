@@ -93,7 +93,7 @@ const requiredPaths = [
   "scripts/windows"
 ];
 
-console.log("Battle Spirits Simulator v4.0.0 — verificação estrutural\n");
+console.log("Battle Spirits Simulator v4.1.0 — verificação estrutural\n");
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -101,17 +101,22 @@ for (const relative of requiredPaths) {
 }
 
 const dataDir = path.join(root, "src", "data");
-const jsonFiles = fs.existsSync(dataDir)
-  ? fs.readdirSync(dataDir).filter((name) => name.toLowerCase().endsWith(".json"))
-  : [];
+function walkJsonFiles(dir) {
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const full = path.join(dir, entry.name);
+    return entry.isDirectory() ? walkJsonFiles(full) : (entry.name.toLowerCase().endsWith(".json") ? [full] : []);
+  });
+}
+const jsonFiles = walkJsonFiles(dataDir);
 
 const rawCards = [];
-for (const name of jsonFiles) {
+for (const file of jsonFiles) {
   try {
-    const parsed = JSON.parse(fs.readFileSync(path.join(dataDir, name), "utf8"));
+    const parsed = JSON.parse(fs.readFileSync(file, "utf8"));
     rawCards.push(...(Array.isArray(parsed) ? parsed : (Array.isArray(parsed?.cards) ? parsed.cards : [])));
   } catch (error) {
-    console.error(`ERRO em src/data/${name}: ${error.message}`);
+    console.error(`ERRO em ${path.relative(root, file)}: ${error.message}`);
     failed = true;
   }
 }
@@ -183,4 +188,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v4.0.0 validada.");
+console.log("\nVERIFY OK — estrutura v4.1.0 validada.");

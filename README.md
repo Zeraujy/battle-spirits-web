@@ -18,3 +18,8 @@ Acesse o simulador pelo link abaixo:
 ---
 
 Projeto feito de fã para fã.
+
+## Expansão da database — v4.1.0
+
+Para adicionar novos sets, consulte `docs/card-database/ADDING-NEW-SETS.md`.
+O fluxo recomendado usa `npm run cards:template`, `npm run cards:import`, `npm run cards:sync` e `npm run cards:validate`.

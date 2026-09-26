@@ -1,9 +1,9 @@
 {
   "name": "battle-spirits-eternal-simulator",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "private": true,
   "type": "module",
-  "description": "Battle Spirits Eternal Simulator v4.0.0 - Battle Spirits Eternal Platform",
+  "description": "Battle Spirits Eternal Simulator v4.1.0 - Card Database Expansion Framework",
   "main": "electron/main.cjs",
   "scripts": {
     "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && cross-env ELECTRON_START_URL=http://127.0.0.1:5173 electron .\"",
@@ -15,7 +15,7 @@
     "preview": "vite preview",
     "dist:win": "npm run build && electron-builder --win nsis && node scripts/generate-update-manifest.mjs",
     "test": "node --test src/game/*.test.js src/online/*.test.js src/services/*.test.js",
-    "verify": "node scripts/verify-project.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs",
+    "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs",
     "check": "npm run verify && npm test && npm run build",
     "server:start": "node --env-file-if-exists=server/.env server/index.mjs",
     "online:check": "node scripts/check-online-config.mjs",
@@ -25,7 +25,12 @@
     "project:check": "npm run verify && npm test && npm run ui:audit && npm run release:audit",
     "publish:cloudflare": "npm run check && npx wrangler@4 deploy",
     "release:audit": "node scripts/release-audit.mjs",
-    "ui:audit": "node scripts/ui-audit.mjs"
+    "ui:audit": "node scripts/ui-audit.mjs",
+    "cards:validate": "node scripts/card-db/validate-catalog.mjs",
+    "cards:sync": "node scripts/card-db/sync-catalog-manifest.mjs",
+    "cards:template": "node scripts/card-db/create-set-template.mjs",
+    "cards:import": "node scripts/card-db/import-set.mjs",
+    "cards:check": "npm run cards:sync && npm run cards:validate && npm run verify"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",

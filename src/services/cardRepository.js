@@ -1,8 +1,9 @@
 import { makeCardIndex, normalizeCard } from "../game/cardAdapter.js";
 import { officialRestrictionForCard } from "../game/eternalDeckRules.js";
 
-const modules = import.meta.glob("../data/*.json", { eager: true, import: "default" });
+const modules = import.meta.glob("../data/**/*.json", { eager: true, import: "default" });
 const byId = new Map();
+const setDetails = new Map();
 const orderedModules = Object.entries(modules).sort(([a], [b]) => {
   const aBase = a.endsWith("/cards.json");
   const bBase = b.endsWith("/cards.json");
@@ -16,6 +17,7 @@ function mergeCatalogOverride(previous, incoming) {
 }
 
 for (const [, rawModule] of orderedModules) {
+  if (rawModule?.set?.code) setDetails.set(String(rawModule.set.code).toUpperCase(), { ...rawModule.set, code: String(rawModule.set.code).toUpperCase() });
   const list = Array.isArray(rawModule) ? rawModule : (Array.isArray(rawModule?.cards) ? rawModule.cards : []);
   for (const raw of list) {
     const card = normalizeCard(raw);
@@ -102,7 +104,8 @@ export const catalogMeta = Object.freeze({
   types: uniqueSorted(cards.map((card) => card.cardType)),
   colors: uniqueSorted(cards.flatMap((card) => card.colors || [])),
   reductions: uniqueSorted(cards.flatMap((card) => card.reduction || [])),
-  symbols: uniqueSorted(cards.flatMap((card) => card.symbols || []))
+  symbols: uniqueSorted(cards.flatMap((card) => card.symbols || [])),
+  setDetails: Object.freeze(Object.fromEntries(setDetails))
 });
 
 function compareCards(a, b, sort = "code") {

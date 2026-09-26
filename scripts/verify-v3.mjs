@@ -23,6 +23,12 @@ const required = [
   "src/game/deckRules.test.js",
   "src/services/deckAnalytics.js",
   "src/services/deckAnalytics.test.js",
+  "src/services/cardCatalogValidation.js",
+  "src/services/cardCatalogValidation.test.js",
+  "scripts/card-db/import-set.mjs",
+  "scripts/card-db/validate-catalog.mjs",
+  "scripts/card-db/sync-catalog-manifest.mjs",
+  "docs/card-database/ADDING-NEW-SETS.md",
   "src/styles/deckbuilder/deckBuilderV398.css",
   "src/game/snapshots.js",
   "src/online/publicProfile.js",
@@ -73,7 +79,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "4.0.0") throw new Error(`package.json está em ${pkg.version}, esperado 4.0.0`);
+if (pkg.version !== "4.1.0") throw new Error(`package.json está em ${pkg.version}, esperado 4.1.0`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -244,6 +250,16 @@ for (const rel of playerFacingFiles) {
 const exposedServerErrors = [...onlineServer.matchAll(/error\s*:\s*["'`]([^"'`]+)["'`]/g)].map((match) => match[1]).join("\n");
 const serverCopyHit = forbiddenPlayerCopy.find((pattern) => pattern.test(exposedServerErrors));
 if (serverCopyHit) throw new Error(`Mensagem técnica do servidor pode chegar ao jogador: ${serverCopyHit}`);
+
+// v4.1.0 — Card Database Expansion Framework.
+const catalogRepositoryV410 = fs.readFileSync(path.join(root, "src", "services", "cardRepository.js"), "utf8");
+const catalogValidationV410 = fs.readFileSync(path.join(root, "src", "services", "cardCatalogValidation.js"), "utf8");
+const packageScriptsV410 = pkg.scripts || {};
+if (!catalogRepositoryV410.includes('import.meta.glob("../data/**/*.json"')) throw new Error("O catálogo v4.1.0 precisa carregar sets JSON recursivamente.");
+if (!catalogValidationV410.includes("validateCatalogCollection") || !catalogValidationV410.includes("inferSetCode")) throw new Error("A validação do catálogo v4.1.0 está incompleta.");
+for (const scriptName of ["cards:template", "cards:import", "cards:sync", "cards:validate", "cards:check"]) {
+  if (!packageScriptsV410[scriptName]) throw new Error(`Script ${scriptName} ausente na v4.1.0.`);
+}
 
 // v4.0.0 — Eternal Platform consolidation and Ranked UX.
 const platformCss = fs.readFileSync(path.join(root, "src", "styles", "base", "eternalPlatformV400.css"), "utf8");

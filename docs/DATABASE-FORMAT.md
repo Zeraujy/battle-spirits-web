@@ -75,3 +75,9 @@ Caminhos de imagem com `public/`, barras do Windows (`\\`) e caminhos relativos 
 Efeitos estruturados podem usar `operations`. A engine atual reconhece operações simples como `draw`, `reserveCoreFromVoid`, `temporaryBP`, `refresh` e `exhaust`. Operações mais complexas caem no painel de resolução manual até receberem um handler específico.
 
 Isso evita interpretar texto de carta livre de forma errada e torna cada nova automação testável.
+
+## Estrutura de sets na v4.1.0
+
+Novos sets podem ser mantidos separadamente em `src/data/sets/<SET>.json`. O runtime carrega JSONs recursivamente dentro de `src/data`, preservando compatibilidade com os arquivos antigos.
+
+Para novos imports, prefira o fluxo documentado em `docs/card-database/ADDING-NEW-SETS.md` e os comandos `cards:template`, `cards:import`, `cards:sync` e `cards:validate`.

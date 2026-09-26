@@ -37,20 +37,25 @@ function loadCards(file) {
   return Array.isArray(parsed) ? parsed : (Array.isArray(parsed?.cards) ? parsed.cards : []);
 }
 
-const jsonFiles = fs.readdirSync(dataDir)
-  .filter((name) => name.toLowerCase().endsWith(".json"))
-  .sort((a, b) => {
-    const aBase = a === "cards.json";
-    const bBase = b === "cards.json";
-    if (aBase !== bBase) return aBase ? -1 : 1;
-    return a.localeCompare(b);
+function walkJsonFiles(dir) {
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const full = path.join(dir, entry.name);
+    return entry.isDirectory() ? walkJsonFiles(full) : (entry.name.toLowerCase().endsWith(".json") ? [full] : []);
   });
+}
+const jsonFiles = walkJsonFiles(dataDir).sort((a, b) => {
+  const aBase = path.basename(a) === "cards.json";
+  const bBase = path.basename(b) === "cards.json";
+  if (aBase !== bBase) return aBase ? -1 : 1;
+  return a.localeCompare(b);
+});
 
 const runtime = new Map();
 let inheritedArtwork = 0;
 
-for (const name of jsonFiles) {
-  for (const raw of loadCards(path.join(dataDir, name))) {
+for (const file of jsonFiles) {
+  for (const raw of loadCards(file)) {
     const id = cardId(raw);
     if (!id || id === "unknown") continue;
 
@@ -62,7 +67,7 @@ for (const name of jsonFiles) {
 
     runtime.set(id, {
       id,
-      source: name,
+      source: path.relative(dataDir, file).replaceAll(path.sep, "/"),
       artwork: effectiveArtwork
     });
   }

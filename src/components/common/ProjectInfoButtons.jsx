@@ -4,6 +4,47 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.1.0",
+    date: { pt: "26/09/2026", en: "09/26/2026" },
+    title: { pt: "Expansão da Database", en: "Database Expansion" },
+    summary: {
+      pt: "A base de cartas foi preparada para crescer com novos sets de forma mais organizada e confiável.",
+      en: "The card catalog is now prepared to grow with new sets in a more organized and reliable way."
+    },
+    sections: [
+      {
+        title: { pt: "Catálogo preparado para crescer", en: "Catalog ready to grow" },
+        items: {
+          pt: [
+            "Novos sets podem ser adicionados ao catálogo sem concentrar todas as cartas em um único arquivo.",
+            "A leitura do catálogo agora reconhece automaticamente sets organizados em pastas próprias.",
+            "A contagem do catálogo permanece sincronizada com as cartas realmente disponíveis no jogo."
+          ],
+          en: [
+            "New sets can be added without concentrating every card into a single file.",
+            "The catalog now recognizes sets organized into their own folders automatically.",
+            "Catalog totals stay synchronized with the cards actually available in the game."
+          ]
+        }
+      },
+      {
+        title: { pt: "Mais consistência", en: "More consistency" },
+        items: {
+          pt: [
+            "Novas verificações ajudam a evitar cartas duplicadas, dados incompletos e imagens ausentes.",
+            "A estrutura continua compatível com todos os sets e decks já existentes.",
+            "O Deck Builder e a Database continuam usando o mesmo catálogo unificado."
+          ],
+          en: [
+            "New checks help prevent duplicate cards, incomplete data and missing artwork.",
+            "The structure remains compatible with all existing sets and decks.",
+            "Deck Builder and Database continue using the same unified catalog."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "4.0.0",
     date: { pt: "26/09/2026", en: "09/26/2026" },
     title: { pt: "Battle Spirits Eternal Platform", en: "Battle Spirits Eternal Platform" },

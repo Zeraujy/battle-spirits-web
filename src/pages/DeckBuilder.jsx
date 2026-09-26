@@ -279,7 +279,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
       format: DECK_FILE_FORMAT,
       version: DECK_FILE_VERSION,
       simulator: "Battle Spirits Eternal Simulator",
-      simulatorVersion: "4.0.0",
+      simulatorVersion: "4.1.0",
       exportedAt: new Date().toISOString(),
       deck: {
         name: String(draft.name || "").trim() || (pt ? "Deck Importado" : "Imported Deck"),

@@ -132,11 +132,6 @@
   width: min(100%, 258px);
   gap: 5px;
 }
-
-.ranked-v400 .match-player-preview.left {
-  transform: translateX(165px);
-}
-
 .ranked-v400 .match-player-banner-shell { width: min(100%, 238px); }
 .ranked-v400 .match-player-heading > span { margin-bottom: 5px; font-size: 8px; }
 .ranked-v400 .match-player-heading h2 { font-size: clamp(20px, 1.9vw, 31px); }
