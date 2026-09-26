@@ -197,7 +197,7 @@ export function createMatch({ player1, player2, firstPlayerId = "player1", cardI
     id: uid("match"),
     format: "eternal",
     rulesVersion: ETERNAL_RULES_VERSION,
-    simulatorVersion: "3.9.4",
+    simulatorVersion: "3.9.5",
     stateSchemaVersion: 1,
     randomSeed,
     turnNumber: 1,

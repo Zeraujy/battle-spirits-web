@@ -4,6 +4,49 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.9.5",
+    date: { pt: "25/09/2026", en: "09/25/2026" },
+    title: { pt: "Tutorial & New Player Onboarding", en: "Tutorial & New Player Onboarding" },
+    summary: {
+      pt: "Um novo tutorial rápido ensina o essencial de Battle Spirits Eternal para quem está começando.",
+      en: "A new quick tutorial teaches the essentials of Battle Spirits Eternal to new players."
+    },
+    sections: [
+      {
+        title: { pt: "Aprenda jogando", en: "Learn by playing" },
+        items: {
+          pt: [
+            "Novo caminho Aprenda a Jogar direto no menu principal.",
+            "Lições curtas explicam Life, Cores, sequência do turno, Main Step, ataque, bloqueio, Flash, Burst e Brave.",
+            "Um treino guiado mostra a ordem real de uma batalha com Flash Timing e escolha de bloqueio.",
+            "A consulta rápida fica disponível para revisar as regras quando quiser."
+          ],
+          en: [
+            "New Learn to Play path directly from the main menu.",
+            "Short lessons cover Life, Cores, turn sequence, Main Step, attack, block, Flash, Burst and Brave.",
+            "A guided practice shows the real battle order with Flash Timing and blocking choice.",
+            "Quick reference stays available whenever you need a refresher."
+          ]
+        }
+      },
+      {
+        title: { pt: "Boas-vindas", en: "New player welcome" },
+        items: {
+          pt: [
+            "Novos jogadores recebem um convite discreto para começar pelo tutorial.",
+            "O progresso fica salvo para que você possa continuar de onde parou.",
+            "Ao concluir, você pode ir direto para a Eternal CPU ou abrir o Deck Builder."
+          ],
+          en: [
+            "New players receive a lightweight invitation to start with the tutorial.",
+            "Progress is saved so you can continue where you left off.",
+            "When finished, you can jump straight into Eternal CPU or open Deck Builder."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "3.9.4",
     date: { pt: "25/09/2026", en: "09/25/2026" },
     title: { pt: "Deck Validation & Format Rules", en: "Deck Validation & Format Rules" },

@@ -46,6 +46,11 @@ const required = [
   "src/pages/RankedLobby.jsx",
   "src/pages/OnlineLobby.jsx",
   "src/pages/Store.jsx",
+  "src/pages/Tutorial.jsx",
+  "src/styles/pages/tutorialV395.css",
+  "src/game/tutorialRules.js",
+  "src/game/tutorialRules.test.js",
+  "src/services/tutorialProgress.js",
   "src/styles/pages/mainMenuV340.css",
   "src/styles/pages/matchSetupV341.css",
   "src/styles/pages/modeScaffoldV340.css",
@@ -64,7 +69,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.9.4") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.4`);
+if (pkg.version !== "3.9.5") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.5`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -155,6 +160,17 @@ if (!stateEngine.includes("multiple_contract_types") || !stateEngine.includes("e
 if (!rankedLobby.includes('regulation: "official"') || !onlineServer.includes('regulation: "official"')) throw new Error("Ranked precisa aplicar o regulamento oficial Eternal no cliente e no servidor.");
 if (!onlineLobby.includes('value="official"') || !onlineLobby.includes('value="eternal"')) throw new Error("As opções Eternal/Eternal Oficial não estão disponíveis nas salas personalizadas.");
 if (!deckBuilderPage.includes("officialValidation") || !deckBuilderPage.includes("officialRestrictionSummary")) throw new Error("O feedback de regulamento oficial do Deck Builder está incompleto.");
+
+
+// v3.9.5 — Tutorial & New Player Onboarding.
+const tutorialPage = fs.readFileSync(path.join(root, "src", "pages", "Tutorial.jsx"), "utf8");
+const tutorialRules = fs.readFileSync(path.join(root, "src", "game", "tutorialRules.js"), "utf8");
+const tutorialCss = fs.readFileSync(path.join(root, "src", "styles", "pages", "tutorialV395.css"), "utf8");
+const homePage = fs.readFileSync(path.join(root, "src", "pages", "Home.jsx"), "utf8");
+if (!tutorialRules.includes('manualVersion: "17.1"') || !tutorialRules.includes('firstPlayerFirstTurnSkips') || !tutorialRules.includes('defenderHasFirstFlashPriority')) throw new Error("A referência de regras do tutorial v3.9.5 está incompleta.");
+if (!tutorialPage.includes("TREINO GUIADO") || !tutorialPage.includes("Flash Timing 1") || !tutorialPage.includes("Manual Oficial Battle Spirits Eternal Ver.17.1")) throw new Error("O Tutorial v3.9.5 está incompleto.");
+if (!tutorialCss.includes("tutorial-practice-board") || !tutorialCss.includes("tutorial-phase-strip")) throw new Error("O visual do Tutorial v3.9.5 está incompleto.");
+if (!homePage.includes("Aprenda a Jogar") || !homePage.includes("bs-tutorial-welcome")) throw new Error("O onboarding de novos jogadores v3.9.5 está incompleto.");
 
 // v3.9.3 — player-facing copy must not expose development internals.
 const playerFacingFiles = [

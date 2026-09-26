@@ -4,6 +4,7 @@ import { useLanguage } from "../i18n.jsx";
 import { APP_VERSION_LABEL } from "../config/appVersion.js";
 import HomeWallpaperSlideshow from "../components/home/HomeWallpaperSlideshow.jsx";
 import ProjectInfoButtons from "../components/common/ProjectInfoButtons.jsx";
+import { dismissTutorialWelcome, getTutorialProgress } from "../services/tutorialProgress.js";
 import "../styles/pages/mainMenuV340.css";
 
 function playerName(profile, language) {
@@ -41,6 +42,7 @@ export default function Home({ go, initialSection = "root" }) {
   const profile = useMemo(() => getProfile() || {}, []);
   const name = playerName(profile, language);
   const [section, setSection] = useState(initialSection || "root");
+  const [tutorialWelcome, setTutorialWelcome] = useState(() => !getTutorialProgress().dismissedWelcome);
 
   useEffect(() => {
     setSection(initialSection || "root");
@@ -49,6 +51,12 @@ export default function Home({ go, initialSection = "root" }) {
 
   const rootMenu = (
     <>
+      <MainMenuItem
+        label={pt ? "Aprenda a Jogar" : "Learn to Play"}
+        detail={pt ? "Tutorial rápido · Regras Eternal" : "Quick tutorial · Eternal rules"}
+        badge={pt ? "NOVO" : "NEW"}
+        onClick={() => { dismissTutorialWelcome(); setTutorialWelcome(false); go("tutorial"); }}
+      />
       <MainMenuItem
         label={pt ? "Partida Local" : "Local Match"}
         detail={pt ? "Jogo Livre ou Eternal CPU" : "Free Play or Eternal CPU"}
@@ -107,7 +115,7 @@ export default function Home({ go, initialSection = "root" }) {
       />
       <MainMenuItem
         label={pt ? "Partida Ranqueada" : "Ranked Match"}
-        detail={pt ? "Fundação da futura fila competitiva" : "Foundation for the competitive queue"}
+        detail={pt ? "Season 0 · Bronze ao Master" : "Season 0 · Bronze to Master"}
         badge={pt ? "PRÉ-TEMPORADA" : "PRE-SEASON"}
         onClick={() => go("ranked")}
       />
@@ -160,6 +168,21 @@ export default function Home({ go, initialSection = "root" }) {
           {section === "local" ? localMenu : section === "online" ? onlineMenu : rootMenu}
         </nav>
       </section>
+
+
+      {tutorialWelcome && section === "root" && (
+        <section className="bs-tutorial-welcome" role="dialog" aria-label={pt ? "Boas-vindas" : "Welcome"}>
+          <div>
+            <span className="eyebrow">{pt ? "NOVO NO BATTLE SPIRITS?" : "NEW TO BATTLE SPIRITS?"}</span>
+            <strong>{pt ? "Aprenda o básico em poucos minutos." : "Learn the basics in a few minutes."}</strong>
+            <small>{pt ? "Turnos, Cores, ataques, bloqueios e Flash sem enrolação." : "Turns, Cores, attacks, blocks and Flash — straight to the point."}</small>
+          </div>
+          <div className="bs-tutorial-welcome-actions">
+            <button type="button" className="primary" onClick={() => { dismissTutorialWelcome(); setTutorialWelcome(false); go("tutorial"); }}>{pt ? "Começar tutorial" : "Start tutorial"}</button>
+            <button type="button" className="ghost" onClick={() => { dismissTutorialWelcome(); setTutorialWelcome(false); }}>{pt ? "Já sei jogar" : "I already know"}</button>
+          </div>
+        </section>
+      )}
 
       <footer className="bs-main-menu-footer">
         <span>Battle Spirits © BANDAI.</span>

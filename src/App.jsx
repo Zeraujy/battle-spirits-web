@@ -21,6 +21,7 @@ const RankedLobby = lazy(() => import("./pages/RankedLobby.jsx"));
 const Store = lazy(() => import("./pages/Store.jsx"));
 const Simulator = lazy(() => import("./pages/Simulator.jsx"));
 const Updater = lazy(() => import("./pages/Updater.jsx"));
+const Tutorial = lazy(() => import("./pages/Tutorial.jsx"));
 
 function LoadingScreen() {
   return (
@@ -50,6 +51,7 @@ export default function App() {
   else if (screen.name === "profile") content = <Profile onBack={() => go("home")} initialUsername={screen.initialUsername || null} />;
   else if (screen.name === "account") content = <Account onBack={() => go("home")} onProfile={() => go("profile")} />;
   else if (screen.name === "settings") content = <Settings onBack={() => go("home")} />;
+  else if (screen.name === "tutorial") content = <Tutorial onBack={() => go("home")} onPlayCpu={() => go("ai")} onDeckBuilder={() => go("decks", { backTo: "tutorial" })} />;
   else if (screen.name === "decks") content = <Decks
     onBack={() => screen.backTo ? go(screen.backTo) : go("home")}
     onNew={() => go("deck", { deckId: null, backTo: screen.backTo })}

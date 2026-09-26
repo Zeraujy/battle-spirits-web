@@ -446,3 +446,8 @@
   .bs-main-menu-item,
   .bs-account-chip { transition: none; }
 }
+
+
+/* v3.9.5 — New player onboarding */
+.bs-tutorial-welcome{position:fixed;z-index:12;left:50%;bottom:34px;transform:translateX(-50%);width:min(760px,calc(100vw - 40px));display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 20px;border:1px solid rgba(255,255,255,.18);background:rgba(8,8,8,.93);box-shadow:0 24px 70px rgba(0,0,0,.55);backdrop-filter:blur(18px)}
+.bs-tutorial-welcome>div:first-child{display:flex;flex-direction:column;gap:4px}.bs-tutorial-welcome strong{font-size:17px}.bs-tutorial-welcome small{color:#8f8f8f}.bs-tutorial-welcome-actions{display:flex;gap:8px;flex-shrink:0}.bs-tutorial-welcome-actions button{min-height:38px;padding:0 14px}.bs-tutorial-welcome-actions .primary{border:1px solid #eee;background:#eee;color:#090909;font-weight:800}.bs-tutorial-welcome-actions .ghost{border:1px solid rgba(255,255,255,.14);background:#111;color:#bbb}@media(max-width:720px){.bs-tutorial-welcome{align-items:stretch;flex-direction:column}.bs-tutorial-welcome-actions{width:100%}.bs-tutorial-welcome-actions button{flex:1}}
