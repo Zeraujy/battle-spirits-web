@@ -648,6 +648,31 @@ export async function createBattleSpiritsServer(options = {}) {
       ack({ ok:true, message });
     });
 
+    onSafe(socket, "room:rematch", (payload, ack) => {
+      const found = findRoomBySocket(socket.id);
+      if (!found) return ack({ ok: false, error: "Sala não encontrada." });
+      const { room, playerId } = found;
+      if (!room.match?.winnerId) return ack({ ok: false, error: "A partida ainda não terminou." });
+      if (room.ranked) return ack({ ok: false, error: "Ranked exige uma nova busca de matchmaking." });
+
+      room.rematchVotes = { ...(room.rematchVotes || {}), [playerId]: true };
+      io.to(room.code).emit("room:rematch-status", { votes: room.rematchVotes });
+      const accepted = Boolean(room.rematchVotes.player1 && room.rematchVotes.player2);
+      if (!accepted) return ack({ ok: true, started: false });
+
+      const firstPlayerId = Math.random() < 0.5 ? "player1" : "player2";
+      room.match = createMatch({
+        player1: { ...room.players.player1.profile, deck: room.players.player1.deck },
+        player2: { ...room.players.player2.profile, deck: room.players.player2.deck },
+        firstPlayerId,
+        cardIndex
+      });
+      room.rematchVotes = {};
+      io.to(room.code).emit("room:rematch-started", { firstPlayerId, matchId: room.match.id });
+      emitRoom(room);
+      ack({ ok: true, started: true });
+    });
+
     onSafe(socket, "game:action", async (payload, ack) => {
       const found = findRoomBySocket(socket.id);
       if (!found) return ack({ ok: false, error: "Sala não encontrada." });

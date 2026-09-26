@@ -11,6 +11,7 @@ const required = [
   "src/styles/arena/effectDecision.css",
   "src/styles/arena/braveUltimate.css",
   "src/styles/arena/gameResult.css",
+  "src/styles/arena/postMatchV380.css",
   "src/styles/arena/arenaLayoutV321.css",
   "src/game/legalActions.js",
   "src/game/aiEffectSemantics.js",
@@ -20,6 +21,7 @@ const required = [
   "src/services/socialService.js",
   "src/services/socialInsights.js",
   "src/services/matchHistoryService.js",
+  "src/services/postMatchService.js",
   "src/pages/Profile.jsx",
   "src/styles/pages/socialHubV360.css",
   "supabase/SOCIAL-HUB-3.6.sql",
@@ -54,7 +56,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.7.1") throw new Error(`package.json está em ${pkg.version}, esperado 3.7.1`);
+if (pkg.version !== "3.8.0") throw new Error(`package.json está em ${pkg.version}, esperado 3.8.0`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -110,6 +112,12 @@ if (!onlineServer.includes("rankedIdentity") || !onlineServer.includes("settleRa
 if (!socialPage.includes('section === "competitive"') || !socialPage.includes("social-competitive-hero")) throw new Error("A identidade competitiva v3.7.1 está incompleta.");
 if (!rankedService.includes("loadPublicRankedIdentity") || !rankedService.includes("loadFriendRankedIdentities")) throw new Error("O serviço de identidade Ranked v3.7.1 está incompleto.");
 if (!rankedIdentitySql.includes("bs_get_ranked_identity") || !rankedIdentitySql.includes("deck_name")) throw new Error("A migração Ranked v3.7.1 está incompleta.");
+const simulatorPage = fs.readFileSync(path.join(root, "src", "pages", "Simulator.jsx"), "utf8");
+const postMatchService = fs.readFileSync(path.join(root, "src", "services", "postMatchService.js"), "utf8");
+const postMatchCss = fs.readFileSync(path.join(root, "src", "styles", "arena", "postMatchV380.css"), "utf8");
+if (!simulatorPage.includes("post-match-v380-grid") || !simulatorPage.includes("room:rematch") || !simulatorPage.includes("requestPostMatchFriend")) throw new Error("A Post-Match Screen v3.8.0 está incompleta.");
+if (!postMatchService.includes("buildPostMatchSummary") || !postMatchService.includes("masteryXpForMatch")) throw new Error("O resumo pós-partida v3.8.0 está incompleto.");
+if (!postMatchCss.includes("post-match-v380-progression") || !onlineServer.includes("room:rematch")) throw new Error("A integração de revanche v3.8.0 está incompleta.");
 
 const publicProfile = fs.readFileSync(path.join(root, "src", "online", "publicProfile.js"), "utf8");
 const socketClient = fs.readFileSync(path.join(root, "src", "online", "socketClient.js"), "utf8");

@@ -1,9 +1,9 @@
 {
   "name": "battle-spirits-eternal-simulator",
-  "version": "3.7.1",
+  "version": "3.8.0",
   "private": true,
   "type": "module",
-  "description": "Battle Spirits Eternal Simulator v3.7.1 - Ranked Profile & Competitive Identity",
+  "description": "Battle Spirits Eternal Simulator v3.8.0 - Post-Match Screen",
   "main": "electron/main.cjs",
   "scripts": {
     "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && cross-env ELECTRON_START_URL=http://127.0.0.1:5173 electron .\"",
@@ -15,7 +15,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "dist:win": "npm run build && electron-builder --win nsis && node scripts/generate-update-manifest.mjs",
-    "test": "node --test src/game/*.test.js src/online/*.test.js",
+    "test": "node --test src/game/*.test.js src/online/*.test.js src/services/*.test.js",
     "verify": "node scripts/verify-project.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs",
     "check": "npm run verify && npm test && npm run build",
     "server:start": "node --env-file-if-exists=server/.env server/index.mjs",

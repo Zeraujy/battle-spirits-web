@@ -49,7 +49,7 @@ export default function App() {
   let content;
   if (mode === "updater") content = <Updater />;
   else if (mode === "server") content = <ServerConsole />;
-  else if (screen.name === "profile") content = <Profile onBack={() => go("home")} />;
+  else if (screen.name === "profile") content = <Profile onBack={() => go("home")} initialUsername={screen.initialUsername || null} />;
   else if (screen.name === "account") content = <Account onBack={() => go("home")} onProfile={() => go("profile")} />;
   else if (screen.name === "settings") content = <Settings onBack={() => go("home")} />;
   else if (screen.name === "decks") content = <Decks
@@ -63,7 +63,17 @@ export default function App() {
   else if (screen.name === "online") content = <OnlineLobby onBack={() => go("home", { menu: "online" })} onDeckBuilder={() => go("decks", { backTo: "online" })} onMatch={(payload) => go("simulator", { ...payload, mode: "online" })} />;
   else if (screen.name === "ranked") content = <RankedLobby onBack={() => go("home", { menu: "online" })} onAccount={() => go("account")} onDeckBuilder={() => go("decks", { backTo: "ranked" })} onMatch={(payload) => go("simulator", { ...payload, mode: "ranked" })} />;
   else if (screen.name === "store") content = <Store onBack={() => go("home")} />;
-  else if (screen.name === "simulator") content = <Simulator {...screen} onExit={() => go("home")} />;
+  else if (screen.name === "simulator") content = <Simulator
+    {...screen}
+    onExit={() => go("home")}
+    onPlayAgain={() => {
+      if (screen.mode === "ranked") go("ranked");
+      else if (screen.mode === "online") go("online");
+      else if (screen.mode === "ai") go("ai");
+      else go("local");
+    }}
+    onOpenProfile={(username) => go("profile", { initialUsername: username })}
+  />;
   else content = <Home go={go} initialSection={screen.menu || "root"} />;
 
   return <Suspense fallback={<LoadingScreen />}>{content}</Suspense>;

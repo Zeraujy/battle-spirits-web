@@ -227,7 +227,7 @@ async function optimizeImage(file, { maxBytes = 6_000_000, width = 512, height =
   return canvas.toDataURL("image/jpeg", 0.68);
 }
 
-export default function Profile({ onBack }) {
+export default function Profile({ onBack, initialUsername = null }) {
   const { language } = useLanguage();
   const pt = language !== "en";
   const decks = useMemo(() => getDecks(), []);
@@ -508,6 +508,21 @@ export default function Profile({ onBack }) {
     setRemoteProfile(social ? { ...social, ranked: competitive?.visible === false ? null : competitive } : null);
     setBusy(false);
   }
+
+  const initialProfileOpenedRef = useRef(false);
+
+  useEffect(() => {
+    if (!initialUsername || !sessionUser || !schema.ready || initialProfileOpenedRef.current) return;
+    initialProfileOpenedRef.current = true;
+    (async () => {
+      const normalized = String(initialUsername).replace(/^@/, "").trim().toLowerCase();
+      const results = await searchProfiles(normalized);
+      const exact = (results || []).find((row) => String(row.username || "").toLowerCase() === normalized);
+      if (exact) await inspectProfile(exact);
+      else flash(pt ? "Perfil do adversário não encontrado." : "Opponent profile not found.");
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialUsername, sessionUser, schema.ready]);
 
   async function handleRemoveFriend(friend) {
     const result = await removeFriend(personId(friend));

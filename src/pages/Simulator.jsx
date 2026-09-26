@@ -38,6 +38,8 @@ import {
 } from "../game/brave.js";
 import { useLanguage } from "../i18n.jsx";
 import { identifySavedDeck, recordMatchResult } from "../services/matchHistoryService.js";
+import { buildPostMatchSummary, formatMatchDuration } from "../services/postMatchService.js";
+import { searchProfiles, sendFriendRequest } from "../services/socialService.js";
 import { getSmartCoreClickTarget } from "../interactions/coreClickPolicy.js";
 import {
   CARD_DRAG_THRESHOLD,
@@ -51,6 +53,7 @@ import "../styles/arena/arenaVisuals.css";
 import "../styles/arena/effectDecision.css";
 import "../styles/arena/braveUltimate.css";
 import "../styles/arena/gameResult.css";
+import "../styles/arena/postMatchV380.css";
 import "../styles/arena/arenaV31.css";
 import "../styles/arena/pendingPlayV314.css";
 import "../styles/arena/cardPresentationV317.css";
@@ -510,7 +513,9 @@ export default function Simulator({
   onlineClient,
   viewerPlayerId,
   roomState: initialRoomState,
-  onExit
+  onExit,
+  onPlayAgain,
+  onOpenProfile
 }) {
   const {
     t,
@@ -526,7 +531,7 @@ export default function Simulator({
 
   const matchStartedAtRef = useRef(Date.now());
   const matchRecordedRef = useRef(null);
-  const initialTrackedPlayerId = mode === "online"
+  const initialTrackedPlayerId = mode === "online" || mode === "ranked"
     ? viewerPlayerId
     : mode === "ai"
       ? initialMatch?.ai?.humanPlayerId || "player1"
@@ -534,9 +539,16 @@ export default function Simulator({
   const trackedDeckRef = useRef(
     identifySavedDeck(initialMatch?.players?.[initialTrackedPlayerId])
   );
+  const activeMatchIdRef = useRef(initialMatch?.id || null);
+  const [matchEndedAt, setMatchEndedAt] = useState(null);
+  const [rankedResult, setRankedResult] = useState(null);
+  const [postMatchActionNotice, setPostMatchActionNotice] = useState("");
+  const [rematchPending, setRematchPending] = useState(false);
 
   useEffect(() => {
     if (!match?.winnerId || matchRecordedRef.current === match.id) return;
+    const endedAt = Date.now();
+    setMatchEndedAt(endedAt);
     matchRecordedRef.current = match.id;
     recordMatchResult({
       match,
@@ -548,6 +560,23 @@ export default function Simulator({
       console.warn("[match-history] resultado não sincronizado:", historyError?.message || historyError);
     });
   }, [match?.winnerId, match?.id, mode, viewerPlayerId]);
+
+  useEffect(() => {
+    if (!match?.id || activeMatchIdRef.current === match.id) return;
+    activeMatchIdRef.current = match.id;
+    matchStartedAtRef.current = Date.now();
+    matchRecordedRef.current = null;
+    setMatchEndedAt(null);
+    setRankedResult(null);
+    setPostMatchActionNotice("");
+    setRematchPending(false);
+    const trackedPlayerId = mode === "online" || mode === "ranked"
+      ? viewerPlayerId
+      : mode === "ai"
+        ? match?.ai?.humanPlayerId || "player1"
+        : "player1";
+    trackedDeckRef.current = identifySavedDeck(match?.players?.[trackedPlayerId]);
+  }, [match?.id, mode, viewerPlayerId]);
 
   const [
     roomState,
@@ -577,6 +606,7 @@ export default function Simulator({
     const onRankedResult = (payload) => {
       if (!payload) return;
       const delta = Number(payload.rpDelta || 0);
+      setRankedResult(payload);
       setNotice(`${payload.result === "win" ? "Vitória" : "Derrota"} Ranked · ${delta >= 0 ? "+" : ""}${delta} RP · ${payload.rank || `${payload.rpAfter || 0} RP`}`);
     };
     onlineClient.socket.on("ranked:result", onRankedResult);
@@ -668,7 +698,8 @@ export default function Simulator({
     useRef({ instanceId: null, until: 0 });
 
   const online =
-    mode === "online";
+    mode === "online" ||
+    mode === "ranked";
 
   const aiMode =
     mode === "ai";
@@ -739,21 +770,37 @@ export default function Simulator({
       }
     };
 
+    const onRematchStatus = (state) => {
+      const votes = state?.votes || {};
+      const mine = Boolean(votes?.[viewerPlayerId]);
+      setRematchPending(mine);
+      if (mine) setPostMatchActionNotice(language === "en" ? "Rematch requested. Waiting for the opponent…" : "Revanche solicitada. Aguardando o adversário…");
+    };
+
+    const onRematchStarted = () => {
+      setRematchPending(false);
+      setPostMatchActionNotice(language === "en" ? "Rematch accepted." : "Revanche aceita.");
+    };
+
     onlineClient.socket.on(
       "room:state",
       handler
     );
+    onlineClient.socket.on("room:rematch-status", onRematchStatus);
+    onlineClient.socket.on("room:rematch-started", onRematchStarted);
 
     onlineClient.connect();
 
-    return () =>
-      onlineClient.socket.off(
-        "room:state",
-        handler
-      );
+    return () => {
+      onlineClient.socket.off("room:state", handler);
+      onlineClient.socket.off("room:rematch-status", onRematchStatus);
+      onlineClient.socket.off("room:rematch-started", onRematchStarted);
+    };
   }, [
     online,
-    onlineClient
+    onlineClient,
+    viewerPlayerId,
+    language
   ]);
 
 
@@ -5252,6 +5299,50 @@ export default function Simulator({
       : null;
 
 
+  const postMatchSummary = match?.winnerId ? buildPostMatchSummary({
+    match,
+    mode,
+    viewerPlayerId,
+    startedAt: matchStartedAtRef.current,
+    endedAt: matchEndedAt || Date.now(),
+    deckSnapshot: trackedDeckRef.current,
+    rankedResult
+  }) : null;
+
+  async function requestPostMatchFriend() {
+    const username = String(postMatchSummary?.opponent?.username || "").replace(/^@/, "").trim();
+    if (!username) {
+      setPostMatchActionNotice(language === "en" ? "This opponent has no public username." : "Este adversário não possui @usuário público.");
+      return;
+    }
+    setPostMatchActionNotice(language === "en" ? "Finding opponent profile…" : "Localizando perfil do adversário…");
+    const results = await searchProfiles(username);
+    const exact = (results || []).find((row) => String(row.username || "").toLowerCase() === username.toLowerCase());
+    if (!exact?.id) {
+      setPostMatchActionNotice(language === "en" ? "Opponent profile not found." : "Perfil do adversário não encontrado.");
+      return;
+    }
+    const result = await sendFriendRequest(exact.id);
+    setPostMatchActionNotice(result.ok
+      ? (language === "en" ? "Friend request sent." : "Pedido de amizade enviado.")
+      : (result.error || (language === "en" ? "Could not send friend request." : "Não foi possível enviar o pedido.")));
+  }
+
+  function requestOnlineRematch() {
+    if (!onlineClient?.socket || rematchPending) return;
+    setPostMatchActionNotice(language === "en" ? "Requesting rematch…" : "Solicitando revanche…");
+    onlineClient.socket.emit("room:rematch", {}, (reply) => {
+      if (!reply?.ok) {
+        setRematchPending(false);
+        setPostMatchActionNotice(reply?.error || (language === "en" ? "Rematch unavailable." : "Revanche indisponível."));
+        return;
+      }
+      setRematchPending(!reply.started);
+      if (reply.started) setPostMatchActionNotice(language === "en" ? "Rematch accepted." : "Revanche aceita.");
+    });
+  }
+
+
   /* =======================================================
      RENDER
   ======================================================= */
@@ -5269,7 +5360,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v3.6.2 • Arena 2D
+            Eternal v3.8.0 • Arena 2D
           </span>
 
           <strong>
@@ -6794,7 +6885,7 @@ export default function Simulator({
                         );
 
 
-                      return (
+  return (
                         <CardTile
                           key={
                             physical.instanceId
@@ -7024,6 +7115,13 @@ export default function Simulator({
             .toUpperCase() ||
           "?";
 
+        const summary = postMatchSummary;
+        const featuredMasteryCard = summary?.mastery?.featuredCardId
+          ? cardIndex.get(String(summary.mastery.featuredCardId))
+          : null;
+        const opponentUsername = String(summary?.opponent?.username || "").replace(/^@/, "").trim();
+        const rankedDelta = Number(summary?.ranked?.rpDelta || 0);
+
         return (
           <div
             className={[
@@ -7224,23 +7322,82 @@ export default function Simulator({
                 </div>
               </div>
 
-              <footer className="game-result-actions">
+              <section className="post-match-v380-grid" aria-label={language === "en" ? "Match details" : "Detalhes da partida"}>
+                <article>
+                  <span>{language === "en" ? "DURATION" : "DURAÇÃO"}</span>
+                  <strong>{formatMatchDuration(summary?.durationSeconds || 0, language)}</strong>
+                  <small>{summary?.turns || match.turnNumber || 1} {language === "en" ? "turns" : "turnos"}</small>
+                </article>
+                <article>
+                  <span>{language === "en" ? "DECK" : "DECK"}</span>
+                  <strong>{summary?.deck?.name || (language === "en" ? "Unidentified" : "Não identificado")}</strong>
+                  <small>{summary?.deck?.cardIds?.length ? `${summary.deck.cardIds.length} ${language === "en" ? "cards" : "cartas"}` : (language === "en" ? "Match snapshot" : "Snapshot da partida")}</small>
+                </article>
+                <article>
+                  <span>{language === "en" ? "LIFE REMAINING" : "LIFE RESTANTE"}</span>
+                  <strong>{summary?.lifeRemaining ?? "—"}</strong>
+                  <small>{summary?.result === "win" ? (language === "en" ? "Your final Life" : "Seu Life final") : (language === "en" ? "At match end" : "Ao encerrar")}</small>
+                </article>
+                <article className="post-match-mastery-stat">
+                  <span>CARD MASTERY</span>
+                  <strong>+{summary?.mastery?.totalXp || 0} XP</strong>
+                  <small>{summary?.mastery?.trackedCards || 0} {language === "en" ? "cards progressed" : "cartas progrediram"}</small>
+                </article>
+              </section>
+
+              {(featuredMasteryCard || summary?.ranked) && (
+                <section className="post-match-v380-progression">
+                  {featuredMasteryCard && (
+                    <article className="post-match-featured-mastery">
+                      <div className="post-match-featured-card">
+                        <img src={resolveCardImage(featuredMasteryCard)} alt={getCardName(featuredMasteryCard)} />
+                      </div>
+                      <div>
+                        <span>{language === "en" ? "MASTERY HIGHLIGHT" : "DESTAQUE DE MAESTRIA"}</span>
+                        <strong>{getCardName(featuredMasteryCard)}</strong>
+                        <small>+{summary?.mastery?.featuredXp || 0} XP · {summary?.deck?.coverCardId === summary?.mastery?.featuredCardId ? (language === "en" ? "Deck cover bonus" : "Bônus de carta de capa") : (language === "en" ? "Used in this duel" : "Utilizada neste duelo")}</small>
+                      </div>
+                    </article>
+                  )}
+                  {summary?.ranked && (
+                    <article className={`post-match-ranked-change ${rankedDelta >= 0 ? "positive" : "negative"}`}>
+                      <span>RANKED / SEASON 0</span>
+                      <strong>{rankedDelta >= 0 ? "+" : ""}{rankedDelta} RP</strong>
+                      <small>{summary.ranked.rpBefore} → {summary.ranked.rpAfter} RP</small>
+                      <b>{summary.ranked.rank || "—"}</b>
+                    </article>
+                  )}
+                </section>
+              )}
+
+              {postMatchActionNotice && <div className="post-match-action-notice" role="status">{postMatchActionNotice}</div>}
+
+              <footer className="game-result-actions post-match-v380-actions">
+                <div className="post-match-secondary-actions">
+                  {mode === "online" && (
+                    <button type="button" onClick={requestOnlineRematch} disabled={rematchPending}>
+                      {rematchPending ? (language === "en" ? "Waiting…" : "Aguardando…") : (language === "en" ? "Request rematch" : "Pedir revanche")}
+                    </button>
+                  )}
+                  {mode !== "online" && (
+                    <button type="button" onClick={onPlayAgain}>
+                      {mode === "ranked" ? (language === "en" ? "Return to Ranked queue" : "Voltar à fila Ranked") : (language === "en" ? "Play again" : "Jogar novamente")}
+                    </button>
+                  )}
+                  {opponentUsername && (mode === "online" || mode === "ranked") && (
+                    <>
+                      <button type="button" onClick={requestPostMatchFriend}>{language === "en" ? "Add opponent" : "Adicionar adversário"}</button>
+                      <button type="button" onClick={() => onOpenProfile?.(opponentUsername)}>{language === "en" ? "Open profile" : "Abrir perfil"}</button>
+                    </>
+                  )}
+                </div>
                 <button
                   type="button"
                   className="game-result-main-button"
-                  onClick={
-                    onExit
-                  }
+                  onClick={onExit}
                 >
-                  <span>
-                    {t(
-                      "mainMenu"
-                    )}
-                  </span>
-
-                  <b aria-hidden="true">
-                    →
-                  </b>
+                  <span>{t("mainMenu")}</span>
+                  <b aria-hidden="true">→</b>
                 </button>
               </footer>
             </section>

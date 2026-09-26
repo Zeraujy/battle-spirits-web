@@ -13,6 +13,18 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.8.0",
+    date: { pt: "26/09/2026", en: "09/26/2026" },
+    title: { pt: "Post-Match Screen", en: "Post-Match Screen" },
+    summary: { pt: "O fim do duelo ganha uma tela própria com resultado, duração, deck, Life, Maestria, RP Ranked e ações pós-partida contextuais.", en: "Duels now end on a dedicated screen with result, duration, deck, Life, Mastery, Ranked RP and contextual post-match actions." },
+    sections: [
+      { title: { pt: "Resultado cinematográfico", en: "Cinematic result" }, items: { pt: ["VICTORY / DEFEAT passa a reunir duração, turnos, deck identificado, Life restante e condição de vitória.", "A carta de capa recebe destaque junto ao XP de Maestria obtido na partida.", "No Ranked, a tela mostra RP ganho/perdido, RP anterior/novo e Rank retornado pelo servidor."], en: ["VICTORY / DEFEAT now gathers duration, turns, identified deck, remaining Life and win condition.", "The deck cover card is highlighted together with Mastery XP earned in the match.", "Ranked shows RP gained/lost, previous/new RP and the Rank returned by the server."] } },
+      { title: { pt: "Ações pós-partida", en: "Post-match actions" }, items: { pt: ["Online Normal permite pedir revanche; a sala só reinicia quando os dois jogadores aceitam.", "Ranked volta à fila em vez de oferecer revanche direta para evitar exploração de RP.", "Adicionar adversário e Abrir perfil ficam disponíveis quando o jogador possui @usuário público."], en: ["Normal Online allows rematch requests; the room restarts only after both players accept.", "Ranked returns to queue instead of offering direct rematches to avoid RP exploitation.", "Add opponent and Open profile are available when the player has a public @username."] } },
+      { title: { pt: "Arquitetura", en: "Architecture" }, items: { pt: ["A tela usa apenas o resultado já confirmado e dados locais existentes; não adiciona estatísticas ao tráfego da partida.", "O perfil por @usuário é resolvido depois do duelo pelo Social Hub/Supabase.", "Correção integra Ranked ao mesmo transporte Online do Simulator sem alterar publicProfile.js."], en: ["The screen uses only confirmed results and existing local data; it adds no statistics to match traffic.", "@username profile resolution happens after the duel through Social Hub/Supabase.", "A fix integrates Ranked with the same Simulator Online transport without changing publicProfile.js."] } }
+    ]
+  },
+
+  {
     version: "3.7.1",
     date: { pt: "25/09/2026", en: "09/25/2026" },
     title: { pt: "Ranked Profile & Competitive Identity", en: "Ranked Profile & Competitive Identity" },
