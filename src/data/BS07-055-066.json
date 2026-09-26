@@ -1,0 +1,527 @@
+[
+  {
+    "id": "BS07-055",
+    "name": "The Meteor Stream Nightsky",
+    "nameEN": "The Meteor Stream Nightsky",
+    "namePT": "The Meteor Stream Nightsky",
+    "nameJP": "流星群の夜空",
+    "nameKey": "the-meteor-stream-nightsky",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All your Spirits with the family \"Heroic\" gain [Awaken]: Flash: You may move any number of Cores from your Spirits to this Spirit.\nLV2 During Your Attack Step: All your Spirits with the family \"Star Dragon\" get +2000 BP.",
+      "ptBR": "LV1/LV2: Todos os seus Spirits com a família \"Heroic\" ganham [Awaken]: Flash: Você pode mover qualquer quantidade de Cores dos seus Spirits para este Spirit.\nLV2 Durante Seu Attack Step: Todos os seus Spirits com a família \"Star Dragon\" recebem +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-055.webp"
+  },
+  {
+    "id": "BS07-056",
+    "name": "The Fall of Meteorite",
+    "nameEN": "The Fall of Meteorite",
+    "namePT": "The Fall of Meteorite",
+    "nameJP": "隕石落下地点",
+    "nameKey": "the-fall-of-meteorite",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Nexuses is destroyed by an opposing Spirit, Nexus, or Magic effect, destroy all opposing Spirits with 3000 BP or less.\nLV2 During Your Attack Step: When one of your Spirits with [Clash] destroys only the opposing Spirit by comparing BP, destroy 1 opposing Spirit with 3000 BP or less.",
+      "ptBR": "LV1/LV2: Quando 1 dos seus Nexuses for destruído por um efeito de Spirit, Nexus ou Magic do oponente, destrua todos os Spirits do oponente com 3000 BP ou menos.\nLV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com [Clash] destruir apenas o Spirit do oponente pela comparação de BP, destrua 1 Spirit do oponente com 3000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-056.webp"
+  },
+  {
+    "id": "BS07-057",
+    "name": "The Decayed Swamp",
+    "nameEN": "The Decayed Swamp",
+    "namePT": "The Decayed Swamp",
+    "nameJP": "腐りゆく湖沼",
+    "nameKey": "the-decayed-swamp",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Nexuses is destroyed by an opposing Spirit, Nexus, or Magic effect, move 1 Core from each opposing Spirit to your opponent's Trash.\nLV2 During Either Attack Step: LV1 Spirits cannot attack or block.",
+      "ptBR": "LV1/LV2: Quando 1 dos seus Nexuses for destruído por um efeito de Spirit, Nexus ou Magic do oponente, mova 1 Core de cada Spirit do oponente para o Trash dele.\nLV2 Durante o Attack Step de qualquer jogador: Spirits LV1 não podem atacar nem bloquear."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-057.webp"
+  },
+  {
+    "id": "BS07-058",
+    "name": "The Darkness Church",
+    "nameEN": "The Darkness Church",
+    "namePT": "The Darkness Church",
+    "nameJP": "常闇の聖堂",
+    "nameKey": "the-darkness-church",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your End Step: By paying its cost using Cores from your Field, you may summon 1 cost 3 or lower Spirit card with the family \"Nightling\" from your Trash.\nLV2 During Your Draw Step: Instead of drawing, you may return 1 Spirit card with the family \"Nightling\" from your Trash to your Hand.",
+      "ptBR": "LV1/LV2 Durante Seu End Step: Ao pagar o custo usando Cores do seu Field, você pode invocar 1 carta de Spirit de custo 3 ou menos com a família \"Nightling\" do seu Trash.\nLV2 Durante Seu Draw Step: Em vez de comprar, você pode devolver 1 carta de Spirit com a família \"Nightling\" do seu Trash para sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-058.webp"
+  },
+  {
+    "id": "BS07-059",
+    "name": "The Hill of Big Windmill",
+    "nameEN": "The Hill of Big Windmill",
+    "namePT": "The Hill of Big Windmill",
+    "nameJP": "大風車の丘",
+    "nameKey": "the-hill-of-big-windmill",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Nexuses is destroyed by an opposing Spirit, Nexus, or Magic effect, choose 1 color. Exhaust all opposing Spirits of the chosen color.\nLV2 During the Opponent's Attack Step: Change the [Windstorm] effects of all your Spirits to: [Windstorm: 1] When This Spirit Blocks: Your opponent Exhausts 1 Spirit they control.",
+      "ptBR": "LV1/LV2: Quando 1 dos seus Nexuses for destruído por um efeito de Spirit, Nexus ou Magic do oponente, escolha 1 cor. Deixe Exhausted todos os Spirits do oponente da cor escolhida.\nLV2 Durante o Attack Step do Oponente: Altere os efeitos [Windstorm] de todos os seus Spirits para: [Windstorm: 1] Quando Este Spirit Bloqueia: O oponente deixa Exhausted 1 Spirit que controla."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-059.webp"
+  },
+  {
+    "id": "BS07-060",
+    "name": "The Ruins of Strange Shaped Rocks",
+    "nameEN": "The Ruins of Strange Shaped Rocks",
+    "namePT": "The Ruins of Strange Shaped Rocks",
+    "nameJP": "爪牙の奇岩遺跡",
+    "nameKey": "the-ruins-of-strange-shaped-rocks",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All your Spirits with the family \"Blade Beast\" gain [Windstorm: 1]: When This Spirit Attacks: When this Spirit is blocked, your opponent Exhausts 1 Spirit they control.\nLV2 During Either Attack Step: Whenever one of your Spirits with the family \"Blade Beast\" destroys only the opposing Spirit by comparing BP, Refresh that Spirit.",
+      "ptBR": "LV1/LV2: Todos os seus Spirits com a família \"Blade Beast\" ganham [Windstorm: 1]: Quando Este Spirit Ataca: Quando este Spirit for bloqueado, o oponente deixa Exhausted 1 Spirit que controla.\nLV2 Durante o Attack Step de qualquer jogador: Sempre que 1 dos seus Spirits com a família \"Blade Beast\" destruir apenas o Spirit do oponente pela comparação de BP, dê Refresh naquele Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-060.webp"
+  },
+  {
+    "id": "BS07-061",
+    "name": "The Gears Plain",
+    "nameEN": "The Gears Plain",
+    "namePT": "The Gears Plain",
+    "nameJP": "ゼンマイ平原",
+    "nameKey": "the-gears-plain",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: When an opposing cost 2 or lower Spirit attacks, Refresh all your Spirits with the family \"Armored Beast\".\nLV2: All your Spirits with the family \"Armored Beast\" and/or \"Giant Beast\" gain: \"When This Spirit Blocks: This Spirit gets +2000 BP during this battle.\"",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Quando um Spirit do oponente de custo 2 ou menos atacar, dê Refresh em todos os seus Spirits com a família \"Armored Beast\".\nLV2: Todos os seus Spirits com a família \"Armored Beast\" e/ou \"Giant Beast\" ganham: \"Quando Este Spirit Bloqueia: Este Spirit recebe +2000 BP durante esta batalha.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-061.webp"
+  },
+  {
+    "id": "BS07-062",
+    "name": "The Necklace of Brisingamen",
+    "nameEN": "The Necklace of Brisingamen",
+    "namePT": "The Necklace of Brisingamen",
+    "nameJP": "ブリシンガメンの首飾り",
+    "nameKey": "the-necklace-of-brisingamen",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Nexuses is destroyed by an opposing Spirit, Nexus, or Magic effect, your opponent chooses 3 Spirits they control and returns them to the top of their deck in any order.\nLV2 During the Opponent's Attack Step: Once per turn, when one of your Spirits blocks an opposing Spirit without [Tribute], that Spirit does not become Exhausted.",
+      "ptBR": "LV1/LV2: Quando 1 dos seus Nexuses for destruído por um efeito de Spirit, Nexus ou Magic do oponente, o oponente escolhe 3 Spirits que controla e os devolve ao topo do próprio deck em qualquer ordem.\nLV2 Durante o Attack Step do Oponente: Uma vez por turno, quando 1 dos seus Spirits bloquear um Spirit do oponente sem [Tribute], aquele Spirit não fica Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-062.webp"
+  },
+  {
+    "id": "BS07-063",
+    "name": "The SecretFlower Garden",
+    "nameEN": "The SecretFlower Garden",
+    "namePT": "The SecretFlower Garden",
+    "nameJP": "秘密の花園",
+    "nameKey": "the-secretflower-garden",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Nexuses is destroyed by an opposing Spirit, Nexus, or Magic effect, put 1 Core from the Void into your Life.\nLV2 During the Opponent's Start Step: By exhausting 1 of your Spirits with the family \"Music Spirit\", attacks from cost 3 or lower Spirits cannot reduce your Life during this turn.",
+      "ptBR": "LV1/LV2: Quando 1 dos seus Nexuses for destruído por um efeito de Spirit, Nexus ou Magic do oponente, coloque 1 Core do Void na sua Life.\nLV2 Durante o Start Step do Oponente: Ao deixar Exhausted 1 dos seus Spirits com a família \"Music Spirit\", ataques de Spirits de custo 3 ou menos não podem reduzir sua Life durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-063.webp"
+  },
+  {
+    "id": "BS07-064",
+    "name": "The Healing Fountain",
+    "nameEN": "The Healing Fountain",
+    "namePT": "The Healing Fountain",
+    "nameJP": "聖なる命の泉",
+    "nameKey": "the-healing-fountain",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All your Spirits with [Holy Life] get +1000 BP.\nLV2 During Your Attack Step: All your Spirits with [Holy Life] cannot be blocked by opposing cost 3 or lower Spirits.",
+      "ptBR": "LV1/LV2: Todos os seus Spirits com [Holy Life] recebem +1000 BP.\nLV2 Durante Seu Attack Step: Todos os seus Spirits com [Holy Life] não podem ser bloqueados por Spirits do oponente de custo 3 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-064.webp"
+  },
+  {
+    "id": "BS07-065",
+    "name": "The Golem Factory",
+    "nameEN": "The Golem Factory",
+    "namePT": "The Golem Factory",
+    "nameJP": "造兵工房",
+    "nameKey": "the-golem-factory",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: All your Spirits with the family \"Artificial Soldier\" do not become Exhausted when blocking an opposing Spirit with the same cost.\nLV2 During Either Attack Step: All your cost 3 or higher Spirits with the family \"Artificial Soldier\" get +2000 BP.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Todos os seus Spirits com a família \"Artificial Soldier\" não ficam Exhausted ao bloquear um Spirit do oponente com o mesmo custo.\nLV2 Durante o Attack Step de qualquer jogador: Todos os seus Spirits de custo 3 ou mais com a família \"Artificial Soldier\" recebem +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-065.webp"
+  },
+  {
+    "id": "BS07-066",
+    "name": "The Historic Assault Field",
+    "nameEN": "The Historic Assault Field",
+    "namePT": "The Historic Assault Field",
+    "nameJP": "蹴撃の戦場跡",
+    "nameKey": "the-historic-assault-field",
+    "set": "BS07",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Nexuses is destroyed by an opposing Spirit, Nexus, or Magic effect, destroy all opposing cost 3 or lower Spirits.\nLV2 During the Opponent's Attack Step: The [Assault] effects of all your Spirits activate as When This Spirit Blocks effects.",
+      "ptBR": "LV1/LV2: Quando 1 dos seus Nexuses for destruído por um efeito de Spirit, Nexus ou Magic do oponente, destrua todos os Spirits do oponente de custo 3 ou menos.\nLV2 Durante o Attack Step do Oponente: Os efeitos [Assault] de todos os seus Spirits são ativados como efeitos Quando Este Spirit Bloqueia."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-066.webp"
+  }
+]

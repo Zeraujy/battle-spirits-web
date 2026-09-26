@@ -1,0 +1,429 @@
+[
+  {
+    "id": "BS07-019",
+    "name": "Spearmink",
+    "nameEN": "Spearmink",
+    "namePT": "Spearmink",
+    "nameJP": "スペアミンク",
+    "nameKey": "spearmink",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-019.webp"
+  },
+  {
+    "id": "BS07-020",
+    "name": "Gulyver",
+    "nameEN": "Gulyver",
+    "namePT": "Gulyver",
+    "nameJP": "ガリーバー",
+    "nameKey": "gulyver",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 2,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [High Speed]: You may summon this Spirit card from your Hand during Flash Timing. When doing so, both the summon cost and the Cores placed on this Spirit must come from your Reserve.\nLV1/LV2/LV3 When Summoned: During this turn, all your Spirits with the family \"Blade Beast\" get +1000 BP.",
+      "ptBR": "Flash [High Speed]: Você pode invocar esta carta de Spirit da sua Hand durante o Flash Timing. Ao fazer isso, tanto o custo de invocação quanto os Cores colocados neste Spirit devem vir da sua Reserve.\nLV1/LV2/LV3 Quando Invocado: Durante este turno, todos os seus Spirits com a família \"Blade Beast\" recebem +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-020.webp"
+  },
+  {
+    "id": "BS07-021",
+    "name": "The BladeBraver Volza",
+    "nameEN": "The BladeBraver Volza",
+    "namePT": "The BladeBraver Volza",
+    "nameJP": "天刃の勇者ヴォルザ",
+    "nameKey": "the-bladebraver-volza",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast",
+      "Heroic"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: Attacks from cost 2 or lower Spirits cannot reduce either player's Life.\nLV2 When This Spirit Battles: When this Spirit destroys only an opposing cost 3 or lower Spirit by comparing BP, Refresh this Spirit.",
+      "ptBR": "LV1/LV2: Ataques de Spirits de custo 2 ou menos não podem reduzir a Life de nenhum jogador.\nLV2 Quando Este Spirit Batalha: Quando este Spirit destruir apenas um Spirit do oponente de custo 3 ou menos pela comparação de BP, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-021.webp"
+  },
+  {
+    "id": "BS07-022",
+    "name": "BlackCaracalossam",
+    "nameEN": "BlackCaracalossam",
+    "namePT": "BlackCaracalossam",
+    "nameJP": "ブラックカラカロッサム",
+    "nameKey": "blackcaracalossam",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "Flash: By returning 1 of your battling \"Caracalossom\" to your Hand, summon this Spirit card from your Hand in Exhausted state without paying its cost and have it continue that battle instead.",
+      "ptBR": "Flash: Ao devolver 1 dos seus \"Caracalossom\" que esteja batalhando para sua Hand, invoque esta carta de Spirit da sua Hand em estado Exhausted sem pagar seu custo e faça com que ela continue aquela batalha no lugar dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-022.webp"
+  },
+  {
+    "id": "BS07-023",
+    "name": "Rakudacho",
+    "nameEN": "Rakudacho",
+    "namePT": "Rakudacho",
+    "nameJP": "ラクダチョウ",
+    "nameKey": "rakudacho",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Wandering Spirit"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2] [Windstorm: 1] When This Spirit Attacks: When this Spirit is blocked, your opponent Exhausts 1 Spirit they control.",
+      "ptBR": "[LV1/LV2] [Windstorm: 1] Quando Este Spirit Ataca: Quando este Spirit for bloqueado, o oponente deixa Exhausted 1 Spirit que controla."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-023.webp"
+  },
+  {
+    "id": "BS07-024",
+    "name": "Dyrfangs",
+    "nameEN": "Dyrfangs",
+    "namePT": "Dyrfangs",
+    "nameJP": "デルファングス",
+    "nameKey": "dyrfangs",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Plant Spirit",
+      "Deified General"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Battles: Put 1 Core from the Void onto 1 of your Spirits with the family \"Vanity Deity\" and/or \"Deified General\".\nLV3: Treat all your Spirits with the family \"Vanity Deity\" and/or \"Deified General\" as their highest Level.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Batalha: Coloque 1 Core do Void sobre 1 dos seus Spirits com a família \"Vanity Deity\" e/ou \"Deified General\".\nLV3: Trate todos os seus Spirits com a família \"Vanity Deity\" e/ou \"Deified General\" como estando em seu maior Level."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-024.webp"
+  },
+  {
+    "id": "BS07-025",
+    "name": "The Elder Buchi-Energy",
+    "nameEN": "The Elder Buchi-Energy",
+    "namePT": "The Elder Buchi-Energy",
+    "nameJP": "草林の長老ブチ・エナジ",
+    "nameKey": "the-elder-buchi-energy",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Attacks: At the end of the battle, you may summon 1 Green cost 3 or lower Spirit card from your Hand without paying its cost. Its When Summoned effects do not activate.",
+      "ptBR": "LV2 Quando Este Spirit Ataca: Ao fim da batalha, você pode invocar 1 carta de Spirit Green de custo 3 ou menos da sua Hand sem pagar seu custo. Os efeitos When Summoned dela não são ativados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-025.webp"
+  },
+  {
+    "id": "BS07-026",
+    "name": "The StingBeast Matsunoarashi",
+    "nameEN": "The StingBeast Matsunoarashi",
+    "namePT": "The StingBeast Matsunoarashi",
+    "nameJP": "烈針獣マツノアラシ",
+    "nameKey": "the-stingbeast-matsunoarashi",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 3 or more → Trash]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 3 or higher Spirits to your Trash.\nLV1/LV2 When This Spirit Attacks: When this Spirit destroys only the opposing Spirit by comparing BP, move 1 Core from your opponent's Life to their Reserve.\nLV2: All your Spirits with the family \"Blade Beast\" get +1000 BP.",
+      "ptBR": "[Tribute: Cost 3 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 3 ou mais para o seu Trash.\nLV1/LV2 Quando Este Spirit Ataca: Quando este Spirit destruir apenas o Spirit do oponente pela comparação de BP, mova 1 Core da Life do oponente para a Reserve dele.\nLV2: Todos os seus Spirits com a família \"Blade Beast\" recebem +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-026.webp"
+  },
+  {
+    "id": "BS07-027",
+    "name": "The BlastMarquis Kokatleaf",
+    "nameEN": "The BlastMarquis Kokatleaf",
+    "namePT": "The BlastMarquis Kokatleaf",
+    "nameJP": "突風侯爵コカトリーフ",
+    "nameKey": "the-blastmarquis-kokatleaf",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 7,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Claw Bird",
+      "Plant Spirit"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Windstorm: 2] When This Spirit Attacks: When this Spirit is blocked, your opponent Exhausts 2 Spirits they control.\nLV2 When This Spirit Attacks: When this Spirit's attack reduces your opponent's Life, Refresh all your Spirits with [Windstorm: 1].",
+      "ptBR": "LV1/LV2 [Windstorm: 2] Quando Este Spirit Ataca: Quando este Spirit for bloqueado, o oponente deixa Exhausted 2 Spirits que controla.\nLV2 Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, dê Refresh em todos os seus Spirits com [Windstorm: 1]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-027.webp"
+  }
+]

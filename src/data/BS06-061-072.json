@@ -1,0 +1,572 @@
+[
+  {
+    "id": "BS06-061",
+    "name": "Dolphino",
+    "nameEN": "Dolphino",
+    "namePT": "Dolphino",
+    "nameJP": "ドルフィーノ",
+    "nameKey": "dolphino",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-061.webp"
+  },
+  {
+    "id": "BS06-062",
+    "name": "The BattleBeast Zouuchi",
+    "nameEN": "The BattleBeast Zouuchi",
+    "namePT": "The BattleBeast Zouuchi",
+    "nameJP": "戦闘獣ゾウウチ",
+    "nameKey": "the-battlebeast-zouuchi",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Beast",
+      "Fusion Beast"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 6,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: While you control a Spirit with the family \"Beast Head\", treat this Spirit as LV2.",
+      "ptBR": "LV1/LV2: Enquanto você controlar um Spirit com a família \"Beast Head\", trate este Spirit como LV2."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-062.webp"
+  },
+  {
+    "id": "BS06-063",
+    "name": "The GolemCraftEngineer Gatan",
+    "nameEN": "The GolemCraftEngineer Gatan",
+    "namePT": "The GolemCraftEngineer Gatan",
+    "nameJP": "造兵技師ガタン",
+    "nameKey": "the-golemcraftengineer-gatan",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Creation Hand"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All your Spirits with the family \"Artificial Soldier\" get +1000 BP.\nLV2: Whenever one of your Spirits with the family \"Artificial Soldier\" destroys only the opposing Spirit by comparing BP, put 1 Core from the Void onto this Spirit.",
+      "ptBR": "LV1/LV2: Todos os seus Spirits com a família \"Artificial Soldier\" recebem +1000 BP.\nLV2: Sempre que 1 dos seus Spirits com a família \"Artificial Soldier\" destruir apenas o Spirit do oponente pela comparação de BP, coloque 1 Core do Void sobre este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-063.webp"
+  },
+  {
+    "id": "BS06-064",
+    "name": "Mantigore",
+    "nameEN": "Mantigore",
+    "namePT": "Mantigore",
+    "nameJP": "マンティゴア",
+    "nameKey": "mantigore",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Fusion Beast"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: Treat all your LV1/LV2 Spirits with no effect text as LV2.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Trate todos os seus Spirits LV1/LV2 sem texto de efeito como LV2."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-064.webp"
+  },
+  {
+    "id": "BS06-065",
+    "name": "Block-Golem",
+    "nameEN": "Block-Golem",
+    "namePT": "Block-Golem",
+    "nameJP": "ブロック・ゴレム",
+    "nameKey": "block-golem",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: For each Nexus you control, discard 2 cards from the top of your opponent's deck, up to 4 cards.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Para cada Nexus que você controla, descarte 2 cartas do topo do deck do oponente, até o máximo de 4 cartas."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-065.webp"
+  },
+  {
+    "id": "BS06-066",
+    "name": "The MuscleBraggart Humphrey",
+    "nameEN": "The MuscleBraggart Humphrey",
+    "namePT": "The MuscleBraggart Humphrey",
+    "nameJP": "力自慢のハンフリー",
+    "nameKey": "the-musclebraggart-humphrey",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2/LV3] [Crush] When This Spirit Attacks: Discard cards from the top of your opponent's deck equal to this Spirit's Level.",
+      "ptBR": "[LV1/LV2/LV3] [Crush] Quando Este Spirit Ataca: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-066.webp"
+  },
+  {
+    "id": "BS06-067",
+    "name": "The WeaponDealer Goron-Garan",
+    "nameEN": "The WeaponDealer Goron-Garan",
+    "namePT": "The WeaponDealer Goron-Garan",
+    "nameJP": "武器商人ゴロン・ガラン",
+    "nameKey": "the-weapondealer-goron-garan",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Creation Hand"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-067.webp"
+  },
+  {
+    "id": "BS06-068",
+    "name": "The Tactician Shoujouji",
+    "nameEN": "The Tactician Shoujouji",
+    "namePT": "The Tactician Shoujouji",
+    "nameJP": "軍師ショウジョウジ",
+    "nameKey": "the-tactician-shoujouji",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Main Step: Neither player can use Flash effects on Magic cards.",
+      "ptBR": "LV1/LV2 Durante a Main Step de qualquer jogador: Nenhum jogador pode usar efeitos Flash de cartas de Magic."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-068.webp"
+  },
+  {
+    "id": "BS06-069",
+    "name": "Tsathoggua",
+    "nameEN": "Tsathoggua",
+    "namePT": "Tsathoggua",
+    "nameJP": "ツァトゥグァ",
+    "nameKey": "tsathoggua",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Fusion Beast"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 6,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-069.webp"
+  },
+  {
+    "id": "BS06-070",
+    "name": "The BlastingGiant Douglas",
+    "nameEN": "The BlastingGiant Douglas",
+    "namePT": "The BlastingGiant Douglas",
+    "nameJP": "爆砕巨人ダグラス",
+    "nameKey": "the-blastinggiant-douglas",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2/LV3] [Crush] When This Spirit Attacks: Discard cards from the top of your opponent's deck equal to this Spirit's Level.\nLV2/LV3 When This Spirit Attacks: When this Spirit's [Crush] effect discards a Spirit card, destroy 1 opposing cost 3 or lower Spirit.",
+      "ptBR": "[LV1/LV2/LV3] [Crush] Quando Este Spirit Ataca: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit.\nLV2/LV3 Quando Este Spirit Ataca: Quando o efeito [Crush] deste Spirit descartar uma carta de Spirit, destrua 1 Spirit do oponente de custo 3 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-070.webp"
+  },
+  {
+    "id": "BS06-071",
+    "name": "The HeavyJavelin Morgan",
+    "nameEN": "The HeavyJavelin Morgan",
+    "namePT": "The HeavyJavelin Morgan",
+    "nameJP": "重槍のモーガン",
+    "nameKey": "the-heavyjavelin-morgan",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit",
+      "Deified General"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: The cost of all Spirit cards in your Hand with the family \"Vanity Deity\" becomes 6.\nLV1/LV2 When Summoned: Destroy all opposing cost 4 Spirits.\nLV2: This Spirit gets +1000 BP for each Spirit you control with the family \"Fighting Spirit\".",
+      "ptBR": "LV1/LV2: O custo de todas as cartas de Spirit na sua Hand com a família \"Vanity Deity\" passa a ser 6.\nLV1/LV2 Quando Invocado: Destrua todos os Spirits do oponente de custo 4.\nLV2: Este Spirit recebe +1000 BP para cada Spirit que você controla com a família \"Fighting Spirit\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-071.webp"
+  },
+  {
+    "id": "BS06-072",
+    "name": "The HugeGiant Eurytos",
+    "nameEN": "The HugeGiant Eurytos",
+    "namePT": "The HugeGiant Eurytos",
+    "nameJP": "大巨人エウリュトス",
+    "nameKey": "the-hugegiant-eurytos",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 7,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit",
+      "Heroic"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 6,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Destroy all cost 3 or lower Spirits.",
+      "ptBR": "LV1/LV2 Quando Invocado: Destrua todos os Spirits de custo 3 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-072.webp"
+  }
+]

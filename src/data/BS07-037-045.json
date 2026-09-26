@@ -1,0 +1,449 @@
+[
+  {
+    "id": "BS07-037",
+    "name": "Hippocampoo",
+    "nameEN": "Hippocampoo",
+    "namePT": "Hippocampoo",
+    "nameJP": "ヒッポカンプー",
+    "nameKey": "hippocampoo",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-037.webp"
+  },
+  {
+    "id": "BS07-038",
+    "name": "The CherryBlossomFairy Ouka",
+    "nameEN": "The CherryBlossomFairy Ouka",
+    "namePT": "The CherryBlossomFairy Ouka",
+    "nameJP": "桜の妖精オウカ",
+    "nameKey": "the-cherryblossomfairy-ouka",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Music Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 Flash: By exhausting this Spirit, 1 of your attacking Spirits with [Holy Life] gets +2000 BP during this turn.",
+      "ptBR": "LV1/LV2 Flash: Ao deixar este Spirit Exhausted, 1 dos seus Spirits atacantes com [Holy Life] recebe +2000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-038.webp"
+  },
+  {
+    "id": "BS07-039",
+    "name": "The Macaroni Pentan",
+    "nameEN": "The Macaroni Pentan",
+    "namePT": "The Macaroni Pentan",
+    "nameJP": "マカロニペンタン",
+    "nameKey": "the-macaroni-pentan",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Song Bird",
+      "Wandering Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: If you control \"Emperor Ampere\" and/or \"The Penpress\", return this Spirit to your Hand.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Se você controlar \"Emperor Ampere\" e/ou \"The Penpress\", devolva este Spirit para sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-039.webp"
+  },
+  {
+    "id": "BS07-040",
+    "name": "The LilyFairy Yuly",
+    "nameEN": "The LilyFairy Yuly",
+    "namePT": "The LilyFairy Yuly",
+    "nameJP": "百合の妖精ユリィ",
+    "nameKey": "the-lilyfairy-yuly",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Music Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 [Holy Life] When This Spirit Attacks: When this Spirit's attack reduces your opponent's Life, put 1 Core from the Void into your Life.",
+      "ptBR": "LV2/LV3 [Holy Life] Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Life."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-040.webp"
+  },
+  {
+    "id": "BS07-041",
+    "name": "The SwordBraver Ryute",
+    "nameEN": "The SwordBraver Ryute",
+    "namePT": "The SwordBraver Ryute",
+    "nameJP": "天剣の勇者リュート",
+    "nameKey": "the-swordbraver-ryute",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Imaginary Beast",
+      "Heroic"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: Attacks from cost 2 or lower Spirits cannot reduce either player's Life.\nLV3 When This Spirit Battles: Treat the opposing Spirit battling this Spirit as LV1.",
+      "ptBR": "LV1/LV2/LV3: Ataques de Spirits de custo 2 ou menos não podem reduzir a Life de nenhum jogador.\nLV3 Quando Este Spirit Batalha: Trate o Spirit do oponente que estiver batalhando com este Spirit como LV1."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-041.webp"
+  },
+  {
+    "id": "BS07-042",
+    "name": "Pao-Peir",
+    "nameEN": "Pao-Peir",
+    "namePT": "Pao-Peir",
+    "nameJP": "パオ・ペイール",
+    "nameKey": "pao-peir",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Imaginary Beast",
+      "Deified General"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Is Destroyed: By exhausting 1 of your Spirits with the family \"Imaginary Beast\", keep this Spirit on your Field in refreshed state.\nLV3: Treat all your Spirits with the family \"Vanity Deity\" and/or \"Deified General\" as their highest Level.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit For Destruído: Ao deixar Exhausted 1 dos seus Spirits com a família \"Imaginary Beast\", mantenha este Spirit no seu Field em estado Refresh.\nLV3: Trate todos os seus Spirits com a família \"Vanity Deity\" e/ou \"Deified General\" como estando em seu maior Level."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-042.webp"
+  },
+  {
+    "id": "BS07-043",
+    "name": "The Penpress",
+    "nameEN": "The Penpress",
+    "namePT": "The Penpress",
+    "nameJP": "女帝ペンプレス",
+    "nameKey": "the-penpress",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Emperor Beast",
+      "Song Bird"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Your Attack Step: When one of your Spirits with \"Pentan\" in its card name is destroyed, Refresh this Spirit.\nLV2/LV3: All Spirit cards in your Hand with \"Pentan\" in their card names become cost 3.\nLV3: This Spirit gets +1000 BP for each Spirit you control with \"Pentan\" in its card name.",
+      "ptBR": "LV1/LV2/LV3 Durante Seu Attack Step: Quando 1 dos seus Spirits com \"Pentan\" no nome da carta for destruído, dê Refresh neste Spirit.\nLV2/LV3: Todas as cartas de Spirit na sua Hand com \"Pentan\" no nome da carta passam a ter custo 3.\nLV3: Este Spirit recebe +1000 BP para cada Spirit que você controla com \"Pentan\" no nome da carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-043.webp"
+  },
+  {
+    "id": "BS07-044",
+    "name": "The GreatAngelia Tron",
+    "nameEN": "The GreatAngelia Tron",
+    "namePT": "The GreatAngelia Tron",
+    "nameJP": "天使長トロン",
+    "nameKey": "the-greatangelia-tron",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 3 or more → Trash]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 3 or higher Spirits to your Trash.\nLV1/LV2 When Summoned: During this turn, this Spirit cannot be blocked.\nLV2 [Holy Life] When This Spirit Attacks: When this Spirit's attack reduces your opponent's Life, put 1 Core from the Void into your Life.",
+      "ptBR": "[Tribute: Cost 3 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 3 ou mais para o seu Trash.\nLV1/LV2 Quando Invocado: Durante este turno, este Spirit não pode ser bloqueado.\nLV2 [Holy Life] Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Life."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-044.webp"
+  },
+  {
+    "id": "BS07-045",
+    "name": "The HolyEmperorBeast Sphin-Cross",
+    "nameEN": "The HolyEmperorBeast Sphin-Cross",
+    "namePT": "The HolyEmperorBeast Sphin-Cross",
+    "nameJP": "神帝獣スフィン・クロス",
+    "nameKey": "the-holyemperorbeast-sphin-cross",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 10,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Vanity Deity",
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 7000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 8000
+      },
+      {
+        "level": 3,
+        "cores": 10,
+        "bp": 14000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: You may summon 1 Spirit card with the family \"Imaginary Beast\" from your Hand without paying its cost.\nLV1/LV2/LV3 [Holy Life] When This Spirit Attacks: When this Spirit's attack reduces your opponent's Life, put 1 Core from the Void into your Life.\nLV3 When This Spirit Attacks: When this Spirit is blocked by an opposing Spirit that is not at its highest Level, Refresh this Spirit.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Você pode invocar 1 carta de Spirit com a família \"Imaginary Beast\" da sua Hand sem pagar seu custo.\nLV1/LV2/LV3 [Holy Life] Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Life.\nLV3 Quando Este Spirit Ataca: Quando este Spirit for bloqueado por um Spirit do oponente que não esteja em seu maior Level, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-045.webp"
+  }
+]

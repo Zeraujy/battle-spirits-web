@@ -1,0 +1,618 @@
+[
+  {
+    "id": "BS06-025",
+    "name": "Mepon",
+    "nameEN": "Mepon",
+    "namePT": "Mepon",
+    "nameJP": "メェ～ポン",
+    "nameKey": "mepon",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Imp"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-025.webp"
+  },
+  {
+    "id": "BS06-025 (1)",
+    "name": "Mepon",
+    "nameEN": "Mepon",
+    "namePT": "Mepon",
+    "nameJP": "メェ～ポン",
+    "nameKey": "mepon",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Imp"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-025 (1).webp"
+  },
+  {
+    "id": "BS06-026",
+    "name": "Caracalossom",
+    "nameEN": "Caracalossom",
+    "namePT": "Caracalossom",
+    "nameJP": "カラカロッサム",
+    "nameKey": "caracalossom",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 2,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [High Speed]: You may summon this Spirit card from your Hand during Flash Timing. When doing so, both the summon cost and the Cores placed on this Spirit must come from your Reserve.\nLV2/LV3 When This Spirit Is Destroyed: During this turn, all your Spirits get +1000 BP.",
+      "ptBR": "Flash [High Speed]: Você pode invocar esta carta de Spirit da sua Hand durante o Flash Timing. Ao fazer isso, tanto o custo de invocação quanto os Cores colocados neste Spirit devem vir da sua Reserve.\nLV2/LV3 Quando Este Spirit For Destruído: Durante este turno, todos os seus Spirits recebem +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-026.webp"
+  },
+  {
+    "id": "BS06-027",
+    "name": "Gazellecaid",
+    "nameEN": "Gazellecaid",
+    "namePT": "Gazellecaid",
+    "nameJP": "ガゼルケイド",
+    "nameKey": "gazellecaid",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 2,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Imp"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-027.webp"
+  },
+  {
+    "id": "BS06-028",
+    "name": "Gabunohashi",
+    "nameEN": "Gabunohashi",
+    "namePT": "Gabunohashi",
+    "nameJP": "ガブノハシ",
+    "nameKey": "gabunohashi",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Plant Spirit"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2] [Windstorm: 1] When This Spirit Attacks: When this Spirit is blocked, your opponent Exhausts 1 Spirit they control.",
+      "ptBR": "[LV1/LV2] [Windstorm: 1] Quando Este Spirit Ataca: Quando este Spirit for bloqueado, o oponente deixa Exhausted 1 Spirit que controla."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-028.webp"
+  },
+  {
+    "id": "BS06-029",
+    "name": "Maparrot",
+    "nameEN": "Maparrot",
+    "namePT": "Maparrot",
+    "nameJP": "メイパロット",
+    "nameKey": "maparrot",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Song Bird"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Put 1 Core from the Void onto one of your Spirits.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Coloque 1 Core do Void sobre 1 dos seus Spirits."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-029.webp"
+  },
+  {
+    "id": "BS06-030",
+    "name": "The Worker Antman",
+    "nameEN": "The Worker Antman",
+    "namePT": "The Worker Antman",
+    "nameJP": "働きアントマン",
+    "nameKey": "the-worker-antman",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Shellman",
+      "Parasite"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Attacks: Put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV2 Quando Este Spirit Ataca: Coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-030.webp"
+  },
+  {
+    "id": "BS06-031",
+    "name": "Mitsujarashi",
+    "nameEN": "Mitsujarashi",
+    "namePT": "Mitsujarashi",
+    "nameJP": "ミツジャラシ",
+    "nameKey": "mitsujarashi",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Parasite"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Put 1 Core from the Void onto one of your Spirits.",
+      "ptBR": "LV1/LV2 Quando Invocado: Coloque 1 Core do Void sobre 1 dos seus Spirits."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-031.webp"
+  },
+  {
+    "id": "BS06-032",
+    "name": "Woodykong",
+    "nameEN": "Woodykong",
+    "namePT": "Woodykong",
+    "nameJP": "ウッディコング",
+    "nameKey": "woodykong",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Imp"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-032.webp"
+  },
+  {
+    "id": "BS06-033",
+    "name": "The Baron Jacobino",
+    "nameEN": "The Baron Jacobino",
+    "namePT": "The Baron Jacobino",
+    "nameJP": "ジャコビーノ男爵",
+    "nameKey": "the-baron-jacobino",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Claw Bird"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2] [Windstorm: 1] When This Spirit Attacks: When this Spirit is blocked, your opponent Exhausts 1 Spirit they control.\nLV2 When This Spirit Attacks: This Spirit gets +1000 BP during this turn for each Spirit you control with the family \"Plant Spirit\".",
+      "ptBR": "[LV1/LV2] [Windstorm: 1] Quando Este Spirit Ataca: Quando este Spirit for bloqueado, o oponente deixa Exhausted 1 Spirit que controla.\nLV2 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP durante este turno para cada Spirit que você controla com a família \"Plant Spirit\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-033.webp"
+  },
+  {
+    "id": "BS06-034",
+    "name": "The IronFist Cactusgaroo",
+    "nameEN": "The IronFist Cactusgaroo",
+    "namePT": "The IronFist Cactusgaroo",
+    "nameJP": "鉄拳のカクタスガルー",
+    "nameKey": "the-ironfist-cactusgaroo",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Plant Spirit",
+      "Deified General"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: The cost of all Spirit cards in your Hand with the family \"Vanity Deity\" becomes 6.\nLV1/LV2: While your Life has 3 or fewer Cores, this Spirit gets +3000 BP.\nLV2 During Your Attack Step: When an attack from one of your Spirits with [Windstorm], other than a Spirit named \"The IronFist Cactusgaroo\", reduces your opponent's Life, Refresh this Spirit.",
+      "ptBR": "LV1/LV2: O custo de todas as cartas de Spirit na sua Hand com a família \"Vanity Deity\" passa a ser 6.\nLV1/LV2: Enquanto sua Life tiver 3 ou menos Cores, este Spirit recebe +3000 BP.\nLV2 Durante Seu Attack Step: Quando o ataque de 1 dos seus Spirits com [Windstorm], que não seja um Spirit chamado \"The IronFist Cactusgaroo\", reduzir a Life do oponente, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-034.webp"
+  },
+  {
+    "id": "BS06-035",
+    "name": "Tsukushinmoa",
+    "nameEN": "Tsukushinmoa",
+    "namePT": "Tsukushinmoa",
+    "nameJP": "ツクシンモア",
+    "nameKey": "tsukushinmoa",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Claw Bird"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [High Speed]: You may summon this Spirit card from your Hand during Flash Timing. When doing so, both the summon cost and the Cores placed on this Spirit must come from your Reserve.\nLV1/LV2 When Summoned: Your opponent discards 1 card from their Hand.",
+      "ptBR": "Flash [High Speed]: Você pode invocar esta carta de Spirit da sua Hand durante o Flash Timing. Ao fazer isso, tanto o custo de invocação quanto os Cores colocados neste Spirit devem vir da sua Reserve.\nLV1/LV2 Quando Invocado: O oponente descarta 1 carta da própria Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-035.webp"
+  },
+  {
+    "id": "BS06-036",
+    "name": "The FangTree Rafflesio",
+    "nameEN": "The FangTree Rafflesio",
+    "namePT": "The FangTree Rafflesio",
+    "nameJP": "牙王樹ラフレシオー",
+    "nameKey": "the-fangtree-rafflesio",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 7,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Plant Spirit"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2/LV3] [Windstorm: 2] When This Spirit Attacks: When this Spirit is blocked, your opponent Exhausts 2 Spirits they control.\nLV3 When This Spirit Attacks: When this Spirit's attack reduces your opponent's Life, Exhaust 1 opposing Spirit.",
+      "ptBR": "[LV1/LV2/LV3] [Windstorm: 2] Quando Este Spirit Ataca: Quando este Spirit for bloqueado, o oponente deixa Exhausted 2 Spirits que controla.\nLV3 Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, deixe 1 Spirit do oponente Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-036.webp"
+  }
+]

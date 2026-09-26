@@ -1,0 +1,558 @@
+[
+  {
+    "id": "BS07-067",
+    "name": "Meteor Fall",
+    "nameEN": "Meteor Fall",
+    "namePT": "Meteor Fall",
+    "nameJP": "メテオフォール",
+    "nameKey": "meteor-fall",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, treat 1 Spirit you control as Blue, and it gets +2000 BP.",
+      "ptBR": "Flash: Durante este turno, trate 1 Spirit que você controla como Blue, e ele recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-067.webp"
+  },
+  {
+    "id": "BS07-068",
+    "name": "Felarl Slash",
+    "nameEN": "Felarl Slash",
+    "namePT": "Felarl Slash",
+    "nameJP": "フェラールスラッシュ",
+    "nameKey": "felarl-slash",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Destroy all opposing Spirits with 2000 BP or less.\nFlash: During this turn, 1 of your Spirits with \"Braver\" in its card name gets +5000 BP.",
+      "ptBR": "Main: Destrua todos os Spirits do oponente com 2000 BP ou menos.\nFlash: Durante este turno, 1 dos seus Spirits com \"Braver\" no nome da carta recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-068.webp"
+  },
+  {
+    "id": "BS07-069",
+    "name": "Reborn Flame",
+    "nameEN": "Reborn Flame",
+    "namePT": "Reborn Flame",
+    "nameJP": "リボーンフレイム",
+    "nameKey": "reborn-flame",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Return 1 Spirit card from your Trash to your Hand. During this turn, all Spirit cards in your Hand with the family \"Star Dragon\" gain 1 Red reduction symbol.\nFlash: During this turn, 1 Spirit gets +1000 BP.",
+      "ptBR": "Main: Devolva 1 carta de Spirit do seu Trash para sua Hand. Durante este turno, todas as cartas de Spirit na sua Hand com a família \"Star Dragon\" ganham 1 símbolo de redução Red.\nFlash: Durante este turno, 1 Spirit recebe +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-069.webp"
+  },
+  {
+    "id": "BS07-070",
+    "name": "Black Ritual",
+    "nameEN": "Black Ritual",
+    "namePT": "Black Ritual",
+    "nameJP": "ブラックリチュアル",
+    "nameKey": "black-ritual",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, when one of your Spirits is destroyed by an opposing Spirit, Nexus, or Magic effect, return to your Hand all your Spirits whose \"When This Spirit Is Destroyed\" effects activate.\nFlash: During this turn, 1 Spirit gets +1000 BP.",
+      "ptBR": "Main: Durante este turno, quando 1 dos seus Spirits for destruído por um efeito de Spirit, Nexus ou Magic do oponente, devolva para sua Hand todos os seus Spirits cujos efeitos \"Quando Este Spirit For Destruído\" forem ativados.\nFlash: Durante este turno, 1 Spirit recebe +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-070.webp"
+  },
+  {
+    "id": "BS07-071",
+    "name": "Dirty Fist",
+    "nameEN": "Dirty Fist",
+    "namePT": "Dirty Fist",
+    "nameJP": "ダーティフィスト",
+    "nameKey": "dirty-fist",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this battle, when your opponent's Life is reduced by an attack from one of your Spirits, draw 2 cards.",
+      "ptBR": "Flash: Durante esta batalha, quando a Life do oponente for reduzida pelo ataque de 1 dos seus Spirits, compre 2 cartas."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-071.webp"
+  },
+  {
+    "id": "BS07-072",
+    "name": "Turon Slash",
+    "nameEN": "Turon Slash",
+    "namePT": "Turon Slash",
+    "nameJP": "トゥーロンスラッシュ",
+    "nameKey": "turon-slash",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, when one of your Spirits is blocked, move 1 Core from the opposing blocking Spirit to your opponent's Reserve.\nFlash: During this turn, 1 of your Spirits with \"Braver\" in its card name gets +5000 BP.",
+      "ptBR": "Main: Durante este turno, quando 1 dos seus Spirits for bloqueado, mova 1 Core do Spirit bloqueador do oponente para a Reserve dele.\nFlash: Durante este turno, 1 dos seus Spirits com \"Braver\" no nome da carta recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-072.webp"
+  },
+  {
+    "id": "BS07-073",
+    "name": "Warlwind",
+    "nameEN": "Warlwind",
+    "namePT": "Warlwind",
+    "nameJP": "ワールウィンド",
+    "nameKey": "warlwind",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 2,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, you choose which opposing Spirits are Exhausted by your [Windstorm] effects.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Durante este turno, você escolhe quais Spirits do oponente ficam Exhausted pelos seus efeitos [Windstorm].\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-073.webp"
+  },
+  {
+    "id": "BS07-074",
+    "name": "Needle Shot",
+    "nameEN": "Needle Shot",
+    "namePT": "Needle Shot",
+    "nameJP": "ニードルショット",
+    "nameKey": "needle-shot",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this battle, 1 of your Spirits with the family \"Blade Beast\" gets +2000 BP. If that Spirit destroys only the opposing Spirit by comparing BP, Exhaust 1 opposing Spirit.",
+      "ptBR": "Flash: Durante esta batalha, 1 dos seus Spirits com a família \"Blade Beast\" recebe +2000 BP. Se aquele Spirit destruir apenas o Spirit do oponente pela comparação de BP, deixe 1 Spirit do oponente Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-074.webp"
+  },
+  {
+    "id": "BS07-075",
+    "name": "Fordia Slash",
+    "nameEN": "Fordia Slash",
+    "namePT": "Fordia Slash",
+    "nameJP": "フォーディアスラッシュ",
+    "nameKey": "fordia-slash",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, opposing Spirit, Nexus, and Magic effects that increase BP cannot activate.\nFlash: During this turn, 1 of your Spirits with \"Braver\" in its card name gets +5000 BP.",
+      "ptBR": "Main: Durante este turno, efeitos de Spirit, Nexus e Magic do oponente que aumentam BP não podem ser ativados.\nFlash: Durante este turno, 1 dos seus Spirits com \"Braver\" no nome da carta recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-075.webp"
+  },
+  {
+    "id": "BS07-076",
+    "name": "Diamond Strike",
+    "nameEN": "Diamond Strike",
+    "namePT": "Diamond Strike",
+    "nameJP": "ダイヤモンドストライク",
+    "nameKey": "diamond-strike",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Refresh 1 of your Spirits with the family \"Armed Machine\".",
+      "ptBR": "Flash: Dê Refresh em 1 dos seus Spirits com a família \"Armed Machine\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-076.webp"
+  },
+  {
+    "id": "BS07-077",
+    "name": "Life Saving",
+    "nameEN": "Life Saving",
+    "namePT": "Life Saving",
+    "nameJP": "ライフセービング",
+    "nameKey": "life-saving",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, when one of your Spirits with the family \"Flying Fish\" blocks an opposing cost 3 or lower Spirit, move 1 Core from that Spirit to your Life.",
+      "ptBR": "Flash: Durante este turno, quando 1 dos seus Spirits com a família \"Flying Fish\" bloquear um Spirit do oponente de custo 3 ou menos, mova 1 Core daquele Spirit para sua Life."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-077.webp"
+  },
+  {
+    "id": "BS07-078",
+    "name": "Maclarn Slash",
+    "nameEN": "Maclarn Slash",
+    "namePT": "Maclarn Slash",
+    "nameJP": "マクラーンスラッシュ",
+    "nameKey": "maclarn-slash",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Choose 1 of your Spirits with a \"When This Spirit Blocks\" effect. During this turn, all of that Spirit's \"When This Spirit Blocks\" effects also activate as \"When This Spirit Attacks\" effects.\nFlash: During this turn, 1 of your Spirits with \"Braver\" in its card name gets +5000 BP.",
+      "ptBR": "Main: Escolha 1 dos seus Spirits com um efeito \"Quando Este Spirit Bloqueia\". Durante este turno, todos os efeitos \"Quando Este Spirit Bloqueia\" daquele Spirit também são ativados como efeitos \"Quando Este Spirit Ataca\".\nFlash: Durante este turno, 1 dos seus Spirits com \"Braver\" no nome da carta recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-078.webp"
+  },
+  {
+    "id": "BS07-079",
+    "name": "Bloom Flute",
+    "nameEN": "Bloom Flute",
+    "namePT": "Bloom Flute",
+    "nameJP": "ブルームフルート",
+    "nameKey": "bloom-flute",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this battle, when one of your Spirits with [Holy Life] is blocked, put 1 Core from the Void into your Life.",
+      "ptBR": "Flash: Durante esta batalha, quando 1 dos seus Spirits com [Holy Life] for bloqueado, coloque 1 Core do Void na sua Life."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-079.webp"
+  },
+  {
+    "id": "BS07-080",
+    "name": "No Entry",
+    "nameEN": "No Entry",
+    "namePT": "No Entry",
+    "nameJP": "ノーエントリー",
+    "nameKey": "no-entry",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, all cost 3 or lower Spirits cannot attack or block.\nFlash: During this turn, 1 Spirit gets +1000 BP.",
+      "ptBR": "Main: Durante este turno, todos os Spirits de custo 3 ou menos não podem atacar nem bloquear.\nFlash: Durante este turno, 1 Spirit recebe +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-080.webp"
+  },
+  {
+    "id": "BS07-081",
+    "name": "Lunar Slash",
+    "nameEN": "Lunar Slash",
+    "namePT": "Lunar Slash",
+    "nameJP": "ルナースラッシュ",
+    "nameKey": "lunar-slash",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, when an opposing Spirit without [Tribute] blocks one of your Spirits, all effects of that opposing Spirit are negated.\nFlash: During this turn, 1 of your Spirits with \"Braver\" in its card name gets +5000 BP.",
+      "ptBR": "Main: Durante este turno, quando um Spirit do oponente sem [Tribute] bloquear 1 dos seus Spirits, todos os efeitos daquele Spirit do oponente são anulados.\nFlash: Durante este turno, 1 dos seus Spirits com \"Braver\" no nome da carta recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-081.webp"
+  },
+  {
+    "id": "BS07-082",
+    "name": "Nexus Attack",
+    "nameEN": "Nexus Attack",
+    "namePT": "Nexus Attack",
+    "nameJP": "ネクサスアタック",
+    "nameKey": "nexus-attack",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, 1 of your Spirits with [Assault] gets +2000 BP for each Exhausted Nexus you control.",
+      "ptBR": "Flash: Durante este turno, 1 dos seus Spirits com [Assault] recebe +2000 BP para cada Nexus Exhausted que você controla."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-082.webp"
+  },
+  {
+    "id": "BS07-083",
+    "name": "Wirian Slash",
+    "nameEN": "Wirian Slash",
+    "namePT": "Wirian Slash",
+    "nameJP": "ウィリアンスラッシュ",
+    "nameKey": "wirian-slash",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, when one of your Spirits with the family \"Heroic\" attacks, your opponent cannot use effects from their Hand during Flash Timing.\nFlash: During this turn, 1 of your Spirits with \"Braver\" in its card name gets +5000 BP.",
+      "ptBR": "Main: Durante este turno, quando 1 dos seus Spirits com a família \"Heroic\" atacar, o oponente não pode usar efeitos da Hand durante o Flash Timing.\nFlash: Durante este turno, 1 dos seus Spirits com \"Braver\" no nome da carta recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-083.webp"
+  },
+  {
+    "id": "BS07-084",
+    "name": "Arms Impact",
+    "nameEN": "Arms Impact",
+    "namePT": "Arms Impact",
+    "nameJP": "アームズインパクト",
+    "nameKey": "arms-impact",
+    "set": "BS07",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: When one of your Spirits is blocked by an opposing Spirit, by destroying 1 of your cost 4 or lower Spirits, destroy any number of opposing Spirits whose combined costs are equal to or less than the cost of the Spirit you destroyed.",
+      "ptBR": "Flash: Quando 1 dos seus Spirits for bloqueado por um Spirit do oponente, ao destruir 1 dos seus Spirits de custo 4 ou menos, destrua qualquer quantidade de Spirits do oponente cuja soma dos custos seja igual ou menor que o custo do Spirit que você destruiu."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-084.webp"
+  }
+]

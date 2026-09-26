@@ -1,0 +1,594 @@
+[
+  {
+    "id": "BS06-049",
+    "name": "Pyorit",
+    "nameEN": "Pyorit",
+    "namePT": "Pyorit",
+    "nameJP": "ピョリット",
+    "nameKey": "pyorit",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Small Toy"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-049.webp"
+  },
+  {
+    "id": "BS06-050",
+    "name": "The SnowKiddie Yeti",
+    "nameEN": "The SnowKiddie Yeti",
+    "namePT": "The SnowKiddie Yeti",
+    "nameJP": "雪ん子イエティ",
+    "nameKey": "the-snowkiddie-yeti",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Exhaust this Spirit.\nLV2 During the Opponent's Attack Step: When your opponent uses a Magic effect, Refresh this Spirit.",
+      "ptBR": "LV1/LV2 Quando Invocado: Deixe este Spirit Exhausted.\nLV2 Durante o Attack Step do Oponente: Quando o oponente usar um efeito de Magic, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-050.webp"
+  },
+  {
+    "id": "BS06-051",
+    "name": "Gremly",
+    "nameEN": "Gremly",
+    "namePT": "Gremly",
+    "nameJP": "グレムリー",
+    "nameKey": "gremly",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Musician"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 When This Spirit Is Destroyed: Refresh 1 of your Spirits with [Brilliance].",
+      "ptBR": "LV2/LV3 Quando Este Spirit For Destruído: Dê Refresh em 1 dos seus Spirits com [Brilliance]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-051.webp"
+  },
+  {
+    "id": "BS06-052",
+    "name": "The Chick Pentan",
+    "nameEN": "The Chick Pentan",
+    "namePT": "The Chick Pentan",
+    "nameJP": "ヒナペンタン",
+    "nameKey": "the-chick-pentan",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 2,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Song Bird",
+      "Wandering Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Start Step: By Exhausting this Spirit, during this turn, treat all your Spirits as cost 2 in addition to their original costs.",
+      "ptBR": "LV1/LV2 Durante o Start Step do Oponente: Ao deixar este Spirit Exhausted, durante este turno, trate todos os seus Spirits também como custo 2, além de seus custos originais."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-052.webp"
+  },
+  {
+    "id": "BS06-053",
+    "name": "Laserpanda",
+    "nameEN": "Laserpanda",
+    "namePT": "Laserpanda",
+    "nameJP": "レーザーパンダ",
+    "nameKey": "laserpanda",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Wandering Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-053.webp"
+  },
+  {
+    "id": "BS06-054",
+    "name": "The FortuneTeller Pentan",
+    "nameEN": "The FortuneTeller Pentan",
+    "namePT": "The FortuneTeller Pentan",
+    "nameJP": "占いペンタン",
+    "nameKey": "the-fortuneteller-pentan",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Song Bird",
+      "Wandering Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: You may reveal 1 Magic card from your Hand and place it in your Opened Cards area. If you do, draw 1 card. A Magic card revealed this way can be used from your Opened Cards area as though it were in your Hand until the end of the game.",
+      "ptBR": "LV1/LV2 Quando Invocado: Você pode revelar 1 carta de Magic da sua Hand e colocá-la na sua área de cartas abertas. Se fizer isso, compre 1 carta. Uma carta de Magic revelada desta forma pode ser usada da sua área de cartas abertas como se estivesse na sua Hand até o fim do jogo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-054.webp"
+  },
+  {
+    "id": "BS06-055",
+    "name": "Cotton-Candele",
+    "nameEN": "Cotton-Candele",
+    "namePT": "Cotton-Candele",
+    "nameJP": "コットン・キャンデル",
+    "nameKey": "cotton-candele",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Wandering Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-055.webp"
+  },
+  {
+    "id": "BS06-056",
+    "name": "The CatKnight Cait-Sith",
+    "nameEN": "The CatKnight Cait-Sith",
+    "namePT": "The CatKnight Cait-Sith",
+    "nameJP": "細剣の猫騎士ケット・シー",
+    "nameKey": "the-catknight-cait-sith",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Imaginary Beast",
+      "Deified General"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: The cost of all Spirit cards in your Hand with the family \"Vanity Deity\" becomes 6.\nLV1/LV2/LV3 During Your Turn: When your opponent uses a Magic effect that includes one of your cost 2 Spirits as a target, you may change the target of that Magic effect so that it targets only this Spirit.\nLV2/LV3: This Spirit gets +1000 BP for each cost 2 Spirit you control.",
+      "ptBR": "LV1/LV2/LV3: O custo de todas as cartas de Spirit na sua Hand com a família \"Vanity Deity\" passa a ser 6.\nLV1/LV2/LV3 Durante Seu Turno: Quando o oponente usar um efeito de Magic que inclua 1 dos seus Spirits de custo 2 como alvo, você pode alterar o alvo daquele efeito de Magic para que ele tenha apenas este Spirit como alvo.\nLV2/LV3: Este Spirit recebe +1000 BP para cada Spirit de custo 2 que você controla."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-056.webp"
+  },
+  {
+    "id": "BS06-057",
+    "name": "ArcanaKing-Charle",
+    "nameEN": "ArcanaKing-Charle",
+    "namePT": "ArcanaKing-Charle",
+    "nameJP": "アルカナキング・カール",
+    "nameKey": "arcanaking-charle",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: You may summon up to 4 Spirit cards from your Hand with \"Arcana\" in their card names without paying their costs. Their When Summoned effects do not activate.\nLV2: Treat all your cost 5 Spirits as also having \"Arcana\" in their card names.",
+      "ptBR": "LV1/LV2 Quando Invocado: Você pode invocar até 4 cartas de Spirit da sua Hand com \"Arcana\" no nome da carta sem pagar seus custos. Os efeitos When Summoned delas não são ativados.\nLV2: Trate todos os seus Spirits de custo 5 como também possuindo \"Arcana\" no nome da carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-057.webp"
+  },
+  {
+    "id": "BS06-058",
+    "name": "ArcanaKnight-Hex",
+    "nameEN": "ArcanaKnight-Hex",
+    "namePT": "ArcanaKnight-Hex",
+    "nameJP": "アルカナナイト・ヘクス",
+    "nameKey": "arcanaknight-hex",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Four Paths"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: This Spirit gets +1000 BP for each Spirit you control with \"Arcana\" in its card name.\nLV3 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP para cada Spirit que você controla com \"Arcana\" no nome da carta.\nLV3 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-058.webp"
+  },
+  {
+    "id": "BS06-059",
+    "name": "The CleverBeast Iberix",
+    "nameEN": "The CleverBeast Iberix",
+    "namePT": "The CleverBeast Iberix",
+    "nameJP": "賢獣アイベリックス",
+    "nameKey": "the-cleverbeast-iberix",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Jester",
+      "Imaginary Beast"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Either Attack Step: All your Magic cards gain 1 Yellow reduction symbol.\nLV2/LV3 [Brilliance] When This Spirit Attacks: At the end of the battle, return all Magic cards you used during this battle from your Trash to your Hand.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step de qualquer jogador: Todas as suas cartas de Magic ganham 1 símbolo de redução Yellow.\nLV2/LV3 [Brilliance] Quando Este Spirit Ataca: Ao fim da batalha, devolva do seu Trash para sua Hand todas as cartas de Magic que você usou durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-059.webp"
+  },
+  {
+    "id": "BS06-060",
+    "name": "The GreatAngelia Fanim",
+    "nameEN": "The GreatAngelia Fanim",
+    "namePT": "The GreatAngelia Fanim",
+    "nameJP": "天使長ファニム",
+    "nameKey": "the-greatangelia-fanim",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Exhaust this Spirit.\nLV2/LV3: While this Spirit is Exhausted, all opposing Spirits are summoned in Exhausted state.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Deixe este Spirit Exhausted.\nLV2/LV3: Enquanto este Spirit estiver Exhausted, todos os Spirits do oponente são invocados em estado Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-060.webp"
+  }
+]

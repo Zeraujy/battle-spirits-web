@@ -1,0 +1,438 @@
+[
+  {
+    "id": "BS07-028",
+    "name": "The Artifact Vellnd",
+    "nameEN": "The Artifact Vellnd",
+    "namePT": "The Artifact Vellnd",
+    "nameJP": "機人ヴェルンド",
+    "nameKey": "the-artifact-vellnd",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2] [Armor: Blue]: This Spirit is unaffected by opposing Blue Spirit, Nexus, and Magic effects.",
+      "ptBR": "[LV1/LV2] [Armor: Blue]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Blue do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-028.webp"
+  },
+  {
+    "id": "BS07-029",
+    "name": "Kigna-Swan",
+    "nameEN": "Kigna-Swan",
+    "namePT": "Kigna-Swan",
+    "nameJP": "キグナ・スワン",
+    "nameKey": "kigna-swan",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-029.webp"
+  },
+  {
+    "id": "BS07-030",
+    "name": "The Sacred Laevateinn",
+    "nameEN": "The Sacred Laevateinn",
+    "namePT": "The Sacred Laevateinn",
+    "nameJP": "神機レーヴァテイン",
+    "nameKey": "the-sacred-laevateinn",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: Whenever your \"The Gigantic Thor\" or \"The ArmoredSacred Walhalance\" destroys only an opposing Spirit by comparing BP, Refresh this Spirit.",
+      "ptBR": "LV1/LV2/LV3: Sempre que o seu \"The Gigantic Thor\" ou \"The ArmoredSacred Walhalance\" destruir apenas um Spirit do oponente pela comparação de BP, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-030.webp"
+  },
+  {
+    "id": "BS07-031",
+    "name": "The BowBraver Ullr",
+    "nameEN": "The BowBraver Ullr",
+    "namePT": "The BowBraver Ullr",
+    "nameJP": "天弓の勇者ウル",
+    "nameKey": "the-bowbraver-ullr",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine",
+      "Heroic"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: Attacks from cost 2 or lower Spirits cannot reduce either player's Life.\nLV2/LV3 [Armor: Red/White]: This Spirit is unaffected by opposing Red and White Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2/LV3: Ataques de Spirits de custo 2 ou menos não podem reduzir a Life de nenhum jogador.\nLV2/LV3 [Armor: Red/White]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red e White do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-031.webp"
+  },
+  {
+    "id": "BS07-032",
+    "name": "Hail-Garf",
+    "nameEN": "Hail-Garf",
+    "namePT": "Hail-Garf",
+    "nameJP": "ヘイル・ガルフ",
+    "nameKey": "hail-garf",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Blocks: This Spirit gets +3000 BP during this battle.",
+      "ptBR": "LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +3000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-032.webp"
+  },
+  {
+    "id": "BS07-033",
+    "name": "The ChiefLibrarian Saga",
+    "nameEN": "The ChiefLibrarian Saga",
+    "namePT": "The ChiefLibrarian Saga",
+    "nameJP": "六花の司書長サーガ",
+    "nameKey": "the-chieflibrarian-saga",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Ice Princess"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: When your Life would be reduced by an opposing Spirit's attack, you may discard the top card of your deck. If that card is a White Magic card, your Life is not reduced.\nLV2/LV3: When you discard cards from your deck by this Spirit's effect, add any Magic cards discarded this way to your Hand.",
+      "ptBR": "LV1/LV2/LV3: Quando sua Life seria reduzida pelo ataque de um Spirit do oponente, você pode descartar a carta do topo do seu deck. Se aquela carta for uma carta de Magic White, sua Life não é reduzida.\nLV2/LV3: Quando você descartar cartas do seu deck pelo efeito deste Spirit, adicione à sua Hand quaisquer cartas de Magic descartadas dessa forma."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-033.webp"
+  },
+  {
+    "id": "BS07-034",
+    "name": "Durackdahl",
+    "nameEN": "Durackdahl",
+    "namePT": "Durackdahl",
+    "nameJP": "デュラクダール",
+    "nameKey": "durackdahl",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine",
+      "Deified General"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Armor: Purple/Green/White]: This Spirit is unaffected by opposing Purple, Green, and White Spirit, Nexus, and Magic effects.\nLV3: Treat all your Spirits with the family \"Vanity Deity\" and/or \"Deified General\" as their highest Level.",
+      "ptBR": "LV1/LV2/LV3 [Armor: Purple/Green/White]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Purple, Green e White do oponente.\nLV3: Trate todos os seus Spirits com a família \"Vanity Deity\" e/ou \"Deified General\" como estando em seu maior Level."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-034.webp"
+  },
+  {
+    "id": "BS07-035",
+    "name": "The SteelWingFish Orcanon",
+    "nameEN": "The SteelWingFish Orcanon",
+    "namePT": "The SteelWingFish Orcanon",
+    "nameJP": "鋼翼魚オルカノン",
+    "nameKey": "the-steelwingfish-orcanon",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fish"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 3 or more → Trash]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 3 or higher Spirits to your Trash.\nLV1/LV2 When Summoned: Return 1 opposing Spirit without [Tribute] to its owner's Hand.\nLV2 During Your Attack Step: All your Spirits with the family \"Flying Fish\" cannot be blocked by opposing Spirits with 4000 BP or less.",
+      "ptBR": "[Tribute: Cost 3 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 3 ou mais para o seu Trash.\nLV1/LV2 Quando Invocado: Devolva 1 Spirit do oponente sem [Tribute] para a Hand do dono.\nLV2 Durante Seu Attack Step: Todos os seus Spirits com a família \"Flying Fish\" não podem ser bloqueados por Spirits do oponente com 4000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-035.webp"
+  },
+  {
+    "id": "BS07-036",
+    "name": "The MachineryMonster Giga-Therium",
+    "nameEN": "The MachineryMonster Giga-Therium",
+    "namePT": "The MachineryMonster Giga-Therium",
+    "nameJP": "大械獣ギガ・テリウム",
+    "nameKey": "the-machinerymonster-giga-therium",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 7,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast",
+      "Giant Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: The \"When This Spirit Blocks\" effects of all your Spirits with the family \"Armored Beast\" and/or \"Giant Beast\" also activate as \"When This Spirit Attacks\" effects.\nLV2 When This Spirit Blocks: This Spirit gets +3000 BP during this battle.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Os efeitos \"Quando Este Spirit Bloqueia\" de todos os seus Spirits com a família \"Armored Beast\" e/ou \"Giant Beast\" também são ativados como efeitos \"Quando Este Spirit Ataca\".\nLV2 Quando Este Spirit Bloqueia: Este Spirit recebe +3000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-036.webp"
+  }
+]

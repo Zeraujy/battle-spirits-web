@@ -1,0 +1,886 @@
+[
+  {
+    "id": "BS07-001",
+    "name": "Rainydle",
+    "nameEN": "Rainydle",
+    "namePT": "Rainydle",
+    "nameJP": "レイニードル",
+    "nameKey": "rainydle",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 1,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Star Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-001.webp"
+  },
+  {
+    "id": "BS07-002",
+    "name": "The WingDragman Pteradia",
+    "nameEN": "The WingDragman Pteradia",
+    "namePT": "The WingDragman Pteradia",
+    "nameJP": "翼竜人プテラディア",
+    "nameKey": "the-wingdragman-pteradia",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon",
+      "Winged Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 Flash [Awaken]: You may move any number of Cores from your Spirits to this Spirit.",
+      "ptBR": "LV1/LV2/LV3 Flash [Awaken]: Você pode mover qualquer quantidade de Cores dos seus Spirits para este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-002.webp"
+  },
+  {
+    "id": "BS07-003",
+    "name": "Basilizard",
+    "nameEN": "Basilizard",
+    "namePT": "Basilizard",
+    "nameJP": "バジリザード",
+    "nameKey": "basilizard",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Reptile Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: This Spirit gets +1000 BP for each opposing cost 3 or lower Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP para cada Spirit do oponente de custo 3 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-003.webp"
+  },
+  {
+    "id": "BS07-004",
+    "name": "The FuryRockWyvern Dragorock",
+    "nameEN": "The FuryRockWyvern Dragorock",
+    "namePT": "The FuryRockWyvern Dragorock",
+    "nameJP": "怒石竜ドラゴロック",
+    "nameKey": "the-furyrockwyvern-dragorock",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Star Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Clash] When This Spirit Attacks: Your opponent must block if possible.",
+      "ptBR": "LV1/LV2 [Clash] Quando Este Spirit Ataca: O oponente deve bloquear se possível."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-004.webp"
+  },
+  {
+    "id": "BS07-005",
+    "name": "The HalberdBraver Arc",
+    "nameEN": "The HalberdBraver Arc",
+    "namePT": "The HalberdBraver Arc",
+    "nameJP": "天槍の勇者アーク",
+    "nameKey": "the-halberdbraver-arc",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Star Dragon",
+      "Heroic"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: Attacks from cost 2 or lower Spirits cannot reduce either player's Life.\nLV2/LV3 When This Spirit Attacks: Destroy 1 opposing Spirit with 2000 BP or less.",
+      "ptBR": "LV1/LV2/LV3: Ataques de Spirits de custo 2 ou menos não podem reduzir a Life de nenhum jogador.\nLV2/LV3 Quando Este Spirit Ataca: Destrua 1 Spirit do oponente com 2000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-005.webp"
+  },
+  {
+    "id": "BS07-006",
+    "name": "La-Diablord",
+    "nameEN": "La-Diablord",
+    "namePT": "La-Diablord",
+    "nameJP": "ラ・ディアブロード",
+    "nameKey": "la-diablord",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon",
+      "Deified General"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Your Attack Step: All your Spirits with the family \"Deified General\" get +2000 BP.\nLV3: Treat all your Spirits with the family \"Vanity Deity\" and/or \"Deified General\" as their highest Level.",
+      "ptBR": "LV1/LV2/LV3 Durante Seu Attack Step: Todos os seus Spirits com a família \"Deified General\" recebem +2000 BP.\nLV3: Trate todos os seus Spirits com a família \"Vanity Deity\" e/ou \"Deified General\" como estando em seu maior Level."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-006.webp"
+  },
+  {
+    "id": "BS07-007",
+    "name": "The Astrologist Dragron",
+    "nameEN": "The Astrologist Dragron",
+    "namePT": "The Astrologist Dragron",
+    "nameJP": "ドラグロン占術師",
+    "nameKey": "the-astrologist-dragron",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Return 1 Spirit card from your Trash to your Hand. If that card has the family \"Heroic\", destroy 1 opposing Spirit with 3000 BP or less.",
+      "ptBR": "LV1/LV2 Quando Invocado: Devolva 1 carta de Spirit do seu Trash para sua Hand. Se aquela carta possuir a família \"Heroic\", destrua 1 Spirit do oponente com 3000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-007.webp"
+  },
+  {
+    "id": "BS07-008",
+    "name": "The BladeDinosaur Bragasaur",
+    "nameEN": "The BladeDinosaur Bragasaur",
+    "namePT": "The BladeDinosaur Bragasaur",
+    "nameJP": "重刀竜ブレイガザウラー",
+    "nameKey": "the-bladedinosaur-bragasaur",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon",
+      "Heroic"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: This Spirit gets +1000 BP for each Spirit you control with the family \"Heroic\".\nLV2/LV3 During Your Attack Step: All your Spirits with the family \"Terra Dragon\" also gain the family \"Heroic\".",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP para cada Spirit que você controla com a família \"Heroic\".\nLV2/LV3 Durante Seu Attack Step: Todos os seus Spirits com a família \"Terra Dragon\" também ganham a família \"Heroic\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-008.webp"
+  },
+  {
+    "id": "BS07-009",
+    "name": "The SwordDragonEmperor Ex-Calibus",
+    "nameEN": "The SwordDragonEmperor Ex-Calibus",
+    "namePT": "The SwordDragonEmperor Ex-Calibus",
+    "nameJP": "剣龍皇エクス・キャリバス",
+    "nameKey": "the-sworddragonemperor-ex-calibus",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 7,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Ancient Dragon",
+      "Heroic"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 3 or more → Trash]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 3 or higher Spirits to your Trash.\nLV1/LV2 When Summoned: Destroy any number of opposing Spirits whose combined BP total 6000 or less.\nLV2 [Clash] When This Spirit Attacks: Your opponent must block if possible.",
+      "ptBR": "[Tribute: Cost 3 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 3 ou mais para o seu Trash.\nLV1/LV2 Quando Invocado: Destrua qualquer quantidade de Spirits do oponente cuja soma dos BP seja 6000 ou menos.\nLV2 [Clash] Quando Este Spirit Ataca: O oponente deve bloquear se possível."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-009.webp"
+  },
+  {
+    "id": "BS07-010",
+    "name": "Ashtal",
+    "nameEN": "Ashtal",
+    "namePT": "Ashtal",
+    "nameJP": "アシュタル",
+    "nameKey": "ashtal",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Nightling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-010.webp"
+  },
+  {
+    "id": "BS07-011",
+    "name": "Necrow",
+    "nameEN": "Necrow",
+    "namePT": "Necrow",
+    "nameJP": "ネクロウ",
+    "nameKey": "necrow",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 2,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Spiritual Beast"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2] [Curse] When This Spirit Attacks: At the end of the battle, destroy the opposing Spirit that blocked this Spirit.",
+      "ptBR": "[LV1/LV2] [Curse] Quando Este Spirit Ataca: Ao fim da batalha, destrua o Spirit do oponente que bloqueou este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-011.webp"
+  },
+  {
+    "id": "BS07-012",
+    "name": "Plasbat",
+    "nameEN": "Plasbat",
+    "namePT": "Plasbat",
+    "nameJP": "プラズバット",
+    "nameKey": "plasbat",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 2,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Nightling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Move 1 Core from an opposing Spirit to your opponent's Reserve.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Mova 1 Core de um Spirit do oponente para a Reserve dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-012.webp"
+  },
+  {
+    "id": "BS07-013",
+    "name": "The FortuneTeller Deasha",
+    "nameEN": "The FortuneTeller Deasha",
+    "namePT": "The FortuneTeller Deasha",
+    "nameJP": "魔札の占い師ディーシャ",
+    "nameKey": "the-fortuneteller-deasha",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Clown",
+      "Nightling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Is Destroyed: Your opponent chooses 1 card from their Hand and returns it to the top of their deck.",
+      "ptBR": "LV2 Quando Este Spirit For Destruído: O oponente escolhe 1 carta da própria Hand e a devolve para o topo do deck dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-013.webp"
+  },
+  {
+    "id": "BS07-014",
+    "name": "The ScytheBraver Zanba",
+    "nameEN": "The ScytheBraver Zanba",
+    "namePT": "The ScytheBraver Zanba",
+    "nameJP": "天鎌の勇者ザンバ",
+    "nameKey": "the-scythebraver-zanba",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Nightling",
+      "Heroic"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: Attacks from cost 2 or lower Spirits cannot reduce either player's Life.\nLV3 When This Spirit Attacks: Move 1 Core from an opposing Spirit to your opponent's Reserve.",
+      "ptBR": "LV1/LV2/LV3: Ataques de Spirits de custo 2 ou menos não podem reduzir a Life de nenhum jogador.\nLV3 Quando Este Spirit Ataca: Mova 1 Core de um Spirit do oponente para a Reserve dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-014.webp"
+  },
+  {
+    "id": "BS07-015",
+    "name": "Brionagon",
+    "nameEN": "Brionagon",
+    "namePT": "Brionagon",
+    "nameJP": "ブリュナグオン",
+    "nameKey": "brionagon",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Curse Demon",
+      "Deified General"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: By destroying 1 of your Spirits with [Curse], return 1 Spirit card with the family \"Vanity Deity\" and/or \"Deified General\" from your Trash to your Hand.\nLV3: Treat all your Spirits with the family \"Vanity Deity\" and/or \"Deified General\" as their highest Level.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Ao destruir 1 dos seus Spirits com [Curse], devolva 1 carta de Spirit com a família \"Vanity Deity\" e/ou \"Deified General\" do seu Trash para sua Hand.\nLV3: Trate todos os seus Spirits com a família \"Vanity Deity\" e/ou \"Deified General\" como estando em seu maior Level."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-015.webp"
+  },
+  {
+    "id": "BS07-016",
+    "name": "The HellBraver Deathcarabia",
+    "nameEN": "The HellBraver Deathcarabia",
+    "namePT": "The HellBraver Deathcarabia",
+    "nameJP": "冥勇士デスカラビア",
+    "nameKey": "the-hellbraver-deathcarabia",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Infernal Lord",
+      "Nightling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Discard the top card of your deck. If that card is a Purple Spirit card, keep this Spirit on your Field in refreshed state.\nLV2 [Curse] When This Spirit Attacks: At the end of the battle, destroy the opposing Spirit that blocked this Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Descarte a carta do topo do seu deck. Se aquela carta for uma carta de Spirit Purple, mantenha este Spirit no seu Field em estado Refresh.\nLV2 [Curse] Quando Este Spirit Ataca: Ao fim da batalha, destrua o Spirit do oponente que bloqueou este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-016.webp"
+  },
+  {
+    "id": "BS07-017",
+    "name": "The HellBeastMan Zabullgan",
+    "nameEN": "The HellBeastMan Zabullgan",
+    "namePT": "The HellBeastMan Zabullgan",
+    "nameJP": "冥獣士ザブルガン",
+    "nameKey": "the-hellbeastman-zabullgan",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Infernal Lord"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 3 or more → Trash]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 3 or higher Spirits to your Trash.\nLV1/LV2/LV3 When Summoned: Move 1 Core from an opposing Spirit to the Void.\nLV2/LV3 When This Spirit Is Destroyed: Move 2 Cores from opposing Spirits to the Void.",
+      "ptBR": "[Tribute: Cost 3 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 3 ou mais para o seu Trash.\nLV1/LV2/LV3 Quando Invocado: Mova 1 Core de um Spirit do oponente para o Void.\nLV2/LV3 Quando Este Spirit For Destruído: Mova 2 Cores dos Spirits do oponente para o Void."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-017.webp"
+  },
+  {
+    "id": "BS07-018",
+    "name": "The HighPriestess Lilu-Succubus",
+    "nameEN": "The HighPriestess Lilu-Succubus",
+    "namePT": "The HighPriestess Lilu-Succubus",
+    "nameJP": "女教皇リル・サキュバス",
+    "nameKey": "the-highpriestess-lilu-succubus",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 7,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Nightling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Activate the \"When This Spirit Is Destroyed\" effects of all your Spirits without destroying those Spirits.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Ative os efeitos \"Quando Este Spirit For Destruído\" de todos os seus Spirits sem destruir aqueles Spirits."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-018.webp"
+  }
+]

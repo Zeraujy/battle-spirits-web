@@ -1,0 +1,220 @@
+[
+  {
+    "id": "BS06-X21",
+    "name": "The Deity Catastrophedragon",
+    "nameEN": "The Deity Catastrophedragon",
+    "namePT": "The Deity Catastrophedragon",
+    "nameJP": "激神皇カタストロフドラゴン",
+    "nameKey": "the-deity-catastrophedragon",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 10,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Vanity Deity",
+      "Ancient Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 7000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 10000
+      },
+      {
+        "level": 3,
+        "cores": 10,
+        "bp": 20000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Draw 1 card for each Spirit you control with the family \"Ancient Dragon\".\nLV2/LV3 [Clash] When This Spirit Attacks: Your opponent must block if possible.\nLV3 When This Spirit Attacks: When blocked by an opposing cost 5 or lower Spirit, Refresh this Spirit.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Compre 1 carta para cada Spirit que você controla com a família \"Ancient Dragon\".\nLV2/LV3 [Clash] Quando Este Spirit Ataca: O oponente deve bloquear se possível.\nLV3 Quando Este Spirit Ataca: Quando for bloqueado por um Spirit do oponente de custo 5 ou menos, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-X21.webp"
+  },
+  {
+    "id": "BS06-X22",
+    "name": "The SevenShogun Beelzebeat",
+    "nameEN": "The SevenShogun Beelzebeat",
+    "namePT": "The SevenShogun Beelzebeat",
+    "nameJP": "魔界七将ベルゼビート",
+    "nameKey": "the-sevenshogun-beelzebeat",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 7,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Infernal Lord",
+      "Curse Demon"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 8000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: You may summon any number of Spirit cards with [Curse] from your Trash without paying their costs, as long as their combined costs total 13 or less.\nLV2/LV3 During Your Attack Step: When an attack from one of your Spirits with [Curse] reduces your opponent's Life, destroy 1 opposing Spirit.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Você pode invocar qualquer quantidade de cartas de Spirit com [Curse] do seu Trash sem pagar seus custos, desde que a soma dos custos delas seja 13 ou menos.\nLV2/LV3 Durante Seu Attack Step: Quando o ataque de 1 dos seus Spirits com [Curse] reduzir a Life do oponente, destrua 1 Spirit do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-X22.webp"
+  },
+  {
+    "id": "BS06-X23",
+    "name": "The Providence Hououga",
+    "nameEN": "The Providence Hououga",
+    "namePT": "The Providence Hououga",
+    "nameJP": "天帝ホウオウガ",
+    "nameKey": "the-providence-hououga",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 10,
+    "reduction": [
+      "green",
+      "green",
+      "green",
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Vanity Deity",
+      "Claw Bird"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 10000
+      },
+      {
+        "level": 3,
+        "cores": 10,
+        "bp": 16000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Windstorm: 3] When This Spirit Attacks: When this Spirit is blocked, your opponent Exhausts 3 Spirits they control.\nLV3 When This Spirit Attacks: When this Spirit's attack reduces your opponent's Life, by moving 1 Core from your Reserve to the Void, Refresh this Spirit.",
+      "ptBR": "LV1/LV2/LV3 [Windstorm: 3] Quando Este Spirit Ataca: Quando este Spirit for bloqueado, o oponente deixa Exhausted 3 Spirits que controla.\nLV3 Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, ao mover 1 Core da sua Reserve para o Void, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-X23.webp"
+  },
+  {
+    "id": "BS06-X24",
+    "name": "The ArmoredSacred Walhalance",
+    "nameEN": "The ArmoredSacred Walhalance",
+    "namePT": "The ArmoredSacred Walhalance",
+    "nameJP": "鎧神機ヴァルハランス",
+    "nameKey": "the-armoredsacred-walhalance",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 7,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine",
+      "War Knight"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Armor: ∞]: This Spirit is unaffected by opposing Spirit, Nexus, and Magic effects whose colors match symbols on your opponent's Field.\nLV2/LV3 When This Spirit Battles: By Exhausting 1 of your Spirits with the family \"Armed Machine\", this Spirit gets +BP equal to that exhausted Spirit's BP during this battle.\nLV3 When This Spirit Attacks: Return all opposing Spirits with 4000 BP or less to their owners' Hands.",
+      "ptBR": "LV1/LV2/LV3 [Armor: ∞]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic do oponente cujas cores correspondam aos símbolos no Field do oponente.\nLV2/LV3 Quando Este Spirit Batalha: Ao deixar Exhausted 1 dos seus Spirits com a família \"Armed Machine\", este Spirit recebe +BP igual ao BP daquele Spirit Exhausted durante esta batalha.\nLV3 Quando Este Spirit Ataca: Devolva todos os Spirits do oponente com 4000 BP ou menos para as Hands de seus donos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-X24.webp"
+  }
+]

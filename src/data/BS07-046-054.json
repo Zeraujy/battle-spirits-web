@@ -1,0 +1,452 @@
+[
+  {
+    "id": "BS07-046",
+    "name": "The PantherMan Berserkas",
+    "nameEN": "The PantherMan Berserkas",
+    "namePT": "The PantherMan Berserkas",
+    "nameJP": "豹人ベルセルカス",
+    "nameKey": "the-pantherman-berserkas",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-046.webp"
+  },
+  {
+    "id": "BS07-047",
+    "name": "The Merman Apkareel",
+    "nameEN": "The Merman Apkareel",
+    "namePT": "The Merman Apkareel",
+    "nameJP": "海人アプカリール",
+    "nameKey": "the-merman-apkareel",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Creation Hand"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When your opponent uses a Magic effect, put 1 Core from the Void onto this Spirit.",
+      "ptBR": "LV1/LV2: Quando o oponente usar um efeito de Magic, coloque 1 Core do Void sobre este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-047.webp"
+  },
+  {
+    "id": "BS07-048",
+    "name": "Silver-Golem",
+    "nameEN": "Silver-Golem",
+    "namePT": "Silver-Golem",
+    "nameJP": "シルバー・ゴレム",
+    "nameKey": "silver-golem",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: When this Spirit blocks an opposing cost 3 or lower Spirit, this Spirit does not become Exhausted.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Quando este Spirit bloquear um Spirit do oponente de custo 3 ou menos, este Spirit não fica Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-048.webp"
+  },
+  {
+    "id": "BS07-049",
+    "name": "Cannon-Golem",
+    "nameEN": "Cannon-Golem",
+    "namePT": "Cannon-Golem",
+    "nameJP": "カノン・ゴレム",
+    "nameKey": "cannon-golem",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2/LV3] [Crush] When This Spirit Attacks: Discard cards from the top of your opponent's deck equal to this Spirit's Level.\nLV2/LV3 When This Spirit Attacks: Destroy all opposing cost 1 or lower Spirits.",
+      "ptBR": "[LV1/LV2/LV3] [Crush] Quando Este Spirit Ataca: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit.\nLV2/LV3 Quando Este Spirit Ataca: Destrua todos os Spirits do oponente de custo 1 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-049.webp"
+  },
+  {
+    "id": "BS07-050",
+    "name": "Galadolg",
+    "nameEN": "Galadolg",
+    "namePT": "Galadolg",
+    "nameJP": "ガラドルグ",
+    "nameKey": "galadolg",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier",
+      "Deified General"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During Your Main Step: When you summon a Spirit with the family \"Vanity Deity\" and/or \"Deified General\", you may place 1 Nexus card from your Trash without paying its cost.\nLV3: Treat all your Spirits with the family \"Vanity Deity\" and/or \"Deified General\" as their highest Level.",
+      "ptBR": "LV1/LV2/LV3 Durante Sua Main Step: Quando você invocar um Spirit com a família \"Vanity Deity\" e/ou \"Deified General\", você pode colocar 1 carta de Nexus do seu Trash sem pagar seu custo.\nLV3: Trate todos os seus Spirits com a família \"Vanity Deity\" e/ou \"Deified General\" como estando em seu maior Level."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-050.webp"
+  },
+  {
+    "id": "BS07-051",
+    "name": "The AxeBraver Coyo",
+    "nameEN": "The AxeBraver Coyo",
+    "namePT": "The AxeBraver Coyo",
+    "nameJP": "天斧の勇者カイオー",
+    "nameKey": "the-axebraver-coyo",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head",
+      "Heroic"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: Attacks from cost 2 or lower Spirits cannot reduce either player's Life.\nLV2 [Assault: 1] When This Spirit Attacks: Once per turn, by exhausting 1 Nexus you control, Refresh this Spirit.",
+      "ptBR": "LV1/LV2: Ataques de Spirits de custo 2 ou menos não podem reduzir a Life de nenhum jogador.\nLV2 [Assault: 1] Quando Este Spirit Ataca: Uma vez por turno, ao deixar Exhausted 1 Nexus que você controla, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-051.webp"
+  },
+  {
+    "id": "BS07-052",
+    "name": "The Fencer Falconia",
+    "nameEN": "The Fencer Falconia",
+    "namePT": "The Fencer Falconia",
+    "nameJP": "隼の剣士ファルコニア",
+    "nameKey": "the-fencer-falconia",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Beast Head",
+      "Heroic"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Assault: 1] When This Spirit Attacks: Once per turn, by exhausting 1 Nexus you control, Refresh this Spirit.",
+      "ptBR": "LV1/LV2 [Assault: 1] Quando Este Spirit Ataca: Uma vez por turno, ao deixar Exhausted 1 Nexus que você controla, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-052.webp"
+  },
+  {
+    "id": "BS07-053",
+    "name": "Island-Golem",
+    "nameEN": "Island-Golem",
+    "namePT": "Island-Golem",
+    "nameJP": "アイランド・ゴレム",
+    "nameKey": "island-golem",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 6,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Artificial Soldier",
+      "Heroic"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "[Tribute: Cost 3 or more → Trash]\nAfter paying this Spirit's summon cost, you must move all Cores from 1 of your cost 3 or higher Spirits to your Trash.\n[LV1/LV2/LV3] [Crush] When This Spirit Attacks: Discard cards from the top of your opponent's deck equal to this Spirit's Level.\nLV2/LV3 During Either Attack Step: Whenever cards are discarded from your opponent's deck by a [Crush] effect, discard 3 additional cards.",
+      "ptBR": "[Tribute: Cost 3 ou mais → Trash]\nApós pagar o custo de invocação deste Spirit, você deve mover todos os Cores de 1 dos seus Spirits de custo 3 ou mais para o seu Trash.\n[LV1/LV2/LV3] [Crush] Quando Este Spirit Ataca: Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit.\nLV2/LV3 Durante o Attack Step de qualquer jogador: Sempre que cartas forem descartadas do deck do oponente por um efeito [Crush], descarte 3 cartas adicionais."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-053.webp"
+  },
+  {
+    "id": "BS07-054",
+    "name": "The PhoenicDeity Phoenix-Golem",
+    "nameEN": "The PhoenicDeity Phoenix-Golem",
+    "namePT": "The PhoenicDeity Phoenix-Golem",
+    "nameJP": "神凰兵フェニックス・ゴレム",
+    "nameKey": "the-phoenicdeity-phoenix-golem",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 10,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue",
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Vanity Deity",
+      "Artificial Soldier"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 7000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 9000
+      },
+      {
+        "level": 3,
+        "cores": 10,
+        "bp": 15000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: You may place 1 Nexus card from your Hand without paying its cost.\nLV2/LV3: Whenever this Spirit is Refreshed, discard 4 cards from the top of your opponent's deck.\nLV3 [Assault: 3] When This Spirit Attacks: Up to three times per turn, by exhausting 1 Nexus you control, Refresh this Spirit.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Você pode colocar 1 carta de Nexus da sua Hand sem pagar seu custo.\nLV2/LV3: Sempre que este Spirit receber Refresh, descarte 4 cartas do topo do deck do oponente.\nLV3 [Assault: 3] Quando Este Spirit Ataca: Até três vezes por turno, ao deixar Exhausted 1 Nexus que você controla, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-054.webp"
+  }
+]

@@ -1,0 +1,572 @@
+[
+  {
+    "id": "BS06-037",
+    "name": "TwinFairies Hugin&Munin",
+    "nameEN": "TwinFairies Hugin&Munin",
+    "namePT": "TwinFairies Hugin&Munin",
+    "nameJP": "双子妖精フギン＆ムニン",
+    "nameKey": "twinfairies-hugin-munin",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2] [Armor: Green]: This Spirit is unaffected by opposing Green Spirit, Nexus, and Magic effects.",
+      "ptBR": "[LV1/LV2] [Armor: Green]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Green do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-037.webp"
+  },
+  {
+    "id": "BS06-038",
+    "name": "Senzangou",
+    "nameEN": "Senzangou",
+    "namePT": "Senzangou",
+    "nameJP": "センザンゴウ",
+    "nameKey": "senzangou",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: This Spirit cannot attack.\nLV1/LV2: When your Life is reduced, Refresh this Spirit.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Este Spirit não pode atacar.\nLV1/LV2: Quando sua Life for reduzida, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-038.webp"
+  },
+  {
+    "id": "BS06-039",
+    "name": "The FloatingFish Molamola",
+    "nameEN": "The FloatingFish Molamola",
+    "namePT": "The FloatingFish Molamola",
+    "nameJP": "浮遊魚モラモラー",
+    "nameKey": "the-floatingfish-molamola",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fish"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-039.webp"
+  },
+  {
+    "id": "BS06-040",
+    "name": "The ChiefMaid Fulla",
+    "nameEN": "The ChiefMaid Fulla",
+    "namePT": "The ChiefMaid Fulla",
+    "nameJP": "薄氷の侍女長フッラ",
+    "nameKey": "the-chiefmaid-fulla",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Ice Princess"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-040.webp"
+  },
+  {
+    "id": "BS06-041",
+    "name": "The ArmoredBeast Audhumla",
+    "nameEN": "The ArmoredBeast Audhumla",
+    "namePT": "The ArmoredBeast Audhumla",
+    "nameJP": "鎧装獣アウドムラ",
+    "nameKey": "the-armoredbeast-audhumla",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Giant Beast",
+      "Armored Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: Put 1 Core from the Void onto this Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Coloque 1 Core do Void sobre este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-041.webp"
+  },
+  {
+    "id": "BS06-042",
+    "name": "The AutoMarine Seerauber",
+    "nameEN": "The AutoMarine Seerauber",
+    "namePT": "The AutoMarine Seerauber",
+    "nameJP": "機海兵ゼーロイヴァー",
+    "nameKey": "the-automarine-seerauber",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Moving Tool"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2] [Armor: Red/Purple/White]: This Spirit is unaffected by opposing Red, Purple, and White Spirit, Nexus, and Magic effects.\nLV2 During Either Attack Step: When your opponent uses a cost 4 or 5 Magic effect, return 1 opposing Spirit to its owner's Hand.",
+      "ptBR": "[LV1/LV2] [Armor: Red/Purple/White]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red, Purple e White do oponente.\nLV2 Durante o Attack Step de qualquer jogador: Quando o oponente usar um efeito de Magic de custo 4 ou 5, devolva 1 Spirit do oponente para a Hand do dono."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-042.webp"
+  },
+  {
+    "id": "BS06-043",
+    "name": "The ShieldSoldier Balder",
+    "nameEN": "The ShieldSoldier Balder",
+    "namePT": "The ShieldSoldier Balder",
+    "nameJP": "盾機兵バルドル",
+    "nameKey": "the-shieldsoldier-balder",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: This Spirit gets +1000 BP for each Exhausted Spirit you control.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +1000 BP para cada Spirit Exhausted que você controla."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-043.webp"
+  },
+  {
+    "id": "BS06-044",
+    "name": "Reindeer",
+    "nameEN": "Reindeer",
+    "namePT": "Reindeer",
+    "nameJP": "レインディア",
+    "nameKey": "reindeer",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "[LV1/LV2] [Armor: Red]: This Spirit is unaffected by opposing Red Spirit, Nexus, and Magic effects.\nLV2 When This Spirit Blocks: Return the opposing Spirit blocked by this Spirit with the family \"Flying Fang\" to its owner's Hand.",
+      "ptBR": "[LV1/LV2] [Armor: Red]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red do oponente.\nLV2 Quando Este Spirit Bloqueia: Devolva para a Hand do dono o Spirit do oponente bloqueado por este Spirit que possua a família \"Flying Fang\"."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-044.webp"
+  },
+  {
+    "id": "BS06-045",
+    "name": "Tonbeaul",
+    "nameEN": "Tonbeaul",
+    "namePT": "Tonbeaul",
+    "nameJP": "トンビュール",
+    "nameKey": "tonbeaul",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Light Insect"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-045.webp"
+  },
+  {
+    "id": "BS06-046",
+    "name": "The KeyMaul Valgrind",
+    "nameEN": "The KeyMaul Valgrind",
+    "namePT": "The KeyMaul Valgrind",
+    "nameJP": "鍵鎚のヴァルグリンド",
+    "nameKey": "the-keymaul-valgrind",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine",
+      "Deified General"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: The cost of all Spirit cards in your Hand with the family \"Vanity Deity\" becomes 6.\nLV1/LV2 When Summoned: Return 1 opposing Spirit to its owner's Hand.\nLV2 When This Spirit Blocks: When this Spirit blocks an opposing Spirit with 4000 BP or more, Refresh this Spirit.",
+      "ptBR": "LV1/LV2: O custo de todas as cartas de Spirit na sua Hand com a família \"Vanity Deity\" passa a ser 6.\nLV1/LV2 Quando Invocado: Devolva 1 Spirit do oponente para a Hand do dono.\nLV2 Quando Este Spirit Bloqueia: Quando este Spirit bloquear um Spirit do oponente com 4000 BP ou mais, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-046.webp"
+  },
+  {
+    "id": "BS06-047",
+    "name": "The ShineDragonPalace Breidhablic",
+    "nameEN": "The ShineDragonPalace Breidhablic",
+    "namePT": "The ShineDragonPalace Breidhablic",
+    "nameJP": "輝竜殿ブレイザブリク",
+    "nameKey": "the-shinedragonpalace-breidhablic",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Dragon"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Blocks: Put 1 Core from the Void onto this Spirit.\nLV2/LV3 When This Spirit Blocks: This Spirit gets +4000 BP during this battle.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Bloqueia: Coloque 1 Core do Void sobre este Spirit.\nLV2/LV3 Quando Este Spirit Bloqueia: Este Spirit recebe +4000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-047.webp"
+  },
+  {
+    "id": "BS06-048",
+    "name": "The SilverWolfEmperor Gagnrathr",
+    "nameEN": "The SilverWolfEmperor Gagnrathr",
+    "namePT": "The SilverWolfEmperor Gagnrathr",
+    "nameJP": "銀狼皇ガグンラーズ",
+    "nameKey": "the-silverwolfemperor-gagnrathr",
+    "set": "BS06",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 7,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine",
+      "War Knight"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: This Spirit gets +1000 BP for each Spirit you control with [Armor].\nLV2 When This Spirit Blocks: Exhaust 2 opposing Spirits.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +1000 BP para cada Spirit que você controla com [Armor].\nLV2 Quando Este Spirit Bloqueia: Deixe 2 Spirits do oponente Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-048.webp"
+  }
+]

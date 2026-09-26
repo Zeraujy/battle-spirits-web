@@ -1,0 +1,753 @@
+[
+  {
+    "id": "BS06-091",
+    "name": "Buster Javelin",
+    "nameEN": "Buster Javelin",
+    "namePT": "Buster Javelin",
+    "nameJP": "バスタージャベリン",
+    "nameKey": "buster-javelin",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Destroy 1 Nexus. If you destroy an opposing Nexus, draw 1 card.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Destrua 1 Nexus. Se você destruir um Nexus do oponente, compre 1 carta.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-091.webp"
+  },
+  {
+    "id": "BS06-092",
+    "name": "Excavation",
+    "nameEN": "Excavation",
+    "namePT": "Excavation",
+    "nameJP": "エクスキャベーション",
+    "nameKey": "excavation",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Return up to 3 Spirit cards with the family \"Terra Dragon\" from your Trash to your Hand.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Devolva até 3 cartas de Spirit com a família \"Terra Dragon\" do seu Trash para sua Hand.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-092.webp"
+  },
+  {
+    "id": "BS06-093",
+    "name": "Lightning Aura",
+    "nameEN": "Lightning Aura",
+    "namePT": "Lightning Aura",
+    "nameJP": "ライトニングオーラ",
+    "nameKey": "lightning-aura",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all your attacking Spirits get +1000 BP. In addition, all your attacking Spirits with [Clash] get +2000 BP.",
+      "ptBR": "Flash: Durante este turno, todos os seus Spirits atacantes recebem +1000 BP. Além disso, todos os seus Spirits atacantes com [Clash] recebem +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-093.webp"
+  },
+  {
+    "id": "BS06-094",
+    "name": "Trident Flare",
+    "nameEN": "Trident Flare",
+    "namePT": "Trident Flare",
+    "nameJP": "トライデントフレア",
+    "nameKey": "trident-flare",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Destroy 3 opposing Spirits with 3000 BP or less.",
+      "ptBR": "Flash: Destrua 3 Spirits do oponente com 3000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-094.webp"
+  },
+  {
+    "id": "BS06-095",
+    "name": "Burial Draw",
+    "nameEN": "Burial Draw",
+    "namePT": "Burial Draw",
+    "nameJP": "ベリアルドロー",
+    "nameKey": "burial-draw",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, when one of your attacking Spirits is destroyed by an opposing Spirit through BP comparison, draw 2 cards.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Durante este turno, quando 1 dos seus Spirits atacantes for destruído por um Spirit do oponente pela comparação de BP, compre 2 cartas.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-095.webp"
+  },
+  {
+    "id": "BS06-096",
+    "name": "Level Drain",
+    "nameEN": "Level Drain",
+    "namePT": "Level Drain",
+    "nameJP": "レベルドレイン",
+    "nameKey": "level-drain",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Choose 1 opposing Spirit. Leave only enough Cores on it to maintain its lowest Level and move all remaining Cores from it to your opponent's Trash.",
+      "ptBR": "Flash: Escolha 1 Spirit do oponente. Deixe sobre ele apenas Cores suficientes para manter seu menor Level e mova todos os Cores restantes para o Trash do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-096.webp"
+  },
+  {
+    "id": "BS06-097",
+    "name": "Bloody Coffin",
+    "nameEN": "Bloody Coffin",
+    "namePT": "Bloody Coffin",
+    "nameJP": "ブラッディコフィン",
+    "nameKey": "bloody-coffin",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Destroy 1 Exhausted cost 4 or lower Spirit.",
+      "ptBR": "Flash: Destrua 1 Spirit Exhausted de custo 4 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-097.webp"
+  },
+  {
+    "id": "BS06-098",
+    "name": "Counter Curse",
+    "nameEN": "Counter Curse",
+    "namePT": "Counter Curse",
+    "nameJP": "カウンターカース",
+    "nameKey": "counter-curse",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, change the [Curse] effects of all your Spirits to: \"[Curse] When This Spirit Blocks: At the end of the battle, destroy the opposing Spirit that battled this Spirit.\"",
+      "ptBR": "Flash: Durante este turno, altere os efeitos [Curse] de todos os seus Spirits para: \"[Curse] Quando Este Spirit Bloqueia: Ao fim da batalha, destrua o Spirit do oponente que batalhou com este Spirit.\""
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-098.webp"
+  },
+  {
+    "id": "BS06-099",
+    "name": "Savage Power",
+    "nameEN": "Savage Power",
+    "namePT": "Savage Power",
+    "nameJP": "サベージパワー",
+    "nameKey": "savage-power",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, 1 Spirit gets +2000 BP for each symbol it has.",
+      "ptBR": "Flash: Durante este turno, 1 Spirit recebe +2000 BP para cada símbolo que possui."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-099.webp"
+  },
+  {
+    "id": "BS06-100",
+    "name": "Thorn Prison",
+    "nameEN": "Thorn Prison",
+    "namePT": "Thorn Prison",
+    "nameJP": "ソーンプリズン",
+    "nameKey": "thorn-prison",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Your opponent Exhausts 2 Spirits they control.",
+      "ptBR": "Flash: O oponente deixa Exhausted 2 Spirits que controla."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-100.webp"
+  },
+  {
+    "id": "BS06-101",
+    "name": "Mistral Core",
+    "nameEN": "Mistral Core",
+    "namePT": "Mistral Core",
+    "nameJP": "ミストラルコア",
+    "nameKey": "mistral-core",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, for each Spirit Exhausted by the [Windstorm] effect of one of your Spirits, put 1 Core from the Void onto one of your Spirits.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Durante este turno, para cada Spirit que ficar Exhausted pelo efeito [Windstorm] de 1 dos seus Spirits, coloque 1 Core do Void sobre 1 dos seus Spirits.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-101.webp"
+  },
+  {
+    "id": "BS06-102",
+    "name": "Speed Star",
+    "nameEN": "Speed Star",
+    "namePT": "Speed Star",
+    "nameJP": "スピードスター",
+    "nameKey": "speed-star",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, whenever an attack from one of your Spirits reduces your opponent's Life, put 2 Cores from the Void into your Reserve.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Durante este turno, sempre que o ataque de 1 dos seus Spirits reduzir a Life do oponente, coloque 2 Cores do Void na sua Reserve.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-102.webp"
+  },
+  {
+    "id": "BS06-103",
+    "name": "Chivalry",
+    "nameEN": "Chivalry",
+    "namePT": "Chivalry",
+    "nameJP": "キャバルリー",
+    "nameKey": "chivalry",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Refresh all your Exhausted Spirits. During this turn, Spirits refreshed by this effect that do not have the family \"War Knight\" cannot attack.",
+      "ptBR": "Flash: Dê Refresh em todos os seus Spirits Exhausted. Durante este turno, Spirits que receberam Refresh por este efeito e que não possuem a família \"War Knight\" não podem atacar."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-103.webp"
+  },
+  {
+    "id": "BS06-104",
+    "name": "Avalanche Aura",
+    "nameEN": "Avalanche Aura",
+    "namePT": "Avalanche Aura",
+    "nameJP": "アバランチオーラ",
+    "nameKey": "avalanche-aura",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all your blocking Spirits get +2000 BP. In addition, all your blocking Spirits with [Armor] get +2000 BP.",
+      "ptBR": "Flash: Durante este turno, todos os seus Spirits bloqueadores recebem +2000 BP. Além disso, todos os seus Spirits bloqueadores com [Armor] recebem +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-104.webp"
+  },
+  {
+    "id": "BS06-105",
+    "name": "Holy Elixir",
+    "nameEN": "Holy Elixir",
+    "namePT": "Holy Elixir",
+    "nameJP": "ホーリーエリクサー",
+    "nameKey": "holy-elixir",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Move 1 Core from your Reserve to your Life.",
+      "ptBR": "Flash: Mova 1 Core da sua Reserve para sua Life."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-105.webp"
+  },
+  {
+    "id": "BS06-106",
+    "name": "White Hole",
+    "nameEN": "White Hole",
+    "namePT": "White Hole",
+    "nameJP": "ホワイトホール",
+    "nameKey": "white-hole",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Return all Nexuses to their owners' Hands.\nFlash: During this turn, 1 Spirit gets +3000 BP.",
+      "ptBR": "Main: Devolva todos os Nexuses para as Hands de seus donos.\nFlash: Durante este turno, 1 Spirit recebe +3000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-106.webp"
+  },
+  {
+    "id": "BS06-107",
+    "name": "Second Sight",
+    "nameEN": "Second Sight",
+    "namePT": "Second Sight",
+    "nameJP": "セカンドサイト",
+    "nameKey": "second-sight",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: Reveal the top 3 cards of your deck, then return them to the top of your deck in any order.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Revele as 3 cartas do topo do seu deck e depois devolva-as ao topo do deck em qualquer ordem.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-107.webp"
+  },
+  {
+    "id": "BS06-108",
+    "name": "Discontinue",
+    "nameEN": "Discontinue",
+    "namePT": "Discontinue",
+    "nameJP": "ディスコンティニュー",
+    "nameKey": "discontinue",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, cards cannot be discarded from your deck. If this Magic card is discarded from the top of your deck by an opposing Spirit, Nexus, or Magic effect, activate this effect immediately without paying its cost.",
+      "ptBR": "Flash: Durante este turno, cartas não podem ser descartadas do seu deck. Se esta carta de Magic for descartada do topo do seu deck por um efeito de Spirit, Nexus ou Magic do oponente, ative este efeito imediatamente sem pagar o custo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-108.webp"
+  },
+  {
+    "id": "BS06-109",
+    "name": "Archaic Smile",
+    "nameEN": "Archaic Smile",
+    "namePT": "Archaic Smile",
+    "nameJP": "アルカイックスマイル",
+    "nameKey": "archaic-smile",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During battle resolution, skip the BP comparison and proceed to the end of the battle.",
+      "ptBR": "Flash: Durante a resolução da batalha, pule a comparação de BP e prossiga para o fim da batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-109.webp"
+  },
+  {
+    "id": "BS06-110",
+    "name": "Imagine Field",
+    "nameEN": "Imagine Field",
+    "namePT": "Imagine Field",
+    "nameJP": "イマジンフィールド",
+    "nameKey": "imagine-field",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 6,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During battle resolution, compare the number of Cores on the battling Spirits instead of comparing BP. Destroy the Spirit with fewer Cores. If both have the same number of Cores, destroy both Spirits.",
+      "ptBR": "Flash: Durante a resolução da batalha, compare a quantidade de Cores sobre os Spirits que estão batalhando em vez de comparar BP. Destrua o Spirit com menos Cores. Se ambos tiverem a mesma quantidade de Cores, destrua os dois Spirits."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-110.webp"
+  },
+  {
+    "id": "BS06-111",
+    "name": "Reclamation",
+    "nameEN": "Reclamation",
+    "namePT": "Reclamation",
+    "nameJP": "リクラメーション",
+    "nameKey": "reclamation",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: By destroying 1 Nexus you control, summon 1 Blue cost 4 or lower Spirit card from your Hand without paying its cost.\nFlash: During this turn, 1 Spirit gets +2000 BP.",
+      "ptBR": "Main: Ao destruir 1 Nexus que você controla, invoque 1 carta de Spirit Blue de custo 4 ou menos da sua Hand sem pagar o custo.\nFlash: Durante este turno, 1 Spirit recebe +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-111.webp"
+  },
+  {
+    "id": "BS06-112",
+    "name": "Muscle Charge",
+    "nameEN": "Muscle Charge",
+    "namePT": "Muscle Charge",
+    "nameJP": "マッスルチャージ",
+    "nameKey": "muscle-charge",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, treat all your Spirits with the family \"Fighting Spirit\" as their highest Level.",
+      "ptBR": "Flash: Durante este turno, trate todos os seus Spirits com a família \"Fighting Spirit\" como estando em seu maior Level."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-112.webp"
+  },
+  {
+    "id": "BS06-113",
+    "name": "Maximum Break",
+    "nameEN": "Maximum Break",
+    "namePT": "Maximum Break",
+    "nameJP": "マキシマムブレイク",
+    "nameKey": "maximum-break",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 6,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, increase the maximum number of cards that all your Spirits can discard from your opponent's deck by 10.\nFlash: During this turn, 1 Spirit gets +4000 BP.",
+      "ptBR": "Main: Durante este turno, aumente em 10 o número máximo de cartas que todos os seus Spirits podem descartar do deck do oponente.\nFlash: Durante este turno, 1 Spirit recebe +4000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-113.webp"
+  },
+  {
+    "id": "BS06-114",
+    "name": "Demolish",
+    "nameEN": "Demolish",
+    "namePT": "Demolish",
+    "nameJP": "デモリッシュ",
+    "nameKey": "demolish",
+    "set": "BS06",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 7,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Main: During this turn, whenever a [Crush] effect discards cards from your opponent's deck, discard 3 additional cards.\nFlash: During this turn, 1 Spirit gets +5000 BP.",
+      "ptBR": "Main: Durante este turno, sempre que um efeito [Crush] descartar cartas do deck do oponente, descarte 3 cartas adicionais.\nFlash: Durante este turno, 1 Spirit recebe +5000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS06/BS06-114.webp"
+  }
+]

@@ -1,0 +1,202 @@
+[
+  {
+    "id": "BS07-X25",
+    "name": "The StarEmperorDragon Meteorwurm",
+    "nameEN": "The StarEmperorDragon Meteorwurm",
+    "namePT": "The StarEmperorDragon Meteorwurm",
+    "nameJP": "龍星皇メテオヴルム",
+    "nameKey": "the-staremperordragon-meteorwurm",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 7,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Star Dragon",
+      "Heroic"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 11000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Clash] When This Spirit Attacks: Your opponent must block if possible.\nLV2/LV3 During Your Attack Step: All your Spirits with the family \"Heroic\" gain [Clash].\nLV3 During Your Attack Step: When one of your Spirits with [Clash] attacks, you may choose 1 opposing Spirit and have that attack target it.",
+      "ptBR": "LV1/LV2/LV3 [Clash] Quando Este Spirit Ataca: O oponente deve bloquear se possível.\nLV2/LV3 Durante Seu Attack Step: Todos os seus Spirits com a família \"Heroic\" ganham [Clash].\nLV3 Durante Seu Attack Step: Quando 1 dos seus Spirits com [Clash] atacar, você pode escolher 1 Spirit do oponente e fazer com que aquele ataque tenha esse Spirit como alvo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-X25.webp"
+  },
+  {
+    "id": "BS07-X26",
+    "name": "The BladeKingBeast Byak-Garo",
+    "nameEN": "The BladeKingBeast Byak-Garo",
+    "namePT": "The BladeKingBeast Byak-Garo",
+    "nameJP": "剣王獣ビャク・ガロウ",
+    "nameKey": "the-bladekingbeast-byak-garo",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 7000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Windstorm: 2] When This Spirit Attacks: When this Spirit is blocked, your opponent Exhausts 2 Spirits they control.\nLV2 When This Spirit Attacks: When this Spirit's attack reduces your opponent's Life, by moving 1 Core from your Reserve to your Trash, return 2 opposing Spirits without [Tribute] to their owner's Hand.",
+      "ptBR": "LV1/LV2 [Windstorm: 2] Quando Este Spirit Ataca: Quando este Spirit for bloqueado, o oponente deixa Exhausted 2 Spirits que controla.\nLV2 Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, ao mover 1 Core da sua Reserve para o seu Trash, devolva 2 Spirits do oponente sem [Tribute] para a Hand do dono."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-X26.webp"
+  },
+  {
+    "id": "BS07-X27",
+    "name": "The ArcAngelia Isfiel",
+    "nameEN": "The ArcAngelia Isfiel",
+    "namePT": "The ArcAngelia Isfiel",
+    "nameJP": "大天使イスフィール",
+    "nameKey": "the-arcangelia-isfiel",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 7,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Divine Spirit"
+    ],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Battles: You may use 1 Magic card from your Hand without paying its cost. After that Magic effect resolves, activate that same effect one additional time.\nLV2/LV3 [Holy Life] When This Spirit Attacks: When this Spirit's attack reduces your opponent's Life, put 1 Core from the Void into your Life.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Batalha: Você pode usar 1 carta de Magic da sua Hand sem pagar seu custo. Depois que o efeito dessa Magic for resolvido, ative esse mesmo efeito mais 1 vez.\nLV2/LV3 [Holy Life] Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Life."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-X27.webp"
+  },
+  {
+    "id": "BS07-X28",
+    "name": "The Giant Emperor Alexander",
+    "nameEN": "The Giant Emperor Alexander",
+    "namePT": "The Giant Emperor Alexander",
+    "nameJP": "巨人大帝アレクサンダー",
+    "nameKey": "the-giant-emperor-alexander",
+    "set": "BS07",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 6,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit",
+      "Heroic"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Assault: 2] When This Spirit Attacks: Up to twice per turn, by exhausting 1 Nexus you control, Refresh this Spirit.\nLV2 When This Spirit Attacks: Destroy 1 opposing cost 4 or lower Spirit, then discard cards from the top of your opponent's deck equal to that destroyed Spirit's cost.",
+      "ptBR": "LV1/LV2 [Assault: 2] Quando Este Spirit Ataca: Até duas vezes por turno, ao deixar Exhausted 1 Nexus que você controla, dê Refresh neste Spirit.\nLV2 Quando Este Spirit Ataca: Destrua 1 Spirit do oponente de custo 4 ou menos e depois descarte do topo do deck do oponente uma quantidade de cartas igual ao custo do Spirit destruído."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS07/BS07-X28.webp"
+  }
+]
