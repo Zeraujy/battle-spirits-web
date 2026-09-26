@@ -46,6 +46,7 @@ export async function createBattleSpiritsServer(options = {}) {
   const matchmakingSocketPair = new Map();
   const rankedQueue = [];
   const rankedBySocket = new Map();
+  const lobbyPresence = new Map();
   const rankedSeason = "S0";
   const supabaseUrl = String(options.supabaseUrl ?? process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "");
   const supabaseServiceKey = String(options.supabaseServiceKey ?? process.env.SUPABASE_SERVICE_ROLE_KEY ?? "");
@@ -56,7 +57,7 @@ export async function createBattleSpiritsServer(options = {}) {
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify({
         ok: true,
-        version: "3.7.0",
+        version: "3.9.1",
         rooms: rooms.size,
         cards: cardIndex.size,
         matchmakingQueued: matchmakingQueue.length,
@@ -151,6 +152,80 @@ export async function createBattleSpiritsServer(options = {}) {
     return clone;
   }
 
+  function normalizeRoomTitle(value, fallback = "Sala de Battle Spirits") {
+    const clean = String(value || "").replace(/\s+/g, " ").trim().slice(0, 48);
+    return clean || fallback;
+  }
+
+  function hashRoomPassword(value) {
+    const password = String(value || "").slice(0, 128);
+    if (!password) return null;
+    return crypto.createHash("sha256").update(password).digest("hex");
+  }
+
+  function roomDirectoryEntry(room) {
+    const host = room.players?.player1?.profile || {};
+    return {
+      code: room.code,
+      title: room.settings?.title || "Sala de Battle Spirits",
+      visibility: room.settings?.visibility || "private",
+      locked: Boolean(room.settings?.passwordHash),
+      spectatorsAllowed: Boolean(room.settings?.spectatorsAllowed),
+      started: Boolean(room.match),
+      createdAt: room.createdAt,
+      host: {
+        name: host.name || "Jogador",
+        username: host.username || "",
+        avatar: host.avatar || null
+      },
+      players: Object.values(room.players || {}).filter(Boolean).length,
+      capacity: 2
+    };
+  }
+
+  function presenceStatus(socketId) {
+    if (rankedBySocket.has(socketId)) return "ranked";
+    if (matchmakingQueue.includes(socketId) || matchmakingSocketPair.has(socketId)) return "searching";
+    const found = findRoomBySocket(socketId);
+    if (found?.room?.match) return "in_match";
+    if (found?.room) return "in_room";
+    return "available";
+  }
+
+  function lobbySnapshot() {
+    const publicRooms = [...rooms.values()]
+      .filter((room) => room.settings?.visibility === "public" && Boolean(room.players?.player1?.socketId))
+      .map(roomDirectoryEntry)
+      .sort((a, b) => Number(a.started) - Number(b.started) || b.createdAt - a.createdAt);
+
+    const players = [...lobbyPresence.entries()]
+      .map(([socketId, value]) => ({
+        id: socketId,
+        profile: value.profile,
+        status: presenceStatus(socketId)
+      }))
+      .sort((a, b) => {
+        const order = { available: 0, searching: 1, in_room: 2, in_match: 3, ranked: 4 };
+        return (order[a.status] ?? 9) - (order[b.status] ?? 9) || String(a.profile?.name || "").localeCompare(String(b.profile?.name || ""));
+      });
+
+    return {
+      rooms: publicRooms,
+      players,
+      counts: {
+        online: players.length,
+        available: players.filter((item) => item.status === "available").length,
+        publicRooms: publicRooms.length,
+        activeMatches: [...rooms.values()].filter((room) => Boolean(room.match)).length
+      },
+      updatedAt: Date.now()
+    };
+  }
+
+  function emitLobbySnapshot() {
+    io.emit("lobby:snapshot", lobbySnapshot());
+  }
+
   function roomSummary(room, viewerId) {
     const players = Object.fromEntries(
       Object.entries(room.players).map(([id, player]) => [
@@ -167,7 +242,13 @@ export async function createBattleSpiritsServer(options = {}) {
       players,
       chat: (room.chat || []).slice(-100),
       match: sanitizeMatch(room.match, viewerId),
-      ranked: room.ranked ? { season: room.ranked.season } : null
+      ranked: room.ranked ? { season: room.ranked.season } : null,
+      settings: {
+        title: room.settings?.title || "Sala de Battle Spirits",
+        visibility: room.settings?.visibility || "private",
+        locked: Boolean(room.settings?.passwordHash),
+        spectatorsAllowed: Boolean(room.settings?.spectatorsAllowed)
+      }
     };
   }
 
@@ -442,6 +523,19 @@ export async function createBattleSpiritsServer(options = {}) {
       console.log(`[socket.io] ${socket.id} upgrade para ${socket.conn.transport.name}`);
     });
 
+    onSafe(socket, "lobby:identify", (payload, ack) => {
+      const validation = validateOnlineProfilePayload(payload?.profile);
+      if (!validation.ok) return ack(validation);
+      lobbyPresence.set(socket.id, { profile: publicProfile(payload?.profile), identifiedAt: Date.now() });
+      const snapshot = lobbySnapshot();
+      ack({ ok: true, snapshot });
+      emitLobbySnapshot();
+    });
+
+    onSafe(socket, "lobby:list", (_payload, ack) => {
+      ack({ ok: true, snapshot: lobbySnapshot() });
+    });
+
     onSafe(socket, "ranked:join", async (payload, ack) => {
       if (findRoomBySocket(socket.id)) return ack({ ok: false, error: "Saia da sala atual antes de procurar Ranked." });
       if (rankedBySocket.has(socket.id)) return ack({ ok: true, status: "searching" });
@@ -490,10 +584,12 @@ export async function createBattleSpiritsServer(options = {}) {
       if (!opponentSocketId) {
         matchmakingQueue.push(socket.id);
         socket.emit("matchmaking:status", { status: "searching" });
+        emitLobbySnapshot();
         return ack({ ok: true, status: "searching" });
       }
 
       const pair = createMatchmakingPair(opponentSocketId, socket.id);
+      emitLobbySnapshot();
       ack({ ok: true, status: "matched", pairId: pair.pairId });
     });
 
@@ -541,6 +637,7 @@ export async function createBattleSpiritsServer(options = {}) {
         failMatchmakingPair(pairId, socket.id, "O outro jogador cancelou a busca.");
       }
 
+      emitLobbySnapshot();
       ack({ ok: true, removedFromQueue, cancelledPair: Boolean(pairId) });
     });
 
@@ -554,6 +651,7 @@ export async function createBattleSpiritsServer(options = {}) {
         failMatchmakingPair(pairId, socket.id, reason);
       }
 
+      emitLobbySnapshot();
       ack({ ok: true });
     });
     onSafe(socket, "room:create", (payload, ack) => {
@@ -563,11 +661,18 @@ export async function createBattleSpiritsServer(options = {}) {
       if (!validation.ok) return ack({ ok: false, error: validation.errors.join(" ") });
       let roomCode = code();
       while (rooms.has(roomCode)) roomCode = code();
+      const visibility = payload?.settings?.visibility === "public" ? "public" : "private";
       const room = {
         code: roomCode,
         players: {
           player1: { socketId: socket.id, profile: publicProfile(payload.profile), deck: payload.deck, resumeToken: resumeToken() },
           player2: null
+        },
+        settings: {
+          title: normalizeRoomTitle(payload?.settings?.title, `${publicProfile(payload.profile).name} · Casual`),
+          visibility,
+          passwordHash: hashRoomPassword(payload?.settings?.password),
+          spectatorsAllowed: Boolean(payload?.settings?.spectatorsAllowed)
         },
         match: null,
         chat: [],
@@ -577,6 +682,7 @@ export async function createBattleSpiritsServer(options = {}) {
       socket.join(roomCode);
       ack({ ok: true, code: roomCode, playerId: "player1", resumeToken: room.players.player1.resumeToken, state: roomSummary(room, "player1") });
       emitRoom(room);
+      emitLobbySnapshot();
     });
 
     onSafe(socket, "room:join", (payload, ack) => {
@@ -586,12 +692,16 @@ export async function createBattleSpiritsServer(options = {}) {
       const room = rooms.get(roomCode);
       if (!room) return ack({ ok: false, error: "Sala não encontrada." });
       if (room.players.player2) return ack({ ok: false, error: "Sala cheia." });
+      if (room.settings?.passwordHash && hashRoomPassword(payload?.password) !== room.settings.passwordHash) {
+        return ack({ ok: false, error: "Senha da sala incorreta." });
+      }
       const validation = validateDeck(payload.deck || [], cardIndex);
       if (!validation.ok) return ack({ ok: false, error: validation.errors.join(" ") });
       room.players.player2 = { socketId: socket.id, profile: publicProfile(payload.profile), deck: payload.deck, resumeToken: resumeToken() };
       socket.join(roomCode);
       ack({ ok: true, code: roomCode, playerId: "player2", resumeToken: room.players.player2.resumeToken, state: roomSummary(room, "player2") });
       emitRoom(room);
+      emitLobbySnapshot();
     });
 
     onSafe(socket, "room:resume", (payload, ack) => {
@@ -607,6 +717,7 @@ export async function createBattleSpiritsServer(options = {}) {
       socket.join(roomCode);
       ack({ ok: true, state: roomSummary(room, playerId) });
       emitRoom(room);
+      emitLobbySnapshot();
     });
 
     onSafe(socket, "room:start", (payload, ack) => {
@@ -623,6 +734,7 @@ export async function createBattleSpiritsServer(options = {}) {
         cardIndex
       });
       emitRoom(room);
+      emitLobbySnapshot();
 
       const pairId = matchmakingSocketPair.get(socket.id);
       if (pairId) cleanupMatchmakingPair(pairId);
@@ -689,6 +801,7 @@ export async function createBattleSpiritsServer(options = {}) {
     socket.on("disconnect", (reason) => {
       console.log(`[socket.io] desconectado ${socket.id}: ${reason}`);
 
+      lobbyPresence.delete(socket.id);
       removeFromMatchmakingQueue(socket.id);
       removeFromRankedQueue(socket.id);
       const pairId = matchmakingSocketPair.get(socket.id);
@@ -697,7 +810,7 @@ export async function createBattleSpiritsServer(options = {}) {
       }
 
       const found = findRoomBySocket(socket.id);
-      if (!found) return;
+      if (!found) { emitLobbySnapshot(); return; }
       found.room.players[found.playerId].socketId = null;
       if (found.room.ranked && found.room.match && !found.room.match.winnerId) {
         const disconnectedId = found.playerId;
@@ -712,11 +825,15 @@ export async function createBattleSpiritsServer(options = {}) {
         found.room.players[disconnectedId].rankedDisconnectTimer.unref?.();
       }
       emitRoom(found.room);
+      emitLobbySnapshot();
       setTimeout(() => {
         const room = rooms.get(found.room.code);
         if (!room) return;
         const anyConnected = Object.values(room.players).filter(Boolean).some((p) => p.socketId);
-        if (!anyConnected) rooms.delete(room.code);
+        if (!anyConnected) {
+          rooms.delete(room.code);
+          emitLobbySnapshot();
+        }
       }, 30 * 60 * 1000).unref?.();
     });
   });
@@ -750,7 +867,9 @@ export async function createBattleSpiritsServer(options = {}) {
         matchmakingQueued: matchmakingQueue.length,
         matchmakingPairs: matchmakingPairs.size,
         rankedQueued: rankedQueue.length,
-        rankedReady: Boolean(rankedSupabase)
+        rankedReady: Boolean(rankedSupabase),
+        lobbyOnline: lobbyPresence.size,
+        publicRooms: [...rooms.values()].filter((room) => room.settings?.visibility === "public").length
       };
     },
     async stop() {

@@ -13,6 +13,18 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.9.1",
+    date: { pt: "26/09/2026", en: "09/26/2026" },
+    title: { pt: "Online Lobby 2.0", en: "Online Lobby 2.0" },
+    summary: { pt: "O Online Normal ganha um lobby vivo com salas públicas, presença de jogadores, salas privadas por código, senha opcional e preparação segura para espectadores.", en: "Normal Online gets a live lobby with public rooms, player presence, code-only private rooms, optional passwords and safe spectator preparation." },
+    sections: [
+      { title: { pt: "Diretório de salas", en: "Room directory" }, items: { pt: ["Salas públicas aparecem em tempo real com host, ocupação, código e estado da partida.", "Filtros separam salas abertas de salas já iniciadas ou lotadas.", "Salas privadas continuam invisíveis no diretório e acessíveis somente por código."], en: ["Public rooms appear in real time with host, occupancy, code and match state.", "Filters separate open rooms from already-started or full rooms.", "Private rooms remain hidden from the directory and accessible only by code."] } },
+      { title: { pt: "Criação & segurança", en: "Creation & security" }, items: { pt: ["O host pode definir nome, visibilidade e senha opcional para a sala.", "Senhas são armazenadas apenas como SHA-256 no servidor e nunca entram no room state enviado aos clientes.", "A configuração Permitir espectadores apenas sinaliza suporte futuro; v3.9.1 não libera espectadores dentro da partida."], en: ["Hosts can define room name, visibility and an optional password.", "Passwords are stored only as SHA-256 on the server and never enter client room state.", "Allow spectators only signals future support; v3.9.1 does not allow spectators inside matches yet."] } },
+      { title: { pt: "Presença & UX", en: "Presence & UX" }, items: { pt: ["O lobby mostra jogadores disponíveis, buscando partida, em sala, em partida ou Ranked usando somente o perfil Online mínimo.", "Contadores de jogadores, salas e partidas ativas atualizam sem recarregar a página.", "O deck selecionado fica sempre visível e pode ser trocado diretamente no lobby."], en: ["The lobby shows players as available, searching, in room, in match or Ranked using only the tiny Online profile.", "Player, room and active-match counters update without reloading the page.", "The selected deck remains visible and can be changed directly from the lobby."] } }
+    ]
+  },
+
+  {
     version: "3.9.0",
     date: { pt: "26/09/2026", en: "09/26/2026" },
     title: { pt: "Eternal CPU Tactical Memory", en: "Eternal CPU Tactical Memory" },

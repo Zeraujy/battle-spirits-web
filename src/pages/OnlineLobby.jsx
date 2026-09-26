@@ -64,6 +64,14 @@ export default function OnlineLobby({
   const [joinCode, setJoinCode] =
     useState("");
 
+  const [joinPassword, setJoinPassword] = useState("");
+  const [roomTitle, setRoomTitle] = useState(`${profile?.displayName || profile?.name || "Jogador"} · Casual`);
+  const [roomVisibility, setRoomVisibility] = useState("public");
+  const [roomPassword, setRoomPassword] = useState("");
+  const [spectatorsAllowed, setSpectatorsAllowed] = useState(false);
+  const [lobbySnapshot, setLobbySnapshot] = useState({ rooms: [], players: [], counts: {} });
+  const [roomFilter, setRoomFilter] = useState("open");
+
   const [room, setRoom] =
     useState(null);
 
@@ -171,8 +179,14 @@ export default function OnlineLobby({
     const socket =
       client.socket;
 
-    const onConnect = () => {
+    const onConnect = async () => {
       setStatus("conectado");
+      setError("");
+      try {
+        socket.emit("lobby:identify", { profile: await currentOnlineProfile() }, (result) => {
+          if (result?.snapshot) setLobbySnapshot(result.snapshot);
+        });
+      } catch {}
     };
 
     const onDisconnect = () => {
@@ -476,6 +490,12 @@ export default function OnlineLobby({
       );
     };
 
+    const onLobbySnapshot = (snapshot) => {
+      if (snapshot) setLobbySnapshot(snapshot);
+    };
+
+    socket.on("lobby:snapshot", onLobbySnapshot);
+
     socket.on(
       "connect",
       onConnect
@@ -529,6 +549,8 @@ export default function OnlineLobby({
     client.connect();
 
     return () => {
+      socket.off("lobby:snapshot", onLobbySnapshot);
+
       socket.off(
         "connect",
         onConnect
@@ -686,7 +708,14 @@ export default function OnlineLobby({
           await currentOnlineProfile(),
 
         deck:
-          deck.cards
+          deck.cards,
+
+        settings: {
+          title: roomTitle,
+          visibility: roomVisibility,
+          password: roomPassword,
+          spectatorsAllowed
+        }
       },
       (result) => {
         if (
@@ -746,7 +775,10 @@ export default function OnlineLobby({
           await currentOnlineProfile(),
 
         deck:
-          deck.cards
+          deck.cards,
+
+        password:
+          joinPassword
       },
       (result) => {
         if (
@@ -755,6 +787,7 @@ export default function OnlineLobby({
           setRoom(
             result.state
           );
+          setJoinPassword("");
         } else {
           setError(
             result?.error ||
@@ -804,6 +837,25 @@ export default function OnlineLobby({
     setSearchMessage(`Código ${room.code} copiado.`);
   }
 
+  function refreshLobby() {
+    client.socket.emit("lobby:list", {}, (result) => {
+      if (result?.snapshot) setLobbySnapshot(result.snapshot);
+    });
+  }
+
+  function choosePublicRoom(entry) {
+    if (!entry?.code) return;
+    setJoinCode(entry.code);
+    setJoinPassword("");
+    setPanelMode("join");
+    setError("");
+  }
+
+  const visibleRooms = (lobbySnapshot.rooms || []).filter((entry) => {
+    if (roomFilter === "all") return true;
+    return !entry.started && Number(entry.players || 0) < Number(entry.capacity || 2);
+  });
+
   const normalMenu = (() => {
     if (room) {
       const isHost = room.viewerPlayerId === "player1";
@@ -812,8 +864,8 @@ export default function OnlineLobby({
           eyebrow="MULTIPLAYER ONLINE"
           titleTop="PARTIDA"
           titleBottom="NORMAL"
-          status={`SALA ${room.code} · ${status.toUpperCase()}`}
-          badge="ROOM"
+          status={`${room.settings?.title || `SALA ${room.code}`} · ${status.toUpperCase()}`}
+          badge={room.settings?.visibility === "public" ? "PUBLIC" : "PRIVATE"}
         >
           {isHost && !room.started && (
             <MatchMenuButton
@@ -853,6 +905,42 @@ export default function OnlineLobby({
       );
     }
 
+    if (panelMode === "create") {
+      return (
+        <MatchSetupMenu
+          eyebrow="MULTIPLAYER ONLINE"
+          titleTop="CRIAR"
+          titleBottom="SALA"
+          status={`SERVIDOR · ${status.toUpperCase()}`}
+          badge={roomVisibility === "public" ? "PUBLIC" : "PRIVATE"}
+        >
+          <div className="online-lobby2-form">
+            <label>
+              <span>Nome da sala</span>
+              <input value={roomTitle} maxLength={48} onChange={(event) => setRoomTitle(event.target.value)} placeholder="Minha sala" />
+            </label>
+            <label>
+              <span>Visibilidade</span>
+              <select value={roomVisibility} onChange={(event) => setRoomVisibility(event.target.value)}>
+                <option value="public">Pública · aparece no lobby</option>
+                <option value="private">Privada · somente por código</option>
+              </select>
+            </label>
+            <label>
+              <span>Senha opcional</span>
+              <input type="password" value={roomPassword} maxLength={64} onChange={(event) => setRoomPassword(event.target.value)} placeholder="Sem senha" />
+            </label>
+            <label className="online-lobby2-check">
+              <input type="checkbox" checked={spectatorsAllowed} onChange={(event) => setSpectatorsAllowed(event.target.checked)} />
+              <span>Permitir espectadores quando o modo estiver disponível</span>
+            </label>
+          </div>
+          <MatchMenuButton label="Criar sala" detail={roomVisibility === "public" ? "Publicar no Lobby Online" : "Gerar código privado"} active disabled={status !== "conectado" || !selectedDeck} onClick={createRoom} />
+          <MatchMenuButton label="Voltar" onClick={() => setPanelMode("root")} />
+        </MatchSetupMenu>
+      );
+    }
+
     if (panelMode === "join") {
       return (
         <MatchSetupMenu
@@ -861,17 +949,24 @@ export default function OnlineLobby({
           titleBottom="SALA"
           status={`SERVIDOR · ${status.toUpperCase()}`}
         >
-          <div className="match-menu-inline">
-            <input
-              autoFocus
-              placeholder="CÓDIGO"
-              value={joinCode}
-              maxLength={6}
-              onChange={(event) => setJoinCode(event.target.value.toUpperCase())}
-              onKeyDown={(event) => { if (event.key === "Enter") joinRoom(); }}
-            />
-            <button type="button" onClick={joinRoom}>Entrar</button>
+          <div className="online-lobby2-form">
+            <label>
+              <span>Código da sala</span>
+              <input
+                autoFocus
+                placeholder="ABC123"
+                value={joinCode}
+                maxLength={6}
+                onChange={(event) => setJoinCode(event.target.value.toUpperCase())}
+                onKeyDown={(event) => { if (event.key === "Enter") joinRoom(); }}
+              />
+            </label>
+            <label>
+              <span>Senha, se necessária</span>
+              <input type="password" placeholder="Senha da sala" value={joinPassword} maxLength={64} onChange={(event) => setJoinPassword(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") joinRoom(); }} />
+            </label>
           </div>
+          <MatchMenuButton label="Entrar" detail="Conectar usando código da sala" active disabled={!joinCode.trim()} onClick={joinRoom} />
           <MatchMenuButton label="Voltar" onClick={() => setPanelMode("root")} />
         </MatchSetupMenu>
       );
@@ -892,7 +987,7 @@ export default function OnlineLobby({
           disabled={status !== "conectado" || !selectedDeck}
           onClick={findRandomMatch}
         />
-        <MatchMenuButton label="Criar sala" detail="Abra uma sala privada" disabled={status !== "conectado" || !selectedDeck} onClick={createRoom} />
+        <MatchMenuButton label="Criar sala" detail="Pública, privada ou protegida por senha" disabled={status !== "conectado" || !selectedDeck} onClick={() => setPanelMode("create")} />
         <MatchMenuButton label="Entrar em uma sala" detail="Use um código de convite" disabled={status !== "conectado" || !selectedDeck} onClick={() => setPanelMode("join")} />
         <MatchMenuButton label="Deck Builder" onClick={onDeckBuilder} />
         <MatchMenuButton label="Voltar" onClick={onBack} />
@@ -908,34 +1003,108 @@ export default function OnlineLobby({
         footer={room ? `ONLINE 1V1 · SALA ${room.code}` : searching ? "ONLINE 1V1 · MATCHMAKING EM ANDAMENTO" : "ONLINE 1V1 · MATCHMAKING, SALAS PRIVADAS E CÓDIGO"}
         menu={normalMenu}
       >
-        <div className="match-setup-duel">
-          <PlayerBattlePreview
-            side="left"
-            kicker="VOCÊ"
-            name={ownName}
-            avatarSrc={profile?.avatar || profile?.avatarUrl || profile?.avatar_url || profile?.photoURL || profile?.photo || null}
-            bannerSrc={getDeckPortrait(selectedDeck)}
-            deck={selectedDeck}
-            deckName={selectedDeck?.name || "Nenhum deck"}
-            deckMeta={selectedDeck ? `${deckSize(selectedDeck)} cartas · ${deckIsValid(selectedDeck) ? "pronto" : "revisar"}` : "crie um deck para jogar"}
-            onChangeDeck={!room && !searching && decks.length ? () => setDeckPickerOpen(true) : null}
-            status={status === "conectado" ? "ONLINE" : status.toUpperCase()}
-          />
+        {room || searching ? (
+          <div className="match-setup-duel">
+            <PlayerBattlePreview
+              side="left"
+              kicker="VOCÊ"
+              name={ownName}
+              avatarSrc={profile?.avatar || profile?.avatarUrl || profile?.avatar_url || profile?.photoURL || profile?.photo || null}
+              bannerSrc={getDeckPortrait(selectedDeck)}
+              deck={selectedDeck}
+              deckName={selectedDeck?.name || "Nenhum deck"}
+              deckMeta={selectedDeck ? `${deckSize(selectedDeck)} cartas · ${deckIsValid(selectedDeck) ? "pronto" : "revisar"}` : "crie um deck para jogar"}
+              status={status === "conectado" ? "ONLINE" : status.toUpperCase()}
+            />
 
-          <VersusMark />
+            <VersusMark />
 
-          <PlayerBattlePreview
-            side="right"
-            kicker={room ? "OPONENTE" : "MATCHMAKING"}
-            name={opponentName}
-            avatarSrc={opponentRoomPlayer?.profile?.avatar || opponentRoomPlayer?.profile?.avatarUrl || opponentRoomPlayer?.profile?.avatar_url || null}
-            bannerSrc={opponentRoomPlayer ? "./images/card-back.webp" : null}
-            deckName={opponentRoomPlayer ? "Deck adversário" : searching ? "Buscando jogador" : "Aguardando conexão"}
-            deckMeta={opponentRoomPlayer ? (opponentConnected ? "conectado · identidade pública" : "offline") : "o deck será revelado apenas quando permitido"}
-            status={opponentRoomPlayer ? (opponentConnected ? "CONECTADO" : "OFFLINE") : searching ? "BUSCANDO" : "ESPERA"}
-            waiting={!opponentRoomPlayer}
-          />
-        </div>
+            <PlayerBattlePreview
+              side="right"
+              kicker={room ? "OPONENTE" : "MATCHMAKING"}
+              name={opponentName}
+              avatarSrc={opponentRoomPlayer?.profile?.avatar || opponentRoomPlayer?.profile?.avatarUrl || opponentRoomPlayer?.profile?.avatar_url || null}
+              bannerSrc={opponentRoomPlayer ? "./images/card-back.webp" : null}
+              deckName={opponentRoomPlayer ? "Deck adversário" : searching ? "Buscando jogador" : "Aguardando conexão"}
+              deckMeta={opponentRoomPlayer ? (opponentConnected ? "conectado · identidade pública" : "offline") : "o deck será revelado apenas quando permitido"}
+              status={opponentRoomPlayer ? (opponentConnected ? "CONECTADO" : "OFFLINE") : searching ? "BUSCANDO" : "ESPERA"}
+              waiting={!opponentRoomPlayer}
+            />
+          </div>
+        ) : (
+          <div className="online-lobby2-dashboard">
+            <header className="online-lobby2-hero">
+              <div>
+                <span>ONLINE LOBBY 2.0</span>
+                <h2>ENCONTRE SUA PRÓXIMA BATALHA</h2>
+                <p>Salas públicas, convites privados e jogadores conectados em uma única tela.</p>
+              </div>
+              <button type="button" onClick={refreshLobby}>Atualizar lobby</button>
+            </header>
+
+            <div className="online-lobby2-stats">
+              <article><strong>{lobbySnapshot.counts?.online || 0}</strong><span>Jogadores online</span></article>
+              <article><strong>{lobbySnapshot.counts?.available || 0}</strong><span>Disponíveis</span></article>
+              <article><strong>{lobbySnapshot.counts?.publicRooms || 0}</strong><span>Salas públicas</span></article>
+              <article><strong>{lobbySnapshot.counts?.activeMatches || 0}</strong><span>Partidas ativas</span></article>
+            </div>
+
+            <div className="online-lobby2-grid">
+              <section className="online-lobby2-card rooms">
+                <header>
+                  <div><span>SALAS</span><h3>Partidas públicas</h3></div>
+                  <div className="online-lobby2-tabs">
+                    <button type="button" className={roomFilter === "open" ? "active" : ""} onClick={() => setRoomFilter("open")}>Abertas</button>
+                    <button type="button" className={roomFilter === "all" ? "active" : ""} onClick={() => setRoomFilter("all")}>Todas</button>
+                  </div>
+                </header>
+                <div className="online-lobby2-room-list">
+                  {visibleRooms.length ? visibleRooms.map((entry) => (
+                    <button type="button" key={entry.code} className="online-lobby2-room" disabled={entry.started || entry.players >= entry.capacity} onClick={() => choosePublicRoom(entry)}>
+                      <span className="online-lobby2-room-main">
+                        <b>{entry.title}</b>
+                        <small>{entry.host?.name || "Jogador"}{entry.host?.username ? ` · @${entry.host.username}` : ""}</small>
+                      </span>
+                      <span className="online-lobby2-room-tags">
+                        {entry.locked && <em>LOCK</em>}
+                        {entry.spectatorsAllowed && <em>WATCH</em>}
+                        <em>{entry.started ? "EM JOGO" : `${entry.players}/${entry.capacity}`}</em>
+                      </span>
+                      <i>{entry.code}</i>
+                    </button>
+                  )) : (
+                    <div className="online-lobby2-empty">Nenhuma sala pública aberta agora. Você pode criar a primeira.</div>
+                  )}
+                </div>
+              </section>
+
+              <section className="online-lobby2-card players">
+                <header><div><span>PRESENÇA</span><h3>Jogadores conectados</h3></div></header>
+                <div className="online-lobby2-player-list">
+                  {(lobbySnapshot.players || []).slice(0, 12).map((entry) => (
+                    <div className="online-lobby2-player" key={entry.id}>
+                      <div className="online-lobby2-avatar">
+                        {entry.profile?.avatar ? <img src={entry.profile.avatar} alt="" /> : <span>{String(entry.profile?.name || "P").slice(0, 1).toUpperCase()}</span>}
+                      </div>
+                      <span><b>{entry.profile?.name || "Jogador"}</b><small>{entry.profile?.username ? `@${entry.profile.username}` : "Jogador Online"}</small></span>
+                      <em className={`status-${entry.status}`}>{entry.status === "available" ? "DISPONÍVEL" : entry.status === "searching" ? "BUSCANDO" : entry.status === "in_room" ? "EM SALA" : entry.status === "in_match" ? "EM PARTIDA" : "RANKED"}</em>
+                    </div>
+                  ))}
+                  {!(lobbySnapshot.players || []).length && <div className="online-lobby2-empty">Conectando à presença do lobby...</div>}
+                </div>
+              </section>
+            </div>
+
+            <footer className="online-lobby2-deck">
+              <div>
+                <span>DECK ATUAL</span>
+                <strong>{selectedDeck?.name || "Nenhum deck selecionado"}</strong>
+                <small>{selectedDeck ? `${deckSize(selectedDeck)} cartas · ${deckIsValid(selectedDeck) ? "PRONTO" : "REVISAR"}` : "Selecione um deck antes de jogar"}</small>
+              </div>
+              <button type="button" disabled={!decks.length} onClick={() => setDeckPickerOpen(true)}>Trocar deck</button>
+            </footer>
+          </div>
+        )}
       </MatchSetupScreen>
 
       <DeckPicker

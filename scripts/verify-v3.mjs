@@ -33,6 +33,7 @@ const required = [
   "supabase/SOCIAL-HUB-3.7.1.sql",
   "src/services/rankedService.js",
   "src/styles/pages/rankedV370.css",
+  "src/styles/pages/onlineLobbySafe.css",
   "src/components/cards/CardDetailsModal.jsx",
   "src/components/home/HomeWallpaperSlideshow.jsx",
   "src/components/match/MatchSetupScreen.jsx",
@@ -40,6 +41,7 @@ const required = [
   "src/components/layout/PointerTiltSurface.jsx",
   "src/pages/Home.jsx",
   "src/pages/RankedLobby.jsx",
+  "src/pages/OnlineLobby.jsx",
   "src/pages/Store.jsx",
   "src/styles/pages/mainMenuV340.css",
   "src/styles/pages/matchSetupV341.css",
@@ -59,7 +61,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.9.0") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.0`);
+if (pkg.version !== "3.9.1") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.1`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -131,6 +133,12 @@ const tacticalMemory = fs.readFileSync(path.join(root, "src", "game", "aiTactica
 const aiEngine = fs.readFileSync(path.join(root, "src", "game", "ai.js"), "utf8");
 if (!tacticalMemory.includes("public-actions-only") || !tacticalMemory.includes("tacticalMemoryActionBias")) throw new Error("A Tactical Memory v3.9.0 está incompleta.");
 if (!aiEngine.includes("buildAITacticalMemory") || !simulatorPage.includes("Memória tática")) throw new Error("A integração Eternal CPU Tactical Memory v3.9.0 está incompleta.");
+
+const onlineLobby = fs.readFileSync(path.join(root, "src", "pages", "OnlineLobby.jsx"), "utf8");
+const onlineLobbyCss = fs.readFileSync(path.join(root, "src", "styles", "pages", "onlineLobbySafe.css"), "utf8");
+if (!onlineLobby.includes("ONLINE LOBBY 2.0") || !onlineLobby.includes("lobby:snapshot") || !onlineLobby.includes("roomVisibility")) throw new Error("A interface Online Lobby 2.0 v3.9.1 está incompleta.");
+if (!onlineServer.includes("lobby:identify") || !onlineServer.includes("roomDirectoryEntry") || !onlineServer.includes("passwordHash")) throw new Error("O diretório server-side do Online Lobby 2.0 v3.9.1 está incompleto.");
+if (!onlineLobbyCss.includes("online-lobby2-dashboard") || !onlineLobbyCss.includes("online-lobby2-room-list")) throw new Error("O visual Online Lobby 2.0 v3.9.1 está incompleto.");
 
 const publicProfile = fs.readFileSync(path.join(root, "src", "online", "publicProfile.js"), "utf8");
 const socketClient = fs.readFileSync(path.join(root, "src", "online", "socketClient.js"), "utf8");
