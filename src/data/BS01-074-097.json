@@ -1,0 +1,1119 @@
+[
+  {
+    "id": "BS01-074",
+    "name": "Berserker-Gun",
+    "nameEN": "Berserker-Gun",
+    "namePT": "Berserker-Gun",
+    "nameJP": "バーサーカー・ガン",
+    "nameKey": "berserker-gun",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-074.webp"
+  },
+  {
+    "id": "BS01-075",
+    "name": "Icemaiden",
+    "nameEN": "Icemaiden",
+    "namePT": "Icemaiden",
+    "nameJP": "アイスメイデン",
+    "nameKey": "icemaiden",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-075.webp"
+  },
+  {
+    "id": "BS01-076",
+    "name": "Ray-Bullet",
+    "nameEN": "Ray-Bullet",
+    "namePT": "Ray-Bullet",
+    "nameJP": "レイ・ブレット",
+    "nameKey": "ray-bullet",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fish"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: While you control an \"Armored Dragon\" family Spirit, this Spirit gets +1000 BP.",
+      "ptBR": "LV1/LV2: Enquanto você controlar um Spirit da família \"Armored Dragon\", este Spirit recebe +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-076.webp"
+  },
+  {
+    "id": "BS01-077",
+    "name": "Baby-Loki",
+    "nameEN": "Baby-Loki",
+    "namePT": "Baby-Loki",
+    "nameJP": "ベビー・ロキ",
+    "nameKey": "baby-loki",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Blocks: This Spirit gets +1000 BP during this battle.",
+      "ptBR": "LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +1000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-077.webp"
+  },
+  {
+    "id": "BS01-078",
+    "name": "The AutoLady Mani",
+    "nameEN": "The AutoLady Mani",
+    "namePT": "The AutoLady Mani",
+    "nameJP": "姫械マーニ",
+    "nameKey": "the-autolady-mani",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Ice Princess"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: Move 1 Core from your Trash to your Reserve.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Mova 1 Core do seu Trash para sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-078.webp"
+  },
+  {
+    "id": "BS01-079",
+    "name": "Rainbowpapillon",
+    "nameEN": "Rainbowpapillon",
+    "namePT": "Rainbowpapillon",
+    "nameJP": "レインボウパピヨン",
+    "nameKey": "rainbowpapillon",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Glow Insect"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: While you control a Green Spirit, this Spirit gets +1000 BP.",
+      "ptBR": "LV1/LV2: Enquanto você controlar um Spirit Green, este Spirit recebe +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-079.webp"
+  },
+  {
+    "id": "BS01-080",
+    "name": "Fenrircannon",
+    "nameEN": "Fenrircannon",
+    "namePT": "Fenrircannon",
+    "nameJP": "フェンリルキャノン",
+    "nameKey": "fenrircannon",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: This Spirit gets +1000 BP during this battle.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +1000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-080.webp"
+  },
+  {
+    "id": "BS01-081",
+    "name": "The SilverScale Nithhoggr",
+    "nameEN": "The SilverScale Nithhoggr",
+    "namePT": "The SilverScale Nithhoggr",
+    "nameJP": "銀燐竜ニーズホッグ",
+    "nameKey": "the-silverscale-nithhoggr",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Dragon",
+      "Armored Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: This Spirit gets +4000 BP during this battle.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +4000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-081.webp"
+  },
+  {
+    "id": "BS01-082",
+    "name": "Ur-Dine",
+    "nameEN": "Ur-Dine",
+    "namePT": "Ur-Dine",
+    "nameJP": "ウル・ディーネ",
+    "nameKey": "ur-dine",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Evil Deity"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: Put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-082.webp"
+  },
+  {
+    "id": "BS01-083",
+    "name": "Rabicrysta",
+    "nameEN": "Rabicrysta",
+    "namePT": "Rabicrysta",
+    "nameJP": "ラビクリスタ",
+    "nameKey": "rabicrysta",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Drifting Spirit"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: During this turn, this Spirit cannot be blocked by Red Spirits.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Durante este turno, este Spirit não pode ser bloqueado por Spirits Red."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-083.webp"
+  },
+  {
+    "id": "BS01-084",
+    "name": "Gatlingstand",
+    "nameEN": "Gatlingstand",
+    "namePT": "Gatlingstand",
+    "nameJP": "ガトリングスタンド",
+    "nameKey": "gatlingstand",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-084.webp"
+  },
+  {
+    "id": "BS01-085",
+    "name": "Elephantite",
+    "nameEN": "Elephantite",
+    "namePT": "Elephantite",
+    "nameJP": "エレファンタイト",
+    "nameKey": "elephantite",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Blocks: This Spirit gets +2000 BP during this battle.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +2000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-085.webp"
+  },
+  {
+    "id": "BS01-086",
+    "name": "Queen-Valkyrie",
+    "nameEN": "Queen-Valkyrie",
+    "namePT": "Queen-Valkyrie",
+    "nameJP": "クイーン・ワルキューレ",
+    "nameKey": "queen-valkyrie",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Android"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: This Spirit is unaffected by opposing Spirit and Nexus effects.",
+      "ptBR": "LV1/LV2: Este Spirit não é afetado por efeitos de Spirit e Nexus do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-086.webp"
+  },
+  {
+    "id": "BS01-087",
+    "name": "Metaldy-Bug",
+    "nameEN": "Metaldy-Bug",
+    "namePT": "Metaldy-Bug",
+    "nameJP": "メタルディー・バグ",
+    "nameKey": "metaldy-bug",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Glow Insect"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Each player moves 1 Core from one of their Spirits to their Trash.",
+      "ptBR": "LV1/LV2 Quando Invocado: Cada jogador move 1 Core de 1 dos seus Spirits para o próprio Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-087.webp"
+  },
+  {
+    "id": "BS01-088",
+    "name": "Towermittcrab",
+    "nameEN": "Towermittcrab",
+    "namePT": "Towermittcrab",
+    "nameJP": "タワーミットクラブ",
+    "nameKey": "towermittcrab",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Giant Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: This Spirit gets +1000 BP for each Nexus you control.",
+      "ptBR": "LV1/LV2: Este Spirit recebe +1000 BP para cada Nexus que você controla."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-088.webp"
+  },
+  {
+    "id": "BS01-089",
+    "name": "Dualcannon-Bell",
+    "nameEN": "Dualcannon-Bell",
+    "namePT": "Dualcannon-Bell",
+    "nameJP": "デュアルキャノン・ベル",
+    "nameKey": "dualcannon-bell",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Android",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-089.webp"
+  },
+  {
+    "id": "BS01-090",
+    "name": "Hell-Blindi",
+    "nameEN": "Hell-Blindi",
+    "namePT": "Hell-Blindi",
+    "nameJP": "ヘル・ブリンディ",
+    "nameKey": "hell-blindi",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Android"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Return 1 Spirit to its owner's Hand.",
+      "ptBR": "LV1/LV2 Quando Invocado: Devolva 1 Spirit para a Hand do dono."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-090.webp"
+  },
+  {
+    "id": "BS01-091",
+    "name": "The Artifact Laguna",
+    "nameEN": "The Artifact Laguna",
+    "namePT": "The Artifact Laguna",
+    "nameJP": "機人ラグーナ",
+    "nameKey": "the-artifact-laguna",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Android"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV2: All your White Spirits get +1000 BP.",
+      "ptBR": "LV2: Todos os seus Spirits White recebem +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-091.webp"
+  },
+  {
+    "id": "BS01-092",
+    "name": "The CarrierWhale Mobileflow",
+    "nameEN": "The CarrierWhale Mobileflow",
+    "namePT": "The CarrierWhale Mobileflow",
+    "nameJP": "空母鯨モビルフロウ",
+    "nameKey": "the-carrierwhale-mobileflow",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fish"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-092.webp"
+  },
+  {
+    "id": "BS01-093",
+    "name": "The ShieldSpirit Dis",
+    "nameEN": "The ShieldSpirit Dis",
+    "namePT": "The ShieldSpirit Dis",
+    "nameJP": "甲精ディース",
+    "nameKey": "the-shieldspirit-dis",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: Whenever this Spirit is blocked, Exhaust 1 opposing refreshed Spirit other than the Spirit blocking this Spirit.\nLV2 When This Spirit Is Destroyed: Refresh 1 of your Exhausted Spirits.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Sempre que este Spirit for bloqueado, deixe Exhausted 1 Spirit do oponente em estado Refresh que não seja o Spirit que está bloqueando este Spirit.\nLV2 Quando Este Spirit For Destruído: Dê Refresh em 1 dos seus Spirits Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-093.webp"
+  },
+  {
+    "id": "BS01-094",
+    "name": "Gran-Dolbalkan",
+    "nameEN": "Gran-Dolbalkan",
+    "namePT": "Gran-Dolbalkan",
+    "nameJP": "グラン・ドルバルカン",
+    "nameKey": "gran-dolbalkan",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 Flash: While this Spirit is battling, you may move 1 Core from your Reserve to your Trash. If you do, end this battle.",
+      "ptBR": "LV1/LV2/LV3 Flash: Enquanto este Spirit estiver batalhando, você pode mover 1 Core da sua Reserve para o Trash. Se fizer isso, encerre esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-094.webp"
+  },
+  {
+    "id": "BS01-095",
+    "name": "The ArmoredBeast Bear-Gelmir",
+    "nameEN": "The ArmoredBeast Bear-Gelmir",
+    "namePT": "The ArmoredBeast Bear-Gelmir",
+    "nameJP": "鎧装獣ベア・ゲルミル",
+    "nameKey": "the-armoredbeast-bear-gelmir",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 8,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 7000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: While your opponent controls no Red Spirits, this Spirit cannot attack.\nLV2: All your Green Spirits get +1000 BP.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Enquanto o oponente não controlar nenhum Spirit Red, este Spirit não pode atacar.\nLV2: Todos os seus Spirits Green recebem +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-095.webp"
+  },
+  {
+    "id": "BS01-096",
+    "name": "The AutoEmpress Sol",
+    "nameEN": "The AutoEmpress Sol",
+    "namePT": "The AutoEmpress Sol",
+    "nameJP": "妖機妃ソール",
+    "nameKey": "the-autoempress-sol",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 8,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Ice Princess"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 When This Spirit Is Destroyed: If it is your opponent's turn, end the current Attack Step.",
+      "ptBR": "LV1 Quando Este Spirit For Destruído: Se for o turno do oponente, encerre o Attack Step atual."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-096.webp"
+  },
+  {
+    "id": "BS01-097",
+    "name": "The SteelWyvern Valkyrious",
+    "nameEN": "The SteelWyvern Valkyrious",
+    "namePT": "The SteelWyvern Valkyrious",
+    "nameJP": "飛龍ヴァルキュリウス",
+    "nameKey": "the-steelwyvern-valkyrious",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 8,
+    "reduction": [
+      "white",
+      "white",
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Dragon"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 8,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Blocks: This Spirit gets +6000 BP during this battle.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Bloqueia: Este Spirit recebe +6000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-097.webp"
+  }
+]

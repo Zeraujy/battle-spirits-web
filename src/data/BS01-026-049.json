@@ -1,0 +1,1144 @@
+[
+  {
+    "id": "BS01-026",
+    "name": "Foger",
+    "nameEN": "Foger",
+    "namePT": "Foger",
+    "nameJP": "フォッガー",
+    "nameKey": "foger",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Darkling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-026.webp"
+  },
+  {
+    "id": "BS01-027",
+    "name": "Will-Orb",
+    "nameEN": "Will-Orb",
+    "namePT": "Will-Orb",
+    "nameJP": "ウィル・オーブ",
+    "nameKey": "will-orb",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Darkling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 During Your Attack Step: This Spirit must attack if possible.",
+      "ptBR": "LV1 Durante Seu Attack Step: Este Spirit deve atacar se puder."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-027.webp"
+  },
+  {
+    "id": "BS01-028",
+    "name": "Skulldevil",
+    "nameEN": "Skulldevil",
+    "namePT": "Skulldevil",
+    "nameJP": "スカルデビル",
+    "nameKey": "skulldevil",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 1,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Ogre Wizard"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-028.webp"
+  },
+  {
+    "id": "BS01-029",
+    "name": "Rib-Reaper",
+    "nameEN": "Rib-Reaper",
+    "namePT": "Rib-Reaper",
+    "nameJP": "リブ・リーパー",
+    "nameKey": "rib-reaper",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 2,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: While you control a Red Spirit or Nexus, this Spirit gets +1000 BP.",
+      "ptBR": "LV1/LV2: Enquanto você controlar um Spirit ou Nexus Red, este Spirit recebe +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-029.webp"
+  },
+  {
+    "id": "BS01-030",
+    "name": "Grip-Hands",
+    "nameEN": "Grip-Hands",
+    "namePT": "Grip-Hands",
+    "nameJP": "グリプ・ハンズ",
+    "nameKey": "grip-hands",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Darkling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Draw 1 card.",
+      "ptBR": "LV1/LV2 Quando Invocado: Compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-030.webp"
+  },
+  {
+    "id": "BS01-031",
+    "name": "Death-Haides",
+    "nameEN": "Death-Haides",
+    "namePT": "Death-Haides",
+    "nameJP": "デス・ハーデス",
+    "nameKey": "death-haides",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Ogre Wizard"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-031.webp"
+  },
+  {
+    "id": "BS01-032",
+    "name": "Gawrm",
+    "nameEN": "Gawrm",
+    "namePT": "Gawrm",
+    "nameJP": "ガウルム",
+    "nameKey": "gawrm",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Is Destroyed: Return this Spirit to your Hand instead of sending it to the Trash.",
+      "ptBR": "LV2 Quando Este Spirit For Destruído: Devolva este Spirit para sua Hand em vez de enviá-lo ao Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-032.webp"
+  },
+  {
+    "id": "BS01-033",
+    "name": "Disaster",
+    "nameEN": "Disaster",
+    "namePT": "Disaster",
+    "nameJP": "ディザスター",
+    "nameKey": "disaster",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Darkling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 During Your Attack Step: This Spirit must attack if possible.",
+      "ptBR": "LV2/LV3 Durante Seu Attack Step: Este Spirit deve atacar se puder."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-033.webp"
+  },
+  {
+    "id": "BS01-034",
+    "name": "Bi-Python",
+    "nameEN": "Bi-Python",
+    "namePT": "Bi-Python",
+    "nameJP": "バイ・パイソン",
+    "nameKey": "bi-python",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Dark Snake"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: Draw 1 card.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-034.webp"
+  },
+  {
+    "id": "BS01-035",
+    "name": "Bone-Gladiator",
+    "nameEN": "Bone-Gladiator",
+    "namePT": "Bone-Gladiator",
+    "nameJP": "ボーン・グラディエイター",
+    "nameKey": "bone-gladiator",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Ogre Wizard"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: This Spirit cannot be blocked by Green Spirits.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Este Spirit não pode ser bloqueado por Spirits Green."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-035.webp"
+  },
+  {
+    "id": "BS01-036",
+    "name": "Sha-Zoo",
+    "nameEN": "Sha-Zoo",
+    "namePT": "Sha-Zoo",
+    "nameJP": "シャ・ズー",
+    "nameKey": "sha-zoo",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 3,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Spiritual Beast"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Exhaust up to 2 Spirits.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Deixe até 2 Spirits Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-036.webp"
+  },
+  {
+    "id": "BS01-037",
+    "name": "Illusiona",
+    "nameEN": "Illusiona",
+    "namePT": "Illusiona",
+    "nameJP": "イリュージョナ",
+    "nameKey": "illusiona",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Spiritual Beast"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 When This Spirit Attacks: You may target 1 exhausted opposing Spirit and attack it.",
+      "ptBR": "LV2/LV3 Quando Este Spirit Ataca: Você pode escolher 1 Spirit do oponente Exhausted e atacá-lo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-037.webp"
+  },
+  {
+    "id": "BS01-038",
+    "name": "Skel-Viper",
+    "nameEN": "Skel-Viper",
+    "namePT": "Skel-Viper",
+    "nameJP": "スケル・バイパー",
+    "nameKey": "skel-viper",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Dark Snake"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Draw 1 card.",
+      "ptBR": "LV1/LV2 Quando Invocado: Compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-038.webp"
+  },
+  {
+    "id": "BS01-039",
+    "name": "The Mysteryman Dionaeman",
+    "nameEN": "The Mysteryman Dionaeman",
+    "namePT": "The Mysteryman Dionaeman",
+    "nameJP": "怪人ディオネマン",
+    "nameKey": "the-mysteryman-dionaeman",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-039.webp"
+  },
+  {
+    "id": "BS01-040",
+    "name": "Darkwitch",
+    "nameEN": "Darkwitch",
+    "namePT": "Darkwitch",
+    "nameJP": "ダークウィッチ",
+    "nameKey": "darkwitch",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Ogre Wizard"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 When This Spirit Attacks: Destroy 1 exhausted Spirit.",
+      "ptBR": "LV2/LV3 Quando Este Spirit Ataca: Destrua 1 Spirit Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-040.webp"
+  },
+  {
+    "id": "BS01-041",
+    "name": "Cobraiga",
+    "nameEN": "Cobraiga",
+    "namePT": "Cobraiga",
+    "nameJP": "コブライガ",
+    "nameKey": "cobraiga",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Dark Snake"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Choose 1 Spirit. Leave 1 Core on it and move all remaining Cores on it to its owner's Reserve.",
+      "ptBR": "LV1/LV2 Quando Invocado: Escolha 1 Spirit. Deixe 1 Core sobre ele e mova todos os Cores restantes para a Reserve do dono."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-041.webp"
+  },
+  {
+    "id": "BS01-042",
+    "name": "Mistweasel",
+    "nameEN": "Mistweasel",
+    "namePT": "Mistweasel",
+    "nameJP": "ミストウィゼル",
+    "nameKey": "mistweasel",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Spiritual Beast"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Draw 3 cards.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Compre 3 cartas."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-042.webp"
+  },
+  {
+    "id": "BS01-043",
+    "name": "Draculious",
+    "nameEN": "Draculious",
+    "namePT": "Draculious",
+    "nameJP": "ドラキュリウス",
+    "nameKey": "draculious",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Ogre Wizard"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-043.webp"
+  },
+  {
+    "id": "BS01-044",
+    "name": "The PhantomBull Smowg",
+    "nameEN": "The PhantomBull Smowg",
+    "namePT": "The PhantomBull Smowg",
+    "nameJP": "牛霊スモゥグ",
+    "nameKey": "the-phantombull-smowg",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Spiritual Beast"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: You may target 1 opposing Spirit with exactly 1 Core on it and attack it.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Você pode escolher 1 Spirit do oponente com exatamente 1 Core sobre ele e atacá-lo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-044.webp"
+  },
+  {
+    "id": "BS01-045",
+    "name": "The Ripper Headiless",
+    "nameEN": "The Ripper Headiless",
+    "namePT": "The Ripper Headiless",
+    "nameJP": "切り裂きヘディレス",
+    "nameKey": "the-ripper-headiless",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Zombie"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Return this Spirit to your Hand instead of sending it to the Trash.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Devolva este Spirit para sua Hand em vez de enviá-lo ao Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-045.webp"
+  },
+  {
+    "id": "BS01-046",
+    "name": "The PhantomDragon Sheyron",
+    "nameEN": "The PhantomDragon Sheyron",
+    "namePT": "The PhantomDragon Sheyron",
+    "nameJP": "幻龍シェイロン",
+    "nameKey": "the-phantomdragon-sheyron",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Nightling",
+      "Dark Snake"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: For every Spirit, leave 1 Core on it and move all remaining Cores on it to its owner's Reserve.\nLV2 When This Spirit Attacks: This Spirit cannot be blocked by Spirits with exactly 1 Core on them.",
+      "ptBR": "LV1/LV2 Quando Invocado: Em cada Spirit, deixe 1 Core sobre ele e mova todos os Cores restantes para a Reserve do dono.\nLV2 Quando Este Spirit Ataca: Este Spirit não pode ser bloqueado por Spirits com exatamente 1 Core sobre eles."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-046.webp"
+  },
+  {
+    "id": "BS01-047",
+    "name": "The Witch Naja",
+    "nameEN": "The Witch Naja",
+    "namePT": "The Witch Naja",
+    "nameJP": "魔女ナージャ",
+    "nameKey": "the-witch-naja",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Evil Deity"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Battles: When only the opposing Spirit is destroyed by comparing BP, Exhaust 1 opposing Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Batalha: Quando apenas o Spirit do oponente for destruído pela comparação de BP, deixe 1 Spirit do oponente Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-047.webp"
+  },
+  {
+    "id": "BS01-048",
+    "name": "The PrincessVampire Vampiles",
+    "nameEN": "The PrincessVampire Vampiles",
+    "namePT": "The PrincessVampire Vampiles",
+    "nameJP": "吸血姫ヴァンピレス",
+    "nameKey": "the-princessvampire-vampiles",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Nightling"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Destroy 1 exhausted Spirit.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Destrua 1 Spirit Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-048.webp"
+  },
+  {
+    "id": "BS01-049",
+    "name": "The PhantomKnight Nightrider",
+    "nameEN": "The PhantomKnight Nightrider",
+    "namePT": "The PhantomKnight Nightrider",
+    "nameJP": "幽騎士ナイトライダー",
+    "nameKey": "the-phantomknight-nightrider",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 7,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Mounted Warrior"
+    ],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV2/LV3 When This Spirit Attacks: Destroy 1 exhausted Spirit.",
+      "ptBR": "LV2/LV3 Quando Este Spirit Ataca: Destrua 1 Spirit Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-049.webp"
+  }
+]

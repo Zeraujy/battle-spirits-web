@@ -1,0 +1,1242 @@
+[
+  {
+    "id": "BS01-001",
+    "name": "Goradon",
+    "nameEN": "Goradon",
+    "namePT": "Goradon",
+    "nameJP": "ゴラドン",
+    "nameKey": "goradon",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Reptile Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-001.webp"
+  },
+  {
+    "id": "BS01-002",
+    "name": "Rokceratops",
+    "nameEN": "Rokceratops",
+    "namePT": "Rokceratops",
+    "nameJP": "ロクケラトプス",
+    "nameKey": "rokceratops",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 1,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-002.webp"
+  },
+  {
+    "id": "BS01-003",
+    "name": "Teranosaber",
+    "nameEN": "Teranosaber",
+    "namePT": "Teranosaber",
+    "nameJP": "テラノセイバー",
+    "nameKey": "teranosaber",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fang"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 During the Opponent's Attack Step: This Spirit cannot block.",
+      "ptBR": "LV1 Durante o Attack Step do Oponente: Este Spirit não pode bloquear."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-003.webp"
+  },
+  {
+    "id": "BS01-004",
+    "name": "The Scout Dragno",
+    "nameEN": "The Scout Dragno",
+    "namePT": "The Scout Dragno",
+    "nameJP": "ドラグノ偵察兵",
+    "nameKey": "the-scout-dragno",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: This Spirit gets +2000 BP during this turn.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Este Spirit recebe +2000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-004.webp"
+  },
+  {
+    "id": "BS01-005",
+    "name": "Eyeburn",
+    "nameEN": "Eyeburn",
+    "namePT": "Eyeburn",
+    "nameJP": "アイバーン",
+    "nameKey": "eyeburn",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Winged Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-005.webp"
+  },
+  {
+    "id": "BS01-006",
+    "name": "Merat",
+    "nameEN": "Merat",
+    "namePT": "Merat",
+    "nameJP": "メラット",
+    "nameKey": "merat",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Drifting Spirit"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Start Step: Move 1 Core from this Spirit to your Reserve. During a turn in which one or more Cores are placed on this Spirit by something other than a Spirit, Nexus, or Magic effect, this Spirit cannot attack.",
+      "ptBR": "LV1/LV2 Durante Seu Start Step: Mova 1 Core deste Spirit para sua Reserve. Durante um turno em que 1 ou mais Cores forem colocados neste Spirit por algo que não seja efeito de Spirit, Nexus ou Magic, este Spirit não pode atacar."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-006.webp"
+  },
+  {
+    "id": "BS01-007",
+    "name": "Hummerdrake",
+    "nameEN": "Hummerdrake",
+    "namePT": "Hummerdrake",
+    "nameJP": "ハンマドレイク",
+    "nameKey": "hummerdrake",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 2,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Remove 1 Core from a card you control or from your Trash to the Void.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Mova 1 Core de uma carta que você controla ou do seu Trash para o Void."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-007.webp"
+  },
+  {
+    "id": "BS01-008",
+    "name": "Metalburn",
+    "nameEN": "Metalburn",
+    "namePT": "Metalburn",
+    "nameJP": "メタルバーン",
+    "nameKey": "metalburn",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 8,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-008.webp"
+  },
+  {
+    "id": "BS01-009",
+    "name": "Volc-Baboon",
+    "nameEN": "Volc-Baboon",
+    "namePT": "Volc-Baboon",
+    "nameJP": "ヴォルク・バブーン",
+    "nameKey": "volc-baboon",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Emperor Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 During the Opponent's Attack Step: This Spirit cannot block.",
+      "ptBR": "LV1 Durante o Attack Step do Oponente: Este Spirit não pode bloquear."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-009.webp"
+  },
+  {
+    "id": "BS01-010",
+    "name": "Chakrambat",
+    "nameEN": "Chakrambat",
+    "namePT": "Chakrambat",
+    "nameJP": "チャクラムバット",
+    "nameKey": "chakrambat",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fang"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: This Spirit gets +4000 BP during this turn.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Este Spirit recebe +4000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-010.webp"
+  },
+  {
+    "id": "BS01-011",
+    "name": "Dragsaurus",
+    "nameEN": "Dragsaurus",
+    "namePT": "Dragsaurus",
+    "nameJP": "ドラグサウルス",
+    "nameKey": "dragsaurus",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Reptile Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Destroy 1 Nexus.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Destrua 1 Nexus."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-011.webp"
+  },
+  {
+    "id": "BS01-012",
+    "name": "Tryswordon",
+    "nameEN": "Tryswordon",
+    "namePT": "Tryswordon",
+    "nameJP": "トライソードン",
+    "nameKey": "tryswordon",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 During the Opponent's Attack Step: This Spirit cannot block Spirits with BP lower than this Spirit's BP.",
+      "ptBR": "LV2 Durante o Attack Step do Oponente: Este Spirit não pode bloquear Spirits com BP menor que o BP deste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-012.webp"
+  },
+  {
+    "id": "BS01-013",
+    "name": "Taurusknight",
+    "nameEN": "Taurusknight",
+    "namePT": "Taurusknight",
+    "nameJP": "タウロスナイト",
+    "nameKey": "taurusknight",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Mounted Warrior"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 6,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 Flash [Awaken]: You may move any number of Cores from your Spirits to this Spirit.",
+      "ptBR": "LV1/LV2/LV3 Flash [Awaken]: Você pode mover qualquer quantidade de Cores dos seus Spirits para este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-013.webp"
+  },
+  {
+    "id": "BS01-014A",
+    "name": "The Shaman Dragno",
+    "nameEN": "The Shaman Dragno",
+    "namePT": "The Shaman Dragno",
+    "nameJP": "ドラグノ祈祷師",
+    "nameKey": "the-shaman-dragno",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Return 1 Spirit card from your Trash to your Hand.",
+      "ptBR": "LV1/LV2 Quando Invocado: Devolva 1 carta de Spirit do seu Trash para sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-014A.webp"
+  },
+  {
+    "id": "BS01-014B",
+    "name": "The Shaman Dragno",
+    "nameEN": "The Shaman Dragno",
+    "namePT": "The Shaman Dragno",
+    "nameJP": "ドラグノ祈祷師",
+    "nameKey": "the-shaman-dragno",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Return 1 Spirit card from your Trash to your Hand.",
+      "ptBR": "LV1/LV2 Quando Invocado: Devolva 1 carta de Spirit do seu Trash para sua Hand."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-014B.webp"
+  },
+  {
+    "id": "BS01-015",
+    "name": "Spinoaxe",
+    "nameEN": "Spinoaxe",
+    "namePT": "Spinoaxe",
+    "nameJP": "スピノアックス",
+    "nameKey": "spinoaxe",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: This Spirit cannot be blocked by Spirits with [High Speed] during this turn.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Este Spirit não pode ser bloqueado por Spirits com [High Speed] durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-015.webp"
+  },
+  {
+    "id": "BS01-016",
+    "name": "Skelton-Jaw",
+    "nameEN": "Skelton-Jaw",
+    "namePT": "Skelton-Jaw",
+    "nameJP": "スケルトン・ジョウ",
+    "nameKey": "skelton-jaw",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Winged Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During the Opponent's Attack Step: This Spirit cannot block. LV2/LV3 When This Spirit Attacks: This Spirit gets +1000 BP for each opposing refreshed Spirit during this turn.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step do Oponente: Este Spirit não pode bloquear. LV2/LV3 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP para cada Spirit do oponente em estado Refresh durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-016.webp"
+  },
+  {
+    "id": "BS01-017",
+    "name": "Lanceraptor",
+    "nameEN": "Lanceraptor",
+    "namePT": "Lanceraptor",
+    "nameJP": "ランスラプトル",
+    "nameKey": "lanceraptor",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: You may destroy 1 Spirit with 2000 BP or less.",
+      "ptBR": "LV1/LV2 Quando Invocado: Você pode destruir 1 Spirit com 2000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-017.webp"
+  },
+  {
+    "id": "BS01-018",
+    "name": "Lizardman",
+    "nameEN": "Lizardman",
+    "namePT": "Lizardman",
+    "nameJP": "リザードマン",
+    "nameKey": "lizardman",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Reptile Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 During the Opponent's Attack Step: This Spirit cannot block Spirits with BP lower than this Spirit's BP.",
+      "ptBR": "LV1/LV2/LV3 Durante o Attack Step do Oponente: Este Spirit não pode bloquear Spirits com BP menor que o BP deste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-018.webp"
+  },
+  {
+    "id": "BS01-019",
+    "name": "Jurassickle",
+    "nameEN": "Jurassickle",
+    "namePT": "Jurassickle",
+    "nameJP": "ジュラシックル",
+    "nameKey": "jurassickle",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Terra Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: This Spirit gets +4000 BP during this turn.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Este Spirit recebe +4000 BP durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-019.webp"
+  },
+  {
+    "id": "BS01-020",
+    "name": "The BladeDragon Steelanodon",
+    "nameEN": "The BladeDragon Steelanodon",
+    "namePT": "The BladeDragon Steelanodon",
+    "nameJP": "翼刃竜スティラノドン",
+    "nameKey": "the-bladedragon-steelanodon",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Winged Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 6,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 Flash [Awaken]: You may move any number of Cores from your Spirits to this Spirit.",
+      "ptBR": "LV1/LV2 Flash [Awaken]: Você pode mover qualquer quantidade de Cores dos seus Spirits para este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-020.webp"
+  },
+  {
+    "id": "BS01-021",
+    "name": "The FlameDragon Ma-Gwo",
+    "nameEN": "The FlameDragon Ma-Gwo",
+    "namePT": "The FlameDragon Ma-Gwo",
+    "nameJP": "焔竜魔人マ・グー",
+    "nameKey": "the-flamedragon-ma-gwo",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Dragon",
+      "Ancient Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3: This Spirit gets +1000 BP for each Dragon family Spirit you control.",
+      "ptBR": "LV1/LV2/LV3: Este Spirit recebe +1000 BP para cada Spirit da família Dragon que você controla."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-021.webp"
+  },
+  {
+    "id": "BS01-022",
+    "name": "The Sickle Fool-Joker",
+    "nameEN": "The Sickle Fool-Joker",
+    "namePT": "The Sickle Fool-Joker",
+    "nameJP": "大鎌フール・ジョーカー",
+    "nameKey": "the-sickle-fool-joker",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Clown"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Attacks: You may destroy 1 Spirit with 3000 BP or less.",
+      "ptBR": "LV2 Quando Este Spirit Ataca: Você pode destruir 1 Spirit com 3000 BP ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-022.webp"
+  },
+  {
+    "id": "BS01-023",
+    "name": "The Fire LithoGraphica Phoenixious",
+    "nameEN": "The Fire LithoGraphica Phoenixious",
+    "namePT": "The Fire LithoGraphica Phoenixious",
+    "nameJP": "原始鳥フェニキオス",
+    "nameKey": "the-fire-lithographica-phoenixious",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 7,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fang"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: Destroy all Spirits with 3000 BP or less. LV2 During Either Attack Step: Whenever this Spirit destroys only an opposing Spirit by comparing BP, place 1 Core from the Void onto this Spirit.",
+      "ptBR": "LV1/LV2 Quando Invocado: Destrua todos os Spirits com 3000 BP ou menos. LV2 Durante o Attack Step de qualquer jogador: Sempre que este Spirit destruir apenas um Spirit do oponente pela comparação de BP, coloque 1 Core do Void sobre este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-023.webp"
+  },
+  {
+    "id": "BS01-024",
+    "name": "The CrystalDragon Diamat",
+    "nameEN": "The CrystalDragon Diamat",
+    "namePT": "The CrystalDragon Diamat",
+    "nameJP": "晶輝龍ディアマット",
+    "nameKey": "the-crystaldragon-diamat",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 7,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Giant Beast"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: You may destroy 1 Spirit with [High Speed].",
+      "ptBR": "LV1/LV2 Quando Invocado: Você pode destruir 1 Spirit com [High Speed]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-024.webp"
+  },
+  {
+    "id": "BS01-025",
+    "name": "The DragonicFortress Giga",
+    "nameEN": "The DragonicFortress Giga",
+    "namePT": "The DragonicFortress Giga",
+    "nameJP": "要塞龍ギガ",
+    "nameKey": "the-dragonicfortress-giga",
+    "set": "BS01",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 8,
+    "reduction": [
+      "red",
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Dragon"
+    ],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: You may destroy 1 Spirit with 6000 BP or less. LV2 During Either Attack Step: Whenever this Spirit destroys only an opposing Spirit by comparing BP, you may move any number of Cores from this Spirit to your other Spirits or Nexuses.",
+      "ptBR": "LV1/LV2 Quando Invocado: Você pode destruir 1 Spirit com 6000 BP ou menos. LV2 Durante o Attack Step de qualquer jogador: Sempre que este Spirit destruir apenas um Spirit do oponente pela comparação de BP, você pode mover qualquer quantidade de Cores deste Spirit para seus outros Spirits ou Nexuses."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-025.webp"
+  }
+]
