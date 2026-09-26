@@ -55,7 +55,8 @@ const responsiveChecks = [
   ["src/styles/pages/onlineLobbySafe.css", /@media\s*\(max-width:\s*520px\)/, /overflow-x:\s*hidden/],
   ["src/styles/pages/localSetup.css", /@media\s*\(max-width:\s*680px\)/, /overflow-x:\s*hidden/],
   ["src/styles/pages/settingsGame.css", /@media\s*\(max-width:\s*520px\)/, /overflow-x:\s*hidden/],
-  ["src/styles/pages/tutorialV395.css", /@media\s*\(max-width:640px\)/, /overflow-x:\s*hidden/]
+  ["src/styles/pages/tutorialV395.css", /@media\s*\(max-width:640px\)/, /overflow-x:\s*hidden/],
+  ["src/styles/deckbuilder/deckBuilderV398.css", /@media\s*\(max-width:\s*620px\)/, /deck-builder-v3-grid/]
 ];
 for (const [rel, mobilePattern, overflowPattern] of responsiveChecks) {
   const full = path.join(root, rel);

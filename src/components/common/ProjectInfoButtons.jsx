@@ -4,6 +4,49 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.9.8",
+    date: { pt: "26/09/2026", en: "09/26/2026" },
+    title: { pt: "Deckbuilder & Database 2.0", en: "Deckbuilder & Database 2.0" },
+    summary: {
+      pt: "Montar e pesquisar decks ficou mais rápido, claro e preparado para um catálogo muito maior.",
+      en: "Deck building and card browsing are now faster, clearer and ready for a much larger catalog."
+    },
+    sections: [
+      {
+        title: { pt: "Catálogo mais completo", en: "Smarter catalog" },
+        items: {
+          pt: [
+            "A busca agora encontra nome, código, família e texto de efeito com mais facilidade.",
+            "Novos filtros incluem set, raridade, família, custo, redução, símbolo e legalidade.",
+            "Ordene cartas por código, nome, custo ou raridade e navegue em páginas de 21 cartas.",
+            "O detalhe de uma carta agora sugere outras cartas relacionadas."
+          ],
+          en: [
+            "Search now finds names, codes, families and effect text more easily.",
+            "New filters cover set, rarity, family, cost, reduction, symbol and legality.",
+            "Sort cards by code, name, cost or rarity and browse 21 cards per page.",
+            "Card details now suggest related cards."
+          ]
+        }
+      },
+      {
+        title: { pt: "Leitura do deck", en: "Deck overview" },
+        items: {
+          pt: [
+            "A lateral do Deck Builder ganhou curva de custo e distribuição por cores e tipos.",
+            "Nome, código, raridade e custo ficam visíveis no catálogo sem precisar abrir cada carta.",
+            "Filtros avançados podem ser recolhidos para manter a tela limpa durante a montagem."
+          ],
+          en: [
+            "The Deck Builder sidebar now includes a cost curve plus color and type distribution.",
+            "Name, code, rarity and cost are visible in the catalog without opening each card.",
+            "Advanced filters can be collapsed to keep the screen clean while building."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "3.9.5",
     date: { pt: "25/09/2026", en: "09/25/2026" },
     title: { pt: "Tutorial & New Player Onboarding", en: "Tutorial & New Player Onboarding" },

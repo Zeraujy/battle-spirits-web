@@ -1,11 +1,12 @@
 import PointerTiltSurface from "../components/layout/PointerTiltSurface.jsx";
 import EternalCinematicBackdrop from "../components/layout/EternalCinematicBackdrop.jsx";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import CardTile from "../components/cards/CardTile.jsx";
 import EmptyState from "../components/common/EmptyState.jsx";
 import CardDetailsModal from "../components/cards/CardDetailsModal.jsx";
-import { searchCards, cardIndex } from "../services/cardRepository.js";
+import { searchCards, cardIndex, catalogMeta, getRelatedCards } from "../services/cardRepository.js";
+import { analyzeDeck, COLOR_ORDER, TYPE_ORDER } from "../services/deckAnalytics.js";
 import { deleteDeck, getDecks, upsertDeck } from "../services/storage.js";
 import { validateDeck } from "../game/state.js";
 import { getCardName, resolveCardImage, resolveCardThumbnail } from "../game/cardAdapter.js";
@@ -20,9 +21,10 @@ import { useLanguage } from "../i18n.jsx";
 import "../styles/deckbuilder/deckBuilderPagination.css";
 import "../styles/deckbuilder/deckImportExport.css";
 import "../styles/deckbuilder/deckBuilderV3.css";
+import "../styles/deckbuilder/deckBuilderV398.css";
 import "../styles/pages/eternalInterfaceV350.css";
 
-const CARDS_PER_PAGE = 14;
+const CARDS_PER_PAGE = 21;
 const DECK_FILE_FORMAT = "battle-spirits-eternal-deck";
 const DECK_FILE_VERSION = 1;
 
@@ -96,8 +98,19 @@ export default function DeckBuilder({ onBack, deckId = null }) {
     }
   );
   const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
   const [type, setType] = useState("");
   const [color, setColor] = useState("");
+  const [setCode, setSetCode] = useState("");
+  const [rarity, setRarity] = useState("");
+  const [family, setFamily] = useState("");
+  const [costMin, setCostMin] = useState("");
+  const [costMax, setCostMax] = useState("");
+  const [reduction, setReduction] = useState("");
+  const [symbol, setSymbol] = useState("");
+  const [restriction, setRestriction] = useState("");
+  const [sort, setSort] = useState("code");
+  const [advancedOpen, setAdvancedOpen] = useState(false);
   const [page, setPage] = useState(1);
   const [detailsCard, setDetailsCard] = useState(null);
   const [transferNotice, setTransferNotice] = useState(null);
@@ -106,12 +119,20 @@ export default function DeckBuilder({ onBack, deckId = null }) {
   const importInputRef = useRef(null);
 
   const results = useMemo(
-    () =>
-      searchCards(query, {
-        cardType: type || undefined,
-        color: color || undefined
-      }),
-    [query, type, color]
+    () => searchCards(deferredQuery, {
+      cardType: type || undefined,
+      color: color || undefined,
+      set: setCode || undefined,
+      rarity: rarity || undefined,
+      family: family || undefined,
+      costMin,
+      costMax,
+      reduction: reduction || undefined,
+      symbol: symbol || undefined,
+      restriction: restriction || undefined,
+      sort
+    }),
+    [deferredQuery, type, color, setCode, rarity, family, costMin, costMax, reduction, symbol, restriction, sort]
   );
 
   const totalPages = Math.max(1, Math.ceil(results.length / CARDS_PER_PAGE));
@@ -163,6 +184,10 @@ export default function DeckBuilder({ onBack, deckId = null }) {
   const uniqueCards = draft.cards.filter((e) => Number(e.quantity || 0) > 0).length;
   const coverCard = cardIndex.get(draft.coverCardId || draft.cards[0]?.cardId || draft.cards[0]?.id || "");
   const hasDeck = draft.cards.length > 0;
+  const analytics = useMemo(() => analyzeDeck(draft.cards, cardIndex), [draft.cards]);
+  const maxCurve = Math.max(1, ...analytics.costCurve);
+  const relatedCards = useMemo(() => getRelatedCards(detailsCard, { limit: 6 }), [detailsCard]);
+  const activeAdvancedFilters = [setCode, rarity, family, costMin, costMax, reduction, symbol, restriction].filter((value) => String(value ?? "").trim() !== "").length;
 
   function qty(cardId) {
     return draft.cards.find((e) => (e.cardId || e.id) === cardId)?.quantity || 0;
@@ -230,7 +255,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
       format: DECK_FILE_FORMAT,
       version: DECK_FILE_VERSION,
       simulator: "Battle Spirits Eternal Simulator",
-      simulatorVersion: "3.9.5",
+      simulatorVersion: "3.9.8",
       exportedAt: new Date().toISOString(),
       deck: {
         name: String(draft.name || "").trim() || (pt ? "Deck Importado" : "Imported Deck"),
@@ -284,6 +309,14 @@ export default function DeckBuilder({ onBack, deckId = null }) {
       setQuery("");
       setType("");
       setColor("");
+      setSetCode("");
+      setRarity("");
+      setFamily("");
+      setCostMin("");
+      setCostMax("");
+      setReduction("");
+      setSymbol("");
+      setRestriction("");
       setPage(1);
 
       setTransferNotice({
@@ -319,6 +352,27 @@ export default function DeckBuilder({ onBack, deckId = null }) {
 
   function changeColor(value) {
     setColor(value);
+    setPage(1);
+  }
+
+  function changeFilter(setter, value) {
+    setter(value);
+    setPage(1);
+  }
+
+  function clearFilters() {
+    setQuery("");
+    setType("");
+    setColor("");
+    setSetCode("");
+    setRarity("");
+    setFamily("");
+    setCostMin("");
+    setCostMax("");
+    setReduction("");
+    setSymbol("");
+    setRestriction("");
+    setSort("code");
     setPage(1);
   }
 
@@ -474,6 +528,46 @@ export default function DeckBuilder({ onBack, deckId = null }) {
             </div>
           </section>
 
+          <section className="deck-builder-v3-section deck-builder-v398-analytics">
+            <div className="deck-builder-v3-section-head deck-builder-v3-section-head-inline">
+              <h3>{pt ? "Análise do deck" : "Deck analysis"}</h3>
+              <small>{analytics.averageCost.toFixed(1)} {pt ? "custo médio" : "avg cost"}</small>
+            </div>
+
+            <div className="deck-v398-curve" aria-label={pt ? "Curva de custo" : "Cost curve"}>
+              {analytics.costCurve.map((count, index) => (
+                <div className="deck-v398-curve-col" key={index}>
+                  <span className="deck-v398-curve-value">{count}</span>
+                  <i style={{ height: `${Math.max(4, (count / maxCurve) * 46)}px` }} />
+                  <b>{index === 7 ? "7+" : index}</b>
+                </div>
+              ))}
+            </div>
+
+            <div className="deck-v398-breakdown">
+              <div>
+                <span>{pt ? "Cores" : "Colors"}</span>
+                <div className="deck-v398-color-row">
+                  {COLOR_ORDER.filter((entry) => analytics.colors[entry] > 0).map((entry) => (
+                    <i key={entry} className={`deck-v398-color-dot ${entry}`} title={`${entry}: ${analytics.colors[entry]}`}>
+                      {analytics.colors[entry]}
+                    </i>
+                  ))}
+                  {!analytics.dominantColors.length && <small>—</small>}
+                </div>
+              </div>
+              <div>
+                <span>{pt ? "Tipos" : "Types"}</span>
+                <div className="deck-v398-type-row">
+                  {TYPE_ORDER.filter((entry) => analytics.types[entry] > 0).map((entry) => (
+                    <small key={entry}><b>{analytics.types[entry]}</b> {entry}</small>
+                  ))}
+                  {!analytics.total && <small>—</small>}
+                </div>
+              </div>
+            </div>
+          </section>
+
           <section className="deck-builder-v3-section">
             <div className="deck-builder-v3-section-head deck-builder-v3-section-head-inline">
               <h3>{t("myDecks")}</h3>
@@ -532,15 +626,18 @@ export default function DeckBuilder({ onBack, deckId = null }) {
         </aside>
 
         <section ref={browserRef} className="panel card-browser deck-builder-v3-browser">
-          <div className="deck-builder-v3-browser-toolbar">
-            <div className="filters deck-builder-v3-filters">
-              <input
-                placeholder={t("searchCards")}
-                value={query}
-                onChange={(e) => changeQuery(e.target.value)}
-              />
+          <div className="deck-builder-v3-browser-toolbar deck-v398-browser-toolbar">
+            <div className="deck-v398-search-row">
+              <label className="deck-v398-search">
+                <span className="sr-only">{t("searchCards")}</span>
+                <input
+                  placeholder={pt ? "Buscar por nome, código, família ou efeito..." : "Search name, code, family or effect..."}
+                  value={query}
+                  onChange={(e) => changeQuery(e.target.value)}
+                />
+              </label>
 
-              <select value={type} onChange={(e) => changeType(e.target.value)}>
+              <select value={type} onChange={(e) => changeType(e.target.value)} aria-label={pt ? "Tipo" : "Type"}>
                 <option value="">{t("allTypes")}</option>
                 <option value="spirit">Spirit</option>
                 <option value="brave">Brave</option>
@@ -549,13 +646,67 @@ export default function DeckBuilder({ onBack, deckId = null }) {
                 <option value="magic">Magic</option>
               </select>
 
-              <select value={color} onChange={(e) => changeColor(e.target.value)}>
+              <select value={color} onChange={(e) => changeColor(e.target.value)} aria-label={pt ? "Cor" : "Color"}>
                 <option value="">{t("allColors")}</option>
                 {["red", "purple", "green", "white", "yellow", "blue"].map((c) => (
                   <option key={c} value={c}>{c}</option>
                 ))}
               </select>
+
+              <button
+                type="button"
+                className={`ghost deck-v398-filter-toggle ${advancedOpen ? "active" : ""}`}
+                onClick={() => setAdvancedOpen((value) => !value)}
+                aria-expanded={advancedOpen}
+              >
+                {pt ? "Filtros" : "Filters"}
+                {activeAdvancedFilters > 0 && <b>{activeAdvancedFilters}</b>}
+              </button>
             </div>
+
+            {advancedOpen && (
+              <div className="deck-v398-advanced">
+                <select value={setCode} onChange={(e) => changeFilter(setSetCode, e.target.value)}>
+                  <option value="">{pt ? "Todos os sets" : "All sets"}</option>
+                  {catalogMeta.sets.map((value) => <option key={value} value={value}>{value}</option>)}
+                </select>
+                <select value={rarity} onChange={(e) => changeFilter(setRarity, e.target.value)}>
+                  <option value="">{pt ? "Todas as raridades" : "All rarities"}</option>
+                  {catalogMeta.rarities.map((value) => <option key={value} value={value}>{value}</option>)}
+                </select>
+                <select value={family} onChange={(e) => changeFilter(setFamily, e.target.value)}>
+                  <option value="">{pt ? "Todas as famílias" : "All families"}</option>
+                  {catalogMeta.families.map((value) => <option key={value} value={value}>{value}</option>)}
+                </select>
+                <select value={reduction} onChange={(e) => changeFilter(setReduction, e.target.value)}>
+                  <option value="">{pt ? "Qualquer redução" : "Any reduction"}</option>
+                  {catalogMeta.reductions.map((value) => <option key={value} value={value}>{value}</option>)}
+                </select>
+                <select value={symbol} onChange={(e) => changeFilter(setSymbol, e.target.value)}>
+                  <option value="">{pt ? "Qualquer símbolo" : "Any symbol"}</option>
+                  {catalogMeta.symbols.map((value) => <option key={value} value={value}>{value}</option>)}
+                </select>
+                <select value={restriction} onChange={(e) => changeFilter(setRestriction, e.target.value)}>
+                  <option value="">{pt ? "Qualquer legalidade" : "Any legality"}</option>
+                  <option value="clean">{pt ? "Sem restrição" : "Unrestricted"}</option>
+                  <option value="restricted">{pt ? "Proibidas / limitadas" : "Banned / limited"}</option>
+                  <option value="banned">{pt ? "Somente proibidas" : "Banned only"}</option>
+                </select>
+                <div className="deck-v398-cost-range">
+                  <span>{pt ? "Custo" : "Cost"}</span>
+                  <input type="number" min="0" max="99" placeholder="Min" value={costMin} onChange={(e) => changeFilter(setCostMin, e.target.value)} />
+                  <em>—</em>
+                  <input type="number" min="0" max="99" placeholder="Max" value={costMax} onChange={(e) => changeFilter(setCostMax, e.target.value)} />
+                </div>
+                <select value={sort} onChange={(e) => changeFilter(setSort, e.target.value)}>
+                  <option value="code">{pt ? "Ordenar por código" : "Sort by code"}</option>
+                  <option value="name">{pt ? "Ordenar por nome" : "Sort by name"}</option>
+                  <option value="cost">{pt ? "Ordenar por custo" : "Sort by cost"}</option>
+                  <option value="rarity">{pt ? "Ordenar por raridade" : "Sort by rarity"}</option>
+                </select>
+                <button type="button" className="ghost deck-v398-clear" onClick={clearFilters}>{pt ? "Limpar filtros" : "Clear filters"}</button>
+              </div>
+            )}
 
             <div className="deck-browser-meta deck-builder-v3-meta">
               <span>
@@ -565,9 +716,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
                   <>Showing <b>{rangeStart}–{rangeEnd}</b> of <b>{results.length}</b> cards</>
                 )}
               </span>
-              <span>
-                {pt ? "Página" : "Page"} <b>{currentPage}</b> / <b>{totalPages}</b>
-              </span>
+              <span>{pt ? "Catálogo" : "Catalog"}: <b>{cardIndex.size}</b> · {pt ? "Página" : "Page"} <b>{currentPage}</b> / <b>{totalPages}</b></span>
             </div>
           </div>
 
@@ -584,6 +733,10 @@ export default function DeckBuilder({ onBack, deckId = null }) {
                       </span>
                     )}
                     <CardTile card={card} imageVariant="thumbnail" loading="lazy" fetchPriority="low" onClick={() => setDetailsCard(card)} />
+                    <div className="deck-v398-card-caption">
+                      <strong title={getCardName(card)}>{getCardName(card)}</strong>
+                      <span>{card.id} · {card.rarity || "—"} · {pt ? "Custo" : "Cost"} {card.cost ?? 0}</span>
+                    </div>
 
                     <div className="qty-control deck-builder-v3-qty-control">
                       <button onClick={() => setQty(card.id, qty(card.id) - 1)}>-</button>
@@ -649,6 +802,8 @@ export default function DeckBuilder({ onBack, deckId = null }) {
         <CardDetailsModal
           card={detailsCard}
           initialLanguage={language === "en" ? "en" : "ptBR"}
+          relatedCards={relatedCards}
+          onSelectRelated={setDetailsCard}
           onClose={() => setDetailsCard(null)}
         />,
         document.body

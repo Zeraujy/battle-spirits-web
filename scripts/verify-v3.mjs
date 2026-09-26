@@ -21,6 +21,9 @@ const required = [
   "src/game/stateValidation.js",
   "src/game/eternalDeckRules.js",
   "src/game/deckRules.test.js",
+  "src/services/deckAnalytics.js",
+  "src/services/deckAnalytics.test.js",
+  "src/styles/deckbuilder/deckBuilderV398.css",
   "src/game/snapshots.js",
   "src/online/publicProfile.js",
   "src/online/customMatchSettings.js",
@@ -69,7 +72,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.9.5") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.5`);
+if (pkg.version !== "3.9.8") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.8`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -84,7 +87,12 @@ const flowUi = fs.readFileSync(path.join(root, "src", "styles", "pages", "gameFl
 if (!flowUi.includes("settings-game-window") || !flowUi.includes("eternal-menu-action")) throw new Error("A interface de fluxo v3.6.0 está incompleta.");
 
 const deckBuilderPage = fs.readFileSync(path.join(root, "src", "pages", "DeckBuilder.jsx"), "utf8");
-if (!deckBuilderPage.includes("const CARDS_PER_PAGE = 14")) throw new Error("Deck Builder deve exibir 14 cartas por página na v3.6.0.");
+if (!deckBuilderPage.includes("const CARDS_PER_PAGE = 21")) throw new Error("Deck Builder 2.0 deve exibir 21 cartas por página.");
+if (!deckBuilderPage.includes("catalogMeta") || !deckBuilderPage.includes("analyzeDeck") || !deckBuilderPage.includes("Filtros")) throw new Error("Deckbuilder & Database 2.0 está incompleto.");
+const deckRepository = fs.readFileSync(path.join(root, "src", "services", "cardRepository.js"), "utf8");
+if (!deckRepository.includes("searchIndex") || !deckRepository.includes("getRelatedCards") || !deckRepository.includes("catalogMeta")) throw new Error("O índice avançado do catálogo v3.9.8 está incompleto.");
+const deckAnalytics = fs.readFileSync(path.join(root, "src", "services", "deckAnalytics.js"), "utf8");
+if (!deckAnalytics.includes("analyzeDeck") || !deckAnalytics.includes("costCurve")) throw new Error("A análise de deck v3.9.8 está incompleta.");
 if (!deckBuilderPage.includes("createPortal") || !deckBuilderPage.includes("CardDetailsModal")) throw new Error("Modal de detalhes deve usar portal centralizado na v3.6.0.");
 
 const decksPage = fs.readFileSync(path.join(root, "src", "pages", "Decks.jsx"), "utf8");

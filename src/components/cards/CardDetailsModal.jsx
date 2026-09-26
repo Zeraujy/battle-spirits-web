@@ -365,7 +365,9 @@ function SectionTitle({ children }) {
 export default function CardDetailsModal({
   card,
   onClose,
-  initialLanguage = "ptBR"
+  initialLanguage = "ptBR",
+  relatedCards = [],
+  onSelectRelated
 }) {
   const [language, setLanguage] = useState(initialLanguage === "en" ? "en" : "ptBR");
   const cardTiltRef = useRef(null);
@@ -488,6 +490,7 @@ export default function CardDetailsModal({
           noEffect: "This card has no effect.",
           noReduction: "None",
           noSymbol: "None",
+          related: "Related cards",
           close: "Close"
         }
       : {
@@ -506,6 +509,7 @@ export default function CardDetailsModal({
           noEffect: "Esta carta não possui efeito.",
           noReduction: "Nenhuma",
           noSymbol: "Nenhum",
+          related: "Cartas relacionadas",
           close: "Fechar"
         };
 
@@ -731,6 +735,28 @@ export default function CardDetailsModal({
                 </article>
               )}
             </section>
+
+            {relatedCards.length > 0 && (
+              <section className="card-details-section card-details-related-section">
+                <SectionTitle>{labels.related}</SectionTitle>
+                <div className="card-details-related-grid">
+                  {relatedCards.map((related) => (
+                    <button
+                      type="button"
+                      className="card-details-related-card"
+                      key={related.id}
+                      onClick={() => onSelectRelated?.(related)}
+                    >
+                      <img src={resolveCardImage(related)} alt={cardName(related, language)} loading="lazy" decoding="async" />
+                      <span>
+                        <b>{cardName(related, language)}</b>
+                        <small>{related.id}</small>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
         </div>
       </section>

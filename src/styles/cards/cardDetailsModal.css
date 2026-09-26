@@ -807,3 +807,30 @@
 .card-detail-symbol-orb.blue { --orb: #397dcc; }
 .card-detail-color-orb.ultimate,
 .card-detail-symbol-orb.ultimate { --orb: #9867df; }
+
+/* v3.9.8 — related cards */
+.card-details-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+.card-details-related-card {
+  min-width: 0;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 46px minmax(0,1fr);
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  background: rgba(255,255,255,.025);
+  text-align: left;
+}
+.card-details-related-card:hover { border-color: rgba(var(--card-theme-rgb),.34); background: rgba(var(--card-theme-rgb),.07); }
+.card-details-related-card img { width: 46px; aspect-ratio: 300/437; object-fit: cover; border-radius: 5px; }
+.card-details-related-card span { min-width: 0; display: grid; gap: 3px; }
+.card-details-related-card b { color: #e8e8e8; font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-details-related-card small { color: #777; font-size: 9px; }
+@media (max-width: 760px) {
+  .card-details-related-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
