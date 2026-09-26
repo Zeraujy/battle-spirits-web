@@ -28,7 +28,8 @@ export default function Updater() {
       setResult(response);
       setStatus("done");
     } catch (e) {
-      setError(e?.message || String(e));
+      console.error("Falha ao verificar atualizações:", e);
+      setError("Não foi possível verificar atualizações agora. Tente novamente mais tarde.");
       setStatus("error");
     }
   }
@@ -42,7 +43,8 @@ export default function Updater() {
       await desktop.downloadAndInstallUpdate(result.manifest);
       setStatus("installing");
     } catch (e) {
-      setError(e?.message || String(e));
+      console.error("Falha ao instalar atualização:", e);
+      setError("Não foi possível instalar a atualização. Tente novamente.");
       setStatus("error");
     }
   }
@@ -88,7 +90,7 @@ export default function Updater() {
         {result?.ok && result.available && <button className="primary-btn" onClick={install} disabled={status === "downloading"}>Baixar e instalar</button>}
       </div>
 
-      <small className="utility-footnote">O instalador baixado é validado por SHA-256 quando o manifesto fornece o hash.</small>
+      <small className="utility-footnote">O instalador é verificado antes de ser iniciado.</small>
     </section>
   </main>;
 }

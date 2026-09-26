@@ -128,7 +128,7 @@ export async function createBattleSpiritsServer(options = {}) {
     if (size > ONLINE_PROFILE_MAX_JSON_CHARS) {
       return {
         ok: false,
-        error: "O perfil enviado ao Online está muito grande. Atualize o simulador e tente novamente."
+        error: "Não foi possível usar este perfil no Online. Atualize o jogo e tente novamente."
       };
     }
 
@@ -434,7 +434,7 @@ export async function createBattleSpiritsServer(options = {}) {
   }
 
   async function rankedIdentity(accessToken) {
-    if (!rankedSupabase) return { ok: false, error: "Ranked indisponível: servidor sem SUPABASE_SERVICE_ROLE_KEY." };
+    if (!rankedSupabase) return { ok: false, error: "Ranked indisponível no momento." };
     const token = String(accessToken || "").trim();
     if (!token) return { ok: false, error: "Sessão Ranked inválida." };
     const { data, error } = await rankedSupabase.auth.getUser(token);
@@ -557,12 +557,12 @@ export async function createBattleSpiritsServer(options = {}) {
         if (result && typeof result.then === "function") {
           result.catch((error) => {
             console.error(`[${eventName}]`, error);
-            reply({ ok: false, error: "Erro interno do servidor. Consulte o Battle Spirits Server." });
+            reply({ ok: false, error: "O Online encontrou um problema. Tente novamente." });
           });
         }
       } catch (error) {
         console.error(`[${eventName}]`, error);
-        reply({ ok: false, error: "Erro interno do servidor. Consulte o Battle Spirits Server." });
+        reply({ ok: false, error: "O Online encontrou um problema. Tente novamente." });
       }
     });
   }
@@ -647,13 +647,13 @@ export async function createBattleSpiritsServer(options = {}) {
       const pairId = String(payload.pairId || "");
       const pair = matchmakingPairs.get(pairId);
       if (!pair || pair.hostSocketId !== socket.id) {
-        return ack({ ok: false, error: "Par de matchmaking inválido ou expirado." });
+        return ack({ ok: false, error: "A busca expirou. Procure uma partida novamente." });
       }
 
       const roomCode = String(payload.code || "").trim().toUpperCase();
       const room = rooms.get(roomCode);
       if (!room || room.players.player1?.socketId !== socket.id) {
-        return ack({ ok: false, error: "A sala criada para a partida rápida não foi encontrada." });
+        return ack({ ok: false, error: "A partida rápida não está mais disponível. Procure novamente." });
       }
 
       pair.roomCode = roomCode;
@@ -666,12 +666,12 @@ export async function createBattleSpiritsServer(options = {}) {
       const pairId = String(payload.pairId || "");
       const pair = matchmakingPairs.get(pairId);
       if (!pair || pair.guestSocketId !== socket.id) {
-        return ack({ ok: false, error: "Par de matchmaking inválido ou expirado." });
+        return ack({ ok: false, error: "A busca expirou. Procure uma partida novamente." });
       }
 
       const room = pair.roomCode ? rooms.get(pair.roomCode) : null;
       if (!room || room.players.player2?.socketId !== socket.id) {
-        return ack({ ok: false, error: "A entrada na sala da partida rápida não foi confirmada." });
+        return ack({ ok: false, error: "Não foi possível entrar na partida rápida. Tente novamente." });
       }
 
       pair.stage = "joined";
@@ -818,7 +818,7 @@ export async function createBattleSpiritsServer(options = {}) {
       if (!found) return ack({ ok: false, error: "Sala não encontrada." });
       const { room, playerId } = found;
       if (!room.match?.winnerId) return ack({ ok: false, error: "A partida ainda não terminou." });
-      if (room.ranked) return ack({ ok: false, error: "Ranked exige uma nova busca de matchmaking." });
+      if (room.ranked) return ack({ ok: false, error: "Ranked exige uma nova busca." });
 
       room.rematchVotes = { ...(room.rematchVotes || {}), [playerId]: true };
       io.to(room.code).emit("room:rematch-status", { votes: room.rematchVotes });

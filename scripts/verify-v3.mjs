@@ -146,14 +146,15 @@ if (!customMatchSettings.includes("resolveFirstPlayerId") || !customMatchSetting
 
 // v3.9.3 — player-facing copy must not expose development internals.
 const playerFacingFiles = [
-  "src/pages/Profile.jsx",
-  "src/pages/Account.jsx",
-  "src/pages/OnlineLobby.jsx",
-  "src/pages/RankedLobby.jsx",
-  "src/pages/Settings.jsx",
-  "src/pages/Updater.jsx",
-  "src/pages/AiSetup.jsx",
-  "src/components/common/ProjectInfoButtons.jsx"
+  ...fs.readdirSync(path.join(root, "src", "pages"))
+    .filter((name) => /\.jsx?$/.test(name))
+    .map((name) => `src/pages/${name}`),
+  ...fs.readdirSync(path.join(root, "src", "components", "common"))
+    .filter((name) => /\.jsx?$/.test(name))
+    .map((name) => `src/components/common/${name}`),
+  ...fs.readdirSync(path.join(root, "src", "components", "match"))
+    .filter((name) => /\.jsx?$/.test(name))
+    .map((name) => `src/components/match/${name}`)
 ];
 const forbiddenPlayerCopy = [
   /SOCIAL-HUB-[0-9]/i,
@@ -166,7 +167,25 @@ const forbiddenPlayerCopy = [
   /latest\.json/i,
   /update-config\.json/i,
   /AI Debugger/i,
-  /Supabase/i
+  /Supabase/i,
+  /SUPABASE_SERVICE_ROLE_KEY/i,
+  /service[_ -]?role/i,
+  /localhost/i,
+  /127\.0\.0\.1/i,
+  /SHA-256/i,
+  /manifesto/i,
+  /backend/i,
+  /\bRLS\b/i,
+  /\bRPC\b/i,
+  /migration/i,
+  /\.sql\b/i,
+  /node_modules/i,
+  /package\.json/i,
+  /Tailscale/i,
+  /\bnpm\b/i,
+  /\bVite\b/i,
+  /servidor local/i,
+  /Battle Spirits Server/i
 ];
 for (const rel of playerFacingFiles) {
   let source = fs.readFileSync(path.join(root, rel), "utf8");
@@ -177,6 +196,11 @@ for (const rel of playerFacingFiles) {
   const hit = forbiddenPlayerCopy.find((pattern) => pattern.test(visibleCopy));
   if (hit) throw new Error(`Copy técnica exposta ao jogador em ${rel}: ${hit}`);
 }
+
+// Server errors may be rendered by Online/Ranked screens; keep them player-safe.
+const exposedServerErrors = [...onlineServer.matchAll(/error\s*:\s*["'`]([^"'`]+)["'`]/g)].map((match) => match[1]).join("\n");
+const serverCopyHit = forbiddenPlayerCopy.find((pattern) => pattern.test(exposedServerErrors));
+if (serverCopyHit) throw new Error(`Mensagem técnica do servidor pode chegar ao jogador: ${serverCopyHit}`);
 
 const publicProfile = fs.readFileSync(path.join(root, "src", "online", "publicProfile.js"), "utf8");
 const socketClient = fs.readFileSync(path.join(root, "src", "online", "socketClient.js"), "utf8");

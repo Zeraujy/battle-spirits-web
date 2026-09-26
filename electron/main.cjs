@@ -3,15 +3,12 @@ const fs = require("node:fs");
 const path = require("node:path");
 const crypto = require("node:crypto");
 const { spawn } = require("node:child_process");
-const { pathToFileURL } = require("node:url");
 const { Readable } = require("node:stream");
 const http = require("node:http");
 const { io: createSocketIoClient } = require("socket.io-client");
 
 app.setName("Battle Spirits Eternal Simulator");
 
-let serverInstance = null;
-let serverError = null;
 let updaterWindow = null;
 let rendererServer = null;
 let rendererOrigin = null;
@@ -21,7 +18,6 @@ function requestedMode() {
   if (arg) return arg.slice("--mode=".length);
   const exe = path.basename(process.execPath).toLowerCase();
   if (exe.includes("updater")) return "updater";
-  if (exe.includes("server")) return "server";
   return "game";
 }
 
@@ -334,45 +330,6 @@ function createUpdaterWindow() {
   return updaterWindow;
 }
 
-function createServerWindow() {
-  const win = new BrowserWindow(commonWindowOptions({
-    width: 720,
-    height: 620,
-    minWidth: 620,
-    minHeight: 520,
-    title: "Battle Spirits Server"
-  }));
-  loadMode(win, "server");
-  return win;
-}
-
-async function serverModulePath() {
-  return path.join(appRoot(), "server", "index.mjs");
-}
-
-async function startEmbeddedServer() {
-  if (serverInstance?.getStats?.().running) return serverInstance.getStats();
-  serverError = null;
-  try {
-    const entry = await serverModulePath();
-    const module = await import(pathToFileURL(entry).href);
-    serverInstance = await module.createBattleSpiritsServer();
-    return serverInstance.getStats();
-  } catch (error) {
-    serverError = error?.message || String(error);
-    console.error("Battle Spirits Server:", error);
-    throw error;
-  }
-}
-
-async function stopEmbeddedServer() {
-  if (!serverInstance) return true;
-  await serverInstance.stop();
-  serverInstance = null;
-  return true;
-}
-
-
 // ---------------------------------------------------------------------------
 // ONLINE COMPATIBILITY BRIDGE - 2.3.11
 // ---------------------------------------------------------------------------
@@ -554,8 +511,7 @@ ipcMain.handle("app:get-info", () => ({
   version: app.getVersion(),
   name: app.getName(),
   mode: APP_MODE,
-  packaged: app.isPackaged,
-  userDataPath: app.getPath("userData")
+  packaged: app.isPackaged
 }));
 
 ipcMain.handle("updater:open", () => {
@@ -565,37 +521,19 @@ ipcMain.handle("updater:open", () => {
 ipcMain.handle("update:check", () => fetchUpdateManifest());
 ipcMain.handle("update:download-install", (event, manifest) => downloadAndLaunchUpdate(event, manifest));
 
-ipcMain.handle("server:get-status", () => ({
-  ...(serverInstance?.getStats?.() || { running: false, port: 3001, cards: 0, rooms: 0, connectedPlayers: 0 }),
-  error: serverError
-}));
-ipcMain.handle("server:start", async () => startEmbeddedServer());
-ipcMain.handle("server:stop", async () => {
-  await stopEmbeddedServer();
-  return { running: false, port: 3001, cards: 0, rooms: 0, connectedPlayers: 0 };
-});
-
 app.whenReady().then(async () => {
-  if (APP_MODE === "server") {
-    try { await startEmbeddedServer(); } catch {}
-    createServerWindow();
-  } else if (APP_MODE === "updater") {
-    createUpdaterWindow();
-  } else {
-    createGameWindow();
-  }
+  if (APP_MODE === "updater") createUpdaterWindow();
+  else createGameWindow();
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length > 0) return;
-    if (APP_MODE === "server") createServerWindow();
-    else if (APP_MODE === "updater") createUpdaterWindow();
+    if (APP_MODE === "updater") createUpdaterWindow();
     else createGameWindow();
   });
 });
 
 app.on("before-quit", () => {
   for (const clientId of [...desktopOnlineClients.keys()]) destroyDesktopOnlineClient(clientId);
-  if (serverInstance) serverInstance.stop().catch(() => {});
   if (rendererServer) {
     try { rendererServer.close(); } catch {}
     rendererServer = null;

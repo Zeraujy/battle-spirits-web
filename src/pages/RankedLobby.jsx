@@ -48,7 +48,7 @@ export default function RankedLobby({ onBack, onAccount, onDeckBuilder, onMatch 
         setRanked(profileResult.profile);
         setAccessToken(profileResult.accessToken);
       } else {
-        setError(profileResult.error || "Ranked indisponível.");
+        setError("Ranked indisponível no momento.");
       }
       if (historyResult.ok) setHistory(historyResult.rows || []);
     });
@@ -61,7 +61,8 @@ export default function RankedLobby({ onBack, onAccount, onDeckBuilder, onMatch 
     const onDisconnect = () => setStatus("disconnected");
     const onConnectError = (err) => {
       setStatus("error");
-      setError(err?.message ? `Não foi possível conectar ao Ranked: ${err.message}` : "Não foi possível conectar ao Ranked.");
+      console.error("Falha ao conectar ao Ranked:", err);
+      setError("Não foi possível conectar ao Ranked agora.");
     };
     const onStatus = (payload) => {
       if (payload?.status === "searching") {
@@ -134,7 +135,7 @@ export default function RankedLobby({ onBack, onAccount, onDeckBuilder, onMatch 
       if (!result?.ok) {
         searchingRef.current = false;
         setSearching(false);
-        setError(result?.error || "Não foi possível entrar na fila Ranked.");
+        setError("Não foi possível entrar na fila Ranked.");
         return;
       }
       if (result.status === "searching") {

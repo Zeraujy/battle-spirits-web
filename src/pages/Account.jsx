@@ -197,12 +197,9 @@ export default function Account({
           );
 
           setMessage(
-            error?.message ||
-            (
-              pt
-                ? "Não foi possível carregar a sessão."
-                : "Could not load session."
-            )
+            pt
+              ? "Não foi possível carregar sua conta agora."
+              : "Could not load your account right now."
           );
         } finally {
           setLoading(
@@ -248,12 +245,9 @@ export default function Account({
 
         if (active) {
           setMessage(
-            error?.message ||
-            (
-              pt
-                ? "Não foi possível carregar a sessão."
-                : "Could not load session."
-            )
+            pt
+              ? "Não foi possível carregar sua conta agora."
+              : "Could not load your account right now."
           );
         }
       } finally {
@@ -330,12 +324,9 @@ export default function Account({
               : "Done."
           )
           : (
-            result?.error ||
-            (
-              pt
-                ? "Ocorreu um erro."
-                : "An error occurred."
-            )
+            pt
+              ? "Não foi possível concluir a operação."
+              : "Could not complete the operation."
           )
       );
 
@@ -349,12 +340,9 @@ export default function Account({
       );
 
       setMessage(
-        error?.message ||
-        (
-          pt
-            ? "Falha ao acessar a conta."
-            : "Account request failed."
-        )
+        pt
+          ? "Não foi possível acessar sua conta agora."
+          : "Could not access your account right now."
       );
 
       setLoading(

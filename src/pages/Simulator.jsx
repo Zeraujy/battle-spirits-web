@@ -64,7 +64,6 @@ import "../styles/arena/coreCombatV318.css";
 import "../styles/arena/cardInteractionV319.css";
 import "../styles/arena/rulesEffectsV320.css";
 import "../styles/arena/arenaLayoutV321.css";
-import "../styles/arena/aiDebuggerV331.css";
 
 
 function effectText(card, language) {

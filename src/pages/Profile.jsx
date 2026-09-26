@@ -329,7 +329,6 @@ export default function Profile({ onBack, initialUsername = null }) {
       touchSocialPresence("offline").catch(() => {});
     };
     // Social presence intentionally exists only while Social Hub is mounted.
-    // It is never opened during a match and does not share the Socket.IO channel.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

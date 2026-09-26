@@ -254,10 +254,7 @@ export default function Settings({
       "3.9.3",
 
     packaged:
-      false,
-
-    userDataPath:
-      null
+      false
   });
 
 

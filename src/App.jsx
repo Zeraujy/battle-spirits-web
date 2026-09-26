@@ -21,7 +21,6 @@ const RankedLobby = lazy(() => import("./pages/RankedLobby.jsx"));
 const Store = lazy(() => import("./pages/Store.jsx"));
 const Simulator = lazy(() => import("./pages/Simulator.jsx"));
 const Updater = lazy(() => import("./pages/Updater.jsx"));
-const ServerConsole = lazy(() => import("./pages/ServerConsole.jsx"));
 
 function LoadingScreen() {
   return (
@@ -48,7 +47,6 @@ export default function App() {
 
   let content;
   if (mode === "updater") content = <Updater />;
-  else if (mode === "server") content = <ServerConsole />;
   else if (screen.name === "profile") content = <Profile onBack={() => go("home")} initialUsername={screen.initialUsername || null} />;
   else if (screen.name === "account") content = <Account onBack={() => go("home")} onProfile={() => go("profile")} />;
   else if (screen.name === "settings") content = <Settings onBack={() => go("home")} />;

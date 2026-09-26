@@ -17,3 +17,11 @@ Separar com mais rigor a experiência do jogador das informações de desenvolvi
 
 ## Guardrail
 O verificador do projeto agora possui uma checagem de copy player-facing para impedir que termos internos conhecidos voltem a aparecer nas principais telas do jogo.
+
+## Segunda auditoria
+- Removida a antiga tela interna de controle do servidor do frontend e o modo Electron correspondente.
+- Erros do Ranked/Online foram revisados para não revelar nomes de variáveis, serviços ou detalhes de infraestrutura.
+- Mensagens de Conta e Updater deixaram de exibir erros brutos vindos do sistema.
+- O Updater passou a usar linguagem simples para validação do instalador.
+- A API desktop deixou de expor caminho local de dados e informações de runtime que não eram usadas pelo jogador.
+- A verificação automática de copy foi ampliada para cobrir mais telas e mais termos técnicos.

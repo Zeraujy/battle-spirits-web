@@ -11,7 +11,6 @@
     "dev:server": "node --env-file-if-exists=server/.env server/index.mjs",
     "electron": "electron .",
     "electron:updater": "electron . --mode=updater",
-    "electron:server": "electron . --mode=server",
     "build": "vite build",
     "preview": "vite preview",
     "dist:win": "npm run build && electron-builder --win nsis && node scripts/generate-update-manifest.mjs",
