@@ -515,8 +515,8 @@ function CreateDeckOverlay({
     if (!selected?.ready) {
       setError(
         pt
-          ? "Este deck ainda não está completo na database atual."
-          : "This deck is not complete in the current database yet."
+          ? "Este deck ainda não está completo na coleção disponível."
+          : "This deck is not complete in the available card collection yet."
       );
       return;
     }
@@ -929,8 +929,8 @@ function CreateDeckOverlay({
                 {!selected.ready && (
                   <div className="prebuilt-warning">
                     {pt
-                      ? `A lista precisa ter ${selected.template.expectedSize} cartas disponíveis na database para ser criada.`
-                      : `The list needs ${selected.template.expectedSize} cards available in the database before it can be created.`}
+                      ? `A lista precisa ter ${selected.template.expectedSize} cartas disponíveis para ser criada.`
+                      : `The list needs ${selected.template.expectedSize} available cards before it can be created.`}
                   </div>
                 )}
 

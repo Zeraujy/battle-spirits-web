@@ -46,7 +46,6 @@ export default function AiSetup({ onBack, onStart, onDeckBuilder }) {
   const [cpuDeckId, setCpuDeckId] = useState(decks[1]?.id || decks[0]?.id || "");
   const [difficulty, setDifficulty] = useState("normal");
   const [first, setFirst] = useState("random");
-  const [debugEnabled, setDebugEnabled] = useState(false);
   const [picker, setPicker] = useState(null);
   const [error, setError] = useState("");
 
@@ -99,7 +98,7 @@ export default function AiSetup({ onBack, onStart, onDeckBuilder }) {
         humanPlayerId: "player1",
         difficulty,
         archetypeProfile: cpuArchetype,
-        debugEnabled
+        debugEnabled: false
       }
     });
   }
@@ -112,21 +111,15 @@ export default function AiSetup({ onBack, onStart, onDeckBuilder }) {
       <MatchSetupScreen
         className="cpu-match-setup"
         error={error}
-        footer={`ETERNAL CPU · ${difficultyName(difficulty)} · ${cpuStyle} · LOOKAHEAD E ARCHETYPE INTELLIGENCE`}
+        footer={`ETERNAL CPU · ${difficultyName(difficulty)} · ${cpuStyle}`}
         menu={
-          <MatchSetupMenu eyebrow="PARTIDA LOCAL" titleTop="ETERNAL" titleBottom="CPU" status={`ESTILO: ${cpuStyle.toUpperCase()}`} badge="ARCHETYPE AI">
+          <MatchSetupMenu eyebrow="PARTIDA LOCAL" titleTop="ETERNAL" titleBottom="CPU" status={`ESTILO: ${cpuStyle.toUpperCase()}`} badge="CPU">
             <MatchMenuButton label="Iniciar partida" detail="Enfrentar a Eternal CPU" active disabled={noDecks} onClick={start} />
             <MatchMenuButton
               label={`Dificuldade: ${difficultyName(difficulty)}`}
-              detail={difficulty === "hard" ? "Lookahead mais profundo" : difficulty === "easy" ? "Decisões mais simples" : "Planejamento equilibrado"}
+              detail={difficulty === "hard" ? "Desafio máximo" : difficulty === "easy" ? "Mais tranquila para aprender" : "Desafio equilibrado"}
               disabled={noDecks}
               onClick={() => setDifficulty(nextDifficulty(difficulty))}
-            />
-            <MatchMenuButton
-              label={`AI Debugger: ${debugEnabled ? "On" : "Off"}`}
-              detail="Scores, alternativas e plano previsto"
-              disabled={noDecks}
-              onClick={() => setDebugEnabled((value) => !value)}
             />
             <MatchMenuButton
               label={`Primeiro: ${firstLabel(first)}`}

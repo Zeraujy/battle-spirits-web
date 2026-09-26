@@ -546,8 +546,8 @@ export default function Account({
 
                 <p>
                   {pt
-                    ? "Seus decks, perfil e configurações permanecem salvos neste PC. Para login em nuvem, amigos e mensagens entre computadores, configure o Supabase do projeto."
-                    : "Your decks, profile and settings remain saved on this PC. Configure Supabase for cloud login, friends and cross-device messages."}
+                    ? "Seus decks, perfil e configurações permanecem salvos neste PC. Recursos de conta online podem ficar indisponíveis nesta instalação."
+                    : "Your decks, profile and settings remain saved on this PC. Online account features may be unavailable in this installation."}
                 </p>
               </div>
 

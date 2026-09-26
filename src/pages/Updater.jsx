@@ -3,7 +3,7 @@ import { getAppInfo } from "../services/desktop.js";
 
 export default function Updater() {
   const desktop = window.battleSpiritsDesktop;
-  const [info, setInfo] = useState({ version: "3.6.2" });
+  const [info, setInfo] = useState({ version: "3.9.3" });
   const [status, setStatus] = useState("idle");
   const [result, setResult] = useState(null);
   const [progress, setProgress] = useState(null);
@@ -61,10 +61,10 @@ export default function Updater() {
       <p className="utility-subtitle">Versão instalada: <strong>{info.version}</strong></p>
 
       <div className="update-status-card">
-        {status === "checking" && <><strong>Verificando atualizações...</strong><span>Consultando o servidor de versões.</span></>}
+        {status === "checking" && <><strong>Verificando atualizações...</strong><span>Buscando a versão mais recente.</span></>}
         {result?.code === "NOT_CONFIGURED" && <>
-          <strong>Servidor de atualizações não configurado</strong>
-          <span>O Updater já está pronto. Configure <code>resources/config/update-config.json</code> com a URL do seu <code>latest.json</code>.</span>
+          <strong>Atualizações automáticas indisponíveis</strong>
+          <span>Esta instalação não possui uma fonte de atualização configurada. Você ainda pode atualizar o jogo manualmente.</span>
         </>}
         {result?.ok && !result.available && <><strong>✓ Battle Spirits está atualizado</strong><span>Você já está usando a versão mais recente disponível.</span></>}
         {result?.ok && result.available && <>

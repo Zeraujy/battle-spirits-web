@@ -1139,8 +1139,8 @@ export default function Simulator({
                 (
                   language ===
                   "en"
-                    ? "Action rejected by server."
-                    : "Ação recusada pelo servidor."
+                    ? "This action is not available."
+                    : "Esta ação não está disponível."
                 )
             );
           }
@@ -5389,7 +5389,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v3.9.2 • Arena 2D
+            Eternal v3.9.3 • Arena 2D
           </span>
 
           <strong>
@@ -5514,16 +5514,6 @@ export default function Simulator({
               : "Turno"}
           </button>
 
-          {aiMode && match.ai?.debugEnabled && (
-            <button
-              className={`ghost arena-dock-toggle ${aiDebugOpen ? "active" : ""}`}
-              onClick={() => setAiDebugOpen((value) => !value)}
-              title={language === "en" ? "AI decision debugger" : "Debugger das decisões da IA"}
-            >
-              AI DEBUG
-            </button>
-          )}
-
           {online && (
             <button
               className="ghost"
@@ -5584,128 +5574,6 @@ export default function Simulator({
           {error ||
             notice}
         </div>
-      )}
-
-
-      {aiMode && match.ai?.debugEnabled && aiDebugOpen && (
-        <aside className="ai-debugger-panel" aria-label="AI Debugger">
-          <header className="ai-debugger-header">
-            <div>
-              <span className="eyebrow">ETERNAL CPU • AI DEBUGGER</span>
-              <strong>{language === "en" ? "Decision trace" : "Rastro da decisão"}</strong>
-            </div>
-            <button type="button" className="ghost" onClick={() => setAiDebugOpen(false)}>×</button>
-          </header>
-
-          {aiDebugDecision ? (
-            <>
-              <div className="ai-debugger-meta">
-                <span>{language === "en" ? "Turn" : "Turno"} {aiDebugDecision.turnNumber}</span>
-                <span>{String(aiDebugDecision.phase || "").toUpperCase()}</span>
-                <span>{String(aiDebugDecision.difficulty || "normal").toUpperCase()}</span>
-              </div>
-
-              <section className="ai-debugger-archetype">
-                <small>{language === "en" ? "Detected style" : "Estilo detectado"}</small>
-                <strong>
-                  {language === "en"
-                    ? (aiDebugDecision.archetypeProfile?.labelEN || "Balanced")
-                    : (aiDebugDecision.archetypeProfile?.labelPT || "Equilibrado")}
-                </strong>
-                <span>
-                  {language === "en"
-                    ? aiDebugDecision.archetypeProfile?.summaryEN
-                    : aiDebugDecision.archetypeProfile?.summaryPT}
-                </span>
-              </section>
-
-              {aiDebugDecision.tacticalMemory && (
-                <section className="ai-debugger-memory">
-                  <small>{language === "en" ? "Tactical memory · public information" : "Memória tática · informação pública"}</small>
-                  <div className="ai-debugger-memory-grid">
-                    <span>{language === "en" ? "Aggression" : "Agressividade"}<b>{Math.round((aiDebugDecision.tacticalMemory.tendencies?.aggression || 0) * 100)}%</b></span>
-                    <span>{language === "en" ? "Block rate" : "Taxa de bloqueio"}<b>{Math.round((aiDebugDecision.tacticalMemory.tendencies?.blockRate || 0) * 100)}%</b></span>
-                    <span>{language === "en" ? "Flash threat" : "Ameaça de Flash"}<b>{Math.round((aiDebugDecision.tacticalMemory.tendencies?.flashThreat || 0) * 100)}%</b></span>
-                    <span>{language === "en" ? "Burst habit" : "Uso de Burst"}<b>{Math.round((aiDebugDecision.tacticalMemory.tendencies?.burstHabit || 0) * 100)}%</b></span>
-                  </div>
-                  <p>
-                    {language === "en"
-                      ? `${aiDebugDecision.tacticalMemory.counters?.observedActions || 0} public opponent actions observed. Hidden hand, deck order and facedown Burst identity are never read.`
-                      : `${aiDebugDecision.tacticalMemory.counters?.observedActions || 0} ações públicas do adversário observadas. Mão, ordem do deck e identidade do Burst virado para baixo nunca são lidos.`}
-                  </p>
-                </section>
-              )}
-
-              {aiDebugDecision.chosen && (
-                <section className="ai-debugger-chosen">
-                  <div className="ai-debugger-choice-head">
-                    <span>{language === "en" ? "Chosen action" : "Ação escolhida"}</span>
-                    <b>{formatAIScore(aiDebugDecision.chosen.score)}</b>
-                  </div>
-                  <strong>{aiDebugDecision.chosen.label}</strong>
-
-                  <div className="ai-debugger-score-grid">
-                    <span>Immediate <b>{formatAIScore(aiDebugDecision.chosen.immediateScore)}</b></span>
-                    <span>Lookahead <b>{formatAIScore(aiDebugDecision.chosen.planBonus)}</b></span>
-                    <span>Archetype <b>{formatAIScore(aiDebugDecision.chosen.archetypeScore)}</b></span>
-                    <span>Memory <b>{formatAIScore(aiDebugDecision.chosen.tacticalMemoryScore)}</b></span>
-                    <span>Effect <b>{formatAIScore(aiDebugDecision.chosen.effectScore)}</b></span>
-                  </div>
-
-                  {aiDebugDecision.chosen.planLabels.length > 1 && (
-                    <div className="ai-debugger-plan">
-                      <small>{language === "en" ? "Predicted line" : "Linha prevista"}</small>
-                      <ol>
-                        {aiDebugDecision.chosen.planLabels.map((label, index) => (
-                          <li key={`${label}-${index}`}>{label}</li>
-                        ))}
-                      </ol>
-                    </div>
-                  )}
-
-                  {!!aiDebugDecision.chosen.archetypeReasons.length && (
-                    <div className="ai-debugger-reasons">
-                      {aiDebugDecision.chosen.archetypeReasons.map((reason, index) => (
-                        <p key={`arch-${index}`}>
-                          <b>{formatAIScore(reason.score)}</b> {aiDebugReasonText(reason, language)}
-                        </p>
-                      ))}
-                    </div>
-                  )}
-
-                  {!!aiDebugDecision.chosen.tacticalMemoryReasons.length && (
-                    <div className="ai-debugger-reasons ai-debugger-memory-reasons">
-                      {aiDebugDecision.chosen.tacticalMemoryReasons.map((reason, index) => (
-                        <p key={`memory-${index}`}>
-                          <b>{formatAIScore(reason.score)}</b> {aiDebugReasonText(reason, language)}
-                        </p>
-                      ))}
-                    </div>
-                  )}
-                </section>
-              )}
-
-              <section className="ai-debugger-alternatives">
-                <small>{language === "en" ? "Top alternatives" : "Melhores alternativas"}</small>
-                {aiDebugDecision.alternatives.map((entry, index) => (
-                  <div
-                    key={`${entry.label}-${index}`}
-                    className={`ai-debugger-alternative ${index === 0 ? "best" : ""}`}
-                  >
-                    <span>{index + 1}. {entry.label}</span>
-                    <b>{formatAIScore(entry.score)}</b>
-                  </div>
-                ))}
-              </section>
-            </>
-          ) : (
-            <p className="ai-debugger-empty">
-              {language === "en"
-                ? "The first CPU decision will appear here."
-                : "A primeira decisão da CPU aparecerá aqui."}
-            </p>
-          )}
-        </aside>
       )}
 
 

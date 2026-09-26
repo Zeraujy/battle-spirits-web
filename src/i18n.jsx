@@ -13,14 +13,14 @@ const translations = {
     reserve: "RESERVE", coreTrash: "CORE TRASH", dragCores: "Arraste os Cores", pendingPlay: "JOGADA PENDENTE", confirmPlay: "Confirmar jogada", cancelPlay: "Cancelar jogada",
     cost: "Custo", summonCost: "Custo de invocação", paid: "Pago", minLevel: "Cores mínimo", costReduction: "Redução", printedCost: "Custo base", finalCost: "Custo final", current: "Atual", manualPaymentHint: "Clique ou arraste Cores da Reserve para pagar o custo e colocar os Cores de Lv antes de confirmar.",
     settingsTitle: "Configurações do simulador", language: "Idioma", resolution: "Resolução", displayMode: "Modo de exibição", fullscreen: "Tela cheia", windowed: "Janela", apply: "Aplicar",
-    portuguese: "Português (Brasil)", english: "English", effect: "Efeito", abilities: "Habilidades", families: "Famílias", noEffect: "Sem texto de efeito no database.",
+    portuguese: "Português (Brasil)", english: "English", effect: "Efeito", abilities: "Habilidades", families: "Famílias", noEffect: "Nenhum texto de efeito disponível.",
     deckBuilder: "DECK BUILDER", eternalFormat: "Formato Eternal", currentList: "Lista atual", myDecks: "Meus decks", cards: "cartas", validDeck: "Deck válido", allTypes: "Todos os tipos", allColors: "Todas as cores", searchCards: "Buscar nome, número ou família...",
     noDecks: "Você ainda não tem decks", noDecksOnline: "Crie um deck válido antes de entrar no online.",
     manualResolution: "Resolução manual", battleSequence: "Sequência Eternal", battleSequenceText: "Start → Core → Draw → Refresh → Main → Attack → End",
     turn: "Turno", priority: "Sua prioridade", waitingPlayer: "Aguardando", phase: "Fase atual", battle: "BATALHA", passFlash: "Passar Flash", noBlock: "Não bloquear", resolveBattle: "Resolver batalha",
     summon: "Invocar", deployNexus: "Colocar Nexus", useMain: "Usar Main", useFlash: "Usar Flash", declareAttack: "Declarar ataque", block: "Bloquear com esta carta",
     chatPlaceholder: "Digite uma mensagem...", send: "Enviar", noMessages: "Nenhuma mensagem ainda.",
-    settingsSaved: "Configurações aplicadas.", updates: "Atualizações", updateServer: "Servidor de atualizações", updateServerHint: "Opcional. Pode ser configurado depois quando você hospedar o latest.json.", updateDescription: "Verifique novas versões sem substituir arquivos manualmente.", checkUpdates: "Verificar atualizações", playerDataStored: "Seus decks, perfil e configurações ficam preservados em:", mainMenu: "Menu principal", opponent: "Oponente", player: "Jogador", currentTurn: "turno atual", matchEnd: "Fim da partida", wins: "venceu!", noCardsFound: "Nenhuma carta"
+    settingsSaved: "Configurações aplicadas.", updates: "Atualizações", updateServer: "Atualizações automáticas", updateServerHint: "Disponibilidade depende da versão instalada.", updateDescription: "Confira se há uma nova versão do Eternal Simulator.", checkUpdates: "Verificar atualizações", playerDataStored: "Dados do jogador", mainMenu: "Menu principal", opponent: "Oponente", player: "Jogador", currentTurn: "turno atual", matchEnd: "Fim da partida", wins: "venceu!", noCardsFound: "Nenhuma carta"
   },
   en: {
     back: "← Back", local: "Local match", online: "Play online", decks: "Decks", profile: "Profile", account: "Account", settings: "Settings",
@@ -33,14 +33,14 @@ const translations = {
     reserve: "RESERVE", coreTrash: "CORE TRASH", dragCores: "Drag Cores", pendingPlay: "PENDING PLAY", confirmPlay: "Confirm play", cancelPlay: "Cancel play",
     cost: "Cost", summonCost: "Summon cost", paid: "Paid", minLevel: "Minimum Cores", costReduction: "Reduction", printedCost: "Base cost", finalCost: "Final cost", current: "Current", manualPaymentHint: "Click or drag Reserve Cores to pay the cost and place the required Lv Cores before confirming.",
     settingsTitle: "Simulator settings", language: "Language", resolution: "Resolution", displayMode: "Display mode", fullscreen: "Fullscreen", windowed: "Windowed", apply: "Apply",
-    portuguese: "Português (Brasil)", english: "English", effect: "Effect", abilities: "Abilities", families: "Families", noEffect: "No effect text in the database.",
+    portuguese: "Português (Brasil)", english: "English", effect: "Effect", abilities: "Abilities", families: "Families", noEffect: "No effect text available.",
     deckBuilder: "DECK BUILDER", eternalFormat: "Eternal Format", currentList: "Current list", myDecks: "My decks", cards: "cards", validDeck: "Valid deck", allTypes: "All types", allColors: "All colors", searchCards: "Search name, number or family...",
     noDecks: "You do not have any decks yet", noDecksOnline: "Create a valid deck before playing online.",
     manualResolution: "Manual resolution", battleSequence: "Eternal sequence", battleSequenceText: "Start → Core → Draw → Refresh → Main → Attack → End",
     turn: "Turn", priority: "Your priority", waitingPlayer: "Waiting for", phase: "Current phase", battle: "BATTLE", passFlash: "Pass Flash", noBlock: "Do not block", resolveBattle: "Resolve battle",
     summon: "Summon", deployNexus: "Deploy Nexus", useMain: "Use Main", useFlash: "Use Flash", declareAttack: "Declare attack", block: "Block with this card",
     chatPlaceholder: "Type a message...", send: "Send", noMessages: "No messages yet.",
-    settingsSaved: "Settings applied.", updates: "Updates", updateServer: "Update server", updateServerHint: "Optional. You can configure it later when latest.json is hosted.", updateDescription: "Check for new versions without replacing files manually.", checkUpdates: "Check for updates", playerDataStored: "Your decks, profile and settings are preserved in:", mainMenu: "Main menu", opponent: "Opponent", player: "Player", currentTurn: "current turn", matchEnd: "Match over", wins: "wins!", noCardsFound: "No cards found"
+    settingsSaved: "Settings applied.", updates: "Updates", updateServer: "Automatic updates", updateServerHint: "Availability depends on the installed version.", updateDescription: "Check whether a new Eternal Simulator version is available.", checkUpdates: "Check for updates", playerDataStored: "Player data", mainMenu: "Main menu", opponent: "Opponent", player: "Player", currentTurn: "current turn", matchEnd: "Match over", wins: "wins!", noCardsFound: "No cards found"
   }
 };
 

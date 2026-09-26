@@ -91,13 +91,13 @@ export async function getAccountSession() {
 }
 
 export async function signUp(email, password) {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const { data, error } = await supabase.auth.signUp({ email, password });
   return error ? { ok: false, error: error.message } : { ok: true, user: data.user };
 }
 
 export async function signIn(email, password) {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
   return error ? { ok: false, error: error.message } : { ok: true, user: data.user };
 }
@@ -121,7 +121,7 @@ export async function getSocialSchemaStatus({ refresh = false } = {}) {
 }
 
 export async function syncProfileToCloud(profile = currentLocalProfile()) {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const user = await currentUser();
   if (!user) return { ok: false, error: "Entre na conta primeiro." };
 
@@ -145,7 +145,7 @@ export async function syncProfileToCloud(profile = currentLocalProfile()) {
 }
 
 export async function loadCloudProfile() {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const user = await currentUser();
   if (!user) return { ok: false, error: "Entre na conta primeiro." };
 
@@ -170,12 +170,12 @@ export async function loadCloudProfile() {
 }
 
 export async function savePrivacySettings(privacy) {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const user = await currentUser();
   if (!user) return { ok: false, error: "Entre na conta primeiro." };
 
   const schema = await getSocialSchemaStatus();
-  if (!schema.ready) return { ok: false, error: "Execute a migração SOCIAL-HUB-3.6.sql no Supabase para ativar a privacidade avançada." };
+  if (!schema.ready) return { ok: false, error: "As opções avançadas de privacidade estão temporariamente indisponíveis." };
 
   const next = cleanPrivacy(privacy);
   const { error } = await supabase.from("bs_profiles").update({
@@ -191,7 +191,7 @@ export async function savePrivacySettings(privacy) {
 }
 
 export async function syncDecksToCloud() {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const user = await currentUser();
   if (!user) return { ok: false, error: "Entre na conta primeiro." };
   const { error } = await supabase.from("bs_player_decks").upsert({ user_id: user.id, decks: getDecks(), updated_at: new Date().toISOString() }, { onConflict: "user_id" });
@@ -199,7 +199,7 @@ export async function syncDecksToCloud() {
 }
 
 export async function loadDecksFromCloud() {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const user = await currentUser();
   if (!user) return { ok: false, error: "Entre na conta primeiro." };
   const { data, error } = await supabase.from("bs_player_decks").select("decks").eq("user_id", user.id).maybeSingle();
@@ -243,7 +243,7 @@ export async function loadSocialProfile(targetId) {
 }
 
 export async function sendFriendRequest(targetId) {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const user = await currentUser();
   if (!user) return { ok: false, error: "Entre na conta primeiro." };
 
@@ -281,7 +281,7 @@ export async function loadFriendRequests() {
 }
 
 export async function respondFriendRequest(requestId, response) {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const { data, error } = await supabase.rpc("bs_respond_friend_request", {
     request_id: Number(requestId),
     response
@@ -291,27 +291,27 @@ export async function respondFriendRequest(requestId, response) {
 }
 
 export async function removeFriend(friendId) {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const { error } = await supabase.rpc("bs_remove_friend", { target_id: friendId });
   return error ? { ok: false, error: normalizeError(error) } : { ok: true };
 }
 
 export async function blockUser(targetId) {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const { error } = await supabase.rpc("bs_block_user", { target_id: targetId });
   return error ? { ok: false, error: normalizeError(error) } : { ok: true };
 }
 
 export async function unblockUser(targetId) {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const { error } = await supabase.rpc("bs_unblock_user", { target_id: targetId });
   return error ? { ok: false, error: normalizeError(error) } : { ok: true };
 }
 
 export async function setFriendPreference(friendId, patch = {}) {
-  if (!supabase || !friendId) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase || !friendId) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const schema = await getSocialSchemaStatus();
-  if (!schema.ready || !schemaAtLeast(schema.version)) return { ok: false, error: "Execute SOCIAL-HUB-3.6.1.sql no Supabase." };
+  if (!schema.ready || !schemaAtLeast(schema.version)) return { ok: false, error: "Este recurso social está temporariamente indisponível." };
   const { data, error } = await supabase.rpc("bs_set_friend_preference", {
     target_id: friendId,
     next_favorite: patch.favorite ?? null,
@@ -378,7 +378,7 @@ export async function loadDirectMessages(friendId) {
 }
 
 export async function sendDirectMessage(friendId, text) {
-  if (!supabase) return { ok: false, error: "Supabase não configurado." };
+  if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
   const user = await currentUser();
   if (!user) return { ok: false, error: "Entre na conta primeiro." };
   const clean = String(text || "").trim().slice(0, 1000);

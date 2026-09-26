@@ -62,7 +62,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.9.2") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.2`);
+if (pkg.version !== "3.9.3") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.3`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -133,7 +133,7 @@ if (!battleExperience.includes("FLASH TIMING") || !battleExperience.includes("cl
 const tacticalMemory = fs.readFileSync(path.join(root, "src", "game", "aiTacticalMemory.js"), "utf8");
 const aiEngine = fs.readFileSync(path.join(root, "src", "game", "ai.js"), "utf8");
 if (!tacticalMemory.includes("public-actions-only") || !tacticalMemory.includes("tacticalMemoryActionBias")) throw new Error("A Tactical Memory v3.9.0 está incompleta.");
-if (!aiEngine.includes("buildAITacticalMemory") || !simulatorPage.includes("Memória tática")) throw new Error("A integração Eternal CPU Tactical Memory v3.9.0 está incompleta.");
+if (!aiEngine.includes("buildAITacticalMemory") || !aiEngine.includes("tacticalMemory")) throw new Error("A integração Eternal CPU Tactical Memory v3.9.0 está incompleta.");
 
 const onlineLobby = fs.readFileSync(path.join(root, "src", "pages", "OnlineLobby.jsx"), "utf8");
 const onlineLobbyCss = fs.readFileSync(path.join(root, "src", "styles", "pages", "onlineLobbySafe.css"), "utf8");
@@ -142,6 +142,41 @@ if (!onlineServer.includes("lobby:identify") || !onlineServer.includes("roomDire
 if (!onlineLobbyCss.includes("online-lobby2-dashboard") || !onlineLobbyCss.includes("online-custom-settings")) throw new Error("O visual Custom Match v3.9.2 está incompleto.");
 const customMatchSettings = fs.readFileSync(path.join(root, "src", "online", "customMatchSettings.js"), "utf8");
 if (!customMatchSettings.includes("resolveFirstPlayerId") || !customMatchSettings.includes("deckValidationOptionsForSettings")) throw new Error("A normalização Custom Match v3.9.2 está incompleta.");
+
+
+// v3.9.3 — player-facing copy must not expose development internals.
+const playerFacingFiles = [
+  "src/pages/Profile.jsx",
+  "src/pages/Account.jsx",
+  "src/pages/OnlineLobby.jsx",
+  "src/pages/RankedLobby.jsx",
+  "src/pages/Settings.jsx",
+  "src/pages/Updater.jsx",
+  "src/pages/AiSetup.jsx",
+  "src/components/common/ProjectInfoButtons.jsx"
+];
+const forbiddenPlayerCopy = [
+  /SOCIAL-HUB-[0-9]/i,
+  /Socket\.IO/i,
+  /publicProfile\.js/i,
+  /src\/online/i,
+  /server-side/i,
+  /RESULT-ONLY PIPELINE/i,
+  /MATCH ISOLATION/i,
+  /latest\.json/i,
+  /update-config\.json/i,
+  /AI Debugger/i,
+  /Supabase/i
+];
+for (const rel of playerFacingFiles) {
+  let source = fs.readFileSync(path.join(root, rel), "utf8");
+  source = source.replace(/import[\s\S]*?from\s+["'][^"']+["'];/g, "");
+  source = source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|\s)\/\/.*$/gm, "");
+  const literals = [...source.matchAll(/(["'`])((?:\\.|(?!\1)[\s\S])*?)\1/g)].map((match) => match[2]).join("\n");
+  const visibleCopy = literals;
+  const hit = forbiddenPlayerCopy.find((pattern) => pattern.test(visibleCopy));
+  if (hit) throw new Error(`Copy técnica exposta ao jogador em ${rel}: ${hit}`);
+}
 
 const publicProfile = fs.readFileSync(path.join(root, "src", "online", "publicProfile.js"), "utf8");
 const socketClient = fs.readFileSync(path.join(root, "src", "online", "socketClient.js"), "utf8");

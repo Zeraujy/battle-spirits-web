@@ -251,7 +251,7 @@ export default function Settings({
     setAppInfo
   ] = useState({
     version:
-      "3.6.2",
+      "3.9.3",
 
     packaged:
       false,
@@ -785,23 +785,13 @@ export default function Settings({
                 </label>
 
                 <div className="settings-game-info-card">
-                  <span>{pt ? "MODO DO APLICATIVO" : "APP MODE"}</span>
-                  <strong>{appInfo.packaged ? (pt ? "Desktop" : "Desktop") : "Web / Dev"}</strong>
-                  <small>{appInfo.packaged ? (pt ? "Executando como aplicativo instalado." : "Running as an installed application.") : (pt ? "Executando no navegador ou ambiente de desenvolvimento." : "Running in browser or development environment.")}</small>
+                  <span>{pt ? "PLATAFORMA" : "PLATFORM"}</span>
+                  <strong>{appInfo.packaged ? "Desktop" : "Web"}</strong>
+                  <small>{appInfo.packaged ? (pt ? "Aplicativo para computador." : "Desktop application.") : (pt ? "Versão para navegador." : "Browser version.")}</small>
                 </div>
               </div>
 
-              <div className="settings-game-divider" />
 
-              <label className="settings-game-field full">
-                <span>{t("updateServer")}</span>
-                <small>{t("updateServerHint")}</small>
-                <input
-                  value={draft.updateManifestUrl || ""}
-                  onChange={(e) => setDraft({ ...draft, updateManifestUrl: e.target.value })}
-                  placeholder="https://seu-dominio.com/battle-spirits/latest.json"
-                />
-              </label>
             </div>
           )}
 
@@ -906,8 +896,8 @@ export default function Settings({
               <div className="settings-game-tip muted-tip">
                 <span>!</span>
                 <div>
-                  <strong>{pt ? "Ainda não altera o áudio" : "Audio not active yet"}</strong>
-                  <small>{pt ? "O simulador ainda não possui uma engine de som conectada. Esses controles estão visíveis apenas para já definirmos a estrutura do menu." : "The simulator does not yet have a connected sound engine. These controls are shown only to establish the settings structure."}</small>
+                  <strong>{pt ? "Áudio em breve" : "Audio coming soon"}</strong>
+                  <small>{pt ? "As opções de áudio serão habilitadas em uma atualização futura." : "Audio options will be enabled in a future update."}</small>
                 </div>
               </div>
             </div>
@@ -1121,13 +1111,6 @@ export default function Settings({
                   {t("checkUpdates")}
                 </button>
               </div>
-
-              {appInfo.userDataPath && (
-                <div className="settings-data-path">
-                  <span>{t("playerDataStored")}</span>
-                  <code>{appInfo.userDataPath}</code>
-                </div>
-              )}
             </div>
           )}
 

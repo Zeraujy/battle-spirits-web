@@ -188,7 +188,7 @@ function FriendDock({ friends, friendRanks = {}, pt, onChat, onManage }) {
         )}
       </div>
       <footer>
-        <span>{pt ? "Social separado das partidas Online" : "Social is isolated from Online matches"}</span>
+        <span>{pt ? "Jogue e converse com seus amigos" : "Play and chat with your friends"}</span>
       </footer>
     </aside>
   );
@@ -609,10 +609,10 @@ export default function Profile({ onBack, initialUsername = null }) {
         </div>
       </header>
 
-      {accountsEnabled && sessionUser && (!schema.ready || schema.version !== "3.6.3") && (
+      {accountsEnabled && sessionUser && !schema.ready && (
         <div className="social-schema-notice">
-          <strong>{pt ? "Atualização Social Hub necessária" : "Social Hub migration required"}</strong>
-          <span>{schema.ready ? (schema.version === "3.6.2" ? (pt ? "Execute supabase/SOCIAL-HUB-3.6.3.sql para sincronizar a Maestria 2.0. Até lá, o XP continua salvo localmente." : "Run supabase/SOCIAL-HUB-3.6.3.sql to sync Mastery 2.0. Until then, XP remains saved locally.") : (pt ? "Atualize as migrações incrementais do Social Hub até a versão 3.6.3." : "Apply the incremental Social Hub migrations through version 3.6.3.")) : (pt ? "Execute SOCIAL-HUB-3.6.sql, 3.6.1, 3.6.2 e 3.6.3 em ordem para ativar todos os recursos sociais." : "Run SOCIAL-HUB-3.6.sql, 3.6.1, 3.6.2 and 3.6.3 in order to enable all social features.")}</span>
+          <strong>{pt ? "Alguns recursos sociais estão indisponíveis" : "Some social features are unavailable"}</strong>
+          <span>{pt ? "Tente novamente mais tarde. Seu perfil local continua disponível." : "Try again later. Your local profile remains available."}</span>
         </div>
       )}
 
@@ -637,8 +637,8 @@ export default function Profile({ onBack, initialUsername = null }) {
           </nav>
 
           <div className="social-hub-safety-note">
-            <span>ONLINE SAFETY</span>
-            <p>{pt ? "O Social Hub não é enviado ao servidor das partidas. O Online continua usando somente nome, username, cor e avatar compacto." : "Social Hub data is not sent to the match server. Online play still uses only name, username, color and a compact avatar."}</p>
+            <span>{pt ? "PRIVACIDADE" : "PRIVACY"}</span>
+            <p>{pt ? "Você escolhe quem pode ver seu perfil, enviar mensagens e interagir com você." : "You choose who can view your profile, message you and interact with you."}</p>
           </div>
         </aside>
 
@@ -699,7 +699,7 @@ export default function Profile({ onBack, initialUsername = null }) {
 
           {section === "profile" && (
             <div className="social-view social-profile-editor">
-              <SocialSectionTitle eyebrow="PLAYER IDENTITY" title={pt ? "Configuração do perfil" : "Profile setup"} description={pt ? "Ajuste como sua identidade aparece nas áreas sociais. Imagens são compactadas antes de serem salvas." : "Choose how your identity appears in social areas. Images are compressed before they are saved."} action={<span className={`social-save-state ${saved ? "saved" : ""}`}>{saved ? (pt ? "SALVO" : "SAVED") : (pt ? "EDITANDO" : "EDITING")}</span>} />
+              <SocialSectionTitle eyebrow="PLAYER IDENTITY" title={pt ? "Configuração do perfil" : "Profile setup"} description={pt ? "Personalize como sua identidade aparece para outros jogadores." : "Customize how your identity appears to other players."} action={<span className={`social-save-state ${saved ? "saved" : ""}`}>{saved ? (pt ? "SALVO" : "SAVED") : (pt ? "EDITANDO" : "EDITING")}</span>} />
 
               <div className="social-profile-media-editor">
                 <div className="social-profile-banner-preview" style={profile.banner ? { backgroundImage: `linear-gradient(180deg,transparent,rgba(0,0,0,.68)),url(${profile.banner})` } : undefined}>
@@ -781,7 +781,7 @@ export default function Profile({ onBack, initialUsername = null }) {
 
           {section === "messages" && (
             <div className="social-view social-messages-view">
-              <SocialSectionTitle eyebrow="DIRECT MESSAGES" title={pt ? "Mensagens privadas" : "Private messages"} description={pt ? "Conversas ficam no Social Hub e não usam o chat Socket.IO das partidas." : "Conversations stay in Social Hub and do not use the match Socket.IO chat."} />
+              <SocialSectionTitle eyebrow="DIRECT MESSAGES" title={pt ? "Mensagens privadas" : "Private messages"} description={pt ? "Converse com seus amigos e acompanhe mensagens não lidas." : "Chat with friends and keep track of unread messages."} />
               <div className="social-chat-layout">
                 <aside className="social-conversation-list">
                   {conversations.map((friend) => (
@@ -830,8 +830,8 @@ export default function Profile({ onBack, initialUsername = null }) {
               <SocialSectionTitle
                 eyebrow="MATCH HISTORY"
                 title={pt ? "Histórico & Estatísticas" : "History & Statistics"}
-                description={pt ? "Resultados finais são registrados somente depois que a engine encerra a partida. Nenhuma estatística social trafega pelo Socket.IO durante o duelo." : "Final results are recorded only after the engine ends the match. No social statistics travel through Socket.IO during the duel."}
-                action={<span className="social-history-source">{historySource === "cloud" ? (pt ? "NUVEM" : "CLOUD") : (pt ? "LOCAL" : "LOCAL")}</span>}
+                description={pt ? "Acompanhe seu desempenho, decks mais usados e partidas recentes." : "Track your performance, most-used decks and recent matches."}
+                action={<span className="social-history-source">{pt ? "ATUALIZADO" : "UPDATED"}</span>}
               />
 
               <div className="social-match-stat-grid">
@@ -867,13 +867,13 @@ export default function Profile({ onBack, initialUsername = null }) {
                 </div>
               </section>
 
-              <section className="social-safety-card"><div><span>RESULT-ONLY PIPELINE</span><h3>{pt ? "Estatísticas fora da rede da partida" : "Statistics outside match networking"}</h3><p>{pt ? "A engine termina o duelo normalmente. Só depois do winnerId confirmado, um resumo compacto é gravado no histórico. Ranked usa validação server-side própria e permanece separado deste histórico geral." : "The engine ends the duel normally. Only after winnerId is confirmed is a compact summary written to history. Ranked uses its own server-side validation and remains separate from this general history."}</p></div><strong>✓</strong></section>
+              <section className="social-safety-card"><div><span>{pt ? "HISTÓRICO" : "HISTORY"}</span><h3>{pt ? "Seu desempenho em um só lugar" : "Your performance in one place"}</h3><p>{pt ? "Veja resultados recentes, taxa de vitória, decks favoritos e outras estatísticas das suas partidas." : "See recent results, win rate, favorite decks and other match statistics."}</p></div><strong>✓</strong></section>
             </div>
           )}
 
           {section === "competitive" && (
             <div className="social-view social-competitive-view">
-              <SocialSectionTitle eyebrow="RANKED · SEASON 0" title={pt ? "Identidade competitiva" : "Competitive identity"} description={pt ? "Rank, RP e histórico ranqueado ficam separados das estatísticas casuais. O RP continua sendo calculado e gravado somente pelo servidor." : "Rank, RP and Ranked history stay separate from casual statistics. RP is still calculated and written only by the server."} />
+              <SocialSectionTitle eyebrow="RANKED · SEASON 0" title={pt ? "Identidade competitiva" : "Competitive identity"} description={pt ? "Acompanhe seu Rank, RP, melhor marca da temporada e histórico competitivo." : "Track your Rank, RP, season peak and competitive history."} />
               {rankedProfile ? <>
                 <section className={`social-competitive-hero rank-${rankTier}`}>
                   <div className="social-rank-emblem"><span>{rankedProfile.rank?.tier?.slice(0,1) || "R"}</span></div>
@@ -898,14 +898,14 @@ export default function Profile({ onBack, initialUsername = null }) {
                     {!rankedHistory.length && <div className="social-big-empty"><b>♢</b><strong>{pt ? "Sem partidas Ranked ainda" : "No Ranked matches yet"}</strong><span>{pt ? "As próximas partidas da Season 0 aparecerão aqui." : "Your next Season 0 matches will appear here."}</span></div>}
                   </div>
                 </section>
-              </> : <div className="social-big-empty"><b>♢</b><strong>{pt ? "Identidade competitiva indisponível" : "Competitive identity unavailable"}</strong><span>{pt ? "Entre na conta e execute SOCIAL-HUB-3.7.1.sql para ativar esta área." : "Sign in and run SOCIAL-HUB-3.7.1.sql to enable this area."}</span></div>}
+              </> : <div className="social-big-empty"><b>♢</b><strong>{pt ? "Identidade competitiva indisponível" : "Competitive identity unavailable"}</strong><span>{pt ? "Entre na sua conta para acessar seus dados competitivos." : "Sign in to access your competitive data."}</span></div>}
             </div>
           )}
 
           {section === "mastery" && (
             <div className="social-view social-mastery-view">
               <SocialSectionTitle eyebrow="CARD MASTERY 2.0" title={pt ? "Maestria de cartas" : "Card Mastery"} description={pt ? "Agora a progressão vem das cartas presentes no deck realmente usado em partidas finalizadas. Cada partida concede XP; vitórias e a carta de capa concedem bônus." : "Progress now comes from cards in the deck actually used in finished matches. Each match grants XP, with bonuses for wins and the deck cover card."} />
-              <div className="social-mastery-summary"><article><span>{pt ? "Líder" : "Leader"}</span><strong>{masteryStats.leader?.name || "—"}</strong><small>{masteryStats.leader ? formatMasteryLabel(masteryStats.leader.level, language) : "—"}</small></article><article><span>{pt ? "Cartas rastreadas" : "Tracked cards"}</span><strong>{masteryStats.trackedCards}</strong><small>{masteryStats.totalXp} XP {pt ? "acumulado" : "earned"}</small></article><article><span>{pt ? "Maior nível" : "Highest level"}</span><strong>{masteryStats.maxLevel ? formatMasteryLabel(masteryStats.maxLevel, language) : "—"}</strong><small>{masterySource === "cloud" ? (pt ? "sincronizado" : "synced") : (pt ? "progresso local" : "local progress")}</small></article></div>
+              <div className="social-mastery-summary"><article><span>{pt ? "Líder" : "Leader"}</span><strong>{masteryStats.leader?.name || "—"}</strong><small>{masteryStats.leader ? formatMasteryLabel(masteryStats.leader.level, language) : "—"}</small></article><article><span>{pt ? "Cartas rastreadas" : "Tracked cards"}</span><strong>{masteryStats.trackedCards}</strong><small>{masteryStats.totalXp} XP {pt ? "acumulado" : "earned"}</small></article><article><span>{pt ? "Maior nível" : "Highest level"}</span><strong>{masteryStats.maxLevel ? formatMasteryLabel(masteryStats.maxLevel, language) : "—"}</strong><small>{pt ? "progresso de Maestria" : "Mastery progress"}</small></article></div>
               <div className="social-mastery-rules"><span>XP</span><b>+40 {pt ? "por partida" : "per match"}</b><b>+20 {pt ? "por vitória" : "per win"}</b><b>+15 {pt ? "se for carta de capa" : "when used as cover"}</b><small>{pt ? "Uma carta recebe XP no máximo uma vez por partida, independentemente da quantidade de cópias no deck." : "A card receives XP at most once per match, regardless of how many copies are in the deck."}</small></div>
               <div className="social-mastery-grid">
                 {masteryRows.map((entry) => <MasteryCard key={entry.id} entry={entry} language={language} onClick={setSelectedMastery} />)}
@@ -916,7 +916,7 @@ export default function Profile({ onBack, initialUsername = null }) {
 
           {section === "privacy" && (
             <div className="social-view social-privacy-view">
-              <SocialSectionTitle eyebrow="PRIVACY & SAFETY" title={pt ? "Privacidade do jogador" : "Player privacy"} description={pt ? "Defina quem pode ver e interagir com seu perfil social. Essas opções não alteram o payload das partidas Online." : "Choose who can see and interact with your social profile. These options do not alter Online match payloads."} />
+              <SocialSectionTitle eyebrow="PRIVACY & SAFETY" title={pt ? "Privacidade do jogador" : "Player privacy"} description={pt ? "Defina quem pode encontrar, ver e interagir com seu perfil." : "Choose who can find, view and interact with your profile."} />
 
               <div className="social-privacy-grid">
                 <section className="social-panel">
@@ -936,10 +936,10 @@ export default function Profile({ onBack, initialUsername = null }) {
                 </section>
               </div>
 
-              <section className="social-safety-card"><div><span>MATCH ISOLATION</span><h3>{pt ? "Social Hub separado das partidas" : "Social Hub isolated from matches"}</h3><p>{pt ? "Perfis sociais, banner, bio, lista de amigos, notificações, privacidade e mensagens não são enviados pelo Socket.IO das partidas. O Online continua usando a camada src/online/publicProfile.js, que cria um perfil mínimo e compacto." : "Social profiles, banners, bios, friends, notifications, privacy and messages are never sent through match Socket.IO. Online play still uses src/online/publicProfile.js to build a tiny public match profile."}</p></div><strong>✓</strong></section>
+              <section className="social-safety-card"><div><span>{pt ? "CONTROLE DE PRIVACIDADE" : "PRIVACY CONTROL"}</span><h3>{pt ? "Você decide o que compartilhar" : "You decide what to share"}</h3><p>{pt ? "Ajuste a visibilidade do perfil, mensagens, buscas, estatísticas, decks e Maestria a qualquer momento." : "Adjust profile visibility, messages, search, statistics, decks and Mastery at any time."}</p></div><strong>✓</strong></section>
 
               {blocked.length > 0 && <section className="social-panel social-blocked-panel"><h3>{pt ? "Jogadores bloqueados" : "Blocked players"}</h3>{blocked.map((person) => <article key={personId(person)}><SocialAvatar person={person} size="small" /><span><strong>{personName(person)}</strong><small>@{person.username}</small></span><button type="button" onClick={() => handleUnblock(person)}>{pt ? "Desbloquear" : "Unblock"}</button></article>)}</section>}
-              <footer className="social-view-actions"><span>{schema.ready ? `Social Hub ${schema.version || "3.6"}` : (pt ? "Modo local/legado" : "Local/legacy mode")}</span><button type="button" className="eternal-menu-action active" onClick={savePrivacy}>{pt ? "Salvar privacidade" : "Save privacy"}</button></footer>
+              <footer className="social-view-actions"><span>{pt ? "Suas preferências de privacidade" : "Your privacy preferences"}</span><button type="button" className="eternal-menu-action active" onClick={savePrivacy}>{pt ? "Salvar privacidade" : "Save privacy"}</button></footer>
             </div>
           )}
         </section>

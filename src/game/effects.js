@@ -104,7 +104,7 @@ export function setBurst(match, playerId, instanceId, cardIndex) {
   const ctx = findPhysicalCard(match, instanceId);
   if (!ctx || ctx.playerId !== playerId || ctx.zone !== "hand") return { ok: false, error: "Carta não encontrada na mão." };
   const card = getDatabaseCard(cardIndex, ctx.card);
-  if (!isBurstCard(card)) return { ok: false, error: "A carta não possui Burst identificada no database." };
+  if (!isBurstCard(card)) return { ok: false, error: "Esta carta não possui Burst disponível." };
   const removed = removeHandCard(player, instanceId);
   let nextPlayer = removed.player;
   if (player.burst) nextPlayer = { ...nextPlayer, trash: [...nextPlayer.trash, { ...player.burst, faceDown: false }] };
@@ -127,7 +127,7 @@ export function setMirage(match, playerId, instanceId, cardIndex, { payment, pre
   const ctx = findPhysicalCard(match, instanceId);
   if (!ctx || ctx.playerId !== playerId || ctx.zone !== "hand") return { ok: false, error: "Carta não encontrada na mão." };
   const card = getDatabaseCard(cardIndex, ctx.card);
-  if (!hasMirage(card)) return { ok: false, error: "A carta não possui Mirage identificada no database." };
+  if (!hasMirage(card)) return { ok: false, error: "Esta carta não possui Mirage disponível." };
   const mirageCard = { ...card, cost: Number(card.mirage?.cost ?? card.cost ?? 0), reduction: card.mirage?.reduction ?? card.reduction ?? [] };
   const cost = calculateReduction(match, playerId, mirageCard, cardIndex);
   let paid = { ok:true, match };

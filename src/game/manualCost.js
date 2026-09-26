@@ -20,7 +20,7 @@ export function beginManualCost(match, playerId, instanceId, cardIndex, options 
   } else if (kind === "mirage") {
     if (match.phase !== "main" || match.activePlayerId !== playerId || match.battle) return { ok:false, error:"Mirage é setada no seu Main Step." };
     if (match.players[playerId].turnFlags?.mirageSet) return { ok:false, error:"Você só pode realizar a ação de Set Mirage uma vez por turno." };
-    if (!hasMirage(card)) return { ok:false, error:"A carta não possui Mirage identificada no database." };
+    if (!hasMirage(card)) return { ok:false, error:"Esta carta não possui Mirage disponível." };
     costCard = { ...card, cost:Number(card.mirage?.cost ?? card.cost ?? 0), reduction:card.mirage?.reduction ?? card.reduction ?? [] };
   } else return { ok:false, error:"Tipo de pagamento manual desconhecido." };
   const cost = calculateReduction(match, playerId, costCard, cardIndex);

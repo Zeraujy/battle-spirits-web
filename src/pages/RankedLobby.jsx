@@ -61,7 +61,7 @@ export default function RankedLobby({ onBack, onAccount, onDeckBuilder, onMatch 
     const onDisconnect = () => setStatus("disconnected");
     const onConnectError = (err) => {
       setStatus("error");
-      setError(err?.message ? `Falha ao conectar ao servidor Ranked: ${err.message}` : "Falha ao conectar ao servidor Ranked.");
+      setError(err?.message ? `Não foi possível conectar ao Ranked: ${err.message}` : "Não foi possível conectar ao Ranked.");
     };
     const onStatus = (payload) => {
       if (payload?.status === "searching") {
@@ -110,12 +110,12 @@ export default function RankedLobby({ onBack, onAccount, onDeckBuilder, onMatch 
 
   async function findRankedMatch() {
     if (!accessToken) {
-      setError("Entre na conta e execute a migração v3.7.0 antes de jogar Ranked.");
+      setError("Entre na sua conta para acessar o Ranked. Se o recurso continuar indisponível, tente novamente mais tarde.");
       return;
     }
     if (!deck) return setError("Escolha um deck.");
     if (!validDeck) return setError("O deck selecionado não é válido para uma partida 1v1.");
-    if (status !== "connected") return setError("Aguarde a conexão com o servidor Ranked.");
+    if (status !== "connected") return setError("Aguarde a conexão com o Ranked.");
 
     setError("");
     searchingRef.current = true;
@@ -158,7 +158,7 @@ export default function RankedLobby({ onBack, onAccount, onDeckBuilder, onMatch 
       <MatchSetupScreen
         className="ranked-match-setup ranked-v370"
         error={error}
-        footer="RANKED · SEASON 0 / PRÉ-TEMPORADA · RP E RESULTADOS VALIDADOS PELO SERVIDOR"
+        footer="RANKED · SEASON 0 / PRÉ-TEMPORADA"
         menu={
           <MatchSetupMenu
             eyebrow="MULTIPLAYER ONLINE"

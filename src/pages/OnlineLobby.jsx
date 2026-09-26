@@ -203,8 +203,8 @@ export default function OnlineLobby({
       setStatus("erro");
       setError(
         connectionError?.message
-          ? `Falha ao conectar ao servidor Online: ${connectionError.message}`
-          : "Falha ao conectar ao servidor Online."
+          ? `Não foi possível conectar ao Online: ${connectionError.message}`
+          : "Não foi possível conectar ao Online."
       );
     };
 
@@ -655,7 +655,7 @@ export default function OnlineLobby({
       "conectado"
     ) {
       setError(
-        "Aguarde a conexão com o servidor."
+        "Aguarde a conexão Online."
       );
 
       return;
@@ -919,7 +919,7 @@ export default function OnlineLobby({
           eyebrow="MULTIPLAYER ONLINE"
           titleTop="CRIAR"
           titleBottom="SALA"
-          status={`SERVIDOR · ${status.toUpperCase()}`}
+          status={`ONLINE · ${status.toUpperCase()}`}
           badge={roomVisibility === "public" ? "PUBLIC" : "PRIVATE"}
         >
           <div className="online-lobby2-form">
@@ -991,7 +991,7 @@ export default function OnlineLobby({
           eyebrow="MULTIPLAYER ONLINE"
           titleTop="ENTRAR EM"
           titleBottom="SALA"
-          status={`SERVIDOR · ${status.toUpperCase()}`}
+          status={`ONLINE · ${status.toUpperCase()}`}
         >
           <div className="online-lobby2-form">
             <label>
@@ -1021,7 +1021,7 @@ export default function OnlineLobby({
         eyebrow="MULTIPLAYER ONLINE"
         titleTop="TIPO DE"
         titleBottom="PARTIDA"
-        status={`SERVIDOR · ${status.toUpperCase()}`}
+        status={`ONLINE · ${status.toUpperCase()}`}
         badge="NORMAL"
       >
         <MatchMenuButton

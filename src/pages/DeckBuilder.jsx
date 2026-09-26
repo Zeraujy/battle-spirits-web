@@ -553,7 +553,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
           </div>
 
           {!results.length ? (
-            <EmptyState title={t("noCardsFound")}>src/data</EmptyState>
+            <EmptyState title={t("noCardsFound")}>{language === "en" ? "Try changing the filters or search." : "Tente alterar os filtros ou a busca."}</EmptyState>
           ) : (
             <>
               <div className="card-grid deck-builder-v3-grid">

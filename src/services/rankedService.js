@@ -32,13 +32,13 @@ function division(rp, floor) {
 }
 
 export async function getRankedAccess() {
-  if (!supabase) return { ok: false, error: "Supabase não configurado.", signedIn: false };
+  if (!supabase) return { ok: false, error: "Recursos competitivos indisponíveis no momento.", signedIn: false };
   const { data } = await supabase.auth.getSession();
   const session = data?.session;
   if (!session?.user || !session?.access_token) return { ok: false, error: "Entre na sua conta para jogar Ranked.", signedIn: false };
   const schema = await getSocialSchemaStatus({ refresh: true });
   if (!schema.ready || !versionAtLeast(schema.version)) {
-    return { ok: false, error: "Execute a migração SOCIAL-HUB-3.7.1.sql para ativar a identidade competitiva.", signedIn: true, needsMigration: true };
+    return { ok: false, error: "Sua identidade competitiva está temporariamente indisponível.", signedIn: true, needsMigration: true };
   }
   return { ok: true, signedIn: true, user: session.user, accessToken: session.access_token };
 }
