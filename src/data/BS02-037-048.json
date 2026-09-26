@@ -1,0 +1,577 @@
+[
+  {
+    "id": "BS02-037",
+    "name": "Sphereroid",
+    "nameEN": "Sphereroid",
+    "namePT": "Sphereroid",
+    "nameJP": "スフィアロイド",
+    "nameKey": "sphereroid",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 1,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Blocks: This Spirit gets +2000 BP during this battle.",
+      "ptBR": "LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +2000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-037.webp"
+  },
+  {
+    "id": "BS02-038",
+    "name": "The Buckler Langlies",
+    "nameEN": "The Buckler Langlies",
+    "namePT": "The Buckler Langlies",
+    "nameJP": "盾精ラングリーズ",
+    "nameKey": "the-buckler-langlies",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: This Spirit cannot attack.\nLV2 When This Spirit Is Destroyed: Choose 1 of your Spirits. Move all Cores on this Spirit to the chosen Spirit instead of your Reserve.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Este Spirit não pode atacar.\nLV2 Quando Este Spirit For Destruído: Escolha 1 dos seus Spirits. Mova todos os Cores deste Spirit para o Spirit escolhido em vez de movê-los para sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-038.webp"
+  },
+  {
+    "id": "BS02-039",
+    "name": "The Sacred Mjolnir",
+    "nameEN": "The Sacred Mjolnir",
+    "namePT": "The Sacred Mjolnir",
+    "nameJP": "神機ミョルニール",
+    "nameKey": "the-sacred-mjolnir",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 2,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 2,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-039.webp"
+  },
+  {
+    "id": "BS02-040",
+    "name": "Lobsterk",
+    "nameEN": "Lobsterk",
+    "namePT": "Lobsterk",
+    "nameJP": "ロブスターク",
+    "nameKey": "lobsterk",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Flying Fish",
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Armor: Red]: This Spirit is unaffected by opposing Red Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1/LV2 [Armor: Red]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-040.webp"
+  },
+  {
+    "id": "BS02-041",
+    "name": "Liorider",
+    "nameEN": "Liorider",
+    "namePT": "Liorider",
+    "nameJP": "ライオライダー",
+    "nameKey": "liorider",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Blocks: When only the opposing Spirit is destroyed by comparing BP, Refresh this Spirit.",
+      "ptBR": "LV2 Quando Este Spirit Bloqueia: Quando apenas o Spirit do oponente for destruído pela comparação de BP, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-041.webp"
+  },
+  {
+    "id": "BS02-042",
+    "name": "Skuldia",
+    "nameEN": "Skuldia",
+    "namePT": "Skuldia",
+    "nameJP": "スクルディア",
+    "nameKey": "skuldia",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Demon"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Refresh Step: This Spirit cannot be refreshed.\nLV2/LV3: While this Spirit is Exhausted, choose 1 opposing Exhausted Spirit. The chosen Spirit cannot be refreshed.",
+      "ptBR": "LV1/LV2 Durante Seu Refresh Step: Este Spirit não pode receber Refresh.\nLV2/LV3: Enquanto este Spirit estiver Exhausted, escolha 1 Spirit Exhausted do oponente. O Spirit escolhido não pode receber Refresh."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-042.webp"
+  },
+  {
+    "id": "BS02-043",
+    "name": "Arma-Dillo",
+    "nameEN": "Arma-Dillo",
+    "namePT": "Arma-Dillo",
+    "nameJP": "アルマ・ジール",
+    "nameKey": "arma-dillo",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 During the Opponent's Attack Step: All your White Spirits get +1000 BP.",
+      "ptBR": "LV2 Durante o Attack Step do Oponente: Todos os seus Spirits White recebem +1000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-043.webp"
+  },
+  {
+    "id": "BS02-044",
+    "name": "The CannonArtifact Megarock",
+    "nameEN": "The CannonArtifact Megarock",
+    "namePT": "The CannonArtifact Megarock",
+    "nameJP": "魔砲神メガロック",
+    "nameKey": "the-cannonartifact-megarock",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Android"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Armor: Red]: This Spirit is unaffected by opposing Red Spirit, Nexus, and Magic effects.\nLV2 When This Spirit Blocks: This Spirit gets +2000 BP during this battle.",
+      "ptBR": "LV1/LV2 [Armor: Red]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red do oponente.\nLV2 Quando Este Spirit Bloqueia: Este Spirit recebe +2000 BP durante esta batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-044.webp"
+  },
+  {
+    "id": "BS02-045",
+    "name": "The ShieldDragon Fevnir",
+    "nameEN": "The ShieldDragon Fevnir",
+    "namePT": "The ShieldDragon Fevnir",
+    "nameJP": "装甲機竜ファーブニル",
+    "nameKey": "the-shielddragon-fevnir",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Armored Dragon",
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 [Armor: Purple]: This Spirit is unaffected by opposing Purple Spirit, Nexus, and Magic effects.\nLV2 [Armor: Red/Purple/Green]: This Spirit is unaffected by opposing Red, Purple, and Green Spirit, Nexus, and Magic effects.",
+      "ptBR": "LV1 [Armor: Purple]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Purple do oponente.\nLV2 [Armor: Red/Purple/Green]: Este Spirit não é afetado por efeitos de Spirit, Nexus e Magic Red, Purple e Green do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-045.webp"
+  },
+  {
+    "id": "BS02-046",
+    "name": "Wingull",
+    "nameEN": "Wingull",
+    "namePT": "Wingull",
+    "nameJP": "ウィンガル",
+    "nameKey": "wingull",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 6,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Armed Machine"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-046.webp"
+  },
+  {
+    "id": "BS02-047",
+    "name": "The AutoPriest Freyr",
+    "nameEN": "The AutoPriest Freyr",
+    "namePT": "The AutoPriest Freyr",
+    "nameJP": "機神官フレイ",
+    "nameKey": "the-autopriest-freyr",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 7,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Ice Princess"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When Summoned: Put 1 Core from the Void onto each Nexus you control.\nLV2/LV3 When This Spirit Blocks: Until the end of this battle, the opponent cannot use effects during Flash Timing.",
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: Coloque 1 Core do Void sobre cada Nexus que você controla.\nLV2/LV3 Quando Este Spirit Bloqueia: Até o fim desta batalha, o oponente não pode usar efeitos durante o Flash Timing."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-047.webp"
+  },
+  {
+    "id": "BS02-048",
+    "name": "The DragonTank Earthguard",
+    "nameEN": "The DragonTank Earthguard",
+    "namePT": "The DragonTank Earthguard",
+    "nameJP": "竜戦車アースガルド",
+    "nameKey": "the-dragontank-earthguard",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 8,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Machine Beast"
+    ],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 7000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: You may summon 1 Spirit card from your Hand that shares a family with this Spirit without paying its cost. The When Summoned effect of a Spirit summoned by this effect does not activate.\nLV2 When This Spirit Attacks: This Spirit cannot be blocked by Spirits with a cost other than 8.",
+      "ptBR": "LV1/LV2 Quando Invocado: Você pode invocar 1 carta de Spirit da sua Hand que compartilhe uma família com este Spirit sem pagar o custo. O efeito When Summoned de um Spirit invocado por este efeito não é ativado.\nLV2 Quando Este Spirit Ataca: Este Spirit não pode ser bloqueado por Spirits com custo diferente de 8."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-048.webp"
+  }
+]

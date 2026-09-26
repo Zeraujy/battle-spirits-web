@@ -1,0 +1,533 @@
+[
+  {
+    "id": "BS02-076",
+    "name": "The Ancient Fault",
+    "nameEN": "The Ancient Fault",
+    "namePT": "The Ancient Fault",
+    "nameJP": "太古の断層",
+    "nameKey": "the-ancient-fault",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your attacking cost 2 Spirits get +2000 BP.\nLV2 During Either Attack Step: Whenever an opposing Spirit is destroyed, draw 1 card for each Spirit destroyed.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits atacantes de custo 2 recebem +2000 BP.\nLV2 Durante o Attack Step de qualquer jogador: Sempre que um Spirit do oponente for destruído, compre 1 carta para cada Spirit destruído."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-076.webp"
+  },
+  {
+    "id": "BS02-077",
+    "name": "The Plateau of Duel",
+    "nameEN": "The Plateau of Duel",
+    "namePT": "The Plateau of Duel",
+    "nameJP": "決闘台地",
+    "nameKey": "the-plateau-of-duel",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1 During the Opponent's Start Step: Refresh 1 of your Spirits with [Awaken].\nLV2 During the Opponent's Start Step: Refresh all your Spirits with [Awaken].",
+      "ptBR": "LV1 Durante o Start Step do Oponente: Dê Refresh em 1 dos seus Spirits com [Awaken].\nLV2 Durante o Start Step do Oponente: Dê Refresh em todos os seus Spirits com [Awaken]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-077.webp"
+  },
+  {
+    "id": "BS02-078",
+    "name": "The Evil Coffin",
+    "nameEN": "The Evil Coffin",
+    "namePT": "The Evil Coffin",
+    "nameJP": "夢魔の寝所",
+    "nameKey": "the-evil-coffin",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Main Step: Exhaust all Spirits whose number of Cores was increased by something other than a Spirit, Nexus, or Magic effect.\nLV2 During Your Attack Step: All your LV3 Spirits may target opposing Exhausted Spirits when attacking.",
+      "ptBR": "LV1/LV2 Durante a Main Step do Oponente: Deixe Exhausted todos os Spirits cuja quantidade de Cores foi aumentada por algo que não seja efeito de Spirit, Nexus ou Magic.\nLV2 Durante Seu Attack Step: Todos os seus Spirits LV3 podem escolher Spirits Exhausted do oponente como alvo ao atacar."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-078.webp"
+  },
+  {
+    "id": "BS02-079",
+    "name": "The Forest of Amethyst",
+    "nameEN": "The Forest of Amethyst",
+    "namePT": "The Forest of Amethyst",
+    "nameJP": "紫水晶の森",
+    "nameKey": "the-forest-of-amethyst",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: When one of your Spirits is destroyed by an opposing Spirit, Nexus, or Magic effect, by moving 1 Core from that Spirit to the Void, return that Spirit to your Field in refreshed state.\nLV2 During Your Attack Step: At the end of the step, if you have three or more refreshed Spirits on your Field, draw 2 cards.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Quando 1 dos seus Spirits for destruído por um efeito de Spirit, Nexus ou Magic do oponente, ao mover 1 Core daquele Spirit para o Void, devolva aquele Spirit ao seu Field em estado Refresh.\nLV2 Durante Seu Attack Step: Ao fim do Step, se você tiver 3 ou mais Spirits em estado Refresh no seu Field, compre 2 cartas."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-079.webp"
+  },
+  {
+    "id": "BS02-080",
+    "name": "The Limestone Cave of Emerald",
+    "nameEN": "The Limestone Cave of Emerald",
+    "namePT": "The Limestone Cave of Emerald",
+    "nameJP": "エメラルドに輝く鍾乳洞",
+    "nameKey": "the-limestone-cave-of-emerald",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your Spirits with three or more Cores on them get +1000 BP.\nLV2 During Either Attack Step: Whenever one of your Spirits with three or more Cores on it destroys only an opposing Spirit by comparing BP, put 1 Core from the Void onto this Nexus.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits com 3 ou mais Cores sobre eles recebem +1000 BP.\nLV2 Durante o Attack Step de qualquer jogador: Sempre que 1 dos seus Spirits com 3 ou mais Cores sobre ele destruir apenas um Spirit do oponente pela comparação de BP, coloque 1 Core do Void sobre este Nexus."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-080.webp"
+  },
+  {
+    "id": "BS02-081",
+    "name": "The Budding Plain",
+    "nameEN": "The Budding Plain",
+    "namePT": "The Budding Plain",
+    "nameJP": "緑芽吹く原野",
+    "nameKey": "the-budding-plain",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: Whenever you use a Magic effect, put 1 Core from the Void into your Reserve.\nLV2 During Either Attack Step: All Spirit cards in your Hand with the family \"Parasite\" gain [High Speed].",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Sempre que você usar um efeito de Magic, coloque 1 Core do Void na sua Reserve.\nLV2 Durante o Attack Step de qualquer jogador: Todas as cartas de Spirit na sua Hand com a família \"Parasite\" ganham [High Speed]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-081.webp"
+  },
+  {
+    "id": "BS02-082",
+    "name": "The Artifact Plant",
+    "nameEN": "The Artifact Plant",
+    "namePT": "The Artifact Plant",
+    "nameJP": "生み出される尖兵",
+    "nameKey": "the-artifact-plant",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: All your cost 2 White Spirits gain the family \"Armed Machine\".\nLV2 During Either Attack Step: Whenever one of your Spirits with the family \"Armed Machine\" becomes Exhausted, for each Spirit exhausted this way, put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Todos os seus Spirits White de custo 2 ganham a família \"Armed Machine\".\nLV2 Durante o Attack Step de qualquer jogador: Sempre que 1 dos seus Spirits com a família \"Armed Machine\" ficar Exhausted, para cada Spirit que ficou Exhausted dessa forma, coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-082.webp"
+  },
+  {
+    "id": "BS02-083",
+    "name": "The Corridor of Mirrors",
+    "nameEN": "The Corridor of Mirrors",
+    "namePT": "The Corridor of Mirrors",
+    "nameJP": "鏡の回廊",
+    "nameKey": "the-corridor-of-mirrors",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 4,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: When one of your Spirits with [Armor] would be destroyed by comparing BP with an opposing Spirit of a color specified by that [Armor], you may keep your Spirit on the Field in Exhausted state.\nLV2 During Your Attack Step: When the opponent uses a Magic effect, you may negate that effect by moving 2 Cores from this Nexus to the Void. This effect can only be used once per turn.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits com [Armor] seria destruído pela comparação de BP contra um Spirit do oponente de uma cor especificada por aquele [Armor], você pode manter seu Spirit no Field em estado Exhausted.\nLV2 Durante Seu Attack Step: Quando o oponente usar um efeito de Magic, você pode anular aquele efeito movendo 2 Cores deste Nexus para o Void. Este efeito só pode ser usado uma vez por turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-083.webp"
+  },
+  {
+    "id": "BS02-084",
+    "name": "The Blessed Sanctuary",
+    "nameEN": "The Blessed Sanctuary",
+    "namePT": "The Blessed Sanctuary",
+    "nameJP": "祝福されし大聖堂",
+    "nameKey": "the-blessed-sanctuary",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: When one of your Yellow Spirits is destroyed, put 1 Core from the Void into your Reserve.\nLV2 During Either Attack Step: When one of your Yellow Spirits is destroyed, draw 1 card.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits Yellow for destruído, coloque 1 Core do Void na sua Reserve.\nLV2 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits Yellow for destruído, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-084.webp"
+  },
+  {
+    "id": "BS02-085",
+    "name": "The Topaz Meteor",
+    "nameEN": "The Topaz Meteor",
+    "namePT": "The Topaz Meteor",
+    "nameJP": "トパーズの流星",
+    "nameKey": "the-topaz-meteor",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 3,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 5,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All Nexus cards in your Hand gain two Yellow reduction symbols.\nLV2: You may treat all your Nexuses as LV2.",
+      "ptBR": "LV1/LV2: Todas as cartas de Nexus na sua Hand ganham 2 símbolos de redução Yellow.\nLV2: Você pode tratar todos os seus Nexuses como LV2."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-085.webp"
+  },
+  {
+    "id": "BS02-086",
+    "name": "The Spiral Tower",
+    "nameEN": "The Spiral Tower",
+    "namePT": "The Spiral Tower",
+    "nameJP": "螺旋の塔",
+    "nameKey": "the-spiral-tower",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 4,
+    "reduction": [
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: Whenever the opponent uses a Magic effect, they must pay 1 additional cost.\nLV2 During Your Attack Step: Whenever the opponent uses a Magic effect, all of its cost must be paid from their Reserve.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Sempre que o oponente usar um efeito de Magic, ele deve pagar 1 custo adicional.\nLV2 Durante Seu Attack Step: Sempre que o oponente usar um efeito de Magic, todo o custo deve ser pago usando a Reserve dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-086.webp"
+  },
+  {
+    "id": "BS02-087",
+    "name": "The Sealed Spellbook",
+    "nameEN": "The Sealed Spellbook",
+    "namePT": "The Sealed Spellbook",
+    "nameJP": "封印された魔導書",
+    "nameKey": "the-sealed-spellbook",
+    "set": "BS02",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "yellow"
+    ],
+    "cost": 5,
+    "reduction": [
+      "yellow",
+      "yellow",
+      "yellow"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "yellow"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Turn: Magic effects that affect both players or cards on both Fields instead affect only one player or one Field, chosen by you.\nLV2 During Your Attack Step: Whenever you draw cards by one of your Spirit or Magic effects, double the number of cards drawn. This effect does not stack.",
+      "ptBR": "LV1/LV2 Durante Seu Turno: Efeitos de Magic que afetariam ambos os jogadores ou cartas nos dois Fields passam a afetar apenas 1 jogador ou 1 Field, à sua escolha.\nLV2 Durante Seu Attack Step: Sempre que você comprar cartas por um efeito de Spirit ou Magic seu, dobre a quantidade de cartas compradas. Este efeito não acumula."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-087.webp"
+  }
+]

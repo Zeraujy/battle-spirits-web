@@ -1,0 +1,602 @@
+[
+  {
+    "id": "BS02-025",
+    "name": "Sheeple",
+    "nameEN": "Sheeple",
+    "namePT": "Sheeple",
+    "nameJP": "シープル",
+    "nameKey": "sheeple",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 0,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-025.webp"
+  },
+  {
+    "id": "BS02-026",
+    "name": "MachG",
+    "nameEN": "MachG",
+    "namePT": "MachG",
+    "nameJP": "マッハジー",
+    "nameKey": "machg",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Parasite"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [High Speed]: You may summon this Spirit card from your Hand during Flash Timing. When doing so, both the summon cost and the Cores placed on this Spirit must come from your Reserve.",
+      "ptBR": "Flash [High Speed]: Você pode invocar esta carta de Spirit da sua Hand durante o Flash Timing. Ao fazer isso, tanto o custo de invocação quanto os Cores colocados neste Spirit devem vir da sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-026.webp"
+  },
+  {
+    "id": "BS02-027",
+    "name": "Caprihorn",
+    "nameEN": "Caprihorn",
+    "namePT": "Caprihorn",
+    "nameJP": "カプリホルン",
+    "nameKey": "caprihorn",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 1,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Imp"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Attacks: This Spirit gets +1000 BP for each opposing refreshed Spirit during this turn.",
+      "ptBR": "LV2 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP para cada Spirit do oponente em estado Refresh durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-027.webp"
+  },
+  {
+    "id": "BS02-028",
+    "name": "Xscissors",
+    "nameEN": "Xscissors",
+    "namePT": "Xscissors",
+    "nameJP": "クロスシザース",
+    "nameKey": "xscissors",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 2,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Shell Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-028.webp"
+  },
+  {
+    "id": "BS02-029",
+    "name": "Bathopper",
+    "nameEN": "Bathopper",
+    "namePT": "Bathopper",
+    "nameJP": "バットホッパー",
+    "nameKey": "bathopper",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Parasite"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Attacks: Put 1 Core from the Void onto this Spirit.",
+      "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Coloque 1 Core do Void sobre este Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-029.webp"
+  },
+  {
+    "id": "BS02-030",
+    "name": "The Soldier Antman",
+    "nameEN": "The Soldier Antman",
+    "namePT": "The Soldier Antman",
+    "nameJP": "兵隊アントマン",
+    "nameKey": "the-soldier-antman",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [
+      "Shellman"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [High Speed]: You may summon this Spirit card from your Hand during Flash Timing. When doing so, both the summon cost and the Cores placed on this Spirit must come from your Reserve.\nLV2 When This Spirit Is Destroyed: You may summon any number of Spirit cards from your Hand with the family \"Parasite\" by paying their costs. Their When Summoned effects do not activate.",
+      "ptBR": "Flash [High Speed]: Você pode invocar esta carta de Spirit da sua Hand durante o Flash Timing. Ao fazer isso, tanto o custo de invocação quanto os Cores colocados neste Spirit devem vir da sua Reserve.\nLV2 Quando Este Spirit For Destruído: Você pode invocar qualquer quantidade de cartas de Spirit da sua Hand com a família \"Parasite\", pagando seus custos. Os efeitos When Summoned desses Spirits não são ativados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-030.webp"
+  },
+  {
+    "id": "BS02-031",
+    "name": "Scorpede",
+    "nameEN": "Scorpede",
+    "namePT": "Scorpede",
+    "nameJP": "スコルピード",
+    "nameKey": "scorpede",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Shell Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: You may place 1 Nexus card from your Hand without paying its cost.",
+      "ptBR": "LV1/LV2 Quando Invocado: Você pode colocar 1 carta de Nexus da sua Hand sem pagar o custo."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-031.webp"
+  },
+  {
+    "id": "BS02-032",
+    "name": "Dachono",
+    "nameEN": "Dachono",
+    "namePT": "Dachono",
+    "nameJP": "ダッチョーノ",
+    "nameKey": "dachono",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Winged Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Put 2 Cores from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Quando Este Spirit For Destruído: Coloque 2 Cores do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-032.webp"
+  },
+  {
+    "id": "BS02-033",
+    "name": "The CavalryBeast Sleiphorse",
+    "nameEN": "The CavalryBeast Sleiphorse",
+    "namePT": "The CavalryBeast Sleiphorse",
+    "nameJP": "騎獣スレイプホース",
+    "nameKey": "the-cavalrybeast-sleiphorse",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 6000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Attacks: Whenever a Green Magic effect increases this Spirit's BP, increase it by an additional +2000 BP during this turn.\nLV3 During Your Attack Step: Whenever a Green Magic effect increases the BP of another Green Spirit you control, increase that Spirit's BP by an additional +2000 BP during this turn.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit Ataca: Sempre que um efeito de Magic Green aumentar o BP deste Spirit, aumente-o em +2000 BP adicionais durante este turno.\nLV3 Durante Seu Attack Step: Sempre que um efeito de Magic Green aumentar o BP de outro Spirit Green que você controla, aumente o BP daquele Spirit em +2000 BP adicionais durante este turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-033.webp"
+  },
+  {
+    "id": "BS02-034",
+    "name": "The OldSage Trenton",
+    "nameEN": "The OldSage Trenton",
+    "namePT": "The OldSage Trenton",
+    "nameJP": "老賢樹トレントン",
+    "nameKey": "the-oldsage-trenton",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Plant Spirit"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: You may summon 1 Green Spirit card from your Hand without paying its cost. When Summoned effects of a Spirit summoned by this effect do not activate.\nLV2 When This Spirit Attacks: When this Spirit's attack reduces the opponent's Life, put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Quando Invocado: Você pode invocar 1 carta de Spirit Green da sua Hand sem pagar o custo. Efeitos When Summoned de um Spirit invocado por este efeito não são ativados.\nLV2 Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-034.webp"
+  },
+  {
+    "id": "BS02-034_2",
+    "name": "The OldSage Trenton",
+    "nameEN": "The OldSage Trenton",
+    "namePT": "The OldSage Trenton",
+    "nameJP": "老賢樹トレントン",
+    "nameKey": "the-oldsage-trenton",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [
+      "Plant Spirit"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 5000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When Summoned: You may summon 1 Green Spirit card from your Hand without paying its cost. When Summoned effects of a Spirit summoned by this effect do not activate.\nLV2 When This Spirit Attacks: When this Spirit's attack reduces the opponent's Life, put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Quando Invocado: Você pode invocar 1 carta de Spirit Green da sua Hand sem pagar o custo. Efeitos When Summoned de um Spirit invocado por este efeito não são ativados.\nLV2 Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-034_2.webp"
+  },
+  {
+    "id": "BS02-035",
+    "name": "The DarkFeather Yatagross",
+    "nameEN": "The DarkFeather Yatagross",
+    "namePT": "The DarkFeather Yatagross",
+    "nameJP": "漆黒鳥ヤタグロス",
+    "nameKey": "the-darkfeather-yatagross",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 6,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Winged Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 6000
+      },
+      {
+        "level": 3,
+        "cores": 7,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 When This Spirit Is Destroyed: For each Core that was on this Spirit, put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2/LV3 Quando Este Spirit For Destruído: Para cada Core que estava sobre este Spirit, coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-035.webp"
+  },
+  {
+    "id": "BS02-036",
+    "name": "The Great Kaiseleon",
+    "nameEN": "The Great Kaiseleon",
+    "namePT": "The Great Kaiseleon",
+    "nameJP": "カイザレオン大帝",
+    "nameKey": "the-great-kaiseleon",
+    "set": "BS02",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 7,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Blade Beast"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 9000
+      },
+      {
+        "level": 2,
+        "cores": 7,
+        "bp": 15000
+      }
+    ],
+    "effectText": {
+      "en": "LV1 During Your Attack Step: This Spirit cannot attack.\nLV2 During Your Attack Step: Whenever this Spirit destroys only an opposing Spirit by comparing BP, move 1 Core from the opponent's Life to their Reserve.",
+      "ptBR": "LV1 Durante Seu Attack Step: Este Spirit não pode atacar.\nLV2 Durante Seu Attack Step: Sempre que este Spirit destruir apenas um Spirit do oponente pela comparação de BP, mova 1 Core da Life do oponente para a Reserve dele."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS02/BS02-036.webp"
+  }
+]
