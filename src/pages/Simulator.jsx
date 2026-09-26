@@ -9,6 +9,7 @@ import ArenaBattleRole from "../components/game/ArenaBattleRole.jsx";
 import PhaseBar from "../components/game/PhaseBar.jsx";
 import PaymentStatus from "../components/game/PaymentStatus.jsx";
 import BattleLinkOverlay from "../components/game/BattleLinkOverlay.jsx";
+import BattleExperienceLayer, { classifyBattleLogEntry } from "../components/game/BattleExperienceLayer.jsx";
 import Modal from "../components/common/Modal.jsx";
 import { cardIndex } from "../services/cardRepository.js";
 import { applyGameAction } from "../game/reducer.js";
@@ -54,6 +55,7 @@ import "../styles/arena/effectDecision.css";
 import "../styles/arena/braveUltimate.css";
 import "../styles/arena/gameResult.css";
 import "../styles/arena/postMatchV380.css";
+import "../styles/arena/battleExperienceV381.css";
 import "../styles/arena/arenaV31.css";
 import "../styles/arena/pendingPlayV314.css";
 import "../styles/arena/cardPresentationV317.css";
@@ -3281,6 +3283,10 @@ export default function Simulator({
                           ? "effect-decision-selected"
                           : "",
 
+                        !effectDecision && selectedId === physical.instanceId
+                          ? "arena-card-selected"
+                          : "",
+
                         effectDecision &&
                         !isDecisionTarget
                           ? "effect-decision-unavailable"
@@ -5350,6 +5356,13 @@ export default function Simulator({
   return (
     <main className="simulator-page">
 
+      <BattleExperienceLayer
+        match={match}
+        actorId={actorId}
+        canControlActor={canControlActor}
+        language={language}
+      />
+
       <header className="sim-topbar">
 
         <img
@@ -5360,7 +5373,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v3.8.0 • Arena 2D
+            Eternal v3.8.1 • Arena 2D
           </span>
 
           <strong>
@@ -6562,6 +6575,7 @@ export default function Simulator({
           blockerInstanceId={activeBattle.blockerInstanceId || null}
           defenderPlayerId={activeBattle.defenderPlayerId}
           theme={activeBattleTheme}
+          stage={activeBattle.flash ? "flash" : activeBattle.stage}
         />
       )}
 
@@ -7424,43 +7438,20 @@ export default function Simulator({
             )
           }
         >
-          <div className="game-log">
+          <div className="game-log game-log-v381">
 
-            {[
-              ...(
-                match.log ||
-                []
-              )
-            ]
+            {[...(match.log || [])]
+              .slice(-80)
               .reverse()
-              .map(
-                (
-                  entry
-                ) => (
-                  <div
-                    key={
-                      entry.id
-                    }
-                  >
-                    <span>
-                      T
-                      {
-                        entry.turn
-                      }
-                      {" • "}
-                      {
-                        entry.phase
-                      }
-                    </span>
-
-                    <p>
-                      {
-                        entry.text
-                      }
-                    </p>
+              .map((entry) => {
+                const kind = classifyBattleLogEntry(entry);
+                return (
+                  <div className={`game-log-entry log-${kind}`} key={entry.id}>
+                    <span>T{entry.turn} • {String(entry.phase || "—").toUpperCase()}</span>
+                    <p>{entry.text}</p>
                   </div>
-                )
-              )}
+                );
+              })}
 
           </div>
         </Modal>

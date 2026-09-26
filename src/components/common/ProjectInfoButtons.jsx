@@ -13,6 +13,18 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.8.1",
+    date: { pt: "26/09/2026", en: "09/26/2026" },
+    title: { pt: "Battle Experience Update", en: "Battle Experience Update" },
+    summary: { pt: "A arena recebe uma camada de feedback visual mais clara para Steps, Flash, bloqueio, ataques, movimentação de recursos, seleção de cartas e leitura do Action Log.", en: "The arena receives clearer visual feedback for Steps, Flash, blocking, attacks, resource movement, card selection and Action Log readability." },
+    sections: [
+      { title: { pt: "Ritmo da batalha", en: "Battle pacing" }, items: { pt: ["Mudanças de Step recebem uma transição central curta sem bloquear a partida.", "Flash Timing e janela de bloqueio exibem prioridade e orientação contextual no centro da arena.", "Ataque e bloqueio ganham fluxo visual mais evidente na ligação entre as cartas."], en: ["Step changes get a short center transition without blocking play.", "Flash Timing and block windows show priority and contextual guidance in the arena center.", "Attacks and blocks get clearer visual flow on the link between cards."] } },
+      { title: { pt: "Feedback de mesa", en: "Table feedback" }, items: { pt: ["Life, Reserve e Core Trash pulsam discretamente quando seus valores mudam.", "A carta selecionada no campo recebe um destaque consistente e um indicador discreto.", "Eventos recentes aparecem brevemente na arena para reduzir a necessidade de abrir o Log a cada ação."], en: ["Life, Reserve and Core Trash pulse subtly when their values change.", "The selected field card receives a consistent highlight and subtle indicator.", "Recent events briefly appear in the arena, reducing the need to open the Log after every action."] } },
+      { title: { pt: "Action Log & segurança", en: "Action Log & safety" }, items: { pt: ["O Log foi reorganizado visualmente por tipo de evento e limitado às ações recentes na interface.", "Toda a atualização é derivada do estado já existente: nenhuma regra, payload Online ou autoridade da engine foi alterada.", "Animações respeitam prefers-reduced-motion para acessibilidade."], en: ["The Log is visually organized by event type and limited to recent actions in the interface.", "The entire update is derived from existing state: no rule, Online payload or engine authority was changed.", "Animations respect prefers-reduced-motion for accessibility."] } }
+    ]
+  },
+
+  {
     version: "3.8.0",
     date: { pt: "26/09/2026", en: "09/26/2026" },
     title: { pt: "Post-Match Screen", en: "Post-Match Screen" },

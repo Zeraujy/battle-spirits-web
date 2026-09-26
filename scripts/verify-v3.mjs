@@ -12,6 +12,8 @@ const required = [
   "src/styles/arena/braveUltimate.css",
   "src/styles/arena/gameResult.css",
   "src/styles/arena/postMatchV380.css",
+  "src/styles/arena/battleExperienceV381.css",
+  "src/components/game/BattleExperienceLayer.jsx",
   "src/styles/arena/arenaLayoutV321.css",
   "src/game/legalActions.js",
   "src/game/aiEffectSemantics.js",
@@ -56,7 +58,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.8.0") throw new Error(`package.json está em ${pkg.version}, esperado 3.8.0`);
+if (pkg.version !== "3.8.1") throw new Error(`package.json está em ${pkg.version}, esperado 3.8.1`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -118,6 +120,11 @@ const postMatchCss = fs.readFileSync(path.join(root, "src", "styles", "arena", "
 if (!simulatorPage.includes("post-match-v380-grid") || !simulatorPage.includes("room:rematch") || !simulatorPage.includes("requestPostMatchFriend")) throw new Error("A Post-Match Screen v3.8.0 está incompleta.");
 if (!postMatchService.includes("buildPostMatchSummary") || !postMatchService.includes("masteryXpForMatch")) throw new Error("O resumo pós-partida v3.8.0 está incompleto.");
 if (!postMatchCss.includes("post-match-v380-progression") || !onlineServer.includes("room:rematch")) throw new Error("A integração de revanche v3.8.0 está incompleta.");
+
+const battleExperience = fs.readFileSync(path.join(root, "src", "components", "game", "BattleExperienceLayer.jsx"), "utf8");
+const battleExperienceCss = fs.readFileSync(path.join(root, "src", "styles", "arena", "battleExperienceV381.css"), "utf8");
+if (!simulatorPage.includes("BattleExperienceLayer") || !simulatorPage.includes("game-log-v381") || !simulatorPage.includes("arena-card-selected")) throw new Error("A Battle Experience Update v3.8.1 está incompleta.");
+if (!battleExperience.includes("FLASH TIMING") || !battleExperience.includes("classifyBattleLogEntry") || !battleExperienceCss.includes("battle-exp-phase-cue")) throw new Error("A camada visual Battle Experience v3.8.1 está incompleta.");
 
 const publicProfile = fs.readFileSync(path.join(root, "src", "online", "publicProfile.js"), "utf8");
 const socketClient = fs.readFileSync(path.join(root, "src", "online", "socketClient.js"), "utf8");

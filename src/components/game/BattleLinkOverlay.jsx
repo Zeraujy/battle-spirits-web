@@ -10,7 +10,8 @@ export default function BattleLinkOverlay({
   attackerInstanceId,
   blockerInstanceId = null,
   defenderPlayerId = null,
-  theme = "neutral"
+  theme = "neutral",
+  stage = null
 }) {
   const [geometry, setGeometry] = useState(null);
 
@@ -82,7 +83,7 @@ export default function BattleLinkOverlay({
   if (!geometry) return null;
 
   return (
-    <svg className={`battle-link-overlay battle-link-${theme}`} aria-hidden="true">
+    <svg className={`battle-link-overlay battle-link-${theme} ${stage ? `battle-stage-${stage}` : ""}`} aria-hidden="true">
       <defs>
         <filter id="battle-link-glow" x="-40%" y="-40%" width="180%" height="180%">
           <feGaussianBlur stdDeviation="3.5" result="blur" />
