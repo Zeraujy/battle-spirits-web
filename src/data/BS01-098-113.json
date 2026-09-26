@@ -1,0 +1,714 @@
+[
+  {
+    "id": "BS01-098",
+    "name": "The Burning Battlefield",
+    "nameEN": "The Burning Battlefield",
+    "namePT": "The Burning Battlefield",
+    "nameJP": "燃えさかる戦場",
+    "nameKey": "the-burning-battlefield",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 3,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Attack Step: All your attacking Spirits get +1000 BP.\nLV2 During Your Attack Step: The opponent must block your first attack of this turn if possible.",
+      "ptBR": "LV1/LV2 Durante Seu Attack Step: Todos os seus Spirits atacantes recebem +1000 BP.\nLV2 Durante Seu Attack Step: O oponente deve bloquear seu primeiro ataque deste turno se puder."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-098.webp"
+  },
+  {
+    "id": "BS01-099",
+    "name": "The Canyon Where Sage lives",
+    "nameEN": "The Canyon Where Sage lives",
+    "namePT": "The Canyon Where Sage lives",
+    "nameJP": "百識の谷",
+    "nameKey": "the-canyon-where-sage-lives",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 4,
+    "reduction": [
+      "red",
+      "red"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1 During Your Draw Step: Draw 1 additional card. After drawing, discard 1 card from your Hand.\nLV2 During Your Draw Step: Draw 1 additional card.",
+      "ptBR": "LV1 Durante Seu Draw Step: Compre 1 carta adicional. Depois de comprar, descarte 1 carta da sua Hand.\nLV2 Durante Seu Draw Step: Compre 1 carta adicional."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-099.webp"
+  },
+  {
+    "id": "BS01-100",
+    "name": "The Ruby Sun",
+    "nameEN": "The Ruby Sun",
+    "namePT": "The Ruby Sun",
+    "nameJP": "ルビーの太陽",
+    "nameKey": "the-ruby-sun",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 5,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All White cards cost 1 additional Core to use.\nLV2: Exhaust a White Spirit whenever Cores are placed on or removed from it by something other than a Spirit, Nexus, or Magic effect.",
+      "ptBR": "LV1/LV2: Todas as cartas White custam 1 Core adicional para serem usadas.\nLV2: Deixe Exhausted um Spirit White sempre que Cores forem colocados nele ou removidos dele por algo que não seja efeito de Spirit, Nexus ou Magic."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-100.webp"
+  },
+  {
+    "id": "BS01-101",
+    "name": "The Ancient Dragon Territory",
+    "nameEN": "The Ancient Dragon Territory",
+    "namePT": "The Ancient Dragon Territory",
+    "nameJP": "古龍の縄張り",
+    "nameKey": "the-ancient-dragon-territory",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "red"
+    ],
+    "cost": 6,
+    "reduction": [
+      "red",
+      "red",
+      "red"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "red"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Turn: When a Spirit is destroyed, move all Cores on that Spirit to its owner's Trash instead of their Reserve.\nLV2 During Your Attack Step: Whenever one of your Spirits destroys only an opposing Spirit by comparing BP, draw 1 card.",
+      "ptBR": "LV1/LV2 Durante Seu Turno: Quando um Spirit for destruído, mova todos os Cores sobre aquele Spirit para o Trash do dono em vez da Reserve.\nLV2 Durante Seu Attack Step: Sempre que 1 dos seus Spirits destruir apenas um Spirit do oponente pela comparação de BP, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-101.webp"
+  },
+  {
+    "id": "BS01-102",
+    "name": "The Lost of Old Castle",
+    "nameEN": "The Lost of Old Castle",
+    "namePT": "The Lost of Old Castle",
+    "nameJP": "主無き古城",
+    "nameKey": "the-lost-of-old-castle",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 4,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: All your Purple Spirits get +1000 BP.\nLV2 During Your Start Step: If the opponent has the same number of cards in Hand as you or more, draw 1 card.",
+      "ptBR": "LV1/LV2: Todos os seus Spirits Purple recebem +1000 BP.\nLV2 Durante Seu Start Step: Se o oponente tiver a mesma quantidade de cartas na Hand que você ou mais, compre 1 carta."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-102.webp"
+  },
+  {
+    "id": "BS01-103",
+    "name": "The Swamp of Drain Life",
+    "nameEN": "The Swamp of Drain Life",
+    "namePT": "The Swamp of Drain Life",
+    "nameJP": "命を吸う沼",
+    "nameKey": "the-swamp-of-drain-life",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 5,
+    "reduction": [
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Start Step: Move all Cores in the opponent's Reserve to their Trash.\nLV2 During Your Start Step: Exhaust 1 opposing Spirit.",
+      "ptBR": "LV1/LV2 Durante Seu Start Step: Mova todos os Cores da Reserve do oponente para o Trash dele.\nLV2 Durante Seu Start Step: Deixe 1 Spirit do oponente Exhausted."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-103.webp"
+  },
+  {
+    "id": "BS01-104",
+    "name": "The Historic Battlefield of the Cursed",
+    "nameEN": "The Historic Battlefield of the Cursed",
+    "namePT": "The Historic Battlefield of the Cursed",
+    "nameJP": "千本槍の古戦場",
+    "nameKey": "the-historic-battlefield-of-the-cursed",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: Whenever an opposing Spirit becomes Exhausted, draw 1 card.\nLV2 During Your Attack Step: By moving 1 Core from this Nexus to your Trash, destroy 1 opposing Spirit that blocked at the end of that battle.",
+      "ptBR": "LV1/LV2: Sempre que um Spirit do oponente ficar Exhausted, compre 1 carta.\nLV2 Durante Seu Attack Step: Ao mover 1 Core deste Nexus para seu Trash, destrua 1 Spirit do oponente que bloqueou ao fim daquela batalha."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-104.webp"
+  },
+  {
+    "id": "BS01-105",
+    "name": "The Shackles of Doom",
+    "nameEN": "The Shackles of Doom",
+    "namePT": "The Shackles of Doom",
+    "nameJP": "魔帝の墓標",
+    "nameKey": "the-shackles-of-doom",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "purple"
+    ],
+    "cost": 6,
+    "reduction": [
+      "purple",
+      "purple",
+      "purple"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "purple"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: Spirits with exactly 1 Core on them cannot attack or block.\nLV2 During Either Attack Step: When a Spirit declares an attack, move 1 Core from that Spirit to its owner's Trash.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Spirits com exatamente 1 Core sobre eles não podem atacar nem bloquear.\nLV2 Durante o Attack Step de qualquer jogador: Quando um Spirit declarar um ataque, mova 1 Core daquele Spirit para o Trash do dono."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-105.webp"
+  },
+  {
+    "id": "BS01-106",
+    "name": "The Hermit Wise Tree",
+    "nameEN": "The Hermit Wise Tree",
+    "namePT": "The Hermit Wise Tree",
+    "nameJP": "隠されたる賢者の樹",
+    "nameKey": "the-hermit-wise-tree",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: For each of your Exhausted Spirits, all your attacking and blocking Spirits get +1000 BP.\nLV2 During Your End Step: Refresh all your Spirits.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Para cada um dos seus Spirits Exhausted, todos os seus Spirits atacantes e bloqueadores recebem +1000 BP.\nLV2 Durante Seu End Step: Dê Refresh em todos os seus Spirits."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-106.webp"
+  },
+  {
+    "id": "BS01-107",
+    "name": "The Fruit of Life",
+    "nameEN": "The Fruit of Life",
+    "namePT": "The Fruit of Life",
+    "nameJP": "命の果実",
+    "nameKey": "the-fruit-of-life",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When your Life is reduced by the opponent, draw 1 card.\nLV2: When your Life is reduced by the opponent, put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2: Quando sua Life for reduzida pelo oponente, compre 1 carta.\nLV2: Quando sua Life for reduzida pelo oponente, coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-107.webp"
+  },
+  {
+    "id": "BS01-108",
+    "name": "The Anthill",
+    "nameEN": "The Anthill",
+    "namePT": "The Anthill",
+    "nameJP": "無限蟲の蟻塚",
+    "nameKey": "the-anthill",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: Whenever one of your blocking Spirits destroys only the attacking opposing Spirit by comparing BP, Refresh that blocking Spirit.\nLV2 During Your Attack Step: Whenever one of your attacking Spirits destroys only the blocking opposing Spirit by comparing BP, Refresh that attacking Spirit.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Sempre que 1 dos seus Spirits bloqueadores destruir apenas o Spirit atacante do oponente pela comparação de BP, dê Refresh naquele Spirit bloqueador.\nLV2 Durante Seu Attack Step: Sempre que 1 dos seus Spirits atacantes destruir apenas o Spirit bloqueador do oponente pela comparação de BP, dê Refresh naquele Spirit atacante."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-108.webp"
+  },
+  {
+    "id": "BS01-109",
+    "name": "The Hill of Violent Wind",
+    "nameEN": "The Hill of Violent Wind",
+    "namePT": "The Hill of Violent Wind",
+    "nameJP": "風吹く丘陵",
+    "nameKey": "the-hill-of-violent-wind",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Start Step: Refresh 1 of your Spirits with [High Speed].\nLV2: All Spirits you summon get +1000 BP during the turn they are summoned.",
+      "ptBR": "LV1/LV2 Durante o Start Step do Oponente: Dê Refresh em 1 dos seus Spirits com [High Speed].\nLV2: Todos os Spirits que você invocar recebem +1000 BP durante o turno em que forem invocados."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-109.webp"
+  },
+  {
+    "id": "BS01-110",
+    "name": "The Timeless Ice Field",
+    "nameEN": "The Timeless Ice Field",
+    "namePT": "The Timeless Ice Field",
+    "nameJP": "時止まりの氷原",
+    "nameKey": "the-timeless-ice-field",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 3,
+    "reduction": [
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: All your blocking Spirits get +1000 BP.\nLV2 During the Opponent's Start Step: Choose 1 opposing Spirit. That Spirit must attack if possible during that turn.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Todos os seus Spirits bloqueadores recebem +1000 BP.\nLV2 Durante o Start Step do Oponente: Escolha 1 Spirit do oponente. Aquele Spirit deve atacar se puder durante aquele turno."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-110.webp"
+  },
+  {
+    "id": "BS01-111",
+    "name": "The Diamond Moon",
+    "nameEN": "The Diamond Moon",
+    "namePT": "The Diamond Moon",
+    "nameJP": "ダイヤモンドの月",
+    "nameKey": "the-diamond-moon",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Either Attack Step: All your Spirits battling an opposing Red Spirit get +1000 BP.\nLV2 During Either Attack Step: At the end of battle, destroy an opposing Red Spirit that attacked or blocked one of your Spirits.",
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Todos os seus Spirits que estiverem batalhando contra um Spirit Red do oponente recebem +1000 BP.\nLV2 Durante o Attack Step de qualquer jogador: Ao fim da batalha, destrua um Spirit Red do oponente que atacou ou bloqueou 1 dos seus Spirits."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-111.webp"
+  },
+  {
+    "id": "BS01-112",
+    "name": "The Castle of Eternal Snow",
+    "nameEN": "The Castle of Eternal Snow",
+    "namePT": "The Castle of Eternal Snow",
+    "nameJP": "千年雪の尖塔",
+    "nameKey": "the-castle-of-eternal-snow",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "U",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Start Step: Return 1 opposing Nexus to its owner's Hand.\nLV2 During Your Start Step: Return 1 Spirit to its owner's Hand.",
+      "ptBR": "LV1/LV2 Durante Seu Start Step: Devolva 1 Nexus do oponente para a Hand do dono.\nLV2 Durante Seu Start Step: Devolva 1 Spirit para a Hand do dono."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-112.webp"
+  },
+  {
+    "id": "BS01-113",
+    "name": "The Invaded Silver Snow",
+    "nameEN": "The Invaded Silver Snow",
+    "namePT": "The Invaded Silver Snow",
+    "nameJP": "侵食されゆく銀世界",
+    "nameKey": "the-invaded-silver-snow",
+    "set": "BS01",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "white"
+    ],
+    "cost": 5,
+    "reduction": [
+      "white",
+      "white",
+      "white"
+    ],
+    "rarity": "C",
+    "includedQuantity": 1,
+    "families": [],
+    "symbols": [
+      "white"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During the Opponent's Attack Step: At the start of the step, move all Cores from your Trash to your Reserve.\nLV2 During the Opponent's Attack Step: When one of your Spirits is destroyed, put 1 Core from the Void into your Reserve.",
+      "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: No início do Step, mova todos os Cores do seu Trash para sua Reserve.\nLV2 Durante o Attack Step do Oponente: Quando 1 dos seus Spirits for destruído, coloque 1 Core do Void na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/BS01/BS01-113.webp"
+  }
+]
