@@ -17,6 +17,7 @@ const required = [
   "src/styles/arena/arenaLayoutV321.css",
   "src/game/legalActions.js",
   "src/game/aiEffectSemantics.js",
+  "src/game/aiTacticalMemory.js",
   "src/game/stateValidation.js",
   "src/game/snapshots.js",
   "src/online/publicProfile.js",
@@ -58,7 +59,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.8.1") throw new Error(`package.json está em ${pkg.version}, esperado 3.8.1`);
+if (pkg.version !== "3.9.0") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.0`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -125,6 +126,11 @@ const battleExperience = fs.readFileSync(path.join(root, "src", "components", "g
 const battleExperienceCss = fs.readFileSync(path.join(root, "src", "styles", "arena", "battleExperienceV381.css"), "utf8");
 if (!simulatorPage.includes("BattleExperienceLayer") || !simulatorPage.includes("game-log-v381") || !simulatorPage.includes("arena-card-selected")) throw new Error("A Battle Experience Update v3.8.1 está incompleta.");
 if (!battleExperience.includes("FLASH TIMING") || !battleExperience.includes("classifyBattleLogEntry") || !battleExperienceCss.includes("battle-exp-phase-cue")) throw new Error("A camada visual Battle Experience v3.8.1 está incompleta.");
+
+const tacticalMemory = fs.readFileSync(path.join(root, "src", "game", "aiTacticalMemory.js"), "utf8");
+const aiEngine = fs.readFileSync(path.join(root, "src", "game", "ai.js"), "utf8");
+if (!tacticalMemory.includes("public-actions-only") || !tacticalMemory.includes("tacticalMemoryActionBias")) throw new Error("A Tactical Memory v3.9.0 está incompleta.");
+if (!aiEngine.includes("buildAITacticalMemory") || !simulatorPage.includes("Memória tática")) throw new Error("A integração Eternal CPU Tactical Memory v3.9.0 está incompleta.");
 
 const publicProfile = fs.readFileSync(path.join(root, "src", "online", "publicProfile.js"), "utf8");
 const socketClient = fs.readFileSync(path.join(root, "src", "online", "socketClient.js"), "utf8");

@@ -203,3 +203,51 @@
     max-height: 58vh;
   }
 }
+
+/* v3.9.0 — Eternal CPU Tactical Memory */
+.ai-debugger-memory {
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: 10px;
+}
+
+.ai-debugger-memory > small {
+  display: block;
+  margin-bottom: 9px;
+  opacity: 0.68;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ai-debugger-memory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.ai-debugger-memory-grid span {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 7px;
+  font-size: 0.78rem;
+}
+
+.ai-debugger-memory-grid b {
+  font-variant-numeric: tabular-nums;
+}
+
+.ai-debugger-memory p {
+  margin: 9px 0 0;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  opacity: 0.62;
+}
+
+.ai-debugger-memory-reasons {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 8px;
+}

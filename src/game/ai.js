@@ -13,6 +13,7 @@ import { getBurstActivationEvent, isBurstCard } from "./burstRules.js";
 import { otherPlayerId } from "./utils.js";
 import { analyzeEffectTransition } from "./aiEffectSemantics.js";
 import { analyzeDeckArchetype, archetypeActionBias, inferPlayerArchetype } from "./aiArchetypes.js";
+import { buildAITacticalMemory, tacticalMemoryActionBias } from "./aiTacticalMemory.js";
 
 const DIFFICULTIES = new Set(["easy", "normal", "hard"]);
 const PROGRESS_ACTIONS = new Set([
@@ -980,10 +981,20 @@ function scoreCandidate(match, playerId, candidate, cardIndex, options, legalAct
     archetypeProfile
   );
 
+  const tacticalMemory = options.tacticalMemory || buildAITacticalMemory(match, playerId);
+  const memoryAnalysis = tacticalMemoryActionBias(
+    match,
+    playerId,
+    candidate.action,
+    tacticalMemory,
+    options.difficulty || match?.ai?.difficulty || "normal"
+  );
+
   let score = delta * 1.25;
   score += effectAnalysis.score * semanticWeight;
   score += categoryBias(match, playerId, candidate, result, cardIndex, legalActions);
   score += archetypeAnalysis.score;
+  score += memoryAnalysis.score;
   score += repeatedActionPenalty(candidate.action, options.recentActionKeys || []);
 
   if (result.match.winnerId === playerId) score += 500_000;
@@ -999,6 +1010,9 @@ function scoreCandidate(match, playerId, candidate, cardIndex, options, legalAct
     effectReasons: semanticWeight ? effectAnalysis.reasons : [],
     archetypeScore: archetypeAnalysis.score,
     archetypeReasons: archetypeAnalysis.reasons,
+    tacticalMemoryScore: memoryAnalysis.score,
+    tacticalMemoryReasons: memoryAnalysis.reasons,
+    tacticalMemory,
     archetypeProfile
   };
 }
@@ -1008,7 +1022,8 @@ export function rankAIActions(match, playerId, cardIndex, options = {}) {
   if (getMatchActor(match) !== playerId) return [];
 
   const archetypeProfile = resolveAIArchetypeProfile(match, playerId, cardIndex, options);
-  const effectiveOptions = { ...options, archetypeProfile };
+  const tacticalMemory = options.tacticalMemory || buildAITacticalMemory(match, playerId);
+  const effectiveOptions = { ...options, archetypeProfile, tacticalMemory };
   const legalActions = getLegalActions(match, playerId, cardIndex);
   const ranked = [];
 
@@ -1158,7 +1173,8 @@ export function rankAIPlans(match, playerId, cardIndex, options = {}) {
       : "normal";
 
   const archetypeProfile = resolveAIArchetypeProfile(match, playerId, cardIndex, options);
-  const effectiveOptions = { ...options, archetypeProfile };
+  const tacticalMemory = options.tacticalMemory || buildAITacticalMemory(match, playerId);
+  const effectiveOptions = { ...options, archetypeProfile, tacticalMemory };
   const immediate = rankAIActions(match, playerId, cardIndex, effectiveOptions);
   const profile = planningProfile(difficulty, effectiveOptions);
   if (!immediate.length || profile.depth <= 0 || !planningWindowOpen(match, playerId)) {
@@ -1279,7 +1295,8 @@ export function chooseAIDecision(match, playerId, cardIndex, options = {}) {
       ? match.ai.difficulty
       : "normal";
   const archetypeProfile = resolveAIArchetypeProfile(match, playerId, cardIndex, options);
-  const effectiveOptions = { ...options, difficulty, archetypeProfile };
+  const tacticalMemory = options.tacticalMemory || buildAITacticalMemory(match, playerId);
+  const effectiveOptions = { ...options, difficulty, archetypeProfile, tacticalMemory };
 
   const ranked =
     difficulty === "easy"
@@ -1320,6 +1337,7 @@ export function chooseAIDecision(match, playerId, cardIndex, options = {}) {
     ranked,
     difficulty,
     archetypeProfile,
+    tacticalMemory,
     selectionReason
   };
 }

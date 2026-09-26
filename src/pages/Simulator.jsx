@@ -488,7 +488,9 @@ function summarizeAIDebugEntry(entry) {
     effectScore: Number(entry.effectScore || 0),
     effectReasons: Array.isArray(entry.effectReasons) ? entry.effectReasons.slice(0, 4) : [],
     archetypeScore: Number(entry.archetypeScore || 0),
-    archetypeReasons: Array.isArray(entry.archetypeReasons) ? entry.archetypeReasons.slice(0, 4) : []
+    archetypeReasons: Array.isArray(entry.archetypeReasons) ? entry.archetypeReasons.slice(0, 4) : [],
+    tacticalMemoryScore: Number(entry.tacticalMemoryScore || 0),
+    tacticalMemoryReasons: Array.isArray(entry.tacticalMemoryReasons) ? entry.tacticalMemoryReasons.slice(0, 4) : []
   };
 }
 
@@ -1235,6 +1237,7 @@ export default function Simulator({
         difficulty: decision.difficulty,
         selectionReason: decision.selectionReason,
         archetypeProfile: decision.archetypeProfile,
+        tacticalMemory: decision.tacticalMemory,
         chosen: summarizeAIDebugEntry(decision.chosen),
         alternatives: decision.ranked.slice(0, 5).map(summarizeAIDebugEntry)
       });
@@ -5373,7 +5376,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v3.8.1 • Arena 2D
+            Eternal v3.9.0 • Arena 2D
           </span>
 
           <strong>
@@ -5597,6 +5600,23 @@ export default function Simulator({
                 </span>
               </section>
 
+              {aiDebugDecision.tacticalMemory && (
+                <section className="ai-debugger-memory">
+                  <small>{language === "en" ? "Tactical memory · public information" : "Memória tática · informação pública"}</small>
+                  <div className="ai-debugger-memory-grid">
+                    <span>{language === "en" ? "Aggression" : "Agressividade"}<b>{Math.round((aiDebugDecision.tacticalMemory.tendencies?.aggression || 0) * 100)}%</b></span>
+                    <span>{language === "en" ? "Block rate" : "Taxa de bloqueio"}<b>{Math.round((aiDebugDecision.tacticalMemory.tendencies?.blockRate || 0) * 100)}%</b></span>
+                    <span>{language === "en" ? "Flash threat" : "Ameaça de Flash"}<b>{Math.round((aiDebugDecision.tacticalMemory.tendencies?.flashThreat || 0) * 100)}%</b></span>
+                    <span>{language === "en" ? "Burst habit" : "Uso de Burst"}<b>{Math.round((aiDebugDecision.tacticalMemory.tendencies?.burstHabit || 0) * 100)}%</b></span>
+                  </div>
+                  <p>
+                    {language === "en"
+                      ? `${aiDebugDecision.tacticalMemory.counters?.observedActions || 0} public opponent actions observed. Hidden hand, deck order and facedown Burst identity are never read.`
+                      : `${aiDebugDecision.tacticalMemory.counters?.observedActions || 0} ações públicas do adversário observadas. Mão, ordem do deck e identidade do Burst virado para baixo nunca são lidos.`}
+                  </p>
+                </section>
+              )}
+
               {aiDebugDecision.chosen && (
                 <section className="ai-debugger-chosen">
                   <div className="ai-debugger-choice-head">
@@ -5609,6 +5629,7 @@ export default function Simulator({
                     <span>Immediate <b>{formatAIScore(aiDebugDecision.chosen.immediateScore)}</b></span>
                     <span>Lookahead <b>{formatAIScore(aiDebugDecision.chosen.planBonus)}</b></span>
                     <span>Archetype <b>{formatAIScore(aiDebugDecision.chosen.archetypeScore)}</b></span>
+                    <span>Memory <b>{formatAIScore(aiDebugDecision.chosen.tacticalMemoryScore)}</b></span>
                     <span>Effect <b>{formatAIScore(aiDebugDecision.chosen.effectScore)}</b></span>
                   </div>
 
@@ -5627,6 +5648,16 @@ export default function Simulator({
                     <div className="ai-debugger-reasons">
                       {aiDebugDecision.chosen.archetypeReasons.map((reason, index) => (
                         <p key={`arch-${index}`}>
+                          <b>{formatAIScore(reason.score)}</b> {aiDebugReasonText(reason, language)}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+
+                  {!!aiDebugDecision.chosen.tacticalMemoryReasons.length && (
+                    <div className="ai-debugger-reasons ai-debugger-memory-reasons">
+                      {aiDebugDecision.chosen.tacticalMemoryReasons.map((reason, index) => (
+                        <p key={`memory-${index}`}>
                           <b>{formatAIScore(reason.score)}</b> {aiDebugReasonText(reason, language)}
                         </p>
                       ))}

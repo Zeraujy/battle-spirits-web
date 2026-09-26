@@ -13,6 +13,18 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.9.0",
+    date: { pt: "26/09/2026", en: "09/26/2026" },
+    title: { pt: "Eternal CPU Tactical Memory", en: "Eternal CPU Tactical Memory" },
+    summary: { pt: "A Eternal CPU passa a adaptar decisões ao comportamento público observado durante a partida, sem acessar mão, deck oculto ou identidade de Burst virado para baixo.", en: "Eternal CPU now adapts decisions to public behavior observed during the match without accessing hidden hand, deck order or facedown Burst identity." },
+    sections: [
+      { title: { pt: "Memória pública", en: "Public memory" }, items: { pt: ["A memória usa somente o Action Log estruturado: ataques, bloqueios, passes/uso de Flash, Burst e outras ações já reveladas.", "Mão adversária, ordem do deck e identidade de Burst virado para baixo não entram no cálculo.", "A memória é reconstruída do histórico público e não cria uma segunda fonte de verdade para a engine."], en: ["Memory uses only the structured Action Log: attacks, blocks, Flash passes/uses, Burst and other already-revealed actions.", "Opponent hand identities, deck order and facedown Burst identity never enter the calculation.", "Memory is rebuilt from public history and does not create a second source of truth for the engine."] } },
+      { title: { pt: "Adaptação tática", en: "Tactical adaptation" }, items: { pt: ["Hard usa a influência completa; Normal recebe uma influência menor e Easy continua sem memória tática.", "Padrões de Magic em Flash, uso de Burst e comportamento de bloqueio ajustam levemente o score de ataque/defesa.", "A memória nunca torna uma ação ilegal disponível: toda escolha continua vindo de getLegalActions()."], en: ["Hard uses the full influence; Normal gets a smaller influence and Easy remains without tactical memory.", "Flash Magic, Burst usage and blocking patterns slightly adjust offensive/defensive action scores.", "Memory never makes an illegal action available: every choice still comes from getLegalActions()."] } },
+      { title: { pt: "AI Debugger", en: "AI Debugger" }, items: { pt: ["Novo painel mostra agressividade, taxa de bloqueio, ameaça de Flash, hábito de Burst e amostragem observada.", "O score Memory aparece ao lado de Immediate, Lookahead, Archetype e Effect.", "Motivos da memória são exibidos na decisão escolhida para facilitar testes e balanceamento."], en: ["A new panel shows aggression, block rate, Flash threat, Burst habit and observed sample size.", "Memory score appears beside Immediate, Lookahead, Archetype and Effect.", "Memory reasons appear on the chosen decision to make testing and balancing easier."] } }
+    ]
+  },
+
+  {
     version: "3.8.1",
     date: { pt: "26/09/2026", en: "09/26/2026" },
     title: { pt: "Battle Experience Update", en: "Battle Experience Update" },

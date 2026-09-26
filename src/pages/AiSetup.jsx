@@ -94,7 +94,7 @@ export default function AiSetup({ onBack, onStart, onDeckBuilder }) {
     onStart({
       ...match,
       ai: {
-        version: 4,
+        version: 5,
         playerId: "player2",
         humanPlayerId: "player1",
         difficulty,
