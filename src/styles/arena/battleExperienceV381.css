@@ -121,3 +121,33 @@
   .simulator-page .battle-link-overlay .battle-link-core,
   .simulator-page .battle-link-overlay .battle-link-origin { animation:none!important; }
 }
+
+/* v3.9.2 — Custom Match turn clock */
+.custom-turn-clock {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  margin-top: 3px;
+  padding: 3px 7px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.035);
+  font-size: 10px;
+  letter-spacing: .12em;
+  font-variant-numeric: tabular-nums;
+}
+.custom-turn-clock.warning {
+  border-color: rgba(255,255,255,.34);
+  animation: eternal-clock-pulse 1.2s ease-in-out infinite;
+}
+.custom-turn-clock.danger {
+  border-color: rgba(255,255,255,.6);
+  background: rgba(255,255,255,.09);
+  animation: eternal-clock-pulse .55s ease-in-out infinite;
+}
+@keyframes eternal-clock-pulse {
+  50% { opacity: .58; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .custom-turn-clock.warning,
+  .custom-turn-clock.danger { animation: none; }
+}

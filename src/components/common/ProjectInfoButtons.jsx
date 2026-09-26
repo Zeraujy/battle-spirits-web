@@ -13,6 +13,18 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "3.9.2",
+    date: { pt: "26/09/2026", en: "09/26/2026" },
+    title: { pt: "Custom Match Settings", en: "Custom Match Settings" },
+    summary: { pt: "O Online Normal ganha salas realmente configuráveis: primeiro jogador, relógio por turno, Mulligan e um preset LAB para testes de deck, sempre com autoridade server-side.", en: "Normal Online gets truly configurable rooms: starting player, server-side turn clock, Mulligan and a LAB deck-testing preset, all under server authority." },
+    sections: [
+      { title: { pt: "Configurações da sala", en: "Room settings" }, items: { pt: ["Host escolhe início aleatório, Host primeiro ou Convidado primeiro.", "Tempo de turno pode ficar sem limite ou em 60, 90, 120 e 180 segundos.", "Mulligan pode ser desativado por sala e a regra é validada no servidor."], en: ["The host can choose random start, Host first or Guest first.", "Turn time can be unlimited or set to 60, 90, 120 or 180 seconds.", "Mulligan can be disabled per room and the rule is enforced by the server."] } },
+      { title: { pt: "LAB · testes", en: "LAB · testing" }, items: { pt: ["Novo preset LAB permite testar decks com pelo menos 1 carta e até 99 cópias pelo mesmo nome.", "O modo LAB não libera cartas inexistentes nem altera regras de efeitos, batalha ou Cores.", "Salas públicas exibem tags de relógio, LAB e preferência de primeiro jogador antes de entrar."], en: ["The new LAB preset allows deck testing with at least 1 card and up to 99 copies of the same name.", "LAB does not allow missing database cards and does not alter effects, battle or Core rules.", "Public rooms show timer, LAB and starting-player tags before joining."] } },
+      { title: { pt: "Autoridade do servidor", en: "Server authority" }, items: { pt: ["O relógio de turno é criado e encerrado pelo servidor; o cliente apenas mostra a contagem regressiva.", "Timeout encerra a partida com motivo turn_timeout e o timer só reinicia quando o turno muda de verdade.", "Ranked permanece isolado e ignora Custom Match Settings; Quick Match continua usando regras padrão."], en: ["The turn clock is created and resolved by the server; clients only display the countdown.", "Timeout ends the match with turn_timeout and the clock resets only when the turn actually changes.", "Ranked stays isolated and ignores Custom Match Settings; Quick Match keeps standard rules."] } }
+    ]
+  },
+
+  {
     version: "3.9.1",
     date: { pt: "26/09/2026", en: "09/26/2026" },
     title: { pt: "Online Lobby 2.0", en: "Online Lobby 2.0" },

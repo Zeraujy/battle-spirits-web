@@ -69,6 +69,10 @@ export default function OnlineLobby({
   const [roomVisibility, setRoomVisibility] = useState("public");
   const [roomPassword, setRoomPassword] = useState("");
   const [spectatorsAllowed, setSpectatorsAllowed] = useState(false);
+  const [firstPlayerMode, setFirstPlayerMode] = useState("random");
+  const [turnTimerSeconds, setTurnTimerSeconds] = useState(0);
+  const [mulliganEnabled, setMulliganEnabled] = useState(true);
+  const [roomRuleset, setRoomRuleset] = useState("standard");
   const [lobbySnapshot, setLobbySnapshot] = useState({ rooms: [], players: [], counts: {} });
   const [roomFilter, setRoomFilter] = useState("open");
 
@@ -714,7 +718,11 @@ export default function OnlineLobby({
           title: roomTitle,
           visibility: roomVisibility,
           password: roomPassword,
-          spectatorsAllowed
+          spectatorsAllowed,
+          firstPlayerMode,
+          turnTimerSeconds,
+          mulliganEnabled,
+          ruleset: roomRuleset
         }
       },
       (result) => {
@@ -800,13 +808,7 @@ export default function OnlineLobby({
 
   function start() {
     client.startRoom(
-      {
-        firstPlayerId:
-          Math.random() <
-          0.5
-            ? "player1"
-            : "player2"
-      },
+      {},
       (result) => {
         if (
           !result?.ok
@@ -867,6 +869,12 @@ export default function OnlineLobby({
           status={`${room.settings?.title || `SALA ${room.code}`} · ${status.toUpperCase()}`}
           badge={room.settings?.visibility === "public" ? "PUBLIC" : "PRIVATE"}
         >
+          <div className="online-custom-summary">
+            <span><b>Início</b>{room.settings?.firstPlayerMode === "host" ? "Host" : room.settings?.firstPlayerMode === "guest" ? "Convidado" : "Aleatório"}</span>
+            <span><b>Turno</b>{room.settings?.turnTimerSeconds ? `${room.settings.turnTimerSeconds}s` : "Sem limite"}</span>
+            <span><b>Mulligan</b>{room.settings?.mulliganEnabled === false ? "Desativado" : "Ativo"}</span>
+            <span><b>Regras</b>{room.settings?.ruleset === "lab" ? "LAB" : "Eternal"}</span>
+          </div>
           {isHost && !room.started && (
             <MatchMenuButton
               label="Iniciar partida"
@@ -930,6 +938,42 @@ export default function OnlineLobby({
               <span>Senha opcional</span>
               <input type="password" value={roomPassword} maxLength={64} onChange={(event) => setRoomPassword(event.target.value)} placeholder="Sem senha" />
             </label>
+            <div className="online-custom-settings">
+              <div className="online-custom-settings-heading">
+                <span>CONFIGURAÇÕES DA PARTIDA</span>
+                <small>Somente Online Normal · Ranked ignora estas opções</small>
+              </div>
+              <label>
+                <span>Primeiro jogador</span>
+                <select value={firstPlayerMode} onChange={(event) => setFirstPlayerMode(event.target.value)}>
+                  <option value="random">Aleatório a cada partida</option>
+                  <option value="host">Host começa</option>
+                  <option value="guest">Convidado começa</option>
+                </select>
+              </label>
+              <label>
+                <span>Tempo por turno</span>
+                <select value={turnTimerSeconds} onChange={(event) => setTurnTimerSeconds(Number(event.target.value))}>
+                  <option value={0}>Sem limite</option>
+                  <option value={60}>60 segundos</option>
+                  <option value={90}>90 segundos</option>
+                  <option value={120}>120 segundos</option>
+                  <option value={180}>180 segundos</option>
+                </select>
+              </label>
+              <label>
+                <span>Regras do deck</span>
+                <select value={roomRuleset} onChange={(event) => setRoomRuleset(event.target.value)}>
+                  <option value="standard">Eternal padrão</option>
+                  <option value="lab">LAB · teste de decks</option>
+                </select>
+                {roomRuleset === "lab" && <small className="online-custom-warning">LAB permite decks a partir de 1 carta e até 99 cópias pelo mesmo nome. Use apenas para testes.</small>}
+              </label>
+              <label className="online-lobby2-check">
+                <input type="checkbox" checked={mulliganEnabled} onChange={(event) => setMulliganEnabled(event.target.checked)} />
+                <span>Permitir Mulligan no início da partida</span>
+              </label>
+            </div>
             <label className="online-lobby2-check">
               <input type="checkbox" checked={spectatorsAllowed} onChange={(event) => setSpectatorsAllowed(event.target.checked)} />
               <span>Permitir espectadores quando o modo estiver disponível</span>
@@ -1035,7 +1079,7 @@ export default function OnlineLobby({
           <div className="online-lobby2-dashboard">
             <header className="online-lobby2-hero">
               <div>
-                <span>ONLINE LOBBY 2.0</span>
+                <span>CUSTOM MATCH · ONLINE LOBBY</span>
                 <h2>ENCONTRE SUA PRÓXIMA BATALHA</h2>
                 <p>Salas públicas, convites privados e jogadores conectados em uma única tela.</p>
               </div>
@@ -1068,6 +1112,9 @@ export default function OnlineLobby({
                       <span className="online-lobby2-room-tags">
                         {entry.locked && <em>LOCK</em>}
                         {entry.spectatorsAllowed && <em>WATCH</em>}
+                        {entry.custom?.turnTimerSeconds > 0 && <em>{entry.custom.turnTimerSeconds}s</em>}
+                        {entry.custom?.ruleset === "lab" && <em>LAB</em>}
+                        {entry.custom?.firstPlayerMode !== "random" && <em>{entry.custom.firstPlayerMode === "host" ? "HOST 1ST" : "GUEST 1ST"}</em>}
                         <em>{entry.started ? "EM JOGO" : `${entry.players}/${entry.capacity}`}</em>
                       </span>
                       <i>{entry.code}</i>

@@ -21,6 +21,7 @@ const required = [
   "src/game/stateValidation.js",
   "src/game/snapshots.js",
   "src/online/publicProfile.js",
+  "src/online/customMatchSettings.js",
   "src/services/socialService.js",
   "src/services/socialInsights.js",
   "src/services/matchHistoryService.js",
@@ -61,7 +62,7 @@ if (missing.length) {
   process.exit(1);
 }
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-if (pkg.version !== "3.9.1") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.1`);
+if (pkg.version !== "3.9.2") throw new Error(`package.json está em ${pkg.version}, esperado 3.9.2`);
 
 const cardTile = fs.readFileSync(path.join(root, "src", "components", "cards", "CardTile.jsx"), "utf8");
 if (!cardTile.includes("card-image-pending")) throw new Error("CardTile não possui o placeholder de verso durante o carregamento.");
@@ -136,9 +137,11 @@ if (!aiEngine.includes("buildAITacticalMemory") || !simulatorPage.includes("Mem�
 
 const onlineLobby = fs.readFileSync(path.join(root, "src", "pages", "OnlineLobby.jsx"), "utf8");
 const onlineLobbyCss = fs.readFileSync(path.join(root, "src", "styles", "pages", "onlineLobbySafe.css"), "utf8");
-if (!onlineLobby.includes("ONLINE LOBBY 2.0") || !onlineLobby.includes("lobby:snapshot") || !onlineLobby.includes("roomVisibility")) throw new Error("A interface Online Lobby 2.0 v3.9.1 está incompleta.");
-if (!onlineServer.includes("lobby:identify") || !onlineServer.includes("roomDirectoryEntry") || !onlineServer.includes("passwordHash")) throw new Error("O diretório server-side do Online Lobby 2.0 v3.9.1 está incompleto.");
-if (!onlineLobbyCss.includes("online-lobby2-dashboard") || !onlineLobbyCss.includes("online-lobby2-room-list")) throw new Error("O visual Online Lobby 2.0 v3.9.1 está incompleto.");
+if (!onlineLobby.includes("CUSTOM MATCH") || !onlineLobby.includes("lobby:snapshot") || !onlineLobby.includes("roomVisibility")) throw new Error("A interface Custom Match v3.9.2 está incompleta.");
+if (!onlineServer.includes("lobby:identify") || !onlineServer.includes("roomDirectoryEntry") || !onlineServer.includes("passwordHash") || !onlineServer.includes("syncTurnTimer")) throw new Error("O diretório server-side Custom Match v3.9.2 está incompleto.");
+if (!onlineLobbyCss.includes("online-lobby2-dashboard") || !onlineLobbyCss.includes("online-custom-settings")) throw new Error("O visual Custom Match v3.9.2 está incompleto.");
+const customMatchSettings = fs.readFileSync(path.join(root, "src", "online", "customMatchSettings.js"), "utf8");
+if (!customMatchSettings.includes("resolveFirstPlayerId") || !customMatchSettings.includes("deckValidationOptionsForSettings")) throw new Error("A normalização Custom Match v3.9.2 está incompleta.");
 
 const publicProfile = fs.readFileSync(path.join(root, "src", "online", "publicProfile.js"), "utf8");
 const socketClient = fs.readFileSync(path.join(root, "src", "online", "socketClient.js"), "utf8");

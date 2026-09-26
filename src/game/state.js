@@ -22,6 +22,7 @@ export function validateDeck(deck, cardIndex, options = {}) {
   const errors = [];
   const warnings = [];
   const minimum = options.minimumDeckSize ?? GAME_DEFAULTS.minimumDeckSize;
+  const maxSameName = options.maxSameName ?? GAME_DEFAULTS.maxSameName;
   if (ids.length < minimum) errors.push(`O deck precisa ter pelo menos ${minimum} cartas.`);
 
   const byName = new Map();
@@ -35,7 +36,7 @@ export function validateDeck(deck, cardIndex, options = {}) {
     byName.set(key, (byName.get(key) || 0) + 1);
   }
   for (const [name, count] of byName) {
-    if (count > GAME_DEFAULTS.maxSameName) errors.push(`${name}: máximo de ${GAME_DEFAULTS.maxSameName} cópias pelo mesmo nome.`);
+    if (count > maxSameName) errors.push(`${name}: máximo de ${maxSameName} cópias pelo mesmo nome.`);
   }
   if (ids.length > 80) warnings.push("O formato Eternal não possui limite superior geral; decks muito grandes podem deixar o jogo mais lento.");
   return { ok: errors.length === 0, errors, warnings, size: ids.length };
@@ -99,7 +100,7 @@ export function createMatch({ player1, player2, firstPlayerId = "player1", cardI
     id: uid("match"),
     format: "eternal",
     rulesVersion: "17.1",
-    simulatorVersion: "3.9.1",
+    simulatorVersion: "3.9.2",
     stateSchemaVersion: 1,
     randomSeed,
     turnNumber: 1,

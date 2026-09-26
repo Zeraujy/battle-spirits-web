@@ -8,6 +8,11 @@ import { createClient } from "@supabase/supabase-js";
 import { normalizeCard, makeCardIndex } from "../src/game/cardAdapter.js";
 import { createMatch, validateDeck } from "../src/game/state.js";
 import { applyGameAction } from "../src/game/reducer.js";
+import {
+  normalizeCustomMatchSettings,
+  resolveFirstPlayerId,
+  deckValidationOptionsForSettings
+} from "../src/online/customMatchSettings.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -57,7 +62,7 @@ export async function createBattleSpiritsServer(options = {}) {
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify({
         ok: true,
-        version: "3.9.1",
+        version: "3.9.2",
         rooms: rooms.size,
         cards: cardIndex.size,
         matchmakingQueued: matchmakingQueue.length,
@@ -179,7 +184,8 @@ export async function createBattleSpiritsServer(options = {}) {
         avatar: host.avatar || null
       },
       players: Object.values(room.players || {}).filter(Boolean).length,
-      capacity: 2
+      capacity: 2,
+      custom: normalizeCustomMatchSettings(room.settings)
     };
   }
 
@@ -247,9 +253,53 @@ export async function createBattleSpiritsServer(options = {}) {
         title: room.settings?.title || "Sala de Battle Spirits",
         visibility: room.settings?.visibility || "private",
         locked: Boolean(room.settings?.passwordHash),
-        spectatorsAllowed: Boolean(room.settings?.spectatorsAllowed)
-      }
+        spectatorsAllowed: Boolean(room.settings?.spectatorsAllowed),
+        ...normalizeCustomMatchSettings(room.settings)
+      },
+      turnClock: room.turnClock ? { ...room.turnClock } : null
     };
+  }
+
+  function clearTurnTimer(room) {
+    if (room?.turnTimerHandle) clearTimeout(room.turnTimerHandle);
+    if (room) {
+      room.turnTimerHandle = null;
+      room.turnClock = null;
+    }
+  }
+
+  function syncTurnTimer(room, force = false) {
+    if (!room?.match || room.match.winnerId || room.ranked) {
+      clearTurnTimer(room);
+      return;
+    }
+    const seconds = Number(room.settings?.turnTimerSeconds || 0);
+    if (!seconds) {
+      clearTurnTimer(room);
+      return;
+    }
+    const key = `${room.match.id}:${room.match.turnNumber}:${room.match.activePlayerId}`;
+    if (!force && room.turnClock?.key === key && room.turnTimerHandle) return;
+    clearTurnTimer(room);
+    const deadline = Date.now() + seconds * 1000;
+    room.turnClock = {
+      key,
+      deadline,
+      seconds,
+      turnNumber: room.match.turnNumber,
+      activePlayerId: room.match.activePlayerId
+    };
+    room.turnTimerHandle = setTimeout(() => {
+      const current = rooms.get(room.code);
+      if (!current?.match || current.match.winnerId || current.turnClock?.key !== key) return;
+      const timedOutId = current.match.activePlayerId;
+      const winnerId = timedOutId === "player1" ? "player2" : "player1";
+      current.match = { ...current.match, winnerId, winnerReason: "turn_timeout" };
+      clearTurnTimer(current);
+      emitRoom(current);
+      emitLobbySnapshot();
+    }, seconds * 1000);
+    room.turnTimerHandle.unref?.();
   }
 
   function emitRoom(room) {
@@ -657,7 +707,8 @@ export async function createBattleSpiritsServer(options = {}) {
     onSafe(socket, "room:create", (payload, ack) => {
       const profileValidation = validateOnlineProfilePayload(payload.profile);
       if (!profileValidation.ok) return ack(profileValidation);
-      const validation = validateDeck(payload.deck || [], cardIndex);
+      const customSettings = normalizeCustomMatchSettings(payload?.settings);
+      const validation = validateDeck(payload.deck || [], cardIndex, deckValidationOptionsForSettings(customSettings));
       if (!validation.ok) return ack({ ok: false, error: validation.errors.join(" ") });
       let roomCode = code();
       while (rooms.has(roomCode)) roomCode = code();
@@ -672,7 +723,8 @@ export async function createBattleSpiritsServer(options = {}) {
           title: normalizeRoomTitle(payload?.settings?.title, `${publicProfile(payload.profile).name} · Casual`),
           visibility,
           passwordHash: hashRoomPassword(payload?.settings?.password),
-          spectatorsAllowed: Boolean(payload?.settings?.spectatorsAllowed)
+          spectatorsAllowed: Boolean(payload?.settings?.spectatorsAllowed),
+          ...customSettings
         },
         match: null,
         chat: [],
@@ -695,7 +747,7 @@ export async function createBattleSpiritsServer(options = {}) {
       if (room.settings?.passwordHash && hashRoomPassword(payload?.password) !== room.settings.passwordHash) {
         return ack({ ok: false, error: "Senha da sala incorreta." });
       }
-      const validation = validateDeck(payload.deck || [], cardIndex);
+      const validation = validateDeck(payload.deck || [], cardIndex, deckValidationOptionsForSettings(room.settings));
       if (!validation.ok) return ack({ ok: false, error: validation.errors.join(" ") });
       room.players.player2 = { socketId: socket.id, profile: publicProfile(payload.profile), deck: payload.deck, resumeToken: resumeToken() };
       socket.join(roomCode);
@@ -726,13 +778,14 @@ export async function createBattleSpiritsServer(options = {}) {
       const { room, playerId } = found;
       if (playerId !== "player1") return ack({ ok: false, error: "Apenas o host inicia a partida." });
       if (!room.players.player2) return ack({ ok: false, error: "Aguardando o segundo jogador." });
-      const firstPlayerId = payload.firstPlayerId === "player2" ? "player2" : "player1";
+      const firstPlayerId = resolveFirstPlayerId(room.settings);
       room.match = createMatch({
         player1: { ...room.players.player1.profile, deck: room.players.player1.deck },
         player2: { ...room.players.player2.profile, deck: room.players.player2.deck },
         firstPlayerId,
         cardIndex
       });
+      syncTurnTimer(room, true);
       emitRoom(room);
       emitLobbySnapshot();
 
@@ -772,7 +825,7 @@ export async function createBattleSpiritsServer(options = {}) {
       const accepted = Boolean(room.rematchVotes.player1 && room.rematchVotes.player2);
       if (!accepted) return ack({ ok: true, started: false });
 
-      const firstPlayerId = Math.random() < 0.5 ? "player1" : "player2";
+      const firstPlayerId = resolveFirstPlayerId(room.settings);
       room.match = createMatch({
         player1: { ...room.players.player1.profile, deck: room.players.player1.deck },
         player2: { ...room.players.player2.profile, deck: room.players.player2.deck },
@@ -780,6 +833,7 @@ export async function createBattleSpiritsServer(options = {}) {
         cardIndex
       });
       room.rematchVotes = {};
+      syncTurnTimer(room, true);
       io.to(room.code).emit("room:rematch-started", { firstPlayerId, matchId: room.match.id });
       emitRoom(room);
       ack({ ok: true, started: true });
@@ -790,10 +844,14 @@ export async function createBattleSpiritsServer(options = {}) {
       if (!found) return ack({ ok: false, error: "Sala não encontrada." });
       const { room, playerId } = found;
       if (!room.match) return ack({ ok: false, error: "Partida ainda não iniciada." });
+      if (payload?.action?.type === "MULLIGAN" && room.settings?.mulliganEnabled === false) {
+        return ack({ ok: false, error: "Mulligan desativado nas configurações desta sala." });
+      }
       const result = applyGameAction(room.match, payload.action, playerId, cardIndex);
       if (!result.ok) return ack(result);
       room.match = result.match;
       if (room.ranked && room.match?.winnerId) await settleRankedRoom(room, room.match.winnerId, room.match.winnerReason || "game");
+      syncTurnTimer(room);
       emitRoom(room);
       ack({ ok: true, manualResolutionNeeded: result.manualResolutionNeeded, notes: result.notes });
     });
@@ -831,6 +889,7 @@ export async function createBattleSpiritsServer(options = {}) {
         if (!room) return;
         const anyConnected = Object.values(room.players).filter(Boolean).some((p) => p.socketId);
         if (!anyConnected) {
+          clearTurnTimer(room);
           rooms.delete(room.code);
           emitLobbySnapshot();
         }

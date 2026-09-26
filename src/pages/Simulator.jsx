@@ -590,6 +590,19 @@ export default function Simulator({
       null
   );
 
+  const [turnClockNow, setTurnClockNow] = useState(Date.now());
+
+  useEffect(() => {
+    if (!roomState?.turnClock?.deadline || match?.winnerId) return undefined;
+    setTurnClockNow(Date.now());
+    const interval = setInterval(() => setTurnClockNow(Date.now()), 250);
+    return () => clearInterval(interval);
+  }, [roomState?.turnClock?.deadline, match?.winnerId]);
+
+  const customTurnRemaining = roomState?.turnClock?.deadline
+    ? Math.max(0, Math.ceil((Number(roomState.turnClock.deadline) - turnClockNow) / 1000))
+    : null;
+
   const [
     selectedId,
     setSelectedId
@@ -5376,7 +5389,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v3.9.1 • Arena 2D
+            Eternal v3.9.2 • Arena 2D
           </span>
 
           <strong>
@@ -5393,6 +5406,12 @@ export default function Simulator({
               ].name
             }
           </strong>
+
+          {online && customTurnRemaining !== null && !match.winnerId && (
+            <small className={`custom-turn-clock ${customTurnRemaining <= 15 ? "danger" : customTurnRemaining <= 30 ? "warning" : ""}`}>
+              {language === "en" ? "TURN CLOCK" : "TEMPO DO TURNO"} · {customTurnRemaining}s
+            </small>
+          )}
 
           {aiMode && (
             <small
@@ -6407,6 +6426,7 @@ export default function Simulator({
                         match.players[
                           id
                         ].mulliganUsed ||
+                        (online && roomState?.settings?.mulliganEnabled === false) ||
                         (
                           online
                             ? viewerPlayerId !==
@@ -7095,6 +7115,8 @@ export default function Simulator({
                   ? "Life depleted"
                   : reason === "deck"
                     ? "Deck depleted"
+                    : reason === "turn_timeout"
+                      ? "Turn timer expired"
                     : reason === "concede" ||
                       reason === "surrender"
                       ? "Concession"
@@ -7105,6 +7127,8 @@ export default function Simulator({
                   ? "Life reduzida a 0"
                   : reason === "deck"
                     ? "Deck esgotado"
+                    : reason === "turn_timeout"
+                      ? "Tempo do turno esgotado"
                     : reason === "concede" ||
                       reason === "surrender"
                       ? "Desistência"
@@ -7118,6 +7142,8 @@ export default function Simulator({
                   ? `${defeated?.name || "The opponent"} has no Life remaining.`
                   : reason === "deck"
                     ? `${defeated?.name || "The opponent"} can no longer continue with an empty Deck.`
+                    : reason === "turn_timeout"
+                      ? `${defeated?.name || "The opponent"} ran out of turn time.`
                     : reason === "concede" ||
                       reason === "surrender"
                       ? `${defeated?.name || "The opponent"} conceded the match.`
@@ -7128,6 +7154,8 @@ export default function Simulator({
                   ? `${defeated?.name || "O oponente"} ficou sem Life.`
                   : reason === "deck"
                     ? `${defeated?.name || "O oponente"} não pode continuar com o Deck vazio.`
+                    : reason === "turn_timeout"
+                      ? `${defeated?.name || "O oponente"} ficou sem tempo no turno.`
                     : reason === "concede" ||
                       reason === "surrender"
                       ? `${defeated?.name || "O oponente"} desistiu da partida.`
