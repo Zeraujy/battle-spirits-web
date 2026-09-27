@@ -66,6 +66,12 @@ const DEFAULT_SETTINGS = {
   displayMode:
     "windowed",
 
+  backgroundMode:
+    "static",
+
+  backgroundVideo:
+    "background_video_01.mp4",
+
   updateManifestUrl:
     "",
 
@@ -411,8 +417,10 @@ export function getSettings() {
 export function saveSettings(
   settings
 ) {
-  return write(
+  const saved = write(
     "settings",
     settings
   );
+  try { window?.dispatchEvent?.(new CustomEvent("bs:settings-changed", { detail: saved })); } catch {}
+  return saved;
 }

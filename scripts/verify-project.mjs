@@ -95,6 +95,7 @@ const requiredPaths = [
   "supabase/ECONOMY-4.2.0.sql",
   "supabase/ECONOMY-4.2.1.sql",
   "supabase/ECONOMY-4.2.2.sql",
+  "supabase/ECONOMY-4.3.0.sql",
   "src/data/shopSagas.js",
   "docs/dev/DEVMODE-ADMIN-ARCHITECTURE.md",
   "src/components/economy/StarterOnboarding.jsx",
@@ -106,7 +107,7 @@ const requiredPaths = [
   "scripts/windows"
 ];
 
-console.log("Battle Spirits Simulator v4.2.2 — verificação estrutural\n");
+console.log("Battle Spirits Simulator v4.3.0 — verificação estrutural\n");
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -201,4 +202,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v4.2.2 validada.");
+console.log("\nVERIFY OK — estrutura v4.3.0 validada.");

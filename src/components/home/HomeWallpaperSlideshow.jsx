@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { getSettings } from "../../services/storage.js";
 import "../../styles/theme/homeWallpapers.css";
 
 const WALLPAPERS = Array.from({ length: 10 }, (_, index) =>
@@ -55,6 +56,27 @@ export default function HomeWallpaperSlideshow() {
   const [layerBIndex, setLayerBIndex] = useState(null);
   const [activeLayer, setActiveLayer] = useState("a");
   const [ready, setReady] = useState(false);
+  const [backgroundSettings, setBackgroundSettings] = useState(() => {
+    const settings = getSettings();
+    return {
+      mode: settings.backgroundMode === "video" ? "video" : "static",
+      video: String(settings.backgroundVideo || "background_video_01.mp4")
+    };
+  });
+  const [videoFailed, setVideoFailed] = useState(false);
+
+  useEffect(() => {
+    const sync = () => {
+      const settings = getSettings();
+      setBackgroundSettings({
+        mode: settings.backgroundMode === "video" ? "video" : "static",
+        video: String(settings.backgroundVideo || "background_video_01.mp4")
+      });
+      setVideoFailed(false);
+    };
+    window.addEventListener("bs:settings-changed", sync);
+    return () => window.removeEventListener("bs:settings-changed", sync);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -124,27 +146,45 @@ export default function HomeWallpaperSlideshow() {
     };
   }, []);
 
+  const useVideo = backgroundSettings.mode === "video" && !videoFailed;
+  const videoSrc = `/video/background/${backgroundSettings.video.replace(/[^a-zA-Z0-9._-]/g, "")}`;
+
   return (
-    <div className={`home-wallpaper-slideshow ${ready ? "ready" : ""}`} aria-hidden="true">
-      <img
-        className={`home-wallpaper-layer ${activeLayer === "a" ? "active" : ""}`}
-        src={WALLPAPERS[layerAIndex]}
-        alt=""
-        draggable="false"
-        decoding="async"
-        loading="eager"
-        fetchPriority="high"
-      />
-      {layerBIndex != null && (
-        <img
-          className={`home-wallpaper-layer ${activeLayer === "b" ? "active" : ""}`}
-          src={WALLPAPERS[layerBIndex]}
-          alt=""
-          draggable="false"
-          decoding="async"
-          loading="eager"
-          fetchPriority="low"
+    <div className={`home-wallpaper-slideshow ${ready || useVideo ? "ready" : ""}`} aria-hidden="true">
+      {useVideo ? (
+        <video
+          className="home-background-video"
+          src={videoSrc}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          onError={() => setVideoFailed(true)}
         />
+      ) : (
+        <>
+          <img
+            className={`home-wallpaper-layer ${activeLayer === "a" ? "active" : ""}`}
+            src={WALLPAPERS[layerAIndex]}
+            alt=""
+            draggable="false"
+            decoding="async"
+            loading="eager"
+            fetchPriority="high"
+          />
+          {layerBIndex != null && (
+            <img
+              className={`home-wallpaper-layer ${activeLayer === "b" ? "active" : ""}`}
+              src={WALLPAPERS[layerBIndex]}
+              alt=""
+              draggable="false"
+              decoding="async"
+              loading="eager"
+              fetchPriority="low"
+            />
+          )}
+        </>
       )}
       <div className="home-wallpaper-shade" />
       <div className="home-wallpaper-vignette" />

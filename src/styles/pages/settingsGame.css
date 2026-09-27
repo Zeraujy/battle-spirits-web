@@ -340,3 +340,15 @@
   .settings-game-panel { padding: 16px 14px; border-radius: 16px; }
   .settings-game-actions { padding: 10px; }
 }
+
+.settings-game-tip.admin-entry-card {
+  grid-template-columns: auto minmax(0,1fr) auto;
+  align-items: center;
+}
+.settings-game-tip.admin-entry-card > button {
+  min-height: 38px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.settings-game-field.is-disabled { opacity: .55; }

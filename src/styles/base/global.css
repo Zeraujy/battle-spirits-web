@@ -855,3 +855,34 @@ textarea::selection,
 @media (prefers-reduced-motion: reduce) {
   .card-tile .card-art-image { transition: none; }
 }
+
+/* Shared icon-button alignment */
+button[aria-label],
+.icon-button,
+.close-button,
+.modal-close,
+.settings-game-nav-icon,
+.social-nav-button > i,
+.social-friend-dock header > button,
+.qty-control button {
+  line-height: 1;
+}
+button[aria-label],
+.icon-button,
+.close-button,
+.modal-close,
+.social-friend-dock header > button,
+.qty-control button {
+  align-items: center;
+  justify-content: center;
+}
+button[aria-label]:not(.card-tile) {
+  display: inline-flex;
+}
+button > svg,
+button > i:only-child,
+button > .button-icon,
+button > .icon {
+  flex: 0 0 auto;
+  align-self: center;
+}

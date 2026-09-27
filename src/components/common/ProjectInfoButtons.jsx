@@ -4,6 +4,47 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.3.0",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Crafting, Fundos Dinâmicos & Admin Panel", en: "Crafting, Dynamic Backgrounds & Admin Panel" },
+    summary: {
+      pt: "A economia recebe crafting de cartas, a interface ganha vídeos de fundo opcionais e o sistema passa a contar com administração restrita de gameplay/economia.",
+      en: "The economy gains card crafting, the interface gets optional video backgrounds and the system receives restricted gameplay/economy administration."
+    },
+    sections: [
+      {
+        title: { pt: "Shop, Cartas & Interface", en: "Store, Cards & Interface" },
+        items: {
+          pt: [
+            "Cartas do Card Preview e da abertura de packs agora abrem a mesma janela de detalhes usada no Deck Builder.",
+            "O modal de carta permite forjar cópias com Craft Coins; o custo varia por raridade e cópias após a primeira recebem 25% de desconto.",
+            "A Shop passa a ficar fixa na viewport, com scroll apenas nos catálogos internos, e os controles de ícone receberam correções de alinhamento."
+          ],
+          en: [
+            "Cards in Card Preview and pack opening now open the same detail window used by Deck Builder.",
+            "The card modal can craft copies with Craft Coins; cost scales by rarity and copies after the first receive a 25% discount.",
+            "The Store now stays fixed to the viewport with scrolling limited to internal catalogs, and icon controls received alignment fixes."
+          ]
+        }
+      },
+      {
+        title: { pt: "Fundos & Administração", en: "Backgrounds & Administration" },
+        items: {
+          pt: [
+            "Settings agora permite alternar entre wallpapers estáticos e vídeos MP4 em loop, sempre sem som e com o degradê de navegação preservado.",
+            "O Admin Panel usa autorização segura para ajustar Spirit Coins, Craft Coins e status de gameplay sem expor dados privados.",
+            "A rotina de release passa a incluir verificação de integridade, limpeza de arquivos redundantes e auditoria de conteúdo técnico visível ao jogador."
+          ],
+          en: [
+            "Settings can now switch between static wallpapers and muted looping MP4 backgrounds while preserving the navigation gradient.",
+            "The Admin Panel uses secure authorization to adjust Spirit Coins, Craft Coins and gameplay status without exposing private data.",
+            "The release routine now includes integrity checks, redundant-file cleanup and auditing of technical content visible to players."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "4.2.2",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Preview, Reveal & Catálogo por Sagas", en: "Preview, Reveal & Saga Catalog" },
@@ -32,12 +73,12 @@ const PATCHES = [
         items: {
           pt: [
             "Boosters e Decks agora podem ser filtrados por saga/era na lateral da Shop.",
-            "A taxonomia da Shop foi estruturada em src/data/shopSagas.js para crescer junto da database.",
+            "A organização da Shop foi preparada para crescer junto do catálogo de cartas.",
             "A arquitetura de DevMode/Admin foi documentada para implementação futura; nenhum comando administrativo foi ativado nesta versão."
           ],
           en: [
             "Boosters and Decks can now be filtered by saga/era from the Store sidebar.",
-            "Store taxonomy is structured in src/data/shopSagas.js so it can grow with the database.",
+            "The Store organization is prepared to grow together with the card catalog.",
             "The DevMode/Admin architecture is documented for future implementation; no admin command is enabled in this version."
           ]
         }

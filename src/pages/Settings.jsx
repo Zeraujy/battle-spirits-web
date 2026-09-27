@@ -27,6 +27,7 @@ import {
   useLanguage
 } from "../i18n.jsx";
 
+import { getAdminAccess } from "../services/adminService.js";
 import "../styles/theme/themeLibrary.css";
 import "../styles/pages/settingsGame.css";
 import "../styles/pages/eternalInterfaceV350.css";
@@ -245,14 +246,23 @@ export default function Settings({
     "general"
   );
 
+  const [adminAllowed, setAdminAllowed] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    getAdminAccess().then((result) => {
+      if (active) setAdminAllowed(Boolean(result?.allowed));
+    }).catch(() => {});
+    return () => { active = false; };
+  }, []);
+
 
   const [
     appInfo,
     setAppInfo
   ] = useState({
     version:
-      "4.2.2",
-      "4.2.1",
+      "4.3.0",
 
     packaged:
       false
@@ -789,6 +799,16 @@ export default function Settings({
                 </div>
               </div>
 
+              {adminAllowed && (
+                <div className="settings-game-tip admin-entry-card">
+                  <span>◆</span>
+                  <div>
+                    <strong>Admin Panel</strong>
+                    <small>{pt ? "Gerencie economia e estados de gameplay das contas autorizadas." : "Manage economy and gameplay states for authorized accounts."}</small>
+                  </div>
+                  <button type="button" onClick={onAdmin}>{pt ? "Abrir painel" : "Open panel"}</button>
+                </div>
+              )}
 
             </div>
           )}
@@ -838,6 +858,35 @@ export default function Settings({
                 </label>
               </div>
 
+              <div className="settings-game-grid two settings-background-controls">
+                <label className="settings-game-field">
+                  <span>{pt ? "Fundo do menu" : "Menu background"}</span>
+                  <small>{pt ? "Alterne entre wallpapers estáticos e vídeos em loop." : "Switch between static wallpapers and looping videos."}</small>
+                  <select
+                    value={draft.backgroundMode || "static"}
+                    onChange={(e) => setDraft({ ...draft, backgroundMode: e.target.value })}
+                  >
+                    <option value="static">{pt ? "Wallpapers estáticos" : "Static wallpapers"}</option>
+                    <option value="video">{pt ? "Vídeo em loop" : "Looping video"}</option>
+                  </select>
+                </label>
+
+                <label className={`settings-game-field ${draft.backgroundMode !== "video" ? "is-disabled" : ""}`}>
+                  <span>{pt ? "Vídeo de fundo" : "Background video"}</span>
+                  <small>{pt ? "Selecione o vídeo que será usado no fundo." : "Choose the video used as the background."}</small>
+                  <select
+                    value={draft.backgroundVideo || "background_video_01.mp4"}
+                    disabled={draft.backgroundMode !== "video"}
+                    onChange={(e) => setDraft({ ...draft, backgroundVideo: e.target.value })}
+                  >
+                    {Array.from({ length: 12 }, (_, index) => {
+                      const value = `background_video_${String(index + 1).padStart(2, "0")}.mp4`;
+                      return <option key={value} value={value}>{pt ? `Vídeo ${index + 1}` : `Video ${index + 1}`}</option>;
+                    })}
+                  </select>
+                </label>
+              </div>
+
               <div className="settings-game-tip">
                 <span>i</span>
                 <div>
@@ -854,7 +903,7 @@ export default function Settings({
                 <div>
                   <span className="eyebrow">AUDIO</span>
                   <h2>{pt ? "Áudio" : "Audio"}</h2>
-                  <p>{pt ? "A estrutura de áudio já fica separada para receber os sons do jogo futuramente." : "The audio section is already separated and ready for future game sounds."}</p>
+                  <p>{pt ? "Os controles de áudio serão disponibilizados em uma atualização futura." : "Audio controls will be available in a future update."}</p>
                 </div>
                 <span className="settings-coming-badge">{pt ? "EM PREPARAÇÃO" : "COMING SOON"}</span>
               </div>

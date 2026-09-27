@@ -14,6 +14,7 @@ const Account = lazy(() => import("./pages/Account.jsx"));
 const DeckBuilder = lazy(() => import("./pages/DeckBuilder.jsx"));
 const Decks = lazy(() => import("./pages/Decks.jsx"));
 const Settings = lazy(() => import("./pages/Settings.jsx"));
+const AdminPanel = lazy(() => import("./pages/AdminPanel.jsx"));
 const LocalSetup = lazy(() => import("./pages/LocalSetup.jsx"));
 const AiSetup = lazy(() => import("./pages/AiSetup.jsx"));
 const OnlineLobby = lazy(() => import("./pages/OnlineLobby.jsx"));
@@ -51,7 +52,8 @@ export default function App() {
   if (mode === "updater") content = <Updater />;
   else if (screen.name === "profile") content = <Profile onBack={() => go("home")} initialUsername={screen.initialUsername || null} />;
   else if (screen.name === "account") content = <Account onBack={() => go("home")} onProfile={() => go("profile")} />;
-  else if (screen.name === "settings") content = <Settings onBack={() => go("home")} />;
+  else if (screen.name === "settings") content = <Settings onBack={() => go("home")} onAdmin={() => go("admin")} />;
+  else if (screen.name === "admin") content = <AdminPanel onBack={() => go("settings")} />;
   else if (screen.name === "tutorial") content = <Tutorial onBack={() => go("home")} onPlayCpu={() => go("ai")} onDeckBuilder={() => go("decks", { backTo: "tutorial" })} />;
   else if (screen.name === "decks") content = <Decks
     onBack={() => screen.backTo ? go(screen.backTo) : go("home")}

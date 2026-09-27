@@ -367,7 +367,8 @@ export default function CardDetailsModal({
   onClose,
   initialLanguage = "ptBR",
   relatedCards = [],
-  onSelectRelated
+  onSelectRelated,
+  crafting = null
 }) {
   const [language, setLanguage] = useState(initialLanguage === "en" ? "en" : "ptBR");
   const cardTiltRef = useRef(null);
@@ -491,7 +492,11 @@ export default function CardDetailsModal({
           noReduction: "None",
           noSymbol: "None",
           related: "Related cards",
-          close: "Close"
+          close: "Close",
+          craft: "Craft",
+          owned: "Owned",
+          discounted: "Collection discount",
+          maxCopies: "Maximum copies reached"
         }
       : {
           title: "Detalhes da Carta",
@@ -510,7 +515,11 @@ export default function CardDetailsModal({
           noReduction: "Nenhuma",
           noSymbol: "Nenhum",
           related: "Cartas relacionadas",
-          close: "Fechar"
+          close: "Fechar",
+          craft: "Forjar",
+          owned: "Possui",
+          discounted: "Desconto de coleção",
+          maxCopies: "Limite máximo atingido"
         };
 
   if (!card) return null;
@@ -602,6 +611,28 @@ export default function CardDetailsModal({
                 {name}
               </h2>
             </section>
+
+            {crafting && (
+              <section className="card-details-crafting-panel">
+                <div>
+                  <span>{labels.craft}</span>
+                  <strong>{crafting.cost} CC</strong>
+                  <small>
+                    {labels.owned}: {crafting.owned}/{crafting.maxOwned}
+                    {crafting.discounted ? ` · ${labels.discounted} −${Math.round((crafting.discount || 0) * 100)}%` : ""}
+                  </small>
+                </div>
+                <button
+                  type="button"
+                  className="card-details-craft-button"
+                  disabled={crafting.busy || crafting.owned >= crafting.maxOwned || crafting.wallet < crafting.cost}
+                  onClick={crafting.onCraft}
+                >
+                  {crafting.owned >= crafting.maxOwned ? labels.maxCopies : crafting.busy ? "…" : `${labels.craft} · ${crafting.cost} CC`}
+                </button>
+                {crafting.message && <p className="card-details-craft-message">{crafting.message}</p>}
+              </section>
+            )}
 
             <section className="card-details-core-info">
               <div className="card-details-cost-card">

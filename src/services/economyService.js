@@ -22,6 +22,21 @@ export const RARITY_CRAFT_VALUES = Object.freeze({
   PX: 120
 });
 
+export const RARITY_CRAFT_COSTS = Object.freeze({
+  C: 40,
+  U: 80,
+  R: 160,
+  M: 320,
+  X: 640,
+  XX: 960,
+  CP: 400,
+  CX: 800,
+  TX: 800,
+  PX: 960
+});
+export const OWNED_CRAFT_DISCOUNT = 0.25;
+
+
 function safeNumber(value) {
   const number = Number(value || 0);
   return Number.isFinite(number) ? Math.max(0, Math.floor(number)) : 0;
@@ -180,6 +195,47 @@ export function collectionQuantityMap(collection = []) {
 
 export function craftValueForRarity(rarity) {
   return RARITY_CRAFT_VALUES[String(rarity || "C").toUpperCase()] ?? 5;
+}
+
+export function craftCostForCard(card, ownedQuantity = 0) {
+  const rarity = String(card?.rarity || "C").toUpperCase();
+  const base = RARITY_CRAFT_COSTS[rarity] ?? RARITY_CRAFT_COSTS.C;
+  const discounted = Number(ownedQuantity || 0) > 0;
+  return {
+    base,
+    discount: discounted ? OWNED_CRAFT_DISCOUNT : 0,
+    cost: Math.max(1, Math.round(base * (discounted ? (1 - OWNED_CRAFT_DISCOUNT) : 1))),
+    discounted
+  };
+}
+
+export async function craftCard(cardOrId) {
+  const { cardIndex } = await catalogRuntime();
+  const card = typeof cardOrId === "string" ? cardIndex.get(cardOrId) : cardOrId;
+  if (!card?.id) return { ok: false, error: "CARD_NOT_FOUND" };
+  const snapshot = await loadEconomySnapshot();
+  const owned = collectionQuantityMap(snapshot.collection).get(card.id) || 0;
+  if (owned >= MAX_OWNED_COPIES) return { ok: false, error: "MAX_OWNED_COPIES" };
+  const pricing = craftCostForCard(card, owned);
+
+  if (!snapshot.signedIn) {
+    const state = readGuestState();
+    if (state.wallet.craftCoins < pricing.cost) return { ok: false, error: "INSUFFICIENT_CRAFT_COINS", pricing };
+    state.wallet.craftCoins -= pricing.cost;
+    const map = collectionQuantityMap(state.collection);
+    map.set(card.id, owned + 1);
+    state.collection = [...map.entries()].map(([cardId, quantity]) => ({ cardId, quantity }));
+    writeGuestState(state);
+    return { ok: true, pricing, snapshot: { ...state, signedIn: false, source: "guest" } };
+  }
+
+  if (!supabase) return { ok: false, error: "ACCOUNT_SERVICE_UNAVAILABLE" };
+  const { data, error } = await supabase.rpc("bs_craft_card", {
+    p_card_id: card.id,
+    p_rarity: String(card.rarity || "C").toUpperCase()
+  });
+  if (error) return { ok: false, error: error.message || "CRAFT_FAILED", pricing };
+  return { ok: true, result: data, pricing, snapshot: await loadEconomySnapshot() };
 }
 
 async function catalogRuntime() {

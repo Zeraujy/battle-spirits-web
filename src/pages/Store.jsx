@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 import EternalCinematicBackdrop from "../components/layout/EternalCinematicBackdrop.jsx";
+import CardDetailsModal from "../components/cards/CardDetailsModal.jsx";
 import { useLanguage } from "../i18n.jsx";
-import { SHOP_ARTWORK, SHOP_CATEGORIES, SHOP_PRODUCTS } from "../data/shopCatalog.js";
+import { SHOP_CATEGORIES, SHOP_PRODUCTS } from "../data/shopCatalog.js";
 import { sagaForProduct, sagaGroupsForProducts } from "../data/shopSagas.js";
 import { cardIndex } from "../services/cardRepository.js";
 import {
   MAX_OWNED_COPIES,
   collectionQuantityMap,
+  craftCard,
+  craftCostForCard,
   formatCoins,
   getDeckRecipe,
   getProductCardPool,
@@ -31,7 +34,7 @@ function Artwork({ product }) {
   const [failed, setFailed] = useState(false);
   useEffect(() => setFailed(false), [product?.artwork]);
   if (!product?.artwork || failed) {
-    return <div className="store-v420-art-fallback"><span>{product?.setCode || product?.title?.slice(0, 3) || "BS"}</span><small>600 × 900</small></div>;
+    return <div className="store-v420-art-fallback"><span>{product?.setCode || product?.title?.slice(0, 3) || "BS"}</span></div>;
   }
   return <img src={product.artwork} alt="" loading="lazy" onError={() => setFailed(true)} />;
 }
@@ -97,7 +100,7 @@ function productDescription(product, pt) {
   return "";
 }
 
-function ProductModal({ product, snapshot, pt, onClose, onPurchased, onReveal }) {
+function ProductModal({ product, snapshot, pt, onClose, onPurchased, onReveal, onOpenCard }) {
   const [quantity, setQuantity] = useState(1);
   const [preview, setPreview] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -161,7 +164,14 @@ function ProductModal({ product, snapshot, pt, onClose, onPurchased, onReveal })
             {loading ? <div className="store-v421-preview-empty">{pt ? "Carregando pool…" : "Loading pool…"}</div> : preview.length ? (
               <div className="store-v422-card-preview-grid">{preview.map((entry) => {
                 const count = owned.get(entry.cardId) || 0;
-                return <article key={entry.cardId} className={count >= MAX_OWNED_COPIES ? "maxed" : ""}>
+                return <article
+                  key={entry.cardId}
+                  className={count >= MAX_OWNED_COPIES ? "maxed" : ""}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => entry.card && onOpenCard(entry.card)}
+                  onKeyDown={(event) => { if (entry.card && (event.key === "Enter" || event.key === " ")) onOpenCard(entry.card); }}
+                >
                   <div className="store-v422-preview-card-art">{entry.card?.image ? <img src={entry.card.image} alt="" loading="lazy" /> : <span>{entry.cardId}</span>}</div>
                   <strong title={entry.card?.namePT || entry.card?.nameEN || entry.card?.name || entry.cardId}>{entry.card?.namePT || entry.card?.nameEN || entry.card?.name || entry.cardId}</strong>
                   <small>{entry.cardId} · {entry.card?.rarity || "—"}{entry.included ? ` · ×${entry.included}` : ""}</small>
@@ -201,7 +211,7 @@ function buildOpeningGroups(opening) {
   return groups;
 }
 
-function PackOpeningSequence({ opening, pt, onClose }) {
+function PackOpeningSequence({ opening, pt, onClose, onOpenCard }) {
   const groups = useMemo(() => buildOpeningGroups(opening), [opening]);
   const [page, setPage] = useState(0);
   const [revealed, setRevealed] = useState(0);
@@ -246,7 +256,14 @@ function PackOpeningSequence({ opening, pt, onClose }) {
           const isNew = Number(grant.before || 0) === 0;
           const craft = Number(grant.craftAwarded || 0);
           const overflow = Boolean(grant.overflow);
-          return <article key={`${grant.cardId}-${index}`} className={`${index < revealed ? "revealed" : "hidden-card"} ${overflow ? "overflow" : ""}`}>
+          return <article
+            key={`${grant.cardId}-${index}`}
+            className={`${index < revealed ? "revealed" : "hidden-card"} ${overflow ? "overflow" : ""}`}
+            role={index < revealed && card ? "button" : undefined}
+            tabIndex={index < revealed && card ? 0 : undefined}
+            onClick={() => { if (index < revealed && card) onOpenCard(card); }}
+            onKeyDown={(event) => { if (index < revealed && card && (event.key === "Enter" || event.key === " ")) onOpenCard(card); }}
+          >
             <div className="store-v422-reveal-card">
               {card?.image ? <img src={card.image} alt="" /> : <span>{grant.cardId}</span>}
               {isNew && <em className="store-v422-new-tag">NEW!</em>}
@@ -275,6 +292,9 @@ export default function Store({ onBack }) {
   const [loading, setLoading] = useState(true);
   const [modalProduct, setModalProduct] = useState(null);
   const [opening, setOpening] = useState(null);
+  const [detailCard, setDetailCard] = useState(null);
+  const [craftBusy, setCraftBusy] = useState(false);
+  const [craftMessage, setCraftMessage] = useState("");
 
   const categoryProducts = useMemo(() => SHOP_PRODUCTS.filter((item) => item.category === activeCategory), [activeCategory]);
   const sagaGroups = useMemo(() => activeCategory === "boosters" || activeCategory === "decks" ? sagaGroupsForProducts(categoryProducts) : [], [activeCategory, categoryProducts]);
@@ -310,6 +330,28 @@ export default function Store({ onBack }) {
     setModalProduct(product);
   }
 
+  const detailOwned = detailCard ? (collectionQuantityMap(snapshot.collection).get(detailCard.id) || 0) : 0;
+  const detailPricing = detailCard ? craftCostForCard(detailCard, detailOwned) : null;
+
+  async function handleCraftCard() {
+    if (!detailCard || craftBusy) return;
+    setCraftBusy(true);
+    setCraftMessage("");
+    const result = await craftCard(detailCard);
+    if (result.ok) {
+      await refresh(result.snapshot || null);
+      setCraftMessage(pt ? "Carta forjada e adicionada à coleção." : "Card crafted and added to your collection.");
+    } else {
+      const error = String(result.error || "");
+      setCraftMessage(
+        error.includes("INSUFFICIENT_CRAFT_COINS") ? (pt ? "Craft Coins insuficientes." : "Not enough Craft Coins.") :
+        error.includes("MAX_OWNED_COPIES") ? (pt ? "Você já possui 6/6 cópias desta carta." : "You already own 6/6 copies of this card.") :
+        (pt ? "Não foi possível forjar esta carta." : "Could not craft this card.")
+      );
+    }
+    setCraftBusy(false);
+  }
+
   const sectionTitle = activeCategory === "boosters" ? "Card Packs" : activeCategory === "decks" ? "Decks" : (pt ? "Acessórios" : "Accessories");
 
   return (
@@ -338,10 +380,26 @@ export default function Store({ onBack }) {
             </section>
           </div>
         )}
-        <footer className="store-v420-footnote"><span>{snapshot.signedIn ? (pt ? "Economia vinculada à sua conta" : "Economy linked to your account") : (pt ? "Modo Guest · progresso apagado ao fechar o simulador" : "Guest Mode · progress is wiped when the simulator closes")}</span><span>{pt ? `Arte da Loja: ${SHOP_ARTWORK.width} × ${SHOP_ARTWORK.height}px` : `Store artwork: ${SHOP_ARTWORK.width} × ${SHOP_ARTWORK.height}px`}</span></footer>
+        <footer className="store-v420-footnote"><span>{snapshot.signedIn ? (pt ? "Economia vinculada à sua conta" : "Economy linked to your account") : (pt ? "Modo Guest · progresso apagado ao fechar o simulador" : "Guest Mode · progress is wiped when the simulator closes")}</span></footer>
       </section>
-      {modalProduct && <ProductModal product={modalProduct} snapshot={snapshot} pt={pt} onClose={() => setModalProduct(null)} onPurchased={refresh} onReveal={setOpening} />}
-      {opening && <PackOpeningSequence opening={opening} pt={pt} onClose={() => setOpening(null)} />}
+      {modalProduct && <ProductModal product={modalProduct} snapshot={snapshot} pt={pt} onClose={() => setModalProduct(null)} onPurchased={refresh} onReveal={setOpening} onOpenCard={(card) => { setCraftMessage(""); setDetailCard(card); }} />}
+      {opening && <PackOpeningSequence opening={opening} pt={pt} onClose={() => setOpening(null)} onOpenCard={(card) => { setCraftMessage(""); setDetailCard(card); }} />}
+      {detailCard && detailPricing && <CardDetailsModal
+        card={detailCard}
+        onClose={() => { setDetailCard(null); setCraftMessage(""); }}
+        initialLanguage={pt ? "ptBR" : "en"}
+        crafting={{
+          cost: detailPricing.cost,
+          discount: detailPricing.discount,
+          discounted: detailPricing.discounted,
+          owned: detailOwned,
+          maxOwned: MAX_OWNED_COPIES,
+          wallet: snapshot.wallet.craftCoins,
+          busy: craftBusy,
+          message: craftMessage,
+          onCraft: handleCraftCard
+        }}
+      />}
     </main>
   );
 }

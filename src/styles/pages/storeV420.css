@@ -296,3 +296,67 @@
 @media (max-width:900px) { .store-v422-preview-modal .store-v421-modal-body { grid-template-columns:190px minmax(0,1fr); } .store-v422-card-preview-grid { grid-template-columns:repeat(auto-fill,minmax(100px,1fr)); } .store-v422-reveal-grid { grid-template-columns:repeat(auto-fit,minmax(115px,1fr)); padding:16px; } }
 @media (max-width:620px) { .store-v422-preview-modal .store-v421-modal-body { display:block; overflow:auto; } .store-v422-card-preview-grid { grid-template-columns:repeat(2,minmax(0,1fr)); max-height:52vh; } .store-v422-opening-backdrop { padding:6px; } .store-v422-opening > header h2 { font-size:21px; } .store-v422-reveal-grid { grid-template-columns:repeat(2,minmax(0,1fr)); align-content:start; } .store-v422-opening > footer { align-items:stretch; flex-direction:column; } .store-v422-opening > footer button { width:100%; } }
 @media (prefers-reduced-motion:reduce) { .store-v422-reveal-grid article { transition:none; } }
+
+/* v4.3.0 viewport layout: the Shop itself never scrolls; only its inner catalog panes do. */
+.store-v420-page {
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.store-v420-shell {
+  min-height: 0;
+  height: 100%;
+  padding-bottom: 18px;
+  display: grid;
+  grid-template-rows: auto minmax(0,1fr) auto;
+  overflow: hidden;
+}
+.store-v420-content {
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.store-v420-series {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.store-v420-products {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.store-v420-collection {
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.store-v420-product-grid {
+  align-content: start;
+}
+.store-v421-quantity button,
+.store-v421-modal-head > button,
+.store-v422-opening footer button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.store-v422-card-preview-grid article[role="button"],
+.store-v422-reveal-grid article[role="button"] {
+  cursor: pointer;
+}
+.store-v422-card-preview-grid article[role="button"]:focus-visible,
+.store-v422-reveal-grid article[role="button"]:focus-visible {
+  outline: 2px solid rgba(255,255,255,.8);
+  outline-offset: 3px;
+}
+@media (max-height: 800px) {
+  .store-v420-topbar { min-height: 76px; padding-top: 10px; padding-bottom: 10px; }
+  .store-v420-shell { padding-top: 12px; }
+  .store-v420-tabs button { min-height: 44px; }
+  .store-v420-content { min-height: 0; }
+}
