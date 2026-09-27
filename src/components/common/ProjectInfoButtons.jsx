@@ -4,6 +4,32 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.3.2",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Correção visual do Admin Panel", en: "Admin Panel Visual Fix" },
+    summary: {
+      pt: "Corrige a ordem de camadas do painel administrativo para exibir corretamente jogadores, carteira, ajustes de economia e status.",
+      en: "Fixes the Admin Panel layer order so players, wallet, economy controls and account status are displayed correctly."
+    },
+    sections: [
+      {
+        title: { pt: "Correção", en: "Fix" },
+        items: {
+          pt: [
+            "O fundo cinematográfico não encobre mais a interface do Admin Panel.",
+            "Lista de jogadores, Spirit Coins, Craft Coins, ajustes e status voltam a ficar totalmente visíveis.",
+            "A autenticação e as permissões administrativas existentes foram preservadas."
+          ],
+          en: [
+            "The cinematic background no longer covers the Admin Panel interface.",
+            "Player list, Spirit Coins, Craft Coins, adjustments and status are fully visible again.",
+            "Existing administrative authentication and permissions were preserved."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "4.3.1",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Hotfix do Admin Panel", en: "Admin Panel Hotfix" },
@@ -18,12 +44,12 @@ const PATCHES = [
           pt: [
             "Contas owner/admin não causam mais erro ao abrir Settings.",
             "O botão Admin Panel recebe corretamente a ação de navegação definida pelo aplicativo.",
-            "As autorizações de segurança continuam sendo verificadas pelo backend/Supabase."
+            "As autorizações administrativas continuam protegidas e validadas pelo sistema."
           ],
           en: [
             "Owner/admin accounts no longer crash when opening Settings.",
             "The Admin Panel button now correctly receives the navigation action defined by the app.",
-            "Security authorization continues to be verified by the backend/Supabase."
+            "Administrative authorization remains protected and validated by the system."
           ]
         }
       }
