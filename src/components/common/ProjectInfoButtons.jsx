@@ -4,6 +4,32 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.3.1",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Hotfix do Admin Panel", en: "Admin Panel Hotfix" },
+    summary: {
+      pt: "Corrige a abertura de Settings para contas owner/admin e restaura o acesso ao Admin Panel.",
+      en: "Fixes Settings for owner/admin accounts and restores access to the Admin Panel."
+    },
+    sections: [
+      {
+        title: { pt: "Correção", en: "Fix" },
+        items: {
+          pt: [
+            "Contas owner/admin não causam mais erro ao abrir Settings.",
+            "O botão Admin Panel recebe corretamente a ação de navegação definida pelo aplicativo.",
+            "As autorizações de segurança continuam sendo verificadas pelo backend/Supabase."
+          ],
+          en: [
+            "Owner/admin accounts no longer crash when opening Settings.",
+            "The Admin Panel button now correctly receives the navigation action defined by the app.",
+            "Security authorization continues to be verified by the backend/Supabase."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "4.3.0",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Crafting, Fundos Dinâmicos & Admin Panel", en: "Crafting, Dynamic Backgrounds & Admin Panel" },

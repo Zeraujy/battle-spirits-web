@@ -172,7 +172,8 @@ function ThemeSwatches({
 
 
 export default function Settings({
-  onBack
+  onBack,
+  onAdmin
 }) {
   const {
     t,
@@ -262,7 +263,7 @@ export default function Settings({
     setAppInfo
   ] = useState({
     version:
-      "4.3.0",
+      "4.3.1",
 
     packaged:
       false
