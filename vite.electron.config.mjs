@@ -1,12 +1,18 @@
 import { defineConfig } from "vite";
+import { builtinModules } from "node:module";
 import { resolve } from "node:path";
 
-// Desktop-only production bundle. The readable Electron sources remain in the
-// repository for development, but packaged clients receive only this minified
-// bundle inside app.asar.
+// Electron main/preload are Node runtimes, not browser bundles. Building them
+// as SSR prevents Vite from replacing node:* built-ins with browser stubs.
+// Those built-ins stay external and are resolved by Electron/Node at runtime.
+const nodeBuiltins = new Set([
+  ...builtinModules,
+  ...builtinModules.map((name) => `node:${name}`),
+]);
+
 export default defineConfig({
   define: {
-    "process.env.NODE_ENV": JSON.stringify("production")
+    "process.env.NODE_ENV": JSON.stringify("production"),
   },
   build: {
     outDir: "desktop-dist",
@@ -14,15 +20,13 @@ export default defineConfig({
     sourcemap: false,
     minify: true,
     reportCompressedSize: false,
-    lib: {
-      entry: {
-        main: resolve("electron/main.cjs"),
-        preload: resolve("electron/preload.cjs")
-      },
-      formats: ["cjs"]
-    },
+    ssr: true,
     rolldownOptions: {
-      external: ["electron", "socket.io-client"],
+      input: {
+        main: resolve("electron/main.cjs"),
+        preload: resolve("electron/preload.cjs"),
+      },
+      external: (id) => id === "electron" || id === "socket.io-client" || nodeBuiltins.has(id),
       output: {
         format: "cjs",
         minify: true,
@@ -30,8 +34,8 @@ export default defineConfig({
         minifyInternalExports: true,
         entryFileNames: "[name].cjs",
         chunkFileNames: "chunks/[name]-[hash].cjs",
-        exports: "auto"
-      }
-    }
-  }
+        exports: "auto",
+      },
+    },
+  },
 });

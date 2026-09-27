@@ -4,7 +4,7 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
-    version: "4.7.4",
+    version: "4.7.5",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Cliente Desktop Único & Auto Update", en: "Single Desktop Client & Auto Update" },
     summary: {

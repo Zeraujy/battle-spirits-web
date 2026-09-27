@@ -1,6 +1,6 @@
 {
   "name": "battle-spirits-kaihou-simulator",
-  "version": "4.7.4",
+  "version": "4.7.5",
   "private": true,
   "type": "module",
   "description": "Battle Spirits: KAIHOU! Simulator v4.7.4 - Linux package metadata + GitHub Actions Node 24 refresh",
