@@ -667,12 +667,12 @@ export default function Simulator({
   const [
     showInspectorDock,
     setShowInspectorDock
-  ] = useState(true);
+  ] = useState(() => !window.matchMedia?.("(max-width: 1220px)")?.matches);
 
   const [
     showControlDock,
     setShowControlDock
-  ] = useState(true);
+  ] = useState(() => !window.matchMedia?.("(max-width: 1220px)")?.matches);
 
   const [
     trashHover,
@@ -2123,8 +2123,9 @@ export default function Simulator({
 
 
   function startCardPointerDrag(e, payload) {
+    const pointerType = e.pointerType || "mouse";
     if (
-      e.button !== 0 ||
+      (pointerType === "mouse" && e.button !== 0) ||
       !payload ||
       payload.playerId !== bottomId ||
       !canControlActor ||
@@ -2133,6 +2134,12 @@ export default function Simulator({
     ) {
       return;
     }
+
+    // Pointer Events cover mouse, pen and touch with the same drag path.
+    // On touch/pen we must prevent browser panning/long-press gestures before
+    // movement begins, otherwise pointercancel can abort the card interaction.
+    if (pointerType !== "mouse") e.preventDefault();
+    try { e.currentTarget.setPointerCapture?.(e.pointerId); } catch {}
 
     previewEnd();
 
@@ -5389,7 +5396,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v4.4.0 • Arena 2D
+            Eternal v4.5.0 • Arena 2D
           </span>
 
           <strong>

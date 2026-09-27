@@ -1,0 +1,30 @@
+/* =========================================================
+   Battle Spirits Eternal Simulator — v4.5.0
+   Public client media protection (best effort, not DRM)
+========================================================= */
+html,
+body,
+#root,
+.app-route-shell {
+  -webkit-touch-callout: none;
+}
+
+img,
+video,
+picture,
+canvas,
+svg,
+[data-protected-media] {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+img,
+video,
+picture,
+canvas,
+[data-protected-media] {
+  user-select: none;
+  -webkit-user-select: none;
+}

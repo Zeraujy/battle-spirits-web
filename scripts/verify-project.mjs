@@ -99,7 +99,14 @@ const requiredPaths = [
   "src/data/shopSagas.js",
   "docs/dev/DEVMODE-ADMIN-ARCHITECTURE.md",
   "src/components/economy/StarterOnboarding.jsx",
-  "src/styles/pages/onboardingV421.css",
+  "src/styles/pages/onboardingV450.css",
+  "src/styles/base/securityV450.css",
+  "src/styles/base/cursorsV450.css",
+  "src/styles/base/responsiveV450.css",
+  "public/assets/cursors/cursor-default.svg",
+  "public/assets/cursors/cursor-pointer.svg",
+  "public/assets/cursors/cursor-grab.svg",
+  "public/assets/cursors/cursor-grabbing.svg",
   "docs/shop/ADDING-SHOP-ITEMS.md",
   "public/images/ui/arena/levels",
   "public/images/arena/wallpaper_arena_default.png",
@@ -107,7 +114,7 @@ const requiredPaths = [
   "scripts/windows"
 ];
 
-console.log("Battle Spirits Simulator v4.4.0 — verificação estrutural\n");
+console.log("Battle Spirits Simulator v4.5.0 — verificação estrutural\n");
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -202,4 +209,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v4.4.0 validada.");
+console.log("\nVERIFY OK — estrutura v4.5.0 validada.");

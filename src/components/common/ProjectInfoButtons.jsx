@@ -4,6 +4,47 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.5.0",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Mobile, Touch & Onboarding UX", en: "Mobile, Touch & Onboarding UX" },
+    summary: {
+      pt: "A interface recebe uma camada responsiva global, gameplay por toque, docks mobile, cursores temáticos e um onboarding de Starter Decks totalmente reformulado.",
+      en: "The interface gains a global responsive layer, touch gameplay, mobile docks, themed cursors and a completely revamped Starter Deck onboarding."
+    },
+    sections: [
+      {
+        title: { pt: "Mobile & Interação", en: "Mobile & Interaction" },
+        items: {
+          pt: [
+            "Layouts principais passam a se adaptar a desktop, tablet e smartphone sem depender de hover.",
+            "A Arena usa Pointer Events para mouse, caneta e toque; cartas podem ser arrastadas com o dedo e os docks Carta/Turno viram painéis retráteis acessíveis por botões.",
+            "Cursores temáticos globais e feedback de glow foram centralizados em variáveis CSS para futuras temporadas e eventos."
+          ],
+          en: [
+            "Main layouts now adapt to desktop, tablet and smartphone without relying on hover.",
+            "The Arena uses Pointer Events for mouse, pen and touch; cards can be dragged with a finger and Card/Turn docks become retractable panels controlled by buttons.",
+            "Global themed cursors and glow feedback are centralized in CSS variables for future seasons and events."
+          ]
+        }
+      },
+      {
+        title: { pt: "Onboarding & Proteção de Assets", en: "Onboarding & Asset Protection" },
+        items: {
+          pt: [
+            "A escolha inicial de Starter Decks agora usa carrossel horizontal com swipe, carta capa em destaque, Decklist completa e Card Details Modal em todas as cartas.",
+            "Confirm Selection só é liberado com exatamente três decks selecionados.",
+            "Context menu, drag nativo de mídia e touch callout foram bloqueados como proteção de conveniência contra download direto de assets no cliente público."
+          ],
+          en: [
+            "Starter Deck onboarding now uses a horizontal swipe carousel with prominent cover cards, full Decklist inspection and the Card Details Modal on every card.",
+            "Confirm Selection is enabled only when exactly three decks are selected.",
+            "Context menus, native media dragging and touch callouts are blocked as convenience protection against direct asset downloads in the public client."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "4.4.0",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Web + Desktop Unificados", en: "Unified Web + Desktop" },

@@ -46,6 +46,28 @@ export default function App() {
     applyDisplaySettings(settings).catch(() => {});
   }, [mode]);
 
+  useEffect(() => {
+    // v4.5.0 — best-effort media protection for the public client.
+    // This removes the browser's convenient save/context-menu paths, but it is
+    // intentionally not presented as DRM: assets delivered to a browser can
+    // still be inspected by a determined user through developer/network tools.
+    const blockContextMenu = (event) => event.preventDefault();
+    const blockMediaDrag = (event) => {
+      const target = event.target;
+      if (target?.closest?.("img, video, canvas, picture, svg, [data-protected-media]")) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener("contextmenu", blockContextMenu, { capture: true });
+    document.addEventListener("dragstart", blockMediaDrag, { capture: true });
+
+    return () => {
+      document.removeEventListener("contextmenu", blockContextMenu, { capture: true });
+      document.removeEventListener("dragstart", blockMediaDrag, { capture: true });
+    };
+  }, []);
+
   const go = (name, props = {}) => setScreen({ name, ...props });
 
   let content;

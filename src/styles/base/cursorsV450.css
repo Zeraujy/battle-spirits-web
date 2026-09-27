@@ -1,0 +1,73 @@
+/* =========================================================
+   Battle Spirits Eternal Simulator — v4.5.0
+   Scalable custom cursor system
+========================================================= */
+:root {
+  --cursor-default: url('/assets/cursors/cursor-default.svg') 2 2, auto;
+  --cursor-pointer: url('/assets/cursors/cursor-pointer.svg') 6 2, pointer;
+  --cursor-grab: url('/assets/cursors/cursor-grab.svg') 16 16, grab;
+  --cursor-grabbing: url('/assets/cursors/cursor-grabbing.svg') 16 16, grabbing;
+  --interaction-glow: drop-shadow(0 0 7px rgba(255,255,255,.24));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body,
+  #root,
+  .app-route-shell,
+  input,
+  textarea,
+  select {
+    cursor: var(--cursor-default);
+  }
+
+  button,
+  a,
+  [role='button'],
+  [data-clickable='true'],
+  .card-tile,
+  .deck-library-card,
+  .store-product-card,
+  .shop-product-card,
+  .starter-v450-deck-card {
+    cursor: var(--cursor-pointer) !important;
+  }
+
+  [draggable='true'],
+  .simulator-page .hand-card-slot .card-tile,
+  .simulator-page .field-card-wrap .card-tile,
+  .simulator-page .core-token.core-clickable {
+    cursor: var(--cursor-grab) !important;
+  }
+
+  [draggable='true']:active,
+  .simulator-page .hand-card-slot .card-tile:active,
+  .simulator-page .field-card-wrap .card-tile:active,
+  .simulator-page .core-token.core-clickable:active,
+  html.card-pointer-dragging *,
+  body.card-pointer-dragging * {
+    cursor: var(--cursor-grabbing) !important;
+  }
+
+  button:not(:disabled),
+  a,
+  [role='button'],
+  .card-tile,
+  .deck-library-card,
+  .store-product-card,
+  .shop-product-card {
+    transition-property: transform, filter, box-shadow, border-color, background-color, color;
+    transition-duration: 150ms;
+    transition-timing-function: ease;
+  }
+
+  button:not(:disabled):hover,
+  a:hover,
+  [role='button']:hover,
+  .card-tile:hover,
+  .deck-library-card:hover,
+  .store-product-card:hover,
+  .shop-product-card:hover {
+    filter: var(--interaction-glow);
+  }
+}
