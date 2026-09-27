@@ -10,10 +10,10 @@ permissions:
 
 jobs:
   validate-web:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -30,8 +30,8 @@ jobs:
     needs: validate-web
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with: { node-version: 24, cache: npm }
       - run: npm ci
       - run: npm run desktop:win
@@ -39,7 +39,7 @@ jobs:
           NODE_ENV: production
           GITHUB_REPOSITORY: ${{ github.repository }}
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: desktop-windows
           path: |
@@ -50,8 +50,8 @@ jobs:
     needs: validate-web
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with: { node-version: 24, cache: npm }
       - run: npm ci
       - run: npm run desktop:mac
@@ -59,7 +59,7 @@ jobs:
           NODE_ENV: production
           GITHUB_REPOSITORY: ${{ github.repository }}
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: desktop-macos
           path: |
@@ -69,10 +69,10 @@ jobs:
 
   linux:
     needs: validate-web
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with: { node-version: 24, cache: npm }
       - run: npm ci
       - run: npm run desktop:linux
@@ -80,7 +80,7 @@ jobs:
           NODE_ENV: production
           GITHUB_REPOSITORY: ${{ github.repository }}
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: desktop-linux
           path: |
@@ -89,10 +89,10 @@ jobs:
 
   publish-desktop:
     needs: [windows, macos, linux]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v7
         with:
           path: release-assets
           merge-multiple: true

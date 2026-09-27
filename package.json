@@ -1,9 +1,9 @@
 {
   "name": "battle-spirits-kaihou-simulator",
-  "version": "4.7.3",
+  "version": "4.7.4",
   "private": true,
   "type": "module",
-  "description": "Battle Spirits: KAIHOU! Simulator v4.7.3 - macOS/Linux CI fix + classic title screen",
+  "description": "Battle Spirits: KAIHOU! Simulator v4.7.4 - Linux package metadata + GitHub Actions Node 24 refresh",
   "main": "electron/main.cjs",
   "scripts": {
     "dev": "npm run prepare:release-config && concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && cross-env ELECTRON_START_URL=http://127.0.0.1:5173 electron .\"",
@@ -109,7 +109,8 @@
       "artifactName": "Battle-Spirits-Linux-${arch}.${ext}",
       "icon": "build/icons/icon.png",
       "executableName": "battle-spirits-kaihou-simulator",
-      "syncDesktopName": true
+      "syncDesktopName": true,
+      "maintainer": "MASK STUDIO <zeraujy@users.noreply.github.com>"
     },
     "extraMetadata": {
       "main": "desktop-dist/main.cjs"
@@ -119,5 +120,9 @@
   "allowScripts": {
     "electron-winstaller@5.4.0": true
   },
-  "desktopName": "com.fan.battlespirits.kaihou.simulator.desktop"
+  "desktopName": "com.fan.battlespirits.kaihou.simulator.desktop",
+  "author": {
+    "name": "MASK STUDIO",
+    "email": "zeraujy@users.noreply.github.com"
+  }
 }
