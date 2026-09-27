@@ -88,6 +88,65 @@ function readUpdateConfig() {
   }
 }
 
+function desktopReleaseConfigPath() {
+  if (app.isPackaged) return path.join(process.resourcesPath, "config", "desktop-release.json");
+  return path.join(appRoot(), "config", "desktop-release.json");
+}
+
+function readDesktopReleaseConfig() {
+  const envRepo = String(process.env.BS_GITHUB_REPOSITORY || "").trim();
+  if (envRepo) return { enabled: true, repository: envRepo };
+  try {
+    return JSON.parse(fs.readFileSync(desktopReleaseConfigPath(), "utf8"));
+  } catch {
+    return { enabled: false, repository: "" };
+  }
+}
+
+function desktopAssetName(platform = process.platform, arch = process.arch) {
+  if (platform === "win32") return "Battle-Spirits-Windows-Setup.exe";
+  if (platform === "darwin") return `Battle-Spirits-macOS-${arch === "arm64" ? "arm64" : "x64"}.zip`;
+  if (platform === "linux") return `Battle-Spirits-Linux-${arch === "arm64" ? "arm64" : "x64"}.AppImage`;
+  return "";
+}
+
+async function fetchGithubReleaseManifest() {
+  const config = readDesktopReleaseConfig();
+  const repository = String(config?.repository || "").trim();
+  if (!config?.enabled || !/^[^/\s]+\/[^/\s]+$/.test(repository)) return null;
+
+  const headers = { Accept: "application/vnd.github+json", "User-Agent": "Battle-Spirits-Desktop" };
+  const response = await net.fetch(`https://api.github.com/repos/${repository}/releases/latest`, { headers, cache: "no-store" });
+  if (!response.ok) throw new Error(`GitHub Releases respondeu HTTP ${response.status}.`);
+  const release = await response.json();
+  const version = String(release?.tag_name || "").replace(/^v/i, "");
+  const fileName = desktopAssetName();
+  const asset = Array.isArray(release?.assets) ? release.assets.find((item) => item?.name === fileName) : null;
+  if (!version || !asset?.browser_download_url) throw new Error(`Release desktop sem asset compatível (${fileName || process.platform}).`);
+
+  let sha256 = "";
+  const checksumAsset = release.assets?.find((item) => item?.name === "SHA256SUMS.txt");
+  if (checksumAsset?.browser_download_url) {
+    try {
+      const sumsResponse = await net.fetch(checksumAsset.browser_download_url, { headers, cache: "no-store" });
+      if (sumsResponse.ok) {
+        const sums = await sumsResponse.text();
+        const line = sums.split(/\r?\n/).find((entry) => entry.trim().endsWith(` ${fileName}`));
+        sha256 = line?.trim().split(/\s+/)[0] || "";
+      }
+    } catch {}
+  }
+
+  return {
+    version,
+    installerUrl: asset.browser_download_url,
+    fileName,
+    sha256,
+    notes: [`Battle Spirits ${release.tag_name || version}`, "Web e Desktop sincronizados na mesma versão."],
+    releaseUrl: release.html_url || `https://github.com/${repository}/releases/latest`
+  };
+}
+
 function compareVersions(a, b) {
   const parse = (value) => String(value || "0").split(".").map((v) => Number.parseInt(v, 10) || 0);
   const av = parse(a);
@@ -106,12 +165,25 @@ function resolveInstallerUrl(manifestUrl, installerUrl) {
 }
 
 async function fetchUpdateManifest() {
+  const githubManifest = await fetchGithubReleaseManifest();
+  if (githubManifest) {
+    const currentVersion = app.getVersion();
+    return {
+      ok: true,
+      available: compareVersions(githubManifest.version, currentVersion) > 0,
+      currentVersion,
+      manifest: githubManifest,
+      source: "github"
+    };
+  }
+
+  // Compatibilidade com instalações desktop antigas que ainda usam manifest URL.
   const config = readUpdateConfig();
   if (!config.manifestUrl) {
     return {
       ok: false,
       code: "NOT_CONFIGURED",
-      error: "Servidor de atualizações ainda não configurado.",
+      error: "Fonte de atualizações ainda não configurada.",
       currentVersion: app.getVersion()
     };
   }
@@ -130,7 +202,8 @@ async function fetchUpdateManifest() {
     manifest: {
       ...manifest,
       installerUrl: resolveInstallerUrl(config.manifestUrl, manifest.installerUrl)
-    }
+    },
+    source: "legacy"
   };
 }
 
@@ -142,7 +215,8 @@ async function downloadAndLaunchUpdate(event, manifest) {
 
   const downloadsDir = path.join(app.getPath("temp"), "battle-spirits-update");
   fs.mkdirSync(downloadsDir, { recursive: true });
-  const target = path.join(downloadsDir, `Battle-Spirits-Setup-${manifest.version}.exe`);
+  const safeFileName = String(manifest.fileName || desktopAssetName() || `Battle-Spirits-${manifest.version}.bin`).replace(/[^a-zA-Z0-9._-]/g, "_");
+  const target = path.join(downloadsDir, safeFileName);
   const temp = `${target}.download`;
   const total = Number(response.headers.get("content-length") || 0);
   let received = 0;
@@ -176,23 +250,81 @@ async function downloadAndLaunchUpdate(event, manifest) {
   fs.rmSync(target, { force: true });
   fs.renameSync(temp, target);
 
-  // Quando o Updater.exe é aberto separadamente, encerra o jogo/servidor
-  // para que o NSIS consiga substituir todos os executáveis.
   const currentExe = path.basename(process.execPath).toLowerCase();
-  if (process.platform === "win32" && currentExe.includes("updater")) {
-    for (const image of ["Battle Spirits.exe", "Battle Spirits Server.exe"]) {
-      await new Promise((resolve) => {
-        const killer = spawn("taskkill", ["/IM", image, "/F"], { windowsHide: true, stdio: "ignore" });
-        killer.on("close", resolve);
-        killer.on("error", resolve);
-      });
+  if (process.platform === "win32") {
+    if (currentExe.includes("updater")) {
+      for (const image of ["Battle Spirits.exe", "Battle Spirits Server.exe"]) {
+        await new Promise((resolve) => {
+          const killer = spawn("taskkill", ["/IM", image, "/F"], { windowsHide: true, stdio: "ignore" });
+          killer.on("close", resolve);
+          killer.on("error", resolve);
+        });
+      }
     }
+    const child = spawn(target, [], { detached: true, stdio: "ignore", windowsHide: false });
+    child.unref();
+    setTimeout(() => app.quit(), 250);
+    return { ok: true, path: target, action: "installer" };
   }
 
-  const child = spawn(target, [], { detached: true, stdio: "ignore" });
-  child.unref();
-  setTimeout(() => app.quit(), 250);
-  return { ok: true, path: target };
+  if (process.platform === "darwin") {
+    const extractDir = path.join(downloadsDir, `mac-${manifest.version}-${Date.now()}`);
+    fs.mkdirSync(extractDir, { recursive: true });
+    await new Promise((resolve, reject) => {
+      const unzip = spawn("ditto", ["-x", "-k", target, extractDir], { stdio: "ignore" });
+      unzip.on("close", (code) => code === 0 ? resolve() : reject(new Error(`Falha ao extrair atualização macOS (${code}).`)));
+      unzip.on("error", reject);
+    });
+    const appEntry = fs.readdirSync(extractDir, { withFileTypes: true }).find((entry) => entry.isDirectory() && entry.name.endsWith(".app"));
+    if (!appEntry) throw new Error("O pacote macOS não contém o aplicativo esperado.");
+
+    const currentBundle = path.resolve(path.dirname(process.execPath), "../..");
+    const stagedBundle = `${currentBundle}.new`;
+    const backupBundle = `${currentBundle}.old`;
+    fs.rmSync(stagedBundle, { recursive: true, force: true });
+    await new Promise((resolve, reject) => {
+      const copy = spawn("ditto", [path.join(extractDir, appEntry.name), stagedBundle], { stdio: "ignore" });
+      copy.on("close", (code) => code === 0 ? resolve() : reject(new Error("Sem permissão para preparar a atualização em Applications.")));
+      copy.on("error", reject);
+    });
+
+    const script = path.join(downloadsDir, `install-macos-${manifest.version}.sh`);
+    const q = (value) => `'${String(value).replace(/'/g, `'\\''`)}'`;
+    fs.writeFileSync(script, `#!/bin/sh\nPID=${process.pid}\nwhile kill -0 "$PID" 2>/dev/null; do sleep 1; done\nrm -rf ${q(backupBundle)}\nmv ${q(currentBundle)} ${q(backupBundle)} || exit 1\nif mv ${q(stagedBundle)} ${q(currentBundle)}; then\n  open ${q(currentBundle)}\n  rm -rf ${q(backupBundle)}\nelse\n  mv ${q(backupBundle)} ${q(currentBundle)}\n  exit 1\nfi\nrm -f "$0"\n`, "utf8");
+    fs.chmodSync(script, 0o755);
+    const child = spawn("/bin/sh", [script], { detached: true, stdio: "ignore" });
+    child.unref();
+    setTimeout(() => app.quit(), 250);
+    return { ok: true, path: stagedBundle, action: "mac-replace" };
+  }
+
+  if (process.platform === "linux") {
+    const currentAppImage = String(process.env.APPIMAGE || "").trim();
+    if (currentAppImage && target.toLowerCase().endsWith(".appimage")) {
+      try {
+        const next = `${currentAppImage}.new`;
+        const backup = `${currentAppImage}.old`;
+        fs.copyFileSync(target, next);
+        fs.chmodSync(next, 0o755);
+        fs.rmSync(backup, { force: true });
+        fs.renameSync(currentAppImage, backup);
+        fs.renameSync(next, currentAppImage);
+        const child = spawn(currentAppImage, [], { detached: true, stdio: "ignore" });
+        child.unref();
+        setTimeout(() => app.quit(), 250);
+        return { ok: true, path: currentAppImage, action: "appimage-replaced" };
+      } catch (error) {
+        console.warn("Falha no replace automático do AppImage:", error);
+      }
+    }
+    try { fs.chmodSync(target, 0o755); } catch {}
+    const child = spawn(target, [], { detached: true, stdio: "ignore" });
+    child.unref();
+    setTimeout(() => app.quit(), 250);
+    return { ok: true, path: target, action: "appimage" };
+  }
+
+  throw new Error("Atualização automática não suportada nesta plataforma.");
 }
 
 function modeQuery(mode) {
@@ -214,7 +346,8 @@ function contentTypeFor(file) {
     ".svg": "image/svg+xml",
     ".ico": "image/x-icon",
     ".woff": "font/woff",
-    ".woff2": "font/woff2"
+    ".woff2": "font/woff2",
+    ".mp4": "video/mp4"
   })[ext] || "application/octet-stream";
 }
 
@@ -521,9 +654,22 @@ ipcMain.handle("updater:open", () => {
 ipcMain.handle("update:check", () => fetchUpdateManifest());
 ipcMain.handle("update:download-install", (event, manifest) => downloadAndLaunchUpdate(event, manifest));
 
+async function checkForUpdateOnLaunch() {
+  if (!app.isPackaged || APP_MODE !== "game") return;
+  try {
+    const result = await fetchUpdateManifest();
+    if (result?.ok && result.available) createUpdaterWindow();
+  } catch (error) {
+    console.warn("[updater] verificação automática falhou:", error?.message || error);
+  }
+}
+
 app.whenReady().then(async () => {
   if (APP_MODE === "updater") createUpdaterWindow();
-  else createGameWindow();
+  else {
+    createGameWindow();
+    setTimeout(() => { checkForUpdateOnLaunch(); }, 4500);
+  }
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length > 0) return;

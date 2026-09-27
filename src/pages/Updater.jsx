@@ -3,7 +3,7 @@ import { getAppInfo } from "../services/desktop.js";
 
 export default function Updater() {
   const desktop = window.battleSpiritsDesktop;
-  const [info, setInfo] = useState({ version: "4.2.2" });
+  const [info, setInfo] = useState({ version: "4.4.0" });
   const [status, setStatus] = useState("idle");
   const [result, setResult] = useState(null);
   const [progress, setProgress] = useState(null);
@@ -17,7 +17,7 @@ export default function Updater() {
 
   async function check() {
     if (!desktop?.checkForUpdates) {
-      setError("O atualizador só está disponível no aplicativo Windows.");
+      setError("O atualizador só está disponível no aplicativo desktop.");
       return;
     }
     setStatus("checking");
@@ -81,7 +81,7 @@ export default function Updater() {
           <div className="progress-track"><div style={{ width: `${pct ?? 8}%` }} /></div>
           <span>{pct == null ? "Baixando..." : `${pct}%`}</span>
         </>}
-        {status === "installing" && <><strong>Instalador iniciado</strong><span>O Battle Spirits será fechado para concluir a atualização.</span></>}
+        {status === "installing" && <><strong>Atualização iniciada</strong><span>O Battle Spirits será fechado para concluir a instalação e reiniciar quando possível.</span></>}
         {error && <><strong className="error-text">Falha ao atualizar</strong><span>{error}</span></>}
       </div>
 
@@ -90,7 +90,7 @@ export default function Updater() {
         {result?.ok && result.available && <button className="primary-btn" onClick={install} disabled={status === "downloading"}>Baixar e instalar</button>}
       </div>
 
-      <small className="utility-footnote">O instalador é verificado antes de ser iniciado.</small>
+      <small className="utility-footnote">A atualização é baixada da release oficial do projeto e validada por SHA-256 quando disponível.</small>
     </section>
   </main>;
 }

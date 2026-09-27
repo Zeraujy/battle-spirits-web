@@ -4,6 +4,47 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.4.0",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Web + Desktop Unificados", en: "Unified Web + Desktop" },
+    summary: {
+      pt: "O mesmo update agora prepara a Web e gera automaticamente clientes Desktop para Windows, macOS e Linux.",
+      en: "The same update now prepares the Web build and automatically generates Desktop clients for Windows, macOS and Linux."
+    },
+    sections: [
+      {
+        title: { pt: "Desktop", en: "Desktop" },
+        items: {
+          pt: [
+            "A versão Web passa a exibir Download Desktop somente no navegador.",
+            "Windows recebe instalador NSIS; macOS recebe builds Apple Silicon e Intel; Linux recebe AppImage e .deb.",
+            "Clientes Desktop verificam automaticamente a release mais recente e usam a mesma conta, coleção e progresso da Web."
+          ],
+          en: [
+            "The Web version now shows Download Desktop only in the browser.",
+            "Windows gets an NSIS installer; macOS gets Apple Silicon and Intel builds; Linux gets AppImage and .deb.",
+            "Desktop clients automatically check the latest release and use the same account, collection and progress as the Web version."
+          ]
+        }
+      },
+      {
+        title: { pt: "Release unificada", en: "Unified release" },
+        items: {
+          pt: [
+            "Um único push no GitHub dispara a validação e os builds Desktop da mesma versão.",
+            "O preflight do Cloudflare bloqueia assets individuais acima de 25 MiB antes do push.",
+            "O posicionamento aprovado do perfil local na tela Ranked foi preservado."
+          ],
+          en: [
+            "A single GitHub push triggers validation and Desktop builds for the same version.",
+            "Cloudflare preflight blocks individual assets above 25 MiB before the push.",
+            "The approved local profile position on the Ranked screen was preserved."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "4.3.2",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Correção visual do Admin Panel", en: "Admin Panel Visual Fix" },

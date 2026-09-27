@@ -148,7 +148,9 @@ function Build-Project {
   Write-Title "BUILD LOCAL"
   npm run build
   if ($LASTEXITCODE -ne 0) { throw "npm run build falhou." }
-  Write-Host "Build gerado em dist/." -ForegroundColor Green
+  npm run cloudflare:preflight
+  if ($LASTEXITCODE -ne 0) { throw "Cloudflare preflight falhou. Corrija assets acima do limite antes do push." }
+  Write-Host "Build gerado em dist/ e validado para o Cloudflare." -ForegroundColor Green
 }
 
 function Push-GitHub {
@@ -191,10 +193,12 @@ function Publish-All {
   Test-Project
   Build-Project
   Push-GitHub
-  $answer = Read-Host "Fazer deploy direto no Cloudflare agora? (S/n)"
-  if ([string]::IsNullOrWhiteSpace($answer) -or $answer.Trim().ToLower().StartsWith("s")) {
-    Deploy-Cloudflare
-  }
+  Write-Title "PUBLICAÇÃO DISPARADA"
+  Write-Host "Push concluído. O mesmo commit agora alimenta:" -ForegroundColor Green
+  Write-Host "- Cloudflare: deploy automático da versão Web" -ForegroundColor Cyan
+  Write-Host "- GitHub Actions: builds Desktop para Windows, macOS e Linux" -ForegroundColor Cyan
+  Write-Host "- GitHub Releases: publicação automática dos instaladores Desktop" -ForegroundColor Cyan
+  Write-Host "Quando a nova release Desktop estiver disponível, clientes instalados detectarão a atualização automaticamente." -ForegroundColor DarkGray
 }
 
 try {
@@ -207,17 +211,17 @@ try {
 
   while ($true) {
     Write-Title "BATTLE SPIRITS - GERENCIADOR DO PROJETO"
-    Write-Host "[1] Aplicar ZIP de update + validar + GitHub + Cloudflare"
-    Write-Host "[2] Publicar alterações atuais (sem aplicar ZIP)"
+    Write-Host "[1] Aplicar ZIP + validar + push (Web + Desktop automático)"
+    Write-Host "[2] Validar + push alterações atuais (Web + Desktop automático)"
     Write-Host "[3] Somente validar projeto"
-    Write-Host "[4] Login do Cloudflare (Wrangler)"
+    Write-Host "[4] Deploy direto no Cloudflare (opcional)"
     Write-Host "[0] Sair"
     $choice = Read-Host "Escolha"
     switch ($choice) {
       "1" { if (Apply-UpdateZip) { Publish-All } }
       "2" { Publish-All }
       "3" { Test-Project }
-      "4" { npx wrangler@4 login }
+      "4" { Deploy-Cloudflare }
       "0" { return }
       default { Write-Host "Opção inválida." -ForegroundColor Yellow }
     }

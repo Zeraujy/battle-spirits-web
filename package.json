@@ -1,19 +1,19 @@
 {
   "name": "battle-spirits-eternal-simulator",
-  "version": "4.3.2",
+  "version": "4.4.0",
   "private": true,
   "type": "module",
-  "description": "Battle Spirits Eternal Simulator v4.3.2 - Admin Panel Visibility Hotfix",
+  "description": "Battle Spirits Eternal Simulator v4.4.0 - Web + Desktop Unified Release",
   "main": "electron/main.cjs",
   "scripts": {
-    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && cross-env ELECTRON_START_URL=http://127.0.0.1:5173 electron .\"",
-    "dev:web": "vite --host 127.0.0.1",
+    "dev": "npm run prepare:release-config && concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && cross-env ELECTRON_START_URL=http://127.0.0.1:5173 electron .\"",
+    "dev:web": "npm run prepare:release-config && vite --host 127.0.0.1",
     "dev:server": "node --env-file-if-exists=server/.env server/index.mjs",
     "electron": "electron .",
     "electron:updater": "electron . --mode=updater",
-    "build": "vite build",
+    "build": "npm run prepare:release-config && vite build",
     "preview": "vite preview",
-    "dist:win": "npm run build && electron-builder --win nsis && node scripts/generate-update-manifest.mjs",
+    "dist:win": "npm run desktop:win",
     "test": "node --test src/game/*.test.js src/online/*.test.js src/services/*.test.js",
     "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs",
     "check": "npm run verify && npm test && npm run build",
@@ -30,7 +30,12 @@
     "cards:sync": "node scripts/card-db/sync-catalog-manifest.mjs",
     "cards:template": "node scripts/card-db/create-set-template.mjs",
     "cards:import": "node scripts/card-db/import-set.mjs",
-    "cards:check": "npm run cards:sync && npm run cards:validate && npm run verify"
+    "cards:check": "npm run cards:sync && npm run cards:validate && npm run verify",
+    "prepare:release-config": "node scripts/generate-desktop-release-config.mjs",
+    "desktop:win": "npm run build && electron-builder --win --x64",
+    "desktop:mac": "npm run build && electron-builder --mac --x64 && electron-builder --mac --arm64",
+    "desktop:linux": "npm run build && electron-builder --linux --x64",
+    "cloudflare:preflight": "node scripts/cloudflare-asset-preflight.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",
@@ -51,7 +56,7 @@
   "build": {
     "appId": "com.fan.battlespirits.eternal.simulator",
     "productName": "Battle Spirits",
-    "artifactName": "Battle-Spirits-Setup-${version}.${ext}",
+    "artifactName": "Battle-Spirits-${os}-${arch}.${ext}",
     "asar": true,
     "afterPack": "scripts/after-pack.cjs",
     "directories": {
@@ -70,6 +75,10 @@
       {
         "from": "config/update-config.json",
         "to": "config/update-config.json"
+      },
+      {
+        "from": "config/desktop-release.json",
+        "to": "config/desktop-release.json"
       }
     ],
     "win": {
@@ -80,7 +89,8 @@
             "x64"
           ]
         }
-      ]
+      ],
+      "artifactName": "Battle-Spirits-Windows-Setup.${ext}"
     },
     "nsis": {
       "oneClick": false,
@@ -89,6 +99,22 @@
       "createStartMenuShortcut": true,
       "shortcutName": "Battle Spirits",
       "uninstallDisplayName": "Battle Spirits"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.games",
+      "artifactName": "Battle-Spirits-macOS-${arch}.${ext}"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Game",
+      "artifactName": "Battle-Spirits-Linux-${arch}.${ext}"
     }
   },
   "allowScripts": {
