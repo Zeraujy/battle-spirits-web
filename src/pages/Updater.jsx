@@ -3,7 +3,7 @@ import { getAppInfo } from "../services/desktop.js";
 
 export default function Updater() {
   const desktop = window.battleSpiritsDesktop;
-  const [info, setInfo] = useState({ version: "4.7.0" });
+  const [info, setInfo] = useState({ version: "4.7.2" });
   const [status, setStatus] = useState("idle");
   const [result, setResult] = useState(null);
   const [progress, setProgress] = useState(null);
@@ -14,6 +14,21 @@ export default function Updater() {
     const cleanup = desktop?.onUpdateProgress?.((payload) => setProgress(payload));
     return () => cleanup?.();
   }, []);
+
+  async function install(response = result) {
+    if (!response?.manifest) return;
+    setStatus("downloading");
+    setError("");
+    setProgress({ percent: 0, received: 0, total: 0 });
+    try {
+      await desktop.downloadAndInstallUpdate(response.manifest);
+      setStatus("installing");
+    } catch (e) {
+      console.error("Falha ao instalar atualização:", e);
+      setError("Não foi possível instalar a atualização. Tente novamente.");
+      setStatus("error");
+    }
+  }
 
   async function check() {
     if (!desktop?.checkForUpdates) {
@@ -27,24 +42,12 @@ export default function Updater() {
       const response = await desktop.checkForUpdates();
       setResult(response);
       setStatus("done");
+      if (response?.ok && response.available && response.manifest) {
+        await install(response);
+      }
     } catch (e) {
       console.error("Falha ao verificar atualizações:", e);
       setError("Não foi possível verificar atualizações agora. Tente novamente mais tarde.");
-      setStatus("error");
-    }
-  }
-
-  async function install() {
-    if (!result?.manifest) return;
-    setStatus("downloading");
-    setError("");
-    setProgress({ percent: 0, received: 0, total: 0 });
-    try {
-      await desktop.downloadAndInstallUpdate(result.manifest);
-      setStatus("installing");
-    } catch (e) {
-      console.error("Falha ao instalar atualização:", e);
-      setError("Não foi possível instalar a atualização. Tente novamente.");
       setStatus("error");
     }
   }
@@ -87,10 +90,10 @@ export default function Updater() {
 
       <div className="utility-actions">
         <button className="ghost" onClick={check} disabled={status === "checking" || status === "downloading"}>Verificar novamente</button>
-        {result?.ok && result.available && <button className="primary-btn" onClick={install} disabled={status === "downloading"}>Baixar e instalar</button>}
+        {result?.ok && result.available && <button className="primary-btn" onClick={() => install(result)} disabled={status === "downloading" || status === "installing"}>Instalar novamente</button>}
       </div>
 
-      <small className="utility-footnote">A atualização é baixada da release oficial do projeto e validada por SHA-256 quando disponível.</small>
+      <small className="utility-footnote">As atualizações Desktop são verificadas e iniciadas automaticamente. O pacote vem da release oficial e é validado por SHA-256 quando disponível.</small>
     </section>
   </main>;
 }

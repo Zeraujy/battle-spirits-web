@@ -17,12 +17,19 @@ exports.default = async function afterPack(context) {
     }
   }
 
-  if (context.electronPlatformName !== "win32") return;
-  const exeName = `${context.packager.appInfo.productFilename}.exe`;
-  const source = path.join(context.appOutDir, exeName);
-  if (!fs.existsSync(source)) return;
-
-  for (const targetName of ["Battle Spirits KAIHOU Updater.exe", "Battle Spirits KAIHOU Server.exe", "Battle Spirits Updater.exe", "Battle Spirits Server.exe"]) {
-    fs.copyFileSync(source, path.join(context.appOutDir, targetName));
+  // v4.7.2: the installed client exposes a single game executable.
+  // Updating is performed by the main app itself; no Server.exe or Updater.exe
+  // clones are created beside the game binary.
+  if (context.electronPlatformName === "win32") {
+    const forbidden = [
+      "Battle Spirits KAIHOU Updater.exe",
+      "Battle Spirits KAIHOU Server.exe",
+      "Battle Spirits Updater.exe",
+      "Battle Spirits Server.exe"
+    ];
+    const leaked = forbidden.filter((name) => fs.existsSync(path.join(context.appOutDir, name)));
+    if (leaked.length) {
+      throw new Error(`DESKTOP PACKAGING: executáveis auxiliares expostos: ${leaked.join(", ")}`);
+    }
   }
 };

@@ -4,6 +4,60 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.7.2",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Cliente Desktop Único & Auto Update", en: "Single Desktop Client & Auto Update" },
+    summary: {
+      pt: "O cliente Desktop passa a expor apenas o executável principal do jogo; atualização e conexão online permanecem integradas ao próprio aplicativo.",
+      en: "The Desktop client now exposes only the main game executable; updating and online connectivity remain integrated into the application itself."
+    },
+    sections: [
+      {
+        title: { pt: "Distribuição Desktop", en: "Desktop distribution" },
+        items: {
+          pt: [
+            "Os builds Windows não criam mais cópias separadas Server.exe ou Updater.exe ao lado do jogo.",
+            "O updater continua dentro do executável principal e passa a iniciar automaticamente a instalação quando encontra uma release mais nova.",
+            "No Windows, upgrades usam o instalador NSIS em modo silencioso; macOS e Linux continuam usando os fluxos internos de substituição do aplicativo.",
+            "O servidor multiplayer continua remoto e não é distribuído como aplicativo que o jogador possa abrir manualmente."
+          ],
+          en: [
+            "Windows builds no longer create separate Server.exe or Updater.exe copies beside the game.",
+            "The updater remains inside the main executable and automatically starts installation when a newer release is found.",
+            "On Windows, upgrades use the NSIS installer in silent mode; macOS and Linux keep their internal application replacement flows.",
+            "The multiplayer server remains remote and is not distributed as an application players can launch manually."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "4.7.1",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Hotfix de publicação Desktop", en: "Desktop Publishing Hotfix" },
+    summary: {
+      pt: "Corrige o pipeline do GitHub Actions para que Windows, macOS e Linux apenas gerem seus artefatos; a publicação acontece uma única vez no job final.",
+      en: "Fixes the GitHub Actions pipeline so Windows, macOS and Linux only build artifacts; publishing now happens once in the final job."
+    },
+    sections: [
+      {
+        title: { pt: "Release unificada", en: "Unified release" },
+        items: {
+          pt: [
+            "electron-builder passa a usar --publish never nos três builds de plataforma, evitando publicação implícita sem GH_TOKEN.",
+            "Os jobs Windows, macOS e Linux enviam somente seus artefatos para o GitHub Actions.",
+            "O job publish-desktop continua sendo o único responsável por criar ou atualizar a GitHub Release da versão."
+          ],
+          en: [
+            "electron-builder now uses --publish never on all three platform builds, preventing implicit publishing without GH_TOKEN.",
+            "Windows, macOS and Linux jobs only upload their artifacts to GitHub Actions.",
+            "The publish-desktop job remains solely responsible for creating or updating the GitHub Release for the version."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "4.7.0",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Nova identidade KAIHOU!", en: "New KAIHOU! Identity" },

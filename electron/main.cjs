@@ -250,21 +250,13 @@ async function downloadAndLaunchUpdate(event, manifest) {
   fs.rmSync(target, { force: true });
   fs.renameSync(temp, target);
 
-  const currentExe = path.basename(process.execPath).toLowerCase();
   if (process.platform === "win32") {
-    if (currentExe.includes("updater")) {
-      for (const image of ["Battle Spirits KAIHOU! Simulator.exe", "Battle Spirits KAIHOU Server.exe", "Battle Spirits.exe", "Battle Spirits Server.exe"]) {
-        await new Promise((resolve) => {
-          const killer = spawn("taskkill", ["/IM", image, "/F"], { windowsHide: true, stdio: "ignore" });
-          killer.on("close", resolve);
-          killer.on("error", resolve);
-        });
-      }
-    }
-    const child = spawn(target, [], { detached: true, stdio: "ignore", windowsHide: false });
+    // The updater is part of the main game executable. No separate Server.exe or
+    // Updater.exe is shipped. NSIS receives /S so upgrades run unattended.
+    const child = spawn(target, ["/S"], { detached: true, stdio: "ignore", windowsHide: true });
     child.unref();
-    setTimeout(() => app.quit(), 250);
-    return { ok: true, path: target, action: "installer" };
+    setTimeout(() => app.quit(), 400);
+    return { ok: true, path: target, action: "silent-installer" };
   }
 
   if (process.platform === "darwin") {

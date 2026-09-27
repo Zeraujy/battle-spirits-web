@@ -1,10 +1,10 @@
 @echo off
 setlocal
 cd /d "%~dp0..\.."
-title BATTLE SPIRITS v3.6.2 - GERAR APLICATIVO WINDOWS
+title BATTLE SPIRITS KAIHOU - GERAR APLICATIVO WINDOWS
 
 echo ======================================================
-echo   BATTLE SPIRITS v3.6.2 - GERAR APLICATIVO WINDOWS
+echo   BATTLE SPIRITS KAIHOU - GERAR APLICATIVO WINDOWS
 echo ======================================================
 echo.
 where node >nul 2>&1 || (echo ERRO: Node.js nao encontrado.& pause & exit /b 1)
@@ -25,8 +25,8 @@ call npm run dist:win || goto :erro
 echo [5/5] Finalizado.
 echo.
 echo Confira a pasta release.
-echo Instalador esperado: Battle-Spirits-Setup-3.2.1.exe
-echo O instalador prepara Battle Spirits.exe, Battle Spirits Updater.exe e Battle Spirits Server.exe.
+echo Instalador esperado: Battle-Spirits-Windows-Setup.exe
+echo O instalador expoe apenas o executavel principal do jogo. O updater e interno e o servidor permanece remoto.
 echo.
 pause
 exit /b 0

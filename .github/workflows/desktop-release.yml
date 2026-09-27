@@ -114,5 +114,5 @@ jobs:
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" release-assets/* --clobber
           else
-            gh release create "$TAG" release-assets/* --title "Battle Spirits $TAG" --notes "Web e Desktop sincronizados na versão $VERSION."
+            gh release create "$TAG" release-assets/* --title "Battle Spirits: KAIHOU! Simulator $TAG" --notes "Web e Desktop sincronizados na versão $VERSION."
           fi

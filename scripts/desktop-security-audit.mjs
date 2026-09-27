@@ -6,6 +6,16 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
 const main = fs.readFileSync(path.join(root, "electron", "main.cjs"), "utf8");
 const problems = [];
+const afterPack = fs.readFileSync(path.join(root, "scripts", "after-pack.cjs"), "utf8");
+if (/copyFileSync\(source,\s*path\.join\(context\.appOutDir/.test(afterPack)) {
+  problems.push("Build Desktop não pode clonar o executável principal como Server.exe/Updater.exe.");
+}
+for (const exposedExe of ["Battle Spirits Server.exe", "Battle Spirits Updater.exe", "Battle Spirits KAIHOU Server.exe", "Battle Spirits KAIHOU Updater.exe"]) {
+  if (afterPack.includes(`fs.copyFileSync(source, path.join(context.appOutDir, targetName))`) && afterPack.includes(exposedExe)) {
+    problems.push(`Executável auxiliar exposto no pacote: ${exposedExe}`);
+  }
+}
+
 
 if (pkg.build?.asar !== true) problems.push("electron-builder precisa manter asar=true.");
 if ((pkg.build?.asarUnpack || []).length) problems.push("asarUnpack deve permanecer vazio para código/assets/config do cliente.");

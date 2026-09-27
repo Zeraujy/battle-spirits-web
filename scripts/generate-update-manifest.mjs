@@ -23,8 +23,8 @@ const manifest = {
   sha256,
   notes: [
     "Aplicativo Windows com instalador dedicado.",
-    "Battle Spirits Updater.exe para futuras atualizações.",
-    "Battle Spirits Server.exe para partidas em LAN.",
+    "Atualizações automáticas integradas ao executável principal.",
+    "Nenhum Server.exe ou Updater.exe separado é distribuído ao jogador.",
     "Dados do jogador persistidos fora da pasta de instalação."
   ],
   publishedAt: new Date().toISOString()

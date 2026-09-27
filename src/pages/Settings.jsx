@@ -1152,8 +1152,8 @@ export default function Settings({
               <div className="settings-update-card">
                 <div className="settings-update-icon">↻</div>
                 <div>
-                  <strong>{pt ? "Atualizador do Eternal Simulator" : "Eternal Simulator Updater"}</strong>
-                  <small>{pt ? "Verifique novas versões quando estiver usando a versão desktop." : "Check for new versions when using the desktop build."}</small>
+                  <strong>{pt ? "Atualizações automáticas do KAIHOU! Simulator" : "KAIHOU! Simulator Automatic Updates"}</strong>
+                  <small>{pt ? "A versão Desktop verifica e instala novas versões automaticamente a partir da release oficial." : "The Desktop build automatically checks and installs new versions from the official release."}</small>
                 </div>
                 <button className="primary-btn" onClick={() => openUpdater()} disabled={!window.battleSpiritsDesktop?.openUpdater}>
                   {t("checkUpdates")}
