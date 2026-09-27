@@ -1,9 +1,47 @@
+const STORAGE_ENV = import.meta.env || {};
+
 const KEYS = {
   decks: "bs-eternal:decks:v2",
   profile: "bs-eternal:profile:v2",
   settings: "bs-eternal:settings:v2"
 };
 
+
+
+const AUTH_STORAGE_USER_KEY = "bs-eternal:auth-storage-user:v1";
+const GUEST_DECKS_KEY = "bs-eternal:guest-decks:v1";
+
+function authenticatedStorageUser() {
+  try { return String(localStorage.getItem(AUTH_STORAGE_USER_KEY) || "").trim(); } catch { return ""; }
+}
+
+export function setAuthenticatedStorageUser(userId) {
+  try {
+    if (userId) localStorage.setItem(AUTH_STORAGE_USER_KEY, String(userId));
+    else localStorage.removeItem(AUTH_STORAGE_USER_KEY);
+  } catch {}
+}
+
+export function clearAuthenticatedStorageUser() {
+  setAuthenticatedStorageUser(null);
+}
+
+export function getGuestDeckSnapshot() {
+  try {
+    const raw = sessionStorage.getItem(GUEST_DECKS_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch { return []; }
+}
+
+export function clearGuestDeckSnapshot() {
+  try { sessionStorage.removeItem(GUEST_DECKS_KEY); } catch {}
+}
+
+function writeGuestDecks(value) {
+  try { sessionStorage.setItem(GUEST_DECKS_KEY, JSON.stringify(Array.isArray(value) ? value : [])); } catch {}
+  return Array.isArray(value) ? value : [];
+}
 
 const LEGACY_PLAYER_COLORS = new Set([
   "#e45b63",
@@ -19,7 +57,7 @@ const DEFAULT_SETTINGS = {
   language: "ptBR",
 
   onlineServerUrl:
-    import.meta.env.VITE_ONLINE_SERVER_URL ||
+    STORAGE_ENV.VITE_ONLINE_SERVER_URL ||
     "http://localhost:3001",
 
   resolution:
@@ -181,6 +219,10 @@ function write(
 ========================================================= */
 
 export function getDecks() {
+  if (!authenticatedStorageUser()) {
+    return getGuestDeckSnapshot();
+  }
+
   return read(
     "decks",
     []
@@ -191,6 +233,10 @@ export function getDecks() {
 export function saveDecks(
   decks
 ) {
+  if (!authenticatedStorageUser()) {
+    return writeGuestDecks(decks);
+  }
+
   return write(
     "decks",
     decks

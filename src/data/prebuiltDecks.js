@@ -246,6 +246,20 @@ export const PREBUILT_DECKS = [
     "accent": "#e2e2e2"
   },
   {
+    "id": "sd22-starter",
+    "setCode": "SD22",
+    "title": "SD22 Starter Deck",
+    "subtitlePT": "Deck pré-construído SD22 disponível na coleção atual.",
+    "subtitleEN": "SD22 prebuilt deck available in the current collection.",
+    "colorLabelPT": "Eternal",
+    "colorLabelEN": "Eternal",
+    "difficultyPT": "Intermediário",
+    "difficultyEN": "Intermediate",
+    "coverCardId": "SD22-X01",
+    "expectedSize": 40,
+    "accent": "#c8c8c8"
+  },
+  {
     "id": "sd23-eris",
     "setCode": "SD23",
     "title": "Ultimate Deck: Eris the Morning Star",

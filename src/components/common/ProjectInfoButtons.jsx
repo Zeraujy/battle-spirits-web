@@ -4,6 +4,129 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.2.2",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Preview, Reveal & Catálogo por Sagas", en: "Preview, Reveal & Saga Catalog" },
+    summary: {
+      pt: "A Shop ganha Card Preview visual completo, abertura de produtos inspirada no Vanguard DD2 e organização por sagas/eras.",
+      en: "The Shop gains a complete visual Card Preview, Vanguard DD2-inspired product reveals and saga/era organization."
+    },
+    sections: [
+      {
+        title: { pt: "Shop & Abertura", en: "Shop & Reveal" },
+        items: {
+          pt: [
+            "O Card Preview agora exibe o pool completo em galeria visual com ownership x/6 em cada carta.",
+            "Após a compra, produtos com cartas entram em uma sequência de reveal: cartas novas mostram NEW! + GET ×1; duplicatas mostram os Craft Coins gerados; overflow em 6/6 é marcado como convertido.",
+            "BSC49 passa a abrir 9 cartas por pack; PC01 e PC02 passam a funcionar como Premium Card Sets de conteúdo fixo."
+          ],
+          en: [
+            "Card Preview now displays the full pool as a visual gallery with x/6 ownership on every card.",
+            "After purchase, card products enter a reveal sequence: new cards show NEW! + GET ×1; duplicates show generated Craft Coins; 6/6 overflow is marked as converted.",
+            "BSC49 now opens 9 cards per pack; PC01 and PC02 now behave as fixed-content Premium Card Sets."
+          ]
+        }
+      },
+      {
+        title: { pt: "Sagas & QA", en: "Sagas & QA" },
+        items: {
+          pt: [
+            "Boosters e Decks agora podem ser filtrados por saga/era na lateral da Shop.",
+            "A taxonomia da Shop foi estruturada em src/data/shopSagas.js para crescer junto da database.",
+            "A arquitetura de DevMode/Admin foi documentada para implementação futura; nenhum comando administrativo foi ativado nesta versão."
+          ],
+          en: [
+            "Boosters and Decks can now be filtered by saga/era from the Store sidebar.",
+            "Store taxonomy is structured in src/data/shopSagas.js so it can grow with the database.",
+            "The DevMode/Admin architecture is documented for future implementation; no admin command is enabled in this version."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "4.2.1",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Produtos Reais, Guest & Starter Economy", en: "Real Products, Guest & Starter Economy" },
+    summary: {
+      pt: "A Loja agora usa os produtos da database, recebe compra em quantidade, onboarding com 3 Starter Decks e a primeira regra completa de coleção/duplicatas.",
+      en: "The Store now uses database products, supports quantity purchasing, 3-Starter-Deck onboarding and the first complete collection/duplicate rules."
+    },
+    sections: [
+      {
+        title: { pt: "Shop & Collection", en: "Shop & Collection" },
+        items: {
+          pt: [
+            "Todos os boosters, Premium Card Sets e Starter Decks identificados na database foram adicionados ao catálogo da Loja.",
+            "O modal de produto mostra o pool de cartas, quantidade possuída em x/6, seletor de quantidade e confirmação de compra.",
+            "Duplicatas geram Craft Coins por raridade; cópias acima do limite de 6 são descartadas e convertidas apenas em Craft Coins."
+          ],
+          en: [
+            "All boosters, Premium Card Sets and Starter Decks identified in the database were added to the Store catalog.",
+            "The product modal shows the card pool, x/6 ownership, quantity selector and purchase confirmation.",
+            "Duplicates grant Craft Coins by rarity; copies above the 6-copy limit are discarded and converted only into Craft Coins."
+          ]
+        }
+      },
+      {
+        title: { pt: "Guest, Conta & Starter Decks", en: "Guest, Account & Starter Decks" },
+        items: {
+          pt: [
+            "Guest Mode usa armazenamento de sessão para Coins, Collection e Decks, apagando esse progresso ao encerrar o simulador.",
+            "Ao criar a conta, o progresso Guest atual é migrado e o AccountCreationBonus concede 1500 Spirit Coins + 1500 Craft Coins uma única vez.",
+            "Novos jogadores escolhem exatamente 3 Starter Decks; as cartas entram na coleção e as Deck Recipes são liberadas em Ready Decks."
+          ],
+          en: [
+            "Guest Mode uses session storage for Coins, Collection and Decks, wiping that progress when the simulator closes.",
+            "Creating an account migrates the current Guest progress and AccountCreationBonus grants 1500 Spirit Coins + 1500 Craft Coins once.",
+            "New players choose exactly 3 Starter Decks; their cards enter the collection and Deck Recipes unlock in Ready Decks."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "4.2.0",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Loja, Coleção & Dupla Economia", en: "Store, Collection & Dual Economy" },
+    summary: {
+      pt: "A Loja e a Coleção ganham uma nova base de progressão com Spirit Coins e Craft Coins, obtidas pelo gameplay.",
+      en: "The Store and Collection gain a new progression foundation with Spirit Coins and Craft Coins earned through gameplay."
+    },
+    sections: [
+      {
+        title: { pt: "Duas moedas, dois objetivos", en: "Two currencies, two purposes" },
+        items: {
+          pt: [
+            "Spirit Coins são a moeda principal da Loja para boosters, decks e futuros itens.",
+            "Craft Coins ficam reservadas exclusivamente para o futuro sistema de crafting de cartas.",
+            "A economia foi planejada sem microtransações com dinheiro real."
+          ],
+          en: [
+            "Spirit Coins are the main Store currency for boosters, decks and future items.",
+            "Craft Coins are reserved exclusively for the future card crafting system.",
+            "The economy is designed without real-money microtransactions."
+          ]
+        }
+      },
+      {
+        title: { pt: "Nova Loja e Coleção", en: "New Store and Collection" },
+        items: {
+          pt: [
+            "A Loja ganhou categorias para Boosters, Decks e Acessórios, com espaço preparado para conteúdos futuros.",
+            "A nova aba Coleção acompanha cartas diferentes, total de cópias e repetidas.",
+            "Itens ainda não lançados aparecem como indisponíveis sem quebrar a estrutura da Loja."
+          ],
+          en: [
+            "The Store now has Boosters, Decks and Accessories categories with room for future content.",
+            "The new Collection tab tracks unique cards, total copies and duplicates.",
+            "Items that are not released yet appear as unavailable without breaking the Store structure."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "4.1.0",
     date: { pt: "26/09/2026", en: "09/26/2026" },
     title: { pt: "Expansão da Database", en: "Database Expansion" },

@@ -73,8 +73,8 @@ export default function Home({ go, initialSection = "root" }) {
       />
       <MainMenuItem
         label={pt ? "Loja" : "Store"}
-        detail={pt ? "Área em preparação" : "Area in preparation"}
-        badge={pt ? "BETA" : "BETA"}
+        detail={pt ? "Boosters, coleção e economia" : "Boosters, collection and economy"}
+        badge="NEW"
         onClick={() => go("store")}
       />
       <MainMenuItem

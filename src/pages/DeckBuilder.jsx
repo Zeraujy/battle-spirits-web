@@ -17,6 +17,7 @@ import {
   officialRestrictionSummary
 } from "../game/eternalDeckRules.js";
 import { useLanguage } from "../i18n.jsx";
+import { MAX_OWNED_COPIES, collectionQuantityMap, loadEconomySnapshot } from "../services/economyService.js";
 
 import "../styles/deckbuilder/deckBuilderPagination.css";
 import "../styles/deckbuilder/deckImportExport.css";
@@ -116,9 +117,21 @@ export default function DeckBuilder({ onBack, deckId = null }) {
   const [page, setPage] = useState(1);
   const [detailsCard, setDetailsCard] = useState(null);
   const [transferNotice, setTransferNotice] = useState(null);
+  const [economySnapshot, setEconomySnapshot] = useState({ collection: [] });
 
   const browserRef = useRef(null);
   const importInputRef = useRef(null);
+
+  useEffect(() => {
+    let active = true;
+    const refresh = () => loadEconomySnapshot().then((next) => { if (active) setEconomySnapshot(next); });
+    refresh();
+    window.addEventListener("bs:economy-changed", refresh);
+    return () => { active = false; window.removeEventListener("bs:economy-changed", refresh); };
+  }, []);
+
+  const ownedById = useMemo(() => collectionQuantityMap(economySnapshot.collection), [economySnapshot.collection]);
+  const ownedQuantity = (cardId) => ownedById.get(cardId) || 0;
 
   const results = useMemo(
     () => searchCards(deferredQuery, {
@@ -229,7 +242,8 @@ export default function DeckBuilder({ onBack, deckId = null }) {
     }, 0) - qty(cardId);
 
     const cardLimit = copyLimitForCard(card, { official: false, fallbackMaxSameName: 3 });
-    const allowed = Math.max(0, Math.min(cardLimit - sameNameCount, nextQty));
+    const ownedLimit = ownedQuantity(cardId);
+    const allowed = Math.max(0, Math.min(cardLimit - sameNameCount, ownedLimit, nextQty));
 
     setDraft((d) => {
       const cards = [
@@ -279,7 +293,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
       format: DECK_FILE_FORMAT,
       version: DECK_FILE_VERSION,
       simulator: "Battle Spirits Eternal Simulator",
-      simulatorVersion: "4.1.0",
+      simulatorVersion: "4.2.2",
       exportedAt: new Date().toISOString(),
       deck: {
         name: String(draft.name || "").trim() || (pt ? "Deck Importado" : "Imported Deck"),
@@ -316,7 +330,15 @@ export default function DeckBuilder({ onBack, deckId = null }) {
         throw new Error(pt ? "Este arquivo não contém um deck válido." : "This file does not contain a valid deck.");
       }
 
-      const { cards, ignored } = normalizeImportedCards(imported.cards);
+      const normalized = normalizeImportedCards(imported.cards);
+      let ignored = normalized.ignored;
+      const cards = normalized.cards
+        .map((entry) => {
+          const owned = ownedQuantity(entry.cardId);
+          if (owned <= 0) { ignored += 1; return null; }
+          return { ...entry, quantity: Math.min(entry.quantity, owned) };
+        })
+        .filter(Boolean);
 
       if (!cards.length) {
         throw new Error(pt ? "Nenhuma carta compatível foi encontrada neste arquivo." : "No compatible cards were found in this file.");
@@ -749,8 +771,11 @@ export default function DeckBuilder({ onBack, deckId = null }) {
           ) : (
             <>
               <div className="card-grid deck-builder-v3-grid">
-                {pageResults.map((card) => (
-                  <div className="builder-card deck-builder-v3-card" key={card.id}>
+                {pageResults.map((card) => {
+                  const owned = ownedQuantity(card.id);
+                  const locked = owned <= 0;
+                  return (
+                  <div className={`builder-card deck-builder-v3-card ${locked ? "collection-locked" : ""}`} key={card.id}>
                     {officialRestrictionSummary(card) && (
                       <span className={`deck-official-restriction ${officialRestrictionSummary(card) === "Proibida" ? "is-banned" : "is-limited"}`}>
                         {officialRestrictionSummary(card)}
@@ -762,10 +787,11 @@ export default function DeckBuilder({ onBack, deckId = null }) {
                       <span>{card.id} · {card.rarity || "—"} · {pt ? "Custo" : "Cost"} {card.cost ?? 0}</span>
                     </div>
 
+                    <div className="deck-v421-ownership"><span>{pt ? "Possui" : "Owned"}</span><b>{owned}/{MAX_OWNED_COPIES}</b></div>
                     <div className="qty-control deck-builder-v3-qty-control">
-                      <button onClick={() => setQty(card.id, qty(card.id) - 1)}>-</button>
+                      <button disabled={qty(card.id) <= 0} onClick={() => setQty(card.id, qty(card.id) - 1)}>-</button>
                       <b>{qty(card.id)}</b>
-                      <button onClick={() => setQty(card.id, qty(card.id) + 1)}>+</button>
+                      <button disabled={locked || qty(card.id) >= owned} onClick={() => setQty(card.id, qty(card.id) + 1)}>+</button>
                     </div>
 
                     {qty(card.id) > 0 && (
@@ -776,8 +802,10 @@ export default function DeckBuilder({ onBack, deckId = null }) {
                         ★ {t("deckCover")}
                       </button>
                     )}
+                    {locked && <div className="deck-v421-lock"><b>LOCKED</b><small>{pt ? "Obtenha esta carta na Shop" : "Get this card in the Shop"}</small></div>}
                   </div>
-                ))}
+                  );
+                })}
               </div>
 
               {totalPages > 1 && (

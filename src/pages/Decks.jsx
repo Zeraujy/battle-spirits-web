@@ -33,6 +33,7 @@ import {
 import {
   useLanguage
 } from "../i18n.jsx";
+import { loadEconomySnapshot } from "../services/economyService.js";
 
 import "../styles/deckbuilder/deckLibrary.css";
 import "../styles/deckbuilder/prebuiltDecks.css";
@@ -1001,21 +1002,35 @@ export default function Decks({
     setDecksPerPage
   ] = useState(getDecksPerPageForViewport);
 
+  const [ownedRecipes, setOwnedRecipes] = useState([]);
+
+  useEffect(() => {
+    let active = true;
+    const refreshRecipes = () => loadEconomySnapshot().then((snapshot) => {
+      if (active) setOwnedRecipes(Array.isArray(snapshot.recipes) ? snapshot.recipes : []);
+    });
+    refreshRecipes();
+    window.addEventListener("bs:economy-changed", refreshRecipes);
+    return () => { active = false; window.removeEventListener("bs:economy-changed", refreshRecipes); };
+  }, []);
+
 
   const builtTemplates =
     useMemo(
       () =>
-        PREBUILT_DECKS.map(
-          (template) => ({
-            template,
-            ...buildPrebuiltDeck(
+        PREBUILT_DECKS
+          .filter((template) => ownedRecipes.includes(`recipe-${String(template.setCode || "").toLowerCase()}`))
+          .map(
+            (template) => ({
               template,
-              cards,
-              cardIndex
-            )
-          })
-        ),
-      []
+              ...buildPrebuiltDeck(
+                template,
+                cards,
+                cardIndex
+              )
+            })
+          ),
+      [ownedRecipes]
     );
 
 

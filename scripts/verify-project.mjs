@@ -44,6 +44,9 @@ const requiredPaths = [
   "src/services/socialService.js",
   "src/services/socialInsights.js",
   "src/services/matchHistoryService.js",
+  "src/services/economyService.js",
+  "src/services/economyService.test.js",
+  "src/data/shopCatalog.js",
   "src/pages/Profile.jsx",
   "src/styles/pages/socialHubV360.css",
   "supabase/SOCIAL-HUB-3.6.sql",
@@ -57,6 +60,7 @@ const requiredPaths = [
   "src/styles/pages/mainMenuV340.css",
   "src/styles/pages/matchSetupV341.css",
   "src/styles/pages/rankedV400.css",
+  "src/styles/pages/storeV420.css",
   "src/styles/base/eternalPlatformV400.css",
   "src/styles/pages/modeScaffoldV340.css",
   "src/styles/pages/eternalInterfaceV350.css",
@@ -87,13 +91,22 @@ const requiredPaths = [
   "src/styles/pages",
   "src/styles/theme",
   "public/cards-database",
+  "public/assets/shop-items/README.md",
+  "supabase/ECONOMY-4.2.0.sql",
+  "supabase/ECONOMY-4.2.1.sql",
+  "supabase/ECONOMY-4.2.2.sql",
+  "src/data/shopSagas.js",
+  "docs/dev/DEVMODE-ADMIN-ARCHITECTURE.md",
+  "src/components/economy/StarterOnboarding.jsx",
+  "src/styles/pages/onboardingV421.css",
+  "docs/shop/ADDING-SHOP-ITEMS.md",
   "public/images/ui/arena/levels",
   "public/images/arena/wallpaper_arena_default.png",
   "docs/changelog",
   "scripts/windows"
 ];
 
-console.log("Battle Spirits Simulator v4.1.0 — verificação estrutural\n");
+console.log("Battle Spirits Simulator v4.2.2 — verificação estrutural\n");
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -188,4 +201,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v4.1.0 validada.");
+console.log("\nVERIFY OK — estrutura v4.2.2 validada.");

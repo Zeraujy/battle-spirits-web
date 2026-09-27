@@ -22,6 +22,7 @@ const Store = lazy(() => import("./pages/Store.jsx"));
 const Simulator = lazy(() => import("./pages/Simulator.jsx"));
 const Updater = lazy(() => import("./pages/Updater.jsx"));
 const Tutorial = lazy(() => import("./pages/Tutorial.jsx"));
+const StarterOnboarding = lazy(() => import("./components/economy/StarterOnboarding.jsx"));
 
 function LoadingScreen() {
   return (
@@ -81,6 +82,7 @@ export default function App() {
   return (
     <Suspense fallback={<LoadingScreen />}>
       <div className="app-route-shell" key={routeKey}>{content}</div>
+      {mode === "game" && <StarterOnboarding />}
     </Suspense>
   );
 }

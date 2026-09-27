@@ -1,5 +1,21 @@
 import { supabase } from "./supabase.js";
-import { getDecks, getProfile, saveDecks, saveProfile } from "./storage.js";
+import {
+  clearAuthenticatedStorageUser,
+  clearGuestDeckSnapshot,
+  getDecks,
+  getGuestDeckSnapshot,
+  getProfile,
+  saveDecks,
+  saveProfile,
+  setAuthenticatedStorageUser
+} from "./storage.js";
+import {
+  clearGuestEconomy,
+  getGuestMigrationSnapshot,
+  loadPendingAccountMigration,
+  migrateGuestEconomyToCurrentAccount,
+  savePendingAccountMigration
+} from "./economyService.js";
 
 export const DEFAULT_SOCIAL_PRIVACY = Object.freeze({
   profileVisibility: "public",
@@ -92,23 +108,80 @@ async function currentUser() {
 export async function getAccountSession() {
   if (!supabase) return { mode: "local", user: null };
   const { data } = await supabase.auth.getSession();
-  return { mode: "cloud", user: data.session?.user || null };
+  const user = data.session?.user || null;
+  if (user) setAuthenticatedStorageUser(user.id);
+  else clearAuthenticatedStorageUser();
+  return { mode: "cloud", user };
 }
 
 export async function signUp(email, password) {
   if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
-  const { data, error } = await supabase.auth.signUp({ email, password });
-  return error ? { ok: false, error: normalizeError(error, "Não foi possível criar a conta agora.") } : { ok: true, user: data.user };
+
+  const normalizedEmail = String(email || "").trim().toLowerCase();
+  const migrationBundle = {
+    ...getGuestMigrationSnapshot(),
+    decks: getGuestDeckSnapshot()
+  };
+
+  const { data, error } = await supabase.auth.signUp({ email: normalizedEmail, password });
+  if (error) return { ok: false, error: normalizeError(error, "Não foi possível criar a conta agora.") };
+
+  // If e-mail confirmation is enabled, preserve this snapshot beyond the guest
+  // session so it can be claimed after the first verified sign-in.
+  savePendingAccountMigration(normalizedEmail, migrationBundle);
+
+  if (data?.session?.user) {
+    setAuthenticatedStorageUser(data.session.user.id);
+    const migration = await migrateGuestEconomyToCurrentAccount(migrationBundle);
+    if (!migration.ok) return { ok: false, error: migration.error || "Conta criada, mas a migração do Guest falhou." };
+
+    saveDecks(migrationBundle.decks || []);
+    const { error: deckError } = await supabase.from("bs_player_decks").upsert({
+      user_id: data.session.user.id,
+      decks: migrationBundle.decks || [],
+      updated_at: new Date().toISOString()
+    }, { onConflict: "user_id" });
+    if (!deckError) clearGuestDeckSnapshot();
+  }
+
+  return { ok: true, user: data.user, requiresEmailConfirmation: !data?.session };
 }
 
 export async function signIn(email, password) {
   if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  return error ? { ok: false, error: normalizeError(error, "Não foi possível entrar na conta agora.") } : { ok: true, user: data.user };
+  const normalizedEmail = String(email || "").trim().toLowerCase();
+  const { data, error } = await supabase.auth.signInWithPassword({ email: normalizedEmail, password });
+  if (error) return { ok: false, error: normalizeError(error, "Não foi possível entrar na conta agora.") };
+
+  if (data?.user) {
+    setAuthenticatedStorageUser(data.user.id);
+    const pending = loadPendingAccountMigration(normalizedEmail);
+    if (pending) {
+      const migration = await migrateGuestEconomyToCurrentAccount(pending);
+      if (migration.ok) {
+        saveDecks(Array.isArray(pending.decks) ? pending.decks : []);
+        const { error: deckError } = await supabase.from("bs_player_decks").upsert({
+          user_id: data.user.id,
+          decks: Array.isArray(pending.decks) ? pending.decks : [],
+          updated_at: new Date().toISOString()
+        }, { onConflict: "user_id" });
+        if (!deckError) clearGuestDeckSnapshot();
+      }
+    }
+  }
+
+  return { ok: true, user: data.user };
 }
 
 export async function signOut() {
-  if (supabase) await supabase.auth.signOut();
+  if (!supabase) return { ok: true };
+  const { error } = await supabase.auth.signOut();
+  if (!error) {
+    clearAuthenticatedStorageUser();
+    clearGuestDeckSnapshot();
+    clearGuestEconomy();
+  }
+  return error ? { ok: false, error: normalizeError(error) } : { ok: true };
 }
 
 export async function getSocialSchemaStatus({ refresh = false } = {}) {
