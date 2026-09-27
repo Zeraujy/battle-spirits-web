@@ -292,7 +292,7 @@ export default function DeckBuilder({ onBack, deckId = null }) {
     const payload = {
       format: DECK_FILE_FORMAT,
       version: DECK_FILE_VERSION,
-      simulator: "Battle Spirits Eternal Simulator",
+      simulator: "Battle Spirits: KAIHOU! Simulator",
       simulatorVersion: "4.2.2",
       exportedAt: new Date().toISOString(),
       deck: {

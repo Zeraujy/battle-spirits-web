@@ -8,10 +8,14 @@ export default defineConfig({
   build: {
     outDir: "dist",
     sourcemap: false,
+    minify: true,
     chunkSizeWarningLimit: 1200,
 
     rolldownOptions: {
       output: {
+        minify: true,
+        comments: false,
+        minifyInternalExports: true,
         codeSplitting: {
           groups: [
             {

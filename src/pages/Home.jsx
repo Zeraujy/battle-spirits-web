@@ -171,11 +171,11 @@ export default function Home({ go, initialSection = "root" }) {
 
       <section className="bs-main-menu-shell" aria-label={pt ? "Menu principal" : "Main menu"}>
         <div className="bs-main-menu-brand">
-          <img src="./images/logo_battlespirits.png" alt="Battle Spirits" />
+          <img src="./images/logo_battlespirits.png" alt="Battle Spirits: KAIHOU! Simulator" />
 
           <div className={`bs-main-menu-title ${section !== "root" ? "is-submenu" : ""}`}>
             <span>{heading}</span>
-            {section === "root" ? <strong>KAIHOU!</strong> : <strong>SELECT</strong>}
+            {section === "root" ? <strong>KAIHOU! SIMULATOR</strong> : <strong>SELECT</strong>}
           </div>
         </div>
 

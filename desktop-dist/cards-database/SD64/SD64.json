@@ -1,0 +1,716 @@
+[
+    {
+        "id":  "BS52-RV007",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "BS52",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/BS52-RV007.webp"
+    },
+    {
+        "id":  "SD64-001",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-001.webp"
+    },
+    {
+        "id":  "SD64-002",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-002.webp"
+    },
+    {
+        "id":  "SD64-003",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-003.webp"
+    },
+    {
+        "id":  "SD64-CP01",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-CP01.webp"
+    },
+    {
+        "id":  "SD64-CX01",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-CX01.webp"
+    },
+    {
+        "id":  "SD64-RV001",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-RV001.webp"
+    },
+    {
+        "id":  "SD64-RV002",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-RV002.webp"
+    },
+    {
+        "id":  "SD64-RV003",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-RV003.webp"
+    },
+    {
+        "id":  "SD64-RV004",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-RV004.webp"
+    },
+    {
+        "id":  "SD64-RV005",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-RV005.webp"
+    },
+    {
+        "id":  "SD64-RV006",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-RV006.webp"
+    },
+    {
+        "id":  "SD64-RV007",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-RV007.webp"
+    },
+    {
+        "id":  "SD64-RV008",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-RV008.webp"
+    },
+    {
+        "id":  "SD64-RV009",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-RV009.webp"
+    },
+    {
+        "id":  "SD64-RV010",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-RV010.webp"
+    },
+    {
+        "id":  "SD64-X01",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "SD64",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/SD64/SD64-X01.webp"
+    }
+]

@@ -1,0 +1,380 @@
+[
+    {
+        "id":  "BS53-TX04",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "BS53",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/PC02/BS53-TX04.webp"
+    },
+    {
+        "id":  "BS53-TX04_b",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "BS53",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/PC02/BS53-TX04_b.webp"
+    },
+    {
+        "id":  "PC02-001",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "PC02",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/PC02/PC02-001.webp"
+    },
+    {
+        "id":  "PC02-002",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "PC02",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/PC02/PC02-002.webp"
+    },
+    {
+        "id":  "PC02-CP01",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "PC02",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/PC02/PC02-CP01.webp"
+    },
+    {
+        "id":  "PC02-CX01",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "PC02",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/PC02/PC02-CX01.webp"
+    },
+    {
+        "id":  "PC02-RV001",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "PC02",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/PC02/PC02-RV001.webp"
+    },
+    {
+        "id":  "PC02-RV002",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "PC02",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/PC02/PC02-RV002.webp"
+    },
+    {
+        "id":  "PC02-X01",
+        "name":  "",
+        "nameEN":  "",
+        "namePT":  "",
+        "nameJP":  "",
+        "nameKey":  "",
+        "set":  "PC02",
+        "cardType":  "",
+        "subtypes":  [
+
+                     ],
+        "colors":  [
+
+                   ],
+        "cost":  null,
+        "reduction":  [
+
+                      ],
+        "rarity":  "",
+        "includedQuantity":  null,
+        "families":  [
+
+                     ],
+        "symbols":  [
+
+                    ],
+        "levels":  [
+
+                   ],
+        "effectText":  {
+                           "en":  "",
+                           "ptBR":  ""
+                       },
+        "effects":  [
+
+                    ],
+        "abilities":  [
+
+                      ],
+        "image":  "/cards-database/PC02/PC02-X01.webp"
+    }
+]

@@ -4,6 +4,73 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.7.0",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Nova identidade KAIHOU!", en: "New KAIHOU! Identity" },
+    summary: {
+      pt: "O projeto passa a adotar oficialmente o nome Battle Spirits: KAIHOU! Simulator, com favicon e ícones Desktop próprios.",
+      en: "The project officially adopts the Battle Spirits: KAIHOU! Simulator name, with custom favicon and Desktop application icons."
+    },
+    sections: [
+      {
+        title: { pt: "Branding unificado", en: "Unified branding" },
+        items: {
+          pt: [
+            "Nome oficial atualizado nas áreas globais do simulador e nos metadados do aplicativo.",
+            "A aba do navegador agora exibe Gate Open, KAIHOU! e usa o novo favicon.",
+            "Windows, macOS e Linux passam a usar a nova logo nos pacotes Desktop."
+          ],
+          en: [
+            "The official name has been updated across global simulator surfaces and application metadata.",
+            "The browser tab now displays Gate Open, KAIHOU! and uses the new favicon.",
+            "Windows, macOS and Linux Desktop packages now use the new application logo."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "4.6.0",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Segurança Desktop & Backend", en: "Desktop & Backend Security" },
+    summary: {
+      pt: "Clientes Desktop recebem uma camada extra de proteção em produção, enquanto o backend reforça a validação autoritativa de economia e administração.",
+      en: "Desktop clients gain an additional production protection layer while the backend strengthens authoritative economy and administration validation."
+    },
+    sections: [
+      {
+        title: { pt: "Desktop protegido", en: "Hardened Desktop" },
+        items: {
+          pt: [
+            "Windows, macOS e Linux continuam no mesmo pipeline de release, sempre gerados com NODE_ENV=production.",
+            "Código do Electron é bundleado/minificado antes do empacotamento; fontes originais, server e arquivos .env não entram no cliente final.",
+            "app.asar passa a conter renderer, configuração pública e runtime Desktop; DevTools, F12 e atalhos de inspeção ficam bloqueados no build final."
+          ],
+          en: [
+            "Windows, macOS and Linux remain in the same release pipeline and are always generated with NODE_ENV=production.",
+            "Electron code is bundled/minified before packaging; original sources, server code and .env files are excluded from the final client.",
+            "app.asar contains the renderer, public configuration and Desktop runtime; DevTools, F12 and inspection shortcuts are blocked in release builds."
+          ]
+        }
+      },
+      {
+        title: { pt: "Backend autoritativo", en: "Authoritative Backend" },
+        items: {
+          pt: [
+            "A nova camada de segurança reforça o isolamento das informações privadas de economia e progresso de cada conta.",
+            "Compras, craft e comandos administrativos permanecem validados pelo backend; o status de Admin é derivado da sessão autenticada, nunca de flags do cliente.",
+            "Settlement Ranked continua exclusivo do backend, e auditorias de release passam a procurar segredos privados e configurações inseguras."
+          ],
+          en: [
+            "The new security layer strengthens isolation of each account’s private economy and progression data.",
+            "Purchases, crafting and administrative commands remain backend-validated; Admin status comes from the authenticated session, never client flags.",
+            "Ranked settlement remains backend-only, and release audits now scan for private secrets and insecure packaging settings."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "4.5.0",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Mobile, Touch & Onboarding UX", en: "Mobile, Touch & Onboarding UX" },
@@ -735,8 +802,8 @@ export default function ProjectInfoButtons() {
 
             {modal === "about" ? (
               <div className="about-content">
-                <div className="project-version-badge">Battle Spirits Eternal Simulator v{PATCHES[0].version}</div>
-                <p>{pt ? "Battle Spirits Eternal Simulator é um projeto de fã não oficial criado para jogar, testar decks e explorar diferentes gerações do Battle Spirits original." : "Battle Spirits Eternal Simulator is an unofficial fan project created to play, test decks and explore different generations of the original Battle Spirits game."}</p>
+                <div className="project-version-badge">Battle Spirits: KAIHOU! Simulator v{PATCHES[0].version}</div>
+                <p>{pt ? "Battle Spirits: KAIHOU! Simulator é um projeto de fã não oficial criado para jogar, testar decks e explorar diferentes gerações do Battle Spirits original." : "Battle Spirits: KAIHOU! Simulator is an unofficial fan project created to play, test decks and explore different generations of the original Battle Spirits game."}</p>
                 <h3>{pt ? "O que você encontra aqui" : "What you'll find here"}</h3>
                 <p>{pt ? "Partidas locais e Online, Eternal CPU, Deck Builder, coleção de cartas, perfis sociais, Maestria e modos competitivos em uma única experiência." : "Local and Online matches, Eternal CPU, Deck Builder, card collection, social profiles, Mastery and competitive modes in one experience."}</p>
                 <h3>{pt ? "Em evolução" : "Always evolving"}</h3>

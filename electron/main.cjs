@@ -7,7 +7,9 @@ const { Readable } = require("node:stream");
 const http = require("node:http");
 const { io: createSocketIoClient } = require("socket.io-client");
 
-app.setName("Battle Spirits Eternal Simulator");
+app.setName("Battle Spirits: KAIHOU! Simulator");
+
+const IS_PRODUCTION = app.isPackaged || process.env.NODE_ENV === "production";
 
 let updaterWindow = null;
 let rendererServer = null;
@@ -69,7 +71,6 @@ function appRoot() {
 }
 
 function updateConfigPath() {
-  if (app.isPackaged) return path.join(process.resourcesPath, "config", "update-config.json");
   return path.join(appRoot(), "config", "update-config.json");
 }
 
@@ -89,7 +90,6 @@ function readUpdateConfig() {
 }
 
 function desktopReleaseConfigPath() {
-  if (app.isPackaged) return path.join(process.resourcesPath, "config", "desktop-release.json");
   return path.join(appRoot(), "config", "desktop-release.json");
 }
 
@@ -142,7 +142,7 @@ async function fetchGithubReleaseManifest() {
     installerUrl: asset.browser_download_url,
     fileName,
     sha256,
-    notes: [`Battle Spirits ${release.tag_name || version}`, "Web e Desktop sincronizados na mesma versão."],
+    notes: [`Battle Spirits: KAIHOU! Simulator ${release.tag_name || version}`, "Web e Desktop sincronizados na mesma versão."],
     releaseUrl: release.html_url || `https://github.com/${repository}/releases/latest`
   };
 }
@@ -253,7 +253,7 @@ async function downloadAndLaunchUpdate(event, manifest) {
   const currentExe = path.basename(process.execPath).toLowerCase();
   if (process.platform === "win32") {
     if (currentExe.includes("updater")) {
-      for (const image of ["Battle Spirits.exe", "Battle Spirits Server.exe"]) {
+      for (const image of ["Battle Spirits KAIHOU! Simulator.exe", "Battle Spirits KAIHOU Server.exe", "Battle Spirits.exe", "Battle Spirits Server.exe"]) {
         await new Promise((resolve) => {
           const killer = spawn("taskkill", ["/IM", image, "/F"], { windowsHide: true, stdio: "ignore" });
           killer.on("close", resolve);
@@ -422,10 +422,50 @@ function commonWindowOptions(extra = {}) {
       preload: path.join(__dirname, "preload.cjs"),
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: true
+      sandbox: true,
+      devTools: !IS_PRODUCTION,
+      webSecurity: true,
+      allowRunningInsecureContent: false,
+      spellcheck: false
     },
     ...extra
   };
+}
+
+function hardenProductionWindow(win) {
+  if (!win || win.isDestroyed()) return;
+
+  // Packaged releases never expose Chromium developer tooling. This is a UX
+  // hardening layer only; authoritative security remains server-side.
+  if (IS_PRODUCTION) {
+    win.removeMenu();
+    win.webContents.on("before-input-event", (event, input) => {
+      const key = String(input?.key || "").toLowerCase();
+      const devShortcut =
+        key === "f12" ||
+        ((input.control || input.meta) && input.shift && ["i", "j", "c", "k"].includes(key)) ||
+        (input.meta && input.alt && ["i", "j", "c"].includes(key));
+      if (devShortcut) event.preventDefault();
+    });
+    win.webContents.on("devtools-opened", () => {
+      try { win.webContents.closeDevTools(); } catch {}
+    });
+  }
+
+  win.webContents.on("context-menu", (event) => event.preventDefault());
+  win.webContents.on("will-attach-webview", (event) => event.preventDefault());
+  win.webContents.on("will-navigate", (event, url) => {
+    try {
+      const target = new URL(url);
+      const current = new URL(win.webContents.getURL());
+      if (target.origin !== current.origin) {
+        event.preventDefault();
+        shell.openExternal(url);
+      }
+    } catch {
+      event.preventDefault();
+    }
+  });
 }
 
 function createGameWindow() {
@@ -435,8 +475,9 @@ function createGameWindow() {
     height: Math.min(1080, workArea.height),
     minWidth: 1180,
     minHeight: 720,
-    title: "Battle Spirits"
+    title: "Battle Spirits: KAIHOU! Simulator"
   }));
+  hardenProductionWindow(win);
   loadMode(win, "game");
   win.webContents.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url);
@@ -456,8 +497,9 @@ function createUpdaterWindow() {
     minWidth: 560,
     minHeight: 460,
     resizable: true,
-    title: "Battle Spirits Updater"
+    title: "Battle Spirits: KAIHOU! Updater"
   }));
+  hardenProductionWindow(updaterWindow);
   loadMode(updaterWindow, "updater");
   updaterWindow.on("closed", () => { updaterWindow = null; });
   return updaterWindow;

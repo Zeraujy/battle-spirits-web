@@ -400,14 +400,18 @@ export async function migrateGuestEconomyToCurrentAccount(bundle = null) {
   if (!supabase) return { ok: false, error: "ACCOUNT_SERVICE_UNAVAILABLE" };
   const { data: userData } = await supabase.auth.getUser();
   if (!userData?.user) return { ok: false, error: "AUTH_REQUIRED" };
-  const source = bundle || getGuestMigrationSnapshot();
+  // v4.6.0 security: the authenticated account creation grant is authoritative.
+  // Guest wallet/cards are intentionally not submitted as trusted economy data.
+  // The legacy RPC signature is kept server-side for compatibility, but these
+  // client-authored values are fixed to neutral values and ignored by the DB.
+  void bundle;
   const { data, error } = await supabase.rpc("bs_claim_account_creation_bundle", {
-    p_guest_spirit: safeNumber(source?.wallet?.spiritCoins),
-    p_guest_craft: safeNumber(source?.wallet?.craftCoins),
-    p_collection: normalizeCollection(source?.collection),
-    p_recipes: Array.isArray(source?.recipes) ? source.recipes : [],
-    p_onboarding_complete: Boolean(source?.onboardingComplete),
-    p_starter_deck_ids: Array.isArray(source?.starterDeckIds) ? source.starterDeckIds : []
+    p_guest_spirit: 0,
+    p_guest_craft: 0,
+    p_collection: [],
+    p_recipes: [],
+    p_onboarding_complete: false,
+    p_starter_deck_ids: []
   });
   if (error) return { ok: false, error: error.message || "MIGRATION_FAILED" };
   clearGuestEconomy();

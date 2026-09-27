@@ -827,7 +827,7 @@ export default function Settings({
               <div className="settings-game-display-preview">
                 <div className="settings-display-monitor">
                   <div className="settings-display-screen">
-                    <span>Battle Spirits</span>
+                    <span>Battle Spirits: KAIHOU! Simulator</span>
                     <strong>{draft.resolution || "1920x1080"}</strong>
                     <small>{draft.displayMode === "fullscreen" ? t("fullscreen") : t("windowed")}</small>
                   </div>

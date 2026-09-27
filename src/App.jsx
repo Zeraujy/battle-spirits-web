@@ -29,7 +29,7 @@ function LoadingScreen() {
   return (
     <main className="route-loading" aria-live="polite">
       <div className="route-loading-mark" />
-      <strong>Battle Spirits</strong>
+      <strong>Battle Spirits: KAIHOU! Simulator</strong>
       <span>Carregando…</span>
     </main>
   );
