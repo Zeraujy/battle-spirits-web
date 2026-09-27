@@ -6,7 +6,7 @@ Status: **design only**. No DevMode controls are enabled in v4.2.2. Finish Shop 
 Provide a QA-only environment for trusted developers to manipulate test account state without exposing economy mutation capabilities to normal players.
 
 ## Security boundary
-The browser/Electron renderer must never be able to grant currency or cards by directly writing database rows. DevMode mutations should be server-side only and require a separate admin authorization check.
+The browser client must never be able to grant currency or cards by directly writing database rows. DevMode mutations should be server-side only and require a separate admin authorization check.
 
 Recommended layers:
 

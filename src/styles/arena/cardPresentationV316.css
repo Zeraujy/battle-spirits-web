@@ -349,7 +349,7 @@
 .arena-brave-attachment.brave-glow-rainbow { --brave-glow-soft: rgba(214,167,255,.56); --brave-glow-mid: rgba(100,170,255,.34); }
 
 /* ---------------------------------------------------------
-   RESPONSIVE DESKTOP SAFEGUARDS
+   RESPONSIVE LARGE-SCREEN SAFEGUARDS
 --------------------------------------------------------- */
 
 @media (max-width: 1500px) {

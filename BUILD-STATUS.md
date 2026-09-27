@@ -1,18 +1,17 @@
-# Build Status — Battle Spirits Eternal Simulator v4.1.0
+# Build Status — Battle Spirits: KAIHOU! Simulator v4.8.1
 
-Data da validação: 26/09/2026
+## Escopo
 
-## Aprovado
-- 142/142 testes automatizados.
-- Validação completa do catálogo: 365 cartas únicas, 0 erros de schema e 0 imagens locais ausentes.
-- Teste real de importação ponta a ponta com set temporário: JSON + imagem + sincronização + validação + restauração.
-- Verificação estrutural do projeto.
-- Auditoria de artes e referências de imagens em runtime.
-- Auditoria de UI/responsividade.
-- Auditoria de release e informações técnicas expostas ao jogador.
-- Ferramentas de expansão de database verificadas: template, import, sync, validate e check.
+Base oficial Web + Online. O pacote-fonte não inclui dependências instaladas, bundles gerados, secrets ou arquivos temporários.
 
-## Build Vite neste ambiente
-O bundle Vite não foi produzido neste ambiente porque o pacote final é mantido sem `node_modules` e as dependências nativas do projeto são instaladas no sistema de destino.
+## Verificações obrigatórias
 
-Nenhum `node_modules`, `dist`, `.env` privado ou arquivo temporário é incluído no pacote final. Em uma instalação normal do projeto, execute `npm install` antes de `npm run build`.
+- Catálogo e referências de cartas.
+- Integridade estrutural.
+- Auditoria de imagens e thumbnails.
+- Testes automatizados.
+- Auditoria de UI e informações técnicas expostas.
+- Auditoria de release e segurança.
+- Build Vite.
+
+Execute `npm run project:check` antes de qualquer publicação.

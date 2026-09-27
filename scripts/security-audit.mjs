@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const problems = [];
 const allowedPublicKeyNames = new Set(["VITE_SUPABASE_URL", "VITE_SUPABASE_PUBLISHABLE_KEY"]);
-const scanRoots = ["src", "electron", "config", "scripts", ".github"];
+const scanRoots = ["src", "config", "scripts", ".github"];
 const secretPatterns = [
   /SUPABASE_SERVICE_ROLE_KEY\s*[:=]\s*["']?eyJ[A-Za-z0-9_-]{20,}/i,
   /\b(?:sk|rk|pk_live)-[A-Za-z0-9_-]{20,}\b/,

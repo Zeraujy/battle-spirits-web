@@ -1,5 +1,3 @@
-const STORAGE_ENV = import.meta.env || {};
-
 const KEYS = {
   decks: "bs-eternal:decks:v2",
   profile: "bs-eternal:profile:v2",
@@ -56,24 +54,11 @@ const LEGACY_PLAYER_COLORS = new Set([
 const DEFAULT_SETTINGS = {
   language: "ptBR",
 
-  onlineServerUrl:
-    STORAGE_ENV.VITE_ONLINE_SERVER_URL ||
-    "http://localhost:3001",
-
-  resolution:
-    "1920x1080",
-
-  displayMode:
-    "windowed",
-
   backgroundMode:
     "static",
 
   backgroundVideo:
     "background_video_01.mp4",
-
-  updateManifestUrl:
-    "",
 
   preferredPlayerColor:
     "#d8d8d8",
@@ -97,12 +82,6 @@ const DEFAULT_SETTINGS = {
   }
 };
 
-
-function desktop() {
-  return typeof window !== "undefined"
-    ? window.battleSpiritsDesktop
-    : null;
-}
 
 
 function readLocal(
@@ -147,43 +126,6 @@ function read(
   kind,
   fallback
 ) {
-  const bridge =
-    desktop();
-
-  if (
-    bridge?.storageRead
-  ) {
-    const result =
-      bridge.storageRead(
-        kind
-      );
-
-    if (
-      result?.found
-    ) {
-      return result.value;
-    }
-
-    /*
-     * Migração automática da 2.1:
-     * se o JSON da versão atual ainda não existe,
-     * reaproveita o localStorage antigo e já salva
-     * fora da instalação.
-     */
-    const legacy =
-      readLocal(
-        KEYS[kind],
-        fallback
-      );
-
-    bridge.storageWrite(
-      kind,
-      legacy
-    );
-
-    return legacy;
-  }
-
   return readLocal(
     KEYS[kind],
     fallback
@@ -195,28 +137,10 @@ function write(
   kind,
   value
 ) {
-  const bridge =
-    desktop();
-
-  if (
-    bridge?.storageWrite
-  ) {
-    bridge.storageWrite(
-      kind,
-      value
-    );
-  }
-
-  /*
-   * Mantemos um espelho local para compatibilidade
-   * com a versão web/dev.
-   */
-  writeLocal(
+  return writeLocal(
     KEYS[kind],
     value
   );
-
-  return value;
 }
 
 

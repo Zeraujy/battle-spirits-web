@@ -1,6 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { getSettings } from "./services/storage.js";
-import { applyDisplaySettings } from "./services/desktop.js";
 import { applyTheme } from "./services/theme.js";
 
 /*
@@ -21,7 +20,6 @@ const OnlineLobby = lazy(() => import("./pages/OnlineLobby.jsx"));
 const RankedLobby = lazy(() => import("./pages/RankedLobby.jsx"));
 const Store = lazy(() => import("./pages/Store.jsx"));
 const Simulator = lazy(() => import("./pages/Simulator.jsx"));
-const Updater = lazy(() => import("./pages/Updater.jsx"));
 const Tutorial = lazy(() => import("./pages/Tutorial.jsx"));
 const StarterOnboarding = lazy(() => import("./components/economy/StarterOnboarding.jsx"));
 
@@ -43,7 +41,6 @@ export default function App() {
     if (mode !== "game") return;
     const settings = getSettings();
     applyTheme(settings.theme);
-    applyDisplaySettings(settings).catch(() => {});
   }, [mode]);
 
   useEffect(() => {
@@ -71,8 +68,7 @@ export default function App() {
   const go = (name, props = {}) => setScreen({ name, ...props });
 
   let content;
-  if (mode === "updater") content = <Updater />;
-  else if (screen.name === "profile") content = <Profile onBack={() => go("home")} initialUsername={screen.initialUsername || null} />;
+  if (screen.name === "profile") content = <Profile onBack={() => go("home")} initialUsername={screen.initialUsername || null} />;
   else if (screen.name === "account") content = <Account onBack={() => go("home")} onProfile={() => go("profile")} />;
   else if (screen.name === "settings") content = <Settings onBack={() => go("home")} onAdmin={() => go("admin")} />;
   else if (screen.name === "admin") content = <AdminPanel onBack={() => go("settings")} />;
@@ -101,12 +97,12 @@ export default function App() {
   />;
   else content = <Home go={go} initialSection={screen.menu || "root"} />;
 
-  const routeKey = mode !== "game" ? mode : screen.name;
+  const routeKey = screen.name;
 
   return (
     <Suspense fallback={<LoadingScreen />}>
       <div className="app-route-shell" key={routeKey}>{content}</div>
-      {mode === "game" && <StarterOnboarding />}
+      <StarterOnboarding />
     </Suspense>
   );
 }

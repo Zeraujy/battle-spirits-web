@@ -6,7 +6,7 @@ begin;
 
 -- ---------------------------------------------------------------------------
 -- 1) Private player data: RLS is mandatory and direct writes to economy tables
---    remain impossible from browser/Electron clients.
+--    remain impossible from public browser clients.
 -- ---------------------------------------------------------------------------
 alter table if exists public.bs_player_wallets enable row level security;
 alter table if exists public.bs_player_wallets force row level security;

@@ -2004,7 +2004,7 @@ export default function Simulator({
     }
 
     /*
-     * Magic is intentionally more forgiving on desktop: dropping a Magic
+     * Magic is intentionally more forgiving with mouse input: dropping a Magic
      * anywhere over the battlefield starts its cost flow. During battle we
      * use Flash timing; during Main Step the default action is Main.
      */
@@ -5396,7 +5396,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v4.7.5 • Arena 2D
+            Eternal v4.8.1 • Arena 2D
           </span>
 
           <strong>

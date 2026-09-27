@@ -4,7 +4,7 @@ A v3.1.7 é uma atualização de polimento visual da Arena clássica. Ela não a
 
 ## Cartas em campo
 
-- Tamanho e espaçamento refinados para evitar cortes e melhorar leitura em diferentes larguras de desktop.
+- Tamanho e espaçamento refinados para evitar cortes e melhorar leitura em diferentes larguras de telas grandes.
 - Cartas, glow, Brave e HUD externo podem ultrapassar visualmente a moldura da zona sem serem recortados.
 - LV e BP continuam fora da arte e permanecem retos quando a carta está Exhausted.
 - Seleção usa sombra discreta, sem moldura branca ao redor do slot.

@@ -1,5 +1,5 @@
 /**
- * Touch/click policy for Core tokens in the desktop simulator.
+ * Touch/click policy for Core tokens in the web simulator.
  *
  * This module DOES NOT move Cores and does not validate Battle Spirits rules.
  * It only converts an intentional click into a suggested destination. The

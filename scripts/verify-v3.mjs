@@ -67,10 +67,6 @@ const required = [
   "src/styles/pages/eternalInterfaceV350.css",
   "src/styles/pages/gameFlowV351.css",
   "src/styles/cards/cardDetailsTilt.css",
-  "scripts/windows/CONFIGURAR-ONLINE.bat",
-  "scripts/windows/INICIAR-ONLINE.bat",
-  "scripts/windows/TESTAR-ONLINE.bat",
-  "scripts/windows/MIGRAR-CONTEUDO-DO-V2.bat"
 ];
 const missing = required.filter((item) => !fs.existsSync(path.join(root, item)));
 if (missing.length) {

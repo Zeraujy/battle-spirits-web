@@ -4,66 +4,40 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
-    version: "4.7.5",
+    version: "4.8.1",
     date: { pt: "27/09/2026", en: "09/27/2026" },
-    title: { pt: "Cliente Desktop Único & Auto Update", en: "Single Desktop Client & Auto Update" },
+    title: { pt: "Web Foundation Cleanup", en: "Web Foundation Cleanup" },
     summary: {
-      pt: "O cliente Desktop passa a expor apenas o executável principal do jogo; atualização e conexão online permanecem integradas ao próprio aplicativo.",
-      en: "The Desktop client now exposes only the main game executable; updating and online connectivity remain integrated into the application itself."
+      pt: "A base foi consolidada em uma única arquitetura oficial focada em Web e Online.",
+      en: "The project has been consolidated into a single official Web and Online architecture."
     },
     sections: [
       {
-        title: { pt: "Distribuição Desktop", en: "Desktop distribution" },
+        title: { pt: "Base simplificada", en: "Simplified foundation" },
         items: {
           pt: [
-            "Os builds Windows não criam mais cópias separadas Server.exe ou Updater.exe ao lado do jogo.",
-            "O updater continua dentro do executável principal e passa a iniciar automaticamente a instalação quando encontra uma release mais nova.",
-            "No Windows, upgrades usam o instalador NSIS em modo silencioso; macOS e Linux continuam usando os fluxos internos de substituição do aplicativo.",
-            "O servidor multiplayer continua remoto e não é distribuído como aplicativo que o jogador possa abrir manualmente."
+            "Removidos fluxos legados, arquivos redundantes e utilitários específicos de sistema operacional.",
+            "Online passa a utilizar exclusivamente o transporte Web oficial, reduzindo caminhos duplicados de conexão.",
+            "Persistência, configurações e publicação voltam a seguir somente o fluxo Web/Cloudflare + servidor Online.",
+            "Gameplay, coleção, Deck Builder, economia, Social Hub e dados existentes foram preservados."
           ],
           en: [
-            "Windows builds no longer create separate Server.exe or Updater.exe copies beside the game.",
-            "The updater remains inside the main executable and automatically starts installation when a newer release is found.",
-            "On Windows, upgrades use the NSIS installer in silent mode; macOS and Linux keep their internal application replacement flows.",
-            "The multiplayer server remains remote and is not distributed as an application players can launch manually."
+            "Legacy workflows, redundant files and operating-system-specific utilities were removed.",
+            "Online now uses only the official Web transport, eliminating duplicated connection paths.",
+            "Persistence, settings and publishing now follow only the Web/Cloudflare + Online server workflow.",
+            "Gameplay, collection, Deck Builder, economy, Social Hub and existing data were preserved."
           ]
         }
       }
     ]
   },
-  {
-    version: "4.7.1",
-    date: { pt: "27/09/2026", en: "09/27/2026" },
-    title: { pt: "Hotfix de publicação Desktop", en: "Desktop Publishing Hotfix" },
-    summary: {
-      pt: "Corrige o pipeline do GitHub Actions para que Windows, macOS e Linux apenas gerem seus artefatos; a publicação acontece uma única vez no job final.",
-      en: "Fixes the GitHub Actions pipeline so Windows, macOS and Linux only build artifacts; publishing now happens once in the final job."
-    },
-    sections: [
-      {
-        title: { pt: "Release unificada", en: "Unified release" },
-        items: {
-          pt: [
-            "electron-builder passa a usar --publish never nos três builds de plataforma, evitando publicação implícita sem GH_TOKEN.",
-            "Os jobs Windows, macOS e Linux enviam somente seus artefatos para o GitHub Actions.",
-            "O job publish-desktop continua sendo o único responsável por criar ou atualizar a GitHub Release da versão."
-          ],
-          en: [
-            "electron-builder now uses --publish never on all three platform builds, preventing implicit publishing without GH_TOKEN.",
-            "Windows, macOS and Linux jobs only upload their artifacts to GitHub Actions.",
-            "The publish-desktop job remains solely responsible for creating or updating the GitHub Release for the version."
-          ]
-        }
-      }
-    ]
-  },
-  {
+{
     version: "4.7.0",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Nova identidade KAIHOU!", en: "New KAIHOU! Identity" },
     summary: {
-      pt: "O projeto passa a adotar oficialmente o nome Battle Spirits: KAIHOU! Simulator, com favicon e ícones Desktop próprios.",
-      en: "The project officially adopts the Battle Spirits: KAIHOU! Simulator name, with custom favicon and Desktop application icons."
+      pt: "O projeto passa a adotar oficialmente o nome Battle Spirits: KAIHOU! Simulator, com identidade visual e favicon próprios.",
+      en: "The project officially adopts the Battle Spirits: KAIHOU! Simulator name, with its own visual identity and favicon."
     },
     sections: [
       {
@@ -72,59 +46,16 @@ const PATCHES = [
           pt: [
             "Nome oficial atualizado nas áreas globais do simulador e nos metadados do aplicativo.",
             "A aba do navegador agora exibe Gate Open, KAIHOU! e usa o novo favicon.",
-            "Windows, macOS e Linux passam a usar a nova logo nos pacotes Desktop."
           ],
           en: [
             "The official name has been updated across global simulator surfaces and application metadata.",
             "The browser tab now displays Gate Open, KAIHOU! and uses the new favicon.",
-            "Windows, macOS and Linux Desktop packages now use the new application logo."
           ]
         }
       }
     ]
   },
-  {
-    version: "4.6.0",
-    date: { pt: "27/09/2026", en: "09/27/2026" },
-    title: { pt: "Segurança Desktop & Backend", en: "Desktop & Backend Security" },
-    summary: {
-      pt: "Clientes Desktop recebem uma camada extra de proteção em produção, enquanto o backend reforça a validação autoritativa de economia e administração.",
-      en: "Desktop clients gain an additional production protection layer while the backend strengthens authoritative economy and administration validation."
-    },
-    sections: [
-      {
-        title: { pt: "Desktop protegido", en: "Hardened Desktop" },
-        items: {
-          pt: [
-            "Windows, macOS e Linux continuam no mesmo pipeline de release, sempre gerados com NODE_ENV=production.",
-            "Código do Electron é bundleado/minificado antes do empacotamento; fontes originais, server e arquivos .env não entram no cliente final.",
-            "app.asar passa a conter renderer, configuração pública e runtime Desktop; DevTools, F12 e atalhos de inspeção ficam bloqueados no build final."
-          ],
-          en: [
-            "Windows, macOS and Linux remain in the same release pipeline and are always generated with NODE_ENV=production.",
-            "Electron code is bundled/minified before packaging; original sources, server code and .env files are excluded from the final client.",
-            "app.asar contains the renderer, public configuration and Desktop runtime; DevTools, F12 and inspection shortcuts are blocked in release builds."
-          ]
-        }
-      },
-      {
-        title: { pt: "Backend autoritativo", en: "Authoritative Backend" },
-        items: {
-          pt: [
-            "A nova camada de segurança reforça o isolamento das informações privadas de economia e progresso de cada conta.",
-            "Compras, craft e comandos administrativos permanecem validados pelo backend; o status de Admin é derivado da sessão autenticada, nunca de flags do cliente.",
-            "Settlement Ranked continua exclusivo do backend, e auditorias de release passam a procurar segredos privados e configurações inseguras."
-          ],
-          en: [
-            "The new security layer strengthens isolation of each account’s private economy and progression data.",
-            "Purchases, crafting and administrative commands remain backend-validated; Admin status comes from the authenticated session, never client flags.",
-            "Ranked settlement remains backend-only, and release audits now scan for private secrets and insecure packaging settings."
-          ]
-        }
-      }
-    ]
-  },
-  {
+{
     version: "4.5.0",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Mobile, Touch & Onboarding UX", en: "Mobile, Touch & Onboarding UX" },
@@ -137,12 +68,12 @@ const PATCHES = [
         title: { pt: "Mobile & Interação", en: "Mobile & Interaction" },
         items: {
           pt: [
-            "Layouts principais passam a se adaptar a desktop, tablet e smartphone sem depender de hover.",
+            "Layouts principais passam a se adaptar a telas grandes, tablet e smartphone sem depender de hover.",
             "A Arena usa Pointer Events para mouse, caneta e toque; cartas podem ser arrastadas com o dedo e os docks Carta/Turno viram painéis retráteis acessíveis por botões.",
             "Cursores temáticos globais e feedback de glow foram centralizados em variáveis CSS para futuras temporadas e eventos."
           ],
           en: [
-            "Main layouts now adapt to desktop, tablet and smartphone without relying on hover.",
+            "Main layouts now adapt to large screens, tablets and smartphones without relying on hover.",
             "The Arena uses Pointer Events for mouse, pen and touch; cards can be dragged with a finger and Card/Turn docks become retractable panels controlled by buttons.",
             "Global themed cursors and glow feedback are centralized in CSS variables for future seasons and events."
           ]
@@ -165,48 +96,7 @@ const PATCHES = [
       }
     ]
   },
-  {
-    version: "4.4.0",
-    date: { pt: "27/09/2026", en: "09/27/2026" },
-    title: { pt: "Web + Desktop Unificados", en: "Unified Web + Desktop" },
-    summary: {
-      pt: "O mesmo update agora prepara a Web e gera automaticamente clientes Desktop para Windows, macOS e Linux.",
-      en: "The same update now prepares the Web build and automatically generates Desktop clients for Windows, macOS and Linux."
-    },
-    sections: [
-      {
-        title: { pt: "Desktop", en: "Desktop" },
-        items: {
-          pt: [
-            "A versão Web passa a exibir Download Desktop somente no navegador.",
-            "Windows recebe instalador NSIS; macOS recebe builds Apple Silicon e Intel; Linux recebe AppImage e .deb.",
-            "Clientes Desktop verificam automaticamente a release mais recente e usam a mesma conta, coleção e progresso da Web."
-          ],
-          en: [
-            "The Web version now shows Download Desktop only in the browser.",
-            "Windows gets an NSIS installer; macOS gets Apple Silicon and Intel builds; Linux gets AppImage and .deb.",
-            "Desktop clients automatically check the latest release and use the same account, collection and progress as the Web version."
-          ]
-        }
-      },
-      {
-        title: { pt: "Release unificada", en: "Unified release" },
-        items: {
-          pt: [
-            "Um único push no GitHub dispara a validação e os builds Desktop da mesma versão.",
-            "O preflight do Cloudflare bloqueia assets individuais acima de 25 MiB antes do push.",
-            "O posicionamento aprovado do perfil local na tela Ranked foi preservado."
-          ],
-          en: [
-            "A single GitHub push triggers validation and Desktop builds for the same version.",
-            "Cloudflare preflight blocks individual assets above 25 MiB before the push.",
-            "The approved local profile position on the Ranked screen was preserved."
-          ]
-        }
-      }
-    ]
-  },
-  {
+{
     version: "4.3.2",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Correção visual do Admin Panel", en: "Admin Panel Visual Fix" },

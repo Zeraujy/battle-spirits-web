@@ -4,7 +4,6 @@ import { useLanguage } from "../i18n.jsx";
 import { APP_VERSION_LABEL } from "../config/appVersion.js";
 import HomeWallpaperSlideshow from "../components/home/HomeWallpaperSlideshow.jsx";
 import ProjectInfoButtons from "../components/common/ProjectInfoButtons.jsx";
-import DesktopDownloadModal from "../components/home/DesktopDownloadModal.jsx";
 import { dismissTutorialWelcome, getTutorialProgress } from "../services/tutorialProgress.js";
 import "../styles/pages/mainMenuV340.css";
 
@@ -46,8 +45,6 @@ export default function Home({ go, initialSection = "root" }) {
   const tutorialProgress = useMemo(() => getTutorialProgress(), []);
   const tutorialComplete = tutorialProgress.practiceCompleted && tutorialProgress.completed.length >= 6;
   const [tutorialWelcome, setTutorialWelcome] = useState(() => !tutorialProgress.dismissedWelcome);
-  const [desktopDownloadsOpen, setDesktopDownloadsOpen] = useState(false);
-  const isDesktopClient = Boolean(window.battleSpiritsDesktop?.isDesktop);
 
   useEffect(() => {
     setSection(initialSection || "root");
@@ -90,14 +87,6 @@ export default function Home({ go, initialSection = "root" }) {
         detail={pt ? "Sistema, tema e idioma" : "System, theme and language"}
         onClick={() => go("settings")}
       />
-      {!isDesktopClient && (
-        <MainMenuItem
-          label={pt ? "Download Desktop" : "Download Desktop"}
-          detail={pt ? "Windows, macOS e Linux" : "Windows, macOS and Linux"}
-          badge="PC"
-          onClick={() => setDesktopDownloadsOpen(true)}
-        />
-      )}
     </>
   );
 
@@ -184,10 +173,6 @@ export default function Home({ go, initialSection = "root" }) {
         </nav>
       </section>
 
-
-      {!isDesktopClient && (
-        <DesktopDownloadModal open={desktopDownloadsOpen} onClose={() => setDesktopDownloadsOpen(false)} pt={pt} />
-      )}
 
       {tutorialWelcome && section === "root" && (
         <section className="bs-tutorial-welcome" role="dialog" aria-label={pt ? "Boas-vindas" : "Welcome"}>

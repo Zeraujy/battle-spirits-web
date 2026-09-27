@@ -1,27 +1,24 @@
 {
   "name": "battle-spirits-kaihou-simulator",
-  "version": "4.7.7",
+  "version": "4.8.1",
   "private": true,
   "type": "module",
-  "description": "Battle Spirits: KAIHOU! Simulator v4.7.6 - Desktop startup lifecycle hotfix",
-  "main": "electron/main.cjs",
+  "description": "Battle Spirits: KAIHOU! Simulator v4.8.1 - Web & Online",
   "scripts": {
-    "dev": "npm run prepare:release-config && concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && cross-env ELECTRON_START_URL=http://127.0.0.1:5173 electron .\"",
-    "dev:web": "npm run prepare:release-config && vite --host 127.0.0.1",
+    "dev": "vite --host 127.0.0.1",
+    "dev:web": "vite --host 127.0.0.1",
     "dev:server": "node --env-file-if-exists=server/.env server/index.mjs",
-    "electron": "electron .",
-    "build": "cross-env NODE_ENV=production npm run prepare:release-config && vite build",
+    "build": "vite build",
     "preview": "vite preview",
-    "dist:win": "npm run desktop:win",
     "test": "node --test src/game/*.test.js src/online/*.test.js src/services/*.test.js",
-    "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs",
+    "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-web-only.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs",
     "check": "npm run verify && npm test && npm run build",
     "server:start": "node --env-file-if-exists=server/.env server/index.mjs",
     "online:check": "node scripts/check-online-config.mjs",
     "verify:v3": "node scripts/verify-v3.mjs",
     "deploy:cloudflare": "npm run build && npx wrangler@4 deploy",
     "preview:cloudflare": "npm run build && npx wrangler@4 dev",
-    "project:check": "npm run verify && npm test && npm run ui:audit && npm run release:audit && npm run security:audit && npm run desktop:security-audit",
+    "project:check": "npm run verify && npm test && npm run ui:audit && npm run release:audit && npm run security:audit && npm run build",
     "publish:cloudflare": "npm run check && npx wrangler@4 deploy",
     "release:audit": "node scripts/release-audit.mjs",
     "ui:audit": "node scripts/ui-audit.mjs",
@@ -30,15 +27,9 @@
     "cards:template": "node scripts/card-db/create-set-template.mjs",
     "cards:import": "node scripts/card-db/import-set.mjs",
     "cards:check": "npm run cards:sync && npm run cards:validate && npm run verify",
-    "prepare:release-config": "node scripts/generate-desktop-release-config.mjs",
-    "desktop:win": "npm run desktop:prepare && electron-builder --win --x64 --publish never",
-    "desktop:mac": "npm run desktop:prepare && electron-builder --mac --x64 --publish never && electron-builder --mac --arm64 --publish never",
-    "desktop:linux": "npm run desktop:prepare && electron-builder --linux --x64 --publish never",
     "cloudflare:preflight": "node scripts/cloudflare-asset-preflight.mjs",
-    "build:electron": "cross-env NODE_ENV=production vite build --config vite.electron.config.mjs",
-    "desktop:prepare": "npm run build && npm run build:electron && npm run desktop:security-audit",
-    "desktop:security-audit": "node scripts/desktop-security-audit.mjs",
-    "security:audit": "node scripts/security-audit.mjs"
+    "security:audit": "node scripts/security-audit.mjs",
+    "web-only:audit": "node scripts/audit-web-only.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",
@@ -49,78 +40,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.2",
-    "concurrently": "^9.2.1",
-    "cross-env": "^10.0.0",
-    "electron": "^44.3.0",
-    "electron-builder": "^26.0.12",
-    "vite": "^8.2.2",
-    "wait-on": "^8.0.4"
+    "vite": "^8.2.2"
   },
-  "build": {
-    "appId": "com.fan.battlespirits.eternal.simulator",
-    "productName": "Battle Spirits: KAIHOU! Simulator",
-    "artifactName": "Battle-Spirits-${os}-${arch}.${ext}",
-    "asar": true,
-    "afterPack": "scripts/after-pack.cjs",
-    "directories": {
-      "output": "release"
-    },
-    "files": [
-      "dist/**/*",
-      "desktop-dist/**/*",
-      "config/**/*",
-      "package.json"
-    ],
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        }
-      ],
-      "artifactName": "Battle-Spirits-Windows-Setup.${ext}",
-      "icon": "build/icons/icon.ico"
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "shortcutName": "Battle Spirits - KAIHOU! Simulator",
-      "uninstallDisplayName": "Battle Spirits: KAIHOU! Simulator"
-    },
-    "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ],
-      "category": "public.app-category.games",
-      "artifactName": "Battle-Spirits-macOS-${arch}.${ext}",
-      "icon": "build/icons/icon.icns"
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
-      "category": "Game",
-      "artifactName": "Battle-Spirits-Linux-${arch}.${ext}",
-      "icon": "build/icons/icon.png",
-      "executableName": "battle-spirits-kaihou-simulator",
-      "syncDesktopName": true,
-      "maintainer": "MASK STUDIO <zeraujy@users.noreply.github.com>"
-    },
-    "extraMetadata": {
-      "main": "desktop-dist/main.cjs"
-    },
-    "asarUnpack": []
-  },
-  "allowScripts": {
-    "electron-winstaller@5.4.0": true
-  },
-  "desktopName": "com.fan.battlespirits.kaihou.simulator.desktop",
   "author": {
     "name": "MASK STUDIO",
     "email": "zeraujy@users.noreply.github.com"

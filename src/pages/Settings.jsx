@@ -11,12 +11,6 @@ import {
 } from "../services/storage.js";
 
 import {
-  applyDisplaySettings,
-  getAppInfo,
-  openUpdater
-} from "../services/desktop.js";
-
-import {
   applyTheme,
   DEFAULT_THEME,
   normalizeTheme,
@@ -28,18 +22,12 @@ import {
 } from "../i18n.jsx";
 
 import { getAdminAccess } from "../services/adminService.js";
+import { APP_VERSION_LABEL } from "../config/appVersion.js";
 import "../styles/theme/themeLibrary.css";
 import "../styles/pages/settingsGame.css";
 import "../styles/pages/eternalInterfaceV350.css";
 
 
-const RESOLUTIONS = [
-  "1280x720",
-  "1366x768",
-  "1600x900",
-  "1920x1080",
-  "2560x1440"
-];
 
 
 const THEME_FIELDS = [
@@ -258,32 +246,6 @@ export default function Settings({
   }, []);
 
 
-  const [
-    appInfo,
-    setAppInfo
-  ] = useState({
-    version:
-      "4.3.1",
-
-    packaged:
-      false
-  });
-
-
-  useEffect(
-    () => {
-      getAppInfo()
-        .then(
-          setAppInfo
-        )
-        .catch(
-          () => {}
-        );
-    },
-    []
-  );
-
-
   function showThemeNotice(
     message
   ) {
@@ -328,10 +290,6 @@ export default function Settings({
 
     applyTheme(
       next.theme
-    );
-
-    await applyDisplaySettings(
-      next
     );
 
 
@@ -706,11 +664,10 @@ export default function Settings({
 
   const sections = [
     { id: "general", icon: "⌂", label: pt ? "Geral" : "General", hint: pt ? "Idioma e sistema" : "Language and system" },
-    { id: "display", icon: "▣", label: pt ? "Exibição" : "Display", hint: pt ? "Resolução e tela" : "Resolution and screen" },
+    { id: "display", icon: "▣", label: pt ? "Exibição" : "Display", hint: pt ? "Fundo e aparência" : "Background and appearance" },
     { id: "audio", icon: "◖", label: pt ? "Áudio" : "Audio", hint: pt ? "Sons do simulador" : "Simulator sounds" },
     { id: "interface", icon: "◇", label: pt ? "Interface" : "Interface", hint: pt ? "Preferências visuais" : "Visual preferences" },
     { id: "themes", icon: "✦", label: pt ? "Temas" : "Themes", hint: pt ? "Cores e aparência" : "Colors and appearance" },
-    { id: "updates", icon: "↻", label: pt ? "Atualizações" : "Updates", hint: pt ? "Versão e updater" : "Version and updater" }
   ];
 
   return (
@@ -732,7 +689,7 @@ export default function Settings({
 
         <div className="settings-game-version">
           <small>{pt ? "VERSÃO" : "VERSION"}</small>
-          <strong>v{appInfo.version}</strong>
+          <strong>{APP_VERSION_LABEL}</strong>
         </div>
       </header>
 
@@ -764,7 +721,7 @@ export default function Settings({
             <span className="settings-game-status-dot" />
             <div>
               <strong>Eternal Simulator</strong>
-              <small>v{appInfo.version}</small>
+              <small>{APP_VERSION_LABEL}</small>
             </div>
           </div>
         </aside>
@@ -795,8 +752,8 @@ export default function Settings({
 
                 <div className="settings-game-info-card">
                   <span>{pt ? "PLATAFORMA" : "PLATFORM"}</span>
-                  <strong>{appInfo.packaged ? "Desktop" : "Web"}</strong>
-                  <small>{appInfo.packaged ? (pt ? "Aplicativo para computador." : "Desktop application.") : (pt ? "Versão para navegador." : "Browser version.")}</small>
+                  <strong>Web</strong>
+                  <small>{pt ? "Versão oficial para navegador." : "Official browser version."}</small>
                 </div>
               </div>
 
@@ -822,41 +779,6 @@ export default function Settings({
                   <h2>{pt ? "Exibição e gráficos" : "Display and graphics"}</h2>
                   <p>{pt ? "Ajuste como o simulador aparece no seu monitor." : "Adjust how the simulator appears on your display."}</p>
                 </div>
-              </div>
-
-              <div className="settings-game-display-preview">
-                <div className="settings-display-monitor">
-                  <div className="settings-display-screen">
-                    <span>Battle Spirits: KAIHOU! Simulator</span>
-                    <strong>{draft.resolution || "1920x1080"}</strong>
-                    <small>{draft.displayMode === "fullscreen" ? t("fullscreen") : t("windowed")}</small>
-                  </div>
-                </div>
-              </div>
-
-              <div className="settings-game-grid two">
-                <label className="settings-game-field">
-                  <span>{t("resolution")}</span>
-                  <small>{pt ? "Tamanho usado no modo janela." : "Size used in windowed mode."}</small>
-                  <select
-                    value={draft.resolution || "1920x1080"}
-                    onChange={(e) => setDraft({ ...draft, resolution: e.target.value })}
-                  >
-                    {RESOLUTIONS.map((resolution) => <option key={resolution}>{resolution}</option>)}
-                  </select>
-                </label>
-
-                <label className="settings-game-field">
-                  <span>{t("displayMode")}</span>
-                  <small>{pt ? "Escolha entre janela ou tela cheia." : "Choose windowed or fullscreen mode."}</small>
-                  <select
-                    value={draft.displayMode || "windowed"}
-                    onChange={(e) => setDraft({ ...draft, displayMode: e.target.value })}
-                  >
-                    <option value="windowed">{t("windowed")}</option>
-                    <option value="fullscreen">{t("fullscreen")}</option>
-                  </select>
-                </label>
               </div>
 
               <div className="settings-game-grid two settings-background-controls">
@@ -892,7 +814,7 @@ export default function Settings({
                 <span>i</span>
                 <div>
                   <strong>{pt ? "Dica de desempenho" : "Performance tip"}</strong>
-                  <small>{pt ? "Para melhor nitidez, use a resolução nativa do monitor. No navegador, o tamanho da janela continua sendo controlado pelo próprio navegador." : "For best sharpness, use your monitor's native resolution. In the browser, window size is still controlled by the browser itself."}</small>
+                  <small>{pt ? "O simulador agora é focado integralmente na Web. Use o zoom padrão do navegador e prefira tela cheia do próprio navegador quando quiser mais espaço." : "The simulator is now fully focused on the Web. Use the browser default zoom and its own fullscreen mode when you want more space."}</small>
                 </div>
               </div>
             </div>
@@ -1135,34 +1057,7 @@ export default function Settings({
             </div>
           )}
 
-          {activeTab === "updates" && (
-            <div className="settings-game-panel">
-              <div className="settings-game-panel-heading">
-                <div>
-                  <span className="eyebrow">UPDATE</span>
-                  <h2>{t("updates")}</h2>
-                  <p>{t("updateDescription")}</p>
-                </div>
-                <div className="settings-update-version-card">
-                  <small>{pt ? "VERSÃO ATUAL" : "CURRENT VERSION"}</small>
-                  <strong>v{appInfo.version}</strong>
-                </div>
-              </div>
-
-              <div className="settings-update-card">
-                <div className="settings-update-icon">↻</div>
-                <div>
-                  <strong>{pt ? "Atualizações automáticas do KAIHOU! Simulator" : "KAIHOU! Simulator Automatic Updates"}</strong>
-                  <small>{pt ? "A versão Desktop verifica e instala novas versões automaticamente a partir da release oficial." : "The Desktop build automatically checks and installs new versions from the official release."}</small>
-                </div>
-                <button className="primary-btn" onClick={() => openUpdater()} disabled={!window.battleSpiritsDesktop?.openUpdater}>
-                  {t("checkUpdates")}
-                </button>
-              </div>
-            </div>
-          )}
-
-          <footer className="settings-game-actions">
+                    <footer className="settings-game-actions">
             <div>
               {saved && <span className="success-text">✓ {t("settingsSaved")}</span>}
             </div>

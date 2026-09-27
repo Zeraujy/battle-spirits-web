@@ -1,6 +1,6 @@
 # Battle Spirits Eternal Simulator v3.1.9 — Card Interaction
 
-A v3.1.9 mantém a Rules Engine da linha estável v3.1.x e foca em deixar cartas e Cores mais naturais de manipular no desktop.
+A v3.1.9 mantém a Rules Engine da linha estável v3.1.x e foca em deixar cartas e Cores mais naturais de manipular no telas grandes.
 
 ## Cores — clique ou arraste
 - Core tokens da Reserve continuam podendo ser arrastados manualmente.

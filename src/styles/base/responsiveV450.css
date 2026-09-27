@@ -1,6 +1,6 @@
 /* =========================================================
    Battle Spirits Eternal Simulator — v4.5.0
-   Global responsive layer: desktop / tablet / smartphone
+   Global responsive layer: large screen / tablet / smartphone
 ========================================================= */
 
 html, body, #root { width: 100%; min-width: 0; max-width: 100%; }

@@ -1,44 +1,32 @@
-# START HERE — v3.7.1
+# START HERE — v4.8.1
 
-## Social Hub & Player Identity
+## Base oficial
 
-Arquivos principais desta revisão:
+O projeto é exclusivamente Web + Online. Use os comandos npm como ponto de entrada para desenvolvimento, testes, validação e publicação.
 
-- `src/pages/Profile.jsx` — novo Social Hub em estilo launcher.
-- `src/styles/pages/socialHubV360.css` — identidade visual e layout sem scroll de página.
-- `src/services/socialService.js` — perfil cloud, privacidade, pedidos, amigos, DMs, notificações, presença e bloqueios.
-- `src/services/socialInsights.js` — estatísticas locais de decks/cartas e Maestria.
-- `src/online/socialInsights.test.js` — testes da camada de insights/Maestria.
-- `supabase/SOCIAL-HUB-3.6.sql` — migração social e políticas de segurança.
-- `supabase/README-SOCIAL-HUB-3.6.md` — instruções da migração.
-- `src/online/publicProfile.js` — **continua isolado** e permanece responsável pelo perfil mínimo das partidas Online.
-- `src/components/common/ProjectInfoButtons.jsx` — Patch Notes internos.
+## Desenvolvimento
 
-## Regra de arquitetura importante
+```bash
+npm install
+npm run dev
+```
 
-Não importe `socialService.js` em `src/online/publicProfile.js`, `src/online/socketClient.js` ou `server/index.mjs`.
+Servidor Online local, quando necessário:
 
-A camada Social e o transporte das partidas devem continuar independentes.
-
-## Social Hub v3.6.3
-
-Depois da migração base `supabase/SOCIAL-HUB-3.6.sql`, execute também `supabase/SOCIAL-HUB-3.6.2.sql`. Esta atualização adiciona favoritos, silenciamento de DMs, status personalizado, indicador de digitação e recibos de leitura sem acoplar o Social Hub ao Socket.IO das partidas.
-
-## Maestria v3.6.3
-
-A primeira versão usa dados que já existem no dispositivo:
-
-- presença da carta em decks;
-- quantidade de cópias;
-- quantidade de decks diferentes;
-- uso como carta de capa.
-
-Isso evita ler estado oculto ou tráfego das partidas Online. Histórico competitivo real pode ser adicionado depois por uma integração pós-partida separada.
+```bash
+npm run dev:server
+```
 
 ## Antes de publicar
 
-```powershell
-npm run check
+```bash
+npm run project:check
 ```
 
-Depois, execute `supabase/SOCIAL-HUB-3.6.sql` no Supabase para liberar todos os recursos cloud da nova interface.
+## Publicação
+
+```bash
+npm run publish:cloudflare
+```
+
+A camada Social e o transporte das partidas permanecem independentes. Não acople `socialService.js` a `src/online/publicProfile.js`, `src/online/socketClient.js` ou `server/index.mjs`.

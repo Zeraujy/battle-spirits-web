@@ -1,5 +1,5 @@
 /**
- * Small, visual-only battle state label used by the desktop arena.
+ * Small, visual-only battle state label used by the browser arena.
  *
  * The Rules Engine remains the source of truth for attackers / blockers.
  * This component only translates an already-known battle state into a

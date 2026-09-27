@@ -1,7 +1,4 @@
-# Deploy Cloudflare — Battle Spirits Eternal Simulator v3
-
-Este pacote foi preparado para substituir o conteúdo do repositório:
-Zeraujy/battle-spirits-web
+# Deploy Cloudflare — Battle Spirits: KAIHOU! Simulator v4.8.1
 
 ## Cloudflare Workers
 - Build command: `npm run build`
@@ -34,9 +31,7 @@ Não coloque uma chave `service_role` no frontend.
 ## Teste
 ```bash
 npm install
-npm run verify
-npm test
-npm run build
+npm run project:check
 ```
 
 ## Deploy manual

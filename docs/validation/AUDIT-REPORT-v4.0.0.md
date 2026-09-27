@@ -11,7 +11,7 @@
 
 ## UX / Ranked
 - Ranked reorganizado em stack vertical próprio para impedir colisão entre VS, estatísticas e histórico.
-- Breakpoints dedicados: 1050px, 760px e 520px, além de ajuste para telas desktop de baixa altura.
+- Breakpoints dedicados: 1050px, 760px e 520px, além de ajuste para telas tela grande de baixa altura.
 - Ações redundantes de troca de deck foram consolidadas.
 - Estado vazio de histórico adicionado.
 - Estado de conexão visível sem expor detalhes de infraestrutura.

@@ -12,7 +12,7 @@
 - Proporção das cartas corrigida para corresponder aos arquivos 675×983.
 - Imagens de mão/campo passam a usar `object-fit: contain` e renderização automática de alta qualidade.
 - Ampliação por `scale()` removida dos hovers principais da mão/campo para evitar rasterização borrada.
-- Cartas ligeiramente maiores no layout desktop principal.
+- Cartas ligeiramente maiores no layout telas grandes principal.
 - Auditoria confirmou que todas as imagens usadas na database estão acima do limite mínimo definido.
 
 ## Interação

@@ -7,7 +7,7 @@ Grande atualização da experiência social do simulador. O sistema foi redesenh
 ### Social Hub
 - Nova tela em viewport fixo, sem scroll da página principal.
 - Navegação lateral para Visão Geral, Perfil, Amigos, Mensagens, Notificações, Maestria e Privacidade.
-- Lista de amigos persistente à direita em telas desktop, com presença, mensagens não lidas e atalho para conversa.
+- Lista de amigos persistente à direita em telas telas grandes, com presença, mensagens não lidas e atalho para conversa.
 - Painéis internos fazem scroll apenas quando necessário.
 
 ### Perfil & mídia

@@ -102,7 +102,7 @@ export default function StarterOnboarding() {
           <div>
             <span>BATTLE SPIRITS ETERNAL · PLAYER ONBOARDING</span>
             <h1>{pt ? "Escolha 3 Starter Decks" : "Choose 3 Starter Decks"}</h1>
-            <p>{pt ? "Explore cada deck, veja a lista completa e leia as cartas antes de escolher. Deslize horizontalmente no celular ou use as setas no desktop." : "Explore each deck, inspect the full decklist and read every card before choosing. Swipe horizontally on mobile or use the arrows on desktop."}</p>
+            <p>{pt ? "Explore cada deck, veja a lista completa e leia as cartas antes de escolher. Deslize horizontalmente no celular ou use as setas em telas grandes." : "Explore each deck, inspect the full decklist and read every card before choosing. Swipe horizontally on mobile or use the arrows on larger screens."}</p>
           </div>
           <div className="starter-v450-counter">
             <strong>{selected.length}/3</strong>

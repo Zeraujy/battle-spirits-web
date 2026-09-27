@@ -98,10 +98,7 @@ const requiredPaths = [
   "supabase/ECONOMY-4.3.0.sql",
   "supabase/SECURITY-4.6.0.sql",
   "supabase/README-SECURITY-4.6.0.md",
-  "vite.electron.config.mjs",
   "scripts/security-audit.mjs",
-  "scripts/desktop-security-audit.mjs",
-  ".github/workflows/desktop-release.yml",
   "src/data/shopSagas.js",
   "docs/dev/DEVMODE-ADMIN-ARCHITECTURE.md",
   "src/components/economy/StarterOnboarding.jsx",
@@ -114,18 +111,14 @@ const requiredPaths = [
   "public/assets/cursors/cursor-grab.svg",
   "public/assets/cursors/cursor-grabbing.svg",
   "public/favicon.ico",
-  "build/icons/icon.ico",
-  "build/icons/icon.icns",
-  "build/icons/icon.png",
-  "docs/changelog/CHANGELOG-4.7.7.md",
+  "docs/changelog/CHANGELOG-4.8.1.md",
   "docs/shop/ADDING-SHOP-ITEMS.md",
   "public/images/ui/arena/levels",
   "public/images/arena/wallpaper_arena_default.png",
-  "docs/changelog",
-  "scripts/windows"
+  "docs/changelog"
 ];
 
-console.log("Battle Spirits: KAIHOU! Simulator v4.7.7 — verificação estrutural\n");
+console.log("Battle Spirits: KAIHOU! Simulator v4.8.1 — verificação estrutural\n");
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -220,4 +213,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v4.7.7 validada.");
+console.log("\nVERIFY OK — estrutura v4.8.1 validada.");

@@ -1,20 +1,35 @@
-# Battle Spirits Eternal Simulator
+# Battle Spirits: KAIHOU! Simulator
 
-Um simulador feito por fã para jogar **Battle Spirits** online de forma simples e acessível.
+Simulador Web feito por fã para jogar **Battle Spirits** online.
 
-O projeto foi criado por paixão pelo jogo e pela comunidade de Battle Spirits.
+O projeto é sem fins lucrativos e não possui afiliação oficial com a Bandai. Todos os direitos sobre Battle Spirits, nomes, imagens, personagens e cartas pertencem aos respectivos detentores.
 
-**Este é um projeto sem fins lucrativos.**
-Não tenho qualquer afiliação oficial com a Bandai, e não estou obtendo lucro com o uso da propriedade intelectual de Battle Spirits.
+## Arquitetura oficial
 
-Todos os direitos sobre **Battle Spirits**, nomes, imagens, personagens, cartas e demais propriedades pertencem aos seus respectivos detentores.
+A partir da v4.8.1, o projeto possui uma única base oficial: **Web + Online**.
 
-## Jogar
+- Frontend: React + Vite
+- Hospedagem Web: Cloudflare
+- Multiplayer: servidor Node.js + Socket.IO separado do frontend
+- Conta e recursos cloud: Supabase
 
-Acesse o simulador pelo link abaixo:
+## Desenvolvimento
 
-**[Jogar Battle Spirits Eternal Simulator](https://battle-spirits-web.zeraujyalkan.workers.dev/)**
+```bash
+npm install
+npm run dev
+```
 
----
+## Validação completa
 
-Projeto feito de fã para fã.
+```bash
+npm run project:check
+```
+
+## Publicação Web
+
+```bash
+npm run publish:cloudflare
+```
+
+Para novos sets, consulte `docs/card-database/ADDING-NEW-SETS.md`.

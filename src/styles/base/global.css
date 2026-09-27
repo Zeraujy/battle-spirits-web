@@ -437,53 +437,9 @@ button:hover:not(:disabled) { border-color: var(--line-strong); filter: brightne
 .compact-manual-tools[open] summary { margin-bottom:8px; color:var(--accent); }
 .online-error-box { margin-top:12px; padding:9px 10px; border:1px solid rgba(138, 138, 138,.35); border-radius:8px; background:rgba(34, 34, 34,.2); }
 
-/* ===== 2.2 Windows application / updater / server ===== */
-.update-settings-panel { margin-top: 18px; }
-.settings-section-heading { display:flex; justify-content:space-between; align-items:center; gap:14px; }
-.settings-section-heading h2 { margin:3px 0 0; }
-.settings-section-heading > strong { padding:7px 10px; border:1px solid var(--line); border-radius:999px; color:var(--accent); }
-.update-settings-panel > p { color:var(--muted); margin:0; line-height:1.55; }
-.data-path-note { color:var(--muted); line-height:1.55; word-break:break-all; }
-.data-path-note code { color:#cccccc; }
-
-.utility-page { min-height:100vh; display:grid; place-items:center; padding:28px; background:radial-gradient(circle at 50% 0%, rgba(84, 84, 84,.28), transparent 44%), #0a0a0a; }
-.utility-shell { width:min(580px,100%); display:grid; gap:14px; padding:28px; border:1px solid var(--line-strong); border-radius:22px; background:linear-gradient(145deg,rgba(23, 23, 23,.98),rgba(11, 11, 11,.98)); box-shadow:var(--shadow); }
-.utility-logo { width:min(280px,75%); max-height:100px; object-fit:contain; justify-self:center; margin-bottom:4px; }
-.utility-shell h1 { margin:0; font-size:34px; }
-.utility-subtitle { margin:0; color:var(--muted); }
-.utility-actions { display:flex; justify-content:flex-end; flex-wrap:wrap; gap:9px; }
-.utility-footnote { color:var(--muted); line-height:1.5; }
-.update-status-card { min-height:150px; display:grid; align-content:center; gap:8px; padding:18px; border:1px solid var(--line); border-radius:14px; background:rgba(13, 13, 13,.72); }
-.update-status-card > strong { font-size:17px; }
-.update-status-card > span { color:var(--muted); line-height:1.55; }
-.update-status-card code { color:#d9d9d9; }
-.update-notes { margin:5px 0 0; padding-left:18px; display:grid; gap:5px; color:#e2e2e2; font-size:12px; }
 .progress-track { height:9px; overflow:hidden; border-radius:999px; background:#0f0f0f; border:1px solid var(--line); }
 .progress-track > div { height:100%; min-width:8%; background:linear-gradient(90deg,#707070,#c0c0c0); transition:width .15s ease; }
 .error-text { color:#a7a7a7; }
-
-.server-shell { width:min(640px,100%); }
-.server-indicator { display:flex; align-items:center; gap:9px; width:max-content; padding:7px 11px; border-radius:999px; border:1px solid var(--line); }
-.server-indicator i { width:10px; height:10px; border-radius:50%; background:#767676; box-shadow:0 0 0 4px rgba(118, 118, 118,.1); }
-.server-indicator.online { color:#cdcdcd; border-color:rgba(172, 172, 172,.32); }
-.server-indicator.online i { background:#afafaf; box-shadow:0 0 14px rgba(175, 175, 175,.7); }
-.server-indicator.offline { color:#c7c7c7; }
-.server-stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
-.server-stats-grid > div { padding:13px 10px; display:grid; gap:4px; text-align:center; border:1px solid var(--line); border-radius:12px; background:rgba(13, 13, 13,.65); }
-.server-stats-grid span { color:var(--muted); font-size:9px; text-transform:uppercase; letter-spacing:.1em; }
-.server-stats-grid strong { font-size:22px; }
-.server-address-box, .server-error { display:grid; gap:5px; padding:14px; border:1px solid var(--line); border-radius:12px; background:rgba(13, 13, 13,.65); }
-.server-address-box > span { color:var(--muted); font-size:9px; text-transform:uppercase; letter-spacing:.1em; }
-.server-address-box code { color:#cbcbcb; font-size:15px; }
-.server-address-box small { color:var(--muted); line-height:1.5; }
-.server-error { border-color:rgba(138, 138, 138,.35); color:#b0b0b0; }
-.danger-btn { border-color:rgba(138, 138, 138,.45); color:#dddddd; background:#222222; }
-
-@media (max-width: 680px) {
-  .utility-page { padding:12px; }
-  .utility-shell { padding:20px; }
-  .server-stats-grid { grid-template-columns:repeat(2,1fr); }
-}
 
 /* ===== Battle Spirits 2.3 update ===== */
 body { background: radial-gradient(circle at 15% 0%, color-mix(in srgb, var(--accent-2) 24%, transparent), transparent 34rem), radial-gradient(circle at 90% 7%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 30rem), linear-gradient(180deg, color-mix(in srgb, var(--bg) 84%, #222222), var(--bg)); color:var(--text); }
