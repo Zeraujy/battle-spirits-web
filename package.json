@@ -1,9 +1,9 @@
 {
   "name": "battle-spirits-kaihou-simulator",
-  "version": "4.7.2",
+  "version": "4.7.3",
   "private": true,
   "type": "module",
-  "description": "Battle Spirits: KAIHOU! Simulator v4.7.2 - Single Client Auto Update",
+  "description": "Battle Spirits: KAIHOU! Simulator v4.7.3 - macOS/Linux CI fix + classic title screen",
   "main": "electron/main.cjs",
   "scripts": {
     "dev": "npm run prepare:release-config && concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && cross-env ELECTRON_START_URL=http://127.0.0.1:5173 electron .\"",
@@ -107,7 +107,9 @@
       ],
       "category": "Game",
       "artifactName": "Battle-Spirits-Linux-${arch}.${ext}",
-      "icon": "build/icons/icon.png"
+      "icon": "build/icons/icon.png",
+      "executableName": "battle-spirits-kaihou-simulator",
+      "syncDesktopName": true
     },
     "extraMetadata": {
       "main": "desktop-dist/main.cjs"
@@ -116,5 +118,6 @@
   },
   "allowScripts": {
     "electron-winstaller@5.4.0": true
-  }
+  },
+  "desktopName": "com.fan.battlespirits.kaihou.simulator.desktop"
 }

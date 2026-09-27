@@ -175,7 +175,7 @@ export default function Home({ go, initialSection = "root" }) {
 
           <div className={`bs-main-menu-title ${section !== "root" ? "is-submenu" : ""}`}>
             <span>{heading}</span>
-            {section === "root" ? <strong>KAIHOU! SIMULATOR</strong> : <strong>SELECT</strong>}
+            {section === "root" ? <strong>KAIHOU!</strong> : <strong>SELECT</strong>}
           </div>
         </div>
 

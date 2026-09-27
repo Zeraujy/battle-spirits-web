@@ -16,7 +16,7 @@ export async function applyDisplaySettings({ resolution = "1920x1080", displayMo
 export async function getAppInfo() {
   const desktop = window.battleSpiritsDesktop;
   if (desktop?.getAppInfo) return desktop.getAppInfo();
-  return { version: "4.7.2", name: "Battle Spirits: KAIHOU! Simulator", mode: "web", packaged: false };
+  return { version: "4.7.3", name: "Battle Spirits: KAIHOU! Simulator", mode: "web", packaged: false };
 }
 
 export async function openUpdater() {
