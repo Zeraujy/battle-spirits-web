@@ -117,7 +117,7 @@ const requiredPaths = [
   "build/icons/icon.ico",
   "build/icons/icon.icns",
   "build/icons/icon.png",
-  "docs/changelog/CHANGELOG-4.7.4.md",
+  "docs/changelog/CHANGELOG-4.7.7.md",
   "docs/shop/ADDING-SHOP-ITEMS.md",
   "public/images/ui/arena/levels",
   "public/images/arena/wallpaper_arena_default.png",
@@ -125,7 +125,7 @@ const requiredPaths = [
   "scripts/windows"
 ];
 
-console.log("Battle Spirits: KAIHOU! Simulator v4.7.4 — verificação estrutural\n");
+console.log("Battle Spirits: KAIHOU! Simulator v4.7.7 — verificação estrutural\n");
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -220,4 +220,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v4.7.4 validada.");
+console.log("\nVERIFY OK — estrutura v4.7.7 validada.");

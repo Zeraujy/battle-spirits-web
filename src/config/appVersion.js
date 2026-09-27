@@ -1,3 +1,2 @@
-export const APP_VERSION = "4.7.5";
-export const APP_VERSION_LABEL = `V${APP_VERSION}`;
-export const APP_RELEASE_NAME = "Desktop Node Runtime Hotfix";
+export const APP_VERSION = "4.7.7";
+export const APP_VERSION_LABEL = `v${APP_VERSION}`;

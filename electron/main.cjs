@@ -11,6 +11,7 @@ app.setName("Battle Spirits: KAIHOU! Simulator");
 
 const IS_PRODUCTION = app.isPackaged || process.env.NODE_ENV === "production";
 
+let mainWindow = null;
 let updaterWindow = null;
 let rendererServer = null;
 let rendererOrigin = null;
@@ -461,6 +462,12 @@ function hardenProductionWindow(win) {
 }
 
 function createGameWindow() {
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    mainWindow.show();
+    mainWindow.focus();
+    return mainWindow;
+  }
+
   const workArea = screen.getPrimaryDisplay().workAreaSize;
   const win = new BrowserWindow(commonWindowOptions({
     width: Math.min(1920, workArea.width),
@@ -469,8 +476,16 @@ function createGameWindow() {
     minHeight: 720,
     title: "Battle Spirits: KAIHOU! Simulator"
   }));
+  mainWindow = win;
+  win.on("closed", () => { mainWindow = null; });
   hardenProductionWindow(win);
-  loadMode(win, "game");
+  loadMode(win, "game").catch((error) => {
+    console.error("[desktop] Falha ao carregar a interface:", error);
+    try {
+      const { dialog } = require("electron");
+      dialog.showErrorBox("Battle Spirits: KAIHOU! Simulator", `Falha ao carregar a interface do jogo.\n\n${error?.message || error}`);
+    } catch {}
+  });
   win.webContents.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url);
     return { action: "deny" };
@@ -706,7 +721,11 @@ app.whenReady().then(async () => {
   }
 
   app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length > 0) return;
+    if (BrowserWindow.getAllWindows().length > 0) {
+      const win = activeWindow();
+      if (win) { win.show(); win.focus(); }
+      return;
+    }
     if (APP_MODE === "updater") createUpdaterWindow();
     else createGameWindow();
   });
