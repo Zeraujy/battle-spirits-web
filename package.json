@@ -11,7 +11,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --test src/game/*.test.js src/online/*.test.js src/services/*.test.js",
-    "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-web-only.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs",
+    "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-web-only.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs && node scripts/audit-arena-phase01.mjs && node scripts/audit-arena-phase23.mjs",
     "check": "npm run verify && npm test && npm run build",
     "server:start": "node --env-file-if-exists=server/.env server/index.mjs",
     "online:check": "node scripts/check-online-config.mjs",
@@ -29,7 +29,9 @@
     "cards:check": "npm run cards:sync && npm run cards:validate && npm run verify",
     "cloudflare:preflight": "node scripts/cloudflare-asset-preflight.mjs",
     "security:audit": "node scripts/security-audit.mjs",
-    "web-only:audit": "node scripts/audit-web-only.mjs"
+    "web-only:audit": "node scripts/audit-web-only.mjs",
+    "arena:phase01:audit": "node scripts/audit-arena-phase01.mjs",
+    "arena:phase23:audit": "node scripts/audit-arena-phase23.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",

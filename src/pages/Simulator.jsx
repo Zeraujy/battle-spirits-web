@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import CardTile from "../components/cards/CardTile.jsx";
 import CoreArea from "../components/game/CoreArea.jsx";
 import EffectText from "../components/cards/EffectText.jsx";
-import PlayerHud from "../components/game/PlayerHud.jsx";
 import ArenaCardStatus from "../components/game/ArenaCardStatus.jsx";
 import ArenaBraveAttachment from "../components/game/ArenaBraveAttachment.jsx";
 import ArenaBattleRole from "../components/game/ArenaBattleRole.jsx";
@@ -10,6 +9,13 @@ import PhaseBar from "../components/game/PhaseBar.jsx";
 import PaymentStatus from "../components/game/PaymentStatus.jsx";
 import BattleLinkOverlay from "../components/game/BattleLinkOverlay.jsx";
 import BattleExperienceLayer, { classifyBattleLogEntry } from "../components/game/BattleExperienceLayer.jsx";
+import ArenaShell from "../components/game/arena/ArenaShell.jsx";
+import Battlefield from "../components/game/arena/Battlefield.jsx";
+import OpponentField from "../components/game/arena/OpponentField.jsx";
+import CenterField from "../components/game/arena/CenterField.jsx";
+import PlayerField from "../components/game/arena/PlayerField.jsx";
+import PlayerHUD from "../components/game/arena/PlayerHUD.jsx";
+import OpponentHUD from "../components/game/arena/OpponentHUD.jsx";
 import Modal from "../components/common/Modal.jsx";
 import { cardIndex } from "../services/cardRepository.js";
 import { applyGameAction } from "../game/reducer.js";
@@ -5377,7 +5383,7 @@ export default function Simulator({
   ======================================================= */
 
   return (
-    <main className="simulator-page">
+    <ArenaShell>
 
       <BattleExperienceLayer
         match={match}
@@ -6044,20 +6050,16 @@ export default function Simulator({
             TABLE
         ================================================= */}
 
-        <section
+        <Battlefield
           data-card-drop-zone="table"
           data-card-drop-player={bottomId}
           className={
-            `table-area ${
-              battleFocusActive
-                ? "attack-focus-active"
-                : ""
-            }`
+            battleFocusActive
+              ? "attack-focus-active"
+              : ""
           }
-
           style={{
-            "--attack-theme":
-              activeBattleTheme
+            "--attack-theme": activeBattleTheme
           }}
         >
 
@@ -6073,92 +6075,57 @@ export default function Simulator({
                 : "attack-focus-top-hud"
             }
           >
-          <PlayerHud
-            player={
-              top
-            }
-
-            active={
-              topId ===
-              match.activePlayerId
-            }
-
-            actor={
-              topId ===
-              actorId
-            }
-
-            opponent
-
-            dataLifeTarget={
-              topId
-            }
+          <OpponentHUD
+            player={top}
+            active={topId === match.activePlayerId}
+            actor={topId === actorId}
+            dataLifeTarget={topId}
           />
           </div>
 
 
           <div
-            className={
-              battleFocusActive
-                ? "attack-focus-dim"
-                : ""
-            }
+            className={`arena-legacy-hand-slot ${battleFocusActive ? "attack-focus-dim" : ""}`}
+            data-arena-slot="OpponentHand"
           >
-          {renderHand(
-            topId
-          )}
+            {renderHand(topId)}
           </div>
 
 
-          <div
+          <OpponentField
             className={
               battleFocusActive
                 ? "attack-focus-relevant attack-focus-top-field"
                 : "attack-focus-top-field"
             }
           >
-          {renderField(
-            topId
-          )}
-          </div>
+            {renderField(topId)}
+          </OpponentField>
 
 
-          <div
-            className={
-              `table-middle ${
-                battleFocusActive
-                  ? "attack-focus-relevant"
-                  : ""
-              }`
-            }
+          <CenterField
+            className={battleFocusActive ? "attack-focus-relevant" : ""}
           >
             {battleCenter()}
-          </div>
+          </CenterField>
 
 
-          <div
+          <PlayerField
             className={
               battleFocusActive
                 ? "attack-focus-relevant attack-focus-bottom-field"
                 : "attack-focus-bottom-field"
             }
           >
-          {renderField(
-            bottomId
-          )}
-          </div>
+            {renderField(bottomId)}
+          </PlayerField>
 
 
           <div
-            className={
-              battleFocusActive
-                ? "attack-focus-dim"
-                : ""
-            }
+            className={`arena-legacy-hand-slot ${battleFocusActive ? "attack-focus-dim" : ""}`}
+            data-arena-slot="PlayerHand"
           >
-          {renderHand(
-            bottomId
-          )}
+            {renderHand(bottomId)}
           </div>
 
 
@@ -6174,28 +6141,15 @@ export default function Simulator({
                 : ""
             }
           >
-          <PlayerHud
-            player={
-              bottom
-            }
-
-            active={
-              bottomId ===
-              match.activePlayerId
-            }
-
-            actor={
-              bottomId ===
-              actorId
-            }
-
-            dataLifeTarget={
-              bottomId
-            }
+          <PlayerHUD
+            player={bottom}
+            active={bottomId === match.activePlayerId}
+            actor={bottomId === actorId}
+            dataLifeTarget={bottomId}
           />
           </div>
 
-        </section>
+        </Battlefield>
 
 
         {/* =================================================
@@ -7542,6 +7496,6 @@ export default function Simulator({
         </div>
       )}
 
-    </main>
+    </ArenaShell>
   );
 }

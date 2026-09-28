@@ -1,0 +1,19 @@
+/*
+ * Arena UX/UI Overhaul — Phase 1
+ *
+ * ArenaShell intentionally introduces no visual redesign yet. The existing
+ * `.simulator-page` styles remain authoritative until Phase 2 begins the
+ * Battlefield migration. This file establishes safe layout ownership without
+ * changing gameplay presentation or interaction behavior.
+ */
+
+.arena-shell {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+}
+
+.arena-shell,
+.arena-shell * {
+  box-sizing: border-box;
+}
