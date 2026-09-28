@@ -4,6 +4,47 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.9.1",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Arena Visual Identity Alignment", en: "Arena Visual Identity Alignment" },
+    summary: {
+      pt: "A Arena agora compartilha a mesma linguagem visual dos menus, mantendo uma interface mais leve para preservar o foco no duelo.",
+      en: "The Arena now shares the same visual language as the menus while keeping a lighter interface that preserves focus on the duel."
+    },
+    sections: [
+      {
+        title: { pt: "Identidade compartilhada", en: "Shared identity" },
+        items: {
+          pt: [
+            "Surfaces, bordas, blur, sombras, tipografia e motion foram consolidados em tokens compartilhados.",
+            "Battlefield, painéis, Action Bar, Phase Tracker, Cores, mão, targeting e overlays agora pertencem à mesma família visual dos menus.",
+            "A Arena mantém menor densidade visual para que as cartas continuem sendo o principal foco da partida."
+          ],
+          en: [
+            "Surfaces, borders, blur, shadows, typography and motion were consolidated into shared tokens.",
+            "Battlefield, panels, Action Bar, Phase Tracker, Cores, hand, targeting and overlays now belong to the same visual family as the menus.",
+            "The Arena keeps lower visual density so cards remain the primary focus during matches."
+          ]
+        }
+      },
+      {
+        title: { pt: "Polimento final", en: "Final polish" },
+        items: {
+          pt: [
+            "A escala tipográfica foi unificada e as microinterações receberam timing consistente.",
+            "A responsividade recebeu revisão final para priorizar a mesa antes dos elementos secundários da interface.",
+            "Core azul, Soul Core vermelho e demais cores semânticas de gameplay permanecem preservados."
+          ],
+          en: [
+            "The typography scale was unified and micro-interactions received consistent timing.",
+            "Responsiveness received a final review that prioritizes the table before secondary interface chrome.",
+            "Blue Core, red Soul Core and other semantic gameplay colors remain preserved."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "4.9.0",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Arena UX/UI Overhaul", en: "Arena UX/UI Overhaul" },

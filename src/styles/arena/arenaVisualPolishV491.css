@@ -1,0 +1,158 @@
+/* =========================================================
+   KAIHOU! Arena Visual Identity Alignment — v4.9.1 Final
+   Steps 12–15: Typography, Motion, Responsive Review, Polish
+
+   Identity shared with menus, density intentionally lower.
+   No gameplay state or semantic gameplay colors are defined here.
+========================================================= */
+
+.simulator-page.arena-shell {
+  font-family: var(--font-family-interface);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Shared Arena type rhythm */
+.simulator-page .arena-context-panel-label,
+.simulator-page .arena-card-preview-kicker,
+.simulator-page .arena-phase-tracker-meta span,
+.simulator-page .arena-hud-label,
+.simulator-page .arena-core-display-label,
+.simulator-page .game-log-drawer-header span,
+.simulator-page .game-log-drawer-entry > span,
+.simulator-page .game-event-toast span,
+.simulator-page .burst-presentation-eyebrow {
+  font-size: var(--font-size-caption) !important;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.simulator-page .arena-card-preview-title,
+.simulator-page .game-log-drawer-header strong,
+.simulator-page .burst-presentation-card strong {
+  font-size: var(--font-size-heading-small) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  line-height: var(--line-height-tight);
+}
+
+.simulator-page .arena-action-bar-inner > button,
+.simulator-page .arena-phase-tracker,
+.simulator-page .game-log-drawer-entry p,
+.simulator-page .game-event-toast strong {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.simulator-page .arena-phase-label,
+.simulator-page .arena-phase-tracker-meta strong {
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-tight);
+}
+
+/* One motion language for UI chrome; card motion remains independent. */
+.simulator-page .arena-context-panel,
+.simulator-page .arena-action-bar-inner > button,
+.simulator-page .arena-phase-item,
+.simulator-page .arena-phase-advance,
+.simulator-page .arena-hand-area .hand-card-slot,
+.simulator-page .arena-core-display,
+.game-log-drawer {
+  transition-timing-function: var(--ease-interface);
+}
+
+.simulator-page .arena-action-bar-inner > button:hover,
+.simulator-page .arena-action-bar-inner > button:focus-visible,
+.simulator-page .arena-phase-advance:hover:not(:disabled),
+.simulator-page .arena-phase-advance:focus-visible:not(:disabled) {
+  translate: 0 -1px;
+}
+
+/* Final hierarchy: cards and playmat stay stronger than utility chrome. */
+.simulator-page .arena-context-panel,
+.simulator-page .arena-action-bar,
+.simulator-page .arena-phase-tracker,
+.simulator-page .game-log-drawer {
+  --backdrop-blur: 12px;
+}
+
+.simulator-page .arena-action-bar-inner > button,
+.simulator-page .arena-phase-advance {
+  box-shadow: var(--shadow-inset-highlight);
+}
+
+.simulator-page .arena-battlefield {
+  isolation: isolate;
+}
+
+/* Responsive visual review — preserve table first, chrome second. */
+@media (max-width: 1600px) {
+  .simulator-page .arena-context-panel {
+    --backdrop-blur: 10px;
+  }
+
+  .simulator-page .arena-phase-tracker {
+    gap: 9px;
+    padding-inline: 8px;
+  }
+}
+
+@media (max-width: 1366px) {
+  .simulator-page .arena-action-bar {
+    margin-top: 7px;
+    padding-top: 7px;
+  }
+
+  .simulator-page .arena-action-bar-inner {
+    gap: 5px;
+  }
+
+  .simulator-page .arena-action-bar-inner > button {
+    min-height: 30px;
+    padding: 6px 8px;
+  }
+
+  .simulator-page .arena-phase-tracker {
+    border-radius: var(--radius-small);
+  }
+
+  .simulator-page .game-log-drawer {
+    width: min(340px, calc(100vw - 22px));
+  }
+}
+
+@media (max-width: 1180px) {
+  .simulator-page .arena-context-panel,
+  .simulator-page .arena-phase-tracker,
+  .simulator-page .arena-compact-hud {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .simulator-page .arena-action-bar-inner > button {
+    min-height: 29px;
+  }
+}
+
+@media (max-width: 760px) {
+  .simulator-page .arena-phase-tracker {
+    gap: 5px;
+    padding: 5px 6px;
+  }
+
+  .simulator-page .arena-action-bar-inner {
+    justify-content: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simulator-page .arena-context-panel,
+  .simulator-page .arena-action-bar-inner > button,
+  .simulator-page .arena-phase-item,
+  .simulator-page .arena-phase-advance,
+  .simulator-page .arena-hand-area .hand-card-slot,
+  .simulator-page .arena-core-display,
+  .game-log-drawer {
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -11,6 +11,8 @@ import { fileURLToPath } from "node:url";
 import { normalizeCard, makeCardIndex } from "../src/game/cardAdapter.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const packageMeta = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
+const currentVersion = packageMeta.version;
 let failed = false;
 
 const requiredPaths = [
@@ -112,13 +114,14 @@ const requiredPaths = [
   "public/assets/cursors/cursor-grabbing.svg",
   "public/favicon.ico",
   "docs/changelog/CHANGELOG-4.9.0.md",
+  "docs/changelog/CHANGELOG-4.9.1.md",
   "docs/shop/ADDING-SHOP-ITEMS.md",
   "public/images/ui/arena/levels",
   "public/images/arena/wallpaper_arena_default.png",
   "docs/changelog"
 ];
 
-console.log("Battle Spirits: KAIHOU! Simulator v4.9.0 — verificação estrutural\n");
+console.log(`Battle Spirits: KAIHOU! Simulator v${currentVersion} — verificação estrutural\n`);
 for (const relative of requiredPaths) {
   const exists = fs.existsSync(path.join(root, relative));
   console.log(`${exists ? "OK " : "-- "} ${relative}`);
@@ -213,4 +216,4 @@ for (const cssFile of cssFiles) {
 console.log(`${failed ? "--" : "OK "} CSS @imports locais (${cssImportCount} verificados)`);
 
 if (failed) process.exit(1);
-console.log("\nVERIFY OK — estrutura v4.9.0 validada.");
+console.log(`\nVERIFY OK — estrutura v${currentVersion} validada.`);

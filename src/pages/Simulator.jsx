@@ -89,6 +89,7 @@ import "../styles/arena/cardMotionV490.css";
 import "../styles/arena/arenaResponsiveV490.css";
 import "../styles/arena/arenaPerformanceV490.css";
 import "../styles/arena/arenaVisualCleanupV490.css";
+import "../styles/arena/arenaVisualPolishV491.css";
 
 
 function effectText(card, language) {
@@ -5493,7 +5494,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v4.9.0 • Arena 2D
+            Eternal v4.9.1 • Arena 2D
           </span>
 
           <strong>

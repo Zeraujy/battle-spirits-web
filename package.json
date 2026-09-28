@@ -1,9 +1,9 @@
 {
   "name": "battle-spirits-kaihou-simulator",
-  "version": "4.9.0",
+  "version": "4.9.1",
   "private": true,
   "type": "module",
-  "description": "Battle Spirits: KAIHOU! Simulator v4.9.0 - Arena UX/UI Overhaul",
+  "description": "Battle Spirits: KAIHOU! Simulator v4.9.1 - Arena Visual Identity Alignment",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "dev:web": "vite --host 127.0.0.1",
@@ -11,7 +11,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --test src/game/*.test.js src/online/*.test.js src/services/*.test.js",
-    "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-web-only.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs && node scripts/audit-arena-phase01.mjs && node scripts/audit-arena-phase23.mjs && node scripts/audit-arena-phase45.mjs && node scripts/audit-arena-phase67.mjs && node scripts/audit-arena-phase89.mjs && node scripts/audit-arena-phase1314.mjs && node scripts/audit-arena-phase1618.mjs && node scripts/audit-arena-phase1921.mjs && node scripts/audit-arena-phase2223.mjs && node scripts/audit-arena-visual-identity-491-block1.mjs && node scripts/audit-arena-visual-identity-491-block057.mjs && node scripts/audit-arena-visual-identity-491-block0811.mjs",
+    "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-web-only.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs && node scripts/audit-arena-phase01.mjs && node scripts/audit-arena-phase23.mjs && node scripts/audit-arena-phase45.mjs && node scripts/audit-arena-phase67.mjs && node scripts/audit-arena-phase89.mjs && node scripts/audit-arena-phase1314.mjs && node scripts/audit-arena-phase1618.mjs && node scripts/audit-arena-phase1921.mjs && node scripts/audit-arena-phase2223.mjs && node scripts/audit-arena-visual-identity-491-block1.mjs && node scripts/audit-arena-visual-identity-491-block057.mjs && node scripts/audit-arena-visual-identity-491-block0811.mjs && node scripts/audit-arena-visual-identity-491-final.mjs",
     "check": "npm run verify && npm test && npm run build",
     "server:start": "node --env-file-if-exists=server/.env server/index.mjs",
     "online:check": "node scripts/check-online-config.mjs",
@@ -41,7 +41,8 @@
     "arena:phase2223:audit": "node scripts/audit-arena-phase2223.mjs",
     "arena:v491:block1:audit": "node scripts/audit-arena-visual-identity-491-block1.mjs",
     "arena:v491:block057:audit": "node scripts/audit-arena-visual-identity-491-block057.mjs",
-    "arena:v491:block0811:audit": "node scripts/audit-arena-visual-identity-491-block0811.mjs"
+    "arena:v491:block0811:audit": "node scripts/audit-arena-visual-identity-491-block0811.mjs",
+    "arena:v491:final:audit": "node scripts/audit-arena-visual-identity-491-final.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",

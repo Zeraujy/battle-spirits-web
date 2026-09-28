@@ -24,7 +24,7 @@ export default function ArenaShell({ children, className = "" }) {
     <main
       ref={rootRef}
       className={rootClassName}
-      data-arena-shell="v4.9.0"
+      data-arena-shell="v4.9.1"
       data-arena-foundation="01"
       data-arena-phase="21"
       data-arena-layout-mode="standard"

@@ -8,13 +8,13 @@ const read = (rel) => fs.readFileSync(path.join(root, rel), "utf8");
 const exists = (rel) => fs.existsSync(path.join(root, rel));
 
 const pkg = JSON.parse(read("package.json"));
-if (pkg.version !== "4.9.0") issues.push(`package.json version expected 4.9.0, found ${pkg.version}`);
+if (!pkg.version.startsWith("4.9.")) issues.push(`package.json version expected 4.9.x, found ${pkg.version}`);
 
 const versionExpectations = [
-  ["src/config/appVersion.js", 'APP_VERSION = "4.9.0"'],
-  ["server/index.mjs", 'version: "4.9.0"'],
-  ["src/pages/Simulator.jsx", "Eternal v4.9.0"],
-  ["src/components/common/ProjectInfoButtons.jsx", 'version: "4.9.0"']
+  ["src/config/appVersion.js", `APP_VERSION = "${pkg.version}"`],
+  ["server/index.mjs", `version: "${pkg.version}"`],
+  ["src/pages/Simulator.jsx", `Eternal v${pkg.version}`],
+  ["src/components/common/ProjectInfoButtons.jsx", `version: "${pkg.version}"`]
 ];
 for (const [rel, needle] of versionExpectations) {
   if (!read(rel).includes(needle)) issues.push(`Version sync missing in ${rel}`);
@@ -67,4 +67,4 @@ if (issues.length) {
   for (const issue of issues) console.error(`- ${issue}`);
   process.exit(1);
 }
-console.log("Arena Phase 22/23 Final QA audit: OK — v4.9.0 release candidate");
+console.log(`Arena Phase 22/23 Final QA audit: OK — v${pkg.version} 4.9.x line`);
