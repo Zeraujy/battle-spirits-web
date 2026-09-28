@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { MatchMode, normalizeMatchMode, isOnlineMatchMode } from "./matchModes.js";
 import { MatchStatus, PlayerConnectionState, isTerminalMatchStatus } from "./matchStatus.js";
-import { QueueType, isQueueType } from "./queueTypes.js";
+import { QueueStatus, QueueType, isQueueStatus, isQueueType } from "./queueTypes.js";
 import { OnlineError, OnlineErrorCode } from "./onlineErrors.js";
 
 test("online domain exposes stable match modes", () => {
@@ -30,4 +30,13 @@ test("OnlineError serializes a public error contract", () => {
     message: "Invalid action.",
     details: { actionType: "ATTACK" }
   });
+});
+
+
+test("queue statuses expose the Casual Ready Check lifecycle", () => {
+  assert.equal(QueueStatus.SEARCHING, "searching");
+  assert.equal(QueueStatus.READY_CHECK, "readyCheck");
+  assert.equal(QueueStatus.MATCHED, "matched");
+  assert.equal(isQueueStatus("readyCheck"), true);
+  assert.equal(isQueueStatus("host"), false);
 });

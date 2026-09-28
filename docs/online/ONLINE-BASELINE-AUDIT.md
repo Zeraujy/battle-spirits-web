@@ -165,3 +165,7 @@ At this phase it is deliberately **not wired into `server/index.mjs`**. The exis
 > The client requests. The server decides.
 
 The client may own presentation and interaction state. Competitive state, legal actions, official match state, match result and reconnect recovery belong to the server-authoritative path.
+
+## Migration status — Phase 7–9
+
+Casual quick matchmaking has now moved from the legacy host/guest preparation handshake to the server-owned `MatchmakingQueue` + `ReadyCheckSession` flow. Manual rooms and Ranked remain on their existing paths until their dedicated roadmap phases.

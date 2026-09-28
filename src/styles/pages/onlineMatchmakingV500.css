@@ -1,0 +1,151 @@
+.online-queue-status,
+.online-ready-check {
+  border: 1px solid var(--border-subtle, rgba(255,255,255,.12));
+  background: color-mix(in srgb, var(--surface-elevated, #171717) 88%, transparent);
+  box-shadow: var(--shadow-soft, 0 18px 44px rgba(0,0,0,.28));
+  backdrop-filter: blur(var(--backdrop-blur, 14px));
+}
+
+.online-queue-status {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-medium, 14px);
+}
+
+.online-queue-status__pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-primary, #fff);
+  box-shadow: 0 0 0 0 rgba(255,255,255,.22);
+  animation: onlineQueuePulse 1.4s ease-out infinite;
+}
+
+.online-queue-status__eyebrow,
+.online-ready-check__header > span,
+.online-ready-check__players span {
+  display: block;
+  color: var(--text-muted, #888);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.online-queue-status strong {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-primary, #fff);
+  font-size: 13px;
+}
+
+.online-queue-status small {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted, #888);
+  font-size: 10px;
+}
+
+.online-queue-status button,
+.online-ready-check button {
+  border: 1px solid var(--border-default, rgba(255,255,255,.16));
+  border-radius: var(--radius-small, 10px);
+  background: var(--surface-secondary, rgba(255,255,255,.05));
+  color: var(--text-primary, #fff);
+  padding: 10px 13px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.online-ready-check {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border-radius: var(--radius-large, 18px);
+}
+
+.online-ready-check__header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 2px 12px;
+}
+
+.online-ready-check__header > span {
+  grid-column: 1 / -1;
+}
+
+.online-ready-check__header strong {
+  color: var(--text-primary, #fff);
+  font-size: 18px;
+}
+
+.online-ready-check__header small {
+  color: var(--text-secondary, #bbb);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.online-ready-check__players {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.online-ready-check__players > div {
+  padding: 11px 12px;
+  border: 1px solid var(--border-subtle, rgba(255,255,255,.1));
+  border-radius: var(--radius-small, 10px);
+  background: var(--surface-secondary, rgba(255,255,255,.035));
+}
+
+.online-ready-check__players strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-secondary, #aaa);
+  font-size: 11px;
+}
+
+.online-ready-check__players > div.is-ready {
+  border-color: color-mix(in srgb, var(--text-primary, #fff) 32%, transparent);
+  background: color-mix(in srgb, var(--surface-elevated, #171717) 78%, white 4%);
+}
+
+.online-ready-check__players > div.is-ready strong {
+  color: var(--text-primary, #fff);
+}
+
+.online-ready-check p {
+  margin: 0;
+  color: var(--text-muted, #8e8e8e);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.online-ready-check__actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.online-ready-check__actions button.primary {
+  background: color-mix(in srgb, var(--surface-elevated, #171717) 72%, white 8%);
+  border-color: var(--border-strong, rgba(255,255,255,.24));
+  font-weight: 750;
+}
+
+.online-ready-check button:disabled {
+  opacity: .46;
+  cursor: default;
+}
+
+@keyframes onlineQueuePulse {
+  70% { box-shadow: 0 0 0 9px rgba(255,255,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .online-queue-status__pulse { animation: none; }
+}

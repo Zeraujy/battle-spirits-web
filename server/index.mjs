@@ -14,11 +14,13 @@ import {
   deckValidationOptionsForSettings
 } from "../src/online/customMatchSettings.js";
 import { MatchMode } from "../src/online/domain/matchModes.js";
+import { QueueStatus, QueueType } from "../src/online/domain/queueTypes.js";
 import { DisconnectReason, PlayerConnectionState } from "../src/online/domain/matchStatus.js";
 import { DEFAULT_RECONNECT_WINDOW_MS } from "../src/online/domain/onlineConstants.js";
 import { MatchRegistry, createMatchSession } from "./matches/index.js";
 import { createStateEnvelope, validateClientStateVersion } from "./matches/stateSync.js";
 import { ReconnectManager } from "./connections/ReconnectManager.js";
+import { Matchmaker, MatchmakingQueue, QueueEntry, ReadyCheckRegistry } from "./matchmaking/index.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -52,9 +54,9 @@ export async function createBattleSpiritsServer(options = {}) {
   const host = String(options.host ?? process.env.HOST ?? "0.0.0.0");
   const corsOrigin = options.corsOrigin ?? process.env.CORS_ORIGIN ?? "*";
   const rooms = new Map();
-  const matchmakingQueue = [];
-  const matchmakingPairs = new Map();
-  const matchmakingSocketPair = new Map();
+  const casualQueue = new MatchmakingQueue({ queueType: QueueType.CASUAL });
+  const casualMatchmaker = new Matchmaker({ queue: casualQueue });
+  let readyCheckRegistry = null;
   const rankedQueue = [];
   const rankedBySocket = new Map();
   const lobbyPresence = new Map();
@@ -75,8 +77,8 @@ export async function createBattleSpiritsServer(options = {}) {
         version: "4.9.1",
         rooms: rooms.size,
         cards: cardIndex.size,
-        matchmakingQueued: matchmakingQueue.length,
-        matchmakingPairs: matchmakingPairs.size,
+        matchmakingQueued: casualQueue.size,
+        readyChecks: readyCheckRegistry?.size || 0,
         rankedQueued: rankedQueue.length,
         rankedReady: Boolean(rankedSupabase),
         host,
@@ -288,7 +290,7 @@ export async function createBattleSpiritsServer(options = {}) {
 
   function presenceStatus(socketId) {
     if (rankedBySocket.has(socketId)) return "ranked";
-    if (matchmakingQueue.includes(socketId) || matchmakingSocketPair.has(socketId)) return "searching";
+    if (casualQueue.hasSocket(socketId) || readyCheckRegistry?.getBySocket(socketId)) return "searching";
     const found = findRoomBySocket(socketId);
     if (found?.room?.match) return "in_match";
     if (found?.room) return "in_room";
@@ -441,99 +443,187 @@ export async function createBattleSpiritsServer(options = {}) {
     return { room, playerId: indexed.playerId };
   }
 
-  function removeFromMatchmakingQueue(socketId) {
-    let removed = false;
-    for (let index = matchmakingQueue.length - 1; index >= 0; index -= 1) {
-      if (matchmakingQueue[index] !== socketId) continue;
-      matchmakingQueue.splice(index, 1);
-      removed = true;
-    }
-    return removed;
+  function removeFromCasualQueue(socketId) {
+    return casualQueue.removeBySocket(socketId);
   }
 
-  function cleanupMatchmakingPair(pairId, { deleteRoom = false } = {}) {
-    const pair = matchmakingPairs.get(pairId);
-    if (!pair) return null;
+  function emitCasualQueueStatus(entry, message = "searching") {
+    if (!entry) return;
+    io.to(entry.socketId).emit("matchmaking:status", {
+      status: QueueStatus.SEARCHING,
+      queueType: QueueType.CASUAL,
+      joinedAt: entry.joinedAt,
+      message
+    });
+  }
 
-    if (pair.timeout) clearTimeout(pair.timeout);
+  function emitReadyCheck(session) {
+    for (const entry of session.entries()) {
+      const snapshot = session.snapshotFor(entry.socketId);
+      if (snapshot) io.to(entry.socketId).emit("matchmaking:readyCheck", snapshot);
+    }
+  }
 
-    matchmakingSocketPair.delete(pair.hostSocketId);
-    matchmakingSocketPair.delete(pair.guestSocketId);
-    matchmakingPairs.delete(pairId);
+  function emitReadyCheckStatus(session) {
+    for (const entry of session.entries()) {
+      const snapshot = session.snapshotFor(entry.socketId);
+      if (snapshot) io.to(entry.socketId).emit("matchmaking:readyStatus", snapshot);
+    }
+  }
 
-    if (deleteRoom && pair.roomCode) {
-      const room = rooms.get(pair.roomCode);
-      if (room && !room.match) {
-        rooms.delete(pair.roomCode);
-        io.sockets.sockets.get(pair.hostSocketId)?.leave(pair.roomCode);
-        io.sockets.sockets.get(pair.guestSocketId)?.leave(pair.roomCode);
+  function requeueReadyCheckEntries(session, { excludeSocketId = null, readyOnly = false } = {}) {
+    const entries = readyOnly ? session.readyEntries() : session.entries();
+    for (const entry of entries) {
+      if (entry.socketId === excludeSocketId) continue;
+      const queuedSocket = io.sockets.sockets.get(entry.socketId);
+      if (!queuedSocket?.connected || findRoomBySocket(entry.socketId)) continue;
+      const queuedEntry = casualQueue.enqueue(entry.requeue(Date.now()));
+      emitCasualQueueStatus(queuedEntry, "searching");
+    }
+  }
+
+  function createCasualMatchmakingRoom(entries, readyCheckId) {
+    const [firstEntry, secondEntry] = entries;
+    if (!firstEntry || !secondEntry) return null;
+
+    const firstSocket = io.sockets.sockets.get(firstEntry.socketId);
+    const secondSocket = io.sockets.sockets.get(secondEntry.socketId);
+    if (!firstSocket?.connected || !secondSocket?.connected) return null;
+
+    let roomCode = code();
+    while (rooms.has(roomCode)) roomCode = code();
+
+    const room = {
+      code: roomCode,
+      players: {
+        player1: {
+          socketId: firstEntry.socketId,
+          profile: publicProfile(firstEntry.profile),
+          deck: firstEntry.deck,
+          resumeToken: resumeToken()
+        },
+        player2: {
+          socketId: secondEntry.socketId,
+          profile: publicProfile(secondEntry.profile),
+          deck: secondEntry.deck,
+          resumeToken: resumeToken()
+        }
+      },
+      settings: {
+        title: "Casual Matchmaking",
+        visibility: "private",
+        passwordHash: null,
+        spectatorsAllowed: false,
+        ...normalizeCustomMatchSettings({
+          firstPlayerMode: "random",
+          turnTimerSeconds: 0,
+          mulliganEnabled: true,
+          ruleset: "eternal"
+        })
+      },
+      match: null,
+      chat: [],
+      createdAt: Date.now(),
+      matchmaking: {
+        queueType: QueueType.CASUAL,
+        readyCheckId
       }
-    }
+    };
 
-    return pair;
+    const firstPlayerId = resolveFirstPlayerId(room.settings);
+    room.match = createMatch({
+      player1: { ...room.players.player1.profile, deck: room.players.player1.deck },
+      player2: { ...room.players.player2.profile, deck: room.players.player2.deck },
+      firstPlayerId,
+      cardIndex
+    });
+    attachRoomMatchSession(room, { replace: true });
+    rooms.set(roomCode, room);
+
+    indexRoomSocket(firstEntry.socketId, roomCode, "player1");
+    indexRoomSocket(secondEntry.socketId, roomCode, "player2");
+    firstSocket.join(roomCode);
+    secondSocket.join(roomCode);
+
+    const sessionPayload = (playerId, opponentId) => ({
+      readyCheckId,
+      code: roomCode,
+      playerId,
+      resumeToken: room.players[playerId].resumeToken,
+      opponentProfile: room.players[opponentId].profile,
+      matchSync: roomMatchSync(room)
+    });
+
+    io.to(firstEntry.socketId).emit("matchmaking:matched", sessionPayload("player1", "player2"));
+    io.to(secondEntry.socketId).emit("matchmaking:matched", sessionPayload("player2", "player1"));
+
+    syncTurnTimer(room, true);
+    emitRoom(room, { includeChat: true });
+    emitLobbySnapshot();
+    return room;
   }
 
-  function failMatchmakingPair(pairId, sourceSocketId, error) {
-    const pair = matchmakingPairs.get(pairId);
-    if (!pair) return false;
+  function beginReadyCheck(entries) {
+    const session = readyCheckRegistry.create(entries);
+    emitReadyCheck(session);
+    emitLobbySnapshot();
+    return session;
+  }
 
-    const message = String(error || "A partida rápida foi interrompida.");
-    for (const socketId of [pair.hostSocketId, pair.guestSocketId]) {
-      if (socketId === sourceSocketId) continue;
-      io.to(socketId).emit("matchmaking:failed", { pairId, error: message });
+  function attemptCasualPairing() {
+    while (casualQueue.size >= 2) {
+      const pair = casualMatchmaker.takePair();
+      if (!pair) break;
+
+      const validEntries = pair.filter((entry) => {
+        const queuedSocket = io.sockets.sockets.get(entry.socketId);
+        return Boolean(queuedSocket?.connected) && !findRoomBySocket(entry.socketId) && !readyCheckRegistry.getBySocket(entry.socketId);
+      });
+
+      if (validEntries.length !== 2) {
+        for (const entry of validEntries) casualQueue.enqueue(entry.requeue(Date.now()));
+        continue;
+      }
+
+      beginReadyCheck(validEntries);
     }
+  }
 
-    cleanupMatchmakingPair(pairId, { deleteRoom: true });
+  function cancelReadyCheckForSocket(socketId, reason = "A confirmação da partida foi cancelada.") {
+    const session = readyCheckRegistry.cancelBySocket(socketId);
+    if (!session) return false;
+
+    for (const entry of session.entries()) {
+      if (entry.socketId === socketId) continue;
+      io.to(entry.socketId).emit("matchmaking:failed", {
+        code: "READY_CHECK_CANCELLED",
+        error: reason,
+        requeued: true
+      });
+    }
+    requeueReadyCheckEntries(session, { excludeSocketId: socketId });
+    attemptCasualPairing();
+    emitLobbySnapshot();
     return true;
   }
 
-  function createMatchmakingPair(hostSocketId, guestSocketId) {
-    const pairId = crypto.randomUUID();
-    const pair = {
-      pairId,
-      hostSocketId,
-      guestSocketId,
-      roomCode: null,
-      stage: "paired",
-      createdAt: Date.now(),
-      timeout: null
-    };
-
-    pair.timeout = setTimeout(() => {
-      const current = matchmakingPairs.get(pairId);
-      if (!current) return;
-
-      const error = "Tempo limite ao preparar a partida rápida. Tente procurar novamente.";
-      io.to(current.hostSocketId).emit("matchmaking:failed", { pairId, error });
-      io.to(current.guestSocketId).emit("matchmaking:failed", { pairId, error });
-      cleanupMatchmakingPair(pairId, { deleteRoom: true });
-    }, 45_000);
-    pair.timeout.unref?.();
-
-    matchmakingPairs.set(pairId, pair);
-    matchmakingSocketPair.set(hostSocketId, pairId);
-    matchmakingSocketPair.set(guestSocketId, pairId);
-
-    io.to(hostSocketId).emit("matchmaking:host", { pairId });
-    io.to(guestSocketId).emit("matchmaking:guest", { pairId });
-
-    return pair;
-  }
-
-  function takeQueuedOpponent(excludeSocketId) {
-    while (matchmakingQueue.length) {
-      const socketId = matchmakingQueue.shift();
-      if (!socketId || socketId === excludeSocketId) continue;
-      if (matchmakingSocketPair.has(socketId)) continue;
-      if (findRoomBySocket(socketId)) continue;
-
-      const queuedSocket = io.sockets.sockets.get(socketId);
-      if (!queuedSocket?.connected) continue;
-      return socketId;
+  readyCheckRegistry = new ReadyCheckRegistry({
+    onExpire(session) {
+      for (const entry of session.entries()) {
+        const wasReady = session.readyEntries().some((readyEntry) => readyEntry.socketId === entry.socketId);
+        io.to(entry.socketId).emit("matchmaking:failed", {
+          code: "READY_CHECK_EXPIRED",
+          error: wasReady
+            ? "O outro jogador não confirmou a partida a tempo. A procurar novamente..."
+            : "A confirmação da partida expirou.",
+          requeued: wasReady
+        });
+      }
+      requeueReadyCheckEntries(session, { readyOnly: true });
+      attemptCasualPairing();
+      emitLobbySnapshot();
     }
-
-    return null;
-  }
+  });
 
 
 
@@ -741,94 +831,108 @@ export async function createBattleSpiritsServer(options = {}) {
       ack({ ok: true, cancelled: Boolean(removed) });
     });
 
-    onSafe(socket, "matchmaking:join", (_payload, ack) => {
+    onSafe(socket, "matchmaking:join", (payload, ack) => {
       if (findRoomBySocket(socket.id)) {
         return ack({ ok: false, error: "Saia da sala atual antes de procurar outra partida." });
       }
-
-      const existingPairId = matchmakingSocketPair.get(socket.id);
-      if (existingPairId) {
-        return ack({ ok: true, status: "matched", pairId: existingPairId });
+      if (rankedBySocket.has(socket.id)) {
+        return ack({ ok: false, error: "Saia da fila Ranked antes de procurar uma partida Casual." });
       }
 
-      if (matchmakingQueue.includes(socket.id)) {
-        socket.emit("matchmaking:status", { status: "searching" });
-        return ack({ ok: true, status: "searching" });
+      const existingReadyCheck = readyCheckRegistry.getBySocket(socket.id);
+      if (existingReadyCheck) {
+        return ack({ ok: true, status: QueueStatus.READY_CHECK, readyCheck: existingReadyCheck.snapshotFor(socket.id) });
       }
 
-      const opponentSocketId = takeQueuedOpponent(socket.id);
-      if (!opponentSocketId) {
-        matchmakingQueue.push(socket.id);
-        socket.emit("matchmaking:status", { status: "searching" });
-        emitLobbySnapshot();
-        return ack({ ok: true, status: "searching" });
+      const existingEntry = casualQueue.getBySocket(socket.id);
+      if (existingEntry) {
+        emitCasualQueueStatus(existingEntry);
+        return ack({ ok: true, status: QueueStatus.SEARCHING, joinedAt: existingEntry.joinedAt });
       }
 
-      const pair = createMatchmakingPair(opponentSocketId, socket.id);
+      const profileValidation = validateOnlineProfilePayload(payload?.profile);
+      if (!profileValidation.ok) return ack(profileValidation);
+      const validation = validateDeck(payload?.deck || [], cardIndex, deckValidationOptionsForSettings({ ruleset: "eternal" }));
+      if (!validation.ok) return ack({ ok: false, code: "DECK_INVALID", error: validation.errors.join(" ") });
+
+      const entry = casualQueue.enqueue(new QueueEntry({
+        socketId: socket.id,
+        queueType: QueueType.CASUAL,
+        profile: publicProfile(payload.profile),
+        deck: payload.deck,
+        deckId: String(payload?.deckId || "").slice(0, 96) || null,
+        deckName: String(payload?.deckName || "Deck").slice(0, 120),
+        metadata: { clientJoinedAt: Date.now() }
+      }));
+
+      emitCasualQueueStatus(entry);
       emitLobbySnapshot();
-      ack({ ok: true, status: "matched", pairId: pair.pairId });
+      attemptCasualPairing();
+
+      const readyCheck = readyCheckRegistry.getBySocket(socket.id);
+      if (readyCheck) {
+        return ack({ ok: true, status: QueueStatus.READY_CHECK, readyCheck: readyCheck.snapshotFor(socket.id) });
+      }
+      ack({ ok: true, status: QueueStatus.SEARCHING, joinedAt: entry.joinedAt });
     });
 
-    onSafe(socket, "matchmaking:roomReady", (payload, ack) => {
-      const pairId = String(payload.pairId || "");
-      const pair = matchmakingPairs.get(pairId);
-      if (!pair || pair.hostSocketId !== socket.id) {
-        return ack({ ok: false, error: "A busca expirou. Procure uma partida novamente." });
+    onSafe(socket, "matchmaking:ready", (payload, ack) => {
+      const readyCheckId = String(payload?.readyCheckId || "");
+      const session = readyCheckRegistry.get(readyCheckId);
+      if (!session || !session.hasSocket(socket.id)) {
+        return ack({ ok: false, code: "READY_CHECK_EXPIRED", error: "A confirmação da partida expirou." });
+      }
+      if (Date.now() > session.deadline) {
+        return ack({ ok: false, code: "READY_CHECK_EXPIRED", error: "A confirmação da partida expirou." });
       }
 
-      const roomCode = String(payload.code || "").trim().toUpperCase();
-      const room = rooms.get(roomCode);
-      if (!room || room.players.player1?.socketId !== socket.id) {
-        return ack({ ok: false, error: "A partida rápida não está mais disponível. Procure novamente." });
+      session.markReady(socket.id);
+      emitReadyCheckStatus(session);
+
+      if (!session.isComplete()) {
+        return ack({ ok: true, status: QueueStatus.READY_CHECK, readyCheck: session.snapshotFor(socket.id) });
       }
 
-      pair.roomCode = roomCode;
-      pair.stage = "room-ready";
-      io.to(pair.guestSocketId).emit("matchmaking:room", { pairId, code: roomCode });
-      ack({ ok: true });
-    });
-
-    onSafe(socket, "matchmaking:joined", (payload, ack) => {
-      const pairId = String(payload.pairId || "");
-      const pair = matchmakingPairs.get(pairId);
-      if (!pair || pair.guestSocketId !== socket.id) {
-        return ack({ ok: false, error: "A busca expirou. Procure uma partida novamente." });
+      const completed = readyCheckRegistry.complete(session.readyCheckId);
+      if (!completed) {
+        return ack({ ok: false, code: "READY_CHECK_EXPIRED", error: "A confirmação da partida expirou." });
       }
 
-      const room = pair.roomCode ? rooms.get(pair.roomCode) : null;
-      if (!room || room.players.player2?.socketId !== socket.id) {
-        return ack({ ok: false, error: "Não foi possível entrar na partida rápida. Tente novamente." });
+      const room = createCasualMatchmakingRoom(completed.entries(), completed.readyCheckId);
+      if (!room) {
+        for (const entry of completed.entries()) {
+          io.to(entry.socketId).emit("matchmaking:failed", {
+            code: "MATCH_NOT_FOUND",
+            error: "Não foi possível iniciar a partida. A procurar novamente...",
+            requeued: true
+          });
+        }
+        requeueReadyCheckEntries(completed);
+        attemptCasualPairing();
+        emitLobbySnapshot();
+        return ack({ ok: false, code: "MATCH_NOT_FOUND", error: "Não foi possível iniciar a partida." });
       }
 
-      pair.stage = "joined";
-      io.to(pair.hostSocketId).emit("matchmaking:start", { pairId, code: pair.roomCode });
-      ack({ ok: true });
+      ack({ ok: true, status: QueueStatus.MATCHED, code: room.code });
     });
 
     onSafe(socket, "matchmaking:cancel", (_payload, ack) => {
-      const removedFromQueue = removeFromMatchmakingQueue(socket.id);
-      const pairId = matchmakingSocketPair.get(socket.id);
-
-      if (pairId) {
-        failMatchmakingPair(pairId, socket.id, "O outro jogador cancelou a busca.");
-      }
-
+      const removedEntry = removeFromCasualQueue(socket.id);
+      const cancelledReadyCheck = cancelReadyCheckForSocket(
+        socket.id,
+        "O outro jogador cancelou a confirmação. A procurar novamente..."
+      );
       emitLobbySnapshot();
-      ack({ ok: true, removedFromQueue, cancelledPair: Boolean(pairId) });
+      ack({ ok: true, removedFromQueue: Boolean(removedEntry), cancelledReadyCheck });
     });
 
     onSafe(socket, "matchmaking:abort", (payload, ack) => {
-      removeFromMatchmakingQueue(socket.id);
+      const removedEntry = removeFromCasualQueue(socket.id);
       removeFromRankedQueue(socket.id);
-      const pairId = String(payload.pairId || matchmakingSocketPair.get(socket.id) || "");
-      const reason = String(payload.reason || "A partida rápida foi interrompida.");
-
-      if (pairId) {
-        failMatchmakingPair(pairId, socket.id, reason);
-      }
-
+      const reason = String(payload?.reason || "A partida rápida foi interrompida.");
+      const cancelledReadyCheck = cancelReadyCheckForSocket(socket.id, reason);
       emitLobbySnapshot();
-      ack({ ok: true });
+      ack({ ok: true, removedFromQueue: Boolean(removedEntry), cancelledReadyCheck });
     });
     onSafe(socket, "room:create", (payload, ack) => {
       const profileValidation = validateOnlineProfilePayload(payload.profile);
@@ -933,8 +1037,6 @@ export async function createBattleSpiritsServer(options = {}) {
       emitRoom(room, { includeChat: true });
       emitLobbySnapshot();
 
-      const pairId = matchmakingSocketPair.get(socket.id);
-      if (pairId) cleanupMatchmakingPair(pairId);
 
       ack({ ok: true });
     });
@@ -1026,12 +1128,12 @@ export async function createBattleSpiritsServer(options = {}) {
       console.log(`[socket.io] desconectado ${socket.id}: ${reason}`);
 
       lobbyPresence.delete(socket.id);
-      removeFromMatchmakingQueue(socket.id);
+      removeFromCasualQueue(socket.id);
       removeFromRankedQueue(socket.id);
-      const pairId = matchmakingSocketPair.get(socket.id);
-      if (pairId) {
-        failMatchmakingPair(pairId, socket.id, "O outro jogador desconectou durante o matchmaking.");
-      }
+      cancelReadyCheckForSocket(
+        socket.id,
+        "O outro jogador desconectou durante a confirmação. A procurar novamente..."
+      );
 
       const found = findRoomBySocket(socket.id);
       socketRoomIndex.delete(socket.id);
@@ -1110,8 +1212,8 @@ export async function createBattleSpiritsServer(options = {}) {
         cards: cardIndex.size,
         rooms: rooms.size,
         connectedPlayers,
-        matchmakingQueued: matchmakingQueue.length,
-        matchmakingPairs: matchmakingPairs.size,
+        matchmakingQueued: casualQueue.size,
+        readyChecks: readyCheckRegistry?.size || 0,
         rankedQueued: rankedQueue.length,
         rankedReady: Boolean(rankedSupabase),
         lobbyOnline: lobbyPresence.size,

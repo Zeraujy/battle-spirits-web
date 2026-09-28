@@ -6,6 +6,8 @@ import {
 } from "react";
 
 import EmptyState from "../components/common/EmptyState.jsx";
+import QueueStatus from "../components/online/QueueStatus.jsx";
+import ReadyCheck from "../components/online/ReadyCheck.jsx";
 
 import {
   getDecks,
@@ -43,6 +45,7 @@ import {
 
 import "../styles/theme/v230.css";
 import "../styles/pages/onlineLobbySafe.css";
+import "../styles/pages/onlineMatchmakingV500.css";
 
 
 function safeOnlineError(message, fallback = "Não foi possível concluir esta ação no Online.") {
@@ -112,6 +115,9 @@ export default function OnlineLobby({
     setSearchMessage
   ] = useState("");
 
+  const [readyCheck, setReadyCheck] = useState(null);
+  const [readySubmitting, setReadySubmitting] = useState(false);
+
   const handedOffRef =
     useRef(false);
 
@@ -123,9 +129,6 @@ export default function OnlineLobby({
 
   const playerColorRef =
     useRef(playerColor);
-
-  const matchmakingPairRef =
-    useRef(null);
 
   const client = useMemo(
     () =>
@@ -169,28 +172,6 @@ export default function OnlineLobby({
       profile || {},
       playerColorRef.current
     );
-  }
-
-  function abortMatchmaking(
-    pairId,
-    reason
-  ) {
-    client.socket.emit(
-      "matchmaking:abort",
-      {
-        pairId,
-        reason
-      }
-    );
-
-    matchmakingPairRef.current =
-      null;
-
-    updateSearching(false);
-
-    if (reason) {
-      setError(safeOnlineError(reason));
-    }
   }
 
   useEffect(() => {
@@ -253,258 +234,48 @@ export default function OnlineLobby({
       }
     };
 
-    const onMatchmakingStatus = (
-      payload
-    ) => {
-      if (
-        payload?.status ===
-        "searching"
-      ) {
-        updateSearching(
-          true,
-          "Procurando outro jogador..."
-        );
-      }
+    const onMatchmakingStatus = (payload) => {
+      if (payload?.status !== QueueStatus.SEARCHING) return;
+      setReadyCheck(null);
+      setReadySubmitting(false);
+      updateSearching(true, payload?.message || "Procurando outro jogador...");
     };
 
-    /*
-     * PRIMEIRO JOGADOR DO PAR
-     *
-     * Ele cria uma sala usando exatamente
-     * o mesmo sistema de Criar Sala
-     * já utilizado pelo online atual.
-     */
-    const onMatchmakingHost = async (
-      payload
-    ) => {
-      const pairId =
-        payload?.pairId;
+    const onReadyCheck = (payload) => {
+      if (!payload?.readyCheckId) return;
+      setError("");
+      setReadyCheck(payload);
+      setReadySubmitting(false);
+      updateSearching(true, "Partida encontrada. Confirme para continuar.");
+    };
 
-      if (!pairId) {
+    const onReadyStatus = (payload) => {
+      if (!payload?.readyCheckId) return;
+      setReadyCheck((current) => current?.readyCheckId === payload.readyCheckId
+        ? { ...current, ...payload }
+        : payload);
+    };
+
+    const onMatchmakingMatched = (payload) => {
+      if (!payload?.code || !payload?.playerId || !payload?.resumeToken) return;
+      client.adoptSession(payload);
+      setReadyCheck(null);
+      setReadySubmitting(false);
+      updateSearching(false, "Partida confirmada.");
+    };
+
+    const onMatchmakingFailed = (payload) => {
+      setReadyCheck(null);
+      setReadySubmitting(false);
+
+      if (payload?.requeued) {
+        updateSearching(true, "Procurando outro jogador...");
+        setError("");
         return;
       }
 
-      matchmakingPairRef.current =
-        pairId;
-
-      updateSearching(
-        true,
-        "Adversário encontrado. Preparando a sala..."
-      );
-
-      const deck =
-        currentDeck();
-
-      if (!deck) {
-        abortMatchmaking(
-          pairId,
-          "O deck selecionado não foi encontrado."
-        );
-
-        return;
-      }
-
-      client.createRoom(
-        {
-          profile:
-            await currentOnlineProfile(),
-
-          deck:
-            deck.cards
-        },
-        (result) => {
-          if (!result?.ok) {
-            abortMatchmaking(
-              pairId,
-              result?.error ||
-                "Não foi possível criar a sala da partida."
-            );
-
-            return;
-          }
-
-          setRoom(
-            result.state
-          );
-
-          socket.emit(
-            "matchmaking:roomReady",
-            {
-              pairId,
-              code:
-                result.code
-            },
-            (reply) => {
-              if (
-                !reply?.ok
-              ) {
-                abortMatchmaking(
-                  pairId,
-                  reply?.error ||
-                    "Não foi possível preparar a partida."
-                );
-              }
-            }
-          );
-        }
-      );
-    };
-
-    /*
-     * SEGUNDO JOGADOR DO PAR
-     */
-    const onMatchmakingGuest = (
-      payload
-    ) => {
-      matchmakingPairRef.current =
-        payload?.pairId ||
-        null;
-
-      updateSearching(
-        true,
-        "Adversário encontrado. Aguardando a sala..."
-      );
-    };
-
-    /*
-     * Quando o host terminou de criar
-     * a sala, o segundo jogador entra
-     * usando o joinRoom original.
-     */
-    const onMatchmakingRoom = async (
-      payload
-    ) => {
-      const pairId =
-        payload?.pairId;
-
-      const roomCode =
-        String(
-          payload?.code ||
-            ""
-        )
-          .trim()
-          .toUpperCase();
-
-      if (
-        !pairId ||
-        !roomCode
-      ) {
-        return;
-      }
-
-      const deck =
-        currentDeck();
-
-      if (!deck) {
-        abortMatchmaking(
-          pairId,
-          "O deck selecionado não foi encontrado."
-        );
-
-        return;
-      }
-
-      updateSearching(
-        true,
-        "Entrando na partida..."
-      );
-
-      client.joinRoom(
-        {
-          code:
-            roomCode,
-
-          profile:
-            await currentOnlineProfile(),
-
-          deck:
-            deck.cards
-        },
-        (result) => {
-          if (!result?.ok) {
-            abortMatchmaking(
-              pairId,
-              result?.error ||
-                "Não foi possível entrar na sala encontrada."
-            );
-
-            return;
-          }
-
-          setRoom(
-            result.state
-          );
-
-          socket.emit(
-            "matchmaking:joined",
-            {
-              pairId
-            },
-            (reply) => {
-              if (
-                !reply?.ok
-              ) {
-                abortMatchmaking(
-                  pairId,
-                  reply?.error ||
-                    "Não foi possível confirmar a partida."
-                );
-              }
-            }
-          );
-        }
-      );
-    };
-
-    /*
-     * Depois que o segundo jogador entrou,
-     * o host inicia normalmente a sala.
-     */
-    const onMatchmakingStart = (
-      payload
-    ) => {
-      const pairId =
-        payload?.pairId;
-
-      updateSearching(
-        true,
-        "Iniciando partida..."
-      );
-
-      client.startRoom(
-        {
-          firstPlayerId:
-            Math.random() <
-            0.5
-              ? "player1"
-              : "player2"
-        },
-        (result) => {
-          if (!result?.ok) {
-            abortMatchmaking(
-              pairId,
-              result?.error ||
-                "Não foi possível iniciar a partida."
-            );
-          }
-        }
-      );
-    };
-
-    const onMatchmakingFailed = (
-      payload
-    ) => {
-      matchmakingPairRef.current =
-        null;
-
-      updateSearching(
-        false
-      );
-
-      setError(
-        payload?.error ||
-          "A busca foi interrompida."
-      );
+      updateSearching(false);
+      setError(safeOnlineError(payload?.error, "A busca foi interrompida."));
     };
 
     const onLobbySnapshot = (snapshot) => {
@@ -538,25 +309,9 @@ export default function OnlineLobby({
       onMatchmakingStatus
     );
 
-    socket.on(
-      "matchmaking:host",
-      onMatchmakingHost
-    );
-
-    socket.on(
-      "matchmaking:guest",
-      onMatchmakingGuest
-    );
-
-    socket.on(
-      "matchmaking:room",
-      onMatchmakingRoom
-    );
-
-    socket.on(
-      "matchmaking:start",
-      onMatchmakingStart
-    );
+    socket.on("matchmaking:readyCheck", onReadyCheck);
+    socket.on("matchmaking:readyStatus", onReadyStatus);
+    socket.on("matchmaking:matched", onMatchmakingMatched);
 
     socket.on(
       "matchmaking:failed",
@@ -593,25 +348,9 @@ export default function OnlineLobby({
         onMatchmakingStatus
       );
 
-      socket.off(
-        "matchmaking:host",
-        onMatchmakingHost
-      );
-
-      socket.off(
-        "matchmaking:guest",
-        onMatchmakingGuest
-      );
-
-      socket.off(
-        "matchmaking:room",
-        onMatchmakingRoom
-      );
-
-      socket.off(
-        "matchmaking:start",
-        onMatchmakingStart
-      );
+      socket.off("matchmaking:readyCheck", onReadyCheck);
+      socket.off("matchmaking:readyStatus", onReadyStatus);
+      socket.off("matchmaking:matched", onMatchmakingMatched);
 
       socket.off(
         "matchmaking:failed",
@@ -644,64 +383,69 @@ export default function OnlineLobby({
       () => {}
     );
 
-    matchmakingPairRef.current =
-      null;
-
+    setReadyCheck(null);
+    setReadySubmitting(false);
     updateSearching(false);
     setError("");
   }
 
-  function findRandomMatch() {
-    const deck =
-      currentDeck();
+  async function findRandomMatch() {
+    const deck = currentDeck();
 
     if (!deck) {
-      setError(
-        "Escolha um deck."
-      );
-
+      setError("Escolha um deck.");
       return;
     }
 
-    if (!deckIsValid(deck, deckValidationOptionsForSettings({ ruleset: roomRuleset }))) {
-      setError(roomRuleset === "official"
-        ? "Este deck precisa estar apto ao regulamento oficial atual."
-        : roomRuleset === "lab"
-          ? "Revise o deck antes de criar a sala LAB."
-          : "Este deck precisa estar válido no formato Eternal.");
+    if (!deckIsValid(deck, deckValidationOptionsForSettings({ ruleset: "eternal" }))) {
+      setError("Este deck precisa estar válido no formato Eternal.");
       return;
     }
 
-    if (
-      status !==
-      "conectado"
-    ) {
-      setError(
-        "Aguarde a conexão Online."
-      );
-
+    if (status !== "conectado") {
+      setError("Aguarde a conexão Online.");
       return;
     }
 
     setError("");
-
-    updateSearching(
-      true,
-      "Procurando outro jogador..."
-    );
+    setReadyCheck(null);
+    updateSearching(true, "Procurando outro jogador...");
 
     client.socket.emit(
       "matchmaking:join",
-      {},
+      {
+        profile: await currentOnlineProfile(),
+        deck: deck.cards,
+        deckId: deck.id || null,
+        deckName: deck.name || "Deck"
+      },
       (result) => {
         if (!result?.ok) {
-          updateSearching(
-            false
-          );
+          updateSearching(false);
+          setError(safeOnlineError(result?.error, "Não foi possível iniciar a busca."));
+          return;
+        }
+        if (result?.readyCheck) setReadyCheck(result.readyCheck);
+      }
+    );
+  }
 
-          setError(
-            safeOnlineError(result?.error, "Não foi possível iniciar a busca.")
-          );
+  function confirmReady() {
+    if (!readyCheck?.readyCheckId || readyCheck.playerReady || readySubmitting) return;
+    setReadySubmitting(true);
+    client.socket.emit(
+      "matchmaking:ready",
+      { readyCheckId: readyCheck.readyCheckId },
+      (result) => {
+        setReadySubmitting(false);
+        if (!result?.ok) {
+          setReadyCheck(null);
+          updateSearching(false);
+          setError(safeOnlineError(result?.error, "A confirmação da partida expirou."));
+          return;
+        }
+        if (result?.readyCheck) {
+          setReadyCheck((current) => ({ ...(current || {}), ...result.readyCheck }));
         }
       }
     );
@@ -846,9 +590,10 @@ export default function OnlineLobby({
   const opponentId = viewerId === "player1" ? "player2" : viewerId === "player2" ? "player1" : null;
   const opponentRoomPlayer = opponentId ? room?.players?.[opponentId] : null;
   const ownName = ownRoomPlayer?.profile?.name || profile?.displayName || profile?.name || "Jogador";
-  const opponentName = searching
+  const readyOpponentProfile = readyCheck?.opponentProfile || null;
+  const opponentName = readyOpponentProfile?.name || (searching
     ? "PROCURANDO..."
-    : opponentRoomPlayer?.profile?.name || (room ? "AGUARDANDO..." : "AGUARDANDO OPONENTE");
+    : opponentRoomPlayer?.profile?.name || (room ? "AGUARDANDO..." : "AGUARDANDO OPONENTE"));
   const opponentConnected = Boolean(opponentRoomPlayer?.connected);
 
   function copyRoomCode() {
@@ -916,6 +661,25 @@ export default function OnlineLobby({
       );
     }
 
+    if (readyCheck) {
+      return (
+        <MatchSetupMenu
+          eyebrow="MULTIPLAYER ONLINE"
+          titleTop="PARTIDA"
+          titleBottom="ENCONTRADA"
+          status="Confirme antes do tempo acabar"
+          badge="READY CHECK"
+        >
+          <ReadyCheck
+            readyCheck={readyCheck}
+            submitting={readySubmitting}
+            onReady={confirmReady}
+            onCancel={cancelSearch}
+          />
+        </MatchSetupMenu>
+      );
+    }
+
     if (searching) {
       return (
         <MatchSetupMenu
@@ -925,7 +689,7 @@ export default function OnlineLobby({
           status={searchMessage || "Procurando adversário..."}
           badge={status.toUpperCase()}
         >
-          <MatchMenuButton label="Cancelar busca" detail="Sair da fila de matchmaking" active onClick={cancelSearch} />
+          <QueueStatus message={searchMessage || "Procurando adversário..."} onCancel={cancelSearch} />
           <MatchMenuButton label="Voltar" disabled />
         </MatchSetupMenu>
       );
@@ -1064,10 +828,10 @@ export default function OnlineLobby({
       <MatchSetupScreen
         className="online-match-setup"
         error={error}
-        footer={room ? `ONLINE 1V1 · SALA ${room.code}` : searching ? "ONLINE 1V1 · MATCHMAKING EM ANDAMENTO" : "ONLINE 1V1 · MATCHMAKING, SALAS PRIVADAS E CÓDIGO"}
+        footer={room ? `ONLINE 1V1 · SALA ${room.code}` : readyCheck ? "ONLINE 1V1 · READY CHECK" : searching ? "ONLINE 1V1 · MATCHMAKING EM ANDAMENTO" : "ONLINE 1V1 · MATCHMAKING, SALAS PRIVADAS E CÓDIGO"}
         menu={normalMenu}
       >
-        {room || searching ? (
+        {room || searching || readyCheck ? (
           <div className="match-setup-duel">
             <PlayerBattlePreview
               side="left"
@@ -1085,14 +849,14 @@ export default function OnlineLobby({
 
             <PlayerBattlePreview
               side="right"
-              kicker={room ? "OPONENTE" : "MATCHMAKING"}
+              kicker={room || readyCheck ? "OPONENTE" : "MATCHMAKING"}
               name={opponentName}
-              avatarSrc={opponentRoomPlayer?.profile?.avatar || opponentRoomPlayer?.profile?.avatarUrl || opponentRoomPlayer?.profile?.avatar_url || null}
-              bannerSrc={opponentRoomPlayer ? "./images/card-back.webp" : null}
-              deckName={opponentRoomPlayer ? "Deck adversário" : searching ? "Buscando jogador" : "Aguardando conexão"}
-              deckMeta={opponentRoomPlayer ? (opponentConnected ? "conectado · identidade pública" : "offline") : "o deck será revelado apenas quando permitido"}
-              status={opponentRoomPlayer ? (opponentConnected ? "CONECTADO" : "OFFLINE") : searching ? "BUSCANDO" : "ESPERA"}
-              waiting={!opponentRoomPlayer}
+              avatarSrc={opponentRoomPlayer?.profile?.avatar || readyOpponentProfile?.avatar || null}
+              bannerSrc={opponentRoomPlayer || readyOpponentProfile ? "./images/card-back.webp" : null}
+              deckName={opponentRoomPlayer || readyOpponentProfile ? "Deck adversário" : searching ? "Buscando jogador" : "Aguardando conexão"}
+              deckMeta={opponentRoomPlayer ? (opponentConnected ? "conectado · identidade pública" : "offline") : readyOpponentProfile ? "partida encontrada · deck protegido" : "o deck será revelado apenas quando permitido"}
+              status={opponentRoomPlayer ? (opponentConnected ? "CONECTADO" : "OFFLINE") : readyOpponentProfile ? (readyCheck?.opponentReady ? "PRONTO" : "CONFIRMANDO") : searching ? "BUSCANDO" : "ESPERA"}
+              waiting={!opponentRoomPlayer && !readyOpponentProfile}
             />
           </div>
         ) : (
