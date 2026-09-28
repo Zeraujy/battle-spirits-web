@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { STARTER_DECK_PRODUCTS } from "../../data/shopCatalog.js";
+import { ONBOARDING_DECK_PRODUCTS } from "../../data/shopCatalog.js";
 import { completeStarterOnboarding, getDeckRecipe, loadEconomySnapshot } from "../../services/economyService.js";
 import { cardIndex } from "../../services/cardRepository.js";
 import CardDetailsModal from "../cards/CardDetailsModal.jsx";
@@ -38,7 +38,7 @@ export default function StarterOnboarding() {
       if (!active) return;
       setSnapshot(next);
       if (next.onboardingComplete) { setLoading(false); return; }
-      const results = await Promise.all(STARTER_DECK_PRODUCTS.map(async (product) => [product.id, await getDeckRecipe(product)]));
+      const results = await Promise.all(ONBOARDING_DECK_PRODUCTS.map(async (product) => [product.id, await getDeckRecipe(product)]));
       if (active) {
         setRecipes(new Map(results));
         setLoading(false);
@@ -48,12 +48,12 @@ export default function StarterOnboarding() {
   }, []);
 
   const availableCount = useMemo(
-    () => STARTER_DECK_PRODUCTS.filter((product) => recipes.get(product.id)?.ready).length,
+    () => ONBOARDING_DECK_PRODUCTS.filter((product) => recipes.get(product.id)?.ready).length,
     [recipes]
   );
 
   const activeDecklistProduct = useMemo(
-    () => STARTER_DECK_PRODUCTS.find((product) => product.id === decklistProductId) || null,
+    () => ONBOARDING_DECK_PRODUCTS.find((product) => product.id === decklistProductId) || null,
     [decklistProductId]
   );
   const activeDecklistRecipe = activeDecklistProduct ? recipes.get(activeDecklistProduct.id) : null;
@@ -114,7 +114,7 @@ export default function StarterOnboarding() {
         <div className="starter-v450-carousel-wrap">
           <button className="starter-v450-arrow prev" type="button" onClick={() => scrollRail(-1)} aria-label={pt ? "Deck anterior" : "Previous deck"}>‹</button>
           <div className="starter-v450-rail" ref={railRef}>
-            {STARTER_DECK_PRODUCTS.map((product) => {
+            {ONBOARDING_DECK_PRODUCTS.map((product) => {
               const recipe = recipes.get(product.id);
               const ready = Boolean(recipe?.ready);
               const active = selected.includes(product.id);

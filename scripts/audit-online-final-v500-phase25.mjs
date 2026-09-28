@@ -14,13 +14,13 @@ const required = [
 ];
 for (const file of required) if (!fs.existsSync(file)) failures.push(`Missing ${file}`);
 
-if (pkg.version !== "5.0.0") failures.push(`Expected package version 5.0.0, found ${pkg.version}`);
+if (!/^5\.0\.\d+$/.test(String(pkg.version || ""))) failures.push(`Expected v5.0.x package version, found ${pkg.version}`);
 for (const [file, marker] of [
-  ["src/config/appVersion.js", 'APP_VERSION = "5.0.0"'],
-  ["server/index.mjs", 'version: "5.0.0"'],
-  ["src/pages/Simulator.jsx", "Eternal v5.0.0"],
-  ["src/components/common/ProjectInfoButtons.jsx", 'version: "5.0.0"']
-]) if (!read(file).includes(marker)) failures.push(`v5.0.0 marker missing in ${file}`);
+  ["src/config/appVersion.js", `APP_VERSION = "${pkg.version}"`],
+  ["server/index.mjs", `version: "${pkg.version}"`],
+  ["src/pages/Simulator.jsx", `Eternal v${pkg.version}`],
+  ["src/components/common/ProjectInfoButtons.jsx", `version: "${pkg.version}"`]
+]) if (!read(file).includes(marker)) failures.push(`v5.0.x marker missing in ${file}`);
 
 const packageText = read("package.json");
 for (const marker of [

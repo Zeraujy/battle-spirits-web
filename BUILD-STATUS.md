@@ -1,4 +1,4 @@
-# Build Status — Battle Spirits: KAIHOU! Simulator v5.0.0
+# Build Status — Battle Spirits: KAIHOU! Simulator v5.0.2
 
 ## Escopo
 
@@ -15,3 +15,18 @@ Base oficial Web + Online. O pacote-fonte não inclui dependências instaladas, 
 - Build Vite.
 
 Execute `npm run project:check` antes de qualquer publicação.
+
+
+## v5.0.1 Starter Deck Shop Recipes
+- 17 Starter Deck products active in Shop.
+- All Starter Deck products use explicit validated recipes.
+- SD14 and SD16 gameplay records added to the runtime catalog.
+- SD01 split into Blazing Thunder and Diamond Deity.
+- SD64 campaign cards excluded from the playable 40-card recipe.
+
+
+## v5.0.2 All Decks in Onboarding
+- New-player onboarding mirrors every active deck product from the Shop.
+- All 17 active decks are selectable in the initial choose-3 flow.
+- Guest and authenticated starter claims accept any active deck product.
+- A dedicated audit prevents Shop/onboarding deck lists from diverging.

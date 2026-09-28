@@ -31,7 +31,7 @@ const booster = (setCode, options = {}) => Object.freeze({
 });
 
 const deck = (setCode, options = {}) => Object.freeze({
-  id: `deck-${setCode.toLowerCase()}`,
+  id: options.id || `deck-${setCode.toLowerCase()}`,
   category: "decks",
   productType: "deck",
   setCode,
@@ -40,8 +40,8 @@ const deck = (setCode, options = {}) => Object.freeze({
   subtitlePT: options.subtitlePT || "Starter Deck",
   subtitleEN: options.subtitleEN || "Starter Deck",
   spiritPrice: options.spiritPrice ?? 1800,
-  artwork: `/assets/shop-items/decks/${setCode.toLowerCase()}.webp`,
-  recipeId: `recipe-${setCode.toLowerCase()}`,
+  artwork: options.artwork || `/assets/shop-items/decks/${setCode.toLowerCase()}.webp`,
+  recipeId: options.recipeId || `recipe-${setCode.toLowerCase()}`,
   starterEligible: options.starterEligible !== false,
   status: options.status || "active",
   dataNotePT: options.dataNotePT || "",
@@ -71,32 +71,23 @@ export const SHOP_PRODUCTS = Object.freeze([
     packSize: null
   }),
 
-  deck("SD01", { status: "catalog-only", starterEligible: false, dataNotePT: "O produto está no catálogo, mas a database atual ainda não possui uma receita de deck validada de 40 cartas.", dataNoteEN: "The product is listed, but the current database does not yet contain a validated 40-card deck recipe." }),
-  deck("SD02", { status: "catalog-only", starterEligible: false, dataNotePT: "O produto está no catálogo, mas a database atual ainda não possui uma receita de deck validada de 40 cartas.", dataNoteEN: "The product is listed, but the current database does not yet contain a validated 40-card deck recipe." }),
-  deck("SD03", { status: "catalog-only", starterEligible: false, dataNotePT: "O produto está no catálogo, mas a database atual ainda não possui uma receita de deck validada de 40 cartas.", dataNoteEN: "The product is listed, but the current database does not yet contain a validated 40-card deck recipe." }),
-  deck("SD10", { title: "Tsurugi Deck: Shining Charge" }),
-  deck("SD11", { title: "The Midnight King Yaiba's Deck: Dark Rush" }),
-  deck("SD13", { title: "Attribute Eye-Opening Deck: Amethyst", status: "catalog-only", starterEligible: false, dataNotePT: "A lista completa usa reprints que ainda não estão no catálogo unificado.", dataNoteEN: "The full list uses reprints that are not yet available in the unified catalog." }),
-  deck("SD14", {
-    status: "catalog-only",
-    starterEligible: false,
-    dataNotePT: "A arte já está na database, mas a lista de cartas ainda precisa ser importada para ativar este deck.",
-    dataNoteEN: "Artwork is already in the database, but its card list still needs to be imported before this deck can be activated."
-  }),
-  deck("SD15", { title: "Attribute Eye-Opening Deck: Topaz", status: "catalog-only", starterEligible: false, dataNotePT: "A lista completa usa reprints que ainda não estão no catálogo unificado.", dataNoteEN: "The full list uses reprints that are not yet available in the unified catalog." }),
-  deck("SD16", {
-    status: "catalog-only",
-    starterEligible: false,
-    dataNotePT: "A arte já está na database, mas a lista de cartas ainda precisa ser importada para ativar este deck.",
-    dataNoteEN: "Artwork is already in the database, but its card list still needs to be imported before this deck can be activated."
-  }),
-  deck("SD17", { title: "New Tsurugi Deck: Darkness Fang" }),
-  deck("SD19", { title: "Ultimate Deck: Scorching Zero" }),
-  deck("SD20", { title: "Ultimate Deck: Silver Zero" }),
-  deck("SD22"),
-  deck("SD23", { title: "Ultimate Deck: Eris the Morning Star" }),
-  deck("SD28", { title: "Ultimate Deck: Land of Deep Green" }),
-  deck("SD64", { status: "catalog-only", starterEligible: false, dataNotePT: "O produto está no catálogo, mas a database atual ainda não possui uma receita de deck validada de 40 cartas.", dataNoteEN: "The product is listed, but the current database does not yet contain a validated 40-card deck recipe." }),
+  deck("SD01", { id: "deck-sd01-blazing", recipeId: "recipe-sd01-blazing-thunder", title: "Blazing Thunder" }),
+  deck("SD01", { id: "deck-sd01-diamond", recipeId: "recipe-sd01-diamond-deity", title: "Diamond Deity" }),
+  deck("SD02", { recipeId: "recipe-sd02-roaring-heavens-door", title: "Roaring Heaven's Door" }),
+  deck("SD03", { recipeId: "recipe-sd03-brave-dragon-sun", title: "Dan Bashin Deck: Brave Dragon of the Sun" }),
+  deck("SD10", { recipeId: "recipe-sd10-shining-charge", title: "Tsurugi Deck: Shining Charge" }),
+  deck("SD11", { recipeId: "recipe-sd11-dark-rush", title: "The Midnight King Yaiba's Deck: Dark Rush" }),
+  deck("SD13", { recipeId: "recipe-sd13-amethyst", title: "Attribute Eye-Opening Deck: Amethyst" }),
+  deck("SD14", { recipeId: "recipe-sd14-emerald", title: "Attribute Eye-Opening Deck: Emerald" }),
+  deck("SD15", { recipeId: "recipe-sd15-topaz", title: "Attribute Eye-Opening Deck: Topaz" }),
+  deck("SD16", { recipeId: "recipe-sd16-sapphire", title: "Attribute Eye-Opening Deck: Sapphire" }),
+  deck("SD17", { recipeId: "recipe-sd17-darkness-fang", title: "New Tsurugi Deck: Darkness Fang" }),
+  deck("SD19", { recipeId: "recipe-sd19-scorching-zero", title: "Ultimate Deck: Scorching Zero" }),
+  deck("SD20", { recipeId: "recipe-sd20-silver-zero", title: "Ultimate Deck: Silver Zero" }),
+  deck("SD22", { recipeId: "recipe-sd22-hurricane-zero", title: "Ultimate Deck: Zero the Hurricane" }),
+  deck("SD23", { recipeId: "recipe-sd23-eris", title: "Ultimate Deck: Eris the Morning Star" }),
+  deck("SD28", { recipeId: "recipe-sd28-land-deep-green", title: "Ultimate Deck: Land of Deep Green" }),
+  deck("SD64", { recipeId: "recipe-sd64-infinite-bond", title: "Battle Spirits Dash Deck: The Infinite Bond" }),
 
   Object.freeze({
     id: "accessory-sleeve-01",
@@ -123,6 +114,11 @@ export const SHOP_PRODUCTS = Object.freeze([
 ]);
 
 export const SHOP_PRODUCT_BY_ID = new Map(SHOP_PRODUCTS.map((product) => [product.id, product]));
-export const STARTER_DECK_PRODUCTS = Object.freeze(
-  SHOP_PRODUCTS.filter((product) => product.category === "decks" && product.starterEligible && product.status === "active")
+export const ACTIVE_DECK_PRODUCTS = Object.freeze(
+  SHOP_PRODUCTS.filter((product) => product.category === "decks" && product.status === "active")
 );
+
+// v5.0.2 — New-player onboarding mirrors every active deck in the Shop.
+// Keep STARTER_DECK_PRODUCTS as a compatibility alias for existing imports.
+export const ONBOARDING_DECK_PRODUCTS = ACTIVE_DECK_PRODUCTS;
+export const STARTER_DECK_PRODUCTS = ONBOARDING_DECK_PRODUCTS;

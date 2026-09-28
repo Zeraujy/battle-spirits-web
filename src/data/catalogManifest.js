@@ -2,8 +2,8 @@
  * Generated catalog metadata.
  * Run `npm run cards:sync` after importing or editing card sets.
  */
-export const CATALOG_CARD_COUNT = 1331;
-export const CATALOG_SET_COUNT = 25;
+export const CATALOG_CARD_COUNT = 1354;
+export const CATALOG_SET_COUNT = 27;
 export const CATALOG_SETS = Object.freeze({
   "BS01": 157,
   "BS02": 116,
@@ -22,7 +22,9 @@ export const CATALOG_SETS = Object.freeze({
   "SD10": 18,
   "SD11": 18,
   "SD13": 18,
+  "SD14": 12,
   "SD15": 18,
+  "SD16": 11,
   "SD17": 18,
   "SD19": 17,
   "SD20": 17,

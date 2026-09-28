@@ -1,0 +1,551 @@
+[
+  {
+    "id": "SD14-001",
+    "name": "The SpearSoldier Antman",
+    "nameEN": "The SpearSoldier Antman",
+    "namePT": "The SpearSoldier Antman",
+    "nameJP": "槍兵アントマン",
+    "nameKey": "the-spearsoldier-antman",
+    "set": "SD14",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 1,
+    "reduction": [],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Insect",
+      "Shellman"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV2 When This Spirit Attacks: This Spirit gains +1000 BP for each Core in your Reserve.",
+      "ptBR": "LV2 Quando Este Spirit Ataca: este Spirit ganha +1000 BP para cada Core na sua Reserve."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD14/SD14-001.webp"
+  },
+  {
+    "id": "SD14-002",
+    "name": "Takeyanma",
+    "nameEN": "Takeyanma",
+    "namePT": "Takeyanma",
+    "nameJP": "タケヤンマ",
+    "nameKey": "takeyanma",
+    "set": "SD14",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 2,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Destroyed: Refresh 1 of your Spirits with the Insect family. Chain: Blue Symbol — Destroy 1 opposing Spirit that costs 2 or less.",
+      "ptBR": "LV1/LV2 Quando Este Spirit É Destruído: dê Refresh em 1 dos seus Spirits da família Insect. Chain: Blue Symbol — destrua 1 Spirit do oponente de custo 2 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD14/SD14-002.webp"
+  },
+  {
+    "id": "SD14-003",
+    "name": "Inegobatta",
+    "nameEN": "Inegobatta",
+    "namePT": "Inegobatta",
+    "nameJP": "イネゴバッタ",
+    "nameKey": "inegobatta",
+    "set": "SD14",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Swift]. LV2 When This Spirit Attacks: Put 1 Core from the Void onto one of your Spirits. Chain: Blue Symbol — during this battle, your opponent cannot use White Magic cards.",
+      "ptBR": "Flash [Swift]. LV2 Quando Este Spirit Ataca: coloque 1 Core do Void em um dos seus Spirits. Chain: Blue Symbol — durante esta batalha, seu oponente não pode usar cartas de Magic White."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD14/SD14-003.webp"
+  },
+  {
+    "id": "SD14-004",
+    "name": "DarkZiga-Wasp",
+    "nameEN": "DarkZiga-Wasp",
+    "namePT": "DarkZiga-Wasp",
+    "nameJP": "ダーク・ジガワスプ",
+    "nameKey": "darkziga-wasp",
+    "set": "SD14",
+    "cardType": "spirit",
+    "subtypes": [
+      "Dark"
+    ],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Swift]. Chain: Blue Symbol — Destroy 1 opposing Spirit that costs 3 or less.",
+      "ptBR": "Flash [Swift]. Chain: Blue Symbol — destrua 1 Spirit do oponente de custo 3 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD14/SD14-004.webp"
+  },
+  {
+    "id": "SD14-005",
+    "name": "Tarancedar",
+    "nameEN": "Tarancedar",
+    "namePT": "Tarancedar",
+    "nameJP": "タランシダー",
+    "nameKey": "tarancedar",
+    "set": "SD14",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 When This Spirit Is Summoned: Exhaust 1 opposing Spirit. LV2: When Cores are put onto this Spirit from the Void, increase that number by 1.",
+      "ptBR": "LV1/LV2 Quando Este Spirit É Invocado: dê Exhaust em 1 Spirit do oponente. LV2: quando Cores forem colocados neste Spirit vindos do Void, aumente essa quantidade em 1."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD14/SD14-005.webp"
+  },
+  {
+    "id": "SD14-006",
+    "name": "The TwinBladeInsect Nokogirafa",
+    "nameEN": "The TwinBladeInsect Nokogirafa",
+    "namePT": "The TwinBladeInsect Nokogirafa",
+    "nameJP": "双刃蟲ノコギラファ",
+    "nameKey": "the-twinbladeinsect-nokogirafa",
+    "set": "SD14",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "M",
+    "includedQuantity": 1,
+    "families": [
+      "Insect",
+      "Shellman"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 5,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "When This Spirit Is Summoned: Your opponent exhausts 2 of their Spirits. LV2/LV3 When This Spirit Attacks: Put 1 Core from the Void onto each of up to 2 of your Spirits with [Swift].",
+      "ptBR": "Quando Este Spirit É Invocado: seu oponente dá Exhaust em 2 dos próprios Spirits. LV2/LV3 Quando Este Spirit Ataca: coloque 1 Core do Void em cada um de até 2 dos seus Spirits com [Swift]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD14/SD14-006.webp"
+  },
+  {
+    "id": "SD14-007",
+    "name": "The FlyingShelledInsect Nitoukuwagata",
+    "nameEN": "The FlyingShelledInsect Nitoukuwagata",
+    "namePT": "The FlyingShelledInsect Nitoukuwagata",
+    "nameJP": "飛甲虫ニトウクワガタ",
+    "nameKey": "the-flyingshelledinsect-nitoukuwagata",
+    "set": "SD14",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Shellman"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Swift]. Combine Condition: Insect. While Braved — When This Spirit Battles: At the end of the battle, put 1 Core from the Void onto one of your Spirits.",
+      "ptBR": "Flash [Swift]. Condição de Combine: Insect. Enquanto estiver combinado — Quando Este Spirit Batalha: no fim da batalha, coloque 1 Core do Void em um dos seus Spirits."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD14/SD14-007.webp",
+    "braveBP": 2000,
+    "braveCondition": {
+      "families": [
+        "Insect"
+      ]
+    }
+  },
+  {
+    "id": "SD14-008",
+    "name": "Insects Assemble",
+    "nameEN": "Insects Assemble",
+    "namePT": "Insects Assemble",
+    "nameJP": "インセクトアッセンブル",
+    "nameKey": "insects-assemble",
+    "set": "SD14",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 5,
+    "reduction": [
+      "green",
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: Refresh 3 of your Spirits with the Insect family. Chain: Blue Symbol — Destroy 1 opposing Spirit that costs 3 or less.",
+      "ptBR": "Flash: dê Refresh em 3 dos seus Spirits da família Insect. Chain: Blue Symbol — destrua 1 Spirit do oponente de custo 3 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD14/SD14-008.webp"
+  },
+  {
+    "id": "SD14-X01",
+    "name": "The ArmoredWoodGod Herac-Dinus",
+    "nameEN": "The ArmoredWoodGod Herac-Dinus",
+    "namePT": "The ArmoredWoodGod Herac-Dinus",
+    "nameJP": "甲樹神ヘラク・ダイナス",
+    "nameKey": "the-armoredwoodgod-herac-dinus",
+    "set": "SD14",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 7,
+    "reduction": [
+      "green",
+      "green",
+      "green"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Insect",
+      "Shellman"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 9000
+      }
+    ],
+    "effectText": {
+      "en": "During Your Attack Step: When this Spirit or one of your Spirits with [Swift] attacks, your opponent must block with 2 Spirits if able; if blocked, battle only 1 of them. LV2/LV3: All of your Spirits with the Insect family gain +2000 BP.",
+      "ptBR": "Durante Seu Attack Step: quando este Spirit ou um dos seus Spirits com [Swift] atacar, seu oponente deve bloquear com 2 Spirits se puder; se bloquear, batalhe apenas contra 1 deles. LV2/LV3: todos os seus Spirits da família Insect ganham +2000 BP."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD14/SD14-X01.webp"
+  },
+  {
+    "id": "BS12-019",
+    "name": "Kunoichijorou",
+    "nameEN": "Kunoichijorou",
+    "namePT": "Kunoichijorou",
+    "nameJP": "くノ一ジョロウ",
+    "nameKey": "kunoichijorou",
+    "set": "SD14",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 3,
+    "reduction": [
+      "green"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [
+      "Insect"
+    ],
+    "symbols": [
+      "green"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Swift]. When This Spirit Is Summoned: Separate 1 Brave from an opposing Braved Spirit currently in battle; that Spirit continues the battle. Your opponent handles Core movement when it separates.",
+      "ptBR": "Flash [Swift]. Quando Este Spirit É Invocado: separe 1 Brave de um Spirit combinado do oponente que esteja batalhando; aquele Spirit continua a batalha. Seu oponente realiza a movimentação de Cores ao separar."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/images/card-back.webp"
+  },
+  {
+    "id": "BS10-052",
+    "name": "The Lumberjack Gobri-Gobri",
+    "nameEN": "The Lumberjack Gobri-Gobri",
+    "namePT": "The Lumberjack Gobri-Gobri",
+    "nameJP": "木こりのゴブリ・ゴブリ",
+    "nameKey": "the-lumberjack-gobri-gobri",
+    "set": "SD14",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 2,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Creator"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "This card has no effect.",
+      "ptBR": "Esta carta não possui efeito."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/images/card-back.webp"
+  },
+  {
+    "id": "EX13-01",
+    "name": "Shieldybug",
+    "nameEN": "Shieldybug",
+    "namePT": "Shieldybug",
+    "nameJP": "シールディバグ",
+    "nameKey": "shieldybug",
+    "set": "SD14",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "green"
+    ],
+    "cost": 4,
+    "reduction": [
+      "green",
+      "green",
+      "white"
+    ],
+    "rarity": "EX",
+    "includedQuantity": 2,
+    "families": [
+      "Shellman",
+      "Light Insect"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "Flash [Swift]. Combine Condition: Cost 3 or more. While Braved — When This Spirit Battles: When it destroys an opposing Spirit by BP comparison, refresh this Spirit.",
+      "ptBR": "Flash [Swift]. Condição de Combine: custo 3 ou mais. Enquanto estiver combinado — Quando Este Spirit Batalha: quando destruir um Spirit do oponente por comparação de BP, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/images/card-back.webp",
+    "braveBP": 4000,
+    "braveCondition": {
+      "cardTypes": [
+        "spirit"
+      ],
+      "minCost": 3
+    }
+  }
+]

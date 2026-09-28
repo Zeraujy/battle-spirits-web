@@ -1,0 +1,501 @@
+[
+  {
+    "id": "SD16-001",
+    "name": "The Giant Platoon",
+    "nameEN": "The Giant Platoon",
+    "namePT": "The Giant Platoon",
+    "nameJP": "巨人小隊",
+    "nameKey": "the-giant-platoon",
+    "set": "SD16",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 1,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 1000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Spirits with the Fighting Spirit family is destroyed by your opponent, discard the top 2 cards of your opponent's deck.",
+      "ptBR": "LV1/LV2: quando um dos seus Spirits da família Fighting Spirit for destruído pelo oponente, descarte as 2 cartas do topo do deck do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD16/SD16-001.webp"
+  },
+  {
+    "id": "SD16-002",
+    "name": "The GreatFist Roger",
+    "nameEN": "The GreatFist Roger",
+    "namePT": "The GreatFist Roger",
+    "nameJP": "豪拳のロジャー",
+    "nameKey": "the-greatfist-roger",
+    "set": "SD16",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 2000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 4000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Strengthening]: Your effects that discard cards from the opposing deck discard 1 additional card. LV2 When This Spirit Is Destroyed: Destroy 1 opposing Spirit that costs 4 or less.",
+      "ptBR": "LV1/LV2 [Strengthening]: seus efeitos que descartam cartas do deck do oponente descartam 1 carta adicional. LV2 Quando Este Spirit É Destruído: destrua 1 Spirit do oponente de custo 4 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD16/SD16-002.webp"
+  },
+  {
+    "id": "SD16-003",
+    "name": "The HeavyJavelinGiant Lance",
+    "nameEN": "The HeavyJavelinGiant Lance",
+    "namePT": "The HeavyJavelinGiant Lance",
+    "nameJP": "重槍巨人ランス",
+    "nameKey": "the-heavyjavelingiant-lance",
+    "set": "SD16",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 [Strengthening]: Your effects that discard cards from the opposing deck discard 1 additional card. LV2: All of your Blue Nexuses cannot be destroyed by opposing Spirit/Brave/Nexus/Magic effects.",
+      "ptBR": "LV1/LV2 [Strengthening]: seus efeitos que descartam cartas do deck do oponente descartam 1 carta adicional. LV2: todos os seus Nexus Blue não podem ser destruídos por efeitos de Spirit/Brave/Nexus/Magic do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD16/SD16-003.webp"
+  },
+  {
+    "id": "SD16-004",
+    "name": "The BattleMaul Gordon",
+    "nameEN": "The BattleMaul Gordon",
+    "namePT": "The BattleMaul Gordon",
+    "nameJP": "戦鎚のゴードン",
+    "nameKey": "the-battlemaul-gordon",
+    "set": "SD16",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 4,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 5000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2/LV3 [Crush] When This Spirit Attacks: Discard cards from the top of the opposing deck equal to this Spirit's level. LV2/LV3 During Opponent's Attack Step: A Cost 3 or lower opposing Spirit cannot attack unless your opponent moves 1 Core from their Reserve to their Trash.",
+      "ptBR": "LV1/LV2/LV3 [Crush] Quando Este Spirit Ataca: descarte do topo do deck do oponente uma quantidade de cartas igual ao nível deste Spirit. LV2/LV3 Durante o Attack Step do Oponente: um Spirit do oponente de custo 3 ou menos não pode atacar a menos que o oponente mova 1 Core da Reserve para o Trash."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD16/SD16-004.webp"
+  },
+  {
+    "id": "SD16-005",
+    "name": "The TwoHeadedDragonTamer Bernhard",
+    "nameEN": "The TwoHeadedDragonTamer Bernhard",
+    "namePT": "The TwoHeadedDragonTamer Bernhard",
+    "nameJP": "双首竜使いのバーンハード",
+    "nameKey": "the-twoheadeddragontamer-bernhard",
+    "set": "SD16",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit",
+      "Sea Head"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 4,
+        "bp": 8000
+      }
+    ],
+    "effectText": {
+      "en": "When This Spirit Is Summoned: Destroy 2 opposing Spirits that cost 3 or less. For each Spirit destroyed by this effect, discard 3 cards from the top of the opposing deck.",
+      "ptBR": "Quando Este Spirit É Invocado: destrua 2 Spirits do oponente de custo 3 ou menos. Para cada Spirit destruído por este efeito, descarte 3 cartas do topo do deck do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD16/SD16-005.webp"
+  },
+  {
+    "id": "SD16-006",
+    "name": "The DemonBladeMaster Clovis",
+    "nameEN": "The DemonBladeMaster Clovis",
+    "namePT": "The DemonBladeMaster Clovis",
+    "nameJP": "魔剣使いのクローヴィス",
+    "nameKey": "the-demonblademaster-clovis",
+    "set": "SD16",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "R",
+    "includedQuantity": 1,
+    "families": [
+      "Sword User",
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 4000
+      },
+      {
+        "level": 2,
+        "cores": 3,
+        "bp": 7000
+      }
+    ],
+    "effectText": {
+      "en": "When This Spirit Is Summoned: You may destroy 1 opposing Nexus; if you do, discard 7 cards from the top of the opposing deck. While Braved — LV2 During Opponent's Attack Step: Opposing Spirits that cost 4 or less cannot attack.",
+      "ptBR": "Quando Este Spirit É Invocado: você pode destruir 1 Nexus do oponente; se fizer isso, descarte 7 cartas do topo do deck do oponente. Enquanto estiver combinado — LV2 Durante o Attack Step do Oponente: Spirits do oponente de custo 4 ou menos não podem atacar."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD16/SD16-006.webp"
+  },
+  {
+    "id": "SD16-007",
+    "name": "Loader-Arms",
+    "nameEN": "Loader-Arms",
+    "namePT": "Loader-Arms",
+    "nameJP": "ローダー・アームズ",
+    "nameKey": "loader-arms",
+    "set": "SD16",
+    "cardType": "brave",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 3,
+    "families": [
+      "Artificial Soldier"
+    ],
+    "symbols": [],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 3000
+      }
+    ],
+    "effectText": {
+      "en": "When This Brave Is Summoned: Put 1 Core from the Void onto one of your Nexuses. Combine Condition: Fighting Spirit. While Braved — When This Spirit Attacks: Destroy 1 opposing Spirit that costs 3 or less.",
+      "ptBR": "Quando Este Brave É Invocado: coloque 1 Core do Void em um dos seus Nexus. Condição de Combine: Fighting Spirit. Enquanto estiver combinado — Quando Este Spirit Ataca: destrua 1 Spirit do oponente de custo 3 ou menos."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD16/SD16-007.webp",
+    "braveBP": 3000,
+    "braveCondition": {
+      "families": [
+        "Fighting Spirit"
+      ]
+    }
+  },
+  {
+    "id": "SD16-008",
+    "name": "The Ironwall Giant Fortress",
+    "nameEN": "The Ironwall Giant Fortress",
+    "namePT": "The Ironwall Giant Fortress",
+    "nameJP": "鉄壁なる巨人城塞",
+    "nameKey": "the-ironwall-giant-fortress",
+    "set": "SD16",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue",
+      "blue"
+    ],
+    "rarity": "U",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2: When one of your Nexuses is destroyed, by exhausting this Nexus, keep 1 of those destroyed Nexuses on the field exhausted instead. LV2: All of your Spirits with the Fighting Spirit family gain [Crush].",
+      "ptBR": "LV1/LV2: quando um dos seus Nexus for destruído, ao dar Exhaust neste Nexus, mantenha 1 desses Nexus destruídos no campo em Exhaust. LV2: todos os seus Spirits da família Fighting Spirit ganham [Crush]."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD16/SD16-008.webp"
+  },
+  {
+    "id": "SD16-X01",
+    "name": "The GiantEmperor Alexander-XIII",
+    "nameEN": "The GiantEmperor Alexander-XIII",
+    "namePT": "The GiantEmperor Alexander-XIII",
+    "nameJP": "巨人帝王アレクサンダー13世",
+    "nameKey": "the-giantemperor-alexander-xiii",
+    "set": "SD16",
+    "cardType": "spirit",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 7,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "X",
+    "includedQuantity": 1,
+    "families": [
+      "Fighting Spirit"
+    ],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 1,
+        "bp": 6000
+      },
+      {
+        "level": 2,
+        "cores": 2,
+        "bp": 8000
+      },
+      {
+        "level": 3,
+        "cores": 4,
+        "bp": 10000
+      }
+    ],
+    "effectText": {
+      "en": "When This Spirit Is Summoned: Destroy 1 opposing Spirit that costs 5 or less. When This Spirit Attacks: Discard 5 cards from the top of the opposing deck. LV2/LV3 When This Spirit Attacks [Once per Turn]: By exhausting 1 of your Spirits with the Fighting Spirit family, refresh this Spirit.",
+      "ptBR": "Quando Este Spirit É Invocado: destrua 1 Spirit do oponente de custo 5 ou menos. Quando Este Spirit Ataca: descarte 5 cartas do topo do deck do oponente. LV2/LV3 Quando Este Spirit Ataca [Uma Vez por Turno]: ao dar Exhaust em 1 dos seus Spirits da família Fighting Spirit, dê Refresh neste Spirit."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/cards-database/SD16/SD16-X01.webp"
+  },
+  {
+    "id": "BS11-071",
+    "name": "The PillarRocks' Aquapolis",
+    "nameEN": "The PillarRocks' Aquapolis",
+    "namePT": "The PillarRocks' Aquapolis",
+    "nameJP": "柱岩の海上都市",
+    "nameKey": "the-pillarrocks-aquapolis",
+    "set": "SD16",
+    "cardType": "nexus",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 3,
+    "reduction": [
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [
+      "blue"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "cores": 0,
+        "bp": 0
+      },
+      {
+        "level": 2,
+        "cores": 1,
+        "bp": 0
+      }
+    ],
+    "effectText": {
+      "en": "LV1/LV2 During Your Main Step: When you summon a Spirit with [Crush], discard 2 cards from the top of the opposing deck. LV2 During Your Attack Step: When one of your Spirits attacks, discard the top card of the opposing deck; if it costs 3 or less, exhaust 1 opposing Spirit.",
+      "ptBR": "LV1/LV2 Durante Seu Main Step: quando você invocar um Spirit com [Crush], descarte 2 cartas do topo do deck do oponente. LV2 Durante Seu Attack Step: quando um dos seus Spirits atacar, descarte a carta do topo do deck do oponente; se ela tiver custo 3 ou menos, dê Exhaust em 1 Spirit do oponente."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/images/card-back.webp"
+  },
+  {
+    "id": "BS11-084",
+    "name": "Solid Body",
+    "nameEN": "Solid Body",
+    "namePT": "Solid Body",
+    "nameJP": "ソリッドボディー",
+    "nameKey": "solid-body",
+    "set": "SD16",
+    "cardType": "magic",
+    "subtypes": [],
+    "colors": [
+      "blue"
+    ],
+    "cost": 5,
+    "reduction": [
+      "blue",
+      "blue",
+      "blue"
+    ],
+    "rarity": "C",
+    "includedQuantity": 2,
+    "families": [],
+    "symbols": [],
+    "levels": [],
+    "effectText": {
+      "en": "Flash: During this turn, all of your Spirits with [Crush] may block opposing Spirits while exhausted.",
+      "ptBR": "Flash: durante este turno, todos os seus Spirits com [Crush] podem bloquear Spirits do oponente enquanto estiverem em Exhaust."
+    },
+    "effects": [],
+    "abilities": [],
+    "image": "/images/card-back.webp"
+  }
+]

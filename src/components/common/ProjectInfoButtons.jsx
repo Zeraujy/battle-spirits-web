@@ -4,6 +4,60 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "5.0.2",
+    date: { pt: "28/09/2026", en: "09/28/2026" },
+    title: { pt: "Todos os Decks no Onboarding", en: "All Decks in Onboarding" },
+    summary: {
+      pt: "A seleção inicial de 3 decks agora espelha automaticamente todos os decks ativos da Loja.",
+      en: "The initial 3-deck selection now automatically mirrors every active deck in the Shop."
+    },
+    sections: [
+      {
+        title: { pt: "Seleção Inicial", en: "Initial Selection" },
+        items: {
+          pt: [
+            "Todos os 17 decks ativos da Loja aparecem na escolha inicial de novos jogadores.",
+            "O onboarding usa a mesma fonte da Shop, evitando listas divergentes em atualizações futuras.",
+            "A escolha continua limitada a exatamente 3 decks e cada opção usa sua receita validada."
+          ],
+          en: [
+            "All 17 active Shop decks appear in the new-player initial selection.",
+            "Onboarding uses the same Shop source, preventing divergent lists in future updates.",
+            "Selection remains limited to exactly 3 decks and each option uses its validated recipe."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "5.0.1",
+    date: { pt: "28/09/2026", en: "09/28/2026" },
+    title: { pt: "Starter Deck Shop Recipes", en: "Starter Deck Shop Recipes" },
+    summary: {
+      pt: "Todos os Starter Decks representados na loja agora estão disponíveis com receitas explícitas e nomes próprios.",
+      en: "Every Starter Deck represented in the Shop is now available with an explicit recipe and its proper product name."
+    },
+    sections: [
+      {
+        title: { pt: "Starter Decks", en: "Starter Decks" },
+        items: {
+          pt: [
+            "As 17 opções de Starter Deck da Shop agora possuem receitas explícitas validadas.",
+            "SD01 foi separado em Blazing Thunder e Diamond Deity, respeitando os dois decks originais.",
+            "SD14 Emerald e SD16 Sapphire receberam os registros de cartas que faltavam para poderem ser adquiridos normalmente.",
+            "SD64 usa sua receita jogável de 40 cartas sem misturar as cartas de campanha extras."
+          ],
+          en: [
+            "All 17 Starter Deck options in the Shop now have explicit validated recipes.",
+            "SD01 was split into Blazing Thunder and Diamond Deity to match the two original decks.",
+            "SD14 Emerald and SD16 Sapphire received the missing card records required for normal Shop acquisition.",
+            "SD64 uses its playable 40-card recipe without mixing in its separate campaign bonus cards."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "5.0.0",
     date: { pt: "28/09/2026", en: "09/28/2026" },
     title: { pt: "Online Matchmaking & Competitive Foundation", en: "Online Matchmaking & Competitive Foundation" },

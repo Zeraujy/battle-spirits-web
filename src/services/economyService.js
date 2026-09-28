@@ -245,17 +245,24 @@ export async function getProductCardPool(productOrId) {
 
 export async function getDeckRecipe(productOrId) {
   const product = typeof productOrId === "string" ? SHOP_PRODUCT_BY_ID.get(productOrId) : productOrId;
-  if (!product || product.productType !== "deck" || product.status !== "active") return { ready: false, entries: [], reason: "inactive" };
+  if (!product || product.productType !== "deck") return { ready: false, entries: [], reason: "invalid-product" };
+
   const { cards, cardIndex, PREBUILT_DECKS, buildPrebuiltDeck } = await catalogRuntime();
-  const template = PREBUILT_DECKS.find((entry) => entry.setCode === product.setCode);
-  if (template) {
-    const built = buildPrebuiltDeck(template, cards, cardIndex);
-    if (built.ready) return built;
+  const template =
+    PREBUILT_DECKS.find((entry) => entry.recipeId === product.recipeId) ||
+    PREBUILT_DECKS.find((entry) => entry.setCode === product.setCode && !entry.recipeId);
+
+  if (!template) {
+    return { ready: false, entries: [], reason: "missing-recipe", missingCardIds: [] };
   }
-  const entries = cards
-    .filter((card) => String(card.set || "").toUpperCase() === String(product.setCode || "").toUpperCase())
-    .map((card) => ({ cardId: card.id, quantity: Math.max(1, safeNumber(card.includedQuantity) || 1) }));
-  return { entries, totalCards: entries.reduce((sum, entry) => sum + entry.quantity, 0), ready: entries.length > 0, cover: cardIndex.get(entries[0]?.cardId) || null, missingCardIds: [] };
+
+  const built = buildPrebuiltDeck(template, cards, cardIndex);
+  return {
+    ...built,
+    productId: product.id,
+    productStatus: product.status,
+    reason: built.ready ? null : (built.missingCardIds?.length ? "missing-card-data" : "invalid-recipe")
+  };
 }
 
 function weightedRandomCard(pool) {
@@ -360,7 +367,7 @@ async function grantStarterDecksToGuest(productIds) {
   const { cardIndex } = await catalogRuntime();
   for (const productId of unique) {
     const product = SHOP_PRODUCT_BY_ID.get(productId);
-    if (!product?.starterEligible || product.status !== "active") return { ok: false, error: "INVALID_STARTER_DECK" };
+    if (!product || product.category !== "decks" || product.status !== "active") return { ok: false, error: "INVALID_STARTER_DECK" };
     const recipe = await getDeckRecipe(product);
     if (!recipe.ready) return { ok: false, error: "DECK_DATA_INCOMPLETE" };
     for (const entry of recipe.entries) {
