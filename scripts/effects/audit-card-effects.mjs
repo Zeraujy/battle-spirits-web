@@ -116,7 +116,7 @@ function collectActions(value, result = { types: [], unsupported: [], conditionI
 }
 
 function entryEvent(entry = {}) {
-  const raw = entry.event ?? entry.timing ?? entry.type ?? "";
+  const raw = entry.trigger?.event ?? entry.event ?? entry.timing ?? entry.type ?? "";
   return {
     raw: String(raw || ""),
     canonical: normalizeCanonicalEvent(raw)
@@ -149,6 +149,9 @@ function inspectEntry(entry, source, index) {
   return {
     id: entry.id ?? `${source}-${index + 1}`,
     source,
+    schemaVersion: Number(entry.schemaVersion ?? entry.schema ?? 0) || null,
+    triggerScope: entry.trigger?.scope || null,
+    eventPlayer: entry.trigger?.eventPlayer || null,
     rawEvent: event.raw || null,
     canonicalEvent: event.canonical || null,
     canonicalEventDefined: canonicalEvent,
@@ -263,7 +266,8 @@ function summarize(cards) {
       runtimeUnsupportedTrigger: entries.filter((entry) => entry.status === CoverageStatus.UNSUPPORTED_TRIGGER).length,
       unsupportedCondition: entries.filter((entry) => entry.status === CoverageStatus.UNSUPPORTED_CONDITION).length,
       unsupportedAction: entries.filter((entry) => entry.status === CoverageStatus.UNSUPPORTED_ACTION).length,
-      manual: entries.filter((entry) => entry.status === CoverageStatus.MANUAL).length
+      manual: entries.filter((entry) => entry.status === CoverageStatus.MANUAL).length,
+      schemaV2: entries.filter((entry) => entry.schemaVersion === 2).length
     },
     gapFrequency: {
       triggers: countBy(entries.filter((entry) => entry.status === CoverageStatus.UNSUPPORTED_TRIGGER), (entry) => entry.rawEvent || "(missing)"),
@@ -280,7 +284,7 @@ function percent(value, total) {
 function markdown(report) {
   const { summary, cards } = report;
   const lines = [];
-  lines.push("# Card Effect Coverage — v5.1.0 Phase 0–1");
+  lines.push("# Card Effect Coverage — v5.1.0 Foundation (Phase 0–3)");
   lines.push("");
   lines.push("> Scope: runtime gameplay catalog (`src/data/cards.json`). Artwork-only/public database records that are not loaded into the gameplay catalog are intentionally excluded.");
   lines.push("");
@@ -289,6 +293,7 @@ function markdown(report) {
   lines.push(`- Runtime cards audited: **${summary.totalCards}**`);
   lines.push(`- Sets audited: **${summary.totalSets}**`);
   lines.push(`- Structured effect/ability entries inspected: **${summary.entries.total}**`);
+  lines.push(`- Effect Schema v2 entries: **${summary.entries.schemaV2 || 0}**`);
   lines.push(`- Fully automated cards: **${summary.byStatus.AUTOMATED || 0} (${percent(summary.byStatus.AUTOMATED || 0, summary.totalCards)})**`);
   lines.push(`- Partially automated cards: **${summary.byStatus.PARTIAL || 0}**`);
   lines.push(`- Unstructured effect text: **${summary.byStatus.UNSTRUCTURED_TEXT || 0}**`);
@@ -367,21 +372,21 @@ function markdown(report) {
     lines.push(`| \`${card.cardId}\` | ${card.set} | ${card.cardType} | \`${card.status}\` | ${gaps.replaceAll("|", "\\|")} |`);
   }
   lines.push("");
-  lines.push("## Phase 2 input");
+  lines.push("## Phase 4 input");
   lines.push("");
-  lines.push("This baseline should be treated as the migration contract for Effect Schema v2. The next phase should first target the highest-frequency unsupported trigger/timing families, then formalize conditions/actions that currently appear only in text.");
+  lines.push("Effect Schema v2 and the central Trigger Dispatcher are now available. This baseline remains the migration contract for the next mechanics phases: migrate cards incrementally into the DSL while expanding queue/target/condition/action coverage without bypassing the dispatcher.");
   lines.push("");
   return `${lines.join("\n")}\n`;
 }
 
 const inspectedCards = loadCards().map(inspectCard).sort((a, b) => a.cardId.localeCompare(b.cardId));
 const report = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   targetRelease: "5.1.0",
-  phases: [0, 1],
+  phases: [0, 1, 2, 3],
   source: "src/data/cards.json",
   generatedAt: new Date().toISOString(),
-  classificationVersion: "v5.1.0-phase01",
+  classificationVersion: "v5.1.0-phase03",
   canonicalEvents: CANONICAL_EVENT_VALUES.map((event) => ({ event, runtimeDispatched: isRuntimeDispatchedEvent(event) })),
   summary: summarize(inspectedCards),
   cards: inspectedCards

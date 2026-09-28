@@ -1,13 +1,15 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "targetRelease": "5.1.0",
   "phases": [
     0,
-    1
+    1,
+    2,
+    3
   ],
   "source": "src/data/cards.json",
-  "generatedAt": "2026-09-28T09:28:32.711Z",
-  "classificationVersion": "v5.1.0-phase01",
+  "generatedAt": "2026-09-28T09:37:32.969Z",
+  "classificationVersion": "v5.1.0-phase03",
   "canonicalEvents": [
     {
       "event": "whenSummoned",
@@ -263,7 +265,8 @@
       "runtimeUnsupportedTrigger": 187,
       "unsupportedCondition": 0,
       "unsupportedAction": 0,
-      "manual": 200
+      "manual": 200,
+      "schemaV2": 0
     },
     "gapFrequency": {
       "triggers": {
@@ -345,6 +348,9 @@
         {
           "id": "sd13-bs01-125-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -400,6 +406,9 @@
         {
           "id": "sd15-bs05-037-draw",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -457,6 +466,9 @@
         {
           "id": "sd13-bs06-023-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -512,6 +524,9 @@
         {
           "id": "sd15-bs08-042-holy-life",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -526,6 +541,9 @@
         {
           "id": "sd15-bs08-042-brilliance",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -563,6 +581,9 @@
         {
           "id": "sd13-bs09-015-draw-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourDrawStep",
           "canonicalEvent": "drawStep",
           "canonicalEventDefined": true,
@@ -577,6 +598,9 @@
         {
           "id": "sd13-bs09-015-destroyed-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -635,6 +659,9 @@
         {
           "id": "sd15-bs10-074-combine",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -649,6 +676,9 @@
         {
           "id": "sd15-bs10-074-combined",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,
@@ -689,6 +719,9 @@
         {
           "id": "sd13-bs11-051-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -703,6 +736,9 @@
         {
           "id": "sd13-bs11-051-combine-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -717,6 +753,9 @@
         {
           "id": "sd13-bs11-051-combined-attack-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -731,6 +770,9 @@
         {
           "id": "sd13-bs11-051-combined-attack",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -773,6 +815,9 @@
         {
           "id": "sd13-bs11-075-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -809,6 +854,9 @@
         {
           "id": "sd15-bs12-035-destroyed",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -845,6 +893,9 @@
         {
           "id": "sd15-bs12-037-bp",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -859,6 +910,9 @@
         {
           "id": "sd15-bs12-037-life",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -899,6 +953,9 @@
         {
           "id": "sd15-bs12-038-summon",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -913,6 +970,9 @@
         {
           "id": "sd15-bs12-038-holy-life",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -950,6 +1010,9 @@
         {
           "id": "sd13-bs12-063-deploy-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDeployed",
           "canonicalEvent": "whenDeployed",
           "canonicalEventDefined": true,
@@ -964,6 +1027,9 @@
         {
           "id": "sd13-bs12-063-attack-step-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -978,6 +1044,9 @@
         {
           "id": "sd13-bs12-063-deploy",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDeployed",
           "canonicalEvent": "whenDeployed",
           "canonicalEventDefined": true,
@@ -2728,6 +2797,9 @@
         {
           "id": "sd15-bsc05-020-life",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenLifeDecreases",
           "canonicalEvent": "whenLifeDecreases",
           "canonicalEventDefined": false,
@@ -2742,6 +2814,9 @@
         {
           "id": "sd15-bsc05-020-opponent-turn",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentTurn",
           "canonicalEvent": "opponentTurn",
           "canonicalEventDefined": false,
@@ -4492,6 +4567,9 @@
         {
           "id": "bsc49-091-hand",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDiscardedFromHand",
           "canonicalEvent": "whenDiscardedFromHand",
           "canonicalEventDefined": false,
@@ -4506,6 +4584,9 @@
         {
           "id": "bsc49-091-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -4545,6 +4626,9 @@
         {
           "id": "bsc49-092-main",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -4559,6 +4643,9 @@
         {
           "id": "bsc49-092-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -4596,6 +4683,9 @@
         {
           "id": "bsc49-093-field",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileInField",
           "canonicalEvent": "whileInField",
           "canonicalEventDefined": false,
@@ -4610,6 +4700,9 @@
         {
           "id": "bsc49-093-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -4649,6 +4742,9 @@
         {
           "id": "bsc49-094-hand",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileInHand",
           "canonicalEvent": "whileInHand",
           "canonicalEventDefined": false,
@@ -4663,6 +4759,9 @@
         {
           "id": "bsc49-094-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -4702,6 +4801,9 @@
         {
           "id": "bsc49-095-immediate",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenLifeReducedByOpponentEffect",
           "canonicalEvent": "whenLifeReducedByOpponentEffect",
           "canonicalEventDefined": false,
@@ -4716,6 +4818,9 @@
         {
           "id": "bsc49-095-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -4755,6 +4860,9 @@
         {
           "id": "bsc49-096-protection",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileInFieldOrTrash",
           "canonicalEvent": "whileInFieldOrTrash",
           "canonicalEventDefined": false,
@@ -4769,6 +4877,9 @@
         {
           "id": "bsc49-096-field",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileInField",
           "canonicalEvent": "whileInField",
           "canonicalEventDefined": false,
@@ -4783,6 +4894,9 @@
         {
           "id": "bsc49-096-main",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -4824,6 +4938,9 @@
         {
           "id": "bsc49-097-trash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenYellowBravedSpiritAttacks",
           "canonicalEvent": "whenYellowBravedSpiritAttacks",
           "canonicalEventDefined": false,
@@ -4838,6 +4955,9 @@
         {
           "id": "bsc49-097-return",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenReturnedFromTrashByYellowEffect",
           "canonicalEvent": "whenReturnedFromTrashByYellowEffect",
           "canonicalEventDefined": false,
@@ -4852,6 +4972,9 @@
         {
           "id": "bsc49-097-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -4893,6 +5016,9 @@
         {
           "id": "bsc49-098-main",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -4907,6 +5033,9 @@
         {
           "id": "bsc49-098-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -4944,6 +5073,9 @@
         {
           "id": "bsc49-099-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -4980,6 +5112,9 @@
         {
           "id": "bsc49-100-discard",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDiscardedByBlueEffect",
           "canonicalEvent": "whenDiscardedByBlueEffect",
           "canonicalEventDefined": false,
@@ -4994,6 +5129,9 @@
         {
           "id": "bsc49-100-main",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -5008,6 +5146,9 @@
         {
           "id": "bsc49-100-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -5048,6 +5189,9 @@
         {
           "id": "bsc49-101-main",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -5062,6 +5206,9 @@
         {
           "id": "bsc49-101-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -5099,6 +5246,9 @@
         {
           "id": "bsc49-102-trash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlueNexusExhausted",
           "canonicalEvent": "whenBlueNexusExhausted",
           "canonicalEventDefined": false,
@@ -5113,6 +5263,9 @@
         {
           "id": "bsc49-102-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -5152,6 +5305,9 @@
         {
           "id": "bsc49-cp01-manifest",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -5166,6 +5322,9 @@
         {
           "id": "bsc49-cp01-family",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileCardOrSpirit",
           "canonicalEvent": "whileCardOrSpirit",
           "canonicalEventDefined": false,
@@ -5180,6 +5339,9 @@
         {
           "id": "bsc49-cp01-star-world-release",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummonedOrAttacks",
           "canonicalEvent": "whenSummonedOrAttacks",
           "canonicalEventDefined": false,
@@ -5222,6 +5384,9 @@
         {
           "id": "bsc49-cp02-true-divine-trust",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "onEligibleSummonOrPlacement",
           "canonicalEvent": "onEligibleSummonOrPlacement",
           "canonicalEventDefined": false,
@@ -5236,6 +5401,9 @@
         {
           "id": "bsc49-cp02-revival",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -5250,6 +5418,9 @@
         {
           "id": "bsc49-cp02-contract-domain",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileLevel1",
           "canonicalEvent": "whileLevel1",
           "canonicalEventDefined": false,
@@ -5264,6 +5435,9 @@
         {
           "id": "bsc49-cp02-contract-skill",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -5306,6 +5480,9 @@
         {
           "id": "bsc49-cp03-divine-trust",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "onEligibleSummonDescendOrPlacement",
           "canonicalEvent": "onEligibleSummonDescendOrPlacement",
           "canonicalEventDefined": false,
@@ -5320,6 +5497,9 @@
         {
           "id": "bsc49-cp03-trust-recovery",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "afterDivineTrust",
           "canonicalEvent": "afterDivineTrust",
           "canonicalEventDefined": false,
@@ -5334,6 +5514,9 @@
         {
           "id": "bsc49-cp03-divine-skill",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -5348,6 +5531,9 @@
         {
           "id": "bsc49-cp03-divine-domain",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileLevel2",
           "canonicalEvent": "whileLevel2",
           "canonicalEventDefined": false,
@@ -5392,6 +5578,9 @@
         {
           "id": "bsc49-xv01-designated-attack",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -5406,6 +5595,9 @@
         {
           "id": "bsc49-xv01-symbol-life",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocked",
           "canonicalEvent": "whenBlocked",
           "canonicalEventDefined": true,
@@ -5420,6 +5612,9 @@
         {
           "id": "bsc49-xv01-extra-symbols",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -5460,6 +5655,9 @@
         {
           "id": "bsc49-xv02-double-brave",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileOnField",
           "canonicalEvent": "whileOnField",
           "canonicalEventDefined": false,
@@ -5474,6 +5672,9 @@
         {
           "id": "bsc49-xv02-bp-destruction",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -5488,6 +5689,9 @@
         {
           "id": "bsc49-xv02-braved-destruction",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -5528,6 +5732,9 @@
         {
           "id": "bsc49-xv03-burst",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "afterLifeReduced",
           "canonicalEvent": "burstLifeDecrease",
           "canonicalEventDefined": true,
@@ -5542,6 +5749,9 @@
         {
           "id": "bsc49-xv03-trash-recovery",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -5556,6 +5766,9 @@
         {
           "id": "bsc49-xv03-core-remove",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -5570,6 +5783,9 @@
         {
           "id": "bsc49-xv03-trash-replacement",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileLevel2Or3",
           "canonicalEvent": "whileLevel2Or3",
           "canonicalEventDefined": false,
@@ -5612,6 +5828,9 @@
         {
           "id": "bsc49-xv04-trash-summon",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opposingUnitLeavesByYourEffect",
           "canonicalEvent": "opposingUnitLeavesByYourEffect",
           "canonicalEventDefined": false,
@@ -5626,6 +5845,9 @@
         {
           "id": "bsc49-xv04-mass-core",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -5640,6 +5862,9 @@
         {
           "id": "bsc49-xv04-random-discard",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourSpiritLeavesByOpponentEffect",
           "canonicalEvent": "yourSpiritLeavesByOpponentEffect",
           "canonicalEventDefined": false,
@@ -5681,6 +5906,9 @@
         {
           "id": "bsc49-xv05-discard-accelerator",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDiscardedByGreenOnlyEffect",
           "canonicalEvent": "whenDiscardedByGreenOnlyEffect",
           "canonicalEventDefined": false,
@@ -5695,6 +5923,9 @@
         {
           "id": "bsc49-xv05-accelerator",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -5709,6 +5940,9 @@
         {
           "id": "bsc49-xv05-block-rule",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -5750,6 +5984,9 @@
         {
           "id": "bsc49-xv06-open-summon",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenOpenedFromDeckByGreenEffect",
           "canonicalEvent": "whenOpenedFromDeckByGreenEffect",
           "canonicalEventDefined": false,
@@ -5764,6 +6001,9 @@
         {
           "id": "bsc49-xv06-exhaust-summons",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentMainStep",
           "canonicalEvent": "mainStep",
           "canonicalEventDefined": true,
@@ -5778,6 +6018,9 @@
         {
           "id": "bsc49-xv06-heavy-exhaust",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacksOrBlocks",
           "canonicalEvent": "whenAttacksOrBlocks",
           "canonicalEventDefined": false,
@@ -5792,6 +6035,9 @@
         {
           "id": "bsc49-xv06-core-lock",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileLevel3",
           "canonicalEvent": "whileLevel3",
           "canonicalEventDefined": false,
@@ -5836,6 +6082,9 @@
         {
           "id": "bsc49-xv07-flash-summon",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -5850,6 +6099,9 @@
         {
           "id": "bsc49-xv07-refresh-lock",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileOnField",
           "canonicalEvent": "whileOnField",
           "canonicalEventDefined": false,
@@ -5864,6 +6116,9 @@
         {
           "id": "bsc49-xv07-super-heavy-armor",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileLevel2Or3",
           "canonicalEvent": "whileLevel2Or3",
           "canonicalEventDefined": false,
@@ -5906,6 +6161,9 @@
         {
           "id": "bsc49-xv08-mirage-armor",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileOnField",
           "canonicalEvent": "whileOnField",
           "canonicalEventDefined": false,
@@ -5920,6 +6178,9 @@
         {
           "id": "bsc49-xv08-refresh",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenExhaustedEitherAttackStep",
           "canonicalEvent": "whenExhaustedEitherAttackStep",
           "canonicalEventDefined": false,
@@ -5934,6 +6195,9 @@
         {
           "id": "bsc49-xv08-white-symbol",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -5976,6 +6240,9 @@
         {
           "id": "bsc49-xv09-flash-summon",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -5990,6 +6257,9 @@
         {
           "id": "bsc49-xv09-life-gain",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -6004,6 +6274,9 @@
         {
           "id": "bsc49-xv09-cost-lock",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -6018,6 +6291,9 @@
         {
           "id": "bsc49-xv09-return-hand",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDepletedOrDestroyedByOpponent",
           "canonicalEvent": "whenDepletedOrDestroyedByOpponent",
           "canonicalEventDefined": false,
@@ -6060,6 +6336,9 @@
         {
           "id": "bsc49-xv10-magic-summon",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "afterCost4PlusMagicResolves",
           "canonicalEvent": "afterCost4PlusMagicResolves",
           "canonicalEventDefined": false,
@@ -6074,6 +6353,9 @@
         {
           "id": "bsc49-xv10-open-card",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenOtherEligibleSpiritSummoned",
           "canonicalEvent": "whenOtherEligibleSpiritSummoned",
           "canonicalEventDefined": false,
@@ -6088,6 +6370,9 @@
         {
           "id": "bsc49-xv10-free-magic",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -6130,6 +6415,9 @@
         {
           "id": "bsc49-xv11-protective-summon",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBravedOrCombinedCardWouldLeave",
           "canonicalEvent": "whenBravedOrCombinedCardWouldLeave",
           "canonicalEventDefined": false,
@@ -6144,6 +6432,9 @@
         {
           "id": "bsc49-xv11-team-buff",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -6158,6 +6449,9 @@
         {
           "id": "bsc49-xv11-lowest-cost-destroy",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -6200,6 +6494,9 @@
         {
           "id": "bsc49-xv12-accelerator",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -6214,6 +6511,9 @@
         {
           "id": "bsc49-xv12-crush",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacksOrBlocks",
           "canonicalEvent": "whenAttacksOrBlocks",
           "canonicalEventDefined": false,
@@ -6228,6 +6528,9 @@
         {
           "id": "bsc49-xv12-refresh",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenOpponentSpiritUltimateMilled",
           "canonicalEvent": "whenOpponentSpiritUltimateMilled",
           "canonicalEventDefined": false,
@@ -6242,6 +6545,9 @@
         {
           "id": "bsc49-xv12-life-lock",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whileAttackingAndRefreshed",
           "canonicalEvent": "whileAttackingAndRefreshed",
           "canonicalEventDefined": false,
@@ -6285,6 +6591,9 @@
         {
           "id": "sd15-sd02-005-summon",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -6299,6 +6608,9 @@
         {
           "id": "sd15-sd02-005-brilliance-support",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -6313,6 +6625,9 @@
         {
           "id": "sd15-sd02-005-brilliance",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -6353,6 +6668,9 @@
         {
           "id": "sd10-001-charge-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -6367,6 +6685,9 @@
         {
           "id": "sd10-001-charge",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -6406,6 +6727,9 @@
         {
           "id": "sd10-002-when-attacks-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -6420,6 +6744,9 @@
         {
           "id": "sd10-002-charge-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -6434,6 +6761,9 @@
         {
           "id": "sd10-002-attack",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -6450,6 +6780,9 @@
         {
           "id": "sd10-002-charge",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -6489,6 +6822,9 @@
         {
           "id": "sd10-003-when-attacks-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -6503,6 +6839,9 @@
         {
           "id": "sd10-003-attack-draw",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -6539,6 +6878,9 @@
         {
           "id": "sd10-004-when-destroyed-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -6553,6 +6895,9 @@
         {
           "id": "sd10-004-destroyed",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -6590,6 +6935,9 @@
         {
           "id": "sd10-005-charge-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -6604,6 +6952,9 @@
         {
           "id": "sd10-005-charge",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -6662,6 +7013,9 @@
         {
           "id": "sd10-007-when-attacks-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -6676,6 +7030,9 @@
         {
           "id": "sd10-007-attack",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -6713,6 +7070,9 @@
         {
           "id": "sd10-008-attack-step-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -6727,6 +7087,9 @@
         {
           "id": "sd10-008-charge-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -6741,6 +7104,9 @@
         {
           "id": "sd10-008-charge",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -6782,6 +7148,9 @@
         {
           "id": "sd10-009-when-summoned-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -6796,6 +7165,9 @@
         {
           "id": "sd10-009-charge-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -6810,6 +7182,9 @@
         {
           "id": "sd10-009-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -6827,6 +7202,9 @@
         {
           "id": "sd10-009-charge",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -6866,6 +7244,9 @@
         {
           "id": "sd10-010-when-summoned-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -6880,6 +7261,9 @@
         {
           "id": "sd10-010-when-attacks-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -6894,6 +7278,9 @@
         {
           "id": "sd10-010-specified-attack-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -6908,6 +7295,9 @@
         {
           "id": "sd10-010-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -6948,6 +7338,9 @@
         {
           "id": "sd10-011-when-summoned-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -6962,6 +7355,9 @@
         {
           "id": "sd10-011-combine-condition-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -6976,6 +7372,9 @@
         {
           "id": "sd10-011-while-combined-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -6990,6 +7389,9 @@
         {
           "id": "sd10-011-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -7007,6 +7409,9 @@
         {
           "id": "sd10-011-combined-attack",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -7048,6 +7453,9 @@
         {
           "id": "sd10-012-attack-step-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -7062,6 +7470,9 @@
         {
           "id": "sd10-012-destroy-draw-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -7102,6 +7513,9 @@
         {
           "id": "sd10-013-life-reduced-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "afterLifeDecreases",
           "canonicalEvent": "burstLifeDecrease",
           "canonicalEventDefined": true,
@@ -7116,6 +7530,9 @@
         {
           "id": "sd10-013-charge-destroy-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -7153,6 +7570,9 @@
         {
           "id": "sd10-014-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -7167,6 +7587,9 @@
         {
           "id": "sd10-014-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -7204,6 +7627,9 @@
         {
           "id": "sd10-015-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -7242,6 +7668,9 @@
         {
           "id": "sd10-016-main-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -7256,6 +7685,9 @@
         {
           "id": "sd10-016-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -7270,6 +7702,9 @@
         {
           "id": "sd10-016-main",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicMain",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -7286,6 +7721,9 @@
         {
           "id": "sd10-016-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -7323,6 +7761,9 @@
         {
           "id": "sd10-x01-when-summoned-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -7337,6 +7778,9 @@
         {
           "id": "sd10-x01-when-attacks-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -7351,6 +7795,9 @@
         {
           "id": "sd10-x01-charge-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -7365,6 +7812,9 @@
         {
           "id": "sd10-x01-attack",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -7382,6 +7832,9 @@
         {
           "id": "sd10-x01-charge",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -7422,6 +7875,9 @@
         {
           "id": "sd10-x02-when-summoned-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -7436,6 +7892,9 @@
         {
           "id": "sd10-x02-charge-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -7450,6 +7909,9 @@
         {
           "id": "sd10-x02-combine-condition-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -7464,6 +7926,9 @@
         {
           "id": "sd10-x02-while-combined-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -7478,6 +7943,9 @@
         {
           "id": "sd10-x02-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -7494,6 +7962,9 @@
         {
           "id": "sd10-x02-charge",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -7508,6 +7979,9 @@
         {
           "id": "sd10-x02-combined-charge",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -7550,6 +8024,9 @@
         {
           "id": "sd11-001-heavy-armor-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -7564,6 +8041,9 @@
         {
           "id": "sd11-001-green-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -7578,6 +8058,9 @@
         {
           "id": "sd11-001-green",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -7637,6 +8120,9 @@
         {
           "id": "sd11-003-block-bp-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -7651,6 +8137,9 @@
         {
           "id": "sd11-003-block-core-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -7665,6 +8154,9 @@
         {
           "id": "sd11-003-rush-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -7679,6 +8171,9 @@
         {
           "id": "sd11-003-block-bp",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -7695,6 +8190,9 @@
         {
           "id": "sd11-003-block-core-rush",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -7734,6 +8232,9 @@
         {
           "id": "sd11-004-exhausted-block-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -7748,6 +8249,9 @@
         {
           "id": "sd11-004-block-bp-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -7762,6 +8266,9 @@
         {
           "id": "sd11-004-block-bp",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -7802,6 +8309,9 @@
         {
           "id": "sd11-005-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -7816,6 +8326,9 @@
         {
           "id": "sd11-005-rush-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -7830,6 +8343,9 @@
         {
           "id": "sd11-005-heavy-armor-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -7844,6 +8360,9 @@
         {
           "id": "sd11-005-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -7887,6 +8406,9 @@
         {
           "id": "sd11-006-opponent-attack-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -7925,6 +8447,9 @@
         {
           "id": "sd11-007-must-attack-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -7939,6 +8464,9 @@
         {
           "id": "sd11-007-block-bp-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -7953,6 +8481,9 @@
         {
           "id": "sd11-007-rush-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -7967,6 +8498,9 @@
         {
           "id": "sd11-007-block",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -8010,6 +8544,9 @@
         {
           "id": "sd11-008-copy-block-effects-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -8048,6 +8585,9 @@
         {
           "id": "sd11-009-block-life-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "afterBPComparison",
           "canonicalEvent": "afterBattleResolution",
           "canonicalEventDefined": true,
@@ -8062,6 +8602,9 @@
         {
           "id": "sd11-009-rush-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -8101,6 +8644,9 @@
         {
           "id": "sd11-010-green-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -8115,6 +8661,9 @@
         {
           "id": "sd11-010-braved-attack-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -8129,6 +8678,9 @@
         {
           "id": "sd11-010-rush-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -8143,6 +8695,9 @@
         {
           "id": "sd11-010-green",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -8184,6 +8739,9 @@
         {
           "id": "sd11-011-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -8198,6 +8756,9 @@
         {
           "id": "sd11-011-combine-condition-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -8212,6 +8773,9 @@
         {
           "id": "sd11-011-combined-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -8226,6 +8790,9 @@
         {
           "id": "sd11-011-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -8269,6 +8836,9 @@
         {
           "id": "sd11-012-bp-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -8283,6 +8853,9 @@
         {
           "id": "sd11-012-core-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -8322,6 +8895,9 @@
         {
           "id": "sd11-013-destroyed-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -8336,6 +8912,9 @@
         {
           "id": "sd11-013-heavy-armor-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -8375,6 +8954,9 @@
         {
           "id": "sd11-014-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -8389,6 +8971,9 @@
         {
           "id": "sd11-014-rush-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -8426,6 +9011,9 @@
         {
           "id": "sd11-015-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -8440,6 +9028,9 @@
         {
           "id": "sd11-015-rush-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -8454,6 +9045,9 @@
         {
           "id": "sd11-015-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -8493,6 +9087,9 @@
         {
           "id": "sd11-016-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -8507,6 +9104,9 @@
         {
           "id": "sd11-016-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -8546,6 +9146,9 @@
         {
           "id": "sd11-x01-block-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "afterBPComparison",
           "canonicalEvent": "afterBattleResolution",
           "canonicalEventDefined": true,
@@ -8560,6 +9163,9 @@
         {
           "id": "sd11-x01-battle-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,
@@ -8574,6 +9180,9 @@
         {
           "id": "sd11-x01-rush-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,
@@ -8615,6 +9224,9 @@
         {
           "id": "sd11-x02-combine-condition-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -8629,6 +9241,9 @@
         {
           "id": "sd11-x02-heavy-armor-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -8643,6 +9258,9 @@
         {
           "id": "sd11-x02-rush-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -8684,6 +9302,9 @@
         {
           "id": "sd13-001-destroyed-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -8698,6 +9319,9 @@
         {
           "id": "sd13-001-destroyed",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -8735,6 +9359,9 @@
         {
           "id": "sd13-002-retaliation-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "onOwnLowCostPurpleDestroyedBySpiritEffect",
           "canonicalEvent": "onOwnLowCostPurpleDestroyedBySpiritEffect",
           "canonicalEventDefined": false,
@@ -8773,6 +9400,9 @@
         {
           "id": "sd13-003-destroyed-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -8787,6 +9417,9 @@
         {
           "id": "sd13-003-chain-yellow-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -8801,6 +9434,9 @@
         {
           "id": "sd13-003-destroyed",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -8840,6 +9476,9 @@
         {
           "id": "sd13-004-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -8854,6 +9493,9 @@
         {
           "id": "sd13-004-chain-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -8868,6 +9510,9 @@
         {
           "id": "sd13-004-summon-draw",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -8904,6 +9549,9 @@
         {
           "id": "sd13-005-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -8918,6 +9566,9 @@
         {
           "id": "sd13-005-chain-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -8932,6 +9583,9 @@
         {
           "id": "sd13-005-attack-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -8946,6 +9600,9 @@
         {
           "id": "sd13-005-summon-draw",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -8962,6 +9619,9 @@
         {
           "id": "sd13-005-attack",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -8999,6 +9659,9 @@
         {
           "id": "sd13-006-attack-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -9013,6 +9676,9 @@
         {
           "id": "sd13-006-chain-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -9027,6 +9693,9 @@
         {
           "id": "sd13-006-attack",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -9064,6 +9733,9 @@
         {
           "id": "sd13-007-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -9078,6 +9750,9 @@
         {
           "id": "sd13-007-combine-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -9092,6 +9767,9 @@
         {
           "id": "sd13-007-combined-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -9106,6 +9784,9 @@
         {
           "id": "sd13-007-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -9122,6 +9803,9 @@
         {
           "id": "sd13-007-combined-attack",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -9163,6 +9847,9 @@
         {
           "id": "sd13-008-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -9177,6 +9864,9 @@
         {
           "id": "sd13-008-chain-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -9191,6 +9881,9 @@
         {
           "id": "sd13-008-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -9228,6 +9921,9 @@
         {
           "id": "sd13-x01-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -9242,6 +9938,9 @@
         {
           "id": "sd13-x01-attack-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -9279,6 +9978,9 @@
         {
           "id": "sd15-001-strengthening",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -9317,6 +10019,9 @@
         {
           "id": "sd15-002-strengthening",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -9331,6 +10036,9 @@
         {
           "id": "sd15-002-zero-bp",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenOpponentSpiritBecomesZeroBP",
           "canonicalEvent": "whenOpponentSpiritBecomesZeroBP",
           "canonicalEventDefined": false,
@@ -9371,6 +10079,9 @@
         {
           "id": "sd15-003-attack",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -9385,6 +10096,9 @@
         {
           "id": "sd15-003-destroyed",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -9422,6 +10136,9 @@
         {
           "id": "sd15-004-attack-bp",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -9436,6 +10153,9 @@
         {
           "id": "sd15-004-unblocked",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "battleResolution",
           "canonicalEvent": "afterBattleResolution",
           "canonicalEventDefined": true,
@@ -9475,6 +10195,9 @@
         {
           "id": "sd15-005-strengthening",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -9489,6 +10212,9 @@
         {
           "id": "sd15-005-life-protection",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -9503,6 +10229,9 @@
         {
           "id": "sd15-005-destroyed",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -9544,6 +10273,9 @@
         {
           "id": "sd15-006-summon",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -9558,6 +10290,9 @@
         {
           "id": "sd15-006-combine",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -9572,6 +10307,9 @@
         {
           "id": "sd15-006-combined",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -9612,6 +10350,9 @@
         {
           "id": "sd15-007-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -9648,6 +10389,9 @@
         {
           "id": "sd15-008-main",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -9662,6 +10406,9 @@
         {
           "id": "sd15-008-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -9699,6 +10446,9 @@
         {
           "id": "sd15-x01-attack-bp",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -9713,6 +10463,9 @@
         {
           "id": "sd15-x01-recovery",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "ownLowCostSpiritDestroyedByOpponentEffect",
           "canonicalEvent": "ownLowCostSpiritDestroyedByOpponentEffect",
           "canonicalEventDefined": false,
@@ -9727,6 +10480,9 @@
         {
           "id": "sd15-x01-zero-bp",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenOpponentSpiritBecomesZeroBP",
           "canonicalEvent": "whenOpponentSpiritBecomesZeroBP",
           "canonicalEventDefined": false,
@@ -9768,6 +10524,9 @@
         {
           "id": "sd17-001-color-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -9782,6 +10541,9 @@
         {
           "id": "sd17-001-green",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -9821,6 +10583,9 @@
         {
           "id": "sd17-002-color-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -9835,6 +10600,9 @@
         {
           "id": "sd17-002-green",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -9874,6 +10642,9 @@
         {
           "id": "sd17-003-confront-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -9888,6 +10659,9 @@
         {
           "id": "sd17-003-confront",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -9927,6 +10701,9 @@
         {
           "id": "sd17-004-when-summoned-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -9941,6 +10718,9 @@
         {
           "id": "sd17-004-rush-green-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -9955,6 +10735,9 @@
         {
           "id": "sd17-004-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -9994,6 +10777,9 @@
         {
           "id": "sd17-005-attack-step-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -10032,6 +10818,9 @@
         {
           "id": "sd17-006-confront-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -10046,6 +10835,9 @@
         {
           "id": "sd17-006-when-attacks-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -10060,6 +10852,9 @@
         {
           "id": "sd17-006-confront",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -10074,6 +10869,9 @@
         {
           "id": "sd17-006-draw",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -10115,6 +10913,9 @@
         {
           "id": "sd17-007-when-attacks-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -10129,6 +10930,9 @@
         {
           "id": "sd17-007-rush-green-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -10143,6 +10947,9 @@
         {
           "id": "sd17-007-attack",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -10179,6 +10986,9 @@
         {
           "id": "sd17-008-confront-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -10193,6 +11003,9 @@
         {
           "id": "sd17-008-rush-green-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -10207,6 +11020,9 @@
         {
           "id": "sd17-008-confront",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -10247,6 +11063,9 @@
         {
           "id": "sd17-009-confront-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -10261,6 +11080,9 @@
         {
           "id": "sd17-009-when-attacks-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -10275,6 +11097,9 @@
         {
           "id": "sd17-009-confront",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -10334,6 +11159,9 @@
         {
           "id": "sd17-011-when-summoned-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -10348,6 +11176,9 @@
         {
           "id": "sd17-011-combine-condition-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -10362,6 +11193,9 @@
         {
           "id": "sd17-011-while-combined-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -10376,6 +11210,9 @@
         {
           "id": "sd17-011-combined-confront",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -10418,6 +11255,9 @@
         {
           "id": "sd17-012-bp-destroy-draw-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -10432,6 +11272,9 @@
         {
           "id": "sd17-012-level2-return-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -10471,6 +11314,9 @@
         {
           "id": "sd17-013-attack-step-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -10485,6 +11331,9 @@
         {
           "id": "sd17-013-end-step-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourEndStep",
           "canonicalEvent": "endStep",
           "canonicalEventDefined": true,
@@ -10525,6 +11374,9 @@
         {
           "id": "sd17-014-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -10539,6 +11391,9 @@
         {
           "id": "sd17-014-rush-green-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -10553,6 +11408,9 @@
         {
           "id": "sd17-014-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -10590,6 +11448,9 @@
         {
           "id": "sd17-015-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -10604,6 +11465,9 @@
         {
           "id": "sd17-015-rush-green-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -10618,6 +11482,9 @@
         {
           "id": "sd17-015-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -10655,6 +11522,9 @@
         {
           "id": "sd17-016-main-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -10669,6 +11539,9 @@
         {
           "id": "sd17-016-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -10683,6 +11556,9 @@
         {
           "id": "sd17-016-main",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicMain",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -10699,6 +11575,9 @@
         {
           "id": "sd17-016-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -10736,6 +11615,9 @@
         {
           "id": "sd17-x01-when-attacks-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -10750,6 +11632,9 @@
         {
           "id": "sd17-x01-rush-green-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,
@@ -10764,6 +11649,9 @@
         {
           "id": "sd17-x01-attack-step-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -10805,6 +11693,9 @@
         {
           "id": "sd17-x02-when-summoned-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -10819,6 +11710,9 @@
         {
           "id": "sd17-x02-combine-condition-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -10833,6 +11727,9 @@
         {
           "id": "sd17-x02-while-combined-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -10847,6 +11744,9 @@
         {
           "id": "sd17-x02-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -10909,6 +11809,9 @@
         {
           "id": "sd19-002-color-symbol",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -10923,6 +11826,9 @@
         {
           "id": "sd19-002-continuous-white",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -10962,6 +11868,9 @@
         {
           "id": "sd19-003-when-attacks",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -10976,6 +11885,9 @@
         {
           "id": "sd19-003-when-attacks-draw",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -11012,6 +11924,9 @@
         {
           "id": "sd19-004-when-destroyed",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -11026,6 +11941,9 @@
         {
           "id": "sd19-004-when-destroyed",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -11063,6 +11981,9 @@
         {
           "id": "sd19-005-when-attacks",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -11099,6 +12020,9 @@
         {
           "id": "sd19-006-when-summoned",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -11113,6 +12037,9 @@
         {
           "id": "sd19-006-when-attacks",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -11127,6 +12054,9 @@
         {
           "id": "sd19-006-when-summoned",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -11144,6 +12074,9 @@
         {
           "id": "sd19-006-when-attacks-draw",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -11180,6 +12113,9 @@
         {
           "id": "sd19-007-when-battles",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,
@@ -11218,6 +12154,9 @@
         {
           "id": "sd19-008-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -11232,6 +12171,9 @@
         {
           "id": "sd19-008-ultimate-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -11269,6 +12211,9 @@
         {
           "id": "sd19-009-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -11283,6 +12228,9 @@
         {
           "id": "sd19-009-ultimate-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -11320,6 +12268,9 @@
         {
           "id": "sd19-010-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -11334,6 +12285,9 @@
         {
           "id": "sd19-010-when-summoned",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -11348,6 +12302,9 @@
         {
           "id": "sd19-010-ultimate-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -11386,6 +12343,9 @@
         {
           "id": "sd19-011-own-attack-step",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -11400,6 +12360,9 @@
         {
           "id": "sd19-011-opponent-attack-step",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -11440,6 +12403,9 @@
         {
           "id": "sd19-012-first-ultimate-attack",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -11454,6 +12420,9 @@
         {
           "id": "sd19-012-bp-destruction",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -11493,6 +12462,9 @@
         {
           "id": "sd19-013-main",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -11507,6 +12479,9 @@
         {
           "id": "sd19-013-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -11521,6 +12496,9 @@
         {
           "id": "sd19-013-magic-main",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicMain",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
@@ -11538,6 +12516,9 @@
         {
           "id": "sd19-013-magic-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -11575,6 +12556,9 @@
         {
           "id": "sd19-014-burst",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "afterLifeDecreases",
           "canonicalEvent": "burstLifeDecrease",
           "canonicalEventDefined": true,
@@ -11589,6 +12573,9 @@
         {
           "id": "sd19-014-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -11603,6 +12590,9 @@
         {
           "id": "sd19-014-burst-life",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "burstLifeDecrease",
           "canonicalEvent": "burstLifeDecrease",
           "canonicalEventDefined": true,
@@ -11620,6 +12610,9 @@
         {
           "id": "sd19-014-magic-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -11658,6 +12651,9 @@
         {
           "id": "sd19-015-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -11672,6 +12668,9 @@
         {
           "id": "sd19-015-magic-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -11711,6 +12710,9 @@
         {
           "id": "sd19-016-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -11725,6 +12727,9 @@
         {
           "id": "sd19-016-magic-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -11764,6 +12769,9 @@
         {
           "id": "sd19-x01-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -11778,6 +12786,9 @@
         {
           "id": "sd19-x01-ultimate-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -11792,6 +12803,9 @@
         {
           "id": "sd19-x01-true-awaken",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacksFlash",
           "canonicalEvent": "whenAttacksFlash",
           "canonicalEventDefined": false,
@@ -11851,6 +12865,9 @@
         {
           "id": "sd20-002-color-symbol",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -11865,6 +12882,9 @@
         {
           "id": "sd20-002-continuous-white",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -11904,6 +12924,9 @@
         {
           "id": "sd20-003-when-blocks",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -11918,6 +12941,9 @@
         {
           "id": "sd20-003-when-blocks-bp",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -11955,6 +12981,9 @@
         {
           "id": "sd20-004-exhausted-block",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -11969,6 +12998,9 @@
         {
           "id": "sd20-004-heavy-armor",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -12009,6 +13041,9 @@
         {
           "id": "sd20-005-heavy-armor",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -12023,6 +13058,9 @@
         {
           "id": "sd20-005-when-blocks",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -12037,6 +13075,9 @@
         {
           "id": "sd20-005-heavy-armor-red",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -12051,6 +13092,9 @@
         {
           "id": "sd20-005-when-blocks-core",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBlocks",
           "canonicalEvent": "whenBlocks",
           "canonicalEventDefined": true,
@@ -12093,6 +13137,9 @@
         {
           "id": "sd20-006-when-summoned",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -12107,6 +13154,9 @@
         {
           "id": "sd20-006-when-summoned-return",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -12145,6 +13195,9 @@
         {
           "id": "sd20-007-life-bp",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -12159,6 +13212,9 @@
         {
           "id": "sd20-007-when-attacks",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -12198,6 +13254,9 @@
         {
           "id": "sd20-008-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -12212,6 +13271,9 @@
         {
           "id": "sd20-008-ultimate-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -12249,6 +13311,9 @@
         {
           "id": "sd20-009-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -12263,6 +13328,9 @@
         {
           "id": "sd20-009-ultimate-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -12300,6 +13368,9 @@
         {
           "id": "sd20-010-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -12314,6 +13385,9 @@
         {
           "id": "sd20-010-ultimate-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -12328,6 +13402,9 @@
         {
           "id": "sd20-010-end-step",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourEndStep",
           "canonicalEvent": "endStep",
           "canonicalEventDefined": true,
@@ -12368,6 +13445,9 @@
         {
           "id": "sd20-011-bp-boost",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -12382,6 +13462,9 @@
         {
           "id": "sd20-011-life-protection",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -12421,6 +13504,9 @@
         {
           "id": "sd20-012-return-nexus",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenYourSpiritOrUltimateDestroyed",
           "canonicalEvent": "whenYourSpiritOrUltimateDestroyed",
           "canonicalEventDefined": false,
@@ -12435,6 +13521,9 @@
         {
           "id": "sd20-012-return-spirit",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -12475,6 +13564,9 @@
         {
           "id": "sd20-013-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -12489,6 +13581,9 @@
         {
           "id": "sd20-013-magic-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -12526,6 +13621,9 @@
         {
           "id": "sd20-014-burst",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "afterLifeDecreases",
           "canonicalEvent": "burstLifeDecrease",
           "canonicalEventDefined": true,
@@ -12540,6 +13638,9 @@
         {
           "id": "sd20-014-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -12554,6 +13655,9 @@
         {
           "id": "sd20-014-burst-life",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "burstLifeDecrease",
           "canonicalEvent": "burstLifeDecrease",
           "canonicalEventDefined": true,
@@ -12571,6 +13675,9 @@
         {
           "id": "sd20-014-magic-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -12607,6 +13714,9 @@
         {
           "id": "sd20-015-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -12621,6 +13731,9 @@
         {
           "id": "sd20-015-magic-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -12660,6 +13773,9 @@
         {
           "id": "sd20-016-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -12674,6 +13790,9 @@
         {
           "id": "sd20-016-magic-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -12712,6 +13831,9 @@
         {
           "id": "sd20-x01-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -12726,6 +13848,9 @@
         {
           "id": "sd20-x01-when-summoned",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -12740,6 +13865,9 @@
         {
           "id": "sd20-x01-ultimate-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -12754,6 +13882,9 @@
         {
           "id": "sd20-x01-end-step",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourEndStep",
           "canonicalEvent": "endStep",
           "canonicalEventDefined": true,
@@ -12795,6 +13926,9 @@
         {
           "id": "sd23-001-destroyed",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyedByOpponent",
           "canonicalEvent": "whenDestroyedByOpponent",
           "canonicalEventDefined": false,
@@ -12833,6 +13967,9 @@
         {
           "id": "sd23-002-battle",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "battleResolution",
           "canonicalEvent": "afterBattleResolution",
           "canonicalEventDefined": true,
@@ -12871,6 +14008,9 @@
         {
           "id": "sd23-003-attack",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -12907,6 +14047,9 @@
         {
           "id": "sd23-004-summon",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -12943,6 +14086,9 @@
         {
           "id": "sd23-005-attack",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -12979,6 +14125,9 @@
         {
           "id": "sd23-006-life-protection",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -12993,6 +14142,9 @@
         {
           "id": "sd23-006-core",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -13033,6 +14185,9 @@
         {
           "id": "sd23-007-attack",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -13047,6 +14202,9 @@
         {
           "id": "sd23-007-battle-destroy",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "battleResolution",
           "canonicalEvent": "afterBattleResolution",
           "canonicalEventDefined": true,
@@ -13086,6 +14244,9 @@
         {
           "id": "sd23-008-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -13100,6 +14261,9 @@
         {
           "id": "sd23-008-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -13137,6 +14301,9 @@
         {
           "id": "sd23-009-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -13151,6 +14318,9 @@
         {
           "id": "sd23-009-magic-cost",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,
@@ -13165,6 +14335,9 @@
         {
           "id": "sd23-009-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -13205,6 +14378,9 @@
         {
           "id": "sd23-010-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -13219,6 +14395,9 @@
         {
           "id": "sd23-010-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -13233,6 +14412,9 @@
         {
           "id": "sd23-010-brilliance",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,
@@ -13273,6 +14455,9 @@
         {
           "id": "sd23-011-life",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "ownDivineSpiritReturnedByOpponent",
           "canonicalEvent": "ownDivineSpiritReturnedByOpponent",
           "canonicalEventDefined": false,
@@ -13287,6 +14472,9 @@
         {
           "id": "sd23-011-draw",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -13327,6 +14515,9 @@
         {
           "id": "sd23-012-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -13363,6 +14554,9 @@
         {
           "id": "sd23-013-burst",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "afterOpponentDestroysYourSpirit",
           "canonicalEvent": "afterOpponentDestroysYourSpirit",
           "canonicalEventDefined": false,
@@ -13377,6 +14571,9 @@
         {
           "id": "sd23-013-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -13416,6 +14613,9 @@
         {
           "id": "sd23-014-burst",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "lifeDecrease",
           "canonicalEvent": "burstLifeDecrease",
           "canonicalEventDefined": true,
@@ -13430,6 +14630,9 @@
         {
           "id": "sd23-014-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -13467,6 +14670,9 @@
         {
           "id": "sd23-015-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -13503,6 +14709,9 @@
         {
           "id": "sd23-016-flash",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -13539,6 +14748,9 @@
         {
           "id": "sd23-x01-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -13553,6 +14765,9 @@
         {
           "id": "sd23-x01-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -13567,6 +14782,9 @@
         {
           "id": "sd23-x01-critical-hit",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "ultimateTriggerHit",
           "canonicalEvent": "ultimateTriggerHit",
           "canonicalEventDefined": true,
@@ -13584,6 +14802,9 @@
         {
           "id": "sd23-x01-battle",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,
@@ -13598,6 +14819,9 @@
         {
           "id": "sd23-x01-utrigger-hit-v2",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "ultimateTriggerHit",
           "canonicalEvent": "ultimateTriggerHit",
           "canonicalEventDefined": true,
@@ -13640,6 +14864,9 @@
         {
           "id": "sd28-001-high-speed-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -13676,6 +14903,9 @@
         {
           "id": "sd28-002-spirit-soul-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "ultimateSummon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -13690,6 +14920,9 @@
         {
           "id": "sd28-002-destroyed-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -13704,6 +14937,9 @@
         {
           "id": "sd28-002-destroyed",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenDestroyed",
           "canonicalEvent": "whenDestroyed",
           "canonicalEventDefined": true,
@@ -13743,6 +14979,9 @@
         {
           "id": "sd28-003-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -13757,6 +14996,9 @@
         {
           "id": "sd28-003-burst-lock-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "shellmanUltimateBattle",
           "canonicalEvent": "shellmanUltimateBattle",
           "canonicalEventDefined": false,
@@ -13771,6 +15013,9 @@
         {
           "id": "sd28-003-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -13811,6 +15056,9 @@
         {
           "id": "sd28-004-protection-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -13825,6 +15073,9 @@
         {
           "id": "sd28-004-trigger-recovery-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -13865,6 +15116,9 @@
         {
           "id": "sd28-005-bp-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -13903,6 +15157,9 @@
         {
           "id": "sd28-006-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -13917,6 +15174,9 @@
         {
           "id": "sd28-006-attack-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -13931,6 +15191,9 @@
         {
           "id": "sd28-006-braved-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "yourAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -13945,6 +15208,9 @@
         {
           "id": "sd28-006-attack",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -13987,6 +15253,9 @@
         {
           "id": "sd28-007-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -14001,6 +15270,9 @@
         {
           "id": "sd28-007-continuous-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -14015,6 +15287,9 @@
         {
           "id": "sd28-007-ultimate-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -14055,6 +15330,9 @@
         {
           "id": "sd28-008-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -14069,6 +15347,9 @@
         {
           "id": "sd28-008-battle-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,
@@ -14083,6 +15364,9 @@
         {
           "id": "sd28-008-combined-trigger-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -14097,6 +15381,9 @@
         {
           "id": "sd28-008-utrigger-hit-v2",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "ultimateTriggerHit",
           "canonicalEvent": "ultimateTriggerHit",
           "canonicalEventDefined": true,
@@ -14140,6 +15427,9 @@
         {
           "id": "sd28-009-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -14154,6 +15444,9 @@
         {
           "id": "sd28-009-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -14168,6 +15461,9 @@
         {
           "id": "sd28-009-ultimate-trigger",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -14182,6 +15478,9 @@
         {
           "id": "sd28-009-xu-trigger-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "afterUltimateTrigger",
           "canonicalEvent": "afterUltimateTrigger",
           "canonicalEventDefined": true,
@@ -14198,6 +15497,9 @@
         {
           "id": "sd28-009-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -14214,6 +15516,9 @@
         {
           "id": "sd28-009-utrigger-hit-v2",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "ultimateTriggerHit",
           "canonicalEvent": "ultimateTriggerHit",
           "canonicalEventDefined": true,
@@ -14253,6 +15558,9 @@
         {
           "id": "sd28-010-high-speed-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -14267,6 +15575,9 @@
         {
           "id": "sd28-010-combine-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -14281,6 +15592,9 @@
         {
           "id": "sd28-010-combined-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,
@@ -14322,6 +15636,9 @@
         {
           "id": "sd28-011-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -14336,6 +15653,9 @@
         {
           "id": "sd28-011-combine-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -14350,6 +15670,9 @@
         {
           "id": "sd28-011-spirit-combined-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -14364,6 +15687,9 @@
         {
           "id": "sd28-011-ultimate-combined-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenAttacks",
           "canonicalEvent": "whenAttacks",
           "canonicalEventDefined": true,
@@ -14378,6 +15704,9 @@
         {
           "id": "sd28-011-summon",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -14421,6 +15750,9 @@
         {
           "id": "sd28-012-life-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -14435,6 +15767,9 @@
         {
           "id": "sd28-012-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "eitherAttackStep",
           "canonicalEvent": "attackStep",
           "canonicalEventDefined": true,
@@ -14475,6 +15810,9 @@
         {
           "id": "sd28-013-counter-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "triggerCounter",
           "canonicalEvent": "triggerCounter",
           "canonicalEventDefined": true,
@@ -14492,6 +15830,9 @@
         {
           "id": "sd28-013-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -14506,6 +15847,9 @@
         {
           "id": "sd28-013-flash",
           "source": "abilities",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "magicFlash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -14543,6 +15887,9 @@
         {
           "id": "sd28-014-burst-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "opponentHandIncrease",
           "canonicalEvent": "opponentHandIncrease",
           "canonicalEventDefined": false,
@@ -14557,6 +15904,9 @@
         {
           "id": "sd28-014-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -14596,6 +15946,9 @@
         {
           "id": "sd28-015-flash-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
@@ -14632,6 +15985,9 @@
         {
           "id": "sd28-x01-summon-condition",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "summon",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -14646,6 +16002,9 @@
         {
           "id": "sd28-x01-burst-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "ownSpiritOrUltimateDestroyedByOpponent",
           "canonicalEvent": "ownSpiritOrUltimateDestroyedByOpponent",
           "canonicalEventDefined": false,
@@ -14660,6 +16019,9 @@
         {
           "id": "sd28-x01-battle-trigger-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,
@@ -14701,6 +16063,9 @@
         {
           "id": "sd28-x02-free-summon-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "ultimateSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
@@ -14715,6 +16080,9 @@
         {
           "id": "sd28-x02-combine-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "combine",
           "canonicalEvent": "combine",
           "canonicalEventDefined": false,
@@ -14729,6 +16097,9 @@
         {
           "id": "sd28-x02-cost-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
@@ -14743,6 +16114,9 @@
         {
           "id": "sd28-x02-burst-lock-display",
           "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
           "rawEvent": "whenBattles",
           "canonicalEvent": "whenBattles",
           "canonicalEventDefined": true,

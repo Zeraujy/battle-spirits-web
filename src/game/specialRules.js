@@ -3,7 +3,8 @@ import { calculateReduction, autoBuildPayment } from "./cost.js";
 import { payCoreCost } from "./cores.js";
 import { removeHandCard } from "./zones.js";
 import { appendLog, otherPlayerId } from "./utils.js";
-import { resolveCardEvent, resolveOperations } from "./effectEngine/effectEngine.js";
+import { resolveOperations } from "./effectEngine/effectEngine.js";
+import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
 import { entryConditionsMatch } from "./effectEngine/conditionResolver.js";
 import { getCombinedStats } from "./brave.js";
 
@@ -416,7 +417,7 @@ export function useTriggerCounter(match, actorId, instanceId, cardIndex, { payme
     }
   };
 
-  const engine = resolveCardEvent(next, {
+  const engine = dispatchEffectEvent(next, {
     event: "triggerCounter",
     sourcePlayerId: actorId,
     sourcePhysical: removed.card,
@@ -596,7 +597,7 @@ export function resolveUltimateTriggerStage(match, actorId, cardIndex) {
     }
   }
 
-  const eventResult = resolveCardEvent(next, {
+  const eventResult = dispatchEffectEvent(next, {
     event,
     sourcePlayerId: trigger.controllerPlayerId,
     sourceInstanceId: trigger.sourceInstanceId,

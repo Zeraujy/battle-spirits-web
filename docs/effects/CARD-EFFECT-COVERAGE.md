@@ -1,4 +1,4 @@
-# Card Effect Coverage — v5.1.0 Phase 0–1
+# Card Effect Coverage — v5.1.0 Foundation (Phase 0–3)
 
 > Scope: runtime gameplay catalog (`src/data/cards.json`). Artwork-only/public database records that are not loaded into the gameplay catalog are intentionally excluded.
 
@@ -7,6 +7,7 @@
 - Runtime cards audited: **365**
 - Sets audited: **11**
 - Structured effect/ability entries inspected: **457**
+- Effect Schema v2 entries: **0**
 - Fully automated cards: **33 (9.0%)**
 - Partially automated cards: **23**
 - Unstructured effect text: **173**
@@ -452,7 +453,7 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `SD28-X01` | SD28 | ultimate | `UNSUPPORTED_TRIGGER` | triggers: ownSpiritOrUltimateDestroyedByOpponent, whenBattles; unresolved entries: 3 |
 | `SD28-X02` | SD28 | brave | `UNSUPPORTED_TRIGGER` | triggers: always, combine, whenBattles; unresolved entries: 4 |
 
-## Phase 2 input
+## Phase 4 input
 
-This baseline should be treated as the migration contract for Effect Schema v2. The next phase should first target the highest-frequency unsupported trigger/timing families, then formalize conditions/actions that currently appear only in text.
+Effect Schema v2 and the central Trigger Dispatcher are now available. This baseline remains the migration contract for the next mechanics phases: migrate cards incrementally into the DSL while expanding queue/target/condition/action coverage without bypassing the dispatcher.
 

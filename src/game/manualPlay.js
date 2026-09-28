@@ -4,7 +4,7 @@ import { conditionMatches } from "./brave.js";
 import { findPhysicalCard, getDatabaseCard } from "./selectors.js";
 import { addFieldCard, removeFieldCard, removeHandCard } from "./zones.js";
 import { appendLog } from "./utils.js";
-import { resolveCardEvent } from "./effectEngine/effectEngine.js";
+import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
 
 function minimumCores(card) {
   if (card?.cardType === "nexus") return 0;
@@ -78,7 +78,7 @@ export function confirmManualPlay(match, playerId, cardIndex) {
   let next = { ...match, players:{ ...match.players, [playerId]:nextPlayer }, pendingManualPlay:null };
   next = appendLog(next, `${player.name} confirmou ${card.namePT || card.nameEN || card.id}.`, "action");
   const event = card.cardType === "nexus" ? "whenDeployed" : "whenSummoned";
-  const engine = resolveCardEvent(next, { event, sourcePlayerId: playerId, sourceInstanceId: pending.instanceId }, cardIndex);
+  const engine = dispatchEffectEvent(next, { event, sourcePlayerId: playerId, sourceInstanceId: pending.instanceId }, cardIndex);
   next = engine.match;
   return { ok:true, match:next, manualResolutionNeeded: engine.manualResolutionNeeded, notes: engine.notes };
 }

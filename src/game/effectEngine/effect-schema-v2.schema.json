@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kaihou.local/schema/effect-schema-v2.json",
+  "title": "Battle Spirits KAIHOU Effect Schema v2",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "trigger",
+    "actions"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trigger": {
+      "type": "object",
+      "required": [
+        "event"
+      ],
+      "properties": {
+        "event": {
+          "type": "string",
+          "enum": [
+            "whenSummoned",
+            "whenDeployed",
+            "whenAttacks",
+            "whenBlocks",
+            "whenBattles",
+            "whenBlocked",
+            "whenDestroyed",
+            "beforeBattleResolution",
+            "afterBattleResolution",
+            "lifeDecreased",
+            "magicMain",
+            "magicFlash",
+            "burstLifeDecrease",
+            "burst",
+            "mirage",
+            "continuous",
+            "startStep",
+            "coreStep",
+            "drawStep",
+            "refreshStep",
+            "mainStep",
+            "attackStep",
+            "endStep",
+            "cardMoved",
+            "coreMoved",
+            "afterUltimateTrigger",
+            "ultimateTriggerHit",
+            "ultimateTriggerGuard",
+            "ultimateTriggerResolved",
+            "triggerCounter",
+            "xuTriggerHit"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "source",
+            "controllerField"
+          ],
+          "default": "source"
+        },
+        "eventPlayer": {
+          "type": "string",
+          "enum": [
+            "self",
+            "opponent",
+            "any"
+          ],
+          "default": "any"
+        }
+      },
+      "additionalProperties": true
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type"
+        ]
+      },
+      "default": []
+    }
+  },
+  "additionalProperties": true
+}

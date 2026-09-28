@@ -2,7 +2,7 @@ import { findPhysicalCard, getBraveAttachment, getCurrentLevel, getDatabaseCard,
 import { updateFieldCard, removeFieldCard } from "./zones.js";
 import { appendLog, otherPlayerId, uid } from "./utils.js";
 import { resolveUltimateTriggerOnAttack } from "./specialRules.js";
-import { resolveCardEvent } from "./effectEngine/effectEngine.js";
+import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
 import { clearEffectModifiers } from "./effectEngine/modifierResolver.js";
 import { openLifeDecreaseBurstOpportunity } from "./burstRules.js";
 
@@ -55,7 +55,7 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
     };
   }
 
-  const engine = resolveCardEvent(next, {
+  const engine = dispatchEffectEvent(next, {
     event: "whenAttacks",
     sourcePlayerId: playerId,
     sourceInstanceId: instanceId
@@ -67,7 +67,7 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
 
   const attachedBrave = getBraveAttachment(resolvedMatch, instanceId);
   if (attachedBrave) {
-    const braveEngine = resolveCardEvent(resolvedMatch, {
+    const braveEngine = dispatchEffectEvent(resolvedMatch, {
       event: "whenAttacks",
       sourcePlayerId: playerId,
       sourceInstanceId: attachedBrave.instanceId,
@@ -151,13 +151,13 @@ export function declareBlock(match, playerId, instanceId, cardIndex) {
       flash: { number: 2, priorityPlayerId: playerId, consecutivePasses: 0 }
     }
   };
-  const engine = resolveCardEvent(next, { event: "whenBlocks", sourcePlayerId: playerId, sourceInstanceId: instanceId }, cardIndex);
+  const engine = dispatchEffectEvent(next, { event: "whenBlocks", sourcePlayerId: playerId, sourceInstanceId: instanceId }, cardIndex);
   let resolvedMatch = engine.match;
   let manualResolutionNeeded = engine.manualResolutionNeeded;
   const notes = [...engine.notes];
   const attachedBrave = getBraveAttachment(resolvedMatch, instanceId);
   if (attachedBrave) {
-    const braveEngine = resolveCardEvent(resolvedMatch, {
+    const braveEngine = dispatchEffectEvent(resolvedMatch, {
       event: "whenBlocks",
       sourcePlayerId: playerId,
       sourceInstanceId: attachedBrave.instanceId,
@@ -271,7 +271,7 @@ export function resolveBattle(match, actorId, cardIndex) {
       let manualResolutionNeeded = false;
       const notes = [];
       for (const destroyedCard of destroyed) {
-        const engine = resolveCardEvent(next, {
+        const engine = dispatchEffectEvent(next, {
           event: "whenDestroyed",
           sourcePlayerId: destroyedCard.playerId,
           sourcePhysical: destroyedCard.physical,

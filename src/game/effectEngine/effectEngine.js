@@ -1,7 +1,7 @@
 import { findPhysicalCard, getBraveAttachment, getDatabaseCard, getEffectiveBP } from "../selectors.js";
 import { appendLog, uid } from "../utils.js";
 import { entryConditionsMatch } from "./conditionResolver.js";
-import { getEntryActions, getTriggeredEntries, normalizeEventName } from "./normalizer.js";
+import { entryMatchesTriggerContext, getEntryActions, getTriggeredEntries, normalizeEventName } from "./normalizer.js";
 import { resolveActionList } from "./actionResolver.js";
 
 function sourceContext(match, cardIndex, input = {}) {
@@ -133,6 +133,7 @@ function serializeEventInput(input = {}) {
     sourcePhysical: input.sourcePhysical || input.context?.sourcePhysical || null,
     sourceCardId: input.sourceCardId || input.sourceCard?.id || input.context?.sourceCard?.id || null,
     sourceZone: input.sourceZone || input.context?.sourceZone || null,
+    dispatchMode: input.dispatchMode || null,
     context: input.context || {}
   };
 }
@@ -179,7 +180,8 @@ export function resolveCardEvent(match, input = {}, cardIndex) {
     return { match, triggered: 0, automatic: 0, manualResolutionNeeded: false, notes: [] };
   }
 
-  const triggered = getTriggeredEntries(context.sourceCard, context.event);
+  const triggered = getTriggeredEntries(context.sourceCard, context.event, { dispatchMode: input.dispatchMode || "any" })
+    .filter(({ entry }) => entryMatchesTriggerContext(entry, context, match));
   let next = match;
   let automatic = 0;
   let manualResolutionNeeded = false;

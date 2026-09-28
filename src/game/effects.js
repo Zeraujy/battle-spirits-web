@@ -3,7 +3,7 @@ import { payCoreCost } from "./cores.js";
 import { findPhysicalCard, getDatabaseCard } from "./selectors.js";
 import { removeHandCard, removeFieldCard, updateFieldCard, addFieldCard } from "./zones.js";
 import { appendLog, otherPlayerId } from "./utils.js";
-import { resolveCardEvent } from "./effectEngine/effectEngine.js";
+import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
 import { getTriggeredEntries } from "./effectEngine/normalizer.js";
 import { manualMoveCard } from "./manualMove.js";
 import {
@@ -61,7 +61,7 @@ export function useMagic(match, playerId, instanceId, cardIndex, { mode = "main"
   const removed = removeHandCard(player, instanceId);
   let next = { ...paid.match, players: { ...paid.match.players, [playerId]: removed.player } };
   const event = mode === "main" ? "magicMain" : "magicFlash";
-  const engine = resolveCardEvent(next, {
+  const engine = dispatchEffectEvent(next, {
     event,
     sourcePlayerId: playerId,
     sourcePhysical: removed.card,
@@ -152,7 +152,7 @@ export function setMirage(match, playerId, instanceId, cardIndex, { payment, pre
     "action"
   );
 
-  const engine = resolveCardEvent(next, {
+  const engine = dispatchEffectEvent(next, {
     event: "mirage",
     sourcePlayerId: playerId,
     sourcePhysical: paidPlayer.mirage,
@@ -184,7 +184,7 @@ export function activateBurst(match, playerId, cardIndex, { confirmCondition = f
     return { ok: false, error: "Confirme que a condição oficial da Burst foi cumprida." };
   }
 
-  const engine = resolveCardEvent(match, {
+  const engine = dispatchEffectEvent(match, {
     event,
     sourcePlayerId: playerId,
     sourcePhysical: physical,
