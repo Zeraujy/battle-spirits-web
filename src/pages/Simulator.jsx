@@ -90,6 +90,7 @@ import "../styles/arena/arenaResponsiveV490.css";
 import "../styles/arena/arenaPerformanceV490.css";
 import "../styles/arena/arenaVisualCleanupV490.css";
 import "../styles/arena/arenaVisualPolishV491.css";
+import "../styles/arena/combatLayoutStabilityV500.css";
 
 
 function effectText(card, language) {

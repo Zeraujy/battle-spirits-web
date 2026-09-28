@@ -1,0 +1,86 @@
+/* =========================================================
+   v5.0.0 foundation — Combat layout stability hotfix
+
+   The battle center is presentation-only and must never change the
+   battlefield grid geometry when match.battle appears/disappears.
+========================================================= */
+
+.simulator-page .arena-center-field {
+  position: relative;
+  min-height: 0 !important;
+  height: 100%;
+  overflow: visible;
+  contain: layout;
+}
+
+/*
+ * Keep both idle and active battle-center states out of normal flow.
+ * The authoritative game state may switch instantly; only the visual
+ * contents change inside the already-reserved center row.
+ */
+.simulator-page .arena-center-field > .battle-center-compact {
+  position: absolute !important;
+  left: 50%;
+  top: 50%;
+  width: min(calc(100% - 10px), 980px);
+  max-width: calc(100% - 10px);
+  height: calc(100% - 4px);
+  min-height: 0 !important;
+  max-height: calc(100% - 4px);
+  margin: 0 !important;
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+}
+
+.simulator-page .arena-center-field > .battle-center-compact.idle {
+  padding: 0 8px;
+}
+
+.simulator-page .arena-center-field > .battle-center-compact.active {
+  min-height: 0 !important;
+  padding: 3px 9px;
+  overflow: hidden;
+}
+
+/* Keep active combat copy from expanding the reserved center row. */
+.simulator-page .arena-center-field .battle-compact-status,
+.simulator-page .arena-center-field .battle-compact-matchup,
+.simulator-page .arena-center-field .battle-compact-actions {
+  min-height: 0;
+}
+
+.simulator-page .arena-center-field .battle-stage-hint {
+  max-height: 1.35em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1120px) {
+  .simulator-page .arena-center-field > .battle-center-compact.active {
+    padding-inline: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simulator-page .arena-center-field > .battle-center-compact {
+    transition: none !important;
+  }
+}
+
+/*
+ * Direct-attack targeting overlay must never become a grid item.
+ * Legacy `.simulator-page .table-area > * { position: relative; }` has
+ * higher specificity than `.arena-targeting-ux` and previously pulled the
+ * targeting pill back into normal grid flow whenever an attack created it.
+ * That inserted an extra grid child and shifted the entire battlefield down.
+ */
+.simulator-page .arena-battlefield > .arena-targeting-ux {
+  position: absolute !important;
+  z-index: 52 !important;
+  left: 50% !important;
+  top: clamp(5.6rem, 10vh, 8rem) !important;
+  margin: 0 !important;
+  transform: translateX(-50%) !important;
+  pointer-events: none !important;
+}
