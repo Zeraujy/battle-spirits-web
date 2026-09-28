@@ -58,3 +58,20 @@ test("MatchRegistry indexes sessions without changing the legacy room system", (
   assert.equal(registry.size, 1);
   assert.equal(registry.get("match-4"), session);
 });
+
+test("MatchSession reconnects from the authoritative session token", () => {
+  const session = createMatchSession({
+    matchId: "match-reconnect",
+    players: [
+      { playerId: "player1", socketId: "socket-1", sessionToken: "token-1" },
+      { playerId: "player2", socketId: "socket-2", sessionToken: "token-2" }
+    ]
+  });
+  session.start({ id: "game-reconnect", turnNumber: 1 });
+  session.beginReconnect("player1", { reconnectWindowMs: 5000 });
+  assert.equal(session.status, MatchStatus.RECONNECTING);
+  assert.equal(session.reconnectPlayer("player1", "socket-3", "wrong"), null);
+  assert.ok(session.reconnectPlayer("player1", "socket-3", "token-1"));
+  assert.equal(session.status, MatchStatus.ACTIVE);
+  assert.equal(session.getPlayer("player1").socketId, "socket-3");
+});

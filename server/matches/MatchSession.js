@@ -1,5 +1,5 @@
 import { MatchMode } from "../../src/online/domain/matchModes.js";
-import { MatchStatus, isTerminalMatchStatus } from "../../src/online/domain/matchStatus.js";
+import { MatchStatus, PlayerConnectionState, isTerminalMatchStatus } from "../../src/online/domain/matchStatus.js";
 import { MAX_MATCH_PLAYERS, PLAYER_IDS } from "../../src/online/domain/onlineConstants.js";
 import { MatchPlayer } from "./MatchPlayer.js";
 
@@ -30,6 +30,8 @@ export class MatchSession {
     this.startedAt = null;
     this.finishedAt = null;
     this.stateVersion = 0;
+    this.serverSequence = 0;
+    this.lastUpdatedAt = createdAt;
 
     for (const player of players) this.addPlayer(player);
   }
@@ -52,31 +54,68 @@ export class MatchSession {
     return [...this.players.values()].find((player) => player.socketId === socketId) || null;
   }
 
+  getPlayerBySessionToken(token) {
+    if (!token) return null;
+    return [...this.players.values()].find((player) => player.sessionToken === token) || null;
+  }
+
+  touch() {
+    this.lastUpdatedAt = Date.now();
+    return this;
+  }
+
   setStatus(status) {
     this.status = status;
     if (status === MatchStatus.ACTIVE && !this.startedAt) this.startedAt = Date.now();
     if (isTerminalMatchStatus(status) && !this.finishedAt) this.finishedAt = Date.now();
+    this.touch();
     return this;
+  }
+
+  commitGameState(gameState) {
+    if (!gameState) throw new TypeError("gameState is required.");
+    this.gameState = gameState;
+    this.stateVersion += 1;
+    this.serverSequence += 1;
+    this.touch();
+    return this.stateVersion;
   }
 
   start(gameState) {
     if (this.players.size !== MAX_MATCH_PLAYERS) throw new Error("MatchSession requires two players before start.");
-    this.gameState = gameState;
-    this.stateVersion += 1;
+    this.commitGameState(gameState);
     this.setStatus(MatchStatus.ACTIVE);
     return this;
   }
 
   replaceGameState(gameState) {
-    if (!gameState) throw new TypeError("gameState is required.");
-    this.gameState = gameState;
-    this.stateVersion += 1;
-    return this.stateVersion;
+    return this.commitGameState(gameState);
+  }
+
+  beginReconnect(playerId, options) {
+    const player = this.getPlayer(playerId);
+    if (!player) throw new Error(`Unknown MatchPlayer: ${playerId}`);
+    player.beginReconnect(options);
+    if (!isTerminalMatchStatus(this.status)) this.setStatus(MatchStatus.RECONNECTING);
+    return player;
+  }
+
+  reconnectPlayer(playerId, socketId, token) {
+    const player = this.getPlayer(playerId);
+    if (!player || !player.canReconnect(token)) return null;
+    player.connect(socketId);
+    const allConnected = [...this.players.values()].every((entry) => entry.connectionState === PlayerConnectionState.CONNECTED);
+    if (allConnected && this.gameState && !isTerminalMatchStatus(this.status)) this.setStatus(MatchStatus.ACTIVE);
+    return player;
   }
 
   finish(gameState = this.gameState) {
-    if (gameState) this.gameState = gameState;
-    this.stateVersion += 1;
+    if (gameState && gameState !== this.gameState) this.commitGameState(gameState);
+    else {
+      this.stateVersion += 1;
+      this.serverSequence += 1;
+      this.touch();
+    }
     this.setStatus(MatchStatus.FINISHED);
     return this;
   }
@@ -92,6 +131,8 @@ export class MatchSession {
       mode: this.mode,
       status: this.status,
       stateVersion: this.stateVersion,
+      serverSequence: this.serverSequence,
+      lastUpdatedAt: this.lastUpdatedAt,
       createdAt: this.createdAt,
       startedAt: this.startedAt,
       finishedAt: this.finishedAt,

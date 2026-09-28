@@ -1,11 +1,22 @@
-import { PlayerConnectionState } from "../../src/online/domain/matchStatus.js";
+import { PlayerConnectionState, DisconnectReason } from "../../src/online/domain/matchStatus.js";
+import { DEFAULT_RECONNECT_WINDOW_MS } from "../../src/online/domain/onlineConstants.js";
 
 function cloneDeck(deck) {
   return Array.isArray(deck) ? deck.map((card) => ({ ...card })) : [];
 }
 
 export class MatchPlayer {
-  constructor({ playerId, socketId = null, profile = {}, deck = [], deckId = null, resumeToken = null } = {}) {
+  constructor({
+    playerId,
+    socketId = null,
+    profile = {},
+    deck = [],
+    deckId = null,
+    resumeToken = null,
+    sessionToken = resumeToken,
+    connectionState = null,
+    reconnectDeadline = null
+  } = {}) {
     if (!playerId) throw new TypeError("MatchPlayer requires playerId.");
 
     this.playerId = playerId;
@@ -13,10 +24,15 @@ export class MatchPlayer {
     this.profile = { ...profile };
     this.deck = cloneDeck(deck);
     this.deckId = deckId || null;
-    this.resumeToken = resumeToken || null;
-    this.connectionState = socketId ? PlayerConnectionState.CONNECTED : PlayerConnectionState.DISCONNECTED;
+    this.sessionToken = sessionToken || resumeToken || null;
+    // Legacy alias kept while room payloads still use resumeToken.
+    this.resumeToken = this.sessionToken;
+    this.connectionState = connectionState || (socketId ? PlayerConnectionState.CONNECTED : PlayerConnectionState.DISCONNECTED);
     this.connectedAt = socketId ? Date.now() : null;
     this.disconnectedAt = socketId ? null : Date.now();
+    this.reconnectDeadline = reconnectDeadline || null;
+    this.disconnectReason = null;
+    this.lastAcknowledgedStateVersion = null;
   }
 
   connect(socketId) {
@@ -25,14 +41,43 @@ export class MatchPlayer {
     this.connectionState = PlayerConnectionState.CONNECTED;
     this.connectedAt = Date.now();
     this.disconnectedAt = null;
+    this.reconnectDeadline = null;
+    this.disconnectReason = null;
     return this;
   }
 
-  disconnect() {
+  disconnect(reason = DisconnectReason.SOCKET_DISCONNECT) {
     this.socketId = null;
     this.connectionState = PlayerConnectionState.DISCONNECTED;
     this.disconnectedAt = Date.now();
+    this.disconnectReason = reason;
     return this;
+  }
+
+  beginReconnect({
+    reason = DisconnectReason.SOCKET_DISCONNECT,
+    reconnectWindowMs = DEFAULT_RECONNECT_WINDOW_MS,
+    now = Date.now()
+  } = {}) {
+    this.socketId = null;
+    this.connectionState = PlayerConnectionState.RECONNECTING;
+    this.disconnectedAt = now;
+    this.reconnectDeadline = now + Math.max(0, Number(reconnectWindowMs) || 0);
+    this.disconnectReason = reason;
+    return this;
+  }
+
+  canReconnect(token, now = Date.now()) {
+    if (!token || !this.sessionToken || token !== this.sessionToken) return false;
+    if (this.connectionState !== PlayerConnectionState.RECONNECTING && this.connectionState !== PlayerConnectionState.DISCONNECTED) return false;
+    if (this.reconnectDeadline && now > this.reconnectDeadline) return false;
+    return true;
+  }
+
+  acknowledgeStateVersion(value) {
+    const version = Number(value);
+    if (Number.isInteger(version) && version >= 0) this.lastAcknowledgedStateVersion = version;
+    return this.lastAcknowledgedStateVersion;
   }
 
   markReconnecting() {
@@ -44,6 +89,7 @@ export class MatchPlayer {
     this.socketId = null;
     this.connectionState = PlayerConnectionState.TIMED_OUT;
     if (!this.disconnectedAt) this.disconnectedAt = Date.now();
+    this.reconnectDeadline = null;
     return this;
   }
 
@@ -51,6 +97,8 @@ export class MatchPlayer {
     this.socketId = null;
     this.connectionState = PlayerConnectionState.LEFT;
     if (!this.disconnectedAt) this.disconnectedAt = Date.now();
+    this.reconnectDeadline = null;
+    this.disconnectReason = DisconnectReason.PLAYER_LEFT;
     return this;
   }
 
@@ -61,10 +109,15 @@ export class MatchPlayer {
       deckId: this.deckId,
       connectionState: this.connectionState,
       connected: Boolean(this.socketId),
+      reconnectDeadline: this.reconnectDeadline,
+      disconnectedAt: this.disconnectedAt,
       ...(includePrivate ? {
         socketId: this.socketId,
+        sessionToken: this.sessionToken,
         resumeToken: this.resumeToken,
-        deck: cloneDeck(this.deck)
+        deck: cloneDeck(this.deck),
+        lastAcknowledgedStateVersion: this.lastAcknowledgedStateVersion,
+        disconnectReason: this.disconnectReason
       } : {})
     };
   }

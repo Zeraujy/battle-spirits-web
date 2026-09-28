@@ -24,6 +24,15 @@ export class MatchRegistry {
     return this.sessions.delete(String(matchId));
   }
 
+  findBySessionToken(token) {
+    if (!token) return null;
+    for (const session of this.sessions.values()) {
+      const player = session.getPlayerBySessionToken(token);
+      if (player) return { session, player };
+    }
+    return null;
+  }
+
   findBySocket(socketId) {
     for (const session of this.sessions.values()) {
       const player = session.getPlayerBySocket(socketId);

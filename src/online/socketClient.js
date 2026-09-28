@@ -1,5 +1,6 @@
 import { io } from "socket.io-client";
 import { ONLINE_PROFILE_MAX_JSON_CHARS } from "./publicProfile.js";
+import { acceptServerSync, createClientSyncState } from "./sync/stateSync.js";
 
 
 function validateRoomPayload(payload) {
@@ -37,10 +38,25 @@ function createBrowserOnlineClient(serverUrl) {
   });
 
   let session = null;
+  let syncState = createClientSyncState();
   let hasConnectedOnce = false;
 
+  function captureSync(value) {
+    if (!value) return syncState;
+    syncState = acceptServerSync(syncState, value.state || value);
+    return syncState;
+  }
+
+  socket.on("room:state", (state) => {
+    captureSync(state);
+  });
+
   socket.on("connect", () => {
-    if (hasConnectedOnce && session) socket.emit("room:resume", session);
+    if (hasConnectedOnce && session) {
+      socket.emit("room:resume", session, (result) => {
+        if (result?.ok) captureSync(result);
+      });
+    }
     hasConnectedOnce = true;
   });
 
@@ -48,6 +64,7 @@ function createBrowserOnlineClient(serverUrl) {
     if (result?.ok && result.code && result.playerId && result.resumeToken) {
       session = { code: result.code, playerId: result.playerId, resumeToken: result.resumeToken };
     }
+    if (result?.ok) captureSync(result);
   }
 
   return {
@@ -66,15 +83,28 @@ function createBrowserOnlineClient(serverUrl) {
       socket.emit("room:join", payload, (result) => { captureSession(result); callback?.(result); });
     },
     startRoom(payload, callback) { socket.emit("room:start", payload, callback); },
-    action(payload, callback) { socket.emit("game:action", payload, callback); },
+    action(payload, callback) {
+      const versionedPayload = syncState.stateVersion == null
+        ? payload
+        : { ...payload, stateVersion: syncState.stateVersion };
+      socket.emit("game:action", versionedPayload, (result) => {
+        if (result?.matchSync || result?.state) captureSync(result);
+        callback?.(result);
+      });
+    },
     sendChat(text, callback) { socket.emit("room:chat", { text }, callback); },
     resume(callback) {
       if (!session) return callback?.({ ok: false, error: "Sem sessão para retomar." });
-      socket.emit("room:resume", session, callback);
+      socket.emit("room:resume", session, (result) => {
+        if (result?.ok) captureSync(result);
+        callback?.(result);
+      });
     },
     getSession() { return session ? { ...session } : null; },
+    getSyncState() { return { ...syncState }; },
     adoptSession(value) {
       if (value?.code && value?.playerId && value?.resumeToken) session = { code: value.code, playerId: value.playerId, resumeToken: value.resumeToken };
+      captureSync(value);
     }
   };
 }

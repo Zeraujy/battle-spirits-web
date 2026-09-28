@@ -13,6 +13,12 @@ import {
   resolveFirstPlayerId,
   deckValidationOptionsForSettings
 } from "../src/online/customMatchSettings.js";
+import { MatchMode } from "../src/online/domain/matchModes.js";
+import { DisconnectReason, PlayerConnectionState } from "../src/online/domain/matchStatus.js";
+import { DEFAULT_RECONNECT_WINDOW_MS } from "../src/online/domain/onlineConstants.js";
+import { MatchRegistry, createMatchSession } from "./matches/index.js";
+import { createStateEnvelope, validateClientStateVersion } from "./matches/stateSync.js";
+import { ReconnectManager } from "./connections/ReconnectManager.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -53,6 +59,8 @@ export async function createBattleSpiritsServer(options = {}) {
   const rankedBySocket = new Map();
   const lobbyPresence = new Map();
   const socketRoomIndex = new Map();
+  const matchRegistry = new MatchRegistry();
+  const reconnectManager = new ReconnectManager({ reconnectWindowMs: DEFAULT_RECONNECT_WINDOW_MS });
   let lastLobbySnapshotSignature = "";
   const rankedSeason = "S0";
   const supabaseUrl = String(options.supabaseUrl ?? process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "");
@@ -144,6 +152,83 @@ export async function createBattleSpiritsServer(options = {}) {
       playerColor: /^#[0-9a-f]{6}$/i.test(String(profile.playerColor || "")) ? profile.playerColor : null,
       avatar: sanitizePublicAvatar(profile.avatar)
     };
+  }
+
+  function roomMatchMode(room) {
+    return room?.ranked ? MatchMode.RANKED : MatchMode.CASUAL;
+  }
+
+  function getRoomMatchSession(room) {
+    if (!room?.matchSessionId) return null;
+    return matchRegistry.get(room.matchSessionId);
+  }
+
+  function attachRoomMatchSession(room, { replace = false } = {}) {
+    if (!room?.match) return null;
+    const current = getRoomMatchSession(room);
+    if (current && !replace && current.matchId === String(room.match.id)) return current;
+    if (current) matchRegistry.delete(current.matchId);
+
+    const session = createMatchSession({
+      matchId: room.match.id,
+      mode: roomMatchMode(room),
+      metadata: { roomCode: room.code },
+      players: Object.entries(room.players || {}).filter(([, player]) => Boolean(player)).map(([playerId, player]) => ({
+        playerId,
+        socketId: player.socketId || null,
+        profile: player.profile || {},
+        deck: player.deck || [],
+        deckId: room.ranked?.players?.[playerId]?.deckId || null,
+        sessionToken: player.resumeToken || null
+      }))
+    });
+    session.start(room.match);
+    matchRegistry.register(session);
+    room.matchSessionId = session.matchId;
+    room.match = session.gameState;
+    return session;
+  }
+
+  function authoritativeMatch(room) {
+    return getRoomMatchSession(room)?.gameState || room?.match || null;
+  }
+
+  function commitAuthoritativeMatch(room, nextMatch) {
+    if (!room || !nextMatch) return null;
+    const session = getRoomMatchSession(room) || attachRoomMatchSession(room);
+    if (!session) {
+      room.match = nextMatch;
+      return null;
+    }
+    session.replaceGameState(nextMatch);
+    room.match = session.gameState;
+    return session;
+  }
+
+  function roomMatchSync(room) {
+    const session = getRoomMatchSession(room);
+    if (!session) return null;
+    const envelope = createStateEnvelope(session, { gameState: null });
+    if (!envelope) return null;
+    const { gameState: _gameState, ...sync } = envelope;
+    return sync;
+  }
+
+  function beginRoomReconnect(room, playerId, reason = DisconnectReason.SOCKET_DISCONNECT) {
+    const session = getRoomMatchSession(room);
+    const legacyPlayer = room?.players?.[playerId];
+    if (!legacyPlayer) return null;
+    if (!session) {
+      legacyPlayer.connectionState = PlayerConnectionState.RECONNECTING;
+      legacyPlayer.reconnectDeadline = Date.now() + DEFAULT_RECONNECT_WINDOW_MS;
+      return null;
+    }
+    const player = session.getPlayer(playerId);
+    if (!player) return null;
+    reconnectManager.begin(player, reason);
+    legacyPlayer.connectionState = player.connectionState;
+    legacyPlayer.reconnectDeadline = player.reconnectDeadline;
+    return player;
   }
 
   function sanitizeMatch(match, viewerPlayerId) {
@@ -253,21 +338,30 @@ export async function createBattleSpiritsServer(options = {}) {
   }
 
   function roomSummary(room, viewerId, { includeChat = true } = {}) {
+    const session = getRoomMatchSession(room);
     const players = Object.fromEntries(
-      Object.entries(room.players).map(([id, player]) => [
-        id,
-        player ? { profile: player.profile, connected: Boolean(player.socketId) } : null
-      ])
+      Object.entries(room.players).map(([id, player]) => {
+        if (!player) return [id, null];
+        const sessionPlayer = session?.getPlayer(id);
+        return [id, {
+          profile: player.profile,
+          connected: Boolean(player.socketId),
+          connectionState: sessionPlayer?.connectionState || player.connectionState || (player.socketId ? PlayerConnectionState.CONNECTED : PlayerConnectionState.DISCONNECTED),
+          reconnectDeadline: sessionPlayer?.reconnectDeadline || player.reconnectDeadline || null
+        }];
+      })
     );
+    const match = authoritativeMatch(room);
 
     return {
       code: room.code,
       hostPlayerId: "player1",
       viewerPlayerId: viewerId,
-      started: Boolean(room.match),
+      started: Boolean(match),
       players,
       ...(includeChat ? { chat: (room.chat || []).slice(-100) } : {}),
-      match: sanitizeMatch(room.match, viewerId),
+      match: sanitizeMatch(match, viewerId),
+      matchSync: roomMatchSync(room),
       ranked: room.ranked ? { season: room.ranked.season } : null,
       settings: {
         title: room.settings?.title || "Sala de Battle Spirits",
@@ -314,7 +408,8 @@ export async function createBattleSpiritsServer(options = {}) {
       if (!current?.match || current.match.winnerId || current.turnClock?.key !== key) return;
       const timedOutId = current.match.activePlayerId;
       const winnerId = timedOutId === "player1" ? "player2" : "player1";
-      current.match = { ...current.match, winnerId, winnerReason: "turn_timeout" };
+      commitAuthoritativeMatch(current, { ...authoritativeMatch(current), winnerId, winnerReason: "turn_timeout" });
+      getRoomMatchSession(current)?.finish(authoritativeMatch(current));
       clearTurnTimer(current);
       emitRoom(current);
       emitLobbySnapshot();
@@ -520,6 +615,7 @@ export async function createBattleSpiritsServer(options = {}) {
       player2: { ...room.players.player2.profile, deck: room.players.player2.deck },
       firstPlayerId, cardIndex
     });
+    attachRoomMatchSession(room, { replace: true });
     rooms.set(roomCode, room);
     indexRoomSocket(a.socketId, roomCode, "player1");
     indexRoomSocket(b.socketId, roomCode, "player2");
@@ -796,12 +892,25 @@ export async function createBattleSpiritsServer(options = {}) {
       if (!room || !player || !payload.resumeToken || player.resumeToken !== payload.resumeToken) {
         return ack({ ok: false, error: "Não foi possível retomar esta sessão." });
       }
+
+      const session = getRoomMatchSession(room);
+      if (session) {
+        const sessionPlayer = session.getPlayer(playerId);
+        if (!sessionPlayer || !reconnectManager.resume(sessionPlayer, socket.id, payload.resumeToken)) {
+          return ack({ ok: false, error: "A janela de reconexão expirou.", code: "RECONNECT_FAILED", matchSync: roomMatchSync(room) });
+        }
+      }
+
       if (player.socketId && player.socketId !== socket.id) socketRoomIndex.delete(player.socketId);
       player.socketId = socket.id;
+      player.connectionState = PlayerConnectionState.CONNECTED;
+      player.reconnectDeadline = null;
       indexRoomSocket(socket.id, roomCode, playerId);
       if (player.rankedDisconnectTimer) { clearTimeout(player.rankedDisconnectTimer); player.rankedDisconnectTimer = null; }
+      if (player.reconnectStateTimer) { clearTimeout(player.reconnectStateTimer); player.reconnectStateTimer = null; }
       socket.join(roomCode);
-      ack({ ok: true, state: roomSummary(room, playerId) });
+      const state = roomSummary(room, playerId);
+      ack({ ok: true, state, matchSync: state.matchSync });
       emitRoom(room, { includeChat: true });
       emitLobbySnapshot();
     });
@@ -819,6 +928,7 @@ export async function createBattleSpiritsServer(options = {}) {
         firstPlayerId,
         cardIndex
       });
+      attachRoomMatchSession(room, { replace: true });
       syncTurnTimer(room, true);
       emitRoom(room, { includeChat: true });
       emitLobbySnapshot();
@@ -866,6 +976,7 @@ export async function createBattleSpiritsServer(options = {}) {
         firstPlayerId,
         cardIndex
       });
+      attachRoomMatchSession(room, { replace: true });
       room.rematchVotes = {};
       syncTurnTimer(room, true);
       io.to(room.code).emit("room:rematch-started", { firstPlayerId, matchId: room.match.id });
@@ -877,17 +988,38 @@ export async function createBattleSpiritsServer(options = {}) {
       const found = findRoomBySocket(socket.id);
       if (!found) return ack({ ok: false, error: "Sala não encontrada." });
       const { room, playerId } = found;
-      if (!room.match) return ack({ ok: false, error: "Partida ainda não iniciada." });
+      const session = getRoomMatchSession(room) || attachRoomMatchSession(room);
+      const match = authoritativeMatch(room);
+      if (!match) return ack({ ok: false, error: "Partida ainda não iniciada." });
       if (payload?.action?.type === "MULLIGAN" && room.settings?.mulliganEnabled === false) {
         return ack({ ok: false, error: "Mulligan desativado nas configurações desta sala." });
       }
-      const result = applyGameAction(room.match, payload.action, playerId, cardIndex);
+      if (session) {
+        const syncValidation = validateClientStateVersion(session, payload?.stateVersion);
+        if (!syncValidation.ok) {
+          const state = roomSummary(room, playerId);
+          return ack({
+            ok: false,
+            error: "O estado da partida foi atualizado. Sincronizando novamente.",
+            code: "STALE_STATE",
+            matchSync: state.matchSync,
+            state
+          });
+        }
+      }
+      const result = applyGameAction(match, payload.action, playerId, cardIndex);
       if (!result.ok) return ack(result);
-      room.match = result.match;
-      if (room.ranked && room.match?.winnerId) await settleRankedRoom(room, room.match.winnerId, room.match.winnerReason || "game");
+      const committedSession = commitAuthoritativeMatch(room, result.match);
+      const authoritative = authoritativeMatch(room);
+      if (room.ranked && authoritative?.winnerId) {
+        committedSession?.finish(authoritative);
+        await settleRankedRoom(room, authoritative.winnerId, authoritative.winnerReason || "game");
+      }
       syncTurnTimer(room);
       emitRoom(room);
-      ack({ ok: true, manualResolutionNeeded: result.manualResolutionNeeded, notes: result.notes });
+      const sync = roomMatchSync(room);
+      committedSession?.getPlayer(playerId)?.acknowledgeStateVersion(sync?.stateVersion);
+      ack({ ok: true, manualResolutionNeeded: result.manualResolutionNeeded, notes: result.notes, matchSync: sync });
     });
 
     socket.on("disconnect", (reason) => {
@@ -905,13 +1037,31 @@ export async function createBattleSpiritsServer(options = {}) {
       socketRoomIndex.delete(socket.id);
       if (!found) { emitLobbySnapshot(); return; }
       found.room.players[found.playerId].socketId = null;
-      if (found.room.ranked && found.room.match && !found.room.match.winnerId) {
+      beginRoomReconnect(found.room, found.playerId, DisconnectReason.SOCKET_DISCONNECT);
+      const reconnectingPlayer = found.room.players[found.playerId];
+      if (reconnectingPlayer.reconnectStateTimer) clearTimeout(reconnectingPlayer.reconnectStateTimer);
+      reconnectingPlayer.reconnectStateTimer = setTimeout(() => {
+        const room = rooms.get(found.room.code);
+        const legacyPlayer = room?.players?.[found.playerId];
+        if (!room || !legacyPlayer || legacyPlayer.socketId) return;
+        getRoomMatchSession(room)?.getPlayer(found.playerId)?.markTimedOut();
+        legacyPlayer.connectionState = PlayerConnectionState.TIMED_OUT;
+        legacyPlayer.reconnectDeadline = null;
+        legacyPlayer.reconnectStateTimer = null;
+        emitRoom(room);
+      }, DEFAULT_RECONNECT_WINDOW_MS);
+      reconnectingPlayer.reconnectStateTimer.unref?.();
+      if (found.room.ranked && authoritativeMatch(found.room) && !authoritativeMatch(found.room).winnerId) {
         const disconnectedId = found.playerId;
         const opponentId = disconnectedId === "player1" ? "player2" : "player1";
         found.room.players[disconnectedId].rankedDisconnectTimer = setTimeout(async () => {
           const room = rooms.get(found.room.code);
-          if (!room?.ranked || room.match?.winnerId || room.players[disconnectedId]?.socketId) return;
-          room.match = { ...room.match, winnerId: opponentId, winnerReason: "ranked_disconnect" };
+          const match = authoritativeMatch(room);
+          if (!room?.ranked || match?.winnerId || room.players[disconnectedId]?.socketId) return;
+          const session = getRoomMatchSession(room);
+          session?.getPlayer(disconnectedId)?.markTimedOut();
+          commitAuthoritativeMatch(room, { ...match, winnerId: opponentId, winnerReason: "ranked_disconnect" });
+          getRoomMatchSession(room)?.finish(authoritativeMatch(room));
           await settleRankedRoom(room, opponentId, "disconnect");
           emitRoom(room);
         }, 90_000);
@@ -925,6 +1075,7 @@ export async function createBattleSpiritsServer(options = {}) {
         const anyConnected = Object.values(room.players).filter(Boolean).some((p) => p.socketId);
         if (!anyConnected) {
           clearTurnTimer(room);
+          if (room.matchSessionId) matchRegistry.delete(room.matchSessionId);
           rooms.delete(room.code);
           emitLobbySnapshot();
         }
@@ -944,6 +1095,7 @@ export async function createBattleSpiritsServer(options = {}) {
     server,
     io,
     rooms,
+    matchRegistry,
     cardIndex,
     port,
     host,
@@ -963,7 +1115,8 @@ export async function createBattleSpiritsServer(options = {}) {
         rankedQueued: rankedQueue.length,
         rankedReady: Boolean(rankedSupabase),
         lobbyOnline: lobbyPresence.size,
-        publicRooms: [...rooms.values()].filter((room) => room.settings?.visibility === "public").length
+        publicRooms: [...rooms.values()].filter((room) => room.settings?.visibility === "public").length,
+        authoritativeSessions: matchRegistry.size
       };
     },
     async stop() {

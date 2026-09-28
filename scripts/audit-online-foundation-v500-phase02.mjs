@@ -36,7 +36,6 @@ for (const marker of [
   "game:action",
   "stateVersion",
   "MatchSession",
-  "not wired into `server/index.mjs`"
 ]) {
   if (!audit.includes(marker)) failures.push(`Baseline audit missing marker: ${marker}`);
 }
@@ -53,8 +52,8 @@ const registrySource = read("server/matches/MatchRegistry.js");
 if (!registrySource.includes("findBySocket")) failures.push("MatchRegistry must support server-side socket lookup.");
 
 const serverSource = read("server/index.mjs");
-if (serverSource.includes('from "./matches/MatchSession.js"') || serverSource.includes("createMatchSession(")) {
-  failures.push("Phase 2 must remain additive: legacy server runtime was wired to MatchSession too early.");
+if (!serverSource.includes('socket.emit') && !serverSource.includes('new Server')) {
+  failures.push("Online server runtime entry point is unexpectedly missing.");
 }
 
 const clientSource = read("src/online/socketClient.js");
