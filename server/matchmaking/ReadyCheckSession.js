@@ -56,16 +56,19 @@ export class ReadyCheckSession {
     return [...this.participants.values()].filter((participant) => participant.ready).map((participant) => participant.entry);
   }
 
-  snapshotFor(socketId) {
+  snapshotFor(socketId, now = Date.now()) {
     const key = String(socketId || "");
     const own = this.participants.get(key);
     if (!own) return null;
     const opponent = [...this.participants.entries()].find(([candidate]) => candidate !== key)?.[1] || null;
+    const serverNow = Number(now) || Date.now();
     return {
       readyCheckId: this.readyCheckId,
       status: this.status,
       createdAt: this.createdAt,
       deadline: this.deadline,
+      serverNow,
+      remainingMs: Math.max(0, this.deadline - serverNow),
       playerReady: Boolean(own.ready),
       opponentReady: Boolean(opponent?.ready),
       opponentProfile: opponent?.entry?.profile ? { ...opponent.entry.profile } : null

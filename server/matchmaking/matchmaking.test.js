@@ -33,3 +33,18 @@ test("ready check tracks readiness independently for each player", () => {
   assert.equal(session.isComplete(), true);
   registry.delete(session.readyCheckId);
 });
+
+
+test("ready check snapshot exposes server-relative remaining time", () => {
+  const registry = new ReadyCheckRegistry({ windowMs: 30_000 });
+  const a = new QueueEntry({ socketId: "clock-a" });
+  const b = new QueueEntry({ socketId: "clock-b" });
+  const session = registry.create([a, b], { now: 1_000_000 });
+  const snapshot = session.snapshotFor("clock-a", 1_005_500);
+
+  assert.equal(snapshot.serverNow, 1_005_500);
+  assert.equal(snapshot.remainingMs, 24_500);
+  assert.equal(snapshot.playerReady, false);
+  assert.equal(snapshot.opponentReady, false);
+  registry.delete(session.readyCheckId);
+});

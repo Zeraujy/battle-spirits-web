@@ -138,3 +138,8 @@ Manual room creation/join remains untouched and continues to use `room:create`, 
 - rating-window matchmaking;
 - penalties for failed Ready Checks;
 - Friend Challenge / Private Match rooms.
+
+
+## Ready Check clock authority hotfix
+
+The Ready Check countdown is now derived from `remainingMs` calculated by the server. The browser clock is presentation-only and never decides whether a Ready Check has expired. The Ready button remains available until the server accepts or rejects the intent, preserving the rule: **The client requests. The server decides.**
