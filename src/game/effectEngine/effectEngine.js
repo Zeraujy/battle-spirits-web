@@ -6,6 +6,7 @@ import { entryMatchesTriggerContext, getEntryActions, getTriggeredEntries, norma
 import { resolveActionList } from "./actionResolver.js";
 import { drainEffectQueue, enqueueEffectEvents, markEffectQueueWaiting } from "./effectQueue.js";
 import { finalizePendingMagicResolution } from "./magicAutomation.js";
+import { applyTriggerGroupOrder, nextAmbiguousTriggerGroup, orderedTriggerDispatches, resolveAutomaticTriggerGroups, triggerOrderDecision } from "./triggerOrderingEngine.js";
 
 function sourceContext(match, cardIndex, input = {}) {
   const found = input.sourceInstanceId ? findPhysicalCard(match, input.sourceInstanceId) : null;
@@ -258,7 +259,36 @@ export function resolveEffectDecision(match, actorId, payload = {}, cardIndex) {
   let decisionContext = baseContext;
   let next = { ...match, pendingEffectDecision: null };
 
-  if (["chooseOption", "chooseYesNo"].includes(pending.kind)) {
+  if (pending.kind === "chooseTriggerOrder") {
+    const batch = match.triggerBatch;
+    const ids = Array.isArray(payload.orderedTriggerIds) ? payload.orderedTriggerIds.map(String) : [];
+    let updatedBatch = applyTriggerGroupOrder(batch, pending.playerId, ids);
+    if (!updatedBatch) return { ok: false, error: "A ordem escolhida precisa conter todos os gatilhos válidos exatamente uma vez." };
+    updatedBatch = resolveAutomaticTriggerGroups(updatedBatch);
+    const nextGroup = nextAmbiguousTriggerGroup(updatedBatch);
+    if (nextGroup) {
+      const decision = triggerOrderDecision(updatedBatch, nextGroup);
+      return {
+        ok: true,
+        match: { ...match, triggerBatch: updatedBatch, pendingEffectDecision: decision },
+        manualResolutionNeeded: true,
+        pendingEffectDecision: decision,
+        notes: ["Próximo controlador deve ordenar seus gatilhos simultâneos."]
+      };
+    }
+    next = { ...match, pendingEffectDecision: null, triggerBatch: null };
+    const dispatches = orderedTriggerDispatches(updatedBatch);
+    if (dispatches.length) next = enqueueEffectEvents(next, dispatches).match;
+    next = drainEffectQueue(next, (working, item) => resolveCardEvent(working, item.payload, cardIndex)).match;
+    if (!next.pendingEffectDecision && next.pendingMagicResolution) next = finalizePendingMagicResolution(next, cardIndex);
+    return {
+      ok: true,
+      match: next,
+      manualResolutionNeeded: Boolean(next.pendingEffectDecision),
+      pendingEffectDecision: next.pendingEffectDecision || null,
+      notes: []
+    };
+  } else if (["chooseOption", "chooseYesNo"].includes(pending.kind)) {
     const optionId = String(payload.optionId ?? "");
     const option = (pending.action?.options || []).find((item, index) => String(item.id ?? index) === optionId);
     if (!option) return { ok: false, error: "Opção de efeito inválida." };

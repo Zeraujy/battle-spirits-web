@@ -1,4 +1,4 @@
-# Card Effect Coverage — v5.1.0 Card Effects & Mechanics Engine (Phase 0–18)
+# Card Effect Coverage — v5.1.0 Card Effects & Mechanics Engine (Phase 0–20)
 
 > Scope: runtime gameplay catalog (`src/data/cards.json`). Artwork-only/public database records that are not loaded into the gameplay catalog are intentionally excluded.
 

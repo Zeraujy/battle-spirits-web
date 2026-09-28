@@ -303,7 +303,7 @@ function percent(value, total) {
 function markdown(report) {
   const { summary, cards } = report;
   const lines = [];
-  lines.push("# Card Effect Coverage — v5.1.0 Card Effects & Mechanics Engine (Phase 0–18)");
+  lines.push("# Card Effect Coverage — v5.1.0 Card Effects & Mechanics Engine (Phase 0–20)");
   lines.push("");
   lines.push("> Scope: runtime gameplay catalog (`src/data/cards.json`). Artwork-only/public database records that are not loaded into the gameplay catalog are intentionally excluded.");
   lines.push("");

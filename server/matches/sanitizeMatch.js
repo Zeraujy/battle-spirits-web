@@ -15,5 +15,21 @@ export function sanitizeMatchForViewer(match, viewerPlayerId) {
     })
   );
 
-  return { ...match, players };
+  const pendingEffectDecision = match.pendingEffectDecision && match.pendingEffectDecision.playerId !== viewerPlayerId
+    ? {
+        id: match.pendingEffectDecision.id,
+        kind: match.pendingEffectDecision.kind,
+        playerId: match.pendingEffectDecision.playerId,
+        titlePT: match.pendingEffectDecision.titlePT || null,
+        titleEN: match.pendingEffectDecision.titleEN || null,
+        instructionPT: match.pendingEffectDecision.instructionPT || null,
+        instructionEN: match.pendingEffectDecision.instructionEN || null,
+        candidateCount: Array.isArray(match.pendingEffectDecision.candidates) ? match.pendingEffectDecision.candidates.length : 0,
+        hidden: true,
+        candidates: [],
+        options: []
+      }
+    : match.pendingEffectDecision;
+
+  return { ...match, players, pendingEffectDecision, triggerBatch: null };
 }

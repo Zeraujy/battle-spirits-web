@@ -19,6 +19,7 @@ import { DisconnectReason, PlayerConnectionState } from "../src/online/domain/ma
 import { DEFAULT_RECONNECT_WINDOW_MS } from "../src/online/domain/onlineConstants.js";
 import { MatchRegistry, createMatchSession, createDeckSnapshot, validateDeckSnapshot, deckSnapshotPresentation, createPrivateMatchDescriptor, RematchRequest, sanitizeMatchForViewer } from "./matches/index.js";
 import { createStateEnvelope, validateClientStateVersion } from "./matches/stateSync.js";
+import { validateServerEffectDecisionIntent } from "./matches/effectDecisionAuthority.js";
 import { ReconnectManager } from "./connections/ReconnectManager.js";
 import { Matchmaker, MatchmakingQueue, QueueEntry, ReadyCheckRegistry, RankedMatchmaker } from "./matchmaking/index.js";
 import { finalizeMatchResult, buildServerMatchHistoryRecords, persistServerMatchHistory } from "./results/index.js";
@@ -1582,6 +1583,17 @@ export async function createBattleSpiritsServer(options = {}) {
             state
           });
         }
+      }
+      const effectAuthority = validateServerEffectDecisionIntent({ match, playerId, action: payload?.action });
+      if (!effectAuthority.ok) {
+        const state = roomSummary(room, playerId);
+        return ack({
+          ok: false,
+          error: effectAuthority.error,
+          code: effectAuthority.code,
+          matchSync: state.matchSync,
+          state
+        });
       }
       const result = applyGameAction(match, payload.action, playerId, cardIndex);
       if (!result.ok) return ack(result);

@@ -793,8 +793,8 @@ export default function Simulator({
     setEffectDecisionSelection([]);
     setEffectCoreDistribution({});
     setEffectDecisionOrder(
-      effectDecision?.kind === "chooseOrder"
-        ? (effectDecision.candidates || []).map((candidate) => candidate.instanceId)
+      ["chooseOrder", "chooseTriggerOrder"].includes(effectDecision?.kind)
+        ? (effectDecision.candidates || []).map((candidate) => candidate.triggerId || candidate.instanceId)
         : []
     );
   }, [
@@ -1443,6 +1443,12 @@ export default function Simulator({
         : "Organize as cartas na ordem em que devem resolver e depois confirme.";
     }
 
+    if (effectDecision.kind === "chooseTriggerOrder") {
+      return language === "en"
+        ? "Arrange the simultaneous triggers in the order they should resolve, then confirm."
+        : "Organize os gatilhos simultâneos na ordem em que devem resolver e depois confirme.";
+    }
+
     if (effectDecision.kind === "chooseCoreDistribution") {
       return language === "en"
         ? "Distribute the required Cores among the valid cards."
@@ -1565,7 +1571,9 @@ export default function Simulator({
         type:
           "RESOLVE_EFFECT_DECISION",
 
+        decisionId: effectDecision.id,
         payload: {
+          decisionId: effectDecision.id,
           selectedInstanceIds:
             ids
         }
@@ -1590,7 +1598,9 @@ export default function Simulator({
         type:
           "RESOLVE_EFFECT_DECISION",
 
+        decisionId: effectDecision.id,
         payload: {
+          decisionId: effectDecision.id,
           optionId
         }
       },
@@ -1604,7 +1614,20 @@ export default function Simulator({
     dispatch(
       {
         type: "RESOLVE_EFFECT_DECISION",
-        payload: { orderedInstanceIds: effectDecisionOrder }
+        decisionId: effectDecision.id,
+        payload: { decisionId: effectDecision.id, orderedInstanceIds: effectDecisionOrder }
+      },
+      effectDecision.playerId
+    );
+  }
+
+  function resolveTriggerDecisionOrder() {
+    if (!effectDecision || !canControlEffectDecision) return;
+    dispatch(
+      {
+        type: "RESOLVE_EFFECT_DECISION",
+        decisionId: effectDecision.id,
+        payload: { decisionId: effectDecision.id, orderedTriggerIds: effectDecisionOrder }
       },
       effectDecision.playerId
     );
@@ -1645,7 +1668,8 @@ export default function Simulator({
     dispatch(
       {
         type: "RESOLVE_EFFECT_DECISION",
-        payload: { coreDistribution: effectCoreDistribution }
+        decisionId: effectDecision.id,
+        payload: { decisionId: effectDecision.id, coreDistribution: effectCoreDistribution }
       },
       effectDecision.playerId
     );
@@ -1790,7 +1814,10 @@ export default function Simulator({
       ["chooseOption", "chooseYesNo"].includes(effectDecision.kind);
 
     const isOrderPicker =
-      effectDecision.kind === "chooseOrder";
+      ["chooseOrder", "chooseTriggerOrder"].includes(effectDecision.kind);
+
+    const isTriggerOrderPicker =
+      effectDecision.kind === "chooseTriggerOrder";
 
     const isCoreDistribution =
       effectDecision.kind === "chooseCoreDistribution";
@@ -1808,6 +1835,9 @@ export default function Simulator({
       (isTrashPicker || isCardZonePicker || isOrderPicker || isCoreDistribution)
         ? (effectDecision.candidates || [])
             .map((candidate) => {
+              if (isTriggerOrderPicker) {
+                return { candidate, ctx: null, card: candidate.cardId ? cardIndex.get(candidate.cardId) : null };
+              }
               const ctx = findPhysicalCard(match, candidate.instanceId);
               if (!ctx) return null;
               return {
@@ -1822,7 +1852,7 @@ export default function Simulator({
     const orderedCandidates =
       isOrderPicker
         ? effectDecisionOrder
-            .map((instanceId) => zoneCandidates.find((entry) => entry.candidate.instanceId === instanceId))
+            .map((instanceId) => zoneCandidates.find((entry) => (entry.candidate.triggerId || entry.candidate.instanceId) === instanceId))
             .filter(Boolean)
         : [];
 
@@ -1979,22 +2009,31 @@ export default function Simulator({
 
           {isOrderPicker && !waiting && (
             <div className="effect-decision-order-list">
-              {orderedCandidates.map(({ candidate, card }, index) => (
-                <div className="effect-decision-order-row" key={candidate.instanceId}>
+              {orderedCandidates.map(({ candidate, card }, index) => {
+                const orderId = candidate.triggerId || candidate.instanceId;
+                const primaryLabel = isTriggerOrderPicker
+                  ? (language === "en" ? candidate.labelEN : candidate.labelPT) || candidate.event || orderId
+                  : (card ? getCardName(card) : candidate.cardId);
+                const secondaryLabel = isTriggerOrderPicker
+                  ? [candidate.cardId, candidate.event].filter(Boolean).join(" · ")
+                  : candidate.cardId;
+                return (
+                <div className="effect-decision-order-row" key={orderId}>
                   <span className="effect-decision-order-index">{index + 1}</span>
                   <div>
-                    <strong>{card ? getCardName(card) : candidate.cardId}</strong>
-                    <small>{candidate.cardId}</small>
+                    <strong>{primaryLabel}</strong>
+                    <small>{secondaryLabel}</small>
                   </div>
                   <div className="effect-decision-order-actions">
-                    <button type="button" className="ghost" disabled={index === 0} onClick={() => moveEffectDecisionOrder(candidate.instanceId, -1)}>↑</button>
-                    <button type="button" className="ghost" disabled={index === orderedCandidates.length - 1} onClick={() => moveEffectDecisionOrder(candidate.instanceId, 1)}>↓</button>
+                    <button type="button" className="ghost" disabled={index === 0} onClick={() => moveEffectDecisionOrder(orderId, -1)}>↑</button>
+                    <button type="button" className="ghost" disabled={index === orderedCandidates.length - 1} onClick={() => moveEffectDecisionOrder(orderId, 1)}>↓</button>
                   </div>
                 </div>
-              ))}
+                );
+              })}
               <footer className="effect-decision-footer">
                 <div className="effect-decision-counter"><b>{orderedCandidates.length}</b><span>{language === "en" ? "cards ordered" : "cartas ordenadas"}</span></div>
-                <button type="button" className="primary-btn" onClick={resolveEffectDecisionOrder}>
+                <button type="button" className="primary-btn" onClick={isTriggerOrderPicker ? resolveTriggerDecisionOrder : resolveEffectDecisionOrder}>
                   {language === "en" ? "Confirm order" : "Confirmar ordem"}
                 </button>
               </footer>

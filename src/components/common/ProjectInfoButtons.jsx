@@ -6,6 +6,60 @@ const PATCHES = [
   {
     version: "5.0.3",
     date: { pt: "28/09/2026", en: "09/28/2026" },
+    title: { pt: "Efeitos Online Autoritativos e Ordem de Gatilhos", en: "Server-Authoritative Effects & Trigger Ordering" },
+    summary: {
+      pt: "Escolhas de efeitos Online agora são validadas pelo servidor e gatilhos simultâneos podem ser ordenados antes de entrar na fila de resolução.",
+      en: "Online effect choices are now validated by the server and simultaneous triggers can be ordered before entering the resolution queue."
+    },
+    sections: [
+      {
+        title: { pt: "Multiplayer e prioridade", en: "Multiplayer and priority" },
+        items: {
+          pt: [
+            "Cada decisão Online precisa corresponder à versão e ao ID exatos da decisão autoritativa do servidor.",
+            "Escolhas antigas, forjadas ou pertencentes ao outro jogador são rejeitadas antes de alterar a partida.",
+            "Gatilhos simultâneos do mesmo controlador abrem uma escolha visual de ordem antes da Effect Queue continuar.",
+            "Informações privadas de candidatos de efeitos são ocultadas do oponente enquanto ele aguarda a decisão."
+          ],
+          en: [
+            "Each Online decision must match the exact server-authoritative state version and decision id.",
+            "Stale, forged or other-player choices are rejected before they can mutate the match.",
+            "Simultaneous triggers controlled by the same player open a visual ordering choice before the Effect Queue continues.",
+            "Private effect candidate data is hidden from the opponent while they wait for the decision."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "28/09/2026", en: "09/28/2026" },
+    title: { pt: "Ultimates e Nova Resolução de Efeitos", en: "Ultimates & New Effect Resolution" },
+    summary: {
+      pt: "Ultimates e decisões complexas foram integrados ao Effect Engine, com nova interface contextual na Arena.",
+      en: "Ultimates and complex decisions were integrated into the Effect Engine with a new contextual Arena interface."
+    },
+    sections: [
+      {
+        title: { pt: "Automação de efeitos", en: "Effect automation" },
+        items: {
+          pt: [
+            "Ultimate Trigger, Guard, Critical Hit e XU Trigger usam eventos canônicos do motor de efeitos.",
+            "Escolhas de cartas, opções, ordem e distribuição de Cores usam decisões estruturadas.",
+            "A Arena mostra a decisão necessária diretamente no painel de resolução, reduzindo ainda mais o uso da Resolução Manual."
+          ],
+          en: [
+            "Ultimate Trigger, Guard, Critical Hit and XU Trigger now use canonical Effect Engine events.",
+            "Card choices, options, ordering and Core distribution use structured decisions.",
+            "The Arena displays required choices directly in the resolution panel, further reducing Manual Resolution use."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "28/09/2026", en: "09/28/2026" },
     title: { pt: "Automação de Magic, Burst e Brave", en: "Magic, Burst & Brave Automation" },
     summary: {
       pt: "O motor de regras agora conclui escolhas de Magic antes do descarte, abre mais janelas automáticas de Burst e integra melhor os efeitos herdados de Braves combinados.",

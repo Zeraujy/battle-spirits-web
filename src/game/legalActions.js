@@ -56,7 +56,7 @@ function candidateActions(match, playerId, cardIndex) {
         pushUnique(
           list,
           seen,
-          { type: "RESOLVE_EFFECT_DECISION", payload: { optionId } },
+          { type: "RESOLVE_EFFECT_DECISION", decisionId: pending.id, payload: { decisionId: pending.id, optionId } },
           option.labelPT || option.labelEN || optionId,
           "decision"
         );
@@ -64,11 +64,20 @@ function candidateActions(match, playerId, cardIndex) {
       return list;
     }
 
+    if (pending.kind === "chooseTriggerOrder") {
+      const ids = (pending.candidates || []).map((candidate) => String(candidate.triggerId || candidate.instanceId));
+      if (ids.length) {
+        pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", decisionId: pending.id, payload: { decisionId: pending.id, orderedTriggerIds: ids } }, "Manter ordem dos gatilhos", "decision");
+        if (ids.length > 1) pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", decisionId: pending.id, payload: { decisionId: pending.id, orderedTriggerIds: [...ids].reverse() } }, "Inverter gatilhos", "decision");
+      }
+      return list;
+    }
+
     if (pending.kind === "chooseOrder") {
       const ids = (pending.candidates || []).map((candidate) => String(candidate.instanceId));
       if (ids.length) {
-        pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", payload: { orderedInstanceIds: ids } }, "Manter ordem", "decision");
-        if (ids.length > 1) pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", payload: { orderedInstanceIds: [...ids].reverse() } }, "Inverter ordem", "decision");
+        pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", decisionId: pending.id, payload: { decisionId: pending.id, orderedInstanceIds: ids } }, "Manter ordem", "decision");
+        if (ids.length > 1) pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", decisionId: pending.id, payload: { decisionId: pending.id, orderedInstanceIds: [...ids].reverse() } }, "Inverter ordem", "decision");
       }
       return list;
     }
@@ -77,9 +86,9 @@ function candidateActions(match, playerId, cardIndex) {
       const ids = (pending.candidates || []).map((candidate) => String(candidate.instanceId));
       const total = Math.max(0, Number(pending.totalCores || 0));
       if (!total && pending.allowZero) {
-        pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", payload: { coreDistribution: {} } }, "Não distribuir Cores", "decision");
+        pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", decisionId: pending.id, payload: { decisionId: pending.id, coreDistribution: {} } }, "Não distribuir Cores", "decision");
       } else if (ids.length) {
-        pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", payload: { coreDistribution: { [ids[0]]: total } } }, `Distribuir ${total} Core(s)`, "decision");
+        pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", decisionId: pending.id, payload: { decisionId: pending.id, coreDistribution: { [ids[0]]: total } } }, `Distribuir ${total} Core(s)`, "decision");
       }
       return list;
     }
@@ -111,7 +120,7 @@ function candidateActions(match, playerId, cardIndex) {
       pushUnique(
         list,
         seen,
-        { type: "RESOLVE_EFFECT_DECISION", payload: { selectedInstanceIds } },
+        { type: "RESOLVE_EFFECT_DECISION", decisionId: pending.id, payload: { decisionId: pending.id, selectedInstanceIds } },
         `Escolher ${selectedInstanceIds.length} alvo(s)`,
         "decision"
       );

@@ -11,6 +11,7 @@ import { EffectTriggerScope, isEffectSchemaV2 } from "./effectSchema.js";
 import { EffectEvent, compactEventName, normalizeCanonicalEvent } from "./canonicalEvents.js";
 import { conditionMatchesEffect } from "./conditionEngine.js";
 import { reconcileContinuousModifierConditions } from "./modifierResolver.js";
+import { buildTriggerBatch, nextAmbiguousTriggerGroup, orderedTriggerDispatches, resolveAutomaticTriggerGroups, triggerOrderDecision } from "./triggerOrderingEngine.js";
 
 
 const AMBIENT_LEGACY_EVENTS = new Set([
@@ -69,6 +70,24 @@ function observerDispatchInput(input, playerId, physical, dispatchMode = "observ
       eventSourceCardId: input.sourceCardId || input.sourceCard?.id || input.context?.eventSourceCardId || null
     }
   };
+}
+
+
+function sourceHasTriggeredEntries(match, input, cardIndex) {
+  const found = input.sourceInstanceId ? findPhysicalCard(match, input.sourceInstanceId) : null;
+  const physical = found?.card || input.sourcePhysical || null;
+  const card = input.sourceCard || (physical ? getDatabaseCard(cardIndex, physical) : null) || (input.sourceCardId ? cardIndex.get(input.sourceCardId) : null);
+  if (!card) return false;
+  const context = {
+    ...(input.context || {}),
+    sourcePlayerId: input.sourcePlayerId || found?.playerId || input.context?.sourcePlayerId || null,
+    sourceInstanceId: input.sourceInstanceId || physical?.instanceId || null,
+    sourcePhysical: physical,
+    sourceCard: card,
+    eventPlayerId: input.context?.eventPlayerId || null
+  };
+  return getTriggeredEntries(card, input.event, { dispatchMode: "source" })
+    .some(({ entry }) => entryMatchesTriggerContext(entry, context, match));
 }
 
 function sourceHasV2ContinuousEffect(match, input, cardIndex) {
@@ -162,7 +181,7 @@ export function dispatchEffectEvent(match, rawInput = {}, cardIndex) {
 
   const dispatches = [];
   if (input.sourceInstanceId || input.sourcePhysical || input.sourceCardId || input.sourceCard) {
-    dispatches.push(sourceDispatchInput(input));
+    if (sourceHasTriggeredEntries(match, input, cardIndex)) dispatches.push(sourceDispatchInput(input));
     if (["whenSummoned", "whenDeployed"].includes(input.event) && sourceHasV2ContinuousEffect(match, input, cardIndex)) {
       dispatches.push(sourceDispatchInput({
         ...input,
@@ -177,7 +196,28 @@ export function dispatchEffectEvent(match, rawInput = {}, cardIndex) {
     return { match, triggered: 0, automatic: 0, manualResolutionNeeded: false, pendingEffectDecision: null, notes: [], dispatchedSources: 0 };
   }
 
-  let queued = enqueueEffectEvents(match, dispatches).match;
+  const triggerBatch = resolveAutomaticTriggerGroups(buildTriggerBatch(match, dispatches, cardIndex));
+  const ambiguousGroup = nextAmbiguousTriggerGroup(triggerBatch);
+  let queued;
+  if (ambiguousGroup && !match.pendingEffectDecision) {
+    queued = {
+      ...match,
+      triggerBatch,
+      pendingEffectDecision: triggerOrderDecision(triggerBatch, ambiguousGroup)
+    };
+    return {
+      match: queued,
+      triggered: 0,
+      automatic: 0,
+      manualResolutionNeeded: true,
+      pendingEffectDecision: queued.pendingEffectDecision,
+      notes: ["Multiple simultaneous triggers are waiting for controller ordering."],
+      dispatchedSources: 0
+    };
+  }
+
+  const orderedDispatches = orderedTriggerDispatches(triggerBatch);
+  queued = enqueueEffectEvents({ ...match, triggerBatch: null }, orderedDispatches).match;
   if (queued.pendingEffectDecision) {
     const compatibilityEvents = (queued.effectQueue?.items || []).map((item) => item.payload).filter(Boolean);
     queued = {
