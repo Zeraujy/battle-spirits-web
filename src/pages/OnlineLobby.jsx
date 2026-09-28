@@ -9,6 +9,7 @@ import EmptyState from "../components/common/EmptyState.jsx";
 import QueueStatus from "../components/online/QueueStatus.jsx";
 import ReadyCheck from "../components/online/ReadyCheck.jsx";
 import PreMatchVersus from "../components/online/PreMatchVersus.jsx";
+import FriendChallengePrompt from "../components/online/FriendChallengePrompt.jsx";
 
 import {
   getDecks,
@@ -27,6 +28,11 @@ import {
 import {
   createOnlinePublicProfile
 } from "../online/publicProfile.js";
+
+import {
+  getAccountAccessToken,
+  loadFriends
+} from "../services/socialService.js";
 
 import {
   deckValidationOptionsForSettings
@@ -49,6 +55,7 @@ import "../styles/theme/v230.css";
 import "../styles/pages/onlineLobbySafe.css";
 import "../styles/pages/onlineMatchmakingV500.css";
 import "../styles/pages/onlinePreMatchV500.css";
+import "../styles/pages/onlineSocialMatchV500.css";
 
 
 function safeOnlineError(message, fallback = "Não foi possível concluir esta ação no Online.") {
@@ -121,6 +128,11 @@ export default function OnlineLobby({
   const [readyCheck, setReadyCheck] = useState(null);
   const [readySubmitting, setReadySubmitting] = useState(false);
   const [preMatch, setPreMatch] = useState(null);
+  const [socialFriends, setSocialFriends] = useState([]);
+  const [accountAccessToken, setAccountAccessToken] = useState(null);
+  const [incomingChallenge, setIncomingChallenge] = useState(null);
+  const [challengeBusy, setChallengeBusy] = useState(false);
+  const [outgoingChallengeId, setOutgoingChallengeId] = useState(null);
 
   const handedOffRef =
     useRef(false);
@@ -184,6 +196,33 @@ export default function OnlineLobby({
   }
 
   useEffect(() => {
+    let active = true;
+    Promise.all([getAccountAccessToken(), loadFriends()])
+      .then(([token, friends]) => {
+        if (!active) return;
+        setAccountAccessToken(token || null);
+        setSocialFriends(Array.isArray(friends) ? friends : []);
+      })
+      .catch(() => {
+        if (!active) return;
+        setAccountAccessToken(null);
+        setSocialFriends([]);
+      });
+    return () => { active = false; };
+  }, []);
+
+  const friendUsernames = useMemo(() => new Set(
+    socialFriends
+      .map((friend) => String(friend?.username || friend?.friend_username || "").replace(/^@/, "").trim().toLowerCase())
+      .filter(Boolean)
+  ), [socialFriends]);
+
+  function isFriendLobbyPlayer(entry) {
+    const username = String(entry?.profile?.username || "").replace(/^@/, "").trim().toLowerCase();
+    return Boolean(username && friendUsernames.has(username));
+  }
+
+  useEffect(() => {
     const socket =
       client.socket;
 
@@ -191,7 +230,9 @@ export default function OnlineLobby({
       setStatus("conectado");
       setError("");
       try {
-        socket.emit("lobby:identify", { profile: await currentOnlineProfile() }, (result) => {
+        const accessToken = await getAccountAccessToken();
+        setAccountAccessToken(accessToken || null);
+        socket.emit("lobby:identify", { profile: await currentOnlineProfile(), accessToken }, (result) => {
           if (result?.snapshot) setLobbySnapshot(result.snapshot);
         });
       } catch {}
@@ -314,7 +355,57 @@ export default function OnlineLobby({
       if (snapshot) setLobbySnapshot(snapshot);
     };
 
+    const onChallengeIncoming = (payload) => {
+      if (!payload?.challengeId) return;
+      setIncomingChallenge(payload);
+      setChallengeBusy(false);
+      setError("");
+    };
+
+    const onChallengeStatus = (payload) => {
+      if (!payload?.challengeId) return;
+      setOutgoingChallengeId(payload.challengeId);
+      setSearchMessage("Desafio enviado. Aguardando resposta do amigo...");
+    };
+
+    const onChallengeFailed = (payload) => {
+      setIncomingChallenge((current) => current?.challengeId === payload?.challengeId ? null : current);
+      setOutgoingChallengeId((current) => current === payload?.challengeId ? null : current);
+      setChallengeBusy(false);
+      if (payload?.error) setError(safeOnlineError(payload.error, "O desafio foi encerrado."));
+    };
+
+    const onChallengeMatched = (payload) => {
+      if (!payload?.code || !payload?.playerId || !payload?.resumeToken) return;
+      client.adoptSession(payload);
+      setIncomingChallenge(null);
+      setOutgoingChallengeId(null);
+      setChallengeBusy(false);
+      updateSearching(false, "Desafio aceito.");
+
+      const presentation = payload?.preMatch || null;
+      if (!presentation) {
+        preMatchElapsedRef.current = true;
+        if (pendingMatchStateRef.current) handoffMatch(pendingMatchStateRef.current);
+        return;
+      }
+
+      preMatchRef.current = presentation;
+      preMatchElapsedRef.current = false;
+      setPreMatch(presentation);
+      if (preMatchTimerRef.current) clearTimeout(preMatchTimerRef.current);
+      preMatchTimerRef.current = setTimeout(() => {
+        preMatchElapsedRef.current = true;
+        const pending = pendingMatchStateRef.current;
+        if (pending) handoffMatch(pending);
+      }, 1800);
+    };
+
     socket.on("lobby:snapshot", onLobbySnapshot);
+    socket.on("challenge:incoming", onChallengeIncoming);
+    socket.on("challenge:status", onChallengeStatus);
+    socket.on("challenge:failed", onChallengeFailed);
+    socket.on("challenge:matched", onChallengeMatched);
 
     socket.on(
       "connect",
@@ -354,6 +445,10 @@ export default function OnlineLobby({
 
     return () => {
       socket.off("lobby:snapshot", onLobbySnapshot);
+      socket.off("challenge:incoming", onChallengeIncoming);
+      socket.off("challenge:status", onChallengeStatus);
+      socket.off("challenge:failed", onChallengeFailed);
+      socket.off("challenge:matched", onChallengeMatched);
 
       socket.off(
         "connect",
@@ -486,6 +581,68 @@ export default function OnlineLobby({
     );
   }
 
+  async function sendFriendChallenge(entry) {
+    const deck = currentDeck();
+    if (!deck || !entry?.id || outgoingChallengeId || challengeBusy) return;
+    if (!accountAccessToken) {
+      setError("Entre na sua conta para desafiar amigos.");
+      return;
+    }
+    if (!deckIsValid(deck, deckValidationOptionsForSettings({ ruleset: "eternal" }))) {
+      setError("Este deck precisa estar válido no formato Eternal.");
+      return;
+    }
+    setChallengeBusy(true);
+    setError("");
+    client.socket.emit("challenge:send", {
+      targetSocketId: entry.id,
+      profile: await currentOnlineProfile(),
+      deck: deck.cards,
+      deckId: deck.id || null,
+      deckName: deck.name || "Deck",
+      coverCardId: deck.coverCardId || deck.coverId || deck.cover?.cardId || deck.cover?.id || getDeckCoverCard(deck)?.id || null
+    }, (result) => {
+      setChallengeBusy(false);
+      if (!result?.ok) {
+        setError(safeOnlineError(result?.error, "Não foi possível enviar o desafio."));
+        return;
+      }
+      if (result?.challenge?.challengeId) setOutgoingChallengeId(result.challenge.challengeId);
+    });
+  }
+
+  async function acceptFriendChallenge() {
+    const deck = currentDeck();
+    if (!incomingChallenge?.challengeId || !deck || challengeBusy) return;
+    setChallengeBusy(true);
+    setError("");
+    client.socket.emit("challenge:accept", {
+      challengeId: incomingChallenge.challengeId,
+      profile: await currentOnlineProfile(),
+      deck: deck.cards,
+      deckId: deck.id || null,
+      deckName: deck.name || "Deck",
+      coverCardId: deck.coverCardId || deck.coverId || deck.cover?.cardId || deck.cover?.id || getDeckCoverCard(deck)?.id || null
+    }, (result) => {
+      setChallengeBusy(false);
+      if (!result?.ok) {
+        if (["CHALLENGE_EXPIRED", "FRIEND_REQUIRED", "CHALLENGE_UNAVAILABLE"].includes(result?.code)) {
+          setIncomingChallenge(null);
+        }
+        setError(safeOnlineError(result?.error, "Não foi possível aceitar o desafio."));
+      }
+    });
+  }
+
+  function declineFriendChallenge() {
+    if (!incomingChallenge?.challengeId || challengeBusy) return;
+    setChallengeBusy(true);
+    client.socket.emit("challenge:decline", { challengeId: incomingChallenge.challengeId }, () => {
+      setChallengeBusy(false);
+      setIncomingChallenge(null);
+    });
+  }
+
   async function createRoom() {
     const deck =
       currentDeck();
@@ -513,6 +670,9 @@ export default function OnlineLobby({
 
         deck:
           deck.cards,
+        deckId: deck.id || null,
+        deckName: deck.name || "Deck",
+        coverCardId: deck.coverCardId || deck.coverId || deck.cover?.cardId || deck.cover?.id || getDeckCoverCard(deck)?.id || null,
 
         settings: {
           title: roomTitle,
@@ -583,6 +743,9 @@ export default function OnlineLobby({
 
         deck:
           deck.cards,
+        deckId: deck.id || null,
+        deckName: deck.name || "Deck",
+        coverCardId: deck.coverCardId || deck.coverId || deck.cover?.cardId || deck.cover?.id || getDeckCoverCard(deck)?.id || null,
 
         password:
           joinPassword
@@ -970,7 +1133,14 @@ export default function OnlineLobby({
                         {entry.profile?.avatar ? <img src={entry.profile.avatar} alt="" /> : <span>{String(entry.profile?.name || "P").slice(0, 1).toUpperCase()}</span>}
                       </div>
                       <span><b>{entry.profile?.name || "Jogador"}</b><small>{entry.profile?.username ? `@${entry.profile.username}` : "Jogador Online"}</small></span>
-                      <em className={`status-${entry.status}`}>{entry.status === "available" ? "DISPONÍVEL" : entry.status === "searching" ? "BUSCANDO" : entry.status === "in_room" ? "EM SALA" : entry.status === "in_match" ? "EM PARTIDA" : "RANKED"}</em>
+                      <div className="online-lobby2-player-actions">
+                        {isFriendLobbyPlayer(entry) && entry.status === "available" && String(entry.profile?.username || "").toLowerCase() !== String(profile?.username || "").toLowerCase() && (
+                          <button type="button" disabled={challengeBusy || Boolean(outgoingChallengeId)} onClick={() => sendFriendChallenge(entry)}>
+                            {outgoingChallengeId ? "AGUARDANDO" : "DESAFIAR"}
+                          </button>
+                        )}
+                        <em className={`status-${entry.status}`}>{entry.status === "available" ? "DISPONÍVEL" : entry.status === "searching" ? "BUSCANDO" : entry.status === "in_room" ? "EM SALA" : entry.status === "in_match" ? "EM PARTIDA" : "RANKED"}</em>
+                      </div>
                     </div>
                   ))}
                   {!(lobbySnapshot.players || []).length && <div className="online-lobby2-empty">Conectando à presença do lobby...</div>}
@@ -989,6 +1159,13 @@ export default function OnlineLobby({
           </div>
         )}
       </MatchSetupScreen>
+
+      <FriendChallengePrompt
+        challenge={incomingChallenge}
+        busy={challengeBusy}
+        onAccept={acceptFriendChallenge}
+        onDecline={declineFriendChallenge}
+      />
 
       <DeckPicker
         open={deckPickerOpen}

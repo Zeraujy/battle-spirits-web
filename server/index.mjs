@@ -17,12 +17,13 @@ import { MatchMode } from "../src/online/domain/matchModes.js";
 import { QueueStatus, QueueType } from "../src/online/domain/queueTypes.js";
 import { DisconnectReason, PlayerConnectionState } from "../src/online/domain/matchStatus.js";
 import { DEFAULT_RECONNECT_WINDOW_MS } from "../src/online/domain/onlineConstants.js";
-import { MatchRegistry, createMatchSession, createDeckSnapshot, validateDeckSnapshot, deckSnapshotPresentation } from "./matches/index.js";
+import { MatchRegistry, createMatchSession, createDeckSnapshot, validateDeckSnapshot, deckSnapshotPresentation, createPrivateMatchDescriptor, RematchRequest } from "./matches/index.js";
 import { createStateEnvelope, validateClientStateVersion } from "./matches/stateSync.js";
 import { ReconnectManager } from "./connections/ReconnectManager.js";
 import { Matchmaker, MatchmakingQueue, QueueEntry, ReadyCheckRegistry, RankedMatchmaker } from "./matchmaking/index.js";
 import { finalizeMatchResult } from "./results/index.js";
 import { AbandonPolicy, DisconnectPolicy } from "./policies/index.js";
+import { ChallengeRegistry } from "./challenges/index.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -68,6 +69,7 @@ export async function createBattleSpiritsServer(options = {}) {
   const reconnectManager = new ReconnectManager({ reconnectWindowMs: DEFAULT_RECONNECT_WINDOW_MS });
   const abandonPolicy = new AbandonPolicy();
   const disconnectPolicy = new DisconnectPolicy({ reconnectWindowMs: DEFAULT_RECONNECT_WINDOW_MS });
+  let challengeRegistry = null;
   let lastLobbySnapshotSignature = "";
   const supabaseUrl = String(options.supabaseUrl ?? process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "");
   const supabaseServiceKey = String(options.supabaseServiceKey ?? process.env.SUPABASE_SERVICE_ROLE_KEY ?? "");
@@ -161,7 +163,10 @@ export async function createBattleSpiritsServer(options = {}) {
   }
 
   function roomMatchMode(room) {
-    return room?.ranked ? MatchMode.RANKED : MatchMode.CASUAL;
+    if (room?.ranked) return MatchMode.RANKED;
+    if (room?.friendChallenge) return MatchMode.FRIEND;
+    if (room?.privateMatch) return MatchMode.PRIVATE;
+    return MatchMode.CASUAL;
   }
 
   function getRoomMatchSession(room) {
@@ -370,6 +375,7 @@ export async function createBattleSpiritsServer(options = {}) {
       match: sanitizeMatch(match, viewerId),
       matchSync: roomMatchSync(room),
       ranked: room.ranked ? { season: room.ranked.season } : null,
+      matchMode: roomMatchMode(room),
       settings: {
         title: room.settings?.title || "Sala de Battle Spirits",
         visibility: room.settings?.visibility || "private",
@@ -601,6 +607,99 @@ export async function createBattleSpiritsServer(options = {}) {
     return room;
   }
 
+  function createFriendChallengeRoom(request, challengedPayload = {}) {
+    if (!request?.challengerDeck) return null;
+    const challengerSocket = io.sockets.sockets.get(request.challengerSocketId);
+    const challengedSocket = io.sockets.sockets.get(request.challengedSocketId);
+    if (!challengerSocket?.connected || !challengedSocket?.connected) return null;
+
+    const lockOptions = deckValidationOptionsForSettings({ ruleset: "eternal" });
+    const challengerLock = createDeckSnapshot(request.challengerDeck, cardIndex, lockOptions);
+    const challengedLock = createDeckSnapshot({
+      deck: challengedPayload.deck,
+      deckId: challengedPayload.deckId,
+      deckName: challengedPayload.deckName,
+      coverCardId: challengedPayload.coverCardId
+    }, cardIndex, lockOptions);
+    if (!challengerLock.ok || !challengedLock.ok) return null;
+    if (!validateDeckSnapshot(challengerLock.snapshot, cardIndex, lockOptions).ok) return null;
+    if (!validateDeckSnapshot(challengedLock.snapshot, cardIndex, lockOptions).ok) return null;
+
+    let roomCode = code();
+    while (rooms.has(roomCode)) roomCode = code();
+    const challengedPresence = lobbyPresence.get(request.challengedSocketId);
+    const room = {
+      code: roomCode,
+      players: {
+        player1: {
+          socketId: request.challengerSocketId,
+          profile: publicProfile(request.challengerProfile),
+          deck: challengerLock.snapshot.cards.map((entry) => ({ ...entry })),
+          deckSnapshot: challengerLock.snapshot,
+          resumeToken: resumeToken()
+        },
+        player2: {
+          socketId: request.challengedSocketId,
+          profile: publicProfile(challengedPayload.profile || challengedPresence?.profile || {}),
+          deck: challengedLock.snapshot.cards.map((entry) => ({ ...entry })),
+          deckSnapshot: challengedLock.snapshot,
+          resumeToken: resumeToken()
+        }
+      },
+      settings: {
+        title: "Friend Challenge",
+        visibility: "private",
+        passwordHash: null,
+        spectatorsAllowed: false,
+        ...normalizeCustomMatchSettings({ firstPlayerMode: "random", turnTimerSeconds: 0, mulliganEnabled: true, ruleset: "eternal" })
+      },
+      privateMatch: createPrivateMatchDescriptor({ roomCode }),
+      friendChallenge: {
+        challengeId: request.challengeId,
+        challengerUserId: request.challengerUserId,
+        challengedUserId: request.challengedUserId
+      },
+      match: null,
+      chat: [],
+      createdAt: Date.now()
+    };
+
+    const firstPlayerId = resolveFirstPlayerId(room.settings);
+    room.match = createMatch({
+      player1: { ...room.players.player1.profile, deck: room.players.player1.deck },
+      player2: { ...room.players.player2.profile, deck: room.players.player2.deck },
+      firstPlayerId,
+      cardIndex
+    });
+    attachRoomMatchSession(room, { replace: true });
+    rooms.set(roomCode, room);
+    indexRoomSocket(request.challengerSocketId, roomCode, "player1");
+    indexRoomSocket(request.challengedSocketId, roomCode, "player2");
+    challengerSocket.join(roomCode);
+    challengedSocket.join(roomCode);
+
+    const matchedPayload = (playerId, opponentId) => ({
+      challengeId: request.challengeId,
+      code: roomCode,
+      playerId,
+      resumeToken: room.players[playerId].resumeToken,
+      matchSync: roomMatchSync(room),
+      preMatch: {
+        matchId: room.match.id,
+        queueType: "friend",
+        player: { profile: room.players[playerId].profile, deck: deckSnapshotPresentation(room.players[playerId].deckSnapshot) },
+        opponent: { profile: room.players[opponentId].profile, deck: deckSnapshotPresentation(room.players[opponentId].deckSnapshot) }
+      }
+    });
+
+    io.to(request.challengerSocketId).emit("challenge:matched", matchedPayload("player1", "player2"));
+    io.to(request.challengedSocketId).emit("challenge:matched", matchedPayload("player2", "player1"));
+    syncTurnTimer(room, true);
+    emitRoom(room, { includeChat: true });
+    emitLobbySnapshot();
+    return room;
+  }
+
   function beginReadyCheck(entries) {
     const session = readyCheckRegistry.create(entries);
     emitReadyCheck(session);
@@ -688,6 +787,34 @@ export async function createBattleSpiritsServer(options = {}) {
     if (error || !data?.user) return { ok: false, error: "Não foi possível validar sua conta Ranked." };
     return { ok: true, user: data.user };
   }
+
+  async function onlineAccountIdentity(accessToken) {
+    if (!rankedSupabase) return { ok: false, error: "Recursos de conta indisponíveis no momento." };
+    const token = String(accessToken || "").trim();
+    if (!token) return { ok: false, error: "Entre na sua conta para usar desafios de amigos." };
+    const { data, error } = await rankedSupabase.auth.getUser(token);
+    if (error || !data?.user) return { ok: false, error: "Não foi possível validar sua conta." };
+    return { ok: true, user: data.user };
+  }
+
+  async function areFriends(userIdA, userIdB) {
+    if (!rankedSupabase || !userIdA || !userIdB || userIdA === userIdB) return false;
+    const { data, error } = await rankedSupabase
+      .from("bs_friendships")
+      .select("id")
+      .eq("status", "accepted")
+      .or(`and(requester_id.eq.${userIdA},addressee_id.eq.${userIdB}),and(requester_id.eq.${userIdB},addressee_id.eq.${userIdA})`)
+      .limit(1);
+    return !error && Array.isArray(data) && data.length > 0;
+  }
+
+  challengeRegistry = new ChallengeRegistry({
+    expiresInMs: 30_000,
+    onExpire(request) {
+      io.to(request.challengerSocketId).emit("challenge:failed", { challengeId: request.challengeId, code: "CHALLENGE_EXPIRED", error: "O desafio expirou." });
+      io.to(request.challengedSocketId).emit("challenge:failed", { challengeId: request.challengeId, code: "CHALLENGE_EXPIRED", error: "O desafio expirou." });
+    }
+  });
 
   async function ensureRankedProfile(userId) {
     const { data: found } = await rankedSupabase.from("bs_ranked_profiles")
@@ -909,17 +1036,115 @@ export async function createBattleSpiritsServer(options = {}) {
       console.log(`[socket.io] ${socket.id} upgrade para ${socket.conn.transport.name}`);
     });
 
-    onSafe(socket, "lobby:identify", (payload, ack) => {
+    onSafe(socket, "lobby:identify", async (payload, ack) => {
       const validation = validateOnlineProfilePayload(payload?.profile);
       if (!validation.ok) return ack(validation);
-      lobbyPresence.set(socket.id, { profile: publicProfile(payload?.profile), identifiedAt: Date.now() });
+      let userId = null;
+      const accessToken = String(payload?.accessToken || "").trim();
+      if (accessToken) {
+        const identity = await onlineAccountIdentity(accessToken);
+        if (identity.ok) userId = identity.user.id;
+      }
+      lobbyPresence.set(socket.id, { profile: publicProfile(payload?.profile), userId, identifiedAt: Date.now() });
       const snapshot = lobbySnapshot();
-      ack({ ok: true, snapshot });
+      ack({ ok: true, snapshot, authenticated: Boolean(userId) });
       emitLobbySnapshot();
     });
 
     onSafe(socket, "lobby:list", (_payload, ack) => {
       ack({ ok: true, snapshot: lobbySnapshot() });
+    });
+
+    onSafe(socket, "challenge:send", async (payload, ack) => {
+      if (findRoomBySocket(socket.id) || casualQueue.hasSocket(socket.id) || rankedQueue.hasSocket(socket.id) || readyCheckRegistry.getBySocket(socket.id)) {
+        return ack({ ok: false, code: "CHALLENGE_UNAVAILABLE", error: "Saia da fila ou sala atual antes de desafiar um amigo." });
+      }
+      const sourcePresence = lobbyPresence.get(socket.id);
+      const targetSocketId = String(payload?.targetSocketId || "");
+      const targetPresence = lobbyPresence.get(targetSocketId);
+      const targetSocket = io.sockets.sockets.get(targetSocketId);
+      if (!sourcePresence?.userId) return ack({ ok: false, code: "AUTH_REQUIRED", error: "Entre na sua conta para desafiar amigos." });
+      if (!targetPresence?.userId || !targetSocket?.connected || targetSocketId === socket.id) {
+        return ack({ ok: false, code: "CHALLENGE_UNAVAILABLE", error: "Este amigo não está disponível para um desafio." });
+      }
+      if (presenceStatus(targetSocketId) !== "available" || challengeRegistry.getBySocket(socket.id) || challengeRegistry.getBySocket(targetSocketId)) {
+        return ack({ ok: false, code: "CHALLENGE_UNAVAILABLE", error: "Este amigo está ocupado no momento." });
+      }
+      if (!(await areFriends(sourcePresence.userId, targetPresence.userId))) {
+        return ack({ ok: false, code: "FRIEND_REQUIRED", error: "Desafios diretos estão disponíveis apenas entre amigos." });
+      }
+      const profileValidation = validateOnlineProfilePayload(payload?.profile);
+      if (!profileValidation.ok) return ack(profileValidation);
+      const validation = validateDeck(payload?.deck || [], cardIndex, deckValidationOptionsForSettings({ ruleset: "eternal" }));
+      if (!validation.ok) return ack({ ok: false, code: "DECK_INVALID", error: validation.errors.join(" ") });
+
+      const request = challengeRegistry.create({
+        challengerSocketId: socket.id,
+        challengedSocketId: targetSocketId,
+        challengerUserId: sourcePresence.userId,
+        challengedUserId: targetPresence.userId,
+        challengerProfile: publicProfile(payload?.profile || sourcePresence.profile),
+        challengerDeck: {
+          deck: payload.deck,
+          deckId: String(payload?.deckId || "").slice(0, 96) || null,
+          deckName: String(payload?.deckName || "Deck").slice(0, 120),
+          coverCardId: String(payload?.coverCardId || "").slice(0, 128) || null
+        }
+      });
+
+      io.to(targetSocketId).emit("challenge:incoming", request.snapshotFor(targetSocketId));
+      io.to(socket.id).emit("challenge:status", request.snapshotFor(socket.id));
+      ack({ ok: true, challenge: request.snapshotFor(socket.id) });
+    });
+
+    onSafe(socket, "challenge:accept", async (payload, ack) => {
+      const request = challengeRegistry.get(payload?.challengeId);
+      if (!request || request.challengedSocketId !== socket.id || !request.isPending()) {
+        return ack({ ok: false, code: "CHALLENGE_EXPIRED", error: "Este desafio não está mais disponível." });
+      }
+      const sourcePresence = lobbyPresence.get(request.challengerSocketId);
+      const targetPresence = lobbyPresence.get(socket.id);
+      const challengerBusy = Boolean(findRoomBySocket(request.challengerSocketId) || casualQueue.hasSocket(request.challengerSocketId) || rankedQueue.hasSocket(request.challengerSocketId) || readyCheckRegistry.getBySocket(request.challengerSocketId));
+      const challengedBusy = Boolean(findRoomBySocket(socket.id) || casualQueue.hasSocket(socket.id) || rankedQueue.hasSocket(socket.id) || readyCheckRegistry.getBySocket(socket.id));
+      if (challengerBusy || challengedBusy) {
+        challengeRegistry.delete(request.challengeId);
+        return ack({ ok: false, code: "CHALLENGE_UNAVAILABLE", error: "Um dos jogadores já entrou em outra atividade Online." });
+      }
+      if (!sourcePresence?.userId || !targetPresence?.userId || !(await areFriends(sourcePresence.userId, targetPresence.userId))) {
+        challengeRegistry.delete(request.challengeId);
+        return ack({ ok: false, code: "FRIEND_REQUIRED", error: "Não foi possível validar este desafio de amizade." });
+      }
+      const validation = validateDeck(payload?.deck || [], cardIndex, deckValidationOptionsForSettings({ ruleset: "eternal" }));
+      if (!validation.ok) return ack({ ok: false, code: "DECK_INVALID", error: validation.errors.join(" ") });
+      if (!request.accept(socket.id)) return ack({ ok: false, code: "CHALLENGE_EXPIRED", error: "Este desafio expirou." });
+
+      const room = createFriendChallengeRoom(request, {
+        profile: payload?.profile || targetPresence.profile,
+        deck: payload.deck,
+        deckId: String(payload?.deckId || "").slice(0, 96) || null,
+        deckName: String(payload?.deckName || "Deck").slice(0, 120),
+        coverCardId: String(payload?.coverCardId || "").slice(0, 128) || null
+      });
+      challengeRegistry.delete(request.challengeId);
+      if (!room) return ack({ ok: false, code: "MATCH_NOT_FOUND", error: "Não foi possível iniciar o desafio." });
+      ack({ ok: true, code: room.code, status: "accepted" });
+    });
+
+    onSafe(socket, "challenge:decline", (payload, ack) => {
+      const request = challengeRegistry.get(payload?.challengeId);
+      if (!request || !request.decline(socket.id)) return ack({ ok: false, code: "CHALLENGE_EXPIRED", error: "Este desafio não está mais disponível." });
+      io.to(request.challengerSocketId).emit("challenge:failed", { challengeId: request.challengeId, code: "CHALLENGE_DECLINED", error: "O desafio foi recusado." });
+      challengeRegistry.delete(request.challengeId);
+      ack({ ok: true });
+    });
+
+    onSafe(socket, "challenge:cancel", (payload, ack) => {
+      const request = challengeRegistry.get(payload?.challengeId) || challengeRegistry.getBySocket(socket.id);
+      if (!request || !request.cancel(socket.id)) return ack({ ok: false, code: "CHALLENGE_EXPIRED", error: "Este desafio não está mais disponível." });
+      const otherSocketId = request.challengerSocketId === socket.id ? request.challengedSocketId : request.challengerSocketId;
+      io.to(otherSocketId).emit("challenge:failed", { challengeId: request.challengeId, code: "CHALLENGE_CANCELLED", error: "O desafio foi cancelado." });
+      challengeRegistry.delete(request.challengeId);
+      ack({ ok: true });
     });
 
     onSafe(socket, "ranked:join", async (payload, ack) => {
@@ -1092,7 +1317,7 @@ export async function createBattleSpiritsServer(options = {}) {
       const room = {
         code: roomCode,
         players: {
-          player1: { socketId: socket.id, profile: publicProfile(payload.profile), deck: payload.deck, resumeToken: resumeToken() },
+          player1: { socketId: socket.id, profile: publicProfile(payload.profile), deck: payload.deck, deckId: String(payload?.deckId || "").slice(0, 96) || null, deckName: String(payload?.deckName || "Deck").slice(0, 120), coverCardId: String(payload?.coverCardId || "").slice(0, 128) || null, resumeToken: resumeToken() },
           player2: null
         },
         settings: {
@@ -1106,6 +1331,9 @@ export async function createBattleSpiritsServer(options = {}) {
         chat: [],
         createdAt: Date.now()
       };
+      if (visibility === "private") {
+        room.privateMatch = createPrivateMatchDescriptor({ roomCode });
+      }
       rooms.set(roomCode, room);
       indexRoomSocket(socket.id, roomCode, "player1");
       socket.join(roomCode);
@@ -1126,7 +1354,7 @@ export async function createBattleSpiritsServer(options = {}) {
       }
       const validation = validateDeck(payload.deck || [], cardIndex, deckValidationOptionsForSettings(room.settings));
       if (!validation.ok) return ack({ ok: false, error: validation.errors.join(" ") });
-      room.players.player2 = { socketId: socket.id, profile: publicProfile(payload.profile), deck: payload.deck, resumeToken: resumeToken() };
+      room.players.player2 = { socketId: socket.id, profile: publicProfile(payload.profile), deck: payload.deck, deckId: String(payload?.deckId || "").slice(0, 96) || null, deckName: String(payload?.deckName || "Deck").slice(0, 120), coverCardId: String(payload?.coverCardId || "").slice(0, 128) || null, resumeToken: resumeToken() };
       indexRoomSocket(socket.id, roomCode, "player2");
       socket.join(roomCode);
       ack({ ok: true, code: roomCode, playerId: "player2", resumeToken: room.players.player2.resumeToken, state: roomSummary(room, "player2") });
@@ -1175,6 +1403,22 @@ export async function createBattleSpiritsServer(options = {}) {
       const { room, playerId } = found;
       if (playerId !== "player1") return ack({ ok: false, error: "Apenas o host inicia a partida." });
       if (!room.players.player2) return ack({ ok: false, error: "Aguardando o segundo jogador." });
+      const lockOptions = deckValidationOptionsForSettings(room.settings);
+      for (const currentPlayerId of ["player1", "player2"]) {
+        const currentPlayer = room.players[currentPlayerId];
+        const lock = createDeckSnapshot({
+          deck: currentPlayer.deck,
+          deckId: currentPlayer.deckId || null,
+          deckName: currentPlayer.deckName || "Deck",
+          coverCardId: currentPlayer.coverCardId || null
+        }, cardIndex, lockOptions);
+        if (!lock.ok || !validateDeckSnapshot(lock.snapshot, cardIndex, lockOptions).ok) {
+          return ack({ ok: false, code: "DECK_LOCK_FAILED", error: "Não foi possível bloquear os decks desta partida." });
+        }
+        currentPlayer.deckSnapshot = lock.snapshot;
+        currentPlayer.deck = lock.snapshot.cards.map((entry) => ({ ...entry }));
+      }
+
       const firstPlayerId = resolveFirstPlayerId(room.settings);
       room.match = createMatch({
         player1: { ...room.players.player1.profile, deck: room.players.player1.deck },
@@ -1209,31 +1453,39 @@ export async function createBattleSpiritsServer(options = {}) {
       ack({ ok:true, message });
     });
 
-    onSafe(socket, "room:rematch", (payload, ack) => {
+    onSafe(socket, "room:rematch", (_payload, ack) => {
       const found = findRoomBySocket(socket.id);
       if (!found) return ack({ ok: false, error: "Sala não encontrada." });
       const { room, playerId } = found;
-      if (!room.match?.winnerId) return ack({ ok: false, error: "A partida ainda não terminou." });
+      const currentMatch = authoritativeMatch(room);
+      if (!currentMatch?.winnerId) return ack({ ok: false, error: "A partida ainda não terminou." });
       if (room.ranked) return ack({ ok: false, error: "Ranked exige uma nova busca." });
 
-      room.rematchVotes = { ...(room.rematchVotes || {}), [playerId]: true };
-      io.to(room.code).emit("room:rematch-status", { votes: room.rematchVotes });
-      const accepted = Boolean(room.rematchVotes.player1 && room.rematchVotes.player2);
-      if (!accepted) return ack({ ok: true, started: false });
+      if (!room.rematchRequest) {
+        room.rematchRequest = new RematchRequest({ playerIds: Object.keys(room.players || {}).filter((id) => Boolean(room.players[id])) });
+      }
+      if (!room.rematchRequest.request(playerId)) {
+        return ack({ ok: false, error: "Não foi possível registrar a revanche." });
+      }
 
+      const rematchState = room.rematchRequest.snapshot();
+      io.to(room.code).emit("room:rematch-status", rematchState);
+      if (!room.rematchRequest.isComplete()) return ack({ ok: true, started: false, rematch: rematchState });
+
+      const previousMatchId = currentMatch.id;
       const firstPlayerId = resolveFirstPlayerId(room.settings);
       room.match = createMatch({
-        player1: { ...room.players.player1.profile, deck: room.players.player1.deck },
-        player2: { ...room.players.player2.profile, deck: room.players.player2.deck },
+        player1: { ...room.players.player1.profile, deck: room.players.player1.deckSnapshot?.cards || room.players.player1.deck },
+        player2: { ...room.players.player2.profile, deck: room.players.player2.deckSnapshot?.cards || room.players.player2.deck },
         firstPlayerId,
         cardIndex
       });
       attachRoomMatchSession(room, { replace: true });
-      room.rematchVotes = {};
+      room.rematchRequest = null;
       syncTurnTimer(room, true);
-      io.to(room.code).emit("room:rematch-started", { firstPlayerId, matchId: room.match.id });
+      io.to(room.code).emit("room:rematch-started", { previousMatchId, firstPlayerId, matchId: room.match.id });
       emitRoom(room, { includeChat: true });
-      ack({ ok: true, started: true });
+      ack({ ok: true, started: true, matchId: room.match.id });
     });
 
     onSafe(socket, "match:concede", async (_payload, ack) => {
@@ -1295,6 +1547,17 @@ export async function createBattleSpiritsServer(options = {}) {
     socket.on("disconnect", (reason) => {
       console.log(`[socket.io] desconectado ${socket.id}: ${reason}`);
 
+      const disconnectedChallenge = challengeRegistry?.cancelBySocket(socket.id);
+      if (disconnectedChallenge) {
+        const otherSocketId = disconnectedChallenge.challengerSocketId === socket.id
+          ? disconnectedChallenge.challengedSocketId
+          : disconnectedChallenge.challengerSocketId;
+        io.to(otherSocketId).emit("challenge:failed", {
+          challengeId: disconnectedChallenge.challengeId,
+          code: "CHALLENGE_CANCELLED",
+          error: "O outro jogador desconectou antes do desafio começar."
+        });
+      }
       lobbyPresence.delete(socket.id);
       removeFromCasualQueue(socket.id);
       removeFromRankedQueue(socket.id);

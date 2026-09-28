@@ -114,6 +114,12 @@ export async function getAccountSession() {
   return { mode: "cloud", user };
 }
 
+export async function getAccountAccessToken() {
+  if (!supabase) return null;
+  const { data } = await supabase.auth.getSession();
+  return data?.session?.access_token || null;
+}
+
 export async function signUp(email, password) {
   if (!supabase) return { ok: false, error: "Recursos sociais indisponíveis no momento." };
 

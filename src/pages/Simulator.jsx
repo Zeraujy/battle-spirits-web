@@ -25,6 +25,7 @@ import ArenaOverlayLayer from "../components/game/arena/ArenaOverlayLayer.jsx";
 import BurstPresentation from "../components/game/arena/BurstPresentation.jsx";
 import GameLogDrawer from "../components/game/arena/GameLogDrawer.jsx";
 import GameEventToast from "../components/game/arena/GameEventToast.jsx";
+import MatchResultScreen from "../components/match/MatchResultScreen.jsx";
 import { ReserveCoreDisplay, CoreTrashDisplay } from "../components/game/arena/CoreSystemDisplay.jsx";
 import Modal from "../components/common/Modal.jsx";
 import { cardIndex } from "../services/cardRepository.js";
@@ -55,7 +56,7 @@ import {
 } from "../game/brave.js";
 import { useLanguage } from "../i18n.jsx";
 import { identifySavedDeck, recordMatchResult } from "../services/matchHistoryService.js";
-import { buildPostMatchSummary, formatMatchDuration } from "../services/postMatchService.js";
+import { buildPostMatchSummary } from "../services/postMatchService.js";
 import { searchProfiles, sendFriendRequest } from "../services/socialService.js";
 import { getSmartCoreClickTarget } from "../interactions/coreClickPolicy.js";
 import {
@@ -6865,419 +6866,40 @@ export default function Simulator({
       ================================================= */}
 
       {match.winnerId && (() => {
-        const winner =
-          match.players[
-            match.winnerId
-          ];
-
-        const defeatedId =
-          otherPlayerId(
-            match,
-            match.winnerId
-          );
-
-        const defeated =
-          match.players[
-            defeatedId
-          ];
-
-        const resultViewerId =
-          online
-            ? viewerPlayerId
-            : aiMode
-              ? humanPlayerId
-              : null;
-
-        const isDefeat =
-          Boolean(
-            resultViewerId &&
-            match.winnerId !==
-              resultViewerId
-          );
-
-        const reason =
-          match.winnerReason ||
-          (
-            Number(
-              defeated?.life ||
-              0
-            ) <= 0
-              ? "life"
-              : (
-                  defeated?.deck
-                    ?.length === 0
-                    ? "deck"
-                    : "other"
-                )
-          );
-
-        const reasonTitle =
-          language === "en"
-            ? (
-                reason === "life"
-                  ? "Life depleted"
-                  : reason === "deck"
-                    ? "Deck depleted"
-                    : reason === "turn_timeout"
-                      ? "Turn timer expired"
-                    : reason === "concede" ||
-                      reason === "surrender"
-                      ? "Concession"
-                      : "Victory condition"
-              )
-            : (
-                reason === "life"
-                  ? "Life reduzida a 0"
-                  : reason === "deck"
-                    ? "Deck esgotado"
-                    : reason === "turn_timeout"
-                      ? "Tempo do turno esgotado"
-                    : reason === "concede" ||
-                      reason === "surrender"
-                      ? "Desistência"
-                      : "Condição de vitória"
-              );
-
-        const reasonText =
-          language === "en"
-            ? (
-                reason === "life"
-                  ? `${defeated?.name || "The opponent"} has no Life remaining.`
-                  : reason === "deck"
-                    ? `${defeated?.name || "The opponent"} can no longer continue with an empty Deck.`
-                    : reason === "turn_timeout"
-                      ? `${defeated?.name || "The opponent"} ran out of turn time.`
-                    : reason === "concede" ||
-                      reason === "surrender"
-                      ? `${defeated?.name || "The opponent"} conceded the match.`
-                      : "The match victory condition was reached."
-              )
-            : (
-                reason === "life"
-                  ? `${defeated?.name || "O oponente"} ficou sem Life.`
-                  : reason === "deck"
-                    ? `${defeated?.name || "O oponente"} não pode continuar com o Deck vazio.`
-                    : reason === "turn_timeout"
-                      ? `${defeated?.name || "O oponente"} ficou sem tempo no turno.`
-                    : reason === "concede" ||
-                      reason === "surrender"
-                      ? `${defeated?.name || "O oponente"} desistiu da partida.`
-                      : "A condição de vitória da partida foi alcançada."
-              );
-
-        const initials = (
-          name
-        ) =>
-          String(
-            name ||
-            "?"
-          )
-            .trim()
-            .split(
-              /\s+/
-            )
-            .slice(
-              0,
-              2
-            )
-            .map(
-              (part) =>
-                part[0] ||
-                ""
-            )
-            .join(
-              ""
-            )
-            .toUpperCase() ||
-          "?";
-
+        const winner = match.players[match.winnerId];
+        const defeatedId = otherPlayerId(match, match.winnerId);
+        const defeated = match.players[defeatedId];
+        const resultViewerId = online ? viewerPlayerId : aiMode ? humanPlayerId : null;
+        const isDefeat = Boolean(resultViewerId && match.winnerId !== resultViewerId);
+        const reason = match.winnerReason || (Number(defeated?.life || 0) <= 0 ? "life" : defeated?.deck?.length === 0 ? "deck" : "other");
         const summary = postMatchSummary;
-        const featuredMasteryCard = summary?.mastery?.featuredCardId
-          ? cardIndex.get(String(summary.mastery.featuredCardId))
-          : null;
+        const featuredMasteryCard = summary?.mastery?.featuredCardId ? cardIndex.get(String(summary.mastery.featuredCardId)) : null;
         const opponentUsername = String(summary?.opponent?.username || "").replace(/^@/, "").trim();
         const rankedDelta = Number(summary?.ranked?.rpDelta || 0);
 
         return (
-          <div
-            className={[
-              "game-result-overlay",
-              isDefeat
-                ? "is-defeat"
-                : "is-victory"
-            ]
-              .filter(Boolean)
-              .join(" ")}
-            role="dialog"
-            aria-modal="true"
-            aria-label={
-              language === "en"
-                ? "Match result"
-                : "Resultado da partida"
-            }
-          >
-            <section className="game-result-card">
-              <div className="game-result-ambient" />
-
-              <header className="game-result-header">
-                <span className="game-result-kicker">
-                  {language === "en"
-                    ? "MATCH COMPLETE"
-                    : "PARTIDA ENCERRADA"}
-                </span>
-
-                <div className="game-result-badge">
-                  <span>
-                    {isDefeat
-                      ? (
-                          language === "en"
-                            ? "DEFEAT"
-                            : "DERROTA"
-                        )
-                      : (
-                          language === "en"
-                            ? "VICTORY"
-                            : "VITÓRIA"
-                        )}
-                  </span>
-                </div>
-
-                <h2>
-                  {isDefeat
-                    ? (
-                        language === "en"
-                          ? `${winner?.name || "Opponent"} won the match`
-                          : `${winner?.name || "Oponente"} venceu a partida`
-                      )
-                    : (
-                        language === "en"
-                          ? `${winner?.name || "Player"} is victorious`
-                          : `${winner?.name || "Jogador"} venceu!`
-                      )}
-                </h2>
-
-                <p>
-                  {isDefeat
-                    ? (
-                        language === "en"
-                          ? "The duel is over. Review the result and prepare for the next battle."
-                          : "O duelo terminou. Confira o resultado e prepare-se para a próxima batalha."
-                      )
-                    : (
-                        language === "en"
-                          ? "The final blow was dealt. The duel belongs to the winner."
-                          : "O golpe final foi dado. O duelo pertence ao vencedor."
-                      )}
-                </p>
-              </header>
-
-              <div className="game-result-versus">
-                <article
-                  className="game-result-player winner"
-                  style={{
-                    "--result-player-color":
-                      winner?.playerColor ||
-                      "#d8d8d8"
-                  }}
-                >
-                  <span className="game-result-player-label">
-                    {language === "en"
-                      ? "WINNER"
-                      : "VENCEDOR"}
-                  </span>
-
-                  <div className="game-result-avatar">
-                    {winner?.avatar ? (
-                      <img
-                        src={winner.avatar}
-                        alt=""
-                      />
-                    ) : (
-                      <span>
-                        {initials(
-                          winner?.name
-                        )}
-                      </span>
-                    )}
-                  </div>
-
-                  <strong>
-                    {winner?.name ||
-                      (
-                        language === "en"
-                          ? "Player"
-                          : "Jogador"
-                      )}
-                  </strong>
-
-                  <small>
-                    {language === "en"
-                      ? "Victory"
-                      : "Vitória"}
-                  </small>
-                </article>
-
-                <div className="game-result-vs-mark">
-                  VS
-                </div>
-
-                <article
-                  className="game-result-player defeated"
-                  style={{
-                    "--result-player-color":
-                      defeated?.playerColor ||
-                      "#929292"
-                  }}
-                >
-                  <span className="game-result-player-label">
-                    {language === "en"
-                      ? "DEFEATED"
-                      : "DERROTADO"}
-                  </span>
-
-                  <div className="game-result-avatar">
-                    {defeated?.avatar ? (
-                      <img
-                        src={defeated.avatar}
-                        alt=""
-                      />
-                    ) : (
-                      <span>
-                        {initials(
-                          defeated?.name
-                        )}
-                      </span>
-                    )}
-                  </div>
-
-                  <strong>
-                    {defeated?.name ||
-                      (
-                        language === "en"
-                          ? "Player"
-                          : "Jogador"
-                      )}
-                  </strong>
-
-                  <small>
-                    {language === "en"
-                      ? "Defeat"
-                      : "Derrota"}
-                  </small>
-                </article>
-              </div>
-
-              <div className="game-result-summary">
-                <div>
-                  <span>
-                    {language === "en"
-                      ? "RESULT"
-                      : "RESULTADO"}
-                  </span>
-
-                  <strong>
-                    {reasonTitle}
-                  </strong>
-
-                  <p>
-                    {reasonText}
-                  </p>
-                </div>
-
-                <div className="game-result-turn">
-                  <span>
-                    {language === "en"
-                      ? "FINAL TURN"
-                      : "TURNO FINAL"}
-                  </span>
-
-                  <strong>
-                    {match.turnNumber ||
-                      "-"}
-                  </strong>
-                </div>
-              </div>
-
-              <section className="post-match-v380-grid" aria-label={language === "en" ? "Match details" : "Detalhes da partida"}>
-                <article>
-                  <span>{language === "en" ? "DURATION" : "DURAÇÃO"}</span>
-                  <strong>{formatMatchDuration(summary?.durationSeconds || 0, language)}</strong>
-                  <small>{summary?.turns || match.turnNumber || 1} {language === "en" ? "turns" : "turnos"}</small>
-                </article>
-                <article>
-                  <span>{language === "en" ? "DECK" : "DECK"}</span>
-                  <strong>{summary?.deck?.name || (language === "en" ? "Unidentified" : "Não identificado")}</strong>
-                  <small>{summary?.deck?.cardIds?.length ? `${summary.deck.cardIds.length} ${language === "en" ? "cards" : "cartas"}` : (language === "en" ? "Match snapshot" : "Snapshot da partida")}</small>
-                </article>
-                <article>
-                  <span>{language === "en" ? "LIFE REMAINING" : "LIFE RESTANTE"}</span>
-                  <strong>{summary?.lifeRemaining ?? "—"}</strong>
-                  <small>{summary?.result === "win" ? (language === "en" ? "Your final Life" : "Seu Life final") : (language === "en" ? "At match end" : "Ao encerrar")}</small>
-                </article>
-                <article className="post-match-mastery-stat">
-                  <span>CARD MASTERY</span>
-                  <strong>+{summary?.mastery?.totalXp || 0} XP</strong>
-                  <small>{summary?.mastery?.trackedCards || 0} {language === "en" ? "cards progressed" : "cartas progrediram"}</small>
-                </article>
-              </section>
-
-              {(featuredMasteryCard || summary?.ranked) && (
-                <section className="post-match-v380-progression">
-                  {featuredMasteryCard && (
-                    <article className="post-match-featured-mastery">
-                      <div className="post-match-featured-card">
-                        <img src={resolveCardImage(featuredMasteryCard)} alt={getCardName(featuredMasteryCard)} />
-                      </div>
-                      <div>
-                        <span>{language === "en" ? "MASTERY HIGHLIGHT" : "DESTAQUE DE MAESTRIA"}</span>
-                        <strong>{getCardName(featuredMasteryCard)}</strong>
-                        <small>+{summary?.mastery?.featuredXp || 0} XP · {summary?.deck?.coverCardId === summary?.mastery?.featuredCardId ? (language === "en" ? "Deck cover bonus" : "Bônus de carta de capa") : (language === "en" ? "Used in this duel" : "Utilizada neste duelo")}</small>
-                      </div>
-                    </article>
-                  )}
-                  {summary?.ranked && (
-                    <article className={`post-match-ranked-change ${rankedDelta >= 0 ? "positive" : "negative"}`}>
-                      <span>RANKED / SEASON 0</span>
-                      <strong>{rankedDelta >= 0 ? "+" : ""}{rankedDelta} RP</strong>
-                      <small>{summary.ranked.rpBefore} → {summary.ranked.rpAfter} RP</small>
-                      <b>{summary.ranked.rank || "—"}</b>
-                    </article>
-                  )}
-                </section>
-              )}
-
-              {postMatchActionNotice && <div className="post-match-action-notice" role="status">{postMatchActionNotice}</div>}
-
-              <footer className="game-result-actions post-match-v380-actions">
-                <div className="post-match-secondary-actions">
-                  {mode === "online" && (
-                    <button type="button" onClick={requestOnlineRematch} disabled={rematchPending}>
-                      {rematchPending ? (language === "en" ? "Waiting…" : "Aguardando…") : (language === "en" ? "Request rematch" : "Pedir revanche")}
-                    </button>
-                  )}
-                  {mode !== "online" && (
-                    <button type="button" onClick={onPlayAgain}>
-                      {mode === "ranked" ? (language === "en" ? "Return to Ranked queue" : "Voltar à fila Ranked") : (language === "en" ? "Play again" : "Jogar novamente")}
-                    </button>
-                  )}
-                  {opponentUsername && (mode === "online" || mode === "ranked") && (
-                    <>
-                      <button type="button" onClick={requestPostMatchFriend}>{language === "en" ? "Add opponent" : "Adicionar adversário"}</button>
-                      <button type="button" onClick={() => onOpenProfile?.(opponentUsername)}>{language === "en" ? "Open profile" : "Abrir perfil"}</button>
-                    </>
-                  )}
-                </div>
-                <button
-                  type="button"
-                  className="game-result-main-button"
-                  onClick={onExit}
-                >
-                  <span>{t("mainMenu")}</span>
-                  <b aria-hidden="true">→</b>
-                </button>
-              </footer>
-            </section>
-          </div>
+          <MatchResultScreen
+            language={language}
+            winner={winner}
+            defeated={defeated}
+            isDefeat={isDefeat}
+            reason={reason}
+            turnNumber={match.turnNumber}
+            summary={summary}
+            masteryImageSrc={featuredMasteryCard ? resolveCardImage(featuredMasteryCard) : null}
+            masteryCardName={featuredMasteryCard ? getCardName(featuredMasteryCard) : ""}
+            rankedDelta={rankedDelta}
+            postMatchActionNotice={postMatchActionNotice}
+            mode={mode}
+            rematchPending={rematchPending}
+            opponentUsername={opponentUsername}
+            onRequestRematch={requestOnlineRematch}
+            onPlayAgain={onPlayAgain}
+            onAddOpponent={requestPostMatchFriend}
+            onOpenProfile={onOpenProfile}
+            onExit={onExit}
+            mainMenuLabel={t("mainMenu")}
+          />
         );
       })()}
 
