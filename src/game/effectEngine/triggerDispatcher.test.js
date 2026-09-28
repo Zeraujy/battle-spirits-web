@@ -148,3 +148,42 @@ test("legacy entries remain source-only and do not become global observers", () 
   assert.equal(result.match.players.player2.hand.length, 0);
   assert.equal(result.match.players.player2.deck.length, 1);
 });
+
+test("dispatcher activates source continuous modifiers when a card enters the field", () => {
+  const source = physical("AURA", "aura-1");
+  const ally = physical("ALLY", "ally-aura");
+  const match = baseMatch();
+  match.players.player1.field.nexuses.push(source);
+  match.players.player1.field.spirits.push(ally);
+
+  const index = new Map([
+    ["AURA", {
+      id: "AURA",
+      cardType: "nexus",
+      colors: ["red"],
+      symbols: ["red"],
+      effects: [{
+        schemaVersion: 2,
+        id: "red-aura",
+        trigger: { event: "continuous", scope: "source", eventPlayer: "self" },
+        actions: [{
+          type: "addModifier",
+          property: "bp",
+          value: 2000,
+          selector: { owner: "self", cardType: "spirit", color: "red" },
+          duration: "whileSourceExists"
+        }]
+      }]
+    }],
+    ["ALLY", { id: "ALLY", cardType: "spirit", colors: ["red"], symbols: ["red"], cost: 3, levels: [{ level: 1, cores: 1, bp: 3000 }] }]
+  ]);
+
+  const result = dispatchEffectEvent(match, {
+    event: "whenDeployed",
+    sourcePlayerId: "player1",
+    sourceInstanceId: "aura-1"
+  }, index);
+
+  assert.equal(result.match.modifierRegistry.items.length, 1);
+  assert.equal(result.match.modifierRegistry.items[0].sourceEffectId, "red-aura");
+});

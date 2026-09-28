@@ -114,6 +114,7 @@ export const RUNTIME_DISPATCHED_EVENTS = Object.freeze(new Set([
   EffectEvent.MAGIC_MAIN,
   EffectEvent.MAGIC_FLASH,
   EffectEvent.BURST_LIFE_DECREASE,
+  EffectEvent.CONTINUOUS,
   EffectEvent.AFTER_ULTIMATE_TRIGGER,
   EffectEvent.ULTIMATE_TRIGGER_HIT,
   EffectEvent.TRIGGER_COUNTER

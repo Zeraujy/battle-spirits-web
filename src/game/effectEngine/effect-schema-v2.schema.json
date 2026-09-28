@@ -98,6 +98,12 @@
           },
           "selector": {
             "$ref": "#/$defs/targetSelector"
+          },
+          "duration": {
+            "$ref": "#/$defs/duration"
+          },
+          "modifier": {
+            "$ref": "#/$defs/modifier"
           }
         },
         "additionalProperties": true
@@ -251,6 +257,84 @@
           }
         },
         "not": {
+          "$ref": "#/$defs/condition"
+        }
+      },
+      "additionalProperties": true
+    },
+    "duration": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "thisBattle",
+            "thisAttack",
+            "thisTurn",
+            "untilEndStep",
+            "whileSourceExists",
+            "whileConditionTrue",
+            "permanent",
+            "battle",
+            "turn"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "sourceInstanceId": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "battleId": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "additionalProperties": true
+        }
+      ]
+    },
+    "modifier": {
+      "type": "object",
+      "required": [
+        "property"
+      ],
+      "properties": {
+        "property": {
+          "enum": [
+            "bp",
+            "cost",
+            "symbols",
+            "colors",
+            "keywords"
+          ]
+        },
+        "operation": {
+          "enum": [
+            "add",
+            "subtract",
+            "set",
+            "remove"
+          ]
+        },
+        "value": {},
+        "selector": {
+          "$ref": "#/$defs/targetSelector"
+        },
+        "duration": {
+          "$ref": "#/$defs/duration"
+        },
+        "condition": {
           "$ref": "#/$defs/condition"
         }
       },

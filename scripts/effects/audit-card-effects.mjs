@@ -302,7 +302,7 @@ function percent(value, total) {
 function markdown(report) {
   const { summary, cards } = report;
   const lines = [];
-  lines.push("# Card Effect Coverage — v5.1.0 Foundation (Phase 0–6)");
+  lines.push("# Card Effect Coverage — v5.1.0 Foundation (Phase 0–9)");
   lines.push("");
   lines.push("> Scope: runtime gameplay catalog (`src/data/cards.json`). Artwork-only/public database records that are not loaded into the gameplay catalog are intentionally excluded.");
   lines.push("");
@@ -365,6 +365,14 @@ function markdown(report) {
   const conditionRows = Object.entries(summary.gapFrequency.conditions).sort((a, b) => b[1] - a[1]);
   lines.push(`- Unsupported action types: ${actionRows.length ? actionRows.map(([name, count]) => `\`${name}\` (${count})`).join(", ") : "none"}`);
   lines.push(`- Unsupported condition forms: ${conditionRows.length ? conditionRows.map(([name, count]) => `\`${name}\` (${count})`).join(", ") : "none"}`);
+  lines.push("");
+  lines.push("## Foundation additions — Phases 7–9");
+  lines.push("");
+  lines.push("- Core Action Library is centralized and currently exposes **43 generic action types** to Schema v2.");
+  lines.push("- Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.");
+  lines.push("- Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.");
+  lines.push("- Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.");
+  lines.push("- `continuous` is now runtime-dispatched for explicit Schema v2 source effects on Summon/Deploy; legacy continuous text remains untouched until migrated.");
   lines.push("");
   lines.push("## Canonical Event Model — Phase 1");
   lines.push("");

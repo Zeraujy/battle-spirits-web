@@ -2,85 +2,17 @@ import { findPhysicalCard, getDatabaseCard } from "../selectors.js";
 import { removeFieldCard, updateFieldCard } from "../zones.js";
 import { otherPlayerId } from "../utils.js";
 import { conditionMatchesEffect } from "./conditionResolver.js";
-import { addBPModifier } from "./modifierResolver.js";
+import {
+  addBPModifier,
+  pruneContinuousModifiers,
+  registerContinuousModifier,
+  removeContinuousModifiers
+} from "./modifierResolver.js";
+import { canonicalActionType, supportsCoreActionType } from "./coreActionLibrary.js";
 import { collectTrashTargets, resolveActionTargets } from "./targetResolver.js";
 
-const ACTION_ALIASES = {
-  modifybp: "modifyBP",
-  temporarybp: "modifyBP",
-  bpmodifier: "modifyBP",
-  gainbp: "modifyBP",
-  reducebp: "modifyBP",
-  reservecorefromvoid: "addCoreToReserveFromVoid",
-  voidtoreserve: "addCoreToReserveFromVoid",
-  addcorefromvoid: "addCoreFromVoid",
-  returnhand: "returnToHand",
-  returntohand: "returnToHand",
-  returnallmatchingtohand: "returnAllMatchingToHand",
-  destroyallmatching: "destroyAllMatching",
-  refreshallmatching: "refreshAllMatching",
-  exhaustallmatching: "exhaustAllMatching",
-  topdecktotrash: "topDeckToTrash",
-  revealtop: "revealTop",
-  adjustlife: "adjustLife",
-  heallife: "healLife",
-  selecttarget: "selectTarget",
-  selecttrashtarget: "selectTrashTarget",
-  selectmultipletargets: "selectMultipleTargets",
-  chooseoption: "chooseOption",
-  conditional: "conditional",
-  setbattlerestriction: "setBattleRestriction",
-  setbattleflag: "setBattleRestriction",
-  preventspiritblock: "setBattleRestriction",
-  cannotbeblockedbyspirits: "setBattleRestriction",
-  cannotbeblockedbylowerlevel: "setBattleRestriction",
-  returntotopdeck: "returnToTopDeck",
-  returnalltrashmatchingtohand: "returnAllTrashMatchingToHand",
-  movelifetotrash: "moveLifeToTrash",
-  negateultimatetrigger: "negateUltimateTrigger",
-  setturnprotection: "setTurnProtection",
-  discardopponentsetburst: "discardOpponentSetBurst"
-};
-
-function canonicalType(type) {
-  const raw = String(type || "").trim();
-  const compact = raw.replace(/[\s_-]+/g, "").toLowerCase();
-  return ACTION_ALIASES[compact] || raw;
-}
-
-const SUPPORTED_ACTION_TYPES = new Set([
-  "draw",
-  "addCoreToReserveFromVoid",
-  "addCoreFromVoid",
-  "adjustLife",
-  "healLife",
-  "moveLifeToTrash",
-  "negateUltimateTrigger",
-  "returnAllTrashMatchingToHand",
-  "modifyBP",
-  "refresh",
-  "exhaust",
-  "destroy",
-  "returnToHand",
-  "returnToTopDeck",
-  "destroyAllMatching",
-  "refreshAllMatching",
-  "exhaustAllMatching",
-  "returnAllMatchingToHand",
-  "topDeckToTrash",
-  "revealTop",
-  "conditional",
-  "setBattleRestriction",
-  "selectTarget",
-  "selectTrashTarget",
-  "selectMultipleTargets",
-  "chooseOption",
-  "setTurnProtection",
-  "discardOpponentSetBurst"
-]);
-
 export function supportsActionType(type) {
-  return SUPPORTED_ACTION_TYPES.has(canonicalType(type));
+  return supportsCoreActionType(type);
 }
 
 function asActionArray(value) {
@@ -171,6 +103,56 @@ function moveTargetOut(match, target, destination, cardIndex) {
   return match;
 }
 
+
+function removeFromSimpleZone(player, zone, instanceId) {
+  if (!["hand", "trash", "revealed", "deck"].includes(zone)) return { player, card: null };
+  const list = [...(player[zone] || [])];
+  const index = list.findIndex((card) => card.instanceId === instanceId);
+  if (index < 0) return { player, card: null };
+  const [card] = list.splice(index, 1);
+  return { player: { ...player, [zone]: list }, card };
+}
+
+function moveCardGeneric(match, target, destination, cardIndex) {
+  const instanceId = target?.physical?.instanceId;
+  if (!instanceId) return match;
+  const current = findPhysicalCard(match, instanceId);
+  if (!current) return match;
+  if (["spirits", "nexuses", "other"].includes(current.zone) && ["hand", "trash", "topDeck"].includes(destination)) {
+    return moveTargetOut(match, target, destination, cardIndex);
+  }
+  if (current.zone === "trash" && destination === "hand") return moveTargetOut(match, target, destination, cardIndex);
+  let player = match.players[current.playerId];
+  let removedCard = null;
+
+  if (["spirits", "nexuses", "other"].includes(current.zone)) {
+    const removed = removeFieldCard(player, instanceId);
+    player = removed.player;
+    removedCard = removed.card;
+    if (removedCard) {
+      const regular = Number(removedCard.cores?.regular || 0);
+      player = { ...player, reserve: Number(player.reserve || 0) + regular };
+      if (removedCard.cores?.soul) player = { ...player, soulCore: { zone: "reserve", instanceId: null } };
+      removedCard = cleanPhysical(removedCard);
+    }
+  } else {
+    const removed = removeFromSimpleZone(player, current.zone, instanceId);
+    player = removed.player;
+    removedCard = removed.card ? cleanPhysical(removed.card) : null;
+  }
+  if (!removedCard) return match;
+
+  if (destination === "hand") player = { ...player, hand: [...player.hand, removedCard] };
+  else if (destination === "trash") player = { ...player, trash: [...player.trash, removedCard] };
+  else if (destination === "topDeck") player = { ...player, deck: [removedCard, ...player.deck] };
+  else if (destination === "bottomDeck") player = { ...player, deck: [...player.deck, removedCard] };
+  else if (destination === "deck") player = { ...player, deck: [...player.deck, removedCard] };
+  else if (destination === "removed") player = { ...player, removed: [...(player.removed || []), removedCard] };
+  else return match;
+
+  return { ...match, players: { ...match.players, [current.playerId]: player } };
+}
+
 function decisionCandidate(target) {
   return {
     instanceId: target?.physical?.instanceId || null,
@@ -194,9 +176,9 @@ function decisionFromTargets(action, resolvedTargets, context) {
   );
 
   return {
-    kind: canonicalType(action.type) === "selectTrashTarget"
+    kind: canonicalActionType(action.type) === "selectTrashTarget"
       ? "selectTrashTarget"
-      : canonicalType(action.type) === "selectMultipleTargets" || Number(resolvedTargets.requested || 1) > 1
+      : canonicalActionType(action.type) === "selectMultipleTargets" || Number(resolvedTargets.requested || 1) > 1
         ? "selectMultipleTargets"
         : "selectTarget",
     playerId: context.sourcePlayerId,
@@ -272,7 +254,7 @@ function mergeResults(base, addition) {
 }
 
 export function resolveAction(match, rawAction = {}, cardIndex, context = {}, resolveNested) {
-  const type = canonicalType(rawAction.type);
+  const type = canonicalActionType(rawAction.type);
   const action = { ...rawAction, type };
   let next = match;
 
@@ -299,6 +281,19 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: drew };
   }
 
+
+  if (type === "discard") {
+    return applyToTargets(next, { ...action, selector: action.selector || action.target || { owner: "self", zones: ["hand"] } }, cardIndex, context, (working, target) => moveCardGeneric(working, target, "trash", cardIndex));
+  }
+
+  if (["moveCard", "returnToDeck", "returnToBottomDeck"].includes(type)) {
+    const destination = type === "returnToBottomDeck" ? "bottomDeck"
+      : type === "returnToDeck" ? (action.position === "top" ? "topDeck" : action.position === "bottom" ? "bottomDeck" : "deck")
+      : String(action.destination || action.to || "");
+    if (!destination) return { match, notes: ["moveCard requires a destination."], manualResolutionNeeded: true, executed: false };
+    return applyToTargets(next, action, cardIndex, context, (working, target) => moveCardGeneric(working, target, destination, cardIndex));
+  }
+
   if (type === "addCoreToReserveFromVoid") {
     const playerId = resolvePlayerId(next, action, context);
     const player = next.players?.[playerId];
@@ -321,6 +316,45 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     });
   }
 
+
+  if (type === "addCore" || type === "removeCore") {
+    const count = Math.max(0, Number(action.count ?? action.amount ?? 1));
+    return applyToTargets(next, action, cardIndex, context, (working, target) => {
+      const current = findPhysicalCard(working, target.physical.instanceId);
+      if (!current || !["spirits", "nexuses", "other"].includes(current.zone)) return working;
+      const player = working.players[current.playerId];
+      const available = Number(current.card.cores?.regular || 0);
+      const delta = type === "addCore" ? count : -Math.min(count, available);
+      const updated = updateFieldCard(player, current.card.instanceId, (physical) => ({
+        ...physical,
+        cores: { ...physical.cores, regular: Math.max(0, Number(physical.cores?.regular || 0) + delta) }
+      }));
+      const reserveDelta = type === "removeCore" ? Math.min(count, available) : 0;
+      const withReserve = reserveDelta ? { ...updated, reserve: Number(updated.reserve || 0) + reserveDelta } : updated;
+      return { ...working, players: { ...working.players, [current.playerId]: withReserve } };
+    });
+  }
+
+  if (type === "moveCore") {
+    const playerId = resolvePlayerId(next, action, context);
+    const player = next.players?.[playerId];
+    if (!player) return { match, notes: ["Jogador inválido para moveCore."], manualResolutionNeeded: true, executed: false };
+    const count = Math.max(0, Number(action.count ?? action.amount ?? 1));
+    const from = String(action.from || "reserve");
+    const to = String(action.to || action.destination || "trash");
+    if (from === "reserve" && to === "trash") {
+      const moved = Math.min(count, Number(player.reserve || 0));
+      next = { ...next, players: { ...next.players, [playerId]: { ...player, reserve: Number(player.reserve || 0) - moved, trashCores: Number(player.trashCores || 0) + moved } } };
+      return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
+    }
+    if (from === "trash" && to === "reserve") {
+      const moved = Math.min(count, Number(player.trashCores || 0));
+      next = { ...next, players: { ...next.players, [playerId]: { ...player, trashCores: Number(player.trashCores || 0) - moved, reserve: Number(player.reserve || 0) + moved } } };
+      return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
+    }
+    return { match, notes: ["moveCore route is not structured for this source/destination yet."], manualResolutionNeeded: true, executed: false };
+  }
+
   if (type === "adjustLife" || type === "healLife") {
     const playerId = resolvePlayerId(next, action, context);
     const player = next.players?.[playerId];
@@ -332,6 +366,19 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     next = { ...next, players: { ...next.players, [playerId]: { ...player, life, reserve: Number(player.reserve || 0) + actualLoss } } };
     if (life <= 0) next = { ...next, winnerId: otherPlayerId(next, playerId), winnerReason: "life" };
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: Math.abs(delta) };
+  }
+
+
+  if (type === "dealLifeDamage" || type === "moveLifeToReserve") {
+    const playerId = resolvePlayerId(next, action, context);
+    const player = next.players?.[playerId];
+    if (!player) return { match, notes: ["Jogador alvo inválido para Life damage."], manualResolutionNeeded: true, executed: false };
+    const requested = Math.max(0, Number(action.amount ?? action.count ?? 1));
+    const moved = Math.min(requested, Number(player.life || 0));
+    const life = Math.max(0, Number(player.life || 0) - moved);
+    next = { ...next, players: { ...next.players, [playerId]: { ...player, life, reserve: Number(player.reserve || 0) + moved } } };
+    if (life <= 0 && moved > 0) next = { ...next, winnerId: otherPlayerId(next, playerId), winnerReason: "life" };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
   }
 
   if (type === "moveLifeToTrash") {
@@ -377,6 +424,29 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const targets = collectTrashTargets(next, cardIndex, { ...selector, owner: selector.owner ?? action.owner ?? "self" }, context);
     for (const target of targets) next = moveTargetOut(next, target, "hand", cardIndex);
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: targets.length };
+  }
+
+
+  if (["addModifier", "modifyCost", "modifySymbols", "gainKeyword", "loseKeyword"].includes(type)) {
+    let descriptor = action.modifier || action;
+    if (type === "modifyCost") descriptor = { ...descriptor, property: "cost", value: Number(action.amount ?? action.value ?? 0), operation: action.operation || "add" };
+    if (type === "modifySymbols") descriptor = { ...descriptor, property: "symbols", value: action.symbols ?? action.value ?? [], operation: action.operation || "add" };
+    if (type === "gainKeyword") descriptor = { ...descriptor, property: "keywords", value: action.keyword ?? action.keywords ?? action.value ?? [], operation: "add" };
+    if (type === "loseKeyword") descriptor = { ...descriptor, property: "keywords", value: action.keyword ?? action.keywords ?? action.value ?? [], operation: "remove" };
+    const registered = registerContinuousModifier(next, descriptor, context);
+    if (!registered.modifier) return { match, notes: ["Modifier without property."], manualResolutionNeeded: true, executed: false };
+    return { match: registered.match, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "removeModifier") {
+    const modifierId = action.modifierId || action.id;
+    const sourceEffectId = action.sourceEffectId || context.effectId;
+    const updated = removeContinuousModifiers(next, (modifier) => {
+      if (modifierId) return modifier.id === modifierId;
+      if (sourceEffectId) return modifier.sourceEffectId === sourceEffectId;
+      return false;
+    });
+    return { match: updated, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
   }
 
   if ([
@@ -594,6 +664,7 @@ export function resolveActionList(match, actions = [], cardIndex, context = {}) 
     const action = list[index];
     const current = resolveAction(result.match, action, cardIndex, context, resolveActionList);
     result = mergeResults(result, current);
+    result.match = pruneContinuousModifiers(result.match);
 
     if (current.manualResolutionNeeded) {
       if (current.decision) {

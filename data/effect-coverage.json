@@ -8,7 +8,7 @@
     3
   ],
   "source": "src/data/cards.json",
-  "generatedAt": "2026-09-28T09:58:49.754Z",
+  "generatedAt": "2026-09-28T12:11:07.833Z",
   "classificationVersion": "v5.1.0-phase03",
   "canonicalEvents": [
     {
@@ -73,7 +73,7 @@
     },
     {
       "event": "continuous",
-      "runtimeDispatched": false
+      "runtimeDispatched": true
     },
     {
       "event": "startStep",
@@ -141,11 +141,11 @@
     "totalSets": 11,
     "byStatus": {
       "AUTOMATED": 33,
-      "MANUAL": 32,
+      "MANUAL": 47,
       "NO_EFFECT": 16,
       "PARTIAL": 23,
       "UNSTRUCTURED_TEXT": 173,
-      "UNSUPPORTED_TRIGGER": 88
+      "UNSUPPORTED_TRIGGER": 73
     },
     "bySet": {
       "SD13": {
@@ -162,8 +162,8 @@
       "SD15": {
         "total": 18,
         "statuses": {
-          "UNSUPPORTED_TRIGGER": 11,
-          "MANUAL": 6,
+          "UNSUPPORTED_TRIGGER": 10,
+          "MANUAL": 7,
           "NO_EFFECT": 1
         },
         "automationPercent": 0
@@ -189,30 +189,31 @@
       "SD10": {
         "total": 18,
         "statuses": {
-          "UNSUPPORTED_TRIGGER": 5,
+          "MANUAL": 3,
           "PARTIAL": 6,
           "AUTOMATED": 5,
           "NO_EFFECT": 1,
-          "MANUAL": 1
+          "UNSUPPORTED_TRIGGER": 3
         },
         "automationPercent": 27.8
       },
       "SD11": {
         "total": 18,
         "statuses": {
-          "UNSUPPORTED_TRIGGER": 9,
+          "MANUAL": 4,
           "NO_EFFECT": 1,
           "AUTOMATED": 3,
           "PARTIAL": 4,
-          "MANUAL": 1
+          "UNSUPPORTED_TRIGGER": 6
         },
         "automationPercent": 16.7
       },
       "SD17": {
         "total": 18,
         "statuses": {
-          "UNSUPPORTED_TRIGGER": 10,
+          "MANUAL": 5,
           "AUTOMATED": 5,
+          "UNSUPPORTED_TRIGGER": 5,
           "PARTIAL": 2,
           "NO_EFFECT": 1
         },
@@ -222,9 +223,9 @@
         "total": 17,
         "statuses": {
           "NO_EFFECT": 1,
-          "UNSUPPORTED_TRIGGER": 5,
+          "MANUAL": 5,
           "AUTOMATED": 7,
-          "MANUAL": 4
+          "UNSUPPORTED_TRIGGER": 4
         },
         "automationPercent": 41.2
       },
@@ -232,10 +233,10 @@
         "total": 17,
         "statuses": {
           "NO_EFFECT": 1,
-          "UNSUPPORTED_TRIGGER": 7,
+          "MANUAL": 4,
           "AUTOMATED": 6,
-          "PARTIAL": 1,
-          "MANUAL": 2
+          "UNSUPPORTED_TRIGGER": 5,
+          "PARTIAL": 1
         },
         "automationPercent": 35.3
       },
@@ -251,9 +252,9 @@
       "SD28": {
         "total": 17,
         "statuses": {
-          "MANUAL": 2,
+          "MANUAL": 3,
           "PARTIAL": 6,
-          "UNSUPPORTED_TRIGGER": 8,
+          "UNSUPPORTED_TRIGGER": 7,
           "AUTOMATED": 1
         },
         "automationPercent": 5.9
@@ -262,10 +263,10 @@
     "entries": {
       "total": 457,
       "automated": 70,
-      "runtimeUnsupportedTrigger": 187,
+      "runtimeUnsupportedTrigger": 133,
       "unsupportedCondition": 0,
       "unsupportedAction": 0,
-      "manual": 200,
+      "manual": 254,
       "schemaV2": 0
     },
     "gapFrequency": {
@@ -274,10 +275,8 @@
         "afterCost4PlusMagicResolves": 1,
         "afterDivineTrust": 1,
         "afterOpponentDestroysYourSpirit": 1,
-        "always": 34,
         "battleResolution": 3,
         "combine": 13,
-        "continuous": 20,
         "eitherAttackStep": 14,
         "onEligibleSummonDescendOrPlacement": 1,
         "onEligibleSummonOrPlacement": 1,
@@ -6658,7 +6657,7 @@
       "set": "SD10",
       "cardType": "spirit",
       "nameEN": "Light-Bladra",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
       "executableEntryCount": 0,
@@ -6674,13 +6673,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd10-001-charge",
@@ -6691,20 +6690,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -6750,13 +6746,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd10-002-attack",
@@ -6786,20 +6782,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -6925,7 +6918,7 @@
       "set": "SD10",
       "cardType": "spirit",
       "nameEN": "Bronze-Wurm",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
       "executableEntryCount": 0,
@@ -6941,13 +6934,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd10-005-charge",
@@ -6958,20 +6951,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -7093,13 +7083,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd10-008-charge",
@@ -7110,19 +7100,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [
-          "always",
-          "continuous",
           "yourAttackStep"
         ],
         "unsupportedConditions": [],
@@ -7171,13 +7159,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd10-009-summon",
@@ -7208,20 +7196,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -7801,13 +7786,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd10-x01-attack",
@@ -7838,20 +7823,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -7898,13 +7880,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd10-x02-combine-condition-display",
@@ -7932,13 +7914,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd10-x02-summon",
@@ -7968,13 +7950,13 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd10-x02-combined-charge",
@@ -7985,20 +7967,18 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [
-          "always",
-          "combine",
-          "continuous"
+          "combine"
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
@@ -8014,7 +7994,7 @@
       "set": "SD11",
       "cardType": "spirit",
       "nameEN": "Shriken",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
       "executableEntryCount": 0,
@@ -8030,13 +8010,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd11-001-green-display",
@@ -8047,13 +8027,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd11-001-green",
@@ -8064,20 +8044,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -8238,13 +8215,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd11-004-block-bp-display",
@@ -8284,9 +8261,7 @@
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -8349,13 +8324,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd11-005-summon",
@@ -8381,9 +8356,7 @@
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -8634,7 +8607,7 @@
       "set": "SD11",
       "cardType": "spirit",
       "nameEN": "Dark-Uranus",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
       "executableEntryCount": 0,
@@ -8650,13 +8623,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd11-010-braved-attack-display",
@@ -8701,20 +8674,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -8885,7 +8855,7 @@
       "set": "SD11",
       "cardType": "nexus",
       "nameEN": "The Lost Crystal",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
       "executableEntryCount": 0,
@@ -8918,19 +8888,17 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -9247,13 +9215,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd11-x02-rush-display",
@@ -9264,18 +9232,17 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [
-          "always",
           "combine"
         ],
         "unsupportedConditions": [],
@@ -9968,7 +9935,7 @@
       "set": "SD15",
       "cardType": "spirit",
       "nameEN": "The Angelia Pathiel",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
       "executableEntryCount": 0,
@@ -9984,19 +9951,17 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -10025,13 +9990,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd15-002-zero-bp",
@@ -10053,7 +10018,6 @@
       ],
       "gaps": {
         "unsupportedTriggers": [
-          "always",
           "whenOpponentSpiritBecomesZeroBP"
         ],
         "unsupportedConditions": [],
@@ -10201,13 +10165,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd15-005-life-protection",
@@ -10246,7 +10210,6 @@
       ],
       "gaps": {
         "unsupportedTriggers": [
-          "always",
           "opponentAttackStep"
         ],
         "unsupportedConditions": [],
@@ -10514,7 +10477,7 @@
       "set": "SD17",
       "cardType": "spirit",
       "nameEN": "Pinacochasaurus",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
       "executableEntryCount": 0,
@@ -10530,13 +10493,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd17-001-green",
@@ -10547,20 +10510,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -10573,7 +10533,7 @@
       "set": "SD17",
       "cardType": "spirit",
       "nameEN": "Dark-Dinonychusaw",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
       "executableEntryCount": 0,
@@ -10589,13 +10549,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd17-002-green",
@@ -10606,20 +10566,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -10632,7 +10589,7 @@
       "set": "SD17",
       "cardType": "spirit",
       "nameEN": "SwordDragon Stegodita",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
       "executableEntryCount": 0,
@@ -10648,13 +10605,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd17-003-confront",
@@ -10665,20 +10622,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -10824,13 +10778,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd17-006-when-attacks-display",
@@ -10858,13 +10812,13 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd17-006-draw",
@@ -10887,10 +10841,7 @@
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -10976,7 +10927,7 @@
       "set": "SD17",
       "cardType": "spirit",
       "nameEN": "Monoforcesaurus",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
       "executableEntryCount": 0,
@@ -10992,13 +10943,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd17-008-rush-green-display",
@@ -11026,20 +10977,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -11053,7 +11001,7 @@
       "set": "SD17",
       "cardType": "spirit",
       "nameEN": "PiercingDragon Styragorn",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
       "executableEntryCount": 0,
@@ -11069,13 +11017,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd17-009-when-attacks-display",
@@ -11103,20 +11051,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -11199,13 +11144,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd17-011-combined-confront",
@@ -11216,20 +11161,18 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [
-          "always",
-          "combine",
-          "continuous"
+          "combine"
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
@@ -11799,7 +11742,7 @@
       "set": "SD19",
       "cardType": "spirit",
       "nameEN": "Mugendra",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
       "executableEntryCount": 0,
@@ -11815,13 +11758,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd19-002-continuous-white",
@@ -11832,20 +11775,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -12855,7 +12795,7 @@
       "set": "SD20",
       "cardType": "spirit",
       "nameEN": "Mugendra",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
       "executableEntryCount": 0,
@@ -12871,13 +12811,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd20-002-continuous-white",
@@ -12888,20 +12828,17 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -13004,18 +12941,17 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [
-          "always",
           "opponentAttackStep"
         ],
         "unsupportedConditions": [],
@@ -13047,13 +12983,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd20-005-when-blocks",
@@ -13081,13 +13017,13 @@
           "rawEvent": "continuous",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": true,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd20-005-when-blocks-core",
@@ -13111,10 +13047,7 @@
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always",
-          "continuous"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -13185,7 +13118,7 @@
       "set": "SD20",
       "cardType": "spirit",
       "nameEN": "White Jet Dragoon",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
       "executableEntryCount": 0,
@@ -13201,13 +13134,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd20-007-when-attacks",
@@ -13228,9 +13161,7 @@
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -15062,13 +14993,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd28-004-trigger-recovery-display",
@@ -15090,7 +15021,6 @@
       ],
       "gaps": {
         "unsupportedTriggers": [
-          "always",
           "eitherAttackStep"
         ],
         "unsupportedConditions": [],
@@ -15243,7 +15173,7 @@
       "set": "SD28",
       "cardType": "ultimate",
       "nameEN": "Koganehime",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
       "executableEntryCount": 0,
@@ -15276,13 +15206,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd28-007-ultimate-trigger",
@@ -15303,9 +15233,7 @@
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "always"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
@@ -16103,13 +16031,13 @@
           "rawEvent": "always",
           "canonicalEvent": "continuous",
           "canonicalEventDefined": true,
-          "runtimeDispatched": false,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
         },
         {
           "id": "sd28-x02-burst-lock-display",
@@ -16131,7 +16059,6 @@
       ],
       "gaps": {
         "unsupportedTriggers": [
-          "always",
           "combine",
           "whenBattles"
         ],

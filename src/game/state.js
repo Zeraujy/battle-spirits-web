@@ -208,6 +208,8 @@ export function createMatch({ player1, player2, firstPlayerId = "player1", cardI
     battle: null,
     burstOpportunity: null,
     pendingEffectDecision: null,
+    effectQueue: { status: "idle", nextSequence: 1, currentItemId: null, completedCount: 0, items: [] },
+    modifierRegistry: { nextSequence: 1, items: [] },
     pending: [],
     temporary: {},
     winnerId: null,

@@ -1,6 +1,10 @@
 import { FIELD_ZONES } from "./constants.js";
 import { normalizeCard } from "./cardAdapter.js";
-import { getEffectBPBonus } from "./effectEngine/modifierResolver.js";
+import {
+  applyContinuousCollectionModifiers,
+  getContinuousNumericModifier,
+  getEffectBPBonus
+} from "./effectEngine/modifierResolver.js";
 
 export function findPhysicalCard(match, instanceId) {
   for (const [playerId, player] of Object.entries(match.players || {})) {
@@ -44,7 +48,7 @@ export function getBraveAttachment(match, hostInstanceId) {
 
 export function getEffectiveBP(match, cardIndex, physicalCard) {
   const card = getDatabaseCard(cardIndex, physicalCard);
-  let bp = getBaseBP(card, physicalCard) + Number(physicalCard.temporaryBP || 0) + getEffectBPBonus(physicalCard);
+  let bp = getBaseBP(card, physicalCard) + Number(physicalCard.temporaryBP || 0) + getEffectBPBonus(physicalCard) + getContinuousNumericModifier(match, cardIndex, physicalCard, "bp");
   const brave = getBraveAttachment(match, physicalCard.instanceId);
   if (brave) {
     const braveCard = getDatabaseCard(cardIndex, brave);
@@ -61,7 +65,7 @@ export function getEffectiveSymbols(match, cardIndex, physicalCard) {
     const braveCard = getDatabaseCard(cardIndex, brave);
     symbols.push(...(braveCard?.symbols || []));
   }
-  return symbols.filter(Boolean);
+  return applyContinuousCollectionModifiers(match, cardIndex, physicalCard, "symbols", symbols.filter(Boolean));
 }
 
 export function getEffectiveCost(match, cardIndex, physicalCard) {
@@ -72,7 +76,7 @@ export function getEffectiveCost(match, cardIndex, physicalCard) {
     const braveCard = getDatabaseCard(cardIndex, brave);
     cost += Number(braveCard?.cost || 0);
   }
-  return cost;
+  return Math.max(0, cost + getContinuousNumericModifier(match, cardIndex, physicalCard, "cost"));
 }
 
 export function getEffectiveColors(match, cardIndex, physicalCard) {
@@ -83,7 +87,7 @@ export function getEffectiveColors(match, cardIndex, physicalCard) {
     const braveCard = getDatabaseCard(cardIndex, brave);
     values.push(...(braveCard?.colors || []));
   }
-  return [...new Set(values.filter(Boolean))];
+  return applyContinuousCollectionModifiers(match, cardIndex, physicalCard, "colors", [...new Set(values.filter(Boolean))]);
 }
 
 export function getEffectiveFamilies(match, cardIndex, physicalCard) {
