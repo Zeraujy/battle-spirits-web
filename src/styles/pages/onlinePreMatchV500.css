@@ -1,0 +1,46 @@
+.online-pre-match-versus {
+  position: relative;
+  isolation: isolate;
+  animation: online-pre-match-enter 360ms var(--transition-standard, ease) both;
+}
+
+.online-pre-match-versus::before {
+  content: "";
+  position: absolute;
+  inset: 8% 18%;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.075), transparent 66%);
+  filter: blur(18px);
+  z-index: -1;
+}
+
+.online-pre-match-versus__center {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 7px;
+  min-width: 112px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.online-pre-match-versus__center > span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.72));
+}
+
+.online-pre-match-versus__center > small {
+  font-size: 10px;
+  color: var(--text-muted, rgba(255, 255, 255, 0.48));
+}
+
+@keyframes online-pre-match-enter {
+  from { opacity: 0; transform: translateY(6px) scale(0.992); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .online-pre-match-versus { animation: none; }
+}

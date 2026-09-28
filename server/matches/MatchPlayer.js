@@ -5,6 +5,20 @@ function cloneDeck(deck) {
   return Array.isArray(deck) ? deck.map((card) => ({ ...card })) : [];
 }
 
+function cloneDeckSnapshot(snapshot) {
+  if (!snapshot) return null;
+  return {
+    snapshotId: snapshot.snapshotId || null,
+    deckId: snapshot.deckId || null,
+    deckName: snapshot.deckName || "Deck",
+    coverCardId: snapshot.coverCardId || null,
+    cardCount: Number(snapshot.cardCount || 0),
+    fingerprint: snapshot.fingerprint || null,
+    lockedAt: Number(snapshot.lockedAt || 0) || null,
+    cards: cloneDeck(snapshot.cards)
+  };
+}
+
 export class MatchPlayer {
   constructor({
     playerId,
@@ -12,6 +26,7 @@ export class MatchPlayer {
     profile = {},
     deck = [],
     deckId = null,
+    deckSnapshot = null,
     resumeToken = null,
     sessionToken = resumeToken,
     connectionState = null,
@@ -22,8 +37,9 @@ export class MatchPlayer {
     this.playerId = playerId;
     this.socketId = socketId;
     this.profile = { ...profile };
-    this.deck = cloneDeck(deck);
-    this.deckId = deckId || null;
+    this.deckSnapshot = cloneDeckSnapshot(deckSnapshot);
+    this.deck = this.deckSnapshot ? cloneDeck(this.deckSnapshot.cards) : cloneDeck(deck);
+    this.deckId = this.deckSnapshot?.deckId || deckId || null;
     this.sessionToken = sessionToken || resumeToken || null;
     // Legacy alias kept while room payloads still use resumeToken.
     this.resumeToken = this.sessionToken;
@@ -116,6 +132,7 @@ export class MatchPlayer {
         sessionToken: this.sessionToken,
         resumeToken: this.resumeToken,
         deck: cloneDeck(this.deck),
+        deckSnapshot: cloneDeckSnapshot(this.deckSnapshot),
         lastAcknowledgedStateVersion: this.lastAcknowledgedStateVersion,
         disconnectReason: this.disconnectReason
       } : {})

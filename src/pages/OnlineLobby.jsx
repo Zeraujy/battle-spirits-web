@@ -8,6 +8,7 @@ import {
 import EmptyState from "../components/common/EmptyState.jsx";
 import QueueStatus from "../components/online/QueueStatus.jsx";
 import ReadyCheck from "../components/online/ReadyCheck.jsx";
+import PreMatchVersus from "../components/online/PreMatchVersus.jsx";
 
 import {
   getDecks,
@@ -40,12 +41,14 @@ import {
   VersusMark,
   deckIsValid,
   deckSize,
-  getDeckPortrait
+  getDeckPortrait,
+  getDeckCoverCard
 } from "../components/match/MatchSetupScreen.jsx";
 
 import "../styles/theme/v230.css";
 import "../styles/pages/onlineLobbySafe.css";
 import "../styles/pages/onlineMatchmakingV500.css";
+import "../styles/pages/onlinePreMatchV500.css";
 
 
 function safeOnlineError(message, fallback = "Não foi possível concluir esta ação no Online.") {
@@ -117,9 +120,15 @@ export default function OnlineLobby({
 
   const [readyCheck, setReadyCheck] = useState(null);
   const [readySubmitting, setReadySubmitting] = useState(false);
+  const [preMatch, setPreMatch] = useState(null);
 
   const handedOffRef =
     useRef(false);
+
+  const preMatchRef = useRef(null);
+  const pendingMatchStateRef = useRef(null);
+  const preMatchElapsedRef = useRef(false);
+  const preMatchTimerRef = useRef(null);
 
   const searchingRef =
     useRef(false);
@@ -199,6 +208,23 @@ export default function OnlineLobby({
       setError("Não foi possível conectar ao Online. Verifique sua conexão e tente novamente.");
     };
 
+    const handoffMatch = (state) => {
+      if (!state?.started || !state?.match || handedOffRef.current) return;
+      handedOffRef.current = true;
+      updateSearching(false);
+      preMatchRef.current = null;
+      pendingMatchStateRef.current = null;
+      preMatchElapsedRef.current = false;
+      setPreMatch(null);
+
+      onMatch({
+        match: state.match,
+        onlineClient: client,
+        roomState: state,
+        viewerPlayerId: state.viewerPlayerId
+      });
+    };
+
     const onState = (
       state
     ) => {
@@ -207,30 +233,12 @@ export default function OnlineLobby({
         chat: state.chat ?? previous?.chat ?? []
       }));
 
-      if (
-        state.started &&
-        state.match
-      ) {
-        handedOffRef.current =
-          true;
-
-        updateSearching(
-          false
-        );
-
-        onMatch({
-          match:
-            state.match,
-
-          onlineClient:
-            client,
-
-          roomState:
-            state,
-
-          viewerPlayerId:
-            state.viewerPlayerId
-        });
+      if (state.started && state.match) {
+        if (preMatchRef.current && !preMatchElapsedRef.current) {
+          pendingMatchStateRef.current = state;
+          return;
+        }
+        handoffMatch(state);
       }
     };
 
@@ -238,6 +246,8 @@ export default function OnlineLobby({
       if (payload?.status !== QueueStatus.SEARCHING) return;
       setReadyCheck(null);
       setReadySubmitting(false);
+      setPreMatch(null);
+      preMatchRef.current = null;
       updateSearching(true, payload?.message || "Procurando outro jogador...");
     };
 
@@ -262,11 +272,33 @@ export default function OnlineLobby({
       setReadyCheck(null);
       setReadySubmitting(false);
       updateSearching(false, "Partida confirmada.");
+
+      const presentation = payload?.preMatch || null;
+      if (!presentation) {
+        preMatchElapsedRef.current = true;
+        if (pendingMatchStateRef.current) handoffMatch(pendingMatchStateRef.current);
+        return;
+      }
+
+      preMatchRef.current = presentation;
+      preMatchElapsedRef.current = false;
+      setPreMatch(presentation);
+
+      if (preMatchTimerRef.current) clearTimeout(preMatchTimerRef.current);
+      preMatchTimerRef.current = setTimeout(() => {
+        preMatchElapsedRef.current = true;
+        const pending = pendingMatchStateRef.current;
+        if (pending) handoffMatch(pending);
+      }, 1800);
     };
 
     const onMatchmakingFailed = (payload) => {
       setReadyCheck(null);
       setReadySubmitting(false);
+      setPreMatch(null);
+      preMatchRef.current = null;
+      pendingMatchStateRef.current = null;
+      preMatchElapsedRef.current = false;
 
       if (payload?.requeued) {
         updateSearching(true, "Procurando outro jogador...");
@@ -357,6 +389,8 @@ export default function OnlineLobby({
         onMatchmakingFailed
       );
 
+      if (preMatchTimerRef.current) clearTimeout(preMatchTimerRef.current);
+
       if (
         searchingRef.current
       ) {
@@ -417,7 +451,8 @@ export default function OnlineLobby({
         profile: await currentOnlineProfile(),
         deck: deck.cards,
         deckId: deck.id || null,
-        deckName: deck.name || "Deck"
+        deckName: deck.name || "Deck",
+        coverCardId: deck.coverCardId || deck.coverId || deck.cover?.cardId || deck.cover?.id || getDeckCoverCard(deck)?.id || null
       },
       (result) => {
         if (!result?.ok) {
@@ -622,6 +657,20 @@ export default function OnlineLobby({
   });
 
   const normalMenu = (() => {
+    if (preMatch) {
+      return (
+        <MatchSetupMenu
+          eyebrow="MULTIPLAYER ONLINE"
+          titleTop="BATALHA"
+          titleBottom="CONFIRMADA"
+          status="Decks bloqueados no servidor"
+          badge="VS"
+        >
+          <MatchMenuButton label="Preparando Arena" detail="A partida começará automaticamente" active disabled />
+        </MatchSetupMenu>
+      );
+    }
+
     if (room) {
       const isHost = room.viewerPlayerId === "player1";
       return (
@@ -828,10 +877,12 @@ export default function OnlineLobby({
       <MatchSetupScreen
         className="online-match-setup"
         error={error}
-        footer={room ? `ONLINE 1V1 · SALA ${room.code}` : readyCheck ? "ONLINE 1V1 · READY CHECK" : searching ? "ONLINE 1V1 · MATCHMAKING EM ANDAMENTO" : "ONLINE 1V1 · MATCHMAKING, SALAS PRIVADAS E CÓDIGO"}
+        footer={preMatch ? "ONLINE 1V1 · VS" : room ? `ONLINE 1V1 · SALA ${room.code}` : readyCheck ? "ONLINE 1V1 · READY CHECK" : searching ? "ONLINE 1V1 · MATCHMAKING EM ANDAMENTO" : "ONLINE 1V1 · MATCHMAKING, SALAS PRIVADAS E CÓDIGO"}
         menu={normalMenu}
       >
-        {room || searching || readyCheck ? (
+        {preMatch ? (
+          <PreMatchVersus preMatch={preMatch} />
+        ) : room || searching || readyCheck ? (
           <div className="match-setup-duel">
             <PlayerBattlePreview
               side="left"

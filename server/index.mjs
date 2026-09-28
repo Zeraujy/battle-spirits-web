@@ -17,7 +17,7 @@ import { MatchMode } from "../src/online/domain/matchModes.js";
 import { QueueStatus, QueueType } from "../src/online/domain/queueTypes.js";
 import { DisconnectReason, PlayerConnectionState } from "../src/online/domain/matchStatus.js";
 import { DEFAULT_RECONNECT_WINDOW_MS } from "../src/online/domain/onlineConstants.js";
-import { MatchRegistry, createMatchSession } from "./matches/index.js";
+import { MatchRegistry, createMatchSession, createDeckSnapshot, validateDeckSnapshot, deckSnapshotPresentation } from "./matches/index.js";
 import { createStateEnvelope, validateClientStateVersion } from "./matches/stateSync.js";
 import { ReconnectManager } from "./connections/ReconnectManager.js";
 import { Matchmaker, MatchmakingQueue, QueueEntry, ReadyCheckRegistry } from "./matchmaking/index.js";
@@ -179,8 +179,9 @@ export async function createBattleSpiritsServer(options = {}) {
         playerId,
         socketId: player.socketId || null,
         profile: player.profile || {},
-        deck: player.deck || [],
-        deckId: room.ranked?.players?.[playerId]?.deckId || null,
+        deck: player.deckSnapshot?.cards || player.deck || [],
+        deckId: player.deckSnapshot?.deckId || room.ranked?.players?.[playerId]?.deckId || null,
+        deckSnapshot: player.deckSnapshot || null,
         sessionToken: player.resumeToken || null
       }))
     });
@@ -490,6 +491,24 @@ export async function createBattleSpiritsServer(options = {}) {
     const secondSocket = io.sockets.sockets.get(secondEntry.socketId);
     if (!firstSocket?.connected || !secondSocket?.connected) return null;
 
+    const lockOptions = deckValidationOptionsForSettings({ ruleset: "eternal" });
+    const firstLock = createDeckSnapshot({
+      deck: firstEntry.deck,
+      deckId: firstEntry.deckId,
+      deckName: firstEntry.deckName,
+      coverCardId: firstEntry.coverCardId
+    }, cardIndex, lockOptions);
+    const secondLock = createDeckSnapshot({
+      deck: secondEntry.deck,
+      deckId: secondEntry.deckId,
+      deckName: secondEntry.deckName,
+      coverCardId: secondEntry.coverCardId
+    }, cardIndex, lockOptions);
+
+    if (!firstLock.ok || !secondLock.ok) return null;
+    if (!validateDeckSnapshot(firstLock.snapshot, cardIndex, lockOptions).ok) return null;
+    if (!validateDeckSnapshot(secondLock.snapshot, cardIndex, lockOptions).ok) return null;
+
     let roomCode = code();
     while (rooms.has(roomCode)) roomCode = code();
 
@@ -499,13 +518,15 @@ export async function createBattleSpiritsServer(options = {}) {
         player1: {
           socketId: firstEntry.socketId,
           profile: publicProfile(firstEntry.profile),
-          deck: firstEntry.deck,
+          deck: firstLock.snapshot.cards.map((entry) => ({ ...entry })),
+          deckSnapshot: firstLock.snapshot,
           resumeToken: resumeToken()
         },
         player2: {
           socketId: secondEntry.socketId,
           profile: publicProfile(secondEntry.profile),
-          deck: secondEntry.deck,
+          deck: secondLock.snapshot.cards.map((entry) => ({ ...entry })),
+          deckSnapshot: secondLock.snapshot,
           resumeToken: resumeToken()
         }
       },
@@ -526,7 +547,8 @@ export async function createBattleSpiritsServer(options = {}) {
       createdAt: Date.now(),
       matchmaking: {
         queueType: QueueType.CASUAL,
-        readyCheckId
+        readyCheckId,
+        deckLocked: true
       }
     };
 
@@ -551,6 +573,18 @@ export async function createBattleSpiritsServer(options = {}) {
       playerId,
       resumeToken: room.players[playerId].resumeToken,
       opponentProfile: room.players[opponentId].profile,
+      preMatch: {
+        matchId: room.match.id,
+        queueType: QueueType.CASUAL,
+        player: {
+          profile: room.players[playerId].profile,
+          deck: deckSnapshotPresentation(room.players[playerId].deckSnapshot)
+        },
+        opponent: {
+          profile: room.players[opponentId].profile,
+          deck: deckSnapshotPresentation(room.players[opponentId].deckSnapshot)
+        }
+      },
       matchSync: roomMatchSync(room)
     });
 
@@ -862,6 +896,7 @@ export async function createBattleSpiritsServer(options = {}) {
         deck: payload.deck,
         deckId: String(payload?.deckId || "").slice(0, 96) || null,
         deckName: String(payload?.deckName || "Deck").slice(0, 120),
+        coverCardId: String(payload?.coverCardId || "").slice(0, 128) || null,
         metadata: { clientJoinedAt: Date.now() }
       }));
 

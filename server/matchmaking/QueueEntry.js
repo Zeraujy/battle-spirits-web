@@ -10,6 +10,7 @@ export class QueueEntry {
     deck = [],
     deckId = null,
     deckName = "Deck",
+    coverCardId = null,
     joinedAt = Date.now(),
     rating = null,
     region = null,
@@ -25,6 +26,7 @@ export class QueueEntry {
     this.deck = Array.isArray(deck) ? [...deck] : [];
     this.deckId = deckId == null ? null : String(deckId);
     this.deckName = String(deckName || "Deck").slice(0, 120);
+    this.coverCardId = coverCardId == null ? null : String(coverCardId).slice(0, 128);
     this.joinedAt = Number(joinedAt) || Date.now();
     this.rating = Number.isFinite(Number(rating)) ? Number(rating) : null;
     this.region = region == null ? null : String(region);
@@ -44,6 +46,7 @@ export class QueueEntry {
       profile: { ...this.profile },
       deckId: this.deckId,
       deckName: this.deckName,
+      coverCardId: this.coverCardId,
       joinedAt: this.joinedAt,
       rating: this.rating,
       region: this.region,
