@@ -41,7 +41,16 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
     restrictions: {}
   };
 
-  let next = { ...match, players: { ...match.players, [playerId]: player }, battle };
+  const attackNumber = Number(match.temporary?.attackCounts?.[playerId] || 0) + 1;
+  let next = {
+    ...match,
+    players: { ...match.players, [playerId]: player },
+    battle,
+    temporary: {
+      ...(match.temporary || {}),
+      attackCounts: { ...(match.temporary?.attackCounts || {}), [playerId]: attackNumber }
+    }
+  };
   next = appendLog(next, `${match.players[playerId].name} declarou um ataque.`, "battle");
 
   const trigger = resolveUltimateTriggerOnAttack(next, playerId, attacker, cardIndex);
@@ -61,7 +70,8 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
   const engine = dispatchEffectEvent(next, {
     event: "whenAttacks",
     sourcePlayerId: playerId,
-    sourceInstanceId: instanceId
+    sourceInstanceId: instanceId,
+    context: { attackNumber }
   }, cardIndex);
 
   let resolvedMatch = engine.match;
@@ -74,7 +84,7 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
       event: "whenAttacks",
       sourcePlayerId: playerId,
       sourceInstanceId: attachedBrave.instanceId,
-      context: { isCombined: true, combinedHostInstanceId: instanceId }
+      context: { isCombined: true, combinedHostInstanceId: instanceId, attackNumber }
     }, cardIndex);
     resolvedMatch = braveEngine.match;
     manualResolutionNeeded = manualResolutionNeeded || braveEngine.manualResolutionNeeded;
@@ -387,7 +397,7 @@ export function resolveBattle(match, actorId, cardIndex) {
           sourcePhysical: destroyedCard.physical,
           sourceCardId: destroyedCard.physical.cardId,
           eventPlayerId: destroyedCard.playerId,
-          context: { ...originalBattleContext, attackerBP: aBP, blockerBP: bBP }
+          context: { ...originalBattleContext, attackerBP: aBP, blockerBP: bBP, cause: "bpComparison" }
         }, cardIndex);
         next = engine.match;
         next = openBurstOpportunityForEvent(next, BurstEvent.OWN_SPIRIT_DESTROYED, destroyedCard.playerId, cardIndex, { sourcePlayerId: destroyedCard.playerId, sourceInstanceId: destroyedCard.physical.instanceId, battleId: battle.id, cause: "bpComparison" });

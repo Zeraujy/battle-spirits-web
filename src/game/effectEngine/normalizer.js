@@ -65,7 +65,7 @@ export function getTriggeredEntries(card, event, options = {}) {
   ].filter(({ entry, source }) => {
     if (source === "effects") {
       const specialType = String(entry?.type || "").replace(/[\s_-]+/g, "").toLowerCase();
-      if (specialType.includes("ultimatetrigger")) return false;
+      if (specialType.includes("ultimatetrigger") || specialType === "summoncondition") return false;
     }
     if (!entryMatchesEvent(entry, event)) return false;
 

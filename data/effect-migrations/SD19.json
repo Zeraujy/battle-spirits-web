@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "migrationId": "sd19-phase22-first-pass",
+  "set": "SD19",
+  "write": false,
+  "definedCards": [
+    "SD19-002",
+    "SD19-005",
+    "SD19-007",
+    "SD19-010",
+    "SD19-011",
+    "SD19-012",
+    "SD19-014",
+    "SD19-X01"
+  ],
+  "definedCount": 8,
+  "changedCards": [],
+  "changedCount": 0,
+  "errors": [],
+  "notes": "First fully structured Starter Deck migration pass. True-Awaken is surfaced as a structured yes/no decision at attack declaration so it no longer falls back to Manual Resolution."
+}

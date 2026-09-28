@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+const need=(p,s)=>{const t=fs.readFileSync(p,'utf8'); if(!t.includes(s)) throw new Error(`${p} missing ${s}`)};
+for(const p of ['scripts/effects/migrate-card-effects.mjs','scripts/effects/migrations/starterDeckMigrations.mjs','scripts/effects/audit-starter-deck-priority-phase22.mjs']) if(!fs.existsSync(p)) throw new Error(`missing ${p}`);
+need('src/game/effectEngine/coreActionLibrary.js','moveCoreSelectedToSource');
+need('src/game/effectEngine/coreActionLibrary.js','paySourceCost');
+need('src/game/effectEngine/conditionEngine.js','attackNumber');
+need('src/game/effectEngine/conditionEngine.js','eventSourceCardType');
+need('src/game/effectEngine/conditionEngine.js','eventCause');
+const cov=JSON.parse(fs.readFileSync('data/effect-coverage.json','utf8'));
+const sd19=cov.cards.filter(c=>c.set==='SD19');
+const bad=sd19.filter(c=>!['AUTOMATED','NO_EFFECT'].includes(c.status));
+if(sd19.length!==17 || bad.length) throw new Error(`SD19 coverage invalid: ${sd19.length} cards, ${bad.length} unresolved`);
+const priority=JSON.parse(fs.readFileSync('data/effect-migrations/starter-deck-priority.json','utf8'));
+const deck=priority.decks.find(d=>d.setCode==='SD19');
+if(!deck?.readyWithoutManual) throw new Error('SD19 priority gate not ready');
+console.log('Phase 21-22 audit: OK');

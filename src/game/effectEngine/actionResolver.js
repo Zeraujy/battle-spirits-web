@@ -1,6 +1,8 @@
 import { findPhysicalCard, getDatabaseCard } from "../selectors.js";
 import { removeFieldCard, updateFieldCard } from "../zones.js";
 import { otherPlayerId } from "../utils.js";
+import { calculateReduction, autoBuildPayment } from "../cost.js";
+import { payCoreCost } from "../cores.js";
 import { conditionMatchesEffect } from "./conditionResolver.js";
 import {
   addBPModifier,
@@ -433,6 +435,49 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
     }
     return { match, notes: ["moveCore route is not structured for this source/destination yet."], manualResolutionNeeded: true, executed: false };
+  }
+
+  if (type === "moveCoreSelectedToSource") {
+    const selected = context.selectedTargets?.[0];
+    const source = context.sourceInstanceId ? findPhysicalCard(next, context.sourceInstanceId) : null;
+    if (!selected?.physical?.instanceId || !source || selected.playerId !== source.playerId) {
+      return { match: next, notes: ["Origem/alvo inválidos para mover Core entre cartas."], manualResolutionNeeded: true, executed: false };
+    }
+    const from = findPhysicalCard(next, selected.physical.instanceId);
+    if (!from || !["spirits", "other"].includes(from.zone) || !["spirits", "other"].includes(source.zone)) {
+      return { match: next, notes: ["As cartas precisam estar no campo para mover Core."], manualResolutionNeeded: true, executed: false };
+    }
+    const amount = Math.max(1, Number(action.amount ?? action.count ?? 1));
+    const availableRegular = Number(from.card.cores?.regular || 0);
+    const moved = Math.min(amount, availableRegular);
+    if (moved <= 0) return { match: next, notes: ["A carta escolhida não possui Core regular disponível."], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    let player = next.players[from.playerId];
+    player = updateFieldCard(player, from.card.instanceId, (physical) => ({
+      ...physical, cores: { ...physical.cores, regular: Number(physical.cores?.regular || 0) - moved }
+    }));
+    player = updateFieldCard(player, source.card.instanceId, (physical) => ({
+      ...physical, cores: { ...physical.cores, regular: Number(physical.cores?.regular || 0) + moved }
+    }));
+    next = { ...next, players: { ...next.players, [from.playerId]: player } };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
+  }
+
+  if (type === "paySourceCost") {
+    const playerId = context.sourcePlayerId;
+    const card = context.sourceCard;
+    if (!playerId || !card) return { match: next, notes: ["Fonte inválida para pagamento de custo."], manualResolutionNeeded: true, executed: false };
+    const payable = calculateReduction(next, playerId, card, cardIndex).payable;
+    if (payable <= 0) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const payment = autoBuildPayment(next, playerId, payable, cardIndex);
+    if (!payment) return { match: next, notes: ["Cores insuficientes para pagar o custo opcional."], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const paid = payCoreCost(next, playerId, payment, payable, cardIndex);
+    if (!paid.ok) return { match: next, notes: [paid.error || "Falha ao pagar o custo opcional."], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const nested = asActionArray(action.actions ?? action.then ?? action.onPaid);
+    if (nested.length) {
+      const resolved = resolveNested(paid.match, nested, cardIndex, context);
+      return { ...resolved, executed: true, affectedCount: Number(resolved.affectedCount || 0) + payable };
+    }
+    return { match: paid.match, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: payable };
   }
 
   if (type === "adjustLife" || type === "healLife") {

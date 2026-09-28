@@ -11,3 +11,13 @@
 
 ### Supabase
 Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding migration.
+
+## v5.1.0 development — Phase 21/22
+
+- Added the Card Migration Pipeline (`npm run effects:migrate -- --set=SDxx`).
+- Added schema validation and migration receipts under `data/effect-migrations/`.
+- Added Starter Deck priority audit with `READY_NO_MANUAL`, `NEEDS_MIGRATION` and `BLOCKED_MISSING_RUNTIME_DATA` states.
+- First completed content batch: SD19 — Ultimate Deck: Scorching Zero.
+- SD19 now passes the no-manual gate across all 17 unique recipe cards.
+- Runtime-native Ultimate rules are no longer misclassified as generic manual fallback by the coverage audit.
+

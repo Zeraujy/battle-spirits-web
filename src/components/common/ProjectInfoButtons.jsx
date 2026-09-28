@@ -6,6 +6,32 @@ const PATCHES = [
   {
     version: "5.0.3",
     date: { pt: "28/09/2026", en: "09/28/2026" },
+    title: { pt: "Automação de Cartas e Starter Decks", en: "Card Automation & Starter Decks" },
+    summary: {
+      pt: "Mais cartas agora usam efeitos estruturados e automáticos, começando pelos Starter Decks.",
+      en: "More cards now use structured automatic effects, beginning with Starter Decks."
+    },
+    sections: [
+      {
+        title: { pt: "Primeiro lote automatizado", en: "First automated batch" },
+        items: {
+          pt: [
+            "SD19 — Ultimate Deck: Scorching Zero agora passa pelo gate completo sem depender de Resolução Manual.",
+            "As 17 cartas únicas da receita são reconhecidas pelo runtime e seus efeitos principais usam automação estruturada ou são explicitamente cartas sem efeito.",
+            "A verificação dos Starter Decks agora diferencia decks ainda em automação daqueles que ainda não possuem todos os dados de gameplay necessários."
+          ],
+          en: [
+            "SD19 — Ultimate Deck: Scorching Zero now passes the full gate without relying on Manual Resolution.",
+            "All 17 unique recipe cards are recognized by the runtime and their primary effects use structured automation or are explicitly effectless cards.",
+            "Starter Deck verification now separates decks still being automated from decks that do not yet have all required gameplay data."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "28/09/2026", en: "09/28/2026" },
     title: { pt: "Efeitos Online Autoritativos e Ordem de Gatilhos", en: "Server-Authoritative Effects & Trigger Ordering" },
     summary: {
       pt: "Escolhas de efeitos Online agora são validadas pelo servidor e gatilhos simultâneos podem ser ordenados antes de entrar na fila de resolução.",

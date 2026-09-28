@@ -119,6 +119,14 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     return Boolean(revealed && (revealed.colors || []).map((color) => String(color).toLowerCase()).includes(expected));
   }
   if (type === "ultimateTriggerWasHit") return Boolean(context.ultimateTrigger?.originalHit ?? context.ultimateTrigger?.hit);
+  if (type === "attackNumber") return compareNumber(Number(context.attackNumber ?? match.temporary?.attackCounts?.[sourcePlayerId] ?? 0), condition);
+  if (type === "eventSourceCardType") {
+    const cardId = context.eventSourceCardId || context.sourceCard?.id;
+    const card = cardId ? cardIndex.get(cardId) : null;
+    const expected = String(condition.cardType ?? condition.value ?? "").toLowerCase();
+    return Boolean(card && String(card.cardType || "").toLowerCase() === expected);
+  }
+  if (type === "eventCause") return String(context.cause || "") === String(condition.value ?? condition.cause ?? "");
   return false;
 }
 

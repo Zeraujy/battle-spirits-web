@@ -92,7 +92,8 @@ function targetProperties(match, cardIndex, candidate) {
     level: isField ? Number(getCurrentLevel(card, physical)?.level || 0) : 0,
     isField,
     braved: isField ? Boolean(getBraveAttachment(match, physical.instanceId)) : false,
-    combined: Boolean(physical?.combinedWith)
+    combined: Boolean(physical?.combinedWith),
+    cores: Number(physical?.cores?.regular || 0) + (physical?.cores?.soul ? 1 : 0)
   };
 }
 
@@ -124,6 +125,7 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   if (selector.notCombinedWithBrave === true && props.braved) return false;
   if (selector.hasSoulCore === true && !physical.cores?.soul) return false;
   if (selector.hasSoulCore === false && physical.cores?.soul) return false;
+  if (!numberBetween(props.cores, selector.minimumCores ?? selector.minCores, selector.maximumCores ?? selector.maxCores)) return false;
   return true;
 }
 

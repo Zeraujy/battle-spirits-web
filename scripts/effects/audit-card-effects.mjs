@@ -50,7 +50,10 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "battleState",
   "ultimateTriggerRevealedCardType",
   "ultimateTriggerRevealedColor",
-  "ultimateTriggerWasHit"
+  "ultimateTriggerWasHit",
+  "attackNumber",
+  "eventSourceCardType",
+  "eventCause"
 ]);
 
 const KNOWN_CONDITION_KEYS = new Set([
@@ -64,7 +67,7 @@ const KNOWN_CONDITION_KEYS = new Set([
   "atLeast", "atMost", "equals", "count", "minCount", "family", "families",
   "minimumCost", "maximumCost", "minCost", "maxCost",
   "player", "owner", "operator", "selector", "zone", "directAttack",
-  "attackerPlayer", "blocked"
+  "attackerPlayer", "blocked", "cardType", "cause"
 ]);
 
 const NESTED_ACTION_KEYS = [
@@ -157,12 +160,15 @@ function inspectEntry(entry, source, index) {
   const unsupportedActions = [...new Set(actionInfo.unsupported)].sort();
   const unsupportedConditions = [...new Set(conditionIssues.map((issue) => `${issue.kind}:${issue.value}`))].sort();
 
+  const compactType = String(entry?.type || "").replace(/[\s_-]+/g, "").toLowerCase();
+  const engineNative = ["summoncondition", "ultimatetrigger", "ultimatetriggerbattle", "criticalhit", "xutrigger", "triggercounter"].includes(compactType);
   let status = CoverageStatus.MANUAL;
-  if (!canonicalEvent) status = CoverageStatus.UNSUPPORTED_TRIGGER;
+  if (engineNative) status = CoverageStatus.AUTOMATED;
+  else if (!canonicalEvent) status = CoverageStatus.UNSUPPORTED_TRIGGER;
   else if (!dispatched) status = CoverageStatus.UNSUPPORTED_TRIGGER;
   else if (unsupportedConditions.length) status = CoverageStatus.UNSUPPORTED_CONDITION;
   else if (unsupportedActions.length) status = CoverageStatus.UNSUPPORTED_ACTION;
-  else if (actionCount > 0) status = CoverageStatus.AUTOMATED;
+  else if (actionCount > 0 || hasModifiers) status = CoverageStatus.AUTOMATED;
   else status = CoverageStatus.MANUAL;
 
   return {
@@ -180,16 +186,22 @@ function inspectEntry(entry, source, index) {
     unsupportedConditions,
     hasModifiers,
     hasStructuredActions: actionCount > 0,
+    automationRef: entry.automationRef || null,
+    engineNative,
     status
   };
 }
 
-function canCoverDisplayEntry(display, executableEntries) {
+function canCoverDisplayEntry(display, executableEntries, allEntries = []) {
+  if (display.automationRef) {
+    return allEntries.some((entry) => entry.id === display.automationRef && entry.status === CoverageStatus.AUTOMATED);
+  }
+  if (display.engineNative) return true;
   if (!display.canonicalEvent) return false;
   return executableEntries.some((entry) =>
     entry.status === CoverageStatus.AUTOMATED
     && entry.canonicalEvent === display.canonicalEvent
-  );
+  ) || allEntries.some((entry) => entry.hasModifiers && entry.status === CoverageStatus.AUTOMATED && entry.canonicalEvent === display.canonicalEvent);
 }
 
 function inspectCard(card) {
@@ -198,8 +210,9 @@ function inspectCard(card) {
   const all = [...effects, ...abilities];
   const executable = all.filter((entry) => entry.hasStructuredActions);
   const automatedExecutable = executable.filter((entry) => entry.status === CoverageStatus.AUTOMATED);
+  const automatedEffective = all.filter((entry) => entry.status === CoverageStatus.AUTOMATED && (entry.hasStructuredActions || entry.hasModifiers || entry.engineNative));
   const displayOnly = effects.filter((entry) => !entry.hasStructuredActions);
-  const unresolvedDisplay = displayOnly.filter((entry) => !canCoverDisplayEntry(entry, automatedExecutable));
+  const unresolvedDisplay = displayOnly.filter((entry) => !canCoverDisplayEntry(entry, automatedExecutable, all));
   const noEntries = all.length === 0;
   const explicitNoEffect = hasExplicitNoEffectText(card);
 
@@ -215,9 +228,9 @@ function inspectCard(card) {
     status = CoverageStatus.NO_EFFECT;
   } else if (noEntries) {
     status = CoverageStatus.UNSTRUCTURED_TEXT;
-  } else if (automatedExecutable.length > 0 && issueStatuses.size === 0) {
+  } else if (automatedEffective.length > 0 && issueStatuses.size === 0) {
     status = CoverageStatus.AUTOMATED;
-  } else if (automatedExecutable.length > 0) {
+  } else if (automatedEffective.length > 0) {
     status = CoverageStatus.PARTIAL;
   } else if (issueStatuses.has(CoverageStatus.UNSUPPORTED_ACTION)) {
     status = CoverageStatus.UNSUPPORTED_ACTION;
