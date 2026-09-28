@@ -12,14 +12,14 @@ const required = [
 for (const file of required) if (!exists(file)) failures.push(`Missing ${file}`);
 
 const pkg = JSON.parse(read("package.json"));
-if (pkg.version !== "4.9.1") failures.push(`Expected package version 4.9.1, found ${pkg.version}`);
+const versionParts = String(pkg.version || "0.0.0").split(".").map(Number);
+if (versionParts[0] < 4 || (versionParts[0] === 4 && versionParts[1] < 9)) {
+  failures.push(`Arena v4.9.1 lineage requires release >=4.9.x, found ${pkg.version}`);
+}
 for (const [file, marker] of [
-  ["src/config/appVersion.js", 'APP_VERSION = "4.9.1"'],
-  ["server/index.mjs", 'version: "4.9.1"'],
-  ["src/pages/Simulator.jsx", "Eternal v4.9.1"],
   ["src/components/common/ProjectInfoButtons.jsx", 'version: "4.9.1"'],
   ["src/components/game/arena/ArenaShell.jsx", 'data-arena-shell="v4.9.1"'],
-]) if (!read(file).includes(marker)) failures.push(`Version marker missing in ${file}`);
+]) if (!read(file).includes(marker)) failures.push(`Historical v4.9.1 marker missing in ${file}`);
 
 const tokens = read("src/styles/theme/interfaceTokens.css");
 for (const token of [

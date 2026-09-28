@@ -8,7 +8,10 @@ const read = (rel) => fs.readFileSync(path.join(root, rel), "utf8");
 const exists = (rel) => fs.existsSync(path.join(root, rel));
 
 const pkg = JSON.parse(read("package.json"));
-if (!pkg.version.startsWith("4.9.")) issues.push(`package.json version expected 4.9.x, found ${pkg.version}`);
+const versionParts = String(pkg.version || "0.0.0").split(".").map(Number);
+if (versionParts[0] < 4 || (versionParts[0] === 4 && versionParts[1] < 9)) {
+  issues.push(`Arena final QA requires release >=4.9.x, found ${pkg.version}`);
+}
 
 const versionExpectations = [
   ["src/config/appVersion.js", `APP_VERSION = "${pkg.version}"`],
@@ -67,4 +70,4 @@ if (issues.length) {
   for (const issue of issues) console.error(`- ${issue}`);
   process.exit(1);
 }
-console.log(`Arena Phase 22/23 Final QA audit: OK — v${pkg.version} 4.9.x line`);
+console.log(`Arena Phase 22/23 Final QA audit: OK — Arena v4.9 lineage preserved in v${pkg.version}`);

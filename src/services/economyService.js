@@ -1,6 +1,14 @@
 import { supabase } from "./supabase.js";
 import { SHOP_PRODUCT_BY_ID } from "../data/shopCatalog.js";
 import { clearAuthenticatedStorageUser, setAuthenticatedStorageUser } from "./storage.js";
+import {
+  safeNumber,
+  normalizeWallet as normalizeWalletBase,
+  formatCoins as formatCoinsBase,
+  normalizeCollection as normalizeCollectionBase,
+  summarizeCollection as summarizeCollectionBase,
+  collectionQuantityMap as collectionQuantityMapBase
+} from "./economyUtils.js";
 
 const GUEST_ECONOMY_KEY = "bs-eternal:guest-economy:v2";
 const PENDING_MIGRATION_KEY = "bs-eternal:pending-account-migration:v1";
@@ -37,20 +45,16 @@ export const RARITY_CRAFT_COSTS = Object.freeze({
 export const OWNED_CRAFT_DISCOUNT = 0.25;
 
 
-function safeNumber(value) {
-  const number = Number(value || 0);
-  return Number.isFinite(number) ? Math.max(0, Math.floor(number)) : 0;
-}
-
 export function normalizeWallet(raw = {}) {
-  return {
-    spiritCoins: safeNumber(raw.spiritCoins ?? raw.spirit_coins),
-    craftCoins: safeNumber(raw.craftCoins ?? raw.craft_coins)
-  };
+  return normalizeWalletBase(raw);
 }
 
 export function formatCoins(value = 0) {
-  return safeNumber(value).toLocaleString("pt-BR");
+  return formatCoinsBase(value);
+}
+
+function normalizeCollection(raw = []) {
+  return normalizeCollectionBase(raw, MAX_OWNED_COPIES);
 }
 
 function emptyGuestState() {
@@ -63,16 +67,6 @@ function emptyGuestState() {
   };
 }
 
-function normalizeCollection(raw = []) {
-  const merged = new Map();
-  for (const entry of Array.isArray(raw) ? raw : []) {
-    const cardId = String(entry?.cardId || entry?.card_id || "").trim();
-    if (!cardId) continue;
-    const quantity = Math.min(MAX_OWNED_COPIES, safeNumber(entry?.quantity));
-    if (quantity > 0) merged.set(cardId, Math.max(merged.get(cardId) || 0, quantity));
-  }
-  return [...merged.entries()].map(([cardId, quantity]) => ({ cardId, quantity }));
-}
 
 function readGuestState() {
   if (typeof sessionStorage === "undefined") return emptyGuestState();
@@ -181,16 +175,11 @@ export async function loadEconomySnapshot() {
 }
 
 export function summarizeCollection(collection = []) {
-  return normalizeCollection(collection).reduce((summary, entry) => {
-    summary.uniqueCards += 1;
-    summary.totalCopies += entry.quantity;
-    if (entry.quantity > 1) summary.duplicateCopies += entry.quantity - 1;
-    return summary;
-  }, { uniqueCards: 0, totalCopies: 0, duplicateCopies: 0 });
+  return summarizeCollectionBase(collection, MAX_OWNED_COPIES);
 }
 
 export function collectionQuantityMap(collection = []) {
-  return new Map(normalizeCollection(collection).map((entry) => [entry.cardId, entry.quantity]));
+  return collectionQuantityMapBase(collection, MAX_OWNED_COPIES);
 }
 
 export function craftValueForRarity(rarity) {

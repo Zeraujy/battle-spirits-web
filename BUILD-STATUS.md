@@ -1,4 +1,4 @@
-# Build Status — Battle Spirits: KAIHOU! Simulator v4.8.1
+# Build Status — Battle Spirits: KAIHOU! Simulator v5.0.0
 
 ## Escopo
 

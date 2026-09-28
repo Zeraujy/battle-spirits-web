@@ -115,6 +115,8 @@ const requiredPaths = [
   "public/favicon.ico",
   "docs/changelog/CHANGELOG-4.9.0.md",
   "docs/changelog/CHANGELOG-4.9.1.md",
+  "docs/changelog/CHANGELOG-5.0.0.md",
+  "docs/online/V5.0.0-FINAL-QA.md",
   "docs/shop/ADDING-SHOP-ITEMS.md",
   "public/images/ui/arena/levels",
   "public/images/arena/wallpaper_arena_default.png",

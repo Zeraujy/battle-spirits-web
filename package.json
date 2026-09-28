@@ -1,9 +1,9 @@
 {
   "name": "battle-spirits-kaihou-simulator",
-  "version": "4.9.1",
+  "version": "5.0.0",
   "private": true,
   "type": "module",
-  "description": "Battle Spirits: KAIHOU! Simulator v4.9.1 - Arena Visual Identity Alignment",
+  "description": "Battle Spirits: KAIHOU! Simulator v5.0.0 - Online Matchmaking & Competitive Foundation",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "dev:web": "vite --host 127.0.0.1",
@@ -11,7 +11,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --test src/game/*.test.js src/online/*.test.js src/services/*.test.js",
-    "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-web-only.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs && node scripts/audit-arena-phase01.mjs && node scripts/audit-arena-phase23.mjs && node scripts/audit-arena-phase45.mjs && node scripts/audit-arena-phase67.mjs && node scripts/audit-arena-phase89.mjs && node scripts/audit-arena-phase1314.mjs && node scripts/audit-arena-phase1618.mjs && node scripts/audit-arena-phase1921.mjs && node scripts/audit-arena-phase2223.mjs && node scripts/audit-arena-visual-identity-491-block1.mjs && node scripts/audit-arena-visual-identity-491-block057.mjs && node scripts/audit-arena-visual-identity-491-block0811.mjs && node scripts/audit-arena-visual-identity-491-final.mjs && node scripts/audit-online-foundation-v500-phase02.mjs && node scripts/audit-combat-layout-stability-v500.mjs && node scripts/audit-online-authority-v500-phase46.mjs && node scripts/audit-online-matchmaking-v500-phase79.mjs && node scripts/audit-online-ready-check-v500.mjs && node scripts/audit-online-prematch-v500-phase1011.mjs && node scripts/audit-online-ranked-v500-phase1214.mjs && node scripts/audit-online-social-v500-phase1518.mjs && node scripts/audit-online-history-v500-phase1921.mjs",
+    "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-web-only.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs && node scripts/audit-arena-phase01.mjs && node scripts/audit-arena-phase23.mjs && node scripts/audit-arena-phase45.mjs && node scripts/audit-arena-phase67.mjs && node scripts/audit-arena-phase89.mjs && node scripts/audit-arena-phase1314.mjs && node scripts/audit-arena-phase1618.mjs && node scripts/audit-arena-phase1921.mjs && node scripts/audit-arena-phase2223.mjs && node scripts/audit-arena-visual-identity-491-block1.mjs && node scripts/audit-arena-visual-identity-491-block057.mjs && node scripts/audit-arena-visual-identity-491-block0811.mjs && node scripts/audit-arena-visual-identity-491-final.mjs && node scripts/audit-online-foundation-v500-phase02.mjs && node scripts/audit-combat-layout-stability-v500.mjs && node scripts/audit-online-authority-v500-phase46.mjs && node scripts/audit-online-matchmaking-v500-phase79.mjs && node scripts/audit-online-ready-check-v500.mjs && node scripts/audit-online-prematch-v500-phase1011.mjs && node scripts/audit-online-ranked-v500-phase1214.mjs && node scripts/audit-online-social-v500-phase1518.mjs && node scripts/audit-online-history-v500-phase1921.mjs && node scripts/audit-online-security-v500-phase22.mjs && node scripts/audit-online-final-v500-phase25.mjs",
     "check": "npm run verify && npm test && npm run build",
     "server:start": "node --env-file-if-exists=server/.env server/index.mjs",
     "online:check": "node scripts/check-online-config.mjs",
@@ -59,7 +59,14 @@
     "online:v500:phase1518:audit": "node scripts/audit-online-social-v500-phase1518.mjs",
     "online:v500:phase1518:test": "node --test server/challenges/challenges.test.js server/matches/socialMatchFlow.test.js server/matches/deckLock.test.js server/matchmaking/matchmaking.test.js server/matchmaking/rankedMatchmaking.test.js server/results/rankedResultAuthority.test.js server/policies/competitivePolicies.test.js server/matches/matchSession.test.js server/matches/stateSync.test.js server/connections/ReconnectManager.test.js src/online/domain/domain.test.js src/online/sync/stateSync.test.js src/online/connection/connectionState.test.js",
     "online:v500:phase1921:audit": "node scripts/audit-online-history-v500-phase1921.mjs",
-    "online:v500:phase1921:test": "node --test server/results/matchHistoryRecord.test.js src/online/errors/onlineErrorMessages.test.js server/challenges/challenges.test.js server/matches/socialMatchFlow.test.js server/matchmaking/matchmaking.test.js server/matchmaking/rankedMatchmaking.test.js server/results/rankedResultAuthority.test.js server/policies/competitivePolicies.test.js server/matches/matchSession.test.js server/matches/stateSync.test.js server/connections/ReconnectManager.test.js src/online/domain/domain.test.js src/online/sync/stateSync.test.js src/online/connection/connectionState.test.js"
+    "online:v500:phase1921:test": "node --test server/results/matchHistoryRecord.test.js src/online/errors/onlineErrorMessages.test.js server/challenges/challenges.test.js server/matches/socialMatchFlow.test.js server/matchmaking/matchmaking.test.js server/matchmaking/rankedMatchmaking.test.js server/results/rankedResultAuthority.test.js server/policies/competitivePolicies.test.js server/matches/matchSession.test.js server/matches/stateSync.test.js server/connections/ReconnectManager.test.js src/online/domain/domain.test.js src/online/sync/stateSync.test.js src/online/connection/connectionState.test.js",
+    "online:v500:phase22:audit": "node scripts/audit-online-security-v500-phase22.mjs",
+    "online:v500:phase22:test": "node --test server/security/onlineSecurity.test.js server/matches/sanitizeMatch.test.js src/online/errors/onlineErrorMessages.test.js",
+    "online:v500:phase23:test": "node scripts/run-online-multiplayer-regression-v500.mjs",
+    "online:v500:phase24:test": "node scripts/run-online-ranked-regression-v500.mjs",
+    "online:v500:phase25:audit": "node scripts/audit-online-final-v500-phase25.mjs",
+    "online:v500:final:check": "npm run verify && npm run online:v500:phase23:test && npm run online:v500:phase24:test && npm run online:v500:phase25:test && npm run ui:audit && npm run release:audit && npm run security:audit && npm run build",
+    "online:v500:phase25:test": "node scripts/run-full-regression-v500.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",

@@ -17,13 +17,14 @@ import { MatchMode } from "../src/online/domain/matchModes.js";
 import { QueueStatus, QueueType } from "../src/online/domain/queueTypes.js";
 import { DisconnectReason, PlayerConnectionState } from "../src/online/domain/matchStatus.js";
 import { DEFAULT_RECONNECT_WINDOW_MS } from "../src/online/domain/onlineConstants.js";
-import { MatchRegistry, createMatchSession, createDeckSnapshot, validateDeckSnapshot, deckSnapshotPresentation, createPrivateMatchDescriptor, RematchRequest } from "./matches/index.js";
+import { MatchRegistry, createMatchSession, createDeckSnapshot, validateDeckSnapshot, deckSnapshotPresentation, createPrivateMatchDescriptor, RematchRequest, sanitizeMatchForViewer } from "./matches/index.js";
 import { createStateEnvelope, validateClientStateVersion } from "./matches/stateSync.js";
 import { ReconnectManager } from "./connections/ReconnectManager.js";
 import { Matchmaker, MatchmakingQueue, QueueEntry, ReadyCheckRegistry, RankedMatchmaker } from "./matchmaking/index.js";
 import { finalizeMatchResult, buildServerMatchHistoryRecords, persistServerMatchHistory } from "./results/index.js";
 import { AbandonPolicy, DisconnectPolicy } from "./policies/index.js";
 import { ChallengeRegistry } from "./challenges/index.js";
+import { OnlineEventGuard, OnlineGuardCode, constantTimeTokenEqual } from "./security/index.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -69,6 +70,7 @@ export async function createBattleSpiritsServer(options = {}) {
   const reconnectManager = new ReconnectManager({ reconnectWindowMs: DEFAULT_RECONNECT_WINDOW_MS });
   const abandonPolicy = new AbandonPolicy();
   const disconnectPolicy = new DisconnectPolicy({ reconnectWindowMs: DEFAULT_RECONNECT_WINDOW_MS });
+  const onlineEventGuard = new OnlineEventGuard();
   let challengeRegistry = null;
   let lastLobbySnapshotSignature = "";
   const supabaseUrl = String(options.supabaseUrl ?? process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "");
@@ -80,7 +82,7 @@ export async function createBattleSpiritsServer(options = {}) {
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify({
         ok: true,
-        version: "4.9.1",
+        version: "5.0.0",
         rooms: rooms.size,
         cards: cardIndex.size,
         matchmakingQueued: casualQueue.size,
@@ -243,29 +245,6 @@ export async function createBattleSpiritsServer(options = {}) {
     return player;
   }
 
-  function sanitizeMatch(match, viewerPlayerId) {
-    if (!match) return null;
-
-    // Build only the private-player branches that must change for this viewer.
-    // This avoids cloning the entire match graph twice after every action while
-    // preserving the exact same hidden-information boundary.
-    const players = Object.fromEntries(
-      Object.entries(match.players || {}).map(([playerId, player]) => {
-        if (playerId === viewerPlayerId || !player) return [playerId, player];
-        return [playerId, {
-          ...player,
-          hand: (player.hand || []).map((card) => ({ instanceId: card.instanceId, hidden: true })),
-          deck: (player.deck || []).map((card) => ({ instanceId: card.instanceId, hidden: true })),
-          burst: player.burst
-            ? { instanceId: player.burst.instanceId, hidden: true, faceDown: true }
-            : player.burst
-        }];
-      })
-    );
-
-    return { ...match, players };
-  }
-
   function normalizeRoomTitle(value, fallback = "Sala de Battle Spirits") {
     const clean = String(value || "").replace(/\s+/g, " ").trim().slice(0, 48);
     return clean || fallback;
@@ -372,7 +351,7 @@ export async function createBattleSpiritsServer(options = {}) {
       started: Boolean(match),
       players,
       ...(includeChat ? { chat: (room.chat || []).slice(-100) } : {}),
-      match: sanitizeMatch(match, viewerId),
+      match: sanitizeMatchForViewer(match, viewerId),
       matchSync: roomMatchSync(room),
       matchHistoryRecord: room.matchHistory?.matchId === match?.id ? room.matchHistory.records?.[viewerId] || null : null,
       ranked: room.ranked ? { season: room.ranked.season } : null,
@@ -999,6 +978,25 @@ export async function createBattleSpiritsServer(options = {}) {
     return room.matchHistory;
   }
 
+  function onlineActivityForSocket(socketId) {
+    if (findRoomBySocket(socketId)) return "room";
+    if (readyCheckRegistry?.getBySocket(socketId)) return "ready_check";
+    if (casualQueue.hasSocket(socketId)) return "casual_queue";
+    if (rankedQueue.hasSocket(socketId)) return "ranked_queue";
+    if (challengeRegistry?.getBySocket(socketId)) return "challenge";
+    return null;
+  }
+
+  function rejectActivityConflict(socketId, allowed = []) {
+    const activity = onlineActivityForSocket(socketId);
+    if (!activity || allowed.includes(activity)) return null;
+    return {
+      ok: false,
+      code: "ACTIVITY_CONFLICT",
+      error: "Conclua ou cancele a atividade Online atual antes de iniciar outra."
+    };
+  }
+
   async function resolveRankedDisconnectIfEligible(room, disconnectedPlayerId) {
     if (!room?.ranked || room.ranked.settled || room.ranked.settling) return null;
     const match = authoritativeMatch(room);
@@ -1049,6 +1047,18 @@ export async function createBattleSpiritsServer(options = {}) {
   function onSafe(socket, eventName, handler) {
     socket.on(eventName, (payload = {}, ack = () => {}) => {
       const reply = typeof ack === "function" ? ack : () => {};
+      const guard = onlineEventGuard.inspect(socket.id, eventName, payload);
+      if (!guard.ok) {
+        const isRateLimit = guard.code === OnlineGuardCode.RATE_LIMITED;
+        return reply({
+          ok: false,
+          code: guard.code,
+          error: isRateLimit
+            ? "Muitas ações Online em pouco tempo. Aguarde um instante e tente novamente."
+            : "Esta solicitação Online é maior do que o permitido.",
+          ...(isRateLimit ? { retryAfterMs: guard.retryAfterMs } : {})
+        });
+      }
       try {
         const result = handler(payload ?? {}, reply);
         if (result && typeof result.then === "function") {
@@ -1182,7 +1192,9 @@ export async function createBattleSpiritsServer(options = {}) {
     });
 
     onSafe(socket, "ranked:join", async (payload, ack) => {
-      if (findRoomBySocket(socket.id)) return ack({ ok: false, error: "Saia da sala atual antes de procurar Ranked." });
+      const conflict = rejectActivityConflict(socket.id, ["ranked_queue"]);
+      if (conflict) return ack(conflict);
+      if (findRoomBySocket(socket.id)) return ack({ ok: false, code: "ACTIVITY_CONFLICT", error: "Saia da sala atual antes de procurar Ranked." });
       const existing = rankedQueue.getBySocket(socket.id);
       if (existing) {
         return ack({ ok: true, status: QueueStatus.SEARCHING, rp: existing.rating, rank: rankedProfileLabel(existing.rating) });
@@ -1236,6 +1248,8 @@ export async function createBattleSpiritsServer(options = {}) {
     });
 
     onSafe(socket, "matchmaking:join", (payload, ack) => {
+      const conflict = rejectActivityConflict(socket.id, ["casual_queue", "ready_check"]);
+      if (conflict) return ack(conflict);
       if (findRoomBySocket(socket.id)) {
         return ack({ ok: false, error: "Saia da sala atual antes de procurar outra partida." });
       }
@@ -1340,6 +1354,8 @@ export async function createBattleSpiritsServer(options = {}) {
       ack({ ok: true, removedFromQueue: Boolean(removedEntry), cancelledReadyCheck });
     });
     onSafe(socket, "room:create", (payload, ack) => {
+      const conflict = rejectActivityConflict(socket.id);
+      if (conflict) return ack(conflict);
       const profileValidation = validateOnlineProfilePayload(payload.profile);
       if (!profileValidation.ok) return ack(profileValidation);
       const customSettings = normalizeCustomMatchSettings(payload?.settings);
@@ -1377,6 +1393,8 @@ export async function createBattleSpiritsServer(options = {}) {
     });
 
     onSafe(socket, "room:join", (payload, ack) => {
+      const conflict = rejectActivityConflict(socket.id);
+      if (conflict) return ack(conflict);
       const profileValidation = validateOnlineProfilePayload(payload.profile);
       if (!profileValidation.ok) return ack(profileValidation);
       const roomCode = String(payload.code || "").trim().toUpperCase();
@@ -1401,7 +1419,7 @@ export async function createBattleSpiritsServer(options = {}) {
       const playerId = payload.playerId === "player2" ? "player2" : "player1";
       const room = rooms.get(roomCode);
       const player = room?.players?.[playerId];
-      if (!room || !player || !payload.resumeToken || player.resumeToken !== payload.resumeToken) {
+      if (!room || !player || !payload.resumeToken || !constantTimeTokenEqual(player.resumeToken, payload.resumeToken)) {
         return ack({ ok: false, error: "Não foi possível retomar esta sessão." });
       }
 
@@ -1585,6 +1603,7 @@ export async function createBattleSpiritsServer(options = {}) {
 
     socket.on("disconnect", (reason) => {
       console.log(`[socket.io] desconectado ${socket.id}: ${reason}`);
+      onlineEventGuard.clearSocket(socket.id);
 
       const disconnectedChallenge = challengeRegistry?.cancelBySocket(socket.id);
       if (disconnectedChallenge) {

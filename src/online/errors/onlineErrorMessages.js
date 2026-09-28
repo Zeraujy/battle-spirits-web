@@ -19,7 +19,11 @@ const COPY = Object.freeze({
     CHALLENGE_EXPIRED: "Este desafio expirou.",
     CHALLENGE_CANCELLED: "O desafio foi cancelado.",
     DECK_LOCK_FAILED: "Não foi possível bloquear o deck para esta partida.",
-    RANKED_ACCOUNT_ALREADY_QUEUED: "Esta conta já está na fila Ranked."
+    RANKED_ACCOUNT_ALREADY_QUEUED: "Esta conta já está na fila Ranked.",
+    RATE_LIMITED: "Muitas ações Online em pouco tempo. Aguarde um instante e tente novamente.",
+    PAYLOAD_TOO_LARGE: "Esta solicitação Online é maior do que o permitido.",
+    INVALID_PAYLOAD: "A solicitação Online não pôde ser validada.",
+    ACTIVITY_CONFLICT: "Conclua ou cancele a atividade Online atual antes de iniciar outra."
   },
   en: {
     [OnlineErrorCode.QUEUE_FAILED]: "Could not join the queue right now.",
@@ -39,7 +43,11 @@ const COPY = Object.freeze({
     CHALLENGE_EXPIRED: "This challenge expired.",
     CHALLENGE_CANCELLED: "The challenge was cancelled.",
     DECK_LOCK_FAILED: "Could not lock the deck for this match.",
-    RANKED_ACCOUNT_ALREADY_QUEUED: "This account is already in the Ranked queue."
+    RANKED_ACCOUNT_ALREADY_QUEUED: "This account is already in the Ranked queue.",
+    RATE_LIMITED: "Too many Online actions in a short time. Wait a moment and try again.",
+    PAYLOAD_TOO_LARGE: "This Online request is larger than allowed.",
+    INVALID_PAYLOAD: "The Online request could not be validated.",
+    ACTIVITY_CONFLICT: "Finish or cancel the current Online activity before starting another."
   }
 });
 

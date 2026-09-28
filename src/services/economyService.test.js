@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { formatCoins, normalizeWallet, summarizeCollection } from "./economyService.js";
+import { formatCoins, normalizeWallet, summarizeCollection } from "./economyUtils.js";
 
 test("normalizeWallet sanitizes economy values", () => {
   assert.deepEqual(normalizeWallet({ spirit_coins: 1200.9, craft_coins: -5 }), {

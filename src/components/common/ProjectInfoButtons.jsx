@@ -4,6 +4,47 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "5.0.0",
+    date: { pt: "28/09/2026", en: "09/28/2026" },
+    title: { pt: "Online Matchmaking & Competitive Foundation", en: "Online Matchmaking & Competitive Foundation" },
+    summary: {
+      pt: "O Online foi reconstruído sobre uma base autoritativa de servidor, com matchmaking Casual e Ranked, reconexão, desafios, resultados e histórico mais confiáveis.",
+      en: "Online play was rebuilt on a server-authoritative foundation with Casual and Ranked matchmaking, reconnect, challenges, results and more reliable history."
+    },
+    sections: [
+      {
+        title: { pt: "Partidas Online", en: "Online matches" },
+        items: {
+          pt: [
+            "Fila Casual com Ready Check, bloqueio de deck no servidor e transição VS antes da Arena.",
+            "Reconexão restaura o estado oficial da partida sem reconstruir o duelo pelo navegador.",
+            "Desafios de amigos, salas privadas e revanche foram integrados ao mesmo fluxo Online."
+          ],
+          en: [
+            "Casual queue now includes Ready Check, server-validated deck lock and a VS transition before the Arena.",
+            "Reconnect restores the official match state without rebuilding the duel from the browser.",
+            "Friend challenges, private rooms and rematches now share the same Online flow."
+          ]
+        }
+      },
+      {
+        title: { pt: "Ranked e segurança", en: "Ranked and security" },
+        items: {
+          pt: [
+            "Resultados Ranked, mudanças de RP, desistências e punições por desconexão são decididos exclusivamente pelo servidor.",
+            "O histórico Online e Ranked passa a nascer do estado oficial da partida.",
+            "A camada Online recebeu limites de eventos e payload, proteção de token de reconexão e novos testes contra vazamento de informações escondidas."
+          ],
+          en: [
+            "Ranked results, RP changes, concedes and disconnect penalties are decided exclusively by the server.",
+            "Online and Ranked history is now generated from official match state.",
+            "The Online layer gained event and payload limits, reconnect-token protection and new hidden-information regression tests."
+          ]
+        }
+      }
+    ]
+  },
+  {
     version: "4.9.1",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Arena Visual Identity Alignment", en: "Arena Visual Identity Alignment" },
