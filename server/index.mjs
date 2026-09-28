@@ -20,7 +20,9 @@ import { DEFAULT_RECONNECT_WINDOW_MS } from "../src/online/domain/onlineConstant
 import { MatchRegistry, createMatchSession, createDeckSnapshot, validateDeckSnapshot, deckSnapshotPresentation } from "./matches/index.js";
 import { createStateEnvelope, validateClientStateVersion } from "./matches/stateSync.js";
 import { ReconnectManager } from "./connections/ReconnectManager.js";
-import { Matchmaker, MatchmakingQueue, QueueEntry, ReadyCheckRegistry } from "./matchmaking/index.js";
+import { Matchmaker, MatchmakingQueue, QueueEntry, ReadyCheckRegistry, RankedMatchmaker } from "./matchmaking/index.js";
+import { finalizeMatchResult } from "./results/index.js";
+import { AbandonPolicy, DisconnectPolicy } from "./policies/index.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -57,14 +59,16 @@ export async function createBattleSpiritsServer(options = {}) {
   const casualQueue = new MatchmakingQueue({ queueType: QueueType.CASUAL });
   const casualMatchmaker = new Matchmaker({ queue: casualQueue });
   let readyCheckRegistry = null;
-  const rankedQueue = [];
-  const rankedBySocket = new Map();
+  const rankedSeason = "S0";
+  const rankedQueue = new MatchmakingQueue({ queueType: QueueType.RANKED });
+  let rankedMatchmaker = null;
   const lobbyPresence = new Map();
   const socketRoomIndex = new Map();
   const matchRegistry = new MatchRegistry();
   const reconnectManager = new ReconnectManager({ reconnectWindowMs: DEFAULT_RECONNECT_WINDOW_MS });
+  const abandonPolicy = new AbandonPolicy();
+  const disconnectPolicy = new DisconnectPolicy({ reconnectWindowMs: DEFAULT_RECONNECT_WINDOW_MS });
   let lastLobbySnapshotSignature = "";
-  const rankedSeason = "S0";
   const supabaseUrl = String(options.supabaseUrl ?? process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "");
   const supabaseServiceKey = String(options.supabaseServiceKey ?? process.env.SUPABASE_SERVICE_ROLE_KEY ?? "");
   const rankedSupabase = supabaseUrl && supabaseServiceKey ? createClient(supabaseUrl, supabaseServiceKey, { auth: { persistSession: false, autoRefreshToken: false } }) : null;
@@ -79,7 +83,7 @@ export async function createBattleSpiritsServer(options = {}) {
         cards: cardIndex.size,
         matchmakingQueued: casualQueue.size,
         readyChecks: readyCheckRegistry?.size || 0,
-        rankedQueued: rankedQueue.length,
+        rankedQueued: rankedQueue.size,
         rankedReady: Boolean(rankedSupabase),
         host,
         port
@@ -290,7 +294,7 @@ export async function createBattleSpiritsServer(options = {}) {
   }
 
   function presenceStatus(socketId) {
-    if (rankedBySocket.has(socketId)) return "ranked";
+    if (rankedQueue.hasSocket(socketId)) return "ranked";
     if (casualQueue.hasSocket(socketId) || readyCheckRegistry?.getBySocket(socketId)) return "searching";
     const found = findRoomBySocket(socketId);
     if (found?.room?.match) return "in_match";
@@ -673,11 +677,7 @@ export async function createBattleSpiritsServer(options = {}) {
   }
 
   function removeFromRankedQueue(socketId) {
-    const index = rankedQueue.findIndex((entry) => entry.socketId === socketId);
-    if (index < 0) return null;
-    const [entry] = rankedQueue.splice(index, 1);
-    rankedBySocket.delete(socketId);
-    return entry;
+    return rankedQueue.removeBySocket(socketId);
   }
 
   async function rankedIdentity(accessToken) {
@@ -700,39 +700,73 @@ export async function createBattleSpiritsServer(options = {}) {
     return data;
   }
 
-  function rankedSearchWindow(entry) {
-    const seconds = Math.max(0, (Date.now() - entry.queuedAt) / 1000);
+  function rankedSearchWindow(entry, now = Date.now()) {
+    const seconds = Math.max(0, (Number(now) - Number(entry.joinedAt || now)) / 1000);
     return Math.min(600, 150 + Math.floor(seconds / 20) * 50);
   }
 
-  function findRankedOpponent(entry) {
-    let bestIndex = -1;
-    let bestGap = Infinity;
-    for (let i = 0; i < rankedQueue.length; i += 1) {
-      const candidate = rankedQueue[i];
-      if (!candidate || candidate.socketId === entry.socketId || candidate.userId === entry.userId) continue;
-      const gap = Math.abs(Number(candidate.rp) - Number(entry.rp));
-      if (gap > Math.max(rankedSearchWindow(entry), rankedSearchWindow(candidate))) continue;
-      if (gap < bestGap) { bestGap = gap; bestIndex = i; }
-    }
-    return bestIndex;
-  }
+  rankedMatchmaker = new RankedMatchmaker({
+    queue: rankedQueue,
+    season: rankedSeason,
+    searchWindow: rankedSearchWindow
+  });
 
-  function createRankedRoom(a, b) {
+  function createRankedRoom(matchContext) {
+    const [a, b] = matchContext.entries();
+    const lockOptions = { regulation: "official" };
+    const aLock = createDeckSnapshot({
+      deck: a.deck,
+      deckId: a.deckId,
+      deckName: a.deckName,
+      coverCardId: a.coverCardId
+    }, cardIndex, lockOptions);
+    const bLock = createDeckSnapshot({
+      deck: b.deck,
+      deckId: b.deckId,
+      deckName: b.deckName,
+      coverCardId: b.coverCardId
+    }, cardIndex, lockOptions);
+
+    if (!aLock.ok || !bLock.ok) return null;
+    if (!validateDeckSnapshot(aLock.snapshot, cardIndex, lockOptions).ok) return null;
+    if (!validateDeckSnapshot(bLock.snapshot, cardIndex, lockOptions).ok) return null;
+
     let roomCode = code();
     while (rooms.has(roomCode)) roomCode = code();
     const firstPlayerId = Math.random() < 0.5 ? "player1" : "player2";
+    const aUserId = a.metadata?.userId || null;
+    const bUserId = b.metadata?.userId || null;
     const room = {
       code: roomCode,
       players: {
-        player1: { socketId: a.socketId, profile: publicProfile(a.profile), deck: a.deck, resumeToken: resumeToken() },
-        player2: { socketId: b.socketId, profile: publicProfile(b.profile), deck: b.deck, resumeToken: resumeToken() }
+        player1: {
+          socketId: a.socketId,
+          profile: publicProfile(a.profile),
+          deck: aLock.snapshot.cards.map((entry) => ({ ...entry })),
+          deckSnapshot: aLock.snapshot,
+          resumeToken: resumeToken()
+        },
+        player2: {
+          socketId: b.socketId,
+          profile: publicProfile(b.profile),
+          deck: bLock.snapshot.cards.map((entry) => ({ ...entry })),
+          deckSnapshot: bLock.snapshot,
+          resumeToken: resumeToken()
+        }
       },
-      match: null, chat: [], createdAt: Date.now(),
-      ranked: { season: rankedSeason, settled: false, players: {
-        player1: { userId: a.userId, rp: a.rp, deckId: a.deckId || null, deckName: a.deckName || "Deck" },
-        player2: { userId: b.userId, rp: b.rp, deckId: b.deckId || null, deckName: b.deckName || "Deck" }
-      } }
+      match: null,
+      chat: [],
+      createdAt: Date.now(),
+      ranked: {
+        season: rankedSeason,
+        settled: false,
+        settling: false,
+        context: matchContext.snapshot(),
+        players: {
+          player1: { userId: aUserId, rp: Number(a.rating || 1000), deckId: aLock.snapshot.deckId, deckName: aLock.snapshot.deckName },
+          player2: { userId: bUserId, rp: Number(b.rating || 1000), deckId: bLock.snapshot.deckId, deckName: bLock.snapshot.deckName }
+        }
+      }
     };
     room.match = createMatch({
       player1: { ...room.players.player1.profile, deck: room.players.player1.deck },
@@ -745,58 +779,110 @@ export async function createBattleSpiritsServer(options = {}) {
     indexRoomSocket(b.socketId, roomCode, "player2");
     io.sockets.sockets.get(a.socketId)?.join(roomCode);
     io.sockets.sockets.get(b.socketId)?.join(roomCode);
-    rankedBySocket.delete(a.socketId); rankedBySocket.delete(b.socketId);
-    io.to(a.socketId).emit("ranked:matched", { code: roomCode, playerId: "player1", resumeToken: room.players.player1.resumeToken, opponentRank: rankedProfileLabel(b.rp) });
-    io.to(b.socketId).emit("ranked:matched", { code: roomCode, playerId: "player2", resumeToken: room.players.player2.resumeToken, opponentRank: rankedProfileLabel(a.rp) });
+
+    const matchedPayload = (playerId, opponentId) => ({
+      code: roomCode,
+      playerId,
+      resumeToken: room.players[playerId].resumeToken,
+      opponentRank: rankedProfileLabel(room.ranked.players[opponentId].rp),
+      matchSync: roomMatchSync(room),
+      preMatch: {
+        matchId: room.match.id,
+        queueType: QueueType.RANKED,
+        player: { profile: room.players[playerId].profile, deck: deckSnapshotPresentation(room.players[playerId].deckSnapshot) },
+        opponent: { profile: room.players[opponentId].profile, deck: deckSnapshotPresentation(room.players[opponentId].deckSnapshot) }
+      }
+    });
+
+    io.to(a.socketId).emit("ranked:matched", matchedPayload("player1", "player2"));
+    io.to(b.socketId).emit("ranked:matched", matchedPayload("player2", "player1"));
     emitRoom(room);
     return room;
   }
 
   async function settleRankedRoom(room, winnerId, reason = "game") {
-    if (!room?.ranked || room.ranked.settled || !winnerId || !rankedSupabase) return;
-    const loserId = winnerId === "player1" ? "player2" : "player1";
-    const winnerMeta = room.ranked.players[winnerId];
-    const loserMeta = room.ranked.players[loserId];
-    if (!winnerMeta || !loserMeta) return;
-
-    const expectedWinner = 1 / (1 + Math.pow(10, (loserMeta.rp - winnerMeta.rp) / 400));
-    const winDelta = Math.max(12, Math.round(32 * (1 - expectedWinner)));
-    const lossDelta = -Math.max(12, Math.round(32 * expectedWinner));
-    const winnerAfter = Math.max(0, Number(winnerMeta.rp) + winDelta);
-    const loserAfter = Math.max(0, Number(loserMeta.rp) + lossDelta);
-    const winnerProfile = room.players[winnerId]?.profile || {};
-    const loserProfile = room.players[loserId]?.profile || {};
-
-    const { error } = await rankedSupabase.rpc("bs_ranked_settle_match", {
-      p_match_uid: String(room.match?.id || room.code),
-      p_season: rankedSeason,
-      p_winner_id: winnerMeta.userId,
-      p_loser_id: loserMeta.userId,
-      p_winner_before: Number(winnerMeta.rp),
-      p_loser_before: Number(loserMeta.rp),
-      p_winner_delta: winDelta,
-      p_loser_delta: lossDelta,
-      p_winner_name: winnerProfile.name || "Jogador",
-      p_winner_username: winnerProfile.username || null,
-      p_loser_name: loserProfile.name || "Jogador",
-      p_loser_username: loserProfile.username || null,
-      p_winner_deck_id: winnerMeta.deckId || null,
-      p_winner_deck_name: winnerMeta.deckName || "Deck",
-      p_loser_deck_id: loserMeta.deckId || null,
-      p_loser_deck_name: loserMeta.deckName || "Deck",
-      p_reason: reason
+    if (!room?.ranked || room.ranked.settled || room.ranked.settling || !winnerId) return null;
+    room.ranked.settling = true;
+    const match = authoritativeMatch(room);
+    const result = await finalizeMatchResult({
+      ranked: room.ranked,
+      match,
+      roomCode: room.code,
+      winnerId,
+      reason,
+      season: rankedSeason,
+      supabase: rankedSupabase,
+      players: room.players
     });
-    if (error) {
-      console.error("[ranked:settle]", error);
-      room.ranked.settleError = error.message;
-      return;
+
+    if (!result.ok) {
+      room.ranked.settling = false;
+      room.ranked.settleError = result.error || result.code || "Ranked result failed.";
+      console.error("[ranked:settle]", room.ranked.settleError);
+      return result;
     }
 
     room.ranked.settled = true;
-    const winnerSocket = room.players[winnerId]?.socketId;
-    const loserSocket = room.players[loserId]?.socketId;
-    if (winnerSocket) io.to(winnerSocket).emit("ranked:result", { result: "win", rpBefore: winnerMeta.rp, rpAfter: winnerAfter, rpDelta: winDelta, rank: rankedProfileLabel(winnerAfter), reason });
-    if (loserSocket) io.to(loserSocket).emit("ranked:result", { result: "loss", rpBefore: loserMeta.rp, rpAfter: loserAfter, rpDelta: lossDelta, rank: rankedProfileLabel(loserAfter), reason });
+    room.ranked.settling = false;
+    room.ranked.settledAt = Date.now();
+    room.ranked.serverResult = {
+      winnerId: result.winnerId,
+      loserId: result.loserId,
+      reason: result.reason
+    };
+
+    const winnerSocket = room.players[result.winnerId]?.socketId;
+    const loserSocket = room.players[result.loserId]?.socketId;
+    const winnerPayload = { ...result.winner, rank: rankedProfileLabel(result.winner.rpAfter), reason: result.reason };
+    const loserPayload = { ...result.loser, rank: rankedProfileLabel(result.loser.rpAfter), reason: result.reason };
+    if (winnerSocket) io.to(winnerSocket).emit("ranked:result", winnerPayload);
+    if (loserSocket) io.to(loserSocket).emit("ranked:result", loserPayload);
+    return result;
+  }
+
+  async function resolveRankedDisconnectIfEligible(room, disconnectedPlayerId) {
+    if (!room?.ranked || room.ranked.settled || room.ranked.settling) return null;
+    const match = authoritativeMatch(room);
+    if (!match || match.winnerId) return null;
+
+    const opponentId = disconnectedPlayerId === "player1" ? "player2" : "player1";
+    const opponent = room.players?.[opponentId];
+    const session = getRoomMatchSession(room);
+    const disconnectedSessionPlayer = session?.getPlayer(disconnectedPlayerId);
+    const opponentSessionPlayer = session?.getPlayer(opponentId);
+
+    const disconnectedTimedOut =
+      disconnectedSessionPlayer?.connectionState === PlayerConnectionState.TIMED_OUT ||
+      room.players?.[disconnectedPlayerId]?.connectionState === PlayerConnectionState.TIMED_OUT;
+    if (!disconnectedTimedOut) return null;
+
+    const opponentTimedOut =
+      opponentSessionPlayer?.connectionState === PlayerConnectionState.TIMED_OUT ||
+      opponent?.connectionState === PlayerConnectionState.TIMED_OUT;
+
+    if (opponentTimedOut) {
+      room.ranked.cancelled = true;
+      room.ranked.cancelledAt = Date.now();
+      room.ranked.cancelReason = "both_disconnected";
+      session?.cancel();
+      return { ok: false, code: "BOTH_PLAYERS_DISCONNECTED" };
+    }
+
+    if (!opponent?.socketId) return null;
+
+    const resolution = disconnectPolicy.resolveTimeout({
+      playerId: disconnectedPlayerId,
+      playerIds: Object.keys(room.players || {})
+    });
+    if (!resolution.ok) return resolution;
+
+    commitAuthoritativeMatch(room, {
+      ...match,
+      winnerId: resolution.winnerId,
+      winnerReason: resolution.reason
+    });
+    getRoomMatchSession(room)?.finish(authoritativeMatch(room));
+    return settleRankedRoom(room, resolution.winnerId, resolution.reason);
   }
 
   function onSafe(socket, eventName, handler) {
@@ -838,26 +924,51 @@ export async function createBattleSpiritsServer(options = {}) {
 
     onSafe(socket, "ranked:join", async (payload, ack) => {
       if (findRoomBySocket(socket.id)) return ack({ ok: false, error: "Saia da sala atual antes de procurar Ranked." });
-      if (rankedBySocket.has(socket.id)) return ack({ ok: true, status: "searching" });
+      const existing = rankedQueue.getBySocket(socket.id);
+      if (existing) {
+        return ack({ ok: true, status: QueueStatus.SEARCHING, rp: existing.rating, rank: rankedProfileLabel(existing.rating) });
+      }
       const identity = await rankedIdentity(payload.accessToken);
       if (!identity.ok) return ack(identity);
       const profileValidation = validateOnlineProfilePayload(payload.profile);
       if (!profileValidation.ok) return ack(profileValidation);
       const validation = validateDeck(payload.deck || [], cardIndex, { regulation: "official" });
       if (!validation.ok) return ack({ ok: false, error: validation.errors.join(" ") });
-      const rankedProfile = await ensureRankedProfile(identity.user.id);
-      const entry = { socketId: socket.id, userId: identity.user.id, rp: Number(rankedProfile.rp || 1000), profile: payload.profile, deck: payload.deck, deckId: String(payload.deckId || "").slice(0, 96) || null, deckName: String(payload.deckName || "Deck").slice(0, 120), queuedAt: Date.now() };
-      const opponentIndex = findRankedOpponent(entry);
-      if (opponentIndex < 0) {
-        rankedQueue.push(entry); rankedBySocket.set(socket.id, entry);
-        socket.emit("ranked:status", { status: "searching", rp: entry.rp, rank: rankedProfileLabel(entry.rp) });
-        return ack({ ok: true, status: "searching", rp: entry.rp, rank: rankedProfileLabel(entry.rp) });
+      const duplicateAccountEntry = rankedQueue.entries.find((candidate) => candidate.metadata?.userId === identity.user.id);
+      if (duplicateAccountEntry) {
+        return ack({ ok: false, code: "RANKED_ACCOUNT_ALREADY_QUEUED", error: "Esta conta já está na fila Ranked." });
       }
-      const [opponent] = rankedQueue.splice(opponentIndex, 1);
-      rankedBySocket.delete(opponent.socketId);
-      rankedBySocket.set(socket.id, entry);
-      createRankedRoom(opponent, entry);
-      ack({ ok: true, status: "matched" });
+      const rankedProfile = await ensureRankedProfile(identity.user.id);
+      const entry = new QueueEntry({
+        socketId: socket.id,
+        queueType: QueueType.RANKED,
+        rating: Number(rankedProfile.rp || 1000),
+        profile: payload.profile,
+        deck: payload.deck,
+        deckId: String(payload.deckId || "").slice(0, 96) || null,
+        deckName: String(payload.deckName || "Deck").slice(0, 120),
+        coverCardId: payload.coverCardId || null,
+        metadata: { userId: identity.user.id }
+      });
+
+      const context = rankedMatchmaker.takeMatch(entry);
+      if (!context) {
+        rankedQueue.enqueue(entry);
+        socket.emit("ranked:status", { status: QueueStatus.SEARCHING, rp: entry.rating, rank: rankedProfileLabel(entry.rating) });
+        emitLobbySnapshot();
+        return ack({ ok: true, status: QueueStatus.SEARCHING, rp: entry.rating, rank: rankedProfileLabel(entry.rating) });
+      }
+
+      const room = createRankedRoom(context);
+      if (!room) {
+        for (const queuedEntry of context.entries()) {
+          if (io.sockets.sockets.get(queuedEntry.socketId)?.connected) rankedQueue.enqueue(queuedEntry.requeue(Date.now()));
+        }
+        emitLobbySnapshot();
+        return ack({ ok: false, code: "DECK_LOCK_FAILED", error: "Não foi possível bloquear os decks da partida Ranked." });
+      }
+      emitLobbySnapshot();
+      ack({ ok: true, status: QueueStatus.MATCHED });
     });
 
     onSafe(socket, "ranked:cancel", (_payload, ack) => {
@@ -869,7 +980,7 @@ export async function createBattleSpiritsServer(options = {}) {
       if (findRoomBySocket(socket.id)) {
         return ack({ ok: false, error: "Saia da sala atual antes de procurar outra partida." });
       }
-      if (rankedBySocket.has(socket.id)) {
+      if (rankedQueue.hasSocket(socket.id)) {
         return ack({ ok: false, error: "Saia da fila Ranked antes de procurar uma partida Casual." });
       }
 
@@ -1023,7 +1134,7 @@ export async function createBattleSpiritsServer(options = {}) {
       emitLobbySnapshot();
     });
 
-    onSafe(socket, "room:resume", (payload, ack) => {
+    onSafe(socket, "room:resume", async (payload, ack) => {
       const roomCode = String(payload.code || "").trim().toUpperCase();
       const playerId = payload.playerId === "player2" ? "player2" : "player1";
       const room = rooms.get(roomCode);
@@ -1048,6 +1159,10 @@ export async function createBattleSpiritsServer(options = {}) {
       if (player.rankedDisconnectTimer) { clearTimeout(player.rankedDisconnectTimer); player.rankedDisconnectTimer = null; }
       if (player.reconnectStateTimer) { clearTimeout(player.reconnectStateTimer); player.reconnectStateTimer = null; }
       socket.join(roomCode);
+      if (room.ranked) {
+        const opponentId = playerId === "player1" ? "player2" : "player1";
+        await resolveRankedDisconnectIfEligible(room, opponentId);
+      }
       const state = roomSummary(room, playerId);
       ack({ ok: true, state, matchSync: state.matchSync });
       emitRoom(room, { includeChat: true });
@@ -1121,6 +1236,24 @@ export async function createBattleSpiritsServer(options = {}) {
       ack({ ok: true, started: true });
     });
 
+    onSafe(socket, "match:concede", async (_payload, ack) => {
+      const found = findRoomBySocket(socket.id);
+      if (!found) return ack({ ok: false, error: "Sala não encontrada." });
+      const { room, playerId } = found;
+      const match = authoritativeMatch(room);
+      if (!room.ranked) return ack({ ok: false, error: "Concessão competitiva disponível apenas no Ranked." });
+      if (!match || match.winnerId) return ack({ ok: false, error: "A partida já terminou." });
+
+      const resolution = abandonPolicy.resolveConcede({ playerId, playerIds: Object.keys(room.players || {}) });
+      if (!resolution.ok) return ack({ ok: false, error: "Não foi possível registrar a desistência." });
+
+      commitAuthoritativeMatch(room, { ...match, winnerId: resolution.winnerId, winnerReason: resolution.reason });
+      getRoomMatchSession(room)?.finish(authoritativeMatch(room));
+      const result = await settleRankedRoom(room, resolution.winnerId, resolution.reason);
+      emitRoom(room);
+      ack({ ok: Boolean(result?.ok), reason: resolution.reason, matchSync: roomMatchSync(room) });
+    });
+
     onSafe(socket, "game:action", async (payload, ack) => {
       const found = findRoomBySocket(socket.id);
       if (!found) return ack({ ok: false, error: "Sala não encontrada." });
@@ -1190,18 +1323,17 @@ export async function createBattleSpiritsServer(options = {}) {
       reconnectingPlayer.reconnectStateTimer.unref?.();
       if (found.room.ranked && authoritativeMatch(found.room) && !authoritativeMatch(found.room).winnerId) {
         const disconnectedId = found.playerId;
-        const opponentId = disconnectedId === "player1" ? "player2" : "player1";
         found.room.players[disconnectedId].rankedDisconnectTimer = setTimeout(async () => {
           const room = rooms.get(found.room.code);
           const match = authoritativeMatch(room);
           if (!room?.ranked || match?.winnerId || room.players[disconnectedId]?.socketId) return;
           const session = getRoomMatchSession(room);
           session?.getPlayer(disconnectedId)?.markTimedOut();
-          commitAuthoritativeMatch(room, { ...match, winnerId: opponentId, winnerReason: "ranked_disconnect" });
-          getRoomMatchSession(room)?.finish(authoritativeMatch(room));
-          await settleRankedRoom(room, opponentId, "disconnect");
+          room.players[disconnectedId].connectionState = PlayerConnectionState.TIMED_OUT;
+          room.players[disconnectedId].reconnectDeadline = null;
+          await resolveRankedDisconnectIfEligible(room, disconnectedId);
           emitRoom(room);
-        }, 90_000);
+        }, disconnectPolicy.reconnectWindowMs);
         found.room.players[disconnectedId].rankedDisconnectTimer.unref?.();
       }
       emitRoom(found.room);
@@ -1249,7 +1381,7 @@ export async function createBattleSpiritsServer(options = {}) {
         connectedPlayers,
         matchmakingQueued: casualQueue.size,
         readyChecks: readyCheckRegistry?.size || 0,
-        rankedQueued: rankedQueue.length,
+        rankedQueued: rankedQueue.size,
         rankedReady: Boolean(rankedSupabase),
         lobbyOnline: lobbyPresence.size,
         publicRooms: [...rooms.values()].filter((room) => room.settings?.visibility === "public").length,

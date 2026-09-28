@@ -93,6 +93,12 @@ function createBrowserOnlineClient(serverUrl) {
       });
     },
     sendChat(text, callback) { socket.emit("room:chat", { text }, callback); },
+    concede(callback) {
+      socket.emit("match:concede", {}, (result) => {
+        if (result?.matchSync || result?.state) captureSync(result);
+        callback?.(result);
+      });
+    },
     resume(callback) {
       if (!session) return callback?.({ ok: false, error: "Sem sessão para retomar." });
       socket.emit("room:resume", session, (result) => {
