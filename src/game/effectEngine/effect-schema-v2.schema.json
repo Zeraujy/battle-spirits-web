@@ -81,7 +81,7 @@
     "conditions": {
       "type": "array",
       "items": {
-        "type": "object"
+        "$ref": "#/$defs/condition"
       },
       "default": []
     },
@@ -91,10 +91,170 @@
         "type": "object",
         "required": [
           "type"
-        ]
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "selector": {
+            "$ref": "#/$defs/targetSelector"
+          }
+        },
+        "additionalProperties": true
       },
       "default": []
     }
   },
-  "additionalProperties": true
+  "additionalProperties": true,
+  "$defs": {
+    "targetSelector": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "enum": [
+            "self",
+            "opponent",
+            "any"
+          ]
+        },
+        "zone": {
+          "type": "string"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cardType": {
+          "type": "string"
+        },
+        "cardTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "color": {
+          "type": "string"
+        },
+        "colors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "family": {
+          "type": "string"
+        },
+        "families": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "symbols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "minimumCost": {
+          "type": "number"
+        },
+        "maximumCost": {
+          "type": "number"
+        },
+        "minimumBP": {
+          "type": "number"
+        },
+        "maximumBP": {
+          "type": "number"
+        },
+        "minimumLevel": {
+          "type": "number"
+        },
+        "maximumLevel": {
+          "type": "number"
+        },
+        "state": {
+          "enum": [
+            "exhausted",
+            "refreshed"
+          ]
+        },
+        "braved": {
+          "type": "boolean"
+        },
+        "combined": {
+          "type": "boolean"
+        },
+        "hasSoulCore": {
+          "type": "boolean"
+        },
+        "excludeSource": {
+          "type": "boolean"
+        },
+        "includeCombined": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "condition": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "player": {
+          "enum": [
+            "self",
+            "opponent"
+          ]
+        },
+        "value": {},
+        "operator": {
+          "type": "string"
+        },
+        "equals": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "atLeast": {
+          "type": "number"
+        },
+        "atMost": {
+          "type": "number"
+        },
+        "selector": {
+          "$ref": "#/$defs/targetSelector"
+        },
+        "all": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/condition"
+          }
+        },
+        "any": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/condition"
+          }
+        },
+        "not": {
+          "$ref": "#/$defs/condition"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
 }

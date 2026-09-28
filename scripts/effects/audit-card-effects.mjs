@@ -30,7 +30,23 @@ export const CoverageStatus = Object.freeze({
 const SUPPORTED_TYPED_CONDITIONS = new Set([
   "controlsSymbolColor",
   "controlsCardType",
+  "controlsColor",
+  "controlsFamily",
   "ownLifeAtMost",
+  "lifeAtMost",
+  "lifeAtLeast",
+  "handSize",
+  "reserve",
+  "trashCores",
+  "fieldCount",
+  "symbolCount",
+  "phase",
+  "activePlayer",
+  "sourceLevel",
+  "sourceCost",
+  "sourceState",
+  "soulCoreLocation",
+  "battleState",
   "ultimateTriggerRevealedCardType",
   "ultimateTriggerRevealedColor",
   "ultimateTriggerWasHit"
@@ -45,7 +61,9 @@ const KNOWN_CONDITION_KEYS = new Set([
   // typed-condition parameters
   "color", "colors", "cardType", "cardTypes", "value", "min", "max",
   "atLeast", "atMost", "equals", "count", "minCount", "family", "families",
-  "minimumCost", "maximumCost", "minCost", "maxCost"
+  "minimumCost", "maximumCost", "minCost", "maxCost",
+  "player", "owner", "operator", "selector", "zone", "directAttack",
+  "attackerPlayer", "blocked"
 ]);
 
 const NESTED_ACTION_KEYS = [
@@ -284,7 +302,7 @@ function percent(value, total) {
 function markdown(report) {
   const { summary, cards } = report;
   const lines = [];
-  lines.push("# Card Effect Coverage — v5.1.0 Foundation (Phase 0–3)");
+  lines.push("# Card Effect Coverage — v5.1.0 Foundation (Phase 0–6)");
   lines.push("");
   lines.push("> Scope: runtime gameplay catalog (`src/data/cards.json`). Artwork-only/public database records that are not loaded into the gameplay catalog are intentionally excluded.");
   lines.push("");
@@ -374,7 +392,7 @@ function markdown(report) {
   lines.push("");
   lines.push("## Phase 4 input");
   lines.push("");
-  lines.push("Effect Schema v2 and the central Trigger Dispatcher are now available. This baseline remains the migration contract for the next mechanics phases: migrate cards incrementally into the DSL while expanding queue/target/condition/action coverage without bypassing the dispatcher.");
+  lines.push("Effect Schema v2, Trigger Dispatcher, Effect Queue, Targeting Engine v2, and Condition Engine v2 are now available. This coverage report remains the migration contract for the next mechanics phases: migrate cards incrementally into the DSL while expanding the action library and trigger coverage without bypassing the dispatcher or queue.");
   lines.push("");
   return `${lines.join("\n")}\n`;
 }

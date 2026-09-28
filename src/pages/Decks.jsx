@@ -27,7 +27,8 @@ import {
 
 import {
   PREBUILT_DECKS,
-  buildPrebuiltDeck
+  buildPrebuiltDeck,
+  ownsPrebuiltDeckRecipe
 } from "../data/prebuiltDecks.js";
 
 import {
@@ -1019,7 +1020,7 @@ export default function Decks({
     useMemo(
       () =>
         PREBUILT_DECKS
-          .filter((template) => ownedRecipes.includes(`recipe-${String(template.setCode || "").toLowerCase()}`))
+          .filter((template) => ownsPrebuiltDeckRecipe(template, ownedRecipes))
           .map(
             (template) => ({
               template,

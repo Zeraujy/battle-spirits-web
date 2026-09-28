@@ -24,9 +24,10 @@ for (const marker of ["EFFECT_SCHEMA_VERSION = 2", "EffectTriggerScope", "EventP
 }
 
 const dispatcher = fs.readFileSync(path.join(ROOT, "src/game/effectEngine/triggerDispatcher.js"), "utf8");
-for (const marker of ["dispatchEffectEvent", "observerCandidates", "continuationEvents", "observerV2"]) {
+for (const marker of ["dispatchEffectEvent", "observerCandidates", "observerV2"]) {
   if (!dispatcher.includes(marker)) failures.push(`Trigger Dispatcher missing marker: ${marker}`);
 }
+if (!dispatcher.includes("continuationEvents") && !dispatcher.includes("enqueueEffectEvents")) failures.push("Trigger Dispatcher has no continuation/Effect Queue mechanism.");
 
 const runtimeFiles = [
   "src/game/summon.js",

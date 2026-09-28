@@ -551,6 +551,25 @@ function explicitEntries(template) {
   return [...unique.values()];
 }
 
+export function ownsPrebuiltDeckRecipe(template, ownedRecipes = []) {
+  if (!template) return false;
+
+  const owned = new Set(
+    (Array.isArray(ownedRecipes) ? ownedRecipes : [])
+      .map((value) => String(value || "").trim())
+      .filter(Boolean)
+  );
+
+  const explicitRecipeId = String(template.recipeId || "").trim();
+  if (explicitRecipeId && owned.has(explicitRecipeId)) {
+    return true;
+  }
+
+  // Compatibility with saves created before explicit per-product recipe IDs.
+  const legacyRecipeId = `recipe-${String(template.setCode || "").trim().toLowerCase()}`;
+  return legacyRecipeId !== "recipe-" && owned.has(legacyRecipeId);
+}
+
 export function buildPrebuiltDeck(template, cards, cardIndex) {
   const explicit = explicitEntries(template);
   let entries;

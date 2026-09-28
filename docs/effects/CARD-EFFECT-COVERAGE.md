@@ -1,4 +1,4 @@
-# Card Effect Coverage — v5.1.0 Foundation (Phase 0–3)
+# Card Effect Coverage — v5.1.0 Foundation (Phase 0–6)
 
 > Scope: runtime gameplay catalog (`src/data/cards.json`). Artwork-only/public database records that are not loaded into the gameplay catalog are intentionally excluded.
 
@@ -455,5 +455,5 @@ The JSON report contains every entry and machine-readable reason. This table lis
 
 ## Phase 4 input
 
-Effect Schema v2 and the central Trigger Dispatcher are now available. This baseline remains the migration contract for the next mechanics phases: migrate cards incrementally into the DSL while expanding queue/target/condition/action coverage without bypassing the dispatcher.
+Effect Schema v2, Trigger Dispatcher, Effect Queue, Targeting Engine v2, and Condition Engine v2 are now available. This coverage report remains the migration contract for the next mechanics phases: migrate cards incrementally into the DSL while expanding the action library and trigger coverage without bypassing the dispatcher or queue.
 

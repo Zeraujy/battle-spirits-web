@@ -1,6 +1,7 @@
 import { fieldCards, getDatabaseCard } from "../selectors.js";
 import { otherPlayerId } from "../utils.js";
 import { resolveCardEvent } from "./effectEngine.js";
+import { drainEffectQueue, enqueueEffectEvents } from "./effectQueue.js";
 import {
   entryMatchesTriggerContext,
   getEntryTriggerScope,
@@ -44,20 +45,6 @@ function observerDispatchInput(input, playerId, physical) {
       eventSourcePlayerId: input.sourcePlayerId || input.context?.eventSourcePlayerId || null,
       eventSourceInstanceId: input.sourceInstanceId || input.context?.eventSourceInstanceId || null,
       eventSourceCardId: input.sourceCardId || input.sourceCard?.id || input.context?.eventSourceCardId || null
-    }
-  };
-}
-
-function appendQueuedEvents(match, events) {
-  if (!match.pendingEffectDecision || !events.length) return match;
-  return {
-    ...match,
-    pendingEffectDecision: {
-      ...match.pendingEffectDecision,
-      continuationEvents: [
-        ...(match.pendingEffectDecision.continuationEvents || []),
-        ...events
-      ]
     }
   };
 }
@@ -126,8 +113,17 @@ export function dispatchEffectEvent(match, rawInput = {}, cardIndex) {
     return { match, triggered: 0, automatic: 0, manualResolutionNeeded: false, pendingEffectDecision: null, notes: [], dispatchedSources: 0 };
   }
 
-  if (match.pendingEffectDecision) {
-    const queued = appendQueuedEvents(match, dispatches);
+  let queued = enqueueEffectEvents(match, dispatches).match;
+  if (queued.pendingEffectDecision) {
+    const compatibilityEvents = (queued.effectQueue?.items || []).map((item) => item.payload).filter(Boolean);
+    queued = {
+      ...queued,
+      pendingEffectDecision: {
+        ...queued.pendingEffectDecision,
+        // Compatibility mirror. Effect Queue is the authoritative continuation store.
+        continuationEvents: compatibilityEvents
+      }
+    };
     return {
       match: queued,
       triggered: 0,
@@ -139,27 +135,34 @@ export function dispatchEffectEvent(match, rawInput = {}, cardIndex) {
     };
   }
 
+  const drained = drainEffectQueue(queued, (working, item) => resolveCardEvent(working, item.payload, cardIndex));
   let result = {
-    match,
+    match: drained.match,
     triggered: 0,
     automatic: 0,
-    manualResolutionNeeded: false,
-    pendingEffectDecision: null,
+    manualResolutionNeeded: Boolean(drained.match.pendingEffectDecision),
+    pendingEffectDecision: drained.match.pendingEffectDecision || null,
     notes: [],
     dispatchedSources: 0
   };
 
-  for (let index = 0; index < dispatches.length; index += 1) {
-    const current = resolveCardEvent(result.match, dispatches[index], cardIndex);
-    result = mergeResult(result, current);
-    if (result.match.pendingEffectDecision) {
-      result.match = appendQueuedEvents(result.match, dispatches.slice(index + 1));
-      result.pendingEffectDecision = result.match.pendingEffectDecision;
-      result.manualResolutionNeeded = true;
-      break;
-    }
+  for (const entry of drained.results) {
+    result = mergeResult(result, entry.result);
   }
-
+  result.match = drained.match;
+  if (drained.waiting && result.match.pendingEffectDecision) {
+    const queuedEvents = (result.match.effectQueue?.items || []).map((item) => item.payload).filter(Boolean);
+    result.match = {
+      ...result.match,
+      pendingEffectDecision: {
+        ...result.match.pendingEffectDecision,
+        // Compatibility mirror for v5.0.x UI/tests. Effect Queue remains authoritative.
+        continuationEvents: queuedEvents
+      }
+    };
+  }
+  result.pendingEffectDecision = result.match.pendingEffectDecision || null;
+  result.manualResolutionNeeded = Boolean(result.manualResolutionNeeded || drained.waiting);
   return result;
 }
 

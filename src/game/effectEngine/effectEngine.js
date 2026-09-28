@@ -3,6 +3,7 @@ import { appendLog, uid } from "../utils.js";
 import { entryConditionsMatch } from "./conditionResolver.js";
 import { entryMatchesTriggerContext, getEntryActions, getTriggeredEntries, normalizeEventName } from "./normalizer.js";
 import { resolveActionList } from "./actionResolver.js";
+import { drainEffectQueue, enqueueEffectEvents, markEffectQueueWaiting } from "./effectQueue.js";
 
 function sourceContext(match, cardIndex, input = {}) {
   const found = input.sourceInstanceId ? findPhysicalCard(match, input.sourceInstanceId) : null;
@@ -161,17 +162,22 @@ export function resolveOperations(match, sourcePlayerId, operations = [], cardIn
 
 export function resolveCardEvent(match, input = {}, cardIndex) {
   if (match.pendingEffectDecision) {
-    const queued = appendContinuationEvents(
-      match,
-      [serializeEventInput(input)]
-    );
+    let queued = markEffectQueueWaiting(enqueueEffectEvents(match, [serializeEventInput(input)]).match);
+    const compatibilityEvents = (queued.effectQueue?.items || []).map((item) => item.payload).filter(Boolean);
+    queued = {
+      ...queued,
+      pendingEffectDecision: {
+        ...queued.pendingEffectDecision,
+        continuationEvents: compatibilityEvents
+      }
+    };
     return {
       match: queued,
       triggered: 0,
       automatic: 0,
       manualResolutionNeeded: true,
       pendingEffectDecision: queued.pendingEffectDecision,
-      notes: ["Evento de efeito colocado na fila após a decisão atual."]
+      notes: ["Evento de efeito colocado na Effect Queue após a decisão atual."]
     };
   }
 
@@ -314,17 +320,14 @@ export function resolveEffectDecision(match, actorId, payload = {}, cardIndex) {
   next = result.match;
 
   const queuedEvents = pending.continuationEvents || [];
+  const queueAlreadyHasEvents = Boolean(next.effectQueue?.items?.length);
+  if (queuedEvents.length && !queueAlreadyHasEvents) next = enqueueEffectEvents(next, queuedEvents).match;
+
   if (next.pendingEffectDecision) {
-    next = appendContinuationEvents(next, queuedEvents);
+    next = markEffectQueueWaiting(next);
   } else {
-    for (let index = 0; index < queuedEvents.length; index += 1) {
-      const eventResult = resolveCardEvent(next, queuedEvents[index], cardIndex);
-      next = eventResult.match;
-      if (next.pendingEffectDecision) {
-        next = appendContinuationEvents(next, queuedEvents.slice(index + 1));
-        break;
-      }
-    }
+    const drainedQueue = drainEffectQueue(next, (working, item) => resolveCardEvent(working, item.payload, cardIndex));
+    next = drainedQueue.match;
   }
 
   if (!next.pendingEffectDecision) {
