@@ -1,4 +1,4 @@
-# START HERE — v5.0.2
+# START HERE — v5.0.3
 
 ## Base oficial
 
@@ -30,3 +30,7 @@ npm run publish:cloudflare
 ```
 
 A camada Social e o transporte das partidas permanecem independentes. Não acople `socialService.js` a `src/online/publicProfile.js`, `src/online/socketClient.js` ou `server/index.mjs`.
+
+## v5.0.3 database step
+
+If you use authenticated Shop purchases, run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the prior economy migrations.

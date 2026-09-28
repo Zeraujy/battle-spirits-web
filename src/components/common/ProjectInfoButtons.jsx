@@ -4,7 +4,7 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
-    version: "5.0.2",
+    version: "5.0.3",
     date: { pt: "28/09/2026", en: "09/28/2026" },
     title: { pt: "Todos os Decks no Onboarding", en: "All Decks in Onboarding" },
     summary: {

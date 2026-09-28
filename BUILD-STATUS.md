@@ -1,4 +1,4 @@
-# Build Status — Battle Spirits: KAIHOU! Simulator v5.0.2
+# Build Status — Battle Spirits: KAIHOU! Simulator v5.0.3
 
 ## Escopo
 
@@ -25,8 +25,12 @@ Execute `npm run project:check` antes de qualquer publicação.
 - SD64 campaign cards excluded from the playable 40-card recipe.
 
 
-## v5.0.2 All Decks in Onboarding
+## v5.0.3 All Decks in Onboarding
 - New-player onboarding mirrors every active deck product from the Shop.
 - All 17 active decks are selectable in the initial choose-3 flow.
 - Guest and authenticated starter claims accept any active deck product.
 - A dedicated audit prevents Shop/onboarding deck lists from diverging.
+
+## v5.0.3 Starter Deck Purchase Fix
+
+Authenticated deck purchases now route through deck contents/recipes correctly. Apply `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` to existing Supabase projects.
