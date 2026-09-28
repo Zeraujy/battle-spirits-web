@@ -538,3 +538,19 @@
     min-height: 300px;
   }
 }
+
+/* v5.0.0 Phase 19-21: server-authoritative result provenance */
+.game-result-server-verified {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 0.35rem;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.045);
+  color: rgba(255,255,255,0.68);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}

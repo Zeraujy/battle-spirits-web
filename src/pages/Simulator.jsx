@@ -56,6 +56,7 @@ import {
 } from "../game/brave.js";
 import { useLanguage } from "../i18n.jsx";
 import { identifySavedDeck, recordMatchResult } from "../services/matchHistoryService.js";
+import { onlineErrorMessage } from "../online/errors/onlineErrorMessages.js";
 import { buildPostMatchSummary } from "../services/postMatchService.js";
 import { searchProfiles, sendFriendRequest } from "../services/socialService.js";
 import { getSmartCoreClickTarget } from "../interactions/coreClickPolicy.js";
@@ -576,8 +577,20 @@ export default function Simulator({
   const [postMatchActionNotice, setPostMatchActionNotice] = useState("");
   const [rematchPending, setRematchPending] = useState(false);
 
+  const [
+    roomState,
+    setRoomState
+  ] = useState(
+    initialRoomState ||
+      null
+  );
+
   useEffect(() => {
     if (!match?.winnerId || matchRecordedRef.current === match.id) return;
+    const onlineMode = mode === "online" || mode === "ranked";
+    const serverRecord = roomState?.matchHistoryRecord || null;
+    if (onlineMode && (!serverRecord?.server_authoritative || serverRecord.match_uid !== match.id)) return;
+
     const endedAt = Date.now();
     setMatchEndedAt(endedAt);
     matchRecordedRef.current = match.id;
@@ -586,11 +599,12 @@ export default function Simulator({
       mode,
       viewerPlayerId,
       startedAt: matchStartedAtRef.current,
-      deckSnapshot: trackedDeckRef.current
+      deckSnapshot: trackedDeckRef.current,
+      serverRecord
     }).catch((historyError) => {
       console.warn("[match-history] resultado não sincronizado:", historyError?.message || historyError);
     });
-  }, [match?.winnerId, match?.id, mode, viewerPlayerId]);
+  }, [match?.winnerId, match?.id, mode, viewerPlayerId, roomState?.matchHistoryRecord]);
 
   useEffect(() => {
     if (!match?.id || activeMatchIdRef.current === match.id) return;
@@ -608,14 +622,6 @@ export default function Simulator({
         : "player1";
     trackedDeckRef.current = identifySavedDeck(match?.players?.[trackedPlayerId]);
   }, [match?.id, mode, viewerPlayerId]);
-
-  const [
-    roomState,
-    setRoomState
-  ] = useState(
-    initialRoomState ||
-      null
-  );
 
   const [turnClockNow, setTurnClockNow] = useState(Date.now());
 
@@ -1163,13 +1169,12 @@ export default function Simulator({
             !result?.ok
           ) {
             setError(
-              result?.error ||
-                (
-                  language ===
-                  "en"
-                    ? "This action is not available."
-                    : "Esta ação não está disponível."
-                )
+              onlineErrorMessage(result, {
+                language,
+                fallback: language === "en"
+                  ? "This action is not available."
+                  : "Esta ação não está disponível."
+              })
             );
           }
 
@@ -6899,6 +6904,7 @@ export default function Simulator({
             onOpenProfile={onOpenProfile}
             onExit={onExit}
             mainMenuLabel={t("mainMenu")}
+            serverVerified={online ? Boolean(roomState?.matchHistoryRecord?.server_authoritative) : false}
           />
         );
       })()}

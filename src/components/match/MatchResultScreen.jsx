@@ -58,7 +58,8 @@ export default function MatchResultScreen({
   onAddOpponent,
   onOpenProfile,
   onExit,
-  mainMenuLabel = "Menu principal"
+  mainMenuLabel = "Menu principal",
+  serverVerified = false
 }) {
   const en = language === "en";
   const copy = reasonCopy(reason, defeated?.name || (en ? "The opponent" : "O oponente"), language);
@@ -75,6 +76,7 @@ export default function MatchResultScreen({
 
         <header className="game-result-header">
           <span className="game-result-kicker">{en ? "MATCH COMPLETE" : "PARTIDA ENCERRADA"}</span>
+          {serverVerified && <span className="game-result-server-verified">{en ? "SERVER VERIFIED" : "VALIDADO PELO SERVIDOR"}</span>}
           <div className="game-result-badge"><span>{isDefeat ? (en ? "DEFEAT" : "DERROTA") : (en ? "VICTORY" : "VITÓRIA")}</span></div>
           <h2>{isDefeat
             ? (en ? `${winner?.name || "Opponent"} won the match` : `${winner?.name || "Oponente"} venceu a partida`)

@@ -21,7 +21,7 @@ import { MatchRegistry, createMatchSession, createDeckSnapshot, validateDeckSnap
 import { createStateEnvelope, validateClientStateVersion } from "./matches/stateSync.js";
 import { ReconnectManager } from "./connections/ReconnectManager.js";
 import { Matchmaker, MatchmakingQueue, QueueEntry, ReadyCheckRegistry, RankedMatchmaker } from "./matchmaking/index.js";
-import { finalizeMatchResult } from "./results/index.js";
+import { finalizeMatchResult, buildServerMatchHistoryRecords, persistServerMatchHistory } from "./results/index.js";
 import { AbandonPolicy, DisconnectPolicy } from "./policies/index.js";
 import { ChallengeRegistry } from "./challenges/index.js";
 
@@ -374,6 +374,7 @@ export async function createBattleSpiritsServer(options = {}) {
       ...(includeChat ? { chat: (room.chat || []).slice(-100) } : {}),
       match: sanitizeMatch(match, viewerId),
       matchSync: roomMatchSync(room),
+      matchHistoryRecord: room.matchHistory?.matchId === match?.id ? room.matchHistory.records?.[viewerId] || null : null,
       ranked: room.ranked ? { season: room.ranked.season } : null,
       matchMode: roomMatchMode(room),
       settings: {
@@ -416,13 +417,14 @@ export async function createBattleSpiritsServer(options = {}) {
       turnNumber: room.match.turnNumber,
       activePlayerId: room.match.activePlayerId
     };
-    room.turnTimerHandle = setTimeout(() => {
+    room.turnTimerHandle = setTimeout(async () => {
       const current = rooms.get(room.code);
       if (!current?.match || current.match.winnerId || current.turnClock?.key !== key) return;
       const timedOutId = current.match.activePlayerId;
       const winnerId = timedOutId === "player1" ? "player2" : "player1";
       commitAuthoritativeMatch(current, { ...authoritativeMatch(current), winnerId, winnerReason: "turn_timeout" });
       getRoomMatchSession(current)?.finish(authoritativeMatch(current));
+      await settleRoomHistory(current);
       clearTurnTimer(current);
       emitRoom(current);
       emitLobbySnapshot();
@@ -527,6 +529,7 @@ export async function createBattleSpiritsServer(options = {}) {
       players: {
         player1: {
           socketId: firstEntry.socketId,
+          userId: firstEntry.metadata?.userId || null,
           profile: publicProfile(firstEntry.profile),
           deck: firstLock.snapshot.cards.map((entry) => ({ ...entry })),
           deckSnapshot: firstLock.snapshot,
@@ -534,6 +537,7 @@ export async function createBattleSpiritsServer(options = {}) {
         },
         player2: {
           socketId: secondEntry.socketId,
+          userId: secondEntry.metadata?.userId || null,
           profile: publicProfile(secondEntry.profile),
           deck: secondLock.snapshot.cards.map((entry) => ({ ...entry })),
           deckSnapshot: secondLock.snapshot,
@@ -633,6 +637,7 @@ export async function createBattleSpiritsServer(options = {}) {
       players: {
         player1: {
           socketId: request.challengerSocketId,
+          userId: request.challengerUserId || null,
           profile: publicProfile(request.challengerProfile),
           deck: challengerLock.snapshot.cards.map((entry) => ({ ...entry })),
           deckSnapshot: challengerLock.snapshot,
@@ -640,6 +645,7 @@ export async function createBattleSpiritsServer(options = {}) {
         },
         player2: {
           socketId: request.challengedSocketId,
+          userId: request.challengedUserId || null,
           profile: publicProfile(challengedPayload.profile || challengedPresence?.profile || {}),
           deck: challengedLock.snapshot.cards.map((entry) => ({ ...entry })),
           deckSnapshot: challengedLock.snapshot,
@@ -868,6 +874,7 @@ export async function createBattleSpiritsServer(options = {}) {
       players: {
         player1: {
           socketId: a.socketId,
+          userId: aUserId,
           profile: publicProfile(a.profile),
           deck: aLock.snapshot.cards.map((entry) => ({ ...entry })),
           deckSnapshot: aLock.snapshot,
@@ -875,6 +882,7 @@ export async function createBattleSpiritsServer(options = {}) {
         },
         player2: {
           socketId: b.socketId,
+          userId: bUserId,
           profile: publicProfile(b.profile),
           deck: bLock.snapshot.cards.map((entry) => ({ ...entry })),
           deckSnapshot: bLock.snapshot,
@@ -967,6 +975,30 @@ export async function createBattleSpiritsServer(options = {}) {
     return result;
   }
 
+  async function settleRoomHistory(room) {
+    const match = authoritativeMatch(room);
+    if (!room || !match?.winnerId) return null;
+    if (room.matchHistory?.matchId === match.id) return room.matchHistory;
+
+    const session = getRoomMatchSession(room);
+    const records = buildServerMatchHistoryRecords({ room, session, cardIndex, finishedAt: session?.finishedAt || Date.now() });
+    if (!records) return null;
+
+    const persistence = await persistServerMatchHistory({
+      supabase: rankedSupabase,
+      room,
+      records
+    });
+
+    room.matchHistory = {
+      matchId: match.id,
+      records,
+      settledAt: Date.now(),
+      persistence: { ok: persistence.ok, persisted: persistence.persisted || 0, skipped: persistence.skipped || 0 }
+    };
+    return room.matchHistory;
+  }
+
   async function resolveRankedDisconnectIfEligible(room, disconnectedPlayerId) {
     if (!room?.ranked || room.ranked.settled || room.ranked.settling) return null;
     const match = authoritativeMatch(room);
@@ -1009,7 +1041,9 @@ export async function createBattleSpiritsServer(options = {}) {
       winnerReason: resolution.reason
     });
     getRoomMatchSession(room)?.finish(authoritativeMatch(room));
-    return settleRankedRoom(room, resolution.winnerId, resolution.reason);
+    const rankedResult = await settleRankedRoom(room, resolution.winnerId, resolution.reason);
+    await settleRoomHistory(room);
+    return rankedResult;
   }
 
   function onSafe(socket, eventName, handler) {
@@ -1233,7 +1267,7 @@ export async function createBattleSpiritsServer(options = {}) {
         deckId: String(payload?.deckId || "").slice(0, 96) || null,
         deckName: String(payload?.deckName || "Deck").slice(0, 120),
         coverCardId: String(payload?.coverCardId || "").slice(0, 128) || null,
-        metadata: { clientJoinedAt: Date.now() }
+        metadata: { clientJoinedAt: Date.now(), userId: lobbyPresence.get(socket.id)?.userId || null }
       }));
 
       emitCasualQueueStatus(entry);
@@ -1317,7 +1351,7 @@ export async function createBattleSpiritsServer(options = {}) {
       const room = {
         code: roomCode,
         players: {
-          player1: { socketId: socket.id, profile: publicProfile(payload.profile), deck: payload.deck, deckId: String(payload?.deckId || "").slice(0, 96) || null, deckName: String(payload?.deckName || "Deck").slice(0, 120), coverCardId: String(payload?.coverCardId || "").slice(0, 128) || null, resumeToken: resumeToken() },
+          player1: { socketId: socket.id, userId: lobbyPresence.get(socket.id)?.userId || null, profile: publicProfile(payload.profile), deck: payload.deck, deckId: String(payload?.deckId || "").slice(0, 96) || null, deckName: String(payload?.deckName || "Deck").slice(0, 120), coverCardId: String(payload?.coverCardId || "").slice(0, 128) || null, resumeToken: resumeToken() },
           player2: null
         },
         settings: {
@@ -1354,7 +1388,7 @@ export async function createBattleSpiritsServer(options = {}) {
       }
       const validation = validateDeck(payload.deck || [], cardIndex, deckValidationOptionsForSettings(room.settings));
       if (!validation.ok) return ack({ ok: false, error: validation.errors.join(" ") });
-      room.players.player2 = { socketId: socket.id, profile: publicProfile(payload.profile), deck: payload.deck, deckId: String(payload?.deckId || "").slice(0, 96) || null, deckName: String(payload?.deckName || "Deck").slice(0, 120), coverCardId: String(payload?.coverCardId || "").slice(0, 128) || null, resumeToken: resumeToken() };
+      room.players.player2 = { socketId: socket.id, userId: lobbyPresence.get(socket.id)?.userId || null, profile: publicProfile(payload.profile), deck: payload.deck, deckId: String(payload?.deckId || "").slice(0, 96) || null, deckName: String(payload?.deckName || "Deck").slice(0, 120), coverCardId: String(payload?.coverCardId || "").slice(0, 128) || null, resumeToken: resumeToken() };
       indexRoomSocket(socket.id, roomCode, "player2");
       socket.join(roomCode);
       ack({ ok: true, code: roomCode, playerId: "player2", resumeToken: room.players.player2.resumeToken, state: roomSummary(room, "player2") });
@@ -1481,6 +1515,7 @@ export async function createBattleSpiritsServer(options = {}) {
         cardIndex
       });
       attachRoomMatchSession(room, { replace: true });
+      room.matchHistory = null;
       room.rematchRequest = null;
       syncTurnTimer(room, true);
       io.to(room.code).emit("room:rematch-started", { previousMatchId, firstPlayerId, matchId: room.match.id });
@@ -1502,6 +1537,7 @@ export async function createBattleSpiritsServer(options = {}) {
       commitAuthoritativeMatch(room, { ...match, winnerId: resolution.winnerId, winnerReason: resolution.reason });
       getRoomMatchSession(room)?.finish(authoritativeMatch(room));
       const result = await settleRankedRoom(room, resolution.winnerId, resolution.reason);
+      await settleRoomHistory(room);
       emitRoom(room);
       ack({ ok: Boolean(result?.ok), reason: resolution.reason, matchSync: roomMatchSync(room) });
     });
@@ -1533,9 +1569,12 @@ export async function createBattleSpiritsServer(options = {}) {
       if (!result.ok) return ack(result);
       const committedSession = commitAuthoritativeMatch(room, result.match);
       const authoritative = authoritativeMatch(room);
-      if (room.ranked && authoritative?.winnerId) {
+      if (authoritative?.winnerId) {
         committedSession?.finish(authoritative);
-        await settleRankedRoom(room, authoritative.winnerId, authoritative.winnerReason || "game");
+        if (room.ranked) {
+          await settleRankedRoom(room, authoritative.winnerId, authoritative.winnerReason || "game");
+        }
+        await settleRoomHistory(room);
       }
       syncTurnTimer(room);
       emitRoom(room);

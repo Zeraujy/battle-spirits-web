@@ -39,6 +39,11 @@ import {
 } from "../online/customMatchSettings.js";
 
 import {
+  onlineErrorMessage,
+  onlineConnectionErrorMessage
+} from "../online/errors/onlineErrorMessages.js";
+
+import {
   DeckPicker,
   MatchMenuButton,
   MatchSetupMenu,
@@ -57,15 +62,6 @@ import "../styles/pages/onlineMatchmakingV500.css";
 import "../styles/pages/onlinePreMatchV500.css";
 import "../styles/pages/onlineSocialMatchV500.css";
 
-
-function safeOnlineError(message, fallback = "Não foi possível concluir esta ação no Online.") {
-  const text = String(message || "").trim();
-  if (!text) return fallback;
-  if (/supabase|socket|service[_ -]?role|localhost|127\.0\.0\.1|\.sql\b|\brpc\b|\brls\b|node_modules|package\.json|vite|npm|stack|exception|database/i.test(text)) {
-    return fallback;
-  }
-  return text.length > 180 ? fallback : text;
-}
 
 
 export default function OnlineLobby({
@@ -246,7 +242,7 @@ export default function OnlineLobby({
 
     const onConnectError = (connectionError) => {
       setStatus("erro");
-      setError("Não foi possível conectar ao Online. Verifique sua conexão e tente novamente.");
+      setError(onlineConnectionErrorMessage());
     };
 
     const handoffMatch = (state) => {
@@ -348,7 +344,7 @@ export default function OnlineLobby({
       }
 
       updateSearching(false);
-      setError(safeOnlineError(payload?.error, "A busca foi interrompida."));
+      setError(onlineErrorMessage(payload, { fallback: "A busca foi interrompida." }));
     };
 
     const onLobbySnapshot = (snapshot) => {
@@ -372,7 +368,7 @@ export default function OnlineLobby({
       setIncomingChallenge((current) => current?.challengeId === payload?.challengeId ? null : current);
       setOutgoingChallengeId((current) => current === payload?.challengeId ? null : current);
       setChallengeBusy(false);
-      if (payload?.error) setError(safeOnlineError(payload.error, "O desafio foi encerrado."));
+      if (payload?.error) setError(onlineErrorMessage(payload, { fallback: "O desafio foi encerrado." }));
     };
 
     const onChallengeMatched = (payload) => {
@@ -552,7 +548,7 @@ export default function OnlineLobby({
       (result) => {
         if (!result?.ok) {
           updateSearching(false);
-          setError(safeOnlineError(result?.error, "Não foi possível iniciar a busca."));
+          setError(onlineErrorMessage(result, { fallback: "Não foi possível iniciar a busca." }));
           return;
         }
         if (result?.readyCheck) setReadyCheck(result.readyCheck);
@@ -571,7 +567,7 @@ export default function OnlineLobby({
         if (!result?.ok) {
           setReadyCheck(null);
           updateSearching(false);
-          setError(safeOnlineError(result?.error, "A confirmação da partida expirou."));
+          setError(onlineErrorMessage(result, { fallback: "A confirmação da partida expirou." }));
           return;
         }
         if (result?.readyCheck) {
@@ -604,7 +600,7 @@ export default function OnlineLobby({
     }, (result) => {
       setChallengeBusy(false);
       if (!result?.ok) {
-        setError(safeOnlineError(result?.error, "Não foi possível enviar o desafio."));
+        setError(onlineErrorMessage(result, { fallback: "Não foi possível enviar o desafio." }));
         return;
       }
       if (result?.challenge?.challengeId) setOutgoingChallengeId(result.challenge.challengeId);
@@ -629,7 +625,7 @@ export default function OnlineLobby({
         if (["CHALLENGE_EXPIRED", "FRIEND_REQUIRED", "CHALLENGE_UNAVAILABLE"].includes(result?.code)) {
           setIncomingChallenge(null);
         }
-        setError(safeOnlineError(result?.error, "Não foi possível aceitar o desafio."));
+        setError(onlineErrorMessage(result, { fallback: "Não foi possível aceitar o desafio." }));
       }
     });
   }
@@ -694,7 +690,7 @@ export default function OnlineLobby({
           );
         } else {
           setError(
-            safeOnlineError(result?.error, "Não foi possível criar a sala.")
+            onlineErrorMessage(result, { fallback: "Não foi possível criar a sala." })
           );
         }
       }
@@ -760,7 +756,7 @@ export default function OnlineLobby({
           setJoinPassword("");
         } else {
           setError(
-            safeOnlineError(result?.error, "Não foi possível entrar na sala.")
+            onlineErrorMessage(result, { fallback: "Não foi possível entrar na sala." })
           );
         }
       }
@@ -775,7 +771,7 @@ export default function OnlineLobby({
           !result?.ok
         ) {
           setError(
-            safeOnlineError(result?.error, "Não foi possível iniciar a partida.")
+            onlineErrorMessage(result, { fallback: "Não foi possível iniciar a partida." })
           );
         }
       }
@@ -902,7 +898,6 @@ export default function OnlineLobby({
           badge={status.toUpperCase()}
         >
           <QueueStatus message={searchMessage || "Procurando adversário..."} onCancel={cancelSearch} />
-          <MatchMenuButton label="Voltar" disabled />
         </MatchSetupMenu>
       );
     }
@@ -1024,11 +1019,11 @@ export default function OnlineLobby({
           label="Procurar partida"
           detail="Matchmaking rápido"
           active
-          disabled={status !== "conectado" || !selectedDeck}
+          disabled={status !== "conectado" || !selectedDeck || !deckIsValid(selectedDeck, deckValidationOptionsForSettings({ ruleset: "eternal" }))}
           onClick={findRandomMatch}
         />
-        <MatchMenuButton label="Criar sala" detail="Pública, privada ou protegida por senha" disabled={status !== "conectado" || !selectedDeck} onClick={() => setPanelMode("create")} />
-        <MatchMenuButton label="Entrar em uma sala" detail="Use um código de convite" disabled={status !== "conectado" || !selectedDeck} onClick={() => setPanelMode("join")} />
+        <MatchMenuButton label="Criar sala" detail="Pública, privada ou protegida por senha" disabled={status !== "conectado" || !selectedDeck || !deckIsValid(selectedDeck, deckValidationOptionsForSettings({ ruleset: "eternal" }))} onClick={() => setPanelMode("create")} />
+        <MatchMenuButton label="Entrar em uma sala" detail="Use um código de convite" disabled={status !== "conectado" || !selectedDeck || !deckIsValid(selectedDeck, deckValidationOptionsForSettings({ ruleset: "eternal" }))} onClick={() => setPanelMode("join")} />
         <MatchMenuButton label="Deck Builder" onClick={onDeckBuilder} />
         <MatchMenuButton label="Voltar" onClick={onBack} />
       </MatchSetupMenu>

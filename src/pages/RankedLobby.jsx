@@ -5,6 +5,7 @@ import { createOnlineClient } from "../online/socketClient.js";
 import { ONLINE_SERVER_URL } from "../config/online.js";
 import { loadRankedHistory, loadRankedProfile } from "../services/rankedService.js";
 import { useLanguage } from "../i18n.jsx";
+import { onlineConnectionErrorMessage, onlineErrorMessage } from "../online/errors/onlineErrorMessages.js";
 import {
   DeckPicker,
   MatchMenuButton,
@@ -84,7 +85,7 @@ export default function RankedLobby({ onBack, onAccount, onDeckBuilder, onMatch 
     const onConnectError = (err) => {
       setStatus("error");
       console.error("Falha ao conectar ao Ranked:", err);
-      setError(pt ? "Não foi possível conectar ao Ranked agora." : "Could not connect to Ranked right now.");
+      setError(onlineConnectionErrorMessage(language));
     };
     const onStatus = (payload) => {
       if (payload?.status === "searching") {
@@ -165,7 +166,7 @@ export default function RankedLobby({ onBack, onAccount, onDeckBuilder, onMatch 
       if (!result?.ok) {
         searchingRef.current = false;
         setSearching(false);
-        setError(pt ? "Não foi possível entrar na fila Ranked." : "Could not join the Ranked queue.");
+        setError(onlineErrorMessage(result, { language, fallback: pt ? "Não foi possível entrar na fila Ranked." : "Could not join the Ranked queue." }));
         return;
       }
       if (result.status === "searching") {

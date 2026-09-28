@@ -122,12 +122,23 @@ export function buildMatchResultRecord({ match, mode, viewerPlayerId, startedAt,
 }
 
 export async function recordMatchResult(input) {
-  const record = buildMatchResultRecord(input);
+  const onlineMode = input?.mode === "online" || input?.mode === "ranked";
+  const serverRecord = input?.serverRecord || null;
+  if (onlineMode && !serverRecord?.server_authoritative) {
+    return { ok: false, code: "SERVER_HISTORY_PENDING", error: "O histórico Online ainda está a ser confirmado pelo servidor." };
+  }
+
+  const record = onlineMode ? { ...serverRecord } : buildMatchResultRecord(input);
   if (!record) return { ok: false, error: "Resultado da partida indisponível." };
 
   const current = readLocalHistory();
   if (!current.some((row) => row.match_uid === record.match_uid)) {
     writeLocalHistory([record, ...current]);
+  }
+
+  if (onlineMode) {
+    const mastery = await applyMasteryForMatch(record);
+    return { ok: mastery.ok !== false, mode: "server", record, mastery, error: mastery.ok === false ? mastery.error : undefined };
   }
 
   if (!supabase) {
