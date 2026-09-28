@@ -1,47 +1,7 @@
-const EVENT_ALIASES = new Map([
-  ["onsummon", "whenSummoned"],
-  ["whensummoned", "whenSummoned"],
-  ["summoned", "whenSummoned"],
-  ["ondeploy", "whenDeployed"],
-  ["whendeployed", "whenDeployed"],
-  ["deployed", "whenDeployed"],
-  ["onattack", "whenAttacks"],
-  ["whenattacks", "whenAttacks"],
-  ["attacks", "whenAttacks"],
-  ["onblock", "whenBlocks"],
-  ["whenblocks", "whenBlocks"],
-  ["blocks", "whenBlocks"],
-  ["ondestroyed", "whenDestroyed"],
-  ["whendestroyed", "whenDestroyed"],
-  ["destroyed", "whenDestroyed"],
-  ["main", "magicMain"],
-  ["magicmain", "magicMain"],
-  ["flash", "magicFlash"],
-  ["magicflash", "magicFlash"],
-  ["afterlifedecreases", "burstLifeDecrease"],
-  ["afterlifereduced", "burstLifeDecrease"],
-  ["lifedecrease", "burstLifeDecrease"],
-  ["lifereduced", "burstLifeDecrease"],
-  ["burstlifedecrease", "burstLifeDecrease"],
-  ["burst", "burst"],
-  ["mirage", "mirage"],
-  ["mirageset", "mirage"],
-  ["continuous", "continuous"],
-  ["ultimatetriggerhit", "ultimateTriggerHit"],
-  ["utriggerhit", "ultimateTriggerHit"],
-  ["ultimatetriggerguard", "ultimateTriggerGuard"],
-  ["utriggerguard", "ultimateTriggerGuard"],
-  ["ultimatetriggerresolved", "ultimateTriggerResolved"],
-  ["triggercounter", "triggerCounter"],
-  ["xutriggerhit", "xuTriggerHit"],
-  ["xuhit", "xuTriggerHit"]
-]);
+import { normalizeCanonicalEvent } from "./canonicalEvents.js";
 
 export function normalizeEventName(value) {
-  const raw = String(value || "").trim();
-  if (!raw) return "";
-  const compact = raw.replace(/[\s_-]+/g, "").toLowerCase();
-  return EVENT_ALIASES.get(compact) || raw;
+  return normalizeCanonicalEvent(value);
 }
 
 export function getEntryEventCandidates(entry = {}) {
@@ -67,8 +27,6 @@ export function getTriggeredEntries(card, event) {
     ...(Array.isArray(card.effects) ? card.effects.map((entry) => ({ entry, source: "effects" })) : []),
     ...(Array.isArray(card.abilities) ? card.abilities.map((entry) => ({ entry, source: "abilities" })) : [])
   ].filter(({ entry, source }) => {
-    // Ultimate Trigger possui uma etapa de regra própria. O texto de display
-    // não deve virar um fallback manual de whenAttacks no Effect Engine.
     if (source === "effects") {
       const specialType = String(entry?.type || "").replace(/[\s_-]+/g, "").toLowerCase();
       if (specialType.includes("ultimatetrigger")) return false;

@@ -1,0 +1,143 @@
+export const EffectEvent = Object.freeze({
+  WHEN_SUMMONED: "whenSummoned",
+  WHEN_DEPLOYED: "whenDeployed",
+  WHEN_ATTACKS: "whenAttacks",
+  WHEN_BLOCKS: "whenBlocks",
+  WHEN_BATTLES: "whenBattles",
+  WHEN_BLOCKED: "whenBlocked",
+  WHEN_DESTROYED: "whenDestroyed",
+  BEFORE_BATTLE_RESOLUTION: "beforeBattleResolution",
+  AFTER_BATTLE_RESOLUTION: "afterBattleResolution",
+  LIFE_DECREASED: "lifeDecreased",
+  MAGIC_MAIN: "magicMain",
+  MAGIC_FLASH: "magicFlash",
+  BURST_LIFE_DECREASE: "burstLifeDecrease",
+  BURST: "burst",
+  MIRAGE: "mirage",
+  CONTINUOUS: "continuous",
+  START_STEP: "startStep",
+  CORE_STEP: "coreStep",
+  DRAW_STEP: "drawStep",
+  REFRESH_STEP: "refreshStep",
+  MAIN_STEP: "mainStep",
+  ATTACK_STEP: "attackStep",
+  END_STEP: "endStep",
+  CARD_MOVED: "cardMoved",
+  CORE_MOVED: "coreMoved",
+  AFTER_ULTIMATE_TRIGGER: "afterUltimateTrigger",
+  ULTIMATE_TRIGGER_HIT: "ultimateTriggerHit",
+  ULTIMATE_TRIGGER_GUARD: "ultimateTriggerGuard",
+  ULTIMATE_TRIGGER_RESOLVED: "ultimateTriggerResolved",
+  TRIGGER_COUNTER: "triggerCounter",
+  XU_TRIGGER_HIT: "xuTriggerHit"
+});
+
+export const CANONICAL_EVENT_VALUES = Object.freeze(Object.values(EffectEvent));
+
+const aliases = new Map([
+  ["onsummon", EffectEvent.WHEN_SUMMONED],
+  ["whensummoned", EffectEvent.WHEN_SUMMONED],
+  ["summoned", EffectEvent.WHEN_SUMMONED],
+  ["summon", EffectEvent.WHEN_SUMMONED],
+  ["ultimatesummoned", EffectEvent.WHEN_SUMMONED],
+  ["ultimatesummon", EffectEvent.WHEN_SUMMONED],
+  ["ondeploy", EffectEvent.WHEN_DEPLOYED],
+  ["whendeployed", EffectEvent.WHEN_DEPLOYED],
+  ["deployed", EffectEvent.WHEN_DEPLOYED],
+  ["onattack", EffectEvent.WHEN_ATTACKS],
+  ["whenattacks", EffectEvent.WHEN_ATTACKS],
+  ["attacks", EffectEvent.WHEN_ATTACKS],
+  ["attack", EffectEvent.WHEN_ATTACKS],
+  ["onblock", EffectEvent.WHEN_BLOCKS],
+  ["whenblocks", EffectEvent.WHEN_BLOCKS],
+  ["blocks", EffectEvent.WHEN_BLOCKS],
+  ["whenbattles", EffectEvent.WHEN_BATTLES],
+  ["battle", EffectEvent.WHEN_BATTLES],
+  ["whenblocked", EffectEvent.WHEN_BLOCKED],
+  ["ondestroyed", EffectEvent.WHEN_DESTROYED],
+  ["whendestroyed", EffectEvent.WHEN_DESTROYED],
+  ["destroyed", EffectEvent.WHEN_DESTROYED],
+  ["beforebattleresolution", EffectEvent.BEFORE_BATTLE_RESOLUTION],
+  ["battleresolution", EffectEvent.AFTER_BATTLE_RESOLUTION],
+  ["afterbattleresolution", EffectEvent.AFTER_BATTLE_RESOLUTION],
+  ["afterbpcomparison", EffectEvent.AFTER_BATTLE_RESOLUTION],
+  ["main", EffectEvent.MAGIC_MAIN],
+  ["magicmain", EffectEvent.MAGIC_MAIN],
+  ["flash", EffectEvent.MAGIC_FLASH],
+  ["magicflash", EffectEvent.MAGIC_FLASH],
+  ["afterlifedecreases", EffectEvent.BURST_LIFE_DECREASE],
+  ["afterlifereduced", EffectEvent.BURST_LIFE_DECREASE],
+  ["lifedecrease", EffectEvent.BURST_LIFE_DECREASE],
+  ["lifedecreased", EffectEvent.LIFE_DECREASED],
+  ["lifereduced", EffectEvent.BURST_LIFE_DECREASE],
+  ["burstlifedecrease", EffectEvent.BURST_LIFE_DECREASE],
+  ["burst", EffectEvent.BURST],
+  ["mirage", EffectEvent.MIRAGE],
+  ["mirageset", EffectEvent.MIRAGE],
+  ["continuous", EffectEvent.CONTINUOUS],
+  ["always", EffectEvent.CONTINUOUS],
+  ["startstep", EffectEvent.START_STEP],
+  ["yourstartstep", EffectEvent.START_STEP],
+  ["corestep", EffectEvent.CORE_STEP],
+  ["yourcorestep", EffectEvent.CORE_STEP],
+  ["drawstep", EffectEvent.DRAW_STEP],
+  ["yourdrawstep", EffectEvent.DRAW_STEP],
+  ["refreshstep", EffectEvent.REFRESH_STEP],
+  ["yourrefreshstep", EffectEvent.REFRESH_STEP],
+  ["mainstep", EffectEvent.MAIN_STEP],
+  ["yourmainstep", EffectEvent.MAIN_STEP],
+  ["opponentmainstep", EffectEvent.MAIN_STEP],
+  ["attackstep", EffectEvent.ATTACK_STEP],
+  ["yourattackstep", EffectEvent.ATTACK_STEP],
+  ["opponentattackstep", EffectEvent.ATTACK_STEP],
+  ["eitherattackstep", EffectEvent.ATTACK_STEP],
+  ["endstep", EffectEvent.END_STEP],
+  ["yourendstep", EffectEvent.END_STEP],
+  ["opponentendstep", EffectEvent.END_STEP],
+  ["afterultimatetrigger", EffectEvent.AFTER_ULTIMATE_TRIGGER],
+  ["ultimatetriggerhit", EffectEvent.ULTIMATE_TRIGGER_HIT],
+  ["utriggerhit", EffectEvent.ULTIMATE_TRIGGER_HIT],
+  ["ultimatetriggerguard", EffectEvent.ULTIMATE_TRIGGER_GUARD],
+  ["utriggerguard", EffectEvent.ULTIMATE_TRIGGER_GUARD],
+  ["ultimatetriggerresolved", EffectEvent.ULTIMATE_TRIGGER_RESOLVED],
+  ["triggercounter", EffectEvent.TRIGGER_COUNTER],
+  ["xutriggerhit", EffectEvent.XU_TRIGGER_HIT],
+  ["xuhit", EffectEvent.XU_TRIGGER_HIT]
+]);
+
+export const RUNTIME_DISPATCHED_EVENTS = Object.freeze(new Set([
+  EffectEvent.WHEN_SUMMONED,
+  EffectEvent.WHEN_DEPLOYED,
+  EffectEvent.WHEN_ATTACKS,
+  EffectEvent.WHEN_BLOCKS,
+  EffectEvent.WHEN_DESTROYED,
+  EffectEvent.MAGIC_MAIN,
+  EffectEvent.MAGIC_FLASH,
+  EffectEvent.BURST_LIFE_DECREASE,
+  EffectEvent.AFTER_ULTIMATE_TRIGGER,
+  EffectEvent.ULTIMATE_TRIGGER_HIT,
+  EffectEvent.TRIGGER_COUNTER
+]));
+
+export function compactEventName(value) {
+  return String(value || "").trim().replace(/[\s_-]+/g, "").toLowerCase();
+}
+
+export function normalizeCanonicalEvent(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  const compact = compactEventName(raw);
+  return aliases.get(compact) || (CANONICAL_EVENT_VALUES.includes(raw) ? raw : raw);
+}
+
+export function isCanonicalEvent(value) {
+  return CANONICAL_EVENT_VALUES.includes(normalizeCanonicalEvent(value));
+}
+
+export function isRuntimeDispatchedEvent(value) {
+  return RUNTIME_DISPATCHED_EVENTS.has(normalizeCanonicalEvent(value));
+}
+
+export function getCanonicalEventAliases() {
+  return new Map(aliases);
+}
