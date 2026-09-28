@@ -5,6 +5,9 @@ import { resolveUltimateTriggerOnAttack } from "./specialRules.js";
 import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
 import { clearEffectModifiers } from "./effectEngine/modifierResolver.js";
 import { openLifeDecreaseBurstOpportunity } from "./burstRules.js";
+import { BurstEvent, openBurstOpportunityForEvent } from "./effectEngine/burstEngine.js";
+import { dispatchBattleParticipantEvent, createBattleContext } from "./effectEngine/battleTriggerEngine.js";
+import { ReplacementEvent, clearReplacementWindow, resolveReplacementWindow } from "./effectEngine/replacementEngine.js";
 
 function refreshedBattleCards(player, cardIndex) {
   const cards = [...(player.field.spirits || []), ...(player.field.other || [])];
@@ -167,6 +170,24 @@ export function declareBlock(match, playerId, instanceId, cardIndex) {
     manualResolutionNeeded = manualResolutionNeeded || braveEngine.manualResolutionNeeded;
     notes.push(...braveEngine.notes);
   }
+
+  const battleContext = createBattleContext(resolvedMatch, cardIndex);
+  const blocked = dispatchEffectEvent(resolvedMatch, {
+    event: "whenBlocked",
+    sourcePlayerId: battle.attackerPlayerId,
+    sourceInstanceId: battle.attackerInstanceId,
+    eventPlayerId: battle.attackerPlayerId,
+    context: battleContext || {}
+  }, cardIndex);
+  resolvedMatch = blocked.match;
+  manualResolutionNeeded = manualResolutionNeeded || blocked.manualResolutionNeeded;
+  notes.push(...(blocked.notes || []));
+
+  const battles = dispatchBattleParticipantEvent(resolvedMatch, "whenBattles", cardIndex);
+  resolvedMatch = battles.match;
+  manualResolutionNeeded = manualResolutionNeeded || battles.manualResolutionNeeded;
+  notes.push(...(battles.notes || []));
+
   return { ok: true, match: resolvedMatch, manualResolutionNeeded, notes };
 }
 
@@ -179,10 +200,53 @@ export function declineBlock(match, playerId, cardIndex) {
   return { ok: true, match: { ...match, battle: { ...battle, stage: "resolve", blockerInstanceId: null, flash: null } } };
 }
 
-function destroyBattleCard(match, playerId, instanceId, cardIndex) {
+function moveDestroyedReplacement(match, playerId, instanceId, destination) {
   const player = match.players[playerId];
   const removed = removeFieldCard(player, instanceId);
-  if (!removed.card) return { match, destroyed: null };
+  if (!removed.card) return { match, moved: null };
+  const returnedRegular = Number(removed.card.cores?.regular || 0);
+  let nextPlayer = { ...removed.player, reserve: Number(removed.player.reserve || 0) + returnedRegular };
+  if (removed.card.cores?.soul) nextPlayer.soulCore = { zone: "reserve", instanceId: null };
+  const clean = { ...removed.card, cores: { regular: 0, soul: false }, pendingDestruction: false, exhausted: false };
+  if (destination === "hand") nextPlayer = { ...nextPlayer, hand: [...nextPlayer.hand, clean] };
+  else if (destination === "topDeck") nextPlayer = { ...nextPlayer, deck: [clean, ...nextPlayer.deck] };
+  else if (destination === "bottomDeck") nextPlayer = { ...nextPlayer, deck: [...nextPlayer.deck, clean] };
+  else return { match, moved: null };
+  return { match: { ...match, players: { ...match.players, [playerId]: nextPlayer } }, moved: clean };
+}
+
+function destroyBattleCard(match, playerId, instanceId, cardIndex, metadata = {}) {
+  const found = findPhysicalCard(match, instanceId);
+  if (!found) return { match, destroyed: null, prevented: false, manualResolutionNeeded: false, notes: [] };
+  const replacement = resolveReplacementWindow(match, {
+    event: ReplacementEvent.WOULD_BE_DESTROYED,
+    targetPlayerId: playerId,
+    targetInstanceId: instanceId,
+    sourcePhysical: found.card,
+    sourceCardId: found.card.cardId,
+    cause: metadata.cause || "battle",
+    context: metadata.context || {}
+  }, cardIndex);
+  let next = replacement.match;
+  const notes = [...(replacement.notes || [])];
+  if (replacement.pending) {
+    return { match: next, destroyed: null, prevented: true, manualResolutionNeeded: true, notes };
+  }
+  if (replacement.prevented) {
+    next = clearReplacementWindow(next);
+    return { match: next, destroyed: null, prevented: true, manualResolutionNeeded: replacement.manualResolutionNeeded, notes };
+  }
+  if (replacement.replacement?.destination) {
+    const moved = moveDestroyedReplacement(next, playerId, instanceId, replacement.replacement.destination);
+    if (moved.moved) {
+      next = clearReplacementWindow(moved.match);
+      return { match: next, destroyed: null, prevented: true, replaced: true, manualResolutionNeeded: replacement.manualResolutionNeeded, notes };
+    }
+  }
+  next = clearReplacementWindow(next);
+  const player = next.players[playerId];
+  const removed = removeFieldCard(player, instanceId);
+  if (!removed.card) return { match: next, destroyed: null, prevented: false, manualResolutionNeeded: replacement.manualResolutionNeeded, notes };
   const returnedRegular = Number(removed.card.cores?.regular || 0);
   let nextPlayer = {
     ...removed.player,
@@ -204,8 +268,11 @@ function destroyBattleCard(match, playerId, instanceId, cardIndex) {
     }
   }
   return {
-    match: { ...match, players: { ...match.players, [playerId]: nextPlayer } },
-    destroyed: { playerId, physical: removed.card }
+    match: { ...next, players: { ...next.players, [playerId]: nextPlayer } },
+    destroyed: { playerId, physical: removed.card },
+    prevented: false,
+    manualResolutionNeeded: replacement.manualResolutionNeeded,
+    notes
   };
 }
 
@@ -213,79 +280,142 @@ export function resolveBattle(match, actorId, cardIndex) {
   const battle = match.battle;
   if (!battle || battle.stage !== "resolve") return { ok: false, error: "A batalha ainda não está pronta para resolução." };
   if (![battle.attackerPlayerId, battle.defenderPlayerId].includes(actorId)) return { ok: false, error: "Jogador inválido para resolver a batalha." };
+
   const attackerCtx = findPhysicalCard(match, battle.attackerInstanceId);
+  const blockerCtxBefore = battle.blockerInstanceId ? findPhysicalCard(match, battle.blockerInstanceId) : null;
+  const originalBattleContext = createBattleContext(match, cardIndex, battle) || {};
   let next = match;
+  let manualResolutionNeeded = false;
+  const notes = [];
+
+  const before = dispatchBattleParticipantEvent(next, "beforeBattleResolution", cardIndex, { battle });
+  next = before.match;
+  manualResolutionNeeded ||= Boolean(before.manualResolutionNeeded);
+  notes.push(...(before.notes || []));
+  if (next.pendingEffectDecision) return { ok: true, match: next, manualResolutionNeeded: true, notes };
 
   if (!battle.blockerInstanceId) {
     if (attackerCtx) {
-      const symbols = getEffectiveSymbols(match, cardIndex, attackerCtx.card);
+      const symbols = getEffectiveSymbols(next, cardIndex, attackerCtx.card);
       const attackerCard = getDatabaseCard(cardIndex, attackerCtx.card);
       let damage = symbols.length;
-      const defender = match.players[battle.defenderPlayerId];
-      const turnProtection = match.temporary?.turnProtections?.[battle.defenderPlayerId]?.limitSpiritAttackLifeDamage;
+      const defender = next.players[battle.defenderPlayerId];
+      const turnProtection = next.temporary?.turnProtections?.[battle.defenderPlayerId]?.limitSpiritAttackLifeDamage;
       if (attackerCard?.cardType === "spirit" && turnProtection?.maxDamage != null) {
         damage = Math.min(damage, Math.max(0, Number(turnProtection.maxDamage)));
       }
-      const actual = Math.min(damage, defender.life);
-      next = {
-        ...match,
-        players: {
-          ...match.players,
-          [battle.defenderPlayerId]: {
-            ...defender,
-            life: defender.life - actual,
-            reserve: defender.reserve + actual
+
+      const replacement = resolveReplacementWindow(next, {
+        event: ReplacementEvent.WOULD_LOSE_LIFE,
+        targetPlayerId: battle.defenderPlayerId,
+        amount: Math.min(damage, defender.life),
+        cause: "unblockedAttack",
+        context: originalBattleContext
+      }, cardIndex);
+      next = replacement.match;
+      manualResolutionNeeded ||= Boolean(replacement.manualResolutionNeeded);
+      notes.push(...(replacement.notes || []));
+      if (replacement.pending) return { ok: true, match: next, manualResolutionNeeded: true, notes };
+
+      let actual = replacement.prevented ? 0 : Math.min(damage, defender.life);
+      if (replacement.replacement?.amount != null) actual = Math.max(0, Math.min(Number(replacement.replacement.amount), defender.life));
+      next = clearReplacementWindow(next);
+
+      if (actual > 0) {
+        const currentDefender = next.players[battle.defenderPlayerId];
+        next = {
+          ...next,
+          players: {
+            ...next.players,
+            [battle.defenderPlayerId]: {
+              ...currentDefender,
+              life: currentDefender.life - actual,
+              reserve: currentDefender.reserve + actual
+            }
           }
+        };
+        if (currentDefender.life - actual <= 0) {
+          next = { ...next, winnerId: battle.attackerPlayerId, winnerReason: "life" };
+        } else {
+          next = openLifeDecreaseBurstOpportunity(next, battle.defenderPlayerId, cardIndex, {
+            amount: actual,
+            cause: "unblockedAttack",
+            sourcePlayerId: battle.attackerPlayerId,
+            battleId: battle.id
+          });
         }
-      };
-      if (defender.life - actual <= 0) {
-        next = { ...next, winnerId: battle.attackerPlayerId, winnerReason: "life" };
-      } else if (actual > 0) {
-        next = openLifeDecreaseBurstOpportunity(next, battle.defenderPlayerId, cardIndex, {
-          amount: actual,
-          cause: "unblockedAttack",
-          sourcePlayerId: battle.attackerPlayerId,
-          battleId: battle.id
-        });
+        const lifeEvent = dispatchEffectEvent(next, {
+          event: "lifeDecreased",
+          eventPlayerId: battle.defenderPlayerId,
+          context: { ...originalBattleContext, amount: actual, cause: "unblockedAttack" }
+        }, cardIndex);
+        next = lifeEvent.match;
+        manualResolutionNeeded ||= Boolean(lifeEvent.manualResolutionNeeded);
+        notes.push(...(lifeEvent.notes || []));
       }
       next = appendLog(next, `${actual} Life foi reduzida pelo ataque não bloqueado.`, "battle");
     }
   } else {
-    const blockerCtx = findPhysicalCard(match, battle.blockerInstanceId);
-    if (attackerCtx && blockerCtx) {
-      const aBP = getEffectiveBP(match, cardIndex, attackerCtx.card);
-      const bBP = getEffectiveBP(match, cardIndex, blockerCtx.card);
+    const blockerCtx = findPhysicalCard(next, battle.blockerInstanceId);
+    const currentAttacker = findPhysicalCard(next, battle.attackerInstanceId);
+    if (currentAttacker && blockerCtx) {
+      const aBP = getEffectiveBP(next, cardIndex, currentAttacker.card);
+      const bBP = getEffectiveBP(next, cardIndex, blockerCtx.card);
       const destroyed = [];
       if (aBP <= bBP) {
-        const result = destroyBattleCard(next, battle.attackerPlayerId, battle.attackerInstanceId, cardIndex);
+        const result = destroyBattleCard(next, battle.attackerPlayerId, battle.attackerInstanceId, cardIndex, { cause: "bpComparison", context: { ...originalBattleContext, attackerBP: aBP, blockerBP: bBP } });
         next = result.match;
+        manualResolutionNeeded ||= Boolean(result.manualResolutionNeeded);
+        notes.push(...(result.notes || []));
         if (result.destroyed) destroyed.push(result.destroyed);
+        if (next.pendingEffectDecision) return { ok: true, match: next, manualResolutionNeeded: true, notes };
       }
       if (bBP <= aBP) {
-        const result = destroyBattleCard(next, battle.defenderPlayerId, battle.blockerInstanceId, cardIndex);
+        const result = destroyBattleCard(next, battle.defenderPlayerId, battle.blockerInstanceId, cardIndex, { cause: "bpComparison", context: { ...originalBattleContext, attackerBP: aBP, blockerBP: bBP } });
         next = result.match;
+        manualResolutionNeeded ||= Boolean(result.manualResolutionNeeded);
+        notes.push(...(result.notes || []));
         if (result.destroyed) destroyed.push(result.destroyed);
+        if (next.pendingEffectDecision) return { ok: true, match: next, manualResolutionNeeded: true, notes };
       }
       next = appendLog(next, `Battle Resolution: ${aBP} BP × ${bBP} BP.`, "battle");
-      next = { ...next, battle: null };
-      let manualResolutionNeeded = false;
-      const notes = [];
+
       for (const destroyedCard of destroyed) {
         const engine = dispatchEffectEvent(next, {
           event: "whenDestroyed",
           sourcePlayerId: destroyedCard.playerId,
           sourcePhysical: destroyedCard.physical,
-          sourceCardId: destroyedCard.physical.cardId
+          sourceCardId: destroyedCard.physical.cardId,
+          eventPlayerId: destroyedCard.playerId,
+          context: { ...originalBattleContext, attackerBP: aBP, blockerBP: bBP }
         }, cardIndex);
         next = engine.match;
-        manualResolutionNeeded = manualResolutionNeeded || engine.manualResolutionNeeded;
-        notes.push(...engine.notes);
+        next = openBurstOpportunityForEvent(next, BurstEvent.OWN_SPIRIT_DESTROYED, destroyedCard.playerId, cardIndex, { sourcePlayerId: destroyedCard.playerId, sourceInstanceId: destroyedCard.physical.instanceId, battleId: battle.id, cause: "bpComparison" });
+        manualResolutionNeeded ||= Boolean(engine.manualResolutionNeeded);
+        notes.push(...(engine.notes || []));
       }
-      next = clearEffectModifiers(next, "battle", { battleId: battle.id });
-      return { ok: true, match: next, manualResolutionNeeded, notes };
     }
   }
+
+  const afterInputs = [
+    attackerCtx ? { playerId: battle.attackerPlayerId, physical: attackerCtx.card } : null,
+    blockerCtxBefore ? { playerId: battle.defenderPlayerId, physical: blockerCtxBefore.card } : null
+  ].filter(Boolean);
+  for (const participant of afterInputs) {
+    const result = dispatchEffectEvent(next, {
+      event: "afterBattleResolution",
+      sourcePlayerId: participant.playerId,
+      sourcePhysical: participant.physical,
+      sourceCardId: participant.physical.cardId,
+      eventPlayerId: participant.playerId,
+      context: originalBattleContext
+    }, cardIndex);
+    next = result.match;
+    manualResolutionNeeded ||= Boolean(result.manualResolutionNeeded);
+    notes.push(...(result.notes || []));
+  }
+
   next = { ...next, battle: null };
   next = clearEffectModifiers(next, "battle", { battleId: battle.id });
-  return { ok: true, match: next };
+  return { ok: true, match: next, manualResolutionNeeded, notes };
 }

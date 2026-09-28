@@ -1,4 +1,4 @@
-# Card Effect Coverage — v5.1.0 Foundation (Phase 0–9)
+# Card Effect Coverage — v5.1.0 Foundation (Phase 0–12)
 
 > Scope: runtime gameplay catalog (`src/data/cards.json`). Artwork-only/public database records that are not loaded into the gameplay catalog are intentionally excluded.
 
@@ -33,38 +33,30 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | Set | Cards | Automated | Partial | Manual | Unsupported trigger | Unsupported condition | Unsupported action | Unstructured | No effect |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | BS13 | 90 | 0 | 0 | 0 | 0 | 0 | 0 | 84 | 6 |
-| BSC49 | 117 | 0 | 0 | 4 | 23 | 0 | 0 | 89 | 1 |
-| SD10 | 18 | 5 | 6 | 3 | 3 | 0 | 0 | 0 | 1 |
-| SD11 | 18 | 3 | 4 | 4 | 6 | 0 | 0 | 0 | 1 |
-| SD13 | 18 | 6 | 3 | 4 | 2 | 0 | 0 | 0 | 3 |
-| SD15 | 18 | 0 | 0 | 7 | 10 | 0 | 0 | 0 | 1 |
-| SD17 | 18 | 5 | 2 | 5 | 5 | 0 | 0 | 0 | 1 |
-| SD19 | 17 | 7 | 0 | 5 | 4 | 0 | 0 | 0 | 1 |
-| SD20 | 17 | 6 | 1 | 4 | 5 | 0 | 0 | 0 | 1 |
-| SD23 | 17 | 0 | 1 | 8 | 8 | 0 | 0 | 0 | 0 |
-| SD28 | 17 | 1 | 6 | 3 | 7 | 0 | 0 | 0 | 0 |
+| BSC49 | 117 | 0 | 0 | 5 | 22 | 0 | 0 | 89 | 1 |
+| SD10 | 18 | 5 | 6 | 6 | 0 | 0 | 0 | 0 | 1 |
+| SD11 | 18 | 3 | 4 | 10 | 0 | 0 | 0 | 0 | 1 |
+| SD13 | 18 | 6 | 3 | 5 | 1 | 0 | 0 | 0 | 3 |
+| SD15 | 18 | 0 | 0 | 14 | 3 | 0 | 0 | 0 | 1 |
+| SD17 | 18 | 5 | 2 | 10 | 0 | 0 | 0 | 0 | 1 |
+| SD19 | 17 | 7 | 0 | 8 | 1 | 0 | 0 | 0 | 1 |
+| SD20 | 17 | 6 | 1 | 8 | 1 | 0 | 0 | 0 | 1 |
+| SD23 | 17 | 0 | 1 | 13 | 3 | 0 | 0 | 0 | 0 |
+| SD28 | 17 | 1 | 6 | 8 | 2 | 0 | 0 | 0 | 0 |
 
 ## Structured entry baseline
 
 - Automated executable entries: **70**
-- Entries blocked by trigger coverage: **133**
+- Entries blocked by trigger coverage: **50**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
-- Represented but non-executable/manual entries: **254**
+- Represented but non-executable/manual entries: **337**
 
 ## Highest-priority trigger gaps
 
 | Trigger/timing | Entries |
 | --- | ---: |
-| `yourAttackStep` | 17 |
-| `opponentAttackStep` | 16 |
-| `eitherAttackStep` | 14 |
-| `combine` | 13 |
-| `whenBattles` | 12 |
-| `battleResolution` | 3 |
 | `whileOnField` | 3 |
-| `yourEndStep` | 3 |
-| `afterBPComparison` | 2 |
 | `whenAttacksOrBlocks` | 2 |
 | `whenOpponentSpiritBecomesZeroBP` | 2 |
 | `whileInField` | 2 |
@@ -76,7 +68,6 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `onEligibleSummonOrPlacement` | 1 |
 | `onOwnLowCostPurpleDestroyedBySpiritEffect` | 1 |
 | `opponentHandIncrease` | 1 |
-| `opponentMainStep` | 1 |
 | `opponentTurn` | 1 |
 | `opposingUnitLeavesByYourEffect` | 1 |
 | `ownDivineSpiritReturnedByOpponent` | 1 |
@@ -84,21 +75,33 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `ownSpiritOrUltimateDestroyedByOpponent` | 1 |
 | `shellmanUltimateBattle` | 1 |
 | `whenAttacksFlash` | 1 |
-| `whenBlocked` | 1 |
 | `whenBlueNexusExhausted` | 1 |
+| `whenBravedOrCombinedCardWouldLeave` | 1 |
+| `whenDepletedOrDestroyedByOpponent` | 1 |
+| `whenDestroyedByOpponent` | 1 |
+| `whenDiscardedByBlueEffect` | 1 |
+| `whenDiscardedByGreenOnlyEffect` | 1 |
+| `whenDiscardedFromHand` | 1 |
+| `whenExhaustedEitherAttackStep` | 1 |
+| `whenLifeDecreases` | 1 |
+| `whenLifeReducedByOpponentEffect` | 1 |
+| `whenOpenedFromDeckByGreenEffect` | 1 |
 
 ## Unsupported action/condition gaps
 
 - Unsupported action types: none
 - Unsupported condition forms: none
 
-## Foundation additions — Phases 7–9
+## Foundation additions — Phases 7–12
 
-- Core Action Library is centralized and currently exposes **43 generic action types** to Schema v2.
+- Core Action Library is centralized and currently exposes **45 generic action types** to Schema v2.
 - Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.
 - Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.
 - Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.
 - `continuous` is now runtime-dispatched for explicit Schema v2 source effects on Summon/Deploy; legacy continuous text remains untouched until migrated.
+- Replacement/prevention windows now cover `wouldBeDestroyed` and `wouldLoseLife` with declarative `preventEvent` / `replaceEvent` actions.
+- Battle flow now dispatches `whenBlocked`, `whenBattles`, `beforeBattleResolution`, `afterBattleResolution`, and `lifeDecreased` with normalized battle context.
+- All seven turn phases now dispatch canonical step events; legacy `your/opponent/either` step timings have a narrow ambient compatibility path.
 
 ## Canonical Event Model — Phase 1
 
@@ -110,25 +113,32 @@ The canonical list is defined in `src/game/effectEngine/canonicalEvents.js`. Leg
 | `whenDeployed` | Yes |
 | `whenAttacks` | Yes |
 | `whenBlocks` | Yes |
-| `whenBattles` | No — foundation only |
-| `whenBlocked` | No — foundation only |
+| `whenBattles` | Yes |
+| `whenBlocked` | Yes |
+| `whenBraved` | Yes |
+| `whenCombined` | Yes |
 | `whenDestroyed` | Yes |
-| `beforeBattleResolution` | No — foundation only |
-| `afterBattleResolution` | No — foundation only |
-| `lifeDecreased` | No — foundation only |
+| `wouldBeDestroyed` | Yes |
+| `wouldLoseLife` | Yes |
+| `beforeBattleResolution` | Yes |
+| `afterBattleResolution` | Yes |
+| `lifeDecreased` | Yes |
 | `magicMain` | Yes |
 | `magicFlash` | Yes |
 | `burstLifeDecrease` | Yes |
+| `burstOpponentSummon` | Yes |
+| `burstOpponentMagic` | Yes |
+| `burstOwnSpiritDestroyed` | Yes |
 | `burst` | No — foundation only |
 | `mirage` | No — foundation only |
 | `continuous` | Yes |
-| `startStep` | No — foundation only |
-| `coreStep` | No — foundation only |
-| `drawStep` | No — foundation only |
-| `refreshStep` | No — foundation only |
-| `mainStep` | No — foundation only |
-| `attackStep` | No — foundation only |
-| `endStep` | No — foundation only |
+| `startStep` | Yes |
+| `coreStep` | Yes |
+| `drawStep` | Yes |
+| `refreshStep` | Yes |
+| `mainStep` | Yes |
+| `attackStep` | Yes |
+| `endStep` | Yes |
 | `cardMoved` | No — foundation only |
 | `coreMoved` | No — foundation only |
 | `afterUltimateTrigger` | Yes |
@@ -145,17 +155,17 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | Card | Set | Type | Status | Main gaps |
 | --- | --- | --- | --- | --- |
 | `BS01-125` | SD13 | magic | `MANUAL` | unresolved entries: 1 |
-| `BS05-037` | SD15 | spirit | `UNSUPPORTED_TRIGGER` | triggers: eitherAttackStep; unresolved entries: 1 |
+| `BS05-037` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
 | `BS06-023` | SD13 | spirit | `MANUAL` | unresolved entries: 1 |
 | `BS08-042` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
-| `BS09-015` | SD13 | spirit | `UNSUPPORTED_TRIGGER` | triggers: yourDrawStep; unresolved entries: 2 |
-| `BS10-074` | SD15 | brave | `UNSUPPORTED_TRIGGER` | triggers: combine, whenBattles; unresolved entries: 2 |
-| `BS11-051` | SD13 | brave | `PARTIAL` | triggers: combine; unresolved entries: 2 |
+| `BS09-015` | SD13 | spirit | `MANUAL` | unresolved entries: 2 |
+| `BS10-074` | SD15 | brave | `MANUAL` | unresolved entries: 2 |
+| `BS11-051` | SD13 | brave | `PARTIAL` | unresolved entries: 2 |
 | `BS11-075` | SD13 | magic | `MANUAL` | unresolved entries: 1 |
 | `BS12-035` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
-| `BS12-037` | SD15 | spirit | `UNSUPPORTED_TRIGGER` | triggers: eitherAttackStep, opponentAttackStep; unresolved entries: 2 |
+| `BS12-037` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
 | `BS12-038` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
-| `BS12-063` | SD13 | nexus | `PARTIAL` | triggers: yourAttackStep; unresolved entries: 1 |
+| `BS12-063` | SD13 | nexus | `PARTIAL` | unresolved entries: 1 |
 | `BS13-002` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-003` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-004` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
@@ -342,124 +352,124 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BSC49-100` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenDiscardedByBlueEffect; unresolved entries: 3 |
 | `BSC49-101` | BSC49 | magic | `MANUAL` | unresolved entries: 2 |
 | `BSC49-102` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenBlueNexusExhausted; unresolved entries: 2 |
-| `BSC49-CP01` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: eitherAttackStep, whenSummonedOrAttacks, whileCardOrSpirit; unresolved entries: 3 |
+| `BSC49-CP01` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenSummonedOrAttacks, whileCardOrSpirit; unresolved entries: 3 |
 | `BSC49-CP02` | BSC49 | nexus | `UNSUPPORTED_TRIGGER` | triggers: onEligibleSummonOrPlacement, whileLevel1; unresolved entries: 4 |
-| `BSC49-CP03` | BSC49 | nexus | `UNSUPPORTED_TRIGGER` | triggers: afterDivineTrust, eitherAttackStep, onEligibleSummonDescendOrPlacement, whileLevel2; unresolved entries: 4 |
-| `BSC49-XV01` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenBlocked; unresolved entries: 3 |
+| `BSC49-CP03` | BSC49 | nexus | `UNSUPPORTED_TRIGGER` | triggers: afterDivineTrust, onEligibleSummonDescendOrPlacement, whileLevel2; unresolved entries: 4 |
+| `BSC49-XV01` | BSC49 | spirit | `MANUAL` | unresolved entries: 3 |
 | `BSC49-XV02` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whileOnField; unresolved entries: 3 |
-| `BSC49-XV03` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whileLevel2Or3, yourAttackStep; unresolved entries: 4 |
+| `BSC49-XV03` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whileLevel2Or3; unresolved entries: 4 |
 | `BSC49-XV04` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: opposingUnitLeavesByYourEffect, yourSpiritLeavesByOpponentEffect; unresolved entries: 3 |
-| `BSC49-XV05` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenDiscardedByGreenOnlyEffect, yourAttackStep; unresolved entries: 3 |
-| `BSC49-XV06` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: opponentMainStep, whenAttacksOrBlocks, whenOpenedFromDeckByGreenEffect, whileLevel3; unresolved entries: 4 |
-| `BSC49-XV07` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: opponentAttackStep, whileLevel2Or3, whileOnField; unresolved entries: 3 |
-| `BSC49-XV08` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenExhaustedEitherAttackStep, whileOnField, yourAttackStep; unresolved entries: 3 |
-| `BSC49-XV09` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: eitherAttackStep, whenDepletedOrDestroyedByOpponent; unresolved entries: 4 |
-| `BSC49-XV10` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: afterCost4PlusMagicResolves, eitherAttackStep, whenOtherEligibleSpiritSummoned; unresolved entries: 3 |
-| `BSC49-XV11` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: eitherAttackStep, whenBravedOrCombinedCardWouldLeave, yourAttackStep; unresolved entries: 3 |
+| `BSC49-XV05` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenDiscardedByGreenOnlyEffect; unresolved entries: 3 |
+| `BSC49-XV06` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenAttacksOrBlocks, whenOpenedFromDeckByGreenEffect, whileLevel3; unresolved entries: 4 |
+| `BSC49-XV07` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whileLevel2Or3, whileOnField; unresolved entries: 3 |
+| `BSC49-XV08` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenExhaustedEitherAttackStep, whileOnField; unresolved entries: 3 |
+| `BSC49-XV09` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenDepletedOrDestroyedByOpponent; unresolved entries: 4 |
+| `BSC49-XV10` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: afterCost4PlusMagicResolves, whenOtherEligibleSpiritSummoned; unresolved entries: 3 |
+| `BSC49-XV11` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenBravedOrCombinedCardWouldLeave; unresolved entries: 3 |
 | `BSC49-XV12` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenAttacksOrBlocks, whenOpponentSpiritUltimateMilled, whileAttackingAndRefreshed; unresolved entries: 4 |
-| `SD02-005` | SD15 | spirit | `UNSUPPORTED_TRIGGER` | triggers: yourAttackStep; unresolved entries: 3 |
+| `SD02-005` | SD15 | spirit | `MANUAL` | unresolved entries: 3 |
 | `SD10-001` | SD10 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD10-002` | SD10 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD10-005` | SD10 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD10-008` | SD10 | spirit | `UNSUPPORTED_TRIGGER` | triggers: yourAttackStep; unresolved entries: 2 |
+| `SD10-008` | SD10 | spirit | `MANUAL` | unresolved entries: 2 |
 | `SD10-009` | SD10 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD10-010` | SD10 | spirit | `PARTIAL` | unresolved entries: 2 |
-| `SD10-011` | SD10 | brave | `PARTIAL` | triggers: combine; unresolved entries: 1 |
-| `SD10-012` | SD10 | nexus | `UNSUPPORTED_TRIGGER` | triggers: eitherAttackStep, yourAttackStep; unresolved entries: 2 |
+| `SD10-011` | SD10 | brave | `PARTIAL` | unresolved entries: 1 |
+| `SD10-012` | SD10 | nexus | `MANUAL` | unresolved entries: 2 |
 | `SD10-013` | SD10 | nexus | `MANUAL` | unresolved entries: 2 |
-| `SD10-015` | SD10 | magic | `UNSUPPORTED_TRIGGER` | triggers: opponentAttackStep; unresolved entries: 1 |
+| `SD10-015` | SD10 | magic | `MANUAL` | unresolved entries: 1 |
 | `SD10-X01` | SD10 | spirit | `PARTIAL` | unresolved entries: 2 |
-| `SD10-X02` | SD10 | brave | `PARTIAL` | triggers: combine; unresolved entries: 3 |
+| `SD10-X02` | SD10 | brave | `PARTIAL` | unresolved entries: 3 |
 | `SD11-001` | SD11 | spirit | `MANUAL` | unresolved entries: 2 |
 | `SD11-004` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD11-005` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD11-006` | SD11 | spirit | `UNSUPPORTED_TRIGGER` | triggers: opponentAttackStep; unresolved entries: 1 |
-| `SD11-007` | SD11 | spirit | `PARTIAL` | triggers: opponentAttackStep; unresolved entries: 1 |
-| `SD11-008` | SD11 | spirit | `UNSUPPORTED_TRIGGER` | triggers: yourAttackStep; unresolved entries: 1 |
-| `SD11-009` | SD11 | spirit | `UNSUPPORTED_TRIGGER` | triggers: afterBPComparison; unresolved entries: 2 |
+| `SD11-006` | SD11 | spirit | `MANUAL` | unresolved entries: 1 |
+| `SD11-007` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
+| `SD11-008` | SD11 | spirit | `MANUAL` | unresolved entries: 1 |
+| `SD11-009` | SD11 | spirit | `MANUAL` | unresolved entries: 2 |
 | `SD11-010` | SD11 | spirit | `MANUAL` | unresolved entries: 3 |
-| `SD11-011` | SD11 | brave | `PARTIAL` | triggers: combine, opponentAttackStep; unresolved entries: 2 |
-| `SD11-012` | SD11 | nexus | `UNSUPPORTED_TRIGGER` | triggers: opponentAttackStep; unresolved entries: 2 |
+| `SD11-011` | SD11 | brave | `PARTIAL` | unresolved entries: 2 |
+| `SD11-012` | SD11 | nexus | `MANUAL` | unresolved entries: 2 |
 | `SD11-013` | SD11 | nexus | `MANUAL` | unresolved entries: 2 |
 | `SD11-014` | SD11 | magic | `MANUAL` | unresolved entries: 2 |
-| `SD11-X01` | SD11 | spirit | `UNSUPPORTED_TRIGGER` | triggers: afterBPComparison, whenBattles; unresolved entries: 3 |
-| `SD11-X02` | SD11 | brave | `UNSUPPORTED_TRIGGER` | triggers: combine; unresolved entries: 3 |
+| `SD11-X01` | SD11 | spirit | `MANUAL` | unresolved entries: 3 |
+| `SD11-X02` | SD11 | brave | `MANUAL` | unresolved entries: 3 |
 | `SD13-002` | SD13 | spirit | `UNSUPPORTED_TRIGGER` | triggers: onOwnLowCostPurpleDestroyedBySpiritEffect; unresolved entries: 1 |
-| `SD13-007` | SD13 | brave | `PARTIAL` | triggers: combine; unresolved entries: 1 |
+| `SD13-007` | SD13 | brave | `PARTIAL` | unresolved entries: 1 |
 | `SD13-X01` | SD13 | spirit | `MANUAL` | unresolved entries: 2 |
 | `SD15-001` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD15-002` | SD15 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenOpponentSpiritBecomesZeroBP; unresolved entries: 2 |
 | `SD15-003` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
-| `SD15-004` | SD15 | spirit | `UNSUPPORTED_TRIGGER` | triggers: battleResolution; unresolved entries: 2 |
-| `SD15-005` | SD15 | spirit | `UNSUPPORTED_TRIGGER` | triggers: opponentAttackStep; unresolved entries: 3 |
-| `SD15-006` | SD15 | brave | `UNSUPPORTED_TRIGGER` | triggers: combine; unresolved entries: 3 |
+| `SD15-004` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
+| `SD15-005` | SD15 | spirit | `MANUAL` | unresolved entries: 3 |
+| `SD15-006` | SD15 | brave | `MANUAL` | unresolved entries: 3 |
 | `SD15-007` | SD15 | magic | `MANUAL` | unresolved entries: 1 |
 | `SD15-008` | SD15 | magic | `MANUAL` | unresolved entries: 2 |
 | `SD15-X01` | SD15 | spirit | `UNSUPPORTED_TRIGGER` | triggers: ownLowCostSpiritDestroyedByOpponentEffect, whenOpponentSpiritBecomesZeroBP; unresolved entries: 3 |
 | `SD17-001` | SD17 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD17-002` | SD17 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD17-003` | SD17 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD17-005` | SD17 | spirit | `UNSUPPORTED_TRIGGER` | triggers: yourAttackStep; unresolved entries: 1 |
+| `SD17-005` | SD17 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD17-006` | SD17 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD17-008` | SD17 | spirit | `MANUAL` | unresolved entries: 2 |
 | `SD17-009` | SD17 | spirit | `MANUAL` | unresolved entries: 2 |
-| `SD17-011` | SD17 | brave | `UNSUPPORTED_TRIGGER` | triggers: combine; unresolved entries: 3 |
-| `SD17-012` | SD17 | nexus | `UNSUPPORTED_TRIGGER` | triggers: yourAttackStep; unresolved entries: 2 |
-| `SD17-013` | SD17 | nexus | `UNSUPPORTED_TRIGGER` | triggers: yourAttackStep, yourEndStep; unresolved entries: 2 |
-| `SD17-X01` | SD17 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenBattles, yourAttackStep; unresolved entries: 3 |
-| `SD17-X02` | SD17 | brave | `PARTIAL` | triggers: combine; unresolved entries: 2 |
+| `SD17-011` | SD17 | brave | `MANUAL` | unresolved entries: 3 |
+| `SD17-012` | SD17 | nexus | `MANUAL` | unresolved entries: 2 |
+| `SD17-013` | SD17 | nexus | `MANUAL` | unresolved entries: 2 |
+| `SD17-X01` | SD17 | spirit | `MANUAL` | unresolved entries: 3 |
+| `SD17-X02` | SD17 | brave | `PARTIAL` | unresolved entries: 2 |
 | `SD19-002` | SD19 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD19-005` | SD19 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD19-007` | SD19 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenBattles; unresolved entries: 1 |
+| `SD19-007` | SD19 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD19-008` | SD19 | ultimate | `MANUAL` | unresolved entries: 2 |
 | `SD19-009` | SD19 | ultimate | `MANUAL` | unresolved entries: 2 |
 | `SD19-010` | SD19 | ultimate | `MANUAL` | unresolved entries: 3 |
-| `SD19-011` | SD19 | nexus | `UNSUPPORTED_TRIGGER` | triggers: opponentAttackStep, yourAttackStep; unresolved entries: 2 |
-| `SD19-012` | SD19 | nexus | `UNSUPPORTED_TRIGGER` | triggers: yourAttackStep; unresolved entries: 2 |
+| `SD19-011` | SD19 | nexus | `MANUAL` | unresolved entries: 2 |
+| `SD19-012` | SD19 | nexus | `MANUAL` | unresolved entries: 2 |
 | `SD19-X01` | SD19 | ultimate | `UNSUPPORTED_TRIGGER` | triggers: whenAttacksFlash; unresolved entries: 3 |
 | `SD20-002` | SD20 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD20-004` | SD20 | spirit | `UNSUPPORTED_TRIGGER` | triggers: opponentAttackStep; unresolved entries: 2 |
+| `SD20-004` | SD20 | spirit | `MANUAL` | unresolved entries: 2 |
 | `SD20-005` | SD20 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD20-007` | SD20 | spirit | `MANUAL` | unresolved entries: 2 |
 | `SD20-008` | SD20 | ultimate | `MANUAL` | unresolved entries: 2 |
 | `SD20-009` | SD20 | ultimate | `MANUAL` | unresolved entries: 2 |
-| `SD20-010` | SD20 | ultimate | `UNSUPPORTED_TRIGGER` | triggers: yourEndStep; unresolved entries: 3 |
-| `SD20-011` | SD20 | nexus | `UNSUPPORTED_TRIGGER` | triggers: opponentAttackStep; unresolved entries: 2 |
-| `SD20-012` | SD20 | nexus | `UNSUPPORTED_TRIGGER` | triggers: opponentAttackStep, whenYourSpiritOrUltimateDestroyed; unresolved entries: 2 |
-| `SD20-X01` | SD20 | ultimate | `UNSUPPORTED_TRIGGER` | triggers: yourEndStep; unresolved entries: 4 |
+| `SD20-010` | SD20 | ultimate | `MANUAL` | unresolved entries: 3 |
+| `SD20-011` | SD20 | nexus | `MANUAL` | unresolved entries: 2 |
+| `SD20-012` | SD20 | nexus | `UNSUPPORTED_TRIGGER` | triggers: whenYourSpiritOrUltimateDestroyed; unresolved entries: 2 |
+| `SD20-X01` | SD20 | ultimate | `MANUAL` | unresolved entries: 4 |
 | `SD23-001` | SD23 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenDestroyedByOpponent; unresolved entries: 1 |
-| `SD23-002` | SD23 | spirit | `UNSUPPORTED_TRIGGER` | triggers: battleResolution; unresolved entries: 1 |
+| `SD23-002` | SD23 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD23-003` | SD23 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD23-004` | SD23 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD23-005` | SD23 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD23-006` | SD23 | spirit | `UNSUPPORTED_TRIGGER` | triggers: eitherAttackStep, opponentAttackStep; unresolved entries: 2 |
-| `SD23-007` | SD23 | spirit | `UNSUPPORTED_TRIGGER` | triggers: battleResolution; unresolved entries: 2 |
+| `SD23-006` | SD23 | spirit | `MANUAL` | unresolved entries: 2 |
+| `SD23-007` | SD23 | spirit | `MANUAL` | unresolved entries: 2 |
 | `SD23-008` | SD23 | ultimate | `MANUAL` | unresolved entries: 2 |
-| `SD23-009` | SD23 | ultimate | `UNSUPPORTED_TRIGGER` | triggers: whenBattles; unresolved entries: 3 |
-| `SD23-010` | SD23 | ultimate | `UNSUPPORTED_TRIGGER` | triggers: whenBattles; unresolved entries: 3 |
-| `SD23-011` | SD23 | nexus | `UNSUPPORTED_TRIGGER` | triggers: eitherAttackStep, ownDivineSpiritReturnedByOpponent; unresolved entries: 2 |
+| `SD23-009` | SD23 | ultimate | `MANUAL` | unresolved entries: 3 |
+| `SD23-010` | SD23 | ultimate | `MANUAL` | unresolved entries: 3 |
+| `SD23-011` | SD23 | nexus | `UNSUPPORTED_TRIGGER` | triggers: ownDivineSpiritReturnedByOpponent; unresolved entries: 2 |
 | `SD23-012` | SD23 | magic | `MANUAL` | unresolved entries: 1 |
 | `SD23-013` | SD23 | magic | `UNSUPPORTED_TRIGGER` | triggers: afterOpponentDestroysYourSpirit; unresolved entries: 2 |
 | `SD23-014` | SD23 | magic | `MANUAL` | unresolved entries: 2 |
 | `SD23-015` | SD23 | magic | `MANUAL` | unresolved entries: 1 |
 | `SD23-016` | SD23 | magic | `MANUAL` | unresolved entries: 1 |
-| `SD23-X01` | SD23 | ultimate | `PARTIAL` | triggers: whenBattles; unresolved entries: 3 |
+| `SD23-X01` | SD23 | ultimate | `PARTIAL` | unresolved entries: 3 |
 | `SD28-001` | SD28 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD28-002` | SD28 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD28-003` | SD28 | spirit | `PARTIAL` | triggers: shellmanUltimateBattle; unresolved entries: 1 |
-| `SD28-004` | SD28 | spirit | `UNSUPPORTED_TRIGGER` | triggers: eitherAttackStep; unresolved entries: 2 |
-| `SD28-005` | SD28 | spirit | `UNSUPPORTED_TRIGGER` | triggers: eitherAttackStep; unresolved entries: 1 |
-| `SD28-006` | SD28 | spirit | `PARTIAL` | triggers: yourAttackStep; unresolved entries: 2 |
+| `SD28-004` | SD28 | spirit | `MANUAL` | unresolved entries: 2 |
+| `SD28-005` | SD28 | spirit | `MANUAL` | unresolved entries: 1 |
+| `SD28-006` | SD28 | spirit | `PARTIAL` | unresolved entries: 2 |
 | `SD28-007` | SD28 | ultimate | `MANUAL` | unresolved entries: 3 |
-| `SD28-008` | SD28 | ultimate | `PARTIAL` | triggers: whenBattles; unresolved entries: 3 |
+| `SD28-008` | SD28 | ultimate | `PARTIAL` | unresolved entries: 3 |
 | `SD28-009` | SD28 | ultimate | `PARTIAL` | unresolved entries: 1 |
-| `SD28-010` | SD28 | brave | `UNSUPPORTED_TRIGGER` | triggers: combine, whenBattles; unresolved entries: 3 |
-| `SD28-011` | SD28 | brave | `PARTIAL` | triggers: combine; unresolved entries: 3 |
-| `SD28-012` | SD28 | nexus | `UNSUPPORTED_TRIGGER` | triggers: eitherAttackStep, opponentAttackStep; unresolved entries: 2 |
+| `SD28-010` | SD28 | brave | `MANUAL` | unresolved entries: 3 |
+| `SD28-011` | SD28 | brave | `PARTIAL` | unresolved entries: 3 |
+| `SD28-012` | SD28 | nexus | `MANUAL` | unresolved entries: 2 |
 | `SD28-014` | SD28 | magic | `UNSUPPORTED_TRIGGER` | triggers: opponentHandIncrease; unresolved entries: 2 |
 | `SD28-015` | SD28 | magic | `MANUAL` | unresolved entries: 1 |
-| `SD28-X01` | SD28 | ultimate | `UNSUPPORTED_TRIGGER` | triggers: ownSpiritOrUltimateDestroyedByOpponent, whenBattles; unresolved entries: 3 |
-| `SD28-X02` | SD28 | brave | `UNSUPPORTED_TRIGGER` | triggers: combine, whenBattles; unresolved entries: 4 |
+| `SD28-X01` | SD28 | ultimate | `UNSUPPORTED_TRIGGER` | triggers: ownSpiritOrUltimateDestroyedByOpponent; unresolved entries: 3 |
+| `SD28-X02` | SD28 | brave | `MANUAL` | unresolved entries: 4 |
 
 ## Phase 4 input
 

@@ -6,6 +6,32 @@ const PATCHES = [
   {
     version: "5.0.3",
     date: { pt: "28/09/2026", en: "09/28/2026" },
+    title: { pt: "Automação de Magic, Burst e Brave", en: "Magic, Burst & Brave Automation" },
+    summary: {
+      pt: "O motor de regras agora conclui escolhas de Magic antes do descarte, abre mais janelas automáticas de Burst e integra melhor os efeitos herdados de Braves combinados.",
+      en: "The rules engine now completes Magic choices before discard, opens more automatic Burst windows and better integrates effects inherited from combined Braves."
+    },
+    sections: [
+      {
+        title: { pt: "Regras automatizadas", en: "Automated rules" },
+        items: {
+          pt: [
+            "Magic com escolhas estruturadas permanece em resolução até a decisão terminar e só então vai ao Trash.",
+            "Burst agora pode reconhecer automaticamente redução de Life, invocação do oponente, uso de Magic do oponente e destruição de Spirit próprio.",
+            "Braves combinados passaram a disparar timings próprios de combinação e compartilhar o contexto correto com o Spirit ou Ultimate hospedeiro."
+          ],
+          en: [
+            "Magic with structured choices remains in resolution until the decision is complete and only then moves to Trash.",
+            "Burst can now automatically recognize Life decrease, opponent summon, opponent Magic use and destruction of your own Spirit.",
+            "Combined Braves now dispatch dedicated combine timings and share the correct context with their Spirit or Ultimate host."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "28/09/2026", en: "09/28/2026" },
     title: { pt: "Todos os Decks no Onboarding", en: "All Decks in Onboarding" },
     summary: {
       pt: "A seleção inicial de 3 decks agora espelha automaticamente todos os decks ativos da Loja.",

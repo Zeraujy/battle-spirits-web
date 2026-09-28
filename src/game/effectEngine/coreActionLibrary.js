@@ -49,7 +49,11 @@ const ACTION_ALIASES = Object.freeze({
   losekeyword: "loseKeyword",
   addmodifier: "addModifier",
   registermodifier: "addModifier",
-  removemodifier: "removeModifier"
+  removemodifier: "removeModifier",
+  preventevent: "preventEvent",
+  replaceevent: "replaceEvent",
+  replacedesctruction: "replaceEvent",
+  replacedestruction: "replaceEvent"
 });
 
 export const CoreActionType = Object.freeze({
@@ -79,7 +83,9 @@ export const CoreActionType = Object.freeze({
   GAIN_KEYWORD: "gainKeyword",
   LOSE_KEYWORD: "loseKeyword",
   ADD_MODIFIER: "addModifier",
-  REMOVE_MODIFIER: "removeModifier"
+  REMOVE_MODIFIER: "removeModifier",
+  PREVENT_EVENT: "preventEvent",
+  REPLACE_EVENT: "replaceEvent"
 });
 
 const SUPPORTED_ACTION_TYPES = new Set([
@@ -107,6 +113,8 @@ const SUPPORTED_ACTION_TYPES = new Set([
   "loseKeyword",
   "addModifier",
   "removeModifier",
+  "preventEvent",
+  "replaceEvent",
   "refresh",
   "exhaust",
   "destroy",

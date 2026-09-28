@@ -2,7 +2,7 @@ import { calculateReduction, autoBuildPayment } from "./cost.js";
 import { payCoreCost } from "./cores.js";
 import { findPhysicalCard, getDatabaseCard } from "./selectors.js";
 import { removeHandCard, removeFieldCard, updateFieldCard, addFieldCard } from "./zones.js";
-import { appendLog, otherPlayerId } from "./utils.js";
+import { appendLog } from "./utils.js";
 import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
 import { getTriggeredEntries } from "./effectEngine/normalizer.js";
 import { manualMoveCard } from "./manualMove.js";
@@ -11,6 +11,8 @@ import {
   getBurstActivationEvent,
   isBurstCard
 } from "./burstRules.js";
+import { stageMagicResolution, finalizePendingMagicResolution } from "./effectEngine/magicAutomation.js";
+import { BurstEvent, openBurstOpportunityForEvent } from "./effectEngine/burstEngine.js";
 
 
 function magicTimingAvailable(card, mode) {
@@ -57,9 +59,9 @@ export function useMagic(match, playerId, instanceId, cardIndex, { mode = "main"
     if (!paid.ok) return paid;
   }
 
-  let player = paid.match.players[playerId];
-  const removed = removeHandCard(player, instanceId);
+  const removed = removeHandCard(paid.match.players[playerId], instanceId);
   let next = { ...paid.match, players: { ...paid.match.players, [playerId]: removed.player } };
+  next = stageMagicResolution(next, { playerId, physical: removed.card, card, mode });
   const event = mode === "main" ? "magicMain" : "magicFlash";
   const engine = dispatchEffectEvent(next, {
     event,
@@ -69,25 +71,10 @@ export function useMagic(match, playerId, instanceId, cardIndex, { mode = "main"
     sourceCardId: card.id
   }, cardIndex);
   next = engine.match;
-
-  player = next.players[playerId];
-  player = { ...player, trash: [...player.trash, { ...removed.card, cores: { regular: 0, soul: false } }] };
-  next = { ...next, players: { ...next.players, [playerId]: player } };
+  next = openBurstOpportunityForEvent(next, BurstEvent.OPPONENT_USED_MAGIC, playerId, cardIndex, { sourcePlayerId: playerId, sourceInstanceId: instanceId });
+  if (!next.pendingEffectDecision) next = finalizePendingMagicResolution(next, cardIndex);
+  const player = next.players[playerId];
   next = appendLog(next, `${player.name} usou ${card.namePT || card.nameEN || card.id} (${mode}).`, "effect");
-
-  if (mode === "flash" && next.battle?.flash) {
-    next = {
-      ...next,
-      battle: {
-        ...next.battle,
-        flash: {
-          ...next.battle.flash,
-          consecutivePasses: 0,
-          priorityPlayerId: otherPlayerId(next, playerId)
-        }
-      }
-    };
-  }
 
   return {
     ok: true,
@@ -177,10 +164,10 @@ export function activateBurst(match, playerId, cardIndex, { confirmCondition = f
   const card = getDatabaseCard(cardIndex, physical);
   const event = getBurstActivationEvent(card);
   const automaticCondition = burstConditionIsAutomaticallySatisfied(match, playerId, cardIndex);
-  if (event === "burstLifeDecrease" && !automaticCondition) {
-    return { ok: false, error: "Esta Burst só pode ser ativada na janela aberta após sua Life diminuir." };
+  if (event !== "burst" && !automaticCondition) {
+    return { ok: false, error: "A condição automática desta Burst não está ativa." };
   }
-  if (event !== "burstLifeDecrease" && !confirmCondition) {
+  if (event === "burst" && !confirmCondition) {
     return { ok: false, error: "Confirme que a condição oficial da Burst foi cumprida." };
   }
 

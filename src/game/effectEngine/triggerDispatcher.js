@@ -8,10 +8,30 @@ import {
   getTriggeredEntries
 } from "./normalizer.js";
 import { EffectTriggerScope, isEffectSchemaV2 } from "./effectSchema.js";
-import { normalizeCanonicalEvent } from "./canonicalEvents.js";
+import { EffectEvent, compactEventName, normalizeCanonicalEvent } from "./canonicalEvents.js";
 import { conditionMatchesEffect } from "./conditionEngine.js";
 import { reconcileContinuousModifierConditions } from "./modifierResolver.js";
 
+
+const AMBIENT_LEGACY_EVENTS = new Set([
+  EffectEvent.START_STEP,
+  EffectEvent.CORE_STEP,
+  EffectEvent.DRAW_STEP,
+  EffectEvent.REFRESH_STEP,
+  EffectEvent.MAIN_STEP,
+  EffectEvent.ATTACK_STEP,
+  EffectEvent.END_STEP,
+  EffectEvent.LIFE_DECREASED
+]);
+
+function legacyAmbientRelationMatches(entry, controllerId, eventPlayerId) {
+  const raw = compactEventName(entry?.event || entry?.timing || entry?.trigger?.event || entry?.type || "");
+  if (!raw || !eventPlayerId) return true;
+  if (raw.startsWith("your")) return controllerId === eventPlayerId;
+  if (raw.startsWith("opponent")) return controllerId !== eventPlayerId;
+  if (raw.startsWith("either")) return true;
+  return controllerId === eventPlayerId;
+}
 function eventInput(input = {}) {
   const eventPlayerId = input.eventPlayerId || input.sourcePlayerId || input.context?.eventPlayerId || null;
   return {
@@ -34,13 +54,13 @@ function sourceDispatchInput(input) {
   };
 }
 
-function observerDispatchInput(input, playerId, physical) {
+function observerDispatchInput(input, playerId, physical, dispatchMode = "observerV2") {
   return {
     event: input.event,
     sourcePlayerId: playerId,
     sourceInstanceId: physical.instanceId,
     sourcePhysical: physical,
-    dispatchMode: "observerV2",
+    dispatchMode,
     context: {
       ...(input.context || {}),
       eventPlayerId: input.context?.eventPlayerId || null,
@@ -75,15 +95,23 @@ function observerCandidates(match, input, cardIndex) {
         sourceCard: card,
         eventPlayerId: input.context?.eventPlayerId || null
       };
-      const entries = getTriggeredEntries(card, event, { dispatchMode: "observerV2" })
+      const v2Entries = getTriggeredEntries(card, event, { dispatchMode: "observerV2" })
         .filter(({ entry }) => getEntryTriggerScope(entry) === EffectTriggerScope.CONTROLLER_FIELD)
         .filter(({ entry }) => entryMatchesTriggerContext(entry, context, match));
-      if (!entries.length) continue;
+      if (v2Entries.length) {
+        out.push(observerDispatchInput(input, playerId, physical, "observerV2"));
+        continue;
+      }
 
-      // Source-scoped effects are handled by the first dispatch. Observer-scoped
-      // effects may legally live on the same physical card, so they are not
-      // excluded here.
-      out.push(observerDispatchInput(input, playerId, physical));
+      // Step/phase events historically lived as source-style legacy entries even
+      // though there is no source card for a phase transition. Phase 12 treats
+      // these as ambient battlefield observations while preserving relationship
+      // words such as your/opponent/either.
+      if (AMBIENT_LEGACY_EVENTS.has(event)) {
+        const legacyEntries = getTriggeredEntries(card, event, { dispatchMode: "observerLegacy" })
+          .filter(({ entry }) => legacyAmbientRelationMatches(entry, playerId, input.context?.eventPlayerId || null));
+        if (legacyEntries.length) out.push(observerDispatchInput(input, playerId, physical, "observerLegacy"));
+      }
     }
   }
   return out;

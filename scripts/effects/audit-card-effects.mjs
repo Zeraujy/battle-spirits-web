@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { supportsActionType } from "../../src/game/effectEngine/actionResolver.js";
+import { listSupportedCoreActionTypes } from "../../src/game/effectEngine/coreActionLibrary.js";
 import {
   CANONICAL_EVENT_VALUES,
   EffectEvent,
@@ -302,7 +303,7 @@ function percent(value, total) {
 function markdown(report) {
   const { summary, cards } = report;
   const lines = [];
-  lines.push("# Card Effect Coverage — v5.1.0 Foundation (Phase 0–9)");
+  lines.push("# Card Effect Coverage — v5.1.0 Foundation (Phase 0–12)");
   lines.push("");
   lines.push("> Scope: runtime gameplay catalog (`src/data/cards.json`). Artwork-only/public database records that are not loaded into the gameplay catalog are intentionally excluded.");
   lines.push("");
@@ -366,13 +367,16 @@ function markdown(report) {
   lines.push(`- Unsupported action types: ${actionRows.length ? actionRows.map(([name, count]) => `\`${name}\` (${count})`).join(", ") : "none"}`);
   lines.push(`- Unsupported condition forms: ${conditionRows.length ? conditionRows.map(([name, count]) => `\`${name}\` (${count})`).join(", ") : "none"}`);
   lines.push("");
-  lines.push("## Foundation additions — Phases 7–9");
+  lines.push("## Foundation additions — Phases 7–12");
   lines.push("");
-  lines.push("- Core Action Library is centralized and currently exposes **43 generic action types** to Schema v2.");
+  lines.push(`- Core Action Library is centralized and currently exposes **${listSupportedCoreActionTypes().length} generic action types** to Schema v2.`);
   lines.push("- Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.");
   lines.push("- Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.");
   lines.push("- Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.");
   lines.push("- `continuous` is now runtime-dispatched for explicit Schema v2 source effects on Summon/Deploy; legacy continuous text remains untouched until migrated.");
+  lines.push("- Replacement/prevention windows now cover `wouldBeDestroyed` and `wouldLoseLife` with declarative `preventEvent` / `replaceEvent` actions.");
+  lines.push("- Battle flow now dispatches `whenBlocked`, `whenBattles`, `beforeBattleResolution`, `afterBattleResolution`, and `lifeDecreased` with normalized battle context.");
+  lines.push("- All seven turn phases now dispatch canonical step events; legacy `your/opponent/either` step timings have a narrow ambient compatibility path.");
   lines.push("");
   lines.push("## Canonical Event Model — Phase 1");
   lines.push("");

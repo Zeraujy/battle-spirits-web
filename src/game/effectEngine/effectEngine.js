@@ -4,6 +4,7 @@ import { entryConditionsMatch } from "./conditionResolver.js";
 import { entryMatchesTriggerContext, getEntryActions, getTriggeredEntries, normalizeEventName } from "./normalizer.js";
 import { resolveActionList } from "./actionResolver.js";
 import { drainEffectQueue, enqueueEffectEvents, markEffectQueueWaiting } from "./effectQueue.js";
+import { finalizePendingMagicResolution } from "./magicAutomation.js";
 
 function sourceContext(match, cardIndex, input = {}) {
   const found = input.sourceInstanceId ? findPhysicalCard(match, input.sourceInstanceId) : null;
@@ -328,6 +329,10 @@ export function resolveEffectDecision(match, actorId, payload = {}, cardIndex) {
   } else {
     const drainedQueue = drainEffectQueue(next, (working, item) => resolveCardEvent(working, item.payload, cardIndex));
     next = drainedQueue.match;
+  }
+
+  if (!next.pendingEffectDecision && next.pendingMagicResolution) {
+    next = finalizePendingMagicResolution(next, cardIndex);
   }
 
   if (!next.pendingEffectDecision) {

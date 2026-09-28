@@ -3,6 +3,7 @@ import { appendLog, otherPlayerId } from "./utils.js";
 import { clearEffectModifiers } from "./effectEngine/modifierResolver.js";
 import { createSeededRandom, deriveSeed } from "./random.js";
 import { shuffle } from "./utils.js";
+import { dispatchPhaseEntry } from "./effectEngine/phaseTriggerEngine.js";
 
 export function isFirstPlayersFirstTurn(match) {
   return match.turnNumber === 1 && match.activePlayerId === match.firstPlayerId;
@@ -62,7 +63,7 @@ function performPhaseEntry(match, phase) {
   return match;
 }
 
-export function advancePhase(match, actorId) {
+export function advancePhase(match, actorId, cardIndex) {
   if (match.winnerId) return { ok: false, error: "A partida já terminou." };
   if (actorId !== match.activePlayerId) return { ok: false, error: "Apenas o jogador do turno pode avançar a fase." };
   if (match.battle) return { ok: false, error: "Resolva a batalha atual antes de avançar a fase." };
@@ -89,16 +90,20 @@ export function advancePhase(match, actorId) {
     };
     next = clearEffectModifiers(next, "turn");
     next = performPhaseEntry(next, "start");
+    const phaseEvent = dispatchPhaseEntry(next, "start", cardIndex, { previousPhase: "end", turnStarted: true, eventPlayerId: nextPlayerId });
+    next = phaseEvent.match;
     next = appendLog(next, `Turno ${next.turnNumber}: ${next.players[nextPlayerId].name}.`, "turn");
-    return { ok: true, match: next };
+    return { ok: true, match: next, manualResolutionNeeded: Boolean(phaseEvent.manualResolutionNeeded), notes: phaseEvent.notes || [] };
   }
 
   let nextPhase = PHASES[index + 1];
   if (nextPhase === "attack" && isFirstPlayersFirstTurn(match)) nextPhase = "end";
   next = { ...match, phase: nextPhase };
   next = performPhaseEntry(next, nextPhase);
+  const phaseEvent = dispatchPhaseEntry(next, nextPhase, cardIndex, { previousPhase: match.phase, eventPlayerId: next.activePlayerId });
+  next = phaseEvent.match;
   next = appendLog(next, `${next.players[next.activePlayerId].name}: ${nextPhase}.`, "turn");
-  return { ok: true, match: next };
+  return { ok: true, match: next, manualResolutionNeeded: Boolean(phaseEvent.manualResolutionNeeded), notes: phaseEvent.notes || [] };
 }
 
 export function mulligan(match, playerId) {

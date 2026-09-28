@@ -70,7 +70,7 @@ export function applyGameAction(match, action, actorId, cardIndex) {
   let result;
 
   switch (action.type) {
-    case "ADVANCE_PHASE": result = advancePhase(match, actorId); break;
+    case "ADVANCE_PHASE": result = advancePhase(match, actorId, cardIndex); break;
     case "MULLIGAN": result = mulligan(match, actorId); break;
     case "BEGIN_MANUAL_PLAY": result = beginManualPlay(match, actorId, action.instanceId, cardIndex, action.options || {}); break;
     case "BEGIN_MANUAL_COST": result = beginManualCost(match, actorId, action.instanceId, cardIndex, action.options || {}); break;

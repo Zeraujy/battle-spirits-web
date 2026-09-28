@@ -34,3 +34,11 @@ Execute `npm run project:check` antes de qualquer publicação.
 ## v5.0.3 Starter Deck Purchase Fix
 
 Authenticated deck purchases now route through deck contents/recipes correctly. Apply `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` to existing Supabase projects.
+
+
+## v5.1.0 Development — Effect Engine Phase 10–12
+- Replacement/prevention windows added for destruction and Life loss.
+- Battle triggers now dispatch `whenBlocked`, `whenBattles`, pre/post battle resolution and Life-decrease events.
+- Canonical Start/Core/Draw/Refresh/Main/Attack/End step events are emitted by the turn flow.
+- Internal app version remains 5.0.3 until the v5.1.0 release is promoted.
+- Phase 10–12 tests: 34/34. Global regression: 229/229.

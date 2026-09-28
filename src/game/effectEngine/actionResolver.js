@@ -10,6 +10,7 @@ import {
 } from "./modifierResolver.js";
 import { canonicalActionType, supportsCoreActionType } from "./coreActionLibrary.js";
 import { collectTrashTargets, resolveActionTargets } from "./targetResolver.js";
+import { preventReplacementEvent, replaceCurrentEvent } from "./replacementState.js";
 
 export function supportsActionType(type) {
   return supportsCoreActionType(type);
@@ -259,6 +260,24 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
   let next = match;
 
   if (!type) return { match, notes: ["Operação sem tipo estruturado."], manualResolutionNeeded: true, executed: false };
+
+  if (type === "preventEvent") {
+    if (!next.replacementWindow) return { match: next, notes: ["preventEvent requires an active replacement window."], manualResolutionNeeded: true, executed: false };
+    next = preventReplacementEvent(next, { sourceEffectId: context.effectId, sourceInstanceId: context.sourceInstanceId });
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "replaceEvent") {
+    if (!next.replacementWindow) return { match: next, notes: ["replaceEvent requires an active replacement window."], manualResolutionNeeded: true, executed: false };
+    const replacement = {
+      type: action.replacementType || action.with || action.replacement || "move",
+      destination: action.destination || action.to || null,
+      amount: action.amount == null ? null : Number(action.amount),
+      metadata: action.metadata || null
+    };
+    next = replaceCurrentEvent(next, replacement, { sourceEffectId: context.effectId, sourceInstanceId: context.sourceInstanceId });
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
 
   if (type === "draw") {
     const playerId = resolvePlayerId(next, action, context);

@@ -75,6 +75,9 @@ export function getTriggeredEntries(card, event, options = {}) {
     if (dispatchMode === "observerV2") {
       return isEffectSchemaV2(entry) && getEntryTriggerScope(entry) !== EffectTriggerScope.SOURCE;
     }
+    if (dispatchMode === "observerLegacy") {
+      return !isEffectSchemaV2(entry);
+    }
     return true;
   });
 

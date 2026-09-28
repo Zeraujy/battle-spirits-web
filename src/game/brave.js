@@ -1,6 +1,7 @@
 import { findPhysicalCard, getDatabaseCard, getCurrentLevel } from "./selectors.js";
 import { updateFieldCard, removeFieldCard } from "./zones.js";
 import { appendLog } from "./utils.js";
+import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
 
 function minimumBraveCores(card) {
   const levels = (card?.levels || [])
@@ -288,7 +289,11 @@ export function combineBrave(match, playerId, braveInstanceId, hostInstanceId, c
   let next = { ...match, players: { ...match.players, [playerId]: player } };
   const manualNote = evaluation.manual ? " (condição confirmada manualmente)" : "";
   next = appendLog(next, `${braveCard.namePT || braveCard.nameEN || braveCard.id} foi combinado${manualNote}.`, "action");
-  return { ok: true, match: next };
+  const braved = dispatchEffectEvent(next, { event: "whenBraved", sourcePlayerId: playerId, sourceInstanceId: braveInstanceId, context: { isCombined: true, combinedHostInstanceId: hostInstanceId } }, cardIndex);
+  next = braved.match;
+  const combined = dispatchEffectEvent(next, { event: "whenCombined", sourcePlayerId: playerId, sourceInstanceId: hostInstanceId, context: { braveInstanceId } }, cardIndex);
+  next = combined.match;
+  return { ok: true, match: next, manualResolutionNeeded: braved.manualResolutionNeeded || combined.manualResolutionNeeded, notes: [...(braved.notes || []), ...(combined.notes || [])] };
 }
 
 export function exchangeBrave(match, playerId, braveInstanceId, newHostInstanceId, cardIndex, options = {}) {

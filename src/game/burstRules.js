@@ -30,7 +30,8 @@ export function getBurstActivationEvent(card) {
     if (event && event.toLowerCase().includes("burst")) candidates.push(event);
   }
 
-  if (candidates.includes("burstLifeDecrease")) return "burstLifeDecrease";
+  const priority = ["burstLifeDecrease", "burstOpponentSummon", "burstOpponentMagic", "burstOwnSpiritDestroyed"];
+  for (const event of priority) if (candidates.includes(event)) return event;
   return "burst";
 }
 
@@ -60,7 +61,7 @@ export function burstConditionIsAutomaticallySatisfied(match, playerId, cardInde
   if (!player?.burst) return false;
   const card = getDatabaseCard(cardIndex, player.burst);
   const event = getBurstActivationEvent(card);
-  if (event !== "burstLifeDecrease") return false;
+  if (event === "burst") return false;
   return Boolean(match.burstOpportunity?.playerId === playerId && match.burstOpportunity?.event === event);
 }
 

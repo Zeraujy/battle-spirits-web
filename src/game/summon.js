@@ -6,6 +6,7 @@ import { appendLog } from "./utils.js";
 import { conditionMatches } from "./brave.js";
 import { checkSummoningCondition } from "./specialRules.js";
 import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
+import { BurstEvent, openBurstOpportunityForEvent } from "./effectEngine/burstEngine.js";
 
 function minimumCores(card) {
   if (card.cardType === "nexus") return 0;
@@ -101,7 +102,12 @@ export function summonFromHand(match, playerId, instanceId, cardIndex, options =
     let next = appendLog({ ...paid.match, players: { ...paid.match.players, [playerId]: player } }, `${player.name} invocou ${card.namePT || card.nameEN || card.id} em Direct Combine.`, "action");
     const engine = dispatchEffectEvent(next, { event: "whenSummoned", sourcePlayerId: playerId, sourceInstanceId: physical.instanceId }, cardIndex);
     next = engine.match;
-    return { ok: true, match: next, manualResolutionNeeded: engine.manualResolutionNeeded, notes: engine.notes };
+    next = openBurstOpportunityForEvent(next, BurstEvent.OPPONENT_SUMMONED, playerId, cardIndex, { sourcePlayerId: playerId, sourceInstanceId: physical.instanceId });
+    const braved = dispatchEffectEvent(next, { event: "whenBraved", sourcePlayerId: playerId, sourceInstanceId: physical.instanceId, context: { isCombined: true, combinedHostInstanceId: directHostId } }, cardIndex);
+    next = braved.match;
+    const combined = dispatchEffectEvent(next, { event: "whenCombined", sourcePlayerId: playerId, sourceInstanceId: directHostId, context: { braveInstanceId: physical.instanceId } }, cardIndex);
+    next = combined.match;
+    return { ok: true, match: next, manualResolutionNeeded: engine.manualResolutionNeeded || braved.manualResolutionNeeded || combined.manualResolutionNeeded, notes: [...engine.notes, ...braved.notes, ...combined.notes] };
   }
 
   const min = minimumCores(card);
@@ -125,6 +131,7 @@ export function summonFromHand(match, playerId, instanceId, cardIndex, options =
   next = appendLog(next, `${player.name} invocou ${card.namePT || card.nameEN || card.id}.`, "action");
   const engine = dispatchEffectEvent(next, { event: "whenSummoned", sourcePlayerId: playerId, sourceInstanceId: physical.instanceId }, cardIndex);
   next = engine.match;
+  next = openBurstOpportunityForEvent(next, BurstEvent.OPPONENT_SUMMONED, playerId, cardIndex, { sourcePlayerId: playerId, sourceInstanceId: physical.instanceId });
   return { ok: true, match: next, manualResolutionNeeded: engine.manualResolutionNeeded, notes: engine.notes };
 }
 

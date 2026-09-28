@@ -16,6 +16,8 @@ test("canonical events preserve current runtime aliases", () => {
 
 test("canonical model distinguishes defined events from runtime-dispatched events", () => {
   assert.equal(isCanonicalEvent("whenBattles"), true);
-  assert.equal(isRuntimeDispatchedEvent("whenBattles"), false);
+  assert.equal(isRuntimeDispatchedEvent("whenBattles"), true);
   assert.equal(isRuntimeDispatchedEvent("whenSummoned"), true);
+  assert.equal(isRuntimeDispatchedEvent("attackStep"), true);
+  assert.equal(isRuntimeDispatchedEvent("wouldBeDestroyed"), true);
 });

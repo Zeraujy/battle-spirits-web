@@ -32,6 +32,8 @@
             "whenBattles",
             "whenBlocked",
             "whenDestroyed",
+            "wouldLoseLife",
+            "wouldBeDestroyed",
             "beforeBattleResolution",
             "afterBattleResolution",
             "lifeDecreased",
