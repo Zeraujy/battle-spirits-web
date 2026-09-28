@@ -59,7 +59,8 @@
         "text": {
           "en": "Your BP-destruction effect limits are increased by 1000.",
           "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
-        }
+        },
+        "automationRef": "sd10-001-charge"
       }
     ],
     "abilities": [
@@ -132,7 +133,8 @@
         "text": {
           "en": "This Spirit gains +2000 BP for the battle.",
           "ptBR": "Este Spirit recebe +2000 BP durante a batalha."
-        }
+        },
+        "automationRef": "sd10-002-attack"
       },
       {
         "id": "sd10-002-charge-display",
@@ -148,7 +150,8 @@
         "text": {
           "en": "Your BP-destruction effect limits are increased by 1000.",
           "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
-        }
+        },
+        "automationRef": "sd10-002-charge"
       }
     ],
     "abilities": [
@@ -240,7 +243,8 @@
         "text": {
           "en": "Draw 1 card.",
           "ptBR": "Compre 1 carta."
-        }
+        },
+        "automationRef": "sd10-003-attack-draw"
       }
     ],
     "abilities": [
@@ -318,7 +322,8 @@
         "text": {
           "en": "Destroy 1 opposing Spirit with 4000 BP or less.",
           "ptBR": "Destrua 1 Spirit do oponente com 4000 BP ou menos."
-        }
+        },
+        "automationRef": "sd10-004-destroyed"
       }
     ],
     "abilities": [
@@ -411,7 +416,8 @@
         "text": {
           "en": "Your BP-destruction effect limits are increased by 1000.",
           "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
-        }
+        },
+        "automationRef": "sd10-005-charge"
       }
     ],
     "abilities": [
@@ -542,7 +548,8 @@
         "text": {
           "en": "Destroy 1 opposing Spirit with 3000 BP or less.",
           "ptBR": "Destrua 1 Spirit do oponente com 3000 BP ou menos."
-        }
+        },
+        "automationRef": "sd10-007-attack"
       }
     ],
     "abilities": [
@@ -645,7 +652,8 @@
         "text": {
           "en": "Your BP-destruction effect limits are increased by 1000.",
           "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
-        }
+        },
+        "automationRef": "sd10-008-charge"
       }
     ],
     "abilities": [
@@ -723,7 +731,8 @@
         "text": {
           "en": "Return 1 Astral Dragon Spirit/Brave card from your Trash to your hand.",
           "ptBR": "Devolva 1 carta de Spirit/Brave da família Astral Dragon do seu Trash para a sua mão."
-        }
+        },
+        "automationRef": "sd10-009-summon"
       },
       {
         "id": "sd10-009-charge-display",
@@ -739,7 +748,8 @@
         "text": {
           "en": "Your BP-destruction effect limits are increased by 1000.",
           "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
-        }
+        },
+        "automationRef": "sd10-009-charge"
       }
     ],
     "abilities": [
@@ -843,7 +853,8 @@
         "text": {
           "en": "Destroy up to 2 opposing Spirits with 4000 BP or less.",
           "ptBR": "Destrua até 2 Spirits do oponente com 4000 BP ou menos."
-        }
+        },
+        "automationRef": "sd10-010-summon"
       },
       {
         "id": "sd10-010-when-attacks-display",
@@ -957,7 +968,8 @@
         "text": {
           "en": "Destroy 1 opposing Nexus.",
           "ptBR": "Destrua 1 Nexus do oponente."
-        }
+        },
+        "automationRef": "sd10-011-summon"
       },
       {
         "id": "sd10-011-combine-condition-display",
@@ -985,7 +997,8 @@
         "text": {
           "en": "Destroy 1 opposing Spirit with 3000 BP or less.",
           "ptBR": "Destrua 1 Spirit do oponente com 3000 BP ou menos."
-        }
+        },
+        "automationRef": "sd10-011-combined-attack"
       }
     ],
     "abilities": [
@@ -1229,7 +1242,8 @@
         "text": {
           "en": "Destroy up to 2 opposing Spirits with 2000 BP or less.",
           "ptBR": "Destrua até 2 Spirits do oponente com 2000 BP ou menos."
-        }
+        },
+        "automationRef": "sd10-014-flash"
       }
     ],
     "abilities": [
@@ -1346,7 +1360,8 @@
         "text": {
           "en": "Draw 2 cards, then reveal the top 2 cards. Add all Spirit/Brave cards with Charge to your hand and return the rest to the top in any order.",
           "ptBR": "Compre 2 cartas. Depois, revele as 2 cartas do topo do seu deck; adicione à sua mão todas as cartas de Spirit/Brave com Charge e devolva as demais ao topo em qualquer ordem."
-        }
+        },
+        "automationRef": "sd10-016-main"
       },
       {
         "id": "sd10-016-flash-display",
@@ -1360,7 +1375,8 @@
         "text": {
           "en": "1 Spirit gains +3000 BP this turn.",
           "ptBR": "1 Spirit recebe +3000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd10-016-flash"
       }
     ],
     "abilities": [
@@ -1480,7 +1496,8 @@
         "text": {
           "en": "Destroy 1 opposing Spirit with 5000 BP or less.",
           "ptBR": "Destrua 1 Spirit do oponente com 5000 BP ou menos."
-        }
+        },
+        "automationRef": "sd10-x01-attack"
       },
       {
         "id": "sd10-x01-charge-display",
@@ -1496,7 +1513,8 @@
         "text": {
           "en": "Your BP-destruction effect limits are increased by 1000.",
           "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
-        }
+        },
+        "automationRef": "sd10-x01-charge"
       }
     ],
     "abilities": [
@@ -1595,7 +1613,8 @@
         "text": {
           "en": "Destroy all opposing Spirits with 3000 BP or less and draw 1 card for each destroyed.",
           "ptBR": "Destrua todos os Spirits do oponente com 3000 BP ou menos e compre 1 carta para cada Spirit destruído."
-        }
+        },
+        "automationRef": "sd10-x02-summon"
       },
       {
         "id": "sd10-x02-charge-display",
@@ -1746,7 +1765,8 @@
         "text": {
           "en": "This Spirit is also treated as Green.",
           "ptBR": "Este Spirit também é tratado como Verde."
-        }
+        },
+        "automationRef": "sd17-001-green"
       }
     ],
     "abilities": [
@@ -1827,7 +1847,8 @@
         "text": {
           "en": "This Spirit is also treated as Green.",
           "ptBR": "Este Spirit também é tratado como Verde."
-        }
+        },
+        "automationRef": "sd17-002-green"
       }
     ],
     "abilities": [
@@ -1913,7 +1934,8 @@
         "text": {
           "en": "This Spirit has [Confront].",
           "ptBR": "Este Spirit possui [Confront]."
-        }
+        },
+        "automationRef": "sd17-003-confront"
       }
     ],
     "abilities": [
@@ -1986,7 +2008,8 @@
         "text": {
           "en": "Destroy 1 opposing Nexus.",
           "ptBR": "Destrua 1 Nexus do oponente."
-        }
+        },
+        "automationRef": "sd17-004-summon"
       },
       {
         "id": "sd17-004-rush-green-display",
@@ -2003,7 +2026,8 @@
         "text": {
           "en": "Place 1 Core from the Void on this Spirit.",
           "ptBR": "Coloque 1 Core do Void neste Spirit."
-        }
+        },
+        "automationRef": "sd17-004-summon"
       }
     ],
     "abilities": [
@@ -2182,7 +2206,8 @@
         "text": {
           "en": "This Spirit has [Confront].",
           "ptBR": "Este Spirit possui [Confront]."
-        }
+        },
+        "automationRef": "sd17-006-confront"
       },
       {
         "id": "sd17-006-when-attacks-display",
@@ -2198,7 +2223,8 @@
         "text": {
           "en": "Draw 1 card.",
           "ptBR": "Compre 1 carta."
-        }
+        },
+        "automationRef": "sd17-006-draw"
       }
     ],
     "abilities": [
@@ -2285,7 +2311,8 @@
         "text": {
           "en": "This Spirit gains +3000 BP for the battle.",
           "ptBR": "Este Spirit recebe +3000 BP durante a batalha."
-        }
+        },
+        "automationRef": "sd17-007-attack"
       },
       {
         "id": "sd17-007-rush-green-display",
@@ -2302,7 +2329,8 @@
         "text": {
           "en": "Place 1 Core from the Void on this Spirit.",
           "ptBR": "Coloque 1 Core do Void neste Spirit."
-        }
+        },
+        "automationRef": "sd17-007-attack"
       }
     ],
     "abilities": [
@@ -2377,7 +2405,8 @@
         "text": {
           "en": "This Spirit has [Confront].",
           "ptBR": "Este Spirit possui [Confront]."
-        }
+        },
+        "automationRef": "sd17-008-confront"
       },
       {
         "id": "sd17-008-rush-green-display",
@@ -2474,7 +2503,8 @@
         "text": {
           "en": "This Spirit has [Confront].",
           "ptBR": "Este Spirit possui [Confront]."
-        }
+        },
+        "automationRef": "sd17-009-confront"
       },
       {
         "id": "sd17-009-when-attacks-display",
@@ -2637,7 +2667,8 @@
         "text": {
           "en": "The combined Spirit gains [Confront].",
           "ptBR": "O Spirit combinado recebe [Confront]."
-        }
+        },
+        "automationRef": "sd17-011-combined-confront"
       }
     ],
     "abilities": [
@@ -2850,7 +2881,8 @@
         "text": {
           "en": "Destroy 1 opposing Spirit with 3000 BP or less.",
           "ptBR": "Destrua 1 Spirit do oponente com 3000 BP ou menos."
-        }
+        },
+        "automationRef": "sd17-014-flash"
       },
       {
         "id": "sd17-014-rush-green-display",
@@ -2864,7 +2896,8 @@
         "text": {
           "en": "Exhaust 1 opposing Spirit.",
           "ptBR": "Dê Exhaust em 1 Spirit do oponente."
-        }
+        },
+        "automationRef": "sd17-014-flash"
       }
     ],
     "abilities": [
@@ -2931,7 +2964,8 @@
         "text": {
           "en": "Destroy any number of opposing Spirits with a total BP of 5000 or less.",
           "ptBR": "Destrua qualquer quantidade de Spirits do oponente cuja soma de BP seja 5000 ou menos."
-        }
+        },
+        "automationRef": "sd17-015-flash"
       },
       {
         "id": "sd17-015-rush-green-display",
@@ -2945,7 +2979,8 @@
         "text": {
           "en": "Refresh 2 of your Spirits with one symbol.",
           "ptBR": "Dê Refresh em 2 dos seus Spirits com 1 símbolo."
-        }
+        },
+        "automationRef": "sd17-015-flash"
       }
     ],
     "abilities": [
@@ -3014,7 +3049,8 @@
         "text": {
           "en": "Draw 2 cards, then reveal the top 2 cards and add 1 Spirit/Brave with Rush to your hand; return the rest to the top in any order.",
           "ptBR": "Compre 2 cartas. Depois, revele as 2 cartas do topo do seu deck e adicione 1 Spirit/Brave com Rush à sua mão; devolva as demais ao topo do deck em qualquer ordem."
-        }
+        },
+        "automationRef": "sd17-016-main"
       },
       {
         "id": "sd17-016-flash-display",
@@ -3028,7 +3064,8 @@
         "text": {
           "en": "1 Spirit gains +3000 BP this turn.",
           "ptBR": "1 Spirit recebe +3000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd17-016-flash"
       }
     ],
     "abilities": [
@@ -3224,7 +3261,8 @@
         "text": {
           "en": "Destroy 1 opposing Nexus. If it is destroyed this way, draw 1 card.",
           "ptBR": "Destrua 1 Nexus do oponente. Se ele for destruído por este efeito, compre 1 carta."
-        }
+        },
+        "automationRef": "sd17-x02-summon"
       },
       {
         "id": "sd17-x02-combine-condition-display",
@@ -3395,7 +3433,8 @@
         "text": {
           "en": "This Spirit's color and symbol are also treated as White.",
           "ptBR": "A cor e o símbolo deste Spirit também são tratados como Branco."
-        }
+        },
+        "automationRef": "sd19-002-continuous-white-v2"
       }
     ],
     "abilities": [
@@ -3499,7 +3538,8 @@
         "text": {
           "en": "Draw 1 card.",
           "ptBR": "Compre 1 carta."
-        }
+        },
+        "automationRef": "sd19-003-when-attacks-draw"
       }
     ],
     "abilities": [
@@ -3579,7 +3619,8 @@
         "text": {
           "en": "Destroy one opposing Spirit with 4000 BP or less.",
           "ptBR": "Destrua 1 Spirit do oponente com 4000 BP ou menos."
-        }
+        },
+        "automationRef": "sd19-004-when-destroyed"
       }
     ],
     "abilities": [
@@ -3676,7 +3717,8 @@
         "text": {
           "en": "This Spirit gains +3000 BP. If you control an Ultimate, it gains an additional +3000 BP.",
           "ptBR": "Este Spirit recebe +3000 BP. Se você controlar um Ultimate, ele recebe mais +3000 BP."
-        }
+        },
+        "automationRef": "sd19-005-when-attacks-auto"
       }
     ],
     "abilities": [
@@ -3777,7 +3819,8 @@
         "text": {
           "en": "If you control an Ultimate, destroy one opposing Nexus.",
           "ptBR": "Se você controlar um Ultimate, destrua 1 Nexus do oponente."
-        }
+        },
+        "automationRef": "sd19-006-when-summoned"
       },
       {
         "id": "sd19-006-when-attacks",
@@ -3794,7 +3837,8 @@
         "text": {
           "en": "Draw 1 card.",
           "ptBR": "Compre 1 carta."
-        }
+        },
+        "automationRef": "sd19-006-when-attacks-draw"
       }
     ],
     "abilities": [
@@ -3911,7 +3955,8 @@
         "text": {
           "en": "Destroy one opposing Spirit with 3000 BP or less. If you control an Ultimate, also draw 1 card.",
           "ptBR": "Destrua 1 Spirit do oponente com 3000 BP ou menos. Se você controlar um Ultimate, também compre 1 carta."
-        }
+        },
+        "automationRef": "sd19-007-when-battles-auto"
       }
     ],
     "abilities": [
@@ -4186,7 +4231,8 @@
         "text": {
           "en": "You must control at least one Red Spirit.",
           "ptBR": "Você deve controlar pelo menos 1 Spirit Vermelho."
-        }
+        },
+        "automationRef": "sd19-010-when-summoned-auto"
       },
       {
         "id": "sd19-010-when-summoned",
@@ -4203,7 +4249,8 @@
         "text": {
           "en": "Destroy one opposing Spirit with 6000 BP or less.",
           "ptBR": "Destrua 1 Spirit do oponente com 6000 BP ou menos."
-        }
+        },
+        "automationRef": "sd19-010-when-summoned-auto"
       },
       {
         "id": "sd19-010-ultimate-trigger",
@@ -4315,7 +4362,8 @@
         "text": {
           "en": "All of your Red Spirits and Ultimates gain +2000 BP.",
           "ptBR": "Todos os seus Spirits e Ultimates Vermelhos recebem +2000 BP."
-        }
+        },
+        "automationRef": "sd19-011-own-attack-step-auto"
       },
       {
         "id": "sd19-011-opponent-attack-step",
@@ -4642,7 +4690,8 @@
         "text": {
           "en": "Draw 2 cards. If you control an Ultimate, draw 1 additional card.",
           "ptBR": "Compre 2 cartas. Se você controlar um Ultimate, compre mais 1 carta."
-        }
+        },
+        "automationRef": "sd19-013-magic-main"
       },
       {
         "id": "sd19-013-flash",
@@ -4656,7 +4705,8 @@
         "text": {
           "en": "One Spirit or Ultimate gains +1000 BP for this turn.",
           "ptBR": "1 Spirit ou Ultimate recebe +1000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd19-013-magic-flash"
       }
     ],
     "abilities": [
@@ -4754,7 +4804,8 @@
         "text": {
           "en": "Destroy one opposing Spirit with 5000 BP or less. Then you may pay this card's cost to activate its Flash effect.",
           "ptBR": "Destrua 1 Spirit do oponente com 5000 BP ou menos. Depois, você pode pagar o custo desta carta para ativar seu efeito Flash."
-        }
+        },
+        "automationRef": "sd19-014-burst-life"
       },
       {
         "id": "sd19-014-flash",
@@ -4768,7 +4819,8 @@
         "text": {
           "en": "Destroy one of your Red Spirits. For the rest of this turn, attacks by opposing Spirits can reduce your Life by no more than 1 at a time.",
           "ptBR": "Destrua 1 dos seus Spirits Vermelhos. Pelo restante deste turno, ataques de Spirits do oponente não podem reduzir sua Life em mais de 1 por vez."
-        }
+        },
+        "automationRef": "sd19-014-magic-flash"
       }
     ],
     "abilities": [
@@ -4919,7 +4971,8 @@
         "text": {
           "en": "Destroy any number of opposing Spirits whose combined BP is 5000 or less. If this effect destroys at least one Spirit, return one Spirit card from your Trash to your hand.",
           "ptBR": "Destrua qualquer quantidade de Spirits do oponente cuja soma de BP seja 5000 ou menos. Se este efeito destruir pelo menos 1 Spirit, devolva 1 carta de Spirit do seu Trash para sua mão."
-        }
+        },
+        "automationRef": "sd19-015-magic-flash"
       }
     ],
     "abilities": [
@@ -5006,7 +5059,8 @@
         "text": {
           "en": "Choose one: destroy one opposing Spirit with 8000 BP or less; or destroy all Spirits with 4000 BP or less.",
           "ptBR": "Escolha 1: destrua 1 Spirit do oponente com 8000 BP ou menos; ou destrua todos os Spirits com 4000 BP ou menos."
-        }
+        },
+        "automationRef": "sd19-016-magic-flash"
       }
     ],
     "abilities": [
@@ -5144,7 +5198,8 @@
         "text": {
           "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card's cost is lower than this Ultimate's cost, the trigger hits. On a hit, the opponent must block if possible, but their Ultimates are not required to block. If an opposing Spirit blocks, move 1 core from the opponent's Life to their Reserve.",
           "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o trigger acerta. Em um acerto, o oponente deve bloquear se puder, mas os Ultimates dele não são obrigados a bloquear. Se um Spirit do oponente bloquear, mova 1 core da Life do oponente para a Reserve dele."
-        }
+        },
+        "automationRef": "sd19-x01-true-awaken-auto"
       },
       {
         "id": "sd19-x01-true-awaken",
@@ -5331,7 +5386,8 @@
         "text": {
           "en": "This Spirit's color and symbol are also treated as White.",
           "ptBR": "A cor e o símbolo deste Spirit também são tratados como Branco."
-        }
+        },
+        "automationRef": "sd20-002-continuous-white"
       }
     ],
     "abilities": [
@@ -5412,7 +5468,8 @@
         "text": {
           "en": "This Spirit gains +3000 BP. If your Life is 3 or less, it gains an additional +3000 BP.",
           "ptBR": "Este Spirit recebe +3000 BP. Se sua Life estiver em 3 ou menos, ele recebe mais +3000 BP."
-        }
+        },
+        "automationRef": "sd20-003-when-blocks-bp"
       }
     ],
     "abilities": [
@@ -5598,7 +5655,8 @@
         "text": {
           "en": "This Spirit is unaffected by opposing Red Spirit, Brave, Nexus, and Magic effects.",
           "ptBR": "Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Vermelhos do oponente."
-        }
+        },
+        "automationRef": "sd20-005-heavy-armor-red"
       },
       {
         "id": "sd20-005-when-blocks",
@@ -5615,7 +5673,8 @@
         "text": {
           "en": "Put 1 core from the Void onto one of your White Spirits.",
           "ptBR": "Coloque 1 Core do Void em 1 dos seus Spirits Brancos."
-        }
+        },
+        "automationRef": "sd20-005-when-blocks-core"
       }
     ],
     "abilities": [
@@ -5723,7 +5782,8 @@
         "text": {
           "en": "Return one opposing Spirit with 5000 BP or less to the hand. If your Life is 3 or less, return one additional opposing Spirit with 5000 BP or less to the hand.",
           "ptBR": "Devolva para a mão 1 Spirit do oponente com 5000 BP ou menos. Se sua Life estiver em 3 ou menos, devolva para a mão mais 1 Spirit do oponente com 5000 BP ou menos."
-        }
+        },
+        "automationRef": "sd20-006-when-summoned-return"
       }
     ],
     "abilities": [
@@ -6113,10 +6173,30 @@
         "text": {
           "en": "Refresh this Ultimate.",
           "ptBR": "Dê Refresh neste Ultimate."
-        }
+        },
+        "automationRef": "sd20-010-end-step-auto23"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd20-010-end-step-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "endStep",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "refresh",
+            "target": "source"
+          }
+        ],
+        "levels": [
+          4
+        ]
+      }
+    ],
     "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-010.webp"
   },
   {
@@ -6313,7 +6393,8 @@
         "text": {
           "en": "One Spirit or Ultimate gains +3000 BP for this turn.",
           "ptBR": "1 Spirit ou Ultimate recebe +3000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd20-013-magic-flash"
       }
     ],
     "abilities": [
@@ -6385,7 +6466,8 @@
         "text": {
           "en": "Put 1 core from the Void onto one of your White Spirits. Then you may pay this card's cost to activate its Flash effect.",
           "ptBR": "Coloque 1 Core do Void em 1 dos seus Spirits Brancos. Depois, você pode pagar o custo desta carta para ativar seu efeito Flash."
-        }
+        },
+        "automationRef": "sd20-014-burst-life"
       },
       {
         "id": "sd20-014-flash",
@@ -6399,7 +6481,8 @@
         "text": {
           "en": "For this turn, your Life cannot be reduced by attacks from Spirits with cost 4 or more.",
           "ptBR": "Durante este turno, sua Life não pode ser reduzida por ataques de Spirits de custo 4 ou mais."
-        }
+        },
+        "automationRef": "sd20-014-magic-flash"
       }
     ],
     "abilities": [
@@ -6488,7 +6571,8 @@
         "text": {
           "en": "Choose one: return all opposing Spirits with cost 3 or less to the hand; or return one opposing Spirit that is not combined with a Brave to the hand.",
           "ptBR": "Escolha 1: devolva para a mão todos os Spirits do oponente de custo 3 ou menos; ou devolva para a mão 1 Spirit do oponente que não esteja combinado com um Brave."
-        }
+        },
+        "automationRef": "sd20-015-magic-flash"
       }
     ],
     "abilities": [
@@ -6588,7 +6672,8 @@
         "text": {
           "en": "Return one opposing Spirit to the hand. Then refresh one of your Spirits.",
           "ptBR": "Devolva 1 Spirit do oponente para a mão. Depois, dê Refresh em 1 dos seus Spirits."
-        }
+        },
+        "automationRef": "sd20-016-magic-flash"
       }
     ],
     "abilities": [
@@ -6748,10 +6833,31 @@
         "text": {
           "en": "Refresh this Ultimate.",
           "ptBR": "Dê Refresh neste Ultimate."
-        }
+        },
+        "automationRef": "sd20-x01-end-step-auto23"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd20-x01-end-step-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "endStep",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "refresh",
+            "target": "source"
+          }
+        ],
+        "levels": [
+          4,
+          5
+        ]
+      }
+    ],
     "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-X01.webp"
   },
   {
@@ -17575,7 +17681,8 @@
         "text": {
           "en": "This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.",
           "ptBR": "Este Spirit não é afetado por efeitos Vermelhos de Spirit/Brave/Nexus/Magic do oponente."
-        }
+        },
+        "automationRef": "sd11-001-green"
       },
       {
         "id": "sd11-001-green-display",
@@ -17591,7 +17698,8 @@
         "text": {
           "en": "This Spirit is also treated as Green.",
           "ptBR": "Este Spirit também é tratado como Verde."
-        }
+        },
+        "automationRef": "sd11-001-green"
       }
     ],
     "abilities": [
@@ -17715,7 +17823,8 @@
         "text": {
           "en": "This Spirit gains +3000 BP for the battle.",
           "ptBR": "Este Spirit recebe +3000 BP durante a batalha."
-        }
+        },
+        "automationRef": "sd11-003-block-bp"
       },
       {
         "id": "sd11-003-block-core-display",
@@ -17731,7 +17840,8 @@
         "text": {
           "en": "Put 1 Core from the Void on this Spirit.",
           "ptBR": "Coloque 1 Core do Void neste Spirit."
-        }
+        },
+        "automationRef": "sd11-003-block-core-rush"
       },
       {
         "id": "sd11-003-rush-display",
@@ -17747,7 +17857,8 @@
         "text": {
           "en": "Exhaust 1 opposing Spirit.",
           "ptBR": "Dê Exhaust em 1 Spirit do oponente."
-        }
+        },
+        "automationRef": "sd11-003-block-core-rush"
       }
     ],
     "abilities": [
@@ -17887,7 +17998,8 @@
         "text": {
           "en": "This Spirit gains +3000 BP for the battle.",
           "ptBR": "Este Spirit recebe +3000 BP durante a batalha."
-        }
+        },
+        "automationRef": "sd11-004-block-bp"
       }
     ],
     "abilities": [
@@ -17966,7 +18078,8 @@
         "text": {
           "en": "Return 1 opposing Spirit with 2000 BP or less to the hand.",
           "ptBR": "Devolva 1 Spirit do oponente com 2000 BP ou menos para a mão."
-        }
+        },
+        "automationRef": "sd11-005-summon"
       },
       {
         "id": "sd11-005-rush-display",
@@ -17983,7 +18096,8 @@
         "text": {
           "en": "Put 1 Core from the Void on this Spirit.",
           "ptBR": "Coloque 1 Core do Void neste Spirit."
-        }
+        },
+        "automationRef": "sd11-005-summon"
       },
       {
         "id": "sd11-005-heavy-armor-display",
@@ -18186,7 +18300,8 @@
         "text": {
           "en": "This Spirit gains +3000 BP for the battle.",
           "ptBR": "Este Spirit recebe +3000 BP durante a batalha."
-        }
+        },
+        "automationRef": "sd11-007-block"
       },
       {
         "id": "sd11-007-rush-display",
@@ -18202,7 +18317,8 @@
         "text": {
           "en": "Exhaust 1 opposing Spirit.",
           "ptBR": "Dê Exhaust em 1 Spirit do oponente."
-        }
+        },
+        "automationRef": "sd11-007-block"
       }
     ],
     "abilities": [
@@ -18465,7 +18581,8 @@
         "text": {
           "en": "This Spirit is also treated as Green.",
           "ptBR": "Este Spirit também é tratado como Verde."
-        }
+        },
+        "automationRef": "sd11-010-green"
       },
       {
         "id": "sd11-010-braved-attack-display",
@@ -18499,7 +18616,8 @@
         "text": {
           "en": "Put 1 Core from the Void on this Spirit.",
           "ptBR": "Coloque 1 Core do Void neste Spirit."
-        }
+        },
+        "automationRef": "sd11-010-rush-auto23"
       }
     ],
     "abilities": [
@@ -18515,6 +18633,26 @@
             "green"
           ]
         }
+      },
+      {
+        "id": "sd11-010-rush-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addCoreFromVoid",
+            "target": "self",
+            "amount": 1
+          }
+        ],
+        "levels": [
+          2,
+          3
+        ]
       }
     ],
     "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-010.webp"
@@ -18568,7 +18706,8 @@
         "text": {
           "en": "Return 1 opposing Nexus to the hand.",
           "ptBR": "Devolva 1 Nexus do oponente para a mão."
-        }
+        },
+        "automationRef": "sd11-011-summon"
       },
       {
         "id": "sd11-011-combine-condition-display",
@@ -18836,10 +18975,36 @@
         "text": {
           "en": "Exhaust 1 opposing Spirit.",
           "ptBR": "Dê Exhaust em 1 Spirit do oponente."
-        }
+        },
+        "automationRef": "sd11-014-rush-auto23"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd11-014-rush-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "exhaust"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-014.webp"
   },
   {
@@ -18881,7 +19046,8 @@
         "text": {
           "en": "Return 1 opposing Spirit to the hand.",
           "ptBR": "Devolva 1 Spirit do oponente para a mão."
-        }
+        },
+        "automationRef": "sd11-015-flash"
       },
       {
         "id": "sd11-015-rush-display",
@@ -18895,7 +19061,8 @@
         "text": {
           "en": "Exhaust 1 opposing Spirit.",
           "ptBR": "Dê Exhaust em 1 Spirit do oponente."
-        }
+        },
+        "automationRef": "sd11-015-flash"
       }
     ],
     "abilities": [
@@ -18989,7 +19156,8 @@
         "text": {
           "en": "Choose one: return any number of opposing Spirits with a total of 5000 BP or less to the hand; or discard 1 of your opponent's set Burst cards. This effect cannot be used during the Main Step.",
           "ptBR": "Escolha um: devolva para a mão qualquer número de Spirits do oponente com BP total de até 5000; ou descarte 1 Burst setado do oponente. Este efeito não pode ser usado durante o Main Step."
-        }
+        },
+        "automationRef": "sd11-016-flash"
       }
     ],
     "abilities": [
@@ -19142,10 +19310,39 @@
         "text": {
           "en": "Exhaust 1 opposing Spirit.",
           "ptBR": "Dê Exhaust em 1 Spirit do oponente."
-        }
+        },
+        "automationRef": "sd11-x01-rush-auto23"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd11-x01-rush-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "exhaust"
+            }
+          }
+        ],
+        "levels": [
+          3
+        ]
+      }
+    ],
     "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-X01.webp"
   },
   {
@@ -19592,7 +19789,8 @@
         "text": {
           "en": "Destroy 1 exhausted opposing Spirit that costs 3 or less.",
           "ptBR": "Destrua 1 Spirit do oponente em Exhaust de custo 3 ou menos."
-        }
+        },
+        "automationRef": "sd13-001-destroyed"
       }
     ],
     "abilities": [
@@ -19749,7 +19947,8 @@
         "text": {
           "en": "Destroy 1 exhausted opposing Spirit.",
           "ptBR": "Destrua 1 Spirit do oponente em Exhaust."
-        }
+        },
+        "automationRef": "sd13-003-destroyed"
       },
       {
         "id": "sd13-003-chain-yellow-display",
@@ -19767,7 +19966,8 @@
         "text": {
           "en": "If you have a Yellow symbol, draw 1 card.",
           "ptBR": "Se você possuir um símbolo Amarelo, compre 1 carta."
-        }
+        },
+        "automationRef": "sd13-003-destroyed"
       }
     ],
     "abilities": [
@@ -19868,7 +20068,8 @@
         "text": {
           "en": "Draw 1 card.",
           "ptBR": "Compre 1 carta."
-        }
+        },
+        "automationRef": "sd13-004-summon-draw"
       },
       {
         "id": "sd13-004-chain-display",
@@ -19885,7 +20086,8 @@
         "text": {
           "en": "If you have a Yellow symbol, treat 1 opposing Spirit as LV1 during this turn.",
           "ptBR": "Se você possuir um símbolo Amarelo, trate 1 Spirit do oponente como LV1 durante este turno."
-        }
+        },
+        "automationRef": "sd13-004-summon-draw"
       }
     ],
     "abilities": [
@@ -19962,7 +20164,8 @@
         "text": {
           "en": "Draw 1 card.",
           "ptBR": "Compre 1 carta."
-        }
+        },
+        "automationRef": "sd13-005-summon-draw"
       },
       {
         "id": "sd13-005-chain-display",
@@ -19979,7 +20182,8 @@
         "text": {
           "en": "If you have a Yellow symbol, exhaust 1 opposing Spirit with the highest current level.",
           "ptBR": "Se você possuir um símbolo Amarelo, dê Exhaust em 1 Spirit do oponente que possua o maior Level atual."
-        }
+        },
+        "automationRef": "sd13-005-summon-draw"
       },
       {
         "id": "sd13-005-attack-display",
@@ -19995,7 +20199,8 @@
         "text": {
           "en": "Destroy 1 exhausted opposing Spirit.",
           "ptBR": "Destrua 1 Spirit do oponente em Exhaust."
-        }
+        },
+        "automationRef": "sd13-005-attack"
       }
     ],
     "abilities": [
@@ -20098,7 +20303,8 @@
         "text": {
           "en": "Destroy 1 exhausted opposing Spirit that costs 6 or less.",
           "ptBR": "Destrua 1 Spirit do oponente em Exhaust de custo 6 ou menos."
-        }
+        },
+        "automationRef": "sd13-006-attack"
       },
       {
         "id": "sd13-006-chain-display",
@@ -20115,7 +20321,8 @@
         "text": {
           "en": "If you have a Yellow symbol, this Spirit cannot be blocked by opposing LV2/LV3 Spirits during this turn.",
           "ptBR": "Se você possuir um símbolo Amarelo, este Spirit não pode ser bloqueado por Spirits LV2/LV3 do oponente durante este turno."
-        }
+        },
+        "automationRef": "sd13-006-attack"
       }
     ],
     "abilities": [
@@ -20225,7 +20432,8 @@
         "text": {
           "en": "Return 1 Spirit card that costs 6 or less from your Trash to your hand.",
           "ptBR": "Devolva 1 carta de Spirit de custo 6 ou menos do seu Trash para a sua mão."
-        }
+        },
+        "automationRef": "sd13-bs11-051-combined-attack"
       }
     ],
     "abilities": [
@@ -20313,7 +20521,8 @@
         "text": {
           "en": "Draw 1 card.",
           "ptBR": "Compre 1 carta."
-        }
+        },
+        "automationRef": "sd13-007-summon"
       },
       {
         "id": "sd13-007-combine-display",
@@ -20341,7 +20550,8 @@
         "text": {
           "en": "Destroy 1 exhausted opposing Spirit that is not Braved.",
           "ptBR": "Destrua 1 Spirit do oponente em Exhaust que não esteja combinado com um Brave."
-        }
+        },
+        "automationRef": "sd13-007-combined-attack"
       }
     ],
     "abilities": [
@@ -20448,7 +20658,8 @@
         "text": {
           "en": "Draw 1 card.",
           "ptBR": "Compre 1 carta."
-        }
+        },
+        "automationRef": "sd13-bs12-063-deploy"
       },
       {
         "id": "sd13-bs12-063-attack-step-display",
@@ -20613,7 +20824,8 @@
         "text": {
           "en": "Destroy 1 exhausted opposing Spirit that costs exactly 4.",
           "ptBR": "Destrua 1 Spirit do oponente em Exhaust de custo exatamente 4."
-        }
+        },
+        "automationRef": "sd13-008-flash"
       },
       {
         "id": "sd13-008-chain-display",
@@ -20627,7 +20839,8 @@
         "text": {
           "en": "If you have a Yellow symbol, choose a color. During this turn, treat the color and symbol of 1 of your Spirits as the chosen color.",
           "ptBR": "Se você possuir um símbolo Amarelo, escolha uma cor. Durante este turno, trate a cor e o símbolo de 1 dos seus Spirits como a cor escolhida."
-        }
+        },
+        "automationRef": "sd13-008-flash"
       }
     ],
     "abilities": [
@@ -20882,7 +21095,8 @@
         "text": {
           "en": "Exhaust 1 opposing Ultimate that is not Braved.",
           "ptBR": "Dê Exhaust em 1 Ultimate do oponente que não esteja combinado com um Brave."
-        }
+        },
+        "automationRef": "sd28-002-destroyed"
       }
     ],
     "abilities": [
@@ -20969,7 +21183,8 @@
         "text": {
           "en": "Put 1 Core from the Void into your Reserve.",
           "ptBR": "Coloque 1 Core do Void na sua Reserve."
-        }
+        },
+        "automationRef": "sd28-003-summon"
       },
       {
         "id": "sd28-003-burst-lock-display",
@@ -21232,7 +21447,8 @@
         "text": {
           "en": "Exhaust 1 opposing Spirit.",
           "ptBR": "Dê Exhaust em 1 Spirit do oponente."
-        }
+        },
+        "automationRef": "sd28-006-attack"
       },
       {
         "id": "sd28-006-braved-display",
@@ -21565,7 +21781,8 @@
         "text": {
           "en": "You must control at least one Cost 3 or more Spirit.",
           "ptBR": "Você deve controlar pelo menos 1 Spirit de custo 3 ou mais."
-        }
+        },
+        "automationRef": "sd28-009-summon"
       },
       {
         "id": "sd28-009-summon-display",
@@ -21583,7 +21800,8 @@
         "text": {
           "en": "Put 2 Cores from the Void on this Ultimate.",
           "ptBR": "Coloque 2 Cores do Void neste Ultimate."
-        }
+        },
+        "automationRef": "sd28-009-summon"
       },
       {
         "id": "sd28-009-ultimate-trigger",
@@ -21756,10 +21974,29 @@
         "text": {
           "en": "This Ultimate gains +5000 BP for the battle.",
           "ptBR": "Este Ultimate recebe +5000 BP durante a batalha."
-        }
+        },
+        "automationRef": "sd28-010-combined-auto23"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd28-010-combined-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "modifyBP",
+            "target": "source",
+            "amount": 5000,
+            "duration": "battle"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-010.webp",
     "nameJP": "翼刃グライド",
     "braveBP": 2000,
@@ -21819,7 +22056,8 @@
         "text": {
           "en": "Put 1 Core from the Void on 1 of your Ultimates.",
           "ptBR": "Coloque 1 Core do Void em 1 dos seus Ultimates."
-        }
+        },
+        "automationRef": "sd28-011-summon"
       },
       {
         "id": "sd28-011-combine-display",
@@ -22044,7 +22282,8 @@
         "text": {
           "en": "Exhaust 1 opposing Spirit.",
           "ptBR": "Dê Exhaust em 1 Spirit do oponente."
-        }
+        },
+        "automationRef": "sd28-013-flash"
       }
     ],
     "abilities": [
@@ -22610,7 +22849,8 @@
         "text": {
           "en": "One opposing Spirit gets -1000 BP during this turn.",
           "ptBR": "1 Spirit do oponente recebe -1000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd15-003-attack-auto23"
       },
       {
         "id": "sd15-003-destroyed",
@@ -22630,7 +22870,39 @@
         }
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd15-003-attack-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -1000,
+              "duration": "turn"
+            }
+          }
+        ],
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
     "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-003.webp",
     "nameJP": "天使アーチェル"
   },
@@ -22697,7 +22969,8 @@
         "text": {
           "en": "One opposing Spirit gets -2000 BP during this turn.",
           "ptBR": "1 Spirit do oponente recebe -2000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd15-004-attack-bp-auto23"
       },
       {
         "id": "sd15-004-unblocked",
@@ -22717,7 +22990,39 @@
         }
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd15-004-attack-bp-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -2000,
+              "duration": "turn"
+            }
+          }
+        ],
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
     "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-004.webp",
     "nameJP": "天使アクセラ"
   },
@@ -22889,7 +23194,8 @@
         "text": {
           "en": "One opposing Spirit gets -3000 BP during this turn.",
           "ptBR": "1 Spirit do oponente recebe -3000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd15-x01-attack-bp-auto23"
       },
       {
         "id": "sd15-x01-recovery",
@@ -22927,7 +23233,39 @@
         }
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd15-x01-attack-bp-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -3000,
+              "duration": "turn"
+            }
+          }
+        ],
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
     "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-X01.webp",
     "nameJP": "戦天使イクセル"
   },
@@ -24093,10 +24431,42 @@
         "text": {
           "en": "One opposing Spirit gets -3000 BP during this turn.",
           "ptBR": "1 Spirit do oponente recebe -3000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd23-004-summon-auto23"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-004-summon-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -3000,
+              "duration": "turn"
+            }
+          }
+        ],
+        "levels": [
+          1,
+          2
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-004.webp",
     "nameJP": "天使アエスタ"
   },
@@ -25236,7 +25606,8 @@
         "text": {
           "en": "One opposing Spirit/Ultimate gets -3000 BP during this turn.",
           "ptBR": "1 Spirit/Ultimate do oponente recebe -3000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd23-x01-battle-auto23"
       }
     ],
     "abilities": [
@@ -25252,6 +25623,36 @@
           {
             "type": "cannotBeBlockedByLowerLevel"
           }
+        ]
+      },
+      {
+        "id": "sd23-x01-battle-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -3000,
+              "duration": "turn"
+            }
+          }
+        ],
+        "levels": [
+          4,
+          5
         ]
       }
     ],

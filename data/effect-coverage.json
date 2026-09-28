@@ -8,7 +8,7 @@
     3
   ],
   "source": "src/data/cards.json",
-  "generatedAt": "2026-09-28T16:56:05.861Z",
+  "generatedAt": "2026-09-28T19:18:59.547Z",
   "classificationVersion": "v5.1.0-phase03",
   "canonicalEvents": [
     {
@@ -172,12 +172,12 @@
     "totalCards": 365,
     "totalSets": 11,
     "byStatus": {
-      "AUTOMATED": 57,
-      "MANUAL": 59,
+      "AUTOMATED": 62,
+      "MANUAL": 53,
       "NO_EFFECT": 16,
-      "PARTIAL": 29,
+      "PARTIAL": 31,
       "UNSTRUCTURED_TEXT": 173,
-      "UNSUPPORTED_TRIGGER": 31
+      "UNSUPPORTED_TRIGGER": 30
     },
     "bySet": {
       "SD13": {
@@ -194,9 +194,10 @@
       "SD15": {
         "total": 18,
         "statuses": {
-          "MANUAL": 14,
+          "MANUAL": 12,
           "NO_EFFECT": 1,
-          "UNSUPPORTED_TRIGGER": 3
+          "UNSUPPORTED_TRIGGER": 2,
+          "PARTIAL": 3
         },
         "automationPercent": 0
       },
@@ -231,12 +232,12 @@
       "SD11": {
         "total": 18,
         "statuses": {
-          "AUTOMATED": 4,
+          "AUTOMATED": 6,
           "NO_EFFECT": 1,
           "PARTIAL": 5,
-          "MANUAL": 8
+          "MANUAL": 6
         },
-        "automationPercent": 22.2
+        "automationPercent": 33.3
       },
       "SD17": {
         "total": 18,
@@ -260,28 +261,28 @@
         "total": 17,
         "statuses": {
           "NO_EFFECT": 1,
-          "AUTOMATED": 10,
+          "AUTOMATED": 11,
           "MANUAL": 3,
-          "PARTIAL": 2,
-          "UNSUPPORTED_TRIGGER": 1
+          "UNSUPPORTED_TRIGGER": 1,
+          "PARTIAL": 1
         },
-        "automationPercent": 58.8
+        "automationPercent": 64.7
       },
       "SD23": {
         "total": 17,
         "statuses": {
           "UNSUPPORTED_TRIGGER": 3,
-          "MANUAL": 10,
-          "AUTOMATED": 1,
-          "PARTIAL": 3
+          "MANUAL": 9,
+          "AUTOMATED": 3,
+          "PARTIAL": 2
         },
-        "automationPercent": 5.9
+        "automationPercent": 17.6
       },
       "SD28": {
         "total": 17,
         "statuses": {
-          "MANUAL": 7,
-          "PARTIAL": 7,
+          "MANUAL": 6,
+          "PARTIAL": 8,
           "AUTOMATED": 2,
           "UNSUPPORTED_TRIGGER": 1
         },
@@ -289,13 +290,13 @@
       }
     },
     "entries": {
-      "total": 465,
-      "automated": 129,
+      "total": 476,
+      "automated": 140,
       "runtimeUnsupportedTrigger": 50,
       "unsupportedCondition": 0,
       "unsupportedAction": 0,
       "manual": 286,
-      "schemaV2": 10
+      "schemaV2": 21
     },
     "gapFrequency": {
       "triggers": {
@@ -796,7 +797,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-bs11-051-combined-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -1064,7 +1065,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-bs12-063-deploy",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -6875,7 +6876,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-001-charge",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -6933,7 +6934,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-002-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -6952,7 +6953,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-002-charge",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7031,7 +7032,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-003-attack-draw",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7091,7 +7092,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-004-destroyed",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7152,7 +7153,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-005-charge",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7229,7 +7230,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-007-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7309,7 +7310,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-008-charge",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7369,7 +7370,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-009-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7388,7 +7389,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-009-charge",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7468,7 +7469,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-010-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7570,7 +7571,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-011-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7608,7 +7609,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-011-combined-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7815,7 +7816,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-014-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7917,7 +7918,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-016-main",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -7936,7 +7937,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-016-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8037,7 +8038,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-x01-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8056,7 +8057,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-x01-charge",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8138,7 +8139,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-x02-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8295,7 +8296,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-001-green",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8314,7 +8315,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-001-green",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8391,7 +8392,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-003-block-bp",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8410,7 +8411,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-003-block-core-rush",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8429,7 +8430,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-003-block-core-rush",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8532,7 +8533,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-004-block-bp",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8594,7 +8595,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-005-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8613,7 +8614,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-005-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8757,7 +8758,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-007-block",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8776,7 +8777,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-007-block",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8921,12 +8922,12 @@
       "set": "SD11",
       "cardType": "spirit",
       "nameEN": "Dark-Uranus",
-      "status": "PARTIAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 2,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd11-010-green-display",
@@ -8943,7 +8944,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-010-green",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -8981,7 +8982,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-010-rush-auto23",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9003,16 +9004,34 @@
           "automationRef": null,
           "engineNative": false,
           "status": "AUTOMATED"
+        },
+        {
+          "id": "sd11-010-rush-auto23",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenAttacks",
+          "canonicalEvent": "whenAttacks",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "addCoreFromVoid"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd11-010-braved-attack-display",
-          "sd11-010-rush-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -9042,7 +9061,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-011-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9244,12 +9263,12 @@
       "set": "SD11",
       "cardType": "magic",
       "nameEN": "Wind Wall",
-      "status": "MANUAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 2,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd11-014-flash-display",
@@ -9285,19 +9304,38 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-014-rush-auto23",
           "engineNative": false,
           "status": "MANUAL"
+        },
+        {
+          "id": "sd11-014-rush-auto23",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "magicFlash",
+          "canonicalEvent": "magicFlash",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "exhaust",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd11-014-flash-display",
-          "sd11-014-rush-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -9327,7 +9365,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-015-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9346,7 +9384,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-015-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9409,7 +9447,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-016-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9450,12 +9488,12 @@
       "set": "SD11",
       "cardType": "spirit",
       "nameEN": "The DarkEmperor Ninetail-Dark",
-      "status": "MANUAL",
+      "status": "PARTIAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 3,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 1,
       "entries": [
         {
           "id": "sd11-x01-block-display",
@@ -9510,9 +9548,31 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd11-x01-rush-auto23",
           "engineNative": false,
           "status": "MANUAL"
+        },
+        {
+          "id": "sd11-x01-rush-auto23",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenBattles",
+          "canonicalEvent": "whenBattles",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "exhaust",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -9520,9 +9580,7 @@
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
-          "sd11-x01-block-display",
-          "sd11-x01-battle-display",
-          "sd11-x01-rush-display"
+          "sd11-x01-block-display"
         ]
       }
     },
@@ -9634,7 +9692,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-001-destroyed",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9738,7 +9796,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-003-destroyed",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9757,7 +9815,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-003-destroyed",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9820,7 +9878,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-004-summon-draw",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9839,7 +9897,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-004-summon-draw",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9899,7 +9957,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-005-summon-draw",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9918,7 +9976,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-005-summon-draw",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -9937,7 +9995,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-005-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -10019,7 +10077,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-006-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -10038,7 +10096,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-006-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -10099,7 +10157,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-007-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -10137,7 +10195,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-007-combined-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -10221,7 +10279,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-008-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -10240,7 +10298,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-008-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -10444,12 +10502,12 @@
       "set": "SD15",
       "cardType": "spirit",
       "nameEN": "The Angelia Archiel",
-      "status": "MANUAL",
+      "status": "PARTIAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 2,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 1,
       "entries": [
         {
           "id": "sd15-003-attack",
@@ -10466,7 +10524,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd15-003-attack-auto23",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -10488,6 +10546,28 @@
           "automationRef": null,
           "engineNative": false,
           "status": "MANUAL"
+        },
+        {
+          "id": "sd15-003-attack-auto23",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenAttacks",
+          "canonicalEvent": "whenAttacks",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "modifyBP",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -10495,7 +10575,6 @@
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
-          "sd15-003-attack",
           "sd15-003-destroyed"
         ]
       }
@@ -10505,12 +10584,12 @@
       "set": "SD15",
       "cardType": "spirit",
       "nameEN": "The Angelia Axela",
-      "status": "MANUAL",
+      "status": "PARTIAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 2,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 1,
       "entries": [
         {
           "id": "sd15-004-attack-bp",
@@ -10527,7 +10606,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd15-004-attack-bp-auto23",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -10549,6 +10628,28 @@
           "automationRef": null,
           "engineNative": false,
           "status": "MANUAL"
+        },
+        {
+          "id": "sd15-004-attack-bp-auto23",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenAttacks",
+          "canonicalEvent": "whenAttacks",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "modifyBP",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -10556,7 +10657,6 @@
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
-          "sd15-004-attack-bp",
           "sd15-004-unblocked"
         ]
       }
@@ -10830,12 +10930,12 @@
       "set": "SD15",
       "cardType": "spirit",
       "nameEN": "The BattleAngelia Excel",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "PARTIAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 3,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 2,
       "entries": [
         {
           "id": "sd15-x01-attack-bp",
@@ -10852,7 +10952,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd15-x01-attack-bp-auto23",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -10893,6 +10993,28 @@
           "automationRef": null,
           "engineNative": false,
           "status": "UNSUPPORTED_TRIGGER"
+        },
+        {
+          "id": "sd15-x01-attack-bp-auto23",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenAttacks",
+          "canonicalEvent": "whenAttacks",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "modifyBP",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -10903,7 +11025,6 @@
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
-          "sd15-x01-attack-bp",
           "sd15-x01-recovery",
           "sd15-x01-zero-bp"
         ]
@@ -10936,7 +11057,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-001-green",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -10994,7 +11115,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-002-green",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11052,7 +11173,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-003-confront",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11110,7 +11231,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-004-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11129,7 +11250,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-004-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11233,7 +11354,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-006-confront",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11252,7 +11373,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-006-draw",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11331,7 +11452,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-007-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11350,7 +11471,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-007-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11410,7 +11531,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-008-confront",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11489,7 +11610,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-009-confront",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11625,7 +11746,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-011-combined-confront",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11808,7 +11929,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-014-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11827,7 +11948,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-014-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11888,7 +12009,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-015-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11907,7 +12028,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-015-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11968,7 +12089,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-016-main",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -11987,7 +12108,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-016-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -12150,7 +12271,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-x02-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -12272,7 +12393,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-002-continuous-white-v2",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -12332,7 +12453,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-003-when-attacks-draw",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -12392,7 +12513,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-004-when-destroyed",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -12453,7 +12574,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-005-when-attacks-auto",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -12514,7 +12635,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-006-when-summoned",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -12533,7 +12654,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-006-when-attacks-draw",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -12615,7 +12736,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-007-when-battles-auto",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -12794,7 +12915,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-010-when-summoned-auto",
           "engineNative": true,
           "status": "AUTOMATED"
         },
@@ -12813,7 +12934,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-010-when-summoned-auto",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -12893,7 +13014,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-011-own-attack-step-auto",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -13096,7 +13217,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-013-magic-main",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -13115,7 +13236,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-013-magic-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -13198,7 +13319,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-014-burst-life",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -13217,7 +13338,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-014-magic-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -13302,7 +13423,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-015-magic-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -13365,7 +13486,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-016-magic-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -13447,7 +13568,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd19-x01-true-awaken-auto",
           "engineNative": true,
           "status": "AUTOMATED"
         },
@@ -13547,7 +13668,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-002-continuous-white",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -13605,7 +13726,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-003-when-blocks-bp",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -13727,7 +13848,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-005-heavy-armor-red",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -13746,7 +13867,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-005-when-blocks-core",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -13826,7 +13947,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-006-when-summoned-return",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -14043,12 +14164,12 @@
       "set": "SD20",
       "cardType": "ultimate",
       "nameEN": "Ultimate-Surtr",
-      "status": "PARTIAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd20-010-summon-condition",
@@ -14103,18 +14224,37 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-010-end-step-auto23",
           "engineNative": false,
           "status": "MANUAL"
+        },
+        {
+          "id": "sd20-010-end-step-auto23",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "endStep",
+          "canonicalEvent": "endStep",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "refresh"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd20-010-end-step"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -14268,7 +14408,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-013-magic-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -14329,7 +14469,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-014-burst-life",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -14348,7 +14488,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-014-magic-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -14430,7 +14570,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-015-magic-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -14493,7 +14633,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-016-magic-flash",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -14536,9 +14676,9 @@
       "status": "PARTIAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 4,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 2,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 1,
       "entries": [
         {
           "id": "sd20-x01-summon-condition",
@@ -14612,9 +14752,30 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd20-x01-end-step-auto23",
           "engineNative": false,
           "status": "MANUAL"
+        },
+        {
+          "id": "sd20-x01-end-step-auto23",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "endStep",
+          "canonicalEvent": "endStep",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "refresh"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -14622,8 +14783,7 @@
         "unsupportedConditions": [],
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
-          "sd20-x01-when-summoned",
-          "sd20-x01-end-step"
+          "sd20-x01-when-summoned"
         ]
       }
     },
@@ -14757,12 +14917,12 @@
       "set": "SD23",
       "cardType": "spirit",
       "nameEN": "The Angelia Aester",
-      "status": "MANUAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd23-004-summon",
@@ -14779,18 +14939,38 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd23-004-summon-auto23",
           "engineNative": false,
           "status": "MANUAL"
+        },
+        {
+          "id": "sd23-004-summon-auto23",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenSummoned",
+          "canonicalEvent": "whenSummoned",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "modifyBP",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd23-004-summon"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -15487,12 +15667,12 @@
       "set": "SD23",
       "cardType": "ultimate",
       "nameEN": "Ultimate-Valiero",
-      "status": "PARTIAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 4,
-      "executableEntryCount": 2,
-      "automatedExecutableCount": 2,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 3,
+      "automatedExecutableCount": 3,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd23-x01-summon-condition",
@@ -15569,7 +15749,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd23-x01-battle-auto23",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -15593,15 +15773,35 @@
           "automationRef": null,
           "engineNative": false,
           "status": "AUTOMATED"
+        },
+        {
+          "id": "sd23-x01-battle-auto23",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenBattles",
+          "canonicalEvent": "whenBattles",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "modifyBP",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd23-x01-battle"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -15691,7 +15891,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd28-002-destroyed",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -15754,7 +15954,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd28-003-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -15958,7 +16158,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd28-006-attack",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -16222,7 +16422,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd28-009-summon",
           "engineNative": true,
           "status": "AUTOMATED"
         },
@@ -16241,7 +16441,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd28-009-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -16341,12 +16541,12 @@
       "set": "SD28",
       "cardType": "brave",
       "nameEN": "The WingedBlade Gruid",
-      "status": "MANUAL",
+      "status": "PARTIAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 3,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 2,
       "entries": [
         {
           "id": "sd28-010-high-speed-display",
@@ -16401,9 +16601,30 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd28-010-combined-auto23",
           "engineNative": false,
           "status": "MANUAL"
+        },
+        {
+          "id": "sd28-010-combined-auto23",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenBattles",
+          "canonicalEvent": "whenBattles",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "modifyBP"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -16412,8 +16633,7 @@
         "unsupportedActions": [],
         "unresolvedDisplayEntries": [
           "sd28-010-high-speed-display",
-          "sd28-010-combine-display",
-          "sd28-010-combined-display"
+          "sd28-010-combine-display"
         ]
       }
     },
@@ -16444,7 +16664,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd28-011-summon",
           "engineNative": false,
           "status": "MANUAL"
         },
@@ -16649,7 +16869,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd28-013-flash",
           "engineNative": false,
           "status": "MANUAL"
         },

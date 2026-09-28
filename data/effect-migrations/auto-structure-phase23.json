@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-09-28T19:18:59.449Z",
+  "write": true,
+  "converted": 11,
+  "details": [
+    {
+      "cardId": "SD20-010",
+      "effectId": "sd20-010-end-step",
+      "abilityId": "sd20-010-end-step-auto23",
+      "event": "endStep",
+      "text": "Refresh this Ultimate."
+    },
+    {
+      "cardId": "SD20-X01",
+      "effectId": "sd20-x01-end-step",
+      "abilityId": "sd20-x01-end-step-auto23",
+      "event": "endStep",
+      "text": "Refresh this Ultimate."
+    },
+    {
+      "cardId": "SD11-010",
+      "effectId": "sd11-010-rush-display",
+      "abilityId": "sd11-010-rush-auto23",
+      "event": "whenAttacks",
+      "text": "Put 1 Core from the Void on this Spirit."
+    },
+    {
+      "cardId": "SD11-014",
+      "effectId": "sd11-014-rush-display",
+      "abilityId": "sd11-014-rush-auto23",
+      "event": "magicFlash",
+      "text": "Exhaust 1 opposing Spirit."
+    },
+    {
+      "cardId": "SD11-X01",
+      "effectId": "sd11-x01-rush-display",
+      "abilityId": "sd11-x01-rush-auto23",
+      "event": "whenBattles",
+      "text": "Exhaust 1 opposing Spirit."
+    },
+    {
+      "cardId": "SD28-010",
+      "effectId": "sd28-010-combined-display",
+      "abilityId": "sd28-010-combined-auto23",
+      "event": "whenBattles",
+      "text": "This Ultimate gains +5000 BP for the battle."
+    },
+    {
+      "cardId": "SD15-003",
+      "effectId": "sd15-003-attack",
+      "abilityId": "sd15-003-attack-auto23",
+      "event": "whenAttacks",
+      "text": "One opposing Spirit gets -1000 BP during this turn."
+    },
+    {
+      "cardId": "SD15-004",
+      "effectId": "sd15-004-attack-bp",
+      "abilityId": "sd15-004-attack-bp-auto23",
+      "event": "whenAttacks",
+      "text": "One opposing Spirit gets -2000 BP during this turn."
+    },
+    {
+      "cardId": "SD15-X01",
+      "effectId": "sd15-x01-attack-bp",
+      "abilityId": "sd15-x01-attack-bp-auto23",
+      "event": "whenAttacks",
+      "text": "One opposing Spirit gets -3000 BP during this turn."
+    },
+    {
+      "cardId": "SD23-004",
+      "effectId": "sd23-004-summon",
+      "abilityId": "sd23-004-summon-auto23",
+      "event": "whenSummoned",
+      "text": "One opposing Spirit gets -3000 BP during this turn."
+    },
+    {
+      "cardId": "SD23-X01",
+      "effectId": "sd23-x01-battle",
+      "abilityId": "sd23-x01-battle-auto23",
+      "event": "whenBattles",
+      "text": "One opposing Spirit/Ultimate gets -3000 BP during this turn."
+    }
+  ]
+}

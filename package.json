@@ -73,7 +73,7 @@
     "effects:audit": "node scripts/effects/audit-card-effects.mjs",
     "effects:audit:check": "node scripts/effects/audit-card-effects.mjs --check",
     "effects:phase01:test": "node --test src/game/effectEngine/canonicalEvents.test.js",
-    "effects:phase23:audit": "node scripts/effects/audit-effect-foundation-phase23.mjs",
+    "effects:phase23:audit": "node scripts/effects/audit-set-automation-phase23.mjs",
     "effects:phase23:test": "node --test src/game/effectEngine/canonicalEvents.test.js src/game/effectEngine/effectSchema.test.js src/game/effectEngine/triggerDispatcher.test.js",
     "effects:phase46:audit": "node scripts/effects/audit-effect-foundation-phase46.mjs",
     "effects:phase46:test": "node --test src/game/effectEngine/canonicalEvents.test.js src/game/effectEngine/effectSchema.test.js src/game/effectEngine/triggerDispatcher.test.js src/game/effectEngine/effectQueue.test.js src/game/effectEngine/targetingEngine.test.js src/game/effectEngine/conditionEngine.test.js",
@@ -91,7 +91,13 @@
     "effects:migrate": "node scripts/effects/migrate-card-effects.mjs",
     "effects:starter:priority:audit": "node scripts/effects/audit-starter-deck-priority-phase22.mjs",
     "effects:phase2122:audit": "node scripts/effects/audit-effect-foundation-phase2122.mjs",
-    "effects:phase2122:test": "node --test src/game/effectEngine/phase2122.test.js"
+    "effects:phase2122:test": "node --test src/game/effectEngine/phase2122.test.js",
+    "effects:phase23:auto": "node scripts/effects/normalize-display-effects.mjs --write && node scripts/effects/auto-structure-display-effects.mjs --write && npm run effects:audit",
+    "effects:phase24:generate": "node scripts/effects/generate-card-regression-phase24.mjs",
+    "effects:phase24:test": "node scripts/effects/generate-card-regression-phase24.mjs && node --test src/game/effectEngine/generatedCardRegression.test.js",
+    "effects:phase25:audit": "node scripts/effects/audit-manual-resolution-phase25.mjs",
+    "effects:phase26:qa": "node scripts/effects/audit-final-mechanics-phase26.mjs",
+    "effects:phase27:release": "node scripts/effects/release-qa-phase27.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",

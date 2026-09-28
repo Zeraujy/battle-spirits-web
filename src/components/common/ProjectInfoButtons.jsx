@@ -6,6 +6,32 @@ const PATCHES = [
   {
     version: "5.0.3",
     date: { pt: "28/09/2026", en: "09/28/2026" },
+    title: { pt: "Auditoria de Automação de Cartas", en: "Card Automation Audit" },
+    summary: {
+      pt: "A automação de efeitos ganhou verificação por set, regressão por carta e uma medição oficial do uso de Resolução Manual.",
+      en: "Effect automation gained per-set verification, per-card regression coverage and an official Manual Resolution usage metric."
+    },
+    sections: [
+      {
+        title: { pt: "Qualidade e cobertura", en: "Quality and coverage" },
+        items: {
+          pt: [
+            "Efeitos repetitivos e inequívocos podem ser convertidos para ações estruturadas pelo novo pipeline de automação.",
+            "Cada carta já automatizada recebe um cenário de regressão para evitar que futuras mudanças quebrem seus gatilhos ou ações.",
+            "A auditoria por set agora mostra claramente quais coleções ainda precisam de automação antes do fechamento da próxima versão."
+          ],
+          en: [
+            "Unambiguous recurring effects can now be converted into structured actions by the new automation pipeline.",
+            "Every automated card receives a regression scenario to prevent future changes from breaking its triggers or actions.",
+            "Per-set auditing now clearly shows which collections still need automation before the next version can be finalized."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "28/09/2026", en: "09/28/2026" },
     title: { pt: "Automação de Cartas e Starter Decks", en: "Card Automation & Starter Decks" },
     summary: {
       pt: "Mais cartas agora usam efeitos estruturados e automáticos, começando pelos Starter Decks.",
