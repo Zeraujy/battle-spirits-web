@@ -1,0 +1,35 @@
+/* v4.9.1 Step 11 — GameEventToast alignment */
+
+.game-event-toast {
+  position: absolute;
+  left: 50%;
+  top: 88px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(480px, calc(100vw - 36px));
+  padding: 10px 14px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-medium);
+  background: color-mix(in srgb, var(--surface-elevated) 90%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(var(--backdrop-blur));
+  color: var(--text-primary);
+  animation: game-event-toast-in 180ms ease-out both, game-event-toast-out 220ms ease-in 1.82s both;
+  z-index: 44;
+}
+
+.game-event-toast > i { flex: 0 0 auto; width: 6px; height: 26px; border-radius: 4px; background: var(--text-secondary); }
+.game-event-toast > div { min-width: 0; display: grid; gap: 2px; }
+.game-event-toast span { color: var(--text-muted); font-size: 9px; letter-spacing: .16em; }
+.game-event-toast strong { color: var(--text-primary); font-size: 12px; font-weight: 550; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.game-event-toast.event-timing > i { background: #ffd56d; }
+.game-event-toast.event-life > i { background: #ff6b6b; }
+.game-event-toast.event-battle > i { background: #ff9a73; }
+.game-event-toast.event-removal > i { background: #bb9cff; }
+.game-event-toast.event-play > i { background: #8bc9ff; }
+
+@keyframes game-event-toast-in { from { opacity: 0; transform: translate(-50%, -8px) scale(.98); } to { opacity: 1; transform: translate(-50%, 0) scale(1); } }
+@keyframes game-event-toast-out { to { opacity: 0; transform: translate(-50%, -6px) scale(.985); } }
+@media (prefers-reduced-motion: reduce) { .game-event-toast { animation: none; } }

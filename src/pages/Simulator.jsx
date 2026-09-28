@@ -1,11 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import CardTile from "../components/cards/CardTile.jsx";
-import CoreArea from "../components/game/CoreArea.jsx";
 import EffectText from "../components/cards/EffectText.jsx";
 import ArenaCardStatus from "../components/game/ArenaCardStatus.jsx";
 import ArenaBraveAttachment from "../components/game/ArenaBraveAttachment.jsx";
 import ArenaBattleRole from "../components/game/ArenaBattleRole.jsx";
-import PhaseBar from "../components/game/PhaseBar.jsx";
 import PaymentStatus from "../components/game/PaymentStatus.jsx";
 import BattleLinkOverlay from "../components/game/BattleLinkOverlay.jsx";
 import BattleExperienceLayer, { classifyBattleLogEntry } from "../components/game/BattleExperienceLayer.jsx";
@@ -16,6 +14,18 @@ import CenterField from "../components/game/arena/CenterField.jsx";
 import PlayerField from "../components/game/arena/PlayerField.jsx";
 import PlayerHUD from "../components/game/arena/PlayerHUD.jsx";
 import OpponentHUD from "../components/game/arena/OpponentHUD.jsx";
+import HandArea from "../components/game/arena/HandArea.jsx";
+import CardPreview from "../components/game/arena/CardPreview.jsx";
+import ContextPanel from "../components/game/arena/ContextPanel.jsx";
+import ActionBar from "../components/game/arena/ActionBar.jsx";
+import PhaseTracker from "../components/game/arena/PhaseTracker.jsx";
+import TargetingUX from "../components/game/arena/TargetingUX.jsx";
+import CardMotionLayer from "../components/game/arena/CardMotionLayer.jsx";
+import ArenaOverlayLayer from "../components/game/arena/ArenaOverlayLayer.jsx";
+import BurstPresentation from "../components/game/arena/BurstPresentation.jsx";
+import GameLogDrawer from "../components/game/arena/GameLogDrawer.jsx";
+import GameEventToast from "../components/game/arena/GameEventToast.jsx";
+import { ReserveCoreDisplay, CoreTrashDisplay } from "../components/game/arena/CoreSystemDisplay.jsx";
 import Modal from "../components/common/Modal.jsx";
 import { cardIndex } from "../services/cardRepository.js";
 import { applyGameAction } from "../game/reducer.js";
@@ -70,6 +80,15 @@ import "../styles/arena/coreCombatV318.css";
 import "../styles/arena/cardInteractionV319.css";
 import "../styles/arena/rulesEffectsV320.css";
 import "../styles/arena/arenaLayoutV321.css";
+import "../styles/arena/cardPreviewV490.css";
+import "../styles/arena/contextPanelV490.css";
+import "../styles/arena/actionBarV490.css";
+import "../styles/arena/phaseTrackerV490.css";
+import "../styles/arena/targetingUXV490.css";
+import "../styles/arena/cardMotionV490.css";
+import "../styles/arena/arenaResponsiveV490.css";
+import "../styles/arena/arenaPerformanceV490.css";
+import "../styles/arena/arenaVisualCleanupV490.css";
 
 
 function effectText(card, language) {
@@ -2666,6 +2685,7 @@ export default function Simulator({
 
 
     return (
+      <HandArea owner={ownsRow ? "player" : "opponent"}>
       <div
         className={`hand-row ${
           ownsRow
@@ -2679,6 +2699,7 @@ export default function Simulator({
           <div
             className="stack-card deck-stack-main card-drop-target"
             data-card-drop-zone={ownsRow ? "deck" : undefined}
+            data-motion-zone={`deck:${playerId}`}
             data-card-drop-player={ownsRow ? playerId : undefined}
             data-card-drop-placement="top"
           >
@@ -2773,6 +2794,7 @@ export default function Simulator({
           }`}
           data-card-drop-zone={ownsRow ? "hand" : undefined}
           data-card-drop-player={ownsRow ? playerId : undefined}
+          data-motion-zone={`hand:${playerId}`}
         >
           {player.hand.map(
             (
@@ -2832,6 +2854,7 @@ export default function Simulator({
                     physical.instanceId
                   }
                   className="hand-card-slot"
+                  data-motion-card-instance={physical.instanceId}
                   style={{
                     "--fan-rotation": `${fanRotation}deg`,
                     "--fan-lift": `${fanLift}px`,
@@ -2919,6 +2942,7 @@ export default function Simulator({
 
             data-card-drop-zone={ownsRow ? "burst" : undefined}
             data-card-drop-player={ownsRow ? playerId : undefined}
+            data-motion-zone={`burst:${playerId}`}
 
             disabled={
               !burstPhysical && !ownsRow
@@ -3041,6 +3065,7 @@ export default function Simulator({
             className="stack-card trash card-drop-target"
             data-card-drop-zone={ownsRow ? "trash" : undefined}
             data-card-drop-player={ownsRow ? playerId : undefined}
+            data-motion-zone={`trash:${playerId}`}
 
             onPointerDown={
               ownsRow && canControlActor && player.trash.length
@@ -3131,6 +3156,7 @@ export default function Simulator({
         </div>
 
       </div>
+      </HandArea>
     );
   }
 
@@ -3183,6 +3209,7 @@ export default function Simulator({
         data-card-drop-zone={playerId === bottomId ? "field" : undefined}
         data-card-drop-player={playerId === bottomId ? playerId : undefined}
         data-card-drop-field-zone={zone}
+        data-motion-zone={`field:${playerId}:${zone}`}
 
       >
         <div className="zone-title">
@@ -3345,6 +3372,16 @@ export default function Simulator({
 
                     data-field-card-instance={
                       physical.instanceId
+                    }
+                    data-motion-card-instance={physical.instanceId}
+                    data-targeting-state={
+                      isDecisionSelected
+                        ? "selected"
+                        : isDecisionTarget || legalBlockerIds?.has(physical.instanceId)
+                          ? "targetable"
+                          : effectDecision
+                            ? "unavailable"
+                            : undefined
                     }
 
                     data-blocker-label={
@@ -4222,17 +4259,7 @@ export default function Simulator({
     }
 
 
-    return buttons.length
-      ? (
-        <div className="inspector-actions">
-          {buttons}
-        </div>
-      )
-      : (
-        <p className="muted">
-          —
-        </p>
-      );
+    return buttons.length ? buttons : null;
   }
 
 
@@ -5334,6 +5361,37 @@ export default function Simulator({
       : null;
 
 
+  const targetingMode = effectDecision
+    ? "effect"
+    : activeBattle?.stage === "block"
+      ? "block"
+      : directBattleTargetId
+        ? "life"
+        : "none";
+
+  const targetingTargetableCount = effectDecision
+    ? effectCandidateIds.size
+    : activeBattle?.stage === "block"
+      ? legalBlockers(match, cardIndex).length
+      : directBattleTargetId
+        ? 1
+        : 0;
+
+  const targetingSelectedCount = effectDecision
+    ? effectDecisionSelection.length
+    : activeBattle?.blockerInstanceId
+      ? 1
+      : 0;
+
+  const targetingLabel = targetingMode === "effect"
+    ? (language === "en" ? "Choose target" : "Escolha o alvo")
+    : targetingMode === "block"
+      ? (language === "en" ? "Choose blocker" : "Escolha o bloqueador")
+      : targetingMode === "life"
+        ? (language === "en" ? "Life target" : "Alvo de Life")
+        : "";
+
+
   const postMatchSummary = match?.winnerId ? buildPostMatchSummary({
     match,
     mode,
@@ -5385,12 +5443,45 @@ export default function Simulator({
   return (
     <ArenaShell>
 
-      <BattleExperienceLayer
-        match={match}
-        actorId={actorId}
-        canControlActor={canControlActor}
-        language={language}
-      />
+      <ArenaOverlayLayer>
+        <BattleExperienceLayer
+          match={match}
+          actorId={actorId}
+          canControlActor={canControlActor}
+          language={language}
+          showEventCue={false}
+        />
+
+        <CardMotionLayer players={match.players} enabled />
+
+        <BurstPresentation
+          players={match.players}
+          actionLog={match.actionLog || []}
+          burstOpportunity={match.burstOpportunity}
+          language={language}
+          getCardPresentation={(physical) => {
+            const card = getDatabaseCard(cardIndex, physical);
+            return {
+              name: getCardName(card, language),
+              image: resolveCardImage(card)
+            };
+          }}
+        />
+
+        <GameEventToast
+          entries={match.log || []}
+          classifyEntry={classifyBattleLogEntry}
+          language={language}
+        />
+
+        <GameLogDrawer
+          open={showLog}
+          entries={match.log || []}
+          classifyEntry={classifyBattleLogEntry}
+          language={language}
+          onClose={() => setShowLog(false)}
+        />
+      </ArenaOverlayLayer>
 
       <header className="sim-topbar">
 
@@ -5402,7 +5493,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v4.8.1 • Arena 2D
+            Eternal v4.9.0 • Arena 2D
           </span>
 
           <strong>
@@ -5442,16 +5533,19 @@ export default function Simulator({
         </div>
 
 
-        <PhaseBar
-          phase={
-            match.phase
-          }
-
-          playerColor={
-            match.players[
+        <PhaseTracker
+          currentPhase={match.phase}
+          activePlayerName={match.players[match.activePlayerId]?.name || ""}
+          turnNumber={match.turnNumber}
+          canAdvance={!match.battle && canControlActor && !blockingPending}
+          showAdvance={!match.battle}
+          onAdvance={() =>
+            dispatch(
+              { type: "ADVANCE_PHASE" },
               match.activePlayerId
-            ]?.playerColor
+            )
           }
+          language={language}
         />
 
 
@@ -5478,32 +5572,6 @@ export default function Simulator({
               ? "Card"
               : "Carta"}
           </button>
-
-          {!match.battle && (
-            <button
-              className="arena-next-phase-btn"
-              disabled={
-                !canControlActor ||
-                blockingPending
-              }
-              onClick={() =>
-                dispatch(
-                  {
-                    type:
-                      "ADVANCE_PHASE"
-                  },
-                  match.activePlayerId
-                )
-              }
-            >
-              <span>
-                {language === "en"
-                  ? "Next"
-                  : "Avançar"}
-              </span>
-              <b>›</b>
-            </button>
-          )}
 
           <button
             className={`ghost arena-dock-toggle ${
@@ -5611,100 +5679,31 @@ export default function Simulator({
             LEFT — SELECTED CARD
         ================================================= */}
 
-        <aside
-          className={`inspector panel arena-side-dock card-theme-${getInspectorCardTheme(selectedCard)} ${
-            showInspectorDock
-              ? "dock-open"
-              : "dock-closed"
-          }`}
+        <ContextPanel
+          open={showInspectorDock}
+          mode="card"
+          theme={getInspectorCardTheme(selectedCard)}
+          eyebrow={t("selectedCard")}
+          emptyText={t("selectCardHint")}
+          hasContent={Boolean(selectedCard)}
         >
 
-          <div className="inspector-scroll">
+          <CardPreview
+            card={selectedCard}
+            physical={selectedCtx?.card || null}
+            mode="selected"
+            source={selectedCtx?.zone || "field"}
+            name={selectedCard ? getCardName(selectedCard) : ""}
+            effect={selectedCard ? effectText(selectedCard, language) : ""}
+            noEffectText={t("noEffect")}
+            costLabel={t("cost")}
+          />
 
-            <span className="eyebrow">
-              {t(
-                "selectedCard"
-              )}
-            </span>
-
-
-            {selectedCard
-              ? (
-                <>
-
-                  <CardTile
-                    card={
-                      selectedCard
-                    }
-
-                    physical={
-                      selectedCtx.card
-                    }
-
-                    staticPreview
-                  />
-
-
-                  <h2>
-                    {getCardName(
-                      selectedCard
-                    )}
-                  </h2>
-
-
-                  <div className="card-meta">
-
-                    <span>
-                      {
-                        selectedCard.id
-                      }
-                    </span>
-
-                    <span>
-                      {
-                        selectedCard.cardType
-                      }
-                    </span>
-
-                    <span>
-                      {t(
-                        "cost"
-                      )}{" "}
-                      {
-                        selectedCard.cost
-                      }
-                    </span>
-
-                  </div>
-
-
-                  <EffectText
-                    text={
-                      effectText(
-                        selectedCard,
-                        language
-                      )
-                    }
-
-                    emptyText={
-                      t(
-                        "noEffect"
-                      )
-                    }
-                  />
-
-
-                  {actionButtons()}
-
-                </>
-              )
-              : (
-                <p className="muted">
-                  {t(
-                    "selectCardHint"
-                  )}
-                </p>
-              )}
+          <ActionBar
+            actions={actionButtons()}
+            visible={Boolean(selectedCard)}
+            context={selectedCtx?.zone || "none"}
+          />
 
 
             <details className="manual-tools compact-manual-tools">
@@ -6040,10 +6039,7 @@ export default function Simulator({
 
             </details>
 
-          </div>
-
-
-        </aside>
+        </ContextPanel>
 
 
         {/* =================================================
@@ -6063,6 +6059,14 @@ export default function Simulator({
           }}
         >
 
+          <TargetingUX
+            active={targetingMode !== "none"}
+            mode={targetingMode}
+            label={targetingLabel}
+            targetableCount={targetingTargetableCount}
+            selectedCount={targetingSelectedCount}
+          />
+
           <div
             className={
               battleFocusActive
@@ -6074,6 +6078,8 @@ export default function Simulator({
                   )
                 : "attack-focus-top-hud"
             }
+          
+            data-targeting-state={directBattleTargetId === topId ? "targetable" : undefined}
           >
           <OpponentHUD
             player={top}
@@ -6140,6 +6146,8 @@ export default function Simulator({
                   )
                 : ""
             }
+          
+            data-targeting-state={directBattleTargetId === bottomId ? "targetable" : undefined}
           >
           <PlayerHUD
             player={bottom}
@@ -6364,30 +6372,26 @@ export default function Simulator({
       ================================================= */}
 
       <div className="persistent-core-area persistent-reserve-area">
-        <CoreArea
+        <ReserveCoreDisplay
           title={t("reserve")}
           playerId={bottomId}
-          zone="reserve"
           regularCount={bottom.reserve}
           soul={bottomSoulReserve}
           canControl={canMoveCores}
           onCoreDrop={coreDrop}
           onCoreClick={smartCoreClick}
-          accent="reserve"
         />
       </div>
 
       <div className="persistent-core-area persistent-trash-area">
-        <CoreArea
+        <CoreTrashDisplay
           title={t("coreTrash")}
           playerId={bottomId}
-          zone="trash"
           regularCount={bottom.trashCores}
           soul={bottomSoulTrash}
           canControl={canMoveCores && Boolean(pending)}
           onCoreDrop={coreDrop}
           onCoreClick={smartCoreClick}
-          accent="trash"
         />
       </div>
 
@@ -6827,12 +6831,17 @@ export default function Simulator({
 
 
       {/* =================================================
-          CARD ZOOM
+          CARD PREVIEW
       ================================================= */}
 
       {previewCard && (
-        <div
-          className="card-zoom-preview"
+        <CardPreview
+          card={previewCard}
+          mode="hover"
+          source="hover"
+          imageSrc={resolveCardImage(previewCard)}
+          name={getCardName(previewCard)}
+          previewLabel={language === "en" ? "CARD PREVIEW" : "VISUALIZAÇÃO"}
           style={previewAnchor
             ? {
                 left: Math.max(12, Math.min(
@@ -6845,44 +6854,7 @@ export default function Simulator({
                 right: "auto"
               }
             : undefined}
-        >
-
-          <img
-            src={
-              resolveCardImage(
-                previewCard
-              )
-            }
-
-            alt={
-              getCardName(
-                previewCard
-              )
-            }
-          />
-
-          <div className="card-zoom-copy">
-            <span>
-              {language === "en"
-                ? "CARD PREVIEW"
-                : "VISUALIZAÇÃO"}
-            </span>
-
-            <strong>
-              {getCardName(
-                previewCard
-              )}
-            </strong>
-
-            <small>
-              {previewCard.id}
-              {previewCard.cardType
-                ? ` • ${previewCard.cardType}`
-                : ""}
-            </small>
-          </div>
-
-        </div>
+        />
       )}
 
 
@@ -7306,44 +7278,6 @@ export default function Simulator({
           </div>
         );
       })()}
-
-
-      {/* =================================================
-          LOG
-      ================================================= */}
-
-      {showLog && (
-        <Modal
-          title={
-            t(
-              "log"
-            )
-          }
-
-          onClose={() =>
-            setShowLog(
-              false
-            )
-          }
-        >
-          <div className="game-log game-log-v381">
-
-            {[...(match.log || [])]
-              .slice(-80)
-              .reverse()
-              .map((entry) => {
-                const kind = classifyBattleLogEntry(entry);
-                return (
-                  <div className={`game-log-entry log-${kind}`} key={entry.id}>
-                    <span>T{entry.turn} • {String(entry.phase || "—").toUpperCase()}</span>
-                    <p>{entry.text}</p>
-                  </div>
-                );
-              })}
-
-          </div>
-        </Modal>
-      )}
 
 
       {/* =================================================

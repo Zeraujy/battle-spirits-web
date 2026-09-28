@@ -1,0 +1,65 @@
+/* =========================================================
+   KAIHOU! Shared Interface Tokens
+   v4.9.1 — Arena Visual Identity Alignment / Block 01-03
+
+   These tokens are intentionally additive. Existing menu surfaces keep their
+   current CSS in this block; ArenaShell and Battlefield are the first consumers.
+   Gameplay-semantic colors (Core, Soul Core, symbols, targeting) remain outside
+   this file by design.
+========================================================= */
+
+:root {
+  /* Surfaces */
+  --surface-primary: var(--eternal-surface, rgba(8, 8, 10, .82));
+  --surface-secondary: rgba(10, 10, 12, .72);
+  --surface-elevated: rgba(14, 14, 16, .86);
+  --surface-glass: rgba(4, 4, 6, .56);
+  --surface-soft: var(--eternal-surface-soft, rgba(255, 255, 255, .035));
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, .08);
+  --border-default: var(--eternal-border, rgba(255, 255, 255, .12));
+  --border-strong: var(--eternal-border-strong, rgba(255, 255, 255, .24));
+
+  /* Typography */
+  --text-primary: var(--text, #f7f7f7);
+  --text-secondary: rgba(255, 255, 255, .72);
+  --text-muted: var(--eternal-text-muted, rgba(255, 255, 255, .52));
+  --text-soft: var(--eternal-text-soft, rgba(255, 255, 255, .34));
+
+  /* Glass / depth */
+  --backdrop-blur: 14px;
+  --surface-opacity: .82;
+  --shadow-soft: 0 12px 34px rgba(0, 0, 0, .26);
+  --shadow-elevated: 0 22px 70px rgba(0, 0, 0, .38);
+  --shadow-inset-highlight: inset 0 1px 0 rgba(255, 255, 255, .045);
+
+  /* Geometry */
+  --radius-small: 8px;
+  --radius-medium: var(--eternal-radius, 12px);
+  --radius-large: 18px;
+
+  /* Motion */
+  --transition-fast: 140ms ease;
+  --transition-standard: 180ms ease;
+
+  /* Neutral interaction language. Gameplay targeting colors stay separate. */
+  --interaction-hover: rgba(255, 255, 255, .075);
+  --interaction-active: rgba(255, 255, 255, .14);
+  --interaction-disabled: rgba(255, 255, 255, .26);
+
+  /* Arena-specific composition aliases built from the shared language. */
+  --arena-surface-shell: rgba(2, 2, 3, .78);
+  --arena-surface-field: rgba(8, 8, 10, .88);
+  --arena-surface-field-soft: rgba(255, 255, 255, .024);
+  --arena-border-field: var(--border-default);
+  --arena-divider: var(--border-subtle);
+  --arena-vignette: rgba(0, 0, 0, .46);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms linear;
+    --transition-standard: 0ms linear;
+  }
+}

@@ -1,0 +1,133 @@
+/* Arena UX/UI Overhaul — Phase 5 / v4.9.1 Step 09: Hand interaction alignment */
+
+.simulator-page .arena-hand-area {
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  color: var(--text-primary);
+}
+
+.simulator-page .arena-hand-surface {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  display: grid;
+}
+
+.simulator-page .arena-player-hand-area::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 18%;
+  right: 18%;
+  bottom: 0;
+  height: 54%;
+  border-radius: 50% 50% 0 0 / 32% 32% 0 0;
+  background: radial-gradient(ellipse at 50% 100%, var(--interaction-hover), transparent 68%);
+  opacity: .48;
+  pointer-events: none;
+}
+
+.simulator-page .arena-opponent-hand-area::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 24%;
+  right: 24%;
+  top: 0;
+  height: 44%;
+  background: radial-gradient(ellipse at 50% 0%, var(--surface-soft), transparent 70%);
+  pointer-events: none;
+}
+
+.simulator-page .arena-hand-area .hand-row { width: 100%; }
+
+.simulator-page .arena-player-hand-area .hand-cards {
+  --hand-card-width: 76px;
+  --hand-overlap: -8px;
+  min-height: 126px;
+  align-items: flex-end !important;
+  padding-bottom: 4px !important;
+}
+
+.simulator-page .arena-player-hand-area .hand-card-slot {
+  flex-basis: var(--hand-card-width);
+  width: var(--hand-card-width);
+  margin-inline: var(--hand-overlap);
+  transform: translate3d(0, var(--fan-lift), 0) rotate(var(--fan-rotation));
+  backface-visibility: hidden;
+  will-change: transform;
+  transition: transform var(--transition-fast), margin var(--transition-fast), filter var(--transition-fast), opacity var(--transition-fast);
+}
+
+.simulator-page .arena-player-hand-area .hand-card-slot > .card-tile {
+  transform: translateZ(0);
+  transition: transform var(--transition-fast), filter var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast) !important;
+}
+
+.simulator-page .arena-player-hand-area .hand-card-slot:hover {
+  z-index: 100;
+  margin-inline: -1px;
+  transform: translate3d(0, -24px, 0) rotate(0deg) scale(1.025);
+}
+
+.simulator-page .arena-player-hand-area .hand-card-slot:hover > .card-tile {
+  filter: brightness(1.035);
+}
+
+.simulator-page .arena-player-hand-area .hand-card-slot:has(.card-tile.selected) {
+  z-index: 90;
+  transform: translate3d(0, -17px, 0) rotate(0deg);
+}
+
+.simulator-page .arena-player-hand-area .hand-card-slot:has(.card-tile.selected) > .card-tile {
+  box-shadow: 0 0 0 1px var(--border-strong), var(--shadow-soft) !important;
+}
+
+.simulator-page .arena-player-hand-area .hand-card-slot:has(.card-tile.pointer-drag-active) {
+  opacity: .28;
+  transform: translate3d(0, -12px, 0) rotate(0deg) scale(.97);
+}
+
+.simulator-page .arena-opponent-hand-area .hand-card-slot {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.simulator-page .arena-hand-area .hand-cards {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-default) transparent;
+}
+
+.simulator-page .arena-hand-area .hand-cards::-webkit-scrollbar { height: 4px; }
+.simulator-page .arena-hand-area .hand-cards::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 999px; }
+
+@media (max-width: 1366px) {
+  .simulator-page .arena-player-hand-area .hand-cards {
+    --hand-card-width: 69px;
+    --hand-overlap: -9px;
+    min-height: 114px;
+  }
+  .simulator-page .arena-player-hand-area .hand-card-slot,
+  .simulator-page .arena-player-hand-area .hand-card-slot > .card-tile { width: var(--hand-card-width) !important; }
+}
+
+@media (max-width: 1180px) {
+  .simulator-page .arena-player-hand-area .hand-cards {
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    scroll-snap-type: x proximity;
+    padding-inline: 16px !important;
+  }
+  .simulator-page .arena-player-hand-area .hand-card-slot { margin-inline: -5px; scroll-snap-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simulator-page .arena-hand-area .hand-card-slot,
+  .simulator-page .arena-hand-area .hand-card-slot > .card-tile { animation: none !important; transition: none !important; }
+}

@@ -4,6 +4,67 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "4.9.0",
+    date: { pt: "27/09/2026", en: "09/27/2026" },
+    title: { pt: "Arena UX/UI Overhaul", en: "Arena UX/UI Overhaul" },
+    summary: {
+      pt: "A Arena foi reconstruída visualmente para oferecer uma mesa de Battle Spirits mais limpa, responsiva, fluida e focada no duelo.",
+      en: "The Arena has been visually rebuilt to deliver a cleaner, more responsive and fluid Battle Spirits table focused on the duel."
+    },
+    sections: [
+      {
+        title: { pt: "Nova Arena", en: "New Arena" },
+        items: {
+          pt: [
+            "Battlefield reorganizado em áreas claras para oponente, centro de batalha e jogador.",
+            "HUDs compactos concentram Life, Deck, Reserve, Core Trash, mão e Burst sem ocupar espaço desnecessário.",
+            "Card Preview, Context Panel e Action Bar mostram informações e ações somente quando são relevantes.",
+            "Phase Tracker reorganiza a leitura do turno em uma trilha compacta e consistente."
+          ],
+          en: [
+            "The Battlefield is reorganized into clear opponent, battle center and player areas.",
+            "Compact HUDs concentrate Life, Deck, Reserve, Core Trash, hand and Burst without unnecessary screen usage.",
+            "Card Preview, Context Panel and Action Bar show information and actions only when relevant.",
+            "Phase Tracker reorganizes turn readability into a compact and consistent track."
+          ]
+        }
+      },
+      {
+        title: { pt: "Interação e fluidez", en: "Interaction and fluidity" },
+        items: {
+          pt: [
+            "A mão ganhou apresentação mais natural, seleção mais clara e melhor adaptação a diferentes quantidades de cartas.",
+            "Targeting visual foi padronizado sem duplicar regras de legalidade do jogo.",
+            "Movimentações de cartas usam uma camada visual independente: o Game State atualiza primeiro e a animação apenas representa o resultado.",
+            "Burst, notificações e Game Log usam uma Arena Overlay Layer que não bloqueia cliques ou drag na mesa."
+          ],
+          en: [
+            "The hand gained a more natural presentation, clearer selection and better adaptation to different card counts.",
+            "Visual targeting was standardized without duplicating game legality rules.",
+            "Card movement uses an independent visual layer: Game State updates first and animation only represents the result.",
+            "Burst, notifications and Game Log use an Arena Overlay Layer that does not block clicks or drag on the table."
+          ]
+        }
+      },
+      {
+        title: { pt: "Responsividade e estabilidade", en: "Responsiveness and stability" },
+        items: {
+          pt: [
+            "A Arena agora possui modos wide, standard e compact para preservar a leitura da mesa em diferentes resoluções.",
+            "O Card Motion mede layout apenas quando cartas realmente mudam de zona, reduzindo trabalho visual desnecessário.",
+            "A atualização preserva o Rules Engine, multiplayer e fluxos Online existentes; o redesign consome o estado atual sem assumir controle da lógica do jogo."
+          ],
+          en: [
+            "The Arena now provides wide, standard and compact modes to preserve table readability across resolutions.",
+            "Card Motion measures layout only when cards actually change zones, reducing unnecessary visual work.",
+            "The update preserves the Rules Engine, multiplayer and existing Online flows; the redesign consumes current state without taking control of game logic."
+          ]
+        }
+      }
+    ]
+  },
+
+{
     version: "4.8.1",
     date: { pt: "27/09/2026", en: "09/27/2026" },
     title: { pt: "Web Foundation Cleanup", en: "Web Foundation Cleanup" },

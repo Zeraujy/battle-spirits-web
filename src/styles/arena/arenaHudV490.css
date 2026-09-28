@@ -155,3 +155,101 @@
     transition: none !important;
   }
 }
+
+/* Life stability hotfix — keep the target anchored while Life changes.
+ * This explicitly neutralizes the legacy absolute-positioned Life widget and
+ * keeps ten fixed core slots so neither the HUD item nor its contents reflow. */
+.simulator-page .arena-hud-life {
+  position: relative !important;
+  inset: auto !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  translate: none !important;
+  transform: none !important;
+  box-sizing: border-box;
+  flex: 0 0 104px;
+  align-self: center;
+  width: 104px;
+  min-width: 104px !important;
+  max-width: 104px;
+  height: 34px;
+  min-height: 34px;
+  max-height: 34px;
+  margin: 0 !important;
+  contain: layout paint;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.simulator-page .arena-hud-life .life-core-row {
+  flex: 0 0 42px;
+  width: 42px;
+  min-width: 42px;
+  max-width: 42px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.simulator-page .arena-hud-life .life-core {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.simulator-page .arena-hud-life .life-core.is-empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Do not reuse the legacy .resource-pulse animation here: it scales the
+ * element with transform and can visually displace the Life target. */
+.simulator-page .arena-hud-life.life-value-changed {
+  animation: none !important;
+  transform: none !important;
+}
+
+.simulator-page .arena-hud-life.life-value-changed::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: arenaLifeFeedbackStable .62s ease both;
+}
+
+@keyframes arenaLifeFeedbackStable {
+  0% {
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(216,181,181,0);
+  }
+  30% {
+    opacity: 1;
+    box-shadow: 0 0 0 1px rgba(216,181,181,.26), 0 0 20px rgba(216,181,181,.14);
+  }
+  100% {
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(216,181,181,0);
+  }
+}
+
+@media (max-width: 1366px) {
+  .simulator-page .arena-hud-life {
+    flex-basis: 94px;
+    width: 94px;
+    min-width: 94px !important;
+    max-width: 94px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simulator-page .arena-hud-life.life-value-changed::before {
+    animation: none !important;
+    opacity: 0;
+  }
+}
+

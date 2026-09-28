@@ -1,0 +1,103 @@
+/* Arena UX/UI Overhaul — Phase 19: Responsive Arena */
+
+.arena-shell {
+  --arena-side-dock-width: 222px;
+  --arena-shell-gap: 7px;
+  --arena-playmat-radius: 18px;
+  --arena-hud-scale: 1;
+}
+
+.arena-shell[data-arena-layout-mode="wide"] {
+  --arena-side-dock-width: 236px;
+  --arena-shell-gap: 9px;
+  --arena-playmat-radius: 20px;
+}
+
+.arena-shell[data-arena-layout-mode="standard"] {
+  --arena-side-dock-width: 222px;
+}
+
+.arena-shell[data-arena-layout-mode="compact"] {
+  --arena-side-dock-width: 0px;
+  --arena-shell-gap: 5px;
+  --arena-playmat-radius: 12px;
+  --arena-hud-scale: .94;
+}
+
+.arena-shell[data-arena-layout-mode] .sim-layout {
+  gap: var(--arena-shell-gap) !important;
+}
+
+.arena-shell[data-arena-layout-mode="wide"] .sim-layout.inspector-open.control-open {
+  grid-template-columns: var(--arena-side-dock-width) minmax(680px, 1fr) var(--arena-side-dock-width) !important;
+}
+
+.arena-shell[data-arena-layout-mode="wide"] .sim-layout.inspector-closed.control-open {
+  grid-template-columns: 0 minmax(680px, 1fr) var(--arena-side-dock-width) !important;
+}
+
+.arena-shell[data-arena-layout-mode="wide"] .sim-layout.inspector-open.control-closed {
+  grid-template-columns: var(--arena-side-dock-width) minmax(680px, 1fr) 0 !important;
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .sim-layout,
+.arena-shell[data-arena-layout-mode="compact"] .sim-layout.inspector-open.control-open,
+.arena-shell[data-arena-layout-mode="compact"] .sim-layout.inspector-closed.control-open,
+.arena-shell[data-arena-layout-mode="compact"] .sim-layout.inspector-open.control-closed,
+.arena-shell[data-arena-layout-mode="compact"] .sim-layout.inspector-closed.control-closed {
+  grid-template-columns: minmax(0, 1fr) !important;
+  padding: 5px !important;
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .arena-side-dock {
+  display: none !important;
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .arena-battlefield {
+  border-radius: var(--arena-playmat-radius);
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .arena-hud-secondary,
+.arena-shell[data-arena-layout-mode="compact"] .arena-hud-core-trash {
+  display: none !important;
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .arena-compact-hud {
+  grid-template-columns: minmax(102px, 1fr) auto !important;
+  gap: 5px !important;
+  padding-inline: 6px !important;
+  backdrop-filter: none !important;
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .arena-hud-stat {
+  min-width: 39px;
+  padding-inline: 4px;
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .arena-phase-tracker {
+  max-width: calc(100vw - 20px);
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .arena-phase-label {
+  font-size: 6px;
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .arena-hand-area {
+  min-width: 0;
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .card-zoom-preview {
+  width: min(190px, 24vw) !important;
+}
+
+@media (max-width: 720px) {
+  .arena-shell[data-arena-layout-mode="compact"] .arena-hud-deck {
+    display: none;
+  }
+
+  .arena-shell[data-arena-layout-mode="compact"] .arena-compact-hud .avatar-wrap {
+    width: 26px;
+    height: 26px;
+    flex-basis: 26px;
+  }
+}

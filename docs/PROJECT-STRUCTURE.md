@@ -1,4 +1,4 @@
-# Project Structure — v4.8.1
+# Project Structure — v4.9.0
 
 - `src/` — frontend Web.
 - `public/` — imagens, cartas e configuração pública.

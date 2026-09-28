@@ -1,0 +1,18 @@
+/* v4.9.1 Step 11 — shared overlay surface alignment */
+
+.arena-overlay-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  pointer-events: none;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--text-primary);
+}
+
+.arena-overlay-layer .arena-overlay-interactive { pointer-events: auto; }
+.arena-overlay-layer .card-motion-layer { z-index: 10; }
+
+@media (prefers-reduced-motion: reduce) {
+  .arena-overlay-layer * { scroll-behavior: auto !important; }
+}

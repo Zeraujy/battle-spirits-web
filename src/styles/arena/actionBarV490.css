@@ -1,0 +1,111 @@
+/* =========================================================
+   KAIHOU! Arena Action Bar
+   v4.9.1 — Visual Identity Alignment / Step 06
+
+   Actions remain contextual and visually subordinate to cards.
+========================================================= */
+
+.simulator-page .arena-action-bar {
+  width: 100%;
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.simulator-page .arena-action-bar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.simulator-page .arena-action-bar-inner > button,
+.simulator-page .arena-action-bar-inner > .combine-box {
+  margin: 0 !important;
+}
+
+.simulator-page .arena-action-bar-inner > button {
+  min-height: 34px;
+  padding: 7px 11px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-small);
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-inset-highlight);
+  font-weight: 650;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.simulator-page .arena-action-bar-inner > button:hover,
+.simulator-page .arena-action-bar-inner > button:focus-visible {
+  border-color: var(--border-default);
+  background: var(--interaction-hover);
+  color: var(--text-primary);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+/* Primary means preferred, not visually dominant. */
+.simulator-page .arena-action-bar-inner > button.primary-btn {
+  border-color: var(--border-default);
+  background: rgba(255, 255, 255, .075);
+  color: var(--text-primary);
+}
+
+.simulator-page .arena-action-bar-inner > button.primary-btn:hover,
+.simulator-page .arena-action-bar-inner > button.primary-btn:focus-visible {
+  border-color: var(--border-strong);
+  background: var(--interaction-active);
+}
+
+.simulator-page .arena-action-bar-inner > button:disabled {
+  border-color: var(--border-subtle);
+  background: transparent;
+  color: var(--interaction-disabled);
+  transform: none;
+}
+
+.simulator-page .arena-action-bar-inner > .combine-box {
+  width: 100%;
+  padding: 7px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-small);
+  background: rgba(255, 255, 255, .018);
+}
+
+.simulator-page .arena-action-bar-inner > .combine-box > span {
+  color: var(--text-muted);
+}
+
+.simulator-page .arena-action-bar-inner > .combine-box button {
+  border-color: var(--border-subtle);
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+}
+
+.simulator-page .arena-action-bar-inner > .combine-box button:hover,
+.simulator-page .arena-action-bar-inner > .combine-box button:focus-visible {
+  border-color: var(--border-default);
+  background: var(--interaction-hover);
+  color: var(--text-primary);
+}
+
+@media (max-width: 1380px) {
+  .simulator-page .arena-action-bar-inner > button {
+    min-height: 32px;
+    padding-inline: 9px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simulator-page .arena-action-bar-inner > button {
+    transition: none;
+  }
+}

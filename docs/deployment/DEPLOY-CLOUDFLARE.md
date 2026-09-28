@@ -1,4 +1,4 @@
-# Deploy Cloudflare — Battle Spirits: KAIHOU! Simulator v4.8.1
+# Deploy Cloudflare — Battle Spirits: KAIHOU! Simulator v4.9.0
 
 ## Cloudflare Workers
 - Build command: `npm run build`

@@ -1,0 +1,62 @@
+import fs from "node:fs";
+import path from "node:path";
+
+const root = process.cwd();
+const read = (p) => fs.readFileSync(path.join(root, p), "utf8");
+const exists = (p) => fs.existsSync(path.join(root, p));
+
+const required = [
+  "src/components/game/arena/CardPreview.jsx",
+  "src/components/game/arena/ContextPanel.jsx",
+  "src/styles/arena/cardPreviewV490.css",
+  "src/styles/arena/contextPanelV490.css",
+  "docs/arena/PHASE-6-7.md",
+  "docs/arena/VISUAL-CLEANUP-PENDING.md"
+];
+
+const errors = [];
+for (const file of required) {
+  if (!exists(file)) errors.push(`Missing required Phase 6/7 file: ${file}`);
+}
+
+const forbiddenImports = [
+  "/game/reducer",
+  "/game/legalActions",
+  "/online/",
+  "/services/",
+  "applyGameAction",
+  "onlineClient"
+];
+
+for (const file of [
+  "src/components/game/arena/CardPreview.jsx",
+  "src/components/game/arena/ContextPanel.jsx"
+]) {
+  if (!exists(file)) continue;
+  const source = read(file);
+  for (const token of forbiddenImports) {
+    if (source.includes(token)) errors.push(`${file} crosses presentation boundary: ${token}`);
+  }
+}
+
+const simulator = read("src/pages/Simulator.jsx");
+for (const token of ["<CardPreview", "<ContextPanel", "mode=\"selected\"", "mode=\"hover\""]) {
+  if (!simulator.includes(token)) errors.push(`Simulator missing Phase 6/7 integration token: ${token}`);
+}
+
+if (simulator.includes('<div\n          className="card-zoom-preview"')) {
+  errors.push("Legacy inline card zoom preview remains in Simulator.jsx");
+}
+
+const pending = read("docs/arena/VISUAL-CLEANUP-PENDING.md");
+if (!/Life HUD layout shift/i.test(pending)) {
+  errors.push("Life HUD layout-shift bug is not recorded for final Visual cleanup");
+}
+
+if (errors.length) {
+  console.error("Arena Phase 6/7 audit: FAILED");
+  for (const error of errors) console.error(`- ${error}`);
+  process.exit(1);
+}
+
+console.log("Arena Phase 6/7 audit: OK");

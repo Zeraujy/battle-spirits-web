@@ -1,18 +1,20 @@
-/* Arena UX/UI Overhaul — Phase 2: Battlefield */
+/* Arena Visual Identity Alignment — v4.9.1 / Step 03: Battlefield surfaces */
 
 .arena-battlefield {
   position: relative;
   isolation: isolate;
   overflow: hidden !important;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 18px;
+  border: 1px solid var(--arena-border-field);
+  border-radius: var(--arena-playmat-radius, var(--radius-large));
   background:
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.045), transparent 34%),
-    linear-gradient(180deg, rgba(17,17,19,0.92), rgba(7,7,9,0.96));
+    radial-gradient(circle at 50% 48%, rgba(255,255,255,.034), transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,.018), transparent 20%, transparent 78%, rgba(0,0,0,.15)),
+    var(--arena-surface-field);
+  backdrop-filter: blur(calc(var(--backdrop-blur) * .35));
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.05),
-    inset 0 0 80px rgba(0,0,0,0.38),
-    0 18px 50px rgba(0,0,0,0.24);
+    var(--shadow-inset-highlight),
+    inset 0 0 88px var(--arena-vignette),
+    var(--shadow-soft);
 }
 
 .arena-battlefield::before {
@@ -21,10 +23,20 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.38;
+  opacity: .42;
   background:
-    linear-gradient(90deg, transparent 49.8%, rgba(255,255,255,0.045) 50%, transparent 50.2%),
-    linear-gradient(180deg, transparent 49.75%, rgba(255,255,255,0.06) 50%, transparent 50.25%);
+    linear-gradient(90deg, transparent 49.8%, rgba(255,255,255,.035) 50%, transparent 50.2%),
+    linear-gradient(180deg, transparent 49.75%, rgba(255,255,255,.05) 50%, transparent 50.25%);
+}
+
+.arena-battlefield::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .34);
 }
 
 .arena-field-section {
@@ -33,7 +45,10 @@
   min-height: 0;
   display: grid;
   align-items: stretch;
-  transition: opacity 160ms ease, filter 160ms ease, transform 160ms ease;
+  transition:
+    opacity var(--transition-fast),
+    filter var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .arena-field-section > .battlefield-row {
@@ -52,9 +67,10 @@
 .arena-center-field {
   position: relative;
   margin: 0 !important;
-  border-top-color: rgba(255,255,255,0.08) !important;
-  border-bottom-color: rgba(255,255,255,0.08) !important;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.025), transparent);
+  border-top-color: var(--arena-divider) !important;
+  border-bottom-color: var(--arena-divider) !important;
+  background:
+    linear-gradient(90deg, transparent 8%, var(--arena-surface-field-soft) 50%, transparent 92%);
 }
 
 .arena-center-field::before {
@@ -64,19 +80,21 @@
   right: 12%;
   top: 50%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+  background: linear-gradient(90deg, transparent, var(--border-default), transparent);
+  opacity: .72;
   pointer-events: none;
 }
 
 .arena-legacy-hand-slot {
   min-width: 0;
   min-height: 0;
-  transition: opacity 160ms ease, filter 160ms ease;
+  transition: opacity var(--transition-fast), filter var(--transition-fast);
 }
 
 @media (max-width: 1366px) {
   .arena-battlefield {
-    border-radius: 14px;
+    border-radius: var(--arena-playmat-radius, var(--radius-medium));
+    backdrop-filter: none;
   }
 }
 

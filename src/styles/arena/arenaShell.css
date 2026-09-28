@@ -1,19 +1,51 @@
 /*
- * Arena UX/UI Overhaul — Phase 1
+ * Arena Visual Identity Alignment — v4.9.1 / Steps 01-03
  *
- * ArenaShell intentionally introduces no visual redesign yet. The existing
- * `.simulator-page` styles remain authoritative until Phase 2 begins the
- * Battlefield migration. This file establishes safe layout ownership without
- * changing gameplay presentation or interaction behavior.
+ * ArenaShell now consumes the shared interface token language without changing
+ * gameplay structure. The shell remains deliberately quieter than menu surfaces:
+ * shared identity, lower visual density.
  */
 
 .arena-shell {
   position: relative;
   isolation: isolate;
   min-width: 0;
+  color: var(--text-primary);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, .14), transparent 18%, transparent 82%, rgba(0, 0, 0, .24)),
+    var(--arena-surface-shell);
+}
+
+.arena-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, .022), transparent 34%),
+    linear-gradient(90deg, rgba(0, 0, 0, .28), transparent 18%, transparent 82%, rgba(0, 0, 0, .28));
+}
+
+.arena-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .07;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0, rgba(255,255,255,.018) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode: soft-light;
 }
 
 .arena-shell,
 .arena-shell * {
   box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arena-shell::after {
+    mix-blend-mode: normal;
+  }
 }

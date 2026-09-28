@@ -1,0 +1,70 @@
+/* v4.9.1 Step 10 — neutral targeting language; gameplay legality remains external. */
+
+.arena-targeting-ux {
+  position: absolute;
+  z-index: 52;
+  top: clamp(5.6rem, 10vh, 8rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2rem;
+  max-width: min(78vw, 34rem);
+  padding: 0.42rem 0.72rem;
+  border: 1px solid var(--border-default);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-elevated) 90%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(var(--backdrop-blur));
+  pointer-events: none;
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.arena-targeting-pulse {
+  width: 0.46rem;
+  height: 0.46rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 0 rgba(255,255,255,.2);
+  animation: arena-targeting-pulse 1.25s ease-out infinite;
+}
+
+.arena-targeting-count { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+[data-targeting-state="targetable"] { position: relative; isolation: isolate; }
+
+[data-targeting-state="targetable"]::after {
+  content: "";
+  position: absolute;
+  z-index: 8;
+  inset: -5px;
+  border: 1px solid var(--border-strong);
+  border-radius: inherit;
+  box-shadow: 0 0 0 1px var(--border-subtle), 0 0 20px rgba(255,255,255,.12);
+  pointer-events: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+}
+
+[data-targeting-state="selected"]::after {
+  border-width: 2px;
+  border-color: var(--text-secondary);
+  box-shadow: 0 0 0 2px var(--border-subtle), 0 0 24px rgba(255,255,255,.18);
+}
+
+[data-targeting-state="unavailable"] {
+  opacity: .48;
+  filter: saturate(.55);
+  transition: opacity var(--transition-fast), filter var(--transition-fast);
+}
+
+@keyframes arena-targeting-pulse {
+  70% { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+
+@media (prefers-reduced-motion: reduce) { .arena-targeting-pulse { animation: none; } }

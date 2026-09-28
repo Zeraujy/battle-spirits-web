@@ -1,0 +1,199 @@
+/* =========================================================
+   KAIHOU! Arena Phase Tracker
+   v4.9.1 — Visual Identity Alignment / Step 07
+========================================================= */
+
+.simulator-page .arena-phase-tracker {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(330px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-medium);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.018), transparent 55%),
+    var(--surface-glass);
+  box-shadow: var(--shadow-inset-highlight);
+  backdrop-filter: blur(calc(var(--backdrop-blur) * .72));
+  -webkit-backdrop-filter: blur(calc(var(--backdrop-blur) * .72));
+}
+
+.simulator-page .arena-phase-tracker-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 70px;
+  line-height: 1.05;
+}
+
+.simulator-page .arena-phase-tracker-meta span {
+  color: var(--text-muted);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+.simulator-page .arena-phase-tracker-meta strong {
+  margin-top: 3px;
+  max-width: 110px;
+  overflow: hidden;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.simulator-page .arena-phase-track {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(34px, 1fr));
+  align-items: center;
+  gap: 3px;
+}
+
+.simulator-page .arena-phase-item {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  opacity: .42;
+  transition:
+    color var(--transition-fast),
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.simulator-page .arena-phase-item::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: calc(-50% + 4px);
+  right: calc(50% + 4px);
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.simulator-page .arena-phase-item:first-child::before {
+  display: none;
+}
+
+.simulator-page .arena-phase-item.is-complete {
+  color: var(--text-secondary);
+  opacity: .72;
+}
+
+.simulator-page .arena-phase-item.is-current {
+  color: var(--text-primary);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.simulator-page .arena-phase-dot {
+  position: relative;
+  z-index: 1;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background: var(--surface-secondary);
+  box-shadow: 0 0 0 2px var(--surface-glass);
+}
+
+.simulator-page .arena-phase-item.is-complete .arena-phase-dot {
+  border-color: var(--border-default);
+  background: rgba(255, 255, 255, .38);
+}
+
+.simulator-page .arena-phase-item.is-current .arena-phase-dot {
+  width: 9px;
+  height: 9px;
+  border-color: var(--border-strong);
+  background: var(--text-primary);
+  box-shadow: 0 0 0 3px rgba(255,255,255,.075);
+}
+
+.simulator-page .arena-phase-label {
+  max-width: 100%;
+  overflow: hidden;
+  color: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 9px;
+  letter-spacing: .02em;
+}
+
+.simulator-page .arena-phase-item.is-current .arena-phase-label {
+  font-weight: 750;
+}
+
+.simulator-page .arena-phase-advance {
+  min-width: 70px;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-small);
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-inset-highlight);
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.simulator-page .arena-phase-advance:hover:not(:disabled),
+.simulator-page .arena-phase-advance:focus-visible:not(:disabled) {
+  border-color: var(--border-default);
+  background: var(--interaction-hover);
+  color: var(--text-primary);
+  outline: none;
+  transform: translateX(1px);
+}
+
+.simulator-page .arena-phase-advance b {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.simulator-page .arena-phase-advance:disabled {
+  border-color: var(--border-subtle);
+  background: transparent;
+  color: var(--interaction-disabled);
+  opacity: .55;
+}
+
+@media (max-width: 1500px) {
+  .simulator-page .arena-phase-tracker {
+    grid-template-columns: minmax(280px, 1fr) auto;
+  }
+
+  .simulator-page .arena-phase-tracker-meta {
+    display: none;
+  }
+}
+
+@media (max-width: 1180px) {
+  .simulator-page .arena-phase-label {
+    display: none;
+  }
+
+  .simulator-page .arena-phase-tracker {
+    grid-template-columns: minmax(220px, 1fr) auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simulator-page .arena-phase-item,
+  .simulator-page .arena-phase-advance {
+    transition: none;
+  }
+}

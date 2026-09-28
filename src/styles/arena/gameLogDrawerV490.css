@@ -1,0 +1,75 @@
+/* v4.9.1 Step 11 — GameLogDrawer alignment */
+
+.game-log-drawer {
+  position: absolute;
+  top: 72px;
+  right: 16px;
+  bottom: 18px;
+  width: min(390px, calc(100vw - 32px));
+  display: flex;
+  flex-direction: column;
+  background: color-mix(in srgb, var(--surface-elevated) 94%, transparent);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-elevated);
+  backdrop-filter: blur(calc(var(--backdrop-blur) + 4px));
+  transform: translate3d(calc(100% + 28px), 0, 0);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform var(--transition-standard), opacity var(--transition-fast), visibility 0s linear 180ms;
+  z-index: 42;
+}
+
+.game-log-drawer.is-open {
+  transform: translate3d(0,0,0);
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.game-log-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-soft);
+}
+
+.game-log-drawer-header div { display: grid; gap: 2px; }
+.game-log-drawer-header span { color: var(--text-muted); font-size: 10px; letter-spacing: .16em; }
+.game-log-drawer-header strong { color: var(--text-primary); font-size: 18px; font-weight: 650; }
+
+.game-log-drawer-close {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-small);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+.game-log-drawer-close:hover { background: var(--interaction-hover); border-color: var(--border-default); color: var(--text-primary); }
+
+.game-log-drawer-list { min-height: 0; overflow: auto; padding: 8px 12px 14px; scrollbar-width: thin; scrollbar-color: var(--border-default) transparent; }
+.game-log-drawer-entry { position: relative; padding: 11px 10px 11px 14px; border-bottom: 1px solid var(--border-subtle); }
+.game-log-drawer-entry::before { content: ""; position: absolute; left: 2px; top: 16px; width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: .6; }
+.game-log-drawer-entry > span { display: block; color: var(--text-muted); font-size: 9px; letter-spacing: .12em; margin-bottom: 4px; }
+.game-log-drawer-entry p { margin: 0; font-size: 12px; line-height: 1.45; color: var(--text-secondary); }
+.game-log-drawer-entry.log-life { color: #fff; }
+.game-log-drawer-entry.log-timing { color: #ffd98a; }
+.game-log-drawer-entry.log-battle { color: #ffaaa4; }
+.game-log-drawer-entry.log-play { color: #bfe0ff; }
+.game-log-drawer-entry.log-removal { color: #d3baff; }
+.game-log-drawer-empty { padding: 24px 12px; text-align: center; color: var(--text-muted); font-size: 12px; }
+
+@media (max-width: 760px) {
+  .game-log-drawer { top: auto; left: 8px; right: 8px; bottom: 8px; width: auto; height: min(62vh, 520px); transform: translate3d(0, calc(100% + 20px), 0); }
+  .game-log-drawer.is-open { transform: translate3d(0,0,0); }
+}
+@media (prefers-reduced-motion: reduce) { .game-log-drawer { transition: none; } }
+.game-log-drawer:not(.is-open) { pointer-events: none !important; }

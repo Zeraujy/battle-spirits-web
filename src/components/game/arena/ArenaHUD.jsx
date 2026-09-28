@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { useLanguage } from "../../../i18n.jsx";
 import "../../../styles/arena/arenaHudV490.css";
 
-function ArenaHUD({ player, active, actor, opponent = false, dataLifeTarget, role }) {
+function ArenaHUDComponent({ player, active, actor, opponent = false, dataLifeTarget, role }) {
   const { t } = useLanguage();
   const reserveCount = Number(player?.reserve || 0) + (player?.soulCore?.zone === "reserve" ? 1 : 0);
   const coreTrashCount = Number(player?.trashCores || 0) + (player?.soulCore?.zone === "trash" ? 1 : 0);
@@ -11,15 +11,16 @@ function ArenaHUD({ player, active, actor, opponent = false, dataLifeTarget, rol
   const handCount = Number(player?.hand?.length || 0);
   const playerColor = player?.playerColor || (opponent ? "#929292" : "#d8d8d8");
   const [resourcePulse, setResourcePulse] = useState(null);
-  const previousResources = useRef({ life: lifeCount, reserve: reserveCount, trash: coreTrashCount });
+  const previousResources = useRef({ reserve: reserveCount, trash: coreTrashCount });
 
+  // Life intentionally does not participate in resourcePulse. The Life box is
+  // geometry-stable and receives no class/state transition when damage occurs.
   useEffect(() => {
-    const nextResources = { life: lifeCount, reserve: reserveCount, trash: coreTrashCount };
+    const nextResources = { reserve: reserveCount, trash: coreTrashCount };
     const previous = previousResources.current;
     let changedResource = null;
 
-    if (previous.life !== nextResources.life) changedResource = "life";
-    else if (previous.reserve !== nextResources.reserve) changedResource = "reserve";
+    if (previous.reserve !== nextResources.reserve) changedResource = "reserve";
     else if (previous.trash !== nextResources.trash) changedResource = "trash";
 
     previousResources.current = nextResources;
@@ -28,7 +29,7 @@ function ArenaHUD({ player, active, actor, opponent = false, dataLifeTarget, rol
     setResourcePulse(changedResource);
     const timer = window.setTimeout(() => setResourcePulse(null), 650);
     return () => window.clearTimeout(timer);
-  }, [lifeCount, reserveCount, coreTrashCount]);
+  }, [reserveCount, coreTrashCount]);
 
   return (
     <div
@@ -56,17 +57,21 @@ function ArenaHUD({ player, active, actor, opponent = false, dataLifeTarget, rol
 
       <div className="arena-hud-counters">
         <div
-          className={`life-core-display life-drop-target arena-hud-life ${resourcePulse === "life" ? "resource-pulse" : ""}`}
+          className="arena-hud-life"
           data-life-target={dataLifeTarget || undefined}
           title="Life"
+          data-life-count={lifeCount}
         >
-          <div className="life-core-row">
-            {Array.from({ length: Math.min(lifeCount, 10) }, (_, index) => (
-              <span className="life-core" key={index} />
+          <div className="arena-life-slots" aria-hidden="true">
+            {Array.from({ length: 10 }, (_, index) => (
+              <span
+                className={`arena-life-core ${index < Math.min(lifeCount, 10) ? "is-active" : "is-empty"}`}
+                key={index}
+              />
             ))}
           </div>
-          <b>{lifeCount}</b>
-          <span>LIFE</span>
+          <b className="arena-life-value">{lifeCount}</b>
+          <span className="arena-life-label">LIFE</span>
         </div>
 
         <div className="arena-hud-stat arena-hud-deck" title="Deck">
@@ -92,6 +97,8 @@ function ArenaHUD({ player, active, actor, opponent = false, dataLifeTarget, rol
     </div>
   );
 }
+
+const ArenaHUD = memo(ArenaHUDComponent);
 
 export function PlayerHUD(props) {
   return <ArenaHUD {...props} role="player" opponent={false} />;

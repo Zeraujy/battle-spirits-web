@@ -1,0 +1,79 @@
+/* =========================================================
+   KAIHOU! Arena Card Preview
+   v4.9.1 — Visual Identity Alignment / Step 05
+========================================================= */
+
+.simulator-page .card-preview-selected {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: var(--text-primary);
+}
+
+.simulator-page .card-preview-selected > .card-tile,
+.simulator-page .card-preview-selected > button.card-tile {
+  display: block !important;
+  width: 154px !important;
+  max-width: 82% !important;
+  margin: 8px auto 12px !important;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, .22));
+}
+
+.simulator-page .card-preview-title {
+  width: 100%;
+  margin: 7px auto !important;
+  color: var(--text-primary);
+  text-align: center;
+  font-size: 15px !important;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+.simulator-page .card-preview-meta {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 8px !important;
+}
+
+.simulator-page .context-panel .card-preview-meta span {
+  padding: 3px 6px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-small);
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+}
+
+.simulator-page .card-preview-actions {
+  width: 100%;
+}
+
+.simulator-page .card-preview-hover {
+  pointer-events: none;
+  border-color: var(--border-default);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.025), transparent 26%),
+    var(--surface-elevated);
+  box-shadow: var(--shadow-elevated), var(--shadow-inset-highlight);
+  backdrop-filter: blur(var(--backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--backdrop-blur));
+}
+
+.simulator-page .card-preview-hover .card-preview-copy > span,
+.simulator-page .card-preview-hover .card-preview-copy > small {
+  color: var(--text-muted);
+}
+
+.simulator-page .card-preview-hover .card-preview-copy > strong {
+  color: var(--text-primary);
+}
+
+@media (max-width: 1380px) {
+  .simulator-page .card-preview-selected > .card-tile,
+  .simulator-page .card-preview-selected > button.card-tile {
+    width: 145px !important;
+  }
+}

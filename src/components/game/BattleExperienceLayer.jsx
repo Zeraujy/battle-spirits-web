@@ -21,7 +21,13 @@ export function classifyBattleLogEntry(entry) {
   return "system";
 }
 
-export default function BattleExperienceLayer({ match, actorId, canControlActor, language = "ptBR" }) {
+export default function BattleExperienceLayer({
+  match,
+  actorId,
+  canControlActor,
+  language = "ptBR",
+  showEventCue = true
+}) {
   const [phaseCue, setPhaseCue] = useState(null);
   const [eventCue, setEventCue] = useState(null);
   const previousPhaseRef = useRef(null);
@@ -113,7 +119,7 @@ export default function BattleExperienceLayer({ match, actorId, canControlActor,
         </div>
       )}
 
-      {eventCue && (
+      {showEventCue && eventCue && (
         <div className={`battle-exp-event-cue event-${eventCue.kind}`} aria-live="polite">
           <i aria-hidden="true" />
           <span>{eventCue.text}</span>

@@ -1,0 +1,136 @@
+/* Arena UX/UI Overhaul — Phase 21: Visual cleanup */
+
+/* Life backlog fix: this component intentionally does NOT reuse any of the
+ * legacy `.life-core-display`, `.life-core`, `.life-drop-target` classes.
+ * Its outer geometry never changes when lifeCount changes. */
+.simulator-page .arena-hud-life {
+  position: relative !important;
+  inset: auto !important;
+  translate: none !important;
+  transform: none !important;
+  flex: 0 0 104px !important;
+  width: 104px !important;
+  min-width: 104px !important;
+  max-width: 104px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
+  margin: 0 !important;
+  padding: 3px 7px !important;
+  display: grid !important;
+  grid-template-columns: 42px 18px 1fr;
+  align-items: center;
+  justify-content: stretch;
+  gap: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(170,170,170,.22);
+  border-radius: 9px;
+  background: rgba(9,9,9,.76);
+  box-shadow: none !important;
+  animation: none !important;
+  contain: strict;
+  isolation: isolate;
+}
+
+.simulator-page .arena-life-slots {
+  position: relative;
+  width: 42px;
+  height: 18px;
+  display: grid;
+  grid-template-columns: repeat(5, 7px);
+  grid-template-rows: repeat(2, 7px);
+  place-content: center;
+  gap: 2px 1px;
+  overflow: hidden;
+}
+
+.simulator-page .arena-life-core {
+  position: static !important;
+  display: block;
+  width: 7px !important;
+  height: 7px !important;
+  min-width: 7px;
+  min-height: 7px;
+  margin: 0 !important;
+  border-radius: 50%;
+  background: #d7d7d7;
+  border: 1px solid rgba(255,255,255,.34);
+  box-shadow: 0 0 5px rgba(255,255,255,.12);
+  transform: none !important;
+  transition: opacity .16s ease, filter .16s ease;
+}
+
+.simulator-page .arena-life-core.is-empty {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.simulator-page .arena-life-value {
+  display: block;
+  width: 18px;
+  min-width: 18px;
+  margin: 0;
+  color: #e1e1e1;
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+}
+
+.simulator-page .arena-life-label {
+  min-width: 0;
+  color: rgba(255,255,255,.56);
+  font-size: 7px;
+  line-height: 1;
+  letter-spacing: .12em;
+  text-align: center;
+}
+
+/* Direct-attack targeting now addresses the new stable Life component. */
+.table-area.attack-focus-active .attack-focus-top-hud .arena-hud-life,
+.table-area.attack-focus-active .attack-focus-life-target .arena-hud-life {
+  border-color: rgba(255,255,255,.44) !important;
+  box-shadow:
+    0 0 18px rgba(255,255,255,.08),
+    0 0 30px color-mix(in srgb, var(--attack-theme, #7b7b7b) 26%, transparent) !important;
+}
+
+.simulator-page .arena-hud-counters {
+  min-height: 34px;
+  contain: layout;
+}
+
+.simulator-page .arena-compact-hud {
+  overflow: hidden;
+}
+
+.simulator-page .arena-battlefield {
+  border-radius: var(--arena-playmat-radius, 18px);
+}
+
+.simulator-page .arena-context-panel,
+.simulator-page .arena-action-bar,
+.simulator-page .arena-phase-tracker {
+  border-color: rgba(255,255,255,.1);
+}
+
+@media (max-width: 1366px) {
+  .simulator-page .arena-hud-life {
+    flex-basis: 94px !important;
+    width: 94px !important;
+    min-width: 94px !important;
+    max-width: 94px !important;
+    grid-template-columns: 38px 18px 1fr;
+    gap: 3px;
+  }
+
+  .simulator-page .arena-life-slots {
+    width: 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simulator-page .arena-life-core {
+    transition: none !important;
+  }
+}

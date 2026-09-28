@@ -1,0 +1,31 @@
+/* Arena UX/UI Overhaul — Phase 20: Performance pass */
+
+.arena-shell .arena-battlefield,
+.arena-shell .arena-compact-hud,
+.arena-shell .arena-phase-tracker,
+.arena-shell .arena-context-panel,
+.arena-shell .arena-action-bar {
+  contain: layout paint style;
+}
+
+.arena-shell .arena-field-section,
+.arena-shell .arena-hand-area {
+  contain: layout style;
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .arena-side-dock,
+.arena-shell[data-arena-layout-mode="compact"] .arena-compact-hud {
+  box-shadow: none !important;
+}
+
+.arena-shell[data-arena-layout-mode="compact"] .arena-battlefield {
+  box-shadow: inset 0 0 44px rgba(0,0,0,.36) !important;
+}
+
+.arena-overlay-layer {
+  contain: strict;
+}
+
+.game-log-drawer-list {
+  overscroll-behavior: contain;
+}
