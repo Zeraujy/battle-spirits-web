@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-28T19:24:39.870Z",
+  "generatedAt": "2026-09-28T19:55:08.661Z",
   "targetPercent": 95,
   "totalSets": 11,
-  "completeSets": 1,
+  "completeSets": 2,
   "sets": [
     {
       "set": "BS13",
@@ -971,10 +971,10 @@
     {
       "set": "SD13",
       "total": 18,
-      "automated": 9,
+      "automated": 10,
       "noEffect": 3,
-      "unresolved": 9,
-      "automationPercent": 50,
+      "unresolved": 8,
+      "automationPercent": 55.6,
       "unsupportedTriggers": [
         "onOwnLowCostPurpleDestroyedBySpiritEffect"
       ],
@@ -1009,10 +1009,6 @@
         {
           "cardId": "SD13-002",
           "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "SD13-007",
-          "status": "PARTIAL"
         },
         {
           "cardId": "SD13-X01",
@@ -1110,37 +1106,21 @@
     {
       "set": "SD17",
       "total": 18,
-      "automated": 10,
+      "automated": 14,
       "noEffect": 1,
-      "unresolved": 8,
-      "automationPercent": 55.6,
+      "unresolved": 4,
+      "automationPercent": 77.8,
       "unsupportedTriggers": [],
       "unsupportedConditions": [],
       "unsupportedActions": [],
       "complete": false,
       "unresolvedCards": [
         {
-          "cardId": "SD17-005",
-          "status": "MANUAL"
-        },
-        {
           "cardId": "SD17-008",
           "status": "PARTIAL"
         },
         {
-          "cardId": "SD17-009",
-          "status": "PARTIAL"
-        },
-        {
-          "cardId": "SD17-011",
-          "status": "PARTIAL"
-        },
-        {
           "cardId": "SD17-012",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "SD17-013",
           "status": "MANUAL"
         },
         {
@@ -1169,38 +1149,15 @@
     {
       "set": "SD20",
       "total": 17,
-      "automated": 12,
+      "automated": 17,
       "noEffect": 1,
-      "unresolved": 5,
-      "automationPercent": 70.6,
-      "unsupportedTriggers": [
-        "whenYourSpiritOrUltimateDestroyed"
-      ],
+      "unresolved": 0,
+      "automationPercent": 100,
+      "unsupportedTriggers": [],
       "unsupportedConditions": [],
       "unsupportedActions": [],
-      "complete": false,
-      "unresolvedCards": [
-        {
-          "cardId": "SD20-004",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "SD20-007",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "SD20-011",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "SD20-012",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "SD20-X01",
-          "status": "PARTIAL"
-        }
-      ]
+      "complete": true,
+      "unresolvedCards": []
     },
     {
       "set": "SD23",

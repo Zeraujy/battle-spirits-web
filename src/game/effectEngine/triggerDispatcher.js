@@ -266,8 +266,21 @@ export function dispatchEffectEvent(match, rawInput = {}, cardIndex) {
     };
   }
   result.match = reconcileModifierConditions(result.match, cardIndex);
+
+  // Content Migration Batch 02: destruction and other canonical events emitted
+  // from inside action resolution are deferred until the current effect queue
+  // item finishes. This avoids resolver import cycles while still allowing
+  // controller-field observers to react authoritatively.
+  if (!result.match.pendingEffectDecision && Array.isArray(result.match.deferredCanonicalEvents) && result.match.deferredCanonicalEvents.length) {
+    const [deferred, ...remainingDeferred] = result.match.deferredCanonicalEvents;
+    result.match = { ...result.match, deferredCanonicalEvents: remainingDeferred };
+    const deferredResult = dispatchEffectEvent(result.match, deferred, cardIndex);
+    result = mergeResult(result, deferredResult);
+    result.match = deferredResult.match;
+  }
+
   result.pendingEffectDecision = result.match.pendingEffectDecision || null;
-  result.manualResolutionNeeded = Boolean(result.manualResolutionNeeded || drained.waiting);
+  result.manualResolutionNeeded = Boolean(result.manualResolutionNeeded || drained.waiting || result.pendingEffectDecision);
   return result;
 }
 

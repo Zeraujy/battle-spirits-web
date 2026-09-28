@@ -8,6 +8,7 @@ import {
   getEffectiveFamilies,
   getEffectiveSymbols
 } from "../selectors.js";
+import { applyContinuousCollectionModifiers } from "./modifierResolver.js";
 import { otherPlayerId } from "../utils.js";
 
 export const TargetOwner = Object.freeze({ SELF: "self", OPPONENT: "opponent", ANY: "any" });
@@ -79,6 +80,36 @@ function numberBetween(actual, min, max) {
   return true;
 }
 
+function cardKeywords(card) {
+  const out = new Set();
+  for (const entry of card?.effects || []) {
+    const raw = String(entry?.type || entry?.title?.en || entry?.title?.ptBR || "").toLowerCase();
+    for (const keyword of ["rush", "confront", "burst", "brave", "heavyarmor", "heavy armor"]) {
+      if (raw.includes(keyword)) out.add(keyword.replace(/\s+/g, ""));
+    }
+  }
+  for (const entry of card?.abilities || []) {
+    const keywords = entry?.modifiers?.keywords || entry?.keywords || [];
+    for (const keyword of Array.isArray(keywords) ? keywords : [keywords]) if (keyword) out.add(String(keyword).toLowerCase().replace(/\s+/g, ""));
+  }
+  return [...out];
+}
+
+function effectSourceColors(match, cardIndex, context) {
+  if (context?.sourcePhysical) return getEffectiveColors(match, cardIndex, context.sourcePhysical);
+  return context?.sourceCard?.colors || [];
+}
+
+function targetHasEffectColorImmunity(match, cardIndex, physical, playerId, context) {
+  if (!physical || !context?.sourcePlayerId || context.sourcePlayerId === playerId) return false;
+  const sourceType = String(context.sourceCard?.cardType || "").toLowerCase();
+  if (!["spirit", "brave", "nexus", "magic"].includes(sourceType)) return false;
+  const protectedColors = applyContinuousCollectionModifiers(match, cardIndex, physical, "effectImmunityColors", []);
+  if (!protectedColors.length) return false;
+  const sourceColors = effectSourceColors(match, cardIndex, context).map((color) => String(color).toLowerCase());
+  return protectedColors.some((color) => sourceColors.includes(String(color).toLowerCase()));
+}
+
 function targetProperties(match, cardIndex, candidate) {
   const { physical, card, zone } = candidate;
   const isField = [TargetZone.SPIRITS, TargetZone.NEXUSES, TargetZone.OTHER].includes(zone);
@@ -87,6 +118,7 @@ function targetProperties(match, cardIndex, candidate) {
     colors: isField ? getEffectiveColors(match, cardIndex, physical) : (card?.colors || []),
     families: isField ? getEffectiveFamilies(match, cardIndex, physical) : (card?.families || []),
     symbols: isField ? getEffectiveSymbols(match, cardIndex, physical) : (card?.symbols || []),
+    keywords: cardKeywords(card),
     cost: isField ? getEffectiveCost(match, cardIndex, physical) : Number(card?.cost || 0),
     bp: isField ? getEffectiveBP(match, cardIndex, physical) : Number(card?.bp || 0),
     level: isField ? Number(getCurrentLevel(card, physical)?.level || 0) : 0,
@@ -112,9 +144,15 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   if (selector.colors?.length && !selector.colors.some((color) => props.colors.includes(color))) return false;
   if (selector.families?.length && !selector.families.some((family) => props.families.includes(family))) return false;
   if (selector.symbols?.length && !selector.symbols.some((symbol) => props.symbols.includes(symbol))) return false;
+  const keywords = selector.keywords ?? (selector.keyword ? [selector.keyword] : []);
+  if (keywords.length && !keywords.some((keyword) => props.keywords.includes(String(keyword).toLowerCase().replace(/\s+/g, "")))) return false;
 
   if (!numberBetween(props.cost, selector.minimumCost ?? selector.minCost, selector.maximumCost ?? selector.maxCost)) return false;
-  if (props.isField && !numberBetween(props.bp, selector.minimumBP ?? selector.minBP, selector.maximumBP ?? selector.maxBP)) return false;
+  let maximumBP = selector.maximumBP ?? selector.maxBP;
+  let minimumBP = selector.minimumBP ?? selector.minBP;
+  if (selector.maximumBPFromSource && context.sourcePhysical) maximumBP = getEffectiveBP(match, cardIndex, context.sourcePhysical);
+  if (selector.minimumBPFromSource && context.sourcePhysical) minimumBP = getEffectiveBP(match, cardIndex, context.sourcePhysical);
+  if (props.isField && !numberBetween(props.bp, minimumBP, maximumBP)) return false;
   if (props.isField && !numberBetween(props.level, selector.minimumLevel ?? selector.minLevel, selector.maximumLevel ?? selector.maxLevel)) return false;
   if (selector.exhausted && !physical.exhausted) return false;
   if (selector.refreshed && physical.exhausted) return false;
@@ -126,6 +164,7 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   if (selector.hasSoulCore === true && !physical.cores?.soul) return false;
   if (selector.hasSoulCore === false && physical.cores?.soul) return false;
   if (!numberBetween(props.cores, selector.minimumCores ?? selector.minCores, selector.maximumCores ?? selector.maxCores)) return false;
+  if (props.isField && targetHasEffectColorImmunity(match, cardIndex, physical, playerId, context)) return false;
   return true;
 }
 

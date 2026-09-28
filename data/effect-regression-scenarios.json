@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-28T19:20:32.633Z",
-  "scenarioCount": 78,
+  "generatedAt": "2026-09-28T19:54:42.361Z",
+  "scenarioCount": 88,
   "scenarios": [
     {
       "cardId": "BS04-048",
@@ -412,6 +412,20 @@
       }
     },
     {
+      "cardId": "SD13-007",
+      "set": "SD13",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd13-007-summon",
+          "sd13-007-combined-attack"
+        ]
+      }
+    },
+    {
       "cardId": "SD13-008",
       "set": "SD13",
       "status": "AUTOMATED",
@@ -477,6 +491,19 @@
       }
     },
     {
+      "cardId": "SD17-005",
+      "set": "SD17",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd17-005-attack-step-auto"
+        ]
+      }
+    },
+    {
       "cardId": "SD17-006",
       "set": "SD17",
       "status": "AUTOMATED",
@@ -504,6 +531,20 @@
       }
     },
     {
+      "cardId": "SD17-009",
+      "set": "SD17",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd17-009-confront",
+          "sd17-009-when-attacks-auto"
+        ]
+      }
+    },
+    {
       "cardId": "SD17-010",
       "set": "SD17",
       "status": "NO_EFFECT",
@@ -512,6 +553,34 @@
         "noUnsupportedConditions": true,
         "noUnsupportedTriggers": true,
         "automatedEntryIds": []
+      }
+    },
+    {
+      "cardId": "SD17-011",
+      "set": "SD17",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd17-011-combined-confront",
+          "sd17-011-when-summoned-auto"
+        ]
+      }
+    },
+    {
+      "cardId": "SD17-013",
+      "set": "SD17",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd17-013-attack-step-auto",
+          "sd17-013-end-step-auto"
+        ]
       }
     },
     {
@@ -822,6 +891,20 @@
       }
     },
     {
+      "cardId": "SD20-004",
+      "set": "SD20",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd20-004-exhausted-block-auto",
+          "sd20-004-heavy-armor-red-auto"
+        ]
+      }
+    },
+    {
       "cardId": "SD20-005",
       "set": "SD20",
       "status": "AUTOMATED",
@@ -845,6 +928,20 @@
         "noUnsupportedTriggers": true,
         "automatedEntryIds": [
           "sd20-006-when-summoned-return"
+        ]
+      }
+    },
+    {
+      "cardId": "SD20-007",
+      "set": "SD20",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd20-007-life-bp-auto",
+          "sd20-007-when-attacks-auto"
         ]
       }
     },
@@ -888,6 +985,35 @@
           "sd20-010-summon-condition",
           "sd20-010-ultimate-trigger",
           "sd20-010-end-step-auto23"
+        ]
+      }
+    },
+    {
+      "cardId": "SD20-011",
+      "set": "SD20",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd20-011-bp-boost-auto",
+          "sd20-011-life-protection-step-auto",
+          "sd20-011-life-protection-threshold-auto"
+        ]
+      }
+    },
+    {
+      "cardId": "SD20-012",
+      "set": "SD20",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": false,
+        "automatedEntryIds": [
+          "sd20-012-return-nexus-auto",
+          "sd20-012-return-spirit-auto"
         ]
       }
     },
@@ -941,6 +1067,22 @@
         "noUnsupportedTriggers": true,
         "automatedEntryIds": [
           "sd20-016-magic-flash"
+        ]
+      }
+    },
+    {
+      "cardId": "SD20-X01",
+      "set": "SD20",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd20-x01-summon-condition",
+          "sd20-x01-ultimate-trigger",
+          "sd20-x01-end-step-auto23",
+          "sd20-x01-when-summoned-auto"
         ]
       }
     },

@@ -6,10 +6,10 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **476**
-- Effect Schema v2 entries: **21**
-- Fully automated cards: **62 (17.0%)**
-- Partially automated cards: **31**
+- Structured effect/ability entries inspected: **491**
+- Effect Schema v2 entries: **36**
+- Fully automated cards: **72 (19.7%)**
+- Partially automated cards: **27**
 - Unstructured effect text: **173**
 - Explicit no-effect cards: **16**
 
@@ -36,17 +36,17 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | BSC49 | 117 | 0 | 0 | 5 | 22 | 0 | 0 | 89 | 1 |
 | SD10 | 18 | 9 | 5 | 3 | 0 | 0 | 0 | 0 | 1 |
 | SD11 | 18 | 6 | 5 | 6 | 0 | 0 | 0 | 0 | 1 |
-| SD13 | 18 | 6 | 3 | 5 | 1 | 0 | 0 | 0 | 3 |
+| SD13 | 18 | 7 | 2 | 5 | 1 | 0 | 0 | 0 | 3 |
 | SD15 | 18 | 0 | 3 | 12 | 2 | 0 | 0 | 0 | 1 |
-| SD17 | 18 | 9 | 4 | 4 | 0 | 0 | 0 | 0 | 1 |
+| SD17 | 18 | 13 | 2 | 2 | 0 | 0 | 0 | 0 | 1 |
 | SD19 | 17 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
-| SD20 | 17 | 11 | 1 | 3 | 1 | 0 | 0 | 0 | 1 |
+| SD20 | 17 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD23 | 17 | 3 | 2 | 9 | 3 | 0 | 0 | 0 | 0 |
 | SD28 | 17 | 2 | 8 | 6 | 1 | 0 | 0 | 0 | 0 |
 
 ## Structured entry baseline
 
-- Automated executable entries: **140**
+- Automated executable entries: **155**
 - Entries blocked by trigger coverage: **50**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
@@ -164,8 +164,8 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BS06-023` | SD13 | spirit | `MANUAL` | unresolved entries: 1 |
 | `BS08-042` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
 | `BS09-015` | SD13 | spirit | `MANUAL` | unresolved entries: 2 |
-| `BS10-074` | SD15 | brave | `MANUAL` | unresolved entries: 2 |
-| `BS11-051` | SD13 | brave | `PARTIAL` | unresolved entries: 2 |
+| `BS10-074` | SD15 | brave | `MANUAL` | unresolved entries: 1 |
+| `BS11-051` | SD13 | brave | `PARTIAL` | unresolved entries: 1 |
 | `BS11-075` | SD13 | magic | `MANUAL` | unresolved entries: 1 |
 | `BS12-035` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
 | `BS12-037` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
@@ -387,36 +387,26 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `SD11-007` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD11-008` | SD11 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD11-009` | SD11 | spirit | `MANUAL` | unresolved entries: 2 |
-| `SD11-011` | SD11 | brave | `PARTIAL` | unresolved entries: 2 |
+| `SD11-011` | SD11 | brave | `PARTIAL` | unresolved entries: 1 |
 | `SD11-012` | SD11 | nexus | `MANUAL` | unresolved entries: 2 |
 | `SD11-013` | SD11 | nexus | `MANUAL` | unresolved entries: 2 |
 | `SD11-X01` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD11-X02` | SD11 | brave | `MANUAL` | unresolved entries: 3 |
+| `SD11-X02` | SD11 | brave | `MANUAL` | unresolved entries: 2 |
 | `SD13-002` | SD13 | spirit | `UNSUPPORTED_TRIGGER` | triggers: onOwnLowCostPurpleDestroyedBySpiritEffect; unresolved entries: 1 |
-| `SD13-007` | SD13 | brave | `PARTIAL` | unresolved entries: 1 |
 | `SD13-X01` | SD13 | spirit | `MANUAL` | unresolved entries: 2 |
 | `SD15-001` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD15-002` | SD15 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenOpponentSpiritBecomesZeroBP; unresolved entries: 2 |
 | `SD15-003` | SD15 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD15-004` | SD15 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD15-005` | SD15 | spirit | `MANUAL` | unresolved entries: 3 |
-| `SD15-006` | SD15 | brave | `MANUAL` | unresolved entries: 3 |
+| `SD15-006` | SD15 | brave | `MANUAL` | unresolved entries: 2 |
 | `SD15-007` | SD15 | magic | `MANUAL` | unresolved entries: 1 |
 | `SD15-008` | SD15 | magic | `MANUAL` | unresolved entries: 2 |
 | `SD15-X01` | SD15 | spirit | `PARTIAL` | triggers: ownLowCostSpiritDestroyedByOpponentEffect, whenOpponentSpiritBecomesZeroBP; unresolved entries: 2 |
-| `SD17-005` | SD17 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD17-008` | SD17 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD17-009` | SD17 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD17-011` | SD17 | brave | `PARTIAL` | unresolved entries: 2 |
 | `SD17-012` | SD17 | nexus | `MANUAL` | unresolved entries: 2 |
-| `SD17-013` | SD17 | nexus | `MANUAL` | unresolved entries: 2 |
 | `SD17-X01` | SD17 | spirit | `MANUAL` | unresolved entries: 3 |
-| `SD17-X02` | SD17 | brave | `PARTIAL` | unresolved entries: 2 |
-| `SD20-004` | SD20 | spirit | `MANUAL` | unresolved entries: 2 |
-| `SD20-007` | SD20 | spirit | `MANUAL` | unresolved entries: 2 |
-| `SD20-011` | SD20 | nexus | `MANUAL` | unresolved entries: 2 |
-| `SD20-012` | SD20 | nexus | `UNSUPPORTED_TRIGGER` | triggers: whenYourSpiritOrUltimateDestroyed; unresolved entries: 2 |
-| `SD20-X01` | SD20 | ultimate | `PARTIAL` | unresolved entries: 1 |
+| `SD17-X02` | SD17 | brave | `PARTIAL` | unresolved entries: 1 |
 | `SD23-001` | SD23 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenDestroyedByOpponent; unresolved entries: 1 |
 | `SD23-002` | SD23 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD23-003` | SD23 | spirit | `MANUAL` | unresolved entries: 1 |
@@ -439,13 +429,13 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `SD28-006` | SD28 | spirit | `PARTIAL` | unresolved entries: 2 |
 | `SD28-007` | SD28 | ultimate | `PARTIAL` | unresolved entries: 1 |
 | `SD28-008` | SD28 | ultimate | `PARTIAL` | unresolved entries: 2 |
-| `SD28-010` | SD28 | brave | `PARTIAL` | unresolved entries: 2 |
-| `SD28-011` | SD28 | brave | `PARTIAL` | unresolved entries: 3 |
+| `SD28-010` | SD28 | brave | `PARTIAL` | unresolved entries: 1 |
+| `SD28-011` | SD28 | brave | `PARTIAL` | unresolved entries: 2 |
 | `SD28-012` | SD28 | nexus | `MANUAL` | unresolved entries: 2 |
 | `SD28-014` | SD28 | magic | `UNSUPPORTED_TRIGGER` | triggers: opponentHandIncrease; unresolved entries: 2 |
 | `SD28-015` | SD28 | magic | `MANUAL` | unresolved entries: 1 |
 | `SD28-X01` | SD28 | ultimate | `PARTIAL` | triggers: ownSpiritOrUltimateDestroyedByOpponent; unresolved entries: 1 |
-| `SD28-X02` | SD28 | brave | `MANUAL` | unresolved entries: 4 |
+| `SD28-X02` | SD28 | brave | `MANUAL` | unresolved entries: 3 |
 
 ## Phase 4 input
 

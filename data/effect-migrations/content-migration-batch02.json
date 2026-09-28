@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "batch": "v5.1.0-content-migration-batch02",
+  "base": "v5.1.0-content-migration-batch01",
+  "internalVersion": "5.0.3",
+  "starterDecks": {
+    "SD20": {
+      "set": "SD20",
+      "ready": 17,
+      "total": 17,
+      "coveragePercent": 100.0
+    },
+    "SD17": {
+      "set": "SD17",
+      "ready": 14,
+      "total": 18,
+      "coveragePercent": 77.8
+    }
+  },
+  "manualFallback": {
+    "generatedAt": "2026-09-28T19:55:08.844Z",
+    "metric": "card-level Manual Resolution fallback",
+    "targetPercent": 10,
+    "baseline": {
+      "phase": "Phase 22",
+      "totalCards": 365,
+      "automated": 57,
+      "noEffect": 16,
+      "manualFallback": 292,
+      "rate": 80
+    },
+    "current": {
+      "totalCards": 365,
+      "automated": 72,
+      "noEffect": 16,
+      "manualFallback": 277,
+      "rate": 75.89,
+      "statusCounts": {
+        "MANUAL": 48,
+        "NO_EFFECT": 16,
+        "PARTIAL": 27,
+        "UNSTRUCTURED_TEXT": 173,
+        "UNSUPPORTED_TRIGGER": 29,
+        "AUTOMATED": 72
+      }
+    },
+    "reductionPercentagePoints": 4.11,
+    "passesTarget": false
+  },
+  "setAutomation": {
+    "passedSets": null,
+    "totalSets": 11
+  },
+  "regressionScenarioCount": 88,
+  "migratedCards": [
+    "SD20-004",
+    "SD20-011",
+    "SD20-012",
+    "SD17-009",
+    "SD17-011",
+    "SD17-X02"
+  ],
+  "qa": {
+    "mainTests": "149/149",
+    "effectEngine": "62/62",
+    "batch02": "6/6",
+    "fullRegression": "261/261",
+    "verify": "PASS",
+    "uiAudit": "PASS",
+    "releaseAudit": "PASS",
+    "securityAudit": "PASS"
+  }
+}

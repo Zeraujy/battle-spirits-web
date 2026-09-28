@@ -6,6 +6,62 @@ const PATCHES = [
   {
     version: "5.0.3",
     date: { pt: "28/09/2026", en: "09/28/2026" },
+    title: { pt: "Automação de Cartas — Lote 2", en: "Card Automation — Batch 2" },
+    summary: {
+      pt: "O SD20 agora pode ser jogado sem depender da Resolução Manual, enquanto novas cartas do SD17 avançam para o sistema estruturado.",
+      en: "SD20 can now be played without relying on Manual Resolution, while more SD17 cards move into structured automation."
+    },
+    sections: [
+      {
+        title: { pt: "Starter Decks", en: "Starter Decks" },
+        items: {
+          pt: [
+            "SD20 — Ultimate Deck: Silver Zero agora passa pelo gate completo sem Resolução Manual.",
+            "Heavy Armor, bloqueio mesmo estando Exhausted e novas respostas a destruição passaram a usar regras automáticas do motor.",
+            "Proteções de Life contra efeitos de Ultimate e bônus defensivos durante o Attack Step do oponente agora são aplicados automaticamente.",
+            "PiercingDragon Styragorn e ArmedMachineDragon Silveed receberam automação estruturada no SD17."
+          ],
+          en: [
+            "SD20 — Ultimate Deck: Silver Zero now passes the full gate without Manual Resolution.",
+            "Heavy Armor, blocking while Exhausted and new destruction responses now use automatic engine rules.",
+            "Life protection against Ultimate effects and defensive bonuses during the opponent's Attack Step are now applied automatically.",
+            "PiercingDragon Styragorn and ArmedMachineDragon Silveed received structured automation in SD17."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "28/09/2026", en: "09/28/2026" },
+    title: { pt: "Automação de Cartas — Lote 1", en: "Card Automation — Batch 1" },
+    summary: {
+      pt: "Mais cartas dos Starter Decks SD20, SD17 e SD13 agora usam resolução estruturada, ampliando a cobertura sem esconder efeitos ainda pendentes.",
+      en: "More SD20, SD17 and SD13 Starter Deck cards now use structured resolution, expanding coverage without hiding effects that still need work."
+    },
+    sections: [
+      {
+        title: { pt: "Starter Decks", en: "Starter Decks" },
+        items: {
+          pt: [
+            "White Jet Dragoon e Ultimate-Odin receberam automação estruturada para seus efeitos suportados.",
+            "FeatherDragon Pedpenner e Dark Galaxy of Dusk agora usam auras e decisões automáticas durante os Steps corretos.",
+            "Condições de Combine já estruturadas passam a ser reconhecidas corretamente pela auditoria de automação.",
+            "Efeitos ainda não suportados continuam sinalizados para revisão em vez de serem tratados como concluídos."
+          ],
+          en: [
+            "White Jet Dragoon and Ultimate-Odin received structured automation for their supported effects.",
+            "FeatherDragon Pedpenner and Dark Galaxy of Dusk now use automatic auras and decisions during the correct Steps.",
+            "Already structured Combine Conditions are now recognized correctly by the automation audit.",
+            "Effects that still need support remain explicitly flagged for review instead of being treated as complete."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "28/09/2026", en: "09/28/2026" },
     title: { pt: "Auditoria de Automação de Cartas", en: "Card Automation Audit" },
     summary: {
       pt: "A automação de efeitos ganhou verificação por set, regressão por carta e uma medição oficial do uso de Resolução Manual.",

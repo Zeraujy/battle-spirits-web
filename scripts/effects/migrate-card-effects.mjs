@@ -26,6 +26,9 @@ for (const [cardId, patch] of Object.entries(migration.cards || {})) {
   card.abilities ||= [];
   card.effects ||= [];
 
+  if (patch.setFields && typeof patch.setFields === "object") {
+    for (const [key, value] of Object.entries(patch.setFields)) card[key] = structuredClone(value);
+  }
   if (Array.isArray(patch.replaceAbilities)) card.abilities = structuredClone(patch.replaceAbilities);
   if (patch.replaceAbilityById) {
     for (const [abilityId, replacement] of Object.entries(patch.replaceAbilityById)) {

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "migrationId": "sd20-content-migration-batch2",
+  "set": "SD20",
+  "write": true,
+  "definedCards": [
+    "SD20-004",
+    "SD20-011",
+    "SD20-012",
+    "SD20-007",
+    "SD20-X01"
+  ],
+  "definedCount": 5,
+  "changedCards": [
+    "SD20-004",
+    "SD20-011",
+    "SD20-012"
+  ],
+  "changedCount": 3,
+  "errors": [],
+  "notes": "SD20 migration pass through Batch 02: exhausted blocking, Heavy Armor: Red, opponent Attack Step BP protection, Ultimate effect Life-loss cap, and destruction observers are structured alongside the Batch 01 effects."
+}

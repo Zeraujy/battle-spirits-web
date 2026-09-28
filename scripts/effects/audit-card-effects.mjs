@@ -53,7 +53,8 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "ultimateTriggerWasHit",
   "attackNumber",
   "eventSourceCardType",
-  "eventCause"
+  "eventCause",
+  "eventDestroyedByOpponent"
 ]);
 
 const KNOWN_CONDITION_KEYS = new Set([
@@ -188,6 +189,7 @@ function inspectEntry(entry, source, index) {
     hasStructuredActions: actionCount > 0,
     automationRef: entry.automationRef || null,
     engineNative,
+    entryType: compactType,
     status
   };
 }
@@ -212,7 +214,16 @@ function inspectCard(card) {
   const automatedExecutable = executable.filter((entry) => entry.status === CoverageStatus.AUTOMATED);
   const automatedEffective = all.filter((entry) => entry.status === CoverageStatus.AUTOMATED && (entry.hasStructuredActions || entry.hasModifiers || entry.engineNative));
   const displayOnly = effects.filter((entry) => !entry.hasStructuredActions);
-  const unresolvedDisplay = displayOnly.filter((entry) => !canCoverDisplayEntry(entry, automatedExecutable, all));
+  const structuredBraveCondition = Boolean(
+    card.braveCondition
+    && typeof card.braveCondition === "object"
+    && !Array.isArray(card.braveCondition)
+    && Object.keys(card.braveCondition).length
+  );
+  const unresolvedDisplay = displayOnly.filter((entry) => {
+    if (entry.entryType === "combinecondition" && structuredBraveCondition) return false;
+    return !canCoverDisplayEntry(entry, automatedExecutable, all);
+  });
   const noEntries = all.length === 0;
   const explicitNoEffect = hasExplicitNoEffectText(card);
 

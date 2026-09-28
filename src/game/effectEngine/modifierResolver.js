@@ -64,7 +64,44 @@ function dbCard(cardIndex, physical) {
   return cardIndex?.get?.(physical?.cardId) || null;
 }
 
-function selectorMatches(match, cardIndex, physical, modifier) {
+function activeProtectionItems(match, cardIndex, physical) {
+  const items = match.modifierRegistry?.items || [];
+  return items.filter((modifier) => {
+    if (modifier.property !== "effectImmunityColors") return false;
+    if (!durationIsActive(match, modifier.duration, {
+      sourceExists: (instanceId) => sourceExists(match, instanceId),
+      conditionActive: modifier.conditionActive
+    })) return false;
+    return selectorMatches(match, cardIndex, physical, modifier, true);
+  });
+}
+
+function modifierBlockedByEffectImmunity(match, cardIndex, physical, modifier) {
+  if (!modifier || modifier.property === "effectImmunityColors") return false;
+  const targetOwnerId = targetOwner(match, physical);
+  if (!targetOwnerId || !modifier.controllerId || modifier.controllerId === targetOwnerId) return false;
+  const source = modifier.sourceInstanceId ? (() => {
+    for (const player of Object.values(match.players || {})) {
+      for (const zone of FIELD_ZONES) {
+        const found = (player.field?.[zone] || []).find((card) => card.instanceId === modifier.sourceInstanceId);
+        if (found) return found;
+      }
+    }
+    return null;
+  })() : null;
+  const sourceCard = dbCard(cardIndex, source);
+  const sourceType = String(sourceCard?.cardType || "").toLowerCase();
+  if (!["spirit", "brave", "nexus", "magic"].includes(sourceType)) return false;
+  const sourceColors = (sourceCard?.colors || []).map((color) => String(color).toLowerCase());
+  if (!sourceColors.length) return false;
+  const protectedColors = activeProtectionItems(match, cardIndex, physical)
+    .flatMap((entry) => Array.isArray(entry.value) ? entry.value : [entry.value])
+    .filter(Boolean)
+    .map((color) => String(color).toLowerCase());
+  return protectedColors.some((color) => sourceColors.includes(color));
+}
+
+function selectorMatches(match, cardIndex, physical, modifier, skipProtection = false) {
   const selector = modifier.selector || {};
   const card = dbCard(cardIndex, physical);
   if (!card || !physical) return false;
@@ -90,6 +127,7 @@ function selectorMatches(match, cardIndex, physical, modifier) {
   if (selector.maximumCost != null && cost > Number(selector.maximumCost)) return false;
   if (selector.exhausted === true && !physical.exhausted) return false;
   if (selector.refreshed === true && physical.exhausted) return false;
+  if (!skipProtection && modifierBlockedByEffectImmunity(match, cardIndex, physical, modifier)) return false;
   return true;
 }
 

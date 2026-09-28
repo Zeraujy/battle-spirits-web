@@ -18,6 +18,50 @@ export function supportsActionType(type) {
   return supportsCoreActionType(type);
 }
 
+function queueDeferredCanonicalEvent(match, event) {
+  if (!event) return match;
+  return {
+    ...match,
+    deferredCanonicalEvents: [...(match.deferredCanonicalEvents || []), event]
+  };
+}
+
+function activeTurnProtection(match, playerId, type) {
+  const protection = match.temporary?.turnProtections?.[playerId]?.[type] || null;
+  if (!protection) return null;
+  if (protection.sourceInstanceId && !findPhysicalCard(match, protection.sourceInstanceId)) return null;
+  return protection;
+}
+
+function capUltimateEffectLifeLoss(match, playerId, requested, context) {
+  const sourceType = String(context.sourceCard?.cardType || '').toLowerCase();
+  if (sourceType !== 'ultimate') return { requested, type: null, used: 0, cap: null };
+  const type = 'limitUltimateEffectLifeDamage';
+  const protection = activeTurnProtection(match, playerId, type);
+  if (!protection) return { requested, type: null, used: 0, cap: null };
+  const cap = Math.max(0, Number(protection.maxDamage ?? 1));
+  const used = Math.max(0, Number(match.temporary?.turnProtectionUsage?.[playerId]?.[type] || 0));
+  return { requested: Math.min(requested, Math.max(0, cap - used)), type, used, cap };
+}
+
+function recordTurnProtectionUsage(match, playerId, type, amount) {
+  if (!type || !amount) return match;
+  const current = Number(match.temporary?.turnProtectionUsage?.[playerId]?.[type] || 0);
+  return {
+    ...match,
+    temporary: {
+      ...(match.temporary || {}),
+      turnProtectionUsage: {
+        ...(match.temporary?.turnProtectionUsage || {}),
+        [playerId]: {
+          ...(match.temporary?.turnProtectionUsage?.[playerId] || {}),
+          [type]: current + Number(amount || 0)
+        }
+      }
+    }
+  };
+}
+
 function asActionArray(value) {
   if (!value) return [];
   return Array.isArray(value) ? value : [value];
@@ -498,10 +542,12 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const playerId = resolvePlayerId(next, action, context);
     const player = next.players?.[playerId];
     if (!player) return { match, notes: ["Jogador alvo inválido para Life damage."], manualResolutionNeeded: true, executed: false };
-    const requested = Math.max(0, Number(action.amount ?? action.count ?? 1));
-    const moved = Math.min(requested, Number(player.life || 0));
+    const rawRequested = Math.max(0, Number(action.amount ?? action.count ?? 1));
+    const capped = capUltimateEffectLifeLoss(next, playerId, rawRequested, context);
+    const moved = Math.min(capped.requested, Number(player.life || 0));
     const life = Math.max(0, Number(player.life || 0) - moved);
     next = { ...next, players: { ...next.players, [playerId]: { ...player, life, reserve: Number(player.reserve || 0) + moved } } };
+    next = recordTurnProtectionUsage(next, playerId, capped.type, moved);
     if (life <= 0 && moved > 0) next = { ...next, winnerId: otherPlayerId(next, playerId), winnerReason: "life" };
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
   }
@@ -510,8 +556,9 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const playerId = resolvePlayerId(next, action, context);
     const player = next.players?.[playerId];
     if (!player) return { match, notes: ["Jogador alvo inválido para mover Life ao Trash."], manualResolutionNeeded: true, executed: false };
-    const requested = Math.max(0, Number(action.amount ?? action.count ?? 1));
-    const moved = Math.min(requested, Number(player.life || 0));
+    const rawRequested = Math.max(0, Number(action.amount ?? action.count ?? 1));
+    const capped = capUltimateEffectLifeLoss(next, playerId, rawRequested, context);
+    const moved = Math.min(capped.requested, Number(player.life || 0));
     const life = Math.max(0, Number(player.life || 0) - moved);
     next = {
       ...next,
@@ -520,6 +567,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         [playerId]: { ...player, life, trashCores: Number(player.trashCores || 0) + moved }
       }
     };
+    next = recordTurnProtectionUsage(next, playerId, capped.type, moved);
     if (life <= 0 && moved > 0) next = { ...next, winnerId: otherPlayerId(next, playerId), winnerReason: "life" };
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
   }
@@ -606,7 +654,26 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         const player = updateFieldCard(working.players[current.playerId], current.card.instanceId, (physical) => ({ ...physical, exhausted: baseType === "exhaust" }));
         return { ...working, players: { ...working.players, [current.playerId]: player } };
       }
-      if (baseType === "destroy") return moveTargetOut(working, target, "trash", cardIndex);
+      if (baseType === "destroy") {
+        const destroyedPhysical = target.physical;
+        const destroyedCard = target.card;
+        const destroyedPlayerId = target.playerId;
+        let moved = moveTargetOut(working, target, "trash", cardIndex);
+        moved = queueDeferredCanonicalEvent(moved, {
+          event: "whenDestroyed",
+          sourcePlayerId: destroyedPlayerId,
+          sourcePhysical: destroyedPhysical,
+          sourceCardId: destroyedCard?.id || destroyedPhysical?.cardId || null,
+          eventPlayerId: destroyedPlayerId,
+          context: {
+            cause: "effect",
+            destroyedByPlayerId: context.sourcePlayerId || null,
+            destroyedByCardType: context.sourceCard?.cardType || null,
+            destroyedByCardId: context.sourceCard?.id || null
+          }
+        });
+        return moved;
+      }
       if (baseType === "returnToHand") return moveTargetOut(working, target, "hand", cardIndex);
       if (baseType === "returnToTopDeck") return moveTargetOut(working, target, "topDeck", cardIndex);
       return working;
@@ -624,10 +691,11 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     }
     const current = next.temporary?.turnProtections?.[playerId] || {};
     let normalized = protection;
-    if (protection.type === "limitSpiritAttackLifeDamage") {
+    if (["limitSpiritAttackLifeDamage", "limitUltimateEffectLifeDamage"].includes(protection.type)) {
       normalized = {
         type: protection.type,
-        maxDamage: Math.max(0, Number(protection.maxDamage ?? 1))
+        maxDamage: Math.max(0, Number(protection.maxDamage ?? 1)),
+        sourceInstanceId: protection.sourceInstanceId || context.sourceInstanceId || null
       };
     }
     next = {

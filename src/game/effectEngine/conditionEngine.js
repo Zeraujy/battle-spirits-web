@@ -127,6 +127,10 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     return Boolean(card && String(card.cardType || "").toLowerCase() === expected);
   }
   if (type === "eventCause") return String(context.cause || "") === String(condition.value ?? condition.cause ?? "");
+  if (type === "eventDestroyedByOpponent") {
+    const destroyedBy = context.destroyedByPlayerId || null;
+    return Boolean(destroyedBy && sourcePlayerId && destroyedBy !== sourcePlayerId);
+  }
   return false;
 }
 

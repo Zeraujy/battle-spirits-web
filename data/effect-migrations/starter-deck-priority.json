@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-28T19:27:16.091Z",
+  "generatedAt": "2026-09-28T20:48:59.767Z",
   "starterDecks": 17,
-  "ready": 1,
+  "ready": 2,
   "decks": [
     {
       "id": "sd01-blazing-thunder",
@@ -178,7 +178,6 @@
         "BS09-015",
         "SD13-002",
         "BS11-051",
-        "SD13-007",
         "BS12-063",
         "BS01-125",
         "BS11-075",
@@ -281,12 +280,8 @@
       "uniqueCards": 18,
       "missingRuntime": [],
       "unresolved": [
-        "SD17-005",
         "SD17-008",
-        "SD17-009",
-        "SD17-011",
         "SD17-012",
-        "SD17-013",
         "SD17-X01",
         "SD17-X02"
       ],
@@ -309,15 +304,9 @@
       "title": "Ultimate Deck: Silver Zero",
       "uniqueCards": 17,
       "missingRuntime": [],
-      "unresolved": [
-        "SD20-004",
-        "SD20-007",
-        "SD20-011",
-        "SD20-012",
-        "SD20-X01"
-      ],
-      "readyWithoutManual": false,
-      "status": "NEEDS_MIGRATION"
+      "unresolved": [],
+      "readyWithoutManual": true,
+      "status": "READY_NO_MANUAL"
     },
     {
       "id": "sd22-hurricane-zero",

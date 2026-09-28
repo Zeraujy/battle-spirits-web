@@ -29,3 +29,31 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Technical QA passes, but the content release gate is intentionally blocked: only SD19 currently meets the >=95% per-set automation target and full-catalog manual fallback remains 78.63%.
 - The build remains a release candidate; v5.1.0 is not promoted until the content gates pass.
 
+
+
+## v5.1.0 Content Migration — Batch 01
+
+- Phase 21 migration registry expanded with safe SD20 and SD17 conversions.
+- SD20 White Jet Dragoon: Life <= 3 BP modifier and opposing set-Burst discard structured.
+- SD20 Ultimate-Odin: When Summoned return-to-hand effect structured.
+- SD17 FeatherDragon Pedpenner: Terra Dragon Attack Step BP aura structured.
+- SD17 Dark Galaxy of Dusk: Attack Step BP aura and End Step refresh structured.
+- Automation audit now recognizes documented Combine Conditions only when a structured `braveCondition` is present.
+- Phase 24 card regression scenarios regenerated from 78 to 83 cards.
+- Manual Resolution fallback improved from 78.63% (287/365) to 77.26% (282/365).
+- Internal application version remains 5.0.3 while v5.1.0 content migration continues.
+
+## v5.1.0 Content Migration — Batch 02
+
+- SD20 — Ultimate Deck: Silver Zero reaches 17/17 automated/no-effect cards and becomes `READY_NO_MANUAL`.
+- Added reusable exhausted-block support for effects that explicitly allow blocking while Exhausted.
+- Added color-based effect immunity used by Heavy Armor: Red, including targeted effects and continuous modifiers.
+- Added per-turn Ultimate-effect Life-loss protection used by Rowgard North Command.
+- Destruction caused during structured effect resolution now emits deferred canonical `whenDestroyed` events for field observers.
+- SD20 The Falling World now reacts to opponent-caused destruction with its Nexus/Spirit return effects.
+- SD17 PiercingDragon Styragorn now uses source-relative BP targeting.
+- SD17 ArmedMachineDragon Silveed now validates its Terra Dragon Combine condition and retrieves Rush Spirits from Trash.
+- SD17 automation improves to 77.8%; SD20 improves to 100%.
+- Full-catalog Manual Resolution fallback improves from 77.26% (282/365) to 75.89% (277/365).
+- Phase 24 generated regression scenarios increase from 83 to 88 cards.
+- Internal application version remains 5.0.3 while v5.1.0 content migration continues.

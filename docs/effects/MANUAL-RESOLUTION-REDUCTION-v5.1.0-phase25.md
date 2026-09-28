@@ -3,15 +3,15 @@
 Target: < 10% card-level fallback.
 
 Phase 22 baseline: **80%** (292/365)
-Current: **78.63%** (287/365)
-Reduction: **1.37 percentage points**
+Current: **75.89%** (277/365)
+Reduction: **4.11 percentage points**
 Gate: **BLOCKED**
 
 ## Current status breakdown
 
-- AUTOMATED: 62
-- MANUAL: 53
+- AUTOMATED: 72
+- MANUAL: 48
 - NO_EFFECT: 16
-- PARTIAL: 31
+- PARTIAL: 27
 - UNSTRUCTURED_TEXT: 173
-- UNSUPPORTED_TRIGGER: 30
+- UNSUPPORTED_TRIGGER: 29

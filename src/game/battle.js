@@ -3,7 +3,7 @@ import { updateFieldCard, removeFieldCard } from "./zones.js";
 import { appendLog, otherPlayerId, uid } from "./utils.js";
 import { resolveUltimateTriggerOnAttack } from "./specialRules.js";
 import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
-import { clearEffectModifiers } from "./effectEngine/modifierResolver.js";
+import { clearEffectModifiers, getContinuousNumericModifier } from "./effectEngine/modifierResolver.js";
 import { openLifeDecreaseBurstOpportunity } from "./burstRules.js";
 import { BurstEvent, openBurstOpportunityForEvent } from "./effectEngine/burstEngine.js";
 import { dispatchBattleParticipantEvent, createBattleContext } from "./effectEngine/battleTriggerEngine.js";
@@ -136,7 +136,13 @@ export function legalBlockers(match, cardIndex) {
   const battle = match.battle;
   if (!battle || battle.stage !== "block") return [];
   const restrictions = battle.restrictions || {};
-  return refreshedBattleCards(match.players[battle.defenderPlayerId], cardIndex).filter((physical) => {
+  const defender = match.players[battle.defenderPlayerId];
+  const candidates = [...(defender.field.spirits || []), ...(defender.field.other || [])].filter((physical) => {
+    if (physical.combinedWith) return false;
+    if (!physical.exhausted) return true;
+    return getContinuousNumericModifier(match, cardIndex, physical, "allowExhaustedBlock") > 0;
+  });
+  return candidates.filter((physical) => {
     const card = getDatabaseCard(cardIndex, physical);
     if (restrictions.spiritsCannotBlock && ["spirit", "brave"].includes(card?.cardType)) return false;
     if (restrictions.ultimatesCannotBlock && card?.cardType === "ultimate") return false;
@@ -397,7 +403,14 @@ export function resolveBattle(match, actorId, cardIndex) {
           sourcePhysical: destroyedCard.physical,
           sourceCardId: destroyedCard.physical.cardId,
           eventPlayerId: destroyedCard.playerId,
-          context: { ...originalBattleContext, attackerBP: aBP, blockerBP: bBP, cause: "bpComparison" }
+          context: {
+            ...originalBattleContext,
+            attackerBP: aBP,
+            blockerBP: bBP,
+            cause: "bpComparison",
+            destroyedByPlayerId: otherPlayerId(next, destroyedCard.playerId),
+            destroyedByCardType: "spirit"
+          }
         }, cardIndex);
         next = engine.match;
         next = openBurstOpportunityForEvent(next, BurstEvent.OWN_SPIRIT_DESTROYED, destroyedCard.playerId, cardIndex, { sourcePlayerId: destroyedCard.playerId, sourceInstanceId: destroyedCard.physical.instanceId, battleId: battle.id, cause: "bpComparison" });

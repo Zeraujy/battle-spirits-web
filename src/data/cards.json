@@ -2143,10 +2143,56 @@
         "text": {
           "en": "All your Terra Dragon Spirits gain +2000 BP.",
           "ptBR": "Todos os seus Spirits da família Terra Dragon recebem +2000 BP."
-        }
+        },
+        "automationRef": "sd17-005-attack-step-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd17-005-attack-step-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 2000,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Terra Dragon"
+              ]
+            },
+            "duration": "whileConditionTrue",
+            "condition": {
+              "all": [
+                {
+                  "type": "phase",
+                  "value": "attack"
+                },
+                {
+                  "type": "activePlayer",
+                  "player": "self"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-005.webp"
   },
   {
@@ -2521,7 +2567,8 @@
         "text": {
           "en": "Destroy 1 opposing Spirit with BP equal to or less than this Spirit.",
           "ptBR": "Destrua 1 Spirit do oponente com BP igual ou menor que o BP deste Spirit."
-        }
+        },
+        "automationRef": "sd17-009-when-attacks-auto"
       }
     ],
     "abilities": [
@@ -2533,6 +2580,37 @@
             "confront"
           ]
         }
+      },
+      {
+        "id": "sd17-009-when-attacks-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "PiercingDragon Styragorn",
+            "instructionPT": "Escolha 1 Spirit do oponente com BP igual ou menor que este Spirit.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumBPFromSource": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
       }
     ],
     "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-009.webp"
@@ -2639,7 +2717,8 @@
         "text": {
           "en": "Return 1 Spirit card with Rush from your Trash to your hand.",
           "ptBR": "Devolva 1 carta de Spirit com Rush do seu Trash para a sua mão."
-        }
+        },
+        "automationRef": "sd17-011-when-summoned-auto"
       },
       {
         "id": "sd17-011-combine-condition-display",
@@ -2681,9 +2760,51 @@
             "confront"
           ]
         }
+      },
+      {
+        "id": "sd17-011-when-summoned-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "ArmedMachineDragon Silveed",
+            "instructionPT": "Escolha 1 Spirit com Rush no seu Trash para devolver à mão.",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "trash"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "keywords": [
+                "rush"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
       }
     ],
-    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-011.webp"
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-011.webp",
+    "braveCondition": {
+      "type": "family",
+      "value": "Terra Dragon",
+      "cardTypes": [
+        "spirit"
+      ]
+    }
   },
   {
     "id": "SD17-012",
@@ -2820,7 +2941,8 @@
         "text": {
           "en": "All your Terra Dragon Spirits gain +2000 BP.",
           "ptBR": "Todos os seus Spirits da família Terra Dragon recebem +2000 BP."
-        }
+        },
+        "automationRef": "sd17-013-attack-step-auto"
       },
       {
         "id": "sd17-013-end-step-display",
@@ -2836,10 +2958,89 @@
         "text": {
           "en": "Refresh 1 Terra Dragon Spirit.",
           "ptBR": "Dê Refresh em 1 Spirit da família Terra Dragon."
-        }
+        },
+        "automationRef": "sd17-013-end-step-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd17-013-attack-step-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 2000,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Terra Dragon"
+              ]
+            },
+            "duration": "whileConditionTrue",
+            "condition": {
+              "all": [
+                {
+                  "type": "phase",
+                  "value": "attack"
+                },
+                {
+                  "type": "activePlayer",
+                  "player": "self"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd17-013-end-step-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "endStep",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Dark Galaxy of Dusk — End Step",
+            "titleEN": "Dark Galaxy of Dusk — End Step",
+            "instructionPT": "Escolha 1 Spirit da família Terra Dragon para dar Refresh.",
+            "instructionEN": "Choose 1 Terra Dragon Spirit to refresh.",
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Terra Dragon"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "refresh"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-013.webp"
   },
   {
@@ -3321,7 +3522,14 @@
         ]
       }
     ],
-    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-X02.webp"
+    "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-X02.webp",
+    "braveCondition": {
+      "type": "costAtLeast",
+      "value": 5,
+      "cardTypes": [
+        "spirit"
+      ]
+    }
   },
   {
     "id": "SD19-001",
@@ -5569,7 +5777,8 @@
         "text": {
           "en": "This Spirit can block while exhausted.",
           "ptBR": "Este Spirit pode bloquear mesmo estando Exhausted."
-        }
+        },
+        "automationRef": "sd20-004-exhausted-block-auto"
       },
       {
         "id": "sd20-004-heavy-armor",
@@ -5586,10 +5795,73 @@
         "text": {
           "en": "This Spirit is unaffected by opposing Red Spirit, Brave, Nexus, and Magic effects.",
           "ptBR": "Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Vermelhos do oponente."
-        }
+        },
+        "automationRef": "sd20-004-heavy-armor-red-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd20-004-exhausted-block-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "allowExhaustedBlock",
+            "operation": "set",
+            "value": 1,
+            "target": "source",
+            "duration": "whileConditionTrue",
+            "condition": {
+              "all": [
+                {
+                  "type": "phase",
+                  "value": "attack"
+                },
+                {
+                  "type": "activePlayer",
+                  "player": "opponent"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd20-004-heavy-armor-red-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectImmunityColors",
+            "operation": "add",
+            "value": [
+              "red"
+            ],
+            "target": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-004.webp"
   },
   {
@@ -5900,7 +6172,8 @@
         "text": {
           "en": "While your Life is 3 or less, this Spirit gains +4000 BP.",
           "ptBR": "Enquanto sua Life estiver em 3 ou menos, este Spirit recebe +4000 BP."
-        }
+        },
+        "automationRef": "sd20-007-life-bp-auto"
       },
       {
         "id": "sd20-007-when-attacks",
@@ -5916,10 +6189,57 @@
         "text": {
           "en": "Discard one opposing set Burst.",
           "ptBR": "Descarte 1 Burst que o oponente tenha preparado."
-        }
+        },
+        "automationRef": "sd20-007-when-attacks-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd20-007-life-bp-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 4000,
+            "target": "source",
+            "duration": "whileConditionTrue",
+            "condition": {
+              "type": "lifeAtMost",
+              "player": "self",
+              "value": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd20-007-when-attacks-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "discardOpponentSetBurst"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-007.webp"
   },
   {
@@ -6254,7 +6574,8 @@
         "text": {
           "en": "All of your White Spirits and Ultimates gain +2000 BP.",
           "ptBR": "Todos os seus Spirits e Ultimates Brancos recebem +2000 BP."
-        }
+        },
+        "automationRef": "sd20-011-bp-boost-auto"
       },
       {
         "id": "sd20-011-life-protection",
@@ -6270,10 +6591,120 @@
         "text": {
           "en": "While your Life is 3 or less, opposing Ultimate effects can reduce your Life by only 1 per turn.",
           "ptBR": "Enquanto sua Life estiver em 3 ou menos, efeitos de Ultimates do oponente só podem reduzir sua Life em 1 por turno."
-        }
+        },
+        "automationRef": "sd20-011-life-protection-step-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd20-011-bp-boost-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 2000,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ],
+              "colors": [
+                "white"
+              ]
+            },
+            "duration": "whileConditionTrue",
+            "condition": {
+              "all": [
+                {
+                  "type": "phase",
+                  "value": "attack"
+                },
+                {
+                  "type": "activePlayer",
+                  "player": "opponent"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd20-011-life-protection-step-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "lifeAtMost",
+            "player": "self",
+            "value": 3
+          }
+        ],
+        "actions": [
+          {
+            "type": "setTurnProtection",
+            "protection": {
+              "type": "limitUltimateEffectLifeDamage",
+              "maxDamage": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd20-011-life-protection-threshold-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          },
+          {
+            "type": "lifeAtMost",
+            "player": "self",
+            "value": 3
+          }
+        ],
+        "actions": [
+          {
+            "type": "setTurnProtection",
+            "protection": {
+              "type": "limitUltimateEffectLifeDamage",
+              "maxDamage": 1
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-011.webp"
   },
   {
@@ -6332,7 +6763,8 @@
         "text": {
           "en": "When one of your Spirits or Ultimates is destroyed by the opponent, return one opposing Nexus to the hand.",
           "ptBR": "Quando 1 dos seus Spirits ou Ultimates for destruído pelo oponente, devolva 1 Nexus do oponente para a mão."
-        }
+        },
+        "automationRef": "sd20-012-return-nexus-auto"
       },
       {
         "id": "sd20-012-return-spirit",
@@ -6348,10 +6780,113 @@
         "text": {
           "en": "When one of your Spirits or Ultimates is destroyed by the opponent, return one opposing Spirit to the hand.",
           "ptBR": "Quando 1 dos seus Spirits ou Ultimates for destruído pelo oponente, devolva 1 Spirit do oponente para a mão."
-        }
+        },
+        "automationRef": "sd20-012-return-spirit-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd20-012-return-nexus-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "any": [
+              {
+                "type": "eventSourceCardType",
+                "cardType": "spirit"
+              },
+              {
+                "type": "eventSourceCardType",
+                "cardType": "ultimate"
+              }
+            ]
+          },
+          {
+            "type": "eventDestroyedByOpponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "O Mundo em Queda",
+            "instructionPT": "Escolha 1 Nexus do oponente para devolver à mão.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd20-012-return-spirit-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "any": [
+              {
+                "type": "eventSourceCardType",
+                "cardType": "spirit"
+              },
+              {
+                "type": "eventSourceCardType",
+                "cardType": "ultimate"
+              }
+            ]
+          },
+          {
+            "type": "eventDestroyedByOpponent"
+          },
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "O Mundo em Queda — LV2",
+            "instructionPT": "Escolha 1 Spirit do oponente para devolver à mão.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD20-UltimateDeck-SilverZero/SD20-012.webp"
   },
   {
@@ -6798,7 +7333,8 @@
         "text": {
           "en": "Return one opposing Spirit to the hand.",
           "ptBR": "Devolva 1 Spirit do oponente para a mão."
-        }
+        },
+        "automationRef": "sd20-x01-when-summoned-auto"
       },
       {
         "id": "sd20-x01-ultimate-trigger",
@@ -6855,6 +7391,38 @@
         "levels": [
           4,
           5
+        ]
+      },
+      {
+        "id": "sd20-x01-when-summoned-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Ultimate-Odin — Quando Invocado",
+            "titleEN": "Ultimate-Odin — When Summoned",
+            "instructionPT": "Escolha 1 Spirit do oponente para devolver à mão.",
+            "instructionEN": "Choose 1 opposing Spirit to return to hand.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
         ]
       }
     ],

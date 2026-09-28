@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-09-28T19:42:17.619828+00:00",
+  "batch": "v5.1.0-content-migration-batch01",
+  "base": "v5.1.0 RC Phase 23-27",
+  "internalVersion": "5.0.3",
+  "migratedCards": [
+    "SD20-007",
+    "SD20-X01",
+    "SD17-005",
+    "SD17-013"
+  ],
+  "auditReclassifiedCards": [
+    "SD13-007"
+  ],
+  "coverage": {
+    "automated": 67,
+    "noEffect": 16,
+    "manualFallback": 282,
+    "manualFallbackRate": 77.26
+  },
+  "starterDeckProgress": {
+    "SD20": {
+      "automationPercent": 76.5,
+      "statuses": {
+        "NO_EFFECT": 1,
+        "AUTOMATED": 13,
+        "MANUAL": 2,
+        "UNSUPPORTED_TRIGGER": 1
+      }
+    },
+    "SD17": {
+      "automationPercent": 61.1,
+      "statuses": {
+        "AUTOMATED": 11,
+        "PARTIAL": 4,
+        "NO_EFFECT": 1,
+        "MANUAL": 2
+      }
+    },
+    "SD13": {
+      "automationPercent": 38.9,
+      "statuses": {
+        "MANUAL": 5,
+        "NO_EFFECT": 3,
+        "PARTIAL": 2,
+        "AUTOMATED": 7,
+        "UNSUPPORTED_TRIGGER": 1
+      }
+    }
+  },
+  "remainingFocus": {
+    "SD20": [
+      "SD20-004",
+      "SD20-011",
+      "SD20-012"
+    ],
+    "SD17": [
+      "SD17-008",
+      "SD17-009",
+      "SD17-011",
+      "SD17-012",
+      "SD17-X01",
+      "SD17-X02"
+    ],
+    "SD13": [
+      "BS06-023",
+      "BS09-015",
+      "SD13-002",
+      "BS11-051",
+      "BS12-063",
+      "BS01-125",
+      "BS11-075",
+      "SD13-X01"
+    ]
+  }
+}
