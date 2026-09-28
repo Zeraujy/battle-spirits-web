@@ -243,3 +243,90 @@
     animation: none;
   }
 }
+
+/* Phase 18 — structured decision extensions */
+.effect-decision-order-list,
+.effect-decision-core-list {
+  display: grid;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.effect-decision-order-row,
+.effect-decision-core-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 9px 10px;
+  border: 1px solid rgba(178, 178, 178, .24);
+  border-radius: 12px;
+  background: rgba(17, 17, 17, .74);
+}
+
+.effect-decision-order-row > div:nth-child(2),
+.effect-decision-core-row > div:first-child {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.effect-decision-order-row strong,
+.effect-decision-core-row strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.effect-decision-order-row small,
+.effect-decision-core-row small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.effect-decision-order-index {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(192, 192, 192, .34);
+  border-radius: 50%;
+  background: rgba(161, 161, 161, .08);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.effect-decision-order-actions,
+.effect-decision-core-stepper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.effect-decision-order-actions button,
+.effect-decision-core-stepper button {
+  min-width: 34px;
+  min-height: 34px;
+  padding: 5px 9px;
+}
+
+.effect-decision-core-stepper b {
+  min-width: 32px;
+  text-align: center;
+  font-size: 15px;
+}
+
+@media (max-width: 640px) {
+  .effect-decision-order-row,
+  .effect-decision-core-row {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .effect-decision-order-actions,
+  .effect-decision-core-stepper {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+}

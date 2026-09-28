@@ -8,7 +8,7 @@
     3
   ],
   "source": "src/data/cards.json",
-  "generatedAt": "2026-09-28T13:50:30.481Z",
+  "generatedAt": "2026-09-28T14:42:38.801Z",
   "classificationVersion": "v5.1.0-phase03",
   "canonicalEvents": [
     {
@@ -149,11 +149,11 @@
     },
     {
       "event": "ultimateTriggerGuard",
-      "runtimeDispatched": false
+      "runtimeDispatched": true
     },
     {
       "event": "ultimateTriggerResolved",
-      "runtimeDispatched": false
+      "runtimeDispatched": true
     },
     {
       "event": "triggerCounter",
@@ -161,7 +161,11 @@
     },
     {
       "event": "xuTriggerHit",
-      "runtimeDispatched": false
+      "runtimeDispatched": true
+    },
+    {
+      "event": "criticalHit",
+      "runtimeDispatched": true
     }
   ],
   "summary": {

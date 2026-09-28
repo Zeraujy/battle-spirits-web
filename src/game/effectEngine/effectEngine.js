@@ -1,5 +1,6 @@
 import { findPhysicalCard, getBraveAttachment, getDatabaseCard, getEffectiveBP } from "../selectors.js";
 import { appendLog, uid } from "../utils.js";
+import { updateFieldCard } from "../zones.js";
 import { entryConditionsMatch } from "./conditionResolver.js";
 import { entryMatchesTriggerContext, getEntryActions, getTriggeredEntries, normalizeEventName } from "./normalizer.js";
 import { resolveActionList } from "./actionResolver.js";
@@ -42,6 +43,9 @@ function makePendingDecision(decision = {}) {
     titleEN: decision.titleEN || null,
     instructionPT: decision.instructionPT || null,
     instructionEN: decision.instructionEN || null,
+    totalCores: decision.totalCores == null ? null : Number(decision.totalCores),
+    exactTotal: decision.exactTotal !== false,
+    sourceCoreZone: decision.sourceCoreZone || null,
     continuationActions: decision.continuationActions || [],
     continuationBatches: decision.continuationBatches || [],
     continuationEvents: decision.continuationEvents || []
@@ -251,12 +255,68 @@ export function resolveEffectDecision(match, actorId, payload = {}, cardIndex) {
   const baseContext = pendingContext(match, cardIndex, pending);
   let selectedTargets = [];
   let firstActions = [];
+  let decisionContext = baseContext;
+  let next = { ...match, pendingEffectDecision: null };
 
-  if (pending.kind === "chooseOption") {
+  if (["chooseOption", "chooseYesNo"].includes(pending.kind)) {
     const optionId = String(payload.optionId ?? "");
     const option = (pending.action?.options || []).find((item, index) => String(item.id ?? index) === optionId);
     if (!option) return { ok: false, error: "Opção de efeito inválida." };
     firstActions = Array.isArray(option.actions) ? option.actions : [];
+    decisionContext = { ...baseContext, chosenOptionId: optionId, chosenOption: option };
+  } else if (pending.kind === "chooseOrder") {
+    const ids = Array.isArray(payload.orderedInstanceIds) ? payload.orderedInstanceIds.map(String) : [];
+    const allowed = (pending.candidates || []).map((candidate) => String(candidate.instanceId));
+    if (ids.length !== allowed.length || new Set(ids).size !== allowed.length || ids.some((id) => !allowed.includes(id))) {
+      return { ok: false, error: "A ordem escolhida precisa conter todas as cartas válidas exatamente uma vez." };
+    }
+    selectedTargets = ids.map((id) => targetFromId(match, cardIndex, id)).filter(Boolean);
+    if (selectedTargets.length !== ids.length) return { ok: false, error: "Uma das cartas da ordem não está mais disponível." };
+    decisionContext = { ...baseContext, selectedTargets, orderedTargets: selectedTargets, selectionResolved: true };
+    const main = pending.action?.onConfirm ?? pending.action?.actions ?? pending.action?.then ?? [];
+    firstActions = Array.isArray(main) ? main : [main];
+  } else if (pending.kind === "chooseCoreDistribution") {
+    const raw = payload.coreDistribution && typeof payload.coreDistribution === "object" ? payload.coreDistribution : {};
+    const allowed = new Set((pending.candidates || []).map((candidate) => String(candidate.instanceId)));
+    const distribution = {};
+    let total = 0;
+    for (const [instanceId, rawAmount] of Object.entries(raw)) {
+      if (!allowed.has(String(instanceId))) return { ok: false, error: "A distribuição contém um alvo inválido." };
+      const amount = Math.max(0, Math.floor(Number(rawAmount || 0)));
+      if (!Number.isFinite(amount)) return { ok: false, error: "Quantidade de Core inválida." };
+      if (amount > 0) distribution[String(instanceId)] = amount;
+      total += amount;
+    }
+    const required = Math.max(0, Number(pending.totalCores || 0));
+    if (pending.exactTotal !== false && total !== required) return { ok: false, error: `Distribua exatamente ${required} Core(s).` };
+    if (pending.exactTotal === false && total > required) return { ok: false, error: `Distribua no máximo ${required} Core(s).` };
+
+    const sourceZone = pending.sourceCoreZone || "reserve";
+    const player = next.players?.[actorId];
+    if (!player) return { ok: false, error: "Jogador inválido para distribuição de Cores." };
+    if (sourceZone === "reserve" && Number(player.reserve || 0) < total) return { ok: false, error: "Não há Cores suficientes na Reserva." };
+    if (["trash", "coreTrash"].includes(sourceZone) && Number(player.trashCores || 0) < total) return { ok: false, error: "Não há Cores suficientes no Core Trash." };
+
+    let updatedPlayer = { ...player };
+    if (sourceZone === "reserve") updatedPlayer.reserve = Number(updatedPlayer.reserve || 0) - total;
+    if (["trash", "coreTrash"].includes(sourceZone)) updatedPlayer.trashCores = Number(updatedPlayer.trashCores || 0) - total;
+    next = { ...next, players: { ...next.players, [actorId]: updatedPlayer } };
+
+    selectedTargets = [];
+    for (const [instanceId, amount] of Object.entries(distribution)) {
+      const target = targetFromId(next, cardIndex, instanceId);
+      if (!target || !["spirits", "nexuses", "other"].includes(target.zone)) return { ok: false, error: "Um dos alvos da distribuição não está mais no campo." };
+      const owner = next.players[target.playerId];
+      const withCore = updateFieldCard(owner, instanceId, (physical) => ({
+        ...physical,
+        cores: { ...physical.cores, regular: Number(physical.cores?.regular || 0) + amount }
+      }));
+      next = { ...next, players: { ...next.players, [target.playerId]: withCore } };
+      selectedTargets.push(targetFromId(next, cardIndex, instanceId));
+    }
+    decisionContext = { ...baseContext, selectedTargets, coreDistribution: distribution, distributedCores: total, selectionResolved: true };
+    const main = pending.action?.onConfirm ?? pending.action?.actions ?? pending.action?.then ?? [];
+    firstActions = Array.isArray(main) ? main : [main];
   } else {
     const ids = Array.isArray(payload.selectedInstanceIds)
       ? [...new Set(payload.selectedInstanceIds.map(String))]
@@ -275,46 +335,32 @@ export function resolveEffectDecision(match, actorId, payload = {}, cardIndex) {
         if (!["spirits", "nexuses", "other"].includes(target.zone)) return sum;
         return sum + Number(getEffectiveBP(match, cardIndex, target.physical) || 0);
       }, 0);
-      if (totalBP > Number(pending.maxTotalBP)) {
-        return { ok: false, error: `O total de BP selecionado excede ${pending.maxTotalBP}.` };
-      }
+      if (totalBP > Number(pending.maxTotalBP)) return { ok: false, error: `O total de BP selecionado excede ${pending.maxTotalBP}.` };
     }
 
     const action = pending.action || {};
-    const isSelectionWrapper = ["selectTarget", "selectTrashTarget", "selectMultipleTargets"].includes(action.type);
+    const isSelectionWrapper = ["selectTarget", "selectTrashTarget", "selectMultipleTargets", "chooseCardsFromHand", "chooseCardsFromTrash", "chooseCardsFromDeck"].includes(action.type);
     const main = isSelectionWrapper
       ? (action.onSelect ?? action.onConfirm ?? action.actions ?? action.then ?? [])
       : [{ ...action, target: "selected", selector: undefined, targets: undefined }];
     firstActions = Array.isArray(main) ? main : [main];
+    decisionContext = { ...baseContext, selectedTargets, selectionResolved: true };
   }
 
-  let next = { ...match, pendingEffectDecision: null };
   const batches = [];
+  if (firstActions.length) batches.push({ actions: firstActions, context: decisionContext });
 
-  if (pending.kind === "chooseOption") {
-    if (firstActions.length) batches.push({ actions: firstActions, context: baseContext });
-  } else {
-    const selectedContext = {
-      ...baseContext,
-      selectedTargets,
-      selectionResolved: true
-    };
-    if (firstActions.length) batches.push({ actions: firstActions, context: selectedContext });
-
+  if (!["chooseOption", "chooseYesNo", "chooseOrder", "chooseCoreDistribution"].includes(pending.kind)) {
     const after = pending.action?.afterSelect ?? pending.action?.afterConfirm ?? [];
     const afterActions = Array.isArray(after) ? after : [after];
-    if (afterActions.length) batches.push({ actions: afterActions, context: selectedContext });
+    if (afterActions.length) batches.push({ actions: afterActions, context: decisionContext });
 
     const afterIfAny = pending.action?.afterIfAny ?? [];
     const afterIfAnyActions = Array.isArray(afterIfAny) ? afterIfAny : [afterIfAny];
-    if (selectedTargets.length > 0 && afterIfAnyActions.length) {
-      batches.push({ actions: afterIfAnyActions, context: selectedContext });
-    }
+    if (selectedTargets.length > 0 && afterIfAnyActions.length) batches.push({ actions: afterIfAnyActions, context: decisionContext });
   }
 
-  if ((pending.continuationActions || []).length) {
-    batches.push({ actions: pending.continuationActions, context: baseContext });
-  }
+  if ((pending.continuationActions || []).length) batches.push({ actions: pending.continuationActions, context: baseContext });
   batches.push(...(pending.continuationBatches || []));
 
   const result = runBatches(next, batches, cardIndex);
@@ -324,16 +370,10 @@ export function resolveEffectDecision(match, actorId, payload = {}, cardIndex) {
   const queueAlreadyHasEvents = Boolean(next.effectQueue?.items?.length);
   if (queuedEvents.length && !queueAlreadyHasEvents) next = enqueueEffectEvents(next, queuedEvents).match;
 
-  if (next.pendingEffectDecision) {
-    next = markEffectQueueWaiting(next);
-  } else {
-    const drainedQueue = drainEffectQueue(next, (working, item) => resolveCardEvent(working, item.payload, cardIndex));
-    next = drainedQueue.match;
-  }
+  if (next.pendingEffectDecision) next = markEffectQueueWaiting(next);
+  else next = drainEffectQueue(next, (working, item) => resolveCardEvent(working, item.payload, cardIndex)).match;
 
-  if (!next.pendingEffectDecision && next.pendingMagicResolution) {
-    next = finalizePendingMagicResolution(next, cardIndex);
-  }
+  if (!next.pendingEffectDecision && next.pendingMagicResolution) next = finalizePendingMagicResolution(next, cardIndex);
 
   if (!next.pendingEffectDecision) {
     const sourceName = baseContext.sourceCard?.namePT || baseContext.sourceCard?.nameEN || baseContext.sourceCard?.id || "Efeito";

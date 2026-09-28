@@ -734,6 +734,16 @@ export default function Simulator({
   ] = useState([]);
 
   const [
+    effectDecisionOrder,
+    setEffectDecisionOrder
+  ] = useState([]);
+
+  const [
+    effectCoreDistribution,
+    setEffectCoreDistribution
+  ] = useState({});
+
+  const [
     braveSeparationDialog,
     setBraveSeparationDialog
   ] = useState(null);
@@ -781,6 +791,12 @@ export default function Simulator({
 
   useEffect(() => {
     setEffectDecisionSelection([]);
+    setEffectCoreDistribution({});
+    setEffectDecisionOrder(
+      effectDecision?.kind === "chooseOrder"
+        ? (effectDecision.candidates || []).map((candidate) => candidate.instanceId)
+        : []
+    );
   }, [
     effectDecision?.id
   ]);
@@ -1410,6 +1426,35 @@ export default function Simulator({
         : "Escolha uma carta válida do Trash.";
     }
 
+    if (["chooseCardsFromHand", "chooseCardsFromTrash", "chooseCardsFromDeck"].includes(effectDecision.kind)) {
+      const zone = effectDecision.kind === "chooseCardsFromHand"
+        ? (language === "en" ? "hand" : "mão")
+        : effectDecision.kind === "chooseCardsFromDeck"
+          ? (language === "en" ? "deck" : "deck")
+          : (language === "en" ? "Trash" : "Trash");
+      return language === "en"
+        ? `Choose the required card(s) from the ${zone}.`
+        : `Escolha a(s) carta(s) necessária(s) da ${zone}.`;
+    }
+
+    if (effectDecision.kind === "chooseOrder") {
+      return language === "en"
+        ? "Arrange the cards in the order they should resolve, then confirm."
+        : "Organize as cartas na ordem em que devem resolver e depois confirme.";
+    }
+
+    if (effectDecision.kind === "chooseCoreDistribution") {
+      return language === "en"
+        ? "Distribute the required Cores among the valid cards."
+        : "Distribua os Cores necessários entre as cartas válidas.";
+    }
+
+    if (effectDecision.kind === "chooseYesNo") {
+      return language === "en"
+        ? "Choose Yes or No to continue."
+        : "Escolha Sim ou Não para continuar.";
+    }
+
     return language === "en"
       ? "Click one of the highlighted valid cards."
       : "Clique em uma das cartas válidas destacadas.";
@@ -1554,6 +1599,59 @@ export default function Simulator({
   }
 
 
+  function resolveEffectDecisionOrder() {
+    if (!effectDecision || !canControlEffectDecision) return;
+    dispatch(
+      {
+        type: "RESOLVE_EFFECT_DECISION",
+        payload: { orderedInstanceIds: effectDecisionOrder }
+      },
+      effectDecision.playerId
+    );
+  }
+
+  function moveEffectDecisionOrder(instanceId, direction) {
+    setEffectDecisionOrder((current) => {
+      const index = current.indexOf(instanceId);
+      if (index < 0) return current;
+      const nextIndex = index + direction;
+      if (nextIndex < 0 || nextIndex >= current.length) return current;
+      const next = [...current];
+      [next[index], next[nextIndex]] = [next[nextIndex], next[index]];
+      return next;
+    });
+  }
+
+  function effectCoreAssigned() {
+    return Object.values(effectCoreDistribution).reduce((sum, value) => sum + Math.max(0, Number(value || 0)), 0);
+  }
+
+  function changeEffectCoreDistribution(instanceId, delta) {
+    if (!effectDecision || !canControlEffectDecision) return;
+    setEffectCoreDistribution((current) => {
+      const totalLimit = Math.max(0, Number(effectDecision.totalCores || 0));
+      const currentValue = Math.max(0, Number(current[instanceId] || 0));
+      const assigned = Object.values(current).reduce((sum, value) => sum + Math.max(0, Number(value || 0)), 0);
+      const nextValue = Math.max(0, currentValue + delta);
+      if (delta > 0 && assigned >= totalLimit) return current;
+      const next = { ...current, [instanceId]: nextValue };
+      if (!nextValue) delete next[instanceId];
+      return next;
+    });
+  }
+
+  function resolveEffectCoreDistribution() {
+    if (!effectDecision || !canControlEffectDecision) return;
+    dispatch(
+      {
+        type: "RESOLVE_EFFECT_DECISION",
+        payload: { coreDistribution: effectCoreDistribution }
+      },
+      effectDecision.playerId
+    );
+  }
+
+
   function toggleEffectDecisionTarget(
     instanceId
   ) {
@@ -1685,49 +1783,51 @@ export default function Simulator({
       effectDecision.kind ===
       "selectTrashTarget";
 
+    const isCardZonePicker =
+      ["chooseCardsFromHand", "chooseCardsFromTrash", "chooseCardsFromDeck"].includes(effectDecision.kind);
+
     const isOptionPicker =
-      effectDecision.kind ===
-      "chooseOption";
+      ["chooseOption", "chooseYesNo"].includes(effectDecision.kind);
+
+    const isOrderPicker =
+      effectDecision.kind === "chooseOrder";
+
+    const isCoreDistribution =
+      effectDecision.kind === "chooseCoreDistribution";
 
     const showConfirm =
       effectDecision.kind ===
         "selectMultipleTargets" ||
+      isCardZonePicker ||
       Number(
         effectDecision.maximum ||
         1
       ) > 1;
 
-    const trashCandidates =
-      isTrashPicker
-        ? (
-            effectDecision.candidates ||
-            []
-          )
-            .map(
-              (candidate) => {
-                const ctx =
-                  findPhysicalCard(
-                    match,
-                    candidate.instanceId
-                  );
-
-                if (!ctx) {
-                  return null;
-                }
-
-                return {
-                  candidate,
-                  ctx,
-                  card:
-                    getDatabaseCard(
-                      cardIndex,
-                      ctx.card
-                    )
-                };
-              }
-            )
+    const zoneCandidates =
+      (isTrashPicker || isCardZonePicker || isOrderPicker || isCoreDistribution)
+        ? (effectDecision.candidates || [])
+            .map((candidate) => {
+              const ctx = findPhysicalCard(match, candidate.instanceId);
+              if (!ctx) return null;
+              return {
+                candidate,
+                ctx,
+                card: getDatabaseCard(cardIndex, ctx.card)
+              };
+            })
             .filter(Boolean)
         : [];
+
+    const orderedCandidates =
+      isOrderPicker
+        ? effectDecisionOrder
+            .map((instanceId) => zoneCandidates.find((entry) => entry.candidate.instanceId === instanceId))
+            .filter(Boolean)
+        : [];
+
+    const coresAssigned = isCoreDistribution ? effectCoreAssigned() : 0;
+    const requiredCores = Math.max(0, Number(effectDecision.totalCores || 0));
 
     return (
       <>
@@ -1737,7 +1837,10 @@ export default function Simulator({
           className={
             `effect-decision-panel ${
               isTrashPicker ||
-              isOptionPicker
+              isCardZonePicker ||
+              isOptionPicker ||
+              isOrderPicker ||
+              isCoreDistribution
                 ? "picker"
                 : "compact"
             }`
@@ -1815,10 +1918,10 @@ export default function Simulator({
             </div>
           )}
 
-          {isTrashPicker &&
+          {(isTrashPicker || isCardZonePicker) &&
             !waiting && (
             <div className="effect-decision-trash-grid">
-              {trashCandidates.map(
+              {zoneCandidates.map(
                 ({
                   candidate,
                   ctx,
@@ -1874,8 +1977,69 @@ export default function Simulator({
             </div>
           )}
 
+          {isOrderPicker && !waiting && (
+            <div className="effect-decision-order-list">
+              {orderedCandidates.map(({ candidate, card }, index) => (
+                <div className="effect-decision-order-row" key={candidate.instanceId}>
+                  <span className="effect-decision-order-index">{index + 1}</span>
+                  <div>
+                    <strong>{card ? getCardName(card) : candidate.cardId}</strong>
+                    <small>{candidate.cardId}</small>
+                  </div>
+                  <div className="effect-decision-order-actions">
+                    <button type="button" className="ghost" disabled={index === 0} onClick={() => moveEffectDecisionOrder(candidate.instanceId, -1)}>↑</button>
+                    <button type="button" className="ghost" disabled={index === orderedCandidates.length - 1} onClick={() => moveEffectDecisionOrder(candidate.instanceId, 1)}>↓</button>
+                  </div>
+                </div>
+              ))}
+              <footer className="effect-decision-footer">
+                <div className="effect-decision-counter"><b>{orderedCandidates.length}</b><span>{language === "en" ? "cards ordered" : "cartas ordenadas"}</span></div>
+                <button type="button" className="primary-btn" onClick={resolveEffectDecisionOrder}>
+                  {language === "en" ? "Confirm order" : "Confirmar ordem"}
+                </button>
+              </footer>
+            </div>
+          )}
+
+          {isCoreDistribution && !waiting && (
+            <div className="effect-decision-core-list">
+              {zoneCandidates.map(({ candidate, card }) => {
+                const amount = Math.max(0, Number(effectCoreDistribution[candidate.instanceId] || 0));
+                return (
+                  <div className="effect-decision-core-row" key={candidate.instanceId}>
+                    <div>
+                      <strong>{card ? getCardName(card) : candidate.cardId}</strong>
+                      <small>{candidate.cardId}</small>
+                    </div>
+                    <div className="effect-decision-core-stepper">
+                      <button type="button" className="ghost" disabled={amount <= 0} onClick={() => changeEffectCoreDistribution(candidate.instanceId, -1)}>−</button>
+                      <b>{amount}</b>
+                      <button type="button" className="ghost" disabled={coresAssigned >= requiredCores} onClick={() => changeEffectCoreDistribution(candidate.instanceId, 1)}>+</button>
+                    </div>
+                  </div>
+                );
+              })}
+              <footer className="effect-decision-footer">
+                <div className="effect-decision-counter">
+                  <b>{coresAssigned}/{requiredCores}</b>
+                  <span>{language === "en" ? "Cores assigned" : "Cores distribuídos"}</span>
+                </div>
+                <button
+                  type="button"
+                  className="primary-btn"
+                  disabled={effectDecision.exactTotal !== false ? coresAssigned !== requiredCores : coresAssigned > requiredCores}
+                  onClick={resolveEffectCoreDistribution}
+                >
+                  {language === "en" ? "Confirm Cores" : "Confirmar Cores"}
+                </button>
+              </footer>
+            </div>
+          )}
+
           {!waiting &&
-            !isOptionPicker && (
+            !isOptionPicker &&
+            !isOrderPicker &&
+            !isCoreDistribution && (
             <footer className="effect-decision-footer">
               <div className="effect-decision-counter">
                 <b>

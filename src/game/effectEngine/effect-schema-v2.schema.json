@@ -57,7 +57,8 @@
             "ultimateTriggerGuard",
             "ultimateTriggerResolved",
             "triggerCounter",
-            "xuTriggerHit"
+            "xuTriggerHit",
+            "criticalHit"
           ]
         },
         "scope": {

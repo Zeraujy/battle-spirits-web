@@ -36,7 +36,8 @@ export const EffectEvent = Object.freeze({
   ULTIMATE_TRIGGER_GUARD: "ultimateTriggerGuard",
   ULTIMATE_TRIGGER_RESOLVED: "ultimateTriggerResolved",
   TRIGGER_COUNTER: "triggerCounter",
-  XU_TRIGGER_HIT: "xuTriggerHit"
+  XU_TRIGGER_HIT: "xuTriggerHit",
+  CRITICAL_HIT: "criticalHit"
 });
 
 export const CANONICAL_EVENT_VALUES = Object.freeze(Object.values(EffectEvent));
@@ -161,6 +162,10 @@ export const RUNTIME_DISPATCHED_EVENTS = Object.freeze(new Set([
   EffectEvent.CONTINUOUS,
   EffectEvent.AFTER_ULTIMATE_TRIGGER,
   EffectEvent.ULTIMATE_TRIGGER_HIT,
+  EffectEvent.ULTIMATE_TRIGGER_GUARD,
+  EffectEvent.ULTIMATE_TRIGGER_RESOLVED,
+  EffectEvent.XU_TRIGGER_HIT,
+  EffectEvent.CRITICAL_HIT,
   EffectEvent.TRIGGER_COUNTER
 ]));
 

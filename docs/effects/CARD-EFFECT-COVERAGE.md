@@ -1,4 +1,4 @@
-# Card Effect Coverage — v5.1.0 Foundation (Phase 0–12)
+# Card Effect Coverage — v5.1.0 Card Effects & Mechanics Engine (Phase 0–18)
 
 > Scope: runtime gameplay catalog (`src/data/cards.json`). Artwork-only/public database records that are not loaded into the gameplay catalog are intentionally excluded.
 
@@ -92,9 +92,9 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 - Unsupported action types: none
 - Unsupported condition forms: none
 
-## Foundation additions — Phases 7–12
+## Engine additions — Phases 7–18
 
-- Core Action Library is centralized and currently exposes **45 generic action types** to Schema v2.
+- Core Action Library is centralized and currently exposes **51 generic action types** to Schema v2.
 - Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.
 - Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.
 - Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.
@@ -102,6 +102,10 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 - Replacement/prevention windows now cover `wouldBeDestroyed` and `wouldLoseLife` with declarative `preventEvent` / `replaceEvent` actions.
 - Battle flow now dispatches `whenBlocked`, `whenBattles`, `beforeBattleResolution`, `afterBattleResolution`, and `lifeDecreased` with normalized battle context.
 - All seven turn phases now dispatch canonical step events; legacy `your/opponent/either` step timings have a narrow ambient compatibility path.
+- Magic, Burst and Brave automation now share the same decision/trigger infrastructure instead of falling back immediately to manual resolution.
+- Ultimate mechanics formalize HIT/GUARD, Trigger Counter, Critical Hit, XU Trigger and post-resolution events inside the canonical Effect Engine flow.
+- Complex Player Decisions now support targets, multiple cards, Yes/No, Hand/Trash/Deck selection, ordering and authoritative Core distribution.
+- Arena Effect Resolution UI renders structured decision panels and keeps the legacy manual panel as exceptional fallback only.
 
 ## Canonical Event Model — Phase 1
 
@@ -143,10 +147,11 @@ The canonical list is defined in `src/game/effectEngine/canonicalEvents.js`. Leg
 | `coreMoved` | No — foundation only |
 | `afterUltimateTrigger` | Yes |
 | `ultimateTriggerHit` | Yes |
-| `ultimateTriggerGuard` | No — foundation only |
-| `ultimateTriggerResolved` | No — foundation only |
+| `ultimateTriggerGuard` | Yes |
+| `ultimateTriggerResolved` | Yes |
 | `triggerCounter` | Yes |
-| `xuTriggerHit` | No — foundation only |
+| `xuTriggerHit` | Yes |
+| `criticalHit` | Yes |
 
 ## Cards requiring work
 

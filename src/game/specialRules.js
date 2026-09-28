@@ -508,7 +508,7 @@ function completeCurrentTrigger(match, cardIndex, manualResolutionNeeded = false
   const trigger = match.battle?.ultimateTrigger;
   if (!trigger) return match;
 
-  const resolved = {
+  let resolved = {
     ...match,
     battle: {
       ...match.battle,
@@ -520,6 +520,39 @@ function completeCurrentTrigger(match, cardIndex, manualResolutionNeeded = false
       }
     }
   };
+
+  const sourceCtx = findPhysicalCard(resolved, trigger.sourceInstanceId);
+  const sourcePhysical = sourceCtx?.card || null;
+  const sourceCard = sourcePhysical ? getDatabaseCard(cardIndex, sourcePhysical) : cardIndex.get(trigger.sourceCardId);
+  if (sourceCard && trigger.controllerPlayerId && !trigger.resolutionEventDispatched) {
+    resolved = {
+      ...resolved,
+      battle: {
+        ...resolved.battle,
+        ultimateTrigger: {
+          ...resolved.battle.ultimateTrigger,
+          resolutionEventDispatched: true
+        }
+      }
+    };
+    const dispatched = dispatchEffectEvent(resolved, {
+      event: "ultimateTriggerResolved",
+      sourcePlayerId: trigger.controllerPlayerId,
+      sourceInstanceId: trigger.sourceInstanceId,
+      sourcePhysical,
+      sourceCard,
+      sourceCardId: trigger.sourceCardId,
+      context: {
+        event: "ultimateTriggerResolved",
+        ultimateTrigger: resolved.battle?.ultimateTrigger,
+        ultimateTriggerHit: Boolean(trigger.hit && !trigger.countered),
+        ultimateTriggerGuard: Boolean(!trigger.hit),
+        xuTriggerHit: Boolean(trigger.kind === "xu" && trigger.hit && !trigger.countered)
+      }
+    }, cardIndex);
+    resolved = dispatched.match;
+    if (resolved.pendingEffectDecision) return markTriggerWaitingDecision(resolved, true);
+  }
 
   const xu = startXUTriggerIfEligible(resolved, trigger, cardIndex);
   if (xu) return xu;
@@ -543,8 +576,32 @@ export function resolveUltimateTriggerStage(match, actorId, cardIndex) {
   }
 
   if (!trigger.hit || trigger.countered || trigger.status === "emptyDeck") {
-    const next = completeCurrentTrigger(match, cardIndex, false);
-    return { ok: true, match: next, manualResolutionNeeded: false, notes: [] };
+    let next = match;
+    const notes = [];
+    if (!trigger.hit && !trigger.countered && trigger.status !== "emptyDeck") {
+      const sourceCtx = findPhysicalCard(next, trigger.sourceInstanceId);
+      const sourcePhysical = sourceCtx?.card || null;
+      const sourceCard = sourcePhysical ? getDatabaseCard(cardIndex, sourcePhysical) : cardIndex.get(trigger.sourceCardId);
+      if (sourceCard) {
+        const guard = dispatchEffectEvent(next, {
+          event: "ultimateTriggerGuard",
+          sourcePlayerId: trigger.controllerPlayerId,
+          sourceInstanceId: trigger.sourceInstanceId,
+          sourcePhysical,
+          sourceCard,
+          sourceCardId: trigger.sourceCardId,
+          context: { ultimateTrigger: trigger, ultimateTriggerGuard: true }
+        }, cardIndex);
+        next = guard.match;
+        notes.push(...(guard.notes || []));
+        if (next.pendingEffectDecision) {
+          next = markTriggerWaitingDecision(next, true);
+          return { ok: true, match: next, manualResolutionNeeded: true, notes };
+        }
+      }
+    }
+    next = completeCurrentTrigger(next, cardIndex, false);
+    return { ok: true, match: next, manualResolutionNeeded: Boolean(next.pendingEffectDecision), notes };
   }
 
   const sourceCtx = findPhysicalCard(match, trigger.sourceInstanceId);
@@ -613,6 +670,34 @@ export function resolveUltimateTriggerStage(match, actorId, cardIndex) {
   if (next.pendingEffectDecision) {
     next = markTriggerWaitingDecision(next, true);
     return { ok: true, match: next, manualResolutionNeeded: true, notes };
+  }
+
+  if (trigger.kind !== "xu" && trigger.criticalHit?.eligible) {
+    const criticalEffect = findCriticalHitEffect(next, cardIndex, sourceCard, sourcePhysical, trigger);
+    const explicitCriticalEvent = compact(criticalEffect?.event || criticalEffect?.trigger?.event) === "criticalhit" || (!criticalEffect?.timing && compact(criticalEffect?.type) === "criticalhit");
+    if (explicitCriticalEvent) {
+      const critical = dispatchEffectEvent(next, {
+        event: "criticalHit",
+        sourcePlayerId: trigger.controllerPlayerId,
+        sourceInstanceId: trigger.sourceInstanceId,
+        sourcePhysical,
+        sourceCard,
+        sourceCardId: trigger.sourceCardId,
+        context: {
+          ...context,
+          event: "criticalHit",
+          criticalHit: true
+        }
+      }, cardIndex);
+      next = critical.match;
+      manualResolutionNeeded = manualResolutionNeeded || Boolean(critical.manualResolutionNeeded);
+      structuredResolved = structuredResolved || Number(critical.automatic || 0) > 0 || Number(critical.triggered || 0) > 0;
+      notes.push(...(critical.notes || []));
+      if (next.pendingEffectDecision) {
+        next = markTriggerWaitingDecision(next, true);
+        return { ok: true, match: next, manualResolutionNeeded: true, notes };
+      }
+    }
   }
 
   if (!structuredResolved) {

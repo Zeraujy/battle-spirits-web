@@ -303,7 +303,7 @@ function percent(value, total) {
 function markdown(report) {
   const { summary, cards } = report;
   const lines = [];
-  lines.push("# Card Effect Coverage — v5.1.0 Foundation (Phase 0–12)");
+  lines.push("# Card Effect Coverage — v5.1.0 Card Effects & Mechanics Engine (Phase 0–18)");
   lines.push("");
   lines.push("> Scope: runtime gameplay catalog (`src/data/cards.json`). Artwork-only/public database records that are not loaded into the gameplay catalog are intentionally excluded.");
   lines.push("");
@@ -367,7 +367,7 @@ function markdown(report) {
   lines.push(`- Unsupported action types: ${actionRows.length ? actionRows.map(([name, count]) => `\`${name}\` (${count})`).join(", ") : "none"}`);
   lines.push(`- Unsupported condition forms: ${conditionRows.length ? conditionRows.map(([name, count]) => `\`${name}\` (${count})`).join(", ") : "none"}`);
   lines.push("");
-  lines.push("## Foundation additions — Phases 7–12");
+  lines.push("## Engine additions — Phases 7–18");
   lines.push("");
   lines.push(`- Core Action Library is centralized and currently exposes **${listSupportedCoreActionTypes().length} generic action types** to Schema v2.`);
   lines.push("- Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.");
@@ -377,6 +377,10 @@ function markdown(report) {
   lines.push("- Replacement/prevention windows now cover `wouldBeDestroyed` and `wouldLoseLife` with declarative `preventEvent` / `replaceEvent` actions.");
   lines.push("- Battle flow now dispatches `whenBlocked`, `whenBattles`, `beforeBattleResolution`, `afterBattleResolution`, and `lifeDecreased` with normalized battle context.");
   lines.push("- All seven turn phases now dispatch canonical step events; legacy `your/opponent/either` step timings have a narrow ambient compatibility path.");
+  lines.push("- Magic, Burst and Brave automation now share the same decision/trigger infrastructure instead of falling back immediately to manual resolution.");
+  lines.push("- Ultimate mechanics formalize HIT/GUARD, Trigger Counter, Critical Hit, XU Trigger and post-resolution events inside the canonical Effect Engine flow.");
+  lines.push("- Complex Player Decisions now support targets, multiple cards, Yes/No, Hand/Trash/Deck selection, ordering and authoritative Core distribution.");
+  lines.push("- Arena Effect Resolution UI renders structured decision panels and keeps the legacy manual panel as exceptional fallback only.");
   lines.push("");
   lines.push("## Canonical Event Model — Phase 1");
   lines.push("");

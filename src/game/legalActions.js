@@ -50,7 +50,7 @@ function candidateActions(match, playerId, cardIndex) {
     const pending = match.pendingEffectDecision;
     if (pending.playerId !== playerId) return list;
 
-    if (pending.kind === "chooseOption") {
+    if (["chooseOption", "chooseYesNo"].includes(pending.kind)) {
       for (const [index, option] of (pending.action?.options || []).entries()) {
         const optionId = String(option.id ?? index);
         pushUnique(
@@ -60,6 +60,26 @@ function candidateActions(match, playerId, cardIndex) {
           option.labelPT || option.labelEN || optionId,
           "decision"
         );
+      }
+      return list;
+    }
+
+    if (pending.kind === "chooseOrder") {
+      const ids = (pending.candidates || []).map((candidate) => String(candidate.instanceId));
+      if (ids.length) {
+        pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", payload: { orderedInstanceIds: ids } }, "Manter ordem", "decision");
+        if (ids.length > 1) pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", payload: { orderedInstanceIds: [...ids].reverse() } }, "Inverter ordem", "decision");
+      }
+      return list;
+    }
+
+    if (pending.kind === "chooseCoreDistribution") {
+      const ids = (pending.candidates || []).map((candidate) => String(candidate.instanceId));
+      const total = Math.max(0, Number(pending.totalCores || 0));
+      if (!total && pending.allowZero) {
+        pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", payload: { coreDistribution: {} } }, "Não distribuir Cores", "decision");
+      } else if (ids.length) {
+        pushUnique(list, seen, { type: "RESOLVE_EFFECT_DECISION", payload: { coreDistribution: { [ids[0]]: total } } }, `Distribuir ${total} Core(s)`, "decision");
       }
       return list;
     }

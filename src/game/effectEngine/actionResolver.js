@@ -9,7 +9,7 @@ import {
   removeContinuousModifiers
 } from "./modifierResolver.js";
 import { canonicalActionType, supportsCoreActionType } from "./coreActionLibrary.js";
-import { collectTrashTargets, resolveActionTargets } from "./targetResolver.js";
+import { collectTargets, collectTrashTargets, resolveActionTargets } from "./targetResolver.js";
 import { preventReplacementEvent, replaceCurrentEvent } from "./replacementState.js";
 
 export function supportsActionType(type) {
@@ -219,6 +219,67 @@ function decisionFromOptions(action, context) {
       labelPT: option.labelPT || option.label?.ptBR || option.label?.pt || option.labelEN || option.label?.en || `Opção ${index + 1}`,
       labelEN: option.labelEN || option.label?.en || option.labelPT || option.label?.ptBR || `Option ${index + 1}`
     })),
+    continuationActions: [],
+    continuationBatches: []
+  };
+}
+
+function decisionMeta(action = {}) {
+  return {
+    titlePT: action.titlePT || action.title?.ptBR || action.title?.pt || null,
+    titleEN: action.titleEN || action.title?.en || null,
+    instructionPT: action.instructionPT || action.instruction?.ptBR || action.instruction?.pt || null,
+    instructionEN: action.instructionEN || action.instruction?.en || null
+  };
+}
+
+function decisionFromYesNo(action, context) {
+  const yesActions = asActionArray(action.yesActions ?? action.onYes ?? action.then ?? action.actions);
+  const noActions = asActionArray(action.noActions ?? action.onNo ?? action.else);
+  const normalized = {
+    ...action,
+    type: "chooseOption",
+    options: [
+      { id: "yes", labelPT: action.yesLabelPT || "Sim", labelEN: action.yesLabelEN || "Yes", actions: yesActions },
+      { id: "no", labelPT: action.noLabelPT || "Não", labelEN: action.noLabelEN || "No", actions: noActions }
+    ]
+  };
+  return { ...decisionFromOptions(normalized, context), kind: "chooseYesNo", action: normalized };
+}
+
+function decisionFromOrder(action, context, candidates) {
+  return {
+    kind: "chooseOrder",
+    playerId: context.sourcePlayerId,
+    action,
+    context,
+    candidates: candidates.map(decisionCandidate).filter((item) => item.instanceId),
+    minimum: candidates.length,
+    maximum: candidates.length,
+    allowZero: candidates.length === 0,
+    maxTotalBP: null,
+    ...decisionMeta(action),
+    continuationActions: [],
+    continuationBatches: []
+  };
+}
+
+function decisionFromCoreDistribution(action, context, candidates) {
+  const amount = Math.max(0, Number(action.amount ?? action.count ?? action.totalCores ?? 0));
+  return {
+    kind: "chooseCoreDistribution",
+    playerId: context.sourcePlayerId,
+    action,
+    context,
+    candidates: candidates.map(decisionCandidate).filter((item) => item.instanceId),
+    minimum: 0,
+    maximum: candidates.length,
+    allowZero: amount === 0 || Boolean(action.allowZero),
+    maxTotalBP: null,
+    totalCores: amount,
+    exactTotal: action.exactTotal !== false,
+    sourceCoreZone: action.from || action.source || "reserve",
+    ...decisionMeta(action),
     continuationActions: [],
     continuationBatches: []
   };
@@ -629,6 +690,69 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
   }
 
+  if (["chooseCardsFromHand", "chooseCardsFromTrash", "chooseCardsFromDeck"].includes(type)) {
+    const zone = type === "chooseCardsFromHand" ? "hand" : type === "chooseCardsFromTrash" ? "trash" : "deck";
+    const selector = { ...(action.selector || action.target || {}), zones: [zone] };
+    const selectionAction = {
+      ...action,
+      type: "selectMultipleTargets",
+      selector,
+      minTargets: action.minTargets ?? action.minimum ?? (action.allowZero ? 0 : 1),
+      maxTargets: action.maxTargets ?? action.maximum ?? action.count ?? action.amount ?? 1
+    };
+    const resolvedTargets = resolveActionTargets(next, selectionAction, cardIndex, context);
+    if (resolvedTargets.status === "manual") {
+      return {
+        match,
+        notes: [resolvedTargets.reason],
+        manualResolutionNeeded: true,
+        executed: false,
+        decision: { ...decisionFromTargets(action, resolvedTargets, context), kind: type, action }
+      };
+    }
+    if (resolvedTargets.status === "none") return { match, notes: ["Nenhuma carta válida encontrada para a escolha."], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const selectedContext = { ...context, selectedTargets: resolvedTargets.targets, selectionResolved: true };
+    const main = asActionArray(action.onSelect ?? action.onConfirm ?? action.actions ?? action.then);
+    return main.length
+      ? resolveNested(next, main, cardIndex, selectedContext)
+      : { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: resolvedTargets.targets.length };
+  }
+
+  if (type === "chooseOrder") {
+    const selector = action.selector || action.target || { owner: "self", zones: ["field"] };
+    const candidates = collectTargets(next, cardIndex, selector, context);
+    if (candidates.length <= 1) {
+      const orderedContext = { ...context, selectedTargets: candidates, orderedTargets: candidates, selectionResolved: true };
+      const main = asActionArray(action.onConfirm ?? action.actions ?? action.then);
+      return main.length ? resolveNested(next, main, cardIndex, orderedContext) : { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: candidates.length };
+    }
+    return {
+      match,
+      notes: ["Escolha a ordem de resolução das cartas."],
+      manualResolutionNeeded: true,
+      executed: false,
+      decision: decisionFromOrder(action, context, candidates)
+    };
+  }
+
+  if (type === "chooseCoreDistribution") {
+    const selector = action.selector || action.target || { owner: "self", zones: ["field"] };
+    const candidates = collectTargets(next, cardIndex, selector, context);
+    const amount = Math.max(0, Number(action.amount ?? action.count ?? action.totalCores ?? 0));
+    if (!candidates.length || amount === 0) {
+      const main = asActionArray(action.onConfirm ?? action.actions ?? action.then);
+      const emptyContext = { ...context, coreDistribution: {}, selectedTargets: [], selectionResolved: true };
+      return main.length ? resolveNested(next, main, cardIndex, emptyContext) : { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    }
+    return {
+      match,
+      notes: ["Distribuição de Cores aguardando escolha do jogador."],
+      manualResolutionNeeded: true,
+      executed: false,
+      decision: decisionFromCoreDistribution(action, context, candidates)
+    };
+  }
+
   if (["selectTarget", "selectTrashTarget", "selectMultipleTargets"].includes(type)) {
     const resolvedTargets = resolveActionTargets(next, action, cardIndex, context);
     if (resolvedTargets.status === "manual") {
@@ -655,6 +779,16 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       result = mergeResults(result, resolveNested(result.match, afterIfAny, cardIndex, selectedContext));
     }
     return result;
+  }
+
+  if (type === "chooseYesNo") {
+    return {
+      match,
+      notes: ["Escolha Sim/Não necessária."],
+      manualResolutionNeeded: true,
+      executed: false,
+      decision: decisionFromYesNo(action, context)
+    };
   }
 
   if (type === "chooseOption") {
