@@ -147,7 +147,10 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   if (selector.cardId && String(card.id) !== String(selector.cardId)) return false;
   if (selector.playerId && selector.playerId !== playerId) return false;
   if (selector.instanceIdFromContext) {
-    const dynamicId = context?.[selector.instanceIdFromContext] ?? context?.burstOpportunity?.[selector.instanceIdFromContext] ?? null;
+    const path = String(selector.instanceIdFromContext).split(".").filter(Boolean);
+    let dynamicId = context;
+    for (const key of path) dynamicId = dynamicId?.[key];
+    if (dynamicId == null && path.length === 1) dynamicId = context?.burstOpportunity?.[path[0]] ?? null;
     if (!dynamicId || String(physical.instanceId) !== String(dynamicId)) return false;
   }
   if (selector.battleOpponentOfSource === true) {
@@ -281,7 +284,19 @@ export function resolveActionTargets(match, action = {}, cardIndex, context = {}
   const candidates = collectTargets(match, cardIndex, effectiveSelector, context);
 
   if (selectionType === "selectMultipleTargets") {
-    const maximum = Math.max(0, Number(action.maxTargets ?? candidates.length));
+    let dynamicMaximum = action.maxTargets;
+    if (action.targetCountFrom && typeof action.targetCountFrom === "object") {
+      const spec = action.targetCountFrom;
+      const owner = normalizeOwner(spec.owner || "self");
+      const ownerIds = owner === TargetOwner.OPPONENT ? [otherPlayerId(match, context.sourcePlayerId)].filter(Boolean)
+        : owner === TargetOwner.ANY ? Object.keys(match.players || {}) : [context.sourcePlayerId].filter(Boolean);
+      const zone = String(spec.zone || "hand");
+      const total = ownerIds.reduce((sum, id) => sum + Number(match.players?.[id]?.[zone]?.length || 0), 0);
+      const divisor = Math.max(1, Number(spec.divisor || 1));
+      dynamicMaximum = Math.floor(total / divisor);
+      if (spec.maximum != null) dynamicMaximum = Math.min(dynamicMaximum, Number(spec.maximum));
+    }
+    const maximum = Math.max(0, Number(dynamicMaximum ?? candidates.length));
     if (action.asManyAsPossible === true) {
       const required = Math.min(maximum, candidates.length);
       if (required === 0) return { status: "resolved", targets: [] };

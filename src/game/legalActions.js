@@ -9,6 +9,20 @@ function totalCardCores(physical) {
   return Number(physical?.cores?.regular || 0) + (physical?.cores?.soul ? 1 : 0);
 }
 
+function hasActiveFieldFlash(card, physical) {
+  if (!card || card.cardType === "magic") return false;
+  const total = totalCardCores(physical);
+  let level = 0;
+  for (const entry of [...(card.levels || [])].sort((a,b) => Number(a.cores || 0) - Number(b.cores || 0))) {
+    if (total >= Number(entry.cores || 0)) level = Number(entry.level || level);
+  }
+  return (card.effects || []).some((effect) => {
+    if (String(effect?.type || "").toLowerCase() !== "flash" || !effect?.automationRef) return false;
+    const levels = Array.isArray(effect.levels) ? effect.levels.map(Number) : [];
+    return !levels.length || levels.includes(level);
+  });
+}
+
 function summonLevelCoreOptions(card) {
   if (!["spirit", "ultimate", "brave"].includes(card?.cardType)) return [];
   const requirements = (card.levels || [])
@@ -171,6 +185,16 @@ function candidateActions(match, playerId, cardIndex) {
         const card = getDatabaseCard(cardIndex, physical);
         if (card?.cardType === "magic") {
           pushUnique(list, seen, { type: "USE_MAGIC", instanceId: physical.instanceId, options: { mode: "flash" } }, card.namePT || card.nameEN || card.id, "magic");
+        } else if ((card?.effects || []).some((effect) => String(effect?.type || "").toLowerCase() === "highspeed")) {
+          pushUnique(list, seen, { type: "USE_HIGH_SPEED", instanceId: physical.instanceId, options: { highSpeed: true } }, card.namePT || card.nameEN || card.id, "spirit");
+        }
+      }
+      for (const zone of ["spirits", "nexuses", "other"]) {
+        for (const physical of player.field?.[zone] || []) {
+          const card = getDatabaseCard(cardIndex, physical);
+          if (hasActiveFieldFlash(card, physical)) {
+            pushUnique(list, seen, { type: "ACTIVATE_FIELD_FLASH", instanceId: physical.instanceId }, card.namePT || card.nameEN || card.id, "effect");
+          }
         }
       }
     }

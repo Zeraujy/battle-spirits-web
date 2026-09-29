@@ -1,4 +1,4 @@
-import { getCurrentLevel, getDatabaseCard, getEffectiveBP, getEffectiveCost, getFieldSymbols } from "../selectors.js";
+import { findPhysicalCard, getBraveAttachment, getCurrentLevel, getDatabaseCard, getEffectiveBP, getEffectiveCost, getFieldSymbols } from "../selectors.js";
 import { otherPlayerId } from "../utils.js";
 import { cardKeywords, collectTargets } from "./targetingEngine.js";
 import { applyContinuousCollectionModifiers } from "./modifierResolver.js";
@@ -162,6 +162,20 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     const card = eventSourceCard(match, context, cardIndex);
     const expected = String(condition.family ?? condition.value ?? "").toLowerCase();
     return Boolean(card && (card.families || []).some((family) => String(family).toLowerCase() === expected));
+  }
+  if (type === "eventSourceIsCombinedHost") {
+    const hostId = context.sourcePhysical?.combinedWith || null;
+    const eventId = context.eventSourceInstanceId || null;
+    return Boolean(hostId && eventId && String(hostId) === String(eventId));
+  }
+  if (type === "combinedHostLacksEffectType") {
+    const hostId = context.sourcePhysical?.combinedWith || null;
+    if (!hostId) return false;
+    const host = findPhysicalCard(match, hostId);
+    const hostCard = host ? getDatabaseCard(cardIndex, host.card) : null;
+    if (!hostCard) return false;
+    const expected = String(condition.effectType ?? condition.value ?? "").replace(/[\s_-]+/g, "").toLowerCase();
+    return !(hostCard.effects || []).some((entry) => String(entry?.type || "").replace(/[\s_-]+/g, "").toLowerCase() === expected);
   }
   if (type === "eventCause") return String(context.cause || "") === String(condition.value ?? condition.cause ?? "");
   if (type === "eventDestroyedByOpponent") {

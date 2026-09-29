@@ -7,6 +7,7 @@ import { resolveOperations } from "./effectEngine/effectEngine.js";
 import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
 import { entryConditionsMatch } from "./effectEngine/conditionResolver.js";
 import { getCombinedStats } from "./brave.js";
+import { getContinuousCardNumericModifier, getContinuousNumericModifier } from "./effectEngine/modifierResolver.js";
 
 const COLOR_WORDS = {
   red: ["red", "vermelho", "vermelha", "赤"],
@@ -44,6 +45,7 @@ function controlsMatching(match, playerId, cardIndex, condition = {}) {
 
 export function checkSummoningCondition(match, playerId, card, cardIndex, options = {}) {
   if (card?.cardType !== "ultimate") return { ok: true };
+  if (getContinuousCardNumericModifier(match, card, playerId, "ignoreSummoningCondition") > 0) return { ok: true, ignoredByEffect: true };
   const effect = (card.effects || []).find((entry) =>
     entry.type === "summonCondition" || entry.timing === "summonCondition" || entry.timing === "summon"
   );
@@ -99,6 +101,7 @@ function triggerTimingMatches(effect, timing = "whenAttacks") {
 }
 
 function ultimateTriggerEffects(match, cardIndex, card, physical, timing = "whenAttacks") {
+  if (physical && getContinuousNumericModifier(match, cardIndex, physical, "ultimateTriggerDisabled") > 0) return [];
   const combined = Boolean(getBraveAttachment(match, physical?.instanceId));
   return (card?.effects || []).filter((effect) => {
     if (!triggerTimingMatches(effect, timing)) return false;

@@ -35,7 +35,7 @@
     ],
     "effectText": {
       "en": "[High Speed] Flash: You may summon this Spirit from your hand during a Flash timing by paying its cost and placing the required Cores from your Reserve.",
-      "ptBR": "[High Speed] Flash: você pode Invocar este Spirit da sua mão durante um Flash Timing pagando seu custo e colocando os Cores necessários da sua Reserve."
+      "ptBR": "[High Speed] Flash: voc\u00ea pode Invocar este Spirit da sua m\u00e3o durante um Flash Timing pagando seu custo e colocando os Cores necess\u00e1rios da sua Reserve."
     },
     "effects": [
       {
@@ -52,13 +52,13 @@
         },
         "text": {
           "en": "You may summon this Spirit from your hand during a Flash timing by paying its cost and placing the required Cores from your Reserve.",
-          "ptBR": "Você pode Invocar este Spirit da sua mão durante um Flash Timing pagando seu custo e colocando os Cores necessários da sua Reserve."
+          "ptBR": "Voc\u00ea pode Invocar este Spirit da sua m\u00e3o durante um Flash Timing pagando seu custo e colocando os Cores necess\u00e1rios da sua Reserve."
         }
       }
     ],
     "abilities": [],
-    "image": null,
-    "nameJP": "ギガンティア・カミキリー"
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-001.webp",
+    "nameJP": "\u30ae\u30ac\u30f3\u30c6\u30a3\u30a2\u30fb\u30ab\u30df\u30ad\u30ea\u30fc"
   },
   {
     "id": "SD28-002",
@@ -98,7 +98,7 @@
     ],
     "effectText": {
       "en": "LV1/LV2 [Spirit Soul: Green] When you summon an Ultimate card, this Spirit provides 1 additional Green symbol for that summon. LV1/LV2 When Destroyed: Exhaust 1 opposing Ultimate that is not Braved.",
-      "ptBR": "LV1/LV2 [Spirit Soul: Verde] Quando você Invocar uma carta de Ultimate, este Spirit fornece 1 símbolo Verde adicional para essa Invocação. LV1/LV2 Quando Destruído: dê Exhaust em 1 Ultimate do oponente que não esteja combinado com um Brave."
+      "ptBR": "LV1/LV2 [Spirit Soul: Verde] Quando voc\u00ea Invocar uma carta de Ultimate, este Spirit fornece 1 s\u00edmbolo Verde adicional para essa Invoca\u00e7\u00e3o. LV1/LV2 Quando Destru\u00eddo: d\u00ea Exhaust em 1 Ultimate do oponente que n\u00e3o esteja combinado com um Brave."
     },
     "effects": [
       {
@@ -110,13 +110,14 @@
         ],
         "timing": "ultimateSummon",
         "title": {
-          "en": "Spirit Soul — Green",
-          "ptBR": "Spirit Soul — Verde"
+          "en": "Spirit Soul \u2014 Green",
+          "ptBR": "Spirit Soul \u2014 Verde"
         },
         "text": {
           "en": "When you summon an Ultimate card, this Spirit provides 1 additional Green symbol for that summon.",
-          "ptBR": "Quando você Invocar uma carta de Ultimate, este Spirit fornece 1 símbolo Verde adicional para essa Invocação."
-        }
+          "ptBR": "Quando voc\u00ea Invocar uma carta de Ultimate, este Spirit fornece 1 s\u00edmbolo Verde adicional para essa Invoca\u00e7\u00e3o."
+        },
+        "automationRef": "sd28-002-spirit-soul-auto27"
       },
       {
         "id": "sd28-002-destroyed-display",
@@ -128,12 +129,13 @@
         "timing": "whenDestroyed",
         "title": {
           "en": "When Destroyed",
-          "ptBR": "Quando Destruído"
+          "ptBR": "Quando Destru\u00eddo"
         },
         "text": {
           "en": "Exhaust 1 opposing Ultimate that is not Braved.",
-          "ptBR": "Dê Exhaust em 1 Ultimate do oponente que não esteja combinado com um Brave."
-        }
+          "ptBR": "D\u00ea Exhaust em 1 Ultimate do oponente que n\u00e3o esteja combinado com um Brave."
+        },
+        "automationRef": "sd28-002-destroyed-auto27"
       }
     ],
     "abilities": [
@@ -159,10 +161,72 @@
             }
           }
         ]
+      },
+      {
+        "id": "sd28-002-spirit-soul-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "summonReductionSymbols",
+            "operation": "add",
+            "value": [
+              "green"
+            ],
+            "duration": "whileSourceExists",
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "ultimate"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd28-002-destroyed-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "ultimate"
+              ],
+              "notCombinedWithBrave": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "exhaust"
+            }
+          }
+        ]
       }
     ],
-    "image": null,
-    "nameJP": "コクワン"
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-002.webp",
+    "nameJP": "\u30b3\u30af\u30ef\u30f3"
   },
   {
     "id": "SD28-003",
@@ -202,7 +266,7 @@
     ],
     "effectText": {
       "en": "LV1/LV2 When Summoned: Put 1 Core from the Void into your Reserve. LV2: While one of your Shellman Ultimates is battling, your opponent cannot activate Burst.",
-      "ptBR": "LV1/LV2 Quando Invocado: coloque 1 Core do Void na sua Reserve. LV2: enquanto um dos seus Ultimates da família Shellman estiver batalhando, o oponente não pode ativar Burst."
+      "ptBR": "LV1/LV2 Quando Invocado: coloque 1 Core do Void na sua Reserve. LV2: enquanto um dos seus Ultimates da fam\u00edlia Shellman estiver batalhando, o oponente n\u00e3o pode ativar Burst."
     },
     "effects": [
       {
@@ -220,7 +284,8 @@
         "text": {
           "en": "Put 1 Core from the Void into your Reserve.",
           "ptBR": "Coloque 1 Core do Void na sua Reserve."
-        }
+        },
+        "automationRef": "sd28-003-summon-auto27"
       },
       {
         "id": "sd28-003-burst-lock-display",
@@ -228,15 +293,16 @@
         "levels": [
           2
         ],
-        "timing": "shellmanUltimateBattle",
+        "timing": "whenBattles",
         "title": {
           "en": "During a Shellman Ultimate's Battle",
           "ptBR": "Durante a Batalha de um Ultimate Shellman"
         },
         "text": {
           "en": "Your opponent cannot activate Burst.",
-          "ptBR": "O oponente não pode ativar Burst."
-        }
+          "ptBR": "O oponente n\u00e3o pode ativar Burst."
+        },
+        "automationRef": "sd28-003-burst-lock-auto27"
       }
     ],
     "abilities": [
@@ -249,10 +315,57 @@
             "amount": 1
           }
         ]
+      },
+      {
+        "id": "sd28-003-summon-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "sd28-003-burst-lock-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "ultimate"
+          },
+          {
+            "type": "eventSourceFamily",
+            "family": "Shellman"
+          }
+        ],
+        "actions": [
+          {
+            "type": "setBattleRestriction",
+            "preventOpponentBurst": true
+          }
+        ]
       }
     ],
-    "image": null,
-    "nameJP": "ウスバアゲハ"
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-003.webp",
+    "nameJP": "\u30a6\u30b9\u30d0\u30a2\u30b2\u30cf"
   },
   {
     "id": "SD28-004",
@@ -294,7 +407,7 @@
     ],
     "effectText": {
       "en": "LV1/LV2: This Spirit cannot be destroyed by opposing effects. LV2 During Either Attack Step: When your Green cards are sent to your Trash by an opposing Ultimate Trigger, after that trigger resolves you may add all of those cards to your hand.",
-      "ptBR": "LV1/LV2: este Spirit não pode ser destruído por efeitos do oponente. LV2 Durante o Attack Step de qualquer jogador: quando cartas Verdes suas forem enviadas ao Trash por um Ultimate Trigger do oponente, após a resolução desse Trigger você pode adicionar todas essas cartas à sua mão."
+      "ptBR": "LV1/LV2: este Spirit n\u00e3o pode ser destru\u00eddo por efeitos do oponente. LV2 Durante o Attack Step de qualquer jogador: quando cartas Verdes suas forem enviadas ao Trash por um Ultimate Trigger do oponente, ap\u00f3s a resolu\u00e7\u00e3o desse Trigger voc\u00ea pode adicionar todas essas cartas \u00e0 sua m\u00e3o."
     },
     "effects": [
       {
@@ -307,12 +420,13 @@
         "timing": "always",
         "title": {
           "en": "Effect Protection",
-          "ptBR": "Proteção contra Efeitos"
+          "ptBR": "Prote\u00e7\u00e3o contra Efeitos"
         },
         "text": {
           "en": "This Spirit cannot be destroyed by opposing effects.",
-          "ptBR": "Este Spirit não pode ser destruído por efeitos do oponente."
-        }
+          "ptBR": "Este Spirit n\u00e3o pode ser destru\u00eddo por efeitos do oponente."
+        },
+        "automationRef": "sd28-004-protection-auto27"
       },
       {
         "id": "sd28-004-trigger-recovery-display",
@@ -320,20 +434,73 @@
         "levels": [
           2
         ],
-        "timing": "eitherAttackStep",
+        "timing": "ultimateTriggerResolved",
         "title": {
           "en": "During Either Attack Step",
           "ptBR": "Durante o Attack Step de Qualquer Jogador"
         },
         "text": {
           "en": "After an opposing Ultimate Trigger sends your Green cards to the Trash, you may add all of those cards to your hand.",
-          "ptBR": "Após um Ultimate Trigger do oponente enviar cartas Verdes suas ao Trash, você pode adicionar todas essas cartas à sua mão."
-        }
+          "ptBR": "Ap\u00f3s um Ultimate Trigger do oponente enviar cartas Verdes suas ao Trash, voc\u00ea pode adicionar todas essas cartas \u00e0 sua m\u00e3o."
+        },
+        "automationRef": "sd28-004-trigger-recovery-auto27"
       }
     ],
-    "abilities": [],
-    "image": null,
-    "nameJP": "アカガネ"
+    "abilities": [
+      {
+        "id": "sd28-004-protection-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectDestructionImmune",
+            "value": 1,
+            "duration": "whileSourceExists",
+            "selector": "source"
+          }
+        ]
+      },
+      {
+        "id": "sd28-004-trigger-recovery-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "ultimateTriggerResolved",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "returnUltimateTriggerRevealedMatchingToHand",
+            "selector": {
+              "owner": "self",
+              "colors": [
+                "green"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-004.webp",
+    "nameJP": "\u30a2\u30ab\u30ac\u30cd"
   },
   {
     "id": "SD28-005",
@@ -376,7 +543,7 @@
     ],
     "effectText": {
       "en": "LV1/LV2 During Either Attack Step: All of your Shellman/Blade Insect Spirits and Ultimates gain +3000 BP.",
-      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: todos os seus Spirits e Ultimates das famílias Shellman/Blade Insect recebem +3000 BP."
+      "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: todos os seus Spirits e Ultimates das fam\u00edlias Shellman/Blade Insect recebem +3000 BP."
     },
     "effects": [
       {
@@ -393,13 +560,51 @@
         },
         "text": {
           "en": "All of your Shellman/Blade Insect Spirits and Ultimates gain +3000 BP.",
-          "ptBR": "Todos os seus Spirits e Ultimates das famílias Shellman/Blade Insect recebem +3000 BP."
-        }
+          "ptBR": "Todos os seus Spirits e Ultimates das fam\u00edlias Shellman/Blade Insect recebem +3000 BP."
+        },
+        "automationRef": "sd28-005-bp-auto27"
       }
     ],
-    "abilities": [],
-    "image": null,
-    "nameJP": "ゴロンゴロー"
+    "abilities": [
+      {
+        "id": "sd28-005-bp-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "value": 3000,
+            "duration": "whileConditionTrue",
+            "condition": {
+              "type": "phase",
+              "value": "attack"
+            },
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ],
+              "families": [
+                "Shellman",
+                "Blade Insect"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-005.webp",
+    "nameJP": "\u30b4\u30ed\u30f3\u30b4\u30ed\u30fc"
   },
   {
     "id": "SD28-006",
@@ -447,7 +652,7 @@
     ],
     "effectText": {
       "en": "LV1/LV2/LV3 When Summoned: You may summon 1 Green Exalted Sword Brave card from your hand without paying its cost. LV2/LV3 When This Spirit Attacks: Exhaust 1 opposing Spirit. While Braved, LV3 During Your Attack Step: Effects of this Spirit that exhaust an opposing Spirit may target an Ultimate instead.",
-      "ptBR": "LV1/LV2/LV3 Quando Invocado: você pode Invocar 1 carta de Brave Verde da família Exalted Sword da sua mão sem pagar o custo. LV2/LV3 Quando Este Spirit Ataca: dê Exhaust em 1 Spirit do oponente. Enquanto estiver combinado, LV3 Durante o seu Attack Step: efeitos deste Spirit que dão Exhaust em um Spirit do oponente podem escolher um Ultimate no lugar."
+      "ptBR": "LV1/LV2/LV3 Quando Invocado: voc\u00ea pode Invocar 1 carta de Brave Verde da fam\u00edlia Exalted Sword da sua m\u00e3o sem pagar o custo. LV2/LV3 Quando Este Spirit Ataca: d\u00ea Exhaust em 1 Spirit do oponente. Enquanto estiver combinado, LV3 Durante o seu Attack Step: efeitos deste Spirit que d\u00e3o Exhaust em um Spirit do oponente podem escolher um Ultimate no lugar."
     },
     "effects": [
       {
@@ -465,8 +670,9 @@
         },
         "text": {
           "en": "You may summon 1 Green Exalted Sword Brave card from your hand without paying its cost.",
-          "ptBR": "Você pode Invocar 1 carta de Brave Verde da família Exalted Sword da sua mão sem pagar o custo."
-        }
+          "ptBR": "Voc\u00ea pode Invocar 1 carta de Brave Verde da fam\u00edlia Exalted Sword da sua m\u00e3o sem pagar o custo."
+        },
+        "automationRef": "sd28-006-summon-auto27"
       },
       {
         "id": "sd28-006-attack-display",
@@ -482,8 +688,9 @@
         },
         "text": {
           "en": "Exhaust 1 opposing Spirit.",
-          "ptBR": "Dê Exhaust em 1 Spirit do oponente."
-        }
+          "ptBR": "D\u00ea Exhaust em 1 Spirit do oponente."
+        },
+        "automationRef": "sd28-006-attack-auto27"
       },
       {
         "id": "sd28-006-braved-display",
@@ -491,15 +698,16 @@
         "levels": [
           3
         ],
-        "timing": "yourAttackStep",
+        "timing": "whenAttacks",
         "title": {
           "en": "While Braved",
           "ptBR": "Enquanto Combinado"
         },
         "text": {
           "en": "Effects of this Spirit that exhaust an opposing Spirit may target an Ultimate instead.",
-          "ptBR": "Efeitos deste Spirit que dão Exhaust em um Spirit do oponente podem escolher um Ultimate no lugar."
-        }
+          "ptBR": "Efeitos deste Spirit que d\u00e3o Exhaust em um Spirit do oponente podem escolher um Ultimate no lugar."
+        },
+        "automationRef": "sd28-006-braved-auto27"
       }
     ],
     "abilities": [
@@ -528,10 +736,114 @@
             }
           }
         ]
+      },
+      {
+        "id": "sd28-006-summon-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand"
+              ],
+              "cardTypes": [
+                "brave"
+              ],
+              "colors": [
+                "green"
+              ],
+              "families": [
+                "Exalted Sword"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "specialSummonFromHand",
+              "allowedCardTypes": [
+                "brave"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd28-006-attack-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "exhaust"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd28-006-braved-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "exhaust"
+            }
+          }
+        ]
       }
     ],
-    "image": null,
-    "nameJP": "閃の剣聖ドルサリス"
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-006.webp",
+    "nameJP": "\u9583\u306e\u5263\u8056\u30c9\u30eb\u30b5\u30ea\u30b9"
   },
   {
     "id": "SD28-007",
@@ -573,7 +885,7 @@
     ],
     "effectText": {
       "en": "Summoning Condition: You must control at least one Cost 1 or more Spirit. LV3/LV4: Ignore the Summoning Conditions of your Green Ultimate cards. The Ultimate symbols of all your Shellman Ultimates are also treated as Green symbols. LV4 Ultimate Trigger When This Ultimate Attacks: On a hit, exhaust 2 opposing Spirits.",
-      "ptBR": "Condição de Invocação: você deve controlar pelo menos 1 Spirit de custo 1 ou mais. LV3/LV4: ignore as Condições de Invocação das suas cartas de Ultimate Verdes. Os símbolos Ultimate de todos os seus Ultimates Shellman também são tratados como símbolos Verdes. LV4 Ultimate Trigger Quando Este Ultimate Ataca: em um acerto, dê Exhaust em 2 Spirits do oponente."
+      "ptBR": "Condi\u00e7\u00e3o de Invoca\u00e7\u00e3o: voc\u00ea deve controlar pelo menos 1 Spirit de custo 1 ou mais. LV3/LV4: ignore as Condi\u00e7\u00f5es de Invoca\u00e7\u00e3o das suas cartas de Ultimate Verdes. Os s\u00edmbolos Ultimate de todos os seus Ultimates Shellman tamb\u00e9m s\u00e3o tratados como s\u00edmbolos Verdes. LV4 Ultimate Trigger Quando Este Ultimate Ataca: em um acerto, d\u00ea Exhaust em 2 Spirits do oponente."
     },
     "effects": [
       {
@@ -583,11 +895,11 @@
         "timing": "summon",
         "title": {
           "en": "Summoning Condition",
-          "ptBR": "Condição de Invocação"
+          "ptBR": "Condi\u00e7\u00e3o de Invoca\u00e7\u00e3o"
         },
         "text": {
           "en": "You must control at least one Cost 1 or more Spirit.",
-          "ptBR": "Você deve controlar pelo menos 1 Spirit de custo 1 ou mais."
+          "ptBR": "Voc\u00ea deve controlar pelo menos 1 Spirit de custo 1 ou mais."
         }
       },
       {
@@ -600,12 +912,13 @@
         "timing": "always",
         "title": {
           "en": "Continuous",
-          "ptBR": "Contínuo"
+          "ptBR": "Cont\u00ednuo"
         },
         "text": {
           "en": "Ignore the Summoning Conditions of your Green Ultimate cards. The Ultimate symbols of all your Shellman Ultimates are also treated as Green symbols.",
-          "ptBR": "Ignore as Condições de Invocação das suas cartas de Ultimate Verdes. Os símbolos Ultimate de todos os seus Ultimates Shellman também são tratados como símbolos Verdes."
-        }
+          "ptBR": "Ignore as Condi\u00e7\u00f5es de Invoca\u00e7\u00e3o das suas cartas de Ultimate Verdes. Os s\u00edmbolos Ultimate de todos os seus Ultimates Shellman tamb\u00e9m s\u00e3o tratados como s\u00edmbolos Verdes."
+        },
+        "automationRef": "sd28-007-continuous-auto27"
       },
       {
         "id": "sd28-007-ultimate-trigger",
@@ -620,13 +933,115 @@
         },
         "text": {
           "en": "When this Ultimate attacks, send the top card of the opponent's deck to their Trash. If that card costs less than this Ultimate, the trigger hits. On a hit, exhaust 2 opposing Spirits.",
-          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o Trigger acerta. Em um acerto, dê Exhaust em 2 Spirits do oponente."
-        }
+          "ptBR": "Quando este Ultimate ataca, envie a carta do topo do deck do oponente para o Trash dele. Se o custo daquela carta for menor que o custo deste Ultimate, o Trigger acerta. Em um acerto, d\u00ea Exhaust em 2 Spirits do oponente."
+        },
+        "automationRef": "sd28-007-trigger-hit-auto27",
+        "onHitOperations": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "maxTargets": 2,
+            "asManyAsPossible": true,
+            "allowZero": true,
+            "onConfirm": {
+              "type": "exhaust"
+            }
+          }
+        ]
       }
     ],
-    "abilities": [],
-    "image": null,
-    "nameJP": "コガネヒメ"
+    "abilities": [
+      {
+        "id": "sd28-007-continuous-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3,
+          4
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "ignoreSummoningCondition",
+            "value": 1,
+            "duration": "whileSourceExists",
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "ultimate"
+              ],
+              "colors": [
+                "green"
+              ]
+            }
+          },
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "add",
+            "value": [
+              "green"
+            ],
+            "duration": "whileSourceExists",
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "ultimate"
+              ],
+              "families": [
+                "Shellman"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd28-007-trigger-hit-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "ultimateTriggerHit",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          4
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "maxTargets": 2,
+            "asManyAsPossible": true,
+            "allowZero": true,
+            "onConfirm": {
+              "type": "exhaust"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-007.webp",
+    "nameJP": "\u30b3\u30ac\u30cd\u30d2\u30e1"
   },
   {
     "id": "SD28-008",
@@ -671,7 +1086,7 @@
     ],
     "effectText": {
       "en": "Summoning Condition: You must control at least one Cost 1 or more Spirit. LV3/LV4 When This Ultimate Battles: Exhaust 1 opposing Spirit that costs 5 or less. While Braved, LV4 Ultimate Trigger When This Ultimate Attacks: On a hit, return 1 exhausted opposing Spirit to the top of its owner's deck.",
-      "ptBR": "Condição de Invocação: você deve controlar pelo menos 1 Spirit de custo 1 ou mais. LV3/LV4 Quando Este Ultimate Batalha: dê Exhaust em 1 Spirit do oponente de custo 5 ou menos. Enquanto estiver combinado, LV4 Ultimate Trigger Quando Este Ultimate Ataca: em um acerto, devolva 1 Spirit do oponente em Exhaust para o topo do deck do dono."
+      "ptBR": "Condi\u00e7\u00e3o de Invoca\u00e7\u00e3o: voc\u00ea deve controlar pelo menos 1 Spirit de custo 1 ou mais. LV3/LV4 Quando Este Ultimate Batalha: d\u00ea Exhaust em 1 Spirit do oponente de custo 5 ou menos. Enquanto estiver combinado, LV4 Ultimate Trigger Quando Este Ultimate Ataca: em um acerto, devolva 1 Spirit do oponente em Exhaust para o topo do deck do dono."
     },
     "effects": [
       {
@@ -681,11 +1096,11 @@
         "timing": "summon",
         "title": {
           "en": "Summoning Condition",
-          "ptBR": "Condição de Invocação"
+          "ptBR": "Condi\u00e7\u00e3o de Invoca\u00e7\u00e3o"
         },
         "text": {
           "en": "You must control at least one Cost 1 or more Spirit.",
-          "ptBR": "Você deve controlar pelo menos 1 Spirit de custo 1 ou mais."
+          "ptBR": "Voc\u00ea deve controlar pelo menos 1 Spirit de custo 1 ou mais."
         }
       },
       {
@@ -702,8 +1117,9 @@
         },
         "text": {
           "en": "Exhaust 1 opposing Spirit that costs 5 or less.",
-          "ptBR": "Dê Exhaust em 1 Spirit do oponente de custo 5 ou menos."
-        }
+          "ptBR": "D\u00ea Exhaust em 1 Spirit do oponente de custo 5 ou menos."
+        },
+        "automationRef": "sd28-008-battle-auto27"
       },
       {
         "id": "sd28-008-combined-trigger-display",
@@ -713,14 +1129,15 @@
         ],
         "timing": "whenAttacks",
         "title": {
-          "en": "While Braved — Ultimate Trigger",
-          "ptBR": "Enquanto Combinado — Ultimate Trigger"
+          "en": "While Braved \u2014 Ultimate Trigger",
+          "ptBR": "Enquanto Combinado \u2014 Ultimate Trigger"
         },
         "text": {
           "en": "On a hit, return 1 exhausted opposing Spirit to the top of its owner's deck.",
           "ptBR": "Em um acerto, devolva 1 Spirit do oponente em Exhaust para o topo do deck do dono."
         },
-        "requiresCombined": true
+        "requiresCombined": true,
+        "automationRef": "sd28-008-utrigger-hit-v2"
       }
     ],
     "abilities": [
@@ -734,8 +1151,8 @@
         "actions": [
           {
             "type": "selectTarget",
-            "titlePT": "Ultimate Trigger — HIT",
-            "titleEN": "Ultimate Trigger — HIT",
+            "titlePT": "Ultimate Trigger \u2014 HIT",
+            "titleEN": "Ultimate Trigger \u2014 HIT",
             "instructionPT": "Escolha 1 Spirit do oponente em Exhaust para devolver ao topo do deck do dono.",
             "instructionEN": "Choose 1 exhausted opposing Spirit to return to the top of its owner's deck.",
             "selector": {
@@ -750,10 +1167,42 @@
             }
           }
         ]
+      },
+      {
+        "id": "sd28-008-battle-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3,
+          4
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumCost": 5
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "exhaust"
+            }
+          }
+        ]
       }
     ],
-    "image": null,
-    "nameJP": "剛の剣聖ルビート"
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-008.webp",
+    "nameJP": "\u525b\u306e\u5263\u8056\u30eb\u30d3\u30fc\u30c8"
   },
   {
     "id": "SD28-009",
@@ -801,7 +1250,7 @@
     ],
     "effectText": {
       "en": "Summoning Condition: You must control at least one Cost 3 or more Spirit. LV3/LV4/LV5 When Summoned: Put 2 Cores from the Void on this Ultimate. LV4/LV5 Ultimate Trigger When This Ultimate Attacks: On a hit, exhaust 2 opposing Spirits. After the Ultimate Trigger, if your Life is 3 or less, perform XU Trigger. On an XU hit, move 1 Core from your opponent's Life to their Trash.",
-      "ptBR": "Condição de Invocação: você deve controlar pelo menos 1 Spirit de custo 3 ou mais. LV3/LV4/LV5 Quando Invocado: coloque 2 Cores do Void neste Ultimate. LV4/LV5 Ultimate Trigger Quando Este Ultimate Ataca: em um acerto, dê Exhaust em 2 Spirits do oponente. Após o Ultimate Trigger, se a sua Life for 3 ou menos, execute XU Trigger. Em um acerto de XU, mova 1 Core da Life do oponente para o Trash dele."
+      "ptBR": "Condi\u00e7\u00e3o de Invoca\u00e7\u00e3o: voc\u00ea deve controlar pelo menos 1 Spirit de custo 3 ou mais. LV3/LV4/LV5 Quando Invocado: coloque 2 Cores do Void neste Ultimate. LV4/LV5 Ultimate Trigger Quando Este Ultimate Ataca: em um acerto, d\u00ea Exhaust em 2 Spirits do oponente. Ap\u00f3s o Ultimate Trigger, se a sua Life for 3 ou menos, execute XU Trigger. Em um acerto de XU, mova 1 Core da Life do oponente para o Trash dele."
     },
     "effects": [
       {
@@ -811,12 +1260,13 @@
         "timing": "summon",
         "title": {
           "en": "Summoning Condition",
-          "ptBR": "Condição de Invocação"
+          "ptBR": "Condi\u00e7\u00e3o de Invoca\u00e7\u00e3o"
         },
         "text": {
           "en": "You must control at least one Cost 3 or more Spirit.",
-          "ptBR": "Você deve controlar pelo menos 1 Spirit de custo 3 ou mais."
-        }
+          "ptBR": "Voc\u00ea deve controlar pelo menos 1 Spirit de custo 3 ou mais."
+        },
+        "automationRef": "sd28-009-summon"
       },
       {
         "id": "sd28-009-summon-display",
@@ -834,7 +1284,8 @@
         "text": {
           "en": "Put 2 Cores from the Void on this Ultimate.",
           "ptBR": "Coloque 2 Cores do Void neste Ultimate."
-        }
+        },
+        "automationRef": "sd28-009-summon-auto27"
       },
       {
         "id": "sd28-009-ultimate-trigger",
@@ -850,8 +1301,9 @@
         },
         "text": {
           "en": "On a hit, exhaust 2 opposing Spirits.",
-          "ptBR": "Em um acerto, dê Exhaust em 2 Spirits do oponente."
-        }
+          "ptBR": "Em um acerto, d\u00ea Exhaust em 2 Spirits do oponente."
+        },
+        "automationRef": "sd28-009-utrigger-hit-v2"
       },
       {
         "id": "sd28-009-xu-trigger-display",
@@ -867,7 +1319,7 @@
         },
         "text": {
           "en": "After the Ultimate Trigger, if your Life is 3 or less, perform XU Trigger. On an XU hit, move 1 Core from your opponent's Life to their Trash.",
-          "ptBR": "Após o Ultimate Trigger, se a sua Life for 3 ou menos, execute XU Trigger. Em um acerto de XU, mova 1 Core da Life do oponente para o Trash dele."
+          "ptBR": "Ap\u00f3s o Ultimate Trigger, se a sua Life for 3 ou menos, execute XU Trigger. Em um acerto de XU, mova 1 Core da Life do oponente para o Trash dele."
         },
         "condition": {
           "type": "ownLifeAtMost",
@@ -909,9 +1361,9 @@
         "actions": [
           {
             "type": "selectMultipleTargets",
-            "titlePT": "Ultimate Trigger — HIT",
-            "titleEN": "Ultimate Trigger — HIT",
-            "instructionPT": "Escolha 2 Spirits do oponente para dar Exhaust. Se houver menos de 2, resolva o máximo possível.",
+            "titlePT": "Ultimate Trigger \u2014 HIT",
+            "titleEN": "Ultimate Trigger \u2014 HIT",
+            "instructionPT": "Escolha 2 Spirits do oponente para dar Exhaust. Se houver menos de 2, resolva o m\u00e1ximo poss\u00edvel.",
             "instructionEN": "Choose 2 opposing Spirits to exhaust. If fewer than 2 are available, resolve as many as possible.",
             "selector": {
               "owner": "opponent",
@@ -926,10 +1378,31 @@
             }
           }
         ]
+      },
+      {
+        "id": "sd28-009-summon-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "actions": [
+          {
+            "type": "addCoreFromVoid",
+            "count": 2,
+            "target": "source"
+          }
+        ]
       }
     ],
-    "image": null,
-    "nameJP": "終焉甲帝"
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-009.webp",
+    "nameJP": "\u7d42\u7109\u7532\u5e1d"
   },
   {
     "id": "SD28-010",
@@ -962,7 +1435,7 @@
     ],
     "effectText": {
       "en": "[High Speed] Flash. Combine Condition: Cost 3 or more Ultimate. While Braved, When This Ultimate Battles: This Ultimate gains +5000 BP for the battle.",
-      "ptBR": "[High Speed] Flash. Condição de Combine: Ultimate de custo 3 ou mais. Enquanto estiver combinado, Quando Este Ultimate Batalha: este Ultimate recebe +5000 BP durante a batalha."
+      "ptBR": "[High Speed] Flash. Condi\u00e7\u00e3o de Combine: Ultimate de custo 3 ou mais. Enquanto estiver combinado, Quando Este Ultimate Batalha: este Ultimate recebe +5000 BP durante a batalha."
     },
     "effects": [
       {
@@ -978,7 +1451,7 @@
         },
         "text": {
           "en": "You may summon this Brave from your hand during a Flash timing by paying its cost and placing the required Cores from your Reserve.",
-          "ptBR": "Você pode Invocar este Brave da sua mão durante um Flash Timing pagando seu custo e colocando os Cores necessários da sua Reserve."
+          "ptBR": "Voc\u00ea pode Invocar este Brave da sua m\u00e3o durante um Flash Timing pagando seu custo e colocando os Cores necess\u00e1rios da sua Reserve."
         }
       },
       {
@@ -988,7 +1461,7 @@
         "timing": "combine",
         "title": {
           "en": "Combine Condition",
-          "ptBR": "Condição de Combine"
+          "ptBR": "Condi\u00e7\u00e3o de Combine"
         },
         "text": {
           "en": "Combine with an Ultimate that costs 3 or more.",
@@ -1001,18 +1474,63 @@
         "levels": [],
         "timing": "whenBattles",
         "title": {
-          "en": "While Braved — When This Ultimate Battles",
-          "ptBR": "Enquanto Combinado — Quando Este Ultimate Batalha"
+          "en": "While Braved \u2014 When This Ultimate Battles",
+          "ptBR": "Enquanto Combinado \u2014 Quando Este Ultimate Batalha"
         },
         "text": {
           "en": "This Ultimate gains +5000 BP for the battle.",
           "ptBR": "Este Ultimate recebe +5000 BP durante a batalha."
-        }
+        },
+        "automationRef": "sd28-010-combined-auto27"
       }
     ],
-    "abilities": [],
-    "image": null,
-    "nameJP": "翼刃グライド",
+    "abilities": [
+      {
+        "id": "sd28-010-combined-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "modifyBP",
+            "target": "source",
+            "amount": 5000,
+            "duration": "battle"
+          }
+        ]
+      },
+      {
+        "id": "sd28-010-combined-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "conditions": [
+          {
+            "type": "eventSourceIsCombinedHost"
+          },
+          {
+            "type": "eventSourceCardType",
+            "cardType": "ultimate"
+          }
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "amount": 5000,
+            "duration": "battle",
+            "target": "effectSource"
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-010.webp",
+    "nameJP": "\u7ffc\u5203\u30b0\u30e9\u30a4\u30c9",
     "braveBP": 2000,
     "braveCondition": {
       "cardTypes": [
@@ -1053,7 +1571,7 @@
     ],
     "effectText": {
       "en": "LV1 When This Brave Is Summoned: Put 1 Core from the Void on 1 of your Ultimates. Combine Condition: Cost 3 or more Spirit/Ultimate. While Braved, when the combined Spirit attacks, it gains +5000 BP for the battle. While Braved, when the combined Ultimate attacks, exhaust 1 opposing Spirit.",
-      "ptBR": "LV1 Quando Este Brave For Invocado: coloque 1 Core do Void em 1 dos seus Ultimates. Condição de Combine: Spirit/Ultimate de custo 3 ou mais. Enquanto estiver combinado, quando o Spirit combinado atacar, ele recebe +5000 BP durante a batalha. Enquanto estiver combinado, quando o Ultimate combinado atacar, dê Exhaust em 1 Spirit do oponente."
+      "ptBR": "LV1 Quando Este Brave For Invocado: coloque 1 Core do Void em 1 dos seus Ultimates. Condi\u00e7\u00e3o de Combine: Spirit/Ultimate de custo 3 ou mais. Enquanto estiver combinado, quando o Spirit combinado atacar, ele recebe +5000 BP durante a batalha. Enquanto estiver combinado, quando o Ultimate combinado atacar, d\u00ea Exhaust em 1 Spirit do oponente."
     },
     "effects": [
       {
@@ -1070,7 +1588,8 @@
         "text": {
           "en": "Put 1 Core from the Void on 1 of your Ultimates.",
           "ptBR": "Coloque 1 Core do Void em 1 dos seus Ultimates."
-        }
+        },
+        "automationRef": "sd28-011-summon-auto27"
       },
       {
         "id": "sd28-011-combine-display",
@@ -1079,7 +1598,7 @@
         "timing": "combine",
         "title": {
           "en": "Combine Condition",
-          "ptBR": "Condição de Combine"
+          "ptBR": "Condi\u00e7\u00e3o de Combine"
         },
         "text": {
           "en": "Combine with a Spirit or Ultimate that costs 3 or more.",
@@ -1092,13 +1611,14 @@
         "levels": [],
         "timing": "whenAttacks",
         "title": {
-          "en": "While Braved — Spirit",
-          "ptBR": "Enquanto Combinado — Spirit"
+          "en": "While Braved \u2014 Spirit",
+          "ptBR": "Enquanto Combinado \u2014 Spirit"
         },
         "text": {
           "en": "When the combined Spirit attacks, it gains +5000 BP for the battle.",
           "ptBR": "Quando o Spirit combinado atacar, ele recebe +5000 BP durante a batalha."
-        }
+        },
+        "automationRef": "sd28-011-spirit-combined-auto27"
       },
       {
         "id": "sd28-011-ultimate-combined-display",
@@ -1106,13 +1626,14 @@
         "levels": [],
         "timing": "whenAttacks",
         "title": {
-          "en": "While Braved — Ultimate",
-          "ptBR": "Enquanto Combinado — Ultimate"
+          "en": "While Braved \u2014 Ultimate",
+          "ptBR": "Enquanto Combinado \u2014 Ultimate"
         },
         "text": {
           "en": "When the combined Ultimate attacks, exhaust 1 opposing Spirit.",
-          "ptBR": "Quando o Ultimate combinado atacar, dê Exhaust em 1 Spirit do oponente."
-        }
+          "ptBR": "Quando o Ultimate combinado atacar, d\u00ea Exhaust em 1 Spirit do oponente."
+        },
+        "automationRef": "sd28-011-ultimate-combined-auto27"
       }
     ],
     "abilities": [
@@ -1138,10 +1659,100 @@
             }
           }
         ]
+      },
+      {
+        "id": "sd28-011-summon-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "ultimate"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "addCoreFromVoid",
+              "count": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd28-011-spirit-combined-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "conditions": [
+          {
+            "type": "eventSourceIsCombinedHost"
+          },
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          }
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "amount": 5000,
+            "duration": "battle",
+            "target": "effectSource"
+          }
+        ]
+      },
+      {
+        "id": "sd28-011-ultimate-combined-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "conditions": [
+          {
+            "type": "eventSourceIsCombinedHost"
+          },
+          {
+            "type": "eventSourceCardType",
+            "cardType": "ultimate"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "exhaust"
+            }
+          }
+        ]
       }
     ],
-    "image": null,
-    "nameJP": "星獣刃プロキオン",
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-011.webp",
+    "nameJP": "\u661f\u7363\u5203\u30d7\u30ed\u30ad\u30aa\u30f3",
     "braveBP": 2000,
     "braveCondition": {
       "cardTypes": [
@@ -1188,7 +1799,7 @@
     ],
     "effectText": {
       "en": "LV1/LV2 During Your Opponent's Attack Step: When your Life decreases, draw 1 card. LV2 Flash During Either Attack Step: By exhausting this Nexus, reveal the top 2 cards of your deck. Add 1 Green Exalted Sword Brave card among them to your hand, then return the remaining cards to the bottom of your deck in any order.",
-      "ptBR": "LV1/LV2 Durante o Attack Step do oponente: quando a sua Life diminuir, compre 1 carta. LV2 Flash Durante o Attack Step de qualquer jogador: ao dar Exhaust neste Nexus, revele as 2 cartas do topo do seu deck. Adicione à sua mão 1 carta de Brave Verde da família Exalted Sword entre elas e devolva as demais ao fundo do deck na ordem que desejar."
+      "ptBR": "LV1/LV2 Durante o Attack Step do oponente: quando a sua Life diminuir, compre 1 carta. LV2 Flash Durante o Attack Step de qualquer jogador: ao dar Exhaust neste Nexus, revele as 2 cartas do topo do seu deck. Adicione \u00e0 sua m\u00e3o 1 carta de Brave Verde da fam\u00edlia Exalted Sword entre elas e devolva as demais ao fundo do deck na ordem que desejar."
     },
     "effects": [
       {
@@ -1198,7 +1809,7 @@
           1,
           2
         ],
-        "timing": "opponentAttackStep",
+        "timing": "lifeDecreased",
         "title": {
           "en": "During Your Opponent's Attack Step",
           "ptBR": "Durante o Attack Step do Oponente"
@@ -1206,7 +1817,8 @@
         "text": {
           "en": "When your Life decreases, draw 1 card.",
           "ptBR": "Quando a sua Life diminuir, compre 1 carta."
-        }
+        },
+        "automationRef": "sd28-012-life-auto27"
       },
       {
         "id": "sd28-012-flash-display",
@@ -1214,20 +1826,101 @@
         "levels": [
           2
         ],
-        "timing": "eitherAttackStep",
+        "timing": "magicFlash",
         "title": {
-          "en": "Flash — During Either Attack Step",
-          "ptBR": "Flash — Durante o Attack Step de Qualquer Jogador"
+          "en": "Flash \u2014 During Either Attack Step",
+          "ptBR": "Flash \u2014 Durante o Attack Step de Qualquer Jogador"
         },
         "text": {
           "en": "Exhaust this Nexus, reveal the top 2 cards of your deck, add 1 Green Exalted Sword Brave among them to your hand, and put the rest on the bottom of your deck in any order.",
-          "ptBR": "Dê Exhaust neste Nexus, revele as 2 cartas do topo do seu deck, adicione à sua mão 1 Brave Verde da família Exalted Sword entre elas e coloque as demais no fundo do deck na ordem que desejar."
-        }
+          "ptBR": "D\u00ea Exhaust neste Nexus, revele as 2 cartas do topo do seu deck, adicione \u00e0 sua m\u00e3o 1 Brave Verde da fam\u00edlia Exalted Sword entre elas e coloque as demais no fundo do deck na ordem que desejar."
+        },
+        "automationRef": "sd28-012-flash-auto27"
       }
     ],
-    "abilities": [],
-    "image": null,
-    "nameJP": "翡翠の剣刃探知機"
+    "abilities": [
+      {
+        "id": "sd28-012-life-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "sd28-012-flash-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "exhaust",
+            "target": "source"
+          },
+          {
+            "type": "revealTop",
+            "player": "self",
+            "count": 2
+          },
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "revealed"
+              ],
+              "cardTypes": [
+                "brave"
+              ],
+              "colors": [
+                "green"
+              ],
+              "families": [
+                "Exalted Sword"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          },
+          {
+            "type": "returnToBottomDeck",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "revealed"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-012.webp",
+    "nameJP": "\u7fe1\u7fe0\u306e\u5263\u5203\u63a2\u77e5\u6a5f"
   },
   {
     "id": "SD28-013",
@@ -1252,7 +1945,7 @@
     "levels": [],
     "effectText": {
       "en": "[Trigger Counter] When an opposing Ultimate Trigger hits, before its hit effect resolves, you may use this Magic from your hand. If the revealed hit card is Green, negate that Ultimate Trigger. Flash: Exhaust 1 opposing Spirit.",
-      "ptBR": "[Trigger Counter] Quando um Ultimate Trigger do oponente acertar, antes que o efeito do acerto seja resolvido, você pode usar esta Magic da sua mão. Se a carta revelada pelo acerto for Verde, anule aquele Ultimate Trigger. Flash: dê Exhaust em 1 Spirit do oponente."
+      "ptBR": "[Trigger Counter] Quando um Ultimate Trigger do oponente acertar, antes que o efeito do acerto seja resolvido, voc\u00ea pode usar esta Magic da sua m\u00e3o. Se a carta revelada pelo acerto for Verde, anule aquele Ultimate Trigger. Flash: d\u00ea Exhaust em 1 Spirit do oponente."
     },
     "effects": [
       {
@@ -1287,15 +1980,16 @@
         "id": "sd28-013-flash-display",
         "type": "flash",
         "levels": [],
-        "timing": "flash",
+        "timing": "magicFlash",
         "title": {
           "en": "Flash",
           "ptBR": "Flash"
         },
         "text": {
           "en": "Exhaust 1 opposing Spirit.",
-          "ptBR": "Dê Exhaust em 1 Spirit do oponente."
-        }
+          "ptBR": "D\u00ea Exhaust em 1 Spirit do oponente."
+        },
+        "automationRef": "sd28-013-flash-auto27"
       }
     ],
     "abilities": [
@@ -1320,10 +2014,37 @@
             }
           }
         ]
+      },
+      {
+        "id": "sd28-013-flash-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "exhaust"
+            }
+          }
+        ]
       }
     ],
-    "image": null,
-    "nameJP": "カウンターバインド"
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-013.webp",
+    "nameJP": "\u30ab\u30a6\u30f3\u30bf\u30fc\u30d0\u30a4\u30f3\u30c9"
   },
   {
     "id": "SD28-014",
@@ -1348,42 +2069,109 @@
     "symbols": [],
     "levels": [],
     "effectText": {
-      "en": "Burst — After your opponent's hand increases due to their effect: For each card added to their hand by that effect, put 1 Core from the Void into your Reserve. Then, by paying this card's cost, activate its Flash effect. Flash: For every 2 cards in your opponent's hand, exhaust 1 opposing Spirit.",
-      "ptBR": "Burst — Após a mão do oponente aumentar por um efeito dele: para cada carta adicionada à mão por aquele efeito, coloque 1 Core do Void na sua Reserve. Depois, pagando o custo desta carta, ative o efeito Flash. Flash: para cada 2 cartas na mão do oponente, dê Exhaust em 1 Spirit do oponente."
+      "en": "Burst \u2014 After your opponent's hand increases due to their effect: For each card added to their hand by that effect, put 1 Core from the Void into your Reserve. Then, by paying this card's cost, activate its Flash effect. Flash: For every 2 cards in your opponent's hand, exhaust 1 opposing Spirit.",
+      "ptBR": "Burst \u2014 Ap\u00f3s a m\u00e3o do oponente aumentar por um efeito dele: para cada carta adicionada \u00e0 m\u00e3o por aquele efeito, coloque 1 Core do Void na sua Reserve. Depois, pagando o custo desta carta, ative o efeito Flash. Flash: para cada 2 cartas na m\u00e3o do oponente, d\u00ea Exhaust em 1 Spirit do oponente."
     },
     "effects": [
       {
         "id": "sd28-014-burst-display",
         "type": "burst",
         "levels": [],
-        "timing": "opponentHandIncrease",
+        "timing": "burstOpponentHandIncrease",
         "title": {
           "en": "Burst",
           "ptBR": "Burst"
         },
         "text": {
           "en": "For each card added to your opponent's hand by their effect, put 1 Core from the Void into your Reserve. Then you may pay the cost to activate the Flash effect.",
-          "ptBR": "Para cada carta adicionada à mão do oponente por um efeito dele, coloque 1 Core do Void na sua Reserve. Depois você pode pagar o custo para ativar o efeito Flash."
-        }
+          "ptBR": "Para cada carta adicionada \u00e0 m\u00e3o do oponente por um efeito dele, coloque 1 Core do Void na sua Reserve. Depois voc\u00ea pode pagar o custo para ativar o efeito Flash."
+        },
+        "automationRef": "sd28-014-burst-auto27"
       },
       {
         "id": "sd28-014-flash-display",
         "type": "flash",
         "levels": [],
-        "timing": "flash",
+        "timing": "magicFlash",
         "title": {
           "en": "Flash",
           "ptBR": "Flash"
         },
         "text": {
           "en": "For every 2 cards in your opponent's hand, exhaust 1 opposing Spirit.",
-          "ptBR": "Para cada 2 cartas na mão do oponente, dê Exhaust em 1 Spirit do oponente."
-        }
+          "ptBR": "Para cada 2 cartas na m\u00e3o do oponente, d\u00ea Exhaust em 1 Spirit do oponente."
+        },
+        "automationRef": "sd28-014-flash-auto27"
       }
     ],
-    "abilities": [],
-    "image": null,
-    "nameJP": "エグゾーストエンド"
+    "abilities": [
+      {
+        "id": "sd28-014-burst-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "burstOpponentHandIncrease",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "countFromContext": "burstOpportunity.amount"
+          },
+          {
+            "type": "chooseYesNo",
+            "titleEN": "Activate Flash?",
+            "titlePT": "Ativar Flash?",
+            "yesActions": [
+              {
+                "type": "paySourceCost",
+                "actions": [
+                  {
+                    "type": "dispatchSourceEvent",
+                    "event": "magicFlash"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sd28-014-flash-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "targetCountFrom": {
+              "owner": "opponent",
+              "zone": "hand",
+              "divisor": 2
+            },
+            "asManyAsPossible": true,
+            "allowZero": true,
+            "onConfirm": {
+              "type": "exhaust"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-014.webp",
+    "nameJP": "\u30a8\u30b0\u30be\u30fc\u30b9\u30c8\u30a8\u30f3\u30c9"
   },
   {
     "id": "SD28-015",
@@ -1410,27 +2198,66 @@
     "levels": [],
     "effectText": {
       "en": "Flash: Refresh all of your Braved Ultimates. During this turn, Ultimates refreshed by this effect cannot activate Ultimate Trigger.",
-      "ptBR": "Flash: dê Refresh em todos os seus Ultimates combinados com Brave. Durante este turno, os Ultimates recuperados por este efeito não podem ativar Ultimate Trigger."
+      "ptBR": "Flash: d\u00ea Refresh em todos os seus Ultimates combinados com Brave. Durante este turno, os Ultimates recuperados por este efeito n\u00e3o podem ativar Ultimate Trigger."
     },
     "effects": [
       {
         "id": "sd28-015-flash-display",
         "type": "flash",
         "levels": [],
-        "timing": "flash",
+        "timing": "magicFlash",
         "title": {
           "en": "Flash",
           "ptBR": "Flash"
         },
         "text": {
           "en": "Refresh all of your Braved Ultimates. During this turn, Ultimates refreshed by this effect cannot activate Ultimate Trigger.",
-          "ptBR": "Dê Refresh em todos os seus Ultimates combinados com Brave. Durante este turno, os Ultimates recuperados por este efeito não podem ativar Ultimate Trigger."
-        }
+          "ptBR": "D\u00ea Refresh em todos os seus Ultimates combinados com Brave. Durante este turno, os Ultimates recuperados por este efeito n\u00e3o podem ativar Ultimate Trigger."
+        },
+        "automationRef": "sd28-015-flash-auto27"
       }
     ],
-    "abilities": [],
-    "image": null,
-    "nameJP": "アルティメットゲイン"
+    "abilities": [
+      {
+        "id": "sd28-015-flash-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "refreshAllMatching",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "ultimate"
+              ],
+              "braved": true
+            }
+          },
+          {
+            "type": "addModifier",
+            "property": "ultimateTriggerDisabled",
+            "value": 1,
+            "duration": "turn",
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "ultimate"
+              ],
+              "braved": true
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-015.webp",
+    "nameJP": "\u30a2\u30eb\u30c6\u30a3\u30e1\u30c3\u30c8\u30b2\u30a4\u30f3"
   },
   {
     "id": "SD28-X01",
@@ -1477,8 +2304,8 @@
       }
     ],
     "effectText": {
-      "en": "Summoning Condition: You must control at least one Green Spirit or Ultimate. Burst — After one of your Spirits/Ultimates is destroyed by your opponent: Exhaust 2 opposing Spirits or 1 opposing Ultimate. After this effect resolves, summon this Ultimate. LV4/LV5 Ultimate Trigger When This Ultimate Battles: On a hit, at the end of the battle, by returning this Ultimate to your hand, refresh 1 of your Ultimates.",
-      "ptBR": "Condição de Invocação: você deve controlar pelo menos 1 Spirit ou Ultimate Verde. Burst — Após um dos seus Spirits/Ultimates ser destruído pelo oponente: dê Exhaust em 2 Spirits do oponente ou 1 Ultimate do oponente. Após a resolução deste efeito, Invoque este Ultimate. LV4/LV5 Ultimate Trigger Quando Este Ultimate Batalha: em um acerto, no fim da batalha, ao devolver este Ultimate para a sua mão, dê Refresh em 1 dos seus Ultimates."
+      "en": "Summoning Condition: You must control at least one Green Spirit or Ultimate. Burst \u2014 After one of your Spirits/Ultimates is destroyed by your opponent: Exhaust 2 opposing Spirits or 1 opposing Ultimate. After this effect resolves, summon this Ultimate. LV4/LV5 Ultimate Trigger When This Ultimate Battles: On a hit, at the end of the battle, by returning this Ultimate to your hand, refresh 1 of your Ultimates.",
+      "ptBR": "Condi\u00e7\u00e3o de Invoca\u00e7\u00e3o: voc\u00ea deve controlar pelo menos 1 Spirit ou Ultimate Verde. Burst \u2014 Ap\u00f3s um dos seus Spirits/Ultimates ser destru\u00eddo pelo oponente: d\u00ea Exhaust em 2 Spirits do oponente ou 1 Ultimate do oponente. Ap\u00f3s a resolu\u00e7\u00e3o deste efeito, Invoque este Ultimate. LV4/LV5 Ultimate Trigger Quando Este Ultimate Batalha: em um acerto, no fim da batalha, ao devolver este Ultimate para a sua m\u00e3o, d\u00ea Refresh em 1 dos seus Ultimates."
     },
     "effects": [
       {
@@ -1488,11 +2315,11 @@
         "timing": "summon",
         "title": {
           "en": "Summoning Condition",
-          "ptBR": "Condição de Invocação"
+          "ptBR": "Condi\u00e7\u00e3o de Invoca\u00e7\u00e3o"
         },
         "text": {
           "en": "You must control at least one Green Spirit or Ultimate.",
-          "ptBR": "Você deve controlar pelo menos 1 Spirit ou Ultimate Verde."
+          "ptBR": "Voc\u00ea deve controlar pelo menos 1 Spirit ou Ultimate Verde."
         },
         "condition": {
           "cardTypes": [
@@ -1507,15 +2334,16 @@
         "id": "sd28-x01-burst-display",
         "type": "burst",
         "levels": [],
-        "timing": "ownSpiritOrUltimateDestroyedByOpponent",
+        "timing": "burstOwnSpiritDestroyed",
         "title": {
           "en": "Burst",
           "ptBR": "Burst"
         },
         "text": {
           "en": "Exhaust 2 opposing Spirits or 1 opposing Ultimate. After this effect resolves, summon this Ultimate.",
-          "ptBR": "Dê Exhaust em 2 Spirits do oponente ou 1 Ultimate do oponente. Após a resolução deste efeito, Invoque este Ultimate."
-        }
+          "ptBR": "D\u00ea Exhaust em 2 Spirits do oponente ou 1 Ultimate do oponente. Ap\u00f3s a resolu\u00e7\u00e3o deste efeito, Invoque este Ultimate."
+        },
+        "automationRef": "sd28-x01-burst-auto27"
       },
       {
         "id": "sd28-x01-battle-trigger-display",
@@ -1526,18 +2354,166 @@
         ],
         "timing": "whenBattles",
         "title": {
-          "en": "Ultimate Trigger — When This Ultimate Battles",
-          "ptBR": "Ultimate Trigger — Quando Este Ultimate Batalha"
+          "en": "Ultimate Trigger \u2014 When This Ultimate Battles",
+          "ptBR": "Ultimate Trigger \u2014 Quando Este Ultimate Batalha"
         },
         "text": {
           "en": "On a hit, at the end of the battle, by returning this Ultimate to your hand, refresh 1 of your Ultimates.",
-          "ptBR": "Em um acerto, no fim da batalha, ao devolver este Ultimate para a sua mão, dê Refresh em 1 dos seus Ultimates."
-        }
+          "ptBR": "Em um acerto, no fim da batalha, ao devolver este Ultimate para a sua m\u00e3o, d\u00ea Refresh em 1 dos seus Ultimates."
+        },
+        "automationRef": "sd28-x01-trigger-hit-auto27",
+        "onHitOperations": [
+          {
+            "type": "setBattleRestriction",
+            "restriction": {
+              "sd28UshiwakaHit": true
+            }
+          }
+        ]
       }
     ],
-    "abilities": [],
-    "image": null,
-    "nameJP": "アルティメット・ウシワカ",
+    "abilities": [
+      {
+        "id": "sd28-x01-burst-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "burstOwnSpiritDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "chooseOption",
+            "titleEN": "Exhaust targets",
+            "titlePT": "Exaurir alvos",
+            "options": [
+              {
+                "id": "spirits",
+                "labelEN": "Up to 2 Spirits",
+                "labelPT": "At\u00e9 2 Spirits",
+                "actions": [
+                  {
+                    "type": "selectMultipleTargets",
+                    "selector": {
+                      "owner": "opponent",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit"
+                      ]
+                    },
+                    "maxTargets": 2,
+                    "asManyAsPossible": true,
+                    "allowZero": true,
+                    "onConfirm": {
+                      "type": "exhaust"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "ultimate",
+                "labelEN": "1 Ultimate",
+                "labelPT": "1 Ultimate",
+                "actions": [
+                  {
+                    "type": "selectTarget",
+                    "selector": {
+                      "owner": "opponent",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "ultimate"
+                      ]
+                    },
+                    "allowZero": true,
+                    "onSelect": {
+                      "type": "exhaust"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "specialSummonSource"
+          }
+        ]
+      },
+      {
+        "id": "sd28-x01-trigger-hit-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "ultimateTriggerHit",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          4,
+          5
+        ],
+        "actions": [
+          {
+            "type": "setBattleRestriction",
+            "restriction": {
+              "sd28UshiwakaHit": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd28-x01-after-battle-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          4,
+          5
+        ],
+        "conditions": [
+          {
+            "type": "battleRestriction",
+            "key": "sd28UshiwakaHit"
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "titleEN": "Return this Ultimate to hand to refresh an Ultimate?",
+            "titlePT": "Retornar este Ultimate \u00e0 m\u00e3o para refrescar um Ultimate?",
+            "yesActions": [
+              {
+                "type": "returnToHand",
+                "target": "source"
+              },
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "ultimate"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "refresh"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-X01.webp",
+    "nameJP": "\u30a2\u30eb\u30c6\u30a3\u30e1\u30c3\u30c8\u30fb\u30a6\u30b7\u30ef\u30ab",
     "summonCondition": {
       "cardTypes": [
         "spirit",
@@ -1582,7 +2558,7 @@
     ],
     "effectText": {
       "en": "When you summon an Ultimate, you may summon this Brave card from your hand without paying its cost. Combine Condition: Cost 5 or more Ultimate. While Braved with an Ultimate that does not have XU Trigger, treat this Brave as Cost 0. While Braved, When This Ultimate Battles: Your opponent cannot activate Burst.",
-      "ptBR": "Quando você Invocar um Ultimate, você pode Invocar esta carta de Brave da sua mão sem pagar o custo. Condição de Combine: Ultimate de custo 5 ou mais. Enquanto estiver combinado com um Ultimate que não possua XU Trigger, trate este Brave como custo 0. Enquanto estiver combinado, Quando Este Ultimate Batalha: o oponente não pode ativar Burst."
+      "ptBR": "Quando voc\u00ea Invocar um Ultimate, voc\u00ea pode Invocar esta carta de Brave da sua m\u00e3o sem pagar o custo. Condi\u00e7\u00e3o de Combine: Ultimate de custo 5 ou mais. Enquanto estiver combinado com um Ultimate que n\u00e3o possua XU Trigger, trate este Brave como custo 0. Enquanto estiver combinado, Quando Este Ultimate Batalha: o oponente n\u00e3o pode ativar Burst."
     },
     "effects": [
       {
@@ -1591,15 +2567,16 @@
         "levels": [
           1
         ],
-        "timing": "ultimateSummoned",
+        "timing": "whenSummoned",
         "title": {
           "en": "When You Summon an Ultimate",
-          "ptBR": "Quando Você Invoca um Ultimate"
+          "ptBR": "Quando Voc\u00ea Invoca um Ultimate"
         },
         "text": {
           "en": "You may summon this Brave card from your hand without paying its cost.",
-          "ptBR": "Você pode Invocar esta carta de Brave da sua mão sem pagar o custo."
-        }
+          "ptBR": "Voc\u00ea pode Invocar esta carta de Brave da sua m\u00e3o sem pagar o custo."
+        },
+        "automationRef": "sd28-x02-free-summon-auto27"
       },
       {
         "id": "sd28-x02-combine-display",
@@ -1608,7 +2585,7 @@
         "timing": "combine",
         "title": {
           "en": "Combine Condition",
-          "ptBR": "Condição de Combine"
+          "ptBR": "Condi\u00e7\u00e3o de Combine"
         },
         "text": {
           "en": "Combine with an Ultimate that costs 5 or more.",
@@ -1619,15 +2596,16 @@
         "id": "sd28-x02-cost-display",
         "type": "combined",
         "levels": [],
-        "timing": "always",
+        "timing": "whenBraved",
         "title": {
           "en": "While Braved",
           "ptBR": "Enquanto Combinado"
         },
         "text": {
           "en": "While Braved with an Ultimate that does not have XU Trigger, treat this Brave as Cost 0.",
-          "ptBR": "Enquanto estiver combinado com um Ultimate que não possua XU Trigger, trate este Brave como custo 0."
-        }
+          "ptBR": "Enquanto estiver combinado com um Ultimate que n\u00e3o possua XU Trigger, trate este Brave como custo 0."
+        },
+        "automationRef": "sd28-x02-cost-auto27"
       },
       {
         "id": "sd28-x02-burst-lock-display",
@@ -1635,18 +2613,113 @@
         "levels": [],
         "timing": "whenBattles",
         "title": {
-          "en": "While Braved — When This Ultimate Battles",
-          "ptBR": "Enquanto Combinado — Quando Este Ultimate Batalha"
+          "en": "While Braved \u2014 When This Ultimate Battles",
+          "ptBR": "Enquanto Combinado \u2014 Quando Este Ultimate Batalha"
         },
         "text": {
           "en": "Your opponent cannot activate Burst.",
-          "ptBR": "O oponente não pode ativar Burst."
-        }
+          "ptBR": "O oponente n\u00e3o pode ativar Burst."
+        },
+        "automationRef": "sd28-x02-burst-lock-auto27"
       }
     ],
-    "abilities": [],
-    "image": null,
-    "nameJP": "地球神剣ガイアノホコ",
+    "abilities": [
+      {
+        "id": "sd28-x02-free-summon-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "controllerHand",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "ultimate"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand"
+              ],
+              "instanceIdFromContext": "sourceInstanceId"
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "specialSummonFromHand",
+              "allowedCardTypes": [
+                "brave"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd28-x02-cost-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBraved",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "requiresCombined": true,
+        "conditions": [
+          {
+            "type": "combinedHostLacksEffectType",
+            "effectType": "xuTrigger"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "cost",
+            "operation": "set",
+            "value": 0,
+            "duration": "whileSourceExists",
+            "selector": "source"
+          }
+        ]
+      },
+      {
+        "id": "sd28-x02-burst-lock-auto27",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceIsCombinedHost"
+          },
+          {
+            "type": "eventSourceCardType",
+            "cardType": "ultimate"
+          }
+        ],
+        "actions": [
+          {
+            "type": "setBattleRestriction",
+            "preventOpponentBurst": true
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD28-UltimateDeck-LandofDeepGreen/SD28-X02.webp",
+    "nameJP": "\u5730\u7403\u795e\u5263\u30ac\u30a4\u30a2\u30ce\u30db\u30b3",
     "braveBP": 5000,
     "braveCondition": {
       "cardTypes": [

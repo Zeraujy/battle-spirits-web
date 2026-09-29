@@ -6,10 +6,10 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **554**
-- Effect Schema v2 entries: **100**
-- Fully automated cards: **117 (32.1%)**
-- Partially automated cards: **11**
+- Structured effect/ability entries inspected: **584**
+- Effect Schema v2 entries: **130**
+- Fully automated cards: **132 (36.2%)**
+- Partially automated cards: **3**
 - Unstructured effect text: **173**
 - Explicit no-effect cards: **16**
 
@@ -42,15 +42,15 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | SD19 | 17 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD20 | 17 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD23 | 17 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| SD28 | 17 | 2 | 8 | 6 | 1 | 0 | 0 | 0 | 0 |
+| SD28 | 17 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
 ## Structured entry baseline
 
-- Automated executable entries: **218**
-- Entries blocked by trigger coverage: **46**
+- Automated executable entries: **250**
+- Entries blocked by trigger coverage: **43**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
-- Represented but non-executable/manual entries: **290**
+- Represented but non-executable/manual entries: **291**
 
 ## Highest-priority trigger gaps
 
@@ -65,12 +65,9 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `afterDivineTrust` | 1 |
 | `onEligibleSummonDescendOrPlacement` | 1 |
 | `onEligibleSummonOrPlacement` | 1 |
-| `opponentHandIncrease` | 1 |
 | `opponentTurn` | 1 |
 | `opposingUnitLeavesByYourEffect` | 1 |
 | `ownLowCostSpiritDestroyedByOpponentEffect` | 1 |
-| `ownSpiritOrUltimateDestroyedByOpponent` | 1 |
-| `shellmanUltimateBattle` | 1 |
 | `whenAttacksFlash` | 1 |
 | `whenBlueNexusExhausted` | 1 |
 | `whenBravedOrCombinedCardWouldLeave` | 1 |
@@ -86,6 +83,9 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `whenOtherEligibleSpiritSummoned` | 1 |
 | `whenReturnedFromTrashByYellowEffect` | 1 |
 | `whenSummonedOrAttacks` | 1 |
+| `whenYellowBravedSpiritAttacks` | 1 |
+| `whenYourSpiritOrUltimateDestroyed` | 1 |
+| `whileAttackingAndRefreshed` | 1 |
 
 ## Unsupported action/condition gaps
 
@@ -94,7 +94,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Engine additions — Phases 7–18
 
-- Core Action Library is centralized and currently exposes **64 generic action types** to Schema v2.
+- Core Action Library is centralized and currently exposes **66 generic action types** to Schema v2.
 - Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.
 - Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.
 - Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.
@@ -133,6 +133,7 @@ The canonical list is defined in `src/game/effectEngine/canonicalEvents.js`. Leg
 | `burstOpponentSummon` | Yes |
 | `burstOpponentMagic` | Yes |
 | `burstOwnSpiritDestroyed` | Yes |
+| `burstOpponentHandIncrease` | Yes |
 | `burst` | No — foundation only |
 | `mirage` | No — foundation only |
 | `continuous` | Yes |
@@ -377,21 +378,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `SD15-007` | SD15 | magic | `MANUAL` | unresolved entries: 1 |
 | `SD15-008` | SD15 | magic | `MANUAL` | unresolved entries: 2 |
 | `SD15-X01` | SD15 | spirit | `PARTIAL` | triggers: ownLowCostSpiritDestroyedByOpponentEffect, whenOpponentSpiritBecomesZeroBP; unresolved entries: 2 |
-| `SD28-001` | SD28 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD28-002` | SD28 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD28-003` | SD28 | spirit | `PARTIAL` | triggers: shellmanUltimateBattle; unresolved entries: 1 |
-| `SD28-004` | SD28 | spirit | `MANUAL` | unresolved entries: 2 |
-| `SD28-005` | SD28 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD28-006` | SD28 | spirit | `PARTIAL` | unresolved entries: 2 |
-| `SD28-007` | SD28 | ultimate | `PARTIAL` | unresolved entries: 1 |
-| `SD28-008` | SD28 | ultimate | `PARTIAL` | unresolved entries: 2 |
-| `SD28-010` | SD28 | brave | `PARTIAL` | unresolved entries: 1 |
-| `SD28-011` | SD28 | brave | `PARTIAL` | unresolved entries: 2 |
-| `SD28-012` | SD28 | nexus | `MANUAL` | unresolved entries: 2 |
-| `SD28-014` | SD28 | magic | `UNSUPPORTED_TRIGGER` | triggers: opponentHandIncrease; unresolved entries: 2 |
-| `SD28-015` | SD28 | magic | `MANUAL` | unresolved entries: 1 |
-| `SD28-X01` | SD28 | ultimate | `PARTIAL` | triggers: ownSpiritOrUltimateDestroyedByOpponent; unresolved entries: 1 |
-| `SD28-X02` | SD28 | brave | `MANUAL` | unresolved entries: 3 |
 
 ## Phase 4 input
 

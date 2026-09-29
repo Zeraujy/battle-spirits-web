@@ -37,7 +37,7 @@ test('content batch 6: SD23 reaches READY_NO_MANUAL at 17/17', () => {
 test('content batch 6: Core Action Library exposes the five reusable migration primitives', () => {
   const types = listSupportedCoreActionTypes();
   for (const type of ['dispatchSourceEvent','revealTopAndRoute','oncePerTurn','returnMagicUsedThisBattle','swapExhaustionState']) assert.equal(types.includes(type), true);
-  assert.equal(types.length, 64);
+  assert.equal(types.length, 66);
 });
 
 test('content batch 6: Haneppo draws two only with an allied Fairy and opponent destruction', () => {

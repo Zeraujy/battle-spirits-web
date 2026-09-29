@@ -1,7 +1,7 @@
 # Starter Deck Priority Pass — Phase 22
 
 Starter Deck recipes audited: 17
-Ready without Manual Resolution: 7
+Ready without Manual Resolution: 8
 
 | Deck | Set | Runtime | Manual | Status |
 |---|---|---:|---:|---|
@@ -20,7 +20,7 @@ Ready without Manual Resolution: 7
 | Ultimate Deck: Silver Zero | SD20 | 17/17 | 0 | READY_NO_MANUAL |
 | Ultimate Deck: Zero the Hurricane | SD22 | 0/17 | 0 | BLOCKED_MISSING_RUNTIME_DATA |
 | Ultimate Deck: Eris the Morning Star | SD23 | 17/17 | 0 | READY_NO_MANUAL |
-| Ultimate Deck: Land of Deep Green | SD28 | 17/17 | 15 | NEEDS_MIGRATION |
+| Ultimate Deck: Land of Deep Green | SD28 | 17/17 | 0 | READY_NO_MANUAL |
 | Battle Spirits Dash Deck: The Infinite Bond | SD64 | 0/16 | 0 | BLOCKED_MISSING_RUNTIME_DATA |
 
 ## Data gate

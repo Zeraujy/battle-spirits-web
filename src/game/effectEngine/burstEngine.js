@@ -5,7 +5,8 @@ export const BurstEvent = Object.freeze({
   LIFE_DECREASED: "burstLifeDecrease",
   OPPONENT_SUMMONED: "burstOpponentSummon",
   OPPONENT_USED_MAGIC: "burstOpponentMagic",
-  OWN_SPIRIT_DESTROYED: "burstOwnSpiritDestroyed"
+  OWN_SPIRIT_DESTROYED: "burstOwnSpiritDestroyed",
+  OPPONENT_HAND_INCREASE: "burstOpponentHandIncrease"
 });
 
 export function openBurstOpportunityForEvent(match, event, affectedPlayerId, cardIndex, details = {}) {
@@ -15,7 +16,7 @@ export function openBurstOpportunityForEvent(match, event, affectedPlayerId, car
     if (match.battle?.restrictions?.burstBlockedPlayerId === playerId) continue;
     const card = getDatabaseCard(cardIndex, player.burst);
     if (!isBurstCard(card) || getBurstActivationEvent(card) !== event) continue;
-    if (event === BurstEvent.OPPONENT_SUMMONED || event === BurstEvent.OPPONENT_USED_MAGIC) {
+    if ([BurstEvent.OPPONENT_SUMMONED, BurstEvent.OPPONENT_USED_MAGIC, BurstEvent.OPPONENT_HAND_INCREASE].includes(event)) {
       if (!affectedPlayerId || playerId === affectedPlayerId) continue;
     }
     if (event === BurstEvent.OWN_SPIRIT_DESTROYED && playerId !== affectedPlayerId) continue;

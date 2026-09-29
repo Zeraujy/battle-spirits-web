@@ -3,7 +3,7 @@ import { summonFromHand, deployNexus } from "./summon.js";
 import { moveCore } from "./cores.js";
 import { combineBrave, separateBrave, exchangeBrave, enforceBraveConditions } from "./brave.js";
 import { declareAttack, passFlash, declareBlock, declineBlock, resolveBattle, registerFlashUsed } from "./battle.js";
-import { useMagic, setBurst, setMirage, activateBurst, manualAction } from "./effects.js";
+import { useMagic, setBurst, setMirage, activateBurst, activateFieldFlash, manualAction } from "./effects.js";
 import { beginManualPlay, confirmManualPlay, cancelManualPlay } from "./manualPlay.js";
 import { beginManualCost, confirmManualCost, cancelManualCost } from "./manualCost.js";
 import { resolveEffectDecision } from "./effectEngine/effectEngine.js";
@@ -84,6 +84,7 @@ export function applyGameAction(match, action, actorId, cardIndex) {
     case "CONFIRM_MANUAL_PLAY": result = confirmManualPlay(match, actorId, cardIndex); break;
     case "CANCEL_MANUAL_PLAY": result = cancelManualPlay(match, actorId, cardIndex); break;
     case "SUMMON": result = summonFromHand(match, actorId, action.instanceId, cardIndex, action.options || {}); break;
+    case "USE_HIGH_SPEED": result = summonFromHand(match, actorId, action.instanceId, cardIndex, { ...(action.options || {}), highSpeed: true }); break;
     case "DEPLOY_NEXUS": result = deployNexus(match, actorId, action.instanceId, cardIndex, action.options || {}); break;
     case "MOVE_CORE": result = moveCore(match, actorId, action.move, cardIndex); break;
     case "COMBINE_BRAVE": result = combineBrave(match, actorId, action.braveInstanceId, action.hostInstanceId, cardIndex, action.options || {}); break;
@@ -99,6 +100,7 @@ export function applyGameAction(match, action, actorId, cardIndex) {
     case "DECLINE_BLOCK": result = declineBlock(match, actorId, cardIndex); break;
     case "RESOLVE_BATTLE": result = resolveBattle(match, actorId, cardIndex); break;
     case "USE_MAGIC": result = useMagic(match, actorId, action.instanceId, cardIndex, action.options || {}); break;
+    case "ACTIVATE_FIELD_FLASH": result = activateFieldFlash(match, actorId, action.instanceId, cardIndex); break;
     case "SET_BURST": result = setBurst(match, actorId, action.instanceId, cardIndex); break;
     case "SET_MIRAGE": result = setMirage(match, actorId, action.instanceId, cardIndex, action.options || {}); break;
     case "ACTIVATE_BURST": result = activateBurst(match, actorId, cardIndex, action.options || {}); break;

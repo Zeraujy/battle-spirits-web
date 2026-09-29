@@ -74,7 +74,9 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "eventMovedByCardType",
   "eventZeroedBySource",
   "eventFirstTimeThisTurn",
-  "eventZeroedIsBattleOpponent"
+  "eventZeroedIsBattleOpponent",
+  "eventSourceIsCombinedHost",
+  "combinedHostLacksEffectType"
 ]);
 
 const KNOWN_CONDITION_KEYS = new Set([
@@ -89,7 +91,7 @@ const KNOWN_CONDITION_KEYS = new Set([
   "minimumCost", "maximumCost", "minCost", "maxCost",
   "player", "owner", "operator", "selector", "zone", "directAttack",
   "attackerPlayer", "blocked", "cardType", "cause", "keyword", "keywords", "role",
-  "values", "destinations", "destination", "key"
+  "values", "destinations", "destination", "key", "effectType"
 ]);
 
 const NESTED_ACTION_KEYS = [
@@ -184,7 +186,7 @@ function inspectEntry(entry, source, index) {
   const unsupportedConditions = [...new Set(conditionIssues.map((issue) => `${issue.kind}:${issue.value}`))].sort();
 
   const compactType = String(entry?.type || "").replace(/[\s_-]+/g, "").toLowerCase();
-  const engineNative = ["summoncondition", "ultimatetrigger", "ultimatetriggerbattle", "criticalhit", "xutrigger", "triggercounter"].includes(compactType);
+  const engineNative = ["summoncondition", "ultimatetrigger", "ultimatetriggerbattle", "criticalhit", "xutrigger", "triggercounter", "highspeed"].includes(compactType);
   let status = CoverageStatus.MANUAL;
   if (engineNative) status = CoverageStatus.AUTOMATED;
   else if (!canonicalEvent) status = CoverageStatus.UNSUPPORTED_TRIGGER;

@@ -135,6 +135,27 @@ function observerCandidates(match, input, cardIndex) {
         if (legacyEntries.length) out.push(observerDispatchInput(input, playerId, physical, "observerLegacy"));
       }
     }
+
+    // Content Migration Batch 07: optional reactions that live in hand (for
+    // example Brave cards that may be summoned after an Ultimate is summoned).
+    // These remain explicit Schema v2 observers so legacy hand cards are not
+    // scanned or executed accidentally.
+    for (const physical of player.hand || []) {
+      const card = getDatabaseCard(cardIndex, physical);
+      if (!card) continue;
+      const context = {
+        ...(input.context || {}),
+        sourcePlayerId: playerId,
+        sourceInstanceId: physical.instanceId,
+        sourcePhysical: physical,
+        sourceCard: card,
+        eventPlayerId: input.context?.eventPlayerId || null
+      };
+      const handEntries = getTriggeredEntries(card, event, { dispatchMode: "observerV2" })
+        .filter(({ entry }) => getEntryTriggerScope(entry) === EffectTriggerScope.CONTROLLER_HAND)
+        .filter(({ entry }) => entryMatchesTriggerContext(entry, context, match));
+      if (handEntries.length) out.push(observerDispatchInput(input, playerId, physical, "observerV2"));
+    }
   }
   return out;
 }

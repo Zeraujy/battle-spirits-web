@@ -8,7 +8,8 @@ import {
   addBPModifier,
   pruneContinuousModifiers,
   registerContinuousModifier,
-  removeContinuousModifiers
+  removeContinuousModifiers,
+  getContinuousNumericModifier
 } from "./modifierResolver.js";
 import { canonicalActionType, supportsCoreActionType } from "./coreActionLibrary.js";
 import { collectTargets, collectTrashTargets, resolveActionTargets } from "./targetResolver.js";
@@ -17,6 +18,12 @@ import { BurstEvent, openBurstOpportunityForEvent } from "./burstEngine.js";
 
 export function supportsActionType(type) {
   return supportsCoreActionType(type);
+}
+
+function valueFromContext(context, path, fallback = null) {
+  if (!path) return fallback;
+  const value = String(path).split(".").reduce((current, key) => current == null ? undefined : current[key], context);
+  return value == null ? fallback : value;
 }
 
 function queueDeferredCanonicalEvent(match, event) {
@@ -196,6 +203,11 @@ function moveTargetOut(match, target, destination, cardIndex, context = {}) {
         movedByCardType: context.sourceCard?.cardType || null
       }
     });
+    if (destination === "hand" && context.sourcePlayerId === current.playerId) {
+      next = openBurstOpportunityForEvent(next, BurstEvent.OPPONENT_HAND_INCREASE, current.playerId, cardIndex, {
+        sourcePlayerId: context.sourcePlayerId, sourceInstanceId: context.sourceInstanceId || null, cause: "effectReturnToHand", amount: 1
+      });
+    }
     return next;
   }
 
@@ -307,6 +319,11 @@ function moveCardGeneric(match, target, destination, cardIndex, context = {}) {
       movedByCardType: context.sourceCard?.cardType || null
     }
   });
+  if (destination === "hand" && context.sourcePlayerId === current.playerId) {
+    next = openBurstOpportunityForEvent(next, BurstEvent.OPPONENT_HAND_INCREASE, current.playerId, cardIndex, {
+      sourcePlayerId: context.sourcePlayerId, sourceInstanceId: context.sourceInstanceId || null, cause: "effectMoveToHand", amount: 1
+    });
+  }
   return next;
 }
 
@@ -523,6 +540,14 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     }
     player = { ...player, deck, hand };
     next = { ...next, players: { ...next.players, [playerId]: player } };
+    if (drew > 0 && context.sourcePlayerId === playerId) {
+      next = openBurstOpportunityForEvent(next, BurstEvent.OPPONENT_HAND_INCREASE, playerId, cardIndex, {
+        sourcePlayerId: context.sourcePlayerId,
+        sourceInstanceId: context.sourceInstanceId || null,
+        cause: "effectDraw",
+        amount: drew
+      });
+    }
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: drew };
   }
 
@@ -543,7 +568,8 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const playerId = resolvePlayerId(next, action, context);
     const player = next.players?.[playerId];
     if (!player) return { match, notes: ["Jogador alvo inválido para Core do Void."], manualResolutionNeeded: true, executed: false };
-    const count = Math.max(0, Number(action.count ?? action.amount ?? 1));
+    const contextualCount = action.countFromContext ? valueFromContext(context, action.countFromContext, null) : null;
+    const count = Math.max(0, Number(contextualCount ?? action.count ?? action.amount ?? 1));
     next = { ...next, players: { ...next.players, [playerId]: { ...player, reserve: Number(player.reserve || 0) + count } } };
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: count };
   }
@@ -742,6 +768,69 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       }
     };
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "specialSummonSource") {
+    const instanceId = action.instanceId || context.sourceInstanceId;
+    const current = findPhysicalCard(next, instanceId);
+    if (!current) return { match, notes: ["A fonte do Special Summon não foi encontrada."], manualResolutionNeeded: true, executed: false };
+    const playerId = current.playerId;
+    const card = getDatabaseCard(cardIndex, current.card);
+    if (!card || !["spirit", "ultimate", "brave"].includes(String(card.cardType || "").toLowerCase())) {
+      return { match, notes: ["A fonte não é invocável por Special Summon."], manualResolutionNeeded: true, executed: false };
+    }
+    const min = minimumCores(card);
+    const placed = takeSpecialSummonPlacementCores(next, playerId, Number(action.coresToPlace ?? min), cardIndex);
+    if (!placed.ok) return { match, notes: [placed.error || "Cores insuficientes para o Special Summon."], manualResolutionNeeded: true, executed: false };
+    let player = placed.match.players[playerId];
+    let removed = null;
+    if (current.zone === "burst") {
+      if (player.burst?.instanceId === instanceId) {
+        removed = player.burst;
+        player = { ...player, burst: null };
+      }
+    } else if (["hand", "trash", "revealed", "deck"].includes(current.zone)) {
+      const result = removeFromSimpleZone(player, current.zone, instanceId);
+      player = result.player;
+      removed = result.card;
+    }
+    if (!removed) return { match, notes: ["A fonte não está em uma zona válida para Special Summon."], manualResolutionNeeded: true, executed: false };
+    const physical = {
+      ...cleanPhysical(removed),
+      cardType: card.cardType,
+      exhausted: false,
+      cores: placed.cores,
+      combinedWith: null,
+      faceDown: false
+    };
+    if (placed.cores.soul) player = { ...player, soulCore: { zone: "card", instanceId: physical.instanceId } };
+    const zone = card.cardType === "brave" ? "other" : "spirits";
+    player = addFieldCard(player, zone, physical);
+    let summoned = { ...placed.match, players: { ...placed.match.players, [playerId]: player } };
+    summoned = queueDeferredCanonicalEvent(summoned, {
+      event: "whenSummoned",
+      sourcePlayerId: playerId,
+      sourceInstanceId: physical.instanceId,
+      eventPlayerId: playerId,
+      context: { specialSummon: true, costPaid: false, fromZone: current.zone }
+    });
+    summoned = openBurstOpportunityForEvent(summoned, BurstEvent.OPPONENT_SUMMONED, playerId, cardIndex, {
+      sourcePlayerId: playerId,
+      sourceInstanceId: physical.instanceId,
+      cause: "specialSummon"
+    });
+    return { match: summoned, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "returnUltimateTriggerRevealedMatchingToHand") {
+    const revealedInstanceId = valueFromContext(context, action.instanceIdFromContext || "ultimateTrigger.revealedInstanceId", null);
+    if (!revealedInstanceId) return { match, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const current = findPhysicalCard(next, revealedInstanceId);
+    if (!current || current.zone !== "trash") return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const candidates = collectTrashTargets(next, cardIndex, { ...(action.selector || {}), instanceId: revealedInstanceId }, context);
+    if (!candidates.length) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const moved = moveTargetOut(next, candidates[0], "hand", cardIndex, context);
+    return { match: moved, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
   }
 
   if (type === "specialSummonFromHand") {
@@ -1044,6 +1133,10 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         return { ...working, players: { ...working.players, [current.playerId]: player } };
       }
       if (baseType === "destroy") {
+        const current = findPhysicalCard(working, target.physical.instanceId);
+        if (current && current.playerId !== context.sourcePlayerId && getContinuousNumericModifier(working, cardIndex, current.card, "effectDestructionImmune", 0) > 0) {
+          return working;
+        }
         const destroyedPhysical = target.physical;
         const destroyedCard = target.card;
         const destroyedPlayerId = target.playerId;
@@ -1062,6 +1155,13 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
             destroyedByInstanceId: context.sourceInstanceId || null
           }
         });
+        if (["spirit", "ultimate"].includes(String(destroyedCard?.cardType || "").toLowerCase()) && context.sourcePlayerId && context.sourcePlayerId !== destroyedPlayerId) {
+          moved = openBurstOpportunityForEvent(moved, BurstEvent.OWN_SPIRIT_DESTROYED, destroyedPlayerId, cardIndex, {
+            sourcePlayerId: context.sourcePlayerId,
+            sourceInstanceId: context.sourceInstanceId || null,
+            cause: "effectDestruction"
+          });
+        }
         return moved;
       }
       if (baseType === "returnToHand") return moveTargetOut(working, target, "hand", cardIndex, context);

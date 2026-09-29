@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-29T10:14:52.580Z",
+  "generatedAt": "2026-09-29T12:15:05.246Z",
   "starterDecks": 17,
-  "ready": 7,
+  "ready": 8,
   "decks": [
     {
       "id": "sd01-blazing-thunder",
@@ -317,25 +317,9 @@
       "title": "Ultimate Deck: Land of Deep Green",
       "uniqueCards": 17,
       "missingRuntime": [],
-      "unresolved": [
-        "SD28-001",
-        "SD28-002",
-        "SD28-003",
-        "SD28-004",
-        "SD28-005",
-        "SD28-006",
-        "SD28-007",
-        "SD28-008",
-        "SD28-010",
-        "SD28-011",
-        "SD28-012",
-        "SD28-014",
-        "SD28-015",
-        "SD28-X01",
-        "SD28-X02"
-      ],
-      "readyWithoutManual": false,
-      "status": "NEEDS_MIGRATION"
+      "unresolved": [],
+      "readyWithoutManual": true,
+      "status": "READY_NO_MANUAL"
     },
     {
       "id": "sd64-infinite-bond",

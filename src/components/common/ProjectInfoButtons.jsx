@@ -5,6 +5,34 @@ import "../../styles/theme/v230.css";
 const PATCHES = [
   {
     version: "5.0.3",
+    date: { pt: "29/09/2026", en: "09/29/2026" },
+    title: { pt: "Automação de Cartas — Lote 7", en: "Card Automation — Batch 7" },
+    summary: {
+      pt: "O SD28 — Ultimate Deck: Land of Deep Green agora pode ser jogado sem depender da Resolução Manual, com suporte ampliado para High Speed, Burst, Brave e Ultimate.",
+      en: "SD28 — Ultimate Deck: Land of Deep Green can now be played without relying on Manual Resolution, with expanded support for High Speed, Burst, Brave and Ultimate mechanics."
+    },
+    sections: [
+      {
+        title: { pt: "SD28 completo", en: "SD28 complete" },
+        items: {
+          pt: [
+            "As 17 cartas do SD28 agora passam pelo gate de automação do simulador.",
+            "High Speed pode ser usado diretamente durante a prioridade de Flash.",
+            "Efeitos de Brave e Ultimate ganharam novas respostas automáticas para Combine, Ultimate Trigger e Burst.",
+            "Efeitos Flash ativados a partir do campo agora podem aparecer como ações durante o Battle Timing correto."
+          ],
+          en: [
+            "All 17 SD28 cards now pass the simulator automation gate.",
+            "High Speed can now be used directly during Flash priority.",
+            "Brave and Ultimate effects gained new automatic responses for Combine, Ultimate Trigger and Burst.",
+            "Flash effects activated from the field can now appear as actions during the correct Battle Timing."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "5.0.3",
     date: { pt: "28/09/2026", en: "09/28/2026" },
     title: { pt: "Automação de Cartas — Lote 3", en: "Card Automation — Batch 3" },
     summary: {

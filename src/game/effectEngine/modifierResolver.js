@@ -311,6 +311,31 @@ export function getContinuousCardNumericModifier(match, card, playerId, property
   return value;
 }
 
+export function getContinuousCardCollectionModifier(match, card, playerId, property, base = []) {
+  let values = [...base];
+  for (const modifier of match.modifierRegistry?.items || []) {
+    if (modifier.property !== property) continue;
+    if (!durationIsActive(match, modifier.duration, {
+      sourceExists: (instanceId) => sourceExists(match, instanceId),
+      conditionActive: modifier.conditionActive
+    })) continue;
+    const selector = modifier.selector || {};
+    if (selector.owner === "self" && modifier.controllerId && playerId !== modifier.controllerId) continue;
+    if (selector.owner === "opponent" && modifier.controllerId && playerId === modifier.controllerId) continue;
+    const cardTypes = selector.cardTypes || (selector.cardType ? [selector.cardType] : []);
+    if (cardTypes.length && !cardTypes.includes(card?.cardType)) continue;
+    const colors = selector.colors || (selector.color ? [selector.color] : []);
+    if (colors.length && !colors.some((color) => (card?.colors || []).includes(color))) continue;
+    const families = selector.families || (selector.family ? [selector.family] : []);
+    if (families.length && !families.some((family) => (card?.families || []).includes(family))) continue;
+    const incoming = Array.isArray(modifier.value) ? modifier.value : [modifier.value];
+    if (modifier.operation === "set") values = incoming.filter(Boolean);
+    else if (modifier.operation === "remove") values = values.filter((item) => !incoming.includes(item));
+    else values.push(...incoming.filter(Boolean));
+  }
+  return values;
+}
+
 export function clearEffectModifiers(match, duration, metadata = {}) {
   const normalized = legacyDuration(duration);
   if (!normalized) return match;

@@ -1,8 +1,10 @@
 import { getFieldSymbols, fieldCards, getDatabaseCard, isCoreLockedNexus } from "./selectors.js";
-import { getContinuousCardNumericModifier } from "./effectEngine/modifierResolver.js";
+import { getContinuousCardCollectionModifier, getContinuousCardNumericModifier } from "./effectEngine/modifierResolver.js";
 
 export function calculateReduction(match, playerId, card, cardIndex) {
-  const field = getFieldSymbols(match, playerId, cardIndex);
+  const field = { ...getFieldSymbols(match, playerId, cardIndex) };
+  const bonusReductionSymbols = getContinuousCardCollectionModifier(match, card, playerId, "summonReductionSymbols", []);
+  for (const symbol of bonusReductionSymbols) field[symbol] = Number(field[symbol] || 0) + 1;
   const reductions = [...(card?.reduction || [])];
   let applied = 0;
   const used = {};

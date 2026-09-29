@@ -59,3 +59,15 @@
 - Phase 24 generated regression scenarios increased from 106 to 119.
 - Main suite 149/149, Effect Engine 93/93, Batch 05 13/13 and full regression 292/292 all pass.
 - Internal application version remains 5.0.3 while the v5.1.0 final content gate remains open.
+
+## v5.1.0 Content Migration — Batch 07
+
+- SD28 — Ultimate Deck: Land of Deep Green reaches 17/17 READY_NO_MANUAL.
+- Set gate advances from 7/11 to 8/11 complete sets.
+- Added reusable High Speed support during Flash priority and activated field Flash actions.
+- Added hand observers, opponent-hand-increase Burst timing, source special summon, dynamic target counts and new continuous modifiers for SD28 mechanics.
+- Core Action Library advances from 64 to 66 action types.
+- Manual fallback drops from 63.56% (232/365) to 59.45% (217/365).
+- Per-card regression coverage advances from 133 to 148 scenarios.
+- Internal application version remains 5.0.3 while the v5.1.0 final content gate remains open.
+

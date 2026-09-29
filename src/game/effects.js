@@ -189,11 +189,14 @@ export function activateBurst(match, playerId, cardIndex, { confirmCondition = f
   }, cardIndex);
 
   const resolvedPlayer = engine.match.players[playerId];
-  const nextPlayer = {
-    ...resolvedPlayer,
-    burst: null,
-    trash: [...resolvedPlayer.trash, { ...physical, faceDown: false }]
-  };
+  const burstStillSet = resolvedPlayer.burst?.instanceId === physical.instanceId;
+  const nextPlayer = burstStillSet
+    ? {
+        ...resolvedPlayer,
+        burst: null,
+        trash: [...resolvedPlayer.trash, { ...physical, faceDown: false }]
+      }
+    : resolvedPlayer;
   const next = appendLog(
     { ...engine.match, burstOpportunity: null, players: { ...engine.match.players, [playerId]: nextPlayer } },
     `${player.name} ativou ${card?.namePT || card?.nameEN || card?.id || "Burst"}.`,
@@ -205,6 +208,32 @@ export function activateBurst(match, playerId, cardIndex, { confirmCondition = f
     manualResolutionNeeded: engine.triggered === 0 || engine.manualResolutionNeeded,
     notes: engine.notes
   };
+}
+
+export function activateFieldFlash(match, playerId, instanceId, cardIndex) {
+  const battle = match.battle;
+  if (!battle || !["flash1", "flash2"].includes(battle.stage) || battle.flash?.priorityPlayerId !== playerId) {
+    return { ok: false, error: "Este efeito Flash só pode ser usado durante sua prioridade de Flash." };
+  }
+  const ctx = findPhysicalCard(match, instanceId);
+  if (!ctx || ctx.playerId !== playerId || !["spirits", "nexuses", "other"].includes(ctx.zone)) {
+    return { ok: false, error: "A carta com Flash não está no seu campo." };
+  }
+  const card = getDatabaseCard(cardIndex, ctx.card);
+  if (!card || card.cardType === "magic") return { ok: false, error: "Use a ação de Magic para esta carta." };
+  const entries = getTriggeredEntries(card, "magicFlash");
+  if (!entries.length) return { ok: false, error: "A carta não possui um efeito Flash estruturado." };
+  const engine = dispatchEffectEvent(match, {
+    event: "magicFlash",
+    sourcePlayerId: playerId,
+    sourceInstanceId: instanceId,
+    sourcePhysical: ctx.card,
+    sourceCard: card,
+    sourceCardId: card.id,
+    context: { battleId: battle.id, activatedFieldFlash: true }
+  }, cardIndex);
+  if (!engine.triggered && !engine.manualResolutionNeeded) return { ok: false, error: "O efeito Flash não está ativo no Level atual." };
+  return { ok: true, match: engine.match, manualResolutionNeeded: engine.manualResolutionNeeded, notes: engine.notes };
 }
 
 export function manualAction(match, actorId, payload, cardIndex) {

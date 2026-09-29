@@ -8,6 +8,10 @@ import { checkSummoningCondition } from "./specialRules.js";
 import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
 import { BurstEvent, openBurstOpportunityForEvent } from "./effectEngine/burstEngine.js";
 
+function hasHighSpeed(card) {
+  return (card?.effects || []).some((effect) => String(effect?.type || "").toLowerCase() === "highspeed");
+}
+
 function minimumCores(card) {
   if (card.cardType === "nexus") return 0;
   const reqs = (card.levels || []).map((l) => Number(l.cores)).filter(Number.isFinite);
@@ -55,11 +59,22 @@ function takePlacementCores(match, playerId, amount, cardIndex) {
 }
 
 export function summonFromHand(match, playerId, instanceId, cardIndex, options = {}) {
-  if (match.phase !== "main" || match.activePlayerId !== playerId || match.battle) return { ok: false, error: "Invocações normais são feitas no seu Main Step." };
+  const highSpeed = options.highSpeed === true;
+  const normalWindow = match.phase === "main" && match.activePlayerId === playerId && !match.battle;
+  const highSpeedWindow = Boolean(
+    highSpeed &&
+    match.battle &&
+    ["flash1", "flash2"].includes(match.battle.stage) &&
+    match.battle.flash?.priorityPlayerId === playerId
+  );
+  if (!normalWindow && !highSpeedWindow) {
+    return { ok: false, error: highSpeed ? "High Speed só pode ser usado durante sua prioridade de Flash." : "Invocações normais são feitas no seu Main Step." };
+  }
   const ctx = findPhysicalCard(match, instanceId);
   if (!ctx || ctx.playerId !== playerId || ctx.zone !== "hand") return { ok: false, error: "Carta não encontrada na mão." };
   const card = getDatabaseCard(cardIndex, ctx.card);
   if (!["spirit", "ultimate", "brave"].includes(card?.cardType)) return { ok: false, error: "Esta carta não é invocável por esta ação." };
+  if (highSpeed && !hasHighSpeed(card)) return { ok: false, error: "Esta carta não possui High Speed." };
 
   const summonCondition = checkSummoningCondition(match, playerId, card, cardIndex, options);
   if (!summonCondition.ok) return summonCondition;

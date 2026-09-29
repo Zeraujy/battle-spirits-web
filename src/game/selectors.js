@@ -110,15 +110,7 @@ export function getFieldSymbols(match, playerId, cardIndex) {
   const player = match.players[playerId];
   for (const physical of fieldCards(player)) {
     if (physical.pendingDestruction || physical.combinedWith) continue;
-    const card = getDatabaseCard(cardIndex, physical);
-    for (const symbol of card?.symbols || []) counts[symbol] = (counts[symbol] || 0) + 1;
-    if (card?.cardType !== "brave") {
-      const brave = getBraveAttachment(match, physical.instanceId);
-      if (brave) {
-        const braveCard = getDatabaseCard(cardIndex, brave);
-        for (const symbol of braveCard?.symbols || []) counts[symbol] = (counts[symbol] || 0) + 1;
-      }
-    }
+    for (const symbol of getEffectiveSymbols(match, cardIndex, physical)) counts[symbol] = (counts[symbol] || 0) + 1;
   }
   return counts;
 }

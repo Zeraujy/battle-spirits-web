@@ -30,7 +30,7 @@ export function getBurstActivationEvent(card) {
     if (event && event.toLowerCase().includes("burst")) candidates.push(event);
   }
 
-  const priority = ["burstLifeDecrease", "burstOpponentSummon", "burstOpponentMagic", "burstOwnSpiritDestroyed"];
+  const priority = ["burstLifeDecrease", "burstOpponentSummon", "burstOpponentMagic", "burstOwnSpiritDestroyed", "burstOpponentHandIncrease"];
   for (const event of priority) if (candidates.includes(event)) return event;
   return "burst";
 }
