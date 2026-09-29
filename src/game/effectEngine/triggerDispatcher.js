@@ -10,7 +10,7 @@ import {
 import { EffectTriggerScope, isEffectSchemaV2 } from "./effectSchema.js";
 import { EffectEvent, compactEventName, normalizeCanonicalEvent } from "./canonicalEvents.js";
 import { conditionMatchesEffect } from "./conditionEngine.js";
-import { reconcileContinuousModifierConditions } from "./modifierResolver.js";
+import { getContinuousNumericModifier, reconcileContinuousModifierConditions } from "./modifierResolver.js";
 import { buildTriggerBatch, nextAmbiguousTriggerGroup, orderedTriggerDispatches, resolveAutomaticTriggerGroups, triggerOrderDecision } from "./triggerOrderingEngine.js";
 
 
@@ -78,6 +78,7 @@ function sourceHasTriggeredEntries(match, input, cardIndex) {
   const physical = found?.card || input.sourcePhysical || null;
   const card = input.sourceCard || (physical ? getDatabaseCard(cardIndex, physical) : null) || (input.sourceCardId ? cardIndex.get(input.sourceCardId) : null);
   if (!card) return false;
+  if (physical && getContinuousNumericModifier(match, cardIndex, physical, "effectsDisabled") > 0) return false;
   const context = {
     ...(input.context || {}),
     sourcePlayerId: input.sourcePlayerId || found?.playerId || input.context?.sourcePlayerId || null,
@@ -95,6 +96,7 @@ function sourceHasV2ContinuousEffect(match, input, cardIndex) {
   const physical = found?.card || input.sourcePhysical || null;
   const card = input.sourceCard || (physical ? getDatabaseCard(cardIndex, physical) : null) || (input.sourceCardId ? cardIndex.get(input.sourceCardId) : null);
   if (!card) return false;
+  if (physical && getContinuousNumericModifier(match, cardIndex, physical, "effectsDisabled") > 0) return false;
   return getTriggeredEntries(card, "continuous", { dispatchMode: "source" })
     .some(({ entry }) => isEffectSchemaV2(entry));
 }
@@ -106,6 +108,7 @@ function observerCandidates(match, input, cardIndex) {
     for (const physical of fieldCards(player)) {
       const card = getDatabaseCard(cardIndex, physical);
       if (!card) continue;
+      if (getContinuousNumericModifier(match, cardIndex, physical, "effectsDisabled") > 0) continue;
       const context = {
         ...(input.context || {}),
         sourcePlayerId: playerId,

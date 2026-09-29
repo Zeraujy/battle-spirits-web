@@ -1,4 +1,5 @@
 import { getFieldSymbols, fieldCards, getDatabaseCard, isCoreLockedNexus } from "./selectors.js";
+import { getContinuousCardNumericModifier } from "./effectEngine/modifierResolver.js";
 
 export function calculateReduction(match, playerId, card, cardIndex) {
   const field = getFieldSymbols(match, playerId, cardIndex);
@@ -21,7 +22,9 @@ export function calculateReduction(match, playerId, card, cardIndex) {
     }
   }
   const printed = Number(card?.cost || 0);
-  return { printed, applied, payable: Math.max(0, printed - applied), fieldSymbols: field };
+  const costModifier = getContinuousCardNumericModifier(match, card, playerId, "cost");
+  const effectivePrinted = Math.max(0, printed + Number(costModifier || 0));
+  return { printed, effectivePrinted, applied, payable: Math.max(0, effectivePrinted - applied), fieldSymbols: field };
 }
 
 export function getSpendableCoreSources(match, playerId, cardIndex, { preserveMinimum = true } = {}) {

@@ -26421,7 +26421,7 @@
           1,
           2
         ],
-        "timing": "whenDestroyedByOpponent",
+        "timing": "whenDestroyed",
         "title": {
           "en": "When Destroyed by Your Opponent",
           "ptBR": "Quando Destruído pelo Oponente"
@@ -26429,10 +26429,50 @@
         "text": {
           "en": "If you control a Spirit whose card name includes 'Fairy', draw 2 cards.",
           "ptBR": "Se você controlar um Spirit cujo nome da carta inclua 'Fairy', compre 2 cartas."
-        }
+        },
+        "automationRef": "sd23-001-destroyed-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-001-destroyed-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventDestroyedByOpponent"
+          },
+          {
+            "type": "fieldCount",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "nameIncludes": "Fairy"
+            },
+            "atLeast": 1
+          }
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "count": 2
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-001.webp",
     "nameJP": "ハネッポ"
   },
@@ -26483,7 +26523,7 @@
         "levels": [
           2
         ],
-        "timing": "battleResolution",
+        "timing": "afterBattleResolution",
         "title": {
           "en": "Battle Resolution",
           "ptBR": "Resolução da Batalha"
@@ -26491,10 +26531,65 @@
         "text": {
           "en": "If the opposing battling Spirit has 3000 BP or less, reveal the top card of your deck. Add it to your hand if it is a Yellow Ultimate; otherwise discard it.",
           "ptBR": "Se o Spirit oponente em batalha tiver 3000 BP ou menos, revele a carta do topo do seu deck. Adicione-a à sua mão se for um Ultimate Amarelo; caso contrário, descarte-a."
-        }
+        },
+        "automationRef": "sd23-002-battle-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-002-battle-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "fieldCount",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "battleOpponentOfSource": true,
+              "maximumBP": 3000
+            },
+            "atLeast": 1
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "titleEN": "Reveal the top card?",
+            "titlePT": "Revelar a carta do topo?",
+            "yesActions": [
+              {
+                "type": "revealTopAndRoute",
+                "player": "self",
+                "count": 1,
+                "matchSelector": {
+                  "cardTypes": [
+                    "ultimate"
+                  ],
+                  "colors": [
+                    "yellow"
+                  ]
+                },
+                "matchedDestination": "hand",
+                "otherwiseDestination": "trash"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-002.webp",
     "nameJP": "妖精モナ"
   },
@@ -26559,10 +26654,66 @@
         "text": {
           "en": "During this battle, one opposing Spirit gets -3000 BP. If that Spirit becomes 0 BP due to this effect for the first time this turn, draw 1 card.",
           "ptBR": "Durante esta batalha, 1 Spirit do oponente recebe -3000 BP. Se aquele Spirit chegar a 0 BP devido a este efeito pela primeira vez neste turno, compre 1 carta."
-        }
+        },
+        "automationRef": "sd23-003-attack-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-003-attack-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": [
+              {
+                "type": "modifyBP",
+                "amount": -3000,
+                "duration": "battle"
+              },
+              {
+                "type": "conditional",
+                "condition": {
+                  "type": "selectedTargetBP",
+                  "atMost": 0
+                },
+                "actions": [
+                  {
+                    "type": "oncePerTurn",
+                    "key": "zero-bp-draw",
+                    "actions": [
+                      {
+                        "type": "draw",
+                        "count": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-003.webp",
     "nameJP": "天使イヴェール"
   },
@@ -26725,10 +26876,60 @@
         "text": {
           "en": "During this battle, one opposing Spirit gets -3000 BP. If that Spirit becomes 0 BP due to this effect, destroy it.",
           "ptBR": "Durante esta batalha, 1 Spirit do oponente recebe -3000 BP. Se aquele Spirit chegar a 0 BP devido a este efeito, destrua-o."
-        }
+        },
+        "automationRef": "sd23-005-attack-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-005-attack-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": [
+              {
+                "type": "modifyBP",
+                "amount": -3000,
+                "duration": "battle"
+              },
+              {
+                "type": "conditional",
+                "condition": {
+                  "type": "selectedTargetBP",
+                  "atMost": 0
+                },
+                "actions": [
+                  {
+                    "type": "destroy"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-005.webp",
     "nameJP": "天使グレット"
   },
@@ -26781,7 +26982,7 @@
           1,
           2
         ],
-        "timing": "opponentAttackStep",
+        "timing": "beforeBattleResolution",
         "title": {
           "en": "Battle Resolution",
           "ptBR": "Resolução da Batalha"
@@ -26789,7 +26990,8 @@
         "text": {
           "en": "If the opposing battling Spirit has 3000 BP or less, its attack cannot reduce your Life.",
           "ptBR": "Se o Spirit oponente em batalha tiver 3000 BP ou menos, o ataque dele não pode reduzir sua Life."
-        }
+        },
+        "automationRef": "sd23-006-life-auto26"
       },
       {
         "id": "sd23-006-core",
@@ -26797,7 +26999,7 @@
         "levels": [
           2
         ],
-        "timing": "eitherAttackStep",
+        "timing": "beforeBattleResolution",
         "title": {
           "en": "Battle Resolution",
           "ptBR": "Resolução da Batalha"
@@ -26805,10 +27007,89 @@
         "text": {
           "en": "If the opposing battling Spirit has 3000 BP or less, put 1 Core from the Void into your Reserve.",
           "ptBR": "Se o Spirit oponente em batalha tiver 3000 BP ou menos, coloque 1 Core do Void na sua Reserve."
-        }
+        },
+        "automationRef": "sd23-006-core-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-006-life-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "beforeBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          },
+          {
+            "type": "fieldCount",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "battleOpponentOfSource": true,
+              "maximumBP": 3000
+            },
+            "atLeast": 1
+          }
+        ],
+        "actions": [
+          {
+            "type": "setBattleRestriction",
+            "restriction": {
+              "preventLifeDamage": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd23-006-core-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "beforeBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "fieldCount",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "battleOpponentOfSource": true,
+              "maximumBP": 3000
+            },
+            "atLeast": 1
+          }
+        ],
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "count": 1
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-006.webp",
     "nameJP": "妖精アクティア"
   },
@@ -26876,7 +27157,8 @@
         "text": {
           "en": "During this battle, one opposing Spirit gets -5000 BP.",
           "ptBR": "Durante esta batalha, 1 Spirit do oponente recebe -5000 BP."
-        }
+        },
+        "automationRef": "sd23-007-attack-auto26"
       },
       {
         "id": "sd23-007-battle-destroy",
@@ -26885,7 +27167,7 @@
           2,
           3
         ],
-        "timing": "battleResolution",
+        "timing": "beforeBattleResolution",
         "title": {
           "en": "Battle Resolution",
           "ptBR": "Resolução da Batalha"
@@ -26893,10 +27175,91 @@
         "text": {
           "en": "If the opposing battling Spirit has 3000 BP or less, destroy it.",
           "ptBR": "Se o Spirit oponente em batalha tiver 3000 BP ou menos, destrua-o."
-        }
+        },
+        "automationRef": "sd23-007-battle-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-007-attack-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -5000,
+              "duration": "battle"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd23-007-battle-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "beforeBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "fieldCount",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "battleOpponentOfSource": true,
+              "maximumBP": 3000
+            },
+            "atLeast": 1
+          }
+        ],
+        "actions": [
+          {
+            "type": "destroy",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "battleOpponentOfSource": true
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-007.webp",
     "nameJP": "天使ライエル"
   },
@@ -26983,10 +27346,68 @@
         "text": {
           "en": "On a hit, the opposing battling Spirit gets -5000 BP during this battle. If an opposing Spirit blocks this Ultimate, move 1 Core from your opponent's Life to their Reserve.",
           "ptBR": "Em um acerto, o Spirit oponente em batalha recebe -5000 BP durante esta batalha. Se um Spirit do oponente bloquear este Ultimate, mova 1 Core da Life do oponente para a Reserve dele."
-        }
+        },
+        "onHitOperations": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -5000,
+              "duration": "battle"
+            }
+          },
+          {
+            "type": "setBattleRestriction",
+            "restriction": {
+              "ultimateTriggerHitResolved": true
+            }
+          }
+        ]
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-008-blocked-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocked",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3,
+          4,
+          5
+        ],
+        "conditions": [
+          {
+            "type": "battleRestriction",
+            "key": "ultimateTriggerHitResolved"
+          },
+          {
+            "type": "battleBlockerCardType",
+            "cardType": "spirit"
+          }
+        ],
+        "actions": [
+          {
+            "type": "moveLifeToReserve",
+            "player": "opponent",
+            "count": 1
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-008.webp",
     "nameJP": "アルティメット・クレイオ",
     "summonCondition": {
@@ -27073,7 +27494,8 @@
         "text": {
           "en": "Magic cards in your hand cost 1 less.",
           "ptBR": "As cartas de Magic da sua mão custam 1 a menos."
-        }
+        },
+        "automationRef": "sd23-009-magic-cost-auto26"
       },
       {
         "id": "sd23-009-trigger",
@@ -27090,10 +27512,93 @@
         "text": {
           "en": "On a hit, the opposing battling Spirit gets -10000 BP during this battle. If an opposing Spirit blocks this Ultimate, move 1 Core from your opponent's Life to their Reserve.",
           "ptBR": "Em um acerto, o Spirit oponente em batalha recebe -10000 BP durante esta batalha. Se um Spirit do oponente bloquear este Ultimate, mova 1 Core da Life do oponente para a Reserve dele."
-        }
+        },
+        "onHitOperations": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -10000,
+              "duration": "battle"
+            }
+          },
+          {
+            "type": "setBattleRestriction",
+            "restriction": {
+              "ultimateTriggerHitResolved": true
+            }
+          }
+        ]
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-009-magic-cost-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3,
+          4
+        ],
+        "actions": [
+          {
+            "type": "modifyCost",
+            "amount": -1,
+            "duration": "battle",
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "magic"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd23-009-blocked-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocked",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3,
+          4
+        ],
+        "conditions": [
+          {
+            "type": "battleRestriction",
+            "key": "ultimateTriggerHitResolved"
+          },
+          {
+            "type": "battleBlockerCardType",
+            "cardType": "spirit"
+          }
+        ],
+        "actions": [
+          {
+            "type": "moveLifeToReserve",
+            "player": "opponent",
+            "count": 1
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-009.webp",
     "nameJP": "アルティメット・バーチュ",
     "summonCondition": {
@@ -27185,7 +27690,41 @@
         "text": {
           "en": "On a hit, one opposing Spirit gets -10000 BP during this battle; if it becomes 0 BP due to this effect, destroy it.",
           "ptBR": "Em um acerto, 1 Spirit do oponente recebe -10000 BP durante esta batalha; se chegar a 0 BP devido a este efeito, destrua-o."
-        }
+        },
+        "onHitOperations": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": [
+              {
+                "type": "modifyBP",
+                "amount": -10000,
+                "duration": "battle"
+              },
+              {
+                "type": "conditional",
+                "condition": {
+                  "type": "selectedTargetBP",
+                  "atMost": 0
+                },
+                "actions": [
+                  {
+                    "type": "destroy"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "sd23-010-brilliance",
@@ -27193,7 +27732,7 @@
         "levels": [
           5
         ],
-        "timing": "whenBattles",
+        "timing": "afterBattleResolution",
         "title": {
           "en": "Brilliance",
           "ptBR": "Brilliance"
@@ -27201,10 +27740,36 @@
         "text": {
           "en": "At the end of the battle, return all Magic cards you used during this battle to your hand.",
           "ptBR": "No fim da batalha, devolva à sua mão todas as Magics que você usou nesta batalha."
-        }
+        },
+        "automationRef": "sd23-010-brilliance-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-010-brilliance-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          5
+        ],
+        "conditions": [
+          {
+            "type": "battleSourceRole",
+            "role": "attacker"
+          }
+        ],
+        "actions": [
+          {
+            "type": "returnMagicUsedThisBattle",
+            "player": "self"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-010.webp",
     "nameJP": "アルティメット・エクスシア",
     "summonCondition": {
@@ -27260,7 +27825,7 @@
           1,
           2
         ],
-        "timing": "ownDivineSpiritReturnedByOpponent",
+        "timing": "cardMoved",
         "title": {
           "en": "Life Recovery",
           "ptBR": "Recuperação de Life"
@@ -27268,7 +27833,8 @@
         "text": {
           "en": "For each of your Divine Spirit Spirits returned to your hand or deck by an opposing Spirit or Magic effect, put 1 Core from the Void into your Life.",
           "ptBR": "Para cada um dos seus Spirits Divine Spirit devolvidos à sua mão ou deck por um efeito de Spirit ou Magic do oponente, coloque 1 Core do Void na sua Life."
-        }
+        },
+        "automationRef": "sd23-011-life-auto26"
       },
       {
         "id": "sd23-011-draw",
@@ -27276,7 +27842,7 @@
         "levels": [
           2
         ],
-        "timing": "eitherAttackStep",
+        "timing": "bpBecameZero",
         "title": {
           "en": "During Either Attack Step",
           "ptBR": "Durante o Attack Step de Qualquer Jogador"
@@ -27284,10 +27850,91 @@
         "text": {
           "en": "When an opposing battling Spirit becomes 0 BP for the first time during this turn, draw 1 card.",
           "ptBR": "Quando um Spirit oponente em batalha chegar a 0 BP pela primeira vez neste turno, compre 1 carta."
-        }
+        },
+        "automationRef": "sd23-011-draw-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-011-life-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventMovedByOpponent"
+          },
+          {
+            "type": "eventMovedCardFamily",
+            "family": "Divine Spirit"
+          },
+          {
+            "type": "eventMovedFromZone",
+            "values": [
+              "spirits"
+            ]
+          },
+          {
+            "type": "eventMoveDestination",
+            "values": [
+              "hand",
+              "topDeck",
+              "bottomDeck",
+              "deck"
+            ]
+          },
+          {
+            "type": "eventMovedByCardType",
+            "cardTypes": [
+              "spirit",
+              "magic"
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "healLife",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "sd23-011-draw-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "bpBecameZero",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventZeroedIsBattleOpponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "opposing-battler-zero-draw",
+            "actions": [
+              {
+                "type": "draw",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-011.webp",
     "nameJP": "エイレインの雲上要塞"
   },
@@ -27321,7 +27968,7 @@
         "id": "sd23-012-flash",
         "type": "flash",
         "levels": [],
-        "timing": "flash",
+        "timing": "magicFlash",
         "title": {
           "en": "Flash",
           "ptBR": "Flash"
@@ -27329,10 +27976,69 @@
         "text": {
           "en": "One opposing Spirit gets -2000 BP during this turn. If used during your opponent's turn, also refresh 1 of your Yellow Spirits.",
           "ptBR": "1 Spirit do oponente recebe -2000 BP durante este turno. Se usada durante o turno do oponente, também dê Refresh em 1 dos seus Spirits Amarelos."
-        }
+        },
+        "automationRef": "sd23-012-flash-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-012-flash-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -2000,
+              "duration": "turn"
+            }
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "activePlayer",
+              "player": "opponent"
+            },
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "colors": [
+                    "yellow"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "refresh"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-012.webp",
     "nameJP": "イエローアラート"
   },
@@ -27367,7 +28073,7 @@
         "id": "sd23-013-burst",
         "type": "burst",
         "levels": [],
-        "timing": "afterOpponentDestroysYourSpirit",
+        "timing": "burstOwnSpiritDestroyed",
         "title": {
           "en": "Burst",
           "ptBR": "Burst"
@@ -27375,13 +28081,14 @@
         "text": {
           "en": "Return the Cost 5 or less Spirit card destroyed when this Burst activated from your Trash to your hand. Then you may pay this card's cost to activate its Flash effect.",
           "ptBR": "Devolva do seu Trash para a sua mão a carta de Spirit de custo 5 ou menos destruída quando este Burst ativou. Depois você pode pagar o custo desta carta para ativar o efeito Flash."
-        }
+        },
+        "automationRef": "sd23-013-burst-auto26"
       },
       {
         "id": "sd23-013-flash",
         "type": "flash",
         "levels": [],
-        "timing": "flash",
+        "timing": "magicFlash",
         "title": {
           "en": "Flash",
           "ptBR": "Flash"
@@ -27389,10 +28096,77 @@
         "text": {
           "en": "At the end of this battle, if your Life is 2 or less, end the Attack Step.",
           "ptBR": "No fim desta batalha, se a sua Life for 2 ou menos, encerre o Attack Step."
-        }
+        },
+        "automationRef": "sd23-013-flash-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-013-burst-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "burstOwnSpiritDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTrashTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "trash"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumCost": 5,
+              "instanceIdFromContext": "burstSourceInstanceId"
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          },
+          {
+            "type": "chooseYesNo",
+            "titleEN": "Activate Flash?",
+            "titlePT": "Ativar Flash?",
+            "yesActions": [
+              {
+                "type": "paySourceCost",
+                "actions": [
+                  {
+                    "type": "dispatchSourceEvent",
+                    "event": "magicFlash"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sd23-013-flash-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "conditions": [
+          {
+            "type": "ownLifeAtMost",
+            "value": 2
+          }
+        ],
+        "actions": [
+          {
+            "type": "scheduleAttackStepEndAfterBattle"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-013.webp",
     "nameJP": "シンフォニックバースト"
   },
@@ -27427,7 +28201,7 @@
         "id": "sd23-014-burst",
         "type": "burst",
         "levels": [],
-        "timing": "lifeDecrease",
+        "timing": "burstLifeDecrease",
         "title": {
           "en": "Burst",
           "ptBR": "Burst"
@@ -27435,13 +28209,14 @@
         "text": {
           "en": "During this turn, attacks by opposing Spirits with costs 0, 1, 3, 5, 7, 9, or 11 cannot reduce your Life.",
           "ptBR": "Durante este turno, ataques de Spirits do oponente de custos 0, 1, 3, 5, 7, 9 ou 11 não podem reduzir sua Life."
-        }
+        },
+        "automationRef": "sd23-014-burst-auto26"
       },
       {
         "id": "sd23-014-flash",
         "type": "flash",
         "levels": [],
-        "timing": "flash",
+        "timing": "magicFlash",
         "title": {
           "en": "Flash",
           "ptBR": "Flash"
@@ -27449,10 +28224,108 @@
         "text": {
           "en": "Choose 1 opposing Spirit. During this turn, it cannot attack or block, loses all of its effects, and cannot gain new effects.",
           "ptBR": "Escolha 1 Spirit do oponente. Durante este turno, ele não pode atacar nem bloquear, perde todos os efeitos e não pode ganhar novos efeitos."
-        }
+        },
+        "automationRef": "sd23-014-flash-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-014-burst-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "burstLifeDecrease",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "setTurnProtection",
+            "player": "self",
+            "protection": {
+              "type": "blockSpiritAttackLifeDamageByCosts",
+              "costs": [
+                0,
+                1,
+                3,
+                5,
+                7,
+                9,
+                11
+              ]
+            }
+          },
+          {
+            "type": "chooseYesNo",
+            "titleEN": "Activate Flash?",
+            "titlePT": "Ativar Flash?",
+            "yesActions": [
+              {
+                "type": "paySourceCost",
+                "actions": [
+                  {
+                    "type": "dispatchSourceEvent",
+                    "event": "magicFlash"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sd23-014-flash-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": [
+              {
+                "type": "addModifier",
+                "property": "cannotAttack",
+                "value": 1,
+                "duration": "turn",
+                "selector": {
+                  "selectedTarget": true
+                }
+              },
+              {
+                "type": "addModifier",
+                "property": "cannotBlock",
+                "value": 1,
+                "duration": "turn",
+                "selector": {
+                  "selectedTarget": true
+                }
+              },
+              {
+                "type": "addModifier",
+                "property": "effectsDisabled",
+                "value": 1,
+                "duration": "turn",
+                "selector": {
+                  "selectedTarget": true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-014.webp",
     "nameJP": "バーストスナップ"
   },
@@ -27488,7 +28361,7 @@
         "id": "sd23-015-flash",
         "type": "flash",
         "levels": [],
-        "timing": "flash",
+        "timing": "magicFlash",
         "title": {
           "en": "Flash",
           "ptBR": "Flash"
@@ -27496,10 +28369,56 @@
         "text": {
           "en": "One opposing Spirit or Ultimate gets -5000 BP during this turn. If it becomes 0 BP due to this effect, destroy it.",
           "ptBR": "1 Spirit ou Ultimate do oponente recebe -5000 BP durante este turno. Se chegar a 0 BP devido a este efeito, destrua-o."
-        }
+        },
+        "automationRef": "sd23-015-flash-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-015-flash-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": [
+              {
+                "type": "modifyBP",
+                "amount": -5000,
+                "duration": "turn"
+              },
+              {
+                "type": "conditional",
+                "condition": {
+                  "type": "selectedTargetBP",
+                  "atMost": 0
+                },
+                "actions": [
+                  {
+                    "type": "destroy"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-015.webp",
     "nameJP": "エンジェルストライク"
   },
@@ -27535,7 +28454,7 @@
         "id": "sd23-016-flash",
         "type": "flash",
         "levels": [],
-        "timing": "flash",
+        "timing": "magicFlash",
         "title": {
           "en": "Flash",
           "ptBR": "Flash"
@@ -27543,10 +28462,41 @@
         "text": {
           "en": "Refresh all exhausted Spirits, then exhaust all refreshed Spirits. You cannot use this Magic during your turn.",
           "ptBR": "Dê Refresh em todos os Spirits em Exhaust e depois dê Exhaust em todos os Spirits em Refresh. Você não pode usar esta Magic durante o seu turno."
-        }
+        },
+        "automationRef": "sd23-016-flash-auto26"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd23-016-flash-auto26",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "conditions": [
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "swapExhaustionState",
+            "selector": {
+              "owner": "any",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD23/SD23-016.webp",
     "nameJP": "リバーサルフォース"
   },
@@ -27831,7 +28781,8 @@
             "selector": {
               "owner": "opponent",
               "cardTypes": [
-                "spirit"
+                "spirit",
+                "ultimate"
               ]
             },
             "allowZero": true,

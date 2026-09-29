@@ -1,0 +1,55 @@
+{
+  "generatedAt": "2026-09-29T08:36:25.455545+00:00",
+  "batch": "v5.1.0-content-migration-batch06",
+  "base": "v5.1.0 Content Migration Batch 05",
+  "internalVersion": "5.0.3",
+  "completedSets": [
+    "SD10",
+    "SD11",
+    "SD13",
+    "SD17",
+    "SD19",
+    "SD20",
+    "SD23"
+  ],
+  "sd23": {
+    "ready": true,
+    "automatedOrNoEffect": 17,
+    "total": 17
+  },
+  "coverage": {
+    "totalCards": 365,
+    "automated": 117,
+    "noEffect": 16,
+    "manualFallback": 232,
+    "rate": 63.56,
+    "statusCounts": {
+      "AUTOMATED": 117,
+      "NO_EFFECT": 16,
+      "MANUAL": 23,
+      "UNSTRUCTURED_TEXT": 173,
+      "UNSUPPORTED_TRIGGER": 25,
+      "PARTIAL": 11
+    }
+  },
+  "setGate": {
+    "completeSets": 7,
+    "totalSets": 11,
+    "targetPercent": 95
+  },
+  "generatedRegressionScenarios": 133,
+  "coreActionTypes": 64,
+  "qa": {
+    "main": "149/149",
+    "effectEngine": "103/103",
+    "batch06": "10/10",
+    "fullRegression": "302/302",
+    "verify": "PASS",
+    "uiAudit": "PASS",
+    "releaseAudit": "PASS",
+    "securityAudit": "PASS",
+    "phase26": "PASS",
+    "productionBuild": "NOT_RERUN_DEPENDENCIES_NOT_BUNDLED"
+  },
+  "finalReleaseBlocked": true
+}

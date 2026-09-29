@@ -56,6 +56,10 @@ function targetOwner(match, physical) {
     for (const zone of FIELD_ZONES) {
       if ((player.field?.[zone] || []).some((card) => card.instanceId === physical?.instanceId)) return playerId;
     }
+    for (const zone of ["hand", "trash", "revealed", "deck"]) {
+      if ((player?.[zone] || []).some((card) => card.instanceId === physical?.instanceId)) return playerId;
+    }
+    if (player?.burst?.instanceId === physical?.instanceId) return playerId;
   }
   return null;
 }
@@ -275,6 +279,36 @@ export function applyContinuousCollectionModifiers(match, cardIndex, physical, p
   }
   if (property === "symbols") return values.filter(Boolean);
   return [...new Set(values.filter(Boolean))];
+}
+
+export function getContinuousCardNumericModifier(match, card, playerId, property) {
+  let value = 0;
+  for (const modifier of match.modifierRegistry?.items || []) {
+    if (modifier.property !== property) continue;
+    if (!durationIsActive(match, modifier.duration, {
+      sourceExists: (instanceId) => sourceExists(match, instanceId),
+      conditionActive: modifier.conditionActive
+    })) continue;
+    const selector = modifier.selector || {};
+    if (selector.owner === "self" && modifier.controllerId && playerId !== modifier.controllerId) continue;
+    if (selector.owner === "opponent" && modifier.controllerId && playerId === modifier.controllerId) continue;
+    const cardTypes = selector.cardTypes || (selector.cardType ? [selector.cardType] : []);
+    if (cardTypes.length && !cardTypes.includes(card?.cardType)) continue;
+    const colors = selector.colors || (selector.color ? [selector.color] : []);
+    if (colors.length && !colors.some((color) => (card?.colors || []).includes(color))) continue;
+    const families = selector.families || (selector.family ? [selector.family] : []);
+    if (families.length && !families.some((family) => (card?.families || []).includes(family))) continue;
+    const symbols = selector.symbols || (selector.symbol ? [selector.symbol] : []);
+    if (symbols.length && !symbols.some((symbol) => (card?.symbols || []).includes(symbol))) continue;
+    const baseCost = Number(card?.cost || 0);
+    if (selector.minimumCost != null && baseCost < Number(selector.minimumCost)) continue;
+    if (selector.maximumCost != null && baseCost > Number(selector.maximumCost)) continue;
+    const amount = Number(modifier.value ?? modifier.amount ?? 0);
+    if (modifier.operation === "set") value = amount;
+    else if (modifier.operation === "subtract") value -= Math.abs(amount);
+    else value += amount;
+  }
+  return value;
 }
 
 export function clearEffectModifiers(match, duration, metadata = {}) {

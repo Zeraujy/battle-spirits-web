@@ -6,10 +6,10 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **533**
-- Effect Schema v2 entries: **79**
-- Fully automated cards: **103 (28.2%)**
-- Partially automated cards: **13**
+- Structured effect/ability entries inspected: **554**
+- Effect Schema v2 entries: **100**
+- Fully automated cards: **117 (32.1%)**
+- Partially automated cards: **11**
 - Unstructured effect text: **173**
 - Explicit no-effect cards: **16**
 
@@ -41,16 +41,16 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | SD17 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD19 | 17 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD20 | 17 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
-| SD23 | 17 | 3 | 2 | 9 | 3 | 0 | 0 | 0 | 0 |
+| SD23 | 17 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | SD28 | 17 | 2 | 8 | 6 | 1 | 0 | 0 | 0 | 0 |
 
 ## Structured entry baseline
 
-- Automated executable entries: **197**
-- Entries blocked by trigger coverage: **49**
+- Automated executable entries: **218**
+- Entries blocked by trigger coverage: **46**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
-- Represented but non-executable/manual entries: **287**
+- Represented but non-executable/manual entries: **290**
 
 ## Highest-priority trigger gaps
 
@@ -63,13 +63,11 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `whileLevel2Or3` | 2 |
 | `afterCost4PlusMagicResolves` | 1 |
 | `afterDivineTrust` | 1 |
-| `afterOpponentDestroysYourSpirit` | 1 |
 | `onEligibleSummonDescendOrPlacement` | 1 |
 | `onEligibleSummonOrPlacement` | 1 |
 | `opponentHandIncrease` | 1 |
 | `opponentTurn` | 1 |
 | `opposingUnitLeavesByYourEffect` | 1 |
-| `ownDivineSpiritReturnedByOpponent` | 1 |
 | `ownLowCostSpiritDestroyedByOpponentEffect` | 1 |
 | `ownSpiritOrUltimateDestroyedByOpponent` | 1 |
 | `shellmanUltimateBattle` | 1 |
@@ -77,7 +75,6 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `whenBlueNexusExhausted` | 1 |
 | `whenBravedOrCombinedCardWouldLeave` | 1 |
 | `whenDepletedOrDestroyedByOpponent` | 1 |
-| `whenDestroyedByOpponent` | 1 |
 | `whenDiscardedByBlueEffect` | 1 |
 | `whenDiscardedByGreenOnlyEffect` | 1 |
 | `whenDiscardedFromHand` | 1 |
@@ -86,6 +83,9 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `whenLifeReducedByOpponentEffect` | 1 |
 | `whenOpenedFromDeckByGreenEffect` | 1 |
 | `whenOpponentSpiritUltimateMilled` | 1 |
+| `whenOtherEligibleSpiritSummoned` | 1 |
+| `whenReturnedFromTrashByYellowEffect` | 1 |
+| `whenSummonedOrAttacks` | 1 |
 
 ## Unsupported action/condition gaps
 
@@ -94,7 +94,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Engine additions — Phases 7–18
 
-- Core Action Library is centralized and currently exposes **59 generic action types** to Schema v2.
+- Core Action Library is centralized and currently exposes **64 generic action types** to Schema v2.
 - Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.
 - Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.
 - Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.
@@ -143,7 +143,8 @@ The canonical list is defined in `src/game/effectEngine/canonicalEvents.js`. Leg
 | `mainStep` | Yes |
 | `attackStep` | Yes |
 | `endStep` | Yes |
-| `cardMoved` | No — foundation only |
+| `cardMoved` | Yes |
+| `bpBecameZero` | Yes |
 | `coreMoved` | No — foundation only |
 | `afterUltimateTrigger` | Yes |
 | `ultimateTriggerHit` | Yes |
@@ -376,20 +377,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `SD15-007` | SD15 | magic | `MANUAL` | unresolved entries: 1 |
 | `SD15-008` | SD15 | magic | `MANUAL` | unresolved entries: 2 |
 | `SD15-X01` | SD15 | spirit | `PARTIAL` | triggers: ownLowCostSpiritDestroyedByOpponentEffect, whenOpponentSpiritBecomesZeroBP; unresolved entries: 2 |
-| `SD23-001` | SD23 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenDestroyedByOpponent; unresolved entries: 1 |
-| `SD23-002` | SD23 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD23-003` | SD23 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD23-005` | SD23 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD23-006` | SD23 | spirit | `MANUAL` | unresolved entries: 2 |
-| `SD23-007` | SD23 | spirit | `MANUAL` | unresolved entries: 2 |
-| `SD23-009` | SD23 | ultimate | `PARTIAL` | unresolved entries: 1 |
-| `SD23-010` | SD23 | ultimate | `PARTIAL` | unresolved entries: 1 |
-| `SD23-011` | SD23 | nexus | `UNSUPPORTED_TRIGGER` | triggers: ownDivineSpiritReturnedByOpponent; unresolved entries: 2 |
-| `SD23-012` | SD23 | magic | `MANUAL` | unresolved entries: 1 |
-| `SD23-013` | SD23 | magic | `UNSUPPORTED_TRIGGER` | triggers: afterOpponentDestroysYourSpirit; unresolved entries: 2 |
-| `SD23-014` | SD23 | magic | `MANUAL` | unresolved entries: 2 |
-| `SD23-015` | SD23 | magic | `MANUAL` | unresolved entries: 1 |
-| `SD23-016` | SD23 | magic | `MANUAL` | unresolved entries: 1 |
 | `SD28-001` | SD28 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD28-002` | SD28 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD28-003` | SD28 | spirit | `PARTIAL` | triggers: shellmanUltimateBattle; unresolved entries: 1 |

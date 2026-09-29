@@ -200,6 +200,56 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     const bp = Number(context.attackerBP ?? physical.temporaryBP ?? 0) || Number(getCurrentLevel(candidates[0].card, physical)?.bp || 0);
     return compareNumber(bp, condition);
   }
+  if (type === "selectedTargetBP") {
+    const selected = Array.isArray(context.selectedTargets) ? context.selectedTargets[0] : null;
+    const instanceId = selected?.physical?.instanceId || selected?.instanceId || null;
+    if (!instanceId) return false;
+    const targets = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
+    const physical = targets[0]?.physical || null;
+    return Boolean(physical && compareNumber(getEffectiveBP(match, cardIndex, physical), condition));
+  }
+  if (type === "battleRestriction") {
+    const key = String(condition.key ?? condition.value ?? "");
+    if (!key) return false;
+    const expected = Object.prototype.hasOwnProperty.call(condition, "equals") ? condition.equals : true;
+    return match.battle?.restrictions?.[key] === expected;
+  }
+  if (type === "battleBlockerCardType") {
+    const instanceId = context.blockerInstanceId || match.battle?.blockerInstanceId || null;
+    if (!instanceId) return false;
+    const targets = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
+    const card = targets[0]?.card || null;
+    const expected = condition.cardTypes || (condition.cardType ? [condition.cardType] : [condition.value]);
+    return Boolean(card && expected.filter(Boolean).map((value) => String(value).toLowerCase()).includes(String(card.cardType || "").toLowerCase()));
+  }
+  if (type === "eventMovedCardFamily") {
+    const expected = String(condition.family ?? condition.value ?? "").toLowerCase();
+    return (context.movedCardFamilies || []).map((value) => String(value).toLowerCase()).includes(expected);
+  }
+  if (type === "eventMoveDestination") {
+    const values = (condition.values || condition.destinations || [condition.value ?? condition.destination]).filter(Boolean).map((value) => String(value));
+    return values.includes(String(context.moveDestination || ""));
+  }
+  if (type === "eventMovedFromZone") {
+    const values = (condition.values || [condition.value ?? condition.zone]).filter(Boolean).map((value) => String(value));
+    return values.includes(String(context.moveFromZone || ""));
+  }
+  if (type === "eventMovedByOpponent") {
+    return Boolean(context.movedByPlayerId && sourcePlayerId && context.movedByPlayerId !== sourcePlayerId);
+  }
+  if (type === "eventMovedByCardType") {
+    const expected = condition.cardTypes || (condition.cardType ? [condition.cardType] : [condition.value]);
+    return expected.filter(Boolean).map((value) => String(value).toLowerCase()).includes(String(context.movedByCardType || "").toLowerCase());
+  }
+  if (type === "eventZeroedBySource") return Boolean(context.zeroedByInstanceId && context.zeroedByInstanceId === context.sourceInstanceId);
+  if (type === "eventFirstTimeThisTurn") return Boolean(context.firstTimeThisTurn);
+  if (type === "eventZeroedIsBattleOpponent") {
+    const zeroedPlayerId = context.zeroedPlayerId || null;
+    const instanceId = context.zeroedInstanceId || null;
+    if (!zeroedPlayerId || !instanceId || zeroedPlayerId === sourcePlayerId) return false;
+    const battle = match.battle;
+    return Boolean(battle && [battle.attackerInstanceId, battle.blockerInstanceId].filter(Boolean).includes(instanceId));
+  }
   if (type === "battleSourceRole") {
     const expected = String(condition.role ?? condition.value ?? "").toLowerCase();
     if (expected === "attacker") return Boolean(context.sourceInstanceId && context.sourceInstanceId === context.attackerInstanceId);

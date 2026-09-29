@@ -1,4 +1,4 @@
-import { findPhysicalCard, getBraveAttachment, getCurrentLevel, getDatabaseCard, getEffectiveBP, getEffectiveSymbols } from "./selectors.js";
+import { findPhysicalCard, getBraveAttachment, getCurrentLevel, getDatabaseCard, getEffectiveBP, getEffectiveCost, getEffectiveSymbols } from "./selectors.js";
 import { updateFieldCard, removeFieldCard } from "./zones.js";
 import { appendLog, otherPlayerId, uid } from "./utils.js";
 import { resolveUltimateTriggerOnAttack } from "./specialRules.js";
@@ -9,10 +9,11 @@ import { BurstEvent, openBurstOpportunityForEvent } from "./effectEngine/burstEn
 import { dispatchBattleParticipantEvent, createBattleContext } from "./effectEngine/battleTriggerEngine.js";
 import { ReplacementEvent, clearReplacementWindow, resolveReplacementWindow } from "./effectEngine/replacementEngine.js";
 
-function refreshedBattleCards(player, cardIndex) {
+function refreshedBattleCards(match, player, cardIndex) {
   const cards = [...(player.field.spirits || []), ...(player.field.other || [])];
   return cards.filter((physical) => {
     if (physical.combinedWith || physical.exhausted) return false;
+    if (getContinuousNumericModifier(match, cardIndex, physical, "cannotAttack") > 0) return false;
     const card = getDatabaseCard(cardIndex, physical);
     return ["spirit", "ultimate", "brave"].includes(card?.cardType);
   });
@@ -20,7 +21,7 @@ function refreshedBattleCards(player, cardIndex) {
 
 export function legalAttackers(match, playerId, cardIndex) {
   if (match.phase !== "attack" || match.activePlayerId !== playerId || match.battle) return [];
-  return refreshedBattleCards(match.players[playerId], cardIndex);
+  return refreshedBattleCards(match, match.players[playerId], cardIndex);
 }
 
 export function declareAttack(match, playerId, instanceId, cardIndex) {
@@ -146,6 +147,7 @@ export function legalBlockers(match, cardIndex) {
   });
   return candidates.filter((physical) => {
     const card = getDatabaseCard(cardIndex, physical);
+    if (getContinuousNumericModifier(match, cardIndex, physical, "cannotBlock") > 0) return false;
     if (restrictions.spiritsCannotBlock && ["spirit", "brave"].includes(card?.cardType)) return false;
     if (restrictions.ultimatesCannotBlock && card?.cardType === "ultimate") return false;
     if (restrictions.minimumBlockerLevel != null) {
@@ -322,6 +324,12 @@ export function resolveBattle(match, actorId, cardIndex) {
       if (attackerCard?.cardType === "spirit" && turnProtection?.maxDamage != null) {
         damage = Math.min(damage, Math.max(0, Number(turnProtection.maxDamage)));
       }
+      const costProtection = next.temporary?.turnProtections?.[battle.defenderPlayerId]?.blockSpiritAttackLifeDamageByCosts;
+      if (attackerCard?.cardType === "spirit" && Array.isArray(costProtection?.costs)) {
+        const effectiveCost = getEffectiveCost(next, cardIndex, attackerCtx.card);
+        if (costProtection.costs.map(Number).includes(Number(effectiveCost))) damage = 0;
+      }
+      if (next.battle?.restrictions?.preventLifeDamage === true) damage = 0;
 
       const replacement = resolveReplacementWindow(next, {
         event: ReplacementEvent.WOULD_LOSE_LIFE,

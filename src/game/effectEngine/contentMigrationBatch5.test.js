@@ -50,7 +50,7 @@ test('content batch 5: Core Action Library exposes delayed Attack Step ending an
   assert.equal(types.includes('specialSummonFromHand'), true);
   assert.equal(types.includes('requireAttackIfAble'), true);
   assert.equal(types.includes('emitSourceEvent'), true);
-  assert.equal(types.length, 59);
+  assert.equal(types.length, 64);
 });
 
 test('content batch 5: Fire Wall destroys a Red Spirit and schedules the Attack Step to end after the battle', () => {

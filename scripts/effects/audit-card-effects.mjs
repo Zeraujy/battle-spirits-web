@@ -63,7 +63,18 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "eventDestroyedByOpponent", "eventDestroyedBySelf", "battleAttackerBP", "battleAttackerCardType", "eventDestroyerKeyword",
   "eventDestroyedByCardType",
   "battleOnlyOpponentSpiritDestroyed",
-  "battleSourceRole"
+  "battleSourceRole",
+  "selectedTargetBP",
+  "battleBlockerCardType",
+  "battleRestriction",
+  "eventMovedCardFamily",
+  "eventMoveDestination",
+  "eventMovedFromZone",
+  "eventMovedByOpponent",
+  "eventMovedByCardType",
+  "eventZeroedBySource",
+  "eventFirstTimeThisTurn",
+  "eventZeroedIsBattleOpponent"
 ]);
 
 const KNOWN_CONDITION_KEYS = new Set([
@@ -77,7 +88,8 @@ const KNOWN_CONDITION_KEYS = new Set([
   "atLeast", "atMost", "equals", "count", "minCount", "family", "families",
   "minimumCost", "maximumCost", "minCost", "maxCost",
   "player", "owner", "operator", "selector", "zone", "directAttack",
-  "attackerPlayer", "blocked", "cardType", "cause", "keyword", "keywords", "role"
+  "attackerPlayer", "blocked", "cardType", "cause", "keyword", "keywords", "role",
+  "values", "destinations", "destination", "key"
 ]);
 
 const NESTED_ACTION_KEYS = [

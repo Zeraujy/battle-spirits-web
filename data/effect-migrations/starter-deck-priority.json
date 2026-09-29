@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-29T08:07:30.922Z",
+  "generatedAt": "2026-09-29T10:10:54.740Z",
   "starterDecks": 17,
-  "ready": 6,
+  "ready": 7,
   "decks": [
     {
       "id": "sd01-blazing-thunder",
@@ -307,24 +307,9 @@
       "title": "Ultimate Deck: Eris the Morning Star",
       "uniqueCards": 17,
       "missingRuntime": [],
-      "unresolved": [
-        "SD23-001",
-        "SD23-002",
-        "SD23-003",
-        "SD23-005",
-        "SD23-006",
-        "SD23-007",
-        "SD23-009",
-        "SD23-010",
-        "SD23-011",
-        "SD23-012",
-        "SD23-013",
-        "SD23-014",
-        "SD23-015",
-        "SD23-016"
-      ],
-      "readyWithoutManual": false,
-      "status": "NEEDS_MIGRATION"
+      "unresolved": [],
+      "readyWithoutManual": true,
+      "status": "READY_NO_MANUAL"
     },
     {
       "id": "sd28-land-deep-green",

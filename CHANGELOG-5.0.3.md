@@ -86,3 +86,24 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Phase 24 generated regression scenarios increase from 92 to 106 cards.
 - Core Action Library reports 55 action types.
 - Internal application version remains 5.0.3 while v5.1.0 content migration continues.
+
+
+## v5.1.0 Content Migration — Batch 05
+
+- SD10 and SD11 reach `READY_NO_MANUAL`, raising the audited set gate from 4/11 to 6/11.
+- Added delayed Attack Step termination, free effect-driven summons, mandatory attack-if-able, source-event relay, combined-host targeting and Rush condition bypass.
+- Manual fallback improves to 67.40% (246/365), generated regressions to 119, and the Core Action Library to 59 action types.
+- Internal application version remains 5.0.3 while v5.1.0 content migration continues.
+
+
+## v5.1.0 Content Migration — Batch 06
+
+- SD23 — Ultimate Deck: Eris the Morning Star reaches 17/17 automated cards and becomes `READY_NO_MANUAL`.
+- Added reusable canonical card-move and 0-BP events, battle-resolution selectors, top-deck reveal routing, once-per-turn structured guards, battle Magic recovery, exhaustion-state inversion and battle-scoped hand cost modifiers.
+- Symphonic Burst and Burst Snap now support authoritative Burst-to-Flash continuations without card-ID-specific reducer logic.
+- Ultimate-Kleio, Ultimate-Virchu and Ultimate-Exsia now execute their structured Ultimate Trigger HIT follow-ups.
+- Set automation gate improves from 6/11 to 7/11 complete sets.
+- Full-catalog Manual Resolution fallback improves from 67.40% (246/365) to 63.56% (232/365).
+- Phase 24 generated regression scenarios increase from 119 to 133 cards.
+- Core Action Library increases from 59 to 64 action types.
+- Internal application version remains 5.0.3 while v5.1.0 content migration continues.

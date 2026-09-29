@@ -26,6 +26,20 @@ export function finalizePendingMagicResolution(match, cardIndex) {
     pendingMagicResolution: null,
     players: { ...match.players, [pending.playerId]: { ...player, trash: [...player.trash, clean] } }
   };
+  if (pending.startedInBattle && pending.battleId && clean?.instanceId) {
+    const currentByBattle = next.temporary?.magicUsedByBattle?.[pending.battleId] || {};
+    const currentIds = currentByBattle[pending.playerId] || [];
+    next = {
+      ...next,
+      temporary: {
+        ...(next.temporary || {}),
+        magicUsedByBattle: {
+          ...(next.temporary?.magicUsedByBattle || {}),
+          [pending.battleId]: { ...currentByBattle, [pending.playerId]: [...currentIds, clean.instanceId] }
+        }
+      }
+    };
+  }
   if (pending.mode === "flash" && next.battle?.flash && (!pending.battleId || next.battle.id === pending.battleId)) {
     next = {
       ...next,

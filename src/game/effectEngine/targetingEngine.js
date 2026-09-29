@@ -146,6 +146,21 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   if (selector.instanceId && String(physical.instanceId) !== String(selector.instanceId)) return false;
   if (selector.cardId && String(card.id) !== String(selector.cardId)) return false;
   if (selector.playerId && selector.playerId !== playerId) return false;
+  if (selector.instanceIdFromContext) {
+    const dynamicId = context?.[selector.instanceIdFromContext] ?? context?.burstOpportunity?.[selector.instanceIdFromContext] ?? null;
+    if (!dynamicId || String(physical.instanceId) !== String(dynamicId)) return false;
+  }
+  if (selector.battleOpponentOfSource === true) {
+    const battle = match.battle;
+    let expectedId = null;
+    if (battle?.attackerPlayerId === context.sourcePlayerId) expectedId = battle.blockerInstanceId || null;
+    else if (battle?.defenderPlayerId === context.sourcePlayerId) expectedId = battle.attackerInstanceId || null;
+    if (!expectedId || String(physical.instanceId) !== String(expectedId)) return false;
+  }
+
+  const names = [card.name, card.nameEN, card.namePT, card.nameJP].filter(Boolean).map((value) => String(value).toLowerCase());
+  const includes = selector.nameIncludes ?? selector.cardNameIncludes ?? null;
+  if (includes && !names.some((value) => value.includes(String(includes).toLowerCase()))) return false;
 
   const props = targetProperties(match, cardIndex, candidate);
   if (selector.cardTypes?.length && !selector.cardTypes.some((type) => props.types.has(type))) return false;

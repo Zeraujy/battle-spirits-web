@@ -171,12 +171,21 @@ export function activateBurst(match, playerId, cardIndex, { confirmCondition = f
     return { ok: false, error: "Confirme que a condição oficial da Burst foi cumprida." };
   }
 
+  const opportunity = match.burstOpportunity || null;
   const engine = dispatchEffectEvent(match, {
     event,
     sourcePlayerId: playerId,
     sourcePhysical: physical,
     sourceCard: card,
-    sourceCardId: card?.id
+    sourceCardId: card?.id,
+    context: {
+      burstOpportunity: opportunity,
+      burstSourceInstanceId: opportunity?.sourceInstanceId || null,
+      burstSourcePlayerId: opportunity?.sourcePlayerId || null,
+      burstEventPlayerId: opportunity?.eventPlayerId || null,
+      battleId: opportunity?.battleId || match.battle?.id || null,
+      cause: opportunity?.cause || event
+    }
   }, cardIndex);
 
   const resolvedPlayer = engine.match.players[playerId];

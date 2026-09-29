@@ -1,4 +1,4 @@
-import { findPhysicalCard, getDatabaseCard } from "../selectors.js";
+import { findPhysicalCard, getDatabaseCard, getEffectiveBP } from "../selectors.js";
 import { addFieldCard, removeFieldCard, removeHandCard, updateFieldCard } from "../zones.js";
 import { otherPlayerId } from "../utils.js";
 import { calculateReduction, autoBuildPayment } from "../cost.js";
@@ -21,6 +21,9 @@ export function supportsActionType(type) {
 
 function queueDeferredCanonicalEvent(match, event) {
   if (!event) return match;
+  // Zone moves to Trash are already represented by destruction/discard canonical events.
+  // Avoid double-dispatching observers for the same physical move.
+  if (event.event === "cardMoved" && String(event.context?.moveDestination || "") === "trash") return match;
   return {
     ...match,
     deferredCanonicalEvents: [...(match.deferredCanonicalEvents || []), event]
@@ -155,7 +158,7 @@ function detachAttachedBrave(match, playerId, hostInstanceId, cardIndex) {
   return { ...match, players: { ...match.players, [playerId]: player } };
 }
 
-function moveTargetOut(match, target, destination, cardIndex) {
+function moveTargetOut(match, target, destination, cardIndex, context = {}) {
   const instanceId = target?.physical?.instanceId;
   if (!instanceId) return match;
   const current = findPhysicalCard(match, instanceId);
@@ -173,6 +176,26 @@ function moveTargetOut(match, target, destination, cardIndex) {
     if (destination === "topDeck") player = { ...player, deck: [clean, ...player.deck] };
     let next = { ...match, players: { ...match.players, [current.playerId]: player } };
     if (current.zone === "spirits") next = detachAttachedBrave(next, current.playerId, current.card.instanceId, cardIndex);
+    const movedCard = getDatabaseCard(cardIndex, removed.card);
+    next = queueDeferredCanonicalEvent(next, {
+      event: "cardMoved",
+      sourcePlayerId: current.playerId,
+      sourcePhysical: clean,
+      sourceCardId: movedCard?.id || clean?.cardId || null,
+      eventPlayerId: current.playerId,
+      context: {
+        movedCardInstanceId: clean?.instanceId || null,
+        movedCardId: movedCard?.id || clean?.cardId || null,
+        movedCardFamilies: movedCard?.families || [],
+        movedCardType: movedCard?.cardType || null,
+        moveFromZone: current.zone,
+        moveDestination: destination,
+        movedByPlayerId: context.sourcePlayerId || null,
+        movedByInstanceId: context.sourceInstanceId || null,
+        movedByCardId: context.sourceCard?.id || null,
+        movedByCardType: context.sourceCard?.cardType || null
+      }
+    });
     return next;
   }
 
@@ -182,13 +205,35 @@ function moveTargetOut(match, target, destination, cardIndex) {
     const index = trash.findIndex((card) => card.instanceId === instanceId);
     if (index < 0) return match;
     const [card] = trash.splice(index, 1);
-    return {
+    const clean = cleanPhysical(card);
+    let next = {
       ...match,
       players: {
         ...match.players,
-        [current.playerId]: { ...player, trash, hand: [...player.hand, cleanPhysical(card)] }
+        [current.playerId]: { ...player, trash, hand: [...player.hand, clean] }
       }
     };
+    const movedCard = getDatabaseCard(cardIndex, card);
+    next = queueDeferredCanonicalEvent(next, {
+      event: "cardMoved",
+      sourcePlayerId: current.playerId,
+      sourcePhysical: clean,
+      sourceCardId: movedCard?.id || clean?.cardId || null,
+      eventPlayerId: current.playerId,
+      context: {
+        movedCardInstanceId: clean?.instanceId || null,
+        movedCardId: movedCard?.id || clean?.cardId || null,
+        movedCardFamilies: movedCard?.families || [],
+        movedCardType: movedCard?.cardType || null,
+        moveFromZone: "trash",
+        moveDestination: destination,
+        movedByPlayerId: context.sourcePlayerId || null,
+        movedByInstanceId: context.sourceInstanceId || null,
+        movedByCardId: context.sourceCard?.id || null,
+        movedByCardType: context.sourceCard?.cardType || null
+      }
+    });
+    return next;
   }
 
   return match;
@@ -204,15 +249,15 @@ function removeFromSimpleZone(player, zone, instanceId) {
   return { player: { ...player, [zone]: list }, card };
 }
 
-function moveCardGeneric(match, target, destination, cardIndex) {
+function moveCardGeneric(match, target, destination, cardIndex, context = {}) {
   const instanceId = target?.physical?.instanceId;
   if (!instanceId) return match;
   const current = findPhysicalCard(match, instanceId);
   if (!current) return match;
   if (["spirits", "nexuses", "other"].includes(current.zone) && ["hand", "trash", "topDeck"].includes(destination)) {
-    return moveTargetOut(match, target, destination, cardIndex);
+    return moveTargetOut(match, target, destination, cardIndex, context);
   }
-  if (current.zone === "trash" && destination === "hand") return moveTargetOut(match, target, destination, cardIndex);
+  if (current.zone === "trash" && destination === "hand") return moveTargetOut(match, target, destination, cardIndex, context);
   let player = match.players[current.playerId];
   let removedCard = null;
 
@@ -241,7 +286,28 @@ function moveCardGeneric(match, target, destination, cardIndex) {
   else if (destination === "removed") player = { ...player, removed: [...(player.removed || []), removedCard] };
   else return match;
 
-  return { ...match, players: { ...match.players, [current.playerId]: player } };
+  let next = { ...match, players: { ...match.players, [current.playerId]: player } };
+  const movedCard = getDatabaseCard(cardIndex, removedCard);
+  next = queueDeferredCanonicalEvent(next, {
+    event: "cardMoved",
+    sourcePlayerId: current.playerId,
+    sourcePhysical: removedCard,
+    sourceCardId: movedCard?.id || removedCard?.cardId || null,
+    eventPlayerId: current.playerId,
+    context: {
+      movedCardInstanceId: removedCard?.instanceId || null,
+      movedCardId: movedCard?.id || removedCard?.cardId || null,
+      movedCardFamilies: movedCard?.families || [],
+      movedCardType: movedCard?.cardType || null,
+      moveFromZone: current.zone,
+      moveDestination: destination,
+      movedByPlayerId: context.sourcePlayerId || null,
+      movedByInstanceId: context.sourceInstanceId || null,
+      movedByCardId: context.sourceCard?.id || null,
+      movedByCardType: context.sourceCard?.cardType || null
+    }
+  });
+  return next;
 }
 
 function decisionCandidate(target) {
@@ -462,7 +528,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
 
 
   if (type === "discard") {
-    return applyToTargets(next, { ...action, selector: action.selector || action.target || { owner: "self", zones: ["hand"] } }, cardIndex, context, (working, target) => moveCardGeneric(working, target, "trash", cardIndex));
+    return applyToTargets(next, { ...action, selector: action.selector || action.target || { owner: "self", zones: ["hand"] } }, cardIndex, context, (working, target) => moveCardGeneric(working, target, "trash", cardIndex, context));
   }
 
   if (["moveCard", "returnToDeck", "returnToBottomDeck"].includes(type)) {
@@ -470,7 +536,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       : type === "returnToDeck" ? (action.position === "top" ? "topDeck" : action.position === "bottom" ? "bottomDeck" : "deck")
       : String(action.destination || action.to || "");
     if (!destination) return { match, notes: ["moveCard requires a destination."], manualResolutionNeeded: true, executed: false };
-    return applyToTargets(next, action, cardIndex, context, (working, target) => moveCardGeneric(working, target, destination, cardIndex));
+    return applyToTargets(next, action, cardIndex, context, (working, target) => moveCardGeneric(working, target, destination, cardIndex, context));
   }
 
   if (type === "addCoreToReserveFromVoid") {
@@ -556,6 +622,107 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       }
     });
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "dispatchSourceEvent") {
+    const event = String(action.event || action.value || "").trim();
+    if (!event || !context.sourcePlayerId || !context.sourceCard) {
+      return { match: next, notes: ["dispatchSourceEvent requires a current effect source."], manualResolutionNeeded: true, executed: false };
+    }
+    next = queueDeferredCanonicalEvent(next, {
+      event,
+      sourcePlayerId: context.sourcePlayerId,
+      sourceInstanceId: context.sourceInstanceId || context.sourcePhysical?.instanceId || null,
+      sourcePhysical: context.sourcePhysical || null,
+      sourceCard: context.sourceCard || null,
+      sourceCardId: context.sourceCard?.id || null,
+      eventPlayerId: context.sourcePlayerId,
+      context: { ...(action.context || {}), relayedFromEvent: context.event || null }
+    });
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "oncePerTurn") {
+    const key = String(action.key || action.id || context.effectId || "once-per-turn");
+    const owner = context.sourcePlayerId || "global";
+    const source = context.sourceInstanceId || context.sourceCard?.id || "source";
+    const usageKey = `${owner}:${source}:${key}`;
+    const used = Boolean(next.temporary?.oncePerTurn?.[usageKey]);
+    if (used) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const nested = asActionArray(action.actions ?? action.then ?? action.onAvailable);
+    let marked = {
+      ...next,
+      temporary: {
+        ...(next.temporary || {}),
+        oncePerTurn: { ...(next.temporary?.oncePerTurn || {}), [usageKey]: true }
+      }
+    };
+    return nested.length
+      ? resolveNested(marked, nested, cardIndex, context)
+      : { match: marked, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "revealTopAndRoute") {
+    const playerId = resolvePlayerId(next, action, context);
+    const player = next.players?.[playerId];
+    if (!player) return { match: next, notes: ["Jogador inválido para reveal route."], manualResolutionNeeded: true, executed: false };
+    const count = Math.max(1, Number(action.count ?? action.amount ?? 1));
+    let deck = [...(player.deck || [])];
+    let hand = [...(player.hand || [])];
+    let trash = [...(player.trash || [])];
+    let revealed = [...(player.revealed || [])];
+    let moved = 0;
+    for (let i = 0; i < count && deck.length; i += 1) {
+      const physical = deck.shift();
+      const card = getDatabaseCard(cardIndex, physical);
+      const selector = action.matchSelector || action.selector || {};
+      const types = selector.cardTypes || (selector.cardType ? [selector.cardType] : []);
+      const colors = selector.colors || (selector.color ? [selector.color] : []);
+      const typeOk = !types.length || types.map((v) => String(v).toLowerCase()).includes(String(card?.cardType || "").toLowerCase());
+      const colorOk = !colors.length || colors.some((v) => (card?.colors || []).map((c) => String(c).toLowerCase()).includes(String(v).toLowerCase()));
+      const matched = typeOk && colorOk;
+      const destination = matched ? String(action.matchedDestination || "hand") : String(action.otherwiseDestination || "trash");
+      if (destination === "hand") hand.push(physical);
+      else if (destination === "trash") trash.push(physical);
+      else if (destination === "revealed") revealed.push(physical);
+      else if (destination === "topDeck") deck.unshift(physical);
+      else if (destination === "bottomDeck") deck.push(physical);
+      else trash.push(physical);
+      moved += 1;
+    }
+    next = { ...next, players: { ...next.players, [playerId]: { ...player, deck, hand, trash, revealed } } };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
+  }
+
+  if (type === "returnMagicUsedThisBattle") {
+    const playerId = resolvePlayerId(next, action, context);
+    const battleId = action.battleId || context.battleId || next.battle?.id || null;
+    const ids = battleId ? (next.temporary?.magicUsedByBattle?.[battleId]?.[playerId] || []) : [];
+    if (!ids.length) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const player = next.players?.[playerId];
+    if (!player) return { match: next, notes: ["Jogador inválido para recuperar Magics usadas."], manualResolutionNeeded: true, executed: false };
+    const wanted = new Set(ids);
+    const trash = [];
+    const recovered = [];
+    for (const physical of player.trash || []) {
+      const card = getDatabaseCard(cardIndex, physical);
+      if (wanted.has(physical.instanceId) && String(card?.cardType || "").toLowerCase() === "magic") recovered.push(cleanPhysical(physical));
+      else trash.push(physical);
+    }
+    next = { ...next, players: { ...next.players, [playerId]: { ...player, trash, hand: [...player.hand, ...recovered] } } };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: recovered.length };
+  }
+
+  if (type === "swapExhaustionState") {
+    const selector = action.selector || { owner: "any", zones: ["field"], cardTypes: ["spirit"] };
+    const targets = collectTargets(next, cardIndex, selector, context);
+    for (const target of targets) {
+      const current = findPhysicalCard(next, target.physical.instanceId);
+      if (!current || !["spirits", "other"].includes(current.zone)) continue;
+      const player = updateFieldCard(next.players[current.playerId], current.card.instanceId, (physical) => ({ ...physical, exhausted: !physical.exhausted }));
+      next = { ...next, players: { ...next.players, [current.playerId]: player } };
+    }
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: targets.length };
   }
 
   if (type === "scheduleAttackStepEndAfterBattle") {
@@ -777,13 +944,16 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
   if (type === "returnAllTrashMatchingToHand") {
     const selector = typeof action.selector === "object" && action.selector ? action.selector : {};
     const targets = collectTrashTargets(next, cardIndex, { ...selector, owner: selector.owner ?? action.owner ?? "self" }, context);
-    for (const target of targets) next = moveTargetOut(next, target, "hand", cardIndex);
+    for (const target of targets) next = moveTargetOut(next, target, "hand", cardIndex, context);
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: targets.length };
   }
 
 
   if (["addModifier", "modifyCost", "modifySymbols", "gainKeyword", "loseKeyword"].includes(type)) {
     let descriptor = action.modifier || action;
+    if (descriptor?.selector?.selectedTarget === true && Array.isArray(context.selectedTargets) && context.selectedTargets[0]?.physical?.instanceId) {
+      descriptor = { ...descriptor, selector: { ...descriptor.selector, selectedTarget: undefined, instanceId: context.selectedTargets[0].physical.instanceId } };
+    }
     if (type === "modifyCost") descriptor = { ...descriptor, property: "cost", value: Number(action.amount ?? action.value ?? 0), operation: action.operation || "add" };
     if (type === "modifySymbols") descriptor = { ...descriptor, property: "symbols", value: action.symbols ?? action.value ?? [], operation: action.operation || "add" };
     if (type === "gainKeyword") descriptor = { ...descriptor, property: "keywords", value: action.keyword ?? action.keywords ?? action.value ?? [], operation: "add" };
@@ -826,13 +996,46 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         if (String(rawAction.type || "").replace(/[\s_-]+/g, "").toLowerCase() === "reducebp") amount = -Math.abs(amount);
         const current = findPhysicalCard(working, target.physical.instanceId);
         if (!current) return working;
+        const beforeBP = getEffectiveBP(working, cardIndex, current.card);
         const player = updateFieldCard(working.players[current.playerId], current.card.instanceId, (physical) => addBPModifier(
           physical,
           amount,
           action.duration,
           { battleId: working.battle?.id || null, sourceEffectId: context.effectId || null }
         ));
-        return { ...working, players: { ...working.players, [current.playerId]: player } };
+        let updated = { ...working, players: { ...working.players, [current.playerId]: player } };
+        const afterCtx = findPhysicalCard(updated, current.card.instanceId);
+        const afterBP = afterCtx ? getEffectiveBP(updated, cardIndex, afterCtx.card) : beforeBP;
+        if (beforeBP > 0 && afterBP <= 0 && afterCtx) {
+          const seen = Boolean(updated.temporary?.bpZeroSeen?.[current.card.instanceId]);
+          updated = {
+            ...updated,
+            temporary: {
+              ...(updated.temporary || {}),
+              bpZeroSeen: { ...(updated.temporary?.bpZeroSeen || {}), [current.card.instanceId]: true }
+            }
+          };
+          updated = queueDeferredCanonicalEvent(updated, {
+            event: "bpBecameZero",
+            sourcePlayerId: current.playerId,
+            sourceInstanceId: current.card.instanceId,
+            sourcePhysical: afterCtx.card,
+            sourceCardId: target.card?.id || afterCtx.card?.cardId || null,
+            eventPlayerId: current.playerId,
+            context: {
+              zeroedInstanceId: current.card.instanceId,
+              zeroedCardId: target.card?.id || afterCtx.card?.cardId || null,
+              zeroedPlayerId: current.playerId,
+              zeroedCardType: target.card?.cardType || null,
+              zeroedByPlayerId: context.sourcePlayerId || null,
+              zeroedByInstanceId: context.sourceInstanceId || null,
+              zeroedByCardId: context.sourceCard?.id || null,
+              firstTimeThisTurn: !seen,
+              battleId: updated.battle?.id || context.battleId || null
+            }
+          });
+        }
+        return updated;
       }
       if (baseType === "refresh" || baseType === "exhaust") {
         const current = findPhysicalCard(working, target.physical.instanceId);
@@ -844,7 +1047,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         const destroyedPhysical = target.physical;
         const destroyedCard = target.card;
         const destroyedPlayerId = target.playerId;
-        let moved = moveTargetOut(working, target, "trash", cardIndex);
+        let moved = moveTargetOut(working, target, "trash", cardIndex, context);
         moved = queueDeferredCanonicalEvent(moved, {
           event: "whenDestroyed",
           sourcePlayerId: destroyedPlayerId,
@@ -861,8 +1064,8 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         });
         return moved;
       }
-      if (baseType === "returnToHand") return moveTargetOut(working, target, "hand", cardIndex);
-      if (baseType === "returnToTopDeck") return moveTargetOut(working, target, "topDeck", cardIndex);
+      if (baseType === "returnToHand") return moveTargetOut(working, target, "hand", cardIndex, context);
+      if (baseType === "returnToTopDeck") return moveTargetOut(working, target, "topDeck", cardIndex, context);
       return working;
     });
   }

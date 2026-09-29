@@ -55,6 +55,11 @@ const ACTION_ALIASES = Object.freeze({
   specialsummonfromhand: "specialSummonFromHand",
   requireattackifable: "requireAttackIfAble",
   emitsourceevent: "emitSourceEvent",
+  dispatchsourceevent: "dispatchSourceEvent",
+  revealtopandroute: "revealTopAndRoute",
+  onceperturn: "oncePerTurn",
+  returnmagicusedthisbattle: "returnMagicUsedThisBattle",
+  swapexhaustionstate: "swapExhaustionState",
   discard: "discard",
   movecard: "moveCard",
   modifycost: "modifyCost",
@@ -163,7 +168,12 @@ const SUPPORTED_ACTION_TYPES = new Set([
   "scheduleAttackStepEndAfterBattle",
   "specialSummonFromHand",
   "requireAttackIfAble",
-  "emitSourceEvent"
+  "emitSourceEvent",
+  "dispatchSourceEvent",
+  "revealTopAndRoute",
+  "oncePerTurn",
+  "returnMagicUsedThisBattle",
+  "swapExhaustionState"
 ]);
 
 export function canonicalActionType(type) {
