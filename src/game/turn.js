@@ -4,6 +4,8 @@ import { clearEffectModifiers } from "./effectEngine/modifierResolver.js";
 import { createSeededRandom, deriveSeed } from "./random.js";
 import { shuffle } from "./utils.js";
 import { dispatchPhaseEntry } from "./effectEngine/phaseTriggerEngine.js";
+import { legalAttackers } from "./battle.js";
+import { findPhysicalCard } from "./selectors.js";
 
 export function isFirstPlayersFirstTurn(match) {
   return match.turnNumber === 1 && match.activePlayerId === match.firstPlayerId;
@@ -63,10 +65,43 @@ function performPhaseEntry(match, phase) {
   return match;
 }
 
+export function completeScheduledAttackStepEnd(match, cardIndex) {
+  const scheduled = match.temporary?.endAttackStepAfterBattle || null;
+  if (!scheduled) return { match, completed: false, manualResolutionNeeded: false, notes: [] };
+  if (match.phase !== "attack" || match.battle || match.pendingEffectDecision || match.burstOpportunity) {
+    return { match, completed: false, manualResolutionNeeded: false, notes: [] };
+  }
+
+  let next = {
+    ...match,
+    phase: "end",
+    temporary: { ...(match.temporary || {}), endAttackStepAfterBattle: null }
+  };
+  next = performPhaseEntry(next, "end");
+  const phaseEvent = dispatchPhaseEntry(next, "end", cardIndex, { previousPhase: "attack", eventPlayerId: next.activePlayerId });
+  next = phaseEvent.match;
+  next = appendLog(next, `${next.players[next.activePlayerId].name}: end (efeito encerrou o Attack Step).`, "turn");
+  return {
+    match: next,
+    completed: true,
+    manualResolutionNeeded: Boolean(phaseEvent.manualResolutionNeeded),
+    notes: phaseEvent.notes || []
+  };
+}
+
 export function advancePhase(match, actorId, cardIndex) {
   if (match.winnerId) return { ok: false, error: "A partida já terminou." };
   if (actorId !== match.activePlayerId) return { ok: false, error: "Apenas o jogador do turno pode avançar a fase." };
   if (match.battle) return { ok: false, error: "Resolva a batalha atual antes de avançar a fase." };
+  if (match.phase === "attack") {
+    const requirement = match.temporary?.attackRequirements?.[actorId] || null;
+    const sourceStillActive = !requirement?.sourceInstanceId || Boolean(findPhysicalCard(match, requirement.sourceInstanceId));
+    const completed = Number(match.temporary?.attackCounts?.[actorId] || 0);
+    const minimum = Math.max(0, Number(requirement?.minimumAttacks || 0));
+    if (requirement && sourceStillActive && completed < minimum && legalAttackers(match, actorId, cardIndex).length > 0) {
+      return { ok: false, error: `Você deve declarar pelo menos ${minimum} ataque(s) neste Attack Step se puder.` };
+    }
+  }
 
   const index = PHASES.indexOf(match.phase);
   if (index < 0) return { ok: false, error: "Fase atual inválida." };

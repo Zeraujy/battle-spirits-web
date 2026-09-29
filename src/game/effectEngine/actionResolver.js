@@ -1,8 +1,8 @@
 import { findPhysicalCard, getDatabaseCard } from "../selectors.js";
-import { removeFieldCard, updateFieldCard } from "../zones.js";
+import { addFieldCard, removeFieldCard, removeHandCard, updateFieldCard } from "../zones.js";
 import { otherPlayerId } from "../utils.js";
 import { calculateReduction, autoBuildPayment } from "../cost.js";
-import { payCoreCost } from "../cores.js";
+import { checkDepletion, payCoreCost } from "../cores.js";
 import { conditionMatchesEffect } from "./conditionResolver.js";
 import {
   addBPModifier,
@@ -13,6 +13,7 @@ import {
 import { canonicalActionType, supportsCoreActionType } from "./coreActionLibrary.js";
 import { collectTargets, collectTrashTargets, resolveActionTargets } from "./targetResolver.js";
 import { preventReplacementEvent, replaceCurrentEvent } from "./replacementState.js";
+import { BurstEvent, openBurstOpportunityForEvent } from "./burstEngine.js";
 
 export function supportsActionType(type) {
   return supportsCoreActionType(type);
@@ -89,6 +90,49 @@ function minimumCores(card) {
   const levels = (card?.levels || []).map((level) => Number(level.cores)).filter(Number.isFinite);
   if (!levels.length) return ["spirit", "ultimate", "brave"].includes(card?.cardType) ? 1 : 0;
   return Math.min(...levels);
+}
+
+function takeSpecialSummonPlacementCores(match, playerId, amount, cardIndex) {
+  let player = match.players?.[playerId];
+  if (!player) return { ok: false, match, error: "Jogador inválido para Special Summon." };
+  let remaining = Math.max(0, Number(amount || 0));
+  let regular = 0;
+  let soul = false;
+  const touched = new Set();
+
+  const fromReserve = Math.min(Number(player.reserve || 0), remaining);
+  if (fromReserve > 0) {
+    player = { ...player, reserve: Number(player.reserve || 0) - fromReserve };
+    regular += fromReserve;
+    remaining -= fromReserve;
+  }
+  if (remaining > 0 && player.soulCore?.zone === "reserve") {
+    soul = true;
+    player = { ...player, soulCore: { zone: "moving", instanceId: null } };
+    remaining -= 1;
+  }
+  if (remaining > 0) {
+    for (const zone of ["spirits", "nexuses", "other"]) {
+      for (const physical of player.field?.[zone] || []) {
+        if (remaining <= 0) break;
+        const available = Number(physical.cores?.regular || 0);
+        if (!available) continue;
+        const use = Math.min(available, remaining);
+        player = updateFieldCard(player, physical.instanceId, (card) => ({
+          ...card,
+          cores: { ...card.cores, regular: Number(card.cores?.regular || 0) - use }
+        }));
+        regular += use;
+        remaining -= use;
+        touched.add(physical.instanceId);
+      }
+    }
+  }
+  if (remaining > 0) return { ok: false, match, error: "Cores insuficientes para manter o Lv mínimo da carta invocada por efeito." };
+
+  let next = { ...match, players: { ...match.players, [playerId]: player } };
+  for (const instanceId of touched) next = checkDepletion(next, playerId, instanceId, cardIndex);
+  return { ok: true, match: next, cores: { regular, soul } };
 }
 
 function detachAttachedBrave(match, playerId, hostInstanceId, cardIndex) {
@@ -472,6 +516,107 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         ? { ...updated, trashCores: Number(updated.trashCores || 0) + moved }
         : { ...updated, reserve: Number(updated.reserve || 0) + moved };
       return { ...working, players: { ...working.players, [current.playerId]: withDestination } };
+    });
+  }
+
+  if (type === "requireAttackIfAble") {
+    const playerId = resolvePlayerId(next, { ...action, player: action.player || "opponent" }, context);
+    next = {
+      ...next,
+      temporary: {
+        ...(next.temporary || {}),
+        attackRequirements: {
+          ...(next.temporary?.attackRequirements || {}),
+          [playerId]: {
+            minimumAttacks: Math.max(1, Number(action.minimumAttacks ?? action.amount ?? 1)),
+            sourcePlayerId: context.sourcePlayerId || null,
+            sourceInstanceId: context.sourceInstanceId || null,
+            sourceEffectId: context.effectId || null
+          }
+        }
+      }
+    };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "emitSourceEvent") {
+    const event = String(action.event || action.value || "").trim();
+    const instanceId = action.source === "self" ? context.sourceInstanceId : (context.eventSourceInstanceId || context.sourceInstanceId);
+    const found = instanceId ? findPhysicalCard(next, instanceId) : null;
+    if (!event || !found) return { match: next, notes: ["emitSourceEvent requires a valid event source."], manualResolutionNeeded: true, executed: false };
+    next = queueDeferredCanonicalEvent(next, {
+      event,
+      sourcePlayerId: found.playerId,
+      sourceInstanceId: found.card.instanceId,
+      sourceCardId: found.card.cardId,
+      context: {
+        ...(action.context || {}),
+        relayedFromEvent: context.event || null,
+        relayedByInstanceId: context.sourceInstanceId || null
+      }
+    });
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "scheduleAttackStepEndAfterBattle") {
+    if (next.phase !== "attack" || !next.battle?.id) {
+      return { match: next, notes: ["O encerramento programado do Attack Step exige uma batalha ativa no Attack Step."], manualResolutionNeeded: true, executed: false };
+    }
+    next = {
+      ...next,
+      temporary: {
+        ...(next.temporary || {}),
+        endAttackStepAfterBattle: {
+          battleId: next.battle.id,
+          sourcePlayerId: context.sourcePlayerId || null,
+          sourceInstanceId: context.sourceInstanceId || null,
+          sourceEffectId: context.effectId || null
+        }
+      }
+    };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "specialSummonFromHand") {
+    return applyToTargets(next, { ...action, selector: action.selector || action.target || { owner: "self", zones: ["hand"] } }, cardIndex, context, (working, target) => {
+      const current = findPhysicalCard(working, target?.physical?.instanceId);
+      if (!current || current.zone !== "hand") return working;
+      const playerId = current.playerId;
+      const card = getDatabaseCard(cardIndex, current.card);
+      const allowedTypes = action.cardTypes || action.allowedCardTypes || ["spirit", "ultimate", "brave"];
+      if (!card || !allowedTypes.includes(String(card.cardType || "").toLowerCase())) return working;
+
+      const min = minimumCores(card);
+      const placed = takeSpecialSummonPlacementCores(working, playerId, Number(action.coresToPlace ?? min), cardIndex);
+      if (!placed.ok) return working;
+      let player = placed.match.players[playerId];
+      const removed = removeHandCard(player, current.card.instanceId);
+      if (!removed.card) return working;
+      player = removed.player;
+      const physical = {
+        ...removed.card,
+        cardType: card.cardType,
+        exhausted: false,
+        cores: placed.cores,
+        combinedWith: null
+      };
+      if (placed.cores.soul) player = { ...player, soulCore: { zone: "card", instanceId: physical.instanceId } };
+      const zone = card.cardType === "brave" ? "other" : "spirits";
+      player = addFieldCard(player, zone, physical);
+      let summoned = { ...placed.match, players: { ...placed.match.players, [playerId]: player } };
+      summoned = queueDeferredCanonicalEvent(summoned, {
+        event: "whenSummoned",
+        sourcePlayerId: playerId,
+        sourceInstanceId: physical.instanceId,
+        eventPlayerId: playerId,
+        context: { specialSummon: true, costPaid: false }
+      });
+      summoned = openBurstOpportunityForEvent(summoned, BurstEvent.OPPONENT_SUMMONED, playerId, cardIndex, {
+        sourcePlayerId: playerId,
+        sourceInstanceId: physical.instanceId,
+        cause: "specialSummon"
+      });
+      return summoned;
     });
   }
 
@@ -895,6 +1040,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     if (action.spiritsCannotBlock != null) restriction.spiritsCannotBlock = Boolean(action.spiritsCannotBlock);
     if (action.ultimatesCannotBlock != null) restriction.ultimatesCannotBlock = Boolean(action.ultimatesCannotBlock);
     if (action.mustBlockIfAble != null) restriction.mustBlockIfAble = Boolean(action.mustBlockIfAble);
+    if (action.preventOpponentBurst === true) restriction.burstBlockedPlayerId = otherPlayerId(next, context.sourcePlayerId);
     if (action.minimumBlockerLevel != null) restriction.minimumBlockerLevel = Number(action.minimumBlockerLevel);
 
     if (!Object.keys(restriction).length) {

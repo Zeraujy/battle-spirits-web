@@ -46,6 +46,7 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "sourceLevel",
   "sourceCost",
   "sourceState",
+  "sourceCombined",
   "soulCoreLocation",
   "battleState",
   "ultimateTriggerRevealedCardType",
@@ -56,11 +57,13 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "eventSourceCardType",
   "eventSourceColor",
   "eventSourceCost",
+  "eventSourceBP",
   "eventSourceFamily",
   "eventCause",
   "eventDestroyedByOpponent", "eventDestroyedBySelf", "battleAttackerBP", "battleAttackerCardType", "eventDestroyerKeyword",
   "eventDestroyedByCardType",
-  "battleOnlyOpponentSpiritDestroyed"
+  "battleOnlyOpponentSpiritDestroyed",
+  "battleSourceRole"
 ]);
 
 const KNOWN_CONDITION_KEYS = new Set([
@@ -74,7 +77,7 @@ const KNOWN_CONDITION_KEYS = new Set([
   "atLeast", "atMost", "equals", "count", "minCount", "family", "families",
   "minimumCost", "maximumCost", "minCost", "maxCost",
   "player", "owner", "operator", "selector", "zone", "directAttack",
-  "attackerPlayer", "blocked", "cardType", "cause", "keyword", "keywords"
+  "attackerPlayer", "blocked", "cardType", "cause", "keyword", "keywords", "role"
 ]);
 
 const NESTED_ACTION_KEYS = [

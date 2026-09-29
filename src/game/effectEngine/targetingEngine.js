@@ -237,8 +237,14 @@ export function resolveActionTargets(match, action = {}, cardIndex, context = {}
     const targets = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
     return targets.length ? { status: "resolved", targets: [targets[0]] } : { status: "none", targets: [] };
   }
+  if (["combinedhost", "host", "bravehost"].includes(rawTargetString)) {
+    const hostInstanceId = context.sourcePhysical?.combinedWith || null;
+    if (!hostInstanceId) return { status: "none", targets: [] };
+    const targets = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId: hostInstanceId, includeCombined: true }, context);
+    return targets.length ? { status: "resolved", targets: [targets[0]] } : { status: "none", targets: [] };
+  }
   if (["eventdestroyer", "destroyer", "effectsource"].includes(rawTargetString)) {
-    const instanceId = context.destroyedByInstanceId || context.effectSourceInstanceId || null;
+    const instanceId = context.destroyedByInstanceId || context.effectSourceInstanceId || context.eventSourceInstanceId || null;
     if (!instanceId) return { status: "none", targets: [] };
     const targets = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
     return targets.length ? { status: "resolved", targets: [targets[0]] } : { status: "none", targets: [] };

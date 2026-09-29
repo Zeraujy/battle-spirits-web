@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-28T23:21:47.700Z",
+  "generatedAt": "2026-09-29T08:07:30.922Z",
   "starterDecks": 17,
-  "ready": 4,
+  "ready": 6,
   "decks": [
     {
       "id": "sd01-blazing-thunder",
@@ -132,12 +132,9 @@
       "title": "Tsurugi Deck: Shining Charge",
       "uniqueCards": 18,
       "missingRuntime": [],
-      "unresolved": [
-        "SD10-015",
-        "SD10-X01"
-      ],
-      "readyWithoutManual": false,
-      "status": "NEEDS_MIGRATION"
+      "unresolved": [],
+      "readyWithoutManual": true,
+      "status": "READY_NO_MANUAL"
     },
     {
       "id": "sd11-dark-rush",
@@ -145,21 +142,9 @@
       "title": "The Midnight King Yaiba's Deck: Dark Rush",
       "uniqueCards": 18,
       "missingRuntime": [],
-      "unresolved": [
-        "SD11-004",
-        "SD11-005",
-        "SD11-006",
-        "SD11-007",
-        "SD11-008",
-        "SD11-009",
-        "SD11-011",
-        "SD11-012",
-        "SD11-013",
-        "SD11-X01",
-        "SD11-X02"
-      ],
-      "readyWithoutManual": false,
-      "status": "NEEDS_MIGRATION"
+      "unresolved": [],
+      "readyWithoutManual": true,
+      "status": "READY_NO_MANUAL"
     },
     {
       "id": "sd13-amethyst",

@@ -6,10 +6,10 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **515**
-- Effect Schema v2 entries: **61**
-- Fully automated cards: **90 (24.7%)**
-- Partially automated cards: **19**
+- Structured effect/ability entries inspected: **533**
+- Effect Schema v2 entries: **79**
+- Fully automated cards: **103 (28.2%)**
+- Partially automated cards: **13**
 - Unstructured effect text: **173**
 - Explicit no-effect cards: **16**
 
@@ -34,8 +34,8 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | BS13 | 90 | 0 | 0 | 0 | 0 | 0 | 0 | 84 | 6 |
 | BSC49 | 117 | 0 | 0 | 5 | 22 | 0 | 0 | 89 | 1 |
-| SD10 | 18 | 15 | 1 | 1 | 0 | 0 | 0 | 0 | 1 |
-| SD11 | 18 | 6 | 5 | 6 | 0 | 0 | 0 | 0 | 1 |
+| SD10 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
+| SD11 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD13 | 18 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 3 |
 | SD15 | 18 | 0 | 3 | 12 | 2 | 0 | 0 | 0 | 1 |
 | SD17 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
@@ -46,7 +46,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Structured entry baseline
 
-- Automated executable entries: **179**
+- Automated executable entries: **197**
 - Entries blocked by trigger coverage: **49**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
@@ -94,7 +94,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Engine additions — Phases 7–18
 
-- Core Action Library is centralized and currently exposes **55 generic action types** to Schema v2.
+- Core Action Library is centralized and currently exposes **59 generic action types** to Schema v2.
 - Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.
 - Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.
 - Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.
@@ -367,19 +367,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BSC49-XV11` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenBravedOrCombinedCardWouldLeave; unresolved entries: 3 |
 | `BSC49-XV12` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenAttacksOrBlocks, whenOpponentSpiritUltimateMilled, whileAttackingAndRefreshed; unresolved entries: 4 |
 | `SD02-005` | SD15 | spirit | `MANUAL` | unresolved entries: 3 |
-| `SD10-015` | SD10 | magic | `MANUAL` | unresolved entries: 1 |
-| `SD10-X01` | SD10 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD11-004` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD11-005` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD11-006` | SD11 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD11-007` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD11-008` | SD11 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD11-009` | SD11 | spirit | `MANUAL` | unresolved entries: 2 |
-| `SD11-011` | SD11 | brave | `PARTIAL` | unresolved entries: 1 |
-| `SD11-012` | SD11 | nexus | `MANUAL` | unresolved entries: 2 |
-| `SD11-013` | SD11 | nexus | `MANUAL` | unresolved entries: 2 |
-| `SD11-X01` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD11-X02` | SD11 | brave | `MANUAL` | unresolved entries: 2 |
 | `SD15-001` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD15-002` | SD15 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenOpponentSpiritBecomesZeroBP; unresolved entries: 2 |
 | `SD15-003` | SD15 | spirit | `PARTIAL` | unresolved entries: 1 |

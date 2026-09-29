@@ -139,6 +139,16 @@ function selectorMatches(match, cardIndex, physical, modifier, skipProtection = 
   if (selector.excludeSource && physical.instanceId === modifier.sourceInstanceId) return false;
   if (selector.instanceId && String(selector.instanceId) !== String(physical.instanceId)) return false;
   if (selector.cardId && String(selector.cardId) !== String(card.id)) return false;
+  if (selector.combinedHostOfSource === true) {
+    const source = modifier.sourceInstanceId ? (() => {
+      for (const player of Object.values(match.players || {})) {
+        const found = (player.field?.other || []).find((candidate) => candidate.instanceId === modifier.sourceInstanceId);
+        if (found) return found;
+      }
+      return null;
+    })() : null;
+    if (!source?.combinedWith || String(source.combinedWith) !== String(physical.instanceId)) return false;
+  }
 
   const cardTypes = selector.cardTypes || (selector.cardType ? [selector.cardType] : []);
   if (cardTypes.length && !cardTypes.includes(card.cardType)) return false;

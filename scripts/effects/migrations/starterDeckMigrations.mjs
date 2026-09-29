@@ -896,6 +896,55 @@ export const STARTER_DECK_MIGRATIONS = Object.freeze({
           "sd10-013-charge-destroy-display": "sd10-013-charge-destroy-auto"
         }
       },
+      "SD10-015": {
+        addAbilities: [
+          {
+            id: "sd10-015-flash-auto",
+            schemaVersion: 2,
+            trigger: { event: "magicFlash", scope: "source", eventPlayer: "any" },
+            conditions: [
+              { type: "phase", value: "attack" },
+              { type: "activePlayer", player: "opponent" }
+            ],
+            actions: [
+              {
+                type: "selectTarget",
+                titlePT: "Fire Wall",
+                titleEN: "Fire Wall",
+                instructionPT: "Escolha 1 dos seus Spirits Vermelhos para destruir.",
+                instructionEN: "Choose 1 of your Red Spirits to destroy.",
+                selector: { owner: "self", cardTypes: ["spirit"], colors: ["red"] },
+                onSelect: { type: "destroy" },
+                afterSelect: [{ type: "scheduleAttackStepEndAfterBattle" }]
+              }
+            ]
+          }
+        ],
+        automationRefs: { "sd10-015-flash-display": "sd10-015-flash-auto" }
+      },
+      "SD10-X01": {
+        addAbilities: [
+          {
+            id: "sd10-x01-special-summon-auto",
+            schemaVersion: 2,
+            trigger: { event: "whenSummoned", scope: "source", eventPlayer: "any" },
+            levels: [1, 2, 3],
+            actions: [
+              {
+                type: "selectTarget",
+                titlePT: "ShineDragon Shining-Dragon",
+                titleEN: "ShineDragon Shining-Dragon",
+                instructionPT: "Você pode escolher 1 Brave Vermelho da sua mão para Invocar sem pagar o custo.",
+                instructionEN: "You may choose 1 Red Brave from your hand to summon without paying its cost.",
+                selector: { owner: "self", zones: ["hand"], cardTypes: ["brave"], colors: ["red"] },
+                allowZero: true,
+                onSelect: { type: "specialSummonFromHand", allowedCardTypes: ["brave"] }
+              }
+            ]
+          }
+        ],
+        automationRefs: { "sd10-x01-when-summoned-display": "sd10-x01-special-summon-auto" }
+      },
       "SD10-X02": {
         setFields: { braveCondition: { type: "costAtLeast", value: 5, cardTypes: ["spirit"] } },
         replaceAbilities: [
@@ -931,6 +980,288 @@ export const STARTER_DECK_MIGRATIONS = Object.freeze({
           "sd10-x02-charge-display": "sd10-x02-charge",
           "sd10-x02-combine-condition-display": "engineNative:braveCondition",
           "sd10-x02-while-combined-display": "sd10-x02-combined-charge"
+        }
+      }
+    })
+  }),
+  SD11: Object.freeze({
+    id: "sd11-content-migration-batch5",
+    notes: "SD11 migration pass: closes Dark Rush with mandatory attack enforcement, Machine Beast block-trigger relaying, Rush Burst suppression, combined Rush-condition bypass, Heavy Armor, free summons, battle resolution, and reusable White control semantics.",
+    cards: Object.freeze({
+      "SD11-004": {
+        addAbilities: [
+          {
+            id: "sd11-004-exhausted-block-auto",
+            schemaVersion: 2,
+            trigger: { event: "attackStep", scope: "controllerField", eventPlayer: "opponent" },
+            levels: [1, 2, 3],
+            actions: [
+              {
+                type: "addModifier",
+                property: "allowExhaustedBlock",
+                operation: "set",
+                value: 1,
+                target: "source",
+                duration: "whileConditionTrue",
+                condition: { all: [{ type: "phase", value: "attack" }, { type: "activePlayer", player: "opponent" }] }
+              }
+            ]
+          }
+        ],
+        automationRefs: { "sd11-004-exhausted-block-display": "sd11-004-exhausted-block-auto" }
+      },
+      "SD11-005": {
+        addAbilities: [
+          {
+            id: "sd11-005-heavy-armor-auto",
+            schemaVersion: 2,
+            trigger: { event: "continuous", scope: "source", eventPlayer: "any" },
+            levels: [2],
+            actions: [
+              { type: "addModifier", property: "effectImmunityColors", operation: "add", value: ["red", "blue"], target: "source", duration: "whileSourceExists" }
+            ]
+          }
+        ],
+        automationRefs: { "sd11-005-heavy-armor-display": "sd11-005-heavy-armor-auto" }
+      },
+      "SD11-006": {
+        addAbilities: [
+          {
+            id: "sd11-006-opponent-attack-auto",
+            schemaVersion: 2,
+            trigger: { event: "attackStep", scope: "controllerField", eventPlayer: "opponent" },
+            levels: [1, 2, 3],
+            actions: [
+              {
+                type: "addModifier",
+                property: "bp",
+                operation: "add",
+                value: 2000,
+                selector: { owner: "self", cardTypes: ["spirit"], colors: ["white"] },
+                duration: "whileConditionTrue",
+                condition: { all: [{ type: "phase", value: "attack" }, { type: "activePlayer", player: "opponent" }] }
+              }
+            ]
+          }
+        ],
+        automationRefs: { "sd11-006-opponent-attack-display": "sd11-006-opponent-attack-auto" }
+      },
+      "SD11-007": {
+        addAbilities: [
+          {
+            id: "sd11-007-must-attack-auto",
+            schemaVersion: 2,
+            trigger: { event: "attackStep", scope: "controllerField", eventPlayer: "opponent" },
+            levels: [1, 2],
+            actions: [{ type: "requireAttackIfAble", player: "opponent", minimumAttacks: 1 }]
+          }
+        ],
+        automationRefs: { "sd11-007-must-attack-display": "sd11-007-must-attack-auto" }
+      },
+      "SD11-008": {
+        addAbilities: [
+          {
+            id: "sd11-008-copy-block-effects-auto",
+            schemaVersion: 2,
+            trigger: { event: "whenAttacks", scope: "controllerField", eventPlayer: "self" },
+            levels: [1, 2],
+            conditions: [{ type: "eventSourceFamily", family: "Machine Beast" }],
+            actions: [{ type: "emitSourceEvent", event: "whenBlocks", source: "eventSource", context: { copiedBlockTiming: true } }]
+          }
+        ],
+        automationRefs: { "sd11-008-copy-block-effects-display": "sd11-008-copy-block-effects-auto" }
+      },
+      "SD11-009": {
+        addAbilities: [
+          {
+            id: "sd11-009-block-life-auto",
+            schemaVersion: 2,
+            trigger: { event: "afterBattleResolution", scope: "source", eventPlayer: "any" },
+            levels: [1, 2, 3],
+            conditions: [
+              { type: "battleSourceRole", role: "blocker" },
+              { type: "battleOnlyOpponentSpiritDestroyed" }
+            ],
+            actions: [{ type: "moveLifeToReserve", player: "opponent", amount: 1 }]
+          },
+          {
+            id: "sd11-009-rush-burst-lock-auto",
+            schemaVersion: 2,
+            trigger: { event: "whenBlocks", scope: "source", eventPlayer: "self" },
+            levels: [1, 2, 3],
+            conditions: [{ type: "controlsSymbolColor", color: "green" }],
+            actions: [{ type: "setBattleRestriction", preventOpponentBurst: true }]
+          }
+        ],
+        automationRefs: {
+          "sd11-009-block-life-display": "sd11-009-block-life-auto",
+          "sd11-009-rush-display": "sd11-009-rush-burst-lock-auto"
+        }
+      },
+      "SD11-011": {
+        setFields: { braveCondition: { type: "costAtLeast", value: 4, cardTypes: ["spirit"] } },
+        addAbilities: [
+          {
+            id: "sd11-011-combined-refresh-auto",
+            schemaVersion: 2,
+            trigger: { event: "whenAttacks", scope: "controllerField", eventPlayer: "opponent" },
+            levels: [1],
+            conditions: [
+              { type: "sourceCombined" },
+              { type: "eventSourceCardType", cardType: "spirit" },
+              { type: "eventSourceBP", atLeast: 4000 }
+            ],
+            actions: [{ type: "refresh", target: "combinedHost" }]
+          }
+        ],
+        automationRefs: {
+          "sd11-011-combine-condition-display": "engineNative:braveCondition",
+          "sd11-011-combined-display": "sd11-011-combined-refresh-auto"
+        }
+      },
+      "SD11-012": {
+        addAbilities: [
+          {
+            id: "sd11-012-machine-beast-bp-auto",
+            schemaVersion: 2,
+            trigger: { event: "continuous", scope: "source", eventPlayer: "any" },
+            levels: [1, 2],
+            actions: [
+              { type: "addModifier", property: "bp", operation: "add", value: 2000, selector: { owner: "self", cardTypes: ["spirit"], families: ["Machine Beast"] }, duration: "whileSourceExists" }
+            ]
+          },
+          {
+            id: "sd11-012-machine-beast-block-auto",
+            schemaVersion: 2,
+            trigger: { event: "whenBlocks", scope: "controllerField", eventPlayer: "self" },
+            levels: [2],
+            conditions: [{ type: "eventSourceFamily", family: "Machine Beast" }],
+            actions: [{ type: "addCoreFromVoid", target: "effectSource", amount: 1 }]
+          }
+        ],
+        automationRefs: {
+          "sd11-012-bp-display": "sd11-012-machine-beast-bp-auto",
+          "sd11-012-core-display": "sd11-012-machine-beast-block-auto"
+        }
+      },
+      "SD11-013": {
+        addAbilities: [
+          {
+            id: "sd11-013-destroyed-special-summon-auto",
+            schemaVersion: 2,
+            trigger: { event: "whenDestroyed", scope: "source", eventPlayer: "any" },
+            levels: [1, 2],
+            actions: [
+              {
+                type: "selectTarget",
+                titlePT: "The Lost Crystal",
+                titleEN: "The Lost Crystal",
+                instructionPT: "Você pode escolher 1 Spirit Branco da sua mão para Invocar sem pagar o custo.",
+                instructionEN: "You may choose 1 White Spirit from your hand to summon without paying its cost.",
+                selector: { owner: "self", zones: ["hand"], cardTypes: ["spirit"], colors: ["white"] },
+                allowZero: true,
+                onSelect: { type: "specialSummonFromHand", allowedCardTypes: ["spirit"] }
+              }
+            ]
+          },
+          {
+            id: "sd11-013-machine-beast-heavy-armor-auto",
+            schemaVersion: 2,
+            trigger: { event: "continuous", scope: "source", eventPlayer: "any" },
+            levels: [2],
+            actions: [
+              { type: "addModifier", property: "effectImmunityColors", operation: "add", value: ["red"], selector: { owner: "self", cardTypes: ["spirit"], families: ["Machine Beast"] }, duration: "whileSourceExists" }
+            ]
+          }
+        ],
+        automationRefs: {
+          "sd11-013-destroyed-display": "sd11-013-destroyed-special-summon-auto",
+          "sd11-013-heavy-armor-display": "sd11-013-machine-beast-heavy-armor-auto"
+        }
+      },
+      "SD11-014": {
+        addAbilities: [
+          {
+            id: "sd11-014-end-attack-step-auto",
+            schemaVersion: 2,
+            trigger: { event: "magicFlash", scope: "source", eventPlayer: "any" },
+            conditions: [{ type: "phase", value: "attack" }],
+            actions: [{ type: "scheduleAttackStepEndAfterBattle" }]
+          }
+        ],
+        automationRefs: { "sd11-014-flash-display": "sd11-014-end-attack-step-auto" }
+      },
+      "SD11-X01": {
+        addAbilities: [
+          {
+            id: "sd11-x01-block-result-auto",
+            schemaVersion: 2,
+            trigger: { event: "afterBattleResolution", scope: "source", eventPlayer: "any" },
+            levels: [1, 2, 3],
+            conditions: [
+              { type: "battleSourceRole", role: "blocker" },
+              { type: "battleOnlyOpponentSpiritDestroyed" }
+            ],
+            actions: [
+              { type: "refresh", target: "source" },
+              { type: "modifyBP", target: "source", amount: 3000, duration: "turn" }
+            ]
+          },
+          {
+            id: "sd11-x01-battle-return-auto",
+            schemaVersion: 2,
+            trigger: { event: "whenBattles", scope: "source", eventPlayer: "any" },
+            levels: [2, 3],
+            actions: [
+              {
+                type: "selectTarget",
+                titlePT: "The DarkEmperor Ninetail-Dark",
+                titleEN: "The DarkEmperor Ninetail-Dark",
+                instructionPT: "Escolha 1 Spirit do oponente de Cost 6 ou menos para devolver à mão.",
+                instructionEN: "Choose 1 opposing Cost 6 or lower Spirit to return to hand.",
+                selector: { owner: "opponent", cardTypes: ["spirit"], maximumCost: 6 },
+                allowZero: true,
+                onSelect: { type: "returnToHand" }
+              }
+            ]
+          }
+        ],
+        automationRefs: {
+          "sd11-x01-block-display": "sd11-x01-block-result-auto",
+          "sd11-x01-battle-display": "sd11-x01-battle-return-auto"
+        }
+      },
+      "SD11-X02": {
+        setFields: { braveCondition: { type: "costAtLeast", value: 5, cardTypes: ["spirit"] } },
+        addAbilities: [
+          {
+            id: "sd11-x02-combined-protection-auto",
+            schemaVersion: 2,
+            trigger: { event: "whenBraved", scope: "source", eventPlayer: "self" },
+            actions: [
+              {
+                type: "addModifier",
+                property: "effectImmunityColors",
+                operation: "add",
+                value: ["green", "white", "yellow", "blue"],
+                selector: { combinedHostOfSource: true },
+                duration: "whileSourceExists"
+              },
+              {
+                type: "addModifier",
+                property: "ignoreConditionTypes",
+                operation: "add",
+                value: ["controlsSymbolColor"],
+                selector: { combinedHostOfSource: true },
+                duration: "whileSourceExists"
+              }
+            ]
+          }
+        ],
+        automationRefs: {
+          "sd11-x02-combine-condition-display": "engineNative:braveCondition",
+          "sd11-x02-heavy-armor-display": "sd11-x02-combined-protection-auto",
+          "sd11-x02-rush-display": "sd11-x02-combined-protection-auto"
         }
       }
     })

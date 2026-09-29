@@ -12,6 +12,7 @@ export function openBurstOpportunityForEvent(match, event, affectedPlayerId, car
   if (match.burstOpportunity) return match;
   for (const [playerId, player] of Object.entries(match.players || {})) {
     if (!player?.burst) continue;
+    if (match.battle?.restrictions?.burstBlockedPlayerId === playerId) continue;
     const card = getDatabaseCard(cardIndex, player.burst);
     if (!isBurstCard(card) || getBurstActivationEvent(card) !== event) continue;
     if (event === BurstEvent.OPPONENT_SUMMONED || event === BurstEvent.OPPONENT_USED_MAGIC) {

@@ -51,6 +51,10 @@ const ACTION_ALIASES = Object.freeze({
   discardopponentsetburst: "discardOpponentSetBurst",
   performspecifiedattack: "performSpecifiedAttack",
   trimcoresonmatching: "trimCoresOnMatching",
+  scheduleattackstependafterbattle: "scheduleAttackStepEndAfterBattle",
+  specialsummonfromhand: "specialSummonFromHand",
+  requireattackifable: "requireAttackIfAble",
+  emitsourceevent: "emitSourceEvent",
   discard: "discard",
   movecard: "moveCard",
   modifycost: "modifyCost",
@@ -155,7 +159,11 @@ const SUPPORTED_ACTION_TYPES = new Set([
   "setTurnProtection",
   "discardOpponentSetBurst",
   "performSpecifiedAttack",
-  "trimCoresOnMatching"
+  "trimCoresOnMatching",
+  "scheduleAttackStepEndAfterBattle",
+  "specialSummonFromHand",
+  "requireAttackIfAble",
+  "emitSourceEvent"
 ]);
 
 export function canonicalActionType(type) {

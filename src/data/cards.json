@@ -1596,10 +1596,57 @@
         "text": {
           "en": "Destroy 1 of your Red Spirits. At the end of this battle, end the Attack Step.",
           "ptBR": "Destrua 1 dos seus Spirits Vermelhos. Ao final desta batalha, encerre o Attack Step."
-        }
+        },
+        "automationRef": "sd10-015-flash-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd10-015-flash-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Fire Wall",
+            "titleEN": "Fire Wall",
+            "instructionPT": "Escolha 1 dos seus Spirits Vermelhos para destruir.",
+            "instructionEN": "Choose 1 of your Red Spirits to destroy.",
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "red"
+              ]
+            },
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterSelect": [
+              {
+                "type": "scheduleAttackStepEndAfterBattle"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-015.webp"
   },
   {
@@ -1761,7 +1808,8 @@
         "text": {
           "en": "You may summon 1 Red Brave from your hand without paying its cost.",
           "ptBR": "Você pode Invocar 1 Brave Vermelho da sua mão sem pagar seu custo."
-        }
+        },
+        "automationRef": "sd10-x01-special-summon-auto"
       },
       {
         "id": "sd10-x01-when-attacks-display",
@@ -1838,6 +1886,48 @@
         },
         "levels": [
           3
+        ]
+      },
+      {
+        "id": "sd10-x01-special-summon-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "ShineDragon Shining-Dragon",
+            "titleEN": "ShineDragon Shining-Dragon",
+            "instructionPT": "Você pode escolher 1 Brave Vermelho da sua mão para Invocar sem pagar o custo.",
+            "instructionEN": "You may choose 1 Red Brave from your hand to summon without paying its cost.",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand"
+              ],
+              "cardTypes": [
+                "brave"
+              ],
+              "colors": [
+                "red"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "specialSummonFromHand",
+              "allowedCardTypes": [
+                "brave"
+              ]
+            }
+          }
         ]
       }
     ],
@@ -19126,7 +19216,8 @@
         "text": {
           "en": "This Spirit can block while exhausted.",
           "ptBR": "Este Spirit pode bloquear mesmo estando em Exhaust."
-        }
+        },
+        "automationRef": "sd11-004-exhausted-block-auto"
       },
       {
         "id": "sd11-004-block-bp-display",
@@ -19160,6 +19251,42 @@
             "type": "modifyBP",
             "amount": 3000,
             "duration": "battle"
+          }
+        ]
+      },
+      {
+        "id": "sd11-004-exhausted-block-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "allowExhaustedBlock",
+            "operation": "set",
+            "value": 1,
+            "target": "source",
+            "duration": "whileConditionTrue",
+            "condition": {
+              "all": [
+                {
+                  "type": "phase",
+                  "value": "attack"
+                },
+                {
+                  "type": "activePlayer",
+                  "player": "opponent"
+                }
+              ]
+            }
           }
         ]
       }
@@ -19258,7 +19385,8 @@
         "text": {
           "en": "This Spirit is unaffected by opposing Red/Blue Spirit/Brave/Nexus/Magic effects.",
           "ptBR": "Este Spirit não é afetado por efeitos Vermelhos/Azuis de Spirit/Brave/Nexus/Magic do oponente."
-        }
+        },
+        "automationRef": "sd11-005-heavy-armor-auto"
       }
     ],
     "abilities": [
@@ -19296,6 +19424,31 @@
                 "amount": 1
               }
             ]
+          }
+        ]
+      },
+      {
+        "id": "sd11-005-heavy-armor-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectImmunityColors",
+            "operation": "add",
+            "value": [
+              "red",
+              "blue"
+            ],
+            "target": "source",
+            "duration": "whileSourceExists"
           }
         ]
       }
@@ -19365,10 +19518,56 @@
         "text": {
           "en": "All your White Spirits gain +2000 BP.",
           "ptBR": "Todos os seus Spirits Brancos recebem +2000 BP."
-        }
+        },
+        "automationRef": "sd11-006-opponent-attack-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd11-006-opponent-attack-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 2000,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "white"
+              ]
+            },
+            "duration": "whileConditionTrue",
+            "condition": {
+              "all": [
+                {
+                  "type": "phase",
+                  "value": "attack"
+                },
+                {
+                  "type": "activePlayer",
+                  "player": "opponent"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-006.webp"
   },
   {
@@ -19429,7 +19628,8 @@
         "text": {
           "en": "Your opponent must attack at least once if able.",
           "ptBR": "O oponente deve realizar pelo menos 1 ataque se puder."
-        }
+        },
+        "automationRef": "sd11-007-must-attack-auto"
       },
       {
         "id": "sd11-007-block-bp-display",
@@ -19505,6 +19705,26 @@
             ]
           }
         ]
+      },
+      {
+        "id": "sd11-007-must-attack-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "requireAttackIfAble",
+            "player": "opponent",
+            "minimumAttacks": 1
+          }
+        ]
       }
     ],
     "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-007.webp"
@@ -19567,10 +19787,41 @@
         "text": {
           "en": "The 'When This Spirit Blocks' effects of all your Machine Beast Spirits also activate when those Spirits attack.",
           "ptBR": "Os efeitos 'Quando Este Spirit Bloqueia' de todos os seus Spirits da família Machine Beast também são ativados quando esses Spirits atacam."
-        }
+        },
+        "automationRef": "sd11-008-copy-block-effects-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd11-008-copy-block-effects-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceFamily",
+            "family": "Machine Beast"
+          }
+        ],
+        "actions": [
+          {
+            "type": "emitSourceEvent",
+            "event": "whenBlocks",
+            "source": "eventSource",
+            "context": {
+              "copiedBlockTiming": true
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-008.webp"
   },
   {
@@ -19637,7 +19888,8 @@
         "text": {
           "en": "When only the opposing Spirit is destroyed by comparing BP, move 1 Core from your opponent's Life to their Reserve.",
           "ptBR": "Quando apenas o Spirit do oponente for destruído pela comparação de BP, mova 1 Core do Life do oponente para a Reserve dele."
-        }
+        },
+        "automationRef": "sd11-009-block-life-auto"
       },
       {
         "id": "sd11-009-rush-display",
@@ -19655,10 +19907,68 @@
         "text": {
           "en": "Your opponent cannot activate Burst effects.",
           "ptBR": "O oponente não pode ativar efeitos de Burst."
-        }
+        },
+        "automationRef": "sd11-009-rush-burst-lock-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd11-009-block-life-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "battleSourceRole",
+            "role": "blocker"
+          },
+          {
+            "type": "battleOnlyOpponentSpiritDestroyed"
+          }
+        ],
+        "actions": [
+          {
+            "type": "moveLifeToReserve",
+            "player": "opponent",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": "sd11-009-rush-burst-lock-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocks",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "controlsSymbolColor",
+            "color": "green"
+          }
+        ],
+        "actions": [
+          {
+            "type": "setBattleRestriction",
+            "preventOpponentBurst": true
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-009.webp"
   },
   {
@@ -19866,7 +20176,8 @@
         "text": {
           "en": "Combine with a Spirit that costs 4 or more.",
           "ptBR": "Combine com um Spirit de custo 4 ou mais."
-        }
+        },
+        "automationRef": "engineNative:braveCondition"
       },
       {
         "id": "sd11-011-combined-display",
@@ -19880,7 +20191,8 @@
         "text": {
           "en": "During your opponent's Attack Step, when a Spirit with 4000 BP or more attacks, refresh this Spirit.",
           "ptBR": "Durante o Attack Step do oponente, quando um Spirit com 4000 BP ou mais atacar, dê Refresh neste Spirit."
-        }
+        },
+        "automationRef": "sd11-011-combined-refresh-auto"
       }
     ],
     "abilities": [
@@ -19905,13 +20217,47 @@
             }
           }
         ]
+      },
+      {
+        "id": "sd11-011-combined-refresh-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          1
+        ],
+        "conditions": [
+          {
+            "type": "sourceCombined"
+          },
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventSourceBP",
+            "atLeast": 4000
+          }
+        ],
+        "actions": [
+          {
+            "type": "refresh",
+            "target": "combinedHost"
+          }
+        ]
       }
     ],
     "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-011.webp",
     "braveBP": 4000,
     "braveCondition": {
       "type": "costAtLeast",
-      "value": 4
+      "value": 4,
+      "cardTypes": [
+        "spirit"
+      ]
     }
   },
   {
@@ -19968,7 +20314,8 @@
         "text": {
           "en": "All your Machine Beast Spirits gain +2000 BP.",
           "ptBR": "Todos os seus Spirits da família Machine Beast recebem +2000 BP."
-        }
+        },
+        "automationRef": "sd11-012-machine-beast-bp-auto"
       },
       {
         "id": "sd11-012-core-display",
@@ -19984,10 +20331,68 @@
         "text": {
           "en": "When one of your Machine Beast Spirits blocks, put 1 Core from the Void on that Spirit.",
           "ptBR": "Quando 1 dos seus Spirits Machine Beast bloquear, coloque 1 Core do Void naquele Spirit."
-        }
+        },
+        "automationRef": "sd11-012-machine-beast-block-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd11-012-machine-beast-bp-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 2000,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Machine Beast"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "sd11-012-machine-beast-block-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceFamily",
+            "family": "Machine Beast"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addCoreFromVoid",
+            "target": "effectSource",
+            "amount": 1
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-012.webp"
   },
   {
@@ -20045,7 +20450,8 @@
         "text": {
           "en": "You may summon 1 White Spirit card from your hand without paying the cost.",
           "ptBR": "Você pode Invocar 1 carta de Spirit Branco da sua mão sem pagar o custo."
-        }
+        },
+        "automationRef": "sd11-013-destroyed-special-summon-auto"
       },
       {
         "id": "sd11-013-heavy-armor-display",
@@ -20061,10 +20467,85 @@
         "text": {
           "en": "All your Machine Beast Spirits gain [Heavy Armor: Red].",
           "ptBR": "Todos os seus Spirits da família Machine Beast recebem [Heavy Armor: Vermelho]."
-        }
+        },
+        "automationRef": "sd11-013-machine-beast-heavy-armor-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd11-013-destroyed-special-summon-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "The Lost Crystal",
+            "titleEN": "The Lost Crystal",
+            "instructionPT": "Você pode escolher 1 Spirit Branco da sua mão para Invocar sem pagar o custo.",
+            "instructionEN": "You may choose 1 White Spirit from your hand to summon without paying its cost.",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "white"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "specialSummonFromHand",
+              "allowedCardTypes": [
+                "spirit"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd11-013-machine-beast-heavy-armor-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectImmunityColors",
+            "operation": "add",
+            "value": [
+              "red"
+            ],
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Machine Beast"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-013.webp"
   },
   {
@@ -20106,7 +20587,8 @@
         "text": {
           "en": "At the end of this battle, end the Attack Step.",
           "ptBR": "Ao final desta batalha, encerre o Attack Step."
-        }
+        },
+        "automationRef": "sd11-014-end-attack-step-auto"
       },
       {
         "id": "sd11-014-rush-display",
@@ -20146,6 +20628,26 @@
             "onSelect": {
               "type": "exhaust"
             }
+          }
+        ]
+      },
+      {
+        "id": "sd11-014-end-attack-step-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "scheduleAttackStepEndAfterBattle"
           }
         ]
       }
@@ -20423,7 +20925,8 @@
         "text": {
           "en": "When only the opposing Spirit is destroyed by comparing BP, refresh this Spirit and it gains +3000 BP during this turn.",
           "ptBR": "Quando apenas o Spirit do oponente for destruído pela comparação de BP, dê Refresh neste Spirit e ele recebe +3000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd11-x01-block-result-auto"
       },
       {
         "id": "sd11-x01-battle-display",
@@ -20439,7 +20942,8 @@
         "text": {
           "en": "Return 1 opposing Cost 6 or less Spirit to the hand.",
           "ptBR": "Devolva 1 Spirit do oponente de custo 6 ou menos para a mão."
-        }
+        },
+        "automationRef": "sd11-x01-battle-return-auto"
       },
       {
         "id": "sd11-x01-rush-display",
@@ -20485,6 +20989,74 @@
         ],
         "levels": [
           3
+        ]
+      },
+      {
+        "id": "sd11-x01-block-result-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "battleSourceRole",
+            "role": "blocker"
+          },
+          {
+            "type": "battleOnlyOpponentSpiritDestroyed"
+          }
+        ],
+        "actions": [
+          {
+            "type": "refresh",
+            "target": "source"
+          },
+          {
+            "type": "modifyBP",
+            "target": "source",
+            "amount": 3000,
+            "duration": "turn"
+          }
+        ]
+      },
+      {
+        "id": "sd11-x01-battle-return-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "The DarkEmperor Ninetail-Dark",
+            "titleEN": "The DarkEmperor Ninetail-Dark",
+            "instructionPT": "Escolha 1 Spirit do oponente de Cost 6 ou menos para devolver à mão.",
+            "instructionEN": "Choose 1 opposing Cost 6 or lower Spirit to return to hand.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumCost": 6
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
         ]
       }
     ],
@@ -20543,7 +21115,8 @@
         "text": {
           "en": "Combine with a Spirit that costs 5 or more.",
           "ptBR": "Combine com um Spirit de custo 5 ou mais."
-        }
+        },
+        "automationRef": "engineNative:braveCondition"
       },
       {
         "id": "sd11-x02-heavy-armor-display",
@@ -20557,7 +21130,8 @@
         "text": {
           "en": "The combined Spirit gains [Heavy Armor: Green/White/Yellow/Blue].",
           "ptBR": "O Spirit combinado recebe [Heavy Armor: Verde/Branco/Amarelo/Azul]."
-        }
+        },
+        "automationRef": "sd11-x02-combined-protection-auto"
       },
       {
         "id": "sd11-x02-rush-display",
@@ -20571,15 +21145,58 @@
         "text": {
           "en": "This Spirit's Rush effects activate ignoring their conditions.",
           "ptBR": "Os efeitos de Rush deste Spirit são ativados ignorando suas condições."
-        }
+        },
+        "automationRef": "sd11-x02-combined-protection-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd11-x02-combined-protection-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBraved",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectImmunityColors",
+            "operation": "add",
+            "value": [
+              "green",
+              "white",
+              "yellow",
+              "blue"
+            ],
+            "selector": {
+              "combinedHostOfSource": true
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "ignoreConditionTypes",
+            "operation": "add",
+            "value": [
+              "controlsSymbolColor"
+            ],
+            "selector": {
+              "combinedHostOfSource": true
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD11-ByakuyaouYaibaDeck-DarkRush/SD11-X02.webp",
     "braveBP": 5000,
     "braveCondition": {
       "type": "costAtLeast",
-      "value": 5
+      "value": 5,
+      "cardTypes": [
+        "spirit"
+      ]
     }
   },
   {

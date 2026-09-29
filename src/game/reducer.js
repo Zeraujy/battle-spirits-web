@@ -1,4 +1,4 @@
-import { advancePhase, mulligan } from "./turn.js";
+import { advancePhase, completeScheduledAttackStepEnd, mulligan } from "./turn.js";
 import { summonFromHand, deployNexus } from "./summon.js";
 import { moveCore } from "./cores.js";
 import { combineBrave, separateBrave, exchangeBrave, enforceBraveConditions } from "./brave.js";
@@ -31,11 +31,16 @@ function finishResult(result, cardIndex, actionType) {
   const braveCheck = enforceBraveConditions(next, cardIndex);
   next = braveCheck.match;
 
+  const scheduledEnd = completeScheduledAttackStepEnd(next, cardIndex);
+  next = scheduledEnd.match;
+
   const integrity = validateMatchState(next, cardIndex);
 
   return {
     ...result,
     match: next,
+    manualResolutionNeeded: Boolean(result.manualResolutionNeeded || scheduledEnd.manualResolutionNeeded),
+    notes: [...(result.notes || []), ...(scheduledEnd.notes || [])],
     integrity
   };
 }

@@ -48,3 +48,14 @@
 - Added deterministic controller grouping and player ordering for ambiguous same-controller triggers.
 - Added `chooseTriggerOrder` using the existing Effect Resolution UI and Effect Queue continuation flow.
 
+
+## Content Migration — Batch 05
+
+- Closed SD10 at 18/18 `READY_NO_MANUAL` with reusable deferred Attack Step ending and free special-summon semantics.
+- Closed SD11 at 18/18 `READY_NO_MANUAL`, including mandatory attack-if-able, Machine Beast block-trigger relaying, Rush Burst suppression, combined Heavy Armor and Rush condition bypass.
+- Core Action Library expanded from 55 to 59 action types.
+- Set gate improved from 4/11 to 6/11.
+- Manual Resolution fallback improved from 70.96% (259/365) to 67.40% (246/365).
+- Phase 24 generated regression scenarios increased from 106 to 119.
+- Main suite 149/149, Effect Engine 93/93, Batch 05 13/13 and full regression 292/292 all pass.
+- Internal application version remains 5.0.3 while the v5.1.0 final content gate remains open.
