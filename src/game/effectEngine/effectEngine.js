@@ -7,6 +7,7 @@ import { resolveActionList } from "./actionResolver.js";
 import { drainEffectQueue, enqueueEffectEvents, markEffectQueueWaiting } from "./effectQueue.js";
 import { finalizePendingMagicResolution } from "./magicAutomation.js";
 import { applyTriggerGroupOrder, nextAmbiguousTriggerGroup, orderedTriggerDispatches, resolveAutomaticTriggerGroups, triggerOrderDecision } from "./triggerOrderingEngine.js";
+import { dispatchEffectEvent } from "./triggerDispatcher.js";
 
 function sourceContext(match, cardIndex, input = {}) {
   const found = input.sourceInstanceId ? findPhysicalCard(match, input.sourceInstanceId) : null;
@@ -399,6 +400,20 @@ export function resolveEffectDecision(match, actorId, payload = {}, cardIndex) {
   const queuedEvents = pending.continuationEvents || [];
   const queueAlreadyHasEvents = Boolean(next.effectQueue?.items?.length);
   if (queuedEvents.length && !queueAlreadyHasEvents) next = enqueueEffectEvents(next, queuedEvents).match;
+
+  // Content Migration Batch 04: actions completed through a player decision may
+  // emit canonical events (for example, a destruction selected by the player).
+  // Feed them back through the full dispatcher so battlefield observers and
+  // trigger ordering behave exactly like automatic action resolution.
+  const deferredEvents = Array.isArray(next.deferredCanonicalEvents) ? next.deferredCanonicalEvents : [];
+  if (deferredEvents.length) {
+    next = { ...next, deferredCanonicalEvents: [] };
+    for (const deferred of deferredEvents) {
+      const dispatched = dispatchEffectEvent(next, deferred, cardIndex);
+      next = dispatched.match;
+      if (next.pendingEffectDecision) break;
+    }
+  }
 
   if (next.pendingEffectDecision) next = markEffectQueueWaiting(next);
   else next = drainEffectQueue(next, (working, item) => resolveCardEvent(working, item.payload, cardIndex)).match;

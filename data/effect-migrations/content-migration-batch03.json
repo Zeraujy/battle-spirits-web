@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "batch": "v5.1.0-content-migration-batch03",
+  "focus": ["SD17"],
+  "completedSets": ["SD17", "SD19", "SD20"],
+  "sd17": {
+    "total": 18,
+    "automatedOrNoEffect": 18,
+    "unresolved": 0,
+    "status": "READY_NO_MANUAL"
+  },
+  "migratedCards": ["SD17-008", "SD17-012", "SD17-X01", "SD17-X02"],
+  "engineAdditions": [
+    "per-instance source attack counters",
+    "battle-only-opponent-Spirit-destroyed condition",
+    "destroyer card-type condition",
+    "performSpecifiedAttack action"
+  ],
+  "coverage": {
+    "manualFallbackCards": 273,
+    "manualFallbackPercent": 74.79,
+    "generatedRegressionScenarios": 92,
+    "setsMeeting95PercentGate": 3,
+    "totalAuditedSets": 11
+  }
+}

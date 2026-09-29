@@ -6,10 +6,10 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **491**
-- Effect Schema v2 entries: **36**
-- Fully automated cards: **72 (19.7%)**
-- Partially automated cards: **27**
+- Structured effect/ability entries inspected: **515**
+- Effect Schema v2 entries: **61**
+- Fully automated cards: **90 (24.7%)**
+- Partially automated cards: **19**
 - Unstructured effect text: **173**
 - Explicit no-effect cards: **16**
 
@@ -34,11 +34,11 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | BS13 | 90 | 0 | 0 | 0 | 0 | 0 | 0 | 84 | 6 |
 | BSC49 | 117 | 0 | 0 | 5 | 22 | 0 | 0 | 89 | 1 |
-| SD10 | 18 | 9 | 5 | 3 | 0 | 0 | 0 | 0 | 1 |
+| SD10 | 18 | 15 | 1 | 1 | 0 | 0 | 0 | 0 | 1 |
 | SD11 | 18 | 6 | 5 | 6 | 0 | 0 | 0 | 0 | 1 |
-| SD13 | 18 | 7 | 2 | 5 | 1 | 0 | 0 | 0 | 3 |
+| SD13 | 18 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 3 |
 | SD15 | 18 | 0 | 3 | 12 | 2 | 0 | 0 | 0 | 1 |
-| SD17 | 18 | 13 | 2 | 2 | 0 | 0 | 0 | 0 | 1 |
+| SD17 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD19 | 17 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD20 | 17 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD23 | 17 | 3 | 2 | 9 | 3 | 0 | 0 | 0 | 0 |
@@ -46,11 +46,11 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Structured entry baseline
 
-- Automated executable entries: **155**
-- Entries blocked by trigger coverage: **50**
+- Automated executable entries: **179**
+- Entries blocked by trigger coverage: **49**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
-- Represented but non-executable/manual entries: **286**
+- Represented but non-executable/manual entries: **287**
 
 ## Highest-priority trigger gaps
 
@@ -66,7 +66,6 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `afterOpponentDestroysYourSpirit` | 1 |
 | `onEligibleSummonDescendOrPlacement` | 1 |
 | `onEligibleSummonOrPlacement` | 1 |
-| `onOwnLowCostPurpleDestroyedBySpiritEffect` | 1 |
 | `opponentHandIncrease` | 1 |
 | `opponentTurn` | 1 |
 | `opposingUnitLeavesByYourEffect` | 1 |
@@ -86,6 +85,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `whenLifeDecreases` | 1 |
 | `whenLifeReducedByOpponentEffect` | 1 |
 | `whenOpenedFromDeckByGreenEffect` | 1 |
+| `whenOpponentSpiritUltimateMilled` | 1 |
 
 ## Unsupported action/condition gaps
 
@@ -94,7 +94,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Engine additions — Phases 7–18
 
-- Core Action Library is centralized and currently exposes **53 generic action types** to Schema v2.
+- Core Action Library is centralized and currently exposes **55 generic action types** to Schema v2.
 - Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.
 - Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.
 - Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.
@@ -159,18 +159,12 @@ The JSON report contains every entry and machine-readable reason. This table lis
 
 | Card | Set | Type | Status | Main gaps |
 | --- | --- | --- | --- | --- |
-| `BS01-125` | SD13 | magic | `MANUAL` | unresolved entries: 1 |
 | `BS05-037` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
-| `BS06-023` | SD13 | spirit | `MANUAL` | unresolved entries: 1 |
 | `BS08-042` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
-| `BS09-015` | SD13 | spirit | `MANUAL` | unresolved entries: 2 |
 | `BS10-074` | SD15 | brave | `MANUAL` | unresolved entries: 1 |
-| `BS11-051` | SD13 | brave | `PARTIAL` | unresolved entries: 1 |
-| `BS11-075` | SD13 | magic | `MANUAL` | unresolved entries: 1 |
 | `BS12-035` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
 | `BS12-037` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
 | `BS12-038` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
-| `BS12-063` | SD13 | nexus | `PARTIAL` | unresolved entries: 1 |
 | `BS13-002` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-003` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-004` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
@@ -373,14 +367,8 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BSC49-XV11` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenBravedOrCombinedCardWouldLeave; unresolved entries: 3 |
 | `BSC49-XV12` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenAttacksOrBlocks, whenOpponentSpiritUltimateMilled, whileAttackingAndRefreshed; unresolved entries: 4 |
 | `SD02-005` | SD15 | spirit | `MANUAL` | unresolved entries: 3 |
-| `SD10-008` | SD10 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD10-010` | SD10 | spirit | `PARTIAL` | unresolved entries: 2 |
-| `SD10-011` | SD10 | brave | `PARTIAL` | unresolved entries: 1 |
-| `SD10-012` | SD10 | nexus | `MANUAL` | unresolved entries: 2 |
-| `SD10-013` | SD10 | nexus | `MANUAL` | unresolved entries: 2 |
 | `SD10-015` | SD10 | magic | `MANUAL` | unresolved entries: 1 |
 | `SD10-X01` | SD10 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD10-X02` | SD10 | brave | `PARTIAL` | unresolved entries: 1 |
 | `SD11-004` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD11-005` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD11-006` | SD11 | spirit | `MANUAL` | unresolved entries: 1 |
@@ -392,8 +380,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `SD11-013` | SD11 | nexus | `MANUAL` | unresolved entries: 2 |
 | `SD11-X01` | SD11 | spirit | `PARTIAL` | unresolved entries: 1 |
 | `SD11-X02` | SD11 | brave | `MANUAL` | unresolved entries: 2 |
-| `SD13-002` | SD13 | spirit | `UNSUPPORTED_TRIGGER` | triggers: onOwnLowCostPurpleDestroyedBySpiritEffect; unresolved entries: 1 |
-| `SD13-X01` | SD13 | spirit | `MANUAL` | unresolved entries: 2 |
 | `SD15-001` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD15-002` | SD15 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenOpponentSpiritBecomesZeroBP; unresolved entries: 2 |
 | `SD15-003` | SD15 | spirit | `PARTIAL` | unresolved entries: 1 |
@@ -403,10 +389,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `SD15-007` | SD15 | magic | `MANUAL` | unresolved entries: 1 |
 | `SD15-008` | SD15 | magic | `MANUAL` | unresolved entries: 2 |
 | `SD15-X01` | SD15 | spirit | `PARTIAL` | triggers: ownLowCostSpiritDestroyedByOpponentEffect, whenOpponentSpiritBecomesZeroBP; unresolved entries: 2 |
-| `SD17-008` | SD17 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD17-012` | SD17 | nexus | `MANUAL` | unresolved entries: 2 |
-| `SD17-X01` | SD17 | spirit | `MANUAL` | unresolved entries: 3 |
-| `SD17-X02` | SD17 | brave | `PARTIAL` | unresolved entries: 1 |
 | `SD23-001` | SD23 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenDestroyedByOpponent; unresolved entries: 1 |
 | `SD23-002` | SD23 | spirit | `MANUAL` | unresolved entries: 1 |
 | `SD23-003` | SD23 | spirit | `MANUAL` | unresolved entries: 1 |

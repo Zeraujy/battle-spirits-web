@@ -69,6 +69,7 @@ const aliases = new Map([
   ["combined", EffectEvent.WHEN_COMBINED],
   ["ondestroyed", EffectEvent.WHEN_DESTROYED],
   ["whendestroyed", EffectEvent.WHEN_DESTROYED],
+  ["onownlowcostpurpledestroyedbyspiriteffect", EffectEvent.WHEN_DESTROYED],
   ["destroyed", EffectEvent.WHEN_DESTROYED],
   ["wouldbedestroyed", EffectEvent.WOULD_BE_DESTROYED],
   ["beforedestroyed", EffectEvent.WOULD_BE_DESTROYED],

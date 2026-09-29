@@ -80,15 +80,23 @@ function numberBetween(actual, min, max) {
   return true;
 }
 
-function cardKeywords(card) {
+export function cardKeywords(card, physical = null) {
   const out = new Set();
+  const currentLevel = physical ? Number(getCurrentLevel(card, physical)?.level || 0) : null;
+  const activeAtLevel = (entry) => {
+    const levels = Array.isArray(entry?.levels) ? entry.levels.map(Number) : [];
+    return currentLevel == null || !levels.length || levels.includes(currentLevel);
+  };
   for (const entry of card?.effects || []) {
+    if (!activeAtLevel(entry)) continue;
     const raw = String(entry?.type || entry?.title?.en || entry?.title?.ptBR || "").toLowerCase();
     for (const keyword of ["rush", "confront", "burst", "brave", "heavyarmor", "heavy armor"]) {
       if (raw.includes(keyword)) out.add(keyword.replace(/\s+/g, ""));
     }
   }
   for (const entry of card?.abilities || []) {
+    if (!activeAtLevel(entry)) continue;
+    if (entry?.requiresCombined === true && !physical?.combinedWith) continue;
     const keywords = entry?.modifiers?.keywords || entry?.keywords || [];
     for (const keyword of Array.isArray(keywords) ? keywords : [keywords]) if (keyword) out.add(String(keyword).toLowerCase().replace(/\s+/g, ""));
   }
@@ -118,7 +126,7 @@ function targetProperties(match, cardIndex, candidate) {
     colors: isField ? getEffectiveColors(match, cardIndex, physical) : (card?.colors || []),
     families: isField ? getEffectiveFamilies(match, cardIndex, physical) : (card?.families || []),
     symbols: isField ? getEffectiveSymbols(match, cardIndex, physical) : (card?.symbols || []),
-    keywords: cardKeywords(card),
+    keywords: cardKeywords(card, physical),
     cost: isField ? getEffectiveCost(match, cardIndex, physical) : Number(card?.cost || 0),
     bp: isField ? getEffectiveBP(match, cardIndex, physical) : Number(card?.bp || 0),
     level: isField ? Number(getCurrentLevel(card, physical)?.level || 0) : 0,
@@ -222,6 +230,18 @@ export function resolveActionTargets(match, action = {}, cardIndex, context = {}
   if (["self", "source"].includes(rawTargetString)) {
     const source = sourceTarget(context);
     return source ? { status: "resolved", targets: [source] } : { status: "none", targets: [] };
+  }
+  if (["battleattacker", "attacker"].includes(rawTargetString)) {
+    const instanceId = context.attackerInstanceId || match.battle?.attackerInstanceId || null;
+    if (!instanceId) return { status: "none", targets: [] };
+    const targets = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
+    return targets.length ? { status: "resolved", targets: [targets[0]] } : { status: "none", targets: [] };
+  }
+  if (["eventdestroyer", "destroyer", "effectsource"].includes(rawTargetString)) {
+    const instanceId = context.destroyedByInstanceId || context.effectSourceInstanceId || null;
+    if (!instanceId) return { status: "none", targets: [] };
+    const targets = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
+    return targets.length ? { status: "resolved", targets: [targets[0]] } : { status: "none", targets: [] };
   }
   if (["selected", "selection"].includes(rawTargetString)) {
     const selected = context.selectedTargets || [];

@@ -8,7 +8,7 @@
     3
   ],
   "source": "src/data/cards.json",
-  "generatedAt": "2026-09-28T19:53:01.700Z",
+  "generatedAt": "2026-09-28T21:27:20.683Z",
   "classificationVersion": "v5.1.0-phase03",
   "canonicalEvents": [
     {
@@ -172,24 +172,21 @@
     "totalCards": 365,
     "totalSets": 11,
     "byStatus": {
-      "AUTOMATED": 72,
-      "MANUAL": 48,
+      "AUTOMATED": 90,
+      "MANUAL": 39,
       "NO_EFFECT": 16,
-      "PARTIAL": 27,
+      "PARTIAL": 19,
       "UNSTRUCTURED_TEXT": 173,
-      "UNSUPPORTED_TRIGGER": 29
+      "UNSUPPORTED_TRIGGER": 28
     },
     "bySet": {
       "SD13": {
         "total": 18,
         "statuses": {
-          "MANUAL": 5,
-          "NO_EFFECT": 3,
-          "PARTIAL": 2,
-          "AUTOMATED": 7,
-          "UNSUPPORTED_TRIGGER": 1
+          "AUTOMATED": 15,
+          "NO_EFFECT": 3
         },
-        "automationPercent": 38.9
+        "automationPercent": 83.3
       },
       "SD15": {
         "total": 18,
@@ -222,12 +219,12 @@
       "SD10": {
         "total": 18,
         "statuses": {
-          "AUTOMATED": 9,
+          "AUTOMATED": 15,
           "NO_EFFECT": 1,
-          "PARTIAL": 5,
-          "MANUAL": 3
+          "MANUAL": 1,
+          "PARTIAL": 1
         },
-        "automationPercent": 50
+        "automationPercent": 83.3
       },
       "SD11": {
         "total": 18,
@@ -242,12 +239,10 @@
       "SD17": {
         "total": 18,
         "statuses": {
-          "AUTOMATED": 13,
-          "PARTIAL": 2,
-          "NO_EFFECT": 1,
-          "MANUAL": 2
+          "AUTOMATED": 17,
+          "NO_EFFECT": 1
         },
-        "automationPercent": 72.2
+        "automationPercent": 94.4
       },
       "SD19": {
         "total": 17,
@@ -287,13 +282,13 @@
       }
     },
     "entries": {
-      "total": 491,
-      "automated": 155,
-      "runtimeUnsupportedTrigger": 50,
+      "total": 515,
+      "automated": 179,
+      "runtimeUnsupportedTrigger": 49,
       "unsupportedCondition": 0,
       "unsupportedAction": 0,
-      "manual": 286,
-      "schemaV2": 36
+      "manual": 287,
+      "schemaV2": 61
     },
     "gapFrequency": {
       "triggers": {
@@ -302,7 +297,6 @@
         "afterOpponentDestroysYourSpirit": 1,
         "onEligibleSummonDescendOrPlacement": 1,
         "onEligibleSummonOrPlacement": 1,
-        "onOwnLowCostPurpleDestroyedBySpiritEffect": 1,
         "opponentHandIncrease": 1,
         "opponentTurn": 1,
         "opposingUnitLeavesByYourEffect": 1,
@@ -352,12 +346,12 @@
       "set": "SD13",
       "cardType": "magic",
       "nameEN": "Deadly Balance",
-      "status": "MANUAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd13-bs01-125-flash-display",
@@ -374,19 +368,40 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-bs01-125-flash-auto",
           "engineNative": false,
           "entryType": "flash",
           "status": "MANUAL"
+        },
+        {
+          "id": "sd13-bs01-125-flash-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "magicFlash",
+          "canonicalEvent": "magicFlash",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "destroy",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd13-bs01-125-flash-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -474,12 +489,12 @@
       "set": "SD13",
       "cardType": "spirit",
       "nameEN": "The DarkBishop Baculus",
-      "status": "MANUAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd13-bs06-023-summon-display",
@@ -496,19 +511,39 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-bs06-023-summon-auto",
           "engineNative": false,
           "entryType": "whensummoned",
           "status": "MANUAL"
+        },
+        {
+          "id": "sd13-bs06-023-summon-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenSummoned",
+          "canonicalEvent": "whenSummoned",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "trimCoresOnMatching"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd13-bs06-023-summon-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -598,12 +633,12 @@
       "set": "SD13",
       "cardType": "spirit",
       "nameEN": "The JailBeast Gashabers",
-      "status": "MANUAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 2,
+      "executableEntryCount": 2,
+      "automatedExecutableCount": 2,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd13-bs09-015-draw-display",
@@ -620,7 +655,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-bs09-015-draw-step-auto",
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
@@ -640,20 +675,62 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-bs09-015-destroyed-auto",
           "engineNative": false,
           "entryType": "whendestroyed",
           "status": "MANUAL"
+        },
+        {
+          "id": "sd13-bs09-015-draw-step-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "controllerField",
+          "eventPlayer": "self",
+          "rawEvent": "drawStep",
+          "canonicalEvent": "drawStep",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "draw"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
+        },
+        {
+          "id": "sd13-bs09-015-destroyed-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenDestroyed",
+          "canonicalEvent": "whenDestroyed",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "returnToHand",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd13-bs09-015-draw-display",
-          "sd13-bs09-015-destroyed-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -742,12 +819,12 @@
       "set": "SD13",
       "cardType": "brave",
       "nameEN": "Evil-Fisher",
-      "status": "PARTIAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 1,
-      "automatedExecutableCount": 1,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 2,
+      "automatedExecutableCount": 2,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd13-bs11-051-summon-display",
@@ -764,7 +841,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-bs11-051-summon-auto",
           "engineNative": false,
           "entryType": "whensummoned",
           "status": "MANUAL"
@@ -831,15 +908,38 @@
           "engineNative": false,
           "entryType": "",
           "status": "AUTOMATED"
+        },
+        {
+          "id": "sd13-bs11-051-summon-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenSummoned",
+          "canonicalEvent": "whenSummoned",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "moveCard",
+            "returnToHand",
+            "revealTop",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd13-bs11-051-summon-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -847,12 +947,12 @@
       "set": "SD13",
       "cardType": "magic",
       "nameEN": "Totentanz",
-      "status": "MANUAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd13-bs11-075-flash-display",
@@ -869,19 +969,41 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-bs11-075-flash-auto",
           "engineNative": false,
           "entryType": "flash",
           "status": "MANUAL"
+        },
+        {
+          "id": "sd13-bs11-075-flash-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "magicFlash",
+          "canonicalEvent": "magicFlash",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "discard",
+            "removeCore",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd13-bs11-075-flash-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -1057,12 +1179,12 @@
       "set": "SD13",
       "cardType": "nexus",
       "nameEN": "The Brigade's Skyscraper",
-      "status": "PARTIAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 1,
-      "automatedExecutableCount": 1,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 2,
+      "automatedExecutableCount": 2,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd13-bs12-063-deploy-display",
@@ -1099,7 +1221,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-bs12-063-zombie-attack-auto",
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
@@ -1125,15 +1247,36 @@
           "engineNative": false,
           "entryType": "",
           "status": "AUTOMATED"
+        },
+        {
+          "id": "sd13-bs12-063-zombie-attack-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "controllerField",
+          "eventPlayer": "self",
+          "rawEvent": "whenAttacks",
+          "canonicalEvent": "whenAttacks",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "removeCore",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd13-bs12-063-attack-step-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -7382,12 +7525,12 @@
       "set": "SD10",
       "cardType": "spirit",
       "nameEN": "Dragon-Annura",
-      "status": "PARTIAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd10-008-attack-step-display",
@@ -7404,7 +7547,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-008-attack-step-auto",
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
@@ -7448,15 +7591,35 @@
           "engineNative": false,
           "entryType": "",
           "status": "AUTOMATED"
+        },
+        {
+          "id": "sd10-008-attack-step-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "controllerField",
+          "eventPlayer": "self",
+          "rawEvent": "attackStep",
+          "canonicalEvent": "attackStep",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "addModifier"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd10-008-attack-step-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -7567,12 +7730,12 @@
       "set": "SD10",
       "cardType": "spirit",
       "nameEN": "StormDragon Supercell-Dragoon",
-      "status": "PARTIAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 1,
-      "automatedExecutableCount": 1,
-      "unresolvedDisplayCount": 2,
+      "executableEntryCount": 3,
+      "automatedExecutableCount": 3,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd10-010-when-summoned-display",
@@ -7609,7 +7772,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-010-when-attacks-auto",
           "engineNative": false,
           "entryType": "whenattacks",
           "status": "MANUAL"
@@ -7629,7 +7792,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-010-specified-attack-auto",
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
@@ -7656,16 +7819,59 @@
           "engineNative": false,
           "entryType": "",
           "status": "AUTOMATED"
+        },
+        {
+          "id": "sd10-010-when-attacks-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenAttacks",
+          "canonicalEvent": "whenAttacks",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "modifyBP"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
+        },
+        {
+          "id": "sd10-010-specified-attack-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenAttacks",
+          "canonicalEvent": "whenAttacks",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "chooseYesNo",
+            "performSpecifiedAttack",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd10-010-when-attacks-display",
-          "sd10-010-specified-attack-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -7673,12 +7879,12 @@
       "set": "SD10",
       "cardType": "brave",
       "nameEN": "Dustwhirl",
-      "status": "PARTIAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
       "executableEntryCount": 2,
       "automatedExecutableCount": 2,
-      "unresolvedDisplayCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd10-011-when-summoned-display",
@@ -7715,7 +7921,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "engineNative:braveCondition",
           "engineNative": false,
           "entryType": "combinecondition",
           "status": "MANUAL"
@@ -7791,9 +7997,7 @@
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd10-011-combine-condition-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -7801,12 +8005,12 @@
       "set": "SD10",
       "cardType": "nexus",
       "nameEN": "Magma Spouting Star City",
-      "status": "MANUAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 2,
+      "executableEntryCount": 2,
+      "automatedExecutableCount": 2,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd10-012-attack-step-display",
@@ -7823,7 +8027,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-012-attack-step-auto",
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
@@ -7843,20 +8047,61 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-012-effect-destroy-draw-auto",
           "engineNative": false,
           "entryType": "triggered",
           "status": "MANUAL"
+        },
+        {
+          "id": "sd10-012-attack-step-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "controllerField",
+          "eventPlayer": "self",
+          "rawEvent": "attackStep",
+          "canonicalEvent": "attackStep",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "addModifier"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
+        },
+        {
+          "id": "sd10-012-effect-destroy-draw-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "controllerField",
+          "eventPlayer": "opponent",
+          "rawEvent": "whenDestroyed",
+          "canonicalEvent": "whenDestroyed",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "draw"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd10-012-attack-step-display",
-          "sd10-012-destroy-draw-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -7864,12 +8109,12 @@
       "set": "SD10",
       "cardType": "nexus",
       "nameEN": "Dragon Shuttle to the Heavens",
-      "status": "MANUAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 2,
+      "executableEntryCount": 2,
+      "automatedExecutableCount": 2,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd10-013-life-reduced-display",
@@ -7886,7 +8131,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-013-life-reduced-auto",
           "engineNative": false,
           "entryType": "triggered",
           "status": "MANUAL"
@@ -7906,20 +8151,62 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-013-charge-destroy-auto",
           "engineNative": false,
           "entryType": "triggered",
           "status": "MANUAL"
+        },
+        {
+          "id": "sd10-013-life-reduced-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "controllerField",
+          "eventPlayer": "self",
+          "rawEvent": "lifeDecreased",
+          "canonicalEvent": "lifeDecreased",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "destroy"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
+        },
+        {
+          "id": "sd10-013-charge-destroy-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "controllerField",
+          "eventPlayer": "opponent",
+          "rawEvent": "whenDestroyed",
+          "canonicalEvent": "whenDestroyed",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "destroy",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd10-013-life-reduced-display",
-          "sd10-013-charge-destroy-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -8262,12 +8549,12 @@
       "set": "SD10",
       "cardType": "brave",
       "nameEN": "ShiningSacredSword Shining-Sword",
-      "status": "PARTIAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 4,
       "executableEntryCount": 1,
       "automatedExecutableCount": 1,
-      "unresolvedDisplayCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd10-x02-when-summoned-display",
@@ -8304,7 +8591,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-x02-charge",
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
@@ -8324,7 +8611,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "engineNative:braveCondition",
           "engineNative": false,
           "entryType": "combinecondition",
           "status": "MANUAL"
@@ -8344,7 +8631,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd10-x02-combined-charge",
           "engineNative": false,
           "entryType": "combined",
           "status": "MANUAL"
@@ -8352,15 +8639,17 @@
         {
           "id": "sd10-x02-summon",
           "source": "abilities",
-          "schemaVersion": null,
-          "triggerScope": null,
-          "eventPlayer": null,
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
           "rawEvent": "whenSummoned",
           "canonicalEvent": "whenSummoned",
           "canonicalEventDefined": true,
           "runtimeDispatched": true,
           "actionTypes": [
-            "destroyAllMatching"
+            "destroy",
+            "draw",
+            "selectMultipleTargets"
           ],
           "unsupportedActions": [],
           "unsupportedConditions": [],
@@ -8416,9 +8705,7 @@
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd10-x02-combine-condition-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -9934,12 +10221,12 @@
       "set": "SD13",
       "cardType": "spirit",
       "nameEN": "Bone-Cat",
-      "status": "UNSUPPORTED_TRIGGER",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 1,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd13-002-retaliation-display",
@@ -9948,29 +10235,47 @@
           "triggerScope": null,
           "eventPlayer": null,
           "rawEvent": "onOwnLowCostPurpleDestroyedBySpiritEffect",
-          "canonicalEvent": "onOwnLowCostPurpleDestroyedBySpiritEffect",
-          "canonicalEventDefined": false,
-          "runtimeDispatched": false,
+          "canonicalEvent": "whenDestroyed",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-002-retaliation-auto",
           "engineNative": false,
           "entryType": "constant",
-          "status": "UNSUPPORTED_TRIGGER"
+          "status": "MANUAL"
+        },
+        {
+          "id": "sd13-002-retaliation-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "controllerField",
+          "eventPlayer": "self",
+          "rawEvent": "whenDestroyed",
+          "canonicalEvent": "whenDestroyed",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "removeCore"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [
-          "onOwnLowCostPurpleDestroyedBySpiritEffect"
-        ],
+        "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd13-002-retaliation-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -10561,12 +10866,12 @@
       "set": "SD13",
       "cardType": "spirit",
       "nameEN": "The WickedDragonKing Cursedragon",
-      "status": "MANUAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 2,
+      "executableEntryCount": 2,
+      "automatedExecutableCount": 2,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd13-x01-summon-display",
@@ -10583,7 +10888,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-x01-summon-auto",
           "engineNative": false,
           "entryType": "whensummoned",
           "status": "MANUAL"
@@ -10603,20 +10908,64 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd13-x01-attack-auto",
           "engineNative": false,
           "entryType": "whenattacks",
           "status": "MANUAL"
+        },
+        {
+          "id": "sd13-x01-summon-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenSummoned",
+          "canonicalEvent": "whenSummoned",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "destroy",
+            "draw",
+            "selectMultipleTargets"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
+        },
+        {
+          "id": "sd13-x01-attack-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenAttacks",
+          "canonicalEvent": "whenAttacks",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "removeCore",
+            "selectMultipleTargets"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd13-x01-summon-display",
-          "sd13-x01-attack-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -11793,12 +12142,12 @@
       "set": "SD17",
       "cardType": "spirit",
       "nameEN": "Monoforcesaurus",
-      "status": "PARTIAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 1,
+      "automatedExecutableCount": 1,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd17-008-confront-display",
@@ -11835,7 +12184,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-008-rush-green-auto",
           "engineNative": false,
           "entryType": "rush",
           "status": "MANUAL"
@@ -11859,15 +12208,35 @@
           "engineNative": false,
           "entryType": "",
           "status": "AUTOMATED"
+        },
+        {
+          "id": "sd17-008-rush-green-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenAttacks",
+          "canonicalEvent": "whenAttacks",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "refresh"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd17-008-rush-green-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -12120,12 +12489,12 @@
       "set": "SD17",
       "cardType": "nexus",
       "nameEN": "Primeval Forest",
-      "status": "MANUAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 2,
+      "executableEntryCount": 2,
+      "automatedExecutableCount": 2,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd17-012-bp-destroy-draw-display",
@@ -12142,7 +12511,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-012-bp-destroy-draw-auto",
           "engineNative": false,
           "entryType": "triggered",
           "status": "MANUAL"
@@ -12162,20 +12531,62 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-012-level2-return-auto",
           "engineNative": false,
           "entryType": "triggered",
           "status": "MANUAL"
+        },
+        {
+          "id": "sd17-012-bp-destroy-draw-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "controllerField",
+          "eventPlayer": "self",
+          "rawEvent": "afterBattleResolution",
+          "canonicalEvent": "afterBattleResolution",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "draw"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
+        },
+        {
+          "id": "sd17-012-level2-return-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "controllerField",
+          "eventPlayer": "self",
+          "rawEvent": "whenDestroyed",
+          "canonicalEvent": "whenDestroyed",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "returnToHand",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd17-012-bp-destroy-draw-display",
-          "sd17-012-level2-return-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -12559,12 +12970,12 @@
       "set": "SD17",
       "cardType": "spirit",
       "nameEN": "DarkDragon Dark-Tyrannosaura",
-      "status": "MANUAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 0,
-      "automatedExecutableCount": 0,
-      "unresolvedDisplayCount": 3,
+      "executableEntryCount": 3,
+      "automatedExecutableCount": 3,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd17-x01-when-attacks-display",
@@ -12581,7 +12992,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-x01-when-attacks-auto",
           "engineNative": false,
           "entryType": "whenattacks",
           "status": "MANUAL"
@@ -12601,7 +13012,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-x01-rush-green-auto",
           "engineNative": false,
           "entryType": "rush",
           "status": "MANUAL"
@@ -12621,21 +13032,84 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-x01-terra-dragon-aura-auto",
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
+        },
+        {
+          "id": "sd17-x01-when-attacks-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenAttacks",
+          "canonicalEvent": "whenAttacks",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "destroy",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
+        },
+        {
+          "id": "sd17-x01-rush-green-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "self",
+          "rawEvent": "afterBattleResolution",
+          "canonicalEvent": "afterBattleResolution",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "moveLifeToReserve"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
+        },
+        {
+          "id": "sd17-x01-terra-dragon-aura-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "controllerField",
+          "eventPlayer": "self",
+          "rawEvent": "attackStep",
+          "canonicalEvent": "attackStep",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "addModifier"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd17-x01-when-attacks-display",
-          "sd17-x01-rush-green-display",
-          "sd17-x01-attack-step-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -12643,12 +13117,12 @@
       "set": "SD17",
       "cardType": "brave",
       "nameEN": "DarknessDemonSword Dark-Blade",
-      "status": "PARTIAL",
+      "status": "AUTOMATED",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 1,
-      "automatedExecutableCount": 1,
-      "unresolvedDisplayCount": 1,
+      "executableEntryCount": 2,
+      "automatedExecutableCount": 2,
+      "unresolvedDisplayCount": 0,
       "entries": [
         {
           "id": "sd17-x02-when-summoned-display",
@@ -12705,7 +13179,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": null,
+          "automationRef": "sd17-x02-specified-attack-auto",
           "engineNative": false,
           "entryType": "combined",
           "status": "MANUAL"
@@ -12733,15 +13207,37 @@
           "engineNative": false,
           "entryType": "",
           "status": "AUTOMATED"
+        },
+        {
+          "id": "sd17-x02-specified-attack-auto",
+          "source": "abilities",
+          "schemaVersion": 2,
+          "triggerScope": "source",
+          "eventPlayer": "any",
+          "rawEvent": "whenAttacks",
+          "canonicalEvent": "whenAttacks",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [
+            "chooseYesNo",
+            "performSpecifiedAttack",
+            "selectTarget"
+          ],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": true,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "",
+          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": [
-          "sd17-x02-while-combined-display"
-        ]
+        "unresolvedDisplayEntries": []
       }
     },
     {
@@ -13788,7 +14284,9 @@
           "actionTypes": [
             "chooseYesNo",
             "destroy",
-            "selectTarget"
+            "paySourceCost",
+            "selectTarget",
+            "setTurnProtection"
           ],
           "unsupportedActions": [],
           "unsupportedConditions": [],
@@ -14044,7 +14542,10 @@
           "canonicalEventDefined": true,
           "runtimeDispatched": true,
           "actionTypes": [
-            "chooseYesNo"
+            "chooseYesNo",
+            "modifyBP",
+            "moveCoreSelectedToSource",
+            "selectTarget"
           ],
           "unsupportedActions": [],
           "unsupportedConditions": [],

@@ -49,6 +49,8 @@ const ACTION_ALIASES = Object.freeze({
   negateultimatetrigger: "negateUltimateTrigger",
   setturnprotection: "setTurnProtection",
   discardopponentsetburst: "discardOpponentSetBurst",
+  performspecifiedattack: "performSpecifiedAttack",
+  trimcoresonmatching: "trimCoresOnMatching",
   discard: "discard",
   movecard: "moveCard",
   modifycost: "modifyCost",
@@ -151,7 +153,9 @@ const SUPPORTED_ACTION_TYPES = new Set([
   "chooseOrder",
   "chooseCoreDistribution",
   "setTurnProtection",
-  "discardOpponentSetBurst"
+  "discardOpponentSetBurst",
+  "performSpecifiedAttack",
+  "trimCoresOnMatching"
 ]);
 
 export function canonicalActionType(type) {

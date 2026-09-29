@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "migrationId": "sd13-content-migration-batch4",
+  "set": "SD13",
+  "write": true,
+  "definedCards": [
+    "BS01-125",
+    "BS06-023",
+    "BS09-015",
+    "BS11-051",
+    "BS11-075",
+    "BS12-063",
+    "SD13-002",
+    "SD13-X01"
+  ],
+  "definedCount": 8,
+  "changedCards": [
+    "BS01-125",
+    "BS06-023",
+    "BS09-015",
+    "BS11-051",
+    "BS11-075",
+    "BS12-063",
+    "SD13-002",
+    "SD13-X01"
+  ],
+  "changedCount": 8,
+  "errors": [],
+  "notes": "SD13 migration pass: structures reciprocal Spirit destruction, global Core trimming, Draw Step/When Destroyed observers, Brave reveal choices, discard-as-cost Magic, Zombie attack observers, retaliation against opposing Spirit effects, and Cursedragon multi-target effects."
+}

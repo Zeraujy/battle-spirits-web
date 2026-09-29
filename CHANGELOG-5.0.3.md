@@ -57,3 +57,32 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Full-catalog Manual Resolution fallback improves from 77.26% (282/365) to 75.89% (277/365).
 - Phase 24 generated regression scenarios increase from 83 to 88 cards.
 - Internal application version remains 5.0.3 while v5.1.0 content migration continues.
+## v5.1.0 Content Migration — Batch 03
+
+- SD17 — New Tsurugi Deck: Darkness Fang reaches 18/18 automated/no-effect cards and becomes `READY_NO_MANUAL`.
+- Monoforcesaurus now tracks its own per-instance first attack for Rush: Green refresh automation.
+- Primeval Forest now observes BP-comparison outcomes and opposing-Spirit destruction through canonical battle/destruction context.
+- DarkDragon Dark-Tyrannosaura now automates source-relative BP destruction, Rush life movement and its Terra Dragon Attack Step aura.
+- Added reusable specified-attack resolution: the chosen opposing Spirit/Ultimate is immediately established as blocker and the flow advances to Flash Timing 2.
+- DarknessDemonSword Dark-Blade now resolves its combined specified attack through structured Yes/No + target decisions.
+- Set automation gate improves from 2/11 to 3/11 complete sets (SD17, SD19, SD20).
+- Full-catalog Manual Resolution fallback improves from 75.89% (277/365) to 74.79% (273/365).
+- Phase 24 generated regression scenarios increase from 88 to 92 cards.
+- Internal application version remains 5.0.3 while v5.1.0 content migration continues.
+
+
+## v5.1.0 Content Migration — Batch 04
+
+- SD13 — Attribute Eye-Opening Deck: Amethyst reaches 18/18 automated/no-effect cards and becomes `READY_NO_MANUAL`.
+- Structured SD13 Deadly Balance, Baculus Core trimming, Gashabers Draw/Trash recovery, Evil-Fisher reveal choice, Totentanz discard-as-cost, Brigade's Skyscraper attack observer, Bone-Cat retaliation and Cursedragon multi-target effects.
+- Player decisions can now be authored by the opponent when the card text requires the opponent to choose.
+- Added reusable Core trimming, dynamic draw-per-selection, destruction-source targeting and deferred observer fanout after decision-driven effects.
+- SD10 — Tsurugi Deck: Shining Charge advances to 16/18 automated/no-effect cards (88.9%).
+- Charge keyword checks are now Level-aware in targeting, continuous modifiers and Brave Combine Conditions.
+- Added Charge-aware BP auras, dynamic BP-per-matching-card effects, Charge-based Brave conditions, Dragon Shuttle observers and Big Bang Energy draw-per-destruction automation.
+- SD10 has only Fire Wall (`SD10-015`) and the free Red Brave summon of `SD10-X01` remaining.
+- Set automation gate improves from 3/11 to 4/11 complete sets (SD13, SD17, SD19, SD20).
+- Full-catalog Manual Resolution fallback improves from 74.79% (273/365) to 70.96% (259/365).
+- Phase 24 generated regression scenarios increase from 92 to 106 cards.
+- Core Action Library reports 55 action types.
+- Internal application version remains 5.0.3 while v5.1.0 content migration continues.

@@ -42,13 +42,15 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
   };
 
   const attackNumber = Number(match.temporary?.attackCounts?.[playerId] || 0) + 1;
+  const sourceAttackNumber = Number(match.temporary?.attackCountsByInstance?.[instanceId] || 0) + 1;
   let next = {
     ...match,
     players: { ...match.players, [playerId]: player },
     battle,
     temporary: {
       ...(match.temporary || {}),
-      attackCounts: { ...(match.temporary?.attackCounts || {}), [playerId]: attackNumber }
+      attackCounts: { ...(match.temporary?.attackCounts || {}), [playerId]: attackNumber },
+      attackCountsByInstance: { ...(match.temporary?.attackCountsByInstance || {}), [instanceId]: sourceAttackNumber }
     }
   };
   next = appendLog(next, `${match.players[playerId].name} declarou um ataque.`, "battle");
@@ -71,7 +73,7 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
     event: "whenAttacks",
     sourcePlayerId: playerId,
     sourceInstanceId: instanceId,
-    context: { attackNumber }
+    context: { attackNumber, sourceAttackNumber }
   }, cardIndex);
 
   let resolvedMatch = engine.match;
@@ -84,7 +86,7 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
       event: "whenAttacks",
       sourcePlayerId: playerId,
       sourceInstanceId: attachedBrave.instanceId,
-      context: { isCombined: true, combinedHostInstanceId: instanceId, attackNumber }
+      context: { isCombined: true, combinedHostInstanceId: instanceId, attackNumber, sourceAttackNumber }
     }, cardIndex);
     resolvedMatch = braveEngine.match;
     manualResolutionNeeded = manualResolutionNeeded || braveEngine.manualResolutionNeeded;
@@ -396,6 +398,17 @@ export function resolveBattle(match, actorId, cardIndex) {
       }
       next = appendLog(next, `Battle Resolution: ${aBP} BP × ${bBP} BP.`, "battle");
 
+      originalBattleContext.attackerBP = aBP;
+      originalBattleContext.blockerBP = bBP;
+      originalBattleContext.cause = "bpComparison";
+      originalBattleContext.destroyed = destroyed.map((entry) => ({
+        playerId: entry.playerId,
+        instanceId: entry.physical?.instanceId || null,
+        cardId: entry.physical?.cardId || null,
+        cardType: getDatabaseCard(cardIndex, entry.physical)?.cardType || null
+      }));
+      originalBattleContext.destroyedCount = originalBattleContext.destroyed.length;
+
       for (const destroyedCard of destroyed) {
         const engine = dispatchEffectEvent(next, {
           event: "whenDestroyed",
@@ -409,7 +422,8 @@ export function resolveBattle(match, actorId, cardIndex) {
             blockerBP: bBP,
             cause: "bpComparison",
             destroyedByPlayerId: otherPlayerId(next, destroyedCard.playerId),
-            destroyedByCardType: "spirit"
+            destroyedByCardType: "spirit",
+            destroyedByInstanceId: destroyedCard.playerId === battle.attackerPlayerId ? battle.blockerInstanceId : battle.attackerInstanceId
           }
         }, cardIndex);
         next = engine.match;

@@ -6,6 +6,34 @@ const PATCHES = [
   {
     version: "5.0.3",
     date: { pt: "28/09/2026", en: "09/28/2026" },
+    title: { pt: "Automação de Cartas — Lote 3", en: "Card Automation — Batch 3" },
+    summary: {
+      pt: "O SD17 agora pode ser jogado sem depender da Resolução Manual, incluindo Rush, respostas à comparação de BP e specified attack.",
+      en: "SD17 can now be played without relying on Manual Resolution, including Rush, BP-comparison responses and specified attack."
+    },
+    sections: [
+      {
+        title: { pt: "Starter Decks", en: "Starter Decks" },
+        items: {
+          pt: [
+            "SD17 — New Tsurugi Deck: Darkness Fang agora passa pelo gate completo sem Resolução Manual.",
+            "Rush — Green do Monoforcesaurus reconhece corretamente o primeiro ataque daquele Spirit no turno.",
+            "Primeval Forest e DarkDragon Dark-Tyrannosaura agora respondem automaticamente aos resultados de comparação de BP.",
+            "DarknessDemonSword Dark-Blade ganhou fluxo estruturado de specified attack, incluindo escolha de alvo e avanço correto do Battle Timing."
+          ],
+          en: [
+            "SD17 — New Tsurugi Deck: Darkness Fang now passes the full gate without Manual Resolution.",
+            "Monoforcesaurus Rush — Green correctly tracks that Spirit's first attack of the turn.",
+            "Primeval Forest and DarkDragon Dark-Tyrannosaura now automatically react to BP-comparison outcomes.",
+            "DarknessDemonSword Dark-Blade gained structured specified-attack flow, including target choice and correct Battle Timing progression."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "28/09/2026", en: "09/28/2026" },
     title: { pt: "Automação de Cartas — Lote 2", en: "Card Automation — Batch 2" },
     summary: {
       pt: "O SD20 agora pode ser jogado sem depender da Resolução Manual, enquanto novas cartas do SD17 avançam para o sistema estruturado.",

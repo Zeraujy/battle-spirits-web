@@ -209,7 +209,13 @@ function decisionCandidate(target) {
   };
 }
 
-function decisionFromTargets(action, resolvedTargets, context) {
+function decisionPlayerId(match, action, context) {
+  const chooser = String(action.chooser ?? action.decisionPlayer ?? "self").toLowerCase();
+  if (["opponent", "enemy", "other"].includes(chooser)) return otherPlayerId(match, context.sourcePlayerId);
+  return context.sourcePlayerId;
+}
+
+function decisionFromTargets(match, action, resolvedTargets, context) {
   const minimum = Math.max(0, Number(resolvedTargets.minimum ?? action.minTargets ?? (action.allowZero ? 0 : 1)));
   const maximum = Math.max(
     minimum,
@@ -228,7 +234,7 @@ function decisionFromTargets(action, resolvedTargets, context) {
       : canonicalActionType(action.type) === "selectMultipleTargets" || Number(resolvedTargets.requested || 1) > 1
         ? "selectMultipleTargets"
         : "selectTarget",
-    playerId: context.sourcePlayerId,
+    playerId: decisionPlayerId(match, action, context),
     action,
     context,
     candidates: (resolvedTargets.targets || []).map(decisionCandidate).filter((item) => item.instanceId),
@@ -339,7 +345,7 @@ function applyToTargets(match, action, cardIndex, context, updater) {
       notes: [resolved.reason],
       manualResolutionNeeded: true,
       executed: false,
-      decision: decisionFromTargets(action, resolved, context)
+      decision: decisionFromTargets(match, action, resolved, context)
     };
   }
   if (resolved.status === "none") {
@@ -392,7 +398,10 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     if (!player) return { match, notes: ["Jogador alvo inválido para draw."], manualResolutionNeeded: true, executed: false };
     const deck = [...player.deck];
     const hand = [...player.hand];
-    const count = Math.max(0, Number(action.count ?? action.amount ?? 1));
+    const selectedMultiplier = Number(action.amountPerSelected ?? action.countPerSelected ?? 0);
+    const selectedCount = Array.isArray(context.selectedTargets) ? context.selectedTargets.length : 0;
+    const rawCount = selectedMultiplier > 0 ? selectedCount * selectedMultiplier : (action.count ?? action.amount ?? 1);
+    const count = Math.max(0, Number(rawCount));
     let drew = 0;
     while (drew < count) {
       if (!deck.length) {
@@ -444,21 +453,49 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
 
 
   if (type === "addCore" || type === "removeCore") {
-    const count = Math.max(0, Number(action.count ?? action.amount ?? 1));
+    const configuredCount = Math.max(0, Number(action.count ?? action.amount ?? 1));
     return applyToTargets(next, action, cardIndex, context, (working, target) => {
       const current = findPhysicalCard(working, target.physical.instanceId);
       if (!current || !["spirits", "nexuses", "other"].includes(current.zone)) return working;
       const player = working.players[current.playerId];
       const available = Number(current.card.cores?.regular || 0);
-      const delta = type === "addCore" ? count : -Math.min(count, available);
+      const count = action.allCores === true ? available : configuredCount;
+      const moved = Math.min(count, available);
+      const delta = type === "addCore" ? count : -moved;
       const updated = updateFieldCard(player, current.card.instanceId, (physical) => ({
         ...physical,
         cores: { ...physical.cores, regular: Math.max(0, Number(physical.cores?.regular || 0) + delta) }
       }));
-      const reserveDelta = type === "removeCore" ? Math.min(count, available) : 0;
-      const withReserve = reserveDelta ? { ...updated, reserve: Number(updated.reserve || 0) + reserveDelta } : updated;
-      return { ...working, players: { ...working.players, [current.playerId]: withReserve } };
+      if (type !== "removeCore" || moved <= 0) return { ...working, players: { ...working.players, [current.playerId]: updated } };
+      const destination = String(action.destination || action.to || "reserve").toLowerCase();
+      const withDestination = destination === "trash"
+        ? { ...updated, trashCores: Number(updated.trashCores || 0) + moved }
+        : { ...updated, reserve: Number(updated.reserve || 0) + moved };
+      return { ...working, players: { ...working.players, [current.playerId]: withDestination } };
     });
+  }
+
+  if (type === "trimCoresOnMatching") {
+    const selector = action.selector || { owner: "any", zones: ["field"], cardTypes: ["spirit"] };
+    const leave = Math.max(0, Number(action.leave ?? 1));
+    const targets = collectTargets(next, cardIndex, selector, context);
+    let movedTotal = 0;
+    for (const target of targets) {
+      const current = findPhysicalCard(next, target.physical.instanceId);
+      if (!current || !["spirits", "nexuses", "other"].includes(current.zone)) continue;
+      const regular = Number(current.card.cores?.regular || 0);
+      const hasSoul = Boolean(current.card.cores?.soul);
+      const regularToKeep = Math.max(0, leave - (action.preferSoul !== false && hasSoul ? 1 : 0));
+      const move = Math.max(0, regular - regularToKeep);
+      if (!move) continue;
+      let player = updateFieldCard(next.players[current.playerId], current.card.instanceId, (physical) => ({
+        ...physical, cores: { ...physical.cores, regular: Math.max(0, Number(physical.cores?.regular || 0) - move) }
+      }));
+      player = { ...player, reserve: Number(player.reserve || 0) + move };
+      next = { ...next, players: { ...next.players, [current.playerId]: player } };
+      movedTotal += move;
+    }
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: movedTotal };
   }
 
   if (type === "moveCore") {
@@ -637,6 +674,10 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     return applyToTargets(next, targetAction, cardIndex, context, (working, target) => {
       if (baseType === "modifyBP") {
         let amount = Number(action.amount ?? action.value ?? action.bp ?? 0);
+        if (action.amountPerMatching != null && action.countSelector) {
+          const matches = collectTargets(working, cardIndex, action.countSelector, context);
+          amount = Number(action.amountPerMatching || 0) * matches.length;
+        }
         if (String(rawAction.type || "").replace(/[\s_-]+/g, "").toLowerCase() === "reducebp") amount = -Math.abs(amount);
         const current = findPhysicalCard(working, target.physical.instanceId);
         if (!current) return working;
@@ -669,7 +710,8 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
             cause: "effect",
             destroyedByPlayerId: context.sourcePlayerId || null,
             destroyedByCardType: context.sourceCard?.cardType || null,
-            destroyedByCardId: context.sourceCard?.id || null
+            destroyedByCardId: context.sourceCard?.id || null,
+            destroyedByInstanceId: context.sourceInstanceId || null
           }
         });
         return moved;
@@ -761,6 +803,75 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     return resolveNested(next, asActionArray(branch), cardIndex, context);
   }
 
+  if (type === "performSpecifiedAttack") {
+    const target = context.selectedTargets?.[0] || null;
+    const battle = next.battle;
+    if (!battle || !target?.physical?.instanceId) {
+      return { match: next, notes: ["Specified attack requires an active battle and a selected opposing Spirit/Ultimate."], manualResolutionNeeded: true, executed: false };
+    }
+    if (target.playerId !== battle.defenderPlayerId) {
+      return { match: next, notes: ["Specified attack target must belong to the defending player."], manualResolutionNeeded: true, executed: false };
+    }
+    const targetCard = getDatabaseCard(cardIndex, target.physical);
+    if (!["spirit", "ultimate"].includes(String(targetCard?.cardType || "").toLowerCase())) {
+      return { match: next, notes: ["Specified attack target must be a Spirit or Ultimate."], manualResolutionNeeded: true, executed: false };
+    }
+
+    let defender = next.players[battle.defenderPlayerId];
+    defender = updateFieldCard(defender, target.physical.instanceId, (physical) => ({ ...physical, exhausted: true }));
+    next = {
+      ...next,
+      players: { ...next.players, [battle.defenderPlayerId]: defender },
+      battle: {
+        ...battle,
+        blockerInstanceId: target.physical.instanceId,
+        stage: "flash2",
+        flash: { number: 2, priorityPlayerId: battle.defenderPlayerId, consecutivePasses: 0 },
+        restrictions: { ...(battle.restrictions || {}), specifiedAttack: true, specifiedBlockerInstanceId: target.physical.instanceId }
+      }
+    };
+
+    const battleContext = {
+      battleId: battle.id,
+      attackerPlayerId: battle.attackerPlayerId,
+      defenderPlayerId: battle.defenderPlayerId,
+      attackerInstanceId: battle.attackerInstanceId,
+      blockerInstanceId: target.physical.instanceId,
+      directAttack: false,
+      blocked: true,
+      specifiedAttack: true
+    };
+    next = queueDeferredCanonicalEvent(next, {
+      event: "whenBlocks",
+      sourcePlayerId: battle.defenderPlayerId,
+      sourceInstanceId: target.physical.instanceId,
+      eventPlayerId: battle.defenderPlayerId,
+      context: battleContext
+    });
+    next = queueDeferredCanonicalEvent(next, {
+      event: "whenBlocked",
+      sourcePlayerId: battle.attackerPlayerId,
+      sourceInstanceId: battle.attackerInstanceId,
+      eventPlayerId: battle.attackerPlayerId,
+      context: battleContext
+    });
+    next = queueDeferredCanonicalEvent(next, {
+      event: "whenBattles",
+      sourcePlayerId: battle.attackerPlayerId,
+      sourceInstanceId: battle.attackerInstanceId,
+      eventPlayerId: battle.attackerPlayerId,
+      context: battleContext
+    });
+    next = queueDeferredCanonicalEvent(next, {
+      event: "whenBattles",
+      sourcePlayerId: battle.defenderPlayerId,
+      sourceInstanceId: target.physical.instanceId,
+      eventPlayerId: battle.defenderPlayerId,
+      context: battleContext
+    });
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
   if (type === "setBattleRestriction") {
     if (!next.battle) {
       return { match: next, notes: ["Não existe batalha ativa para aplicar a restrição."], manualResolutionNeeded: true, executed: false };
@@ -820,7 +931,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         notes: [resolvedTargets.reason],
         manualResolutionNeeded: true,
         executed: false,
-        decision: { ...decisionFromTargets(action, resolvedTargets, context), kind: type, action }
+        decision: { ...decisionFromTargets(next, action, resolvedTargets, context), kind: type, action }
       };
     }
     if (resolvedTargets.status === "none") return { match, notes: ["Nenhuma carta válida encontrada para a escolha."], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
@@ -874,7 +985,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         notes: [resolvedTargets.reason],
         manualResolutionNeeded: true,
         executed: false,
-        decision: decisionFromTargets(action, resolvedTargets, context)
+        decision: decisionFromTargets(next, action, resolvedTargets, context)
       };
     }
     if (resolvedTargets.status === "none") return { match, notes: ["Nenhum alvo válido encontrado."], manualResolutionNeeded: false, executed: true, affectedCount: 0 };

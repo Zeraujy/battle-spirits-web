@@ -1,6 +1,6 @@
 import { getCurrentLevel, getDatabaseCard, getEffectiveCost, getFieldSymbols } from "../selectors.js";
 import { otherPlayerId } from "../utils.js";
-import { collectTargets } from "./targetingEngine.js";
+import { cardKeywords, collectTargets } from "./targetingEngine.js";
 
 export const ConditionType = Object.freeze({
   LIFE: "life",
@@ -120,16 +120,76 @@ function typedConditionMatches(match, condition, context, cardIndex) {
   }
   if (type === "ultimateTriggerWasHit") return Boolean(context.ultimateTrigger?.originalHit ?? context.ultimateTrigger?.hit);
   if (type === "attackNumber") return compareNumber(Number(context.attackNumber ?? match.temporary?.attackCounts?.[sourcePlayerId] ?? 0), condition);
+  if (type === "sourceAttackNumber") return compareNumber(Number(context.sourceAttackNumber ?? match.temporary?.attackCountsByInstance?.[context.sourceInstanceId] ?? 0), condition);
   if (type === "eventSourceCardType") {
     const cardId = context.eventSourceCardId || context.sourceCard?.id;
     const card = cardId ? cardIndex.get(cardId) : null;
     const expected = String(condition.cardType ?? condition.value ?? "").toLowerCase();
     return Boolean(card && String(card.cardType || "").toLowerCase() === expected);
   }
+  if (type === "eventSourceColor") {
+    const cardId = context.eventSourceCardId || context.sourceCard?.id;
+    const card = cardId ? cardIndex.get(cardId) : null;
+    const expected = String(condition.color ?? condition.value ?? "").toLowerCase();
+    return Boolean(card && (card.colors || []).map((color) => String(color).toLowerCase()).includes(expected));
+  }
+  if (type === "eventSourceCost") {
+    const cardId = context.eventSourceCardId || context.sourceCard?.id;
+    const card = cardId ? cardIndex.get(cardId) : null;
+    return Boolean(card && compareNumber(Number(card.cost || 0), condition));
+  }
+  if (type === "eventSourceFamily") {
+    const cardId = context.eventSourceCardId || context.sourceCard?.id;
+    const card = cardId ? cardIndex.get(cardId) : null;
+    const expected = String(condition.family ?? condition.value ?? "").toLowerCase();
+    return Boolean(card && (card.families || []).some((family) => String(family).toLowerCase() === expected));
+  }
   if (type === "eventCause") return String(context.cause || "") === String(condition.value ?? condition.cause ?? "");
   if (type === "eventDestroyedByOpponent") {
     const destroyedBy = context.destroyedByPlayerId || null;
     return Boolean(destroyedBy && sourcePlayerId && destroyedBy !== sourcePlayerId);
+  }
+  if (type === "eventDestroyedBySelf") {
+    const destroyedBy = context.destroyedByPlayerId || null;
+    return Boolean(destroyedBy && sourcePlayerId && destroyedBy === sourcePlayerId);
+  }
+  if (type === "eventDestroyedByCardType") {
+    return String(context.destroyedByCardType || "").toLowerCase() === String(condition.cardType ?? condition.value ?? "").toLowerCase();
+  }
+  if (type === "eventDestroyerKeyword") {
+    const instanceId = context.destroyedByInstanceId || null;
+    if (!instanceId) return false;
+    const candidates = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
+    const candidate = candidates[0];
+    if (!candidate) return false;
+    const expected = String(condition.keyword ?? condition.value ?? "").toLowerCase().replace(/\s+/g, "");
+    return cardKeywords(candidate.card, candidate.physical).includes(expected);
+  }
+  if (type === "battleAttackerCardType") {
+    const instanceId = context.attackerInstanceId || match.battle?.attackerInstanceId || null;
+    if (!instanceId) return false;
+    const candidates = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
+    const card = candidates[0]?.card || null;
+    return String(card?.cardType || "").toLowerCase() === String(condition.cardType ?? condition.value ?? "").toLowerCase();
+  }
+  if (type === "battleAttackerBP") {
+    const instanceId = context.attackerInstanceId || match.battle?.attackerInstanceId || null;
+    if (!instanceId) return false;
+    const candidates = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
+    const physical = candidates[0]?.physical || null;
+    if (!physical) return false;
+    const bp = Number(context.attackerBP ?? physical.temporaryBP ?? 0) || Number(getCurrentLevel(candidates[0].card, physical)?.bp || 0);
+    return compareNumber(bp, condition);
+  }
+  if (type === "battleOnlyOpponentSpiritDestroyed") {
+    const destroyed = Array.isArray(context.destroyed) ? context.destroyed : [];
+    return Boolean(
+      sourcePlayerId &&
+      String(context.cause || "") === "bpComparison" &&
+      destroyed.length === 1 &&
+      destroyed[0]?.playerId !== sourcePlayerId &&
+      String(destroyed[0]?.cardType || "").toLowerCase() === "spirit"
+    );
   }
   return false;
 }

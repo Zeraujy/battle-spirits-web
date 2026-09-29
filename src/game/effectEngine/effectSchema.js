@@ -59,7 +59,7 @@ function collectActionTypes(value, out = []) {
   }
   if (typeof value !== "object") return out;
   if (value.type) out.push(String(value.type));
-  for (const key of ["actions", "operations", "ops", "then", "else", "onSelect", "onConfirm", "afterSelect", "afterConfirm", "afterIfAny"]) {
+  for (const key of ["actions", "operations", "ops", "then", "else", "onSelect", "onConfirm", "afterSelect", "afterConfirm", "afterIfAny", "yesActions", "noActions", "onYes", "onNo"]) {
     collectActionTypes(value[key], out);
   }
   if (Array.isArray(value.options)) {

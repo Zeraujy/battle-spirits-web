@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-28T19:55:08.661Z",
+  "generatedAt": "2026-09-28T21:27:20.728Z",
   "targetPercent": 95,
   "totalSets": 11,
-  "completeSets": 2,
+  "completeSets": 4,
   "sets": [
     {
       "set": "BS13",
@@ -867,45 +867,21 @@
     {
       "set": "SD10",
       "total": 18,
-      "automated": 10,
+      "automated": 16,
       "noEffect": 1,
-      "unresolved": 8,
-      "automationPercent": 55.6,
+      "unresolved": 2,
+      "automationPercent": 88.9,
       "unsupportedTriggers": [],
       "unsupportedConditions": [],
       "unsupportedActions": [],
       "complete": false,
       "unresolvedCards": [
         {
-          "cardId": "SD10-008",
-          "status": "PARTIAL"
-        },
-        {
-          "cardId": "SD10-010",
-          "status": "PARTIAL"
-        },
-        {
-          "cardId": "SD10-011",
-          "status": "PARTIAL"
-        },
-        {
-          "cardId": "SD10-012",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "SD10-013",
-          "status": "MANUAL"
-        },
-        {
           "cardId": "SD10-015",
           "status": "MANUAL"
         },
         {
           "cardId": "SD10-X01",
-          "status": "PARTIAL"
-        },
-        {
-          "cardId": "SD10-X02",
           "status": "PARTIAL"
         }
       ]
@@ -971,50 +947,15 @@
     {
       "set": "SD13",
       "total": 18,
-      "automated": 10,
+      "automated": 18,
       "noEffect": 3,
-      "unresolved": 8,
-      "automationPercent": 55.6,
-      "unsupportedTriggers": [
-        "onOwnLowCostPurpleDestroyedBySpiritEffect"
-      ],
+      "unresolved": 0,
+      "automationPercent": 100,
+      "unsupportedTriggers": [],
       "unsupportedConditions": [],
       "unsupportedActions": [],
-      "complete": false,
-      "unresolvedCards": [
-        {
-          "cardId": "BS01-125",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "BS06-023",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "BS09-015",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "BS11-051",
-          "status": "PARTIAL"
-        },
-        {
-          "cardId": "BS11-075",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "BS12-063",
-          "status": "PARTIAL"
-        },
-        {
-          "cardId": "SD13-002",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "SD13-X01",
-          "status": "MANUAL"
-        }
-      ]
+      "complete": true,
+      "unresolvedCards": []
     },
     {
       "set": "SD15",
@@ -1106,32 +1047,15 @@
     {
       "set": "SD17",
       "total": 18,
-      "automated": 14,
+      "automated": 18,
       "noEffect": 1,
-      "unresolved": 4,
-      "automationPercent": 77.8,
+      "unresolved": 0,
+      "automationPercent": 100,
       "unsupportedTriggers": [],
       "unsupportedConditions": [],
       "unsupportedActions": [],
-      "complete": false,
-      "unresolvedCards": [
-        {
-          "cardId": "SD17-008",
-          "status": "PARTIAL"
-        },
-        {
-          "cardId": "SD17-012",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "SD17-X01",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "SD17-X02",
-          "status": "PARTIAL"
-        }
-      ]
+      "complete": true,
+      "unresolvedCards": []
     },
     {
       "set": "SD19",

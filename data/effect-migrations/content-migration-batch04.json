@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "batch": "content-migration-batch04",
+  "internalVersion": "5.0.3",
+  "sd13": {
+    "total": 18,
+    "automatedOrNoEffect": 18,
+    "status": "READY_NO_MANUAL"
+  },
+  "sd10": {
+    "total": 18,
+    "automatedOrNoEffect": 16,
+    "percentage": 88.9,
+    "pending": [
+      "SD10-015",
+      "SD10-X01"
+    ]
+  },
+  "setGate": {
+    "completed": 4,
+    "total": 11,
+    "sets": [
+      "SD13",
+      "SD17",
+      "SD19",
+      "SD20"
+    ]
+  },
+  "manualFallback": {
+    "rate": 70.96,
+    "count": 259,
+    "total": 365
+  },
+  "phase24Scenarios": 106,
+  "qa": {
+    "main": "149/149",
+    "effectEngine": "80/80",
+    "dedicated": "13/13",
+    "fullRegression": "279/279",
+    "verify": "PASS",
+    "uiAudit": "PASS",
+    "releaseAudit": "PASS",
+    "securityAudit": "PASS"
+  },
+  "coreActionTypes": 55
+}

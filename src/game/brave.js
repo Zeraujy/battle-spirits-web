@@ -2,6 +2,7 @@ import { findPhysicalCard, getDatabaseCard, getCurrentLevel } from "./selectors.
 import { updateFieldCard, removeFieldCard } from "./zones.js";
 import { appendLog } from "./utils.js";
 import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
+import { cardKeywords } from "./effectEngine/targetingEngine.js";
 
 function minimumBraveCores(card) {
   const levels = (card?.levels || [])
@@ -55,17 +56,20 @@ function normalizeTypedCondition(condition) {
   if (["spirit", "ultimate"].includes(type)) {
     return { cardTypes: [type] };
   }
+  if (["keyword", "haskeyword", "requireskeyword"].includes(type)) {
+    return { keywords: normalizeList(value ?? condition?.keyword) };
+  }
 
   return null;
 }
 
-function structuredConditionResult(condition, hostCard) {
+function structuredConditionResult(condition, hostCard, hostPhysical = null) {
   if (!condition || typeof condition !== "object") {
     return { known: false, matches: false, reason: "Condição de Combine não estruturada." };
   }
 
   if (Array.isArray(condition)) {
-    const children = condition.map((item) => structuredConditionResult(item, hostCard));
+    const children = condition.map((item) => structuredConditionResult(item, hostCard, hostPhysical));
     if (children.some((child) => !child.known)) {
       return { known: false, matches: false, reason: "Parte da condição de Combine não está estruturada." };
     }
@@ -75,7 +79,7 @@ function structuredConditionResult(condition, hostCard) {
 
   if (Array.isArray(condition.all) || Array.isArray(condition.and)) {
     const list = condition.all || condition.and;
-    const children = list.map((item) => structuredConditionResult(item, hostCard));
+    const children = list.map((item) => structuredConditionResult(item, hostCard, hostPhysical));
     if (children.some((child) => !child.known)) {
       return { known: false, matches: false, reason: "Parte da condição de Combine não está estruturada." };
     }
@@ -85,7 +89,7 @@ function structuredConditionResult(condition, hostCard) {
 
   if (Array.isArray(condition.any) || Array.isArray(condition.or)) {
     const list = condition.any || condition.or;
-    const children = list.map((item) => structuredConditionResult(item, hostCard));
+    const children = list.map((item) => structuredConditionResult(item, hostCard, hostPhysical));
     if (children.some((child) => child.known && child.matches)) {
       return { known: true, matches: true, reason: null };
     }
@@ -96,7 +100,7 @@ function structuredConditionResult(condition, hostCard) {
   }
 
   if (condition.not) {
-    const child = structuredConditionResult(condition.not, hostCard);
+    const child = structuredConditionResult(condition.not, hostCard, hostPhysical);
     if (!child.known) return child;
     return child.matches
       ? { known: true, matches: false, reason: "O alvo possui uma característica proibida pela condição de Combine." }
@@ -121,6 +125,14 @@ function structuredConditionResult(condition, hostCard) {
     return { known: true, matches: false, reason: `O alvo precisa pertencer à família ${families.join(" / ")}.` };
   }
 
+  const keywords = normalizeList(normalized.keywords ?? normalized.keyword).map((keyword) => String(keyword).toLowerCase().replace(/\s+/g, ""));
+  if (keywords.length) {
+    const activeKeywords = cardKeywords(hostCard, hostPhysical);
+    if (!keywords.some((keyword) => activeKeywords.includes(keyword))) {
+      return { known: true, matches: false, reason: `O alvo precisa possuir ${keywords.join(" / ")}.` };
+    }
+  }
+
   const minCost = normalized.minCost ?? normalized.minimumCost ?? normalized.costAtLeast;
   const maxCost = normalized.maxCost ?? normalized.maximumCost ?? normalized.costAtMost;
   const exactCost = normalized.exactCost ?? normalized.costEquals;
@@ -137,7 +149,7 @@ function structuredConditionResult(condition, hostCard) {
   }
 
   const recognizedKeys = [
-    "cardTypes", "cardType", "colors", "color", "families", "family",
+    "cardTypes", "cardType", "colors", "color", "families", "family", "keywords", "keyword",
     "minCost", "minimumCost", "costAtLeast", "maxCost", "maximumCost", "costAtMost",
     "exactCost", "costEquals", "type", "value", "all", "and", "any", "or", "not"
   ];
@@ -169,7 +181,7 @@ export function evaluateBraveCondition(card, hostCard, options = {}) {
       : { matches: false, manual: true, reason: condition };
   }
 
-  const result = structuredConditionResult(condition, hostCard);
+  const result = structuredConditionResult(condition, hostCard, options.hostPhysical || null);
   if (!result.known) {
     return options.confirmCondition === true
       ? { matches: true, manual: true, reason: null }
@@ -205,7 +217,8 @@ export function getLegalBraveHosts(match, playerId, braveInstanceId, cardIndex, 
     .map((physical) => {
       const card = getDatabaseCard(cardIndex, physical);
       const evaluation = evaluateBraveCondition(braveCard, card, {
-        confirmCondition: options.confirmManual === true
+        confirmCondition: options.confirmManual === true,
+        hostPhysical: physical
       });
       return {
         physical,
@@ -263,7 +276,7 @@ export function combineBrave(match, playerId, braveInstanceId, hostInstanceId, c
   if (!["spirit", "ultimate"].includes(hostCard?.cardType)) return { ok: false, error: "Este alvo não é um Spirit/Ultimate compatível." };
   if (hostAlreadyCombined(match, hostInstanceId, braveInstanceId)) return { ok: false, error: "Este alvo já possui um Brave combinado." };
 
-  const evaluation = evaluateBraveCondition(braveCard, hostCard, options);
+  const evaluation = evaluateBraveCondition(braveCard, hostCard, { ...options, hostPhysical: hostCtx?.card || options.hostPhysical || null });
   if (!evaluation.matches) return { ok: false, error: evaluation.reason || "A condição de combinação do Brave não foi cumprida." };
 
   let player = match.players[playerId];
@@ -307,7 +320,7 @@ export function exchangeBrave(match, playerId, braveInstanceId, newHostInstanceI
 
   const braveCard = getDatabaseCard(cardIndex, braveCtx.card);
   const newHostCard = getDatabaseCard(cardIndex, newHostCtx.card);
-  const evaluation = evaluateBraveCondition(braveCard, newHostCard, options);
+  const evaluation = evaluateBraveCondition(braveCard, newHostCard, { ...options, hostPhysical: newHostCtx?.card || options.hostPhysical || null });
   if (!evaluation.matches) return { ok: false, error: evaluation.reason || "A condição de combinação não foi cumprida." };
 
   const oldHostCtx = findPhysicalCard(match, braveCtx.card.combinedWith);
@@ -421,7 +434,7 @@ export function enforceBraveConditions(match, cardIndex) {
       const hostCard = hostCtx ? getDatabaseCard(cardIndex, hostCtx.card) : null;
       if (!hostCtx || !hostCard) continue;
 
-      const evaluation = evaluateBraveCondition(braveCard, hostCard);
+      const evaluation = evaluateBraveCondition(braveCard, hostCard, { hostPhysical: hostCtx?.card || null });
       if (evaluation.manual || evaluation.matches) continue;
 
       const separated = separateBrave(next, playerId, currentBraveCtx.card.instanceId, cardIndex, { forced: true });

@@ -52,9 +52,15 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "ultimateTriggerRevealedColor",
   "ultimateTriggerWasHit",
   "attackNumber",
+  "sourceAttackNumber",
   "eventSourceCardType",
+  "eventSourceColor",
+  "eventSourceCost",
+  "eventSourceFamily",
   "eventCause",
-  "eventDestroyedByOpponent"
+  "eventDestroyedByOpponent", "eventDestroyedBySelf", "battleAttackerBP", "battleAttackerCardType", "eventDestroyerKeyword",
+  "eventDestroyedByCardType",
+  "battleOnlyOpponentSpiritDestroyed"
 ]);
 
 const KNOWN_CONDITION_KEYS = new Set([
@@ -68,12 +74,13 @@ const KNOWN_CONDITION_KEYS = new Set([
   "atLeast", "atMost", "equals", "count", "minCount", "family", "families",
   "minimumCost", "maximumCost", "minCost", "maxCost",
   "player", "owner", "operator", "selector", "zone", "directAttack",
-  "attackerPlayer", "blocked", "cardType", "cause"
+  "attackerPlayer", "blocked", "cardType", "cause", "keyword", "keywords"
 ]);
 
 const NESTED_ACTION_KEYS = [
   "actions", "operations", "ops", "then", "else", "onTrue", "onFalse",
-  "onSelect", "onConfirm", "afterSelect", "afterConfirm", "afterIfAny"
+  "onSelect", "onConfirm", "afterSelect", "afterConfirm", "afterIfAny",
+  "yesActions", "noActions", "onYes", "onNo"
 ];
 
 function loadCards() {

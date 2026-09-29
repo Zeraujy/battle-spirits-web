@@ -1,7 +1,20 @@
 {
-  "generatedAt": "2026-09-28T19:54:42.361Z",
-  "scenarioCount": 88,
+  "generatedAt": "2026-09-28T21:27:20.964Z",
+  "scenarioCount": 106,
   "scenarios": [
+    {
+      "cardId": "BS01-125",
+      "set": "SD13",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd13-bs01-125-flash-auto"
+        ]
+      }
+    },
     {
       "cardId": "BS04-048",
       "set": "SD13",
@@ -25,6 +38,19 @@
       }
     },
     {
+      "cardId": "BS06-023",
+      "set": "SD13",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd13-bs06-023-summon-auto"
+        ]
+      }
+    },
+    {
       "cardId": "BS06-049",
       "set": "SD13",
       "status": "NO_EFFECT",
@@ -36,6 +62,20 @@
       }
     },
     {
+      "cardId": "BS09-015",
+      "set": "SD13",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd13-bs09-015-draw-step-auto",
+          "sd13-bs09-015-destroyed-auto"
+        ]
+      }
+    },
+    {
       "cardId": "BS10-048",
       "set": "SD15",
       "status": "NO_EFFECT",
@@ -44,6 +84,47 @@
         "noUnsupportedConditions": true,
         "noUnsupportedTriggers": true,
         "automatedEntryIds": []
+      }
+    },
+    {
+      "cardId": "BS11-051",
+      "set": "SD13",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd13-bs11-051-combined-attack",
+          "sd13-bs11-051-summon-auto"
+        ]
+      }
+    },
+    {
+      "cardId": "BS11-075",
+      "set": "SD13",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd13-bs11-075-flash-auto"
+        ]
+      }
+    },
+    {
+      "cardId": "BS12-063",
+      "set": "SD13",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd13-bs12-063-deploy",
+          "sd13-bs12-063-zombie-attack-auto"
+        ]
       }
     },
     {
@@ -214,6 +295,20 @@
       }
     },
     {
+      "cardId": "SD10-008",
+      "set": "SD10",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd10-008-charge",
+          "sd10-008-attack-step-auto"
+        ]
+      }
+    },
+    {
       "cardId": "SD10-009",
       "set": "SD10",
       "status": "AUTOMATED",
@@ -224,6 +319,63 @@
         "automatedEntryIds": [
           "sd10-009-summon",
           "sd10-009-charge"
+        ]
+      }
+    },
+    {
+      "cardId": "SD10-010",
+      "set": "SD10",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd10-010-summon",
+          "sd10-010-when-attacks-auto",
+          "sd10-010-specified-attack-auto"
+        ]
+      }
+    },
+    {
+      "cardId": "SD10-011",
+      "set": "SD10",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd10-011-summon",
+          "sd10-011-combined-attack"
+        ]
+      }
+    },
+    {
+      "cardId": "SD10-012",
+      "set": "SD10",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd10-012-attack-step-auto",
+          "sd10-012-effect-destroy-draw-auto"
+        ]
+      }
+    },
+    {
+      "cardId": "SD10-013",
+      "set": "SD10",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd10-013-life-reduced-auto",
+          "sd10-013-charge-destroy-auto"
         ]
       }
     },
@@ -251,6 +403,21 @@
         "automatedEntryIds": [
           "sd10-016-main",
           "sd10-016-flash"
+        ]
+      }
+    },
+    {
+      "cardId": "SD10-X02",
+      "set": "SD10",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd10-x02-summon",
+          "sd10-x02-charge",
+          "sd10-x02-combined-charge"
         ]
       }
     },
@@ -359,6 +526,19 @@
       }
     },
     {
+      "cardId": "SD13-002",
+      "set": "SD13",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd13-002-retaliation-auto"
+        ]
+      }
+    },
+    {
       "cardId": "SD13-003",
       "set": "SD13",
       "status": "AUTOMATED",
@@ -435,6 +615,20 @@
         "noUnsupportedTriggers": true,
         "automatedEntryIds": [
           "sd13-008-flash"
+        ]
+      }
+    },
+    {
+      "cardId": "SD13-X01",
+      "set": "SD13",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd13-x01-summon-auto",
+          "sd13-x01-attack-auto"
         ]
       }
     },
@@ -531,6 +725,20 @@
       }
     },
     {
+      "cardId": "SD17-008",
+      "set": "SD17",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd17-008-confront",
+          "sd17-008-rush-green-auto"
+        ]
+      }
+    },
+    {
       "cardId": "SD17-009",
       "set": "SD17",
       "status": "AUTOMATED",
@@ -566,6 +774,20 @@
         "automatedEntryIds": [
           "sd17-011-combined-confront",
           "sd17-011-when-summoned-auto"
+        ]
+      }
+    },
+    {
+      "cardId": "SD17-012",
+      "set": "SD17",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd17-012-bp-destroy-draw-auto",
+          "sd17-012-level2-return-auto"
         ]
       }
     },
@@ -620,6 +842,35 @@
         "automatedEntryIds": [
           "sd17-016-main",
           "sd17-016-flash"
+        ]
+      }
+    },
+    {
+      "cardId": "SD17-X01",
+      "set": "SD17",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd17-x01-when-attacks-auto",
+          "sd17-x01-rush-green-auto",
+          "sd17-x01-terra-dragon-aura-auto"
+        ]
+      }
+    },
+    {
+      "cardId": "SD17-X02",
+      "set": "SD17",
+      "status": "AUTOMATED",
+      "expected": {
+        "noUnsupportedActions": true,
+        "noUnsupportedConditions": true,
+        "noUnsupportedTriggers": true,
+        "automatedEntryIds": [
+          "sd17-x02-summon",
+          "sd17-x02-specified-attack-auto"
         ]
       }
     },

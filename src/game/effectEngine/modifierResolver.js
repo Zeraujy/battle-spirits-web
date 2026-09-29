@@ -101,6 +101,32 @@ function modifierBlockedByEffectImmunity(match, cardIndex, physical, modifier) {
   return protectedColors.some((color) => sourceColors.includes(color));
 }
 
+
+function activeKeywords(card, physical) {
+  const totalCores = Number(physical?.cores?.regular || 0) + (physical?.cores?.soul ? 1 : 0);
+  const levels = [...(card?.levels || [])].sort((a, b) => Number(a.cores || 0) - Number(b.cores || 0));
+  let currentLevel = 0;
+  for (const level of levels) if (totalCores >= Number(level.cores || 0)) currentLevel = Number(level.level || currentLevel);
+  const out = new Set();
+  const activeAtLevel = (entry) => {
+    const required = Array.isArray(entry?.levels) ? entry.levels.map(Number) : [];
+    return !required.length || required.includes(currentLevel);
+  };
+  for (const entry of card?.effects || []) {
+    if (!activeAtLevel(entry)) continue;
+    const raw = String(entry?.type || entry?.title?.en || entry?.title?.ptBR || "").toLowerCase();
+    for (const keyword of ["rush", "confront", "burst", "brave", "heavyarmor", "heavy armor", "charge"]) {
+      if (raw.includes(keyword)) out.add(keyword === "charge" ? "chargered" : keyword.replace(/\s+/g, ""));
+    }
+  }
+  for (const entry of card?.abilities || []) {
+    if (!activeAtLevel(entry)) continue;
+    if (entry?.requiresCombined === true && !physical?.combinedWith) continue;
+    const keywords = entry?.modifiers?.keywords || entry?.keywords || [];
+    for (const keyword of Array.isArray(keywords) ? keywords : [keywords]) if (keyword) out.add(String(keyword).toLowerCase().replace(/\s+/g, ""));
+  }
+  return [...out];
+}
 function selectorMatches(match, cardIndex, physical, modifier, skipProtection = false) {
   const selector = modifier.selector || {};
   const card = dbCard(cardIndex, physical);
@@ -122,6 +148,11 @@ function selectorMatches(match, cardIndex, physical, modifier, skipProtection = 
   if (families.length && !families.some((value) => (card.families || []).includes(value))) return false;
   const symbols = selector.symbols || (selector.symbol ? [selector.symbol] : []);
   if (symbols.length && !symbols.some((value) => (card.symbols || []).includes(value))) return false;
+  const keywords = selector.keywords || (selector.keyword ? [selector.keyword] : []);
+  if (keywords.length) {
+    const active = activeKeywords(card, physical);
+    if (!keywords.some((value) => active.includes(String(value).toLowerCase().replace(/\s+/g, "")))) return false;
+  }
   const cost = Number(card.cost || 0);
   if (selector.minimumCost != null && cost < Number(selector.minimumCost)) return false;
   if (selector.maximumCost != null && cost > Number(selector.maximumCost)) return false;

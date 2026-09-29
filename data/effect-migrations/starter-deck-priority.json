@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-28T20:48:59.767Z",
+  "generatedAt": "2026-09-28T23:21:47.700Z",
   "starterDecks": 17,
-  "ready": 2,
+  "ready": 4,
   "decks": [
     {
       "id": "sd01-blazing-thunder",
@@ -133,14 +133,8 @@
       "uniqueCards": 18,
       "missingRuntime": [],
       "unresolved": [
-        "SD10-008",
-        "SD10-010",
-        "SD10-011",
-        "SD10-012",
-        "SD10-013",
         "SD10-015",
-        "SD10-X01",
-        "SD10-X02"
+        "SD10-X01"
       ],
       "readyWithoutManual": false,
       "status": "NEEDS_MIGRATION"
@@ -173,18 +167,9 @@
       "title": "Attribute Eye-Opening Deck: Amethyst",
       "uniqueCards": 18,
       "missingRuntime": [],
-      "unresolved": [
-        "BS06-023",
-        "BS09-015",
-        "SD13-002",
-        "BS11-051",
-        "BS12-063",
-        "BS01-125",
-        "BS11-075",
-        "SD13-X01"
-      ],
-      "readyWithoutManual": false,
-      "status": "NEEDS_MIGRATION"
+      "unresolved": [],
+      "readyWithoutManual": true,
+      "status": "READY_NO_MANUAL"
     },
     {
       "id": "sd14-emerald",
@@ -279,14 +264,9 @@
       "title": "New Tsurugi Deck: Darkness Fang",
       "uniqueCards": 18,
       "missingRuntime": [],
-      "unresolved": [
-        "SD17-008",
-        "SD17-012",
-        "SD17-X01",
-        "SD17-X02"
-      ],
-      "readyWithoutManual": false,
-      "status": "NEEDS_MIGRATION"
+      "unresolved": [],
+      "readyWithoutManual": true,
+      "status": "READY_NO_MANUAL"
     },
     {
       "id": "sd19-scorching-zero",

@@ -1,22 +1,26 @@
 {
   "schemaVersion": 1,
-  "migrationId": "sd17-content-migration-batch2",
+  "migrationId": "sd17-content-migration-batch3",
   "set": "SD17",
   "write": true,
   "definedCards": [
+    "SD17-008",
+    "SD17-012",
+    "SD17-X01",
     "SD17-009",
     "SD17-011",
     "SD17-X02",
     "SD17-005",
     "SD17-013"
   ],
-  "definedCount": 5,
+  "definedCount": 8,
   "changedCards": [
-    "SD17-009",
-    "SD17-011",
+    "SD17-008",
+    "SD17-012",
+    "SD17-X01",
     "SD17-X02"
   ],
-  "changedCount": 3,
+  "changedCount": 4,
   "errors": [],
-  "notes": "SD17 migration through Batch 02: Batch 01 auras are retained, PiercingDragon Styragorn gains dynamic source-BP targeting, and ArmedMachineDragon Silveed gains structured Rush-trash retrieval and Terra Dragon Combine validation."
+  "notes": "SD17 migration through Batch 03: closes the remaining Rush, BP-comparison observer, Terra Dragon aura, and specified-attack gaps with reusable Effect Schema v2 actions/conditions."
 }

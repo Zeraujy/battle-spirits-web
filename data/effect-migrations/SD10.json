@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "migrationId": "sd10-content-migration-batch4",
+  "set": "SD10",
+  "write": true,
+  "definedCards": [
+    "SD10-008",
+    "SD10-010",
+    "SD10-011",
+    "SD10-012",
+    "SD10-013",
+    "SD10-X02"
+  ],
+  "definedCount": 6,
+  "changedCards": [
+    "SD10-013"
+  ],
+  "changedCount": 1,
+  "errors": [],
+  "notes": "SD10 migration pass: structures Charge-aware auras, dynamic attack BP, Charge-based Brave Combine, Astral Dragon attack support, effect-destruction draw observation, specified attack, and Big Bang Energy summon/draw resolution."
+}

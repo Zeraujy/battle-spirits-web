@@ -636,7 +636,8 @@
         "text": {
           "en": "All your Spirits with Charge gain +2000 BP.",
           "ptBR": "Todos os seus Spirits com Charge recebem +2000 BP."
-        }
+        },
+        "automationRef": "sd10-008-attack-step-auto"
       },
       {
         "id": "sd10-008-charge-display",
@@ -668,6 +669,49 @@
         },
         "levels": [
           2
+        ]
+      },
+      {
+        "id": "sd10-008-attack-step-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 2000,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "keywords": [
+                "chargeRed"
+              ]
+            },
+            "duration": "whileConditionTrue",
+            "condition": {
+              "all": [
+                {
+                  "type": "phase",
+                  "value": "attack"
+                },
+                {
+                  "type": "activePlayer",
+                  "player": "self"
+                }
+              ]
+            }
+          }
         ]
       }
     ],
@@ -871,7 +915,8 @@
         "text": {
           "en": "This Spirit gains +2000 BP for each of your Spirits with Charge.",
           "ptBR": "Este Spirit recebe +2000 BP para cada um dos seus Spirits com Charge."
-        }
+        },
+        "automationRef": "sd10-010-when-attacks-auto"
       },
       {
         "id": "sd10-010-specified-attack-display",
@@ -887,7 +932,8 @@
         "text": {
           "en": "This Spirit may make a specified attack.",
           "ptBR": "Este Spirit pode realizar um ataque especificado."
-        }
+        },
+        "automationRef": "sd10-010-specified-attack-auto"
       }
     ],
     "abilities": [
@@ -912,6 +958,77 @@
             "onConfirm": {
               "type": "destroy"
             }
+          }
+        ]
+      },
+      {
+        "id": "sd10-010-when-attacks-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "target": "source",
+            "amountPerMatching": 2000,
+            "countSelector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "keywords": [
+                "chargeRed"
+              ]
+            },
+            "duration": "battle"
+          }
+        ]
+      },
+      {
+        "id": "sd10-010-specified-attack-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "titlePT": "StormDragon Supercell-Dragoon",
+            "titleEN": "StormDragon Supercell-Dragoon",
+            "instructionPT": "Realizar um specified attack contra 1 Spirit ou Ultimate do oponente?",
+            "instructionEN": "Make a specified attack against 1 opposing Spirit or Ultimate?",
+            "yesActions": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Specified Attack",
+                "titleEN": "Specified Attack",
+                "instructionPT": "Escolha o Spirit ou Ultimate que será atacado.",
+                "instructionEN": "Choose the Spirit or Ultimate to attack.",
+                "selector": {
+                  "owner": "opponent",
+                  "cardTypes": [
+                    "spirit",
+                    "ultimate"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "performSpecifiedAttack"
+                }
+              }
+            ]
           }
         ]
       }
@@ -983,7 +1100,8 @@
         "text": {
           "en": "Combine with a Spirit that has [Charge].",
           "ptBR": "Combine com um Spirit que possua [Charge]."
-        }
+        },
+        "automationRef": "engineNative:braveCondition"
       },
       {
         "id": "sd10-011-while-combined-display",
@@ -1047,7 +1165,14 @@
         "requiresCombined": true
       }
     ],
-    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-011.webp"
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-011.webp",
+    "braveCondition": {
+      "type": "keyword",
+      "value": "chargeRed",
+      "cardTypes": [
+        "spirit"
+      ]
+    }
   },
   {
     "id": "SD10-012",
@@ -1104,7 +1229,8 @@
         "text": {
           "en": "All your Astral Dragon Spirits gain +2000 BP.",
           "ptBR": "Todos os seus Spirits da família Astral Dragon recebem +2000 BP."
-        }
+        },
+        "automationRef": "sd10-012-attack-step-auto"
       },
       {
         "id": "sd10-012-destroy-draw-display",
@@ -1120,10 +1246,86 @@
         "text": {
           "en": "When your Spirit effect destroys an opposing Spirit, draw 1 card.",
           "ptBR": "Quando o efeito de um dos seus Spirits destruir um Spirit do oponente, compre 1 carta."
-        }
+        },
+        "automationRef": "sd10-012-effect-destroy-draw-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd10-012-attack-step-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 2000,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Astral Dragon"
+              ]
+            },
+            "duration": "whileConditionTrue",
+            "condition": {
+              "all": [
+                {
+                  "type": "phase",
+                  "value": "attack"
+                },
+                {
+                  "type": "activePlayer",
+                  "player": "self"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd10-012-effect-destroy-draw-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "type": "eventDestroyedBySelf"
+          },
+          {
+            "type": "eventDestroyedByCardType",
+            "cardType": "spirit"
+          }
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-012.webp"
   },
   {
@@ -1182,7 +1384,8 @@
         "text": {
           "en": "When your Life is reduced by an opposing Spirit attack, destroy that attacking Spirit if it has 5000 BP or less.",
           "ptBR": "Quando sua Life for reduzida pelo ataque de um Spirit do oponente, destrua aquele Spirit atacante se ele tiver 5000 BP ou menos."
-        }
+        },
+        "automationRef": "sd10-013-life-reduced-auto"
       },
       {
         "id": "sd10-013-charge-destroy-display",
@@ -1198,10 +1401,89 @@
         "text": {
           "en": "When your Spirit with Charge destroys an opposing Spirit, destroy 1 opposing Nexus.",
           "ptBR": "Quando um dos seus Spirits com Charge destruir um Spirit do oponente, destrua 1 Nexus do oponente."
-        }
+        },
+        "automationRef": "sd10-013-charge-destroy-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd10-013-life-reduced-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventCause",
+            "value": "unblockedAttack"
+          },
+          {
+            "type": "battleAttackerCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "battleAttackerBP",
+            "atMost": 5000
+          }
+        ],
+        "actions": [
+          {
+            "type": "destroy",
+            "target": "battleAttacker"
+          }
+        ]
+      },
+      {
+        "id": "sd10-013-charge-destroy-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventDestroyedBySelf"
+          },
+          {
+            "type": "eventDestroyedByCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventDestroyerKeyword",
+            "keyword": "chargeRed"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Charge Destruction",
+            "titleEN": "Charge Destruction",
+            "instructionPT": "Escolha 1 Nexus do oponente para destruir.",
+            "instructionEN": "Choose 1 opposing Nexus to destroy.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-013.webp"
   },
   {
@@ -1630,7 +1912,8 @@
         "text": {
           "en": "Your BP-destruction effect limits are increased by 1000.",
           "ptBR": "O limite de BP dos seus efeitos de destruição por BP aumenta em 1000."
-        }
+        },
+        "automationRef": "sd10-x02-charge"
       },
       {
         "id": "sd10-x02-combine-condition-display",
@@ -1644,7 +1927,8 @@
         "text": {
           "en": "Combine with a Spirit that costs 5 or more.",
           "ptBR": "Combine com um Spirit de custo 5 ou mais."
-        }
+        },
+        "automationRef": "engineNative:braveCondition"
       },
       {
         "id": "sd10-x02-while-combined-display",
@@ -1658,16 +1942,25 @@
         "text": {
           "en": "The combined Spirit has [Charge].",
           "ptBR": "O Spirit combinado possui [Charge]."
-        }
+        },
+        "automationRef": "sd10-x02-combined-charge"
       }
     ],
     "abilities": [
       {
         "id": "sd10-x02-summon",
-        "event": "whenSummoned",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
         "actions": [
           {
-            "type": "destroyAllMatching",
+            "type": "selectMultipleTargets",
             "selector": {
               "owner": "opponent",
               "cardTypes": [
@@ -1675,7 +1968,18 @@
               ],
               "maxBP": 3000,
               "chargeableBPDestruction": true
-            }
+            },
+            "maxTargets": 99,
+            "asManyAsPossible": true,
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterSelect": [
+              {
+                "type": "draw",
+                "amountPerSelected": 1
+              }
+            ]
           }
         ]
       },
@@ -1701,7 +2005,14 @@
         }
       }
     ],
-    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-X02.webp"
+    "image": "/cards-database/SD10-TsurugiDeck-Shining Charge/SD10-X02.webp",
+    "braveCondition": {
+      "type": "costAtLeast",
+      "value": 5,
+      "cardTypes": [
+        "spirit"
+      ]
+    }
   },
   {
     "id": "SD17-001",
@@ -2469,7 +2780,8 @@
         "text": {
           "en": "On this Spirit's first attack this turn, refresh it.",
           "ptBR": "No primeiro ataque deste Spirit neste turno, dê Refresh nele."
-        }
+        },
+        "automationRef": "sd17-008-rush-green-auto"
       }
     ],
     "abilities": [
@@ -2481,6 +2793,35 @@
             "confront"
           ]
         }
+      },
+      {
+        "id": "sd17-008-rush-green-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "controlsSymbolColor",
+            "color": "green"
+          },
+          {
+            "type": "sourceAttackNumber",
+            "equals": 1
+          }
+        ],
+        "actions": [
+          {
+            "type": "refresh",
+            "target": "source"
+          }
+        ]
       }
     ],
     "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-008.webp"
@@ -2861,7 +3202,8 @@
         "text": {
           "en": "When only an opposing Spirit is destroyed by BP comparison, draw 1 card.",
           "ptBR": "Quando apenas um Spirit do oponente for destruído por comparação de BP, compre 1 carta."
-        }
+        },
+        "automationRef": "sd17-012-bp-destroy-draw-auto"
       },
       {
         "id": "sd17-012-level2-return-display",
@@ -2877,10 +3219,94 @@
         "text": {
           "en": "When one of your Spirits is destroyed by an opposing Spirit, return 1 Terra Dragon Spirit card from your Trash to your hand.",
           "ptBR": "Quando um dos seus Spirits for destruído por um Spirit do oponente, devolva 1 carta de Spirit da família Terra Dragon do seu Trash para a sua mão."
-        }
+        },
+        "automationRef": "sd17-012-level2-return-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd17-012-bp-destroy-draw-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "type": "activePlayer",
+            "player": "self"
+          },
+          {
+            "type": "battleOnlyOpponentSpiritDestroyed"
+          }
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": "sd17-012-level2-return-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventDestroyedByOpponent"
+          },
+          {
+            "type": "eventDestroyedByCardType",
+            "cardType": "spirit"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Primeval Forest",
+            "titleEN": "Primeval Forest",
+            "instructionPT": "Escolha 1 Spirit Terra Dragon no seu Trash para devolver à mão.",
+            "instructionEN": "Choose 1 Terra Dragon Spirit in your Trash to return to hand.",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "trash"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Terra Dragon"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-012.webp"
   },
   {
@@ -3369,7 +3795,8 @@
         "text": {
           "en": "Destroy 1 opposing Spirit with BP equal to or less than this Spirit.",
           "ptBR": "Destrua 1 Spirit do oponente com BP igual ou menor que o BP deste Spirit."
-        }
+        },
+        "automationRef": "sd17-x01-when-attacks-auto"
       },
       {
         "id": "sd17-x01-rush-green-display",
@@ -3387,7 +3814,8 @@
         "text": {
           "en": "If only the opposing Spirit is destroyed by BP comparison, move 1 Core from the opponent's Life to their Reserve.",
           "ptBR": "Se apenas o Spirit do oponente for destruído por comparação de BP, mova 1 Core da Life do oponente para a Reserve dele."
-        }
+        },
+        "automationRef": "sd17-x01-rush-green-auto"
       },
       {
         "id": "sd17-x01-attack-step-display",
@@ -3404,10 +3832,119 @@
         "text": {
           "en": "All your Terra Dragon Spirits gain +3000 BP.",
           "ptBR": "Todos os seus Spirits da família Terra Dragon recebem +3000 BP."
-        }
+        },
+        "automationRef": "sd17-x01-terra-dragon-aura-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd17-x01-when-attacks-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "DarkDragon Dark-Tyrannosaura",
+            "titleEN": "DarkDragon Dark-Tyrannosaura",
+            "instructionPT": "Escolha 1 Spirit do oponente com BP igual ou menor que este Spirit.",
+            "instructionEN": "Choose 1 opposing Spirit with BP equal to or less than this Spirit.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumBPFromSource": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd17-x01-rush-green-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "controlsSymbolColor",
+            "color": "green"
+          },
+          {
+            "type": "battleOnlyOpponentSpiritDestroyed"
+          }
+        ],
+        "actions": [
+          {
+            "type": "moveLifeToReserve",
+            "player": "opponent",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": "sd17-x01-terra-dragon-aura-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 3000,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Terra Dragon"
+              ]
+            },
+            "duration": "whileConditionTrue",
+            "condition": {
+              "all": [
+                {
+                  "type": "phase",
+                  "value": "attack"
+                },
+                {
+                  "type": "activePlayer",
+                  "player": "self"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD17-NewTsurugiDeck-DarknessFang/SD17-X01.webp"
   },
   {
@@ -3491,7 +4028,8 @@
         "text": {
           "en": "The combined Spirit may make a specified attack.",
           "ptBR": "O Spirit combinado pode realizar um ataque especificado."
-        }
+        },
+        "automationRef": "sd17-x02-specified-attack-auto"
       }
     ],
     "abilities": [
@@ -3516,6 +4054,45 @@
               {
                 "type": "draw",
                 "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sd17-x02-specified-attack-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "titlePT": "DarknessDemonSword Dark-Blade",
+            "titleEN": "DarknessDemonSword Dark-Blade",
+            "instructionPT": "Realizar um specified attack contra 1 Spirit ou Ultimate do oponente?",
+            "instructionEN": "Make a specified attack against 1 opposing Spirit or Ultimate?",
+            "yesActions": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Specified Attack",
+                "titleEN": "Specified Attack",
+                "instructionPT": "Escolha o Spirit ou Ultimate que será atacado.",
+                "instructionEN": "Choose the Spirit or Ultimate to attack.",
+                "selector": {
+                  "owner": "opponent",
+                  "cardTypes": [
+                    "spirit",
+                    "ultimate"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "performSpecifiedAttack"
+                }
               }
             ]
           }
@@ -20164,10 +20741,42 @@
         "text": {
           "en": "Leave exactly 1 Core on every Spirit. Move all other Cores on those Spirits to their owners' Reserves.",
           "ptBR": "Deixe exatamente 1 Core em cada Spirit. Mova todos os outros Cores desses Spirits para as Reserves de seus donos."
-        }
+        },
+        "automationRef": "sd13-bs06-023-summon-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd13-bs06-023-summon-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "trimCoresOnMatching",
+            "selector": {
+              "owner": "any",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "leave": 1,
+            "preferSoul": true
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD13-Reprints/BS06-023.webp",
     "nameJP": "闇司教バクルス"
   },
@@ -20280,7 +20889,8 @@
         "text": {
           "en": "If you control a Spirit with 8000 BP or more, draw 1 additional card.",
           "ptBR": "Se você controlar um Spirit com 8000 BP ou mais, compre 1 carta adicional."
-        }
+        },
+        "automationRef": "sd13-bs09-015-draw-step-auto"
       },
       {
         "id": "sd13-bs09-015-destroyed-display",
@@ -20296,10 +20906,84 @@
         "text": {
           "en": "Return 1 Yellow Spirit card from your Trash to your hand.",
           "ptBR": "Devolva 1 carta de Spirit Amarelo do seu Trash para a sua mão."
-        }
+        },
+        "automationRef": "sd13-bs09-015-destroyed-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd13-bs09-015-draw-step-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "drawStep",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "controls": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "minimumBP": 8000,
+              "minCount": 1
+            }
+          }
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": "sd13-bs09-015-destroyed-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "The JailBeast Gashabers",
+            "titleEN": "The JailBeast Gashabers",
+            "instructionPT": "Escolha 1 Spirit Amarelo no seu Trash para devolver à mão.",
+            "instructionEN": "Choose 1 Yellow Spirit in your Trash to return to hand.",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "trash"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "yellow"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD13-Reprints/BS09-015.webp",
     "nameJP": "獄獣ガシャベルス"
   },
@@ -20446,10 +21130,54 @@
         "text": {
           "en": "When one of your Purple Spirits that costs 3 or less is destroyed by an opposing Spirit effect, move all Cores from the source Spirit to your opponent's Trash.",
           "ptBR": "Quando um dos seus Spirits Roxos de custo 3 ou menos for destruído por um efeito de Spirit do oponente, mova todos os Cores do Spirit de origem para o Trash do oponente."
-        }
+        },
+        "automationRef": "sd13-002-retaliation-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd13-002-retaliation-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventSourceColor",
+            "color": "purple"
+          },
+          {
+            "type": "eventSourceCost",
+            "atMost": 3
+          },
+          {
+            "type": "eventDestroyedByOpponent"
+          },
+          {
+            "type": "eventDestroyedByCardType",
+            "cardType": "spirit"
+          }
+        ],
+        "actions": [
+          {
+            "type": "removeCore",
+            "target": "eventDestroyer",
+            "allCores": true,
+            "destination": "trash"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD13-AttributeEye-OpeningDeck-Amethyst/SD13-002.webp",
     "nameJP": "ボーン・キャット"
   },
@@ -20972,7 +21700,8 @@
         "text": {
           "en": "Reveal the top 2 cards of your deck. Add 1 to your hand and discard the other.",
           "ptBR": "Revele as 2 cartas do topo do seu deck. Adicione 1 à sua mão e descarte a outra."
-        }
+        },
+        "automationRef": "sd13-bs11-051-summon-auto"
       },
       {
         "id": "sd13-bs11-051-combine-display",
@@ -21026,6 +21755,55 @@
             "onSelect": {
               "type": "returnToHand"
             }
+          }
+        ]
+      },
+      {
+        "id": "sd13-bs11-051-summon-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "revealTop",
+            "player": "self",
+            "amount": 2
+          },
+          {
+            "type": "selectTarget",
+            "titlePT": "Evil-Fisher",
+            "titleEN": "Evil-Fisher",
+            "instructionPT": "Escolha 1 das cartas reveladas para adicionar à mão.",
+            "instructionEN": "Choose 1 revealed card to add to your hand.",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "revealed"
+              ]
+            },
+            "onSelect": {
+              "type": "returnToHand"
+            },
+            "afterSelect": [
+              {
+                "type": "moveCard",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "revealed"
+                  ],
+                  "all": true
+                },
+                "all": true,
+                "destination": "trash"
+              }
+            ]
           }
         ]
       }
@@ -21243,7 +22021,8 @@
         "text": {
           "en": "When one of your Zombie Spirits attacks, move 1 Core from an opposing Spirit to your opponent's Reserve.",
           "ptBR": "Quando um dos seus Spirits da família Zombie atacar, mova 1 Core de um Spirit do oponente para a Reserve do oponente."
-        }
+        },
+        "automationRef": "sd13-bs12-063-zombie-attack-auto"
       }
     ],
     "abilities": [
@@ -21254,6 +22033,54 @@
           {
             "type": "draw",
             "amount": 1
+          }
+        ]
+      },
+      {
+        "id": "sd13-bs12-063-zombie-attack-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "type": "activePlayer",
+            "player": "self"
+          },
+          {
+            "type": "eventSourceFamily",
+            "family": "Zombie"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "The Brigade's Skyscraper",
+            "titleEN": "The Brigade's Skyscraper",
+            "instructionPT": "Escolha 1 Spirit do oponente para mover 1 Core para a Reserve.",
+            "instructionEN": "Choose 1 opposing Spirit to move 1 Core to its owner's Reserve.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "minimumCores": 1
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "removeCore",
+              "amount": 1,
+              "destination": "reserve"
+            }
           }
         ]
       }
@@ -21300,10 +22127,56 @@
         "text": {
           "en": "Each player destroys 1 of their own Spirits.",
           "ptBR": "Cada jogador destrói 1 dos próprios Spirits."
-        }
+        },
+        "automationRef": "sd13-bs01-125-flash-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd13-bs01-125-flash-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Deadly Balance",
+            "titleEN": "Deadly Balance",
+            "instructionPT": "Escolha 1 dos seus Spirits para destruir.",
+            "instructionEN": "Choose 1 of your Spirits to destroy.",
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          },
+          {
+            "type": "selectTarget",
+            "chooser": "opponent",
+            "titlePT": "Deadly Balance",
+            "titleEN": "Deadly Balance",
+            "instructionPT": "Escolha 1 dos seus Spirits para destruir.",
+            "instructionEN": "Choose 1 of your Spirits to destroy.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD13-Reprints/BS01-125.webp",
     "nameJP": "デッドリィバランス"
   },
@@ -21346,10 +22219,64 @@
         "text": {
           "en": "By discarding 1 Spirit or Brave card from your hand, move 2 Cores from 1 opposing Spirit to your opponent's Reserve.",
           "ptBR": "Ao descartar 1 carta de Spirit ou Brave da sua mão, mova 2 Cores de 1 Spirit do oponente para a Reserve do oponente."
-        }
+        },
+        "automationRef": "sd13-bs11-075-flash-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd13-bs11-075-flash-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "titlePT": "Totentanz",
+            "titleEN": "Totentanz",
+            "instructionPT": "Descarte 1 Spirit ou Brave da sua mão.",
+            "instructionEN": "Discard 1 Spirit or Brave from your hand.",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand"
+              ],
+              "cardTypes": [
+                "spirit",
+                "brave"
+              ]
+            },
+            "onSelect": {
+              "type": "discard"
+            },
+            "afterSelect": [
+              {
+                "type": "selectTarget",
+                "titlePT": "Totentanz",
+                "titleEN": "Totentanz",
+                "instructionPT": "Escolha 1 Spirit do oponente para mover até 2 Cores para a Reserve.",
+                "instructionEN": "Choose 1 opposing Spirit to move up to 2 Cores to its owner's Reserve.",
+                "selector": {
+                  "owner": "opponent",
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "minimumCores": 1
+                },
+                "onSelect": {
+                  "type": "removeCore",
+                  "amount": 2,
+                  "destination": "reserve"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD13-Reprints/BS11-075.webp",
     "nameJP": "トーテンタンツ"
   },
@@ -21505,7 +22432,8 @@
         "text": {
           "en": "Destroy 2 exhausted opposing Spirits. Draw 1 card for each Spirit destroyed by this effect.",
           "ptBR": "Destrua 2 Spirits do oponente em Exhaust. Compre 1 carta para cada Spirit destruído por este efeito."
-        }
+        },
+        "automationRef": "sd13-x01-summon-auto"
       },
       {
         "id": "sd13-x01-attack-display",
@@ -21522,10 +22450,89 @@
         "text": {
           "en": "Move 1 Core from each of 2 opposing Spirits to your opponent's Reserve.",
           "ptBR": "Mova 1 Core de cada um de 2 Spirits do oponente para a Reserve do oponente."
-        }
+        },
+        "automationRef": "sd13-x01-attack-auto"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "sd13-x01-summon-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "titlePT": "The WickedDragonKing Cursedragon",
+            "titleEN": "The WickedDragonKing Cursedragon",
+            "instructionPT": "Escolha até 2 Spirits do oponente em Exhaust para destruir.",
+            "instructionEN": "Choose up to 2 exhausted opposing Spirits to destroy.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "exhausted": true
+            },
+            "maxTargets": 2,
+            "asManyAsPossible": true,
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterSelect": [
+              {
+                "type": "draw",
+                "amountPerSelected": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "sd13-x01-attack-auto",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "titlePT": "The WickedDragonKing Cursedragon",
+            "titleEN": "The WickedDragonKing Cursedragon",
+            "instructionPT": "Escolha até 2 Spirits do oponente para mover 1 Core de cada para a Reserve.",
+            "instructionEN": "Choose up to 2 opposing Spirits to move 1 Core from each to its owner's Reserve.",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "minimumCores": 1
+            },
+            "maxTargets": 2,
+            "asManyAsPossible": true,
+            "onSelect": {
+              "type": "removeCore",
+              "amount": 1,
+              "destination": "reserve"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/SD13-AttributeEye-OpeningDeck-Amethyst/SD13-X01.webp",
     "nameJP": "邪龍王カースドラゴン"
   },
