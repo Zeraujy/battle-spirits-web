@@ -289,7 +289,7 @@ function moveTargetOut(match, target, destination, cardIndex, context = {}) {
 
 
 function removeFromSimpleZone(player, zone, instanceId) {
-  if (!["hand", "trash", "revealed", "deck"].includes(zone)) return { player, card: null };
+  if (!["hand", "trash", "revealed", "openArea", "deck"].includes(zone)) return { player, card: null };
   const list = [...(player[zone] || [])];
   const index = list.findIndex((card) => card.instanceId === instanceId);
   if (index < 0) return { player, card: null };
@@ -302,7 +302,7 @@ function moveCardGeneric(match, target, destination, cardIndex, context = {}) {
   if (!instanceId) return match;
   const current = findPhysicalCard(match, instanceId);
   if (!current) return match;
-  if (["spirits", "nexuses", "other"].includes(current.zone) && ["hand", "trash", "topDeck"].includes(destination)) {
+  if (["spirits", "nexuses", "other"].includes(current.zone) && ["hand", "trash", "topDeck", "openArea"].includes(destination)) {
     return moveTargetOut(match, target, destination, cardIndex, context);
   }
   if (current.zone === "trash" && destination === "hand") return moveTargetOut(match, target, destination, cardIndex, context);
@@ -331,6 +331,7 @@ function moveCardGeneric(match, target, destination, cardIndex, context = {}) {
   else if (destination === "topDeck") player = { ...player, deck: [removedCard, ...player.deck] };
   else if (destination === "bottomDeck") player = { ...player, deck: [...player.deck, removedCard] };
   else if (destination === "deck") player = { ...player, deck: [...player.deck, removedCard] };
+  else if (destination === "openArea") player = { ...player, openArea: [...(player.openArea || []), removedCard] };
   else if (destination === "removed") player = { ...player, removed: [...(player.removed || []), removedCard] };
   else return match;
 
@@ -605,6 +606,17 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       });
     }
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: drew };
+  }
+
+
+  if (type === "moveSourceToOpenArea") {
+    const sourceId = context.sourceInstanceId || context.sourcePhysical?.instanceId || null;
+    if (!sourceId) return { match: next, notes: ["Accel source is missing an instance id."], manualResolutionNeeded: true, executed: false };
+    const current = findPhysicalCard(next, sourceId);
+    if (!current) return { match: next, notes: ["Accel source is no longer in a movable zone."], manualResolutionNeeded: true, executed: false };
+    const sourceTarget = { playerId: current.playerId, zone: current.zone, physical: current.card, card: getDatabaseCard(cardIndex, current.card) };
+    const moved = moveCardGeneric(next, sourceTarget, "openArea", cardIndex, context);
+    return { match: moved, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved === next ? 0 : 1 };
   }
 
 
@@ -1267,6 +1279,28 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     }));
     next = { ...next, players: { ...next.players, [from.playerId]: player } };
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
+  }
+
+  if (type === "payAccelCost") {
+    const playerId = context.sourcePlayerId;
+    const sourceCard = context.sourceCard;
+    if (!playerId || !sourceCard) return { match: next, notes: ["Fonte inválida para pagamento de Accel."], manualResolutionNeeded: true, executed: false };
+    const accelCard = { ...sourceCard, cost: Math.max(0, Number(action.cost ?? sourceCard.cost ?? 0)), reduction: Array.isArray(action.reduction) ? action.reduction : (sourceCard.reduction || []) };
+    const payable = calculateReduction(next, playerId, accelCard, cardIndex).payable;
+    if (payable <= 0) {
+      const nested = asActionArray(action.actions ?? action.then ?? action.onPaid);
+      return nested.length ? resolveNested(next, nested, cardIndex, context) : { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    }
+    const payment = autoBuildPayment(next, playerId, payable, cardIndex);
+    if (!payment) return { match: next, notes: ["Cores insuficientes para pagar o custo de Accel."], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const paid = payCoreCost(next, playerId, payment, payable, cardIndex);
+    if (!paid.ok) return { match: next, notes: [paid.error || "Falha ao pagar o custo de Accel."], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const nested = asActionArray(action.actions ?? action.then ?? action.onPaid);
+    if (nested.length) {
+      const resolved = resolveNested(paid.match, nested, cardIndex, context);
+      return { ...resolved, executed: true, affectedCount: Number(resolved.affectedCount || 0) + payable };
+    }
+    return { match: paid.match, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: payable };
   }
 
   if (type === "paySourceCost") {

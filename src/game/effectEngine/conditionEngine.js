@@ -360,6 +360,12 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     return Boolean(battle && [battle.attackerInstanceId, battle.blockerInstanceId].filter(Boolean).includes(instanceId));
   }
   if (type === "battleAttackerIsCombinedHostOfSource") return Boolean(context.sourcePhysical?.combinedWith && String(context.sourcePhysical.combinedWith) === String(context.attackerInstanceId || match.battle?.attackerInstanceId || ""));
+  if (type === "eventInvolvesControllerSpirit") {
+    const sourcePlayerId = context.sourcePlayerId;
+    const attackerPlayerId = context.attackerPlayerId || match.battle?.attackerPlayerId || null;
+    const defenderPlayerId = context.defenderPlayerId || match.battle?.defenderPlayerId || null;
+    return Boolean(sourcePlayerId && (sourcePlayerId === attackerPlayerId || sourcePlayerId === defenderPlayerId));
+  }
   if (type === "battleSourceRole") {
     const expected = String(condition.role ?? condition.value ?? "").toLowerCase();
     if (expected === "attacker") return Boolean(context.sourceInstanceId && context.sourceInstanceId === context.attackerInstanceId);

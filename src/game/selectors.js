@@ -14,6 +14,8 @@ export function findPhysicalCard(match, instanceId) {
     if (trashIndex >= 0) return { playerId, zone: "trash", index: trashIndex, card: player.trash[trashIndex] };
     const revealedIndex = (player.revealed || []).findIndex((c) => c.instanceId === instanceId);
     if (revealedIndex >= 0) return { playerId, zone: "revealed", index: revealedIndex, card: player.revealed[revealedIndex] };
+    const openAreaIndex = (player.openArea || []).findIndex((c) => c.instanceId === instanceId);
+    if (openAreaIndex >= 0) return { playerId, zone: "openArea", index: openAreaIndex, card: player.openArea[openAreaIndex] };
     for (const zone of FIELD_ZONES) {
       const index = (player.field?.[zone] || []).findIndex((c) => c.instanceId === instanceId);
       if (index >= 0) return { playerId, zone, index, card: player.field[zone][index] };

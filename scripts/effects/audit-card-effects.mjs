@@ -72,6 +72,7 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "battleAttackerKeyword",
   "battleBlockerBPAtMostSourceBP",
   "battleSourceRole",
+  "eventInvolvesControllerSpirit",
   "selectedTargetBP",
   "battleBlockerCardType",
   "battleRestriction",

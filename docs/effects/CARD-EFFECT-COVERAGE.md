@@ -6,11 +6,11 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **868**
-- Effect Schema v2 entries: **402**
-- Fully automated cards: **263 (72.1%)**
+- Structured effect/ability entries inspected: **892**
+- Effect Schema v2 entries: **426**
+- Fully automated cards: **273 (74.8%)**
 - Partially automated cards: **0**
-- Unstructured effect text: **60**
+- Unstructured effect text: **50**
 - Explicit no-effect cards: **16**
 
 The audit is intentionally conservative. A card is only `AUTOMATED` when its executable entries use a canonical event that is currently dispatched by the runtime, all conditions are understood, all action types are supported, and no documented effect remains unresolved.
@@ -33,7 +33,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | Set | Cards | Automated | Partial | Manual | Unsupported trigger | Unsupported condition | Unsupported action | Unstructured | No effect |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | BS13 | 90 | 84 | 0 | 0 | 0 | 0 | 0 | 0 | 6 |
-| BSC49 | 117 | 30 | 0 | 4 | 22 | 0 | 0 | 60 | 1 |
+| BSC49 | 117 | 40 | 0 | 4 | 22 | 0 | 0 | 50 | 1 |
 | SD10 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD11 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD13 | 18 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 3 |
@@ -46,7 +46,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Structured entry baseline
 
-- Automated executable entries: **526**
+- Automated executable entries: **550**
 - Entries blocked by trigger coverage: **38**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
@@ -94,7 +94,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Engine additions — Phases 7–18
 
-- Core Action Library is centralized and currently exposes **78 generic action types** to Schema v2.
+- Core Action Library is centralized and currently exposes **80 generic action types** to Schema v2.
 - Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.
 - Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.
 - Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.
@@ -164,20 +164,12 @@ The JSON report contains every entry and machine-readable reason. This table lis
 
 | Card | Set | Type | Status | Main gaps |
 | --- | --- | --- | --- | --- |
-| `BSC49-001` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-002` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-008` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-009` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-012` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-015` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-021` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-026` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-027` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-028` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-029` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-030` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-032` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-034` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-035` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-038` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-039` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
@@ -185,7 +177,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BSC49-041` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-042` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-043` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-044` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-048` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-049` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-052` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
@@ -205,7 +196,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BSC49-067` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-068` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-069` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-070` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-071` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-073` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-074` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |

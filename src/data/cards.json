@@ -18085,7 +18085,104 @@
       "ptBR": "Enquanto esta carta estiver na sua Área Aberta, quando 1 dos seus Spirits Vermelhos/Brancos fosse deixar o Campo por um efeito do oponente, você pode invocar esta carta. Flash [Accel] Custo 3 (Vermelho1/Branco1): Destrua 1 Nexus de qualquer jogador ou devolva-o para o fundo do deck do dono. Depois que este efeito for resolvido, coloque esta carta na sua Área Aberta. LV1/LV2: A cor e o símbolo deste Spirit também são tratados como Branco."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-001-accel-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 3,
+            "reduction": [
+              "red",
+              "white"
+            ],
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "any",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "nexus"
+                  ]
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "chooseOption",
+                  "options": [
+                    {
+                      "id": "destroy",
+                      "actions": [
+                        {
+                          "type": "destroy",
+                          "target": "selected"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "bottom",
+                      "actions": [
+                        {
+                          "type": "returnToBottomDeck",
+                          "target": "selected"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-001-white-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "colors",
+            "operation": "add",
+            "value": [
+              "white"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "add",
+            "value": [
+              "white"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-001.webp"
   },
   {
@@ -18137,7 +18234,105 @@
       "ptBR": "Flash [Accel] Custo 1 (0): 1 Spirit recebe +3000 BP durante este turno. Depois que este efeito for resolvido, coloque esta carta na sua Área Aberta. LV1/LV2/LV3 Quando Este Spirit Ataca: Compre 1 carta e este Spirit recebe +3000 BP durante esta batalha. LV2/LV3 [Super Confront] Quando Este Spirit Ataca: Spirits/Ultimates do oponente devem bloquear se puderem. Este efeito não pode ser impedido por efeitos do oponente."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-002-accel-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 1,
+            "reduction": [],
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "any",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "modifyBP",
+                  "amount": 3000,
+                  "duration": "turn"
+                }
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-002-attack-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "count": 1
+          },
+          {
+            "type": "modifyBP",
+            "target": "source",
+            "amount": 3000,
+            "duration": "battle"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-002-super-confront-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "mustBlockIfAble",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "duration": "battle"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-002.webp"
   },
   {
@@ -19010,7 +19205,106 @@
       "ptBR": "Flash [Accel] Custo 4 (Roxo1/Branco1/Qualquer Cor1): Destrua 1 Spirit do oponente com 1 Core ou menos ou devolva-o para o fundo do deck do dono. Depois que este efeito for resolvido, coloque esta carta na sua Área Aberta. LV1/LV2: A cor e o símbolo deste Spirit também são tratados como Branco."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-009-accel-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 4,
+            "reduction": [
+              "purple",
+              "white",
+              "all"
+            ],
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "maximumCores": 1
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "chooseOption",
+                  "options": [
+                    {
+                      "id": "destroy",
+                      "actions": [
+                        {
+                          "type": "destroy",
+                          "target": "selected"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "bottom",
+                      "actions": [
+                        {
+                          "type": "returnToBottomDeck",
+                          "target": "selected"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-009-white-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "colors",
+            "operation": "add",
+            "value": [
+              "white"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "add",
+            "value": [
+              "white"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-009.webp"
   },
   {
@@ -19718,7 +20012,127 @@
       "ptBR": "Flash [Accel] Custo 4 (Roxo1/Qualquer Cor1): O oponente destrói 1 dos próprios Spirits. Depois, destrua 1 dos seus Spirits. Depois que este efeito for resolvido, coloque esta carta na sua Área Aberta. LV1/LV2/LV3 Quando Invocado: Você pode comprar 2 cartas. LV2/LV3 Quando Este Spirit For Destruído: Devolva para a sua mão 1 carta Roxa com a família Devotee ou Dark Snake do seu Trash."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-015-accel-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 4,
+            "reduction": [
+              "purple",
+              "all"
+            ],
+            "actions": [
+              {
+                "type": "selectTarget",
+                "chooser": "opponent",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "destroy"
+                },
+                "afterSelect": [
+                  {
+                    "type": "selectTarget",
+                    "selector": {
+                      "owner": "self",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit"
+                      ]
+                    },
+                    "allowZero": false,
+                    "onSelect": {
+                      "type": "destroy"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-015-summon-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "draw",
+                "count": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-015-destroyed-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "trash"
+              ],
+              "colors": [
+                "purple"
+              ],
+              "families": [
+                "Devotee",
+                "Dark Snake"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-015.webp"
   },
   {
@@ -21169,7 +21583,122 @@
       "ptBR": "Flash [Accel] Custo 3 (Verde1/Qualquer Cor1): Deixe 1 Spirit do oponente Exhausted. Depois que este efeito for resolvido, coloque esta carta na sua Área Aberta. LV1/LV2/LV3 Durante Seu End Step: Dê Refresh em todos os seus Spirits Verdes. LV2/LV3 Durante o Attack Step de qualquer jogador: No fim de uma batalha envolvendo 1 dos seus Spirits, ao devolver 1 dos seus Braves para a sua mão, dê Refresh neste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-026-accel-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 3,
+            "reduction": [
+              "green",
+              "all"
+            ],
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "exhaust"
+                }
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-026-end-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "endStep",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "refreshAllMatching",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "green"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-026-battle-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventInvolvesControllerSpirit"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "brave"
+              ],
+              "combined": false
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            },
+            "afterSelect": [
+              {
+                "type": "refresh",
+                "target": "source"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-026.webp"
   },
   {
@@ -21270,7 +21799,92 @@
       "ptBR": "Flash [Accel] Custo 4 (Branco1/Vermelho1/Qualquer Cor1): Ao devolver 1 Spirit do oponente que não esteja Combinado para a mão dele, compre 1 carta. Depois que este efeito for resolvido, coloque esta carta na sua Área Aberta. LV1/LV2: A cor e o símbolo deste Spirit também são tratados como Vermelho."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-028-accel-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 4,
+            "reduction": [
+              "white",
+              "red",
+              "all"
+            ],
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "braved": false
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "returnToHand"
+                },
+                "afterSelect": [
+                  {
+                    "type": "draw",
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-028-red-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "colors",
+            "operation": "add",
+            "value": [
+              "red"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "add",
+            "value": [
+              "red"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-028.webp"
   },
   {
@@ -21552,7 +22166,91 @@
       "ptBR": "Flash [Accel] Custo 2 (Branco1): Escolha 1 Spirit do oponente. Durante este turno, sua Life não pode ser reduzida por ataques daquele Spirit. Depois que este efeito for resolvido, coloque esta carta na sua Área Aberta. LV1/LV2 No início do Attack Step do Oponente: Durante este turno, 1 Spirit Combinado/Ultimate Combinado do oponente não pode atacar."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-032-accel-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 2,
+            "reduction": [
+              "white"
+            ],
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "setTurnProtection",
+                  "player": "self",
+                  "protection": {
+                    "type": "blockSpiritAttackLifeDamageFromInstanceIds"
+                  }
+                }
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-032-start-attack-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "source",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ],
+              "braved": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "addModifier",
+              "property": "cannotAttack",
+              "operation": "set",
+              "value": 1,
+              "selector": {
+                "selectedTarget": true
+              },
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-032.webp"
   },
   {
@@ -21763,7 +22461,107 @@
       "ptBR": "Flash [Accel] Custo 6 (Branco2/Qualquer Cor1): Devolva 1 Spirit do oponente para o fundo do deck do dono. Depois que este efeito for resolvido, coloque esta carta na sua Área Aberta. LV1/LV2/LV3: Este Spirit não é afetado por efeitos de Spirit/Magic do oponente. LV2/LV3 Durante o Attack Step do Oponente: Quando um Spirit do oponente atacar, você pode deixar 1 Spirit do oponente Exhausted."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-034-accel-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 6,
+            "reduction": [
+              "white",
+              "white",
+              "all"
+            ],
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "returnToBottomDeck"
+                }
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-034-immunity-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectImmunityCardTypes",
+            "operation": "add",
+            "value": [
+              "spirit",
+              "magic"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-034-opp-attack-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "exhaust"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-034.webp"
   },
   {
@@ -22514,7 +23312,99 @@
       "ptBR": "Flash [Accel] Custo 3 (Azul1/Vermelho1): Destrua 1 Spirit do oponente de custo 3/4 e impeça que os efeitos do alvo destruído sejam ativados. Depois que este efeito for resolvido, coloque esta carta na sua Área Aberta. LV1/LV2: A cor e o símbolo deste Spirit também são tratados como Vermelho."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-044-accel-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 3,
+            "reduction": [
+              "blue",
+              "red"
+            ],
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "minimumCost": 3,
+                  "maximumCost": 4
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "addModifier",
+                  "property": "effectsDisabled",
+                  "operation": "set",
+                  "value": 1,
+                  "selector": {
+                    "selectedTarget": true
+                  },
+                  "duration": "event"
+                },
+                "afterSelect": [
+                  {
+                    "type": "destroy",
+                    "target": "selected"
+                  }
+                ]
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-044-red-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "colors",
+            "operation": "add",
+            "value": [
+              "red"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "add",
+            "value": [
+              "red"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-044.webp"
   },
   {
@@ -24350,7 +25240,107 @@
       "ptBR": "Flash [Accel] Custo 4 (Amarelo2/Qualquer Cor1): Devolva 1 Spirit/Ultimate do oponente em LV3 para o fundo do deck do dono. Depois que este efeito for resolvido, coloque esta carta na sua Área Aberta. Ou invoque esta carta pagando 1 de custo. Condição de Combine: custo 4 ou mais. Enquanto Combinado — Flash Quando Este Spirit Ataca: Uma vez por turno, você pode descartar as 5 cartas do topo do seu deck. Se fizer isso, coloque 1 Core do Void na sua Life e, durante este turno, este Spirit não pode ser bloqueado por Spirits do oponente em LV2/LV3."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-070-accel-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 4,
+            "reduction": [
+              "yellow",
+              "yellow",
+              "all"
+            ],
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit",
+                    "ultimate"
+                  ],
+                  "minimumLevel": 3,
+                  "maximumLevel": 3
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "returnToBottomDeck"
+                }
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-070-combined-flash-auto39",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "levels": [
+          1
+        ],
+        "conditions": [
+          {
+            "type": "battleSourceRole",
+          "role": "attacker"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-070-combined-flash",
+            "actions": [
+              {
+                "type": "topDeckToTrash",
+                "player": "self",
+                "count": 5
+              },
+              {
+                "type": "healLife",
+                "player": "self",
+                "count": 1
+              },
+              {
+                "type": "addModifier",
+                "property": "cannotBlock",
+                "operation": "set",
+                "value": 1,
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "minimumLevel": 2,
+                  "maximumLevel": 3
+                },
+                "duration": "turn"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "braveBP": 5000,
     "braveCondition": {
       "type": "costAtLeast",

@@ -21,6 +21,7 @@ export const TargetZone = Object.freeze({
   HAND: "hand",
   TRASH: "trash",
   REVEALED: "revealed",
+  OPEN_AREA: "openArea",
   BURST: "burst",
   DECK: "deck"
 });
@@ -239,11 +240,21 @@ export function collectTargets(match, cardIndex, rawSelector = {}, context = {})
       else if (zone === TargetZone.HAND) pushZone(candidates, match, cardIndex, playerId, zone, player.hand, selector, context);
       else if (zone === TargetZone.TRASH) pushZone(candidates, match, cardIndex, playerId, zone, player.trash, selector, context);
       else if (zone === TargetZone.REVEALED) pushZone(candidates, match, cardIndex, playerId, zone, player.revealed, selector, context);
+      else if (zone === TargetZone.OPEN_AREA) pushZone(candidates, match, cardIndex, playerId, zone, player.openArea || [], selector, context);
       else if (zone === TargetZone.BURST) pushZone(candidates, match, cardIndex, playerId, zone, player.burst ? [player.burst] : [], selector, context);
       else if (zone === TargetZone.DECK) pushZone(candidates, match, cardIndex, playerId, zone, player.deck, selector, context);
     }
   }
-  return candidates;
+  let filtered = candidates;
+  if (selector.highestCostOnly === true && filtered.length) {
+    const highest = Math.max(...filtered.map((candidate) => targetProperties(match, cardIndex, candidate).cost));
+    filtered = filtered.filter((candidate) => targetProperties(match, cardIndex, candidate).cost === highest);
+  }
+  if (selector.lowestCostOnly === true && filtered.length) {
+    const lowest = Math.min(...filtered.map((candidate) => targetProperties(match, cardIndex, candidate).cost));
+    filtered = filtered.filter((candidate) => targetProperties(match, cardIndex, candidate).cost === lowest);
+  }
+  return filtered;
 }
 
 export function collectFieldTargets(match, cardIndex, selector = {}, context = {}) {
@@ -262,7 +273,7 @@ function sourceTarget(context) {
 export function resolveActionTargets(match, action = {}, cardIndex, context = {}) {
   const directId = action.instanceId ?? action.targetInstanceId;
   if (directId) {
-    const targets = collectTargets(match, cardIndex, { owner: "any", zones: ["field", "hand", "trash", "revealed", "burst"], instanceId: directId, includeCombined: true }, context);
+    const targets = collectTargets(match, cardIndex, { owner: "any", zones: ["field", "hand", "trash", "revealed", "openArea", "burst"], instanceId: directId, includeCombined: true }, context);
     return targets.length ? { status: "resolved", targets: [targets[0]] } : { status: "none", targets: [] };
   }
 

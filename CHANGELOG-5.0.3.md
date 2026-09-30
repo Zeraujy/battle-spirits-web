@@ -237,3 +237,11 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Main suite passes 149/149, Effect Engine 223/223, Batch 18 dedicated 11/11 and full regression 422/422.
 - Phase 27 remains blocked only by BSC49 completion and the global <10% fallback target.
 - Internal application version remains 5.0.3 while v5.1.0 content migration continues.
+
+## v5.1.0 Content Migration — Batch 19
+- BSC49 Wave 4: 10 additional cards automated (41/117 resolved; 76 remaining).
+- Added reusable Accel/Open Area foundation with first-class Open Area state/targeting.
+- Added generic `payAccelCost` and `moveSourceToOpenArea` Core Actions.
+- Added reusable cost-rank targeting and battle-participant condition support.
+- Manual fallback reduced from 23.56% to 20.82% (86 -> 76 cards).
+- Phase 24 generated regression scenarios increased from 279 to 289.
