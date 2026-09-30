@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T13:09:12.860Z",
+  "generatedAt": "2026-09-30T13:34:28.389Z",
   "targetPercent": 95,
   "totalSets": 11,
   "completeSets": 10,
@@ -20,10 +20,10 @@
     {
       "set": "BSC49",
       "total": 117,
-      "automated": 61,
+      "automated": 72,
       "noEffect": 1,
-      "unresolved": 56,
-      "automationPercent": 52.1,
+      "unresolved": 45,
+      "automationPercent": 61.5,
       "unsupportedTriggers": [
         "afterCost4PlusMagicResolves",
         "afterDivineTrust",
@@ -74,14 +74,6 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-030",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-035",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-038",
           "status": "UNSTRUCTURED_TEXT"
         },
@@ -102,15 +94,7 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-048",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-062",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-063",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -126,15 +110,7 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-077",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-078",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-079",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -142,31 +118,11 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-081",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-082",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-083",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-084",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-085",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-086",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-087",
           "status": "UNSTRUCTURED_TEXT"
         },
         {

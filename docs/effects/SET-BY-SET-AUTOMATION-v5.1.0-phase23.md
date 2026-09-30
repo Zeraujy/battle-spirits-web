@@ -7,7 +7,7 @@ Complete sets: 10/11
 | Set | Automated/No-effect | Unresolved | Coverage | Gate |
 |---|---:|---:|---:|---|
 | BS13 | 90/90 | 0 | 100% | PASS |
-| BSC49 | 61/117 | 56 | 52.1% | BLOCKED |
+| BSC49 | 72/117 | 45 | 61.5% | BLOCKED |
 | SD10 | 18/18 | 0 | 100% | PASS |
 | SD11 | 18/18 | 0 | 100% | PASS |
 | SD13 | 18/18 | 0 | 100% | PASS |
@@ -19,4 +19,4 @@ Complete sets: 10/11
 | SD28 | 17/17 | 0 | 100% | PASS |
 
 ## Release blockers
-- **BSC49**: 56 unresolved card(s); 52.1% automated/no-effect.
+- **BSC49**: 45 unresolved card(s); 61.5% automated/no-effect.

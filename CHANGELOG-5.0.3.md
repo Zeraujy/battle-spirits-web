@@ -264,3 +264,10 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Global manual fallback improved from 18.08% (66/365) to 15.34% (56/365).
 - Reused the existing 83-type Core Action Library; no card-specific Core Action was introduced.
 - Phase 24 generated regression coverage advanced from 299 to 309 scenarios.
+
+## v5.1.0 Content Migration — Batch 22 / BSC49 Wave 7
+- Automated 11 additional BSC49 cards: BSC49-030, 035, 048, 063, 077, 079, 081, 082, 083, 085 and 087.
+- BSC49 coverage advanced from 61/117 to 72/117 resolved.
+- Global manual fallback improved from 15.34% (56/365) to 12.33% (45/365).
+- Reused the existing 83-type Core Action Library; no card-specific Core Action was introduced.
+- Phase 24 generated regression coverage advanced from 309 to 320 scenarios.

@@ -198,7 +198,11 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   const keywords = selector.keywords ?? (selector.keyword ? [selector.keyword] : []);
   if (keywords.length && !keywords.some((keyword) => props.keywords.includes(String(keyword).toLowerCase().replace(/\s+/g, "")))) return false;
 
-  if (!numberBetween(props.cost, selector.minimumCost ?? selector.minCost, selector.maximumCost ?? selector.maxCost)) return false;
+  let maximumCost = selector.maximumCost ?? selector.maxCost;
+  let minimumCost = selector.minimumCost ?? selector.minCost;
+  if (selector.maximumCostFromSource && context.sourcePhysical) maximumCost = getEffectiveCost(match, cardIndex, context.sourcePhysical);
+  if (selector.minimumCostFromSource && context.sourcePhysical) minimumCost = getEffectiveCost(match, cardIndex, context.sourcePhysical);
+  if (!numberBetween(props.cost, minimumCost, maximumCost)) return false;
   let maximumBP = selector.maximumBP ?? selector.maxBP;
   let minimumBP = selector.minimumBP ?? selector.minBP;
   if (selector.maximumBPFromSource && context.sourcePhysical) maximumBP = getEffectiveBP(match, cardIndex, context.sourcePhysical);

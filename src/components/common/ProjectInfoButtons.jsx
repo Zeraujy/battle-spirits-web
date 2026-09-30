@@ -6,6 +6,22 @@ const PATCHES = [
   {
     version: "5.0.3",
     date: { pt: "30/09/2026", en: "09/30/2026" },
+    title: { pt: "Automação de Cartas — BSC49 Wave 7", en: "Card Automation — BSC49 Wave 7" },
+    summary: {
+      pt: "Mais 11 cartas do BSC49 passaram para resolução estruturada, avançando Spirits, Nexuses e Magic antes do bloco XV/Contract/GranWalker.",
+      en: "Eleven more BSC49 cards moved to structured resolution, advancing Spirits, Nexuses and Magic before the XV/Contract/GranWalker block."
+    },
+    sections: [{
+      title: { pt: "BSC49 Wave 7", en: "BSC49 Wave 7" },
+      items: {
+        pt: ["BSC49 avançou para 72/117 cartas resolvidas.", "O fallback manual global caiu para 12,33% (45/365).", "A Core Action Library permaneceu em 83 tipos reutilizáveis."],
+        en: ["BSC49 advanced to 72/117 resolved cards.", "Global manual fallback dropped to 12.33% (45/365).", "The Core Action Library remained at 83 reusable types."]
+      }
+    }]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "30/09/2026", en: "09/30/2026" },
     title: { pt: "Automação de Cartas — BSC49 Wave 6", en: "Card Automation — BSC49 Wave 6" },
     summary: {
       pt: "Mais 10 Braves do BSC49 passaram para resolução estruturada, reaproveitando a base de Combine, summon condicionado, Trash recovery e efeitos de batalha.",
