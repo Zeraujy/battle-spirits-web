@@ -6,11 +6,11 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **984**
-- Effect Schema v2 entries: **518**
-- Fully automated cards: **304 (83.3%)**
+- Structured effect/ability entries inspected: **1019**
+- Effect Schema v2 entries: **553**
+- Fully automated cards: **316 (86.6%)**
 - Partially automated cards: **0**
-- Unstructured effect text: **19**
+- Unstructured effect text: **7**
 - Explicit no-effect cards: **16**
 
 The audit is intentionally conservative. A card is only `AUTOMATED` when its executable entries use a canonical event that is currently dispatched by the runtime, all conditions are understood, all action types are supported, and no documented effect remains unresolved.
@@ -33,7 +33,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | Set | Cards | Automated | Partial | Manual | Unsupported trigger | Unsupported condition | Unsupported action | Unstructured | No effect |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | BS13 | 90 | 84 | 0 | 0 | 0 | 0 | 0 | 0 | 6 |
-| BSC49 | 117 | 71 | 0 | 4 | 22 | 0 | 0 | 19 | 1 |
+| BSC49 | 117 | 83 | 0 | 4 | 22 | 0 | 0 | 7 | 1 |
 | SD10 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD11 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD13 | 18 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 3 |
@@ -46,7 +46,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Structured entry baseline
 
-- Automated executable entries: **642**
+- Automated executable entries: **677**
 - Entries blocked by trigger coverage: **38**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
@@ -166,24 +166,12 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | Card | Set | Type | Status | Main gaps |
 | --- | --- | --- | --- | --- |
 | `BSC49-012` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-021` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-029` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-038` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-039` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-041` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-042` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-043` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-062` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-064` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-071` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-075` | BSC49 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-078` | BSC49 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-080` | BSC49 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-084` | BSC49 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-086` | BSC49 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-088` | BSC49 | magic | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-089` | BSC49 | magic | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-090` | BSC49 | magic | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-091` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenDiscardedFromHand; unresolved entries: 2 |
 | `BSC49-092` | BSC49 | magic | `MANUAL` | unresolved entries: 2 |
 | `BSC49-093` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whileInField; unresolved entries: 2 |

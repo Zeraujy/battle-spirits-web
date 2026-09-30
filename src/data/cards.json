@@ -21107,7 +21107,96 @@
       "ptBR": "LV1/LV2: Sua Life não pode ser reduzida por ataques de Spirits Combinados/Ultimates Combinados do oponente com 2 símbolos ou mais. LV1/LV2 Durante Seu Attack Step: Quando 1 dos seus Spirits da família Blade Beast realizar o primeiro ataque do turno, o oponente coloca 1 carta da própria mão na Área Aberta dele. LV2 Quando Este Spirit Ataca: Se este for o primeiro ataque do seu turno, dê Refresh neste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-021-life-protection-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "preventLifeDamageFromBravedTwoPlusSymbols",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self"
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-021-first-blade-attack-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceFamily",
+            "family": "Blade Beast"
+          },
+          {
+            "type": "sourceAttackNumber",
+            "equals": 1
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "hand"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "moveCard",
+              "toZone": "openArea"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-021-first-self-refresh-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "sourceAttackNumber",
+            "equals": 1
+          }
+        ],
+        "actions": [
+          {
+            "type": "refresh",
+            "target": "source"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-021.webp"
   },
   {
@@ -22224,7 +22313,136 @@
       "ptBR": "LV1/LV2/LV3 Flash Durante o Attack Step de qualquer jogador: Ao deixar 1 dos seus Spirits Exhausted, todos os seus Spirits Brancos recebem +3000 BP durante este turno. LV1/LV2/LV3: O deck de nenhum jogador pode ser descartado. LV2/LV3 [Uma Vez por Turno: Mesmo Nome]: Quando este Spirit ficar Exhausted, você pode colocar 2 Cores do seu Trash, exceto a Soul Core, sobre 1 Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-029-flash-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": false,
+            "onSelect": {
+              "type": "exhaust"
+            }
+          },
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 3000,
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "white"
+              ]
+            },
+            "duration": "turn"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-029-deck-lock-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "maxDeckDiscardPerTurn",
+            "operation": "set",
+            "value": 0,
+            "selector": {
+              "owner": "any"
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-029-exhaust-core-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardExhausted",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceIsSource"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-029-same-name",
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "addCore",
+                  "amount": 2,
+                  "fromZone": "trash",
+                  "excludeSoulCore": true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-029.webp"
   },
   {
@@ -23801,7 +24019,87 @@
       "ptBR": "Quando invocar esta carta, você também pode usar os símbolos das cartas no seu Trash para reduzir seu custo. LV1/LV2/LV3 Quando Invocado: Você pode comprar 2 cartas do fundo do seu deck. LV1/LV2/LV3 Durante Seu Main Step: Quando você invocar uma carta de Spirit/Brave, fixe os símbolos deste Spirit em 3 símbolos Amarelos para aquela invocação."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-041-trash-reduction-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "trashSymbolsCountForSummonReduction",
+            "operation": "set",
+            "value": 1,
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-041-summon-draw-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "draw",
+                "count": 2,
+                "from": "bottom"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-041-main-symbols-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "main"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "set",
+            "value": [
+              "yellow",
+              "yellow",
+              "yellow"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-041.webp"
   },
   {
@@ -23852,7 +24150,171 @@
       "ptBR": "[Burst: Depois que 1 dos Seus Spirits For Esgotado/Destruído pelo Oponente]: Invoque esta carta sem pagar seu custo. LV1/LV2 Quando Invocado: Compre 2 cartas. Ou, [Uma Vez por Jogo: Mesmo Nome], devolva 1 carta do seu Trash para a sua mão. LV2 Quando Este Spirit Ataca ou Bloqueia: Uma vez por turno, se você controlar um Spirit com \"Rolo\" no nome ou sua Life for 2 ou menos, você pode dar Refresh em todos os seus Spirits."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-042-burst-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "burstOwnSpiritDestroyed",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "specialSummonSource",
+            "free": true,
+            "cause": "burst"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-042-summon-choice-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "chooseOption",
+            "options": [
+              {
+                "id": "draw2",
+                "actions": [
+                  {
+                    "type": "draw",
+                    "count": 2
+                  }
+                ]
+              },
+              {
+                "id": "recover",
+                "actions": [
+                  {
+                    "type": "oncePerTurn",
+                    "key": "bsc49-042-once-per-game",
+                    "actions": [
+                      {
+                        "type": "selectTrashTarget",
+                        "selector": {
+                          "owner": "self",
+                          "zones": [
+                            "trash"
+                          ]
+                        },
+                        "allowZero": false,
+                        "onSelect": {
+                          "type": "returnToHand"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-042-attack-refresh-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "any": [
+              {
+                "type": "controlsNameIncludes",
+                "text": "Rolo"
+              },
+              {
+                "type": "lifeAtMost",
+                "player": "self",
+                "value": 2
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-042-refresh",
+            "actions": [
+              {
+                "type": "refreshAllMatching",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-042-block-refresh-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "any": [
+              {
+                "type": "controlsNameIncludes",
+                "text": "Rolo"
+              },
+              {
+                "type": "lifeAtMost",
+                "player": "self",
+                "value": 2
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-042-refresh",
+            "actions": [
+              {
+                "type": "refreshAllMatching",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-042.webp"
   },
   {
@@ -23907,7 +24369,75 @@
       "ptBR": "Quando invocar esta carta, você também pode usar os símbolos das cartas no seu Trash para reduzir seu custo. LV1/LV2/LV3: Quando este Spirit fosse deixar o Campo por um efeito do oponente, ao descartar as 3 cartas do topo do seu deck, mova 1 Core da sua Life para este Spirit. Se fizer isso, deixe este Spirit no seu Campo em estado Exhausted. [Quando Combinado] LV2/LV3 Quando Este Spirit Ataca: Quando for bloqueado, você pode colocar 1 Core do Void na sua Life para cada símbolo neste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-043-trash-reduction-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "trashSymbolsCountForSummonReduction",
+            "operation": "set",
+            "value": 1,
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-043-remain-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "topDeckToTrash",
+            "player": "self",
+            "count": 3
+          },
+          {
+            "type": "specialSummonSource",
+            "exhausted": true,
+            "suppressWhenSummoned": true,
+            "cause": "remainOnField"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-043-braved-blocked-life-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocked",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "healLife",
+            "player": "self",
+            "countFromSourceSymbols": true
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-043.webp"
   },
   {
@@ -28159,7 +28689,160 @@
       "ptBR": "[Uma Vez por Turno: Mesmo Nome]: Durante Seu Main Step, enquanto esta carta estiver no seu Trash, ao deixar Exhausted 1 dos seus Nexus/GranWalker Nexuses da família Galaxian, devolva esta carta para a sua mão. LV1/LV2 Durante Seu Main Step: Todas as cartas de Spirit de custo original 6 ou mais na sua mão/Área Aberta que possuam ao mesmo tempo as famílias Devotee e Galaxian passam a ter custo 5. LV2 Flash Durante o Attack Step de qualquer jogador: Ao deixar este Nexus Exhausted, descarte 1 carta da família Divine Star/Galaxian da sua mão/Área Aberta. Se fizer isso, durante esta batalha 1 dos seus Spirits recebe +6000 BP e 1 símbolo Vermelho adicional."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-075-trash-recover-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "mainStep",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-075-trash-recover",
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "nexus"
+                  ],
+                  "families": [
+                    "Galaxian"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": [
+                  {
+                    "type": "exhaust"
+                  },
+                  {
+                    "type": "returnEventSourceToHand"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-075-cost-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "main"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "printedCostOverride",
+            "operation": "set",
+            "value": 5,
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand",
+                "openArea"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "minimumCost": 6,
+              "families": [
+                "Devotee",
+                "Galaxian"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-075-flash-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "exhaust",
+            "target": "source"
+          },
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand",
+                "openArea"
+              ],
+              "families": [
+                "Divine Star",
+                "Galaxian"
+              ]
+            },
+            "allowZero": false,
+            "onSelect": {
+              "type": "discard"
+            }
+          },
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": false,
+            "onSelect": [
+              {
+                "type": "modifyBP",
+                "amount": 6000,
+                "duration": "battle"
+              },
+              {
+                "type": "modifySymbols",
+                "amount": 1,
+                "color": "red",
+                "duration": "battle"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-075.webp"
   },
   {
@@ -28449,7 +29132,148 @@
       "ptBR": "[Uma Vez por Turno: Mesmo Nome]: Durante Seu Main Step, enquanto esta carta estiver na sua mão/Trash, ao devolver 1 Nexus do oponente para a mão dele, coloque esta carta em campo. LV1/LV2: O deck de cada jogador só pode ter até 6 cartas descartadas por turno. LV2 Durante o Turno do Oponente: Quando a mão do oponente aumentar por um efeito, você pode comprar 1 carta."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-078-deploy-hand-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "mainStep",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-078-deploy",
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "nexus"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": [
+                  {
+                    "type": "returnToHand"
+                  },
+                  {
+                    "type": "moveCard",
+                    "target": "source",
+                    "toZone": "field"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-078-deploy-trash-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "mainStep",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-078-deploy",
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "nexus"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": [
+                  {
+                    "type": "returnToHand"
+                  },
+                  {
+                    "type": "deployFromTrash"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-078-deck-cap-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "maxDeckDiscardPerTurn",
+            "operation": "set",
+            "value": 6,
+            "selector": {
+              "owner": "any"
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-078-opponent-hand-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          },
+          {
+            "type": "eventMoveDestination",
+            "destination": "hand"
+          },
+          {
+            "type": "eventMovedByEffect"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-078-opponent-hand-draw",
+            "actions": [
+              {
+                "type": "draw",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-078.webp"
   },
   {
@@ -28617,7 +29441,101 @@
       "ptBR": "LV1/LV2: Quando você invocar uma carta exclusivamente Amarela, você também pode usar os símbolos das cartas no seu Trash para reduzir o custo dela. LV2 Durante Seu Main Step: Uma vez por turno, quando 1 dos seus Spirits das famílias Astral Soul, Divine Star ou Galaxian for invocado, você pode mover 1 Core que não seja a Soul Core da sua Reserve para a sua Life. Se fizer isso, se você tiver 5 cartas ou menos na mão, você pode comprar 1 carta."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-080-trash-reduction-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "trashSymbolsCountForYellowSummonReduction",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self"
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-080-main-life-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "main"
+          },
+          {
+            "any": [
+              {
+                "type": "eventSourceFamily",
+                "family": "Astral Soul"
+              },
+              {
+                "type": "eventSourceFamily",
+                "family": "Divine Star"
+              },
+              {
+                "type": "eventSourceFamily",
+                "family": "Galaxian"
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-080-main-life",
+            "actions": [
+              {
+                "type": "chooseYesNo",
+                "yesActions": [
+                  {
+                    "type": "moveCoreToLife",
+                    "player": "self",
+                    "count": 1,
+                    "fromZone": "reserve",
+                    "excludeSoulCore": true
+                  },
+                  {
+                    "type": "conditional",
+                    "condition": {
+                      "type": "handSize",
+                      "player": "self",
+                      "atMost": 5
+                    },
+                    "actions": [
+                      {
+                        "type": "draw",
+                        "count": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-080.webp"
   },
   {
@@ -29020,7 +29938,75 @@
       "ptBR": "[Burst: Depois que 1 dos Seus Spirits For Esgotado/Destruído pelo Oponente]: Destrua 1 Spirit do oponente de custo 5 ou menos. Depois que este efeito for resolvido, coloque esta carta em campo sem pagar seu custo. LV2 Durante o Main Step do Oponente: O oponente só pode invocar 1 carta de Spirit da própria mão que possua texto de efeito por turno."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-084-burst-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "burstOwnSpiritDestroyed",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumCost": 5
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          },
+          {
+            "type": "moveCard",
+            "target": "source",
+            "toZone": "field"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-084-summon-limit-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          },
+          {
+            "type": "phase",
+            "value": "main"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "maxEffectTextSpiritSummonsFromHandPerTurn",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent"
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-084.webp"
   },
   {
@@ -29371,7 +30357,92 @@
       "ptBR": "[Uma Vez por Turno: Mesmo Nome]: Quando usar esta carta, se a Life do oponente for 3 ou menos, você pode mudar o custo desta carta para 3 (Qualquer Cor2). Main: Compre 2 cartas. Depois revele as 3 cartas do topo do seu deck. Adicione todas as cartas de Brave entre elas à sua mão. Devolva as cartas restantes somente para o topo ou somente para o fundo do seu deck. Flash: Durante este turno, 1 Spirit Combinado/Ultimate Combinado recebe +10000 BP."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-088-cost-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "conditions": [
+          {
+            "type": "lifeAtMost",
+            "player": "opponent",
+            "value": 3
+          }
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "printedCostOverride",
+            "operation": "set",
+            "value": 3,
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-088-main-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicMain",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "draw",
+            "count": 2
+          },
+          {
+            "type": "revealTopAndRoute",
+            "player": "self",
+            "count": 3,
+            "matchSelector": {
+              "cardTypes": [
+                "brave"
+              ]
+            },
+            "matchedDestination": "hand",
+            "otherwiseDestination": "bottomDeck"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-088-flash-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ],
+              "braved": true
+            },
+            "allowZero": false,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": 10000,
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-088.webp"
   },
   {
@@ -29406,7 +30477,150 @@
       "ptBR": "Enquanto esta carta estiver na sua mão/Área Aberta, ela não é afetada por efeitos do oponente e, durante o Attack Step do Oponente, seu custo passa a ser 2. [Uma Vez por Turno: Mesmo Nome]: Enquanto esta carta estiver no seu Trash, quando 1 dos seus Spirits Combinados atacar, se você tiver 5 cartas ou menos na mão, você pode devolver esta carta para a sua mão. Flash: Destrua 1 Nexus do oponente. Depois, destrua qualquer quantidade de Spirits/Ultimates do oponente com BP total de até 10000, ou destrua 1 Spirit/Ultimate do oponente com 2 símbolos ou mais."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-089-hand-protection-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "unaffectedByOpponentEffects",
+            "operation": "set",
+            "value": 1,
+            "selector": "source",
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "opponentAttackStepCost",
+            "operation": "set",
+            "value": 2,
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-089-trash-recover-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventSourceBraved",
+            "value": true
+          },
+          {
+            "type": "handSize",
+            "player": "self",
+            "atMost": 5
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-089-trash-recover",
+            "actions": [
+              {
+                "type": "chooseYesNo",
+                "yesActions": [
+                  {
+                    "type": "returnEventSourceToHand"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-089-flash-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          },
+          {
+            "type": "chooseOption",
+            "options": [
+              {
+                "id": "totalBP",
+                "actions": [
+                  {
+                    "type": "selectMultipleTargets",
+                    "selector": {
+                      "owner": "opponent",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit",
+                        "ultimate"
+                      ]
+                    },
+                    "maxTargets": 99,
+                    "maximumTotalBP": 10000,
+                    "allowZero": true,
+                    "onSelect": {
+                      "type": "destroy"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "symbols",
+                "actions": [
+                  {
+                    "type": "selectTarget",
+                    "selector": {
+                      "owner": "opponent",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit",
+                        "ultimate"
+                      ],
+                      "minimumSymbols": 2
+                    },
+                    "allowZero": true,
+                    "onSelect": {
+                      "type": "destroy"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-089.webp"
   },
   {
@@ -29439,7 +30653,88 @@
       "ptBR": "[Uma Vez por Turno: Mesmo Nome]: Enquanto esta carta estiver no seu Trash, quando 1 dos seus Braves Roxos com a família Devotee for invocado, você pode devolver esta carta para a sua mão. Flash: Descarte 1 carta da sua mão/Área Aberta. Depois mova 2 Cores do Campo do oponente para a Reserve dele. Se você descartou uma carta exclusivamente Roxa por este efeito, trate este efeito como incolor."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-090-trash-recover-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "brave"
+          },
+          {
+            "type": "eventSourceColor",
+            "color": "purple"
+          },
+          {
+            "type": "eventSourceFamily",
+            "family": "Devotee"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-090-trash-recover",
+            "actions": [
+              {
+                "type": "chooseYesNo",
+                "yesActions": [
+                  {
+                    "type": "returnEventSourceToHand"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-090-flash-auto43",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand",
+                "openArea"
+              ]
+            },
+            "allowZero": false,
+            "onSelect": {
+              "type": "discard"
+            }
+          },
+          {
+            "type": "removeCore",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate",
+                "nexus"
+              ]
+            },
+            "amount": 2,
+            "destination": "reserve"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-090.webp"
   },
   {

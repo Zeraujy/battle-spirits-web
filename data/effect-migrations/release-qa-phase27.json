@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T13:09:31.189Z",
+  "generatedAt": "2026-09-30T14:16:00.067Z",
   "releaseReady": false,
   "results": [
     {
@@ -13,21 +13,21 @@
       "name": "phase23 set gate",
       "ok": false,
       "status": 1,
-      "stdout": "[phase23] 10/11 sets meet the 95% automation gate.\nBS13: 100% PASS (0 unresolved)\nBSC49: 52.1% BLOCKED (56 unresolved)\nSD10: 100% PASS (0 unresolved)\nSD11: 100% PASS (0 unresolved)\nSD13: 100% PASS (0 unresolved)\nSD15: 100% PASS (0 unresolved)\nSD17: 100% PASS (0 unresolved)\nSD19: 100% PASS (0 unresolved)\nSD20: 100% PASS (0 unresolved)\nSD23: 100% PASS (0 unresolved)\nSD28: 100% PASS (0 unresolved)\n",
+      "stdout": "[phase23] 10/11 sets meet the 95% automation gate.\nBS13: 100% PASS (0 unresolved)\nBSC49: 71.8% BLOCKED (33 unresolved)\nSD10: 100% PASS (0 unresolved)\nSD11: 100% PASS (0 unresolved)\nSD13: 100% PASS (0 unresolved)\nSD15: 100% PASS (0 unresolved)\nSD17: 100% PASS (0 unresolved)\nSD19: 100% PASS (0 unresolved)\nSD20: 100% PASS (0 unresolved)\nSD23: 100% PASS (0 unresolved)\nSD28: 100% PASS (0 unresolved)\n",
       "stderr": ""
     },
     {
       "name": "phase24 generated regressions",
       "ok": true,
       "status": 0,
-      "stdout": "TAP version 13\n# Subtest: Phase 24 generated scenarios cover every fully automated/no-effect card\nok 1 - Phase 24 generated scenarios cover every fully automated/no-effect card\n  ---\n  duration_ms: 1.732732\n  type: 'test'\n  ...\n# Subtest: Phase 24 automated entries use runtime-dispatched events and supported actions\nok 2 - Phase 24 automated entries use runtime-dispatched events and supported actions\n  ---\n  duration_ms: 2.188292\n  type: 'test'\n  ...\n# Subtest: Phase 24 automated cards have no unresolved display entry\nok 3 - Phase 24 automated cards have no unresolved display entry\n  ---\n  duration_ms: 1.596196\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 133.449896\n",
+      "stdout": "TAP version 13\n# Subtest: Phase 24 generated scenarios cover every fully automated/no-effect card\nok 1 - Phase 24 generated scenarios cover every fully automated/no-effect card\n  ---\n  duration_ms: 1.507595\n  type: 'test'\n  ...\n# Subtest: Phase 24 automated entries use runtime-dispatched events and supported actions\nok 2 - Phase 24 automated entries use runtime-dispatched events and supported actions\n  ---\n  duration_ms: 3.551516\n  type: 'test'\n  ...\n# Subtest: Phase 24 automated cards have no unresolved display entry\nok 3 - Phase 24 automated cards have no unresolved display entry\n  ---\n  duration_ms: 0.300577\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 117.505721\n",
       "stderr": ""
     },
     {
       "name": "phase25 manual fallback gate",
-      "ok": false,
-      "status": 1,
-      "stdout": "[phase25] Manual fallback 15.34% (56/365); target < 10%: BLOCKED.\n",
+      "ok": true,
+      "status": 0,
+      "stdout": "[phase25] Manual fallback 9.04% (33/365); target < 10%: PASS.\n",
       "stderr": ""
     },
     {

@@ -271,3 +271,13 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Global manual fallback improved from 15.34% (56/365) to 12.33% (45/365).
 - Reused the existing 83-type Core Action Library; no card-specific Core Action was introduced.
 - Phase 24 generated regression coverage advanced from 309 to 320 scenarios.
+
+## v5.1.0 Content Migration — Batch 23 / BSC49 Wave 8
+- Automated 12 additional BSC49 cards: BSC49-021, 029, 041, 042, 043, 075, 078, 080, 084, 088, 089 and 090.
+- BSC49 coverage advanced from 72/117 to 84/117 resolved.
+- Global manual fallback improved from 12.33% (45/365) to 9.04% (33/365), passing the Phase 25 `<10%` target for the first time.
+- Added generic `controlsNameIncludes`, `eventMovedByEffect` and `eventSourceBraved` conditions plus bottom-deck support to the existing `draw` action.
+- Core Action Library remained at 83 reusable action types.
+- Phase 24 generated regression coverage advanced from 320 to 332 scenarios.
+- Main suite passes 149/149, Effect Engine 285/285, Batch 23 dedicated 16/16 and full regression 484/484.
+- Phase 27 is now blocked only by the remaining BSC49 set-automation gate.

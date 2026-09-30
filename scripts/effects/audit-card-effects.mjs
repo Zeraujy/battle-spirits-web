@@ -33,6 +33,7 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "controlsCardType",
   "controlsColor",
   "controlsFamily",
+  "controlsNameIncludes",
   "ownLifeAtMost",
   "lifeAtMost",
   "lifeAtLeast",
@@ -63,6 +64,7 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "eventSourceLevel",
   "eventSourceFamily",
   "eventSourceKeyword",
+  "eventSourceBraved",
   "eventCause",
   "specialSummonCause",
   "eventDestroyedByOpponent", "eventDestroyedBySelf", "battleAttackerBP", "battleAttackerCost", "battleAttackerCardType", "eventDestroyerKeyword",
@@ -80,6 +82,7 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "eventMoveDestination",
   "eventMovedFromZone",
   "eventMovedByOpponent",
+  "eventMovedByEffect",
   "eventMovedByCardType",
   "eventZeroedBySource",
   "eventSourceIsNotSource",
@@ -109,7 +112,7 @@ const KNOWN_CONDITION_KEYS = new Set([
   "minimumCost", "maximumCost", "minCost", "maxCost",
   "player", "owner", "operator", "selector", "zone", "directAttack",
   "attackerPlayer", "blocked", "cardType", "cause", "keyword", "keywords", "role", "relation",
-  "values", "destinations", "destination", "key", "effectType", "property"
+  "values", "destinations", "destination", "key", "effectType", "property", "text", "nameIncludes"
 ]);
 
 const NESTED_ACTION_KEYS = [

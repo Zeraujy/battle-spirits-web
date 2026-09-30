@@ -83,6 +83,7 @@ function typedConditionMatches(match, condition, context, cardIndex) {
   if (type === "controlsCardType") return collectTargets(match, cardIndex, { owner: condition.player || "self", zone: "field", cardType: condition.cardType }, context).length >= Number(condition.minCount ?? 1);
   if (type === "controlsColor") return collectTargets(match, cardIndex, { owner: condition.player || "self", zone: "field", color: condition.color }, context).length >= Number(condition.minCount ?? 1);
   if (type === "controlsFamily") return collectTargets(match, cardIndex, { owner: condition.player || "self", zone: "field", family: condition.family }, context).length >= Number(condition.minCount ?? 1);
+  if (type === "controlsNameIncludes") return collectTargets(match, cardIndex, { owner: condition.player || "self", zone: "field", nameIncludes: condition.text ?? condition.nameIncludes ?? condition.value }, context).length >= Number(condition.minCount ?? 1);
   if (type === "ownLifeAtMost" || type === "lifeAtMost") return playerMetric(match, context, { ...condition, player: condition.player || "self", atMost: condition.value ?? condition.max }, (player) => player.life);
   if (type === "lifeAtLeast") return playerMetric(match, context, { ...condition, atLeast: condition.value ?? condition.min }, (player) => player.life);
   if (type === "handSize") return playerMetric(match, context, condition, (player) => player.hand?.length || 0);
@@ -198,6 +199,13 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     const card = eventSourceCard(match, context, cardIndex);
     const expected = String(condition.family ?? condition.value ?? "").toLowerCase();
     return Boolean(card && (card.families || []).some((family) => String(family).toLowerCase() === expected));
+  }
+  if (type === "eventSourceBraved") {
+    const instanceId = context.eventSourceInstanceId || null;
+    if (!instanceId) return false;
+    const found = findPhysicalCard(match, instanceId);
+    if (!found?.card) return false;
+    return Boolean(found.card.combinedWith || getBraveAttachment(match, instanceId));
   }
   if (type === "eventSourceKeyword") {
     const instanceId = context.eventSourceInstanceId || null;
@@ -343,6 +351,9 @@ function typedConditionMatches(match, condition, context, cardIndex) {
   }
   if (type === "eventMovedByOpponent") {
     return Boolean(context.movedByPlayerId && sourcePlayerId && context.movedByPlayerId !== sourcePlayerId);
+  }
+  if (type === "eventMovedByEffect") {
+    return Boolean(context.movedByInstanceId || context.movedByCardId || context.movedByCardType);
   }
   if (type === "eventMovedByCardType") {
     const expected = condition.cardTypes || (condition.cardType ? [condition.cardType] : [condition.value]);

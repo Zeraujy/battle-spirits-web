@@ -592,7 +592,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         next = { ...next, winnerId: otherPlayerId(next, playerId), winnerReason: "deck" };
         break;
       }
-      hand.push(deck.shift());
+      hand.push(String(action.from || action.position || "top").toLowerCase() === "bottom" ? deck.pop() : deck.shift());
       drew += 1;
     }
     player = { ...player, deck, hand };
