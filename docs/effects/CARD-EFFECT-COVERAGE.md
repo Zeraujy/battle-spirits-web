@@ -6,11 +6,11 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **843**
-- Effect Schema v2 entries: **378**
-- Fully automated cards: **253 (69.3%)**
+- Structured effect/ability entries inspected: **868**
+- Effect Schema v2 entries: **402**
+- Fully automated cards: **263 (72.1%)**
 - Partially automated cards: **0**
-- Unstructured effect text: **69**
+- Unstructured effect text: **60**
 - Explicit no-effect cards: **16**
 
 The audit is intentionally conservative. A card is only `AUTOMATED` when its executable entries use a canonical event that is currently dispatched by the runtime, all conditions are understood, all action types are supported, and no documented effect remains unresolved.
@@ -33,7 +33,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | Set | Cards | Automated | Partial | Manual | Unsupported trigger | Unsupported condition | Unsupported action | Unstructured | No effect |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | BS13 | 90 | 84 | 0 | 0 | 0 | 0 | 0 | 0 | 6 |
-| BSC49 | 117 | 20 | 0 | 5 | 22 | 0 | 0 | 69 | 1 |
+| BSC49 | 117 | 30 | 0 | 4 | 22 | 0 | 0 | 60 | 1 |
 | SD10 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD11 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD13 | 18 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 3 |
@@ -46,11 +46,11 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Structured entry baseline
 
-- Automated executable entries: **502**
+- Automated executable entries: **526**
 - Entries blocked by trigger coverage: **38**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
-- Represented but non-executable/manual entries: **303**
+- Represented but non-executable/manual entries: **304**
 
 ## Highest-priority trigger gaps
 
@@ -166,20 +166,16 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | --- | --- | --- | --- | --- |
 | `BSC49-001` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-002` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-004` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-008` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-009` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-012` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-013` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-015` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-021` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-023` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-026` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-027` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-028` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-029` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-030` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-031` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-032` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-034` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-035` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
@@ -190,11 +186,8 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BSC49-042` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-043` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-044` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-045` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-048` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-049` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-050` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-051` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-052` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-053` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-054` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
@@ -202,7 +195,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BSC49-056` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-057` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-058` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-059` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-060` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-061` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-062` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
@@ -218,7 +210,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BSC49-073` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-074` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-075` | BSC49 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-076` | BSC49 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-077` | BSC49 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-078` | BSC49 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-079` | BSC49 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
@@ -243,7 +234,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BSC49-098` | BSC49 | magic | `MANUAL` | unresolved entries: 2 |
 | `BSC49-099` | BSC49 | magic | `MANUAL` | unresolved entries: 1 |
 | `BSC49-100` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenDiscardedByBlueEffect; unresolved entries: 3 |
-| `BSC49-101` | BSC49 | magic | `MANUAL` | unresolved entries: 2 |
 | `BSC49-102` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenBlueNexusExhausted; unresolved entries: 2 |
 | `BSC49-CP01` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenSummonedOrAttacks, whileCardOrSpirit; unresolved entries: 3 |
 | `BSC49-CP02` | BSC49 | nexus | `UNSUPPORTED_TRIGGER` | triggers: onEligibleSummonOrPlacement, whileLevel1; unresolved entries: 4 |

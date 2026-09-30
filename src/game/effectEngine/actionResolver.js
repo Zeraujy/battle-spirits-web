@@ -1307,6 +1307,9 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const playerId = resolvePlayerId(next, action, context);
     const player = next.players?.[playerId];
     if (!player) return { match, notes: ["Jogador alvo inválido para Life damage."], manualResolutionNeeded: true, executed: false };
+    if (context.sourcePlayerId !== playerId && getContinuousPlayerNumericModifier(next, playerId, "opponentEffectLifeDamageBlocked") > 0) {
+      return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    }
     if (String(context.sourceCard?.cardType || "").toLowerCase() === "spirit" && context.sourcePlayerId !== playerId && getContinuousPlayerNumericModifier(next, playerId, "opponentSpiritEffectLifeDamageBlocked") > 0) {
       return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
     }

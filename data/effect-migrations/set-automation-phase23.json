@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T08:47:42.951Z",
+  "generatedAt": "2026-09-30T10:24:40.763Z",
   "targetPercent": 95,
   "totalSets": 11,
   "completeSets": 10,
@@ -20,10 +20,10 @@
     {
       "set": "BSC49",
       "total": 117,
-      "automated": 21,
+      "automated": 31,
       "noEffect": 1,
-      "unresolved": 96,
-      "automationPercent": 17.9,
+      "unresolved": 86,
+      "automationPercent": 26.5,
       "unsupportedTriggers": [
         "afterCost4PlusMagicResolves",
         "afterDivineTrust",
@@ -70,10 +70,6 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-004",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-008",
           "status": "UNSTRUCTURED_TEXT"
         },
@@ -86,19 +82,11 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-013",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-015",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
           "cardId": "BSC49-021",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-023",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -119,10 +107,6 @@
         },
         {
           "cardId": "BSC49-030",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-031",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -166,23 +150,11 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-045",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-048",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
           "cardId": "BSC49-049",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-050",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-051",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -211,10 +183,6 @@
         },
         {
           "cardId": "BSC49-058",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-059",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -275,10 +243,6 @@
         },
         {
           "cardId": "BSC49-075",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-076",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -376,10 +340,6 @@
         {
           "cardId": "BSC49-100",
           "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-101",
-          "status": "MANUAL"
         },
         {
           "cardId": "BSC49-102",

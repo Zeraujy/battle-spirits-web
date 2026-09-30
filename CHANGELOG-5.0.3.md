@@ -225,3 +225,15 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Phase 24 generated regression scenarios increased from 259 to 269.
 - Reused controller-Trash Immortality observers, reveal routing, Trash/hand Special Summon, dynamic BP targeting and continuous symbol modifiers without adding BSC49-specific Core Actions.
 - Full QA remains green; Phase 27 is blocked only by the remaining BSC49 set gate and the global <10% fallback target.
+
+## v5.1.0 Content Migration Batch 18 — BSC49 Wave 3
+
+- Automated 10 additional BSC49 cards: 004, 013, 023, 031, 045, 050, 051, 059, 076 and 101.
+- BSC49 coverage advanced from 21/117 to 31/117 resolved.
+- Global manual fallback dropped from 26.30% (96/365) to 23.56% (86/365).
+- Phase 24 generated regression scenarios increased from 269 to 279.
+- Added reusable generic blocking of Life damage from any opposing effect while preserving the existing Spirit-effect shield path.
+- Reused Immortality, field Flash, Brave host/combine, Trash observer, Nexus transformation and Magic routing primitives without adding BSC49-specific Core Actions.
+- Main suite passes 149/149, Effect Engine 223/223, Batch 18 dedicated 11/11 and full regression 422/422.
+- Phase 27 remains blocked only by BSC49 completion and the global <10% fallback target.
+- Internal application version remains 5.0.3 while v5.1.0 content migration continues.
