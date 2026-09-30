@@ -6,11 +6,11 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **1019**
-- Effect Schema v2 entries: **553**
-- Fully automated cards: **316 (86.6%)**
+- Structured effect/ability entries inspected: **1039**
+- Effect Schema v2 entries: **584**
+- Fully automated cards: **328 (89.9%)**
 - Partially automated cards: **0**
-- Unstructured effect text: **7**
+- Unstructured effect text: **0**
 - Explicit no-effect cards: **16**
 
 The audit is intentionally conservative. A card is only `AUTOMATED` when its executable entries use a canonical event that is currently dispatched by the runtime, all conditions are understood, all action types are supported, and no documented effect remains unresolved.
@@ -33,7 +33,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | Set | Cards | Automated | Partial | Manual | Unsupported trigger | Unsupported condition | Unsupported action | Unstructured | No effect |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | BS13 | 90 | 84 | 0 | 0 | 0 | 0 | 0 | 0 | 6 |
-| BSC49 | 117 | 83 | 0 | 4 | 22 | 0 | 0 | 7 | 1 |
+| BSC49 | 117 | 95 | 0 | 2 | 19 | 0 | 0 | 0 | 1 |
 | SD10 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD11 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD13 | 18 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 3 |
@@ -46,11 +46,11 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Structured entry baseline
 
-- Automated executable entries: **677**
-- Entries blocked by trigger coverage: **38**
+- Automated executable entries: **708**
+- Entries blocked by trigger coverage: **34**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
-- Represented but non-executable/manual entries: **304**
+- Represented but non-executable/manual entries: **297**
 
 ## Highest-priority trigger gaps
 
@@ -58,7 +58,6 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | --- | ---: |
 | `whileOnField` | 3 |
 | `whenAttacksOrBlocks` | 2 |
-| `whileInField` | 2 |
 | `whileLevel2Or3` | 2 |
 | `afterCost4PlusMagicResolves` | 1 |
 | `afterDivineTrust` | 1 |
@@ -66,7 +65,6 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `onEligibleSummonOrPlacement` | 1 |
 | `opposingUnitLeavesByYourEffect` | 1 |
 | `whenAttacksFlash` | 1 |
-| `whenBlueNexusExhausted` | 1 |
 | `whenBravedOrCombinedCardWouldLeave` | 1 |
 | `whenDepletedOrDestroyedByOpponent` | 1 |
 | `whenDiscardedByBlueEffect` | 1 |
@@ -77,15 +75,17 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `whenOpenedFromDeckByGreenEffect` | 1 |
 | `whenOpponentSpiritUltimateMilled` | 1 |
 | `whenOtherEligibleSpiritSummoned` | 1 |
-| `whenReturnedFromTrashByYellowEffect` | 1 |
 | `whenSummonedOrAttacks` | 1 |
-| `whenYellowBravedSpiritAttacks` | 1 |
 | `whenYourSpiritOrUltimateDestroyed` | 1 |
 | `whileAttackingAndRefreshed` | 1 |
 | `whileCardOrSpirit` | 1 |
+| `whileInField` | 1 |
 | `whileInFieldOrTrash` | 1 |
 | `whileInHand` | 1 |
 | `whileLevel1` | 1 |
+| `whileLevel2` | 1 |
+| `whileLevel3` | 1 |
+| `yourSpiritLeavesByOpponentEffect` | 1 |
 
 ## Unsupported action/condition gaps
 
@@ -94,7 +94,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Engine additions — Phases 7–18
 
-- Core Action Library is centralized and currently exposes **83 generic action types** to Schema v2.
+- Core Action Library is centralized and currently exposes **85 generic action types** to Schema v2.
 - Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.
 - Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.
 - Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.
@@ -165,24 +165,12 @@ The JSON report contains every entry and machine-readable reason. This table lis
 
 | Card | Set | Type | Status | Main gaps |
 | --- | --- | --- | --- | --- |
-| `BSC49-012` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-038` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-039` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-062` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-064` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-071` | BSC49 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC49-086` | BSC49 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-091` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenDiscardedFromHand; unresolved entries: 2 |
-| `BSC49-092` | BSC49 | magic | `MANUAL` | unresolved entries: 2 |
-| `BSC49-093` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whileInField; unresolved entries: 2 |
 | `BSC49-094` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whileInHand; unresolved entries: 2 |
 | `BSC49-095` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenLifeReducedByOpponentEffect; unresolved entries: 2 |
 | `BSC49-096` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whileInField, whileInFieldOrTrash; unresolved entries: 3 |
-| `BSC49-097` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenReturnedFromTrashByYellowEffect, whenYellowBravedSpiritAttacks; unresolved entries: 3 |
-| `BSC49-098` | BSC49 | magic | `MANUAL` | unresolved entries: 2 |
 | `BSC49-099` | BSC49 | magic | `MANUAL` | unresolved entries: 1 |
 | `BSC49-100` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenDiscardedByBlueEffect; unresolved entries: 3 |
-| `BSC49-102` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenBlueNexusExhausted; unresolved entries: 2 |
 | `BSC49-CP01` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenSummonedOrAttacks, whileCardOrSpirit; unresolved entries: 3 |
 | `BSC49-CP02` | BSC49 | nexus | `UNSUPPORTED_TRIGGER` | triggers: onEligibleSummonOrPlacement, whileLevel1; unresolved entries: 4 |
 | `BSC49-CP03` | BSC49 | nexus | `UNSUPPORTED_TRIGGER` | triggers: afterDivineTrust, onEligibleSummonDescendOrPlacement, whileLevel2; unresolved entries: 4 |

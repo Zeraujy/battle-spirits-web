@@ -620,6 +620,27 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
   }
 
 
+  if (type === "placeSourceInField") {
+    const sourceId = context.sourceInstanceId || context.sourcePhysical?.instanceId || null;
+    if (!sourceId) return { match: next, notes: ["Field source is missing an instance id."], manualResolutionNeeded: true, executed: false };
+    const current = findPhysicalCard(next, sourceId);
+    if (!current) return { match: next, notes: ["Field source is no longer in a movable zone."], manualResolutionNeeded: true, executed: false };
+    if (["spirits", "nexuses", "other"].includes(current.zone)) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const player = next.players?.[current.playerId];
+    if (!player) return { match: next, notes: ["Field source owner is invalid."], manualResolutionNeeded: true, executed: false };
+    const removed = removeFromSimpleZone(player, current.zone, sourceId);
+    if (!removed.card) return { match: next, notes: ["Field source could not be removed from its current zone."], manualResolutionNeeded: true, executed: false };
+    const placed = cleanPhysical(removed.card);
+    const updatedPlayer = { ...removed.player, field: { ...removed.player.field, other: [...(removed.player.field?.other || []), placed] } };
+    next = { ...next, players: { ...next.players, [current.playerId]: updatedPlayer } };
+    const movedCard = getDatabaseCard(cardIndex, placed);
+    next = queueDeferredCanonicalEvent(next, {
+      event: "cardMoved", sourcePlayerId: current.playerId, sourcePhysical: placed, sourceCardId: movedCard?.id || placed.cardId || null, eventPlayerId: current.playerId,
+      context: { movedCardInstanceId: placed.instanceId || null, movedCardId: movedCard?.id || placed.cardId || null, movedCardFamilies: movedCard?.families || [], movedCardType: movedCard?.cardType || null, moveFromZone: current.zone, moveDestination: "field", movedByPlayerId: context.sourcePlayerId || null, movedByInstanceId: context.sourceInstanceId || null, movedByCardId: context.sourceCard?.id || null, movedByCardType: context.sourceCard?.cardType || null }
+    });
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
   if (type === "discard") {
     return applyToTargets(next, { ...action, selector: action.selector || action.target || { owner: "self", zones: ["hand"] } }, cardIndex, context, (working, target) => moveCardGeneric(working, target, "trash", cardIndex, context));
   }
@@ -645,6 +666,15 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       : null;
     const count = Math.max(0, Number(contextualCount ?? sourceLevelCount ?? selectorCount ?? action.count ?? action.amount ?? 1));
     next = { ...next, players: { ...next.players, [playerId]: { ...player, reserve: Number(player.reserve || 0) + count } } };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: count };
+  }
+
+  if (type === "addCoreToTrashFromVoid") {
+    const playerId = resolvePlayerId(next, action, context);
+    const player = next.players?.[playerId];
+    if (!player) return { match, notes: ["Jogador alvo inválido para Core do Void."], manualResolutionNeeded: true, executed: false };
+    const count = Math.max(0, Number(action.count ?? action.amount ?? 1));
+    next = { ...next, players: { ...next.players, [playerId]: { ...player, trashCores: Number(player.trashCores || 0) + count } } };
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: count };
   }
 
@@ -1669,6 +1699,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       if (baseType === "refresh" || baseType === "exhaust") {
         const current = findPhysicalCard(working, target.physical.instanceId);
         if (!current) return working;
+        if (baseType === "refresh" && getContinuousNumericModifier(working, cardIndex, current.card, "cannotRefresh") > 0) return working;
         const wasExhausted = Boolean(current.card.exhausted);
         const player = updateFieldCard(working.players[current.playerId], current.card.instanceId, (physical) => ({ ...physical, exhausted: baseType === "exhaust" }));
         let updated = { ...working, players: { ...working.players, [current.playerId]: player } };

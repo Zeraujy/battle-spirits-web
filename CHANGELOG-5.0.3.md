@@ -281,3 +281,35 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Phase 24 generated regression coverage advanced from 320 to 332 scenarios.
 - Main suite passes 149/149, Effect Engine 285/285, Batch 23 dedicated 16/16 and full regression 484/484.
 - Phase 27 is now blocked only by the remaining BSC49 set-automation gate.
+
+
+## v5.1.0 Content Migration — Batch 24 / BSC49 Wave 9
+- Automated the final 7 direct/unstructured BSC49 cards: BSC49-012, 038, 039, 062, 064, 071 and 086.
+- BSC49 coverage advanced from 84/117 to 91/117 resolved.
+- Global manual fallback improved from 9.04% (33/365) to 7.12% (26/365).
+- Reused the existing 83-type Core Action Library; no new Core Action was introduced.
+- Phase 24 generated regression coverage advanced from 332 to 339 scenarios.
+- Main suite passes 149/149, Effect Engine 294/294, Batch 24 dedicated 9/9 and full regression 493/493.
+- Phase 25 and Phase 26 pass; Phase 27 remains blocked only by the BSC49 Phase 23 set gate.
+
+## v5.1.0 Content Migration — Batch 25 / BSC49 Wave 10
+- Automated 3 advanced BSC49 Magic cards: BSC49-092, BSC49-097 and BSC49-098.
+- BSC49 coverage advanced from 91/117 to 94/117 resolved.
+- Global manual fallback improved from 7.12% (26/365) to 6.30% (23/365).
+- Added reusable `addCoreToTrashFromVoid` Core Action and generic `zoneCount` / `eventMovedByColor` conditions.
+- Core Action Library increased from 83 to 84 reusable action types.
+- Phase 24 generated regression coverage advanced from 339 to 342 scenarios.
+- Main suite passes 149/149, Effect Engine 301/301, Batch 25 dedicated 7/7 and full regression 500/500.
+- Phase 25 and Phase 26 remain PASS; Phase 27 is still blocked only by the BSC49 Phase 23 set gate.
+
+
+## v5.1.0 Content Migration — Batch 26 / BSC49 Wave 11
+- Automated 2 advanced BSC49 Magic cards: BSC49-093 and BSC49-102.
+- BSC49 coverage advanced from 94/117 to 96/117 resolved.
+- Global manual fallback improved from 6.30% (23/365) to 5.75% (21/365).
+- Added reusable `placeSourceInField` Core Action and explicit immunity-bypass targeting for effects that cannot be prevented.
+- Enforced the existing `cannotRefresh` modifier in the generic Refresh resolver.
+- Core Action Library increased from 84 to 85 reusable action types.
+- Phase 24 generated regression coverage advanced from 342 to 344 scenarios.
+- Main suite passes 149/149, Effect Engine 306/306, Batch 26 dedicated 5/5 and full regression 505/505.
+- Phase 25 and Phase 26 remain PASS; Phase 27 is still blocked only by the BSC49 Phase 23 set gate.

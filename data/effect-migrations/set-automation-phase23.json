@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T14:15:46.155Z",
+  "generatedAt": "2026-09-30T17:07:31.502Z",
   "targetPercent": 95,
   "totalSets": 11,
   "completeSets": 10,
@@ -20,10 +20,10 @@
     {
       "set": "BSC49",
       "total": 117,
-      "automated": 84,
+      "automated": 96,
       "noEffect": 1,
-      "unresolved": 33,
-      "automationPercent": 71.8,
+      "unresolved": 21,
+      "automationPercent": 82.1,
       "unsupportedTriggers": [
         "afterCost4PlusMagicResolves",
         "afterDivineTrust",
@@ -31,7 +31,6 @@
         "onEligibleSummonOrPlacement",
         "opposingUnitLeavesByYourEffect",
         "whenAttacksOrBlocks",
-        "whenBlueNexusExhausted",
         "whenBravedOrCombinedCardWouldLeave",
         "whenDepletedOrDestroyedByOpponent",
         "whenDiscardedByBlueEffect",
@@ -42,9 +41,7 @@
         "whenOpenedFromDeckByGreenEffect",
         "whenOpponentSpiritUltimateMilled",
         "whenOtherEligibleSpiritSummoned",
-        "whenReturnedFromTrashByYellowEffect",
         "whenSummonedOrAttacks",
-        "whenYellowBravedSpiritAttacks",
         "whileAttackingAndRefreshed",
         "whileCardOrSpirit",
         "whileInField",
@@ -62,43 +59,7 @@
       "complete": false,
       "unresolvedCards": [
         {
-          "cardId": "BSC49-012",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-038",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-039",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-062",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-064",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-071",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-086",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-091",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-092",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "BSC49-093",
           "status": "UNSUPPORTED_TRIGGER"
         },
         {
@@ -114,23 +75,11 @@
           "status": "UNSUPPORTED_TRIGGER"
         },
         {
-          "cardId": "BSC49-097",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-098",
-          "status": "MANUAL"
-        },
-        {
           "cardId": "BSC49-099",
           "status": "MANUAL"
         },
         {
           "cardId": "BSC49-100",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-102",
           "status": "UNSUPPORTED_TRIGGER"
         },
         {

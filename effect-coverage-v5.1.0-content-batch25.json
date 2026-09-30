@@ -8,7 +8,7 @@
     3
   ],
   "source": "src/data/cards.json",
-  "generatedAt": "2026-09-30T17:03:55.909Z",
+  "generatedAt": "2026-09-30T16:20:15.207Z",
   "classificationVersion": "v5.1.0-phase03",
   "canonicalEvents": [
     {
@@ -196,10 +196,10 @@
     "totalCards": 365,
     "totalSets": 11,
     "byStatus": {
-      "AUTOMATED": 328,
+      "AUTOMATED": 326,
       "MANUAL": 2,
       "NO_EFFECT": 16,
-      "UNSUPPORTED_TRIGGER": 19
+      "UNSUPPORTED_TRIGGER": 21
     },
     "bySet": {
       "SD13": {
@@ -229,12 +229,12 @@
       "BSC49": {
         "total": 117,
         "statuses": {
-          "AUTOMATED": 95,
+          "AUTOMATED": 93,
           "NO_EFFECT": 1,
-          "UNSUPPORTED_TRIGGER": 19,
+          "UNSUPPORTED_TRIGGER": 21,
           "MANUAL": 2
         },
-        "automationPercent": 81.2
+        "automationPercent": 79.5
       },
       "SD10": {
         "total": 18,
@@ -292,13 +292,13 @@
       }
     },
     "entries": {
-      "total": 1039,
-      "automated": 708,
-      "runtimeUnsupportedTrigger": 34,
+      "total": 1040,
+      "automated": 705,
+      "runtimeUnsupportedTrigger": 36,
       "unsupportedCondition": 0,
       "unsupportedAction": 0,
-      "manual": 297,
-      "schemaV2": 584
+      "manual": 299,
+      "schemaV2": 581
     },
     "gapFrequency": {
       "triggers": {
@@ -309,6 +309,7 @@
         "opposingUnitLeavesByYourEffect": 1,
         "whenAttacksFlash": 1,
         "whenAttacksOrBlocks": 2,
+        "whenBlueNexusExhausted": 1,
         "whenBravedOrCombinedCardWouldLeave": 1,
         "whenDepletedOrDestroyedByOpponent": 1,
         "whenDiscardedByBlueEffect": 1,
@@ -323,7 +324,7 @@
         "whenYourSpiritOrUltimateDestroyed": 1,
         "whileAttackingAndRefreshed": 1,
         "whileCardOrSpirit": 1,
-        "whileInField": 1,
+        "whileInField": 2,
         "whileInFieldOrTrash": 1,
         "whileInHand": 1,
         "whileLevel1": 1,
@@ -14994,44 +14995,64 @@
       "set": "BSC49",
       "cardType": "magic",
       "nameEN": "Cassiopeia Seal LT",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
-      "documentedEffectCount": 0,
-      "executableEntryCount": 1,
-      "automatedExecutableCount": 1,
-      "unresolvedDisplayCount": 0,
+      "documentedEffectCount": 2,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 2,
       "entries": [
         {
-          "id": "bsc49-093-flash-auto46",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier",
-            "exhaust",
-            "placeSourceInField",
-            "selectMultipleTargets"
-          ],
+          "id": "bsc49-093-field",
+          "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
+          "rawEvent": "whileInField",
+          "canonicalEvent": "whileInField",
+          "canonicalEventDefined": false,
+          "runtimeDispatched": false,
+          "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
-          "hasStructuredActions": true,
+          "hasStructuredActions": false,
           "automationRef": null,
           "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
+          "entryType": "field",
+          "status": "UNSUPPORTED_TRIGGER"
+        },
+        {
+          "id": "bsc49-093-flash",
+          "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
+          "rawEvent": "flash",
+          "canonicalEvent": "magicFlash",
+          "canonicalEventDefined": true,
+          "runtimeDispatched": true,
+          "actionTypes": [],
+          "unsupportedActions": [],
+          "unsupportedConditions": [],
+          "hasModifiers": false,
+          "hasStructuredActions": false,
+          "automationRef": null,
+          "engineNative": false,
+          "entryType": "flash",
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [],
+        "unsupportedTriggers": [
+          "whileInField"
+        ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-093-field",
+          "bsc49-093-flash"
+        ]
       }
     },
     {
@@ -15655,65 +15676,64 @@
       "set": "BSC49",
       "cardType": "magic",
       "nameEN": "Mercury Goblet LT",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
-      "documentedEffectCount": 0,
-      "executableEntryCount": 2,
-      "automatedExecutableCount": 2,
-      "unresolvedDisplayCount": 0,
+      "documentedEffectCount": 2,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 2,
       "entries": [
         {
-          "id": "bsc49-102-trash-auto46",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerTrash",
-          "eventPlayer": "self",
-          "rawEvent": "cardExhausted",
-          "canonicalEvent": "cardExhausted",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "returnToHand"
-          ],
+          "id": "bsc49-102-trash",
+          "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
+          "rawEvent": "whenBlueNexusExhausted",
+          "canonicalEvent": "whenBlueNexusExhausted",
+          "canonicalEventDefined": false,
+          "runtimeDispatched": false,
+          "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
-          "hasStructuredActions": true,
+          "hasStructuredActions": false,
           "automationRef": null,
           "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
+          "entryType": "constant",
+          "status": "UNSUPPORTED_TRIGGER"
         },
         {
-          "id": "bsc49-102-flash-auto46",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "magicFlash",
+          "id": "bsc49-102-flash",
+          "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
+          "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
           "runtimeDispatched": true,
-          "actionTypes": [
-            "destroy",
-            "selectTarget"
-          ],
+          "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
-          "hasStructuredActions": true,
+          "hasStructuredActions": false,
           "automationRef": null,
           "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
+          "entryType": "flash",
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [],
+        "unsupportedTriggers": [
+          "whenBlueNexusExhausted"
+        ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-102-trash",
+          "bsc49-102-flash"
+        ]
       }
     },
     {

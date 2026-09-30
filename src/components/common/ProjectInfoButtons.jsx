@@ -6,6 +6,54 @@ const PATCHES = [
   {
     version: "5.0.3",
     date: { pt: "30/09/2026", en: "09/30/2026" },
+    title: { pt: "Automação de Cartas — BSC49 Wave 11", en: "Card Automation — BSC49 Wave 11" },
+    summary: {
+      pt: "Cassiopeia Seal LT e Mercury Goblet LT passaram para resolução estruturada, com suporte reutilizável para Magic em Field e targeting que ignora imunidade quando o texto permitir.",
+      en: "Cassiopeia Seal LT and Mercury Goblet LT moved to structured resolution, adding reusable Field Magic placement and immunity-bypass targeting when card text allows it."
+    },
+    sections: [{
+      title: { pt: "BSC49 Wave 11", en: "BSC49 Wave 11" },
+      items: {
+        pt: ["BSC49 avançou para 96/117 cartas resolvidas e o fallback manual caiu para 5,75% (21/365).", "A Core Action Library passou para 85 tipos com placeSourceInField.", "cannotRefresh agora é aplicado pelo resolver de Refresh e Mercury Goblet usa targeting de menor custo."],
+        en: ["BSC49 advanced to 96/117 resolved cards and manual fallback dropped to 5.75% (21/365).", "The Core Action Library increased to 85 types with placeSourceInField.", "cannotRefresh is now enforced by the Refresh resolver and Mercury Goblet uses lowest-cost targeting."]
+      }
+    }]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "30/09/2026", en: "09/30/2026" },
+    title: { pt: "Automação de Cartas — BSC49 Wave 10", en: "Card Automation — BSC49 Wave 10" },
+    summary: {
+      pt: "Três Magics avançadas do BSC49 passaram para resolução estruturada, reduzindo o fallback manual global para 6,30%.",
+      en: "Three advanced BSC49 Magic cards moved to structured resolution, reducing global manual fallback to 6.30%."
+    },
+    sections: [{
+      title: { pt: "BSC49 Wave 10", en: "BSC49 Wave 10" },
+      items: {
+        pt: ["Life Charge LT, Pegasus Flap LT e Hand Typhoon LT agora possuem resolução estruturada completa.", "BSC49 avançou para 94/117 cartas resolvidas e o fallback manual caiu para 6,30% (23/365).", "A Core Action Library passou para 84 tipos com a nova ação genérica de enviar Cores do Void ao Core Trash."],
+        en: ["Life Charge LT, Pegasus Flap LT and Hand Typhoon LT now have complete structured resolution.", "BSC49 advanced to 94/117 resolved cards and manual fallback dropped to 6.30% (23/365).", "The Core Action Library increased to 84 types with the new generic Void-to-Core-Trash action."]
+      }
+    }]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "30/09/2026", en: "09/30/2026" },
+    title: { pt: "Automação de Cartas — BSC49 Wave 9", en: "Card Automation — BSC49 Wave 9" },
+    summary: {
+      pt: "As 7 cartas diretas restantes do BSC49 passaram para resolução estruturada, reduzindo o fallback manual global para 7,12%.",
+      en: "The final seven direct BSC49 cards moved to structured resolution, reducing global manual fallback to 7.12%."
+    },
+    sections: [{
+      title: { pt: "BSC49 Wave 9", en: "BSC49 Wave 9" },
+      items: {
+        pt: ["BSC49 avançou para 91/117 cartas resolvidas.", "O fallback manual global caiu para 7,12% (26/365).", "A Core Action Library permaneceu em 83 tipos; o próximo bloco concentra Magic avançada, Contract/GranWalker e XV."],
+        en: ["BSC49 advanced to 91/117 resolved cards.", "Global manual fallback dropped to 7.12% (26/365).", "The Core Action Library remained at 83 types; the next block concentrates advanced Magic, Contract/GranWalker and XV mechanics."]
+      }
+    }]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "30/09/2026", en: "09/30/2026" },
     title: { pt: "Automação de Cartas — BSC49 Wave 8", en: "Card Automation — BSC49 Wave 8" },
     summary: {
       pt: "Mais 12 cartas do BSC49 passaram para resolução estruturada e o fallback manual global caiu abaixo de 10% pela primeira vez.",

@@ -219,7 +219,7 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   if (selector.hasSoulCore === true && !physical.cores?.soul) return false;
   if (selector.hasSoulCore === false && physical.cores?.soul) return false;
   if (!numberBetween(props.cores, selector.minimumCores ?? selector.minCores, selector.maximumCores ?? selector.maxCores)) return false;
-  if (props.isField && targetHasEffectColorImmunity(match, cardIndex, physical, playerId, context)) return false;
+  if (props.isField && selector.ignoreEffectImmunity !== true && targetHasEffectColorImmunity(match, cardIndex, physical, playerId, context)) return false;
   return true;
 }
 

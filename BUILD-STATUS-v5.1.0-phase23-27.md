@@ -8,21 +8,21 @@ v5.1.0 final promotion: **NO**
 ## Phase 23 — Set-by-Set Automation
 - Complete set gate: **10/11**
 - BSC49 remains the only incomplete audited set.
-- BSC49 current coverage: **84/117 resolved, 33 unresolved**.
+- BSC49 current coverage: **96/117 resolved, 21 unresolved**.
 
 ## Phase 24 — Card Effect Regression Suite
-- Generated scenarios: **332**
+- Generated scenarios: **344**
 - Every card currently classified as `AUTOMATED` or `NO_EFFECT` is represented.
 
 ## Phase 25 — Manual Resolution Reduction Audit
-- Current fallback: **9.04% (33/365)**
+- Current fallback: **5.75% (21/365)**
 - Target: **<10%**
 - Gate: **PASS**
 
 ## Phase 26 — Final Mechanics QA
 - Main suite: **149/149 PASS**
-- Effect Engine: **285/285 PASS**
-- Full regression: **484/484 PASS**
+- Effect Engine: **306/306 PASS**
+- Full regression: **505/505 PASS**
 - `npm run verify`: **PASS**
 - UI audit: **PASS**
 - Release audit: **PASS**

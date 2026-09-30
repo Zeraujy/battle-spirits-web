@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-30T17:05:29.920Z",
-  "scenarioCount": 344,
+  "generatedAt": "2026-09-30T16:20:15.303Z",
+  "scenarioCount": 342,
   "scenarios": [
     {
       "cardId": "BS01-125",
@@ -2807,19 +2807,6 @@
       }
     },
     {
-      "cardId": "BSC49-093",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-093-flash-auto46"
-        ]
-      }
-    },
-    {
       "cardId": "BSC49-097",
       "set": "BSC49",
       "status": "AUTOMATED",
@@ -2859,20 +2846,6 @@
         "automatedEntryIds": [
           "bsc49-101-main-auto38",
           "bsc49-101-flash-auto38"
-        ]
-      }
-    },
-    {
-      "cardId": "BSC49-102",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-102-trash-auto46",
-          "bsc49-102-flash-auto46"
         ]
       }
     },

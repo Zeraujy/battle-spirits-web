@@ -105,6 +105,11 @@ function typedConditionMatches(match, condition, context, cardIndex) {
   }
   if (type === "reserve") return playerMetric(match, context, condition, (player) => player.reserve || 0);
   if (type === "trashCores") return playerMetric(match, context, condition, (player) => player.trashCores || 0);
+  if (type === "zoneCount") {
+    const selector = { ...(condition.selector || {}), owner: condition.player ?? condition.selector?.owner ?? "self", zones: condition.selector?.zones || [condition.zone || "hand"] };
+    const targets = collectTargets(match, cardIndex, selector, context);
+    return compareNumber(targets.length, condition);
+  }
   if (type === "fieldCount") {
     const targets = collectTargets(match, cardIndex, { ...(condition.selector || {}), owner: condition.player ?? condition.selector?.owner ?? "self", zone: condition.selector?.zone || "field" }, context);
     return compareNumber(targets.length, condition);
@@ -354,6 +359,13 @@ function typedConditionMatches(match, condition, context, cardIndex) {
   }
   if (type === "eventMovedByEffect") {
     return Boolean(context.movedByInstanceId || context.movedByCardId || context.movedByCardType);
+  }
+  if (type === "eventMovedByColor") {
+    const movedById = context.movedByCardId || null;
+    const movedByCard = movedById ? cardIndex?.get?.(movedById) : null;
+    const colors = (movedByCard?.colors || []).map((value) => String(value).toLowerCase());
+    const wanted = String(condition.color ?? condition.value ?? "").toLowerCase();
+    return Boolean(wanted && colors.includes(wanted));
   }
   if (type === "eventMovedByCardType") {
     const expected = condition.cardTypes || (condition.cardType ? [condition.cardType] : [condition.value]);
