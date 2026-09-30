@@ -90,7 +90,7 @@ export function cardKeywords(card, physical = null) {
   for (const entry of card?.effects || []) {
     if (!activeAtLevel(entry)) continue;
     const raw = String(entry?.type || entry?.title?.en || entry?.title?.ptBR || "").toLowerCase();
-    for (const keyword of ["rush", "confront", "burst", "brave", "heavyarmor", "heavy armor", "strengthening", "brilliance", "holy life", "holylife", "high speed", "highspeed"]) {
+    for (const keyword of ["rush", "confront", "curse", "immortality", "burst", "brave", "heavyarmor", "heavy armor", "strengthening", "brilliance", "holy life", "holylife", "high speed", "highspeed", "ice wall", "icewall", "assault", "radiance", "ultra awaken", "ultraawaken", "transmigration", "charge"]) {
       if (raw.includes(keyword)) out.add(keyword.replace(/\s+/g, ""));
     }
   }
@@ -153,6 +153,10 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
     if (dynamicId == null && path.length === 1) dynamicId = context?.burstOpportunity?.[path[0]] ?? null;
     if (!dynamicId || String(physical.instanceId) !== String(dynamicId)) return false;
   }
+  if (selector.combinedWithSource === true) {
+    if (!context.sourceInstanceId || String(physical.combinedWith || "") !== String(context.sourceInstanceId)) return false;
+  }
+
   if (selector.battleOpponentOfSource === true) {
     const battle = match.battle;
     let expectedId = null;
@@ -161,7 +165,11 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
     if (!expectedId || String(physical.instanceId) !== String(expectedId)) return false;
   }
 
-  const names = [card.name, card.nameEN, card.namePT, card.nameJP].filter(Boolean).map((value) => String(value).toLowerCase());
+  let names = [card.name, card.nameEN, card.namePT, card.nameJP].filter(Boolean);
+  if ([TargetZone.SPIRITS, TargetZone.NEXUSES, TargetZone.OTHER].includes(zone)) {
+    names = applyContinuousCollectionModifiers(match, cardIndex, physical, "names", names);
+  }
+  names = names.map((value) => String(value).toLowerCase());
   const includes = selector.nameIncludes ?? selector.cardNameIncludes ?? null;
   if (includes && !names.some((value) => value.includes(String(includes).toLowerCase()))) return false;
 
@@ -169,6 +177,7 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   if (selector.cardTypes?.length && !selector.cardTypes.some((type) => props.types.has(type))) return false;
   if (selector.colors?.length && !selector.colors.some((color) => props.colors.includes(color))) return false;
   if (selector.families?.length && !selector.families.some((family) => props.families.includes(family))) return false;
+  if (selector.familiesAll?.length && !selector.familiesAll.every((family) => props.families.includes(family))) return false;
   if (selector.symbols?.length && !selector.symbols.some((symbol) => props.symbols.includes(symbol))) return false;
   const keywords = selector.keywords ?? (selector.keyword ? [selector.keyword] : []);
   if (keywords.length && !keywords.some((keyword) => props.keywords.includes(String(keyword).toLowerCase().replace(/\s+/g, "")))) return false;

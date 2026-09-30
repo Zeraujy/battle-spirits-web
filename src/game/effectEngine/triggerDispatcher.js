@@ -156,6 +156,26 @@ function observerCandidates(match, input, cardIndex) {
         .filter(({ entry }) => entryMatchesTriggerContext(entry, context, match));
       if (handEntries.length) out.push(observerDispatchInput(input, playerId, physical, "observerV2"));
     }
+
+    // Content Migration Batch 09: Schema v2 effects may remain active in the
+    // controller's Trash (for example Immortality and End Step recovery).
+    for (const physical of player.trash || []) {
+      const card = getDatabaseCard(cardIndex, physical);
+      if (!card) continue;
+      const context = {
+        ...(input.context || {}),
+        sourcePlayerId: playerId,
+        sourceInstanceId: physical.instanceId,
+        sourcePhysical: physical,
+        sourceCard: card,
+        sourceZone: "trash",
+        eventPlayerId: input.context?.eventPlayerId || null
+      };
+      const trashEntries = getTriggeredEntries(card, event, { dispatchMode: "observerV2" })
+        .filter(({ entry }) => getEntryTriggerScope(entry) === EffectTriggerScope.CONTROLLER_TRASH)
+        .filter(({ entry }) => entryMatchesTriggerContext(entry, context, match));
+      if (trashEntries.length) out.push(observerDispatchInput(input, playerId, physical, "observerV2"));
+    }
   }
   return out;
 }

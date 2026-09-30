@@ -130,3 +130,15 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Per-card regression coverage advances from 148 to 165 scenarios.
 - Main suite passes 149/149, Effect Engine 123/123, Batch 08 dedicated 10/10 and full regression 322/322.
 - Internal application version remains 5.0.3 while the v5.1.0 global content gate remains open.
+
+## v5.1.0 Content Migration — Batch 09 (BS13 Wave 1)
+
+- Started the BS13 large-set migration and automated 24 previously unresolved effect cards.
+- Reduced BS13 unresolved effects from 84 to 60.
+- Reduced global Manual Resolution fallback from 54.79% (200/365) to 48.22% (176/365).
+- Added generic Trash observers (`controllerTrash`) for mechanics such as Immortality and End Step recovery.
+- Added generic dynamic event-source Core/LV/keyword conditions and reusable dynamic action metrics.
+- Added reusable support for alternate-name modifiers, dynamic event-source modifier targeting and battle-opponent symbol BP scaling.
+- Expanded generated card regression coverage from 165 to 189 scenarios.
+- Passed main, Effect Engine, Batch 09, full regression, Phase 26, project, UI, release and security QA.
+- Phase 27 remains blocked only by BS13/BSC49 content completion and the global manual-fallback target.

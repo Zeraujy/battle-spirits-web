@@ -591,7 +591,13 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const player = next.players?.[playerId];
     if (!player) return { match, notes: ["Jogador alvo inválido para Core do Void."], manualResolutionNeeded: true, executed: false };
     const contextualCount = action.countFromContext ? valueFromContext(context, action.countFromContext, null) : null;
-    const count = Math.max(0, Number(contextualCount ?? action.count ?? action.amount ?? 1));
+    const sourceLevelCount = action.countFromSourceLevel && context.sourceCard && context.sourcePhysical
+      ? Number(getCurrentLevel(context.sourceCard, context.sourcePhysical)?.level || 0)
+      : null;
+    const selectorCount = action.countFromSelector && typeof action.countFromSelector === "object"
+      ? collectTargets(next, cardIndex, action.countFromSelector, context).length
+      : null;
+    const count = Math.max(0, Number(contextualCount ?? sourceLevelCount ?? selectorCount ?? action.count ?? action.amount ?? 1));
     next = { ...next, players: { ...next.players, [playerId]: { ...player, reserve: Number(player.reserve || 0) + count } } };
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: count };
   }
@@ -1136,6 +1142,14 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
 
   if (["addModifier", "modifyCost", "modifySymbols", "gainKeyword", "loseKeyword"].includes(type)) {
     let descriptor = action.modifier || action;
+    if (descriptor?.selector?.instanceIdFromContext) {
+      const dynamicId = valueFromContext(context, descriptor.selector.instanceIdFromContext, null);
+      descriptor = { ...descriptor, selector: { ...descriptor.selector, instanceIdFromContext: undefined, instanceId: dynamicId } };
+    }
+    if (descriptor.valueFromPlayerLifeMultiplier != null) {
+      const playerId = resolvePlayerId(next, descriptor, context);
+      descriptor = { ...descriptor, value: Number(next.players?.[playerId]?.life || 0) * Number(descriptor.valueFromPlayerLifeMultiplier || 0) };
+    }
     if (descriptor?.selector?.selectedTargets === true && Array.isArray(context.selectedTargets)) {
       let working = next;
       let count = 0;
@@ -1189,6 +1203,28 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         if (action.amountPerMatching != null && action.countSelector) {
           const matches = collectTargets(working, cardIndex, action.countSelector, context);
           amount = Number(action.amountPerMatching || 0) * matches.length;
+        }
+        if (action.amountPerSourceCore != null && context.sourcePhysical) {
+          const sourceCores = Number(context.sourcePhysical.cores?.regular || 0) + (context.sourcePhysical.cores?.soul ? 1 : 0);
+          amount = Number(action.amountPerSourceCore || 0) * sourceCores;
+        }
+        if (action.amountFromSelectedBP === true) {
+          const selected = Array.isArray(context.selectedTargets) ? context.selectedTargets[0] : null;
+          const selectedPhysical = selected?.physical || null;
+          amount = selectedPhysical ? getEffectiveBP(working, cardIndex, selectedPhysical) : 0;
+        }
+        if (action.amountPerBattleOpponentSymbol != null) {
+          const battle = working.battle || {};
+          const sourceId = context.sourceInstanceId || null;
+          const eventId = context.eventSourceInstanceId || null;
+          let opponentId = null;
+          if (sourceId && sourceId === battle.attackerInstanceId) opponentId = battle.blockerInstanceId || null;
+          else if (sourceId && sourceId === battle.blockerInstanceId) opponentId = battle.attackerInstanceId || null;
+          else if (eventId && eventId === battle.attackerInstanceId) opponentId = battle.blockerInstanceId || null;
+          else if (eventId && eventId === battle.blockerInstanceId) opponentId = battle.attackerInstanceId || null;
+          const opponent = opponentId ? findPhysicalCard(working, opponentId) : null;
+          const symbols = opponent ? getEffectiveSymbols(working, cardIndex, opponent.card).length : 0;
+          amount = Number(action.amountPerBattleOpponentSymbol || 0) * symbols;
         }
         if (String(rawAction.type || "").replace(/[\s_-]+/g, "").toLowerCase() === "reducebp") amount = -Math.abs(amount);
         const current = findPhysicalCard(working, target.physical.instanceId);

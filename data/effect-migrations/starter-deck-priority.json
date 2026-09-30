@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T00:34:26.367Z",
+  "generatedAt": "2026-09-30T00:35:49.563Z",
   "starterDecks": 17,
   "ready": 9,
   "decks": [
@@ -178,9 +178,7 @@
         "SD14-008",
         "BS01-134"
       ],
-      "unresolved": [
-        "BS13-054"
-      ],
+      "unresolved": [],
       "readyWithoutManual": false,
       "status": "BLOCKED_MISSING_RUNTIME_DATA"
     },

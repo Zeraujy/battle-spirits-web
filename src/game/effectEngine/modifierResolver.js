@@ -119,7 +119,7 @@ function activeKeywords(card, physical) {
   for (const entry of card?.effects || []) {
     if (!activeAtLevel(entry)) continue;
     const raw = String(entry?.type || entry?.title?.en || entry?.title?.ptBR || "").toLowerCase();
-    for (const keyword of ["rush", "confront", "burst", "brave", "heavyarmor", "heavy armor", "charge"]) {
+    for (const keyword of ["rush", "confront", "curse", "immortality", "burst", "brave", "heavyarmor", "heavy armor", "strengthening", "brilliance", "holy life", "holylife", "high speed", "highspeed", "ice wall", "icewall", "assault", "radiance", "ultra awaken", "ultraawaken", "transmigration", "charge"]) {
       if (raw.includes(keyword)) out.add(keyword === "charge" ? "chargered" : keyword.replace(/\s+/g, ""));
     }
   }
@@ -160,6 +160,8 @@ function selectorMatches(match, cardIndex, physical, modifier, skipProtection = 
   if (colors.length && !colors.some((value) => (card.colors || []).includes(value))) return false;
   const families = selector.families || (selector.family ? [selector.family] : []);
   if (families.length && !families.some((value) => (card.families || []).includes(value))) return false;
+  const familiesAll = selector.familiesAll || [];
+  if (familiesAll.length && !familiesAll.every((value) => (card.families || []).includes(value))) return false;
   const symbols = selector.symbols || (selector.symbol ? [selector.symbol] : []);
   if (symbols.length && !symbols.some((value) => (card.symbols || []).includes(value))) return false;
   const keywords = selector.keywords || (selector.keyword ? [selector.keyword] : []);
@@ -315,6 +317,8 @@ export function getContinuousCardNumericModifier(match, card, playerId, property
     if (colors.length && !colors.some((color) => (card?.colors || []).includes(color))) continue;
     const families = selector.families || (selector.family ? [selector.family] : []);
     if (families.length && !families.some((family) => (card?.families || []).includes(family))) continue;
+    const familiesAll = selector.familiesAll || [];
+    if (familiesAll.length && !familiesAll.every((family) => (card?.families || []).includes(family))) continue;
     const symbols = selector.symbols || (selector.symbol ? [selector.symbol] : []);
     if (symbols.length && !symbols.some((symbol) => (card?.symbols || []).includes(symbol))) continue;
     const baseCost = Number(card?.cost || 0);
@@ -345,6 +349,8 @@ export function getContinuousCardCollectionModifier(match, card, playerId, prope
     if (colors.length && !colors.some((color) => (card?.colors || []).includes(color))) continue;
     const families = selector.families || (selector.family ? [selector.family] : []);
     if (families.length && !families.some((family) => (card?.families || []).includes(family))) continue;
+    const familiesAll = selector.familiesAll || [];
+    if (familiesAll.length && !familiesAll.every((family) => (card?.families || []).includes(family))) continue;
     const incoming = Array.isArray(modifier.value) ? modifier.value : [modifier.value];
     if (modifier.operation === "set") values = incoming.filter(Boolean);
     else if (modifier.operation === "remove") values = values.filter((item) => !incoming.includes(item));

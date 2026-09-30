@@ -9,7 +9,8 @@ export const EFFECT_SCHEMA_VERSION = 2;
 export const EffectTriggerScope = Object.freeze({
   SOURCE: "source",
   CONTROLLER_FIELD: "controllerField",
-  CONTROLLER_HAND: "controllerHand"
+  CONTROLLER_HAND: "controllerHand",
+  CONTROLLER_TRASH: "controllerTrash"
 });
 
 export const EventPlayerRelation = Object.freeze({

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T13:00:09.471Z",
+  "generatedAt": "2026-09-29T17:05:21.341Z",
   "metric": "card-level Manual Resolution fallback",
   "targetPercent": 10,
   "baseline": {
@@ -12,18 +12,18 @@
   },
   "current": {
     "totalCards": 365,
-    "automated": 149,
+    "automated": 173,
     "noEffect": 16,
-    "manualFallback": 200,
-    "rate": 54.79,
+    "manualFallback": 176,
+    "rate": 48.22,
     "statusCounts": {
-      "AUTOMATED": 149,
+      "AUTOMATED": 173,
       "NO_EFFECT": 16,
-      "UNSTRUCTURED_TEXT": 173,
+      "UNSTRUCTURED_TEXT": 149,
       "UNSUPPORTED_TRIGGER": 22,
       "MANUAL": 5
     }
   },
-  "reductionPercentagePoints": 25.21,
+  "reductionPercentagePoints": 31.78,
   "passesTarget": false
 }

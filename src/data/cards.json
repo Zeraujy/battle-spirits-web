@@ -8382,7 +8382,69 @@
       "ptBR": "LV1/LV2/LV3: Quando um Spirit do oponente com 4000 BP ou menos atacar, destrua aquele Spirit. LV2/LV3 Quando Este Spirit Ataca: Enquanto você controlar um Brave em estado de Spirit, este Spirit ganha 1 símbolo Vermelho adicional."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-006-low-bp-attacker-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventSourceBP",
+            "atMost": 4000
+          }
+        ],
+        "actions": [
+          {
+            "type": "destroy",
+            "target": "effectSource"
+          }
+        ]
+      },
+      {
+        "id": "bs13-006-symbol-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "controlsCardType",
+            "cardType": "brave"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "add",
+            "value": [
+              "red"
+            ],
+            "selector": "source",
+            "duration": "battle"
+          }
+        ]
+      }
+    ],
     "name": "The FlameBeast Fioryx",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-006.webp"
@@ -8574,7 +8636,50 @@
       "ptBR": "LV2 Durante o turno do oponente: Quando este Spirit for destruído pelo oponente, você pode invocar até 2 cartas de Spirit de custo 1 ou menos do seu Trash sem pagar seus custos."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-010-destroyed-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventDestroyedByOpponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "trash"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumCost": 1
+            },
+            "maxTargets": 2,
+            "allowZero": true,
+            "asManyAsPossible": false,
+            "onConfirm": {
+              "type": "specialSummonFromTrash",
+              "target": "selected",
+              "allowedCardTypes": [
+                "spirit"
+              ]
+            }
+          }
+        ]
+      }
+    ],
     "name": "Skullzard",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-010.webp"
@@ -8672,8 +8777,90 @@
       "en": "[Immortality: Cost 7/8] Either Attack Step: When one of your Cost 7 or 8 Spirits is destroyed, you may summon this Spirit card from your Trash. LV1/LV2/LV3 When Destroyed: Send one Core from an opposing Spirit to the opponent's Trash.",
       "ptBR": "[Immortality: Custo 7/8] Durante o Attack Step de qualquer jogador: Quando um dos seus Spirits de custo 7 ou 8 for destruído, você pode invocar esta carta de Spirit do seu Trash. LV1/LV2/LV3 Quando Destruído: Coloque 1 Core de um Spirit do oponente no Trash dele."
     },
-    "effects": [],
-    "abilities": [],
+    "effects": [
+      {
+        "id": "bs13-012-immortality-auto29",
+        "type": "immortality",
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "Immortality: Cost 7/8",
+          "ptBR": "Immortality: Cost 7/8"
+        },
+        "text": {
+          "en": "When one of your Cost 7 or 8 Spirits is destroyed during either Attack Step, you may summon this card from your Trash.",
+          "ptBR": "Quando um dos seus Spirits de custo 7 ou 8 for destruído durante qualquer Attack Step, você pode invocar esta carta do Trash."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "bs13-012-immortality-trigger-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "any": [
+              {
+                "type": "eventSourceCost",
+                "equals": 7
+              },
+              {
+                "type": "eventSourceCost",
+                "equals": 8
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "specialSummonSource"
+          }
+        ]
+      },
+      {
+        "id": "bs13-012-destroyed-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "minimumCores": 1
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "removeCore",
+              "amount": 1,
+              "destination": "trash"
+            }
+          }
+        ]
+      }
+    ],
     "name": "Jainagant",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-012.webp"
@@ -8723,7 +8910,41 @@
       "ptBR": "LV1/LV2/LV3 Quando Invocado: Mova 1 Core de cada Spirit do oponente de custo 3 ou menos para a Reserve dele."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-013-summon-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "removeCore",
+            "all": true,
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumCost": 3,
+              "minimumCores": 1
+            },
+            "amount": 1,
+            "destination": "reserve"
+          }
+        ]
+      }
+    ],
     "name": "Skullion",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-013.webp"
@@ -8821,7 +9042,100 @@
       "ptBR": "Durante o seu End Step: Devolva esta carta de Spirit do seu Trash para a sua mão. LV1/LV2 Quando Invocado: Devolva 1 carta de Spirit com [Curse] ou [Immortality] do seu Trash para a sua mão. LV2 Durante o seu Attack Step: Todos os seus Spirits atacantes com [Curse] ou [Immortality] são tratados como sem cor."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-015-trash-end-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "endStep",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "returnToHand",
+            "target": "source"
+          }
+        ]
+      },
+      {
+        "id": "bs13-015-summon-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "trash"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "keywords": [
+                "curse",
+                "immortality"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bs13-015-colorless-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "any": [
+              {
+                "type": "eventSourceKeyword",
+                "keyword": "curse"
+              },
+              {
+                "type": "eventSourceKeyword",
+                "keyword": "immortality"
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "colors",
+            "operation": "set",
+            "value": [],
+            "selector": {
+              "instanceIdFromContext": "eventSourceInstanceId"
+            },
+            "duration": "battle"
+          }
+        ]
+      }
+    ],
     "name": "The HellGovernor Hagen",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-015.webp"
@@ -8917,7 +9231,40 @@
       "ptBR": "LV2 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP para cada Spirit da família Imp que você controla."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-017-attack-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "target": "source",
+            "duration": "battle",
+            "amountPerMatching": 1000,
+            "countSelector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Imp"
+              ]
+            }
+          }
+        ]
+      }
+    ],
     "name": "Anaguma-Kosuke",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-017.webp"
@@ -9011,7 +9358,73 @@
       "ptBR": "LV1/LV2 Durante o seu End Step: Ao devolver 1 dos seus Spirits com [High Speed] para a sua mão, dê Refresh neste Spirit. LV2 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits for combinado com um Brave, dê Refresh naquele Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-019-end-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "endStep",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "keywords": [
+                "highspeed"
+              ],
+              "excludeSource": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            },
+            "afterSelect": [
+              {
+                "type": "refresh",
+                "target": "source"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bs13-019-braved-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBraved",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "refresh",
+            "target": "effectSource"
+          }
+        ]
+      }
+    ],
     "name": "Corocorn",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-019.webp"
@@ -9056,7 +9469,28 @@
       "ptBR": "LV2 Quando Este Spirit Ataca: Este Spirit recebe +1000 BP para cada Core colocado neste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-020-attack-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "target": "source",
+            "duration": "battle",
+            "amountPerSourceCore": 1000
+          }
+        ]
+      }
+    ],
     "name": "Bushbabe",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-020.webp"
@@ -9101,8 +9535,58 @@
       "en": "Flash [High Speed]: This Spirit card in your hand can be summoned by paying its summoning cost using cores from your Reserve. The cores placed on this Spirit when summoned this way must also come from your Reserve. LV1/LV2 When This Spirit Is Destroyed: Refresh one of your Spirits.",
       "ptBR": "Flash [High Speed]: Esta carta de Spirit na sua mão pode ser invocada pagando seu custo de invocação usando Cores da sua Reserve. Os Cores colocados neste Spirit ao invocá-lo desta forma também devem vir da sua Reserve. LV1/LV2 Quando Este Spirit For Destruído: Dê Refresh em 1 dos seus Spirits."
     },
-    "effects": [],
-    "abilities": [],
+    "effects": [
+      {
+        "id": "bs13-021-high-speed-auto29",
+        "type": "highSpeed",
+        "timing": "flash",
+        "levels": [
+          1,
+          2
+        ],
+        "title": {
+          "en": "High Speed",
+          "ptBR": "High Speed"
+        },
+        "text": {
+          "en": "This Spirit may be summoned from hand during Flash timing by paying its cost from the Reserve.",
+          "ptBR": "Este Spirit pode ser Invocado da mão durante o Flash Timing pagando seu custo com a Reserve."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "bs13-021-destroyed-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "refresh"
+            }
+          }
+        ]
+      }
+    ],
     "name": "Saizorong",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-021.webp"
@@ -9154,7 +9638,29 @@
       "ptBR": "LV1/LV2/LV3 Quando Este Spirit For Destruído: Coloque na sua Reserve uma quantidade de Cores do Void igual ao Level atual deste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-022-destroyed-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "player": "self",
+            "countFromSourceLevel": true
+          }
+        ]
+      }
+    ],
     "name": "Yang-Ogre",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-022.webp"
@@ -9204,7 +9710,76 @@
       "ptBR": "LV1/LV2/LV3 Durante o seu End Step: Dê Refresh em todos os seus Spirits que estejam no LV2 ou superior. [Quando Combinado] LV3 Quando Este Spirit Batalha: No fim da batalha, ao devolver 1 Brave combinado com este Spirit para a sua mão, dê Refresh neste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-023-end-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "endStep",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "refreshAllMatching",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "minimumLevel": 2
+            }
+          }
+        ]
+      },
+      {
+        "id": "bs13-023-braved-battle-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          3
+        ],
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "other"
+              ],
+              "cardTypes": [
+                "brave"
+              ],
+              "combinedWithSource": true,
+              "includeCombined": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            },
+            "afterSelect": [
+              {
+                "type": "refresh",
+                "target": "source"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "name": "Mountain-Seikai",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-023.webp"
@@ -9249,7 +9824,105 @@
       "ptBR": "LV1/LV2 Quando Invocado: Para cada Spirit da família Imp que você controla, coloque 1 Core do Void na sua Reserve. LV1/LV2 Quando Este Spirit Ataca: Ao deixar 1 dos seus Spirits da família Imp Exhausted, este Spirit recebe BP igual ao BP atual daquele Spirit. LV2: Quando 1 dos seus Spirits que não seja \"The BushinBeast Deerl-Yukimura\" receber Refresh, dê Refresh neste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-024-summon-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "player": "self",
+            "countFromSelector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Imp"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "bs13-024-attack-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Imp"
+              ],
+              "refreshed": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "exhaust"
+            },
+            "afterSelect": [
+              {
+                "type": "modifyBP",
+                "target": "source",
+                "duration": "battle",
+                "amountFromSelectedBP": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bs13-024-refresh-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardRefreshed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceIsNotSource"
+          }
+        ],
+        "actions": [
+          {
+            "type": "refresh",
+            "target": "source"
+          }
+        ]
+      }
+    ],
     "name": "The BushinBeast Deerl-Yukimura",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-024.webp"
@@ -9541,7 +10214,87 @@
       "ptBR": "LV1/LV2 [Heavy Armor: Roxo/Azul]: Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Roxos ou Azuis do oponente. [Quando Combinado] LV2 Quando Este Spirit Batalha: Devolva para a mão 1 Spirit do oponente de cada cor que corresponda a uma das cores especificadas pelo [Heavy Armor] deste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-030-heavy-armor-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectImmunityColors",
+            "operation": "add",
+            "value": [
+              "purple",
+              "blue"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bs13-030-braved-battle-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "purple"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          },
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "blue"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      }
+    ],
     "name": "Lethalweapondragon",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-030.webp"
@@ -9587,7 +10340,71 @@
       "ptBR": "LV1/LV2 Durante o Attack Step do Oponente: Todos os seus Spirits da família Armored Dragon podem bloquear qualquer Spirit do oponente mesmo estando Exhausted. LV2 Quando Este Spirit Bloqueia: Este Spirit recebe +2000 BP para cada Spirit da família Armored Dragon que você controla."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-031-exhausted-block-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "allowExhaustedBlock",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Armored Dragon"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bs13-031-block-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "target": "source",
+            "duration": "battle",
+            "amountPerMatching": 2000,
+            "countSelector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Armored Dragon"
+              ]
+            }
+          }
+        ]
+      }
+    ],
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-031.webp"
   },
@@ -9868,7 +10685,68 @@
       "ptBR": "LV1/LV2/LV3: Este Spirit também é tratado como \"The Kaiser Empereur\". LV1/LV2/LV3 Quando Invocado: Você pode invocar 1 carta de Spirit da sua mão que tenha \"Pentan\" no nome sem pagar seu custo."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-037-name-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "names",
+            "operation": "add",
+            "value": [
+              "The Kaiser Empereur"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bs13-037-summon-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "nameIncludes": "Pentan"
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "specialSummonFromHand",
+              "free": true
+            }
+          }
+        ]
+      }
+    ],
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-037.webp"
   },
@@ -10517,7 +11395,57 @@
       "ptBR": "LV1 Quando Este Brave For Invocado: Ao destruir 1 dos seus Spirits, o oponente deve destruir 1 dos próprios Spirits. Condição de Combine: custo 4 ou mais."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-051-summon-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterSelect": [
+              {
+                "type": "selectTarget",
+                "chooser": "opponent",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "destroy"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "braveBP": 4000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -10647,7 +11575,41 @@
       "ptBR": "LV1 Quando Este Brave For Invocado: O oponente deixa 2 dos próprios Spirits Exhausted. Condição de Combine: custo 4 ou mais."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-054-summon-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "chooser": "opponent",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "maxTargets": 2,
+            "minTargets": 2,
+            "asManyAsPossible": true,
+            "onConfirm": {
+              "type": "exhaust"
+            }
+          }
+        ]
+      }
+    ],
     "braveBP": 3000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -10733,7 +11695,64 @@
       "ptBR": "LV1: Enquanto este Brave estiver em forma de Spirit, todos os seus Spirits recebem [Heavy Armor: Vermelho]. Condição de Combine: custo 5 ou mais. Enquanto Combinado — Quando Este Spirit Bloqueia: Este Spirit recebe +5000 BP para cada símbolo no Spirit do oponente com o qual está batalhando."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-056-spirit-form-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "requiresCombined": false,
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectImmunityColors",
+            "operation": "add",
+            "value": [
+              "red"
+            ],
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bs13-056-combined-block-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1
+        ],
+        "requiresCombined": true,
+        "conditions": [
+          {
+            "type": "eventSourceIsCombinedHost"
+          }
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "target": "effectSource",
+            "duration": "battle",
+            "amountPerBattleOpponentSymbol": 5000
+          }
+        ]
+      }
+    ],
     "braveBP": 3000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -11047,7 +12066,77 @@
       "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Quando um Spirit com 2 Cores ou menos sobre ele atacar, destrua aquele Spirit. LV2 Durante Seu Draw Step: No início do Step, ao descartar 1 carta de Spirit com [Curse] ou [Immortality] da sua mão, aumente em 2 a quantidade de cartas que você compra."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-063-attack-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventSourceCoreCount",
+            "atMost": 2
+          }
+        ],
+        "actions": [
+          {
+            "type": "destroy",
+            "target": "effectSource"
+          }
+        ]
+      },
+      {
+        "id": "bs13-063-draw-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "drawStep",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "keywords": [
+                "curse",
+                "immortality"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "discard"
+            },
+            "afterSelect": [
+              {
+                "type": "draw",
+                "count": 2
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-063.webp"
   },
   {
@@ -11178,7 +12267,82 @@
       "ptBR": "LV1/LV2: Quando 1 dos seus Spirits for destruído pelo oponente, coloque 1 Core do Void na sua Reserve. LV2 Durante o Attack Step do Oponente: Quando sua Life for reduzida pelo ataque de um Spirit do oponente, coloque 1 Core do Void na sua Reserve e dê Refresh em 1 dos seus Spirits."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-066-destroyed-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventDestroyedByOpponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "player": "self",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": "bs13-066-life-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          },
+          {
+            "type": "battleAttackerCardType",
+            "cardType": "spirit"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "player": "self",
+            "amount": 1
+          },
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "refresh"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-066.webp"
   },
   {
@@ -11351,7 +12515,81 @@
       "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Ataques de Spirits em LV1 com custo 3 ou menos não podem reduzir a Life de nenhum jogador. LV2 Durante o Attack Step do Oponente: Quando sua Life for reduzida por um Spirit do oponente, ao deixar este Nexus Exhausted, coloque 1 Core do Void na sua Life. Este efeito só pode ser usado uma vez por turno."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-070-attack-lock-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventSourceCost",
+            "atMost": 3
+          },
+          {
+            "type": "eventSourceLevel",
+            "equals": 1
+          }
+        ],
+        "actions": [
+          {
+            "type": "setBattleRestriction",
+            "restriction": {
+              "preventLifeDamage": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "bs13-070-life-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          },
+          {
+            "type": "sourceState",
+            "value": "refreshed"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bs13-070-life-restore",
+            "actions": [
+              {
+                "type": "exhaust",
+                "target": "source"
+              },
+              {
+                "type": "healLife",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-070.webp"
   },
   {
@@ -11560,7 +12798,78 @@
       "ptBR": "Flash: Destrua 1 Spirit Combinado do oponente que esteja Exhausted. Ou destrua 2 Spirits do oponente, de custo 3 ou menos, que estejam Exhausted."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-076-flash-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "chooseOption",
+            "titleEN": "Assassinate",
+            "titlePT": "Assassinate",
+            "options": [
+              {
+                "id": "braved",
+                "labelEN": "Destroy 1 exhausted Braved Spirit",
+                "labelPT": "Destruir 1 Spirit Combinado Exhausted",
+                "actions": [
+                  {
+                    "type": "selectTarget",
+                    "selector": {
+                      "owner": "opponent",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit"
+                      ],
+                      "braved": true,
+                      "exhausted": true
+                    },
+                    "allowZero": true,
+                    "onSelect": {
+                      "type": "destroy"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "low",
+                "labelEN": "Destroy 2 exhausted Cost 3-or-less Spirits",
+                "labelPT": "Destruir 2 Spirits Exhausted de custo 3 ou menos",
+                "actions": [
+                  {
+                    "type": "selectMultipleTargets",
+                    "selector": {
+                      "owner": "opponent",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit"
+                      ],
+                      "exhausted": true,
+                      "maximumCost": 3
+                    },
+                    "maxTargets": 2,
+                    "asManyAsPossible": true,
+                    "allowZero": true,
+                    "onConfirm": {
+                      "type": "destroy"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-076.webp"
   },
   {
@@ -11589,7 +12898,58 @@
       "ptBR": "No seu End Step, devolva 1 [Breeze Ride] do seu Trash para a sua mão. Este efeito só pode ser usado uma vez por turno. Flash: 1 Spirit recebe +3000 BP durante este turno."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-077-trash-end-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "endStep",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bs13-077-trash-return",
+            "actions": [
+              {
+                "type": "returnToHand",
+                "target": "source"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bs13-077-flash-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "any",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": false,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": 3000,
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-077.webp"
   },
   {
@@ -11679,7 +13039,68 @@
       "ptBR": "Flash: Devolva 1 Spirit do oponente para a mão dele. Depois, se você controlar um Spirit que tenha \"Strike\" no nome, devolva mais 1 Spirit do oponente para a mão dele."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-080-flash-auto29",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "controls": {
+                "owner": "self",
+                "zones": [
+                  "field"
+                ],
+                "cardTypes": [
+                  "spirit"
+                ],
+                "nameIncludes": "Strike"
+              }
+            },
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "returnToHand"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-080.webp"
   },
   {

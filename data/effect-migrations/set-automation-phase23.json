@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T13:02:02.972Z",
+  "generatedAt": "2026-09-29T17:05:21.214Z",
   "targetPercent": 95,
   "totalSets": 11,
   "completeSets": 9,
@@ -7,10 +7,10 @@
     {
       "set": "BS13",
       "total": 90,
-      "automated": 6,
+      "automated": 30,
       "noEffect": 6,
-      "unresolved": 84,
-      "automationPercent": 6.7,
+      "unresolved": 60,
+      "automationPercent": 33.3,
       "unsupportedTriggers": [],
       "unsupportedConditions": [],
       "unsupportedActions": [],
@@ -33,10 +33,6 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-006",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-007",
           "status": "UNSTRUCTURED_TEXT"
         },
@@ -45,19 +41,7 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-010",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-011",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-012",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-013",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -65,39 +49,7 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-015",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-016",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-017",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-019",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-020",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-021",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-022",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-023",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-024",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -117,14 +69,6 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-030",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-031",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-032",
           "status": "UNSTRUCTURED_TEXT"
         },
@@ -138,10 +82,6 @@
         },
         {
           "cardId": "BS13-036",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-037",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -193,10 +133,6 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-051",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-052",
           "status": "UNSTRUCTURED_TEXT"
         },
@@ -205,15 +141,7 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-054",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-055",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-056",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -241,19 +169,11 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-063",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-064",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
           "cardId": "BS13-065",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-066",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -266,10 +186,6 @@
         },
         {
           "cardId": "BS13-069",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-070",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -293,23 +209,11 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-076",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-077",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-078",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
           "cardId": "BS13-079",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-080",
           "status": "UNSTRUCTURED_TEXT"
         },
         {

@@ -67,7 +67,8 @@
           "enum": [
             "source",
             "controllerField",
-            "controllerHand"
+            "controllerHand",
+            "controllerTrash"
           ],
           "default": "source"
         },

@@ -165,10 +165,31 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     const physical = candidates[0]?.physical || null;
     return Boolean(physical && compareNumber(getEffectiveBP(match, cardIndex, physical), condition));
   }
+  if (type === "eventSourceCoreCount" || type === "eventSourceLevel") {
+    const instanceId = context.eventSourceInstanceId || null;
+    if (!instanceId) return false;
+    const candidates = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
+    const candidate = candidates[0] || null;
+    if (!candidate) return false;
+    if (type === "eventSourceCoreCount") {
+      const count = Number(candidate.physical?.cores?.regular || 0) + (candidate.physical?.cores?.soul ? 1 : 0);
+      return compareNumber(count, condition);
+    }
+    return compareNumber(Number(getCurrentLevel(candidate.card, candidate.physical)?.level || 0), condition);
+  }
   if (type === "eventSourceFamily") {
     const card = eventSourceCard(match, context, cardIndex);
     const expected = String(condition.family ?? condition.value ?? "").toLowerCase();
     return Boolean(card && (card.families || []).some((family) => String(family).toLowerCase() === expected));
+  }
+  if (type === "eventSourceKeyword") {
+    const instanceId = context.eventSourceInstanceId || null;
+    if (!instanceId) return false;
+    const candidates = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
+    const candidate = candidates[0] || null;
+    if (!candidate) return false;
+    const expected = String(condition.keyword ?? condition.value ?? "").toLowerCase().replace(/\s+/g, "");
+    return cardKeywords(candidate.card, candidate.physical).includes(expected);
   }
   if (type === "eventSourceIsCombinedHost") {
     const hostId = context.sourcePhysical?.combinedWith || null;
@@ -283,6 +304,7 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     return expected.filter(Boolean).map((value) => String(value).toLowerCase()).includes(String(context.movedByCardType || "").toLowerCase());
   }
   if (type === "eventZeroedBySource") return Boolean(context.zeroedByInstanceId && context.zeroedByInstanceId === context.sourceInstanceId);
+  if (type === "eventSourceIsNotSource") return Boolean(context.eventSourceInstanceId && context.sourceInstanceId && context.eventSourceInstanceId !== context.sourceInstanceId);
   if (type === "eventFirstTimeThisTurn") return Boolean(context.firstTimeThisTurn);
   if (type === "eventZeroedIsBattleOpponent") {
     const zeroedPlayerId = context.zeroedPlayerId || null;
