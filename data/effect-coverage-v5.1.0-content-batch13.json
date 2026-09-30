@@ -8,7 +8,7 @@
     3
   ],
   "source": "src/data/cards.json",
-  "generatedAt": "2026-09-30T07:13:36.455Z",
+  "generatedAt": "2026-09-30T06:48:07.728Z",
   "classificationVersion": "v5.1.0-phase03",
   "canonicalEvents": [
     {
@@ -192,10 +192,10 @@
     "totalCards": 365,
     "totalSets": 11,
     "byStatus": {
-      "AUTOMATED": 223,
+      "AUTOMATED": 213,
       "MANUAL": 5,
       "NO_EFFECT": 16,
-      "UNSTRUCTURED_TEXT": 99,
+      "UNSTRUCTURED_TEXT": 109,
       "UNSUPPORTED_TRIGGER": 22
     },
     "bySet": {
@@ -219,10 +219,10 @@
         "total": 90,
         "statuses": {
           "NO_EFFECT": 6,
-          "UNSTRUCTURED_TEXT": 10,
-          "AUTOMATED": 74
+          "UNSTRUCTURED_TEXT": 20,
+          "AUTOMATED": 64
         },
-        "automationPercent": 82.2
+        "automationPercent": 71.1
       },
       "BSC49": {
         "total": 117,
@@ -290,13 +290,13 @@
       }
     },
     "entries": {
-      "total": 762,
-      "automated": 425,
+      "total": 742,
+      "automated": 405,
       "runtimeUnsupportedTrigger": 38,
       "unsupportedCondition": 0,
       "unsupportedAction": 0,
       "manual": 299,
-      "schemaV2": 304
+      "schemaV2": 284
     },
     "gapFrequency": {
       "triggers": {
@@ -1697,59 +1697,13 @@
       "set": "BS13",
       "cardType": "spirit",
       "nameEN": "The PantherDragon Pandolancer",
-      "status": "AUTOMATED",
+      "status": "UNSTRUCTURED_TEXT",
       "explicitNoEffect": false,
       "documentedEffectCount": 0,
-      "executableEntryCount": 2,
-      "automatedExecutableCount": 2,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
       "unresolvedDisplayCount": 0,
-      "entries": [
-        {
-          "id": "bs13-007-attack-combine-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "whenAttacks",
-          "canonicalEvent": "whenAttacks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "combineBraveFromField",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bs13-007-battle-destroy-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "whenBattles",
-          "canonicalEvent": "whenBattles",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "destroy"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        }
-      ],
+      "entries": [],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
@@ -1762,62 +1716,13 @@
       "set": "BS13",
       "cardType": "spirit",
       "nameEN": "The DinomanKing Megalo-Saur",
-      "status": "AUTOMATED",
+      "status": "UNSTRUCTURED_TEXT",
       "explicitNoEffect": false,
       "documentedEffectCount": 0,
-      "executableEntryCount": 2,
-      "automatedExecutableCount": 2,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
       "unresolvedDisplayCount": 0,
-      "entries": [
-        {
-          "id": "bs13-008-summon-destroy-budget-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "whenSummoned",
-          "canonicalEvent": "whenSummoned",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "destroy",
-            "selectMultipleTargets"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bs13-008-blocked-refresh-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "whenBlocked",
-          "canonicalEvent": "whenBlocked",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "refresh",
-            "returnToHand",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        }
-      ],
+      "entries": [],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
@@ -4362,61 +4267,13 @@
       "set": "BS13",
       "cardType": "brave",
       "nameEN": "Mokubaoh",
-      "status": "AUTOMATED",
+      "status": "UNSTRUCTURED_TEXT",
       "explicitNoEffect": false,
       "documentedEffectCount": 0,
-      "executableEntryCount": 2,
-      "automatedExecutableCount": 2,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
       "unresolvedDisplayCount": 0,
-      "entries": [
-        {
-          "id": "bs13-053-highspeed-combine-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "self",
-          "rawEvent": "whenSummoned",
-          "canonicalEvent": "whenSummoned",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "combineBraveFromField",
-            "refresh"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bs13-053-battle-bounce-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "any",
-          "rawEvent": "afterBattleResolution",
-          "canonicalEvent": "afterBattleResolution",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "returnToHand",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        }
-      ],
+      "entries": [],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
@@ -4601,59 +4458,13 @@
       "set": "BS13",
       "cardType": "brave",
       "nameEN": "Poppor",
-      "status": "AUTOMATED",
+      "status": "UNSTRUCTURED_TEXT",
       "explicitNoEffect": false,
       "documentedEffectCount": 0,
-      "executableEntryCount": 2,
-      "automatedExecutableCount": 2,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
       "unresolvedDisplayCount": 0,
-      "entries": [
-        {
-          "id": "bs13-057-survive-host-destruction-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bs13-057-return-host-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "self",
-          "rawEvent": "whenDestroyed",
-          "canonicalEvent": "whenDestroyed",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "refresh",
-            "returnEventSourceToHand"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        }
-      ],
+      "entries": [],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
@@ -4775,38 +4586,13 @@
       "set": "BS13",
       "cardType": "brave",
       "nameEN": "Tres-Beluga",
-      "status": "AUTOMATED",
+      "status": "UNSTRUCTURED_TEXT",
       "explicitNoEffect": false,
       "documentedEffectCount": 0,
-      "executableEntryCount": 1,
-      "automatedExecutableCount": 1,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
       "unresolvedDisplayCount": 0,
-      "entries": [
-        {
-          "id": "bs13-060-braved-attack-mill-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "self",
-          "rawEvent": "whenAttacks",
-          "canonicalEvent": "whenAttacks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "modifyBP",
-            "topDeckToTrash"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        }
-      ],
+      "entries": [],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
@@ -5017,58 +4803,13 @@
       "set": "BS13",
       "cardType": "nexus",
       "nameEN": "The Palace of Snake Believers",
-      "status": "AUTOMATED",
+      "status": "UNSTRUCTURED_TEXT",
       "explicitNoEffect": false,
       "documentedEffectCount": 0,
-      "executableEntryCount": 2,
-      "automatedExecutableCount": 2,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
       "unresolvedDisplayCount": 0,
-      "entries": [
-        {
-          "id": "bs13-064-dark-snake-life-void-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bs13-064-opponent-life-discard-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        }
-      ],
+      "entries": [],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
@@ -5838,37 +5579,13 @@
       "set": "BS13",
       "cardType": "magic",
       "nameEN": "Never Give Up",
-      "status": "AUTOMATED",
+      "status": "UNSTRUCTURED_TEXT",
       "explicitNoEffect": false,
       "documentedEffectCount": 0,
-      "executableEntryCount": 1,
-      "automatedExecutableCount": 1,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
       "unresolvedDisplayCount": 0,
-      "entries": [
-        {
-          "id": "bs13-078-flash-refresh-grant-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        }
-      ],
+      "entries": [],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
@@ -5881,58 +5598,13 @@
       "set": "BS13",
       "cardType": "magic",
       "nameEN": "Vanishing Day",
-      "status": "AUTOMATED",
+      "status": "UNSTRUCTURED_TEXT",
       "explicitNoEffect": false,
       "documentedEffectCount": 0,
-      "executableEntryCount": 2,
-      "automatedExecutableCount": 2,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
       "unresolvedDisplayCount": 0,
-      "entries": [
-        {
-          "id": "bs13-079-main-return-replacement-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "magicMain",
-          "canonicalEvent": "magicMain",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bs13-079-flash-bp-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "modifyBP"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        }
-      ],
+      "entries": [],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
@@ -6271,80 +5943,13 @@
       "set": "BS13",
       "cardType": "spirit",
       "nameEN": "The SephirothicSheepDeity Sephiro-Aries",
-      "status": "AUTOMATED",
+      "status": "UNSTRUCTURED_TEXT",
       "explicitNoEffect": false,
       "documentedEffectCount": 0,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
       "unresolvedDisplayCount": 0,
-      "entries": [
-        {
-          "id": "bs13-x03-main-summon-exhaust-self-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bs13-x03-battle-refresh-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "afterBattleResolution",
-          "canonicalEvent": "afterBattleResolution",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "refresh"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bs13-x03-core-lock-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        }
-      ],
+      "entries": [],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
@@ -6443,83 +6048,13 @@
       "set": "BS13",
       "cardType": "spirit",
       "nameEN": "The KylinStarBeast Rean",
-      "status": "AUTOMATED",
+      "status": "UNSTRUCTURED_TEXT",
       "explicitNoEffect": false,
       "documentedEffectCount": 0,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
       "unresolvedDisplayCount": 0,
-      "entries": [
-        {
-          "id": "bs13-x05-ignore-brave-condition-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bs13-x05-destruction-survive-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "whenDestroyed",
-          "canonicalEvent": "whenDestroyed",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "exhaust",
-            "selectTarget",
-            "specialSummonEventSourceFromTrash"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bs13-x05-braved-families-auto34",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        }
-      ],
+      "entries": [],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],

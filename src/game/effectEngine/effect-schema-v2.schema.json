@@ -39,6 +39,7 @@
             "lifeDecreased",
             "magicMain",
             "magicFlash",
+            "magicResolved",
             "burstLifeDecrease",
             "burstOpponentHandIncrease",
             "burst",

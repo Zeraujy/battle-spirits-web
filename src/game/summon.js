@@ -7,9 +7,18 @@ import { conditionMatches } from "./brave.js";
 import { checkSummoningCondition } from "./specialRules.js";
 import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
 import { BurstEvent, openBurstOpportunityForEvent } from "./effectEngine/burstEngine.js";
+import { getContinuousPlayerNumericModifier } from "./effectEngine/modifierResolver.js";
 
 function hasHighSpeed(card) {
   return (card?.effects || []).some((effect) => String(effect?.type || "").toLowerCase() === "highspeed");
+}
+
+
+function summonEntersExhausted(match, playerId, card) {
+  return match.phase === "main"
+    && !(card?.families || []).includes("Imp")
+    && ["spirit", "brave"].includes(String(card?.cardType || "").toLowerCase())
+    && getContinuousPlayerNumericModifier(match, playerId, "nonImpSummonsExhaustedDuringMain") > 0;
 }
 
 function minimumCores(card) {
@@ -106,10 +115,12 @@ export function summonFromHand(match, playerId, instanceId, cardIndex, options =
     player = removed.player;
     const hostAfterPay = findPhysicalCard(paid.match, directHostId);
     if (!hostAfterPay || hostAfterPay.playerId !== playerId || hostAfterPay.zone !== "spirits") return { ok: false, error: "O alvo do Direct Combine deixou o campo durante o pagamento." };
+    const forcedExhausted = summonEntersExhausted(paid.match, playerId, card);
+    if (forcedExhausted && hostAfterPay) player = updateFieldCard(player, directHostId, (host) => ({ ...host, exhausted: true }));
     const physical = {
       ...removed.card,
       cardType: "brave",
-      exhausted: Boolean(hostAfterPay?.card?.exhausted),
+      exhausted: Boolean(hostAfterPay?.card?.exhausted || forcedExhausted),
       cores: { regular: 0, soul: false },
       combinedWith: directHostId
     };
@@ -135,7 +146,7 @@ export function summonFromHand(match, playerId, instanceId, cardIndex, options =
   let physical = {
     ...removed.card,
     cardType: card.cardType,
-    exhausted: false,
+    exhausted: summonEntersExhausted(placed.match, playerId, card),
     cores: placed.cores,
     combinedWith: null
   };

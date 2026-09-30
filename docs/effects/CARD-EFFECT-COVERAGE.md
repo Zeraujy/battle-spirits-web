@@ -6,11 +6,11 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **678**
-- Effect Schema v2 entries: **221**
-- Fully automated cards: **183 (50.1%)**
+- Structured effect/ability entries inspected: **762**
+- Effect Schema v2 entries: **304**
+- Fully automated cards: **223 (61.1%)**
 - Partially automated cards: **0**
-- Unstructured effect text: **139**
+- Unstructured effect text: **99**
 - Explicit no-effect cards: **16**
 
 The audit is intentionally conservative. A card is only `AUTOMATED` when its executable entries use a canonical event that is currently dispatched by the runtime, all conditions are understood, all action types are supported, and no documented effect remains unresolved.
@@ -32,7 +32,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 | Set | Cards | Automated | Partial | Manual | Unsupported trigger | Unsupported condition | Unsupported action | Unstructured | No effect |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| BS13 | 90 | 34 | 0 | 0 | 0 | 0 | 0 | 50 | 6 |
+| BS13 | 90 | 74 | 0 | 0 | 0 | 0 | 0 | 10 | 6 |
 | BSC49 | 117 | 0 | 0 | 5 | 22 | 0 | 0 | 89 | 1 |
 | SD10 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD11 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
@@ -46,11 +46,11 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Structured entry baseline
 
-- Automated executable entries: **342**
+- Automated executable entries: **425**
 - Entries blocked by trigger coverage: **38**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
-- Represented but non-executable/manual entries: **298**
+- Represented but non-executable/manual entries: **299**
 
 ## Highest-priority trigger gaps
 
@@ -94,7 +94,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Engine additions — Phases 7–18
 
-- Core Action Library is centralized and currently exposes **69 generic action types** to Schema v2.
+- Core Action Library is centralized and currently exposes **77 generic action types** to Schema v2.
 - Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.
 - Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.
 - Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.
@@ -129,6 +129,7 @@ The canonical list is defined in `src/game/effectEngine/canonicalEvents.js`. Leg
 | `lifeDecreased` | Yes |
 | `magicMain` | Yes |
 | `magicFlash` | Yes |
+| `magicResolved` | Yes |
 | `burstLifeDecrease` | Yes |
 | `burstOpponentSummon` | Yes |
 | `burstOpponentMagic` | Yes |
@@ -146,6 +147,7 @@ The canonical list is defined in `src/game/effectEngine/canonicalEvents.js`. Leg
 | `endStep` | Yes |
 | `cardMoved` | Yes |
 | `cardRefreshed` | Yes |
+| `cardExhausted` | Yes |
 | `bpBecameZero` | Yes |
 | `coreMoved` | No — foundation only |
 | `afterUltimateTrigger` | Yes |
@@ -163,55 +165,15 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | Card | Set | Type | Status | Main gaps |
 | --- | --- | --- | --- | --- |
 | `BS13-002` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-003` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-004` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-005` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-007` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-008` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-014` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-016` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-027` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-028` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-029` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-032` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-034` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-036` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-038` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-039` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-040` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-042` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-043` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-046` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-047` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-048` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-049` | BS13 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-050` | BS13 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-052` | BS13 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-053` | BS13 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-057` | BS13 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-059` | BS13 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-060` | BS13 | brave | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-064` | BS13 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-065` | BS13 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-067` | BS13 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-068` | BS13 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-069` | BS13 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-071` | BS13 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-072` | BS13 | nexus | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-073` | BS13 | magic | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-075` | BS13 | magic | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-078` | BS13 | magic | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-079` | BS13 | magic | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-081` | BS13 | magic | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-082` | BS13 | magic | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-083` | BS13 | magic | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-084` | BS13 | magic | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-X01` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-X02` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-X03` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-X04` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-X05` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BS13-X06` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-001` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-002` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-003` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |

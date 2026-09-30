@@ -28,8 +28,15 @@ export function getDatabaseCard(cardIndex, physicalCard) {
 }
 
 export function getCurrentLevel(card, physicalCard) {
+  const printed = [...(card?.levels || [])].sort((a, b) => Number(a.level || 0) - Number(b.level || 0));
+  const forced = (physicalCard?.effectModifiers || []).filter((m) => m?.type === "forcedLevel").at(-1);
+  if (forced) {
+    if (forced.maxLevel === true) return printed.at(-1) ?? null;
+    const exact = printed.find((level) => Number(level.level || 0) === Number(forced.level || 0));
+    if (exact) return exact;
+  }
   const total = Number(physicalCard?.cores?.regular || 0) + (physicalCard?.cores?.soul ? 1 : 0);
-  const levels = (card?.levels || []).filter((l) => Number(l.cores) <= total).sort((a, b) => a.level - b.level);
+  const levels = printed.filter((l) => Number(l.cores) <= total);
   return levels.at(-1) ?? null;
 }
 

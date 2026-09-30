@@ -281,7 +281,14 @@ export function resolveEffectDecision(match, actorId, payload = {}, cardIndex) {
     const dispatches = orderedTriggerDispatches(updatedBatch);
     if (dispatches.length) next = enqueueEffectEvents(next, dispatches).match;
     next = drainEffectQueue(next, (working, item) => resolveCardEvent(working, item.payload, cardIndex)).match;
-    if (!next.pendingEffectDecision && next.pendingMagicResolution) next = finalizePendingMagicResolution(next, cardIndex);
+    if (!next.pendingEffectDecision && next.pendingMagicResolution) {
+      next = finalizePendingMagicResolution(next, cardIndex);
+      while (!next.pendingEffectDecision && Array.isArray(next.deferredCanonicalEvents) && next.deferredCanonicalEvents.length) {
+        const [deferred, ...rest] = next.deferredCanonicalEvents;
+        next = { ...next, deferredCanonicalEvents: rest };
+        next = dispatchEffectEvent(next, deferred, cardIndex).match;
+      }
+    }
     return {
       ok: true,
       match: next,
@@ -418,7 +425,14 @@ export function resolveEffectDecision(match, actorId, payload = {}, cardIndex) {
   if (next.pendingEffectDecision) next = markEffectQueueWaiting(next);
   else next = drainEffectQueue(next, (working, item) => resolveCardEvent(working, item.payload, cardIndex)).match;
 
-  if (!next.pendingEffectDecision && next.pendingMagicResolution) next = finalizePendingMagicResolution(next, cardIndex);
+  if (!next.pendingEffectDecision && next.pendingMagicResolution) {
+      next = finalizePendingMagicResolution(next, cardIndex);
+      while (!next.pendingEffectDecision && Array.isArray(next.deferredCanonicalEvents) && next.deferredCanonicalEvents.length) {
+        const [deferred, ...rest] = next.deferredCanonicalEvents;
+        next = { ...next, deferredCanonicalEvents: rest };
+        next = dispatchEffectEvent(next, deferred, cardIndex).match;
+      }
+    }
 
   if (!next.pendingEffectDecision) {
     const sourceName = baseContext.sourceCard?.namePT || baseContext.sourceCard?.nameEN || baseContext.sourceCard?.id || "Efeito";

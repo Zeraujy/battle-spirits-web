@@ -40,6 +40,27 @@ export function finalizePendingMagicResolution(match, cardIndex) {
       }
     };
   }
+  const previousCount = Number(next.temporary?.magicResolvedCounts?.[pending.playerId] || 0);
+  const magicResolvedCount = previousCount + 1;
+  next = {
+    ...next,
+    temporary: {
+      ...(next.temporary || {}),
+      magicResolvedCounts: { ...(next.temporary?.magicResolvedCounts || {}), [pending.playerId]: magicResolvedCount }
+    },
+    deferredCanonicalEvents: [
+      ...(next.deferredCanonicalEvents || []),
+      {
+        event: "magicResolved",
+        sourcePlayerId: pending.playerId,
+        sourceInstanceId: clean.instanceId || null,
+        sourcePhysical: clean,
+        sourceCardId: pending.cardId || null,
+        eventPlayerId: pending.playerId,
+        context: { magicResolvedCount, magicMode: pending.mode, eventPlayerId: pending.playerId }
+      }
+    ]
+  };
   if (pending.mode === "flash" && next.battle?.flash && (!pending.battleId || next.battle.id === pending.battleId)) {
     next = {
       ...next,

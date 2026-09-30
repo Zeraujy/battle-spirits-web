@@ -5,8 +5,30 @@ export function calculateReduction(match, playerId, card, cardIndex) {
   const field = { ...getFieldSymbols(match, playerId, cardIndex) };
   const bonusReductionSymbols = getContinuousCardCollectionModifier(match, card, playerId, "summonReductionSymbols", []);
   for (const symbol of bonusReductionSymbols) field[symbol] = Number(field[symbol] || 0) + 1;
+  const dynamicReduction = card?.dynamicReduction || null;
+  let dynamicExtraReductions = [];
+  if (dynamicReduction?.extraSymbolsPerFieldMatch?.selector && dynamicReduction.extraSymbolsPerFieldMatch.symbol) {
+    const rule = dynamicReduction.extraSymbolsPerFieldMatch;
+    const matches = fieldCards(match.players[playerId]).filter((physical) => {
+      if (physical.pendingDestruction || physical.combinedWith) return false;
+      const db = getDatabaseCard(cardIndex, physical);
+      const selector = rule.selector || {};
+      const types = selector.cardTypes || (selector.cardType ? [selector.cardType] : []);
+      if (types.length && !types.includes(db?.cardType)) return false;
+      const families = selector.families || (selector.family ? [selector.family] : []);
+      if (families.length && !families.some((family) => (db?.families || []).includes(family))) return false;
+      return true;
+    }).length;
+    dynamicExtraReductions = Array.from({ length: matches * Math.max(1, Number(rule.perMatch || 1)) }, () => rule.symbol);
+  }
+  if (dynamicReduction?.includeTrashSymbols === true || getContinuousCardNumericModifier(match, card, playerId, "useTrashSymbolsForReduction") > 0) {
+    for (const physical of match.players?.[playerId]?.trash || []) {
+      const db = getDatabaseCard(cardIndex, physical);
+      for (const symbol of db?.symbols || []) field[symbol] = Number(field[symbol] || 0) + 1;
+    }
+  }
   const ignoreReduction = getContinuousCardNumericModifier(match, card, playerId, "ignoreReductionSymbols") > 0;
-  const reductions = ignoreReduction ? [] : [...(card?.reduction || [])];
+  const reductions = ignoreReduction ? [] : [...(card?.reduction || []), ...dynamicExtraReductions];
   let applied = 0;
   const used = {};
   for (const reduction of reductions) {

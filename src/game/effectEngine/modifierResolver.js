@@ -172,6 +172,8 @@ function selectorMatches(match, cardIndex, physical, modifier, skipProtection = 
   const cost = Number(card.cost || 0);
   if (selector.minimumCost != null && cost < Number(selector.minimumCost)) return false;
   if (selector.maximumCost != null && cost > Number(selector.maximumCost)) return false;
+  if (selector.braved === true && !physical.combinedWith) return false;
+  if (selector.braved === false && physical.combinedWith) return false;
   if (selector.exhausted === true && !physical.exhausted) return false;
   if (selector.refreshed === true && physical.exhausted) return false;
   if (!skipProtection && modifierBlockedByEffectImmunity(match, cardIndex, physical, modifier)) return false;
@@ -238,10 +240,25 @@ export function removeContinuousModifiers(match, predicate = () => false) {
 }
 
 export function pruneContinuousModifiers(match) {
-  return removeContinuousModifiers(match, (modifier) => !durationIsActive(match, modifier.duration, {
+  let next = removeContinuousModifiers(match, (modifier) => !durationIsActive(match, modifier.duration, {
     sourceExists: (instanceId) => sourceExists(match, instanceId),
     conditionActive: modifier.conditionActive
   }));
+  const players = {};
+  for (const [playerId, player] of Object.entries(next.players || {})) {
+    const field = { ...player.field };
+    for (const zone of FIELD_ZONES) {
+      field[zone] = (player.field?.[zone] || []).map((physical) => ({
+        ...physical,
+        effectModifiers: (physical.effectModifiers || []).filter((modifier) => {
+          if (modifier?.duration !== "whileSourceExists") return true;
+          return !modifier.sourceInstanceId || sourceExists(next, modifier.sourceInstanceId);
+        })
+      }));
+    }
+    players[playerId] = { ...player, field };
+  }
+  return { ...next, players };
 }
 
 export function expireContinuousModifiers(match, reason) {
@@ -314,6 +331,7 @@ export function getContinuousCardNumericModifier(match, card, playerId, property
     const selector = modifier.selector || {};
     if (selector.owner === "self" && modifier.controllerId && playerId !== modifier.controllerId) continue;
     if (selector.owner === "opponent" && modifier.controllerId && playerId === modifier.controllerId) continue;
+    if (selector.cardId && String(selector.cardId) !== String(card?.id)) continue;
     const cardTypes = selector.cardTypes || (selector.cardType ? [selector.cardType] : []);
     if (cardTypes.length && !cardTypes.includes(card?.cardType)) continue;
     const colors = selector.colors || (selector.color ? [selector.color] : []);
@@ -346,6 +364,7 @@ export function getContinuousCardCollectionModifier(match, card, playerId, prope
     const selector = modifier.selector || {};
     if (selector.owner === "self" && modifier.controllerId && playerId !== modifier.controllerId) continue;
     if (selector.owner === "opponent" && modifier.controllerId && playerId === modifier.controllerId) continue;
+    if (selector.cardId && String(selector.cardId) !== String(card?.id)) continue;
     const cardTypes = selector.cardTypes || (selector.cardType ? [selector.cardType] : []);
     if (cardTypes.length && !cardTypes.includes(card?.cardType)) continue;
     const colors = selector.colors || (selector.color ? [selector.color] : []);

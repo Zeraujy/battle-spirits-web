@@ -3,6 +3,7 @@ import { updateFieldCard, removeFieldCard } from "./zones.js";
 import { appendLog } from "./utils.js";
 import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
 import { cardKeywords } from "./effectEngine/targetingEngine.js";
+import { getContinuousNumericModifier } from "./effectEngine/modifierResolver.js";
 
 function minimumBraveCores(card) {
   const levels = (card?.levels || [])
@@ -216,10 +217,10 @@ export function getLegalBraveHosts(match, playerId, braveInstanceId, cardIndex, 
     .filter((physical) => !hostAlreadyCombined(match, physical.instanceId, braveInstanceId))
     .map((physical) => {
       const card = getDatabaseCard(cardIndex, physical);
-      const evaluation = evaluateBraveCondition(braveCard, card, {
-        confirmCondition: options.confirmManual === true,
-        hostPhysical: physical
-      });
+      const ignoresCondition = getContinuousNumericModifier(match, cardIndex, physical, "ignoreBraveCombineCondition") > 0;
+      const evaluation = ignoresCondition
+        ? { matches: true, manual: false, reason: null }
+        : evaluateBraveCondition(braveCard, card, { confirmCondition: options.confirmManual === true, hostPhysical: physical });
       return {
         physical,
         card,
@@ -276,7 +277,8 @@ export function combineBrave(match, playerId, braveInstanceId, hostInstanceId, c
   if (!["spirit", "ultimate"].includes(hostCard?.cardType)) return { ok: false, error: "Este alvo não é um Spirit/Ultimate compatível." };
   if (hostAlreadyCombined(match, hostInstanceId, braveInstanceId)) return { ok: false, error: "Este alvo já possui um Brave combinado." };
 
-  const evaluation = evaluateBraveCondition(braveCard, hostCard, { ...options, hostPhysical: hostCtx?.card || options.hostPhysical || null });
+  const ignoresCondition = getContinuousNumericModifier(match, cardIndex, hostCtx.card, "ignoreBraveCombineCondition") > 0;
+  const evaluation = ignoresCondition ? { matches: true, manual: false, reason: null } : evaluateBraveCondition(braveCard, hostCard, { ...options, hostPhysical: hostCtx?.card || options.hostPhysical || null });
   if (!evaluation.matches) return { ok: false, error: evaluation.reason || "A condição de combinação do Brave não foi cumprida." };
 
   let player = match.players[playerId];

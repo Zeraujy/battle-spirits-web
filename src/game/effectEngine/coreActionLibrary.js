@@ -56,6 +56,8 @@ const ACTION_ALIASES = Object.freeze({
   specialsummonfromhand: "specialSummonFromHand",
   specialsummonfromtrash: "specialSummonFromTrash",
   specialsummonsource: "specialSummonSource",
+  deployfromtrash: "deployFromTrash",
+  forcelevel: "forceLevel",
   requireattackifable: "requireAttackIfAble",
   emitsourceevent: "emitSourceEvent",
   dispatchsourceevent: "dispatchSourceEvent",
@@ -77,7 +79,13 @@ const ACTION_ALIASES = Object.freeze({
   preventevent: "preventEvent",
   replaceevent: "replaceEvent",
   replacedesctruction: "replaceEvent",
-  replacedestruction: "replaceEvent"
+  replacedestruction: "replaceEvent",
+  endcurrentstep: "endCurrentStep",
+  uptontimesperturn: "upToNTimesPerTurn",
+  specialsummonbravecombinedfromhand: "specialSummonBraveCombinedFromHand",
+  specialsummoneventsourcefromtrash: "specialSummonEventSourceFromTrash",
+  combinebravefromfield: "combineBraveFromField",
+  returneventsourcetohand: "returnEventSourceToHand"
 });
 
 export const CoreActionType = Object.freeze({
@@ -176,6 +184,8 @@ const SUPPORTED_ACTION_TYPES = new Set([
   "specialSummonFromHand",
   "specialSummonFromTrash",
   "specialSummonSource",
+  "deployFromTrash",
+  "forceLevel",
   "requireAttackIfAble",
   "emitSourceEvent",
   "dispatchSourceEvent",
@@ -184,7 +194,13 @@ const SUPPORTED_ACTION_TYPES = new Set([
   "oncePerTurn",
   "returnMagicUsedThisBattle",
   "returnUltimateTriggerRevealedMatchingToHand",
-  "swapExhaustionState"
+  "swapExhaustionState",
+  "endCurrentStep",
+  "upToNTimesPerTurn",
+  "specialSummonBraveCombinedFromHand",
+  "specialSummonEventSourceFromTrash",
+  "combineBraveFromField",
+  "returnEventSourceToHand"
 ]);
 
 export function canonicalActionType(type) {

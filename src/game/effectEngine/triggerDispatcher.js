@@ -75,7 +75,7 @@ function observerDispatchInput(input, playerId, physical, dispatchMode = "observ
 
 function sourceHasTriggeredEntries(match, input, cardIndex) {
   const found = input.sourceInstanceId ? findPhysicalCard(match, input.sourceInstanceId) : null;
-  const physical = found?.card || input.sourcePhysical || null;
+  const physical = input.sourcePhysical || found?.card || null;
   const card = input.sourceCard || (physical ? getDatabaseCard(cardIndex, physical) : null) || (input.sourceCardId ? cardIndex.get(input.sourceCardId) : null);
   if (!card) return false;
   if (physical && getContinuousNumericModifier(match, cardIndex, physical, "effectsDisabled") > 0) return false;
@@ -93,7 +93,7 @@ function sourceHasTriggeredEntries(match, input, cardIndex) {
 
 function sourceHasV2ContinuousEffect(match, input, cardIndex) {
   const found = input.sourceInstanceId ? findPhysicalCard(match, input.sourceInstanceId) : null;
-  const physical = found?.card || input.sourcePhysical || null;
+  const physical = input.sourcePhysical || found?.card || null;
   const card = input.sourceCard || (physical ? getDatabaseCard(cardIndex, physical) : null) || (input.sourceCardId ? cardIndex.get(input.sourceCardId) : null);
   if (!card) return false;
   if (physical && getContinuousNumericModifier(match, cardIndex, physical, "effectsDisabled") > 0) return false;

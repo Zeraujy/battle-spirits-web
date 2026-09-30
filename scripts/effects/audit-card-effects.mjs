@@ -36,7 +36,7 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "ownLifeAtMost",
   "lifeAtMost",
   "lifeAtLeast",
-  "handSize",
+  "handSize", "handSizeCompare", "eventMagicResolvedCount",
   "reserve",
   "trashCores",
   "fieldCount",
@@ -64,7 +64,8 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "eventSourceFamily",
   "eventSourceKeyword",
   "eventCause",
-  "eventDestroyedByOpponent", "eventDestroyedBySelf", "battleAttackerBP", "battleAttackerCardType", "eventDestroyerKeyword",
+  "specialSummonCause",
+  "eventDestroyedByOpponent", "eventDestroyedBySelf", "battleAttackerBP", "battleAttackerCost", "battleAttackerCardType", "eventDestroyerKeyword",
   "eventDestroyedByCardType",
   "eventRefreshedByCardType",
   "battleOnlyOpponentSpiritDestroyed",
@@ -81,10 +82,17 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "eventMovedByCardType",
   "eventZeroedBySource",
   "eventSourceIsNotSource",
+  "eventSourceIsSource",
+  "battleAttackerIsCombinedHostOfSource",
   "eventFirstTimeThisTurn",
   "eventZeroedIsBattleOpponent",
   "eventSourceIsCombinedHost",
-  "combinedHostLacksEffectType"
+  "combinedHostLacksEffectType",
+  "contextFlag",
+  "sourceNotBattling",
+  "battleParticipantIsCombinedHostOfSource",
+  "deckSize",
+  "sourceHasBraveAttachment"
 ]);
 
 const KNOWN_CONDITION_KEYS = new Set([
@@ -98,7 +106,7 @@ const KNOWN_CONDITION_KEYS = new Set([
   "atLeast", "atMost", "equals", "count", "minCount", "family", "families",
   "minimumCost", "maximumCost", "minCost", "maxCost",
   "player", "owner", "operator", "selector", "zone", "directAttack",
-  "attackerPlayer", "blocked", "cardType", "cause", "keyword", "keywords", "role",
+  "attackerPlayer", "blocked", "cardType", "cause", "keyword", "keywords", "role", "relation",
   "values", "destinations", "destination", "key", "effectType"
 ]);
 

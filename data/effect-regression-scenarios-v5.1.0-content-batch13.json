@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-30T07:13:55.056Z",
-  "scenarioCount": 239,
+  "generatedAt": "2026-09-30T06:48:07.768Z",
+  "scenarioCount": 229,
   "scenarios": [
     {
       "cardId": "BS01-125",
@@ -257,34 +257,6 @@
         "automatedEntryIds": [
           "bs13-006-low-bp-attacker-auto29",
           "bs13-006-symbol-auto29"
-        ]
-      }
-    },
-    {
-      "cardId": "BS13-007",
-      "set": "BS13",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bs13-007-attack-combine-auto34",
-          "bs13-007-battle-destroy-auto34"
-        ]
-      }
-    },
-    {
-      "cardId": "BS13-008",
-      "set": "BS13",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bs13-008-summon-destroy-budget-auto34",
-          "bs13-008-blocked-refresh-auto34"
         ]
       }
     },
@@ -835,20 +807,6 @@
       }
     },
     {
-      "cardId": "BS13-053",
-      "set": "BS13",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bs13-053-highspeed-combine-auto34",
-          "bs13-053-battle-bounce-auto34"
-        ]
-      }
-    },
-    {
       "cardId": "BS13-054",
       "set": "BS13",
       "status": "AUTOMATED",
@@ -890,20 +848,6 @@
       }
     },
     {
-      "cardId": "BS13-057",
-      "set": "BS13",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bs13-057-survive-host-destruction-auto34",
-          "bs13-057-return-host-auto34"
-        ]
-      }
-    },
-    {
       "cardId": "BS13-058",
       "set": "BS13",
       "status": "AUTOMATED",
@@ -927,19 +871,6 @@
         "automatedEntryIds": [
           "bs13-059-summon-auto31",
           "bs13-059-battle-auto31"
-        ]
-      }
-    },
-    {
-      "cardId": "BS13-060",
-      "set": "BS13",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bs13-060-braved-attack-mill-auto34"
         ]
       }
     },
@@ -982,20 +913,6 @@
         "automatedEntryIds": [
           "bs13-063-attack-auto29",
           "bs13-063-draw-auto29"
-        ]
-      }
-    },
-    {
-      "cardId": "BS13-064",
-      "set": "BS13",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bs13-064-dark-snake-life-void-auto34",
-          "bs13-064-opponent-life-discard-auto34"
         ]
       }
     },
@@ -1154,33 +1071,6 @@
       }
     },
     {
-      "cardId": "BS13-078",
-      "set": "BS13",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bs13-078-flash-refresh-grant-auto34"
-        ]
-      }
-    },
-    {
-      "cardId": "BS13-079",
-      "set": "BS13",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bs13-079-main-return-replacement-auto34",
-          "bs13-079-flash-bp-auto34"
-        ]
-      }
-    },
-    {
       "cardId": "BS13-080",
       "set": "BS13",
       "status": "AUTOMATED",
@@ -1249,21 +1139,6 @@
       }
     },
     {
-      "cardId": "BS13-X03",
-      "set": "BS13",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bs13-x03-main-summon-exhaust-self-auto34",
-          "bs13-x03-battle-refresh-auto34",
-          "bs13-x03-core-lock-auto34"
-        ]
-      }
-    },
-    {
       "cardId": "BS13-X04",
       "set": "BS13",
       "status": "AUTOMATED",
@@ -1275,21 +1150,6 @@
           "bs13-x04-heavy-armor-auto31",
           "bs13-x04-refresh-auto31",
           "bs13-x04-symbol-auto31"
-        ]
-      }
-    },
-    {
-      "cardId": "BS13-X05",
-      "set": "BS13",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bs13-x05-ignore-brave-condition-auto34",
-          "bs13-x05-destruction-survive-auto34",
-          "bs13-x05-braved-families-auto34"
         ]
       }
     },

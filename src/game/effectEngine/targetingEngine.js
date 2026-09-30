@@ -137,6 +137,13 @@ function targetProperties(match, cardIndex, candidate) {
   };
 }
 
+function propsFamiliesForShare(match, cardIndex, candidate) {
+  const { physical, card, zone } = candidate || {};
+  if (!physical || !card) return [];
+  const isField = [TargetZone.SPIRITS, TargetZone.NEXUSES, TargetZone.OTHER].includes(zone);
+  return isField ? getEffectiveFamilies(match, cardIndex, physical) : (card.families || []);
+}
+
 export function targetMatchesSelector(match, cardIndex, candidate, rawSelector = {}, context = {}) {
   const selector = normalizeTargetSelector(rawSelector);
   const { physical, card, playerId, zone } = candidate || {};
@@ -155,6 +162,13 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   }
   if (selector.combinedWithSource === true) {
     if (!context.sourceInstanceId || String(physical.combinedWith || "") !== String(context.sourceInstanceId)) return false;
+  }
+
+  if (selector.sharesFamilyWithSource === true) {
+    const sourceFamilies = context.sourcePhysical
+      ? getEffectiveFamilies(match, cardIndex, context.sourcePhysical)
+      : (context.sourceCard?.families || []);
+    if (!sourceFamilies.some((family) => propsFamiliesForShare(match, cardIndex, candidate).includes(family))) return false;
   }
 
   if (selector.battleOpponentOfSource === true) {

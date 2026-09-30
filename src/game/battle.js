@@ -3,17 +3,24 @@ import { updateFieldCard, removeFieldCard } from "./zones.js";
 import { appendLog, otherPlayerId, uid } from "./utils.js";
 import { resolveUltimateTriggerOnAttack } from "./specialRules.js";
 import { dispatchEffectEvent } from "./effectEngine/triggerDispatcher.js";
-import { clearEffectModifiers, getContinuousNumericModifier } from "./effectEngine/modifierResolver.js";
+import { clearEffectModifiers, getContinuousNumericModifier, getContinuousPlayerNumericModifier } from "./effectEngine/modifierResolver.js";
 import { openLifeDecreaseBurstOpportunity } from "./burstRules.js";
 import { BurstEvent, openBurstOpportunityForEvent } from "./effectEngine/burstEngine.js";
 import { dispatchBattleParticipantEvent, createBattleContext } from "./effectEngine/battleTriggerEngine.js";
 import { ReplacementEvent, clearReplacementWindow, resolveReplacementWindow } from "./effectEngine/replacementEngine.js";
 
-function refreshedBattleCards(match, player, cardIndex) {
+function refreshedBattleCards(match, playerId, cardIndex) {
+  const player = match.players[playerId];
   const cards = [...(player.field.spirits || []), ...(player.field.other || [])];
   return cards.filter((physical) => {
     if (physical.combinedWith || physical.exhausted) return false;
     if (getContinuousNumericModifier(match, cardIndex, physical, "cannotAttack") > 0) return false;
+    const symbolCount = getEffectiveSymbols(match, cardIndex, physical).length;
+    const maxForSymbolCount = Math.max(0, Number(getContinuousNumericModifier(match, cardIndex, physical, `maxAttacksPerTurnSymbolCount${symbolCount}`) || 0));
+    const usedForSymbolCount = Number(match.temporary?.attacksBySymbolCount?.[playerId]?.[symbolCount] || 0);
+    if (maxForSymbolCount > 0 && usedForSymbolCount >= maxForSymbolCount) return false;
+    const attackTax = Math.max(0, Number(getContinuousNumericModifier(match, cardIndex, physical, "attackReserveTrashCost") || 0));
+    if (attackTax > Number(player.reserve || 0)) return false;
     const card = getDatabaseCard(cardIndex, physical);
     return ["spirit", "ultimate", "brave"].includes(card?.cardType);
   });
@@ -21,7 +28,7 @@ function refreshedBattleCards(match, player, cardIndex) {
 
 export function legalAttackers(match, playerId, cardIndex) {
   if (match.phase !== "attack" || match.activePlayerId !== playerId || match.battle) return [];
-  return refreshedBattleCards(match, match.players[playerId], cardIndex);
+  return refreshedBattleCards(match, playerId, cardIndex);
 }
 
 export function declareAttack(match, playerId, instanceId, cardIndex) {
@@ -30,7 +37,10 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
   if (!attacker) return { ok: false, error: "Atacante inválido ou Exhausted." };
 
   const defenderId = otherPlayerId(match, playerId);
-  const player = updateFieldCard(match.players[playerId], instanceId, (card) => ({ ...card, exhausted: true }));
+  const attackTax = Math.max(0, Number(getContinuousNumericModifier(match, cardIndex, attacker, "attackReserveTrashCost") || 0));
+  let taxedPlayer = match.players[playerId];
+  if (attackTax > 0) taxedPlayer = { ...taxedPlayer, reserve: Number(taxedPlayer.reserve || 0) - attackTax, trashCores: Number(taxedPlayer.trashCores || 0) + attackTax };
+  const player = updateFieldCard(taxedPlayer, instanceId, (card) => ({ ...card, exhausted: true }));
   const battle = {
     id: uid("battle"),
     attackerPlayerId: playerId,
@@ -51,7 +61,14 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
     temporary: {
       ...(match.temporary || {}),
       attackCounts: { ...(match.temporary?.attackCounts || {}), [playerId]: attackNumber },
-      attackCountsByInstance: { ...(match.temporary?.attackCountsByInstance || {}), [instanceId]: sourceAttackNumber }
+      attackCountsByInstance: { ...(match.temporary?.attackCountsByInstance || {}), [instanceId]: sourceAttackNumber },
+      attacksBySymbolCount: {
+        ...(match.temporary?.attacksBySymbolCount || {}),
+        [playerId]: {
+          ...(match.temporary?.attacksBySymbolCount?.[playerId] || {}),
+          [getEffectiveSymbols(match, cardIndex, attacker).length]: Number(match.temporary?.attacksBySymbolCount?.[playerId]?.[getEffectiveSymbols(match, cardIndex, attacker).length] || 0) + 1
+        }
+      }
     }
   };
   next = appendLog(next, `${match.players[playerId].name} declarou um ataque.`, "battle");
@@ -70,6 +87,15 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
     };
   }
 
+  const exhaustedEvent = dispatchEffectEvent(next, {
+    event: "cardExhausted",
+    sourcePlayerId: playerId,
+    sourceInstanceId: instanceId,
+    eventPlayerId: playerId,
+    context: { attackNumber, sourceAttackNumber, exhaustedByAttack: true }
+  }, cardIndex);
+  next = exhaustedEvent.match;
+
   const engine = dispatchEffectEvent(next, {
     event: "whenAttacks",
     sourcePlayerId: playerId,
@@ -78,8 +104,8 @@ export function declareAttack(match, playerId, instanceId, cardIndex) {
   }, cardIndex);
 
   let resolvedMatch = engine.match;
-  let manualResolutionNeeded = Boolean(trigger.manualResolutionNeeded || engine.manualResolutionNeeded);
-  const notes = [...engine.notes];
+  let manualResolutionNeeded = Boolean(trigger.manualResolutionNeeded || exhaustedEvent.manualResolutionNeeded || engine.manualResolutionNeeded);
+  const notes = [...(exhaustedEvent.notes || []), ...engine.notes];
 
   const attachedBrave = getBraveAttachment(resolvedMatch, instanceId);
   if (attachedBrave) {
@@ -140,10 +166,23 @@ export function legalBlockers(match, cardIndex) {
   if (!battle || battle.stage !== "block") return [];
   const restrictions = battle.restrictions || {};
   const defender = match.players[battle.defenderPlayerId];
+  const attackerCtx = findPhysicalCard(match, battle.attackerInstanceId);
+  const attackerPhysical = attackerCtx?.card || null;
+  const attackerBP = attackerPhysical ? getEffectiveBP(match, cardIndex, attackerPhysical) : 0;
+  const blockDiscardMagicCost = attackerPhysical ? Math.max(0, Number(getContinuousNumericModifier(match, cardIndex, attackerPhysical, "blockDiscardMagicCost") || 0)) : 0;
+  if (blockDiscardMagicCost > 0) {
+    const magicInHand = (defender.hand || []).filter((physical) => String(getDatabaseCard(cardIndex, physical)?.cardType || "").toLowerCase() === "magic").length;
+    if (magicInHand < blockDiscardMagicCost) return [];
+  }
+  const attackerBraved = Boolean(attackerPhysical && getBraveAttachment(match, attackerPhysical.instanceId));
   const candidates = [...(defender.field.spirits || []), ...(defender.field.other || [])].filter((physical) => {
     if (physical.combinedWith) return false;
     if (!physical.exhausted) return true;
-    return getContinuousNumericModifier(match, cardIndex, physical, "allowExhaustedBlock") > 0;
+    if (getContinuousNumericModifier(match, cardIndex, physical, "allowExhaustedBlock") > 0) return true;
+    const maxBP = getContinuousNumericModifier(match, cardIndex, physical, "allowExhaustedBlockMaxOpponentBP");
+    if (maxBP > 0 && attackerBP <= maxBP) return true;
+    if (attackerBraved && getContinuousNumericModifier(match, cardIndex, physical, "allowExhaustedBlockAgainstBraved") > 0) return true;
+    return false;
   });
   return candidates.filter((physical) => {
     const card = getDatabaseCard(cardIndex, physical);
@@ -154,6 +193,7 @@ export function legalBlockers(match, cardIndex) {
       const level = Number(getCurrentLevel(card, physical)?.level || 0);
       if (level < Number(restrictions.minimumBlockerLevel)) return false;
     }
+    if (restrictions.maximumBlockerBP != null && getEffectiveBP(match, cardIndex, physical) > Number(restrictions.maximumBlockerBP)) return false;
     return true;
   });
 }
@@ -163,7 +203,20 @@ export function declareBlock(match, playerId, instanceId, cardIndex) {
   if (!battle || battle.stage !== "block" || playerId !== battle.defenderPlayerId) return { ok: false, error: "Bloqueio indisponível." };
   const blocker = legalBlockers(match, cardIndex).find((c) => c.instanceId === instanceId);
   if (!blocker) return { ok: false, error: "Bloqueador inválido." };
-  const player = updateFieldCard(match.players[playerId], instanceId, (c) => ({ ...c, exhausted: true }));
+  let blockingPlayer = match.players[playerId];
+  const attackerCtx = findPhysicalCard(match, battle.attackerInstanceId);
+  const blockDiscardMagicCost = attackerCtx?.card ? Math.max(0, Number(getContinuousNumericModifier(match, cardIndex, attackerCtx.card, "blockDiscardMagicCost") || 0)) : 0;
+  if (blockDiscardMagicCost > 0) {
+    const hand = [...(blockingPlayer.hand || [])];
+    const discardIndexes = [];
+    for (let i = 0; i < hand.length && discardIndexes.length < blockDiscardMagicCost; i += 1) {
+      if (String(getDatabaseCard(cardIndex, hand[i])?.cardType || "").toLowerCase() === "magic") discardIndexes.push(i);
+    }
+    if (discardIndexes.length < blockDiscardMagicCost) return { ok: false, error: "É necessário descartar Magic para bloquear." };
+    const discarded = discardIndexes.map((i) => hand[i]);
+    blockingPlayer = { ...blockingPlayer, hand: hand.filter((_, i) => !discardIndexes.includes(i)), trash: [...(blockingPlayer.trash || []), ...discarded] };
+  }
+  const player = updateFieldCard(blockingPlayer, instanceId, (c) => ({ ...c, exhausted: true }));
   const next = {
     ...match,
     players: { ...match.players, [playerId]: player },
@@ -174,10 +227,11 @@ export function declareBlock(match, playerId, instanceId, cardIndex) {
       flash: { number: 2, priorityPlayerId: playerId, consecutivePasses: 0 }
     }
   };
-  const engine = dispatchEffectEvent(next, { event: "whenBlocks", sourcePlayerId: playerId, sourceInstanceId: instanceId }, cardIndex);
+  const exhaustedEvent = dispatchEffectEvent(next, { event: "cardExhausted", sourcePlayerId: playerId, sourceInstanceId: instanceId, eventPlayerId: playerId, context: { exhaustedByBlock: true } }, cardIndex);
+  const engine = dispatchEffectEvent(exhaustedEvent.match, { event: "whenBlocks", sourcePlayerId: playerId, sourceInstanceId: instanceId }, cardIndex);
   let resolvedMatch = engine.match;
-  let manualResolutionNeeded = engine.manualResolutionNeeded;
-  const notes = [...engine.notes];
+  let manualResolutionNeeded = Boolean(exhaustedEvent.manualResolutionNeeded || engine.manualResolutionNeeded);
+  const notes = [...(exhaustedEvent.notes || []), ...engine.notes];
   const attachedBrave = getBraveAttachment(resolvedMatch, instanceId);
   if (attachedBrave) {
     const braveEngine = dispatchEffectEvent(resolvedMatch, {
@@ -279,9 +333,12 @@ function destroyBattleCard(match, playerId, instanceId, cardIndex, metadata = {}
   if (attachedBrave) {
     const braveCard = getDatabaseCard(cardIndex, attachedBrave);
     const min = Math.min(...(braveCard?.levels || [{ cores: 1 }]).map((l) => Number(l.cores || 0)));
+    const survives = getContinuousNumericModifier(next, cardIndex, attachedBrave, "braveSurvivesHostDestructionRefresh") > 0;
     if (min <= nextPlayer.reserve) {
       nextPlayer = { ...nextPlayer, reserve: nextPlayer.reserve - min };
-      nextPlayer = updateFieldCard(nextPlayer, attachedBrave.instanceId, (b) => ({ ...b, combinedWith: null, cores: { regular: min, soul: false } }));
+      nextPlayer = updateFieldCard(nextPlayer, attachedBrave.instanceId, (b) => ({ ...b, combinedWith: null, exhausted: survives ? false : b.exhausted, flags: survives ? { ...(b.flags || {}), lastCombinedWith: instanceId } : b.flags, cores: { regular: min, soul: false } }));
+    } else if (survives) {
+      nextPlayer = updateFieldCard(nextPlayer, attachedBrave.instanceId, (b) => ({ ...b, combinedWith: null, exhausted: false, flags: { ...(b.flags || {}), lastCombinedWith: instanceId }, cores: { regular: 0, soul: false } }));
     } else {
       const braveRemoved = removeFieldCard(nextPlayer, attachedBrave.instanceId);
       nextPlayer = { ...braveRemoved.player, trash: [...braveRemoved.player.trash, { ...braveRemoved.card, combinedWith: null }] };
@@ -324,6 +381,8 @@ export function resolveBattle(match, actorId, cardIndex) {
       if (attackerCard?.cardType === "spirit" && turnProtection?.maxDamage != null) {
         damage = Math.min(damage, Math.max(0, Number(turnProtection.maxDamage)));
       }
+      const instanceProtection = next.temporary?.turnProtections?.[battle.defenderPlayerId]?.blockSpiritAttackLifeDamageFromInstanceIds;
+      if (attackerCard?.cardType === "spirit" && Array.isArray(instanceProtection?.instanceIds) && instanceProtection.instanceIds.includes(battle.attackerInstanceId)) damage = 0;
       const costProtection = next.temporary?.turnProtections?.[battle.defenderPlayerId]?.blockSpiritAttackLifeDamageByCosts;
       if (attackerCard?.cardType === "spirit" && Array.isArray(costProtection?.costs)) {
         const effectiveCost = getEffectiveCost(next, cardIndex, attackerCtx.card);
@@ -359,6 +418,11 @@ export function resolveBattle(match, actorId, cardIndex) {
 
       if (actual > 0) {
         const currentDefender = next.players[battle.defenderPlayerId];
+        const attackerLevel = attackerCtx ? Number(getCurrentLevel(attackerCard, attackerCtx.card)?.level || 0) : 0;
+        const darkSnakeToVoid = attackerCard?.cardType === "spirit"
+          && (attackerCard?.families || []).includes("Dark Snake")
+          && attackerLevel >= 2
+          && getContinuousPlayerNumericModifier(next, battle.attackerPlayerId, "darkSnakeAttackLifeToVoid") > 0;
         next = {
           ...next,
           players: {
@@ -366,10 +430,19 @@ export function resolveBattle(match, actorId, cardIndex) {
             [battle.defenderPlayerId]: {
               ...currentDefender,
               life: currentDefender.life - actual,
-              reserve: currentDefender.reserve + actual
+              reserve: currentDefender.reserve + (darkSnakeToVoid ? 0 : actual)
             }
           }
         };
+        const discardPerSymbol = getContinuousPlayerNumericModifier(next, battle.defenderPlayerId, "opponentAttackLifeDiscardPerSymbol");
+        if (discardPerSymbol > 0) {
+          const attackerPlayer = next.players[battle.attackerPlayerId];
+          const count = Math.min(attackerPlayer.hand?.length || 0, getEffectiveSymbols(next, cardIndex, attackerCtx.card).length * discardPerSymbol);
+          if (count > 0) {
+            const discarded = (attackerPlayer.hand || []).slice(0, count);
+            next = { ...next, players: { ...next.players, [battle.attackerPlayerId]: { ...attackerPlayer, hand: attackerPlayer.hand.slice(count), trash: [...attackerPlayer.trash, ...discarded] } } };
+          }
+        }
         if (currentDefender.life - actual <= 0) {
           next = { ...next, winnerId: battle.attackerPlayerId, winnerReason: "life" };
         } else {
@@ -391,7 +464,7 @@ export function resolveBattle(match, actorId, cardIndex) {
       }
       next = appendLog(next, `${actual} Life foi reduzida pelo ataque não bloqueado.`, "battle");
     }
-  } else {
+  } else if (next.battle?.restrictions?.skipBPComparison !== true) {
     const blockerCtx = findPhysicalCard(next, battle.blockerInstanceId);
     const currentAttacker = findPhysicalCard(next, battle.attackerInstanceId);
     if (currentAttacker && blockerCtx) {
@@ -448,6 +521,19 @@ export function resolveBattle(match, actorId, cardIndex) {
         next = openBurstOpportunityForEvent(next, BurstEvent.OWN_SPIRIT_DESTROYED, destroyedCard.playerId, cardIndex, { sourcePlayerId: destroyedCard.playerId, sourceInstanceId: destroyedCard.physical.instanceId, battleId: battle.id, cause: "bpComparison" });
         manualResolutionNeeded ||= Boolean(engine.manualResolutionNeeded);
         notes.push(...(engine.notes || []));
+      }
+    }
+  }
+
+  if (Array.isArray(originalBattleContext.destroyed) && originalBattleContext.destroyed.length === 1 && originalBattleContext.cause === "bpComparison") {
+    const destroyedEntry = originalBattleContext.destroyed[0];
+    for (const [playerId, player] of Object.entries(next.players || {})) {
+      if (destroyedEntry.playerId === playerId) continue;
+      for (const physical of [...(player.field?.spirits || []), ...(player.field?.other || [])]) {
+        if (getContinuousNumericModifier(next, cardIndex, physical, "refreshWhenOnlyOpponentDestroyedByBP") > 0 && physical.exhausted) {
+          const updatedPlayer = updateFieldCard(next.players[playerId], physical.instanceId, (card) => ({ ...card, exhausted: false }));
+          next = { ...next, players: { ...next.players, [playerId]: updatedPlayer } };
+        }
       }
     }
   }

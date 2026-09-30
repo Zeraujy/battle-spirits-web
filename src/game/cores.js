@@ -2,6 +2,7 @@ import { getDatabaseCard, getCurrentLevel, isCoreLockedNexus } from "./selectors
 import { findPhysicalCard } from "./selectors.js";
 import { removeFieldCard, updateFieldCard } from "./zones.js";
 import { appendLog } from "./utils.js";
+import { getContinuousNumericModifier } from "./effectEngine/modifierResolver.js";
 
 function minRequired(card) {
   if (!card) return 0;
@@ -78,6 +79,7 @@ export function payCoreCost(match, playerId, payment, amount, cardIndex) {
       if (!ctx || ctx.playerId !== playerId || !["spirits", "nexuses", "other"].includes(ctx.zone)) return { ok: false, error: "Fonte de Core no campo inválida." };
       const sourceCard = getDatabaseCard(cardIndex, ctx.card);
       if (isCoreLockedNexus(sourceCard)) return { ok: false, error: "Cores de Grandwalker/Grandstone Nexus não podem pagar custos desta forma." };
+      if (String(sourceCard?.cardType || "").toLowerCase() === "spirit" && getContinuousNumericModifier({ ...match, players: { ...match.players, [playerId]: player } }, cardIndex, ctx.card, "coreRemovalLockedExceptTransmigration") > 0) return { ok: false, error: "Os Cores deste Spirit não podem ser removidos." };
       if (Number(ctx.card.cores?.regular || 0) < regular) return { ok: false, error: "A carta não possui Cores regulares suficientes." };
       player = updateFieldCard(player, instanceId, (c) => ({
         ...c,
@@ -144,6 +146,8 @@ export function moveCore(match, playerId, { from, to, coreType = "regular" }, ca
       const ctx = findPhysicalCard({ ...match, players: { ...match.players, [playerId]: player } }, from.instanceId);
       if (!ctx || ctx.playerId !== playerId) return false;
       if (isCoreLockedNexus(getDatabaseCard(cardIndex, ctx.card))) return false;
+      const sourceCard = getDatabaseCard(cardIndex, ctx.card);
+      if (String(sourceCard?.cardType || "").toLowerCase() === "spirit" && getContinuousNumericModifier({ ...match, players: { ...match.players, [playerId]: player } }, cardIndex, ctx.card, "coreRemovalLockedExceptTransmigration") > 0) return false;
       if (isSoul) {
         if (player.soulCore?.zone !== "card" || player.soulCore.instanceId !== from.instanceId) return false;
         player = updateFieldCard(player, from.instanceId, (c) => ({ ...c, cores: { ...c.cores, soul: false } }));

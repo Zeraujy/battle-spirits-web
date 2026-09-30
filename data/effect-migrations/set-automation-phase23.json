@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T00:46:54.551Z",
+  "generatedAt": "2026-09-30T07:14:25.120Z",
   "targetPercent": 95,
   "totalSets": 11,
   "completeSets": 9,
@@ -7,10 +7,10 @@
     {
       "set": "BS13",
       "total": 90,
-      "automated": 40,
+      "automated": 80,
       "noEffect": 6,
-      "unresolved": 50,
-      "automationPercent": 44.4,
+      "unresolved": 10,
+      "automationPercent": 88.9,
       "unsupportedTriggers": [],
       "unsupportedConditions": [],
       "unsupportedActions": [],
@@ -21,35 +21,7 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-003",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-004",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-005",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-007",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-008",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-014",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-016",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-027",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -57,47 +29,7 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-029",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-032",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-034",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-036",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-038",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-039",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-040",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-042",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-043",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-046",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-047",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -109,59 +41,7 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-050",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-052",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-053",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-057",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-059",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-060",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-064",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-065",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-067",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-068",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-069",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-071",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-072",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-073",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -169,51 +49,11 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-078",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-079",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-081",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BS13-082",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-083",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-084",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BS13-X01",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-X02",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-X03",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-X04",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-X05",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-X06",
           "status": "UNSTRUCTURED_TEXT"
         }
       ]

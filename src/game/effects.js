@@ -72,7 +72,14 @@ export function useMagic(match, playerId, instanceId, cardIndex, { mode = "main"
   }, cardIndex);
   next = engine.match;
   next = openBurstOpportunityForEvent(next, BurstEvent.OPPONENT_USED_MAGIC, playerId, cardIndex, { sourcePlayerId: playerId, sourceInstanceId: instanceId });
-  if (!next.pendingEffectDecision) next = finalizePendingMagicResolution(next, cardIndex);
+  if (!next.pendingEffectDecision) {
+    next = finalizePendingMagicResolution(next, cardIndex);
+    while (!next.pendingEffectDecision && Array.isArray(next.deferredCanonicalEvents) && next.deferredCanonicalEvents.length) {
+      const [deferred, ...rest] = next.deferredCanonicalEvents;
+      next = { ...next, deferredCanonicalEvents: rest };
+      next = dispatchEffectEvent(next, deferred, cardIndex).match;
+    }
+  }
   const player = next.players[playerId];
   next = appendLog(next, `${player.name} usou ${card.namePT || card.nameEN || card.id} (${mode}).`, "effect");
 

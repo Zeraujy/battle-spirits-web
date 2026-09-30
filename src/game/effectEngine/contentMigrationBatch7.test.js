@@ -35,7 +35,7 @@ test('content batch 7: Core Action Library expands to at least the Batch 07 reus
   const types = listSupportedCoreActionTypes();
   assert.equal(types.includes('specialSummonSource'), true);
   assert.equal(types.includes('returnUltimateTriggerRevealedMatchingToHand'), true);
-  assert.equal(types.length, 69);
+  assert.ok(types.length >= 71);
 });
 
 test('content batch 7: Gigantea-Kamikiri High Speed is summonable during Flash priority', () => {

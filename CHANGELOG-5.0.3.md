@@ -150,3 +150,54 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Added reusable player/card modifiers for deck discard caps, Trash recovery locks and absolute printed-cost overrides.
 - Added selector-scaled deck discard and Life-scaled BP semantics.
 - Added ten dedicated BS13 regression scenarios; full regression remains green.
+
+## v5.1.0 Content Migration Batch 11 — BS13 Wave 3
+
+- BS13 advanced from 40/90 to 50/90 resolved/no-effect cards, leaving 40 unresolved.
+- Manual fallback reduced from 45.48% (166/365) to 42.74% (156/365).
+- Added canonical `cardExhausted` observation for attacks, blocks and structured effect exhaustion.
+- Added reusable attack declaration Core taxes, effect-driven Nexus deployment from Trash and temporary printed-LV forcing.
+- Added Special Summon provenance, optional When Summoned suppression, Core-to-Void removal and richer battle-attacker context.
+- Pegasus Flap can now end a battle without BP comparison through a structured battle restriction.
+- Generated card regression coverage increased from 199 to 209 scenarios.
+- Core Action Library increased from 69 to 71 action types.
+- Main suite passes 149/149, Effect Engine 153/153, Batch 11 dedicated 10/10 and full regression 352/352.
+- Phase 27 remains blocked only by BS13/BSC49 completion and the global manual-fallback target.
+- Internal application version remains 5.0.3 while v5.1.0 content migration continues.
+
+## v5.1.0 Content Migration Batch 12 — BS13 Wave 4
+
+- BS13 advanced from 50/90 to 60/90 resolved cards.
+- Added canonical `magicResolved`, generic effect-driven step ending, exhausted-block windows, Core-removal protection, Braved modifier targeting and source-bound forced-level cleanup.
+- Manual fallback reduced from 42.74% to 40.00% (146/365).
+- Generated per-card regressions increased from 209 to 219.
+- Core Action Library increased from 71 to 72 reusable action types.
+- All executable QA gates pass; Phase 27 remains blocked only by BS13/BSC49 completion and the global `<10%` fallback target.
+
+## v5.1.0 Content Migration Batch 13 — BS13 Wave 5
+
+- BS13 advanced from 60/90 to 70/90 resolved cards, leaving 20 unresolved.
+- Added reusable limited-use-per-turn actions, event-source recovery and direct-combined Brave Special Summons.
+- Added dynamic field-family reduction, Trash-symbol reduction, source-symbol Life gain and selected-attacker Life protection semantics.
+- Added two-symbol attack caps and Magic-discard blocker costs as reusable battle rules.
+- Manual fallback reduced from 40.00% (146/365) to 37.26% (136/365).
+- Generated per-card regressions increased from 219 to 229.
+- Core Action Library increased from 72 to 75 reusable action types.
+- Main suite passes 149/149, Effect Engine 173/173, Batch 13 dedicated 10/10 and full regression 372/372.
+- Phase 27 remains blocked only by BS13/BSC49 completion and the global `<10%` fallback target.
+- Internal application version remains 5.0.3 while v5.1.0 content migration continues.
+
+## v5.1.0 Content Migration Batch 14 — BS13 Wave 6
+
+- BS13 advanced from 70/90 to 80/90 resolved cards, leaving 10 unresolved.
+- Added reusable effect-driven Brave Combine from field and event-source recovery from Trash.
+- Added selector-derived BP budgets, shared-Family targeting, combined-host battle context and Brave-attachment conditions.
+- Added Brave survival after host destruction, Family-sensitive deck-mill follow-ups and effect-return-to-top-deck replacement rules.
+- Added reusable summon-exhaustion, Core-removal lock/Transmigration bypass and Brave-condition bypass modifiers.
+- Added reusable Dark Snake Life routing, per-symbol hand discard and refresh-after-BP-destruction battle rules.
+- Manual fallback reduced from 37.26% (136/365) to 34.52% (126/365).
+- Generated per-card regressions increased from 229 to 239.
+- Core Action Library increased from 75 to 77 reusable action types.
+- Main suite passes 149/149, Effect Engine 184/184, Batch 14 dedicated 11/11 and full regression 383/383.
+- Phase 27 remains blocked only by BS13/BSC49 completion and the global `<10%` fallback target.
+- Internal application version remains 5.0.3 while v5.1.0 content migration continues.
