@@ -1,4 +1,4 @@
-import { findPhysicalCard, getBraveAttachment, getCurrentLevel, getDatabaseCard, getEffectiveBP, getEffectiveCost, getFieldSymbols } from "../selectors.js";
+import { findPhysicalCard, getBraveAttachment, getCurrentLevel, getDatabaseCard, getEffectiveBP, getEffectiveCost, getEffectiveSymbols, getFieldSymbols } from "../selectors.js";
 import { otherPlayerId } from "../utils.js";
 import { cardKeywords, collectTargets } from "./targetingEngine.js";
 import { applyContinuousCollectionModifiers } from "./modifierResolver.js";
@@ -151,6 +151,13 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     const card = eventSourceCard(match, context, cardIndex);
     return Boolean(card && compareNumber(Number(card.cost || 0), condition));
   }
+  if (type === "eventSourceSymbolCount") {
+    const instanceId = context.eventSourceInstanceId || null;
+    if (!instanceId) return false;
+    const candidates = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
+    const physical = candidates[0]?.physical || null;
+    return Boolean(physical && compareNumber(getEffectiveSymbols(match, cardIndex, physical).length, condition));
+  }
   if (type === "eventSourceBP") {
     const instanceId = context.eventSourceInstanceId || null;
     if (!instanceId) return false;
@@ -189,6 +196,9 @@ function typedConditionMatches(match, condition, context, cardIndex) {
   if (type === "eventDestroyedByCardType") {
     return String(context.destroyedByCardType || "").toLowerCase() === String(condition.cardType ?? condition.value ?? "").toLowerCase();
   }
+  if (type === "eventRefreshedByCardType") {
+    return String(context.refreshedByCardType || "").toLowerCase() === String(condition.cardType ?? condition.value ?? "").toLowerCase();
+  }
   if (type === "eventDestroyerKeyword") {
     const instanceId = context.destroyedByInstanceId || null;
     if (!instanceId) return false;
@@ -197,6 +207,23 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     if (!candidate) return false;
     const expected = String(condition.keyword ?? condition.value ?? "").toLowerCase().replace(/\s+/g, "");
     return cardKeywords(candidate.card, candidate.physical).includes(expected);
+  }
+  if (type === "battleAttackerKeyword") {
+    const instanceId = context.attackerInstanceId || match.battle?.attackerInstanceId || null;
+    if (!instanceId) return false;
+    const candidates = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId, includeCombined: true }, context);
+    const candidate = candidates[0];
+    if (!candidate) return false;
+    const expected = String(condition.keyword ?? condition.value ?? "").toLowerCase().replace(/\s+/g, "");
+    return cardKeywords(candidate.card, candidate.physical).includes(expected);
+  }
+  if (type === "battleBlockerBPAtMostSourceBP") {
+    const blockerId = context.blockerInstanceId || match.battle?.blockerInstanceId || null;
+    if (!blockerId || !context.sourcePhysical) return false;
+    const blockers = collectTargets(match, cardIndex, { owner: "any", zones: ["field"], instanceId: blockerId, includeCombined: true }, context);
+    const blocker = blockers[0]?.physical || null;
+    if (!blocker) return false;
+    return getEffectiveBP(match, cardIndex, blocker) <= getEffectiveBP(match, cardIndex, context.sourcePhysical);
   }
   if (type === "battleAttackerCardType") {
     const instanceId = context.attackerInstanceId || match.battle?.attackerInstanceId || null;

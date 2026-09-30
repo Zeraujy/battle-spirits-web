@@ -314,7 +314,7 @@ export function resolveBattle(match, actorId, cardIndex) {
   notes.push(...(before.notes || []));
   if (next.pendingEffectDecision) return { ok: true, match: next, manualResolutionNeeded: true, notes };
 
-  if (!battle.blockerInstanceId) {
+  if (!battle.blockerInstanceId || next.battle?.restrictions?.treatAsUnblocked === true) {
     if (attackerCtx) {
       const symbols = getEffectiveSymbols(next, cardIndex, attackerCtx.card);
       const attackerCard = getDatabaseCard(cardIndex, attackerCtx.card);
@@ -328,6 +328,16 @@ export function resolveBattle(match, actorId, cardIndex) {
       if (attackerCard?.cardType === "spirit" && Array.isArray(costProtection?.costs)) {
         const effectiveCost = getEffectiveCost(next, cardIndex, attackerCtx.card);
         if (costProtection.costs.map(Number).includes(Number(effectiveCost))) damage = 0;
+      }
+      if (attackerCard?.cardType === "spirit") {
+        const attackerBP = getEffectiveBP(next, cardIndex, attackerCtx.card);
+        const defenderField = [
+          ...(next.players?.[battle.defenderPlayerId]?.field?.spirits || []),
+          ...(next.players?.[battle.defenderPlayerId]?.field?.nexuses || []),
+          ...(next.players?.[battle.defenderPlayerId]?.field?.other || [])
+        ];
+        const maxProtectedBP = defenderField.reduce((max, physical) => Math.max(max, Number(getContinuousNumericModifier(next, cardIndex, physical, "lifeProtectionMaxAttackerBP") || 0)), 0);
+        if (maxProtectedBP > 0 && attackerBP <= maxProtectedBP) damage = 0;
       }
       if (next.battle?.restrictions?.preventLifeDamage === true) damage = 0;
 

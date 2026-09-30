@@ -6,10 +6,10 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **584**
-- Effect Schema v2 entries: **130**
-- Fully automated cards: **132 (36.2%)**
-- Partially automated cards: **3**
+- Structured effect/ability entries inspected: **613**
+- Effect Schema v2 entries: **159**
+- Fully automated cards: **149 (40.8%)**
+- Partially automated cards: **0**
 - Unstructured effect text: **173**
 - Explicit no-effect cards: **16**
 
@@ -37,7 +37,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | SD10 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD11 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD13 | 18 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 3 |
-| SD15 | 18 | 0 | 3 | 12 | 2 | 0 | 0 | 0 | 1 |
+| SD15 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD17 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD19 | 17 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD20 | 17 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
@@ -46,11 +46,11 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Structured entry baseline
 
-- Automated executable entries: **250**
-- Entries blocked by trigger coverage: **43**
+- Automated executable entries: **279**
+- Entries blocked by trigger coverage: **38**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
-- Represented but non-executable/manual entries: **291**
+- Represented but non-executable/manual entries: **296**
 
 ## Highest-priority trigger gaps
 
@@ -58,16 +58,13 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | --- | ---: |
 | `whileOnField` | 3 |
 | `whenAttacksOrBlocks` | 2 |
-| `whenOpponentSpiritBecomesZeroBP` | 2 |
 | `whileInField` | 2 |
 | `whileLevel2Or3` | 2 |
 | `afterCost4PlusMagicResolves` | 1 |
 | `afterDivineTrust` | 1 |
 | `onEligibleSummonDescendOrPlacement` | 1 |
 | `onEligibleSummonOrPlacement` | 1 |
-| `opponentTurn` | 1 |
 | `opposingUnitLeavesByYourEffect` | 1 |
-| `ownLowCostSpiritDestroyedByOpponentEffect` | 1 |
 | `whenAttacksFlash` | 1 |
 | `whenBlueNexusExhausted` | 1 |
 | `whenBravedOrCombinedCardWouldLeave` | 1 |
@@ -76,7 +73,6 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `whenDiscardedByGreenOnlyEffect` | 1 |
 | `whenDiscardedFromHand` | 1 |
 | `whenExhaustedEitherAttackStep` | 1 |
-| `whenLifeDecreases` | 1 |
 | `whenLifeReducedByOpponentEffect` | 1 |
 | `whenOpenedFromDeckByGreenEffect` | 1 |
 | `whenOpponentSpiritUltimateMilled` | 1 |
@@ -86,6 +82,10 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `whenYellowBravedSpiritAttacks` | 1 |
 | `whenYourSpiritOrUltimateDestroyed` | 1 |
 | `whileAttackingAndRefreshed` | 1 |
+| `whileCardOrSpirit` | 1 |
+| `whileInFieldOrTrash` | 1 |
+| `whileInHand` | 1 |
+| `whileLevel1` | 1 |
 
 ## Unsupported action/condition gaps
 
@@ -94,7 +94,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Engine additions — Phases 7–18
 
-- Core Action Library is centralized and currently exposes **66 generic action types** to Schema v2.
+- Core Action Library is centralized and currently exposes **69 generic action types** to Schema v2.
 - Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.
 - Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.
 - Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.
@@ -145,6 +145,7 @@ The canonical list is defined in `src/game/effectEngine/canonicalEvents.js`. Leg
 | `attackStep` | Yes |
 | `endStep` | Yes |
 | `cardMoved` | Yes |
+| `cardRefreshed` | Yes |
 | `bpBecameZero` | Yes |
 | `coreMoved` | No — foundation only |
 | `afterUltimateTrigger` | Yes |
@@ -161,12 +162,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 
 | Card | Set | Type | Status | Main gaps |
 | --- | --- | --- | --- | --- |
-| `BS05-037` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
-| `BS08-042` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
-| `BS10-074` | SD15 | brave | `MANUAL` | unresolved entries: 1 |
-| `BS12-035` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
-| `BS12-037` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
-| `BS12-038` | SD15 | spirit | `MANUAL` | unresolved entries: 2 |
 | `BS13-002` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-003` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-004` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
@@ -251,7 +246,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BS13-X04` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-X05` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BS13-X06` | BS13 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
-| `BSC05-020` | SD15 | nexus | `UNSUPPORTED_TRIGGER` | triggers: opponentTurn, whenLifeDecreases; unresolved entries: 2 |
 | `BSC49-001` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-002` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
 | `BSC49-003` | BSC49 | spirit | `UNSTRUCTURED_TEXT` | structured operations missing |
@@ -368,16 +362,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | `BSC49-XV10` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: afterCost4PlusMagicResolves, whenOtherEligibleSpiritSummoned; unresolved entries: 3 |
 | `BSC49-XV11` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenBravedOrCombinedCardWouldLeave; unresolved entries: 3 |
 | `BSC49-XV12` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenAttacksOrBlocks, whenOpponentSpiritUltimateMilled, whileAttackingAndRefreshed; unresolved entries: 4 |
-| `SD02-005` | SD15 | spirit | `MANUAL` | unresolved entries: 3 |
-| `SD15-001` | SD15 | spirit | `MANUAL` | unresolved entries: 1 |
-| `SD15-002` | SD15 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenOpponentSpiritBecomesZeroBP; unresolved entries: 2 |
-| `SD15-003` | SD15 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD15-004` | SD15 | spirit | `PARTIAL` | unresolved entries: 1 |
-| `SD15-005` | SD15 | spirit | `MANUAL` | unresolved entries: 3 |
-| `SD15-006` | SD15 | brave | `MANUAL` | unresolved entries: 2 |
-| `SD15-007` | SD15 | magic | `MANUAL` | unresolved entries: 1 |
-| `SD15-008` | SD15 | magic | `MANUAL` | unresolved entries: 2 |
-| `SD15-X01` | SD15 | spirit | `PARTIAL` | triggers: ownLowCostSpiritDestroyedByOpponentEffect, whenOpponentSpiritBecomesZeroBP; unresolved entries: 2 |
 
 ## Phase 4 input
 

@@ -55,11 +55,35 @@
         "text": {
           "en": "Your effects that reduce opposing Spirits' BP reduce 1000 additional BP.",
           "ptBR": "Seus efeitos que reduzem o BP de Spirits do oponente reduzem 1000 BP adicionais."
-        }
+        },
+        "automationRef": "sd15-001-strengthening-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-001-strengthening-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bpReductionBonus",
+            "value": 1000,
+            "duration": "whileSourceExists",
+            "selector": "source"
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-001.webp",
     "nameJP": "天使パティエル"
   },
   {
@@ -119,7 +143,8 @@
         "text": {
           "en": "Your effects that reduce opposing Spirits' BP reduce 1000 additional BP.",
           "ptBR": "Seus efeitos que reduzem o BP de Spirits do oponente reduzem 1000 BP adicionais."
-        }
+        },
+        "automationRef": "sd15-002-strengthening-auto28"
       },
       {
         "id": "sd15-002-zero-bp",
@@ -127,7 +152,7 @@
         "levels": [
           2
         ],
-        "timing": "whenOpponentSpiritBecomesZeroBP",
+        "timing": "bpBecameZero",
         "title": {
           "en": "When an Opposing Spirit Becomes 0 BP",
           "ptBR": "Quando um Spirit do Oponente Chega a 0 BP"
@@ -135,11 +160,62 @@
         "text": {
           "en": "Exhaust all Spirits with 0 BP.",
           "ptBR": "Dê Exhaust em todos os Spirits com 0 BP."
-        }
+        },
+        "automationRef": "sd15-002-zero-bp-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-002-strengthening-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bpReductionBonus",
+            "value": 1000,
+            "duration": "whileSourceExists",
+            "selector": "source"
+          }
+        ]
+      },
+      {
+        "id": "sd15-002-zero-bp-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "bpBecameZero",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "exhaustAllMatching",
+            "selector": {
+              "owner": "any",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumBP": 0
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-002.webp",
     "nameJP": "天使マカエル"
   },
   {
@@ -205,7 +281,8 @@
         "text": {
           "en": "One opposing Spirit gets -1000 BP during this turn.",
           "ptBR": "1 Spirit do oponente recebe -1000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd15-003-attack-auto23"
       },
       {
         "id": "sd15-003-destroyed",
@@ -222,11 +299,75 @@
         "text": {
           "en": "Opposing Spirits that cost 3 or less cannot attack during this turn.",
           "ptBR": "Spirits do oponente de custo 3 ou menos não podem atacar durante este turno."
-        }
+        },
+        "automationRef": "sd15-003-destroyed-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-003-attack-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -1000,
+              "duration": "turn"
+            }
+          }
+        ],
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "sd15-003-destroyed-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "cannotAttack",
+            "value": 1,
+            "duration": "turn",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumCost": 3
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-003.webp",
     "nameJP": "天使アーチェル"
   },
   {
@@ -292,7 +433,8 @@
         "text": {
           "en": "One opposing Spirit gets -2000 BP during this turn.",
           "ptBR": "1 Spirit do oponente recebe -2000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd15-004-attack-bp-auto23"
       },
       {
         "id": "sd15-004-unblocked",
@@ -301,7 +443,7 @@
           2,
           3
         ],
-        "timing": "battleResolution",
+        "timing": "beforeBattleResolution",
         "title": {
           "en": "Battle Resolution",
           "ptBR": "Resolução da Batalha"
@@ -309,11 +451,70 @@
         "text": {
           "en": "If the blocking opposing Spirit has BP less than or equal to this Spirit's BP, do not compare BP and treat this attack as unblocked.",
           "ptBR": "Se o Spirit do oponente que bloqueou tiver BP menor ou igual ao BP deste Spirit, não compare BP e trate este ataque como não bloqueado."
-        }
+        },
+        "automationRef": "sd15-004-unblocked-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-004-attack-bp-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -2000,
+              "duration": "turn"
+            }
+          }
+        ],
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "sd15-004-unblocked-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "beforeBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "battleBlockerBPAtMostSourceBP"
+          }
+        ],
+        "actions": [
+          {
+            "type": "setBattleRestriction",
+            "restriction": {
+              "treatAsUnblocked": true
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-004.webp",
     "nameJP": "天使アクセラ"
   },
   {
@@ -380,7 +581,8 @@
         "text": {
           "en": "Your effects that reduce opposing Spirits' BP reduce 1000 additional BP.",
           "ptBR": "Seus efeitos que reduzem o BP de Spirits do oponente reduzem 1000 BP adicionais."
-        }
+        },
+        "automationRef": "sd15-005-strengthening-auto28"
       },
       {
         "id": "sd15-005-life-protection",
@@ -397,7 +599,8 @@
         "text": {
           "en": "Attacks by opposing Spirits with 4000 BP or less cannot reduce your Life.",
           "ptBR": "Ataques de Spirits do oponente com 4000 BP ou menos não podem reduzir sua Life."
-        }
+        },
+        "automationRef": "sd15-005-life-protection-auto28"
       },
       {
         "id": "sd15-005-destroyed",
@@ -413,11 +616,76 @@
         "text": {
           "en": "Return this Spirit to your hand.",
           "ptBR": "Devolva este Spirit para a sua mão."
-        }
+        },
+        "automationRef": "sd15-005-destroyed-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-005-strengthening-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bpReductionBonus",
+            "value": 1000,
+            "duration": "whileSourceExists",
+            "selector": "source"
+          }
+        ]
+      },
+      {
+        "id": "sd15-005-life-protection-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "lifeProtectionMaxAttackerBP",
+            "value": 4000,
+            "duration": "whileSourceExists",
+            "selector": "source"
+          }
+        ]
+      },
+      {
+        "id": "sd15-005-destroyed-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "actions": [
+          {
+            "type": "returnToHand",
+            "target": "source"
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-005.webp",
     "nameJP": "天使ブラスティエル"
   },
   {
@@ -484,7 +752,8 @@
         "text": {
           "en": "One opposing Spirit gets -3000 BP during this turn.",
           "ptBR": "1 Spirit do oponente recebe -3000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd15-x01-attack-bp-auto23"
       },
       {
         "id": "sd15-x01-recovery",
@@ -494,7 +763,7 @@
           2,
           3
         ],
-        "timing": "ownLowCostSpiritDestroyedByOpponentEffect",
+        "timing": "whenDestroyed",
         "title": {
           "en": "Low-Cost Spirit Recovery",
           "ptBR": "Recuperação de Spirit de Baixo Custo"
@@ -502,7 +771,8 @@
         "text": {
           "en": "When one of your Spirits that costs 3 or less is destroyed by an opposing effect, return it to your hand, then draw 1 card.",
           "ptBR": "Quando um dos seus Spirits de custo 3 ou menos for destruído por um efeito do oponente, devolva-o à sua mão e depois compre 1 carta."
-        }
+        },
+        "automationRef": "sd15-x01-recovery-auto28"
       },
       {
         "id": "sd15-x01-zero-bp",
@@ -511,7 +781,7 @@
           2,
           3
         ],
-        "timing": "whenOpponentSpiritBecomesZeroBP",
+        "timing": "bpBecameZero",
         "title": {
           "en": "0 BP Destruction",
           "ptBR": "Destruição por 0 BP"
@@ -519,11 +789,118 @@
         "text": {
           "en": "If an opposing Spirit becomes 0 BP due to this Spirit's effect, destroy all Spirits with 0 BP.",
           "ptBR": "Se um Spirit do oponente chegar a 0 BP devido ao efeito deste Spirit, destrua todos os Spirits com 0 BP."
-        }
+        },
+        "automationRef": "sd15-x01-zero-bp-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-x01-attack-bp-auto23",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -3000,
+              "duration": "turn"
+            }
+          }
+        ],
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "sd15-x01-recovery-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventSourceCost",
+            "atMost": 3
+          },
+          {
+            "type": "eventCause",
+            "value": "effect"
+          },
+          {
+            "type": "eventDestroyedByOpponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "returnToHand",
+            "target": "effectSource"
+          },
+          {
+            "type": "draw",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "sd15-x01-zero-bp-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "bpBecameZero",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventZeroedBySource"
+          }
+        ],
+        "actions": [
+          {
+            "type": "destroyAllMatching",
+            "selector": {
+              "owner": "any",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumBP": 0
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-X01.webp",
     "nameJP": "戦天使イクセル"
   },
   {
@@ -580,7 +957,7 @@
           2,
           3
         ],
-        "timing": "eitherAttackStep",
+        "timing": "whenDestroyed",
         "title": {
           "en": "During Either Attack Step",
           "ptBR": "Durante o Attack Step de Qualquer Jogador"
@@ -588,11 +965,46 @@
         "text": {
           "en": "When one of your Cost 2 Spirits is destroyed, draw 1 card.",
           "ptBR": "Quando um dos seus Spirits de custo 2 for destruído, compre 1 carta."
-        }
+        },
+        "automationRef": "sd15-bs05-037-draw-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-bs05-037-draw-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventSourceCost",
+            "equals": 2
+          },
+          {
+            "phase": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-Reprints/BS05-037.webp",
     "nameJP": "天使クレイオ",
     "originalSet": "BS05"
   },
@@ -652,7 +1064,7 @@
           2,
           3
         ],
-        "timing": "whenAttacks",
+        "timing": "lifeDecreased",
         "title": {
           "en": "Holy Life",
           "ptBR": "Holy Life"
@@ -660,7 +1072,8 @@
         "text": {
           "en": "When this Spirit's attack reduces your opponent's Life, put 1 Core from the Void into your Life.",
           "ptBR": "Quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Life."
-        }
+        },
+        "automationRef": "sd15-bs08-042-holy-life-auto28"
       },
       {
         "id": "sd15-bs08-042-brilliance",
@@ -668,7 +1081,7 @@
         "levels": [
           3
         ],
-        "timing": "whenAttacks",
+        "timing": "afterBattleResolution",
         "title": {
           "en": "Brilliance",
           "ptBR": "Brilliance"
@@ -676,11 +1089,58 @@
         "text": {
           "en": "At the end of the battle, return all Magic cards you used during this battle to your hand.",
           "ptBR": "No fim da batalha, devolva à sua mão todas as Magics que você usou nesta batalha."
-        }
+        },
+        "automationRef": "sd15-bs08-042-brilliance-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-bs08-042-holy-life-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "battleSourceRole",
+            "role": "attacker"
+          }
+        ],
+        "actions": [
+          {
+            "type": "healLife",
+            "player": "self",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": "sd15-bs08-042-brilliance-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "actions": [
+          {
+            "type": "returnMagicUsedThisBattle",
+            "player": "self"
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-Reprints/BS08-042.webp",
     "nameJP": "天使サラティ",
     "originalSet": "BS08"
   },
@@ -734,7 +1194,7 @@
     },
     "effects": [],
     "abilities": [],
-    "image": null,
+    "image": "/cards-database/SD15-Reprints/BS10-048.webp",
     "nameJP": "天使パワー",
     "originalSet": "BS10"
   },
@@ -794,11 +1254,33 @@
         "text": {
           "en": "Put 1 Core from this Spirit into your Life.",
           "ptBR": "Coloque 1 Core deste Spirit na sua Life."
-        }
+        },
+        "automationRef": "sd15-bs12-035-destroyed-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-bs12-035-destroyed-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "moveCoreToLife",
+            "target": "source",
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-Reprints/BS12-035.webp",
     "nameJP": "オリンピアの天使フル",
     "originalSet": "BS12"
   },
@@ -857,7 +1339,7 @@
           2,
           3
         ],
-        "timing": "opponentAttackStep",
+        "timing": "whenAttacks",
         "title": {
           "en": "During Your Opponent's Attack Step",
           "ptBR": "Durante o Attack Step do Oponente"
@@ -865,7 +1347,8 @@
         "text": {
           "en": "When an opposing Spirit with 2 symbols attacks, treat that Spirit as 2000 BP during the battle.",
           "ptBR": "Quando um Spirit do oponente com 2 símbolos atacar, trate aquele Spirit como 2000 BP durante a batalha."
-        }
+        },
+        "automationRef": "sd15-bs12-037-bp-auto28"
       },
       {
         "id": "sd15-bs12-037-life",
@@ -874,7 +1357,7 @@
           2,
           3
         ],
-        "timing": "eitherAttackStep",
+        "timing": "whenDestroyed",
         "title": {
           "en": "During Either Attack Step",
           "ptBR": "Durante o Attack Step de Qualquer Jogador"
@@ -882,11 +1365,85 @@
         "text": {
           "en": "When one of your Divine Spirit Spirits is destroyed, you may put 1 Core from your field into your Life.",
           "ptBR": "Quando um dos seus Spirits da família Divine Spirit for destruído, você pode colocar 1 Core do seu campo na sua Life."
-        }
+        },
+        "automationRef": "sd15-bs12-037-life-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-bs12-037-bp-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventSourceSymbolCount",
+            "equals": 2
+          }
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "target": "effectSource",
+            "setTo": 2000,
+            "duration": "battle"
+          }
+        ]
+      },
+      {
+        "id": "sd15-bs12-037-life-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceFamily",
+            "family": "Divine Spirit"
+          },
+          {
+            "phase": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "minimumCores": 1
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "moveCoreToLife",
+              "target": "selected",
+              "count": 1
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-Reprints/BS12-037.webp",
     "nameJP": "オリンピアの天使ベトール",
     "originalSet": "BS12"
   },
@@ -953,7 +1510,8 @@
         "text": {
           "en": "For each Divine Spirit Spirit you control, designate 1 opposing Spirit. All designated Spirits cannot block during this turn.",
           "ptBR": "Para cada Spirit da família Divine Spirit que você controlar, designe 1 Spirit do oponente. Todos os Spirits designados não podem bloquear durante este turno."
-        }
+        },
+        "automationRef": "sd15-bs12-038-summon-auto28"
       },
       {
         "id": "sd15-bs12-038-holy-life",
@@ -961,7 +1519,7 @@
         "levels": [
           3
         ],
-        "timing": "whenAttacks",
+        "timing": "lifeDecreased",
         "title": {
           "en": "Holy Life",
           "ptBR": "Holy Life"
@@ -969,11 +1527,90 @@
         "text": {
           "en": "When this Spirit's attack reduces your opponent's Life, put 1 Core from the Void into your Life.",
           "ptBR": "Quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Life."
-        }
+        },
+        "automationRef": "sd15-bs12-038-holy-life-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-bs12-038-summon-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "targetCountFrom": {
+              "selector": {
+                "owner": "self",
+                "zones": [
+                  "field"
+                ],
+                "cardTypes": [
+                  "spirit"
+                ],
+                "families": [
+                  "Divine Spirit"
+                ]
+              }
+            },
+            "onConfirm": {
+              "type": "addModifier",
+              "property": "cannotBlock",
+              "value": 1,
+              "duration": "turn",
+              "selector": {
+                "selectedTargets": true
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd15-bs12-038-holy-life-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          3
+        ],
+        "conditions": [
+          {
+            "type": "battleSourceRole",
+            "role": "attacker"
+          }
+        ],
+        "actions": [
+          {
+            "type": "healLife",
+            "player": "self",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-Reprints/BS12-038.webp",
     "nameJP": "オリンピアの天使ファレグ",
     "originalSet": "BS12"
   },
@@ -1041,7 +1678,8 @@
         "text": {
           "en": "Reveal 1 card from the top of your deck for each Yellow symbol you control. Add 1 Magic card among them to your hand, then put the remaining cards on the bottom of your deck in any order.",
           "ptBR": "Revele 1 carta do topo do seu deck para cada símbolo Amarelo que você controla. Adicione 1 Magic entre elas à sua mão e coloque as demais no fundo do deck na ordem que desejar."
-        }
+        },
+        "automationRef": "sd15-sd02-005-summon-auto28"
       },
       {
         "id": "sd15-sd02-005-brilliance-support",
@@ -1050,7 +1688,7 @@
           2,
           3
         ],
-        "timing": "yourAttackStep",
+        "timing": "whenBlocks",
         "title": {
           "en": "During Your Attack Step",
           "ptBR": "Durante o Seu Attack Step"
@@ -1058,7 +1696,8 @@
         "text": {
           "en": "Opposing Spirits that block one of your Spirits with [Brilliance] are treated as LV1 during the battle.",
           "ptBR": "Spirits do oponente que bloquearem um dos seus Spirits com [Brilliance] são tratados como LV1 durante a batalha."
-        }
+        },
+        "automationRef": "sd15-sd02-005-brilliance-support-auto28"
       },
       {
         "id": "sd15-sd02-005-brilliance",
@@ -1066,7 +1705,7 @@
         "levels": [
           3
         ],
-        "timing": "whenAttacks",
+        "timing": "afterBattleResolution",
         "title": {
           "en": "Brilliance",
           "ptBR": "Brilliance"
@@ -1074,11 +1713,86 @@
         "text": {
           "en": "At the end of the battle, return all Magic cards you used during this battle to your hand.",
           "ptBR": "No fim da batalha, devolva à sua mão todas as Magics que você usou nesta batalha."
-        }
+        },
+        "automationRef": "sd15-sd02-005-brilliance-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-sd02-005-summon-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "revealTopAndRoute",
+            "player": "self",
+            "countFromSymbolColor": "yellow",
+            "matchSelector": {
+              "cardTypes": [
+                "magic"
+              ]
+            },
+            "matchedDestination": "hand",
+            "otherwiseDestination": "bottomDeck"
+          }
+        ]
+      },
+      {
+        "id": "sd15-sd02-005-brilliance-support-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocks",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "battleAttackerKeyword",
+            "keyword": "brilliance"
+          }
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "target": "effectSource",
+            "setToLevel": 1,
+            "duration": "battle"
+          }
+        ]
+      },
+      {
+        "id": "sd15-sd02-005-brilliance-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "actions": [
+          {
+            "type": "returnMagicUsedThisBattle",
+            "player": "self"
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-Reprints/SD02-005.webp",
     "nameJP": "天使ヘルヴィム",
     "originalSet": "SD02"
   },
@@ -1146,11 +1860,53 @@
         "text": {
           "en": "Exhaust all opposing Nexuses. All exhausted Nexuses cannot activate their effects.",
           "ptBR": "Dê Exhaust em todos os Nexus do oponente. Todos os Nexus em Exhaust não podem ativar seus efeitos."
-        }
+        },
+        "automationRef": "sd15-bs10-074-combined-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-bs10-074-combined-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBattles",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "exhaustAllMatching",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "nexus"
+              ]
+            }
+          },
+          {
+            "type": "addModifier",
+            "property": "effectsDisabled",
+            "value": 1,
+            "duration": "turn",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "nexus"
+              ],
+              "exhausted": true
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-Reprints/BS10-074.webp",
     "nameJP": "きぐるみクマッター",
     "originalSet": "BS10",
     "braveBP": 4000,
@@ -1210,7 +1966,8 @@
         "text": {
           "en": "Summon up to 3 Divine Spirit Spirit cards that cost 3 or less from your Trash without paying their costs.",
           "ptBR": "Invoque até 3 cartas de Spirit da família Divine Spirit de custo 3 ou menos do seu Trash sem pagar seus custos."
-        }
+        },
+        "automationRef": "sd15-006-summon-auto28"
       },
       {
         "id": "sd15-006-combine",
@@ -1238,11 +1995,86 @@
         "text": {
           "en": "Designate 1 opposing Spirit. That Spirit cannot block during this turn.",
           "ptBR": "Designe 1 Spirit do oponente. Aquele Spirit não pode bloquear durante este turno."
-        }
+        },
+        "automationRef": "sd15-006-combined-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-006-summon-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "trash"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Divine Spirit"
+              ],
+              "maximumCost": 3
+            },
+            "maxTargets": 3,
+            "allowZero": true,
+            "onConfirm": {
+              "type": "specialSummonFromTrash",
+              "target": "selected",
+              "allowedCardTypes": [
+                "spirit"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd15-006-combined-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "addModifier",
+              "property": "cannotBlock",
+              "value": 1,
+              "duration": "turn",
+              "selector": {
+                "selectedTarget": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-006.webp",
     "nameJP": "エンジェロイド",
     "braveBP": 2000,
     "braveCondition": {
@@ -1301,7 +2133,7 @@
           1,
           2
         ],
-        "timing": "whenLifeDecreases",
+        "timing": "lifeDecreased",
         "title": {
           "en": "When Your Life Decreases",
           "ptBR": "Quando Sua Life Diminui"
@@ -1309,7 +2141,8 @@
         "text": {
           "en": "Reveal the top card of your deck. If it is a Spirit that costs 2 or less, you may summon it for free; otherwise add it to your hand.",
           "ptBR": "Revele a carta do topo do seu deck. Se for um Spirit de custo 2 ou menos, você pode Invocá-lo gratuitamente; caso contrário, adicione-o à sua mão."
-        }
+        },
+        "automationRef": "sd15-bsc05-020-life-auto28"
       },
       {
         "id": "sd15-bsc05-020-opponent-turn",
@@ -1317,7 +2150,7 @@
         "levels": [
           2
         ],
-        "timing": "opponentTurn",
+        "timing": "cardRefreshed",
         "title": {
           "en": "During Your Opponent's Turn",
           "ptBR": "Durante o Turno do Oponente"
@@ -1325,11 +2158,90 @@
         "text": {
           "en": "Destroy all Red, Green, and Blue Spirits that are refreshed by Spirit or Magic effects.",
           "ptBR": "Destrua todos os Spirits Vermelhos, Verdes e Azuis que receberem Refresh por efeitos de Spirit ou Magic."
-        }
+        },
+        "automationRef": "sd15-bsc05-020-opponent-turn-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-bsc05-020-life-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "revealTopAndSummonOrHand",
+            "player": "self",
+            "matchSelector": {
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumCost": 2
+            }
+          }
+        ]
+      },
+      {
+        "id": "sd15-bsc05-020-opponent-turn-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardRefreshed",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          },
+          {
+            "any": [
+              {
+                "type": "eventSourceColor",
+                "color": "red"
+              },
+              {
+                "type": "eventSourceColor",
+                "color": "green"
+              },
+              {
+                "type": "eventSourceColor",
+                "color": "blue"
+              }
+            ]
+          },
+          {
+            "any": [
+              {
+                "type": "eventRefreshedByCardType",
+                "cardType": "spirit"
+              },
+              {
+                "type": "eventRefreshedByCardType",
+                "cardType": "magic"
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "destroy",
+            "target": "effectSource"
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-Reprints/BSC05-020.webp",
     "nameJP": "星空の冠",
     "originalSet": "BSC05"
   },
@@ -1372,11 +2284,51 @@
         "text": {
           "en": "During this turn, when an opposing Spirit becomes 0 BP, exhaust all Spirits with 0 BP. Then, one opposing Spirit gets -2000 BP during this turn.",
           "ptBR": "Durante este turno, quando um Spirit do oponente chegar a 0 BP, dê Exhaust em todos os Spirits com 0 BP. Depois, 1 Spirit do oponente recebe -2000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd15-007-flash-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-007-flash-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "zeroBPExhaustAllZeroBP",
+            "value": 1,
+            "duration": "turn",
+            "selector": {
+              "owner": "self"
+            }
+          },
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -2000,
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-007.webp",
     "nameJP": "アセンションゼロ"
   },
   {
@@ -1419,7 +2371,8 @@
         "text": {
           "en": "Draw 1 card. Then reveal the top 5 cards of your deck, add all Spirit cards with [Strengthening] among them to your hand, and put the remaining cards on top of your deck in any order.",
           "ptBR": "Compre 1 carta. Depois revele as 5 cartas do topo do seu deck, adicione à sua mão todos os Spirits com [Strengthening] entre elas e coloque as demais no topo do deck na ordem que desejar."
-        }
+        },
+        "automationRef": "sd15-008-main-auto28"
       },
       {
         "id": "sd15-008-flash",
@@ -1433,11 +2386,69 @@
         "text": {
           "en": "One Spirit gets -3000 BP during this turn.",
           "ptBR": "1 Spirit recebe -3000 BP durante este turno."
-        }
+        },
+        "automationRef": "sd15-008-flash-auto28"
       }
     ],
-    "abilities": [],
-    "image": null,
+    "abilities": [
+      {
+        "id": "sd15-008-main-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicMain",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "draw",
+            "count": 1
+          },
+          {
+            "type": "revealTopAndRoute",
+            "player": "self",
+            "count": 5,
+            "matchSelector": {
+              "cardTypes": [
+                "spirit"
+              ],
+              "effectIdIncludes": "strengthening"
+            },
+            "matchedDestination": "hand",
+            "otherwiseDestination": "topDeck"
+          }
+        ]
+      },
+      {
+        "id": "sd15-008-flash-auto28",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "any",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": -3000,
+              "duration": "turn"
+            }
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/SD15-AttributeEyeOpeningDeck-Topaz/SD15-008.webp",
     "nameJP": "マジカルドロー"
   }
 ]

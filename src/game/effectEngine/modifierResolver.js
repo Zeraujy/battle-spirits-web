@@ -269,6 +269,23 @@ export function getContinuousNumericModifier(match, cardIndex, physical, propert
   return value;
 }
 
+export function getContinuousPlayerNumericModifier(match, playerId, property) {
+  let value = 0;
+  for (const modifier of match.modifierRegistry?.items || []) {
+    if (modifier.property !== property) continue;
+    if (!durationIsActive(match, modifier.duration, {
+      sourceExists: (instanceId) => sourceExists(match, instanceId),
+      conditionActive: modifier.conditionActive
+    })) continue;
+    if (modifier.controllerId && modifier.controllerId !== playerId) continue;
+    const amount = Number(modifier.value ?? modifier.amount ?? 0);
+    if (modifier.operation === "set") value = amount;
+    else if (modifier.operation === "subtract") value -= Math.abs(amount);
+    else value += amount;
+  }
+  return value;
+}
+
 export function applyContinuousCollectionModifiers(match, cardIndex, physical, property, base = []) {
   let values = [...base];
   for (const modifier of activeRegistryItems(match, cardIndex, physical, property)) {

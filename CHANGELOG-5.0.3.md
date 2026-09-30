@@ -119,3 +119,14 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Per-card regression coverage advances from 133 to 148 scenarios.
 - Internal application version remains 5.0.3 while the v5.1.0 final content gate remains open.
 
+
+## v5.1.0 Content Migration — Batch 08
+
+- SD15 — Attribute Eye-Opening Deck: Topaz reaches 18/18 automated/no-effect cards and becomes `READY_NO_MANUAL`.
+- Set gate advances from 8/11 to 9/11 complete sets; only BS13 and BSC49 remain outside the content gate.
+- Added reusable Strengthening aggregation, `cardRefreshed`, Core → Life movement, Trash special summon, reveal-and-summon/hand routing, richer battle conditions and multi-target modifier support.
+- Core Action Library advances from 66 to 69 action types.
+- Manual fallback drops from 59.45% (217/365) to 54.79% (200/365).
+- Per-card regression coverage advances from 148 to 165 scenarios.
+- Main suite passes 149/149, Effect Engine 123/123, Batch 08 dedicated 10/10 and full regression 322/322.
+- Internal application version remains 5.0.3 while the v5.1.0 global content gate remains open.

@@ -90,7 +90,7 @@ export function cardKeywords(card, physical = null) {
   for (const entry of card?.effects || []) {
     if (!activeAtLevel(entry)) continue;
     const raw = String(entry?.type || entry?.title?.en || entry?.title?.ptBR || "").toLowerCase();
-    for (const keyword of ["rush", "confront", "burst", "brave", "heavyarmor", "heavy armor"]) {
+    for (const keyword of ["rush", "confront", "burst", "brave", "heavyarmor", "heavy armor", "strengthening", "brilliance", "holy life", "holylife", "high speed", "highspeed"]) {
       if (raw.includes(keyword)) out.add(keyword.replace(/\s+/g, ""));
     }
   }
@@ -287,11 +287,16 @@ export function resolveActionTargets(match, action = {}, cardIndex, context = {}
     let dynamicMaximum = action.maxTargets;
     if (action.targetCountFrom && typeof action.targetCountFrom === "object") {
       const spec = action.targetCountFrom;
-      const owner = normalizeOwner(spec.owner || "self");
-      const ownerIds = owner === TargetOwner.OPPONENT ? [otherPlayerId(match, context.sourcePlayerId)].filter(Boolean)
-        : owner === TargetOwner.ANY ? Object.keys(match.players || {}) : [context.sourcePlayerId].filter(Boolean);
-      const zone = String(spec.zone || "hand");
-      const total = ownerIds.reduce((sum, id) => sum + Number(match.players?.[id]?.[zone]?.length || 0), 0);
+      let total = 0;
+      if (spec.selector && typeof spec.selector === "object") {
+        total = collectTargets(match, cardIndex, spec.selector, context).length;
+      } else {
+        const owner = normalizeOwner(spec.owner || "self");
+        const ownerIds = owner === TargetOwner.OPPONENT ? [otherPlayerId(match, context.sourcePlayerId)].filter(Boolean)
+          : owner === TargetOwner.ANY ? Object.keys(match.players || {}) : [context.sourcePlayerId].filter(Boolean);
+        const zone = String(spec.zone || "hand");
+        total = ownerIds.reduce((sum, id) => sum + Number(match.players?.[id]?.[zone]?.length || 0), 0);
+      }
       const divisor = Math.max(1, Number(spec.divisor || 1));
       dynamicMaximum = Math.floor(total / divisor);
       if (spec.maximum != null) dynamicMaximum = Math.min(dynamicMaximum, Number(spec.maximum));

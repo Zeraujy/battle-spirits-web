@@ -31,11 +31,11 @@ test('content batch 7: SD28 reaches READY_NO_MANUAL at 17/17', () => {
   assert.equal(rows.every((entry) => ['AUTOMATED','NO_EFFECT'].includes(entry.status)), true);
 });
 
-test('content batch 7: Core Action Library expands to 66 reusable action types', () => {
+test('content batch 7: Core Action Library expands to at least the Batch 07 reusable action set', () => {
   const types = listSupportedCoreActionTypes();
   assert.equal(types.includes('specialSummonSource'), true);
   assert.equal(types.includes('returnUltimateTriggerRevealedMatchingToHand'), true);
-  assert.equal(types.length, 66);
+  assert.equal(types.length, 69);
 });
 
 test('content batch 7: Gigantea-Kamikiri High Speed is summonable during Flash priority', () => {

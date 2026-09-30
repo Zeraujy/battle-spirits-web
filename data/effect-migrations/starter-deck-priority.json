@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-29T12:15:05.246Z",
+  "generatedAt": "2026-09-30T00:34:26.367Z",
   "starterDecks": 17,
-  "ready": 8,
+  "ready": 9,
   "decks": [
     {
       "id": "sd01-blazing-thunder",
@@ -92,9 +92,7 @@
         "SD02-020",
         "SD02-021"
       ],
-      "unresolved": [
-        "SD02-005"
-      ],
+      "unresolved": [],
       "readyWithoutManual": false,
       "status": "BLOCKED_MISSING_RUNTIME_DATA"
     },
@@ -192,27 +190,9 @@
       "title": "Attribute Eye-Opening Deck: Topaz",
       "uniqueCards": 18,
       "missingRuntime": [],
-      "unresolved": [
-        "SD15-001",
-        "SD15-002",
-        "SD15-003",
-        "SD15-004",
-        "SD15-005",
-        "SD15-X01",
-        "BS05-037",
-        "BS08-042",
-        "BS12-035",
-        "BS12-037",
-        "BS12-038",
-        "SD02-005",
-        "BS10-074",
-        "SD15-006",
-        "BSC05-020",
-        "SD15-007",
-        "SD15-008"
-      ],
-      "readyWithoutManual": false,
-      "status": "NEEDS_MIGRATION"
+      "unresolved": [],
+      "readyWithoutManual": true,
+      "status": "READY_NO_MANUAL"
     },
     {
       "id": "sd16-sapphire",
