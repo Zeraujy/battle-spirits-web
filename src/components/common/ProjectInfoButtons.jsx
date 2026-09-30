@@ -5,6 +5,34 @@ import "../../styles/theme/v230.css";
 const PATCHES = [
   {
     version: "5.0.3",
+    date: { pt: "30/09/2026", en: "09/30/2026" },
+    title: { pt: "Automação de Cartas — BSC49 Wave 6", en: "Card Automation — BSC49 Wave 6" },
+    summary: {
+      pt: "Mais 10 Braves do BSC49 passaram para resolução estruturada, reaproveitando a base de Combine, summon condicionado, Trash recovery e efeitos de batalha.",
+      en: "Ten more BSC49 Braves moved to structured resolution by reusing the Combine, conditional summon, Trash recovery and battle-effect foundations."
+    },
+    sections: [
+      {
+        title: { pt: "Braves e interações de batalha", en: "Braves and battle interactions" },
+        items: {
+          pt: [
+            "Bal-Gunner LT, Amphisbaenar LT e Phoenix-Cannon LT ganharam fluxos estruturados de summon, destruição e recuperação.",
+            "Evil-Fisher LT, Pendragon LT e Shieldybug LT reutilizam rotas genéricas de Trash, remoção de Core e refresh pós-batalha.",
+            "Janome-Shielder LT e Kumattar LT agora estruturam proteção, bloqueio de refresh, supressão de Nexus e Sacred Life.",
+            "BSC49 avançou para 61/117 cartas resolvidas no gate de automação."
+          ],
+          en: [
+            "Bal-Gunner LT, Amphisbaenar LT and Phoenix-Cannon LT gained structured summon, destruction and recovery flows.",
+            "Evil-Fisher LT, Pendragon LT and Shieldybug LT reuse generic Trash, Core-removal and post-battle refresh routes.",
+            "Janome-Shielder LT and Kumattar LT now structure protection, refresh locks, Nexus suppression and Sacred Life.",
+            "BSC49 advanced to 61/117 resolved cards in the automation gate."
+          ]
+        }
+      }
+    ]
+  },
+  {
+    version: "5.0.3",
     date: { pt: "29/09/2026", en: "09/29/2026" },
     title: { pt: "Automação de Cartas — Lote 7", en: "Card Automation — Batch 7" },
     summary: {

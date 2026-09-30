@@ -245,3 +245,22 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Added reusable cost-rank targeting and battle-participant condition support.
 - Manual fallback reduced from 23.56% to 20.82% (86 -> 76 cards).
 - Phase 24 generated regression scenarios increased from 279 to 289.
+
+
+## v5.1.0 Content Migration — Batch 20
+- BSC49 Wave 5 automated 10 additional cards and advanced coverage from 41/117 to 51/117 resolved.
+- Added first-class Advent resolution with Soul Core payment, source-state preservation, Brave/battle transfer and canonical `whenAdvented` dispatch.
+- Added reusable `specialSummonSelected` for hand/Open Area/Trash routing and `revealUntilAndSummon` for deck-search style effects.
+- Added symbol-count targeting filters for effects that depend on the number of symbols.
+- Core Action Library increased from 80 to 83 reusable action types.
+- Manual fallback reduced from 20.82% (76/365) to 18.08% (66/365).
+- Phase 24 generated regression scenarios increased from 289 to 299.
+- Main suite passes 149/149, Effect Engine 245/245, Batch 20 dedicated 10/10 and full regression 444/444.
+- Phase 27 remains blocked only by BSC49 completion and the global <10% fallback target.
+
+## v5.1.0 Content Migration — Batch 21 / BSC49 Wave 6
+- Automated 10 additional BSC49 Braves: BSC49-052, 053, 054, 055, 057, 060, 061, 065, 069 and 074.
+- BSC49 coverage advanced from 51/117 to 61/117.
+- Global manual fallback improved from 18.08% (66/365) to 15.34% (56/365).
+- Reused the existing 83-type Core Action Library; no card-specific Core Action was introduced.
+- Phase 24 generated regression coverage advanced from 299 to 309 scenarios.

@@ -194,6 +194,7 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   if (selector.families?.length && !selector.families.some((family) => props.families.includes(family))) return false;
   if (selector.familiesAll?.length && !selector.familiesAll.every((family) => props.families.includes(family))) return false;
   if (selector.symbols?.length && !selector.symbols.some((symbol) => props.symbols.includes(symbol))) return false;
+  if (!numberBetween(props.symbols.length, selector.minimumSymbols ?? selector.minSymbols, selector.maximumSymbols ?? selector.maxSymbols)) return false;
   const keywords = selector.keywords ?? (selector.keyword ? [selector.keyword] : []);
   if (keywords.length && !keywords.some((keyword) => props.keywords.includes(String(keyword).toLowerCase().replace(/\s+/g, "")))) return false;
 

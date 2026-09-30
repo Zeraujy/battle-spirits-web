@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-30T13:08:23.599Z",
-  "scenarioCount": 309,
+  "generatedAt": "2026-09-30T12:33:46.787Z",
+  "scenarioCount": 299,
   "scenarios": [
     {
       "cardId": "BS01-125",
@@ -2053,67 +2053,6 @@
       }
     },
     {
-      "cardId": "BSC49-052",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-052-trash-recover-auto41",
-          "bsc49-052-combine-auto41",
-          "bsc49-052-destruction-suppress-auto41",
-          "bsc49-052-combined-attack-auto41"
-        ]
-      }
-    },
-    {
-      "cardId": "BSC49-053",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-053-cost-auto41",
-          "bsc49-053-summon-auto41",
-          "bsc49-053-combine-auto41"
-        ]
-      }
-    },
-    {
-      "cardId": "BSC49-054",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-054-hand-summon-auto41",
-          "bsc49-054-combine-auto41",
-          "bsc49-054-life-pressure-auto41"
-        ]
-      }
-    },
-    {
-      "cardId": "BSC49-055",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-055-reveal-auto41",
-          "bsc49-055-summon-auto41",
-          "bsc49-055-combine-auto41"
-        ]
-      }
-    },
-    {
       "cardId": "BSC49-056",
       "set": "BSC49",
       "status": "AUTOMATED",
@@ -2125,21 +2064,6 @@
           "bsc49-056-summon-auto40",
           "bsc49-056-combine-auto40",
           "bsc49-056-combined-attack-auto40"
-        ]
-      }
-    },
-    {
-      "cardId": "BSC49-057",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-057-summon-auto41",
-          "bsc49-057-combine-auto41",
-          "bsc49-057-attack-auto41"
         ]
       }
     },
@@ -2169,53 +2093,6 @@
         "automatedEntryIds": [
           "bsc49-059-trash-return-auto38",
           "bsc49-059-summon-auto38"
-        ]
-      }
-    },
-    {
-      "cardId": "BSC49-060",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-060-trash-summon-auto41",
-          "bsc49-060-summon-auto41",
-          "bsc49-060-combine-auto41",
-          "bsc49-060-attack-auto41"
-        ]
-      }
-    },
-    {
-      "cardId": "BSC49-061",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-061-high-speed-auto41",
-          "bsc49-061-combine-auto41",
-          "bsc49-061-attack-auto41"
-        ]
-      }
-    },
-    {
-      "cardId": "BSC49-065",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-065-burst-auto41",
-          "bsc49-065-summon-auto41",
-          "bsc49-065-combine-auto41",
-          "bsc49-065-immunity-auto41"
         ]
       }
     },
@@ -2265,21 +2142,6 @@
       }
     },
     {
-      "cardId": "BSC49-069",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-069-combine-auto41",
-          "bsc49-069-attack-auto41",
-          "bsc49-069-sacred-life-auto41"
-        ]
-      }
-    },
-    {
       "cardId": "BSC49-070",
       "set": "BSC49",
       "status": "AUTOMATED",
@@ -2316,21 +2178,6 @@
           "bsc49-073-summon-auto40",
           "bsc49-073-combine-auto40",
           "bsc49-073-suppress-auto40"
-        ]
-      }
-    },
-    {
-      "cardId": "BSC49-074",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-074-hand-summon-auto41",
-          "bsc49-074-combine-auto41",
-          "bsc49-074-attack-auto41"
         ]
       }
     },

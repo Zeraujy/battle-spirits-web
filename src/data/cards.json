@@ -19159,7 +19159,115 @@
       "ptBR": "Flash [Advent: Vermelho & Custo 4 ou Mais] Durante o Attack Step de qualquer jogador: Ao enviar sua Soul Core para o Trash, coloque esta carta da sua mão sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado. LV1/LV2/LV3 Quando Este Spirit Faz Advent: Destrua 2 Spirits do oponente com 1 símbolo ou menos. [Quando Combinado] LV2/LV3 Quando Este Spirit Ataca: Destrua 1 Spirit do oponente com 2 símbolos ou mais e compre 2 cartas."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-008-advent-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "performAdvent",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "red"
+              ],
+              "minimumCost": 4
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-008-advented-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAdvented",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumSymbols": 1
+            },
+            "maxTargets": 2,
+            "asManyAsPossible": true,
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-008-braved-attack-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "minimumSymbols": 2
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterSelect": [
+              {
+                "type": "draw",
+                "count": 2
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-008.webp"
   },
   {
@@ -21752,7 +21860,187 @@
       "ptBR": "Flash [Advent: Verde & Custo 4 ou Mais] Durante o Attack Step de qualquer jogador: Ao enviar sua Soul Core para o Trash, coloque esta carta da sua mão sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado. LV1/LV2/LV3 Quando Invocado ou Quando Este Spirit Faz Advent: Você pode invocar qualquer quantidade de cartas de Brave da sua mão/Área Aberta sem pagar seus custos. Depois, você pode colocar 1 Core do Void sobre cada um dos seus Spirits Combinados. [Quando Combinado] LV2/LV3 Quando Este Spirit Ataca: Para cada Brave que você controla, deixe 1 Spirit do oponente Exhausted."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-027-advent-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "performAdvent",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "green"
+              ],
+              "minimumCost": 4
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-027-summon-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand",
+                "openArea"
+              ],
+              "cardTypes": [
+                "brave"
+              ]
+            },
+            "allowZero": true,
+            "maxTargets": 99,
+            "onSelect": {
+              "type": "specialSummonSelected"
+            },
+            "afterSelect": [
+              {
+                "type": "addCoreFromVoid",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "braved": true,
+                  "all": true
+                },
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-027-advented-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAdvented",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand",
+                "openArea"
+              ],
+              "cardTypes": [
+                "brave"
+              ]
+            },
+            "allowZero": true,
+            "maxTargets": 99,
+            "onSelect": {
+              "type": "specialSummonSelected"
+            },
+            "afterSelect": [
+              {
+                "type": "addCoreFromVoid",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "braved": true,
+                  "all": true
+                },
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-027-braved-attack-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "targetCountFrom": {
+              "selector": {
+                "owner": "self",
+                "zones": [
+                  "field"
+                ],
+                "cardTypes": [
+                  "brave"
+                ],
+                "includeCombined": true
+              }
+            },
+            "onSelect": {
+              "type": "exhaust"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-027.webp"
   },
   {
@@ -23107,7 +23395,90 @@
       "ptBR": "Flash [Advent: Amarelo & Custo 3 ou Mais] Durante o Attack Step de qualquer jogador: Ao enviar sua Soul Core para o Trash, coloque esta carta da sua mão sobre 1 dos seus Spirits que cumpra a condição, mantendo o mesmo estado. LV1/LV2 Quando Este Spirit For Destruído: Você pode descartar cartas do topo do seu deck até aparecer uma carta de Spirit de custo 6/7/8, até o máximo de 6 cartas. Se fizer isso, invoque aquela carta de Spirit sem pagar seu custo. LV2 Quando Este Spirit For Destruído: Compre 3 cartas."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-040-advent-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "performAdvent",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "yellow"
+              ],
+              "minimumCost": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-040-destroyed-reveal-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "revealUntilAndSummon",
+                "maximum": 6,
+                "matchSelector": {
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "minimumCost": 6,
+                  "maximumCost": 8
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-040-destroyed-draw-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "count": 3
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-040.webp"
   },
   {
@@ -24005,7 +24376,123 @@
       "ptBR": "Flash [Accel] Custo 4 (Azul2/Qualquer Cor1): Ignorando o custo do Brave, destrua 1 Spirit do oponente de custo 5 ou menos. Depois que este efeito for resolvido, coloque esta carta na sua Área Aberta. LV1/LV2 Durante o Attack Step de qualquer jogador: Trate todos os seus Spirits de custo 6 ou mais como se estivessem no maior LV impresso neles. LV2 Durante Seu Attack Step: Todos os seus Spirits das famílias Divine Star/Fusion Beast ganham 1 símbolo Azul adicional."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-049-accel-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 4,
+            "reduction": [
+              "blue",
+              "blue",
+              "all"
+            ],
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "maximumCost": 5
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "destroy"
+                }
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-049-attack-step-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "forceLevel",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "minimumCost": 6,
+              "all": true
+            },
+            "maxLevel": true,
+            "duration": "turn"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-049-symbol-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "add",
+            "value": [
+              "blue"
+            ],
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Divine Star",
+                "Fusion Beast"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-049.webp"
   },
   {
@@ -24336,7 +24823,123 @@
       "ptBR": "[Uma Vez por Turno: Mesmo Nome]: Quando esta carta for colocada do seu deck no Trash por um dos seus efeitos Vermelhos, você pode adicioná-la à sua mão. Condição de Combine: custo 4 ou mais. Enquanto Combinado — Durante Seu Attack Step: Spirits do oponente destruídos pelos efeitos deste Spirit não podem ativar seus efeitos. Enquanto Combinado — Quando Este Spirit Ataca: Destrua 1 Spirit do oponente com 6000 BP ou menos e compre 1 carta."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-052-trash-recover-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventMovedFromZone",
+            "zone": "deck"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-052-trash-recover",
+            "actions": [
+              {
+                "type": "chooseYesNo",
+                "yesActions": [
+                  {
+                    "type": "returnEventSourceToHand"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-052-combine-auto41",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "minimumCost": 4,
+          "cardTypes": [
+            "spirit"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "minimumCost": 4,
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-052-destruction-suppress-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "suppressDestroyedOpponentSpiritEffectsDuringOwnAttackStep",
+            "operation": "set",
+            "value": 1,
+            "selector": "combinedHost",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-052-combined-attack-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumBP": 6000
+            },
+            "allowZero": false,
+            "onSelect": {
+              "type": "destroy"
+            }
+          },
+          {
+            "type": "draw",
+            "count": 1
+          }
+        ]
+      }
+    ],
     "braveBP": 4000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -24383,7 +24986,115 @@
       "ptBR": "Quando invocar esta carta, se o oponente controlar uma carta de Magic com [Field], passe o custo desta carta para 3. LV1 Quando Este Brave For Invocado: Destrua 1 Spirit do oponente com 10000 BP ou menos. Depois, você pode descartar 1 carta de Magic do Campo do oponente. Condição de Combine: Concluser/Astral Soul/Divine Star/Galaxian."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-053-cost-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "summonCostIfOpponentControlsFieldMagic",
+            "operation": "set",
+            "value": 3,
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-053-summon-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumBP": 10000
+            },
+            "allowZero": false,
+            "onSelect": {
+              "type": "destroy"
+            }
+          },
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "magic"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "discard"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-053-combine-auto41",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "cardTypes": [
+            "spirit"
+          ],
+          "families": [
+            "Concluser",
+            "Astral Soul",
+            "Divine Star",
+            "Galaxian"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Concluser",
+                "Astral Soul",
+                "Divine Star",
+                "Galaxian"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "braveBP": 4000,
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-053.webp"
   },
@@ -24428,7 +25139,114 @@
       "ptBR": "[Uma Vez por Turno: Mesmo Nome]: Quando você invocar 1 dos seus Spirits que possua ao mesmo tempo as famílias Devotee e Galaxian, você pode invocar esta carta da sua mão pagando custo 5 (Qualquer Cor4). Condição de Combine: custo 5 ou mais. Enquanto Combinado — Quando Este Spirit Ataca: Quando um Spirit/Ultimate do oponente com 8000 BP ou mais for destruído, para cada alvo destruído, você pode mover 1 Core da Life do oponente para a Reserve dele."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-054-hand-summon-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventSourceFamily",
+            "family": "Devotee"
+          },
+          {
+            "type": "eventSourceFamily",
+            "family": "Galaxian"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-054-hand-summon",
+            "actions": [
+              {
+                "type": "chooseYesNo",
+                "yesActions": [
+                  {
+                    "type": "paySourceCost",
+                    "cost": 5,
+                    "reduction": [
+                      "all",
+                      "all",
+                      "all",
+                      "all"
+                    ],
+                    "actions": [
+                      {
+                        "type": "specialSummonSource"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-054-combine-auto41",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "minimumCost": 5,
+          "cardTypes": [
+            "spirit"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "minimumCost": 5,
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-054-life-pressure-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventMovedFromZone",
+            "zone": "field"
+          }
+        ],
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "moveLifeToReserve",
+                "player": "opponent",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "braveBP": 5000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -24477,7 +25295,126 @@
       "ptBR": "[Uma Vez por Turno: Mesmo Nome]: Quando esta carta for revelada do seu deck por um dos seus efeitos de Spirit/Nexus Vermelho/Branco, você pode adicioná-la à sua mão. Ou você pode invocá-la pagando custo 3 (Vermelho1/Qualquer Cor1). LV1 Quando Este Brave For Invocado: Ignorando o BP+ dos Braves, destrua até 2 alvos no total entre Spirits do oponente com 5000 BP ou menos e Nexuses do oponente. Este efeito de destruição por BP não pode ser impedido por efeitos do oponente. Condição de Combine: custo 3 ou mais."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-055-reveal-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerDeck",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventMovedFromZone",
+            "zone": "deck"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-055-reveal",
+            "actions": [
+              {
+                "type": "chooseOption",
+                "options": [
+                  {
+                    "label": "Add to hand",
+                    "actions": [
+                      {
+                        "type": "returnEventSourceToHand"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Summon for reduced cost",
+                    "actions": [
+                      {
+                        "type": "paySourceCost",
+                        "cost": 3,
+                        "reduction": [
+                          "red",
+                          "all"
+                        ],
+                        "actions": [
+                          {
+                            "type": "specialSummonSource"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-055-summon-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "nexus"
+              ],
+              "maximumBP": 5000
+            },
+            "min": 0,
+            "max": 2,
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-055-combine-auto41",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "minimumCost": 3,
+          "cardTypes": [
+            "spirit"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "minimumCost": 3,
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "braveBP": 3000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -24521,7 +25458,93 @@
       "ptBR": "LV1 Quando Este Brave For Invocado: Você pode comprar 1 carta. Condição de Combine: custo 4 ou menos. Enquanto Combinado — Quando Este Spirit Ataca: Destrua 1 Spirit do oponente que esteja Exhausted."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-056-summon-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "draw",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-056-combine-auto40",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "minimumCost": 0,
+          "maximumCost": 4,
+          "cardTypes": [
+            "spirit"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "minimumCost": 0,
+              "maximumCost": 4,
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-056-combined-attack-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "exhausted": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
     "braveBP": 2000,
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-056.webp"
   },
@@ -24561,7 +25584,114 @@
       "ptBR": "LV1 Quando Este Brave For Invocado: Você pode revelar as 2 cartas do topo do seu deck. Adicione 1 dessas cartas à sua mão e descarte a carta restante. Depois, você pode mover 1 Core de um GranWalker Nexus de qualquer jogador para o Void. Condição de Combine: custo 3 ou mais. Enquanto Combinado — Quando Este Spirit Ataca: Devolva 1 carta de Spirit de custo 6 ou menos do seu Trash para a sua mão."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-057-summon-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "revealTopAndRoute",
+                "count": 2,
+                "chooseToHand": 1,
+                "remainder": "trash"
+              },
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "any",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "nexus"
+                  ],
+                  "families": [
+                    "GranWalker"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "removeCore",
+                  "amount": 1,
+                  "destination": "void"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-057-combine-auto41",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "minimumCost": 3,
+          "cardTypes": [
+            "spirit"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "minimumCost": 3,
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-057-attack-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "trash"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumCost": 6
+            },
+            "allowZero": false,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      }
+    ],
     "braveBP": 2000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -24607,7 +25737,104 @@
       "ptBR": "LV1 Quando Este Brave For Invocado: Você pode devolver para a sua mão 1 carta de Spirit do seu Trash com a família Astral Soul, Divine Star ou Galaxian. Condição de Combine: Concluser/Astral Soul/Divine Star/Galaxian. Enquanto Combinado [True Curse] Durante Seu Turno: Quando este Spirit fosse deixar o Campo por causa do oponente, destrua 1 Spirit/Ultimate do oponente."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-058-summon-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "trash"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Astral Soul",
+                "Divine Star",
+                "Galaxian"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-058-combine-auto40",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "cardTypes": [
+            "spirit"
+          ],
+          "families": [
+            "Concluser",
+            "Astral Soul",
+            "Divine Star",
+            "Galaxian"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Concluser",
+                "Astral Soul",
+                "Divine Star",
+                "Galaxian"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-058-true-curse-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "trueCurse",
+            "operation": "set",
+            "value": 1,
+            "selector": "combinedHost",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "braveBP": 3000,
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-058.webp"
   },
@@ -24795,7 +26022,163 @@
       "ptBR": "[Uma Vez por Jogo: Mesmo Nome]: Durante Seu Main Step, enquanto esta carta estiver no seu Trash, ao remover do jogo 1 carta da sua mão, invoque esta carta. LV1 Quando Este Brave For Invocado: Você pode mover 3 Cores do Campo do oponente para a Reserve dele. Se um Spirit/Ultimate for esgotado por este efeito, você pode comprar 2 cartas. Condição de Combine: custo 3 ou mais. Enquanto Combinado — Quando Este Spirit Ataca: Você pode mover 2 Cores do Campo do oponente para a Reserve dele. Se um Spirit/Ultimate for esgotado por este efeito, este Spirit ganha 1 símbolo Roxo adicional durante esta batalha."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-060-trash-summon-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "mainStep",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-060-once-per-game",
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "hand"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "moveCard",
+                  "toZone": "removed"
+                }
+              },
+              {
+                "type": "specialSummonSource"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-060-summon-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "removeCore",
+            "all": false,
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "amount": 3,
+            "destination": "reserve"
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "contextFlag",
+              "key": "depletedByPreviousAction",
+              "value": true
+            },
+            "then": [
+              {
+                "type": "draw",
+                "count": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-060-combine-auto41",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "minimumCost": 3,
+          "cardTypes": [
+            "spirit"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "minimumCost": 3,
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-060-attack-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "removeCore",
+            "all": false,
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "amount": 2,
+            "destination": "reserve"
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "contextFlag",
+              "key": "depletedByPreviousAction",
+              "value": true
+            },
+            "then": [
+              {
+                "type": "modifySymbols",
+                "target": "combinedHost",
+                "add": [
+                  "purple"
+                ],
+                "duration": "battle"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "braveBP": 4000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -24840,7 +26223,82 @@
       "ptBR": "Flash [High Speed]: Você pode invocar esta carta da sua mão usando apenas Cores da sua Reserve para pagar o custo de invocação e colocar Cores sobre ela. Condição de Combine: custo 3 ou mais. Enquanto Combinado — Quando Este Spirit Ataca ou Bloqueia: Quando apenas o Spirit/Ultimate do oponente for destruído por comparação de BP, dê Refresh neste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-061-high-speed-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "specialSummonSource"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-061-combine-auto41",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "minimumCost": 3,
+          "cardTypes": [
+            "spirit"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "minimumCost": 3,
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-061-attack-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "conditions": [
+          {
+            "type": "battleParticipantIsCombinedHostOfSource"
+          },
+          {
+            "type": "battleOnlyOpponentSpiritDestroyed"
+          }
+        ],
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "refresh",
+            "target": "combinedHost"
+          }
+        ]
+      }
+    ],
     "braveBP": 4000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -25020,7 +26478,111 @@
       "ptBR": "[Burst: Depois que um Spirit/Ultimate do Oponente Atacar]: Invoque esta carta sem pagar seu custo. LV1 Quando Este Brave For Invocado: Escolha 1 Spirit do oponente. Ele não pode dar Refresh até o próximo Refresh Step do oponente. Condição de Combine: custo 3 ou mais. Enquanto Combinado: Este Spirit não é afetado por efeitos de Brave/Nexus do oponente."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-065-burst-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerHand",
+          "eventPlayer": "opponent"
+        },
+        "actions": [
+          {
+            "type": "specialSummonSource",
+            "free": true
+          }
+        ]
+      },
+      {
+        "id": "bsc49-065-summon-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": false,
+            "onSelect": {
+              "type": "addModifier",
+              "property": "cannotRefresh",
+              "operation": "set",
+              "value": 1,
+              "duration": "untilOpponentRefreshStep"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-065-combine-auto41",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "minimumCost": 3,
+          "cardTypes": [
+            "spirit"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "minimumCost": 3,
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-065-immunity-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectImmunityCardTypes",
+            "operation": "add",
+            "value": [
+              "brave",
+              "nexus"
+            ],
+            "selector": "combinedHost",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "braveBP": 3000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -25064,7 +26626,97 @@
       "ptBR": "LV1 Quando Este Brave For Invocado: Você pode devolver 1 Spirit do oponente para a mão dele. Condição de Combine: custo 4 ou menos. Enquanto Combinado — Durante o Attack Step do Oponente: Quando um Spirit/Ultimate do oponente atacar, você pode dar Refresh neste Spirit. Se fizer isso, você pode colocar 1 Core do Void sobre este Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-066-summon-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-066-combine-auto40",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "minimumCost": 0,
+          "maximumCost": 4,
+          "cardTypes": [
+            "spirit"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "minimumCost": 0,
+              "maximumCost": 4,
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-066-opp-attack-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "refresh",
+                "target": "combinedHost"
+              },
+              {
+                "type": "addCoreFromVoid",
+                "target": "combinedHost",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "braveBP": 3000,
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-066.webp"
   },
@@ -25105,7 +26757,105 @@
       "ptBR": "LV1 Quando Este Brave For Invocado: Durante este turno, todos os seus Spirits Combinados não podem ser bloqueados. Condição de Combine: Devotee/Concluser/Astral Soul/Divine Star/Galaxian. Enquanto Combinado [Heavy Armor: Roxo/Amarelo]: Este Spirit não é afetado por efeitos de Spirit, Brave, Nexus e Magic Roxos/Amarelos do oponente."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-067-summon-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "cannotBeBlocked",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "braved": true
+            },
+            "duration": "turn"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-067-combine-auto40",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "cardTypes": [
+            "spirit"
+          ],
+          "families": [
+            "Devotee",
+            "Concluser",
+            "Astral Soul",
+            "Divine Star",
+            "Galaxian"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Devotee",
+                "Concluser",
+                "Astral Soul",
+                "Divine Star",
+                "Galaxian"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-067-heavy-armor-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectImmunityColors",
+            "operation": "add",
+            "value": [
+              "purple",
+              "yellow"
+            ],
+            "selector": "combinedHost",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "braveBP": 4000,
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-067.webp"
   },
@@ -25147,7 +26897,93 @@
       "ptBR": "LV1: Seus Spirits/Braves não podem ser destruídos por efeitos do oponente. Condição de Combine: custo 3 ou mais. Enquanto Combinado: Se este Spirit possuir a família Concluser ou Galaxian, ele recebe [Phantom Armor: Vermelho/Azul]: Este Spirit não pode ser bloqueado e não é afetado por efeitos de Spirit, Brave, Nexus e Magic Vermelhos/Azuis do oponente."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-068-protection-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectDestructionImmune",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "brave"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-068-combine-auto40",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "minimumCost": 3,
+          "cardTypes": [
+            "spirit"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "minimumCost": 3,
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-068-phantom-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "phantomArmorColors",
+            "operation": "add",
+            "value": [
+              "red",
+              "blue"
+            ],
+            "selector": "combinedHost",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "braveBP": 7000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -25191,7 +27027,106 @@
       "ptBR": "Condição de Combine: custo 3 ou mais. Enquanto Combinado — Quando Este Spirit Ataca ou Bloqueia: Deixe 1 Nexus do oponente Exhausted. Depois, durante este turno, todos os Nexuses Exhausted do oponente não podem ativar seus efeitos. Enquanto Combinado [Sacred Life] Quando Este Spirit Ataca: Quando o ataque deste Spirit reduzir a Life do oponente, coloque 1 Core do Void na sua Life."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-069-combine-auto41",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "minimumCost": 3,
+          "cardTypes": [
+            "spirit"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "minimumCost": 3,
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-069-attack-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "nexus"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "exhaust"
+            }
+          },
+          {
+            "type": "addModifier",
+            "property": "exhaustedNexusEffectsSuppressed",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "nexus"
+              ],
+              "exhausted": true
+            },
+            "duration": "turn"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-069-sacred-life-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "source",
+          "eventPlayer": "opponent"
+        },
+        "conditions": [
+          {
+            "type": "battleAttackerIsCombinedHostOfSource"
+          }
+        ],
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "addCoreFromVoid",
+            "target": "life",
+            "count": 1
+          }
+        ]
+      }
+    ],
     "braveBP": 4000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -25300,7 +27235,7 @@
         "conditions": [
           {
             "type": "battleSourceRole",
-          "role": "attacker"
+            "role": "attacker"
           }
         ],
         "actions": [
@@ -25477,7 +27412,97 @@
       "ptBR": "LV1 Quando Este Brave For Invocado: Você pode comprar 3 cartas. Se fizer isso, descarte 2 cartas da sua mão. Condição de Combine: Concluser/Astral Soul/Divine Star/Galaxian. Enquanto Combinado: Quando você comprar cartas por um dos seus efeitos que possua a família Devotee, Astral Soul ou Galaxian, o oponente não pode ativar efeitos que disparem quando cartas são compradas ou quando sua mão aumenta."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-073-summon-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "draw",
+                "count": 3
+              },
+              {
+                "type": "discard",
+                "player": "self",
+                "count": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-073-combine-auto40",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "cardTypes": [
+            "spirit"
+          ],
+          "families": [
+            "Concluser",
+            "Astral Soul",
+            "Divine Star",
+            "Galaxian"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Concluser",
+                "Astral Soul",
+                "Divine Star",
+                "Galaxian"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-073-suppress-auto40",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "suppressOpponentHandIncreaseReactionsToQualifiedDraw",
+            "operation": "set",
+            "value": 1,
+            "selector": "combinedHost",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "braveBP": 5000,
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-073.webp"
   },
@@ -25521,7 +27546,127 @@
       "ptBR": "[Uma Vez por Turno: Mesmo Nome]: Quando 1 dos seus Spirits que possua ao mesmo tempo as famílias Devotee e Galaxian for invocado, você pode invocar esta carta da sua mão pagando custo 5 (Qualquer Cor4). Condição de Combine: Galaxian. Enquanto Combinado — Quando Este Spirit Ataca: Ao descartar as 6 cartas do topo do seu deck, este Spirit recebe +6000 BP. Se uma carta de Spirit com a família Divine Star ou Galaxian for descartada por este efeito, dê Refresh neste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-074-hand-summon-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventSourceFamily",
+            "family": "Devotee"
+          },
+          {
+            "type": "eventSourceFamily",
+            "family": "Galaxian"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-074-hand-summon",
+            "actions": [
+              {
+                "type": "chooseYesNo",
+                "yesActions": [
+                  {
+                    "type": "paySourceCost",
+                    "cost": 5,
+                    "reduction": [
+                      "all",
+                      "all",
+                      "all",
+                      "all"
+                    ],
+                    "actions": [
+                      {
+                        "type": "specialSummonSource"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-074-combine-auto41",
+        "schemaVersion": 2,
+        "type": "summonCondition",
+        "combineCondition": {
+          "cardTypes": [
+            "spirit"
+          ],
+          "families": [
+            "Galaxian"
+          ]
+        },
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "combineCondition",
+            "operation": "set",
+            "value": {
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Galaxian"
+              ]
+            },
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-074-attack-auto41",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "topDeckToTrash",
+            "player": "self",
+            "count": 6
+          },
+          {
+            "type": "modifyBP",
+            "target": "combinedHost",
+            "amount": 6000,
+            "duration": "battle"
+          },
+          {
+            "type": "conditional",
+            "condition": {
+              "type": "contextFlag",
+              "key": "milledMatchingFamily",
+              "value": true
+            },
+            "then": [
+              {
+                "type": "refresh",
+                "target": "combinedHost"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "braveBP": 6000,
     "braveCondition": {
       "type": "family",
