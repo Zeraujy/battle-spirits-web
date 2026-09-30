@@ -71,6 +71,8 @@ export function getEffectiveSymbols(match, cardIndex, physicalCard) {
 export function getEffectiveCost(match, cardIndex, physicalCard) {
   const card = getDatabaseCard(cardIndex, physicalCard);
   let cost = Number(card?.cost || 0);
+  const override = getContinuousNumericModifier(match, cardIndex, physicalCard, "printedCostOverride");
+  if (override > 0) cost = override;
   const brave = getBraveAttachment(match, physicalCard?.instanceId);
   if (brave) {
     const braveCard = getDatabaseCard(cardIndex, brave);

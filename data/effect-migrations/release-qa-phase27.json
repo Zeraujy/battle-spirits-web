@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T17:05:27.050Z",
+  "generatedAt": "2026-09-30T00:47:00.429Z",
   "releaseReady": false,
   "results": [
     {
@@ -13,21 +13,21 @@
       "name": "phase23 set gate",
       "ok": false,
       "status": 1,
-      "stdout": "[phase23] 9/11 sets meet the 95% automation gate.\nBS13: 33.3% BLOCKED (60 unresolved)\nBSC49: 0.9% BLOCKED (116 unresolved)\nSD10: 100% PASS (0 unresolved)\nSD11: 100% PASS (0 unresolved)\nSD13: 100% PASS (0 unresolved)\nSD15: 100% PASS (0 unresolved)\nSD17: 100% PASS (0 unresolved)\nSD19: 100% PASS (0 unresolved)\nSD20: 100% PASS (0 unresolved)\nSD23: 100% PASS (0 unresolved)\nSD28: 100% PASS (0 unresolved)\n",
+      "stdout": "[phase23] 9/11 sets meet the 95% automation gate.\nBS13: 44.4% BLOCKED (50 unresolved)\nBSC49: 0.9% BLOCKED (116 unresolved)\nSD10: 100% PASS (0 unresolved)\nSD11: 100% PASS (0 unresolved)\nSD13: 100% PASS (0 unresolved)\nSD15: 100% PASS (0 unresolved)\nSD17: 100% PASS (0 unresolved)\nSD19: 100% PASS (0 unresolved)\nSD20: 100% PASS (0 unresolved)\nSD23: 100% PASS (0 unresolved)\nSD28: 100% PASS (0 unresolved)\n",
       "stderr": ""
     },
     {
       "name": "phase24 generated regressions",
       "ok": true,
       "status": 0,
-      "stdout": "TAP version 13\n# Subtest: Phase 24 generated scenarios cover every fully automated/no-effect card\nok 1 - Phase 24 generated scenarios cover every fully automated/no-effect card\n  ---\n  duration_ms: 1.105435\n  type: 'test'\n  ...\n# Subtest: Phase 24 automated entries use runtime-dispatched events and supported actions\nok 2 - Phase 24 automated entries use runtime-dispatched events and supported actions\n  ---\n  duration_ms: 1.073627\n  type: 'test'\n  ...\n# Subtest: Phase 24 automated cards have no unresolved display entry\nok 3 - Phase 24 automated cards have no unresolved display entry\n  ---\n  duration_ms: 0.186838\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 69.236314\n",
+      "stdout": "TAP version 13\n# Subtest: Phase 24 generated scenarios cover every fully automated/no-effect card\nok 1 - Phase 24 generated scenarios cover every fully automated/no-effect card\n  ---\n  duration_ms: 1.073294\n  type: 'test'\n  ...\n# Subtest: Phase 24 automated entries use runtime-dispatched events and supported actions\nok 2 - Phase 24 automated entries use runtime-dispatched events and supported actions\n  ---\n  duration_ms: 1.095599\n  type: 'test'\n  ...\n# Subtest: Phase 24 automated cards have no unresolved display entry\nok 3 - Phase 24 automated cards have no unresolved display entry\n  ---\n  duration_ms: 0.187182\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 70.876904\n",
       "stderr": ""
     },
     {
       "name": "phase25 manual fallback gate",
       "ok": false,
       "status": 1,
-      "stdout": "[phase25] Manual fallback 48.22% (176/365); target < 10%: BLOCKED.\n",
+      "stdout": "[phase25] Manual fallback 45.48% (166/365); target < 10%: BLOCKED.\n",
       "stderr": ""
     },
     {
@@ -48,21 +48,21 @@
       "name": "ui audit",
       "ok": true,
       "status": 0,
-      "stdout": "UI AUDIT OK — frontend limpo e responsivo nos fluxos principais.\n",
+      "stdout": "\n> battle-spirits-kaihou-simulator@5.0.3 ui:audit\n> node scripts/ui-audit.mjs\n\nUI AUDIT OK — frontend limpo e responsivo nos fluxos principais.\n",
       "stderr": ""
     },
     {
       "name": "release audit",
       "ok": true,
       "status": 0,
-      "stdout": "RELEASE AUDIT OK — v5.0.3\n",
+      "stdout": "\n> battle-spirits-kaihou-simulator@5.0.3 release:audit\n> node scripts/release-audit.mjs\n\nRELEASE AUDIT OK — v5.0.3\n",
       "stderr": ""
     },
     {
       "name": "security audit",
       "ok": true,
       "status": 0,
-      "stdout": "SECURITY AUDIT OK — cliente contém somente configuração pública permitida.\n",
+      "stdout": "\n> battle-spirits-kaihou-simulator@5.0.3 security:audit\n> node scripts/security-audit.mjs\n\nSECURITY AUDIT OK — cliente contém somente configuração pública permitida.\n",
       "stderr": ""
     }
   ]

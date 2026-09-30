@@ -279,7 +279,10 @@ export function getContinuousPlayerNumericModifier(match, playerId, property) {
       sourceExists: (instanceId) => sourceExists(match, instanceId),
       conditionActive: modifier.conditionActive
     })) continue;
-    if (modifier.controllerId && modifier.controllerId !== playerId) continue;
+    const owner = modifier.selector?.owner || null;
+    if (owner === "self" && modifier.controllerId && modifier.controllerId !== playerId) continue;
+    if (owner === "opponent" && modifier.controllerId && modifier.controllerId === playerId) continue;
+    if (!owner && modifier.controllerId && modifier.controllerId !== playerId) continue;
     const amount = Number(modifier.value ?? modifier.amount ?? 0);
     if (modifier.operation === "set") value = amount;
     else if (modifier.operation === "subtract") value -= Math.abs(amount);

@@ -5,7 +5,8 @@ export function calculateReduction(match, playerId, card, cardIndex) {
   const field = { ...getFieldSymbols(match, playerId, cardIndex) };
   const bonusReductionSymbols = getContinuousCardCollectionModifier(match, card, playerId, "summonReductionSymbols", []);
   for (const symbol of bonusReductionSymbols) field[symbol] = Number(field[symbol] || 0) + 1;
-  const reductions = [...(card?.reduction || [])];
+  const ignoreReduction = getContinuousCardNumericModifier(match, card, playerId, "ignoreReductionSymbols") > 0;
+  const reductions = ignoreReduction ? [] : [...(card?.reduction || [])];
   let applied = 0;
   const used = {};
   for (const reduction of reductions) {
@@ -24,8 +25,10 @@ export function calculateReduction(match, playerId, card, cardIndex) {
     }
   }
   const printed = Number(card?.cost || 0);
+  const printedOverride = getContinuousCardNumericModifier(match, card, playerId, "printedCostOverride");
   const costModifier = getContinuousCardNumericModifier(match, card, playerId, "cost");
-  const effectivePrinted = Math.max(0, printed + Number(costModifier || 0));
+  const effectiveBase = printedOverride > 0 ? printedOverride : printed;
+  const effectivePrinted = Math.max(0, effectiveBase + Number(costModifier || 0));
   return { printed, effectivePrinted, applied, payable: Math.max(0, effectivePrinted - applied), fieldSymbols: field };
 }
 

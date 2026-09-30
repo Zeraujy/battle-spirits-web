@@ -234,6 +234,7 @@ function moveTargetOut(match, target, destination, cardIndex, context = {}) {
   }
 
   if (current.zone === "trash" && destination === "hand") {
+    if (getContinuousPlayerNumericModifier(match, current.playerId, "trashToHandBlocked") > 0) return match;
     const player = match.players[current.playerId];
     const trash = [...player.trash];
     const index = trash.findIndex((card) => card.instanceId === instanceId);
@@ -1208,6 +1209,10 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
           const sourceCores = Number(context.sourcePhysical.cores?.regular || 0) + (context.sourcePhysical.cores?.soul ? 1 : 0);
           amount = Number(action.amountPerSourceCore || 0) * sourceCores;
         }
+        if (action.amountPerPlayerLife != null) {
+          const playerId = resolvePlayerId(working, { ...action, player: action.lifePlayer || action.player || "self" }, context);
+          amount = Number(action.amountPerPlayerLife || 0) * Number(working.players?.[playerId]?.life || 0);
+        }
         if (action.amountFromSelectedBP === true) {
           const selected = Array.isArray(context.selectedTargets) ? context.selectedTargets[0] : null;
           const selectedPhysical = selected?.physical || null;
@@ -1414,13 +1419,39 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const playerId = resolvePlayerId(next, action, context);
     let player = next.players?.[playerId];
     if (!player) return { match, notes: ["Jogador alvo inválido para o deck."], manualResolutionNeeded: true, executed: false };
-    const count = Math.max(1, Number(action.count ?? action.amount ?? 1));
+    const selectorCount = action.countFromSelector && typeof action.countFromSelector === "object"
+      ? collectTargets(next, cardIndex, action.countFromSelector, context).length
+      : null;
+    let requested = selectorCount != null
+      ? selectorCount * Number(action.countMultiplier ?? action.amountPerMatching ?? 1)
+      : Number(action.count ?? action.amount ?? 1);
+    if (action.maxCount != null) requested = Math.min(requested, Number(action.maxCount));
+    if (type === "topDeckToTrash") {
+      const cap = getContinuousPlayerNumericModifier(next, playerId, "maxDeckDiscardPerTurn");
+      if (cap > 0) {
+        const used = Number(next.temporary?.deckDiscardedByEffect?.[playerId] || 0);
+        requested = Math.min(requested, Math.max(0, cap - used));
+      }
+    }
+    const count = Math.max(0, Number(requested));
     const deck = [...player.deck];
     const moved = [];
     for (let i = 0; i < count && deck.length; i += 1) moved.push(deck.shift());
     if (type === "topDeckToTrash") player = { ...player, deck, trash: [...player.trash, ...moved] };
     else player = { ...player, deck, revealed: [...(player.revealed || []), ...moved] };
     next = { ...next, players: { ...next.players, [playerId]: player } };
+    if (type === "topDeckToTrash" && moved.length) {
+      next = {
+        ...next,
+        temporary: {
+          ...(next.temporary || {}),
+          deckDiscardedByEffect: {
+            ...(next.temporary?.deckDiscardedByEffect || {}),
+            [playerId]: Number(next.temporary?.deckDiscardedByEffect?.[playerId] || 0) + moved.length
+          }
+        }
+      };
+    }
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved.length };
   }
 
