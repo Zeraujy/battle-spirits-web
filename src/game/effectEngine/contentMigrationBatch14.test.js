@@ -17,7 +17,7 @@ function base(){const m=createMatch({player1:{name:'A',deck},player2:{name:'B',d
 function physical(id,instance,cores=2,exhausted=false,combinedWith=null){return {...makePhysicalCard(id,index),instanceId:instance,cores:{regular:cores,soul:false},exhausted,combinedWith};}
 function ability(id,a){return byId.get(id)?.abilities?.find(x=>x.id===a);}
 
-test('content batch 14: BS13 Wave 6 resolves ten more cards and leaves 10 pending',()=>{const cov=JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage.json',import.meta.url),'utf8'));const rows=cov.cards.filter(x=>x.set==='BS13');assert.equal(rows.length,90);assert.equal(rows.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,10);assert.equal(rows.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,80);});
+test('content batch 14: BS13 Wave 6 resolves ten more cards and leaves 10 pending',()=>{const cov=JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage-v5.1.0-content-batch14.json',import.meta.url),'utf8'));const rows=cov.cards.filter(x=>x.set==='BS13');assert.equal(rows.length,90);assert.equal(rows.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,10);assert.equal(rows.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,80);});
 
 test('content batch 14: Core Action Library exposes field-combine and event-source recovery actions',()=>{const types=listSupportedCoreActionTypes();for(const t of ['combineBraveFromField','returnEventSourceToHand'])assert.equal(types.includes(t),true);assert.ok(types.length>=77);});
 

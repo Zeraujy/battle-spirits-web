@@ -195,12 +195,18 @@ export function conditionMatches(card, hostCard, options = {}) {
   return evaluateBraveCondition(card, hostCard, options).matches;
 }
 
-function hostAlreadyCombined(match, hostId, ignoreBraveInstanceId = null) {
-  return Object.values(match.players || {}).some((player) =>
-    (player.field?.other || []).some((physical) =>
+function hostAttachmentCount(match, hostId, ignoreBraveInstanceId = null) {
+  return Object.values(match.players || {}).reduce((total, player) =>
+    total + (player.field?.other || []).filter((physical) =>
       physical.instanceId !== ignoreBraveInstanceId && physical.combinedWith === hostId
-    )
-  );
+    ).length, 0);
+}
+
+function hostCanAcceptAnotherBrave(match, cardIndex, hostPhysical, ignoreBraveInstanceId = null) {
+  if (!hostPhysical) return false;
+  const configured = Number(getContinuousNumericModifier(match, cardIndex, hostPhysical, "maxBraveAttachments") || 0);
+  const maximum = Math.max(1, configured || 1);
+  return hostAttachmentCount(match, hostPhysical.instanceId, ignoreBraveInstanceId) < maximum;
 }
 
 export function getLegalBraveHosts(match, playerId, braveInstanceId, cardIndex, options = {}) {
@@ -214,7 +220,7 @@ export function getLegalBraveHosts(match, playerId, braveInstanceId, cardIndex, 
 
   return hosts
     .filter((physical) => physical.instanceId !== currentHostId)
-    .filter((physical) => !hostAlreadyCombined(match, physical.instanceId, braveInstanceId))
+    .filter((physical) => hostCanAcceptAnotherBrave(match, cardIndex, physical, braveInstanceId))
     .map((physical) => {
       const card = getDatabaseCard(cardIndex, physical);
       const ignoresCondition = getContinuousNumericModifier(match, cardIndex, physical, "ignoreBraveCombineCondition") > 0;
@@ -275,7 +281,7 @@ export function combineBrave(match, playerId, braveInstanceId, hostInstanceId, c
   const hostCard = getDatabaseCard(cardIndex, hostCtx.card);
   if (braveCard?.cardType !== "brave") return { ok: false, error: "A carta escolhida não é um Brave." };
   if (!["spirit", "ultimate"].includes(hostCard?.cardType)) return { ok: false, error: "Este alvo não é um Spirit/Ultimate compatível." };
-  if (hostAlreadyCombined(match, hostInstanceId, braveInstanceId)) return { ok: false, error: "Este alvo já possui um Brave combinado." };
+  if (!hostCanAcceptAnotherBrave(match, cardIndex, hostCtx.card, braveInstanceId)) return { ok: false, error: "Este alvo já atingiu o limite de Braves combinados." };
 
   const ignoresCondition = getContinuousNumericModifier(match, cardIndex, hostCtx.card, "ignoreBraveCombineCondition") > 0;
   const evaluation = ignoresCondition ? { matches: true, manual: false, reason: null } : evaluateBraveCondition(braveCard, hostCard, { ...options, hostPhysical: hostCtx?.card || options.hostPhysical || null });
@@ -318,7 +324,7 @@ export function exchangeBrave(match, playerId, braveInstanceId, newHostInstanceI
   if (!braveCtx || braveCtx.playerId !== playerId || braveCtx.zone !== "other" || !braveCtx.card.combinedWith) return { ok: false, error: "Brave combinado não encontrado." };
   if (!newHostCtx || newHostCtx.playerId !== playerId || newHostCtx.zone !== "spirits") return { ok: false, error: "Novo alvo não encontrado." };
   if (newHostInstanceId === braveCtx.card.combinedWith) return { ok: false, error: "O Brave já está combinado com esse alvo." };
-  if (hostAlreadyCombined(match, newHostInstanceId, braveInstanceId)) return { ok: false, error: "O novo alvo já possui um Brave combinado." };
+  if (!hostCanAcceptAnotherBrave(match, cardIndex, newHostCtx.card, braveInstanceId)) return { ok: false, error: "O novo alvo já atingiu o limite de Braves combinados." };
 
   const braveCard = getDatabaseCard(cardIndex, braveCtx.card);
   const newHostCard = getDatabaseCard(cardIndex, newHostCtx.card);

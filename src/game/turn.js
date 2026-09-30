@@ -7,6 +7,23 @@ import { dispatchPhaseEntry } from "./effectEngine/phaseTriggerEngine.js";
 import { legalAttackers } from "./battle.js";
 import { findPhysicalCard } from "./selectors.js";
 
+
+function decrementEndStepSuppressions(match, playerId) {
+  const current = Number(match.persistentEffects?.suppressWhenSummonedEndSteps?.[playerId] || 0);
+  if (current <= 0) return match;
+  const nextValue = Math.max(0, current - 1);
+  return {
+    ...match,
+    persistentEffects: {
+      ...(match.persistentEffects || {}),
+      suppressWhenSummonedEndSteps: {
+        ...(match.persistentEffects?.suppressWhenSummonedEndSteps || {}),
+        [playerId]: nextValue
+      }
+    }
+  };
+}
+
 export function isFirstPlayersFirstTurn(match) {
   return match.turnNumber === 1 && match.activePlayerId === match.firstPlayerId;
 }
@@ -80,6 +97,7 @@ export function completeScheduledAttackStepEnd(match, cardIndex) {
   next = performPhaseEntry(next, "end");
   const phaseEvent = dispatchPhaseEntry(next, "end", cardIndex, { previousPhase: "attack", eventPlayerId: next.activePlayerId });
   next = phaseEvent.match;
+  next = decrementEndStepSuppressions(next, next.activePlayerId);
   next = appendLog(next, `${next.players[next.activePlayerId].name}: end (efeito encerrou o Attack Step).`, "turn");
   return {
     match: next,
@@ -137,6 +155,7 @@ export function advancePhase(match, actorId, cardIndex) {
   next = performPhaseEntry(next, nextPhase);
   const phaseEvent = dispatchPhaseEntry(next, nextPhase, cardIndex, { previousPhase: match.phase, eventPlayerId: next.activePlayerId });
   next = phaseEvent.match;
+  if (nextPhase === "end") next = decrementEndStepSuppressions(next, next.activePlayerId);
   next = appendLog(next, `${next.players[next.activePlayerId].name}: ${nextPhase}.`, "turn");
   return { ok: true, match: next, manualResolutionNeeded: Boolean(phaseEvent.manualResolutionNeeded), notes: phaseEvent.notes || [] };
 }

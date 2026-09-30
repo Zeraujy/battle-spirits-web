@@ -8184,7 +8184,80 @@
       "ptBR": "LV1/LV2 Durante o seu Start Step: Você pode devolver 1 dos seus Spirits com [Ultra Awaken] para a sua mão. LV2: Quando um dos seus Spirits usar [Ultra Awaken], você também pode usar Cores da sua Reserve, além dos Cores nos seus Spirits."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-002-start-return-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "startStep",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "keywords": [
+                    "ultraawaken"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": [
+                  {
+                    "type": "returnToHand",
+                    "target": "selected"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bs13-002-reserve-ultra-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "ultraAwakenCanUseReserve",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "keywords": [
+                "ultraawaken"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "name": "The ArmoredDinoman Ankylong",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-002.webp"
@@ -8451,7 +8524,104 @@
       "ptBR": "LV1/LV2/LV3: Seus Spirits combinados com Brave que possuem [Ultra Awaken] não podem ser separados, e nenhum jogador pode remover Cores deles. [Quando Combinado] LV3: Todos os seus Spirits combinados da família Terra Dragon recebem o seguinte efeito: Flash [Ultra Awaken]: Você pode mover qualquer quantidade de Cores dos seus Spirits para este Spirit. Sempre que 1 ou mais Cores forem movidos para este Spirit por este efeito, dê Refresh neste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-005-ultra-lock-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "cannotSeparateBrave",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "keywords": [
+                "ultraawaken"
+              ],
+              "braved": true
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "coreRemovalLocked",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "keywords": [
+                "ultraawaken"
+              ],
+              "braved": true
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bs13-005-grant-ultra-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "actions": [
+          {
+            "type": "gainKeyword",
+            "keyword": "ultraawaken",
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Terra Dragon"
+              ],
+              "braved": true
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "ultraAwakenRefreshOnCoreMove",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Terra Dragon"
+              ],
+              "braved": true
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "name": "The RudeSaurus Dirano-Rex",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-005.webp"
@@ -10823,7 +10993,66 @@
       "ptBR": "LV1/LV2/LV3 [Ice Wall: Vermelho/Verde/Amarelo] Durante o turno do oponente: Quando o oponente usar um efeito de Magic Vermelho, Verde ou Amarelo, ao deixar este Spirit Exhausted, anule aquele efeito. LV2/LV3 Durante o Attack Step do Oponente: No início do Step, dê Refresh em todos os seus Spirits com [Ice Wall]."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-028-icewall-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "iceWallMagicNegationColors",
+            "operation": "set",
+            "value": [
+              "red",
+              "green",
+              "yellow"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bs13-028-refresh-icewall-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "refreshAllMatching",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "keywords": [
+                "icewall"
+              ]
+            }
+          }
+        ]
+      }
+    ],
     "name": "The OathGoddess Var",
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-028.webp"
@@ -11952,7 +12181,78 @@
       "ptBR": "LV1/LV2: Quando um ou mais dos seus Spirits da família Dark Artes forem destruídos, você pode descartar qualquer quantidade de cartas de Spirit da sua mão. Para cada carta de Spirit descartada dessa forma, 1 desses Spirits Dark Artes destruídos permanece no seu campo Exhausted. LV2 [Radiance] Quando Este Spirit Ataca: No fim da batalha, devolva para a sua mão todas as cartas de Magic que você usou durante esta batalha."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-038-darkartes-save-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceFamily",
+            "family": "Dark Artes"
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "chooseCardsFromHand",
+                "count": 1,
+                "selector": {
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "onConfirm": [
+                  {
+                    "type": "discard",
+                    "selector": {
+                      "selectedTargets": true
+                    }
+                  },
+                  {
+                    "type": "specialSummonEventSourceFromTrash",
+                    "exhausted": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bs13-038-radiance-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "afterBattleResolution",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "battleSourceRole",
+            "role": "attacker"
+          }
+        ],
+        "actions": [
+          {
+            "type": "returnMagicUsedThisBattle"
+          }
+        ]
+      }
+    ],
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-038.webp"
   },
@@ -13042,7 +13342,77 @@
       "ptBR": "LV1/LV2 Quando Invocado: Se você controlar 4 Nexuses diferentes com \"Ancient Battleship\" no nome, destrua todos os Spirits e Nexuses do oponente. LV2 Durante o Attack Step de qualquer jogador: Todos os seus Nexuses com \"Ancient Battleship\" no nome que tenham 1 ou mais Cores perdem seus efeitos de Nexus e também são tratados como Spirits sem efeito de custo 6, das famílias Artificial Soldier/Astral Soul, com custo de LV1 igual a 1 e 8000 BP."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-048-summon-wipe-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "fieldCount",
+            "player": "self",
+            "selector": {
+              "cardTypes": [
+                "nexus"
+              ],
+              "nameIncludes": "Ancient Battleship"
+            },
+            "atLeast": 4
+          }
+        ],
+        "actions": [
+          {
+            "type": "destroyAllMatching",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "nexus"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "bs13-048-battleship-form-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "ancientBattleshipSpiritForm",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "nexus"
+              ],
+              "nameIncludes": "Ancient Battleship"
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "set": "BS13",
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-048.webp"
   },
@@ -13083,7 +13453,51 @@
       "ptBR": "LV1: Enquanto este Brave estiver em forma de Spirit, você pode combinar 1 dos seus Braves com este Spirit. Condição de Combine: custo 4 ou mais. Enquanto Combinado — Quando Este Spirit Combinado Ataca: Você pode ativar, como efeito deste Spirit, 1 efeito de \"Quando Este Spirit Combinado Ataca\" escrito em 1 dos seus Braves em forma de Spirit ou em um Brave combinado com 1 dos seus Spirits Combinados."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-049-host-brave-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "canHostBrave",
+            "operation": "set",
+            "value": 1,
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bs13-049-copy-brave-attack-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "copyBraveAttackEffect",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "combinedHostOfSource": true
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "braveBP": 2000,
     "braveCondition": {
       "type": "costAtLeast",
@@ -14942,7 +15356,70 @@
       "ptBR": "LV1/LV2 Durante o Attack Step de qualquer jogador: Quando um dos seus Spirits com [Heavy Armor] for destruído por comparação de BP com um Spirit do oponente cuja cor esteja listada naquele [Heavy Armor], devolva aquele Spirit ao seu campo Exhausted. LV2 Durante o Main Step do Oponente: Quando o oponente comprar cartas por um efeito de Spirit, Brave, Nexus ou Magic, encerre o Main Step do oponente depois que aquele efeito for resolvido."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-067-heavyarmor-revive-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceKeyword",
+            "keyword": "heavyarmor"
+          },
+          {
+            "type": "contextFlag",
+            "key": "destroyedByBP",
+            "equals": true
+          }
+        ],
+        "actions": [
+          {
+            "type": "specialSummonEventSourceFromTrash",
+            "exhausted": true
+          }
+        ]
+      },
+      {
+        "id": "bs13-067-draw-end-main-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "main"
+          },
+          {
+            "type": "activePlayer",
+            "player": "opponent"
+          },
+          {
+            "type": "contextFlag",
+            "key": "effectDraw",
+            "equals": true
+          }
+        ],
+        "actions": [
+          {
+            "type": "endCurrentStep"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-067.webp"
   },
   {
@@ -15761,7 +16238,102 @@
       "ptBR": "Main: Durante este turno, quando 1 dos seus Spirits for destruído, ao mover 1 Core da sua Reserve para o seu Trash, invoque 1 carta de Spirit da família Dark Snake do seu Trash sem pagar seu custo. O efeito Quando Invocado do Spirit invocado não é ativado. Flash: 1 Spirit recebe +2000 BP durante este turno."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-075-main-enable-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicMain",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "snakeSlaveActivated",
+            "operation": "set",
+            "value": 1,
+            "selector": "source",
+            "duration": "thisTurn"
+          }
+        ]
+      },
+      {
+        "id": "bs13-075-revive-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "sourceHasModifier",
+            "property": "snakeSlaveActivated"
+          },
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "moveCore",
+                "player": "self",
+                "from": "reserve",
+                "to": "trash",
+                "count": 1
+              },
+              {
+                "type": "specialSummonFromTrash",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "trash"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "families": [
+                    "Dark Snake"
+                  ]
+                },
+                "count": 1,
+                "suppressWhenSummoned": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bs13-075-flash-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "modifyBP",
+            "selector": {
+              "owner": "any",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "amount": 2000,
+            "duration": "thisTurn"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-075.webp"
   },
   {
@@ -16207,7 +16779,68 @@
       "ptBR": "Esta carta de Magic no seu Trash não é afetada por nenhum efeito. Main: Até que você tenha realizado seu End Step 3 vezes, efeitos de Quando Invocado não são ativados. Depois que este efeito for ativado, coloque 3 Cores do Void ao lado do seu deck e, em cada um dos seus End Steps, devolva 1 desses Cores ao Void. Esses Cores não podem ser usados para nada além deste efeito. Flash: 1 Spirit recebe +2000 BP durante este turno."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-081-trash-immunity-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "controllerTrash",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectImmunityAll",
+            "operation": "set",
+            "value": 1,
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bs13-081-main-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicMain",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "suppressWhenSummonedForEndSteps",
+            "player": "self",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "id": "bs13-081-flash-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "modifyBP",
+            "selector": {
+              "owner": "any",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ]
+            },
+            "amount": 2000,
+            "duration": "thisTurn"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-081.webp"
   },
   {
@@ -16501,7 +17134,105 @@
       "ptBR": "LV1/LV2/LV3: Este Spirit pode ser combinado com até 2 Braves. LV1/LV2/LV3: Todos os seus Spirits das famílias Galaxian e Astral Soul podem realizar um ataque especificado contra 1 Spirit do oponente. [Quando Combinado] LV3 Quando Este Spirit Ataca: Para cada Brave combinado com este Spirit, destrua 1 Spirit do oponente com 10000 BP ou menos."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bs13-x01-double-brave-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "maxBraveAttachments",
+            "operation": "set",
+            "value": 2,
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bs13-x01-specified-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "specifiedAttackEnabled",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Galaxian",
+                "Astral Soul"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bs13-x01-attack-destroy-auto35",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "conditions": [
+          {
+            "type": "sourceHasBraveAttachment"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumBP": 10000
+            },
+            "countFromSourceBraves": true,
+            "allowZero": true,
+            "onSelect": [
+              {
+                "type": "destroy",
+                "target": "selected"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BS13-Constellations-Part-4-KingoftheStarrySky/BS13-X01.webp"
   },
   {
@@ -17458,7 +18189,116 @@
       "ptBR": "LV1/LV2/LV3 Quando Invocado: Você pode revelar as 3 cartas do topo do seu deck. Adicione à sua mão 1 carta entre elas, exceto \"Chamaeleopus LT\", que possua a família Astral Soul, Divine Star ou Galaxian; depois coloque as cartas restantes no fundo do seu deck. LV1/LV2/LV3 Durante Seu Main Step: Quando você invocar uma carta de Spirit com custo original 6 ou mais, este Spirit ganha 2 símbolos Vermelhos adicionais para aquela invocação. LV2/LV3: A cor e o símbolo deste Spirit também são tratados como Azul."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-003-summon-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "revealTopAndRoute",
+            "player": "self",
+            "count": 3,
+            "matchSelector": {
+              "families": [
+                "Astral Soul",
+                "Divine Star",
+                "Galaxian"
+              ],
+              "nameIncludesNot": "Chamaeleopus LT"
+            },
+            "matchedDestination": "hand",
+            "matchedLimit": 1,
+            "otherwiseDestination": "bottomDeck"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-003-reduction-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "main"
+          },
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          },
+          {
+            "type": "eventSourceCost",
+            "atLeast": 6
+          }
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "add",
+            "value": [
+              "red",
+              "red"
+            ],
+            "selector": "source",
+            "duration": "event"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-003-blue-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "colors",
+            "operation": "add",
+            "value": [
+              "blue"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "add",
+            "value": [
+              "blue"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-003.webp"
   },
   {
@@ -17558,7 +18398,130 @@
       "ptBR": "LV1/LV2 Quando Invocado [Uma Vez por Turno: Mesmo Nome]: Você pode devolver para a sua mão 1 carta de Spirit ou Brave, ou 1 carta da família Galaxian, do seu Trash. LV2 Durante Seu Attack Step: Quando 1 dos seus Spirits das famílias Astral Soul, Galaxian ou Emperor Beast atacar, você pode destruir 1 Spirit do oponente com BP igual ou menor que o BP daquele Spirit atacante."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-005-summon-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-005-same-name",
+            "actions": [
+              {
+                "type": "chooseOption",
+                "options": [
+                  {
+                    "id": "spirit-or-brave",
+                    "actions": [
+                      {
+                        "type": "selectTarget",
+                        "selector": {
+                          "owner": "self",
+                          "zones": [
+                            "trash"
+                          ],
+                          "cardTypes": [
+                            "spirit",
+                            "brave"
+                          ]
+                        },
+                        "allowZero": true,
+                        "onSelect": {
+                          "type": "returnToHand"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": "galaxian",
+                    "actions": [
+                      {
+                        "type": "selectTarget",
+                        "selector": {
+                          "owner": "self",
+                          "zones": [
+                            "trash"
+                          ],
+                          "families": [
+                            "Galaxian"
+                          ]
+                        },
+                        "allowZero": true,
+                        "onSelect": {
+                          "type": "returnToHand"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-005-attack-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "any": [
+              {
+                "type": "eventSourceFamily",
+                "family": "Astral Soul"
+              },
+              {
+                "type": "eventSourceFamily",
+                "family": "Galaxian"
+              },
+              {
+                "type": "eventSourceFamily",
+                "family": "Emperor Beast"
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumBPFromEventSource": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-005.webp"
   },
   {
@@ -17612,7 +18575,126 @@
       "ptBR": "LV1/LV2/LV3 Quando Invocado ou Quando Este Spirit Ataca [Uma Vez por Turno]: Você pode revelar as 3 cartas do topo do seu deck. Adicione 1 carta de Brave entre elas à sua mão e depois coloque as cartas restantes no fundo do seu deck. LV1/LV2/LV3: Quando 1 dos seus Spirits fosse deixar o Campo por causa do oponente, você pode invocar 1 carta de Brave da sua mão em forma de Spirit sem pagar seu custo."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-006-summon-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-006-reveal",
+            "actions": [
+              {
+                "type": "revealTopAndRoute",
+                "player": "self",
+                "count": 3,
+                "matchSelector": {
+                  "cardTypes": [
+                    "brave"
+                  ]
+                },
+                "matchedDestination": "hand",
+                "matchedLimit": 1,
+                "otherwiseDestination": "bottomDeck"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-006-attack-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-006-reveal",
+            "actions": [
+              {
+                "type": "revealTopAndRoute",
+                "player": "self",
+                "count": 3,
+                "matchSelector": {
+                  "cardTypes": [
+                    "brave"
+                  ]
+                },
+                "matchedDestination": "hand",
+                "matchedLimit": 1,
+                "otherwiseDestination": "bottomDeck"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-006-leave-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventMovedFromZone",
+            "zone": "field"
+          },
+          {
+            "type": "eventMovedByOpponent"
+          },
+          {
+            "type": "eventSourceCardType",
+            "cardType": "spirit"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "hand"
+              ],
+              "cardTypes": [
+                "brave"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "specialSummonFromHand",
+              "free": true,
+              "asSpirit": true,
+              "cause": "effect"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-006.webp"
   },
   {
@@ -17660,7 +18742,75 @@
       "ptBR": "LV1/LV2 Quando Invocado: Você pode destruir 1 Spirit do oponente com 10000 BP ou menos. Se um Spirit for destruído por este efeito, você pode comprar 2 cartas. LV2 Quando Este Spirit Ataca: Você pode revelar as 3 cartas do topo do seu deck. Adicione à sua mão 1 carta entre elas que possua a família Astral Soul, Divine Star ou Galaxian; depois coloque as cartas restantes no fundo do seu deck."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-007-summon-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumBP": 10000
+            },
+            "allowZero": true,
+            "onSelect": [
+              {
+                "type": "destroy"
+              },
+              {
+                "type": "draw",
+                "count": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-007-attack-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "revealTopAndRoute",
+            "player": "self",
+            "count": 3,
+            "matchSelector": {
+              "families": [
+                "Astral Soul",
+                "Divine Star",
+                "Galaxian"
+              ]
+            },
+            "matchedDestination": "hand",
+            "matchedLimit": 1,
+            "otherwiseDestination": "bottomDeck"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-007.webp"
   },
   {
@@ -17805,8 +18955,104 @@
       "en": "[Immortality: 1/3/5] During Either Attack Step: While this card is in your Trash, when one of your Cost 1, 3, or 5 Spirits is destroyed, you may summon this card. LV2 [True Curse] During Your Turn: When this Spirit would leave the Field because of the opponent, destroy 1 opposing Spirit/Ultimate.",
       "ptBR": "[Immortality: 1/3/5] Durante o Attack Step de qualquer jogador: Enquanto esta carta estiver no seu Trash, quando 1 dos seus Spirits de custo 1, 3 ou 5 for destruído, você pode invocar esta carta. LV2 [True Curse] Durante Seu Turno: Quando este Spirit fosse deixar o Campo por causa do oponente, destrua 1 Spirit/Ultimate do oponente."
     },
-    "effects": [],
-    "abilities": [],
+    "effects": [
+      {
+        "id": "bsc49-010-immortality-auto37",
+        "type": "immortality",
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "Immortality: 1/3/5",
+          "ptBR": "Immortality: 1/3/5"
+        },
+        "text": {
+          "en": "During either Attack Step, when one of your Cost 1, 3, or 5 Spirits is destroyed, you may summon this card from your Trash.",
+          "ptBR": "Durante qualquer Attack Step, quando um dos seus Spirits de custo 1, 3 ou 5 for destruído, você pode invocar esta carta do Trash."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "bsc49-010-immortality-trigger-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "any": [
+              {
+                "type": "eventSourceCost",
+                "equals": 1
+              },
+              {
+                "type": "eventSourceCost",
+                "equals": 3
+              },
+              {
+                "type": "eventSourceCost",
+                "equals": 5
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "specialSummonSource",
+            "cause": "immortality"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-010-true-curse-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "activePlayer",
+            "player": "self"
+          },
+          {
+            "type": "eventMovedFromZone",
+            "zone": "field"
+          },
+          {
+            "type": "eventMovedByOpponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-010.webp"
   },
   {
@@ -17855,7 +19101,98 @@
       "ptBR": "[Burst: Depois que Sua Life Diminuir]: Invoque esta carta sem pagar seu custo. LV1/LV2 Quando Invocado: Se você controlar outro Spirit ou Nexus com a família Devotee, Astral Soul ou Galaxian, você pode comprar 1 carta. LV2 Quando Este Spirit For Destruído: Mova 1 Core de cada um de 2 Spirits/Nexuses do oponente para a Reserve dele."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-011-burst-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "specialSummonSource",
+            "free": true,
+            "cause": "burst"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-011-summon-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "fieldCount",
+            "player": "self",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "families": [
+                "Devotee",
+                "Astral Soul",
+                "Galaxian"
+              ],
+              "excludeSource": true
+            },
+            "atLeast": 1
+          }
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "bsc49-011-destroyed-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "nexus"
+              ],
+              "minimumCores": 1
+            },
+            "maxTargets": 2,
+            "asManyAsPossible": true,
+            "allowZero": true,
+            "onConfirm": {
+              "type": "removeCore",
+              "amount": 1,
+              "destination": "reserve"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-011.webp"
   },
   {
@@ -18007,8 +19344,147 @@
       "en": "[Immortality: 3/5/7] During Either Attack Step: While this card is in your Trash, when one of your Cost 3, 5, or 7 Spirits is destroyed, you may summon this card. LV1/LV2/LV3 When This Spirit Is Destroyed: Move 1 core from an opposing Spirit to the opponent's Trash, and draw 1 card. LV2/LV3 During Your Attack Step: When one of your Spirits with an effect name that includes \"Immortality\" attacks, you may activate one of this Spirit's When Destroyed effects without destroying this Spirit.",
       "ptBR": "[Immortality: 3/5/7] Durante o Attack Step de qualquer jogador: Enquanto esta carta estiver no seu Trash, quando 1 dos seus Spirits de custo 3, 5 ou 7 for destruído, você pode invocar esta carta. LV1/LV2/LV3 Quando Este Spirit For Destruído: Mova 1 Core de 1 Spirit do oponente para o Trash dele e compre 1 carta. LV2/LV3 Durante Seu Attack Step: Quando 1 dos seus Spirits com um nome de efeito que inclua \"Immortality\" atacar, você pode ativar 1 dos efeitos Quando Destruído deste Spirit sem destruí-lo."
     },
-    "effects": [],
-    "abilities": [],
+    "effects": [
+      {
+        "id": "bsc49-014-immortality-auto37",
+        "type": "immortality",
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "Immortality: 3/5/7",
+          "ptBR": "Immortality: 3/5/7"
+        },
+        "text": {
+          "en": "During either Attack Step, when one of your Cost 3, 5, or 7 Spirits is destroyed, you may summon this card from your Trash.",
+          "ptBR": "Durante qualquer Attack Step, quando um dos seus Spirits de custo 3, 5 ou 7 for destruído, você pode invocar esta carta do Trash."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "bsc49-014-immortality-trigger-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "any": [
+              {
+                "type": "eventSourceCost",
+                "equals": 3
+              },
+              {
+                "type": "eventSourceCost",
+                "equals": 5
+              },
+              {
+                "type": "eventSourceCost",
+                "equals": 7
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "specialSummonSource",
+            "cause": "immortality"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-014-destroyed-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "minimumCores": 1
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "removeCore",
+              "amount": 1,
+              "destination": "trash"
+            }
+          },
+          {
+            "type": "draw",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "bsc49-014-attack-observer-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "type": "eventSourceKeyword",
+            "keyword": "immortality"
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "minimumCores": 1
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "removeCore",
+              "amount": 1,
+              "destination": "trash"
+            }
+          },
+          {
+            "type": "draw",
+            "count": 1
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-014.webp"
   },
   {
@@ -18111,8 +19587,135 @@
       "en": "[Immortality: Devotee/Dark Snake & Cost 7 or More] During Either Attack Step: While this card is in your Trash, when one of your Cost 7 or more Spirits with the Devotee or Dark Snake family is destroyed, you may summon this card. LV1/LV2/LV3 When Summoned [Once per Turn: Same Name]: You may move 2 cores from 1 opposing Spirit to the opponent's Reserve. Then, if this Spirit was summoned by Immortality, you may summon 1 mono-Purple Spirit card with the Devotee or Dark Snake family from your Trash without paying its cost.",
       "ptBR": "[Immortality: Devotee/Dark Snake & Custo 7 ou Mais] Durante o Attack Step de qualquer jogador: Enquanto esta carta estiver no seu Trash, quando 1 dos seus Spirits de custo 7 ou mais com a família Devotee ou Dark Snake for destruído, você pode invocar esta carta. LV1/LV2/LV3 Quando Invocado [Uma Vez por Turno: Mesmo Nome]: Você pode mover 2 Cores de 1 Spirit do oponente para a Reserve dele. Depois, se este Spirit tiver sido invocado por Immortality, você pode invocar 1 carta de Spirit Roxa de uma única cor, com a família Devotee ou Dark Snake, do seu Trash sem pagar seu custo."
     },
-    "effects": [],
-    "abilities": [],
+    "effects": [
+      {
+        "id": "bsc49-016-immortality-auto37",
+        "type": "immortality",
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "Immortality: Devotee/Dark Snake Cost 7+",
+          "ptBR": "Immortality: Devotee/Dark Snake Custo 7+"
+        },
+        "text": {
+          "en": "When one of your Cost 7 or more Devotee/Dark Snake Spirits is destroyed during either Attack Step, you may summon this card from your Trash.",
+          "ptBR": "Quando um dos seus Spirits Devotee/Dark Snake de custo 7 ou mais for destruído durante qualquer Attack Step, você pode invocar esta carta do Trash."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "bsc49-016-immortality-trigger-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "type": "eventSourceCost",
+            "atLeast": 7
+          },
+          {
+            "any": [
+              {
+                "type": "eventSourceFamily",
+                "family": "Devotee"
+              },
+              {
+                "type": "eventSourceFamily",
+                "family": "Dark Snake"
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "specialSummonSource",
+            "cause": "immortality"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-016-summon-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-016-same-name",
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "minimumCores": 1
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "removeCore",
+                  "amount": 2,
+                  "destination": "reserve"
+                }
+              },
+              {
+                "type": "conditional",
+                "condition": {
+                  "type": "specialSummonCause",
+                  "value": "immortality"
+                },
+                "actions": [
+                  {
+                    "type": "selectTarget",
+                    "selector": {
+                      "owner": "self",
+                      "zones": [
+                        "trash"
+                      ],
+                      "cardTypes": [
+                        "spirit"
+                      ],
+                      "colors": [
+                        "purple"
+                      ],
+                      "families": [
+                        "Devotee",
+                        "Dark Snake"
+                      ]
+                    },
+                    "allowZero": true,
+                    "onSelect": {
+                      "type": "specialSummonFromTrash",
+                      "free": true,
+                      "cause": "immortality-chain"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-016.webp"
   },
   {
@@ -18165,8 +19768,209 @@
       "en": "[Immortality: Devotee/Concluser/Astral Soul/Galaxian] During Either Attack Step: While this card is in your Trash, when one of your Spirits with any of those families is destroyed, you may summon this card. LV1/LV2/LV3 When Summoned or When This Spirit Attacks: Destroy 1 opposing Brave. If you could not destroy it, move up to 2 cores from the opponent's Field to their Reserve. LV2/LV3 During Your Attack Step: All your Spirits with an effect whose name includes \"Immortality\" gain 1 additional Purple symbol.",
       "ptBR": "[Immortality: Devotee/Concluser/Astral Soul/Galaxian] Durante o Attack Step de qualquer jogador: Enquanto esta carta estiver no seu Trash, quando 1 dos seus Spirits com qualquer uma dessas famílias for destruído, você pode invocar esta carta. LV1/LV2/LV3 Quando Invocado ou Quando Este Spirit Ataca: Destrua 1 Brave do oponente. Se você não conseguir destruí-lo, mova até 2 Cores do Campo do oponente para a Reserve dele. LV2/LV3 Durante Seu Attack Step: Todos os seus Spirits com um efeito cujo nome inclua \"Immortality\" ganham 1 símbolo Roxo adicional."
     },
-    "effects": [],
-    "abilities": [],
+    "effects": [
+      {
+        "id": "bsc49-017-immortality-auto37",
+        "type": "immortality",
+        "timing": "whenDestroyed",
+        "title": {
+          "en": "Immortality: Devotee/Concluser/Astral Soul/Galaxian",
+          "ptBR": "Immortality: Devotee/Concluser/Astral Soul/Galaxian"
+        },
+        "text": {
+          "en": "When one of your matching family Spirits is destroyed during either Attack Step, you may summon this card from your Trash.",
+          "ptBR": "Quando um dos seus Spirits das famílias indicadas for destruído durante qualquer Attack Step, você pode invocar esta carta do Trash."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "bsc49-017-immortality-trigger-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "any": [
+              {
+                "type": "eventSourceFamily",
+                "family": "Devotee"
+              },
+              {
+                "type": "eventSourceFamily",
+                "family": "Concluser"
+              },
+              {
+                "type": "eventSourceFamily",
+                "family": "Astral Soul"
+              },
+              {
+                "type": "eventSourceFamily",
+                "family": "Galaxian"
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "specialSummonSource",
+            "cause": "immortality"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-017-summon-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "brave"
+              ],
+              "includeCombined": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterIfAny": []
+          },
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "nexus"
+              ],
+              "minimumCores": 1
+            },
+            "maxTargets": 2,
+            "asManyAsPossible": true,
+            "allowZero": true,
+            "onConfirm": {
+              "type": "removeCore",
+              "amount": 1,
+              "destination": "reserve"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-017-attack-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "brave"
+              ],
+              "includeCombined": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterIfAny": []
+          },
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "nexus"
+              ],
+              "minimumCores": 1
+            },
+            "maxTargets": 2,
+            "asManyAsPossible": true,
+            "allowZero": true,
+            "onConfirm": {
+              "type": "removeCore",
+              "amount": 1,
+              "destination": "reserve"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-017-symbol-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "add",
+            "value": [
+              "purple"
+            ],
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "keywords": [
+                "immortality"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-017.webp"
   },
   {
@@ -18215,7 +20019,96 @@
       "ptBR": "LV1/LV2 Quando Este Spirit Ataca: Descarte até as 3 cartas do topo do seu deck e destrua 1 Brave do oponente. Depois que este efeito for resolvido, uma vez por turno, você pode invocar 1 carta do seu Trash com um efeito cujo nome inclua \"Immortality\" sem pagar seu custo. LV2 Durante Seu Attack Step: Quando 1 dos seus Spirits com um efeito cujo nome inclua \"Immortality\" atacar, você pode dar Refresh neste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-018-attack-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "topDeckToTrash",
+            "player": "self",
+            "count": 3
+          },
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "brave"
+              ],
+              "includeCombined": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          },
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-018-immortality-summon",
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "trash"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "keywords": [
+                    "immortality"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "specialSummonFromTrash",
+                  "free": true,
+                  "cause": "effect"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-018-refresh-auto37",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceKeyword",
+            "keyword": "immortality"
+          }
+        ],
+        "actions": [
+          {
+            "type": "refresh",
+            "target": "source"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-018.webp"
   },
   {
@@ -18262,8 +20155,75 @@
       "en": "Flash [High Speed]: You may summon this card from your hand using only cores from your Reserve to pay its summon cost and place cores on it. LV2/LV3 During Either Attack Step: This Spirit's cost is increased by 3. [When Braved] LV3 When This Spirit Attacks: Once per turn, you may refresh this Spirit.",
       "ptBR": "Flash [High Speed]: Você pode invocar esta carta da sua mão usando apenas Cores da sua Reserve para pagar seu custo de invocação e colocar Cores sobre ela. LV2/LV3 Durante o Attack Step de qualquer jogador: O custo deste Spirit é aumentado em 3. [Quando Combinado] LV3 Quando Este Spirit Ataca: Uma vez por turno, você pode dar Refresh neste Spirit."
     },
-    "effects": [],
-    "abilities": [],
+    "effects": [
+      {
+        "id": "bsc49-019-highspeed-auto36",
+        "type": "highSpeed",
+        "timing": "flash",
+        "title": {
+          "en": "High Speed",
+          "ptBR": "High Speed"
+        },
+        "text": {
+          "en": "This Spirit may be summoned from hand during Flash timing by paying its cost from the Reserve.",
+          "ptBR": "Este Spirit pode ser Invocado da mão durante o Flash Timing pagando seu custo com a Reserve."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "bsc49-019-cost-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "cost",
+            "operation": "add",
+            "value": 3,
+            "selector": "source",
+            "duration": "whileConditionTrue",
+            "condition": {
+              "type": "phase",
+              "value": "attack"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-019-refresh-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "requiresCombined": true,
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-019-refresh",
+            "actions": [
+              {
+                "type": "refresh",
+                "target": "source"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-019.webp"
   },
   {
@@ -18309,7 +20269,94 @@
       "ptBR": "LV1/LV2 Quando Invocado ou Quando Destruído: Você pode colocar 1 Core do Void na sua Reserve. Depois, você pode colocar 1 Core do Void sobre 1 dos seus Spirits, exceto este Spirit, que possua a família Astral Soul, Divine Star ou Galaxian. O oponente não pode ativar efeitos de Spirit Roxos em resposta a estes efeitos."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-020-summon-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "player": "self",
+            "count": 1
+          },
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Astral Soul",
+                "Divine Star",
+                "Galaxian"
+              ],
+              "excludeSource": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "addCoreFromVoid",
+              "count": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-020-destroyed-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "player": "self",
+            "count": 1
+          },
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "families": [
+                "Astral Soul",
+                "Divine Star",
+                "Galaxian"
+              ],
+              "excludeSource": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "addCoreFromVoid",
+              "count": 1
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-020.webp"
   },
   {
@@ -18402,8 +20449,74 @@
       "en": "Flash [High Speed]: You may summon this card from your hand using only cores from your Reserve to pay its summon cost and place cores on it. LV1/LV2 When Summoned: You may return 1 Brave from 1 opposing Braved Spirit to the opponent's hand. After this effect resolves, you may exhaust 1 opposing Spirit.",
       "ptBR": "Flash [High Speed]: Você pode invocar esta carta da sua mão usando apenas Cores da sua Reserve para pagar seu custo de invocação e colocar Cores sobre ela. LV1/LV2 Quando Invocado: Você pode devolver 1 Brave de 1 Spirit Combinado do oponente para a mão dele. Depois que este efeito for resolvido, você pode deixar 1 Spirit do oponente Exhausted."
     },
-    "effects": [],
-    "abilities": [],
+    "effects": [
+      {
+        "id": "bsc49-022-highspeed-auto36",
+        "type": "highSpeed",
+        "timing": "flash",
+        "title": {
+          "en": "High Speed",
+          "ptBR": "High Speed"
+        },
+        "text": {
+          "en": "This Spirit may be summoned from hand during Flash timing by paying its cost from the Reserve.",
+          "ptBR": "Este Spirit pode ser Invocado da mão durante o Flash Timing pagando seu custo com a Reserve."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "bsc49-022-summon-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "brave"
+              ],
+              "combined": true,
+              "includeCombined": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "returnToHand"
+            },
+            "afterSelect": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "exhaust"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-022.webp"
   },
   {
@@ -18497,8 +20610,127 @@
       "en": "Flash [High Speed]: You may summon this card from your hand using only cores from your Reserve to pay its summon cost and place cores on it. LV1/LV2 When Summoned or When This Spirit Attacks: You may put 1 core from the Void onto one of your Spirits or into your Reserve.",
       "ptBR": "Flash [High Speed]: Você pode invocar esta carta da sua mão usando apenas Cores da sua Reserve para pagar seu custo de invocação e colocar Cores sobre ela. LV1/LV2 Quando Invocado ou Quando Este Spirit Ataca: Você pode colocar 1 Core do Void sobre 1 dos seus Spirits ou na sua Reserve."
     },
-    "effects": [],
-    "abilities": [],
+    "effects": [
+      {
+        "id": "bsc49-024-highspeed-auto36",
+        "type": "highSpeed",
+        "timing": "flash",
+        "title": {
+          "en": "High Speed",
+          "ptBR": "High Speed"
+        },
+        "text": {
+          "en": "This Spirit may be summoned from hand during Flash timing by paying its cost from the Reserve.",
+          "ptBR": "Este Spirit pode ser Invocado da mão durante o Flash Timing pagando seu custo com a Reserve."
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "id": "bsc49-024-summon-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "chooseOption",
+            "options": [
+              {
+                "id": "reserve",
+                "actions": [
+                  {
+                    "type": "addCoreToReserveFromVoid",
+                    "player": "self",
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "id": "spirit",
+                "actions": [
+                  {
+                    "type": "selectTarget",
+                    "selector": {
+                      "owner": "self",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit"
+                      ]
+                    },
+                    "allowZero": false,
+                    "onSelect": {
+                      "type": "addCoreFromVoid",
+                      "count": 1
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-024-attack-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "chooseOption",
+            "options": [
+              {
+                "id": "reserve",
+                "actions": [
+                  {
+                    "type": "addCoreToReserveFromVoid",
+                    "player": "self",
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "id": "spirit",
+                "actions": [
+                  {
+                    "type": "selectTarget",
+                    "selector": {
+                      "owner": "self",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit"
+                      ]
+                    },
+                    "allowZero": false,
+                    "onSelect": {
+                      "type": "addCoreFromVoid",
+                      "count": 1
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-024.webp"
   },
   {
@@ -18551,7 +20783,55 @@
       "ptBR": "LV1/LV2/LV3 Quando Este Spirit For Destruído: Coloque, do Void no seu Campo e/ou Reserve, uma quantidade de Cores igual ao LV atual deste Spirit. Se este Spirit tiver sido destruído pelo oponente, aumente em 1 a quantidade de Cores colocados por este efeito para cada LV deste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-025-destroyed-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "player": "self",
+            "countFromSourceLevel": true
+          }
+        ]
+      },
+      {
+        "id": "bsc49-025-opponent-bonus-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventDestroyedByOpponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "player": "self",
+            "countFromSourceLevel": true
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-025.webp"
   },
   {
@@ -18953,7 +21233,112 @@
       "ptBR": "LV1/LV2/LV3: A cor e o símbolo deste Spirit também são tratados como Vermelho. Além disso, todos os seus Spirits Vermelhos podem bloquear mesmo estando Exhausted. LV2/LV3 Durante o Attack Step de qualquer jogador [Não Acumulável]: Quando 1 dos seus Spirits Vermelhos atacar ou bloquear, você pode colocar 1 Core do Void sobre este Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-033-red-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "colors",
+            "operation": "add",
+            "value": [
+              "red"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "symbols",
+            "operation": "add",
+            "value": [
+              "red"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "allowExhaustedBlock",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "colors": [
+                "red"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-033-attack-core-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceColor",
+            "color": "red"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addCoreFromVoid",
+            "target": "source",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "bsc49-033-block-core-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceColor",
+            "color": "red"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addCoreFromVoid",
+            "target": "source",
+            "count": 1
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-033.webp"
   },
   {
@@ -19110,7 +21495,142 @@
       "ptBR": "LV1/LV2/LV3 Quando Invocado ou Quando Destruído: Você pode revelar as 3 cartas do topo do seu deck. Adicione à sua mão 1 carta Branca/Amarela entre elas, exceto \"Pomeran\", que possua a família Devotee, Concluser ou Galaxian; depois coloque as cartas restantes no fundo do seu deck. LV1/LV2/LV3 Quando Este Spirit Ataca ou Bloqueia: Este Spirit recebe +3000 BP para cada Brave que você controla."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-036-summon-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "revealTopAndRoute",
+            "player": "self",
+            "count": 3,
+            "matchSelector": {
+              "colors": [
+                "white",
+                "yellow"
+              ],
+              "families": [
+                "Devotee",
+                "Concluser",
+                "Galaxian"
+              ],
+              "nameIncludesNot": "Pomeran"
+            },
+            "matchedDestination": "hand",
+            "otherwiseDestination": "bottomDeck"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-036-destroyed-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "revealTopAndRoute",
+            "player": "self",
+            "count": 3,
+            "matchSelector": {
+              "colors": [
+                "white",
+                "yellow"
+              ],
+              "families": [
+                "Devotee",
+                "Concluser",
+                "Galaxian"
+              ],
+              "nameIncludesNot": "Pomeran"
+            },
+            "matchedDestination": "hand",
+            "otherwiseDestination": "bottomDeck"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-036-attack-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "target": "source",
+            "amountPerMatching": 3000,
+            "countSelector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "brave"
+              ],
+              "includeCombined": true
+            },
+            "duration": "battle"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-036-block-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "modifyBP",
+            "target": "source",
+            "amountPerMatching": 3000,
+            "countSelector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "brave"
+              ],
+              "includeCombined": true
+            },
+            "duration": "battle"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-036.webp"
   },
   {
@@ -19163,7 +21683,108 @@
       "ptBR": "LV1/LV2/LV3 Durante o Attack Step de qualquer jogador: Quando 1 dos seus Spirits Amarelos for destruído, ao mover 1 Core da sua Life para a sua Reserve, deixe 1 desses Spirits destruídos no seu Campo em estado Exhausted. LV2/LV3: Quando 1 dos seus Spirits das famílias Devotee, Astral Soul ou Galaxian for destruído, você pode comprar 1 carta. LV3: Quando 1 dos seus Spirits Amarelos for destruído, você pode colocar 1 Core do Void na sua Reserve."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-037-save-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "wouldBeDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "type": "eventSourceColor",
+            "color": "yellow"
+          }
+        ],
+        "actions": [
+          {
+            "type": "moveLifeToReserve",
+            "player": "self",
+            "count": 1
+          },
+          {
+            "type": "preventEvent"
+          },
+          {
+            "type": "exhaust",
+            "target": "effectSource"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-037-draw-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "any": [
+              {
+                "type": "eventSourceFamily",
+                "family": "Devotee"
+              },
+              {
+                "type": "eventSourceFamily",
+                "family": "Astral Soul"
+              },
+              {
+                "type": "eventSourceFamily",
+                "family": "Galaxian"
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "draw",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": "bsc49-037-core-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceColor",
+            "color": "yellow"
+          }
+        ],
+        "actions": [
+          {
+            "type": "addCoreToReserveFromVoid",
+            "player": "self",
+            "count": 1
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-037.webp"
   },
   {
@@ -19614,7 +22235,147 @@
       "ptBR": "LV1/LV2 Quando Invocado: Destrua 1 Spirit do oponente de custo 4 ou menos. Se ele for destruído, coloque 1 Core do Void sobre este Spirit e 1 Core do Void sobre 1 dos seus Nexuses. LV1/LV2 [Assault: 1] Quando Este Spirit Ataca: Uma vez por turno, ao deixar 1 dos seus Nexuses Exhausted, dê Refresh neste Spirit. LV2 Durante o Attack Step do Oponente: Enquanto você controlar um Spirit Combinado, todos os Spirits do oponente de custo 6 ou menos não podem atacar."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-046-summon-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumCost": 4
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterSelect": [
+              {
+                "type": "addCoreFromVoid",
+                "target": "source",
+                "count": 1
+              },
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "nexus"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "addCoreFromVoid",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-046-assault-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-046-assault",
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "nexus"
+                  ],
+                  "refreshed": true
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "exhaust"
+                },
+                "afterSelect": [
+                  {
+                    "type": "refresh",
+                    "target": "source"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-046-lock-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "cannotAttack",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit"
+              ],
+              "maximumCost": 6
+            },
+            "duration": "whileConditionTrue",
+            "condition": {
+              "type": "fieldCount",
+              "player": "self",
+              "selector": {
+                "cardTypes": [
+                  "spirit"
+                ],
+                "braved": true
+              },
+              "atLeast": 1
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-046.webp"
   },
   {
@@ -19662,7 +22423,142 @@
       "ptBR": "LV1/LV2 Quando Invocado: Destrua 2 Spirits do oponente de custo 3 ou menos, ou 1 Spirit do oponente de custo 6/7. LV1/LV2 Durante o Main Step de qualquer jogador: Quando qualquer jogador usar uma carta de Magic, depois que seu efeito for resolvido, encerre aquele Main Step. LV2 [Assault: 1] Quando Este Spirit Ataca: Uma vez por turno, ao deixar 1 dos seus Nexuses Exhausted, dê Refresh neste Spirit."
     },
     "effects": [],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-047-summon-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "actions": [
+          {
+            "type": "chooseOption",
+            "options": [
+              {
+                "id": "two-low",
+                "actions": [
+                  {
+                    "type": "selectMultipleTargets",
+                    "selector": {
+                      "owner": "opponent",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit"
+                      ],
+                      "maximumCost": 3
+                    },
+                    "maxTargets": 2,
+                    "asManyAsPossible": true,
+                    "allowZero": true,
+                    "onConfirm": {
+                      "type": "destroy"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "one-high",
+                "actions": [
+                  {
+                    "type": "selectTarget",
+                    "selector": {
+                      "owner": "opponent",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit"
+                      ],
+                      "minimumCost": 6,
+                      "maximumCost": 7
+                    },
+                    "allowZero": true,
+                    "onSelect": {
+                      "type": "destroy"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-047-magic-end-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicResolved",
+          "scope": "controllerField",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "main"
+          }
+        ],
+        "actions": [
+          {
+            "type": "endCurrentStep"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-047-assault-auto36",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-047-assault",
+            "actions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "nexus"
+                  ],
+                  "refreshed": true
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "exhaust"
+                },
+                "afterSelect": [
+                  {
+                    "type": "refresh",
+                    "target": "source"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-047.webp"
   },
   {

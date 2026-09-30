@@ -78,6 +78,7 @@ function sourceHasTriggeredEntries(match, input, cardIndex) {
   const physical = input.sourcePhysical || found?.card || null;
   const card = input.sourceCard || (physical ? getDatabaseCard(cardIndex, physical) : null) || (input.sourceCardId ? cardIndex.get(input.sourceCardId) : null);
   if (!card) return false;
+  if (input.event === EffectEvent.WHEN_SUMMONED && Number(match.persistentEffects?.suppressWhenSummonedEndSteps?.[input.sourcePlayerId] || 0) > 0) return false;
   if (physical && getContinuousNumericModifier(match, cardIndex, physical, "effectsDisabled") > 0) return false;
   const context = {
     ...(input.context || {}),
@@ -96,6 +97,7 @@ function sourceHasV2ContinuousEffect(match, input, cardIndex) {
   const physical = input.sourcePhysical || found?.card || null;
   const card = input.sourceCard || (physical ? getDatabaseCard(cardIndex, physical) : null) || (input.sourceCardId ? cardIndex.get(input.sourceCardId) : null);
   if (!card) return false;
+  if (input.event === EffectEvent.WHEN_SUMMONED && Number(match.persistentEffects?.suppressWhenSummonedEndSteps?.[input.sourcePlayerId] || 0) > 0) return false;
   if (physical && getContinuousNumericModifier(match, cardIndex, physical, "effectsDisabled") > 0) return false;
   return getTriggeredEntries(card, "continuous", { dispatchMode: "source" })
     .some(({ entry }) => isEffectSchemaV2(entry));

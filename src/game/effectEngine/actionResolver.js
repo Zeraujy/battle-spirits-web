@@ -1,4 +1,4 @@
-import { findPhysicalCard, getDatabaseCard, getEffectiveBP, getEffectiveFamilies, getEffectiveSymbols, getFieldSymbols } from "../selectors.js";
+import { findPhysicalCard, getCurrentLevel, getDatabaseCard, getEffectiveBP, getEffectiveFamilies, getEffectiveSymbols, getFieldSymbols } from "../selectors.js";
 import { addFieldCard, removeFieldCard, removeHandCard, updateFieldCard } from "../zones.js";
 import { otherPlayerId } from "../utils.js";
 import { calculateReduction, autoBuildPayment } from "../cost.js";
@@ -541,6 +541,22 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
 
   if (!type) return { match, notes: ["Operação sem tipo estruturado."], manualResolutionNeeded: true, executed: false };
 
+  if (type === "suppressWhenSummonedForEndSteps") {
+    const playerId = resolvePlayerId(next, action, context);
+    const count = Math.max(1, Number(action.count ?? action.amount ?? 1));
+    next = {
+      ...next,
+      persistentEffects: {
+        ...(next.persistentEffects || {}),
+        suppressWhenSummonedEndSteps: {
+          ...(next.persistentEffects?.suppressWhenSummonedEndSteps || {}),
+          [playerId]: Math.max(count, Number(next.persistentEffects?.suppressWhenSummonedEndSteps?.[playerId] || 0))
+        }
+      }
+    };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
   if (type === "preventEvent") {
     if (!next.replacementWindow) return { match: next, notes: ["preventEvent requires an active replacement window."], manualResolutionNeeded: true, executed: false };
     next = preventReplacementEvent(next, { sourceEffectId: context.effectId, sourceInstanceId: context.sourceInstanceId });
@@ -639,6 +655,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     return applyToTargets(next, action, cardIndex, context, (working, target) => {
       const current = findPhysicalCard(working, target.physical.instanceId);
       if (!current || !["spirits", "nexuses", "other"].includes(current.zone)) return working;
+      if (type === "removeCore" && getContinuousNumericModifier(working, cardIndex, current.card, "coreRemovalLocked") > 0) return working;
       if (type === "removeCore" && getContinuousNumericModifier(working, cardIndex, current.card, "coreRemovalLockedExceptTransmigration") > 0
           && String(context.cause || action.cause || "").toLowerCase() !== "transmigration") return working;
       if (type === "removeCore" && context.sourcePlayerId && context.sourcePlayerId !== current.playerId

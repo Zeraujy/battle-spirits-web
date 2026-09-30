@@ -1,7 +1,7 @@
 import { findPhysicalCard, getBraveAttachment, getCurrentLevel, getDatabaseCard, getEffectiveBP, getEffectiveCost, getEffectiveSymbols, getFieldSymbols } from "../selectors.js";
 import { otherPlayerId } from "../utils.js";
 import { cardKeywords, collectTargets } from "./targetingEngine.js";
-import { applyContinuousCollectionModifiers } from "./modifierResolver.js";
+import { applyContinuousCollectionModifiers, getContinuousNumericModifier } from "./modifierResolver.js";
 
 export const ConditionType = Object.freeze({
   LIFE: "life",
@@ -98,6 +98,10 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     return false;
   }
   if (type === "eventMagicResolvedCount") return compareNumber(Number(context.magicResolvedCount || 0), condition);
+  if (type === "sourceHasModifier") {
+    const physical = context.sourcePhysical || (context.sourceInstanceId ? findPhysicalCard(match, context.sourceInstanceId)?.card : null);
+    return Boolean(physical && getContinuousNumericModifier(match, cardIndex, physical, String(condition.property || condition.value || "")) > 0);
+  }
   if (type === "reserve") return playerMetric(match, context, condition, (player) => player.reserve || 0);
   if (type === "trashCores") return playerMetric(match, context, condition, (player) => player.trashCores || 0);
   if (type === "fieldCount") {

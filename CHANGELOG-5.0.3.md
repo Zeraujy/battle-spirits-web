@@ -201,3 +201,27 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Main suite passes 149/149, Effect Engine 184/184, Batch 14 dedicated 11/11 and full regression 383/383.
 - Phase 27 remains blocked only by BS13/BSC49 completion and the global `<10%` fallback target.
 - Internal application version remains 5.0.3 while v5.1.0 content migration continues.
+
+## v5.1.0 Content Migration Batch 15
+- Completed BS13 Wave 7 and promoted BS13 to 90/90 `READY_NO_MANUAL`.
+- Added reusable two-Brave host, timed When Summoned suppression, source-modifier conditions, Ultra Awaken/Ice Wall support descriptors and final BS13 automation primitives.
+- Manual fallback reduced to 31.78% (116/365); 10/11 content-set gates now complete.
+
+## v5.1.0 Content Migration Batch 16 — BSC49 Wave 1
+
+- Started the final BSC49 content migration block.
+- Automated 10 additional BSC49 cards, moving the set to 11/117 resolved.
+- Reduced global manual fallback from 31.78% to 29.04%.
+- Increased Phase 24 generated regression coverage from 249 to 259 cards.
+- Fixed the generic Action Resolver `countFromSourceLevel` path by importing `getCurrentLevel`.
+- Preserved the 78-type Core Action Library with no card-specific action additions.
+- Full QA passed; Phase 27 remains gated only by BSC49 completion and the `<10%` manual fallback target.
+
+## v5.1.0 Content Migration Batch 17 — BSC49 Wave 2
+
+- Automated 10 additional BSC49 cards: 003, 005, 006, 007, 010, 011, 014, 016, 017 and 018.
+- BSC49 coverage advanced from 11/117 to 21/117 resolved.
+- Global manual fallback dropped from 29.04% (106/365) to 26.30% (96/365).
+- Phase 24 generated regression scenarios increased from 259 to 269.
+- Reused controller-Trash Immortality observers, reveal routing, Trash/hand Special Summon, dynamic BP targeting and continuous symbol modifiers without adding BSC49-specific Core Actions.
+- Full QA remains green; Phase 27 is blocked only by the remaining BSC49 set gate and the global <10% fallback target.

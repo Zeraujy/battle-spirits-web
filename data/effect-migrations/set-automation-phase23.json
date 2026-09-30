@@ -1,70 +1,29 @@
 {
-  "generatedAt": "2026-09-30T07:14:25.120Z",
+  "generatedAt": "2026-09-30T08:47:42.951Z",
   "targetPercent": 95,
   "totalSets": 11,
-  "completeSets": 9,
+  "completeSets": 10,
   "sets": [
     {
       "set": "BS13",
       "total": 90,
-      "automated": 80,
+      "automated": 90,
       "noEffect": 6,
-      "unresolved": 10,
-      "automationPercent": 88.9,
+      "unresolved": 0,
+      "automationPercent": 100,
       "unsupportedTriggers": [],
       "unsupportedConditions": [],
       "unsupportedActions": [],
-      "complete": false,
-      "unresolvedCards": [
-        {
-          "cardId": "BS13-002",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-005",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-028",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-038",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-048",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-049",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-067",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-075",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-081",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BS13-X01",
-          "status": "UNSTRUCTURED_TEXT"
-        }
-      ]
+      "complete": true,
+      "unresolvedCards": []
     },
     {
       "set": "BSC49",
       "total": 117,
-      "automated": 1,
+      "automated": 21,
       "noEffect": 1,
-      "unresolved": 116,
-      "automationPercent": 0.9,
+      "unresolved": 96,
+      "automationPercent": 17.9,
       "unsupportedTriggers": [
         "afterCost4PlusMagicResolves",
         "afterDivineTrust",
@@ -111,23 +70,7 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-003",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-004",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-005",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-006",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-007",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -139,14 +82,6 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-010",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-011",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-012",
           "status": "UNSTRUCTURED_TEXT"
         },
@@ -155,31 +90,7 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-014",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-015",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-016",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-017",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-018",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-019",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-020",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -187,19 +98,7 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-022",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-023",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-024",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-025",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -231,23 +130,11 @@
           "status": "UNSTRUCTURED_TEXT"
         },
         {
-          "cardId": "BSC49-033",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
           "cardId": "BSC49-034",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
           "cardId": "BSC49-035",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-036",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-037",
           "status": "UNSTRUCTURED_TEXT"
         },
         {
@@ -280,14 +167,6 @@
         },
         {
           "cardId": "BSC49-045",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-046",
-          "status": "UNSTRUCTURED_TEXT"
-        },
-        {
-          "cardId": "BSC49-047",
           "status": "UNSTRUCTURED_TEXT"
         },
         {

@@ -2,12 +2,12 @@
 
 Target: >= 95% fully automated/no-effect cards per set, with no unsupported trigger/condition/action gaps.
 
-Complete sets: 9/11
+Complete sets: 10/11
 
 | Set | Automated/No-effect | Unresolved | Coverage | Gate |
 |---|---:|---:|---:|---|
-| BS13 | 80/90 | 10 | 88.9% | BLOCKED |
-| BSC49 | 1/117 | 116 | 0.9% | BLOCKED |
+| BS13 | 90/90 | 0 | 100% | PASS |
+| BSC49 | 21/117 | 96 | 17.9% | BLOCKED |
 | SD10 | 18/18 | 0 | 100% | PASS |
 | SD11 | 18/18 | 0 | 100% | PASS |
 | SD13 | 18/18 | 0 | 100% | PASS |
@@ -19,5 +19,4 @@ Complete sets: 9/11
 | SD28 | 17/17 | 0 | 100% | PASS |
 
 ## Release blockers
-- **BS13**: 10 unresolved card(s); 88.9% automated/no-effect.
-- **BSC49**: 116 unresolved card(s); 0.9% automated/no-effect.
+- **BSC49**: 96 unresolved card(s); 17.9% automated/no-effect.

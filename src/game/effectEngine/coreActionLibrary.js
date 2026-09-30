@@ -85,7 +85,8 @@ const ACTION_ALIASES = Object.freeze({
   specialsummonbravecombinedfromhand: "specialSummonBraveCombinedFromHand",
   specialsummoneventsourcefromtrash: "specialSummonEventSourceFromTrash",
   combinebravefromfield: "combineBraveFromField",
-  returneventsourcetohand: "returnEventSourceToHand"
+  returneventsourcetohand: "returnEventSourceToHand",
+  suppresswhensummonedforendsteps: "suppressWhenSummonedForEndSteps"
 });
 
 export const CoreActionType = Object.freeze({
@@ -200,7 +201,8 @@ const SUPPORTED_ACTION_TYPES = new Set([
   "specialSummonBraveCombinedFromHand",
   "specialSummonEventSourceFromTrash",
   "combineBraveFromField",
-  "returnEventSourceToHand"
+  "returnEventSourceToHand",
+  "suppressWhenSummonedForEndSteps"
 ]);
 
 export function canonicalActionType(type) {

@@ -308,6 +308,9 @@ export function resolveActionTargets(match, action = {}, cardIndex, context = {}
 
   if (selectionType === "selectMultipleTargets") {
     let dynamicMaximum = action.maxTargets;
+    if (action.countFromSourceBraves === true && context.sourceInstanceId) {
+      dynamicMaximum = Object.values(match.players || {}).reduce((total, player) => total + (player.field?.other || []).filter((physical) => physical.combinedWith === context.sourceInstanceId).length, 0);
+    }
     if (action.targetCountFrom && typeof action.targetCountFrom === "object") {
       const spec = action.targetCountFrom;
       let total = 0;

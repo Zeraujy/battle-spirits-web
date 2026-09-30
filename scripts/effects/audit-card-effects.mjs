@@ -92,7 +92,8 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "sourceNotBattling",
   "battleParticipantIsCombinedHostOfSource",
   "deckSize",
-  "sourceHasBraveAttachment"
+  "sourceHasBraveAttachment",
+  "sourceHasModifier"
 ]);
 
 const KNOWN_CONDITION_KEYS = new Set([
@@ -107,7 +108,7 @@ const KNOWN_CONDITION_KEYS = new Set([
   "minimumCost", "maximumCost", "minCost", "maxCost",
   "player", "owner", "operator", "selector", "zone", "directAttack",
   "attackerPlayer", "blocked", "cardType", "cause", "keyword", "keywords", "role", "relation",
-  "values", "destinations", "destination", "key", "effectType"
+  "values", "destinations", "destination", "key", "effectType", "property"
 ]);
 
 const NESTED_ACTION_KEYS = [
