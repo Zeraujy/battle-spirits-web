@@ -29,31 +29,25 @@ import MatchResultScreen from "../components/match/MatchResultScreen.jsx";
 import { ReserveCoreDisplay, CoreTrashDisplay } from "../components/game/arena/CoreSystemDisplay.jsx";
 import Modal from "../components/common/Modal.jsx";
 import { cardIndex } from "../services/cardRepository.js";
-import { applyGameAction } from "../game/reducer.js";
-import { chooseAIDecision } from "../game/ai.js";
-import {
-  findPhysicalCard,
-  getDatabaseCard,
-  getCurrentLevel,
-  getEffectiveBP,
-  getEffectiveSymbols
-} from "../game/selectors.js";
-import {
-  getCardName,
-  resolveCardImage
-} from "../game/cardAdapter.js";
-import { otherPlayerId } from "../game/utils.js";
-import { legalBlockers } from "../game/battle.js";
-import { getBurstActivationEvent } from "../game/burstRules.js";
 import {
   calculateReduction,
-  getSpendableCoreSources
-} from "../game/cost.js";
-import {
+  dispatchArenaIntent,
+  findPhysicalCard,
   getBraveSeparationPreview,
+  getBurstActivationEvent,
+  getCardName,
   getCombinedStats,
-  getLegalBraveHosts
-} from "../game/brave.js";
+  getCurrentLevel,
+  getDatabaseCard,
+  getEffectiveBP,
+  getEffectiveSymbols,
+  getLegalBraveHosts,
+  getSpendableCoreSources,
+  legalBlockers,
+  planArenaCpuDecision,
+  resolveArenaPerspective,
+  resolveCardImage
+} from "../arena/controller/index.js";
 import { useLanguage } from "../i18n.jsx";
 import { identifySavedDeck, recordMatchResult } from "../services/matchHistoryService.js";
 import { onlineErrorMessage } from "../online/errors/onlineErrorMessages.js";
@@ -875,101 +869,28 @@ export default function Simulator({
      PLAYER / ACTOR
   ======================================================= */
 
-  const actorId =
-    useMemo(() => {
-      if (
-        match.pendingEffectDecision
-          ?.playerId
-      ) {
-        return match
-          .pendingEffectDecision
-          .playerId;
-      }
-
-      if (
-        match.burstOpportunity
-          ?.playerId
-      ) {
-        return match
-          .burstOpportunity
-          .playerId;
-      }
-
-      if (
-        match.battle
-          ?.stage ===
-        "ultimateTrigger" &&
-        match.battle
-          ?.ultimateTrigger
-      ) {
-        const trigger =
-          match.battle
-            .ultimateTrigger;
-
-        if (
-          trigger.status ===
-            "counterWindow" &&
-          trigger.counterPlayerId
-        ) {
-          return trigger
-            .counterPlayerId;
-        }
-
-        if (
-          trigger.controllerPlayerId
-        ) {
-          return trigger
-            .controllerPlayerId;
-        }
-      }
-
-      if (
-        match.battle
-          ?.flash
-          ?.priorityPlayerId
-      ) {
-        return match.battle
-          .flash
-          .priorityPlayerId;
-      }
-
-      if (
-        match.battle
-          ?.stage ===
-        "block"
-      ) {
-        return match.battle
-          .defenderPlayerId;
-      }
-
-      return match
-        .activePlayerId;
-    }, [match]);
-
-
-  const canControlActor =
-    online
-      ? viewerPlayerId ===
-          actorId
-      : aiMode
-        ? actorId ===
-            humanPlayerId
-        : true;
-
-
-  const bottomId =
-    online
-      ? viewerPlayerId
-      : aiMode
-        ? humanPlayerId
-        : actorId;
-
-
-  const topId =
-    otherPlayerId(
+  const {
+    actorId,
+    canControlActor,
+    bottomId,
+    topId
+  } = useMemo(
+    () =>
+      resolveArenaPerspective({
+        match,
+        online,
+        viewerPlayerId,
+        aiMode,
+        humanPlayerId
+      }),
+    [
       match,
-      bottomId
-    );
+      online,
+      viewerPlayerId,
+      aiMode,
+      humanPlayerId
+    ]
+  );
 
 
   const bottom =
@@ -1162,74 +1083,67 @@ export default function Simulator({
     setError("");
     setNotice("");
 
-    if (online) {
-      if (
-        viewerPlayerId !==
-        asPlayerId
-      ) {
-        return setError(
-          language === "en"
-            ? "Wait for the other player."
-            : "Aguarde a ação do outro jogador."
+    const handleOnlineResult = (result) => {
+      if (!result?.ok) {
+        setError(
+          onlineErrorMessage(result, {
+            language,
+            fallback: language === "en"
+              ? "This action is not available."
+              : "Esta ação não está disponível."
+          })
         );
       }
 
-      onlineClient.action(
-        {
-          action
-        },
-        (
-          result
-        ) => {
-          if (
-            !result?.ok
-          ) {
-            setError(
-              onlineErrorMessage(result, {
-                language,
-                fallback: language === "en"
-                  ? "This action is not available."
-                  : "Esta ação não está disponível."
-              })
-            );
-          }
+      if (
+        result?.manualResolutionNeeded &&
+        !result?.pendingEffectDecision &&
+        !result?.match?.pendingEffectDecision
+      ) {
+        setNotice(
+          language === "en"
+            ? "This effect still needs manual resolution."
+            : "O efeito ainda precisa de resolução manual conforme o texto."
+        );
+      }
+    };
 
-          if (
-            result?.manualResolutionNeeded &&
-            !result?.pendingEffectDecision &&
-            !result?.match?.pendingEffectDecision
-          ) {
-            setNotice(
+    const result = dispatchArenaIntent({
+      online,
+      onlineClient,
+      viewerPlayerId,
+      match,
+      action,
+      asPlayerId,
+      cardIndex,
+      onOnlineResult: handleOnlineResult
+    });
+
+    if (result.transport === "blocked") {
+      return setError(
+        result.reason === "ONLINE_CLIENT_UNAVAILABLE"
+          ? (
               language === "en"
-                ? "This effect still needs manual resolution."
-                : "O efeito ainda precisa de resolução manual conforme o texto."
-            );
-          }
-        }
+                ? "Online connection is not available."
+                : "A conexão online não está disponível."
+            )
+          : (
+              language === "en"
+                ? "Wait for the other player."
+                : "Aguarde a ação do outro jogador."
+            )
       );
+    }
 
+    if (result.transport === "online") {
       return;
     }
 
-    const result =
-      applyGameAction(
-        match,
-        action,
-        asPlayerId,
-        cardIndex
-      );
-
-    if (
-      !result.ok
-    ) {
-      return setError(
-        result.error
-      );
+    if (!result.ok) {
+      return setError(result.error);
     }
 
-    setMatch(
-      result.match
-    );
+    setMatch(result.match);
 
     if (
       result.manualResolutionNeeded &&
@@ -1270,27 +1184,19 @@ export default function Simulator({
       guard.recentActionKeys = [];
     }
 
-    const difficulty =
-      match.ai?.difficulty ||
-      "normal";
-
-    const decision =
-      chooseAIDecision(
-        match,
-        aiPlayerId,
-        cardIndex,
-        {
-          difficulty,
-          archetypeProfile: match.ai?.archetypeProfile,
-          recentActionKeys:
-            guard.recentActionKeys,
-          turnActionCount:
-            guard.actions,
-          maxTurnActions: 70
-        }
-      );
-
-    const action = decision.action;
+    const {
+      difficulty,
+      decision,
+      action,
+      delay
+    } = planArenaCpuDecision({
+      match,
+      aiPlayerId,
+      cardIndex,
+      recentActionKeys: guard.recentActionKeys,
+      turnActionCount: guard.actions,
+      maxTurnActions: 70
+    });
 
     if (match.ai?.debugEnabled) {
       setAiDebugDecision({
@@ -1313,13 +1219,6 @@ export default function Simulator({
       );
       return undefined;
     }
-
-    const delay =
-      difficulty === "hard"
-        ? 360
-        : difficulty === "easy"
-          ? 650
-          : 500;
 
     const timer =
       window.setTimeout(
@@ -5704,7 +5603,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v5.1.0 • Arena 2D
+            Eternal v5.2.0 • Arena 2D
           </span>
 
           <strong>

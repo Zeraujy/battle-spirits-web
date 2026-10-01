@@ -4,6 +4,64 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "5.2.0",
+    date: { pt: "01/10/2026", en: "10/01/2026" },
+    title: { pt: "v5.2.0 — Fundação da Nova Arena", en: "v5.2.0 — New Arena Foundation" },
+    summary: {
+      pt: "A nova geração da Arena começou pela arquitetura: fronteiras entre interface, motor, servidor e conteúdo foram auditadas antes do redesign visual.",
+      en: "The next-generation Arena starts with architecture: boundaries between UI, engine, server and content were audited before the visual redesign."
+    },
+    sections: [{
+      title: { pt: "Phase 0 — Architecture & Repository Boundary Audit", en: "Phase 0 — Architecture & Repository Boundary Audit" },
+      items: {
+        pt: [
+          "A v5.1.0 FINAL foi congelada como baseline funcional da nova etapa.",
+          "Foi adicionado um audit automatizado para impedir dependências Game Engine → UI e Server → UI.",
+          "A separação futura em kaihou-web, kaihou-server e kaihou-content foi mapeada sem dividir os repositórios prematuramente.",
+          "O redesign inspirado na eficiência espacial do Talishar continuará usando zonas, regras e identidade próprias do Battle Spirits."
+        ],
+        en: [
+          "v5.1.0 FINAL is frozen as the functional baseline for the new cycle.",
+          "An automated boundary audit now prevents Game Engine → UI and Server → UI dependencies.",
+          "A future kaihou-web, kaihou-server and kaihou-content split is mapped without prematurely splitting repositories.",
+          "The redesign inspired by Talishar's spatial efficiency will retain Battle Spirits-specific zones, rules and identity."
+        ]
+      }
+    }, {
+      title: { pt: "Phase 1 — Shared Contract Foundation", en: "Phase 1 — Shared Contract Foundation" },
+      items: {
+        pt: [
+          "Foi criada uma camada compartilhada e independente para os dados que a nova Arena poderá consumir.",
+          "Cards, jogadores, zonas, turno, prioridade e ações disponíveis agora possuem formatos de apresentação explícitos e validados.",
+          "A interface poderá exibir e enviar ações autorizadas sem decidir por conta própria se uma jogada é legal.",
+          "Nenhuma regra, carta, protocolo online, layout da Arena ou dado de jogador foi alterado nesta fase."
+        ],
+        en: [
+          "A shared implementation-neutral layer now defines the data the new Arena will consume.",
+          "Cards, players, zones, turn timing, priority and available actions now have explicit validated presentation shapes.",
+          "The UI will be able to render and dispatch authorized actions without deciding gameplay legality itself.",
+          "No rules, cards, online protocol, Arena layout or player data were changed in this phase."
+        ]
+      }
+    }, {
+      title: { pt: "Phase 2 — Arena Controller Boundary", en: "Phase 2 — Arena Controller Boundary" },
+      items: {
+        pt: [
+          "A página Simulator deixou de importar diretamente reducer, AI, selectors, battle, Burst, custos e regras de Brave do Game Engine.",
+          "Uma camada Arena Controller agora centraliza a ponte entre a apresentação e o motor local/servidor, preservando Local, Eternal CPU e Online.",
+          "A escolha do ator/prioridade e da perspectiva top/bottom saiu do componente de apresentação e passou para o controller.",
+          "Nenhuma regra, protocolo online, layout ou conteúdo de carta foi alterado; a Phase 3 poderá construir o ArenaViewModel v2 sobre esta fronteira."
+        ],
+        en: [
+          "Simulator no longer imports reducer, AI, selectors, battle, Burst, cost or Brave rule helpers directly from the Game Engine.",
+          "An Arena Controller layer now centralizes the bridge between presentation and local/server authority while preserving Local, Eternal CPU and Online modes.",
+          "Actor/priority and top/bottom perspective resolution moved out of the presentation component and into the controller.",
+          "No rules, online protocol, layout or card content changed; Phase 3 can now build ArenaViewModel v2 on this boundary."
+        ]
+      }
+    }]
+  },
+  {
     version: "5.1.0",
     date: { pt: "01/10/2026", en: "10/01/2026" },
     title: { pt: "v5.1.0 — Automação de Cartas Concluída", en: "v5.1.0 — Card Automation Complete" },

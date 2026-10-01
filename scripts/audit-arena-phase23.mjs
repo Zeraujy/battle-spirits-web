@@ -5,6 +5,7 @@ const root = process.cwd();
 const arenaDir = path.join(root, "src/components/game/arena");
 const simulatorPath = path.join(root, "src/pages/Simulator.jsx");
 const docPath = path.join(root, "docs/arena/PHASE-2-3-BATTLEFIELD-HUD.md");
+const controllerPath = path.join(root, "src/arena/controller/arenaController.js");
 
 const requiredFiles = [
   "Battlefield.jsx",
@@ -63,8 +64,19 @@ if (fs.existsSync(simulatorPath)) {
     if (!simulator.includes(token)) failures.push(`Simulator must render ${token.replace("<", "")}.`);
   }
 
-  if (!simulator.includes("applyGameAction(")) failures.push("Local gameplay dispatch boundary unexpectedly changed or disappeared.");
-  if (!simulator.includes("onlineClient.action(")) failures.push("Online gameplay dispatch boundary unexpectedly changed or disappeared.");
+  const usesLegacyDirectDispatch =
+    simulator.includes("applyGameAction(") &&
+    simulator.includes("onlineClient.action(");
+
+  const usesPhase2Controller =
+    simulator.includes("dispatchArenaIntent(") &&
+    fs.existsSync(controllerPath) &&
+    fs.readFileSync(controllerPath, "utf8").includes("applyGameActionEngine(") &&
+    fs.readFileSync(controllerPath, "utf8").includes("onlineClient.action(");
+
+  if (!usesLegacyDirectDispatch && !usesPhase2Controller) {
+    failures.push("Local/online gameplay dispatch boundary unexpectedly changed or disappeared.");
+  }
   if (!simulator.includes('data-card-drop-zone="table"')) failures.push("Battlefield must preserve the table drop contract.");
   if (!simulator.includes("dataLifeTarget={topId}")) failures.push("OpponentHUD must preserve direct Life targeting.");
   if (!simulator.includes("dataLifeTarget={bottomId}")) failures.push("PlayerHUD must preserve direct Life targeting.");

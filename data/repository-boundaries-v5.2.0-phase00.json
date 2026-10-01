@@ -1,0 +1,158 @@
+{
+  "audit": "v5.2.0-phase00-repository-boundaries",
+  "generatedAt": "2026-10-01T13:05:22.112Z",
+  "status": "PASS",
+  "rules": [
+    "game-engine must not import web-ui",
+    "server must not import web-ui",
+    "existing web-ui -> game-engine imports are migration debt, not a Phase 0 failure"
+  ],
+  "counts": {
+    "other-src -> services": 3,
+    "web-ui -> game-engine": 24,
+    "web-ui -> web-ui": 66,
+    "web-ui -> other-src": 15,
+    "web-ui -> content-src": 4,
+    "web-ui -> services": 44,
+    "content-src -> content-src": 2,
+    "game-engine -> game-engine": 415,
+    "game-engine -> interactions": 1,
+    "other-src -> other-src": 2,
+    "other-src -> web-ui": 1,
+    "online-client -> services": 2,
+    "online-client -> online-client": 14,
+    "web-ui -> config": 4,
+    "web-ui -> online-client": 8,
+    "web-ui -> interactions": 2,
+    "services -> services": 23,
+    "services -> game-engine": 4,
+    "services -> content-src": 3,
+    "server -> server": 41,
+    "server -> online-client": 23,
+    "server -> game-engine": 4
+  },
+  "forbidden": [],
+  "migrationDebt": {
+    "webUiToGameEngine": 24,
+    "serverToGameEngine": 4,
+    "webUiToServices": 44
+  },
+  "examples": {
+    "webUiToGameEngine": [
+      {
+        "source": "src/components/cards/CardDetailsModal.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../../game/cardAdapter.js",
+        "target": "src/game/cardAdapter.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "src/components/cards/CardTile.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../../game/cardAdapter.js",
+        "target": "src/game/cardAdapter.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "src/components/cards/CardTile.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../../game/selectors.js",
+        "target": "src/game/selectors.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "src/components/economy/StarterOnboarding.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../../game/cardAdapter.js",
+        "target": "src/game/cardAdapter.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "src/components/match/MatchSetupScreen.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../../game/cardAdapter.js",
+        "target": "src/game/cardAdapter.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "src/components/match/MatchSetupScreen.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../../game/state.js",
+        "target": "src/game/state.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "src/pages/AiSetup.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../game/state.js",
+        "target": "src/game/state.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "src/pages/AiSetup.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../game/aiArchetypes.js",
+        "target": "src/game/aiArchetypes.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "src/pages/DeckBuilder.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../game/state.js",
+        "target": "src/game/state.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "src/pages/DeckBuilder.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../game/cardAdapter.js",
+        "target": "src/game/cardAdapter.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "src/pages/DeckBuilder.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../game/eternalDeckRules.js",
+        "target": "src/game/eternalDeckRules.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "src/pages/Decks.jsx",
+        "sourceLayer": "web-ui",
+        "specifier": "../game/cardAdapter.js",
+        "target": "src/game/cardAdapter.js",
+        "targetLayer": "game-engine"
+      }
+    ],
+    "serverToGameEngine": [
+      {
+        "source": "server/index.mjs",
+        "sourceLayer": "server",
+        "specifier": "../src/game/cardAdapter.js",
+        "target": "src/game/cardAdapter.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "server/index.mjs",
+        "sourceLayer": "server",
+        "specifier": "../src/game/state.js",
+        "target": "src/game/state.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "server/index.mjs",
+        "sourceLayer": "server",
+        "specifier": "../src/game/reducer.js",
+        "target": "src/game/reducer.js",
+        "targetLayer": "game-engine"
+      },
+      {
+        "source": "server/matches/deckLock.js",
+        "sourceLayer": "server",
+        "specifier": "../../src/game/state.js",
+        "target": "src/game/state.js",
+        "targetLayer": "game-engine"
+      }
+    ]
+  }
+}
