@@ -33,9 +33,10 @@ The release is divided into three blocks so architecture risk and visual risk ar
 - Derive visual-only flags centrally.
 - Add focused tests for the ViewModel contract.
 
-### Phase 4 — Internal Repository Shape
+### Phase 4 — Internal Repository Shape — COMPLETE
 
 - Introduce clean internal domains equivalent to future `web`, `server`, `content` and `shared` repositories without physically splitting Git yet.
+- Add stable Arena, Shared and Content public facades.
 - Add import-boundary regression checks.
 
 ### Phase 5 — Architecture Foundation QA

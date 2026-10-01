@@ -75,6 +75,22 @@ const PATCHES = [
           "The current layout is preserved; this phase prepares the internal domain reorganization and upcoming spatial prototype."
         ]
       }
+    }, {
+      title: { pt: "Phase 4 — Internal Repository Shape", en: "Phase 4 — Internal Repository Shape" },
+      items: {
+        pt: [
+          "O monorepo agora possui ownership explícito para os domínios Web, Server, Content e Shared, preparando uma futura separação física sem realizá-la agora.",
+          "Arena, contratos compartilhados e conteúdo estruturado ganharam entry points públicos estáveis para reduzir acoplamento a caminhos internos.",
+          "Shop, sagas e receitas de decks passaram a ser consumidos pela interface através do facade de Content, sem mover os assets públicos nem alterar o deploy.",
+          "Novos audits impedem dependências Shared → implementação, Server → Web, Web → server autoritativo e bypass dos novos facades."
+        ],
+        en: [
+          "The monorepo now has explicit ownership for Web, Server, Content and Shared domains, preparing a future physical split without performing it yet.",
+          "Arena, shared contracts and structured content now expose stable public entry points to reduce coupling to internal paths.",
+          "Shop, saga and deck recipe consumers now use the Content facade without moving public assets or changing deployment behavior.",
+          "New audits prevent Shared → implementation, Server → Web, Web → authoritative server and facade-bypass dependencies."
+        ]
+      }
     }]
   },
   {

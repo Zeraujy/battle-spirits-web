@@ -30,6 +30,7 @@ import { ReserveCoreDisplay, CoreTrashDisplay } from "../components/game/arena/C
 import Modal from "../components/common/Modal.jsx";
 import { cardIndex } from "../services/cardRepository.js";
 import {
+  buildArenaViewModel,
   calculateReduction,
   dispatchArenaIntent,
   findPhysicalCard,
@@ -47,8 +48,8 @@ import {
   planArenaCpuDecision,
   resolveArenaPerspective,
   resolveCardImage
-} from "../arena/controller/index.js";
-import { buildArenaViewModel } from "../arena/viewModel/index.js";
+} from "../arena/index.js";
+
 import { useLanguage } from "../i18n.jsx";
 import { identifySavedDeck, recordMatchResult } from "../services/matchHistoryService.js";
 import { onlineErrorMessage } from "../online/errors/onlineErrorMessages.js";

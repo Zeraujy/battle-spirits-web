@@ -29,7 +29,7 @@ import {
   PREBUILT_DECKS,
   buildPrebuiltDeck,
   ownsPrebuiltDeckRecipe
-} from "../data/prebuiltDecks.js";
+} from "../content/index.js";
 
 import {
   useLanguage

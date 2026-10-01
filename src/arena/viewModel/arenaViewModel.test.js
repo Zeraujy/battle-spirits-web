@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { ArenaCardVisualState, ArenaZone, validateArenaPresentationContract } from "../../shared/contracts/arena/index.js";
+import { ArenaCardVisualState, ArenaZone, validateArenaPresentationContract } from "../../shared/index.js";
 import { buildArenaViewModel, getArenaCard, getArenaZone } from "./arenaViewModel.js";
 
 function physical(cardId, instanceId, extra = {}) {

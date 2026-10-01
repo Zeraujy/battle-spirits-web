@@ -43,8 +43,19 @@ if (!errors.length) {
     errors.push(`Simulator.jsx still imports Game Engine directly: ${directSimulatorGameImports.join(", ")}`);
   }
 
-  if (!simulatorImports.some((item) => item === "../arena/controller/index.js")) {
+  const consumesControllerBoundary = simulatorImports.some((item) =>
+    item === "../arena/controller/index.js" || item === "../arena/index.js"
+  );
+  if (!consumesControllerBoundary) {
     errors.push("Simulator.jsx does not consume the Arena controller boundary.");
+  }
+
+  if (simulatorImports.some((item) => item === "../arena/index.js")) {
+    const arenaIndexFile = path.join(ROOT, "src/arena/index.js");
+    const arenaIndexText = fs.existsSync(arenaIndexFile) ? read(arenaIndexFile) : "";
+    if (!arenaIndexText.includes('./controller/index.js')) {
+      errors.push("Arena public facade does not re-export the Phase 2 controller boundary.");
+    }
   }
 
   if (controllerImports.some((item) => item === "react" || item.startsWith("react/"))) {

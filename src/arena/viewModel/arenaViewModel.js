@@ -9,7 +9,7 @@ import {
   createArenaPresentationContract,
   createArenaTimingContract,
   createArenaZoneContract
-} from "../../shared/contracts/arena/index.js";
+} from "../../shared/index.js";
 import { getLegalActions } from "../../game/legalActions.js";
 import {
   getCurrentLevel,

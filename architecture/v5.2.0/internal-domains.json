@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "release": "5.2.0",
+  "phase": 4,
+  "domains": {
+    "web": {
+      "futureRepository": "kaihou-web",
+      "roots": [
+        "src/pages",
+        "src/components",
+        "src/styles",
+        "src/arena",
+        "src/interactions",
+        "src/config",
+        "src/services",
+        "src/App.jsx",
+        "src/main.jsx",
+        "src/i18n.jsx",
+        "src/online/socketClient.js",
+        "src/online/connection",
+        "src/online/errors",
+        "src/online/publicProfile.js"
+      ],
+      "publicEntryPoints": [
+        "src/arena/index.js"
+      ]
+    },
+    "server": {
+      "futureRepository": "kaihou-server",
+      "roots": [
+        "server",
+        "src/game"
+      ],
+      "notes": "src/game remains in-process for Local/CPU mode during v5.2.0 but is owned by the future authoritative/server domain."
+    },
+    "content": {
+      "futureRepository": "kaihou-content",
+      "roots": [
+        "src/data",
+        "public/cards-database",
+        "public/assets/shop-items"
+      ],
+      "publicEntryPoints": [
+        "src/content/index.js"
+      ],
+      "notes": "Phase 4 introduces a source facade before any physical content move."
+    },
+    "shared": {
+      "futureRepository": "shared package / generated contract artifact",
+      "roots": [
+        "src/shared",
+        "src/online/domain",
+        "src/online/customMatchSettings.js",
+        "src/online/sync/stateSync.js"
+      ],
+      "publicEntryPoints": [
+        "src/shared/index.js"
+      ],
+      "notes": "Implementation-neutral contracts plus pure online protocol/domain primitives shared by browser and authoritative server."
+    }
+  },
+  "allowedDirectionSummary": [
+    "web -> shared",
+    "web -> content public facade",
+    "web arena adapter -> server-owned game runtime (transitional local-mode bridge)",
+    "server -> shared",
+    "server -> content where rule data is required",
+    "content -> shared only",
+    "shared -> no implementation domain"
+  ]
+}
