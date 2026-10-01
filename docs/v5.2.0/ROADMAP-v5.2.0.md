@@ -39,7 +39,7 @@ The release is divided into three blocks so architecture risk and visual risk ar
 - Add stable Arena, Shared and Content public facades.
 - Add import-boundary regression checks.
 
-### Phase 5 — Architecture Foundation QA
+### Phase 5 — Architecture Foundation QA — COMPLETE
 
 - Full v5.1.0 gameplay regression.
 - Online/authority regression.
@@ -48,12 +48,12 @@ The release is divided into three blocks so architecture risk and visual risk ar
 
 ## Block B — Arena Structural Redesign
 
-### Phase 6 — Spatial Prototype
+### Phase 6 — Spatial Prototype — COMPLETE
 
 - Implement a low-polish Talishar-inspired spatial prototype using Battle Spirits zones.
 - Validate 1366×768, 1920×1080 and ultrawide layouts first.
 
-### Phase 7 — Full-Viewport ArenaShell v2
+### Phase 7 — Full-Viewport ArenaShell v2 — COMPLETE
 
 - Maximize battlefield area.
 - Remove unnecessary chrome and layout waste.

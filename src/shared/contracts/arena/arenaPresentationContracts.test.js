@@ -40,6 +40,12 @@ test("card presentation contract strips rule-engine behavior and normalizes UI f
     combinedWith: null,
     combinedHostId: null,
     visualState: "attackable",
+    name: null,
+    image: null,
+    colors: [],
+    symbols: [],
+    cost: null,
+    reduction: null,
     flags: {}
   });
   assert.equal("reducerHelper" in card, false);

@@ -1,0 +1,224 @@
+/* =========================================================
+   KAIHOU! v5.2.0 — Phase 6: Spatial Prototype
+
+   Low-polish structural pass inspired by Talishar's viewport discipline,
+   translated to Battle Spirits. This file intentionally focuses on geometry,
+   hierarchy and viewport usage. Final visual polish belongs to Block C.
+========================================================= */
+
+.arena-shell[data-arena-spatial-prototype="phase06"] {
+  --v520-utility-rail: clamp(224px, 15vw, 272px);
+  --v520-arena-gap: 6px;
+  --v520-hand-height: clamp(104px, 14vh, 136px);
+  --v520-opponent-hand-height: clamp(44px, 7vh, 64px);
+  --v520-hud-height: 38px;
+  --v520-timing-band: 44px;
+  --v520-inspector-width: clamp(228px, 17vw, 292px);
+  overflow: hidden;
+}
+
+/* Compact global chrome: the play surface receives the vertical budget. */
+.arena-shell[data-arena-spatial-prototype="phase06"] .sim-topbar {
+  height: 52px !important;
+  min-height: 52px !important;
+  padding-block: 4px !important;
+}
+
+.arena-shell[data-arena-spatial-prototype="phase06"] .sim-topbar > img {
+  width: 108px;
+  max-height: 36px;
+}
+
+/*
+ * Desktop spatial model:
+ *   [ battlefield ] [ persistent utility rail ]
+ *
+ * The selected-card inspector becomes a floating overlay. It no longer steals
+ * permanent width from the battlefield, matching the cards-first philosophy.
+ */
+.arena-shell[data-arena-spatial-prototype="phase06"] .sim-layout,
+.arena-shell[data-arena-spatial-prototype="phase06"] .sim-layout.inspector-open.control-open,
+.arena-shell[data-arena-spatial-prototype="phase06"] .sim-layout.inspector-closed.control-open {
+  position: relative;
+  width: 100%;
+  height: 100% !important;
+  min-height: 0;
+  grid-template-columns: minmax(0, 1fr) var(--v520-utility-rail) !important;
+  gap: var(--v520-arena-gap) !important;
+  padding: var(--v520-arena-gap) !important;
+}
+
+.arena-shell[data-arena-spatial-prototype="phase06"] .sim-layout.inspector-open.control-closed,
+.arena-shell[data-arena-spatial-prototype="phase06"] .sim-layout.inspector-closed.control-closed {
+  grid-template-columns: minmax(0, 1fr) 0 !important;
+}
+
+.arena-shell[data-arena-spatial-prototype="phase06"] .arena-battlefield {
+  grid-column: 1;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px !important;
+}
+
+.arena-shell[data-arena-spatial-prototype="phase06"] .turn-panel.arena-side-dock {
+  grid-column: 2;
+  min-width: 0;
+  width: 100%;
+  border-radius: 10px !important;
+}
+
+.arena-shell[data-arena-spatial-prototype="phase06"] .turn-panel.arena-side-dock.dock-closed {
+  width: 0;
+}
+
+/* Floating inspector: presentation only, never affects legal actions. */
+.arena-shell[data-arena-spatial-prototype="phase06"] .context-panel.arena-inspector-overlay {
+  position: absolute;
+  z-index: 42;
+  top: var(--v520-arena-gap);
+  left: var(--v520-arena-gap);
+  bottom: var(--v520-arena-gap);
+  width: var(--v520-inspector-width);
+  max-width: min(34vw, 320px);
+  margin: 0;
+  border-radius: 10px !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .46) !important;
+}
+
+.arena-shell[data-arena-spatial-prototype="phase06"] .context-panel.arena-inspector-overlay.dock-closed {
+  opacity: 0;
+  transform: translateX(calc(-100% - 18px));
+  pointer-events: none;
+}
+
+/* Battlefield becomes the dominant surface. No individual zone boxes are added. */
+.arena-shell[data-arena-spatial-prototype="phase06"] .table-area {
+  grid-template-rows:
+    var(--v520-hud-height)
+    var(--v520-opponent-hand-height)
+    minmax(128px, 1fr)
+    var(--v520-timing-band)
+    minmax(128px, 1fr)
+    var(--v520-hand-height)
+    var(--v520-hud-height) !important;
+  gap: 2px !important;
+  padding: 4px !important;
+  border-color: rgba(255, 255, 255, .10) !important;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, .16), transparent 16%, transparent 84%, rgba(0, 0, 0, .20)),
+    url("/images/arena/wallpaper_arena_default.png") center / cover no-repeat !important;
+  box-shadow: inset 0 0 72px rgba(0, 0, 0, .36) !important;
+}
+
+/* Opponent / local symmetry is spatial, not decorative. */
+.arena-shell[data-arena-spatial-prototype="phase06"] [data-arena-region="opponent-status"],
+.arena-shell[data-arena-spatial-prototype="phase06"] [data-arena-region="player-status"] {
+  min-width: 0;
+  min-height: 0;
+}
+
+.arena-shell[data-arena-spatial-prototype="phase06"] [data-arena-region="opponent-battlefield"],
+.arena-shell[data-arena-spatial-prototype="phase06"] [data-arena-region="player-battlefield"] {
+  min-height: 0;
+  padding-inline: clamp(2px, .8vw, 12px);
+}
+
+.arena-shell[data-arena-spatial-prototype="phase06"] [data-arena-region="timing-focus"] {
+  min-height: 0;
+  margin-inline: clamp(2px, 2vw, 32px) !important;
+  border-block-color: rgba(255, 255, 255, .08) !important;
+  background: linear-gradient(90deg, transparent 3%, rgba(255, 255, 255, .018) 50%, transparent 97%);
+}
+
+/* Hand remains a dedicated dock instead of pushing the permanent battlefield. */
+.arena-shell[data-arena-spatial-prototype="phase06"] [data-arena-region="player-hand"] {
+  z-index: 5;
+  min-height: 0;
+  overflow: visible;
+  border-top: 1px solid rgba(255, 255, 255, .06);
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .18));
+}
+
+.arena-shell[data-arena-spatial-prototype="phase06"] [data-arena-region="opponent-hand"] {
+  min-height: 0;
+  opacity: .88;
+}
+
+/* HUDs are compressed only enough to prove the spatial target; Phase 8 owns redesign. */
+.arena-shell[data-arena-spatial-prototype="phase06"] .arena-compact-hud {
+  min-height: var(--v520-hud-height) !important;
+  height: var(--v520-hud-height) !important;
+  border-radius: 7px !important;
+  padding-block: 2px !important;
+  background: rgba(8, 8, 9, .80) !important;
+  backdrop-filter: blur(6px);
+}
+
+/* The desktop utility rail is visually subordinate to cards. */
+.arena-shell[data-arena-spatial-prototype="phase06"] [data-arena-region="utility-rail"] {
+  border-color: rgba(255, 255, 255, .09) !important;
+  background: rgba(8, 8, 9, .91) !important;
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, .03) !important;
+}
+
+/* 1366x768 target: retain rail and two playable permanent bands. */
+@media (max-width: 1500px) {
+  .arena-shell[data-arena-spatial-prototype="phase06"] {
+    --v520-utility-rail: clamp(208px, 15vw, 232px);
+    --v520-hand-height: clamp(96px, 13vh, 118px);
+    --v520-opponent-hand-height: 42px;
+    --v520-hud-height: 36px;
+    --v520-timing-band: 40px;
+  }
+
+  .arena-shell[data-arena-spatial-prototype="phase06"] .sim-topbar {
+    height: 50px !important;
+    min-height: 50px !important;
+  }
+}
+
+/* 1080p / ultrawide: spend extra pixels on cards rather than chrome. */
+@media (min-width: 1800px) and (min-height: 900px) {
+  .arena-shell[data-arena-spatial-prototype="phase06"] {
+    --v520-utility-rail: clamp(238px, 14vw, 286px);
+    --v520-hand-height: clamp(122px, 14vh, 154px);
+    --v520-opponent-hand-height: clamp(48px, 6vh, 66px);
+    --v520-timing-band: 48px;
+  }
+
+  .arena-shell[data-arena-spatial-prototype="phase06"] .table-area {
+    padding: 6px !important;
+    gap: 3px !important;
+  }
+}
+
+/* Structural fallback before Phase 15's dedicated responsive pass. */
+@media (max-width: 1180px) {
+  .arena-shell[data-arena-spatial-prototype="phase06"] {
+    --v520-utility-rail: 0px;
+  }
+
+  .arena-shell[data-arena-spatial-prototype="phase06"] .sim-layout,
+  .arena-shell[data-arena-spatial-prototype="phase06"] .sim-layout.inspector-open.control-open,
+  .arena-shell[data-arena-spatial-prototype="phase06"] .sim-layout.inspector-closed.control-open,
+  .arena-shell[data-arena-spatial-prototype="phase06"] .sim-layout.inspector-open.control-closed,
+  .arena-shell[data-arena-spatial-prototype="phase06"] .sim-layout.inspector-closed.control-closed {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .arena-shell[data-arena-spatial-prototype="phase06"] [data-arena-region="utility-rail"] {
+    display: none !important;
+  }
+
+  .arena-shell[data-arena-spatial-prototype="phase06"] .context-panel.arena-inspector-overlay {
+    max-width: min(42vw, 286px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arena-shell[data-arena-spatial-prototype="phase06"] .context-panel.arena-inspector-overlay {
+    transition: none !important;
+  }
+}

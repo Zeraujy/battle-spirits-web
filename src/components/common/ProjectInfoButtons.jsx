@@ -91,6 +91,54 @@ const PATCHES = [
           "New audits prevent Shared → implementation, Server → Web, Web → authoritative server and facade-bypass dependencies."
         ]
       }
+    }, {
+      title: { pt: "Phase 5 — Architecture Foundation QA", en: "Phase 5 — Architecture Foundation QA" },
+      items: {
+        pt: [
+          "A base v5.1.0 FINAL foi travada por verificações de integridade para regras, partidas online, dados persistentes e conteúdo público antes do redesign visual.",
+          "A regressão completa agora descobre todos os testes em src/ e server/, cobrindo uma superfície maior que a suíte curta padrão.",
+          "A QA confirmou zero mudanças de gameplay, comportamento online, dados persistentes ou assets públicos nas Phases 0–4.",
+          "Com a fundação arquitetural validada, a Phase 6 pode iniciar o protótipo espacial da nova Arena."
+        ],
+        en: [
+          "The v5.1.0 FINAL baseline is now protected by integrity checks across rules, online matches, persistent data and public content before the visual redesign.",
+          "The complete regression now discovers every test under src/ and server/, covering a broader surface than the short default suite.",
+          "QA confirms zero gameplay, online behavior, persistent-data or public-asset changes across Phases 0–4.",
+          "With the architecture foundation proven stable, Phase 6 may begin the new Arena spatial prototype."
+        ]
+      }
+       }, {
+      title: { pt: "Phase 6 — Spatial Prototype", en: "Phase 6 — Spatial Prototype" },
+      items: {
+        pt: [
+          "A Arena ganhou sua primeira estrutura visual battlefield-first inspirada na eficiência espacial do Talishar, sem copiar suas zonas ou identidade.",
+          "O campo agora ocupa a maior parte do viewport no desktop, com utility rail compacto à direita e o inspector de carta flutuando sobre o lado esquerdo quando aberto.",
+          "Opponent status, mão, campo, timing central, campo do jogador, hand dock e player status agora possuem regiões espaciais explícitas para orientar as próximas fases.",
+          "Foram adicionados breakpoints estruturais para 1366×768, 1080p/ultrawide e fallback estreito, sem alterar regras, autoridade online, dados persistentes ou assets públicos."
+        ],
+        en: [
+          "The Arena now has its first battlefield-first visual structure inspired by Talishar's spatial efficiency without copying its zones or identity.",
+          "The battlefield now owns most of the desktop viewport, with a compact right utility rail and a selected-card inspector that floats over the left edge when open.",
+          "Opponent status, hand, battlefield, central timing, player battlefield, hand dock and player status now expose explicit spatial regions for upcoming phases.",
+          "Structural breakpoints were added for 1366×768, 1080p/ultrawide and narrow fallback without changing rules, online authority, persistent data or public assets."
+        ]
+      }
+    }, {
+      title: { pt: "Phase 7 — Full-Viewport ArenaShell v2", en: "Phase 7 — Full-Viewport ArenaShell v2" },
+      items: {
+        pt: [
+          "A Arena agora ocupa o viewport dinâmico completo, eliminando a linha permanente de chrome que reduzia a área de jogo.",
+          "Os controles superiores foram convertidos em uma command strip flutuante e compacta, mantendo turno, fases, relógio, chat, log e saída acessíveis sem empurrar o campo.",
+          "Battlefield, utility rail, mensagens e inspector passaram a respeitar a geometria full-viewport com gaps e molduras reduzidos.",
+          "A mudança é exclusivamente de apresentação: regras, Effect Engine, autoridade online, dados persistentes, cartas e assets públicos permanecem inalterados."
+        ],
+        en: [
+          "The Arena now occupies the full dynamic viewport, removing the permanent chrome row that reduced playable space.",
+          "Top controls are now a compact floating command strip that keeps turn, phases, clock, chat, log and exit accessible without pushing the field down.",
+          "Battlefield, utility rail, messages and inspector now follow full-viewport geometry with reduced gaps and framing.",
+          "This is presentation-only: rules, Effect Engine, online authority, persistent data, cards and public assets remain unchanged."
+        ]
+      }
     }]
   },
   {

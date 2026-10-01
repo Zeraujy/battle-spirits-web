@@ -27,7 +27,10 @@ export default function ArenaShell({ children, className = "", viewModel = null 
       data-arena-shell="v4.9.1"
       data-arena-foundation="01"
       data-arena-phase="21"
+      data-arena-v520-phase="07"
       data-arena-layout-mode="standard"
+      data-arena-spatial-prototype="phase06"
+      data-arena-full-viewport="phase07"
       data-arena-view-model={viewModel?.version ? `v${viewModel.version}` : undefined}
       data-arena-active-player={viewModel?.timing?.activePlayerId || undefined}
       data-arena-priority-player={viewModel?.timing?.priorityPlayerId || undefined}

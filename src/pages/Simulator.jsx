@@ -89,6 +89,8 @@ import "../styles/arena/arenaPerformanceV490.css";
 import "../styles/arena/arenaVisualCleanupV490.css";
 import "../styles/arena/arenaVisualPolishV491.css";
 import "../styles/arena/combatLayoutStabilityV500.css";
+import "../styles/arena/spatialPrototypeV520.css";
+import "../styles/arena/fullViewportArenaV520.css";
 
 
 function effectText(card, language) {
@@ -5608,7 +5610,7 @@ export default function Simulator({
         />
       </ArenaOverlayLayer>
 
-      <header className="sim-topbar">
+      <header className="sim-topbar" data-arena-region="command-strip">
 
         <img
           src="./images/logo_battlespirits.png"
@@ -5805,6 +5807,7 @@ export default function Simulator({
         ================================================= */}
 
         <ContextPanel
+          className="arena-inspector-overlay"
           open={showInspectorDock}
           mode="card"
           theme={getInspectorCardTheme(selectedCard)}
@@ -6204,6 +6207,7 @@ export default function Simulator({
                 : "attack-focus-top-hud"
             }
           
+            data-arena-region="opponent-status"
             data-targeting-state={directBattleTargetId === topId ? "targetable" : undefined}
           >
           <OpponentHUD
@@ -6218,12 +6222,14 @@ export default function Simulator({
           <div
             className={`arena-legacy-hand-slot ${battleFocusActive ? "attack-focus-dim" : ""}`}
             data-arena-slot="OpponentHand"
+            data-arena-region="opponent-hand"
           >
             {renderHand(topId)}
           </div>
 
 
           <OpponentField
+            data-arena-region="opponent-battlefield"
             className={
               battleFocusActive
                 ? "attack-focus-relevant attack-focus-top-field"
@@ -6235,6 +6241,7 @@ export default function Simulator({
 
 
           <CenterField
+            data-arena-region="timing-focus"
             className={battleFocusActive ? "attack-focus-relevant" : ""}
           >
             {battleCenter()}
@@ -6242,6 +6249,7 @@ export default function Simulator({
 
 
           <PlayerField
+            data-arena-region="player-battlefield"
             className={
               battleFocusActive
                 ? "attack-focus-relevant attack-focus-bottom-field"
@@ -6255,6 +6263,7 @@ export default function Simulator({
           <div
             className={`arena-legacy-hand-slot ${battleFocusActive ? "attack-focus-dim" : ""}`}
             data-arena-slot="PlayerHand"
+            data-arena-region="player-hand"
           >
             {renderHand(bottomId)}
           </div>
@@ -6272,6 +6281,7 @@ export default function Simulator({
                 : ""
             }
           
+            data-arena-region="player-status"
             data-targeting-state={directBattleTargetId === bottomId ? "targetable" : undefined}
           >
           <PlayerHUD
@@ -6290,6 +6300,7 @@ export default function Simulator({
         ================================================= */}
 
         <aside
+          data-arena-region="utility-rail"
           className={`turn-panel panel arena-side-dock ${
             showControlDock
               ? "dock-open"
