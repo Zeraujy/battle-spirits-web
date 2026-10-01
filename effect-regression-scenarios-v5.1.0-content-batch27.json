@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-01T10:26:57.330Z",
-  "scenarioCount": 346,
+  "generatedAt": "2026-09-30T17:58:09.985Z",
+  "scenarioCount": 345,
   "scenarios": [
     {
       "cardId": "BS01-125",
@@ -2860,21 +2860,6 @@
         "automatedEntryIds": [
           "bsc49-098-main-auto45",
           "bsc49-098-flash-auto45"
-        ]
-      }
-    },
-    {
-      "cardId": "BSC49-100",
-      "set": "BSC49",
-      "status": "AUTOMATED",
-      "expected": {
-        "noUnsupportedActions": true,
-        "noUnsupportedConditions": true,
-        "noUnsupportedTriggers": true,
-        "automatedEntryIds": [
-          "bsc49-100-discard-auto48",
-          "bsc49-100-main-auto48",
-          "bsc49-100-flash-auto48"
         ]
       }
     },

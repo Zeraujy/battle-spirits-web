@@ -8,7 +8,7 @@
     3
   ],
   "source": "src/data/cards.json",
-  "generatedAt": "2026-10-01T10:26:57.255Z",
+  "generatedAt": "2026-09-30T17:58:09.709Z",
   "classificationVersion": "v5.1.0-phase03",
   "canonicalEvents": [
     {
@@ -196,10 +196,10 @@
     "totalCards": 365,
     "totalSets": 11,
     "byStatus": {
-      "AUTOMATED": 330,
+      "AUTOMATED": 329,
       "MANUAL": 2,
       "NO_EFFECT": 16,
-      "UNSUPPORTED_TRIGGER": 17
+      "UNSUPPORTED_TRIGGER": 18
     },
     "bySet": {
       "SD13": {
@@ -229,12 +229,12 @@
       "BSC49": {
         "total": 117,
         "statuses": {
-          "AUTOMATED": 97,
+          "AUTOMATED": 96,
           "NO_EFFECT": 1,
-          "UNSUPPORTED_TRIGGER": 17,
+          "UNSUPPORTED_TRIGGER": 18,
           "MANUAL": 2
         },
-        "automationPercent": 82.9
+        "automationPercent": 82.1
       },
       "SD10": {
         "total": 18,
@@ -293,12 +293,12 @@
     },
     "entries": {
       "total": 1040,
-      "automated": 714,
-      "runtimeUnsupportedTrigger": 32,
+      "automated": 711,
+      "runtimeUnsupportedTrigger": 33,
       "unsupportedCondition": 0,
       "unsupportedAction": 0,
-      "manual": 294,
-      "schemaV2": 590
+      "manual": 296,
+      "schemaV2": 587
     },
     "gapFrequency": {
       "triggers": {
@@ -311,6 +311,7 @@
         "whenAttacksOrBlocks": 2,
         "whenBravedOrCombinedCardWouldLeave": 1,
         "whenDepletedOrDestroyedByOpponent": 1,
+        "whenDiscardedByBlueEffect": 1,
         "whenDiscardedByGreenOnlyEffect": 1,
         "whenDiscardedFromHand": 1,
         "whenExhaustedEitherAttackStep": 1,
@@ -15484,88 +15485,85 @@
       "set": "BSC49",
       "cardType": "magic",
       "nameEN": "Orion Power LT",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
-      "documentedEffectCount": 0,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
-      "unresolvedDisplayCount": 0,
+      "documentedEffectCount": 3,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 3,
       "entries": [
         {
-          "id": "bsc49-100-discard-auto48",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerTrash",
-          "eventPlayer": "self",
-          "rawEvent": "cardMoved",
-          "canonicalEvent": "cardMoved",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseOption",
-            "dispatchSourceEvent"
-          ],
+          "id": "bsc49-100-discard",
+          "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
+          "rawEvent": "whenDiscardedByBlueEffect",
+          "canonicalEvent": "whenDiscardedByBlueEffect",
+          "canonicalEventDefined": false,
+          "runtimeDispatched": false,
+          "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
-          "hasStructuredActions": true,
+          "hasStructuredActions": false,
           "automationRef": null,
           "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
+          "entryType": "constant",
+          "status": "UNSUPPORTED_TRIGGER"
         },
         {
-          "id": "bsc49-100-main-auto48",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "magicMain",
+          "id": "bsc49-100-main",
+          "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
+          "rawEvent": "main",
           "canonicalEvent": "magicMain",
           "canonicalEventDefined": true,
           "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier",
-            "oncePerTurn"
-          ],
+          "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
-          "hasStructuredActions": true,
+          "hasStructuredActions": false,
           "automationRef": null,
           "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
+          "entryType": "main",
+          "status": "MANUAL"
         },
         {
-          "id": "bsc49-100-flash-auto48",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "magicFlash",
+          "id": "bsc49-100-flash",
+          "source": "effects",
+          "schemaVersion": null,
+          "triggerScope": null,
+          "eventPlayer": null,
+          "rawEvent": "flash",
           "canonicalEvent": "magicFlash",
           "canonicalEventDefined": true,
           "runtimeDispatched": true,
-          "actionTypes": [
-            "modifyBP",
-            "selectTarget"
-          ],
+          "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
-          "hasStructuredActions": true,
+          "hasStructuredActions": false,
           "automationRef": null,
           "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
+          "entryType": "flash",
+          "status": "MANUAL"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [],
+        "unsupportedTriggers": [
+          "whenDiscardedByBlueEffect"
+        ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-100-discard",
+          "bsc49-100-main",
+          "bsc49-100-flash"
+        ]
       }
     },
     {

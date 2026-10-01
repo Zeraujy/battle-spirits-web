@@ -313,3 +313,23 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Phase 24 generated regression coverage advanced from 342 to 344 scenarios.
 - Main suite passes 149/149, Effect Engine 306/306, Batch 26 dedicated 5/5 and full regression 505/505.
 - Phase 25 and Phase 26 remain PASS; Phase 27 is still blocked only by the BSC49 Phase 23 set gate.
+
+## v5.1.0 Content Migration — Batch 27 / BSC49 Wave 12
+- Automated BSC49-094 Reboot Code LT with structured Hand protection, opponent Attack Step cost override and selective Refresh handling.
+- BSC49 coverage advanced from 96/117 to 97/117 resolved.
+- Global manual fallback improved from 5.75% (21/365) to 5.48% (20/365).
+- Extended generic targeting so `unaffectedByOpponentEffects` can protect cards outside the Field when a turn modifier is active.
+- Core Action Library remains at 85 reusable action types.
+- Phase 24 generated regression coverage advanced from 344 to 345 scenarios.
+- Main suite passes 149/149, Effect Engine 310/310, Batch 27 dedicated 4/4 and full regression 509/509.
+- Phase 25 and Phase 26 remain PASS; Phase 27 is still blocked only by the BSC49 Phase 23 set gate.
+
+## v5.1.0 Content Migration — Batch 28 / BSC49 Wave 13
+- Automated BSC49-100 Orion Power LT with structured Blue-discard activation, Main observer and Flash BP routing.
+- BSC49 coverage advanced from 97/117 to 98/117 resolved.
+- Global manual fallback improved from 5.48% (20/365) to 5.21% (19/365).
+- Added a reusable `opponentDeckDiscardOnLifeDamage` battle modifier hook for family-filtered attack Life damage triggers.
+- Core Action Library remains at 85 reusable action types.
+- Phase 24 generated regression coverage advanced from 345 to 346 scenarios.
+- Main suite passes 149/149, Effect Engine 315/315, Batch 28 dedicated 5/5 and full regression 514/514.
+- Phase 25 and Phase 26 remain PASS; Phase 27 is still blocked only by the BSC49 Phase 23 set gate.

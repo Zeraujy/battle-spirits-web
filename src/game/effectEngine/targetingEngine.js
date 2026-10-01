@@ -8,7 +8,7 @@ import {
   getEffectiveFamilies,
   getEffectiveSymbols
 } from "../selectors.js";
-import { applyContinuousCollectionModifiers } from "./modifierResolver.js";
+import { applyContinuousCollectionModifiers, getContinuousNumericModifier } from "./modifierResolver.js";
 import { otherPlayerId } from "../utils.js";
 
 export const TargetOwner = Object.freeze({ SELF: "self", OPPONENT: "opponent", ANY: "any" });
@@ -219,6 +219,8 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   if (selector.hasSoulCore === true && !physical.cores?.soul) return false;
   if (selector.hasSoulCore === false && physical.cores?.soul) return false;
   if (!numberBetween(props.cores, selector.minimumCores ?? selector.minCores, selector.maximumCores ?? selector.maxCores)) return false;
+  if (selector.ignoreEffectImmunity !== true && context?.sourcePlayerId && context.sourcePlayerId !== playerId
+      && getContinuousNumericModifier(match, cardIndex, physical, "unaffectedByOpponentEffects") > 0) return false;
   if (props.isField && selector.ignoreEffectImmunity !== true && targetHasEffectColorImmunity(match, cardIndex, physical, playerId, context)) return false;
   return true;
 }

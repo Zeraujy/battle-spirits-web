@@ -290,37 +290,143 @@
       "en": "This card in your hand/hand area is unaffected by opposing effects. During the opponent's Attack Step, this card's cost becomes 2. Flash: Refresh all your Spirits. For this turn, all non-Braved Spirits refreshed by this effect cannot attack.",
       "ptBR": "Esta carta na sua mão/área de Hand não é afetada por efeitos do oponente. Durante o Attack Step do oponente, o custo desta carta se torna 2. Flash: Dê Refresh em todos os seus Spirits. Durante este turno, todos os Spirits que não estejam combinados com Brave e que receberam Refresh por este efeito não podem atacar."
     },
-    "effects": [
+    "effects": [],
+    "abilities": [
       {
-        "id": "bsc49-094-hand",
-        "type": "constant",
-        "levels": [],
-        "timing": "whileInHand",
-        "title": {
-          "en": "Hand Effect",
-          "ptBR": "Efeito na Mão"
+        "id": "bsc49-094-hand-protection-auto47",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "startStep",
+          "scope": "controllerHand",
+          "eventPlayer": "any"
         },
-        "text": {
-          "en": "This card in your hand/hand area is unaffected by opposing effects. During the opponent's Attack Step, this card's cost becomes 2.",
-          "ptBR": "Esta carta na sua mão/área de Hand não é afetada por efeitos do oponente. Durante o Attack Step do oponente, o custo desta carta se torna 2."
-        }
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "unaffectedByOpponentEffects",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "cardId": "BSC49-094"
+            },
+            "duration": "thisTurn"
+          }
+        ]
       },
       {
-        "id": "bsc49-094-flash",
-        "type": "flash",
-        "levels": [],
-        "timing": "flash",
-        "title": {
-          "en": "Flash",
-          "ptBR": "Flash"
+        "id": "bsc49-094-attack-cost-auto47",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "attackStep",
+          "scope": "controllerHand",
+          "eventPlayer": "opponent"
         },
-        "text": {
-          "en": "Refresh all your Spirits. For this turn, all non-Braved Spirits refreshed by this effect cannot attack.",
-          "ptBR": "Dê Refresh em todos os seus Spirits. Durante este turno, todos os Spirits que não estejam combinados com Brave e que receberam Refresh por este efeito não podem atacar."
-        }
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "printedCostOverride",
+            "operation": "set",
+            "value": 2,
+            "selector": {
+              "owner": "self",
+              "cardId": "BSC49-094"
+            },
+            "duration": "thisTurn"
+          },
+          {
+            "type": "addModifier",
+            "property": "unaffectedByOpponentEffects",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "cardId": "BSC49-094"
+            },
+            "duration": "thisTurn"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-094-flash-auto47",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "exhausted": true,
+              "braved": true
+            },
+            "maxTargets": 99,
+            "asManyAsPossible": true,
+            "allowZero": true,
+            "onConfirm": [
+              {
+                "type": "draw",
+                "count": 0
+              }
+            ],
+            "afterIfAny": [
+              {
+                "type": "refresh",
+                "target": "selected"
+              }
+            ]
+          },
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "exhausted": true,
+              "braved": false
+            },
+            "maxTargets": 99,
+            "asManyAsPossible": true,
+            "allowZero": true,
+            "onConfirm": [
+              {
+                "type": "draw",
+                "count": 0
+              }
+            ],
+            "afterIfAny": [
+              {
+                "type": "refresh",
+                "target": "selected"
+              },
+              {
+                "type": "addModifier",
+                "property": "cannotAttack",
+                "operation": "set",
+                "value": 1,
+                "selector": {
+                  "selectedTargets": true
+                },
+                "duration": "thisTurn"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "abilities": [],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-094.webp"
   },
   {
@@ -935,51 +1041,132 @@
       "en": "When this card in your hand is discarded by one of your Blue effects, you may activate its Main or Flash effect. Main [Once per Turn: Same Name]: For this turn, whenever an attack by one of your Spirits with Astral Soul, Galaxian, or Fighting Spirit reduces the opponent's Life, discard the top ten cards of the opponent's deck. Flash: One Spirit/Ultimate gains +3000 BP for this turn.",
       "ptBR": "Quando esta carta na sua mão for descartada por um dos seus efeitos Azuis, você pode ativar seu efeito Main ou Flash. Main [1 vez por turno: mesmo nome]: Durante este turno, sempre que um ataque de 1 dos seus Spirits com Astral Soul, Galaxian ou Fighting Spirit reduzir a Life do oponente, descarte as 10 cartas do topo do deck do oponente. Flash: 1 Spirit/Ultimate recebe +3000 BP durante este turno."
     },
-    "effects": [
+    "effects": [],
+    "abilities": [
       {
-        "id": "bsc49-100-discard",
-        "type": "constant",
-        "levels": [],
-        "timing": "whenDiscardedByBlueEffect",
-        "title": {
-          "en": "When Discarded",
-          "ptBR": "Quando Descartada"
+        "id": "bsc49-100-discard-auto48",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
         },
-        "text": {
-          "en": "When this card in your hand is discarded by one of your Blue effects, you may activate its Main or Flash effect.",
-          "ptBR": "Quando esta carta na sua mão for descartada por um dos seus efeitos Azuis, você pode ativar seu efeito Main ou Flash."
-        }
+        "conditions": [
+          {
+            "type": "eventSourceIsSource"
+          },
+          {
+            "type": "eventMovedFromZone",
+            "zone": "hand"
+          },
+          {
+            "type": "eventMoveDestination",
+            "zone": "trash"
+          },
+          {
+            "type": "eventMovedByColor",
+            "color": "blue"
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseOption",
+            "options": [
+              {
+                "id": "main",
+                "labelEN": "Activate Main",
+                "labelPT": "Ativar Main",
+                "actions": [
+                  {
+                    "type": "dispatchSourceEvent",
+                    "event": "magicMain"
+                  }
+                ]
+              },
+              {
+                "id": "flash",
+                "labelEN": "Activate Flash",
+                "labelPT": "Ativar Flash",
+                "actions": [
+                  {
+                    "type": "dispatchSourceEvent",
+                    "event": "magicFlash"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
-        "id": "bsc49-100-main",
-        "type": "main",
-        "levels": [],
-        "timing": "main",
-        "title": {
-          "en": "Main",
-          "ptBR": "Main"
+        "id": "bsc49-100-main-auto48",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicMain",
+          "scope": "source",
+          "eventPlayer": "any"
         },
-        "text": {
-          "en": "For this turn, whenever an attack by one of your Spirits with Astral Soul, Galaxian, or Fighting Spirit reduces the opponent's Life, discard the top ten cards of the opponent's deck. [Once per Turn: Same Name]",
-          "ptBR": "Durante este turno, sempre que um ataque de 1 dos seus Spirits com Astral Soul, Galaxian ou Fighting Spirit reduzir a Life do oponente, descarte as 10 cartas do topo do deck do oponente. [1 vez por turno: mesmo nome]"
-        }
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-100-same-name-main",
+            "actions": [
+              {
+                "type": "addModifier",
+                "property": "opponentDeckDiscardOnLifeDamage",
+                "operation": "set",
+                "value": 10,
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "families": [
+                    "Astral Soul",
+                    "Galaxian",
+                    "Fighting Spirit"
+                  ]
+                },
+                "duration": "thisTurn"
+              }
+            ]
+          }
+        ]
       },
       {
-        "id": "bsc49-100-flash",
-        "type": "flash",
-        "levels": [],
-        "timing": "flash",
-        "title": {
-          "en": "Flash",
-          "ptBR": "Flash"
+        "id": "bsc49-100-flash-auto48",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
         },
-        "text": {
-          "en": "One Spirit/Ultimate gains +3000 BP for this turn.",
-          "ptBR": "1 Spirit/Ultimate recebe +3000 BP durante este turno."
-        }
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "any",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "allowZero": false,
+            "onSelect": {
+              "type": "modifyBP",
+              "amount": 3000,
+              "duration": "turn"
+            }
+          }
+        ]
       }
     ],
-    "abilities": [],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-100.webp"
   },
   {

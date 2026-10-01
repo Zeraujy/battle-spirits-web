@@ -443,6 +443,32 @@ export function resolveBattle(match, actorId, cardIndex) {
             next = { ...next, players: { ...next.players, [battle.attackerPlayerId]: { ...attackerPlayer, hand: attackerPlayer.hand.slice(count), trash: [...attackerPlayer.trash, ...discarded] } } };
           }
         }
+        const lifeHitDeckDiscard = Math.max(0, Number(getContinuousNumericModifier(next, cardIndex, attackerCtx.card, "opponentDeckDiscardOnLifeDamage") || 0));
+        if (lifeHitDeckDiscard > 0) {
+          const targetPlayer = next.players[battle.defenderPlayerId];
+          const cap = getContinuousPlayerNumericModifier(next, battle.defenderPlayerId, "maxDeckDiscardPerTurn");
+          const used = Number(next.temporary?.deckDiscardedByEffect?.[battle.defenderPlayerId] || 0);
+          const allowed = cap > 0 ? Math.max(0, cap - used) : lifeHitDeckDiscard;
+          const count = Math.min(lifeHitDeckDiscard, allowed, targetPlayer.deck?.length || 0);
+          if (count > 0) {
+            const deck = [...(targetPlayer.deck || [])];
+            const moved = deck.splice(0, count);
+            next = {
+              ...next,
+              players: {
+                ...next.players,
+                [battle.defenderPlayerId]: { ...targetPlayer, deck, trash: [...(targetPlayer.trash || []), ...moved] }
+              },
+              temporary: {
+                ...(next.temporary || {}),
+                deckDiscardedByEffect: {
+                  ...(next.temporary?.deckDiscardedByEffect || {}),
+                  [battle.defenderPlayerId]: used + moved.length
+                }
+              }
+            };
+          }
+        }
         if (currentDefender.life - actual <= 0) {
           next = { ...next, winnerId: battle.attackerPlayerId, winnerReason: "life" };
         } else {

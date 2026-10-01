@@ -6,9 +6,9 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **1039**
-- Effect Schema v2 entries: **584**
-- Fully automated cards: **328 (89.9%)**
+- Structured effect/ability entries inspected: **1040**
+- Effect Schema v2 entries: **590**
+- Fully automated cards: **330 (90.4%)**
 - Partially automated cards: **0**
 - Unstructured effect text: **0**
 - Explicit no-effect cards: **16**
@@ -33,7 +33,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | Set | Cards | Automated | Partial | Manual | Unsupported trigger | Unsupported condition | Unsupported action | Unstructured | No effect |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | BS13 | 90 | 84 | 0 | 0 | 0 | 0 | 0 | 0 | 6 |
-| BSC49 | 117 | 95 | 0 | 2 | 19 | 0 | 0 | 0 | 1 |
+| BSC49 | 117 | 97 | 0 | 2 | 17 | 0 | 0 | 0 | 1 |
 | SD10 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD11 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD13 | 18 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 3 |
@@ -46,11 +46,11 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Structured entry baseline
 
-- Automated executable entries: **708**
-- Entries blocked by trigger coverage: **34**
+- Automated executable entries: **714**
+- Entries blocked by trigger coverage: **32**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
-- Represented but non-executable/manual entries: **297**
+- Represented but non-executable/manual entries: **294**
 
 ## Highest-priority trigger gaps
 
@@ -67,7 +67,6 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `whenAttacksFlash` | 1 |
 | `whenBravedOrCombinedCardWouldLeave` | 1 |
 | `whenDepletedOrDestroyedByOpponent` | 1 |
-| `whenDiscardedByBlueEffect` | 1 |
 | `whenDiscardedByGreenOnlyEffect` | 1 |
 | `whenDiscardedFromHand` | 1 |
 | `whenExhaustedEitherAttackStep` | 1 |
@@ -81,7 +80,6 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | `whileCardOrSpirit` | 1 |
 | `whileInField` | 1 |
 | `whileInFieldOrTrash` | 1 |
-| `whileInHand` | 1 |
 | `whileLevel1` | 1 |
 | `whileLevel2` | 1 |
 | `whileLevel3` | 1 |
@@ -166,11 +164,9 @@ The JSON report contains every entry and machine-readable reason. This table lis
 | Card | Set | Type | Status | Main gaps |
 | --- | --- | --- | --- | --- |
 | `BSC49-091` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenDiscardedFromHand; unresolved entries: 2 |
-| `BSC49-094` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whileInHand; unresolved entries: 2 |
 | `BSC49-095` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenLifeReducedByOpponentEffect; unresolved entries: 2 |
 | `BSC49-096` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whileInField, whileInFieldOrTrash; unresolved entries: 3 |
 | `BSC49-099` | BSC49 | magic | `MANUAL` | unresolved entries: 1 |
-| `BSC49-100` | BSC49 | magic | `UNSUPPORTED_TRIGGER` | triggers: whenDiscardedByBlueEffect; unresolved entries: 3 |
 | `BSC49-CP01` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenSummonedOrAttacks, whileCardOrSpirit; unresolved entries: 3 |
 | `BSC49-CP02` | BSC49 | nexus | `UNSUPPORTED_TRIGGER` | triggers: onEligibleSummonOrPlacement, whileLevel1; unresolved entries: 4 |
 | `BSC49-CP03` | BSC49 | nexus | `UNSUPPORTED_TRIGGER` | triggers: afterDivineTrust, onEligibleSummonDescendOrPlacement, whileLevel2; unresolved entries: 4 |

@@ -5,6 +5,38 @@ import "../../styles/theme/v230.css";
 const PATCHES = [
   {
     version: "5.0.3",
+    date: { pt: "01/10/2026", en: "10/01/2026" },
+    title: { pt: "Automação de Cartas — BSC49 Wave 13", en: "Card Automation — BSC49 Wave 13" },
+    summary: {
+      pt: "Orion Power LT passou para resolução estruturada completa, incluindo ativação após descarte por efeito Blue e descarte de deck após dano de ataque.",
+      en: "Orion Power LT moved to complete structured resolution, including activation after a Blue-effect discard and deck discard after attack Life damage."
+    },
+    sections: [{
+      title: { pt: "BSC49 Wave 13", en: "BSC49 Wave 13" },
+      items: {
+        pt: ["BSC49 avançou para 98/117 cartas resolvidas e o fallback manual caiu para 5,21% (19/365).", "A Core Action Library permaneceu em 85 tipos; entrou um hook genérico de descarte do deck após ataques que reduzem Life.", "Orion Power LT agora pode ativar Main/Flash após ser descartada por um efeito Blue e seu Main descarta 10 cartas do deck adversário quando um Spirit elegível causa dano à Life."],
+        en: ["BSC49 advanced to 98/117 resolved cards and manual fallback dropped to 5.21% (19/365).", "The Core Action Library remained at 85 types; a generic deck-discard hook after attacks that reduce Life was added.", "Orion Power LT can now activate Main/Flash after being discarded by a Blue effect, and its Main discards 10 cards from the opponent's deck when an eligible Spirit deals Life damage."]
+      }
+    }]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "30/09/2026", en: "09/30/2026" },
+    title: { pt: "Automação de Cartas — BSC49 Wave 12", en: "Card Automation — BSC49 Wave 12" },
+    summary: {
+      pt: "Reboot Code LT passou para resolução estruturada, com custo reduzido no Attack Step adversário, proteção de Hand e refresh seletivo.",
+      en: "Reboot Code LT moved to structured resolution with opponent Attack Step cost reduction, Hand protection and selective refresh handling."
+    },
+    sections: [{
+      title: { pt: "BSC49 Wave 12", en: "BSC49 Wave 12" },
+      items: {
+        pt: ["BSC49 avançou para 97/117 cartas resolvidas e o fallback manual caiu para 5,48% (20/365).", "A Core Action Library permaneceu em 85 tipos; a melhoria ficou no targeting genérico contra efeitos do oponente.", "Reboot Code LT agora atualiza o custo para 2 no Attack Step adversário e impede ataque dos Spirits não-Braved refrescados por seu Flash."],
+        en: ["BSC49 advanced to 97/117 resolved cards and manual fallback dropped to 5.48% (20/365).", "The Core Action Library remained at 85 types; the improvement landed in generic targeting against opposing effects.", "Reboot Code LT now becomes cost 2 during the opponent Attack Step and prevents non-Braved Spirits refreshed by its Flash from attacking."]
+      }
+    }]
+  },
+  {
+    version: "5.0.3",
     date: { pt: "30/09/2026", en: "09/30/2026" },
     title: { pt: "Automação de Cartas — BSC49 Wave 11", en: "Card Automation — BSC49 Wave 11" },
     summary: {
