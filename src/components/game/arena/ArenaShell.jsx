@@ -12,7 +12,7 @@ import "../../../styles/arena/arenaShell.css";
  * - Do not communicate with online services.
  * - Responsive mode is DOM-only so resizing does not re-render gameplay.
  */
-export default function ArenaShell({ children, className = "" }) {
+export default function ArenaShell({ children, className = "", viewModel = null }) {
   const rootRef = useRef(null);
   useArenaLayout(rootRef);
 
@@ -28,6 +28,9 @@ export default function ArenaShell({ children, className = "" }) {
       data-arena-foundation="01"
       data-arena-phase="21"
       data-arena-layout-mode="standard"
+      data-arena-view-model={viewModel?.version ? `v${viewModel.version}` : undefined}
+      data-arena-active-player={viewModel?.timing?.activePlayerId || undefined}
+      data-arena-priority-player={viewModel?.timing?.priorityPlayerId || undefined}
     >
       {children}
     </main>

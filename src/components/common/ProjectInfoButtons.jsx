@@ -59,6 +59,22 @@ const PATCHES = [
           "No rules, online protocol, layout or card content changed; Phase 3 can now build ArenaViewModel v2 on this boundary."
         ]
       }
+    }, {
+      title: { pt: "Phase 3 — ArenaViewModel v2", en: "Phase 3 — ArenaViewModel v2" },
+      items: {
+        pt: [
+          "A Arena agora recebe um estado de apresentação explícito para jogadores, zonas, cartas, timing, prioridade e ações disponíveis.",
+          "Estados visuais como playable, attackable, blockable e targetable passam a ser derivados centralmente pelo ViewModel.",
+          "A mão adversária preserva apenas a contagem no contrato visual, sem expor as identidades das cartas ocultas.",
+          "O layout atual foi preservado; esta fase prepara a reorganização estrutural e o protótipo espacial das próximas etapas."
+        ],
+        en: [
+          "The Arena now receives explicit presentation state for players, zones, cards, timing, priority and available actions.",
+          "Visual states such as playable, attackable, blockable and targetable are now derived centrally by the ViewModel.",
+          "The opponent hand exposes only its count in the presentation contract, never hidden card identities.",
+          "The current layout is preserved; this phase prepares the internal domain reorganization and upcoming spatial prototype."
+        ]
+      }
     }]
   },
   {

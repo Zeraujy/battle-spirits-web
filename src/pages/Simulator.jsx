@@ -48,6 +48,7 @@ import {
   resolveArenaPerspective,
   resolveCardImage
 } from "../arena/controller/index.js";
+import { buildArenaViewModel } from "../arena/viewModel/index.js";
 import { useLanguage } from "../i18n.jsx";
 import { identifySavedDeck, recordMatchResult } from "../services/matchHistoryService.js";
 import { onlineErrorMessage } from "../online/errors/onlineErrorMessages.js";
@@ -903,6 +904,19 @@ export default function Simulator({
     match.players[
       topId
     ];
+
+
+  const arenaViewModel = useMemo(
+    () => buildArenaViewModel({
+      match,
+      cardIndex,
+      viewerPlayerId: bottomId,
+      opponentPlayerId: topId,
+      connectionState: online ? "connected" : "local",
+      opponentConnectionState: online ? "connected" : "local"
+    }),
+    [match, bottomId, topId, online]
+  );
 
 
   const actorBurstCard =
@@ -5551,7 +5565,7 @@ export default function Simulator({
   ======================================================= */
 
   return (
-    <ArenaShell>
+    <ArenaShell viewModel={arenaViewModel}>
 
       <ArenaOverlayLayer>
         <BattleExperienceLayer

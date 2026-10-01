@@ -59,6 +59,12 @@ export function createArenaCardContract(input = {}) {
     visualState: ARENA_CARD_VISUAL_STATE_VALUES.includes(input.visualState)
       ? input.visualState
       : ArenaCardVisualState.IDLE,
+    name: nullableString(input.name),
+    image: nullableString(input.image),
+    colors: Array.isArray(input.colors) ? input.colors.map(String) : [],
+    symbols: Array.isArray(input.symbols) ? input.symbols.map(String) : [],
+    cost: input.cost == null ? null : finiteNumber(input.cost),
+    reduction: input.reduction == null ? null : cloneSerializable(input.reduction),
     flags: input.flags && typeof input.flags === "object" ? { ...input.flags } : {}
   };
 }

@@ -37,7 +37,7 @@ if (fs.existsSync(simulatorPath)) {
   if (!simulator.includes('import ArenaShell from "../components/game/arena/ArenaShell.jsx";')) {
     failures.push("Simulator must import ArenaShell.");
   }
-  if (!simulator.includes("<ArenaShell>")) failures.push("Simulator must render inside ArenaShell.");
+  if (!/<ArenaShell(?:\s|>)/.test(simulator)) failures.push("Simulator must render inside ArenaShell.");
   if (!simulator.includes("</ArenaShell>")) failures.push("Simulator must close ArenaShell.");
   const usesLegacyDirectDispatch =
     simulator.includes("applyGameAction(") &&

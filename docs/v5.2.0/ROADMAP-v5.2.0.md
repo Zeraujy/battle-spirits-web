@@ -27,7 +27,7 @@ The release is divided into three blocks so architecture risk and visual risk ar
 - Presentation components stop importing rule helpers directly.
 - Preserve local, CPU and online modes.
 
-### Phase 3 — ArenaViewModel v2
+### Phase 3 — ArenaViewModel v2 — COMPLETE
 
 - Produce explicit presentation state for both players, zones, cards, targeting, actions and priority.
 - Derive visual-only flags centrally.
