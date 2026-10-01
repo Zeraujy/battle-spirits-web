@@ -18,6 +18,26 @@ import { passBurstOpportunity } from "./burstRules.js";
 import { appendStructuredAction } from "./actionLog.js";
 import { validateMatchState } from "./stateValidation.js";
 
+
+function handUseRestrictionError(match, action, actorId, cardIndex) {
+  const restrictedActions = new Set(["SUMMON", "USE_HIGH_SPEED", "DEPLOY_NEXUS", "USE_MAGIC", "SET_BURST", "SET_MIRAGE", "BEGIN_MANUAL_PLAY"]);
+  if (!restrictedActions.has(String(action?.type || ""))) return null;
+  const instanceId = action?.instanceId;
+  if (!instanceId) return null;
+  const physical = (match.players?.[actorId]?.hand || []).find((entry) => entry.instanceId === instanceId)
+    || (match.players?.[actorId]?.openArea || []).find((entry) => entry.instanceId === instanceId);
+  if (!physical) return null;
+  const protection = match.temporary?.turnProtections?.[actorId]?.handUseColorsOnly;
+  if (!protection) return null;
+  const card = cardIndex?.get?.(physical.cardId);
+  const colors = (card?.colors || []).map((value) => String(value).toLowerCase());
+  const allowed = (protection.colors || []).map((value) => String(value).toLowerCase());
+  const matches = protection.requireOnly === true
+    ? colors.length === 1 && allowed.includes(colors[0])
+    : colors.some((value) => allowed.includes(value));
+  return matches ? null : "Este efeito impede o uso desta carta da Hand/Hand Area neste turno.";
+}
+
 function finishResult(result, cardIndex, actionType) {
   if (!result?.ok || !result.match) return result;
 
@@ -48,6 +68,8 @@ function finishResult(result, cardIndex, actionType) {
 export function applyGameAction(match, action, actorId, cardIndex) {
   if (!match || !action?.type) return { ok: false, error: "Ação inválida." };
   if (match.winnerId && action.type !== "MANUAL") return { ok: false, error: "A partida já terminou." };
+  const handRestriction = handUseRestrictionError(match, action, actorId, cardIndex);
+  if (handRestriction) return { ok: false, error: handRestriction };
   if (match.pendingManualPlay && !["MOVE_CORE", "CONFIRM_MANUAL_PLAY", "CANCEL_MANUAL_PLAY", "MANUAL"].includes(action.type)) {
     return { ok: false, error: "Conclua ou cancele a jogada pendente primeiro." };
   }

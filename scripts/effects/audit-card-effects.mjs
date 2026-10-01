@@ -66,6 +66,7 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "eventSourceFamily",
   "eventSourceKeyword",
   "eventSourceBraved",
+  "eventSourceIsOpponent",
   "eventCause",
   "specialSummonCause",
   "eventDestroyedByOpponent", "eventDestroyedBySelf", "battleAttackerBP", "battleAttackerCost", "battleAttackerCardType", "eventDestroyerKeyword",

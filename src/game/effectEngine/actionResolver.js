@@ -205,6 +205,8 @@ function moveTargetOut(match, target, destination, cardIndex, context = {}) {
   if (!instanceId) return match;
   const current = findPhysicalCard(match, instanceId);
   if (!current) return match;
+  if (destination === "trash" && context.allowTrashPlacement !== true
+      && getContinuousPlayerNumericModifier(match, current.playerId, "trashPlacementLocked") > 0) return match;
 
   if (["spirits", "nexuses", "other"].includes(current.zone)) {
     const removed = removeFieldCard(match.players[current.playerId], current.card.instanceId);
@@ -633,6 +635,18 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const placed = cleanPhysical(removed.card);
     const updatedPlayer = { ...removed.player, field: { ...removed.player.field, other: [...(removed.player.field?.other || []), placed] } };
     next = { ...next, players: { ...next.players, [current.playerId]: updatedPlayer } };
+    if (action.removeAtEndOfNextControllerTurn === true) {
+      const dueTurnNumber = Number(next.turnNumber || 0) + (next.activePlayerId === current.playerId ? 2 : 1);
+      next = {
+        ...next,
+        persistentEffects: {
+          ...(next.persistentEffects || {}),
+          scheduledSourceRemovals: [...(next.persistentEffects?.scheduledSourceRemovals || []), {
+            instanceId: placed.instanceId, playerId: current.playerId, dueTurnNumber, destination: "removed"
+          }]
+        }
+      };
+    }
     const movedCard = getDatabaseCard(cardIndex, placed);
     next = queueDeferredCanonicalEvent(next, {
       event: "cardMoved", sourcePlayerId: current.playerId, sourcePhysical: placed, sourceCardId: movedCard?.id || placed.cardId || null, eventPlayerId: current.playerId,
@@ -1453,13 +1467,19 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const playerId = resolvePlayerId(next, action, context);
     const player = next.players?.[playerId];
     if (!player) return { match, notes: ["Jogador alvo inválido para Life."], manualResolutionNeeded: true, executed: false };
+    if (getContinuousPlayerNumericModifier(next, playerId, "lifeChangeLocked") > 0) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
     let configuredLifeAmount = Number(action.amount ?? action.count ?? 1);
     if (action.countFromSourceSymbols === true && context.sourcePhysical) configuredLifeAmount = getEffectiveSymbols(next, cardIndex, context.sourcePhysical).length;
-    const delta = type === "healLife" ? Math.abs(configuredLifeAmount) : Number(action.delta ?? action.amount ?? 0);
+    let delta = type === "healLife" ? Math.abs(configuredLifeAmount) : Number(action.delta ?? action.amount ?? 0);
     const oldLife = Number(player.life || 0);
+    const floorProtection = context.sourcePlayerId && context.sourcePlayerId !== playerId
+      ? activeTurnProtection(next, playerId, "lifeCannotBecomeZeroFromOpponentEffects")
+      : null;
+    if (delta < 0 && floorProtection && oldLife > 0) delta = -Math.min(-delta, Math.max(0, oldLife - 1));
     const life = Math.max(0, oldLife + delta);
     const actualLoss = delta < 0 ? Math.min(-delta, oldLife) : 0;
     next = { ...next, players: { ...next.players, [playerId]: { ...player, life, reserve: Number(player.reserve || 0) + actualLoss } } };
+    if (actualLoss > 0) next = queueDeferredCanonicalEvent(next, { event: "lifeDecreased", sourcePlayerId: context.sourcePlayerId || null, sourceInstanceId: context.sourceInstanceId || null, sourceCardId: context.sourceCard?.id || null, eventPlayerId: playerId, context: { amount: actualLoss, cause: "effect" } });
     if (life <= 0) next = { ...next, winnerId: otherPlayerId(next, playerId), winnerReason: "life" };
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: Math.abs(delta) };
   }
@@ -1469,6 +1489,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const playerId = resolvePlayerId(next, action, context);
     const player = next.players?.[playerId];
     if (!player) return { match, notes: ["Jogador alvo inválido para Life damage."], manualResolutionNeeded: true, executed: false };
+    if (getContinuousPlayerNumericModifier(next, playerId, "lifeChangeLocked") > 0) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
     if (context.sourcePlayerId !== playerId && getContinuousPlayerNumericModifier(next, playerId, "opponentEffectLifeDamageBlocked") > 0) {
       return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
     }
@@ -1477,10 +1498,15 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     }
     const rawRequested = Math.max(0, Number(action.amount ?? action.count ?? 1));
     const capped = capUltimateEffectLifeLoss(next, playerId, rawRequested, context);
-    const moved = Math.min(capped.requested, Number(player.life || 0));
+    const floorProtection = context.sourcePlayerId && context.sourcePlayerId !== playerId
+      ? activeTurnProtection(next, playerId, "lifeCannotBecomeZeroFromOpponentEffects")
+      : null;
+    const floorCap = floorProtection && Number(player.life || 0) > 0 ? Math.max(0, Number(player.life || 0) - 1) : Number(player.life || 0);
+    const moved = Math.min(capped.requested, floorCap);
     const life = Math.max(0, Number(player.life || 0) - moved);
     next = { ...next, players: { ...next.players, [playerId]: { ...player, life, reserve: Number(player.reserve || 0) + moved } } };
     next = recordTurnProtectionUsage(next, playerId, capped.type, moved);
+    if (moved > 0) next = queueDeferredCanonicalEvent(next, { event: "lifeDecreased", sourcePlayerId: context.sourcePlayerId || null, sourceInstanceId: context.sourceInstanceId || null, sourceCardId: context.sourceCard?.id || null, eventPlayerId: playerId, context: { amount: moved, cause: "effect" } });
     if (life <= 0 && moved > 0) next = { ...next, winnerId: otherPlayerId(next, playerId), winnerReason: "life" };
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
   }
@@ -1489,9 +1515,14 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const playerId = resolvePlayerId(next, action, context);
     const player = next.players?.[playerId];
     if (!player) return { match, notes: ["Jogador alvo inválido para mover Life ao Trash."], manualResolutionNeeded: true, executed: false };
+    if (getContinuousPlayerNumericModifier(next, playerId, "lifeChangeLocked") > 0) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
     const rawRequested = Math.max(0, Number(action.amount ?? action.count ?? 1));
     const capped = capUltimateEffectLifeLoss(next, playerId, rawRequested, context);
-    const moved = Math.min(capped.requested, Number(player.life || 0));
+    const floorProtection = context.sourcePlayerId && context.sourcePlayerId !== playerId
+      ? activeTurnProtection(next, playerId, "lifeCannotBecomeZeroFromOpponentEffects")
+      : null;
+    const floorCap = floorProtection && Number(player.life || 0) > 0 ? Math.max(0, Number(player.life || 0) - 1) : Number(player.life || 0);
+    const moved = Math.min(capped.requested, floorCap);
     const life = Math.max(0, Number(player.life || 0) - moved);
     next = {
       ...next,
@@ -1501,6 +1532,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       }
     };
     next = recordTurnProtectionUsage(next, playerId, capped.type, moved);
+    if (moved > 0) next = queueDeferredCanonicalEvent(next, { event: "lifeDecreased", sourcePlayerId: context.sourcePlayerId || null, sourceInstanceId: context.sourceInstanceId || null, sourceCardId: context.sourceCard?.id || null, eventPlayerId: playerId, context: { amount: moved, cause: "effect" } });
     if (life <= 0 && moved > 0) next = { ...next, winnerId: otherPlayerId(next, playerId), winnerReason: "life" };
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
   }
@@ -1589,7 +1621,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
   }
 
   if ([
-    "modifyBP", "refresh", "exhaust", "destroy", "returnToHand", "returnToTopDeck",
+    "modifyBP", "refresh", "exhaust", "heavyExhaust", "destroy", "returnToHand", "returnToTopDeck",
     "destroyAllMatching", "refreshAllMatching", "exhaustAllMatching", "returnAllMatchingToHand"
   ].includes(type)) {
     const allType = ["destroyAllMatching", "refreshAllMatching", "exhaustAllMatching", "returnAllMatchingToHand"].includes(type);
@@ -1696,14 +1728,23 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         }
         return updated;
       }
-      if (baseType === "refresh" || baseType === "exhaust") {
+      if (baseType === "refresh" || baseType === "exhaust" || baseType === "heavyExhaust") {
         const current = findPhysicalCard(working, target.physical.instanceId);
         if (!current) return working;
         if (baseType === "refresh" && getContinuousNumericModifier(working, cardIndex, current.card, "cannotRefresh") > 0) return working;
         const wasExhausted = Boolean(current.card.exhausted);
-        const player = updateFieldCard(working.players[current.playerId], current.card.instanceId, (physical) => ({ ...physical, exhausted: baseType === "exhaust" }));
+        const willExhaust = baseType === "exhaust" || baseType === "heavyExhaust";
+        const player = updateFieldCard(working.players[current.playerId], current.card.instanceId, (physical) => ({
+          ...physical,
+          exhausted: willExhaust,
+          flags: baseType === "heavyExhaust"
+            ? { ...(physical.flags || {}), heavyExhausted: true }
+            : baseType === "refresh"
+              ? { ...(physical.flags || {}), heavyExhausted: false }
+              : physical.flags
+        }));
         let updated = { ...working, players: { ...working.players, [current.playerId]: player } };
-        if (baseType === "exhaust" && !wasExhausted) {
+        if ((baseType === "exhaust" || baseType === "heavyExhaust") && !wasExhausted) {
           updated = queueDeferredCanonicalEvent(updated, {
             event: "cardExhausted",
             sourcePlayerId: current.playerId,
@@ -1844,6 +1885,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       : Number(action.count ?? action.amount ?? 1);
     if (action.maxCount != null) requested = Math.min(requested, Number(action.maxCount));
     if (type === "topDeckToTrash") {
+      if (getContinuousPlayerNumericModifier(next, playerId, "deckRemovalLocked") > 0) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
       const cap = getContinuousPlayerNumericModifier(next, playerId, "maxDeckDiscardPerTurn");
       if (cap > 0) {
         const used = Number(next.temporary?.deckDiscardedByEffect?.[playerId] || 0);

@@ -6,6 +6,7 @@ import { shuffle } from "./utils.js";
 import { dispatchPhaseEntry } from "./effectEngine/phaseTriggerEngine.js";
 import { legalAttackers } from "./battle.js";
 import { findPhysicalCard } from "./selectors.js";
+import { removeFieldCard } from "./zones.js";
 
 
 function decrementEndStepSuppressions(match, playerId) {
@@ -39,8 +40,28 @@ function drawOne(match, playerId) {
   return { ...match, players: { ...match.players, [playerId]: nextPlayer } };
 }
 
+function performScheduledSourceRemovals(match, playerId) {
+  const scheduled = match.persistentEffects?.scheduledSourceRemovals || [];
+  let next = match;
+  const keep = [];
+  for (const item of scheduled) {
+    if (item.playerId !== playerId || Number(item.dueTurnNumber || Infinity) > Number(match.turnNumber || 0)) { keep.push(item); continue; }
+    const found = findPhysicalCard(next, item.instanceId);
+    if (!found || !["spirits","nexuses","other"].includes(found.zone)) continue;
+    const removed = removeFieldCard(next.players[playerId], item.instanceId);
+    if (!removed.card) continue;
+    const regular = Number(removed.card.cores?.regular || 0);
+    const clean = { ...removed.card, cores: { regular: 0, soul: false }, combinedWith: null, pendingDestruction: false };
+    let player = { ...removed.player, reserve: Number(removed.player.reserve || 0) + regular, removed: [...(removed.player.removed || []), clean] };
+    if (removed.card.cores?.soul) player = { ...player, soulCore: { zone: "reserve", instanceId: null } };
+    next = { ...next, players: { ...next.players, [playerId]: player } };
+  }
+  return { ...next, persistentEffects: { ...(next.persistentEffects || {}), scheduledSourceRemovals: keep } };
+}
+
 function performPhaseEntry(match, phase) {
   const playerId = match.activePlayerId;
+  if (phase === "end") match = performScheduledSourceRemovals(match, playerId);
   const player = match.players[playerId];
   if (phase === "start") {
     if (player.deck.length === 0) {
@@ -62,7 +83,12 @@ function performPhaseEntry(match, phase) {
   if (phase === "refresh") {
     const field = {};
     for (const [zone, cards] of Object.entries(player.field)) {
-      field[zone] = cards.map((c) => ({ ...c, exhausted: false }));
+      field[zone] = cards.map((c) => {
+        if (c.flags?.heavyExhausted) {
+          return { ...c, exhausted: true, flags: { ...(c.flags || {}), heavyExhausted: false } };
+        }
+        return { ...c, exhausted: false };
+      });
     }
     const soulFromTrash = player.soulCore?.zone === "trash";
     return {

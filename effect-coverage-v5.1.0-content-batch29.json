@@ -8,7 +8,7 @@
     3
   ],
   "source": "src/data/cards.json",
-  "generatedAt": "2026-10-01T11:19:21.271Z",
+  "generatedAt": "2026-10-01T10:39:09.334Z",
   "classificationVersion": "v5.1.0-phase03",
   "canonicalEvents": [
     {
@@ -196,10 +196,10 @@
     "totalCards": 365,
     "totalSets": 11,
     "byStatus": {
-      "AUTOMATED": 334,
+      "AUTOMATED": 331,
       "MANUAL": 1,
       "NO_EFFECT": 16,
-      "UNSUPPORTED_TRIGGER": 14
+      "UNSUPPORTED_TRIGGER": 17
     },
     "bySet": {
       "SD13": {
@@ -229,12 +229,12 @@
       "BSC49": {
         "total": 117,
         "statuses": {
-          "AUTOMATED": 101,
+          "AUTOMATED": 98,
           "NO_EFFECT": 1,
-          "UNSUPPORTED_TRIGGER": 14,
+          "UNSUPPORTED_TRIGGER": 17,
           "MANUAL": 1
         },
-        "automationPercent": 86.3
+        "automationPercent": 83.8
       },
       "SD10": {
         "total": 18,
@@ -292,13 +292,13 @@
       }
     },
     "entries": {
-      "total": 1047,
-      "automated": 722,
-      "runtimeUnsupportedTrigger": 29,
+      "total": 1040,
+      "automated": 715,
+      "runtimeUnsupportedTrigger": 32,
       "unsupportedCondition": 0,
       "unsupportedAction": 0,
-      "manual": 296,
-      "schemaV2": 598
+      "manual": 293,
+      "schemaV2": 591
     },
     "gapFrequency": {
       "triggers": {
@@ -312,6 +312,7 @@
         "whenBravedOrCombinedCardWouldLeave": 1,
         "whenDepletedOrDestroyedByOpponent": 1,
         "whenDiscardedByGreenOnlyEffect": 1,
+        "whenDiscardedFromHand": 1,
         "whenExhaustedEitherAttackStep": 1,
         "whenLifeReducedByOpponentEffect": 1,
         "whenOpenedFromDeckByGreenEffect": 1,
@@ -321,6 +322,8 @@
         "whenYourSpiritOrUltimateDestroyed": 1,
         "whileAttackingAndRefreshed": 1,
         "whileCardOrSpirit": 1,
+        "whileInField": 1,
+        "whileInFieldOrTrash": 1,
         "whileLevel1": 1,
         "whileLevel2": 1,
         "whileLevel2Or3": 2,
@@ -14854,12 +14857,12 @@
       "set": "BSC49",
       "cardType": "magic",
       "nameEN": "Triangle Trap LT",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 2,
-      "automatedExecutableCount": 2,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 2,
       "entries": [
         {
           "id": "bsc49-091-hand",
@@ -14867,19 +14870,19 @@
           "schemaVersion": null,
           "triggerScope": null,
           "eventPlayer": null,
-          "rawEvent": "cardMoved",
-          "canonicalEvent": "cardMoved",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
+          "rawEvent": "whenDiscardedFromHand",
+          "canonicalEvent": "whenDiscardedFromHand",
+          "canonicalEventDefined": false,
+          "runtimeDispatched": false,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-091-hand-auto51",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
-          "status": "MANUAL"
+          "status": "UNSUPPORTED_TRIGGER"
         },
         {
           "id": "bsc49-091-flash",
@@ -14896,64 +14899,22 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-091-flash-auto51",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "flash",
           "status": "MANUAL"
-        },
-        {
-          "id": "bsc49-091-hand-auto51",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerTrash",
-          "eventPlayer": "self",
-          "rawEvent": "cardMoved",
-          "canonicalEvent": "cardMoved",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "moveCard"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-091-flash-auto51",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseOption",
-            "exhaust",
-            "heavyExhaust"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [],
+        "unsupportedTriggers": [
+          "whenDiscardedFromHand"
+        ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-091-hand",
+          "bsc49-091-flash"
+        ]
       }
     },
     {
@@ -15165,12 +15126,12 @@
       "set": "BSC49",
       "cardType": "magic",
       "nameEN": "Delta Barrier LT",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 2,
-      "executableEntryCount": 2,
-      "automatedExecutableCount": 2,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 2,
       "entries": [
         {
           "id": "bsc49-095-immediate",
@@ -15187,7 +15148,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-095-immediate-auto50",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "UNSUPPORTED_TRIGGER"
@@ -15207,56 +15168,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-095-flash-auto50",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "flash",
           "status": "MANUAL"
-        },
-        {
-          "id": "bsc49-095-immediate-auto50",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerHand",
-          "eventPlayer": "self",
-          "rawEvent": "lifeDecreased",
-          "canonicalEvent": "lifeDecreased",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "dispatchSourceEvent",
-            "moveCard"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-095-flash-auto50",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "setTurnProtection"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -15265,7 +15180,10 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-095-immediate",
+          "bsc49-095-flash"
+        ]
       }
     },
     {
@@ -15273,12 +15191,12 @@
       "set": "BSC49",
       "cardType": "magic",
       "nameEN": "Lunatic Seal LT",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 3,
       "entries": [
         {
           "id": "bsc49-096-protection",
@@ -15286,19 +15204,19 @@
           "schemaVersion": null,
           "triggerScope": null,
           "eventPlayer": null,
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
+          "rawEvent": "whileInFieldOrTrash",
+          "canonicalEvent": "whileInFieldOrTrash",
+          "canonicalEventDefined": false,
+          "runtimeDispatched": false,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-096-protection-auto52",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
-          "status": "MANUAL"
+          "status": "UNSUPPORTED_TRIGGER"
         },
         {
           "id": "bsc49-096-field",
@@ -15306,19 +15224,19 @@
           "schemaVersion": null,
           "triggerScope": null,
           "eventPlayer": null,
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
+          "rawEvent": "whileInField",
+          "canonicalEvent": "whileInField",
+          "canonicalEventDefined": false,
+          "runtimeDispatched": false,
           "actionTypes": [],
           "unsupportedActions": [],
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-096-field-auto52",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "field",
-          "status": "MANUAL"
+          "status": "UNSUPPORTED_TRIGGER"
         },
         {
           "id": "bsc49-096-main",
@@ -15335,88 +15253,24 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-096-main-auto52",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "main",
           "status": "MANUAL"
-        },
-        {
-          "id": "bsc49-096-protection-auto52",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-096-field-auto52",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-096-main-auto52",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "magicMain",
-          "canonicalEvent": "magicMain",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier",
-            "chooseCardsFromTrash",
-            "moveCard",
-            "placeSourceInField",
-            "returnToHand",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
-        "unsupportedTriggers": [],
+        "unsupportedTriggers": [
+          "whileInField",
+          "whileInFieldOrTrash"
+        ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-096-protection",
+          "bsc49-096-field",
+          "bsc49-096-main"
+        ]
       }
     },
     {

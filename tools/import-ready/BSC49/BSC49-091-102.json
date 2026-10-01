@@ -33,7 +33,7 @@
         "id": "bsc49-091-hand",
         "type": "constant",
         "levels": [],
-        "timing": "whenDiscardedFromHand",
+        "timing": "cardMoved",
         "title": {
           "en": "[Cannot Stack] Hand Effect",
           "ptBR": "[Não Acumula] Efeito na Mão"
@@ -41,7 +41,8 @@
         "text": {
           "en": "When this card in your hand would be discarded by one of your Green-only effects, you may put it in your hand area instead of your Trash.",
           "ptBR": "Quando esta carta na sua mão seria descartada por um dos seus efeitos somente Verdes, você pode colocá-la na sua área de Hand em vez do Trash."
-        }
+        },
+        "automationRef": "bsc49-091-hand-auto51"
       },
       {
         "id": "bsc49-091-flash",
@@ -55,10 +56,106 @@
         "text": {
           "en": "Choose one — exhaust one opposing Spirit/Ultimate; or heavily exhaust three opposing Spirits/Ultimates with original cost 4 or less.",
           "ptBR": "Escolha 1 — dê Exhaust em 1 Spirit/Ultimate do oponente; ou dê Heavy Exhaust em 3 Spirits/Ultimates do oponente com custo original 4 ou menos."
-        }
+        },
+        "automationRef": "bsc49-091-flash-auto51"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-091-hand-auto51",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "conditions": {
+          "all": [
+            {
+              "type": "eventMovedFromZone",
+              "zone": "hand"
+            },
+            {
+              "type": "eventMoveDestination",
+              "destination": "trash"
+            },
+            {
+              "type": "eventMovedByColor",
+              "color": "green"
+            }
+          ]
+        },
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "moveCard",
+                "target": "source",
+                "destination": "hand"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-091-flash-auto51",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "chooseOption",
+            "options": [
+              {
+                "id": "exhaust-one",
+                "actions": [
+                  {
+                    "type": "exhaust",
+                    "selector": {
+                      "owner": "opponent",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit",
+                        "ultimate"
+                      ]
+                    },
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "id": "heavy-exhaust-three",
+                "actions": [
+                  {
+                    "type": "heavyExhaust",
+                    "selector": {
+                      "owner": "opponent",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "spirit",
+                        "ultimate"
+                      ],
+                      "maximumCost": 4
+                    },
+                    "count": 3,
+                    "min": 0,
+                    "max": 3
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-091.webp"
   },
   {
@@ -471,7 +568,8 @@
         "text": {
           "en": "When your Life is reduced by an opposing effect, you may use this card immediately without paying its cost. A card used this way is unaffected by opposing effects until this Magic's effect finishes resolving.",
           "ptBR": "Quando sua Life for reduzida por um efeito do oponente, você pode usar esta carta imediatamente sem pagar seu custo. Uma carta usada desta forma não é afetada por efeitos do oponente até o efeito desta Magic terminar de resolver."
-        }
+        },
+        "automationRef": "bsc49-095-immediate-auto50"
       },
       {
         "id": "bsc49-095-flash",
@@ -485,10 +583,78 @@
         "text": {
           "en": "For this turn, your Life cannot become 0 from opposing effects or from attacks by opposing Spirits/Ultimates with cost 4 or more.",
           "ptBR": "Durante este turno, sua Life não pode se tornar 0 por efeitos do oponente nem por ataques de Spirits/Ultimates do oponente de custo 4 ou mais."
-        }
+        },
+        "automationRef": "bsc49-095-flash-auto50"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-095-immediate-auto50",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "conditions": {
+          "all": [
+            {
+              "type": "eventCause",
+              "value": "effect"
+            },
+            {
+              "type": "eventSourceIsOpponent"
+            }
+          ]
+        },
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "dispatchSourceEvent",
+                "event": "magicFlash",
+                "context": {
+                  "usedWithoutCost": true,
+                  "immediateUse": true
+                }
+              },
+              {
+                "type": "moveCard",
+                "target": "source",
+                "destination": "trash"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-095-flash-auto50",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "setTurnProtection",
+            "player": "self",
+            "protection": {
+              "type": "lifeCannotBecomeZeroFromOpponentEffects"
+            }
+          },
+          {
+            "type": "setTurnProtection",
+            "player": "self",
+            "protection": {
+              "type": "lifeCannotBecomeZeroFromOpponentHighCostAttacks",
+              "minimumCost": 4
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-095.webp"
   },
   {
@@ -527,7 +693,7 @@
         "id": "bsc49-096-protection",
         "type": "constant",
         "levels": [],
-        "timing": "whileInFieldOrTrash",
+        "timing": "continuous",
         "title": {
           "en": "Protection",
           "ptBR": "Proteção"
@@ -535,13 +701,14 @@
         "text": {
           "en": "This card in your Field/Trash is unaffected by your other effects.",
           "ptBR": "Esta carta no seu Field/Trash não é afetada pelos seus outros efeitos."
-        }
+        },
+        "automationRef": "bsc49-096-protection-auto52"
       },
       {
         "id": "bsc49-096-field",
         "type": "field",
         "levels": [],
-        "timing": "whileInField",
+        "timing": "continuous",
         "title": {
           "en": "Field",
           "ptBR": "Field"
@@ -549,7 +716,8 @@
         "text": {
           "en": "Neither player's Life can increase or decrease. Neither deck is affected by deck-removal effects, and cards cannot be put into the Trash except by Divine Trust. At the end of your next turn after this card is placed in your Field, remove this card from the game.",
           "ptBR": "A Life de nenhum jogador pode aumentar ou diminuir. Nenhum deck é afetado por efeitos de descarte/remoção de deck, e cartas não podem ser colocadas no Trash exceto por Divine Trust. No final do seu próximo turno após esta carta ser colocada no Field, remova esta carta do jogo."
-        }
+        },
+        "automationRef": "bsc49-096-field-auto52"
       },
       {
         "id": "bsc49-096-main",
@@ -563,11 +731,230 @@
         "text": {
           "en": "Return one opposing Spirit/Nexus to the hand. Then, by removing five cards from your Trash that have Devotee and also Astral Soul/Galaxian, place this card in your Field.",
           "ptBR": "Devolva 1 Spirit/Nexus do oponente para a mão. Depois, ao remover do jogo 5 cartas do seu Trash que possuam Devotee e também Astral Soul/Galaxian, coloque esta carta no seu Field."
-        }
+        },
+        "automationRef": "bsc49-096-main-auto52"
       }
     ],
-    "abilities": [],
-    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-096.webp"
+    "abilities": [
+      {
+        "id": "bsc49-096-protection-auto52",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "unaffectedByOwnEffects",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "instanceId": "$source"
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-096-field-auto52",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "lifeChangeLocked",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self"
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "lifeChangeLocked",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent"
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "deckRemovalLocked",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self"
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "deckRemovalLocked",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent"
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "trashPlacementLocked",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self"
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "trashPlacementLocked",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent"
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-096-main-auto52",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicMain",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "nexus"
+              ]
+            },
+            "maxTargets": 1,
+            "onSelect": [
+              {
+                "type": "returnToHand",
+                "target": "selected"
+              }
+            ],
+            "afterSelect": [
+              {
+                "type": "chooseCardsFromTrash",
+                "selector": {
+                  "owner": "self",
+                  "families": [
+                    "Devotee"
+                  ],
+                  "familiesAny": [
+                    "Astral Soul",
+                    "Galaxian"
+                  ]
+                },
+                "minTargets": 5,
+                "maxTargets": 5,
+                "onSelect": [
+                  {
+                    "type": "moveCard",
+                    "target": "selected",
+                    "destination": "removed"
+                  },
+                  {
+                    "type": "placeSourceInField",
+                    "removeAtEndOfNextControllerTurn": true
+                  },
+                  {
+                    "type": "addModifier",
+                    "property": "lifeChangeLocked",
+                    "operation": "set",
+                    "value": 1,
+                    "selector": {
+                      "owner": "self"
+                    },
+                    "duration": "whileSourceExists"
+                  },
+                  {
+                    "type": "addModifier",
+                    "property": "lifeChangeLocked",
+                    "operation": "set",
+                    "value": 1,
+                    "selector": {
+                      "owner": "opponent"
+                    },
+                    "duration": "whileSourceExists"
+                  },
+                  {
+                    "type": "addModifier",
+                    "property": "deckRemovalLocked",
+                    "operation": "set",
+                    "value": 1,
+                    "selector": {
+                      "owner": "self"
+                    },
+                    "duration": "whileSourceExists"
+                  },
+                  {
+                    "type": "addModifier",
+                    "property": "deckRemovalLocked",
+                    "operation": "set",
+                    "value": 1,
+                    "selector": {
+                      "owner": "opponent"
+                    },
+                    "duration": "whileSourceExists"
+                  },
+                  {
+                    "type": "addModifier",
+                    "property": "trashPlacementLocked",
+                    "operation": "set",
+                    "value": 1,
+                    "selector": {
+                      "owner": "self"
+                    },
+                    "duration": "whileSourceExists"
+                  },
+                  {
+                    "type": "addModifier",
+                    "property": "trashPlacementLocked",
+                    "operation": "set",
+                    "value": 1,
+                    "selector": {
+                      "owner": "opponent"
+                    },
+                    "duration": "whileSourceExists"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-096.webp",
+    "unaffectedByOwnEffectsInZones": [
+      "trash",
+      "nexuses",
+      "other",
+      "spirits"
+    ]
   },
   {
     "id": "BSC49-097",
@@ -993,23 +1380,95 @@
       "en": "Flash: For this turn, all opposing Spirits with effect text cannot attack or block. Additionally, by removing five cards from your Trash that have Devotee and also Astral Soul/Galaxian, your opponent cannot use cards from their hand/hand area this turn unless those cards are Yellow-only.",
       "ptBR": "Flash: Durante este turno, todos os Spirits do oponente que possuem texto de efeito não podem atacar nem bloquear. Além disso, ao remover do jogo 5 cartas do seu Trash que possuam Devotee e também Astral Soul/Galaxian, seu oponente não pode usar cartas da mão/área de Hand durante este turno, exceto cartas que sejam somente Amarelas."
     },
-    "effects": [
+    "effects": [],
+    "abilities": [
       {
-        "id": "bsc49-099-flash",
-        "type": "flash",
-        "levels": [],
-        "timing": "flash",
-        "title": {
-          "en": "Flash",
-          "ptBR": "Flash"
+        "id": "bsc49-099-flash-auto49",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "self"
         },
-        "text": {
-          "en": "For this turn, all opposing Spirits with effect text cannot attack or block. Additionally, by removing five cards from your Trash that have Devotee and also Astral Soul/Galaxian, your opponent cannot use cards from their hand/hand area this turn unless those cards are Yellow-only.",
-          "ptBR": "Durante este turno, todos os Spirits do oponente que possuem texto de efeito não podem atacar nem bloquear. Além disso, ao remover do jogo 5 cartas do seu Trash que possuam Devotee e também Astral Soul/Galaxian, seu oponente não pode usar cartas da mão/área de Hand durante este turno, exceto cartas que sejam somente Amarelas."
-        }
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "cannotAttack",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "hasEffectText": true
+            },
+            "duration": "thisTurn"
+          },
+          {
+            "type": "addModifier",
+            "property": "cannotBlock",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "hasEffectText": true
+            },
+            "duration": "thisTurn"
+          },
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "selectMultipleTargets",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "trash"
+                  ],
+                  "familiesAll": [
+                    "Devotee"
+                  ],
+                  "familiesAny": [
+                    "Astral Soul",
+                    "Galaxian"
+                  ]
+                },
+                "minTargets": 5,
+                "maxTargets": 5,
+                "onConfirm": [
+                  {
+                    "type": "moveCard",
+                    "target": "selected",
+                    "destination": "removed"
+                  },
+                  {
+                    "type": "setTurnProtection",
+                    "player": "opponent",
+                    "protection": {
+                      "type": "handUseColorsOnly",
+                      "colors": [
+                        "yellow"
+                      ],
+                      "requireOnly": true
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
     ],
-    "abilities": [],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-099.webp"
   },
   {

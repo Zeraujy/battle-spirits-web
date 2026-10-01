@@ -6,6 +6,58 @@ const PATCHES = [
   {
     version: "5.0.3",
     date: { pt: "01/10/2026", en: "10/01/2026" },
+    title: { pt: "Automação de Cartas — BSC49 Wave 17", en: "Card Automation — BSC49 Wave 17" },
+    summary: { pt: "Lunatic Seal LT passou para resolução estruturada com Field lock global e remoção programada.", en: "Lunatic Seal LT moved to structured resolution with global Field locks and scheduled removal." },
+    sections: [{ title: { pt: "BSC49 Wave 17", en: "BSC49 Wave 17" }, items: {
+      pt: ["BSC49 avançou para 102/117 cartas resolvidas e o fallback manual caiu para 4,11% (15/365).", "Field locks reutilizáveis agora podem congelar Life, impedir deck removal e bloquear envio de cartas ao Trash enquanto a fonte permanecer em campo.", "Lunatic Seal LT remove 5 cartas válidas do Trash, permanece em Field e é removida no fim do próximo turno do controlador."],
+      en: ["BSC49 advanced to 102/117 resolved cards and manual fallback dropped to 4.11% (15/365).", "Reusable Field locks can now freeze Life, prevent deck removal and block cards from being sent to Trash while the source remains in play.", "Lunatic Seal LT removes five valid Trash cards, remains in the Field and is removed at the end of its controller's next turn."]
+    }}]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "01/10/2026", en: "10/01/2026" },
+    title: { pt: "Automação de Cartas — BSC49 Wave 16", en: "Card Automation — BSC49 Wave 16" },
+    summary: { pt: "Triangle Trap LT passou para resolução estruturada com Heavy Exhaust reutilizável.", en: "Triangle Trap LT moved to structured resolution with reusable Heavy Exhaust support." },
+    sections: [{ title: { pt: "BSC49 Wave 16", en: "BSC49 Wave 16" }, items: {
+      pt: ["BSC49 avançou para 101/117 cartas resolvidas e o fallback manual caiu para 4,38% (16/365).", "Heavy Exhaust agora é uma Core Action genérica que faz a carta pular exatamente o próximo Refresh Step.", "Triangle Trap LT automatiza recuperação após descarte por efeito Verde e suas duas opções de Flash."],
+      en: ["BSC49 advanced to 101/117 resolved cards and manual fallback dropped to 4.38% (16/365).", "Heavy Exhaust is now a generic Core Action that makes the card skip exactly the next Refresh Step.", "Triangle Trap LT automates recovery after a Green-effect discard and both Flash choices."]
+    }}]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "01/10/2026", en: "10/01/2026" },
+    title: { pt: "Automação de Cartas — BSC49 Wave 15", en: "Card Automation — BSC49 Wave 15" },
+    summary: {
+      pt: "Delta Barrier LT passou para resolução estruturada, com ativação reativa após dano de efeito e proteção para impedir que a Life chegue a 0.",
+      en: "Delta Barrier LT moved to structured resolution with reactive activation after effect Life loss and protection that prevents Life from reaching 0."
+    },
+    sections: [{
+      title: { pt: "BSC49 Wave 15", en: "BSC49 Wave 15" },
+      items: {
+        pt: ["BSC49 avançou para 100/117 cartas resolvidas e o fallback manual caiu para 4,66% (17/365).", "Dano de Life causado por efeitos agora emite lifeDecreased canônico, e observers de Hand também podem reagir a partir do Open Area.", "Delta Barrier LT pode ativar seu Flash reativamente sem custo e protege a Life contra chegar a 0 por efeitos adversários ou ataques de custo 4 ou mais."],
+        en: ["BSC49 advanced to 100/117 resolved cards and manual fallback dropped to 4.66% (17/365).", "Effect-caused Life loss now emits canonical lifeDecreased, and Hand observers can also react from Open Area.", "Delta Barrier LT can reactively activate its Flash without cost and protects Life from reaching 0 through opposing effects or cost 4+ attacks."]
+      }
+    }]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "01/10/2026", en: "10/01/2026" },
+    title: { pt: "Automação de Cartas — BSC49 Wave 14", en: "Card Automation — BSC49 Wave 14" },
+    summary: {
+      pt: "Wig Bind LT passou para resolução estruturada completa, incluindo bloqueio por texto de efeito e restrição Yellow-only da Hand/Hand Area.",
+      en: "Wig Bind LT moved to complete structured resolution, including effect-text combat locks and a Yellow-only Hand/Hand Area restriction."
+    },
+    sections: [{
+      title: { pt: "BSC49 Wave 14", en: "BSC49 Wave 14" },
+      items: {
+        pt: ["BSC49 avançou para 99/117 cartas resolvidas e o fallback manual caiu para 4,93% (18/365).", "A Core Action Library permaneceu em 85 tipos; entraram seletores genéricos hasEffectText/familiesAny e uma proteção de turno para limitar uso da Hand por cor.", "Wig Bind LT agora impede ataque/bloqueio dos Spirits adversários com texto de efeito e pode remover 5 cartas válidas do Trash para limitar a Hand adversária a cartas somente Amarelas no turno."],
+        en: ["BSC49 advanced to 99/117 resolved cards and manual fallback dropped to 4.93% (18/365).", "The Core Action Library remained at 85 types; generic hasEffectText/familiesAny selectors and a turn protection for color-limited Hand use were added.", "Wig Bind LT now prevents opposing Spirits with effect text from attacking/blocking and can remove five valid Trash cards to restrict the opponent to Yellow-only Hand use for the turn."]
+      }
+    }]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "01/10/2026", en: "10/01/2026" },
     title: { pt: "Automação de Cartas — BSC49 Wave 13", en: "Card Automation — BSC49 Wave 13" },
     summary: {
       pt: "Orion Power LT passou para resolução estruturada completa, incluindo ativação após descarte por efeito Blue e descarte de deck após dano de ataque.",

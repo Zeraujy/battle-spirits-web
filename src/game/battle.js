@@ -292,6 +292,7 @@ function moveDestroyedReplacement(match, playerId, instanceId, destination) {
 function destroyBattleCard(match, playerId, instanceId, cardIndex, metadata = {}) {
   const found = findPhysicalCard(match, instanceId);
   if (!found) return { match, destroyed: null, prevented: false, manualResolutionNeeded: false, notes: [] };
+  if (getContinuousPlayerNumericModifier(match, playerId, "trashPlacementLocked") > 0) return { match, destroyed: null, prevented: true, manualResolutionNeeded: false, notes: [] };
   const replacement = resolveReplacementWindow(match, {
     event: ReplacementEvent.WOULD_BE_DESTROYED,
     targetPlayerId: playerId,
@@ -399,7 +400,14 @@ export function resolveBattle(match, actorId, cardIndex) {
         if (maxProtectedBP > 0 && attackerBP <= maxProtectedBP) damage = 0;
       }
       if (next.battle?.restrictions?.preventLifeDamage === true) damage = 0;
+      const lifeFloor = next.temporary?.turnProtections?.[battle.defenderPlayerId]?.lifeCannotBecomeZeroFromOpponentHighCostAttacks;
+      if (lifeFloor && ["spirit", "ultimate"].includes(String(attackerCard?.cardType || "").toLowerCase())) {
+        const effectiveCost = getEffectiveCost(next, cardIndex, attackerCtx.card);
+        const minCost = Math.max(0, Number(lifeFloor.minimumCost ?? 4));
+        if (effectiveCost >= minCost && Number(defender.life || 0) > 0) damage = Math.min(damage, Math.max(0, Number(defender.life || 0) - 1));
+      }
 
+      if (getContinuousPlayerNumericModifier(next, battle.defenderPlayerId, "lifeChangeLocked") > 0) damage = 0;
       const replacement = resolveReplacementWindow(next, {
         event: ReplacementEvent.WOULD_LOSE_LIFE,
         targetPlayerId: battle.defenderPlayerId,
@@ -444,7 +452,7 @@ export function resolveBattle(match, actorId, cardIndex) {
           }
         }
         const lifeHitDeckDiscard = Math.max(0, Number(getContinuousNumericModifier(next, cardIndex, attackerCtx.card, "opponentDeckDiscardOnLifeDamage") || 0));
-        if (lifeHitDeckDiscard > 0) {
+        if (lifeHitDeckDiscard > 0 && getContinuousPlayerNumericModifier(next, battle.defenderPlayerId, "deckRemovalLocked") <= 0) {
           const targetPlayer = next.players[battle.defenderPlayerId];
           const cap = getContinuousPlayerNumericModifier(next, battle.defenderPlayerId, "maxDeckDiscardPerTurn");
           const used = Number(next.temporary?.deckDiscardedByEffect?.[battle.defenderPlayerId] || 0);

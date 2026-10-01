@@ -255,6 +255,7 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     const expected = String(condition.effectType ?? condition.value ?? "").replace(/[\s_-]+/g, "").toLowerCase();
     return !(hostCard.effects || []).some((entry) => String(entry?.type || "").replace(/[\s_-]+/g, "").toLowerCase() === expected);
   }
+  if (type === "eventSourceIsOpponent") return Boolean(context.eventSourcePlayerId && sourcePlayerId && context.eventSourcePlayerId !== sourcePlayerId);
   if (type === "eventCause") return String(context.cause || "") === String(condition.value ?? condition.cause ?? "");
   if (type === "specialSummonCause") return String(context.specialSummonCause || "") === String(condition.value ?? condition.cause ?? "");
   if (type === "eventDestroyedByOpponent") {

@@ -143,6 +143,11 @@ function selectorMatches(match, cardIndex, physical, modifier, skipProtection = 
   if (selector.excludeSource && physical.instanceId === modifier.sourceInstanceId) return false;
   if (selector.instanceId && String(selector.instanceId) !== String(physical.instanceId)) return false;
   if (selector.cardId && String(selector.cardId) !== String(card.id)) return false;
+  if (selector.hasEffectText === true) {
+    const text = String(card?.effectText?.en || card?.effectText?.ptBR || card?.textEN || card?.textPT || "").trim();
+    const structured = (card?.effects || []).length > 0 || (card?.abilities || []).length > 0;
+    if (!text && !structured) return false;
+  }
   if (selector.combinedHostOfSource === true) {
     const source = modifier.sourceInstanceId ? (() => {
       for (const player of Object.values(match.players || {})) {
@@ -162,6 +167,8 @@ function selectorMatches(match, cardIndex, physical, modifier, skipProtection = 
   if (families.length && !families.some((value) => (card.families || []).includes(value))) return false;
   const familiesAll = selector.familiesAll || [];
   if (familiesAll.length && !familiesAll.every((value) => (card.families || []).includes(value))) return false;
+  const familiesAny = selector.familiesAny || [];
+  if (familiesAny.length && !familiesAny.some((value) => (card.families || []).includes(value))) return false;
   const symbols = selector.symbols || (selector.symbol ? [selector.symbol] : []);
   if (symbols.length && !symbols.some((value) => (card.symbols || []).includes(value))) return false;
   const keywords = selector.keywords || (selector.keyword ? [selector.keyword] : []);

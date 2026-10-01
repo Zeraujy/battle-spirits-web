@@ -142,7 +142,7 @@ function observerCandidates(match, input, cardIndex) {
     // example Brave cards that may be summoned after an Ultimate is summoned).
     // These remain explicit Schema v2 observers so legacy hand cards are not
     // scanned or executed accidentally.
-    for (const physical of player.hand || []) {
+    for (const physical of [...(player.hand || []), ...(player.openArea || [])]) {
       const card = getDatabaseCard(cardIndex, physical);
       if (!card) continue;
       const context = {

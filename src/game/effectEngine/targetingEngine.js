@@ -153,7 +153,16 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   if (selector.excludeSource && physical.instanceId === context.sourceInstanceId) return false;
   if (selector.instanceId && String(physical.instanceId) !== String(selector.instanceId)) return false;
   if (selector.cardId && String(card.id) !== String(selector.cardId)) return false;
+  if (selector.hasEffectText === true) {
+    const text = String(card?.effectText?.en || card?.effectText?.ptBR || card?.textEN || card?.textPT || "").trim();
+    const structured = (card?.effects || []).length > 0 || (card?.abilities || []).length > 0;
+    if (!text && !structured) return false;
+  }
   if (selector.playerId && selector.playerId !== playerId) return false;
+  if (selector.ignoreEffectImmunity !== true && context?.sourcePlayerId && context.sourcePlayerId === playerId) {
+    const protectedZones = Array.isArray(card?.unaffectedByOwnEffectsInZones) ? card.unaffectedByOwnEffectsInZones : [];
+    if (protectedZones.includes(zone)) return false;
+  }
   if (selector.instanceIdFromContext) {
     const path = String(selector.instanceIdFromContext).split(".").filter(Boolean);
     let dynamicId = context;
@@ -193,6 +202,7 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   if (selector.colors?.length && !selector.colors.some((color) => props.colors.includes(color))) return false;
   if (selector.families?.length && !selector.families.some((family) => props.families.includes(family))) return false;
   if (selector.familiesAll?.length && !selector.familiesAll.every((family) => props.families.includes(family))) return false;
+  if (selector.familiesAny?.length && !selector.familiesAny.some((family) => props.families.includes(family))) return false;
   if (selector.symbols?.length && !selector.symbols.some((symbol) => props.symbols.includes(symbol))) return false;
   if (!numberBetween(props.symbols.length, selector.minimumSymbols ?? selector.minSymbols, selector.maximumSymbols ?? selector.maxSymbols)) return false;
   const keywords = selector.keywords ?? (selector.keyword ? [selector.keyword] : []);

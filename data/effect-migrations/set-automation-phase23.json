@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T10:28:39.966Z",
+  "generatedAt": "2026-10-01T11:19:44.710Z",
   "targetPercent": 95,
   "totalSets": 11,
   "completeSets": 10,
@@ -20,10 +20,10 @@
     {
       "set": "BSC49",
       "total": 117,
-      "automated": 98,
+      "automated": 102,
       "noEffect": 1,
-      "unresolved": 19,
-      "automationPercent": 83.8,
+      "unresolved": 15,
+      "automationPercent": 87.2,
       "unsupportedTriggers": [
         "afterCost4PlusMagicResolves",
         "afterDivineTrust",
@@ -34,17 +34,13 @@
         "whenBravedOrCombinedCardWouldLeave",
         "whenDepletedOrDestroyedByOpponent",
         "whenDiscardedByGreenOnlyEffect",
-        "whenDiscardedFromHand",
         "whenExhaustedEitherAttackStep",
-        "whenLifeReducedByOpponentEffect",
         "whenOpenedFromDeckByGreenEffect",
         "whenOpponentSpiritUltimateMilled",
         "whenOtherEligibleSpiritSummoned",
         "whenSummonedOrAttacks",
         "whileAttackingAndRefreshed",
         "whileCardOrSpirit",
-        "whileInField",
-        "whileInFieldOrTrash",
         "whileLevel1",
         "whileLevel2",
         "whileLevel2Or3",
@@ -56,22 +52,6 @@
       "unsupportedActions": [],
       "complete": false,
       "unresolvedCards": [
-        {
-          "cardId": "BSC49-091",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-095",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-096",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-099",
-          "status": "MANUAL"
-        },
         {
           "cardId": "BSC49-CP01",
           "status": "UNSUPPORTED_TRIGGER"

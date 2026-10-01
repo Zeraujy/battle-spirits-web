@@ -333,3 +333,37 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Phase 24 generated regression coverage advanced from 345 to 346 scenarios.
 - Main suite passes 149/149, Effect Engine 315/315, Batch 28 dedicated 5/5 and full regression 514/514.
 - Phase 25 and Phase 26 remain PASS; Phase 27 is still blocked only by the BSC49 Phase 23 set gate.
+
+## v5.1.0 Content Migration — Batch 29 / BSC49 Wave 14
+- Automated BSC49-099 Wig Bind LT with structured effect-text attack/block locks and its optional five-card Trash removal cost.
+- BSC49 coverage advanced from 98/117 to 99/117 resolved.
+- Global manual fallback improved from 5.21% (19/365) to 4.93% (18/365).
+- Added reusable `hasEffectText` and `familiesAny` selector semantics plus generic `handUseColorsOnly` turn protection enforcement for Hand/Hand Area plays.
+- Core Action Library remains at 85 reusable action types.
+- Phase 24 generated regression coverage advanced from 346 to 347 scenarios.
+- Main suite passes 149/149, Effect Engine 320/320, Batch 29 dedicated 5/5 and full regression 519/519.
+- Phase 25 and Phase 26 remain PASS; Phase 27 is still blocked only by the BSC49 Phase 23 set gate.
+
+## v5.1.0 Content Migration — Batch 30 / BSC49 Wave 15
+- Automated BSC49-095 Delta Barrier LT with reactive immediate-use routing and Life-floor protections.
+- BSC49 coverage advanced from 99/117 to 100/117 resolved.
+- Global manual fallback improved from 4.93% (18/365) to 4.66% (17/365).
+- Effect-caused Life loss now emits canonical `lifeDecreased`; controllerHand observers can also operate from Open Area.
+- Added reusable `eventSourceIsOpponent` condition and turn protections that prevent Life from becoming 0 from opposing effects or qualifying cost 4+ attacks.
+- Core Action Library remains at 85 reusable action types.
+- Phase 24 generated regression coverage advanced from 347 to 348 scenarios.
+- Main suite passes 149/149, Effect Engine 326/326, Batch 30 dedicated 6/6 and full regression 525/525.
+- Phase 25 and Phase 26 remain PASS; Phase 27 is still blocked only by the BSC49 Phase 23 set gate.
+
+## v5.1.0 Content Migration — Batch 31 / BSC49 Wave 16
+- Triangle Trap LT migrated to structured resolution.
+- Added reusable Heavy Exhaust semantics with one-Refresh-Step persistence.
+- BSC49 advanced to 101/117; manual fallback dropped to 4.38% (16/365).
+- Main suite 149/149, Effect Engine 330/330, Batch 31 dedicated 4/4.
+
+## v5.1.0 Content Migration — Batch 32 / BSC49 Wave 17
+- Lunatic Seal LT migrated to structured resolution.
+- Added reusable Field locks for Life, deck removal and card-to-Trash movement.
+- Added scheduled source removal at the end of the controller's next turn.
+- BSC49 advanced to 102/117; manual fallback dropped to 4.11% (15/365).
+- Main suite 149/149, Effect Engine 336/336, Batch 32 dedicated 6/6.
