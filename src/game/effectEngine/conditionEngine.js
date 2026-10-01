@@ -205,6 +205,17 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     const expected = String(condition.family ?? condition.value ?? "").toLowerCase();
     return Boolean(card && (card.families || []).some((family) => String(family).toLowerCase() === expected));
   }
+  if (type === "sourceBraveCount") {
+    const sourceId = context.sourceInstanceId || context.sourcePhysical?.instanceId || null;
+    const count = sourceId ? Object.values(match.players || {}).reduce((total, player) => total + (player.field?.other || []).filter((physical) => physical.combinedWith === sourceId).length, 0) : 0;
+    return compareNumber(count, condition);
+  }
+  if (type === "eventMovedCardWasBraved") return Boolean(context.movedCardWasBraved) === (condition.value ?? true);
+  if (type === "eventSourceFamilyAny") {
+    const card = eventSourceCard(match, context, cardIndex);
+    const expected = (condition.families || condition.values || []).map((value) => String(value).toLowerCase());
+    return Boolean(card && expected.some((value) => (card.families || []).some((family) => String(family).toLowerCase() === value)));
+  }
   if (type === "eventSourceBraved") {
     const instanceId = context.eventSourceInstanceId || null;
     if (!instanceId) return false;
@@ -343,6 +354,11 @@ function typedConditionMatches(match, condition, context, cardIndex) {
     const expected = condition.cardTypes || (condition.cardType ? [condition.cardType] : [condition.value]);
     return Boolean(card && expected.filter(Boolean).map((value) => String(value).toLowerCase()).includes(String(card.cardType || "").toLowerCase()));
   }
+  if (type === "eventMovedCardType") {
+    const expected = condition.cardTypes || (condition.cardType ? [condition.cardType] : [condition.value]);
+    return expected.filter(Boolean).map((value) => String(value).toLowerCase()).includes(String(context.movedCardType || "").toLowerCase());
+  }
+  if (type === "eventMovedCardIsSource") return Boolean(context.movedCardInstanceId && context.sourceInstanceId && String(context.movedCardInstanceId) === String(context.sourceInstanceId));
   if (type === "eventMovedCardFamily") {
     const expected = String(condition.family ?? condition.value ?? "").toLowerCase();
     return (context.movedCardFamilies || []).map((value) => String(value).toLowerCase()).includes(expected);

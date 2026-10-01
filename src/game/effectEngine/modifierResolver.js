@@ -177,6 +177,7 @@ function selectorMatches(match, cardIndex, physical, modifier, skipProtection = 
     if (!keywords.some((value) => active.includes(String(value).toLowerCase().replace(/\s+/g, "")))) return false;
   }
   const cost = Number(card.cost || 0);
+  if (Array.isArray(selector.costs) && selector.costs.length && !selector.costs.map(Number).includes(cost)) return false;
   if (selector.minimumCost != null && cost < Number(selector.minimumCost)) return false;
   if (selector.maximumCost != null && cost > Number(selector.maximumCost)) return false;
   if (selector.braved === true && !physical.combinedWith) return false;

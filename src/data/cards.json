@@ -33343,7 +33343,9 @@
     "families": [
       "Sovereign",
       "Divine Star",
-      "Dragon Knight"
+      "Dragon Knight",
+      "Devotee",
+      "Galaxian"
     ],
     "symbols": [
       "red"
@@ -33382,7 +33384,8 @@
         "text": {
           "en": "By moving your Soul Core to your Trash, pay 1 cost from The GalaxianContractor Dan with 6 or more cores and summon this card from your hand.",
           "ptBR": "Ao mover seu Soul Core para o Trash, pague 1 de custo a partir de The GalaxianContractor Dan com 6 ou mais Cores e Invoque esta carta da sua mão."
-        }
+        },
+        "automationRef": "bsc49-cp01-manifest-auto53"
       },
       {
         "id": "bsc49-cp01-family",
@@ -33396,7 +33399,8 @@
         "text": {
           "en": "This card/Spirit also gains Devotee/Galaxian.",
           "ptBR": "Esta carta/Spirit também recebe as famílias Devotee/Galaxian."
-        }
+        },
+        "automationRef": "bsc49-cp01-family-auto53"
       },
       {
         "id": "bsc49-cp01-star-world-release",
@@ -33414,10 +33418,293 @@
         "text": {
           "en": "You may destroy one opposing Spirit/Ultimate with the highest BP. Then, by moving one core from your six-color GranWalker Nexus to a Spirit, open the top card of your deck. If it has Devotee and also Astral Soul/Galaxian, summon it without paying its cost. Otherwise, add it to your hand.",
           "ptBR": "Você pode destruir 1 Spirit/Ultimate do oponente com o maior BP. Depois, ao mover 1 Core do seu GranWalker Nexus de seis cores para um Spirit, revele a carta do topo do deck. Se ela possuir Devotee e também Astral Soul/Galaxian, Invoque-a sem pagar o custo. Caso contrário, adicione-a à sua mão."
-        }
+        },
+        "automationRef": "bsc49-cp01-summon-release-auto53"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-cp01-manifest-auto53",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "performManifest",
+            "selector": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "nexus"
+              ],
+              "nameIncludes": "The GalaxianContractor Dan"
+            },
+            "minimumTargetCores": 6,
+            "costFromTarget": 1,
+            "coresToPlace": 1
+          }
+        ]
+      },
+      {
+        "id": "bsc49-cp01-family-auto53",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "families",
+            "operation": "add",
+            "value": [
+              "Devotee",
+              "Galaxian"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-cp01-summon-release-auto53",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit",
+                    "ultimate"
+                  ],
+                  "highestBPOnly": true
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "destroy"
+                },
+                "afterSelect": [
+                  {
+                    "type": "selectTarget",
+                    "selector": {
+                      "owner": "self",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "nexus"
+                      ],
+                      "families": [
+                        "GranWalker"
+                      ],
+                      "minimumCores": 1
+                    },
+                    "allowZero": true,
+                    "onSelect": {
+                      "type": "moveCoreSelectedToSource",
+                      "amount": 1
+                    },
+                    "afterIfAny": [
+                      {
+                        "type": "revealTopAndSummonOrHand",
+                        "matchSelector": {
+                          "familiesAll": [
+                            "Devotee"
+                          ],
+                          "familiesAny": [
+                            "Astral Soul",
+                            "Galaxian"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "noActions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "nexus"
+                  ],
+                  "families": [
+                    "GranWalker"
+                  ],
+                  "minimumCores": 1
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "moveCoreSelectedToSource",
+                  "amount": 1
+                },
+                "afterIfAny": [
+                  {
+                    "type": "revealTopAndSummonOrHand",
+                    "matchSelector": {
+                      "familiesAll": [
+                        "Devotee"
+                      ],
+                      "familiesAny": [
+                        "Astral Soul",
+                        "Galaxian"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-cp01-attack-release-auto53",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit",
+                    "ultimate"
+                  ],
+                  "highestBPOnly": true
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "destroy"
+                },
+                "afterSelect": [
+                  {
+                    "type": "selectTarget",
+                    "selector": {
+                      "owner": "self",
+                      "zones": [
+                        "field"
+                      ],
+                      "cardTypes": [
+                        "nexus"
+                      ],
+                      "families": [
+                        "GranWalker"
+                      ],
+                      "minimumCores": 1
+                    },
+                    "allowZero": true,
+                    "onSelect": {
+                      "type": "moveCoreSelectedToSource",
+                      "amount": 1
+                    },
+                    "afterIfAny": [
+                      {
+                        "type": "revealTopAndSummonOrHand",
+                        "matchSelector": {
+                          "familiesAll": [
+                            "Devotee"
+                          ],
+                          "familiesAny": [
+                            "Astral Soul",
+                            "Galaxian"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "noActions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "nexus"
+                  ],
+                  "families": [
+                    "GranWalker"
+                  ],
+                  "minimumCores": 1
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "moveCoreSelectedToSource",
+                  "amount": 1
+                },
+                "afterIfAny": [
+                  {
+                    "type": "revealTopAndSummonOrHand",
+                    "matchSelector": {
+                      "familiesAll": [
+                        "Devotee"
+                      ],
+                      "familiesAny": [
+                        "Astral Soul",
+                        "Galaxian"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-CP01.webp"
   },
   {
@@ -33479,7 +33766,8 @@
         "text": {
           "en": "Trust Astral Soul/Divine Star/Galaxian cards with cost 3 or more and Braves. Eligible summons may add one core from the Void; on placement, you may mill three and gain one core per eligible card.",
           "ptBR": "Trust para cartas Astral Soul/Divine Star/Galaxian de custo 3 ou mais e Braves. Invocações elegíveis podem adicionar 1 Core do Void; ao colocar este Nexus, você pode descartar 3 cartas e ganhar 1 Core por carta elegível."
-        }
+        },
+        "automationRef": "bsc49-cp02-trust-summon-final"
       },
       {
         "id": "bsc49-cp02-revival",
@@ -33493,7 +33781,8 @@
         "text": {
           "en": "If this card is in Soul State, you may place it. [Once per Turn: Same Name]",
           "ptBR": "Se esta carta estiver em Soul State, você pode colocá-la. [1 vez por turno: mesmo nome]"
-        }
+        },
+        "automationRef": "bsc49-cp02-revival-final"
       },
       {
         "id": "bsc49-cp02-contract-domain",
@@ -33509,7 +33798,8 @@
         "text": {
           "en": "For your non-six-color cards/Accelerators with Astral Soul/Galaxian, all reduction symbols are also treated as six-color reductions.",
           "ptBR": "Para suas cartas/Accelerators que não sejam de seis cores e possuam Astral Soul/Galaxian, todos os símbolos de redução também são tratados como reduções de seis cores."
-        }
+        },
+        "automationRef": "bsc49-cp02-domain-final"
       },
       {
         "id": "bsc49-cp02-contract-skill",
@@ -33525,10 +33815,191 @@
         "text": {
           "en": "By moving three cores from this Nexus to the Void, open the top two cards of your deck. Add one Astral Soul/Galaxian card among them to your hand and discard the rest. [Once per Turn]",
           "ptBR": "Ao mover 3 Cores deste Nexus para o Void, revele as 2 cartas do topo do deck. Adicione 1 carta Astral Soul/Galaxian entre elas à sua mão e descarte o restante. [1 vez por turno]"
-        }
+        },
+        "automationRef": "bsc49-cp02-skill-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-cp02-trust-summon-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "any": [
+              {
+                "type": "eventSourceCardType",
+                "cardTypes": [
+                  "brave"
+                ]
+              },
+              {
+                "all": [
+                  {
+                    "type": "eventSourceCost",
+                    "min": 3
+                  },
+                  {
+                    "type": "eventSourceFamilyAny",
+                    "families": [
+                      "Astral Soul",
+                      "Divine Star",
+                      "Galaxian"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "addCoreFromVoid",
+                "target": "source",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-cp02-trust-placement-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDeployed",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "millAndGainCoresPerMatching",
+                "count": 3,
+                "matchSelectors": [
+                  {
+                    "cardTypes": [
+                      "brave"
+                    ]
+                  },
+                  {
+                    "minimumCost": 3,
+                    "familiesAny": [
+                      "Astral Soul",
+                      "Divine Star",
+                      "Galaxian"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-cp02-revival-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "mainStep",
+          "scope": "controllerSoulState",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-cp02-revival",
+            "actions": [
+              {
+                "type": "chooseYesNo",
+                "yesActions": [
+                  {
+                    "type": "moveSourceFromSoulStateToField"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-cp02-domain-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "allReductionSymbolsSixColor",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "familiesAny": [
+                "Astral Soul",
+                "Galaxian"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-cp02-skill-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "main"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-cp02-skill",
+            "actions": [
+              {
+                "type": "removeCore",
+                "target": "source",
+                "amount": 3,
+                "destination": "void"
+              },
+              {
+                "type": "revealTopChooseOneToHand",
+                "count": 2,
+                "matchSelector": {
+                  "familiesAny": [
+                    "Astral Soul",
+                    "Galaxian"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-CP02.webp",
     "contractNexus": true
   },
@@ -33591,7 +34062,8 @@
         "text": {
           "en": "Trust Divine Star/Galaxian Spirits with cost 3 or more. Eligible summons/descends may add one core from the Void. On placement, if you have no other same-name GranWalker Nexus, you may mill three and gain one core per eligible card.",
           "ptBR": "Trust para Spirits Divine Star/Galaxian de custo 3 ou mais. Invocações/Descend elegíveis podem adicionar 1 Core do Void. Ao colocar este Nexus, se não houver outro GranWalker Nexus de mesmo nome, você pode descartar 3 cartas e ganhar 1 Core por carta elegível."
-        }
+        },
+        "automationRef": "bsc49-cp03-trust-summon-final"
       },
       {
         "id": "bsc49-cp03-trust-recovery",
@@ -33608,7 +34080,8 @@
         "text": {
           "en": "Add all Galaxian cards discarded by this Nexus's Divine Trust to your hand.",
           "ptBR": "Adicione à sua mão todas as cartas Galaxian descartadas pelo Divine Trust deste Nexus."
-        }
+        },
+        "automationRef": "bsc49-cp03-trust-placement-final"
       },
       {
         "id": "bsc49-cp03-divine-skill",
@@ -33625,7 +34098,8 @@
         "text": {
           "en": "By moving four cores from this Nexus to the Void, destroy one opposing Spirit/Ultimate with 10000 BP or less. Your opponent cannot end the Attack Step with effects this turn. [Once per Turn]",
           "ptBR": "Ao mover 4 Cores deste Nexus para o Void, destrua 1 Spirit/Ultimate do oponente com 10000 BP ou menos. Neste turno, seu oponente não pode encerrar o Attack Step por efeitos. [1 vez por turno]"
-        }
+        },
+        "automationRef": "bsc49-cp03-skill-final"
       },
       {
         "id": "bsc49-cp03-divine-domain",
@@ -33641,10 +34115,177 @@
         "text": {
           "en": "While you have six or fewer cards in your hand, your hand is unaffected by opposing effects.",
           "ptBR": "Enquanto você tiver 6 ou menos cartas na mão, sua mão não é afetada por efeitos do oponente."
-        }
+        },
+        "automationRef": "bsc49-cp03-domain-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-cp03-trust-summon-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardTypes": [
+              "spirit"
+            ]
+          },
+          {
+            "type": "eventSourceCost",
+            "min": 3
+          },
+          {
+            "type": "eventSourceFamilyAny",
+            "families": [
+              "Divine Star",
+              "Galaxian"
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "addCoreFromVoid",
+                "target": "source",
+                "count": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-cp03-trust-placement-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDeployed",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "millAndGainCoresPerMatching",
+                "count": 3,
+                "matchSelector": {
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "minimumCost": 3,
+                  "familiesAny": [
+                    "Divine Star",
+                    "Galaxian"
+                  ]
+                },
+                "recoverSelector": {
+                  "familiesAny": [
+                    "Galaxian"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-cp03-skill-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-cp03-skill",
+            "actions": [
+              {
+                "type": "removeCore",
+                "target": "source",
+                "amount": 4,
+                "destination": "void"
+              },
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit",
+                    "ultimate"
+                  ],
+                  "maximumBP": 10000
+                },
+                "allowZero": false,
+                "onSelect": {
+                  "type": "destroy"
+                }
+              },
+              {
+                "type": "addModifier",
+                "property": "cannotEndAttackStepByEffect",
+                "operation": "set",
+                "value": 1,
+                "selector": {
+                  "owner": "opponent"
+                },
+                "duration": "thisTurn"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-cp03-domain-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "handUnaffectedByOpponentEffects",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self"
+            },
+            "condition": {
+              "type": "handSize",
+              "player": "self",
+              "max": 6
+            },
+            "duration": "whileConditionTrue"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-CP03.webp",
     "errata": true,
     "printedCost": 4,
@@ -33728,7 +34369,8 @@
         "text": {
           "en": "You may make a designated attack against one opposing Spirit/Ultimate.",
           "ptBR": "Você pode realizar um ataque designado contra 1 Spirit/Ultimate do oponente."
-        }
+        },
+        "automationRef": "bsc49-xv01-designated-final"
       },
       {
         "id": "bsc49-xv01-symbol-life",
@@ -33746,7 +34388,8 @@
         "text": {
           "en": "Compare this Spirit's symbols with the blocker's symbols. For each symbol this Spirit has in excess, move one core from the opponent's Life to their Reserve.",
           "ptBR": "Compare os símbolos deste Spirit com os do bloqueador. Para cada símbolo que este Spirit possuir a mais, mova 1 Core da Life do oponente para a Reserve dele."
-        }
+        },
+        "automationRef": "bsc49-xv01-symbol-life-final"
       },
       {
         "id": "bsc49-xv01-extra-symbols",
@@ -33762,10 +34405,99 @@
         "text": {
           "en": "For each of your other Spirits, add one Red symbol to this Spirit for this battle.",
           "ptBR": "Para cada um dos seus outros Spirits, adicione 1 símbolo Vermelho a este Spirit durante esta batalha."
-        }
+        },
+        "automationRef": "bsc49-xv01-extra-symbols-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv01-designated-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "selectTarget",
+                "selector": {
+                  "owner": "opponent",
+                  "zones": [
+                    "field"
+                  ],
+                  "cardTypes": [
+                    "spirit",
+                    "ultimate"
+                  ]
+                },
+                "onSelect": {
+                  "type": "performSpecifiedAttack"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv01-symbol-life-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocked",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "moveLifeToReserveBySymbolExcess"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv01-extra-symbols-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          3
+        ],
+        "actions": [
+          {
+            "type": "modifySymbols",
+            "operation": "add",
+            "repeatValue": "red",
+            "valueFromSelectorCount": {
+              "owner": "self",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "excludeSource": true
+            },
+            "selector": "source",
+            "duration": "thisBattle"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV01.webp"
   },
   {
@@ -33839,7 +34571,8 @@
         "text": {
           "en": "This Spirit can combine with up to two Braves. While combined with exactly two Braves, Life reduction caused by this Spirit cannot be prevented by opposing White effects.",
           "ptBR": "Este Spirit pode combinar com até 2 Braves. Enquanto estiver combinado com exatamente 2 Braves, a redução de Life causada por este Spirit não pode ser impedida por efeitos Brancos do oponente."
-        }
+        },
+        "automationRef": "bsc49-xv02-double-final"
       },
       {
         "id": "bsc49-xv02-bp-destruction",
@@ -33857,7 +34590,8 @@
         "text": {
           "en": "Destroy any number of opposing Spirits/Ultimates whose total BP is 15000 or less, plus 5000 to the limit for each Brave combined with this Spirit.",
           "ptBR": "Destrua qualquer quantidade de Spirits/Ultimates do oponente cuja soma de BP seja 15000 ou menos, aumentando o limite em 5000 para cada Brave combinado com este Spirit."
-        }
+        },
+        "automationRef": "bsc49-xv02-bp-final"
       },
       {
         "id": "bsc49-xv02-braved-destruction",
@@ -33874,10 +34608,119 @@
         "text": {
           "en": "For each Brave on this Spirit, you may destroy one opposing Spirit/Ultimate/Nexus/GranWalker Nexus.",
           "ptBR": "Para cada Brave neste Spirit, você pode destruir 1 Spirit/Ultimate/Nexus/GranWalker Nexus do oponente."
-        }
+        },
+        "automationRef": "bsc49-xv02-braved-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv02-double-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "maxBraveAttachments",
+            "operation": "set",
+            "value": 2,
+            "selector": "source",
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "lifeDamageIgnoresWhitePrevention",
+            "operation": "set",
+            "value": 1,
+            "selector": "source",
+            "condition": {
+              "type": "sourceBraveCount",
+              "equals": 2
+            },
+            "duration": "whileConditionTrue"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv02-bp-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "destroyUpToTotalBP",
+            "baseBP": 15000,
+            "bonusPerSourceBrave": 5000,
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv02-braved-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "sourceBraveCount",
+            "min": 1
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectMultipleTargets",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate",
+                "nexus"
+              ]
+            },
+            "countFromSourceBraves": true,
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV02.webp"
   },
   {
@@ -33944,7 +34787,8 @@
         "text": {
           "en": "After your Life is reduced, summon this card without paying its cost.",
           "ptBR": "Depois que sua Life for reduzida, Invoque esta carta sem pagar o custo."
-        }
+        },
+        "automationRef": "bsc49-xv03-burst-auto54"
       },
       {
         "id": "bsc49-xv03-trash-recovery",
@@ -33962,7 +34806,8 @@
         "text": {
           "en": "Return one Purple card from your Trash to your hand. [Once per Turn: Same Name]",
           "ptBR": "Devolva 1 carta Roxa do seu Trash para a mão. [1 vez por turno: mesmo nome]"
-        }
+        },
+        "automationRef": "bsc49-xv03-recovery-auto54"
       },
       {
         "id": "bsc49-xv03-core-remove",
@@ -33980,7 +34825,8 @@
         "text": {
           "en": "When one of your Spirits with Astral Soul/Galaxian attacks, you may move one core from an opposing card on the field to their Reserve.",
           "ptBR": "Quando 1 dos seus Spirits com Astral Soul/Galaxian atacar, você pode mover 1 Core de uma carta do oponente no campo para a Reserve dele."
-        }
+        },
+        "automationRef": "bsc49-xv03-core-remove-auto54"
       },
       {
         "id": "bsc49-xv03-trash-replacement",
@@ -33997,10 +34843,134 @@
         "text": {
           "en": "Cores moved to your opponent's Reserve by your effects are put into their Trash instead.",
           "ptBR": "Cores movidos para a Reserve do oponente pelos seus efeitos são colocados no Trash dele em vez disso."
-        }
+        },
+        "automationRef": "bsc49-xv03-replacement-auto54"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv03-burst-auto54",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "lifeDecreased",
+          "scope": "controllerBurst",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "specialSummonSource",
+            "coresToPlace": 1,
+            "cause": "burst"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv03-recovery-auto54",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-xv03-recovery-same-name",
+            "actions": [
+              {
+                "type": "selectTrashTarget",
+                "selector": {
+                  "owner": "self",
+                  "zones": [
+                    "trash"
+                  ],
+                  "colors": [
+                    "purple"
+                  ]
+                },
+                "allowZero": true,
+                "onSelect": {
+                  "type": "returnToHand",
+                  "target": "selected"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv03-core-remove-auto54",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceFamilyAny",
+            "families": [
+              "Astral Soul",
+              "Galaxian"
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "minimumCores": 1
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "removeCore",
+              "amount": 1,
+              "destination": "reserve",
+              "target": "selected"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv03-replacement-auto54",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "opponentEffectCoreToTrash",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "self"
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV03.webp"
   },
   {
@@ -34062,7 +35032,8 @@
         "text": {
           "en": "When an opposing Spirit/Ultimate leaves the field by one of your effects, you may summon this card from your Trash. [Once per Turn: Same Name]",
           "ptBR": "Quando 1 Spirit/Ultimate do oponente sair do campo por um dos seus efeitos, você pode Invocar esta carta do seu Trash. [1 vez por turno: mesmo nome]"
-        }
+        },
+        "automationRef": "bsc49-xv04-trash-final"
       },
       {
         "id": "bsc49-xv04-mass-core",
@@ -34079,7 +35050,8 @@
         "text": {
           "en": "Treat this Spirit's color as colorless, then put one core from every opposing Spirit/Ultimate into the opponent's Trash. If none are depleted, draw up to two cards.",
           "ptBR": "Trate a cor deste Spirit como incolor e coloque 1 Core de cada Spirit/Ultimate do oponente no Trash dele. Se nenhum for esgotado, compre até 2 cartas."
-        }
+        },
+        "automationRef": "bsc49-xv04-mass-final"
       },
       {
         "id": "bsc49-xv04-random-discard",
@@ -34095,10 +35067,152 @@
         "text": {
           "en": "When one of your Spirits leaves the field because of an opposing effect, you may discard two random cards from your opponent's hand. [Once per Turn: Same Name]",
           "ptBR": "Quando 1 dos seus Spirits sair do campo por um efeito do oponente, você pode descartar 2 cartas aleatórias da mão do oponente. [1 vez por turno: mesmo nome]"
-        }
+        },
+        "automationRef": "bsc49-xv04-discard-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv04-trash-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerTrash",
+          "eventPlayer": "opponent"
+        },
+        "conditions": [
+          {
+            "type": "eventMovedFromZone",
+            "value": "spirits"
+          },
+          {
+            "type": "eventMovedByEffect"
+          },
+          {
+            "not": {
+              "type": "eventMovedByOpponent"
+            }
+          },
+          {
+            "type": "eventMovedCardType",
+            "cardTypes": [
+              "spirit",
+              "ultimate"
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-xv04-trash-summon",
+            "actions": [
+              {
+                "type": "chooseYesNo",
+                "yesActions": [
+                  {
+                    "type": "specialSummonSource",
+                    "coresToPlace": 1,
+                    "cause": "trashReaction"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv04-mass-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "colors",
+            "operation": "set",
+            "value": [],
+            "selector": "source",
+            "duration": "thisTurn"
+          },
+          {
+            "type": "removeCore",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ],
+              "all": true
+            },
+            "all": true,
+            "amount": 1,
+            "destination": "trash"
+          },
+          {
+            "type": "draw",
+            "player": "self",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv04-discard-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventMovedFromZone",
+            "value": "spirits"
+          },
+          {
+            "type": "eventMovedByOpponent"
+          },
+          {
+            "type": "eventMovedCardType",
+            "cardTypes": [
+              "spirit"
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-xv04-random-discard",
+            "actions": [
+              {
+                "type": "chooseYesNo",
+                "yesActions": [
+                  {
+                    "type": "discardRandomOpponentHand",
+                    "count": 2
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV04.webp"
   },
   {
@@ -34161,7 +35275,8 @@
         "text": {
           "en": "When this card is discarded from your hand by one of your Green-only effects, you may use its Accelerator without paying the cost. [Once per Turn: Same Name]",
           "ptBR": "Quando esta carta for descartada da sua mão por um dos seus efeitos somente Verdes, você pode usar seu Accelerator sem pagar o custo. [1 vez por turno: mesmo nome]"
-        }
+        },
+        "automationRef": "bsc49-xv05-discard-final"
       },
       {
         "id": "bsc49-xv05-accelerator",
@@ -34175,7 +35290,8 @@
         "text": {
           "en": "For this turn, when your cost 5 or more Spirit's attack reduces the opponent's Life, move one additional core from their Life to their Reserve. Then place this card in your hand area.",
           "ptBR": "Durante este turno, quando o ataque de um dos seus Spirits de custo 5 ou mais reduzir a Life do oponente, mova mais 1 Core da Life dele para a Reserve. Depois, coloque esta carta na sua área de Hand."
-        }
+        },
+        "automationRef": "bsc49-xv05-accel-final"
       },
       {
         "id": "bsc49-xv05-block-rule",
@@ -34192,10 +35308,121 @@
         "text": {
           "en": "While one of your Spirits attacks, your opponent can block only by using two Spirits; battle only one of those blockers. Your opponent also cannot activate Burst effects.",
           "ptBR": "Enquanto 1 dos seus Spirits estiver atacando, seu oponente só pode bloquear usando 2 Spirits; batalhe contra apenas 1 desses bloqueadores. O oponente também não pode ativar efeitos Burst."
-        }
+        },
+        "automationRef": "bsc49-xv05-block-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv05-discard-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerTrash",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventMovedCardIsSource"
+          },
+          {
+            "type": "eventMovedFromZone",
+            "value": "hand"
+          },
+          {
+            "type": "eventMoveDestination",
+            "value": "trash"
+          },
+          {
+            "type": "eventMovedByColor",
+            "color": "green"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-xv05-discard-accel",
+            "actions": [
+              {
+                "type": "addModifier",
+                "property": "additionalLifeDamageOnHit",
+                "operation": "add",
+                "value": 1,
+                "selector": {
+                  "owner": "self",
+                  "cardTypes": [
+                    "spirit"
+                  ],
+                  "minimumCost": 5
+                },
+                "duration": "thisTurn"
+              },
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv05-accel-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 5
+          },
+          {
+            "type": "addModifier",
+            "property": "additionalLifeDamageOnHit",
+            "operation": "add",
+            "value": 1,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "minimumCost": 5
+            },
+            "duration": "thisTurn"
+          },
+          {
+            "type": "moveSourceToOpenArea"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv05-block-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardTypes": [
+              "spirit"
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "setBattleRestriction",
+            "restriction": {
+              "minimumBlockerCount": 2
+            },
+            "preventOpponentBurst": true
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV05.webp",
     "accelerator": {
       "cost": 6,
@@ -34270,7 +35497,8 @@
         "text": {
           "en": "When this card is opened from your deck by one of your Green effects, you may summon it as though all reductions were satisfied.",
           "ptBR": "Quando esta carta for revelada do seu deck por um dos seus efeitos Verdes, você pode Invocá-la como se todas as reduções estivessem satisfeitas."
-        }
+        },
+        "automationRef": "bsc49-xv06-open-final"
       },
       {
         "id": "bsc49-xv06-exhaust-summons",
@@ -34288,7 +35516,8 @@
         "text": {
           "en": "Cards without Galaxian/Fairy summoned by your opponent by a method other than Manifest are summoned exhausted.",
           "ptBR": "Cartas sem Galaxian/Fairy Invocadas pelo oponente por um método diferente de Manifestar são Invocadas Exhausted."
-        }
+        },
+        "automationRef": "bsc49-xv06-exhaust-final"
       },
       {
         "id": "bsc49-xv06-heavy-exhaust",
@@ -34305,7 +35534,8 @@
         "text": {
           "en": "You may heavily exhaust one opposing Spirit/Ultimate.",
           "ptBR": "Você pode dar Heavy Exhaust em 1 Spirit/Ultimate do oponente."
-        }
+        },
+        "automationRef": "bsc49-xv06-heavy-final"
       },
       {
         "id": "bsc49-xv06-core-lock",
@@ -34321,10 +35551,165 @@
         "text": {
           "en": "Cores on both fields, except Soul Cores, cannot be moved.",
           "ptBR": "Cores nos dois campos, exceto Soul Cores, não podem ser movidos."
-        }
+        },
+        "automationRef": "bsc49-xv06-core-lock-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv06-open-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerRevealed",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventMovedCardIsSource"
+          },
+          {
+            "type": "eventMovedFromZone",
+            "value": "deck"
+          },
+          {
+            "type": "eventMovedByColor",
+            "color": "green"
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "specialSummonSource",
+                "coresToPlace": 1,
+                "cause": "openedByGreen"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv06-exhaust-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "summonsExhaustedExceptGalaxianFairy",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent"
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv06-heavy-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "heavyExhaust"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv06-heavy-block-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocks",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ]
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "heavyExhaust"
+            }
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv06-core-lock-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "coreRemovalLocked",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "any",
+              "zones": [
+                "field"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV06.webp"
   },
   {
@@ -34393,7 +35778,8 @@
         "text": {
           "en": "You may summon this card from your hand/hand area by paying Cost 5 (White2 + six-color). If summoned this way, end the Attack Step after this battle ends.",
           "ptBR": "Você pode Invocar esta carta da sua mão/área de Hand pagando Custo 5 (Branco2 + seis cores). Se for Invocada desta forma, encerre o Attack Step depois que esta batalha terminar."
-        }
+        },
+        "automationRef": "bsc49-xv07-summon-final"
       },
       {
         "id": "bsc49-xv07-refresh-lock",
@@ -34411,7 +35797,8 @@
         "text": {
           "en": "All opposing non-Braved Spirits/Ultimates/Nexuses/GranWalker Nexuses cannot refresh.",
           "ptBR": "Todos os Spirits/Ultimates/Nexuses/GranWalker Nexuses do oponente que não estejam Braved não podem receber Refresh."
-        }
+        },
+        "automationRef": "bsc49-xv07-lock-final"
       },
       {
         "id": "bsc49-xv07-super-heavy-armor",
@@ -34428,10 +35815,132 @@
         "text": {
           "en": "All your Spirits with Devotee and also Astral Soul/Galaxian gain Super Heavy Armor: Red/Purple/White/Blue.",
           "ptBR": "Todos os seus Spirits com Devotee e também Astral Soul/Galaxian recebem Super Heavy Armor: Vermelho/Roxo/Branco/Azul."
-        }
+        },
+        "automationRef": "bsc49-xv07-armor-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv07-summon-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "opponent"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "paySourceCost",
+            "cost": 5
+          },
+          {
+            "type": "specialSummonSource",
+            "coresToPlace": 1,
+            "cause": "opponentAttackFlash"
+          },
+          {
+            "type": "scheduleAttackStepEndAfterBattle"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv07-lock-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "cannotRefresh",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit",
+                "ultimate",
+                "nexus"
+              ],
+              "braved": false
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv07-armor-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "effectImmunityColors",
+            "operation": "add",
+            "value": [
+              "red",
+              "purple",
+              "white",
+              "blue"
+            ],
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "familiesAll": [
+                "Devotee",
+                "Astral Soul"
+              ]
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "effectImmunityColors",
+            "operation": "add",
+            "value": [
+              "red",
+              "purple",
+              "white",
+              "blue"
+            ],
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "familiesAll": [
+                "Devotee",
+                "Galaxian"
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV07.webp"
   },
   {
@@ -34505,7 +36014,8 @@
         "text": {
           "en": "This Spirit cannot be blocked and is unaffected by opposing Purple/Green/White/Blue Spirit/Brave/Nexus/Magic effects.",
           "ptBR": "Este Spirit não pode ser bloqueado e não é afetado por efeitos Roxos/Verdes/Brancos/Azuis de Spirits/Braves/Nexuses/Magics do oponente."
-        }
+        },
+        "automationRef": "bsc49-xv08-armor-final"
       },
       {
         "id": "bsc49-xv08-refresh",
@@ -34522,7 +36032,8 @@
         "text": {
           "en": "When this Spirit becomes exhausted, you may open the top card of your deck. If it has Devotee/Galaxian/GranWalker, refresh this Spirit. Discard the opened card afterward.",
           "ptBR": "Quando este Spirit ficar Exhausted, você pode revelar a carta do topo do deck. Se possuir Devotee/Galaxian/GranWalker, dê Refresh neste Spirit. Depois, descarte a carta revelada."
-        }
+        },
+        "automationRef": "bsc49-xv08-refresh-final"
       },
       {
         "id": "bsc49-xv08-white-symbol",
@@ -34538,10 +36049,130 @@
         "text": {
           "en": "While Braved, all your Spirits with Devotee/Divine Star/Galaxian gain one additional White symbol.",
           "ptBR": "Enquanto estiver Braved, todos os seus Spirits com Devotee/Divine Star/Galaxian recebem 1 símbolo Branco adicional."
-        }
+        },
+        "automationRef": "bsc49-xv08-symbol-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv08-armor-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "cannotBeBlocked",
+            "operation": "set",
+            "value": 1,
+            "selector": "source",
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "effectImmunityColors",
+            "operation": "add",
+            "value": [
+              "purple",
+              "green",
+              "white",
+              "blue"
+            ],
+            "selector": "source",
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv08-refresh-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardExhausted",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "revealTopRefreshIfMatching",
+                "matchSelector": {
+                  "familiesAny": [
+                    "Devotee",
+                    "Galaxian",
+                    "GranWalker"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv08-symbol-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "conditions": [
+          {
+            "type": "sourceHasBraveAttachment"
+          },
+          {
+            "type": "activePlayer",
+            "player": "self"
+          }
+        ],
+        "actions": [
+          {
+            "type": "modifySymbols",
+            "operation": "add",
+            "symbols": [
+              "white"
+            ],
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "familiesAny": [
+                "Devotee",
+                "Divine Star",
+                "Galaxian"
+              ]
+            },
+            "duration": "whileConditionTrue",
+            "condition": {
+              "type": "sourceHasBraveAttachment"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV08.webp"
   },
   {
@@ -34606,7 +36237,8 @@
         "text": {
           "en": "If your Life is 3 or less and you have a Yellow Nexus, you may summon this card from your hand/hand area by paying 1 cost. [Once per Turn: Same Name]",
           "ptBR": "Se sua Life for 3 ou menos e você possuir um Nexus Amarelo, você pode Invocar esta carta da sua mão/área de Hand pagando 1 de custo. [1 vez por turno: mesmo nome]"
-        }
+        },
+        "automationRef": "bsc49-xv09-summon-final"
       },
       {
         "id": "bsc49-xv09-life-gain",
@@ -34624,7 +36256,8 @@
         "text": {
           "en": "If your Life is 5 or less, you may put one core from the Void into your Life.",
           "ptBR": "Se sua Life for 5 ou menos, você pode colocar 1 Core do Void na sua Life."
-        }
+        },
+        "automationRef": "bsc49-xv09-life-final"
       },
       {
         "id": "bsc49-xv09-cost-lock",
@@ -34642,7 +36275,8 @@
         "text": {
           "en": "All opposing Spirits/Ultimates with cost 2/3/5/7/11/13 cannot attack or block.",
           "ptBR": "Todos os Spirits/Ultimates do oponente de custo 2/3/5/7/11/13 não podem atacar nem bloquear."
-        }
+        },
+        "automationRef": "bsc49-xv09-lock-final"
       },
       {
         "id": "bsc49-xv09-return-hand",
@@ -34659,10 +36293,176 @@
         "text": {
           "en": "When this Spirit is depleted/destroyed by an opposing effect, you may return it to your hand.",
           "ptBR": "Quando este Spirit for esgotado/destruído por um efeito do oponente, você pode devolvê-lo para a sua mão."
-        }
+        },
+        "automationRef": "bsc49-xv09-return-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv09-summon-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "any"
+        },
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          },
+          {
+            "type": "ownLifeAtMost",
+            "value": 3
+          },
+          {
+            "type": "controlsColor",
+            "color": "yellow"
+          },
+          {
+            "type": "controlsCardType",
+            "cardType": "nexus"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-xv09-summon",
+            "actions": [
+              {
+                "type": "paySourceCost",
+                "cost": 1
+              },
+              {
+                "type": "specialSummonSource",
+                "coresToPlace": 1,
+                "cause": "lowLifeFlash"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv09-life-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "ownLifeAtMost",
+            "value": 5
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "healLife",
+                "player": "self",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv09-lock-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "cannotAttack",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ],
+              "costs": [
+                2,
+                3,
+                5,
+                7,
+                11,
+                13
+              ]
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "cannotBlock",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent",
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ],
+              "costs": [
+                2,
+                3,
+                5,
+                7,
+                11,
+                13
+              ]
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv09-return-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenDestroyed",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventDestroyedByOpponent"
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "returnEventSourceToHand"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV09.webp"
   },
   {
@@ -34728,7 +36528,8 @@
         "text": {
           "en": "After you use a cost 4 or more Magic and its effect resolves, you may summon this card from your hand/hand area by paying 1 cost. [Cannot Stack]",
           "ptBR": "Depois que você usar uma Magic de custo 4 ou mais e o efeito resolver, você pode Invocar esta carta da sua mão/área de Hand pagando 1 de custo. [Não Acumula]"
-        }
+        },
+        "automationRef": "bsc49-xv10-magic-summon-final"
       },
       {
         "id": "bsc49-xv10-open-card",
@@ -34746,7 +36547,8 @@
         "text": {
           "en": "When another one of your Spirits with Devotee/Astral Soul/Galaxian is summoned, you may open the top card of your deck. Summon it without paying its cost or add it to your hand. [Once per Turn]",
           "ptBR": "Quando outro dos seus Spirits com Devotee/Astral Soul/Galaxian for Invocado, você pode revelar a carta do topo do deck. Invoque-a sem pagar o custo ou adicione-a à sua mão. [1 vez por turno]"
-        }
+        },
+        "automationRef": "bsc49-xv10-open-final"
       },
       {
         "id": "bsc49-xv10-free-magic",
@@ -34763,10 +36565,123 @@
         "text": {
           "en": "You may use one Flash effect of a Magic card in your hand/hand area without paying its cost. [Once per Turn: Same Name]",
           "ptBR": "Você pode usar 1 efeito Flash de uma carta Magic na sua mão/área de Hand sem pagar o custo. [1 vez por turno: mesmo nome]"
-        }
+        },
+        "automationRef": "bsc49-xv10-free-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv10-magic-summon-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicResolved",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventSourceCardType",
+            "cardTypes": [
+              "magic"
+            ]
+          },
+          {
+            "type": "eventSourceCost",
+            "min": 4
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "paySourceCost",
+                "cost": 1
+              },
+              {
+                "type": "specialSummonSource",
+                "coresToPlace": 1,
+                "cause": "magicResolved"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv10-open-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenSummoned",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceIsNotSource"
+          },
+          {
+            "type": "eventSourceFamilyAny",
+            "families": [
+              "Devotee",
+              "Astral Soul",
+              "Galaxian"
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-xv10-open",
+            "actions": [
+              {
+                "type": "chooseYesNo",
+                "yesActions": [
+                  {
+                    "type": "revealTopAndSummonOrHand",
+                    "matchSelector": {}
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv10-free-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "phase",
+            "value": "attack"
+          }
+        ],
+        "actions": [
+          {
+            "type": "oncePerTurn",
+            "key": "bsc49-xv10-free-magic",
+            "actions": [
+              {
+                "type": "useMagicFlashFromHandFree"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV10.webp"
   },
   {
@@ -34831,7 +36746,8 @@
         "text": {
           "en": "When one of your Braved Spirits, combined GranWalker Nexuses, or Braves would leave the field because of an opposing effect, you may summon this card from your hand by paying 1 cost. [Cannot Stack]",
           "ptBR": "Quando 1 dos seus Spirits Braved, GranWalker Nexuses combinados ou Braves fosse sair do campo por um efeito do oponente, você pode Invocar esta carta da sua mão pagando 1 de custo. [Não Acumula]"
-        }
+        },
+        "automationRef": "bsc49-xv11-protect-final"
       },
       {
         "id": "bsc49-xv11-team-buff",
@@ -34849,7 +36765,8 @@
         "text": {
           "en": "All your Spirits with Sovereign/Galaxian and all your Braves in Spirit form gain +10000 BP and one additional Blue symbol. [Cannot Stack]",
           "ptBR": "Todos os seus Spirits com Sovereign/Galaxian e todos os seus Braves em forma de Spirit recebem +10000 BP e 1 símbolo Azul adicional. [Não Acumula]"
-        }
+        },
+        "automationRef": "bsc49-xv11-buff-final"
       },
       {
         "id": "bsc49-xv11-lowest-cost-destroy",
@@ -34866,10 +36783,182 @@
         "text": {
           "en": "When one of your Spirits with Astral Soul/Galaxian attacks, you may destroy one opposing Spirit with the lowest cost.",
           "ptBR": "Quando 1 dos seus Spirits com Astral Soul/Galaxian atacar, você pode destruir 1 Spirit do oponente com o menor custo."
-        }
+        },
+        "automationRef": "bsc49-xv11-destroy-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv11-protect-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerHand",
+          "eventPlayer": "self"
+        },
+        "conditions": [
+          {
+            "type": "eventMovedFromZone",
+            "value": "spirits"
+          },
+          {
+            "type": "eventMovedByOpponent"
+          },
+          {
+            "any": [
+              {
+                "type": "eventMovedCardWasBraved",
+                "value": true
+              },
+              {
+                "type": "eventMovedCardType",
+                "cardTypes": [
+                  "brave",
+                  "nexus"
+                ]
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "paySourceCost",
+                "cost": 1
+              },
+              {
+                "type": "specialSummonSource",
+                "coresToPlace": 1,
+                "cause": "protectiveReaction"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv11-buff-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 10000,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "familiesAny": [
+                "Sovereign",
+                "Galaxian"
+              ]
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "modifySymbols",
+            "operation": "add",
+            "symbols": [
+              "blue"
+            ],
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "spirit"
+              ],
+              "familiesAny": [
+                "Sovereign",
+                "Galaxian"
+              ]
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "addModifier",
+            "property": "bp",
+            "operation": "add",
+            "value": 10000,
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "brave"
+              ],
+              "combined": false
+            },
+            "duration": "whileSourceExists"
+          },
+          {
+            "type": "modifySymbols",
+            "operation": "add",
+            "symbols": [
+              "blue"
+            ],
+            "selector": {
+              "owner": "self",
+              "cardTypes": [
+                "brave"
+              ],
+              "combined": false
+            },
+            "duration": "whileSourceExists"
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv11-destroy-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "controllerField",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          2,
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventSourceFamilyAny",
+            "families": [
+              "Astral Soul",
+              "Galaxian"
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit"
+              ],
+              "lowestCostOnly": true
+            },
+            "allowZero": true,
+            "onSelect": {
+              "type": "destroy"
+            }
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV11.webp"
   },
   {
@@ -34939,7 +37028,8 @@
         "text": {
           "en": "Destroy one opposing Spirit/Ultimate with the highest cost. Then place this card in your hand area.",
           "ptBR": "Destrua 1 Spirit/Ultimate do oponente com o maior custo. Depois, coloque esta carta na sua área de Hand."
-        }
+        },
+        "automationRef": "bsc49-xv12-accel-final"
       },
       {
         "id": "bsc49-xv12-crush",
@@ -34957,7 +37047,8 @@
         "text": {
           "en": "Discard a number of cards from the top of your opponent's deck equal to this Spirit's Level.",
           "ptBR": "Descarte do topo do deck do oponente uma quantidade de cartas igual ao Level deste Spirit."
-        }
+        },
+        "automationRef": "bsc49-xv12-crush-attack-final"
       },
       {
         "id": "bsc49-xv12-refresh",
@@ -34973,7 +37064,8 @@
         "text": {
           "en": "When a Spirit/Ultimate card is discarded from your opponent's deck, you may refresh this Spirit.",
           "ptBR": "Quando uma carta Spirit/Ultimate for descartada do deck do oponente, você pode dar Refresh neste Spirit."
-        }
+        },
+        "automationRef": "bsc49-xv12-refresh-final"
       },
       {
         "id": "bsc49-xv12-life-lock",
@@ -34989,10 +37081,167 @@
         "text": {
           "en": "While this Spirit is refreshed during its attack, your opponent's Life cannot be reduced.",
           "ptBR": "Enquanto este Spirit estiver Refresh durante seu ataque, a Life do oponente não pode ser reduzida."
-        }
+        },
+        "automationRef": "bsc49-xv12-lock-final"
       }
     ],
-    "abilities": [],
+    "abilities": [
+      {
+        "id": "bsc49-xv12-accel-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "magicFlash",
+          "scope": "controllerHand",
+          "eventPlayer": "any"
+        },
+        "actions": [
+          {
+            "type": "payAccelCost",
+            "cost": 5
+          },
+          {
+            "type": "selectTarget",
+            "selector": {
+              "owner": "opponent",
+              "zones": [
+                "field"
+              ],
+              "cardTypes": [
+                "spirit",
+                "ultimate"
+              ],
+              "highestCostOnly": true
+            },
+            "onSelect": {
+              "type": "destroy"
+            },
+            "afterSelect": [
+              {
+                "type": "moveSourceToOpenArea"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv12-crush-attack-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenAttacks",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "topDeckToTrash",
+            "player": "opponent",
+            "countFromSourceLevel": true
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv12-crush-block-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "whenBlocks",
+          "scope": "source",
+          "eventPlayer": "self"
+        },
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "actions": [
+          {
+            "type": "topDeckToTrash",
+            "player": "opponent",
+            "countFromSourceLevel": true
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv12-refresh-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "cardMoved",
+          "scope": "controllerField",
+          "eventPlayer": "opponent"
+        },
+        "levels": [
+          3
+        ],
+        "conditions": [
+          {
+            "type": "eventMovedFromZone",
+            "value": "deck"
+          },
+          {
+            "type": "eventMoveDestination",
+            "value": "trash"
+          },
+          {
+            "type": "eventMovedCardType",
+            "cardTypes": [
+              "spirit",
+              "ultimate"
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "type": "chooseYesNo",
+            "yesActions": [
+              {
+                "type": "refresh",
+                "target": "source"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bsc49-xv12-lock-final",
+        "schemaVersion": 2,
+        "trigger": {
+          "event": "continuous",
+          "scope": "source",
+          "eventPlayer": "any"
+        },
+        "levels": [
+          3
+        ],
+        "actions": [
+          {
+            "type": "addModifier",
+            "property": "lifeChangeLocked",
+            "operation": "set",
+            "value": 1,
+            "selector": {
+              "owner": "opponent"
+            },
+            "condition": {
+              "all": [
+                {
+                  "type": "sourceState",
+                  "value": "refreshed"
+                },
+                {
+                  "type": "battleSourceRole",
+                  "role": "attacker"
+                }
+              ]
+            },
+            "duration": "whileConditionTrue"
+          }
+        ]
+      }
+    ],
     "image": "/cards-database/BSC49-DreamBooster-StarsAround/BSC49-XV12.webp",
     "accelerator": {
       "cost": 5,

@@ -1,3 +1,4 @@
+import { getContinuousPlayerNumericModifier } from "./modifierResolver.js";
 import { getDatabaseCard } from "../selectors.js";
 import { getBurstActivationEvent, isBurstCard } from "../burstRules.js";
 
@@ -14,6 +15,7 @@ export function openBurstOpportunityForEvent(match, event, affectedPlayerId, car
   for (const [playerId, player] of Object.entries(match.players || {})) {
     if (!player?.burst) continue;
     if (match.battle?.restrictions?.burstBlockedPlayerId === playerId) continue;
+    if (getContinuousPlayerNumericModifier(match, playerId, "burstActivationBlocked") > 0) continue;
     const card = getDatabaseCard(cardIndex, player.burst);
     if (!isBurstCard(card) || getBurstActivationEvent(card) !== event) continue;
     if ([BurstEvent.OPPONENT_SUMMONED, BurstEvent.OPPONENT_USED_MAGIC, BurstEvent.OPPONENT_HAND_INCREASE].includes(event)) {

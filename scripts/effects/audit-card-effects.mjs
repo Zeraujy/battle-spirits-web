@@ -64,6 +64,7 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "eventSourceCoreCount",
   "eventSourceLevel",
   "eventSourceFamily",
+  "eventSourceFamilyAny",
   "eventSourceKeyword",
   "eventSourceBraved",
   "eventSourceIsOpponent",
@@ -100,7 +101,11 @@ const SUPPORTED_TYPED_CONDITIONS = new Set([
   "battleParticipantIsCombinedHostOfSource",
   "deckSize",
   "sourceHasBraveAttachment",
-  "sourceHasModifier"
+  "sourceHasModifier",
+  "sourceBraveCount",
+  "eventMovedCardWasBraved",
+  "eventMovedCardType",
+  "eventMovedCardIsSource"
 ]);
 
 const KNOWN_CONDITION_KEYS = new Set([

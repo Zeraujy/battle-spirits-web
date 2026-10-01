@@ -367,3 +367,18 @@ Run `supabase/ECONOMY-5.0.3-DECK-PURCHASE-FIX.sql` after the v5.0.2 onboarding m
 - Added scheduled source removal at the end of the controller's next turn.
 - BSC49 advanced to 102/117; manual fallback dropped to 4.11% (15/365).
 - Main suite 149/149, Effect Engine 336/336, Batch 32 dedicated 6/6.
+
+## v5.1.0 Content Migration — Batch 34 / BSC49 Wave 19
+- Automated BSC49-XV03 with Burst observer, Purple Trash recovery and Core-routing replacement.
+- BSC49: 104/117; manual fallback 3.56% (13/365).
+- Main suite 149/149, Effect Engine 346/346, dedicated 5/5.
+
+## v5.1.0 — Content Migration Complete
+- Promoted the application version to 5.1.0 after completing the Phase 23–27 release gates.
+- Completed BSC49 CP02/CP03 and the remaining XV block; BSC49 now passes at 117/117 resolved cards.
+- All 11 audited sets pass the Phase 23 automation gate.
+- Phase 24 now contains 365 generated card regression scenarios.
+- Phase 25 manual fallback reached 0% (0/365).
+- Phase 26 Final Mechanics QA and Phase 27 Release QA both pass.
+- Core Action Library finishes at 95 reusable action types.
+- Final reusable additions cover Contract/GranWalker, Manifest, reveal-family routing, symbol-excess Life movement, total-BP destruction, random Hand discard, reveal/refresh, free Magic Flash usage and final XV battle/deck hooks.

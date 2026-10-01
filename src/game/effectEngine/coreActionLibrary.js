@@ -15,6 +15,7 @@ const ACTION_ALIASES = Object.freeze({
   paysourcecost: "paySourceCost",
   payaccelcost: "payAccelCost",
   performadvent: "performAdvent",
+  performmanifest: "performManifest",
   specialsummonselected: "specialSummonSelected",
   revealuntilandsummon: "revealUntilAndSummon",
   returnhand: "returnToHand",
@@ -92,7 +93,15 @@ const ACTION_ALIASES = Object.freeze({
   specialsummoneventsourcefromtrash: "specialSummonEventSourceFromTrash",
   combinebravefromfield: "combineBraveFromField",
   returneventsourcetohand: "returnEventSourceToHand",
-  suppresswhensummonedforendsteps: "suppressWhenSummonedForEndSteps"
+  suppresswhensummonedforendsteps: "suppressWhenSummonedForEndSteps",
+  millandgaincorespermatching: "millAndGainCoresPerMatching",
+  revealtopchooseonetohand: "revealTopChooseOneToHand",
+  movesourcefromsoulstatetofield: "moveSourceFromSoulStateToField",
+  movelifetoreservebysymbolexcess: "moveLifeToReserveBySymbolExcess",
+  destroyuptototalbp: "destroyUpToTotalBP",
+  discardrandomopponenthand: "discardRandomOpponentHand",
+  revealtoprefreshifmatching: "revealTopRefreshIfMatching",
+  usemagicflashfromhandfree: "useMagicFlashFromHandFree"
 });
 
 export const CoreActionType = Object.freeze({
@@ -150,6 +159,7 @@ const SUPPORTED_ACTION_TYPES = new Set([
   "paySourceCost",
   "payAccelCost",
   "performAdvent",
+  "performManifest",
   "specialSummonSelected",
   "revealUntilAndSummon",
   "adjustLife",
@@ -217,7 +227,15 @@ const SUPPORTED_ACTION_TYPES = new Set([
   "specialSummonEventSourceFromTrash",
   "combineBraveFromField",
   "returnEventSourceToHand",
-  "suppressWhenSummonedForEndSteps"
+  "suppressWhenSummonedForEndSteps",
+  "millAndGainCoresPerMatching",
+  "revealTopChooseOneToHand",
+  "moveSourceFromSoulStateToField",
+  "moveLifeToReserveBySymbolExcess",
+  "destroyUpToTotalBP",
+  "discardRandomOpponentHand",
+  "revealTopRefreshIfMatching",
+  "useMagicFlashFromHandFree"
 ]);
 
 export function canonicalActionType(type) {

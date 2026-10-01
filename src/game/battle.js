@@ -164,7 +164,12 @@ export function registerFlashUsed(match, playerId) {
 export function legalBlockers(match, cardIndex) {
   const battle = match.battle;
   if (!battle || battle.stage !== "block") return [];
+  const attackerLookup = findPhysicalCard(match, battle.attackerInstanceId);
+  if (attackerLookup?.card && getContinuousNumericModifier(match, cardIndex, attackerLookup.card, "cannotBeBlocked") > 0) return [];
   const restrictions = battle.restrictions || {};
+  // The current battle model supports a single declared blocker. If an effect
+  // requires two or more simultaneous blockers, a lone blocker is not legal.
+  if (Number(restrictions.minimumBlockerCount || 0) > 1) return [];
   const defender = match.players[battle.defenderPlayerId];
   const attackerCtx = findPhysicalCard(match, battle.attackerInstanceId);
   const attackerPhysical = attackerCtx?.card || null;
@@ -400,6 +405,7 @@ export function resolveBattle(match, actorId, cardIndex) {
         if (maxProtectedBP > 0 && attackerBP <= maxProtectedBP) damage = 0;
       }
       if (next.battle?.restrictions?.preventLifeDamage === true) damage = 0;
+      if (damage > 0) damage += Math.max(0, Number(getContinuousNumericModifier(next, cardIndex, attackerCtx.card, "additionalLifeDamageOnHit") || 0));
       const lifeFloor = next.temporary?.turnProtections?.[battle.defenderPlayerId]?.lifeCannotBecomeZeroFromOpponentHighCostAttacks;
       if (lifeFloor && ["spirit", "ultimate"].includes(String(attackerCard?.cardType || "").toLowerCase())) {
         const effectiveCost = getEffectiveCost(next, cardIndex, attackerCtx.card);

@@ -10,7 +10,11 @@ export const EffectTriggerScope = Object.freeze({
   SOURCE: "source",
   CONTROLLER_FIELD: "controllerField",
   CONTROLLER_HAND: "controllerHand",
-  CONTROLLER_TRASH: "controllerTrash"
+  CONTROLLER_TRASH: "controllerTrash",
+  CONTROLLER_BURST: "controllerBurst",
+  CONTROLLER_DECK: "controllerDeck",
+  CONTROLLER_SOUL_STATE: "controllerSoulState",
+  CONTROLLER_REVEALED: "controllerRevealed"
 });
 
 export const EventPlayerRelation = Object.freeze({

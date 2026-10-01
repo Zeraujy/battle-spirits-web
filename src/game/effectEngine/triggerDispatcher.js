@@ -159,6 +159,53 @@ function observerCandidates(match, input, cardIndex) {
       if (handEntries.length) out.push(observerDispatchInput(input, playerId, physical, "observerV2"));
     }
 
+    // Content Migration Batch 34: Schema v2 effects may observe while set as Burst.
+    if (player.burst) {
+      const physical = player.burst;
+      const card = getDatabaseCard(cardIndex, physical);
+      if (card) {
+        const context = {
+          ...(input.context || {}),
+          sourcePlayerId: playerId,
+          sourceInstanceId: physical.instanceId,
+          sourcePhysical: physical,
+          sourceCard: card,
+          sourceZone: "burst",
+          eventPlayerId: input.context?.eventPlayerId || null
+        };
+        const burstEntries = getTriggeredEntries(card, event, { dispatchMode: "observerV2" })
+          .filter(({ entry }) => getEntryTriggerScope(entry) === EffectTriggerScope.CONTROLLER_BURST)
+          .filter(({ entry }) => entryMatchesTriggerContext(entry, context, match));
+        if (burstEntries.length) out.push(observerDispatchInput(input, playerId, physical, "observerV2"));
+      }
+    }
+
+    // v5.1.0 final migration: explicit Schema v2 observers may react while
+    // still in the Deck (opened/revealed hooks) or in Soul State (Contract revival).
+    for (const [zoneName, cards, scope] of [
+      ["deck", player.deck || [], EffectTriggerScope.CONTROLLER_DECK],
+      ["soulState", player.soulState || [], EffectTriggerScope.CONTROLLER_SOUL_STATE],
+      ["revealed", player.revealed || [], EffectTriggerScope.CONTROLLER_REVEALED]
+    ]) {
+      for (const physical of cards) {
+        const card = getDatabaseCard(cardIndex, physical);
+        if (!card) continue;
+        const context = {
+          ...(input.context || {}),
+          sourcePlayerId: playerId,
+          sourceInstanceId: physical.instanceId,
+          sourcePhysical: physical,
+          sourceCard: card,
+          sourceZone: zoneName,
+          eventPlayerId: input.context?.eventPlayerId || null
+        };
+        const entries = getTriggeredEntries(card, event, { dispatchMode: "observerV2" })
+          .filter(({ entry }) => getEntryTriggerScope(entry) === scope)
+          .filter(({ entry }) => entryMatchesTriggerContext(entry, context, match));
+        if (entries.length) out.push(observerDispatchInput(input, playerId, physical, "observerV2"));
+      }
+    }
+
     // Content Migration Batch 09: Schema v2 effects may remain active in the
     // controller's Trash (for example Immortality and End Step recovery).
     for (const physical of player.trash || []) {

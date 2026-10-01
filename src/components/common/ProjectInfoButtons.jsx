@@ -4,6 +4,42 @@ import "../../styles/theme/v230.css";
 
 const PATCHES = [
   {
+    version: "5.1.0",
+    date: { pt: "01/10/2026", en: "10/01/2026" },
+    title: { pt: "v5.1.0 — Automação de Cartas Concluída", en: "v5.1.0 — Card Automation Complete" },
+    summary: {
+      pt: "A automação de cartas foi concluída: todos os 11 sets passam pelo gate de automação e nenhuma das 365 cartas auditadas depende de resolução manual.",
+      en: "Card automation is complete: all 11 sets pass the automation gate and none of the 365 audited cards depend on manual resolution."
+    },
+    sections: [{
+      title: { pt: "Release v5.1.0", en: "v5.1.0 Release" },
+      items: {
+        pt: [
+          "BSC49 foi concluído com 117/117 cartas resolvidas no gate de automação.",
+          "Phase 23: 11/11 sets PASS; Phase 24: 365 cenários gerados; Phase 25: 0% fallback manual; Phase 26 e Phase 27: PASS.",
+          "Contract/GranWalker, Manifest, XV, Accel/Open Area, Advent, Burst observers, Heavy Exhaust e Field locks agora fazem parte da infraestrutura reutilizável do Effect Engine.",
+          "A Core Action Library final contém 95 tipos reutilizáveis, sem depender de resolvers exclusivos por ID para fechar o catálogo auditado."
+        ],
+        en: [
+          "BSC49 is complete with 117/117 cards resolved by the automation gate.",
+          "Phase 23: 11/11 sets PASS; Phase 24: 365 generated scenarios; Phase 25: 0% manual fallback; Phase 26 and Phase 27: PASS.",
+          "Contract/GranWalker, Manifest, XV, Accel/Open Area, Advent, Burst observers, Heavy Exhaust and Field locks are now part of the reusable Effect Engine infrastructure.",
+          "The final Core Action Library contains 95 reusable types without relying on card-ID-specific resolvers to close the audited catalog."
+        ]
+      }
+    }]
+  },
+  {
+    version: "5.0.3",
+    date: { pt: "01/10/2026", en: "10/01/2026" },
+    title: { pt: "Automa\u00e7\u00e3o de Cartas \u2014 BSC49 Wave 19", en: "Card Automation \u2014 BSC49 Wave 19" },
+    summary: { pt: "Stein-Bolg XV passou para resolu\u00e7\u00e3o estruturada e abriu o primeiro suporte de observer para cartas setadas como Burst.", en: "Stein-Bolg XV moved to structured resolution and introduced the first observer support for cards set as Burst." },
+    sections: [{ title: { pt: "BSC49 Wave 19", en: "BSC49 Wave 19" }, items: {
+      pt: ["BSC49 avan\u00e7ou para 104/117 cartas resolvidas e o fallback manual caiu para 3,56% (13/365).", "Schema v2 agora pode observar eventos enquanto uma carta est\u00e1 setada como Burst por meio de controllerBurst.", "Core removal de efeitos pode ser redirecionado genericamente da Reserve advers\u00e1ria para o Trash enquanto o modifier correspondente estiver ativo."],
+      en: ["BSC49 advanced to 104/117 resolved cards and manual fallback dropped to 3.56% (13/365).", "Schema v2 can now observe events while a card is set as Burst through controllerBurst.", "Effect-driven Core removal can now be generically redirected from the opponent Reserve to Trash while the corresponding modifier is active."]
+    }}]
+  },
+  {
     version: "5.0.3",
     date: { pt: "01/10/2026", en: "10/01/2026" },
     title: { pt: "Automação de Cartas — BSC49 Wave 17", en: "Card Automation — BSC49 Wave 17" },

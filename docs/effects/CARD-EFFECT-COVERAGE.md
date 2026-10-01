@@ -6,9 +6,9 @@
 
 - Runtime cards audited: **365**
 - Sets audited: **11**
-- Structured effect/ability entries inspected: **1047**
-- Effect Schema v2 entries: **598**
-- Fully automated cards: **334 (91.5%)**
+- Structured effect/ability entries inspected: **1102**
+- Effect Schema v2 entries: **653**
+- Fully automated cards: **349 (95.6%)**
 - Partially automated cards: **0**
 - Unstructured effect text: **0**
 - Explicit no-effect cards: **16**
@@ -33,7 +33,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 | Set | Cards | Automated | Partial | Manual | Unsupported trigger | Unsupported condition | Unsupported action | Unstructured | No effect |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | BS13 | 90 | 84 | 0 | 0 | 0 | 0 | 0 | 0 | 6 |
-| BSC49 | 117 | 101 | 0 | 1 | 14 | 0 | 0 | 0 | 1 |
+| BSC49 | 117 | 116 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD10 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD11 | 18 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
 | SD13 | 18 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 3 |
@@ -46,7 +46,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Structured entry baseline
 
-- Automated executable entries: **722**
+- Automated executable entries: **777**
 - Entries blocked by trigger coverage: **29**
 - Entries blocked by condition coverage: **0**
 - Entries blocked by action coverage: **0**
@@ -89,7 +89,7 @@ The audit is intentionally conservative. A card is only `AUTOMATED` when its exe
 
 ## Engine additions — Phases 7–18
 
-- Core Action Library is centralized and currently exposes **86 generic action types** to Schema v2.
+- Core Action Library is centralized and currently exposes **95 generic action types** to Schema v2.
 - Continuous effects use `match.modifierRegistry` rather than one-shot state mutation.
 - Effective BP, Cost, Symbols and Colors can consume continuous modifiers dynamically.
 - Canonical durations: `thisBattle`, `thisAttack`, `thisTurn`, `untilEndStep`, `whileSourceExists`, `whileConditionTrue`, `permanent`.
@@ -160,21 +160,6 @@ The JSON report contains every entry and machine-readable reason. This table lis
 
 | Card | Set | Type | Status | Main gaps |
 | --- | --- | --- | --- | --- |
-| `BSC49-CP01` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenSummonedOrAttacks, whileCardOrSpirit; unresolved entries: 3 |
-| `BSC49-CP02` | BSC49 | nexus | `UNSUPPORTED_TRIGGER` | triggers: onEligibleSummonOrPlacement, whileLevel1; unresolved entries: 4 |
-| `BSC49-CP03` | BSC49 | nexus | `UNSUPPORTED_TRIGGER` | triggers: afterDivineTrust, onEligibleSummonDescendOrPlacement, whileLevel2; unresolved entries: 4 |
-| `BSC49-XV01` | BSC49 | spirit | `MANUAL` | unresolved entries: 3 |
-| `BSC49-XV02` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whileOnField; unresolved entries: 3 |
-| `BSC49-XV03` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whileLevel2Or3; unresolved entries: 4 |
-| `BSC49-XV04` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: opposingUnitLeavesByYourEffect, yourSpiritLeavesByOpponentEffect; unresolved entries: 3 |
-| `BSC49-XV05` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenDiscardedByGreenOnlyEffect; unresolved entries: 3 |
-| `BSC49-XV06` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenAttacksOrBlocks, whenOpenedFromDeckByGreenEffect, whileLevel3; unresolved entries: 4 |
-| `BSC49-XV07` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whileLevel2Or3, whileOnField; unresolved entries: 3 |
-| `BSC49-XV08` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenExhaustedEitherAttackStep, whileOnField; unresolved entries: 3 |
-| `BSC49-XV09` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenDepletedOrDestroyedByOpponent; unresolved entries: 4 |
-| `BSC49-XV10` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: afterCost4PlusMagicResolves, whenOtherEligibleSpiritSummoned; unresolved entries: 3 |
-| `BSC49-XV11` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenBravedOrCombinedCardWouldLeave; unresolved entries: 3 |
-| `BSC49-XV12` | BSC49 | spirit | `UNSUPPORTED_TRIGGER` | triggers: whenAttacksOrBlocks, whenOpponentSpiritUltimateMilled, whileAttackingAndRefreshed; unresolved entries: 4 |
 
 ## Phase 4 input
 

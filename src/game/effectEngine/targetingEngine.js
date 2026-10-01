@@ -8,7 +8,7 @@ import {
   getEffectiveFamilies,
   getEffectiveSymbols
 } from "../selectors.js";
-import { applyContinuousCollectionModifiers, getContinuousNumericModifier } from "./modifierResolver.js";
+import { applyContinuousCollectionModifiers, getContinuousNumericModifier, getContinuousPlayerNumericModifier } from "./modifierResolver.js";
 import { otherPlayerId } from "../utils.js";
 
 export const TargetOwner = Object.freeze({ SELF: "self", OPPONENT: "opponent", ANY: "any" });
@@ -22,6 +22,7 @@ export const TargetZone = Object.freeze({
   TRASH: "trash",
   REVEALED: "revealed",
   OPEN_AREA: "openArea",
+  SOUL_STATE: "soulState",
   BURST: "burst",
   DECK: "deck"
 });
@@ -159,6 +160,9 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
     if (!text && !structured) return false;
   }
   if (selector.playerId && selector.playerId !== playerId) return false;
+  if (selector.ignoreEffectImmunity !== true && context?.sourcePlayerId && context.sourcePlayerId !== playerId
+      && [TargetZone.HAND, TargetZone.OPEN_AREA].includes(zone)
+      && getContinuousPlayerNumericModifier(match, playerId, "handUnaffectedByOpponentEffects") > 0) return false;
   if (selector.ignoreEffectImmunity !== true && context?.sourcePlayerId && context.sourcePlayerId === playerId) {
     const protectedZones = Array.isArray(card?.unaffectedByOwnEffectsInZones) ? card.unaffectedByOwnEffectsInZones : [];
     if (protectedZones.includes(zone)) return false;
@@ -212,6 +216,7 @@ export function targetMatchesSelector(match, cardIndex, candidate, rawSelector =
   let minimumCost = selector.minimumCost ?? selector.minCost;
   if (selector.maximumCostFromSource && context.sourcePhysical) maximumCost = getEffectiveCost(match, cardIndex, context.sourcePhysical);
   if (selector.minimumCostFromSource && context.sourcePhysical) minimumCost = getEffectiveCost(match, cardIndex, context.sourcePhysical);
+  if (Array.isArray(selector.costs) && selector.costs.length && !selector.costs.map(Number).includes(Number(props.cost))) return false;
   if (!numberBetween(props.cost, minimumCost, maximumCost)) return false;
   let maximumBP = selector.maximumBP ?? selector.maxBP;
   let minimumBP = selector.minimumBP ?? selector.minBP;
@@ -258,6 +263,7 @@ export function collectTargets(match, cardIndex, rawSelector = {}, context = {})
       else if (zone === TargetZone.TRASH) pushZone(candidates, match, cardIndex, playerId, zone, player.trash, selector, context);
       else if (zone === TargetZone.REVEALED) pushZone(candidates, match, cardIndex, playerId, zone, player.revealed, selector, context);
       else if (zone === TargetZone.OPEN_AREA) pushZone(candidates, match, cardIndex, playerId, zone, player.openArea || [], selector, context);
+      else if (zone === TargetZone.SOUL_STATE || zone === "soulState") pushZone(candidates, match, cardIndex, playerId, zone, player.soulState || [], selector, context);
       else if (zone === TargetZone.BURST) pushZone(candidates, match, cardIndex, playerId, zone, player.burst ? [player.burst] : [], selector, context);
       else if (zone === TargetZone.DECK) pushZone(candidates, match, cardIndex, playerId, zone, player.deck, selector, context);
     }
@@ -270,6 +276,10 @@ export function collectTargets(match, cardIndex, rawSelector = {}, context = {})
   if (selector.lowestCostOnly === true && filtered.length) {
     const lowest = Math.min(...filtered.map((candidate) => targetProperties(match, cardIndex, candidate).cost));
     filtered = filtered.filter((candidate) => targetProperties(match, cardIndex, candidate).cost === lowest);
+  }
+  if (selector.highestBPOnly === true && filtered.length) {
+    const highest = Math.max(...filtered.map((candidate) => targetProperties(match, cardIndex, candidate).bp));
+    filtered = filtered.filter((candidate) => targetProperties(match, cardIndex, candidate).bp === highest);
   }
   return filtered;
 }
@@ -290,7 +300,7 @@ function sourceTarget(context) {
 export function resolveActionTargets(match, action = {}, cardIndex, context = {}) {
   const directId = action.instanceId ?? action.targetInstanceId;
   if (directId) {
-    const targets = collectTargets(match, cardIndex, { owner: "any", zones: ["field", "hand", "trash", "revealed", "openArea", "burst"], instanceId: directId, includeCombined: true }, context);
+    const targets = collectTargets(match, cardIndex, { owner: "any", zones: ["field", "hand", "trash", "revealed", "openArea", "soulState", "burst"], instanceId: directId, includeCombined: true }, context);
     return targets.length ? { status: "resolved", targets: [targets[0]] } : { status: "none", targets: [] };
   }
 

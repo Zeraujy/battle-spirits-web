@@ -28,7 +28,10 @@ export function calculateReduction(match, playerId, card, cardIndex) {
     }
   }
   const ignoreReduction = getContinuousCardNumericModifier(match, card, playerId, "ignoreReductionSymbols") > 0;
-  const reductions = ignoreReduction ? [] : [...(card?.reduction || []), ...dynamicExtraReductions];
+  let reductions = ignoreReduction ? [] : [...(card?.reduction || []), ...dynamicExtraReductions];
+  if (getContinuousCardNumericModifier(match, card, playerId, "allReductionSymbolsSixColor") > 0) {
+    reductions = reductions.map(() => "six");
+  }
   let applied = 0;
   const used = {};
   for (const reduction of reductions) {

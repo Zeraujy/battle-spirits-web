@@ -8,7 +8,7 @@
     3
   ],
   "source": "src/data/cards.json",
-  "generatedAt": "2026-10-01T12:27:46.548Z",
+  "generatedAt": "2026-10-01T11:50:33.574Z",
   "classificationVersion": "v5.1.0-phase03",
   "canonicalEvents": [
     {
@@ -196,8 +196,10 @@
     "totalCards": 365,
     "totalSets": 11,
     "byStatus": {
-      "AUTOMATED": 349,
-      "NO_EFFECT": 16
+      "AUTOMATED": 335,
+      "MANUAL": 1,
+      "NO_EFFECT": 16,
+      "UNSUPPORTED_TRIGGER": 13
     },
     "bySet": {
       "SD13": {
@@ -227,10 +229,12 @@
       "BSC49": {
         "total": 117,
         "statuses": {
-          "AUTOMATED": 116,
-          "NO_EFFECT": 1
+          "AUTOMATED": 102,
+          "NO_EFFECT": 1,
+          "UNSUPPORTED_TRIGGER": 13,
+          "MANUAL": 1
         },
-        "automationPercent": 99.1
+        "automationPercent": 87.2
       },
       "SD10": {
         "total": 18,
@@ -288,13 +292,13 @@
       }
     },
     "entries": {
-      "total": 1102,
-      "automated": 777,
+      "total": 1051,
+      "automated": 726,
       "runtimeUnsupportedTrigger": 29,
       "unsupportedCondition": 0,
       "unsupportedAction": 0,
       "manual": 296,
-      "schemaV2": 653
+      "schemaV2": 602
     },
     "gapFrequency": {
       "triggers": {
@@ -16071,12 +16075,12 @@
       "set": "BSC49",
       "cardType": "nexus",
       "nameEN": "The GalaxianContractor Dan",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 4,
-      "executableEntryCount": 5,
-      "automatedExecutableCount": 5,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 4,
       "entries": [
         {
           "id": "bsc49-cp02-true-divine-trust",
@@ -16093,7 +16097,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-cp02-trust-summon-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trust",
           "status": "UNSUPPORTED_TRIGGER"
@@ -16113,7 +16117,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-cp02-revival-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "main",
           "status": "MANUAL"
@@ -16133,7 +16137,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-cp02-domain-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "UNSUPPORTED_TRIGGER"
@@ -16153,126 +16157,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-cp02-skill-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "main",
           "status": "MANUAL"
-        },
-        {
-          "id": "bsc49-cp02-trust-summon-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "self",
-          "rawEvent": "whenSummoned",
-          "canonicalEvent": "whenSummoned",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addCoreFromVoid",
-            "chooseYesNo"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-cp02-trust-placement-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenDeployed",
-          "canonicalEvent": "whenDeployed",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "millAndGainCoresPerMatching"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-cp02-revival-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerSoulState",
-          "eventPlayer": "self",
-          "rawEvent": "mainStep",
-          "canonicalEvent": "mainStep",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "moveSourceFromSoulStateToField",
-            "oncePerTurn"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-cp02-domain-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-cp02-skill-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "oncePerTurn",
-            "removeCore",
-            "revealTopChooseOneToHand"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -16282,7 +16170,12 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-cp02-true-divine-trust",
+          "bsc49-cp02-revival",
+          "bsc49-cp02-contract-domain",
+          "bsc49-cp02-contract-skill"
+        ]
       }
     },
     {
@@ -16290,12 +16183,12 @@
       "set": "BSC49",
       "cardType": "nexus",
       "nameEN": "Grandwalker Dan (Revival)",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 4,
-      "executableEntryCount": 4,
-      "automatedExecutableCount": 4,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 4,
       "entries": [
         {
           "id": "bsc49-cp03-divine-trust",
@@ -16312,7 +16205,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-cp03-trust-summon-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trust",
           "status": "UNSUPPORTED_TRIGGER"
@@ -16332,7 +16225,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-cp03-trust-placement-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "UNSUPPORTED_TRIGGER"
@@ -16352,7 +16245,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-cp03-skill-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "flash",
           "status": "MANUAL"
@@ -16372,104 +16265,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-cp03-domain-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "id": "bsc49-cp03-trust-summon-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "self",
-          "rawEvent": "whenSummoned",
-          "canonicalEvent": "whenSummoned",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addCoreFromVoid",
-            "chooseYesNo"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-cp03-trust-placement-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenDeployed",
-          "canonicalEvent": "whenDeployed",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "millAndGainCoresPerMatching"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-cp03-skill-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier",
-            "destroy",
-            "oncePerTurn",
-            "removeCore",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-cp03-domain-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -16480,7 +16279,12 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-cp03-divine-trust",
+          "bsc49-cp03-trust-recovery",
+          "bsc49-cp03-divine-skill",
+          "bsc49-cp03-divine-domain"
+        ]
       }
     },
     {
@@ -16488,12 +16292,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The BullDragonDeity Dragonic-Taurus XV",
-      "status": "AUTOMATED",
+      "status": "MANUAL",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 3,
       "entries": [
         {
           "id": "bsc49-xv01-designated-attack",
@@ -16510,7 +16314,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv01-designated-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "attack",
           "status": "MANUAL"
@@ -16530,7 +16334,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv01-symbol-life-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "MANUAL"
@@ -16550,85 +16354,21 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv01-extra-symbols-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "attack",
           "status": "MANUAL"
-        },
-        {
-          "id": "bsc49-xv01-designated-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenAttacks",
-          "canonicalEvent": "whenAttacks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "performSpecifiedAttack",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv01-symbol-life-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenBlocked",
-          "canonicalEvent": "whenBlocked",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "moveLifeToReserveBySymbolExcess"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv01-extra-symbols-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenAttacks",
-          "canonicalEvent": "whenAttacks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "modifySymbols"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
         "unsupportedTriggers": [],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv01-designated-attack",
+          "bsc49-xv01-symbol-life",
+          "bsc49-xv01-extra-symbols"
+        ]
       }
     },
     {
@@ -16636,12 +16376,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The ShineCentaurusDeity Sagitto-Apollodragon XV",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 3,
       "entries": [
         {
           "id": "bsc49-xv02-double-brave",
@@ -16658,7 +16398,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv02-double-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "UNSUPPORTED_TRIGGER"
@@ -16678,7 +16418,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv02-bp-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "attack",
           "status": "MANUAL"
@@ -16698,77 +16438,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv02-braved-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "attack",
           "status": "MANUAL"
-        },
-        {
-          "id": "bsc49-xv02-double-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv02-bp-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenAttacks",
-          "canonicalEvent": "whenAttacks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "destroyUpToTotalBP"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv02-braved-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenAttacks",
-          "canonicalEvent": "whenAttacks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "destroy",
-            "selectMultipleTargets"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -16777,7 +16450,11 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv02-double-brave",
+          "bsc49-xv02-bp-destruction",
+          "bsc49-xv02-braved-destruction"
+        ]
       }
     },
     {
@@ -16785,12 +16462,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The EvilCapricornusDeity Stein-Bolg XV",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 4,
-      "executableEntryCount": 4,
-      "automatedExecutableCount": 4,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 4,
       "entries": [
         {
           "id": "bsc49-xv03-burst",
@@ -16807,7 +16484,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv03-burst-auto54",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "burst",
           "status": "MANUAL"
@@ -16827,7 +16504,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv03-recovery-auto54",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "summon",
           "status": "MANUAL"
@@ -16847,7 +16524,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv03-core-remove-auto54",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "MANUAL"
@@ -16867,101 +16544,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv03-replacement-auto54",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "id": "bsc49-xv03-burst-auto54",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerBurst",
-          "eventPlayer": "self",
-          "rawEvent": "lifeDecreased",
-          "canonicalEvent": "lifeDecreased",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "specialSummonSource"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv03-recovery-auto54",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "whenSummoned",
-          "canonicalEvent": "whenSummoned",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "oncePerTurn",
-            "returnToHand",
-            "selectTrashTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv03-core-remove-auto54",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "self",
-          "rawEvent": "whenAttacks",
-          "canonicalEvent": "whenAttacks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "removeCore",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv03-replacement-auto54",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -16970,7 +16556,12 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv03-burst",
+          "bsc49-xv03-trash-recovery",
+          "bsc49-xv03-core-remove",
+          "bsc49-xv03-trash-replacement"
+        ]
       }
     },
     {
@@ -16978,12 +16569,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The PirateDeity Piscegalleon XV",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 3,
       "entries": [
         {
           "id": "bsc49-xv04-trash-summon",
@@ -17000,7 +16591,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv04-trash-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
@@ -17020,7 +16611,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv04-mass-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "summon",
           "status": "MANUAL"
@@ -17040,82 +16631,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv04-discard-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "id": "bsc49-xv04-trash-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerTrash",
-          "eventPlayer": "opponent",
-          "rawEvent": "cardMoved",
-          "canonicalEvent": "cardMoved",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "oncePerTurn",
-            "specialSummonSource"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv04-mass-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenSummoned",
-          "canonicalEvent": "whenSummoned",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier",
-            "draw",
-            "removeCore"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv04-discard-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "self",
-          "rawEvent": "cardMoved",
-          "canonicalEvent": "cardMoved",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "discardRandomOpponentHand",
-            "oncePerTurn"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -17125,7 +16644,11 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv04-trash-summon",
+          "bsc49-xv04-mass-core",
+          "bsc49-xv04-random-discard"
+        ]
       }
     },
     {
@@ -17133,12 +16656,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The CancerBushin Cancerd XV",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 3,
       "entries": [
         {
           "id": "bsc49-xv05-discard-accelerator",
@@ -17155,7 +16678,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv05-discard-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
@@ -17175,7 +16698,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv05-accel-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "accelerator",
           "status": "MANUAL"
@@ -17195,80 +16718,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv05-block-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
-        },
-        {
-          "id": "bsc49-xv05-discard-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerTrash",
-          "eventPlayer": "self",
-          "rawEvent": "cardMoved",
-          "canonicalEvent": "cardMoved",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier",
-            "moveSourceToOpenArea",
-            "oncePerTurn"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv05-accel-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerHand",
-          "eventPlayer": "self",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier",
-            "moveSourceToOpenArea",
-            "payAccelCost"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv05-block-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "self",
-          "rawEvent": "whenAttacks",
-          "canonicalEvent": "whenAttacks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "setBattleRestriction"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -17277,7 +16730,11 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv05-discard-accelerator",
+          "bsc49-xv05-accelerator",
+          "bsc49-xv05-block-rule"
+        ]
       }
     },
     {
@@ -17285,12 +16742,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The SephirothicSheepDeity Sephiro-Aries XV",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 4,
-      "executableEntryCount": 5,
-      "automatedExecutableCount": 5,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 4,
       "entries": [
         {
           "id": "bsc49-xv06-open-summon",
@@ -17307,7 +16764,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv06-open-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
@@ -17327,7 +16784,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv06-exhaust-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
@@ -17347,7 +16804,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv06-heavy-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
@@ -17367,123 +16824,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv06-core-lock-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "id": "bsc49-xv06-open-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerRevealed",
-          "eventPlayer": "self",
-          "rawEvent": "cardMoved",
-          "canonicalEvent": "cardMoved",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "specialSummonSource"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv06-exhaust-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv06-heavy-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenAttacks",
-          "canonicalEvent": "whenAttacks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "heavyExhaust",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv06-heavy-block-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenBlocks",
-          "canonicalEvent": "whenBlocks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "heavyExhaust",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv06-core-lock-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -17494,7 +16838,12 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv06-open-summon",
+          "bsc49-xv06-exhaust-summons",
+          "bsc49-xv06-heavy-exhaust",
+          "bsc49-xv06-core-lock"
+        ]
       }
     },
     {
@@ -17502,12 +16851,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The WaterCarrierDeity Aqua-Elysion XV",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 3,
       "entries": [
         {
           "id": "bsc49-xv07-flash-summon",
@@ -17524,7 +16873,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv07-summon-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "flash",
           "status": "MANUAL"
@@ -17544,7 +16893,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv07-lock-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "UNSUPPORTED_TRIGGER"
@@ -17564,78 +16913,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv07-armor-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "id": "bsc49-xv07-summon-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerHand",
-          "eventPlayer": "opponent",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "paySourceCost",
-            "scheduleAttackStepEndAfterBattle",
-            "specialSummonSource"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv07-lock-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv07-armor-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -17645,7 +16926,11 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv07-flash-summon",
+          "bsc49-xv07-refresh-lock",
+          "bsc49-xv07-super-heavy-armor"
+        ]
       }
     },
     {
@@ -17653,12 +16938,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The MachineLionDeity Strikewurm-Leo XV",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 3,
       "entries": [
         {
           "id": "bsc49-xv08-mirage-armor",
@@ -17675,7 +16960,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv08-armor-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "UNSUPPORTED_TRIGGER"
@@ -17695,7 +16980,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv08-refresh-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
@@ -17715,77 +17000,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv08-symbol-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
-        },
-        {
-          "id": "bsc49-xv08-armor-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv08-refresh-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "cardExhausted",
-          "canonicalEvent": "cardExhausted",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "revealTopRefreshIfMatching"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv08-symbol-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "modifySymbols"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -17795,7 +17013,11 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv08-mirage-armor",
+          "bsc49-xv08-refresh",
+          "bsc49-xv08-white-symbol"
+        ]
       }
     },
     {
@@ -17803,12 +17025,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The ValkyrieVirgoDeity Vielje XV",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 4,
-      "executableEntryCount": 4,
-      "automatedExecutableCount": 4,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 4,
       "entries": [
         {
           "id": "bsc49-xv09-flash-summon",
@@ -17825,7 +17047,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv09-summon-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "flash",
           "status": "MANUAL"
@@ -17845,7 +17067,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv09-life-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "summon",
           "status": "MANUAL"
@@ -17865,7 +17087,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv09-lock-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
@@ -17885,102 +17107,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv09-return-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "id": "bsc49-xv09-summon-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerHand",
-          "eventPlayer": "any",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "oncePerTurn",
-            "paySourceCost",
-            "specialSummonSource"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv09-life-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenSummoned",
-          "canonicalEvent": "whenSummoned",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "healLife"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv09-lock-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv09-return-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenDestroyed",
-          "canonicalEvent": "whenDestroyed",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "returnEventSourceToHand"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -17989,7 +17119,12 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv09-flash-summon",
+          "bsc49-xv09-life-gain",
+          "bsc49-xv09-cost-lock",
+          "bsc49-xv09-return-hand"
+        ]
       }
     },
     {
@@ -17997,12 +17132,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The MagicalTwinsDeity Geminize XV",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 3,
       "entries": [
         {
           "id": "bsc49-xv10-magic-summon",
@@ -18019,7 +17154,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv10-magic-summon-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
@@ -18039,7 +17174,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv10-open-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
@@ -18059,81 +17194,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv10-free-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "flash",
           "status": "MANUAL"
-        },
-        {
-          "id": "bsc49-xv10-magic-summon-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerHand",
-          "eventPlayer": "self",
-          "rawEvent": "magicResolved",
-          "canonicalEvent": "magicResolved",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "paySourceCost",
-            "specialSummonSource"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv10-open-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "self",
-          "rawEvent": "whenSummoned",
-          "canonicalEvent": "whenSummoned",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "oncePerTurn",
-            "revealTopAndSummonOrHand"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv10-free-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "oncePerTurn",
-            "useMagicFlashFromHandFree"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -18143,7 +17207,11 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv10-magic-summon",
+          "bsc49-xv10-open-card",
+          "bsc49-xv10-free-magic"
+        ]
       }
     },
     {
@@ -18151,12 +17219,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The ScorpioKnight Scor-Spear XV",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 3,
-      "executableEntryCount": 3,
-      "automatedExecutableCount": 3,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 3,
       "entries": [
         {
           "id": "bsc49-xv11-protective-summon",
@@ -18173,7 +17241,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv11-protect-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
@@ -18193,7 +17261,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv11-buff-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "MANUAL"
@@ -18213,80 +17281,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv11-destroy-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "MANUAL"
-        },
-        {
-          "id": "bsc49-xv11-protect-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerHand",
-          "eventPlayer": "self",
-          "rawEvent": "cardMoved",
-          "canonicalEvent": "cardMoved",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "paySourceCost",
-            "specialSummonSource"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv11-buff-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier",
-            "modifySymbols"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv11-destroy-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "self",
-          "rawEvent": "whenAttacks",
-          "canonicalEvent": "whenAttacks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "destroy",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -18295,7 +17293,11 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv11-protective-summon",
+          "bsc49-xv11-team-buff",
+          "bsc49-xv11-lowest-cost-destroy"
+        ]
       }
     },
     {
@@ -18303,12 +17305,12 @@
       "set": "BSC49",
       "cardType": "spirit",
       "nameEN": "The BalanceDeity Libra-Golem XV",
-      "status": "AUTOMATED",
+      "status": "UNSUPPORTED_TRIGGER",
       "explicitNoEffect": false,
       "documentedEffectCount": 4,
-      "executableEntryCount": 5,
-      "automatedExecutableCount": 5,
-      "unresolvedDisplayCount": 0,
+      "executableEntryCount": 0,
+      "automatedExecutableCount": 0,
+      "unresolvedDisplayCount": 4,
       "entries": [
         {
           "id": "bsc49-xv12-accelerator",
@@ -18325,7 +17327,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv12-accel-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "accelerator",
           "status": "MANUAL"
@@ -18345,7 +17347,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv12-crush-attack-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
@@ -18365,7 +17367,7 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv12-refresh-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "trigger",
           "status": "UNSUPPORTED_TRIGGER"
@@ -18385,124 +17387,10 @@
           "unsupportedConditions": [],
           "hasModifiers": false,
           "hasStructuredActions": false,
-          "automationRef": "bsc49-xv12-lock-final",
+          "automationRef": null,
           "engineNative": false,
           "entryType": "constant",
           "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "id": "bsc49-xv12-accel-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerHand",
-          "eventPlayer": "any",
-          "rawEvent": "magicFlash",
-          "canonicalEvent": "magicFlash",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "destroy",
-            "moveSourceToOpenArea",
-            "payAccelCost",
-            "selectTarget"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv12-crush-attack-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenAttacks",
-          "canonicalEvent": "whenAttacks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "topDeckToTrash"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv12-crush-block-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "self",
-          "rawEvent": "whenBlocks",
-          "canonicalEvent": "whenBlocks",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "topDeckToTrash"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv12-refresh-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "controllerField",
-          "eventPlayer": "opponent",
-          "rawEvent": "cardMoved",
-          "canonicalEvent": "cardMoved",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "chooseYesNo",
-            "refresh"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
-        },
-        {
-          "id": "bsc49-xv12-lock-final",
-          "source": "abilities",
-          "schemaVersion": 2,
-          "triggerScope": "source",
-          "eventPlayer": "any",
-          "rawEvent": "continuous",
-          "canonicalEvent": "continuous",
-          "canonicalEventDefined": true,
-          "runtimeDispatched": true,
-          "actionTypes": [
-            "addModifier"
-          ],
-          "unsupportedActions": [],
-          "unsupportedConditions": [],
-          "hasModifiers": false,
-          "hasStructuredActions": true,
-          "automationRef": null,
-          "engineNative": false,
-          "entryType": "",
-          "status": "AUTOMATED"
         }
       ],
       "gaps": {
@@ -18513,7 +17401,12 @@
         ],
         "unsupportedConditions": [],
         "unsupportedActions": [],
-        "unresolvedDisplayEntries": []
+        "unresolvedDisplayEntries": [
+          "bsc49-xv12-accelerator",
+          "bsc49-xv12-crush",
+          "bsc49-xv12-refresh",
+          "bsc49-xv12-life-lock"
+        ]
       }
     },
     {

@@ -92,6 +92,11 @@ function cardMatchesSimpleSelector(card, selector = {}) {
   const colors = selector.colors || (selector.color ? [selector.color] : []);
   if (types.length && !types.map((v) => String(v).toLowerCase()).includes(String(card.cardType || "").toLowerCase())) return false;
   if (colors.length && !colors.some((v) => (card.colors || []).map((c) => String(c).toLowerCase()).includes(String(v).toLowerCase()))) return false;
+  const families = (card.families || []).map((v) => String(v).toLowerCase());
+  const familiesAny = selector.familiesAny || selector.families || [];
+  const familiesAll = selector.familiesAll || [];
+  if (familiesAny.length && !familiesAny.some((v) => families.includes(String(v).toLowerCase()))) return false;
+  if (familiesAll.length && !familiesAll.every((v) => families.includes(String(v).toLowerCase()))) return false;
   const cost = Number(card.cost || 0);
   if (selector.minimumCost != null && cost < Number(selector.minimumCost)) return false;
   if (selector.maximumCost != null && cost > Number(selector.maximumCost)) return false;
@@ -119,10 +124,11 @@ function cleanPhysical(card) {
 }
 
 function summonEntersExhaustedByModifier(match, playerId, card) {
-  return match.phase === "main"
-    && !(card?.families || []).includes("Imp")
-    && ["spirit", "brave"].includes(String(card?.cardType || "").toLowerCase())
-    && getContinuousPlayerNumericModifier(match, playerId, "nonImpSummonsExhaustedDuringMain") > 0;
+  if (match.phase !== "main" || !["spirit", "brave"].includes(String(card?.cardType || "").toLowerCase())) return false;
+  if (!(card?.families || []).includes("Imp") && getContinuousPlayerNumericModifier(match, playerId, "nonImpSummonsExhaustedDuringMain") > 0) return true;
+  if (getContinuousPlayerNumericModifier(match, playerId, "summonsExhaustedExceptGalaxianFairy") > 0
+      && !(card?.families || []).some((family) => ["Galaxian", "Fairy"].includes(family))) return true;
+  return false;
 }
 
 function minimumCores(card) {
@@ -232,6 +238,7 @@ function moveTargetOut(match, target, destination, cardIndex, context = {}) {
         movedCardId: movedCard?.id || clean?.cardId || null,
         movedCardFamilies: movedCard?.families || [],
         movedCardType: movedCard?.cardType || null,
+        movedCardWasBraved: Boolean(removed.card?.combinedWith || (current.zone === "spirits" && (match.players?.[current.playerId]?.field?.other || []).some((b) => b.combinedWith === removed.card?.instanceId))),
         moveFromZone: current.zone,
         moveDestination: destination,
         movedByPlayerId: context.sourcePlayerId || null,
@@ -291,7 +298,7 @@ function moveTargetOut(match, target, destination, cardIndex, context = {}) {
 
 
 function removeFromSimpleZone(player, zone, instanceId) {
-  if (!["hand", "trash", "revealed", "openArea", "deck"].includes(zone)) return { player, card: null };
+  if (!["hand", "trash", "revealed", "openArea", "deck", "soulState"].includes(zone)) return { player, card: null };
   const list = [...(player[zone] || [])];
   const index = list.findIndex((card) => card.instanceId === instanceId);
   if (index < 0) return { player, card: null };
@@ -726,7 +733,9 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         cores: { ...physical.cores, regular: Math.max(0, Number(physical.cores?.regular || 0) + delta) }
       }));
       if (type !== "removeCore" || moved <= 0) return { ...working, players: { ...working.players, [current.playerId]: updated } };
-      const destination = String(action.destination || action.to || "reserve").toLowerCase();
+      let destination = String(action.destination || action.to || "reserve").toLowerCase();
+      if (destination === "reserve" && context.sourcePlayerId && context.sourcePlayerId !== current.playerId
+          && getContinuousPlayerNumericModifier(working, context.sourcePlayerId, "opponentEffectCoreToTrash") > 0) destination = "trash";
       const withDestination = destination === "trash"
         ? { ...updated, trashCores: Number(updated.trashCores || 0) + moved }
         : destination === "void"
@@ -796,6 +805,10 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
 
   if (type === "endCurrentStep") {
     const current = String(next.phase || "");
+    if (current === "attack" && context.sourcePlayerId
+        && getContinuousPlayerNumericModifier(next, context.sourcePlayerId, "cannotEndAttackStepByEffect") > 0) {
+      return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    }
     let nextPhase = null;
     if (current === "main") nextPhase = (next.turnNumber === 1 && next.activePlayerId === next.firstPlayerId) ? "end" : "attack";
     else if (current === "attack") nextPhase = "end";
@@ -1005,7 +1018,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         removed = player.burst;
         player = { ...player, burst: null };
       }
-    } else if (["hand", "trash", "revealed", "deck"].includes(current.zone)) {
+    } else if (["hand", "trash", "revealed", "deck", "openArea", "soulState"].includes(current.zone)) {
       const result = removeFromSimpleZone(player, current.zone, instanceId);
       player = result.player;
       removed = result.card;
@@ -1335,7 +1348,7 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       return { match: next, notes: ["Origem/alvo inválidos para mover Core entre cartas."], manualResolutionNeeded: true, executed: false };
     }
     const from = findPhysicalCard(next, selected.physical.instanceId);
-    if (!from || !["spirits", "other"].includes(from.zone) || !["spirits", "other"].includes(source.zone)) {
+    if (!from || !["spirits", "nexuses", "other"].includes(from.zone) || !["spirits", "nexuses", "other"].includes(source.zone)) {
       return { match: next, notes: ["As cartas precisam estar no campo para mover Core."], manualResolutionNeeded: true, executed: false };
     }
     const amount = Math.max(1, Number(action.amount ?? action.count ?? 1));
@@ -1353,6 +1366,36 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved };
   }
 
+
+  if (type === "performManifest") {
+    const sourceId = context.sourceInstanceId;
+    const source = sourceId ? findPhysicalCard(next, sourceId) : null;
+    if (!source || source.zone !== "hand") return { match: next, notes: ["Manifest source is not in hand."], manualResolutionNeeded: true, executed: false };
+    const playerId = source.playerId;
+    const player = next.players[playerId];
+    const soul = player.soulCore || {};
+    if (!soul.zone || soul.zone === "trash") return { match: next, notes: ["Soul Core is not available for Manifest."], manualResolutionNeeded: true, executed: false };
+    const candidates = collectTargets(next, cardIndex, action.selector || { owner: "self", zones: ["field"], cardTypes: ["nexus"] }, { ...context, sourcePlayerId: playerId });
+    const eligible = candidates.filter((candidate) => Number(candidate.physical?.cores?.regular || 0) >= Math.max(1, Number(action.minimumTargetCores ?? 1)));
+    if (!eligible.length) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    if (eligible.length > 1 && !context.selectedTargets?.length) return { match: next, notes: [], manualResolutionNeeded: true, executed: false, decision: { kind: "selectTarget", playerId, action, context, candidates: eligible, minimum: 1, maximum: 1 } };
+    const target = context.selectedTargets?.[0] || eligible[0];
+    const currentTarget = findPhysicalCard(next, target.physical.instanceId);
+    if (!currentTarget) return { match: next, notes: ["Manifest target is no longer available."], manualResolutionNeeded: true, executed: false };
+    let workingPlayer = next.players[playerId];
+    if (soul.zone === "reserve") workingPlayer = { ...workingPlayer, soulCore: { zone: "trash", instanceId: null }, trashCores: Number(workingPlayer.trashCores || 0) + 1 };
+    else if (soul.zone === "card" && soul.instanceId) {
+      workingPlayer = updateFieldCard(workingPlayer, soul.instanceId, (physical) => ({ ...physical, cores: { ...physical.cores, soul: false } }));
+      workingPlayer = { ...workingPlayer, soulCore: { zone: "trash", instanceId: null }, trashCores: Number(workingPlayer.trashCores || 0) + 1 };
+    }
+    const pay = Math.max(1, Number(action.costFromTarget ?? 1));
+    const available = Number(currentTarget.card.cores?.regular || 0);
+    if (available < pay) return { match: next, notes: ["Manifest target does not have enough cores."], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    workingPlayer = updateFieldCard(workingPlayer, currentTarget.card.instanceId, (physical) => ({ ...physical, cores: { ...physical.cores, regular: Number(physical.cores?.regular || 0) - pay } }));
+    workingPlayer = { ...workingPlayer, reserve: Number(workingPlayer.reserve || 0) + pay };
+    let working = { ...next, players: { ...next.players, [playerId]: workingPlayer } };
+    return resolveNested(working, [{ type: "specialSummonSource", coresToPlace: action.coresToPlace ?? 1, cause: "manifest" }], cardIndex, context);
+  }
 
   if (type === "performAdvent") {
     const sourceId = context.sourceInstanceId;
@@ -1880,9 +1923,12 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     const selectorCount = action.countFromSelector && typeof action.countFromSelector === "object"
       ? collectTargets(next, cardIndex, action.countFromSelector, context).length
       : null;
+    const sourceLevelCount = action.countFromSourceLevel && context.sourceCard && context.sourcePhysical
+      ? Number(getCurrentLevel(context.sourceCard, context.sourcePhysical)?.level || 0)
+      : null;
     let requested = selectorCount != null
       ? selectorCount * Number(action.countMultiplier ?? action.amountPerMatching ?? 1)
-      : Number(action.count ?? action.amount ?? 1);
+      : Number(sourceLevelCount ?? action.count ?? action.amount ?? 1);
     if (action.maxCount != null) requested = Math.min(requested, Number(action.maxCount));
     if (type === "topDeckToTrash") {
       if (getContinuousPlayerNumericModifier(next, playerId, "deckRemovalLocked") > 0) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
@@ -1899,6 +1945,15 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
     if (type === "topDeckToTrash") player = { ...player, deck, trash: [...player.trash, ...moved] };
     else player = { ...player, deck, revealed: [...(player.revealed || []), ...moved] };
     next = { ...next, players: { ...next.players, [playerId]: player } };
+    if (type === "revealTop" && moved.length) {
+      for (const physical of moved) {
+        const movedCard = getDatabaseCard(cardIndex, physical);
+        next = queueDeferredCanonicalEvent(next, {
+          event: "cardMoved", sourcePlayerId: playerId, sourcePhysical: cleanPhysical(physical), sourceCardId: movedCard?.id || physical?.cardId || null, eventPlayerId: playerId,
+          context: { movedCardInstanceId: physical?.instanceId || null, movedCardId: movedCard?.id || physical?.cardId || null, movedCardFamilies: movedCard?.families || [], movedCardType: movedCard?.cardType || null, moveFromZone: "deck", moveDestination: "revealed", movedByPlayerId: context.sourcePlayerId || null, movedByInstanceId: context.sourceInstanceId || null, movedByCardId: context.sourceCard?.id || null, movedByCardType: context.sourceCard?.cardType || null }
+        });
+      }
+    }
     if (type === "topDeckToTrash" && moved.length) {
       next = {
         ...next,
@@ -1911,6 +1966,13 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
         }
       };
       const movedCards = moved.map((physical) => getDatabaseCard(cardIndex, physical)).filter(Boolean);
+      for (const physical of moved) {
+        const movedCard = getDatabaseCard(cardIndex, physical);
+        next = queueDeferredCanonicalEvent(next, {
+          event: "cardMoved", sourcePlayerId: playerId, sourcePhysical: cleanPhysical(physical), sourceCardId: movedCard?.id || physical?.cardId || null, eventPlayerId: playerId,
+          context: { movedCardInstanceId: physical?.instanceId || null, movedCardId: movedCard?.id || physical?.cardId || null, movedCardFamilies: movedCard?.families || [], movedCardType: movedCard?.cardType || null, moveFromZone: "deck", moveDestination: "trash", movedByPlayerId: context.sourcePlayerId || null, movedByInstanceId: context.sourceInstanceId || null, movedByCardId: context.sourceCard?.id || null, movedByCardType: context.sourceCard?.cardType || null }
+        });
+      }
       const requiredFamily = action.onMovedFamily || action.ifMovedFamily || null;
       const nested = asActionArray(action.onMovedFamilyActions ?? action.thenIfMovedFamily);
       if (requiredFamily && nested.length && movedCards.some((card) => (card.families || []).includes(requiredFamily))) {
@@ -2130,6 +2192,145 @@ export function resolveAction(match, rawAction = {}, cardIndex, context = {}, re
       result = mergeResults(result, resolveNested(result.match, afterIfAny, cardIndex, selectedContext));
     }
     return result;
+  }
+
+  if (type === "millAndGainCoresPerMatching") {
+    const playerId = resolvePlayerId(next, action, context);
+    const player = next.players?.[playerId];
+    if (!player) return { match: next, notes: ["Invalid player for Trust mill."], manualResolutionNeeded: true, executed: false };
+    const count = Math.max(0, Number(action.count ?? 3));
+    const deck = [...(player.deck || [])];
+    const moved = [];
+    for (let i = 0; i < count && deck.length; i += 1) moved.push(deck.shift());
+    const selectors = Array.isArray(action.matchSelectors) ? action.matchSelectors : [action.matchSelector || action.selector || {}];
+    const matches = moved.filter((physical) => {
+      const card = getDatabaseCard(cardIndex, physical);
+      return selectors.some((selector) => cardMatchesSimpleSelector(card, selector));
+    });
+    let trash = [...(player.trash || []), ...moved.map(cleanPhysical)];
+    let hand = [...(player.hand || [])];
+    if (action.recoverSelector) {
+      const recover = moved.filter((physical) => cardMatchesSimpleSelector(getDatabaseCard(cardIndex, physical), action.recoverSelector));
+      const recoverIds = new Set(recover.map((physical) => physical.instanceId));
+      trash = trash.filter((physical) => !recoverIds.has(physical.instanceId));
+      hand.push(...recover.map(cleanPhysical));
+    }
+    let working = { ...next, players: { ...next.players, [playerId]: { ...player, deck, trash, hand } } };
+    const source = context.sourceInstanceId ? findPhysicalCard(working, context.sourceInstanceId) : null;
+    if (source && ["spirits", "nexuses", "other"].includes(source.zone) && matches.length) {
+      const updated = updateFieldCard(working.players[source.playerId], source.card.instanceId, (physical) => ({
+        ...physical, cores: { ...physical.cores, regular: Number(physical.cores?.regular || 0) + matches.length }
+      }));
+      working = { ...working, players: { ...working.players, [source.playerId]: updated } };
+    }
+    return { match: working, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: moved.length };
+  }
+
+  if (type === "revealTopChooseOneToHand") {
+    const playerId = resolvePlayerId(next, action, context);
+    const player = next.players?.[playerId];
+    if (!player) return { match: next, notes: ["Invalid player for reveal."], manualResolutionNeeded: true, executed: false };
+    const count = Math.max(1, Number(action.count ?? 2));
+    const deck = [...(player.deck || [])];
+    const opened = [];
+    for (let i = 0; i < count && deck.length; i += 1) opened.push(deck.shift());
+    const eligible = opened.filter((physical) => cardMatchesSimpleSelector(getDatabaseCard(cardIndex, physical), action.matchSelector || {}));
+    const chosen = eligible[0] || null;
+    const hand = chosen ? [...(player.hand || []), cleanPhysical(chosen)] : [...(player.hand || [])];
+    const trash = [...(player.trash || []), ...opened.filter((physical) => !chosen || physical.instanceId !== chosen.instanceId).map(cleanPhysical)];
+    next = { ...next, players: { ...next.players, [playerId]: { ...player, deck, hand, trash } } };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: opened.length };
+  }
+
+  if (type === "moveSourceFromSoulStateToField") {
+    const playerId = context.sourcePlayerId;
+    const player = next.players?.[playerId];
+    const instanceId = context.sourceInstanceId;
+    const list = [...(player?.soulState || [])];
+    const index = list.findIndex((card) => card.instanceId === instanceId);
+    if (!player || index < 0) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const [cardPhysical] = list.splice(index, 1);
+    const db = getDatabaseCard(cardIndex, cardPhysical);
+    const placed = { ...cleanPhysical(cardPhysical), cardType: db?.cardType || "nexus", cores: { regular: 0, soul: false } };
+    const fieldZone = db?.cardType === "nexus" ? "nexuses" : db?.cardType === "brave" ? "other" : "spirits";
+    const updated = addFieldCard({ ...player, soulState: list }, fieldZone, placed);
+    next = { ...next, players: { ...next.players, [playerId]: updated } };
+    next = queueDeferredCanonicalEvent(next, { event: "whenDeployed", sourcePlayerId: playerId, sourceInstanceId: placed.instanceId, sourcePhysical: placed, sourceCardId: db?.id || placed.cardId, eventPlayerId: playerId, context: { fromSoulState: true } });
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "moveLifeToReserveBySymbolExcess") {
+    const battle = next.battle;
+    if (!battle?.blockerInstanceId || !context.sourcePhysical) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const blocker = findPhysicalCard(next, battle.blockerInstanceId);
+    if (!blocker) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const own = getEffectiveSymbols(next, cardIndex, context.sourcePhysical).length;
+    const opp = getEffectiveSymbols(next, cardIndex, blocker.card).length;
+    const amount = Math.max(0, own - opp);
+    if (!amount) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    return resolveNested(next, [{ type: "moveLifeToReserve", player: "opponent", amount }], cardIndex, context);
+  }
+
+  if (type === "destroyUpToTotalBP") {
+    const selector = action.selector || { owner: "opponent", zones: ["field"], cardTypes: ["spirit", "ultimate"] };
+    const candidates = collectTargets(next, cardIndex, selector, context).sort((a,b) => Number(getEffectiveBP(next, cardIndex, a.physical)||0) - Number(getEffectiveBP(next, cardIndex, b.physical)||0));
+    let budget = Math.max(0, Number(action.baseBP ?? action.totalBP ?? 0));
+    if (action.bonusPerSourceBrave && context.sourceInstanceId) {
+      const braveCount = Object.values(next.players || {}).reduce((n, p) => n + (p.field?.other || []).filter((x) => x.combinedWith === context.sourceInstanceId).length, 0);
+      budget += braveCount * Number(action.bonusPerSourceBrave || 0);
+    }
+    let working = next, used = 0, count = 0;
+    for (const target of candidates) {
+      const bp = Number(getEffectiveBP(working, cardIndex, target.physical) || 0);
+      if (used + bp > budget) continue;
+      working = moveTargetOut(working, target, "trash", cardIndex, context); used += bp; count += 1;
+    }
+    return { match: working, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: count };
+  }
+
+  if (type === "discardRandomOpponentHand") {
+    const playerId = otherPlayerId(next, context.sourcePlayerId);
+    const player = next.players?.[playerId];
+    if (!player) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const count = Math.min(Math.max(0, Number(action.count ?? 1)), (player.hand || []).length);
+    const hand = [...(player.hand || [])];
+    const discarded = hand.splice(0, count).map(cleanPhysical);
+    next = { ...next, players: { ...next.players, [playerId]: { ...player, hand, trash: [...(player.trash || []), ...discarded] } } };
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: count };
+  }
+
+  if (type === "revealTopRefreshIfMatching") {
+    const playerId = resolvePlayerId(next, action, context);
+    const player = next.players?.[playerId];
+    if (!player || !(player.deck || []).length) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const [opened, ...deck] = player.deck;
+    const card = getDatabaseCard(cardIndex, opened);
+    const matched = cardMatchesSimpleSelector(card, action.matchSelector || {});
+    next = { ...next, players: { ...next.players, [playerId]: { ...player, deck, trash: [...(player.trash || []), cleanPhysical(opened)] } } };
+    if (matched && context.sourceInstanceId) {
+      const found = findPhysicalCard(next, context.sourceInstanceId);
+      if (found) {
+        const updated = updateFieldCard(next.players[found.playerId], found.card.instanceId, (physical) => ({ ...physical, exhausted: false }));
+        next = { ...next, players: { ...next.players, [found.playerId]: updated } };
+      }
+    }
+    return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 1 };
+  }
+
+  if (type === "useMagicFlashFromHandFree") {
+    const playerId = context.sourcePlayerId;
+    const player = next.players?.[playerId];
+    const magic = (player?.hand || []).find((physical) => String(getDatabaseCard(cardIndex, physical)?.cardType || "").toLowerCase() === "magic")
+      || (player?.openArea || []).find((physical) => String(getDatabaseCard(cardIndex, physical)?.cardType || "").toLowerCase() === "magic");
+    if (!magic) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const db = getDatabaseCard(cardIndex, magic);
+    const display = (db?.effects || []).find((entry) => String(entry.type || entry.timing || "").toLowerCase().includes("flash"));
+    const automated = display?.automationRef ? (db?.abilities || []).find((entry) => entry.id === display.automationRef) : (db?.abilities || []).find((entry) => String(entry.trigger?.event || "") === "magicFlash");
+    if (!automated?.actions?.length) return { match: next, notes: ["Selected Magic has no structured Flash effect."], manualResolutionNeeded: true, executed: false };
+    const current = findPhysicalCard(next, magic.instanceId);
+    if (!current) return { match: next, notes: [], manualResolutionNeeded: false, executed: true, affectedCount: 0 };
+    const moved = moveCardGeneric(next, { playerId: current.playerId, zone: current.zone, physical: current.card, card: db }, "trash", cardIndex, context);
+    return resolveNested(moved, automated.actions, cardIndex, { ...context, sourcePlayerId: playerId, sourceInstanceId: magic.instanceId, sourcePhysical: magic, sourceCard: db, effectId: automated.id });
   }
 
   if (type === "chooseYesNo") {

@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-01T11:19:44.710Z",
+  "generatedAt": "2026-10-01T12:34:56.623Z",
   "targetPercent": 95,
   "totalSets": 11,
-  "completeSets": 10,
+  "completeSets": 11,
   "sets": [
     {
       "set": "BS13",
@@ -20,99 +20,15 @@
     {
       "set": "BSC49",
       "total": 117,
-      "automated": 102,
+      "automated": 117,
       "noEffect": 1,
-      "unresolved": 15,
-      "automationPercent": 87.2,
-      "unsupportedTriggers": [
-        "afterCost4PlusMagicResolves",
-        "afterDivineTrust",
-        "onEligibleSummonDescendOrPlacement",
-        "onEligibleSummonOrPlacement",
-        "opposingUnitLeavesByYourEffect",
-        "whenAttacksOrBlocks",
-        "whenBravedOrCombinedCardWouldLeave",
-        "whenDepletedOrDestroyedByOpponent",
-        "whenDiscardedByGreenOnlyEffect",
-        "whenExhaustedEitherAttackStep",
-        "whenOpenedFromDeckByGreenEffect",
-        "whenOpponentSpiritUltimateMilled",
-        "whenOtherEligibleSpiritSummoned",
-        "whenSummonedOrAttacks",
-        "whileAttackingAndRefreshed",
-        "whileCardOrSpirit",
-        "whileLevel1",
-        "whileLevel2",
-        "whileLevel2Or3",
-        "whileLevel3",
-        "whileOnField",
-        "yourSpiritLeavesByOpponentEffect"
-      ],
+      "unresolved": 0,
+      "automationPercent": 100,
+      "unsupportedTriggers": [],
       "unsupportedConditions": [],
       "unsupportedActions": [],
-      "complete": false,
-      "unresolvedCards": [
-        {
-          "cardId": "BSC49-CP01",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-CP02",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-CP03",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-XV01",
-          "status": "MANUAL"
-        },
-        {
-          "cardId": "BSC49-XV02",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-XV03",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-XV04",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-XV05",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-XV06",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-XV07",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-XV08",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-XV09",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-XV10",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-XV11",
-          "status": "UNSUPPORTED_TRIGGER"
-        },
-        {
-          "cardId": "BSC49-XV12",
-          "status": "UNSUPPORTED_TRIGGER"
-        }
-      ]
+      "complete": true,
+      "unresolvedCards": []
     },
     {
       "set": "SD10",
