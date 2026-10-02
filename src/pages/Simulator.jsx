@@ -29,27 +29,31 @@ import MatchResultScreen from "../components/match/MatchResultScreen.jsx";
 import { ReserveCoreDisplay, CoreTrashDisplay } from "../components/game/arena/CoreSystemDisplay.jsx";
 import Modal from "../components/common/Modal.jsx";
 import { cardIndex } from "../services/cardRepository.js";
+import { applyGameAction } from "../game/reducer.js";
+import { chooseAIDecision } from "../game/ai.js";
 import {
-  buildArenaViewModel,
-  calculateReduction,
-  dispatchArenaIntent,
   findPhysicalCard,
-  getBraveSeparationPreview,
-  getBurstActivationEvent,
-  getCardName,
-  getCombinedStats,
-  getCurrentLevel,
   getDatabaseCard,
+  getCurrentLevel,
   getEffectiveBP,
-  getEffectiveSymbols,
-  getLegalBraveHosts,
-  getSpendableCoreSources,
-  legalBlockers,
-  planArenaCpuDecision,
-  resolveArenaPerspective,
+  getEffectiveSymbols
+} from "../game/selectors.js";
+import {
+  getCardName,
   resolveCardImage
-} from "../arena/index.js";
-
+} from "../game/cardAdapter.js";
+import { otherPlayerId } from "../game/utils.js";
+import { legalBlockers } from "../game/battle.js";
+import { getBurstActivationEvent } from "../game/burstRules.js";
+import {
+  calculateReduction,
+  getSpendableCoreSources
+} from "../game/cost.js";
+import {
+  getBraveSeparationPreview,
+  getCombinedStats,
+  getLegalBraveHosts
+} from "../game/brave.js";
 import { useLanguage } from "../i18n.jsx";
 import { identifySavedDeck, recordMatchResult } from "../services/matchHistoryService.js";
 import { onlineErrorMessage } from "../online/errors/onlineErrorMessages.js";
@@ -89,8 +93,6 @@ import "../styles/arena/arenaPerformanceV490.css";
 import "../styles/arena/arenaVisualCleanupV490.css";
 import "../styles/arena/arenaVisualPolishV491.css";
 import "../styles/arena/combatLayoutStabilityV500.css";
-import "../styles/arena/spatialPrototypeV520.css";
-import "../styles/arena/fullViewportArenaV520.css";
 
 
 function effectText(card, language) {
@@ -873,28 +875,101 @@ export default function Simulator({
      PLAYER / ACTOR
   ======================================================= */
 
-  const {
-    actorId,
-    canControlActor,
-    bottomId,
-    topId
-  } = useMemo(
-    () =>
-      resolveArenaPerspective({
-        match,
-        online,
-        viewerPlayerId,
-        aiMode,
-        humanPlayerId
-      }),
-    [
+  const actorId =
+    useMemo(() => {
+      if (
+        match.pendingEffectDecision
+          ?.playerId
+      ) {
+        return match
+          .pendingEffectDecision
+          .playerId;
+      }
+
+      if (
+        match.burstOpportunity
+          ?.playerId
+      ) {
+        return match
+          .burstOpportunity
+          .playerId;
+      }
+
+      if (
+        match.battle
+          ?.stage ===
+        "ultimateTrigger" &&
+        match.battle
+          ?.ultimateTrigger
+      ) {
+        const trigger =
+          match.battle
+            .ultimateTrigger;
+
+        if (
+          trigger.status ===
+            "counterWindow" &&
+          trigger.counterPlayerId
+        ) {
+          return trigger
+            .counterPlayerId;
+        }
+
+        if (
+          trigger.controllerPlayerId
+        ) {
+          return trigger
+            .controllerPlayerId;
+        }
+      }
+
+      if (
+        match.battle
+          ?.flash
+          ?.priorityPlayerId
+      ) {
+        return match.battle
+          .flash
+          .priorityPlayerId;
+      }
+
+      if (
+        match.battle
+          ?.stage ===
+        "block"
+      ) {
+        return match.battle
+          .defenderPlayerId;
+      }
+
+      return match
+        .activePlayerId;
+    }, [match]);
+
+
+  const canControlActor =
+    online
+      ? viewerPlayerId ===
+          actorId
+      : aiMode
+        ? actorId ===
+            humanPlayerId
+        : true;
+
+
+  const bottomId =
+    online
+      ? viewerPlayerId
+      : aiMode
+        ? humanPlayerId
+        : actorId;
+
+
+  const topId =
+    otherPlayerId(
       match,
-      online,
-      viewerPlayerId,
-      aiMode,
-      humanPlayerId
-    ]
-  );
+      bottomId
+    );
 
 
   const bottom =
@@ -907,19 +982,6 @@ export default function Simulator({
     match.players[
       topId
     ];
-
-
-  const arenaViewModel = useMemo(
-    () => buildArenaViewModel({
-      match,
-      cardIndex,
-      viewerPlayerId: bottomId,
-      opponentPlayerId: topId,
-      connectionState: online ? "connected" : "local",
-      opponentConnectionState: online ? "connected" : "local"
-    }),
-    [match, bottomId, topId, online]
-  );
 
 
   const actorBurstCard =
@@ -1100,67 +1162,74 @@ export default function Simulator({
     setError("");
     setNotice("");
 
-    const handleOnlineResult = (result) => {
-      if (!result?.ok) {
-        setError(
-          onlineErrorMessage(result, {
-            language,
-            fallback: language === "en"
-              ? "This action is not available."
-              : "Esta ação não está disponível."
-          })
-        );
-      }
-
+    if (online) {
       if (
-        result?.manualResolutionNeeded &&
-        !result?.pendingEffectDecision &&
-        !result?.match?.pendingEffectDecision
+        viewerPlayerId !==
+        asPlayerId
       ) {
-        setNotice(
+        return setError(
           language === "en"
-            ? "This effect still needs manual resolution."
-            : "O efeito ainda precisa de resolução manual conforme o texto."
+            ? "Wait for the other player."
+            : "Aguarde a ação do outro jogador."
         );
       }
-    };
 
-    const result = dispatchArenaIntent({
-      online,
-      onlineClient,
-      viewerPlayerId,
-      match,
-      action,
-      asPlayerId,
-      cardIndex,
-      onOnlineResult: handleOnlineResult
-    });
+      onlineClient.action(
+        {
+          action
+        },
+        (
+          result
+        ) => {
+          if (
+            !result?.ok
+          ) {
+            setError(
+              onlineErrorMessage(result, {
+                language,
+                fallback: language === "en"
+                  ? "This action is not available."
+                  : "Esta ação não está disponível."
+              })
+            );
+          }
 
-    if (result.transport === "blocked") {
-      return setError(
-        result.reason === "ONLINE_CLIENT_UNAVAILABLE"
-          ? (
+          if (
+            result?.manualResolutionNeeded &&
+            !result?.pendingEffectDecision &&
+            !result?.match?.pendingEffectDecision
+          ) {
+            setNotice(
               language === "en"
-                ? "Online connection is not available."
-                : "A conexão online não está disponível."
-            )
-          : (
-              language === "en"
-                ? "Wait for the other player."
-                : "Aguarde a ação do outro jogador."
-            )
+                ? "This effect still needs manual resolution."
+                : "O efeito ainda precisa de resolução manual conforme o texto."
+            );
+          }
+        }
       );
-    }
 
-    if (result.transport === "online") {
       return;
     }
 
-    if (!result.ok) {
-      return setError(result.error);
+    const result =
+      applyGameAction(
+        match,
+        action,
+        asPlayerId,
+        cardIndex
+      );
+
+    if (
+      !result.ok
+    ) {
+      return setError(
+        result.error
+      );
     }
 
-    setMatch(result.match);
+    setMatch(
+      result.match
+    );
 
     if (
       result.manualResolutionNeeded &&
@@ -1201,19 +1270,27 @@ export default function Simulator({
       guard.recentActionKeys = [];
     }
 
-    const {
-      difficulty,
-      decision,
-      action,
-      delay
-    } = planArenaCpuDecision({
-      match,
-      aiPlayerId,
-      cardIndex,
-      recentActionKeys: guard.recentActionKeys,
-      turnActionCount: guard.actions,
-      maxTurnActions: 70
-    });
+    const difficulty =
+      match.ai?.difficulty ||
+      "normal";
+
+    const decision =
+      chooseAIDecision(
+        match,
+        aiPlayerId,
+        cardIndex,
+        {
+          difficulty,
+          archetypeProfile: match.ai?.archetypeProfile,
+          recentActionKeys:
+            guard.recentActionKeys,
+          turnActionCount:
+            guard.actions,
+          maxTurnActions: 70
+        }
+      );
+
+    const action = decision.action;
 
     if (match.ai?.debugEnabled) {
       setAiDebugDecision({
@@ -1236,6 +1313,13 @@ export default function Simulator({
       );
       return undefined;
     }
+
+    const delay =
+      difficulty === "hard"
+        ? 360
+        : difficulty === "easy"
+          ? 650
+          : 500;
 
     const timer =
       window.setTimeout(
@@ -5568,7 +5652,7 @@ export default function Simulator({
   ======================================================= */
 
   return (
-    <ArenaShell viewModel={arenaViewModel}>
+    <ArenaShell>
 
       <ArenaOverlayLayer>
         <BattleExperienceLayer
@@ -5610,7 +5694,7 @@ export default function Simulator({
         />
       </ArenaOverlayLayer>
 
-      <header className="sim-topbar" data-arena-region="command-strip">
+      <header className="sim-topbar">
 
         <img
           src="./images/logo_battlespirits.png"
@@ -5620,7 +5704,7 @@ export default function Simulator({
 
         <div>
           <span>
-            Eternal v5.2.0 • Arena 2D
+            Eternal v5.1.0 • Arena 2D
           </span>
 
           <strong>
@@ -5807,7 +5891,6 @@ export default function Simulator({
         ================================================= */}
 
         <ContextPanel
-          className="arena-inspector-overlay"
           open={showInspectorDock}
           mode="card"
           theme={getInspectorCardTheme(selectedCard)}
@@ -6207,7 +6290,6 @@ export default function Simulator({
                 : "attack-focus-top-hud"
             }
           
-            data-arena-region="opponent-status"
             data-targeting-state={directBattleTargetId === topId ? "targetable" : undefined}
           >
           <OpponentHUD
@@ -6222,14 +6304,12 @@ export default function Simulator({
           <div
             className={`arena-legacy-hand-slot ${battleFocusActive ? "attack-focus-dim" : ""}`}
             data-arena-slot="OpponentHand"
-            data-arena-region="opponent-hand"
           >
             {renderHand(topId)}
           </div>
 
 
           <OpponentField
-            data-arena-region="opponent-battlefield"
             className={
               battleFocusActive
                 ? "attack-focus-relevant attack-focus-top-field"
@@ -6241,7 +6321,6 @@ export default function Simulator({
 
 
           <CenterField
-            data-arena-region="timing-focus"
             className={battleFocusActive ? "attack-focus-relevant" : ""}
           >
             {battleCenter()}
@@ -6249,7 +6328,6 @@ export default function Simulator({
 
 
           <PlayerField
-            data-arena-region="player-battlefield"
             className={
               battleFocusActive
                 ? "attack-focus-relevant attack-focus-bottom-field"
@@ -6263,7 +6341,6 @@ export default function Simulator({
           <div
             className={`arena-legacy-hand-slot ${battleFocusActive ? "attack-focus-dim" : ""}`}
             data-arena-slot="PlayerHand"
-            data-arena-region="player-hand"
           >
             {renderHand(bottomId)}
           </div>
@@ -6281,7 +6358,6 @@ export default function Simulator({
                 : ""
             }
           
-            data-arena-region="player-status"
             data-targeting-state={directBattleTargetId === bottomId ? "targetable" : undefined}
           >
           <PlayerHUD
@@ -6300,7 +6376,6 @@ export default function Simulator({
         ================================================= */}
 
         <aside
-          data-arena-region="utility-rail"
           className={`turn-panel panel arena-side-dock ${
             showControlDock
               ? "dock-open"

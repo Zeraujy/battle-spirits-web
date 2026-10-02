@@ -1,9 +1,9 @@
 {
   "name": "battle-spirits-kaihou-simulator",
-  "version": "5.2.0",
+  "version": "5.1.0",
   "private": true,
   "type": "module",
-  "description": "Battle Spirits: KAIHOU! Simulator v5.2.0 - Arena Architecture & Battlefield Experience Overhaul",
+  "description": "Battle Spirits: KAIHOU! Simulator v5.1.0 - Automated Card Effects Release",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "dev:web": "vite --host 127.0.0.1",
@@ -11,7 +11,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --test src/game/*.test.js src/online/*.test.js src/services/*.test.js",
-    "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-web-only.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs && node scripts/audit-arena-phase01.mjs && node scripts/audit-arena-phase23.mjs && node scripts/audit-arena-phase45.mjs && node scripts/audit-arena-phase67.mjs && node scripts/audit-arena-phase89.mjs && node scripts/audit-arena-phase1314.mjs && node scripts/audit-arena-phase1618.mjs && node scripts/audit-arena-phase1921.mjs && node scripts/audit-arena-phase2223.mjs && node scripts/audit-arena-visual-identity-491-block1.mjs && node scripts/audit-arena-visual-identity-491-block057.mjs && node scripts/audit-arena-visual-identity-491-block0811.mjs && node scripts/audit-arena-visual-identity-491-final.mjs && node scripts/audit-online-foundation-v500-phase02.mjs && node scripts/audit-combat-layout-stability-v500.mjs && node scripts/audit-online-authority-v500-phase46.mjs && node scripts/audit-online-matchmaking-v500-phase79.mjs && node scripts/audit-online-ready-check-v500.mjs && node scripts/audit-online-prematch-v500-phase1011.mjs && node scripts/audit-online-ranked-v500-phase1214.mjs && node scripts/audit-online-social-v500-phase1518.mjs && node scripts/audit-online-history-v500-phase1921.mjs && node scripts/audit-online-security-v500-phase22.mjs && node scripts/audit-online-final-v500-phase25.mjs && node scripts/audit-starter-decks-v501.mjs && node scripts/audit-onboarding-decks-v502.mjs && node scripts/audit-shop-deck-purchase-v503.mjs && node scripts/effects/audit-card-effects.mjs --check && node scripts/effects/audit-effect-foundation-phase23.mjs && node scripts/effects/audit-effect-foundation-phase46.mjs && node scripts/effects/audit-effect-foundation-phase79.mjs && node scripts/effects/audit-effect-foundation-phase1012.mjs && node scripts/effects/audit-effect-foundation-phase1315.mjs && node scripts/effects/audit-effect-foundation-phase1618.mjs && node scripts/effects/audit-effect-foundation-phase1920.mjs && node scripts/effects/audit-starter-deck-priority-phase22.mjs && node scripts/effects/audit-effect-foundation-phase2122.mjs && node scripts/audit-deck-builder-recipes-v503.mjs && node scripts/audit-shared-contracts-v520-phase1.mjs && node scripts/audit-arena-controller-v520-phase2.mjs && node scripts/audit-arena-viewmodel-v520-phase3.mjs && node scripts/audit-internal-repository-shape-v520-phase4.mjs && node scripts/audit-architecture-foundation-v520-phase5.mjs && node scripts/audit-arena-spatial-prototype-v520-phase6.mjs && node scripts/audit-arena-full-viewport-v520-phase7.mjs",
+    "verify": "node scripts/card-db/validate-catalog.mjs && node scripts/verify-project.mjs && node scripts/audit-web-only.mjs && node scripts/audit-card-images.mjs && node scripts/audit-card-thumbnails.mjs && node scripts/audit-runtime-card-references.mjs && node scripts/audit-arena-phase01.mjs && node scripts/audit-arena-phase23.mjs && node scripts/audit-arena-phase45.mjs && node scripts/audit-arena-phase67.mjs && node scripts/audit-arena-phase89.mjs && node scripts/audit-arena-phase1314.mjs && node scripts/audit-arena-phase1618.mjs && node scripts/audit-arena-phase1921.mjs && node scripts/audit-arena-phase2223.mjs && node scripts/audit-arena-visual-identity-491-block1.mjs && node scripts/audit-arena-visual-identity-491-block057.mjs && node scripts/audit-arena-visual-identity-491-block0811.mjs && node scripts/audit-arena-visual-identity-491-final.mjs && node scripts/audit-online-foundation-v500-phase02.mjs && node scripts/audit-combat-layout-stability-v500.mjs && node scripts/audit-online-authority-v500-phase46.mjs && node scripts/audit-online-matchmaking-v500-phase79.mjs && node scripts/audit-online-ready-check-v500.mjs && node scripts/audit-online-prematch-v500-phase1011.mjs && node scripts/audit-online-ranked-v500-phase1214.mjs && node scripts/audit-online-social-v500-phase1518.mjs && node scripts/audit-online-history-v500-phase1921.mjs && node scripts/audit-online-security-v500-phase22.mjs && node scripts/audit-online-final-v500-phase25.mjs && node scripts/audit-starter-decks-v501.mjs && node scripts/audit-onboarding-decks-v502.mjs && node scripts/audit-shop-deck-purchase-v503.mjs && node scripts/effects/audit-card-effects.mjs --check && node scripts/effects/audit-effect-foundation-phase23.mjs && node scripts/effects/audit-effect-foundation-phase46.mjs && node scripts/effects/audit-effect-foundation-phase79.mjs && node scripts/effects/audit-effect-foundation-phase1012.mjs && node scripts/effects/audit-effect-foundation-phase1315.mjs && node scripts/effects/audit-effect-foundation-phase1618.mjs && node scripts/effects/audit-effect-foundation-phase1920.mjs && node scripts/effects/audit-starter-deck-priority-phase22.mjs && node scripts/effects/audit-effect-foundation-phase2122.mjs && node scripts/audit-deck-builder-recipes-v503.mjs",
     "check": "npm run verify && npm test && npm run build",
     "server:start": "node --env-file-if-exists=server/.env server/index.mjs",
     "online:check": "node scripts/check-online-config.mjs",
@@ -97,21 +97,7 @@
     "effects:phase24:test": "node scripts/effects/generate-card-regression-phase24.mjs && node --test src/game/effectEngine/generatedCardRegression.test.js",
     "effects:phase25:audit": "node scripts/effects/audit-manual-resolution-phase25.mjs",
     "effects:phase26:qa": "node scripts/effects/audit-final-mechanics-phase26.mjs",
-    "effects:phase27:release": "node scripts/effects/release-qa-phase27.mjs",
-    "architecture:v520:boundaries": "node scripts/audit-repository-boundaries-v520.mjs",
-    "architecture:v520:phase1:audit": "node scripts/audit-shared-contracts-v520-phase1.mjs",
-    "architecture:v520:phase1:test": "node --test src/shared/contracts/arena/arenaPresentationContracts.test.js",
-    "architecture:v520:phase2:audit": "node scripts/audit-arena-controller-v520-phase2.mjs",
-    "architecture:v520:phase2:test": "node --test src/arena/controller/arenaController.test.js",
-    "architecture:v520:phase3:audit": "node scripts/audit-arena-viewmodel-v520-phase3.mjs",
-    "architecture:v520:phase3:test": "node --test src/arena/viewModel/arenaViewModel.test.js",
-    "architecture:v520:phase4:audit": "node scripts/audit-internal-repository-shape-v520-phase4.mjs",
-    "architecture:v520:phase4:test": "node --test src/content/contentBoundary.test.js",
-    "architecture:v520:phase5:audit": "node scripts/audit-architecture-foundation-v520-phase5.mjs",
-    "architecture:v520:phase5:regression": "node scripts/run-full-regression-v500.mjs",
-    "architecture:v520:phase5:qa": "npm run architecture:v520:phase5:audit && npm run architecture:v520:phase5:regression && npm run ui:audit && npm run release:audit && npm run security:audit",
-    "architecture:v520:phase6:audit": "node scripts/audit-arena-spatial-prototype-v520-phase6.mjs",
-    "architecture:v520:phase7:audit": "node scripts/audit-arena-full-viewport-v520-phase7.mjs"
+    "effects:phase27:release": "node scripts/effects/release-qa-phase27.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.0",
