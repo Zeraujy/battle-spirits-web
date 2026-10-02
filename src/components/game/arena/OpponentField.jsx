@@ -1,10 +1,10 @@
-export default function OpponentField({ children, className = "", ...props }) {
+export default function OpponentField({ children, className = "" }) {
   const rootClassName = ["arena-field-section", "arena-opponent-field", className]
     .filter(Boolean)
     .join(" ");
 
   return (
-    <div className={rootClassName} data-arena-component="OpponentField" {...props}>
+    <div className={rootClassName} data-arena-component="OpponentField">
       {children}
     </div>
   );

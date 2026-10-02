@@ -29,7 +29,6 @@ import { OnlineEventGuard, OnlineGuardCode, constantTimeTokenEqual } from "./sec
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
-// v5.2.0 repository-boundary baseline
 
 function loadCardIndex() {
   const dataDir = path.join(root, "src", "data");
@@ -84,7 +83,7 @@ export async function createBattleSpiritsServer(options = {}) {
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify({
         ok: true,
-        version: "5.2.0",
+        version: "5.1.0",
         rooms: rooms.size,
         cards: cardIndex.size,
         matchmakingQueued: casualQueue.size,

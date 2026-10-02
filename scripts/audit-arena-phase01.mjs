@@ -5,7 +5,6 @@ const root = process.cwd();
 const shellPath = path.join(root, "src/components/game/arena/ArenaShell.jsx");
 const simulatorPath = path.join(root, "src/pages/Simulator.jsx");
 const auditPath = path.join(root, "docs/arena/PHASE-0-BASELINE-AUDIT.md");
-const controllerPath = path.join(root, "src/arena/controller/arenaController.js");
 
 const failures = [];
 
@@ -37,21 +36,10 @@ if (fs.existsSync(simulatorPath)) {
   if (!simulator.includes('import ArenaShell from "../components/game/arena/ArenaShell.jsx";')) {
     failures.push("Simulator must import ArenaShell.");
   }
-  if (!/<ArenaShell(?:\s|>)/.test(simulator)) failures.push("Simulator must render inside ArenaShell.");
+  if (!simulator.includes("<ArenaShell>")) failures.push("Simulator must render inside ArenaShell.");
   if (!simulator.includes("</ArenaShell>")) failures.push("Simulator must close ArenaShell.");
-  const usesLegacyDirectDispatch =
-    simulator.includes("applyGameAction(") &&
-    simulator.includes("onlineClient.action(");
-
-  const usesPhase2Controller =
-    simulator.includes("dispatchArenaIntent(") &&
-    fs.existsSync(controllerPath) &&
-    fs.readFileSync(controllerPath, "utf8").includes("applyGameActionEngine(") &&
-    fs.readFileSync(controllerPath, "utf8").includes("onlineClient.action(");
-
-  if (!usesLegacyDirectDispatch && !usesPhase2Controller) {
-    failures.push("Local/online gameplay dispatch boundary unexpectedly changed or disappeared.");
-  }
+  if (!simulator.includes("applyGameAction(")) failures.push("Local gameplay dispatch boundary unexpectedly changed or disappeared.");
+  if (!simulator.includes("onlineClient.action(")) failures.push("Online gameplay dispatch boundary unexpectedly changed or disappeared.");
 }
 
 if (failures.length) {
