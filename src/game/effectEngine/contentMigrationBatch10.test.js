@@ -18,7 +18,7 @@ function base(){ const m=createMatch({player1:{name:'A',deck},player2:{name:'B',
 function physical(cardId, instanceId, cores=1){ return {...makePhysicalCard(cardId,index),instanceId,cores:{regular:cores,soul:false},exhausted:false}; }
 
 test('content batch 10: BS13 Wave 2 resolves ten more cards and leaves 50 pending',()=>{
-  const coverage=JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage-v5.1.0-content-batch10.json',import.meta.url),'utf8'));
+  const coverage=JSON.parse(fs.readFileSync(new URL('../../../data/effects/history/effect-coverage-v5.1.0-content-batch10.json',import.meta.url),'utf8'));
   const rows=coverage.cards.filter(x=>x.set==='BS13');
   assert.equal(rows.length,90);
   assert.equal(rows.filter(x=>x.status==='UNSTRUCTURED_TEXT').length,50);

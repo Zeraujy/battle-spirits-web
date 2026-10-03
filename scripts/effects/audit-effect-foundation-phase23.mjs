@@ -9,8 +9,8 @@ const required = [
   "src/game/effectEngine/effect-schema-v2.schema.json",
   "src/game/effectEngine/triggerDispatcher.js",
   "src/game/effectEngine/triggerDispatcher.test.js",
-  "docs/effects/EFFECT-SCHEMA-V2.md",
-  "docs/effects/TRIGGER-DISPATCHER.md"
+  "docs/effects/effect-schema-v2.md",
+  "docs/effects/trigger-dispatcher.md"
 ];
 
 const failures = [];

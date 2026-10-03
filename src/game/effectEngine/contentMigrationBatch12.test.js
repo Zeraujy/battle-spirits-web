@@ -15,7 +15,7 @@ const ability=(id,a)=>byId.get(id)?.abilities?.find(x=>x.id===a);
 function base(){const m=createMatch({player1:{name:'A',deck},player2:{name:'B',deck},firstPlayerId:'player1',cardIndex:index,random:()=>0.25}); m.turnNumber=2;m.phase='main';m.activePlayerId='player2';m.players.player1.reserve=20;m.players.player2.reserve=20;return m;}
 function physical(id,instance,cores=10){return {...makePhysicalCard(id,index),instanceId:instance,cores:{regular:cores,soul:false},exhausted:false};}
 
-test('content batch 12: BS13 Wave 4 resolves ten more cards and leaves 30 pending',()=>{const cov=JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage-v5.1.0-content-batch12.json',import.meta.url),'utf8'));const rows=cov.cards.filter(x=>x.set==='BS13');assert.equal(rows.length,90);assert.equal(rows.filter(x=>x.status==='UNSTRUCTURED_TEXT').length,30);assert.equal(rows.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,60);});
+test('content batch 12: BS13 Wave 4 resolves ten more cards and leaves 30 pending',()=>{const cov=JSON.parse(fs.readFileSync(new URL('../../../data/effects/history/effect-coverage-v5.1.0-content-batch12.json',import.meta.url),'utf8'));const rows=cov.cards.filter(x=>x.set==='BS13');assert.equal(rows.length,90);assert.equal(rows.filter(x=>x.status==='UNSTRUCTURED_TEXT').length,30);assert.equal(rows.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,60);});
 
 test('content batch 12: Core Action Library exposes generic step ending',()=>{const types=listSupportedCoreActionTypes();assert.equal(types.includes('endCurrentStep'),true);assert.ok(types.length >= 72);});
 

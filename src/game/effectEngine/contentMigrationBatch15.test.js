@@ -17,7 +17,7 @@ function base(){const m=createMatch({player1:{name:'A',deck},player2:{name:'B',d
 function physical(id,instance,cores=2,exhausted=false,combinedWith=null){return {...makePhysicalCard(id,index),instanceId:instance,cores:{regular:cores,soul:false},exhausted,combinedWith};}
 function ability(id,a){return byId.get(id)?.abilities?.find(x=>x.id===a);}
 
-test('content batch 15: BS13 is 90/90 resolved and READY_NO_MANUAL candidate',()=>{const cov=JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage.json',import.meta.url),'utf8'));const rows=cov.cards.filter(x=>x.set==='BS13');assert.equal(rows.length,90);assert.equal(rows.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,0);assert.equal(rows.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,90);});
+test('content batch 15: BS13 is 90/90 resolved and READY_NO_MANUAL candidate',()=>{const cov=JSON.parse(fs.readFileSync(new URL('../../../data/effects/coverage.json',import.meta.url),'utf8'));const rows=cov.cards.filter(x=>x.set==='BS13');assert.equal(rows.length,90);assert.equal(rows.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,0);assert.equal(rows.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,90);});
 
 test('content batch 15: Dream Seal timed suppression action is part of the Core Action Library',()=>{const types=listSupportedCoreActionTypes();assert.equal(types.includes('suppressWhenSummonedForEndSteps'),true);assert.ok(types.length>=78);});
 

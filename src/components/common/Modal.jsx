@@ -1,4 +1,4 @@
-import { useLanguage } from "../../i18n.jsx";
+import { useLanguage } from "../../localization/i18n.jsx";
 export default function Modal({ title, children, onClose }) {
   const { language } = useLanguage();
   return <div className="modal-backdrop" onMouseDown={onClose}>

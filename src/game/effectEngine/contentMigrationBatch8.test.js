@@ -30,7 +30,7 @@ function physical(cardId, instanceId, cores = 1) {
 }
 
 test('content batch 8: SD15 reaches READY_NO_MANUAL at 18/18', () => {
-  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage.json', import.meta.url), 'utf8'));
+  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effects/coverage.json', import.meta.url), 'utf8'));
   const rows = coverage.cards.filter((entry) => entry.set === 'SD15');
   assert.equal(rows.length, 18);
   assert.equal(rows.every((entry) => ['AUTOMATED', 'NO_EFFECT'].includes(entry.status)), true);

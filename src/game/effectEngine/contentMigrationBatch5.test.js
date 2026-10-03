@@ -35,7 +35,7 @@ function physical(cardId, instanceId, regular = 1, exhausted = false, combinedWi
 }
 
 test('content batch 5: SD10 and SD11 both reach READY_NO_MANUAL at 18/18', () => {
-  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage.json', import.meta.url), 'utf8'));
+  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effects/coverage.json', import.meta.url), 'utf8'));
   const sd10 = coverage.cards.filter((entry) => entry.set === 'SD10');
   const sd11 = coverage.cards.filter((entry) => entry.set === 'SD11');
   assert.equal(sd10.length, 18);

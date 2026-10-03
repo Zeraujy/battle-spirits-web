@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildPlayerSocialInsights, formatMasteryLabel } from "../services/socialInsights.js";
+import { buildPlayerSocialInsights, formatMasteryLabel } from "../services/player/socialInsights.js";
 
 const index = new Map([
   ["A", { id: "A", name: "Alpha", colors: ["red"], image: "/a.webp" }],

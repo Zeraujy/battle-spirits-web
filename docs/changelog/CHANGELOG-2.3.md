@@ -22,7 +22,7 @@
 - Perfil social com avatar, banner, @username, nome de exibição e bio.
 - Amigos e mensagens diretas quando Supabase estiver configurado.
 - Sincronização opcional de perfil e decks com Supabase.
-- `supabase/SOCIAL-SETUP-2.3.sql` cria as tabelas e políticas necessárias.
+- `supabase/migrations/social/social-setup-2.3.sql` cria as tabelas e políticas necessárias.
 
 ## Personalização
 - Editor de tema completo nas Configurações para fundo, painéis, textos, destaques e cores de status.

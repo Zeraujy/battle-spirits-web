@@ -61,7 +61,7 @@ test('content batch 1: SD17 Terra Dragon Attack Step aura adds 2000 BP', () => {
 });
 
 test('content batch 1: coverage recognizes structured Brave condition and new migrations without hiding remaining gaps', () => {
-  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage.json', import.meta.url), 'utf8'));
+  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effects/coverage.json', import.meta.url), 'utf8'));
   const card = (id) => coverage.cards.find((entry) => entry.cardId === id);
   assert.equal(card('SD20-007')?.status, 'AUTOMATED');
   assert.equal(card('SD20-X01')?.status, 'AUTOMATED');

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { masteryLevelFromXp, masteryNextThreshold, masteryXpForMatch } from "../services/masteryRules.js";
+import { masteryLevelFromXp, masteryNextThreshold, masteryXpForMatch } from "../services/player/masteryRules.js";
 
 test("Card Mastery 2.0 exposes seven XP levels", () => {
   assert.equal(masteryLevelFromXp(0), 1);

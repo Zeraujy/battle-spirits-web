@@ -44,7 +44,7 @@ function physical(cardId, instanceId, regular = 1, exhausted = false) {
 }
 
 test('content batch 2: SD20 is fully covered by structured automation', () => {
-  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage.json', import.meta.url), 'utf8'));
+  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effects/coverage.json', import.meta.url), 'utf8'));
   const cards = coverage.cards.filter((entry) => entry.set === 'SD20');
   assert.equal(cards.length, 17);
   assert.equal(cards.every((entry) => ['AUTOMATED', 'NO_EFFECT'].includes(entry.status)), true);

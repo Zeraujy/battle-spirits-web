@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { validateCatalogCollection } from "../../src/services/cardCatalogValidation.js";
+import { validateCatalogCollection } from "../../src/services/cards/cardCatalogValidation.js";
 import { readCatalogCards } from "./catalog-files.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");

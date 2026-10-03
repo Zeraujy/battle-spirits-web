@@ -32,7 +32,7 @@ function physical(cardId, instanceId, regular = 1, exhausted = false) {
 }
 
 test('content batch 4 SD10: migrated mechanics remain covered after SD10 reaches READY_NO_MANUAL', () => {
-  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage.json', import.meta.url), 'utf8'));
+  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effects/coverage.json', import.meta.url), 'utf8'));
   const cards = coverage.cards.filter((entry) => entry.set === 'SD10');
   assert.equal(cards.length, 18);
   assert.equal(cards.filter((entry) => ['AUTOMATED', 'NO_EFFECT'].includes(entry.status)).length, 18);

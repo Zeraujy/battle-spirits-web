@@ -6,13 +6,13 @@ Implemented scope: **Phase 0 (Baseline Audit) + Phase 1 (ArenaShell)** only.
 
 - `src/components/game/arena/ArenaShell.jsx`
 - `src/styles/arena/arenaShell.css`
-- `docs/arena/PHASE-0-BASELINE-AUDIT.md`
-- `docs/arena/PHASE-1-VALIDATION.md`
-- `scripts/audit-arena-phase01.mjs`
+- `docs/arena/phase-0-baseline-audit.md`
+- `docs/arena/phase-1-validation.md`
+- `scripts/audits/arena/audit-arena-phase01.mjs`
 
 ## Files intentionally modified
 
-- `src/pages/Simulator.jsx`
+- `src/features/arena/Simulator.jsx`
   - imports `ArenaShell`;
   - replaces only the legacy root `<main className="simulator-page">` with `<ArenaShell>`;
   - gameplay handlers, state, render functions and online routing remain untouched.

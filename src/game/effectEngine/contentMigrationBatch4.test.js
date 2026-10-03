@@ -35,7 +35,7 @@ function physical(cardId, instanceId, regular = 1, exhausted = false, soul = fal
 }
 
 test('content batch 4: SD13 is fully covered by structured automation', () => {
-  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage.json', import.meta.url), 'utf8'));
+  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effects/coverage.json', import.meta.url), 'utf8'));
   const cards = coverage.cards.filter((entry) => entry.set === 'SD13');
   assert.equal(cards.length, 18);
   assert.equal(cards.every((entry) => ['AUTOMATED', 'NO_EFFECT'].includes(entry.status)), true);

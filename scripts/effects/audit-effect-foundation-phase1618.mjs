@@ -3,7 +3,7 @@ import fs from "node:fs";
 const required = [
   "src/game/effectEngine/phase1618.test.js",
   "src/styles/arena/effectDecision.css",
-  "src/pages/Simulator.jsx"
+  "src/features/arena/Simulator.jsx"
 ];
 for (const file of required) {
   if (!fs.existsSync(file)) throw new Error(`Phase 16-18 missing: ${file}`);
@@ -24,7 +24,7 @@ for (const token of ["orderedInstanceIds", "coreDistribution", "pendingEffectDec
   if (!engine.includes(token)) throw new Error(`Phase 17 authoritative decision path missing: ${token}`);
 }
 
-const simulator = fs.readFileSync("src/pages/Simulator.jsx", "utf8");
+const simulator = fs.readFileSync("src/features/arena/Simulator.jsx", "utf8");
 for (const token of ["effect-decision-order-list", "effect-decision-core-list", "Confirmar ordem", "Confirmar Cores"]) {
   if (!simulator.includes(token)) throw new Error(`Phase 18 Arena UI missing: ${token}`);
 }

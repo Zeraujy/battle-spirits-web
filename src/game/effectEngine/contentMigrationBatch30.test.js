@@ -16,7 +16,7 @@ function base(){return {turnNumber:5,turnPlayerId:'player1',activePlayerId:'play
 
 
 test('batch30 coverage advances BSC49 to 100 resolved and global fallback to 17',()=>{
- const c=JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage-v5.1.0-content-batch30.json',import.meta.url),'utf8'));
+ const c=JSON.parse(fs.readFileSync(new URL('../../../data/effects/history/effect-coverage-v5.1.0-content-batch30.json',import.meta.url),'utf8'));
  const r=c.cards.filter(x=>x.set==='BSC49'); assert.equal(r.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,100);
  assert.equal(r.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,17);
  assert.equal(c.cards.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,17);

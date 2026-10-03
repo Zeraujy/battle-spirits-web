@@ -14,9 +14,9 @@ const required = [
   "src/game/effectEngine/battleTriggerEngine.test.js",
   "src/game/effectEngine/phaseTriggerEngine.js",
   "src/game/effectEngine/phaseTriggerEngine.test.js",
-  "docs/effects/REPLACEMENT-AND-PREVENTION-EFFECTS.md",
-  "docs/effects/BATTLE-TRIGGER-EXPANSION.md",
-  "docs/effects/STEP-AND-PHASE-TRIGGER-ENGINE.md"
+  "docs/effects/replacement-and-prevention-effects.md",
+  "docs/effects/battle-trigger-expansion.md",
+  "docs/effects/step-and-phase-trigger-engine.md"
 ];
 const failures = [];
 for (const rel of required) if (!fs.existsSync(path.join(ROOT, rel))) failures.push(`missing ${rel}`);

@@ -1,4 +1,4 @@
-import HomeWallpaperSlideshow from "../home/HomeWallpaperSlideshow.jsx";
+import HomeWallpaperSlideshow from "./HomeWallpaperSlideshow.jsx";
 import "../../styles/pages/eternalInterfaceV350.css";
 
 export default function EternalCinematicBackdrop({ compact = false }) {

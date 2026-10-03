@@ -32,4 +32,4 @@ npm run project:check
 npm run publish:cloudflare
 ```
 
-Para novos sets, consulte `docs/card-database/ADDING-NEW-SETS.md`.
+Para novos sets, consulte `docs/card-database/adding-new-sets.md`.

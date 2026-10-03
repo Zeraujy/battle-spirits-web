@@ -13,7 +13,7 @@ const physical=(cardId,instanceId,cores=1,exhausted=false)=>({cardId,instanceId,
 function base(){return {turnNumber:4,turnPlayerId:'player1',activePlayerId:'player1',firstPlayerId:'player2',phase:'draw',players:{player1:{id:'player1',name:'A',life:5,reserve:20,trashCores:0,soulCore:{zone:'reserve',instanceId:null},hand:[],deck:[physical('BSC49-004','d1',0)],trash:[],revealed:[],openArea:[],removed:[],field:{spirits:[],nexuses:[],other:[]},burst:null,turnFlags:{}},player2:{id:'player2',name:'B',life:5,reserve:20,trashCores:0,soulCore:{zone:'reserve',instanceId:null},hand:[],deck:[],trash:[],revealed:[],openArea:[],removed:[],field:{spirits:[],nexuses:[],other:[]},burst:null,turnFlags:{}}},temporary:{}};}
 
 test('batch31 coverage advances BSC49 to 101 resolved and global fallback to 16',()=>{
- const c=JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage-v5.1.0-content-batch31.json',import.meta.url),'utf8'));
+ const c=JSON.parse(fs.readFileSync(new URL('../../../data/effects/history/effect-coverage-v5.1.0-content-batch31.json',import.meta.url),'utf8'));
  const r=c.cards.filter(x=>x.set==='BSC49'); assert.equal(r.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,101);
  assert.equal(r.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,16);
  assert.equal(c.cards.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,16);

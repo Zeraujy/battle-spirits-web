@@ -32,4 +32,4 @@ for(const card of cards){
     card.abilities.push(ability); e.automationRef=id; converted++; details.push({cardId:card.id,effectId:e.id,abilityId:id,event,text:clean(text)});
   }
 }
-const report={generatedAt:new Date().toISOString(),write:WRITE,converted,details}; fs.mkdirSync(path.join(root,'data/effect-migrations'),{recursive:true}); fs.writeFileSync(path.join(root,'data/effect-migrations/auto-structure-phase23.json'),JSON.stringify(report,null,2)+'\n'); if(WRITE) fs.writeFileSync(file,JSON.stringify(cards,null,2)+'\n'); console.log(`[phase23:auto] converted ${converted} display effect(s).`);
+const report={generatedAt:new Date().toISOString(),write:WRITE,converted,details}; fs.mkdirSync(path.join(root,'data/effect-migrations'),{recursive:true}); fs.writeFileSync(path.join(root,'data/effects/migrations/auto-structure-phase23.json'),JSON.stringify(report,null,2)+'\n'); if(WRITE) fs.writeFileSync(file,JSON.stringify(cards,null,2)+'\n'); console.log(`[phase23:auto] converted ${converted} display effect(s).`);

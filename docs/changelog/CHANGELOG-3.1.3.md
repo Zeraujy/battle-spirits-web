@@ -5,7 +5,7 @@
 - Componentes separados em `cards`, `common`, `game` e `home`.
 - CSS separado em `arena`, `base`, `cards`, `deckbuilder`, `pages` e `theme`.
 - Changelogs, validações, arquivos antigos e scripts Windows movidos para pastas dedicadas.
-- Adicionado `START-HERE.md` e documentação de estrutura/otimização.
+- Adicionado `docs/development/getting-started.md` e documentação de estrutura/otimização.
 
 ## Qualidade visual
 

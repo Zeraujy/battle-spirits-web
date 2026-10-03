@@ -45,7 +45,7 @@ Local configuration templates remain available through `.env.example` files.
 - `npm run verify`: PASS
 - `npm run ui:audit`: PASS
 - `npm run release:audit`: PASS
-- `node scripts/verify-v3.mjs`: PASS
+- `node scripts/project/verify-v3.mjs`: PASS
 
 ## Build note
 A fresh Vite production build was not generated in the audit container because the supplied `node_modules` tree contains Windows-specific native bindings. The final package intentionally excludes `node_modules` and stale `dist`; install dependencies on the target Windows development environment before building.

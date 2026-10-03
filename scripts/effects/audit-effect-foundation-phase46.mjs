@@ -9,9 +9,9 @@ const required = [
   "src/game/effectEngine/targetingEngine.test.js",
   "src/game/effectEngine/conditionEngine.js",
   "src/game/effectEngine/conditionEngine.test.js",
-  "docs/effects/EFFECT-QUEUE-PHASE04.md",
-  "docs/effects/TARGETING-ENGINE-V2-PHASE05.md",
-  "docs/effects/CONDITION-ENGINE-V2-PHASE06.md"
+  "docs/effects/effect-queue-phase04.md",
+  "docs/effects/targeting-engine-v2-phase05.md",
+  "docs/effects/condition-engine-v2-phase06.md"
 ];
 
 const errors = [];

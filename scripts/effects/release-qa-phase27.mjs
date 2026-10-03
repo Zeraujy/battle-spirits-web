@@ -11,4 +11,4 @@ const root=process.cwd(); const commands=[
  ['security audit',['npm','run','security:audit']]
 ];
 const results=[]; for(const [name,cmd] of commands){ const r=spawnSync(cmd[0],cmd.slice(1),{cwd:root,encoding:'utf8'}); results.push({name,ok:r.status===0,status:r.status,stdout:(r.stdout||'').slice(-5000),stderr:(r.stderr||'').slice(-5000)}); console.log(`[phase27] ${name}: ${r.status===0?'PASS':'FAIL'}`); }
-const out={generatedAt:new Date().toISOString(),releaseReady:results.every(r=>r.ok),results}; fs.mkdirSync(path.join(root,'data/effect-migrations'),{recursive:true}); fs.writeFileSync(path.join(root,'data/effect-migrations/release-qa-phase27.json'),JSON.stringify(out,null,2)+'\n'); if(!out.releaseReady) process.exit(1);
+const out={generatedAt:new Date().toISOString(),releaseReady:results.every(r=>r.ok),results}; fs.mkdirSync(path.join(root,'data/effect-migrations'),{recursive:true}); fs.writeFileSync(path.join(root,'data/effects/migrations/release-qa-phase27.json'),JSON.stringify(out,null,2)+'\n'); if(!out.releaseReady) process.exit(1);

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useLanguage } from "../../i18n.jsx";
+import { useLanguage } from "../../localization/i18n.jsx";
 import "../../styles/theme/v230.css";
 
 const PATCHES = [
@@ -18,13 +18,15 @@ const PATCHES = [
           "BSC49 foi concluído com 117/117 cartas resolvidas no gate de automação.",
           "Phase 23: 11/11 sets PASS; Phase 24: 365 cenários gerados; Phase 25: 0% fallback manual; Phase 26 e Phase 27: PASS.",
           "Contract/GranWalker, Manifest, XV, Accel/Open Area, Advent, Burst observers, Heavy Exhaust e Field locks agora fazem parte da infraestrutura reutilizável do Effect Engine.",
-          "A Core Action Library final contém 95 tipos reutilizáveis, sem depender de resolvers exclusivos por ID para fechar o catálogo auditado."
+          "A Core Action Library final contém 95 tipos reutilizáveis, sem depender de resolvers exclusivos por ID para fechar o catálogo auditado.",
+          "A estrutura interna do projeto foi simplificada e reorganizada para facilitar manutenção futura, sem alterar gameplay ou conteúdo."
         ],
         en: [
           "BSC49 is complete with 117/117 cards resolved by the automation gate.",
           "Phase 23: 11/11 sets PASS; Phase 24: 365 generated scenarios; Phase 25: 0% manual fallback; Phase 26 and Phase 27: PASS.",
           "Contract/GranWalker, Manifest, XV, Accel/Open Area, Advent, Burst observers, Heavy Exhaust and Field locks are now part of the reusable Effect Engine infrastructure.",
-          "The final Core Action Library contains 95 reusable types without relying on card-ID-specific resolvers to close the audited catalog."
+          "The final Core Action Library contains 95 reusable types without relying on card-ID-specific resolvers to close the audited catalog.",
+          "The project structure was simplified and reorganized for easier future maintenance without changing gameplay or content."
         ]
       }
     }]

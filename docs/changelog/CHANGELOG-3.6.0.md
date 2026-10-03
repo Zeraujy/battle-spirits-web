@@ -49,6 +49,6 @@ Grande atualização da experiência social do simulador. O sistema foi redesenh
 ### Migração Supabase
 Execute uma vez:
 
-`supabase/SOCIAL-HUB-3.6.sql`
+`supabase/migrations/social/social-hub-3.6.sql`
 
 A interface detecta automaticamente quando a migração ainda não foi aplicada e mantém o perfil local funcionando.

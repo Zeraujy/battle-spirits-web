@@ -10,7 +10,7 @@ npm run effects:migrate -- --set=SD19 --write
 npm run effects:audit
 ```
 
-The first command is a dry-run. `--write` validates new Schema v2 abilities and updates `src/data/cards.json`. A migration receipt is written under `data/effect-migrations/`.
+The first command is a dry-run. `--write` validates new Schema v2 abilities and updates `src/data/cards.json`. A migration receipt is written under `data/effects/migrations/`.
 
 ## Safety gates
 

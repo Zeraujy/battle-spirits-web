@@ -24,14 +24,14 @@ test('Phase 21 normalizer keeps engine-native Ultimate rules out of generic manu
 });
 
 test('Phase 22 first Starter Deck batch is fully automated', () => {
-  const data = JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage.json', import.meta.url), 'utf8'));
+  const data = JSON.parse(fs.readFileSync(new URL('../../../data/effects/coverage.json', import.meta.url), 'utf8'));
   const sd19 = data.cards.filter((card) => card.set === 'SD19');
   assert.equal(sd19.length, 17);
   assert.deepEqual(sd19.filter((card) => !['AUTOMATED', 'NO_EFFECT'].includes(card.status)), []);
 });
 
 test('Phase 22 priority audit refuses to fake coverage for missing runtime data', () => {
-  const data = JSON.parse(fs.readFileSync(new URL('../../../data/effect-migrations/starter-deck-priority.json', import.meta.url), 'utf8'));
+  const data = JSON.parse(fs.readFileSync(new URL('../../../data/effects/migrations/starter-deck-priority.json', import.meta.url), 'utf8'));
   const sd19 = data.decks.find((deck) => deck.setCode === 'SD19');
   assert.equal(sd19?.readyWithoutManual, true);
   assert.equal(data.decks.some((deck) => deck.status === 'BLOCKED_MISSING_RUNTIME_DATA'), true);

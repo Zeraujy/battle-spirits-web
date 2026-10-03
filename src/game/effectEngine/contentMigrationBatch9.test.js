@@ -26,7 +26,7 @@ function physical(cardId, instanceId, cores = 1) {
 }
 
 test('content batch 9: BS13 Wave 1 resolves 24 effect cards and leaves 60 pending', () => {
-  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage-v5.1.0-content-batch09.json', import.meta.url), 'utf8'));
+  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effects/history/effect-coverage-v5.1.0-content-batch09.json', import.meta.url), 'utf8'));
   const rows = coverage.cards.filter((entry) => entry.set === 'BS13');
   assert.equal(rows.length, 90);
   assert.equal(rows.filter((entry) => entry.status === 'UNSTRUCTURED_TEXT').length, 60);

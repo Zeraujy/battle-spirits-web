@@ -6,7 +6,7 @@ This document records the current Arena integration boundaries before the visual
 
 ## 1. Current Arena entry point
 
-- Page: `src/pages/Simulator.jsx`
+- Page: `src/features/arena/Simulator.jsx`
 - Stable presentation root before Phase 1: `<main className="simulator-page">`
 - Phase 1 replacement root: `src/components/game/arena/ArenaShell.jsx`
 - Compatibility rule: `ArenaShell` preserves the `simulator-page` class so existing Arena CSS and DOM queries keep working unchanged.

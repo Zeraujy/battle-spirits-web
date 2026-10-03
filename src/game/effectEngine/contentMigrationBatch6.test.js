@@ -28,7 +28,7 @@ function ability(cardId, id) { return byId.get(cardId)?.abilities?.find((a) => a
 function effect(cardId, id) { return byId.get(cardId)?.effects?.find((e) => e.id === id); }
 
 test('content batch 6: SD23 reaches READY_NO_MANUAL at 17/17', () => {
-  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage.json', import.meta.url), 'utf8'));
+  const coverage = JSON.parse(fs.readFileSync(new URL('../../../data/effects/coverage.json', import.meta.url), 'utf8'));
   const rows = coverage.cards.filter((entry) => entry.set === 'SD23');
   assert.equal(rows.length, 17);
   assert.equal(rows.every((entry) => ['AUTOMATED','NO_EFFECT'].includes(entry.status)), true);

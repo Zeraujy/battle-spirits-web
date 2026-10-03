@@ -12,10 +12,10 @@ O `cardRepository` substituía o registro inteiro pelo override mais recente. Is
 
 ### Solução
 
-- `src/services/cardRepository.js` agora preserva a arte já conhecida quando um override da mesma ID não declara uma nova imagem.
+- `src/services/cards/cardRepository.js` agora preserva a arte já conhecida quando um override da mesma ID não declara uma nova imagem.
 - A regra continua permitindo que um arquivo posterior troque a arte quando ele realmente fornecer `image`.
 - Nenhuma imagem precisou ser baixada: todas as 365 artes já estavam presentes no projeto.
-- Foi adicionado `scripts/audit-runtime-card-references.mjs` para verificar as referências de imagem que o catálogo final usa em runtime.
+- Foi adicionado `scripts/audits/cards/audit-runtime-card-references.mjs` para verificar as referências de imagem que o catálogo final usa em runtime.
 - `npm run verify` agora executa também essa auditoria.
 
 ## Resultado da auditoria

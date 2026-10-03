@@ -15,7 +15,7 @@ function base(){const m=createMatch({player1:{name:'A',deck},player2:{name:'B',d
 function physical(id,instance,cores=2,exhausted=false){return {...makePhysicalCard(id,index),instanceId:instance,cores:{regular:cores,soul:false},exhausted,combinedWith:null};}
 function ability(id,a){return byId.get(id)?.abilities?.find(x=>x.id===a);}
 
-test('content batch 13: BS13 Wave 5 resolves ten more cards and leaves 20 pending',()=>{const cov=JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage-v5.1.0-content-batch13.json',import.meta.url),'utf8'));const rows=cov.cards.filter(x=>x.set==='BS13');assert.equal(rows.length,90);assert.equal(rows.filter(x=>x.status==='UNSTRUCTURED_TEXT').length,20);assert.equal(rows.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,70);});
+test('content batch 13: BS13 Wave 5 resolves ten more cards and leaves 20 pending',()=>{const cov=JSON.parse(fs.readFileSync(new URL('../../../data/effects/history/effect-coverage-v5.1.0-content-batch13.json',import.meta.url),'utf8'));const rows=cov.cards.filter(x=>x.set==='BS13');assert.equal(rows.length,90);assert.equal(rows.filter(x=>x.status==='UNSTRUCTURED_TEXT').length,20);assert.equal(rows.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,70);});
 
 test('content batch 13: Core Action Library exposes reusable limited-use and special summon actions',()=>{const types=listSupportedCoreActionTypes();for(const t of ['upToNTimesPerTurn','specialSummonBraveCombinedFromHand','specialSummonEventSourceFromTrash'])assert.equal(types.includes(t),true);assert.ok(types.length>=75);});
 

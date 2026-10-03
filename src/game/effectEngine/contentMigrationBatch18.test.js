@@ -13,7 +13,7 @@ function base(){const m=createMatch({player1:{name:'A',deck},player2:{name:'B',d
 function physical(id,instance,cores=2,exhausted=false){return {...makePhysicalCard(id,index),instanceId:instance,cores:{regular:cores,soul:false},exhausted};}
 function ability(id,a){return byId.get(id)?.abilities?.find(x=>x.id===a);}
 
-test('content batch 18: BSC49 Wave 3 resolves ten more cards and leaves 86 pending',()=>{const cov=JSON.parse(fs.readFileSync(new URL('../../../effect-coverage-v5.1.0-content-batch18.json',import.meta.url),'utf8'));const rows=cov.cards.filter(x=>x.set==='BSC49');assert.equal(rows.length,117);assert.equal(rows.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,86);assert.equal(rows.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,31);});
+test('content batch 18: BSC49 Wave 3 resolves ten more cards and leaves 86 pending',()=>{const cov=JSON.parse(fs.readFileSync(new URL('../../../data/effects/history/effect-coverage-v5.1.0-content-batch18.json',import.meta.url),'utf8'));const rows=cov.cards.filter(x=>x.set==='BSC49');assert.equal(rows.length,117);assert.equal(rows.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,86);assert.equal(rows.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,31);});
 
 test('content batch 18: Shurikeraptor LT structures Life Burst and exact-BP target',()=>{const burst=ability('BSC49-004','bsc49-004-burst-auto38');const kill=ability('BSC49-004','bsc49-004-attack-kill-auto38');assert.equal(burst.trigger.scope,'controllerHand');assert.equal(kill.actions[0].selector.minimumBPFromSource,true);assert.equal(kill.actions[0].selector.maximumBPFromSource,true);});
 

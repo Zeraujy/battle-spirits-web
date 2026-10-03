@@ -13,8 +13,8 @@ import {
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const CARD_PATH = path.join(ROOT, "src/data/cards.json");
-const JSON_OUT = path.join(ROOT, "data/effect-coverage.json");
-const MD_OUT = path.join(ROOT, "docs/effects/CARD-EFFECT-COVERAGE.md");
+const JSON_OUT = path.join(ROOT, "data/effects/coverage.json");
+const MD_OUT = path.join(ROOT, "docs/effects/card-effect-coverage.md");
 const CHECK_ONLY = process.argv.includes("--check");
 
 export const CoverageStatus = Object.freeze({
@@ -520,7 +520,7 @@ if (CHECK_ONLY) {
   }
   // Markdown has no generated timestamp, so direct comparison is stable.
   if (fs.readFileSync(MD_OUT, "utf8") !== mdText) {
-    console.error("CARD-EFFECT-COVERAGE.md is stale. Run: npm run effects:audit");
+    console.error("card-effect-coverage.md is stale. Run: npm run effects:audit");
     process.exit(1);
   }
   console.log(`Effect coverage is current: ${report.summary.totalCards} cards / ${report.summary.totalSets} sets.`);

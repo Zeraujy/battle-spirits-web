@@ -34,7 +34,7 @@ Você pode usar um array simples de cartas ou o formato:
 }
 ```
 
-Os campos antigos continuam compatíveis. Consulte `docs/DATABASE-FORMAT.md`.
+Os campos antigos continuam compatíveis. Consulte `docs/architecture/database-format.md`.
 
 ### 3. Adicionar as imagens
 

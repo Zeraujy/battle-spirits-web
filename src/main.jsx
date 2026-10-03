@@ -1,8 +1,8 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
+import App from "./app/App.jsx";
 import AppErrorBoundary from "./components/common/AppErrorBoundary.jsx";
-import { LanguageProvider } from "./i18n.jsx";
+import { LanguageProvider } from "./localization/i18n.jsx";
 import "./styles/base/global.css";
 import "./styles/base/v3.css";
 import "./styles/base/eternalPlatformV400.css";

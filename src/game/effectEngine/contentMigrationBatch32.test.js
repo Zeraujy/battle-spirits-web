@@ -15,7 +15,7 @@ const physical=(cardId,instanceId,cores=0,exhausted=false)=>({cardId,instanceId,
 function base(){return {turnNumber:8,turnPlayerId:'player1',activePlayerId:'player1',firstPlayerId:'player2',phase:'main',players:{player1:{id:'player1',name:'A',life:5,reserve:20,trashCores:0,soulCore:{zone:'reserve',instanceId:null},hand:[],deck:[physical('BSC49-004','d1')],trash:[],revealed:[],openArea:[],removed:[],field:{spirits:[],nexuses:[],other:[]},burst:null,turnFlags:{}},player2:{id:'player2',name:'B',life:5,reserve:20,trashCores:0,soulCore:{zone:'reserve',instanceId:null},hand:[],deck:[physical('BSC49-004','d2')],trash:[],revealed:[],openArea:[],removed:[],field:{spirits:[],nexuses:[],other:[]},burst:null,turnFlags:{}}},temporary:{},persistentEffects:{}};}
 
 test('batch32 coverage advances BSC49 to 102 resolved and global fallback to 15',()=>{
- const c=JSON.parse(fs.readFileSync(new URL('../../../data/effect-coverage-v5.1.0-content-batch32.json',import.meta.url),'utf8'));
+ const c=JSON.parse(fs.readFileSync(new URL('../../../data/effects/history/effect-coverage-v5.1.0-content-batch32.json',import.meta.url),'utf8'));
  const r=c.cards.filter(x=>x.set==='BSC49'); assert.equal(r.filter(x=>['AUTOMATED','NO_EFFECT'].includes(x.status)).length,102);
  assert.equal(r.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,15);
  assert.equal(c.cards.filter(x=>!['AUTOMATED','NO_EFFECT'].includes(x.status)).length,15);
