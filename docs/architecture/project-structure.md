@@ -9,7 +9,10 @@ src/
 │  ├─ cards/
 │  ├─ common/
 │  └─ layout/
-├─ data/               # Frontend catalog and static application data
+├─ data/               # Runtime card data and structured application catalogs
+│  ├─ catalog/          # Shop and catalog metadata
+│  ├─ decks/            # Prebuilt deck recipes
+│  └─ sets/             # New set-oriented card data
 ├─ features/           # Feature-owned UI and feature-only services
 │  ├─ arena/
 │  │  └─ components/
@@ -44,7 +47,6 @@ supabase/              # Database migrations and cloud policies
 scripts/               # Audits, maintenance, migration and regression tools
 data/                  # Development-time effect and validation datasets
 docs/                  # Active project documentation
-resources/             # Catalog maintenance source assets/data
 ```
 
 Route-level screens and feature-owned UI live inside `src/features/`, grouped by domain. `src/components/` is reserved for components reused across multiple features. Feature-only services live beside their owning feature; `src/services/` is reserved for cross-feature services grouped by domain. Flat service files at the root of `src/services/` are not part of the active architecture.

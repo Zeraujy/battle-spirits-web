@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { PREBUILT_DECKS } from '../../src/data/prebuiltDecks.js';
+import { PREBUILT_DECKS } from '../../src/data/decks/prebuilt-decks.js';
 
 const root = process.cwd();
 const cards = JSON.parse(fs.readFileSync(path.join(root,'src/data/cards.json'),'utf8'));

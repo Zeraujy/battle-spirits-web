@@ -1,4 +1,4 @@
-import { inferShopSagaId } from "./shopSagas.js";
+import { inferShopSagaId } from "./shop-sagas.js";
 
 export const SHOP_ARTWORK = Object.freeze({
   width: 600,

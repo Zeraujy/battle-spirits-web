@@ -1,10 +1,10 @@
 import { spawnSync } from 'node:child_process'; import fs from 'node:fs'; import path from 'node:path';
 const root=process.cwd(); const commands=[
  ['effects audit',['node','scripts/effects/audit-card-effects.mjs','--check']],
- ['phase23 set gate',['node','scripts/effects/audit-set-automation-phase23.mjs','--enforce']],
+ ['phase23 set gate',['node','scripts/effects/audit-set-automation.mjs','--enforce']],
  ['phase24 generated regressions',['node','--test','src/game/effectEngine/generatedCardRegression.test.js']],
- ['phase25 manual fallback gate',['node','scripts/effects/audit-manual-resolution-phase25.mjs','--enforce']],
- ['phase26 mechanics QA',['node','scripts/effects/audit-final-mechanics-phase26.mjs']],
+ ['phase25 manual fallback gate',['node','scripts/effects/audit-manual-resolution.mjs','--enforce']],
+ ['phase26 mechanics QA',['node','scripts/effects/audit-final-mechanics.mjs']],
  ['project verify',['npm','run','verify']],
  ['ui audit',['npm','run','ui:audit']],
  ['release audit',['npm','run','release:audit']],

@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
-import { SHOP_PRODUCTS } from "../../../src/data/shopCatalog.js";
-import { PREBUILT_DECKS } from "../../../src/data/prebuiltDecks.js";
+import { SHOP_PRODUCTS } from "../../../src/data/catalog/shop-catalog.js";
+import { PREBUILT_DECKS } from "../../../src/data/decks/prebuilt-decks.js";
 
 const root = process.cwd();
 const dataDir = path.join(root, "src", "data");

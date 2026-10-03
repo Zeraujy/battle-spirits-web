@@ -1,7 +1,7 @@
 import fs from "node:fs";
 
 const required = [
-  "src/game/effectEngine/phase1618.test.js",
+  "src/game/effectEngine/advancedDecisions.test.js",
   "src/styles/arena/effectDecision.css",
   "src/features/arena/Simulator.jsx"
 ];

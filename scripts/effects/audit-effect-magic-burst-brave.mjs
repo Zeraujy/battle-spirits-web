@@ -4,7 +4,7 @@ const required = [
   "src/game/effectEngine/magicAutomation.js",
   "src/game/effectEngine/burstEngine.js",
   "src/game/effectEngine/braveEffectEngine.js",
-  "src/game/effectEngine/phase1315.test.js"
+  "src/game/effectEngine/magicBurstBrave.test.js"
 ];
 for (const file of required) {
   if (!fs.existsSync(file)) throw new Error(`Phase 13-15 missing: ${file}`);

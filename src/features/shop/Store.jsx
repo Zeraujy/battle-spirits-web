@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import EternalCinematicBackdrop from "../../components/layout/EternalCinematicBackdrop.jsx";
 import CardDetailsModal from "../../components/cards/CardDetailsModal.jsx";
 import { useLanguage } from "../../localization/i18n.jsx";
-import { SHOP_CATEGORIES, SHOP_PRODUCTS } from "../../data/shopCatalog.js";
-import { sagaForProduct, sagaGroupsForProducts } from "../../data/shopSagas.js";
+import { SHOP_CATEGORIES, SHOP_PRODUCTS } from "../../data/catalog/shop-catalog.js";
+import { sagaForProduct, sagaGroupsForProducts } from "../../data/catalog/shop-sagas.js";
 import { cardIndex } from "../../services/cards/cardRepository.js";
 import {
   MAX_OWNED_COPIES,

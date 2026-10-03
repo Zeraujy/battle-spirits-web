@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
-import { ACTIVE_DECK_PRODUCTS, ONBOARDING_DECK_PRODUCTS } from "../../../src/data/shopCatalog.js";
-import { PREBUILT_DECKS } from "../../../src/data/prebuiltDecks.js";
+import { ACTIVE_DECK_PRODUCTS, ONBOARDING_DECK_PRODUCTS } from "../../../src/data/catalog/shop-catalog.js";
+import { PREBUILT_DECKS } from "../../../src/data/decks/prebuilt-decks.js";
 
 const root = process.cwd();
 const failures = [];

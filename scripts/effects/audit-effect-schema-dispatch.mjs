@@ -46,7 +46,7 @@ const jsonSchema = JSON.parse(fs.readFileSync(path.join(ROOT, "src/game/effectEn
 if (jsonSchema?.properties?.schemaVersion?.const !== 2) failures.push("Machine-readable JSON Schema is not pinned to schemaVersion 2.");
 
 const packageJson = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8"));
-for (const scriptName of ["effects:audit", "effects:phase23:audit", "effects:phase23:test"]) {
+for (const scriptName of ["effects:audit", "effects:set-automation:audit", "effects:schema-dispatch:test"]) {
   if (!packageJson.scripts?.[scriptName]) failures.push(`package.json missing script: ${scriptName}`);
 }
 

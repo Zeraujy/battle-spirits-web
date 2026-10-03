@@ -1,7 +1,7 @@
 import { makeCardIndex, normalizeCard } from "../../game/cardAdapter.js";
 import { officialRestrictionForCard } from "../../game/eternalDeckRules.js";
 
-const modules = import.meta.glob("../data/**/*.json", { eager: true, import: "default" });
+const modules = import.meta.glob("../../data/**/*.json", { eager: true, import: "default" });
 const byId = new Map();
 const setDetails = new Map();
 const orderedModules = Object.entries(modules).sort(([a], [b]) => {

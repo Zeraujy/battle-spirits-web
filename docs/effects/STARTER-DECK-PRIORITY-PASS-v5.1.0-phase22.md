@@ -1,6 +1,6 @@
 # Phase 22 — Starter Deck Priority Pass
 
-The Starter Deck pass audits every recipe in `src/data/prebuiltDecks.js` against the runtime catalog and the Effect Coverage report.
+The Starter Deck pass audits every recipe in `src/data/decks/prebuilt-decks.js` against the runtime catalog and the Effect Coverage report.
 
 A deck is `READY_NO_MANUAL` only when every recipe card exists in the runtime catalog and every card is either `AUTOMATED` or explicitly `NO_EFFECT`.
 

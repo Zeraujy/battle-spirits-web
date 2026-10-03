@@ -7,7 +7,7 @@
 - New cards display `NEW!` and `GET ×1`; duplicates display the Craft Coins generated; overflow at 6/6 is marked as converted.
 - Reveal flow applies to boosters, fixed Premium Card Sets and decks.
 - Shop side catalog now groups Boosters and Decks by saga/era metadata.
-- Added structured saga catalog data in `src/data/shopSagas.js`.
+- Added structured saga catalog data in `src/data/catalog/shop-sagas.js`.
 - BSC49 now uses 9 cards per pack.
 - PC01/PC02 are treated as fixed-content Premium Card Sets rather than random 3-card boosters.
 - Added `supabase/migrations/economy/economy-4.2.2.sql` for product type, saga metadata and authenticated reveal grant metadata.

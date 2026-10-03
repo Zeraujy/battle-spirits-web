@@ -47,7 +47,7 @@ const requiredPaths = [
   "src/services/player/matchHistoryService.js",
   "src/services/economy/economyService.js",
   "src/services/economy/economyService.test.js",
-  "src/data/shopCatalog.js",
+  "src/data/catalog/shop-catalog.js",
   "src/features/profile/Profile.jsx",
   "src/styles/pages/socialHubV360.css",
   "supabase/migrations/social/social-hub-3.6.sql",
@@ -99,7 +99,7 @@ const requiredPaths = [
   "supabase/migrations/security/security-4.6.0.sql",
   "supabase/docs/readme-security-4.6.0.md",
   "scripts/audits/security/security-audit.mjs",
-  "src/data/shopSagas.js",
+  "src/data/catalog/shop-sagas.js",
   "docs/development/devmode-admin-architecture.md",
   "src/features/shop/components/StarterOnboarding.jsx",
   "src/styles/pages/onboardingV450.css",
@@ -161,13 +161,13 @@ if (!cards.length) {
 
 // The Home screen uses a lightweight number instead of importing the whole
 // database. Verify that this cached count never silently drifts from reality.
-const manifestPath = path.join(root, "src", "data", "catalogManifest.js");
+const manifestPath = path.join(root, "src", "data", "catalog", "catalog-manifest.js");
 if (fs.existsSync(manifestPath)) {
   const source = fs.readFileSync(manifestPath, "utf8");
   const match = source.match(/CATALOG_CARD_COUNT\s*=\s*(\d+)/);
   const manifestCount = match ? Number(match[1]) : NaN;
   const inSync = Number.isFinite(manifestCount) && manifestCount === index.size;
-  console.log(`${inSync ? "OK " : "-- "} catalogManifest.js (${manifestCount || "?"}/${index.size})`);
+  console.log(`${inSync ? "OK " : "-- "} catalog-manifest.js (${manifestCount || "?"}/${index.size})`);
   if (!inSync) failed = true;
 }
 

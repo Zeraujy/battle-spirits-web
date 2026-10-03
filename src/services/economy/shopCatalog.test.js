@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { SHOP_PRODUCTS } from "../../data/shopCatalog.js";
-import { inferShopSagaId, sagaGroupsForProducts } from "../../data/shopSagas.js";
+import { SHOP_PRODUCTS } from "../../data/catalog/shop-catalog.js";
+import { inferShopSagaId, sagaGroupsForProducts } from "../../data/catalog/shop-sagas.js";
 
 test("shop saga map keeps early main sets in Wanderer Lolo Saga", () => {
   assert.equal(inferShopSagaId("BS01"), "wanderer-lolo");

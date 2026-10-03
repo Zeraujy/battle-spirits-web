@@ -8,7 +8,7 @@ Implemented scope: **Phase 0 (Baseline Audit) + Phase 1 (ArenaShell)** only.
 - `src/styles/arena/arenaShell.css`
 - `docs/arena/phase-0-baseline-audit.md`
 - `docs/arena/phase-1-validation.md`
-- `scripts/audits/arena/audit-arena-phase01.mjs`
+- `scripts/audits/arena/audit-arena-foundation.mjs`
 
 ## Files intentionally modified
 
@@ -27,7 +27,7 @@ Implemented scope: **Phase 0 (Baseline Audit) + Phase 1 (ArenaShell)** only.
 - `npm run security:audit`: PASS
 - `npm run ui:audit`: PASS
 - `npm run web-only:audit`: PASS
-- `npm run arena:phase01:audit`: PASS
+- `npm run arena:foundation:audit`: PASS
 - Card catalog: 1331 unique cards
 - Missing local card images: 0
 - Missing runtime artwork: 0

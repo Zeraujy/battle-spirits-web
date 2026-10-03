@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import {
   PREBUILT_DECKS,
   ownsPrebuiltDeckRecipe
-} from "./prebuiltDecks.js";
+} from "./prebuilt-decks.js";
 
 test("Deck Builder recognizes explicit Starter Deck recipe IDs", () => {
   const template = PREBUILT_DECKS.find((entry) => entry.id === "sd10-shining-charge");

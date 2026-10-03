@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ONBOARDING_DECK_PRODUCTS } from "../../../data/shopCatalog.js";
+import { ONBOARDING_DECK_PRODUCTS } from "../../../data/catalog/shop-catalog.js";
 import { completeStarterOnboarding, getDeckRecipe, loadEconomySnapshot } from "../../../services/economy/economyService.js";
 import { cardIndex } from "../../../services/cards/cardRepository.js";
 import CardDetailsModal from "../../../components/cards/CardDetailsModal.jsx";

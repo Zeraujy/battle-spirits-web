@@ -1,6 +1,6 @@
 # Adding Shop Items
 
-The Store catalog lives in `src/data/shopCatalog.js`.
+The Store catalog lives in `src/data/catalog/shop-catalog.js`.
 
 ## Artwork path
 
@@ -55,7 +55,7 @@ Purchasing and booster opening are scheduled for the next economy update.
 
 ## v4.2.1 — Real catalog integration
 
-The current catalog is centralized in `src/data/shopCatalog.js`. Every database product is represented in the Shop, including items whose structured deck recipe is not yet complete.
+The current catalog is centralized in `src/data/catalog/shop-catalog.js`. Every database product is represented in the Shop, including items whose structured deck recipe is not yet complete.
 
 Expected artwork filenames (600×900, preferably WebP):
 
@@ -74,7 +74,7 @@ Deck products should only be marked `status: "active"` after their exact structu
 
 ## v4.2.2 — Saga grouping and reveal behavior
 
-Saga/era metadata is centralized in `src/data/shopSagas.js`. Product entries in `src/data/shopCatalog.js` receive a `sagaId`, allowing Boosters and Decks to be filtered without hard-coding UI buttons.
+Saga/era metadata is centralized in `src/data/catalog/shop-sagas.js`. Product entries in `src/data/catalog/shop-catalog.js` receive a `sagaId`, allowing Boosters and Decks to be filtered without hard-coding UI buttons.
 
 Current catalog groups include `wanderer-lolo`, `constellation`, `sword-blade`, `ultimate-battle`, `contract`, and `supplementary`. Main-set grouping follows the Card Sets reference; non-main products are associated with their release era or kept under Supplementary Sets.
 

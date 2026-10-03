@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 const need=(p,s)=>{const t=fs.readFileSync(p,'utf8'); if(!t.includes(s)) throw new Error(`${p} missing ${s}`)};
-for(const p of ['scripts/effects/migrate-card-effects.mjs','scripts/effects/migrations/starterDeckMigrations.mjs','scripts/effects/audit-starter-deck-priority-phase22.mjs']) if(!fs.existsSync(p)) throw new Error(`missing ${p}`);
+for(const p of ['scripts/effects/migrate-card-effects.mjs','scripts/effects/migrations/starterDeckMigrations.mjs','scripts/effects/audit-starter-deck-priority.mjs']) if(!fs.existsSync(p)) throw new Error(`missing ${p}`);
 need('src/game/effectEngine/coreActionLibrary.js','moveCoreSelectedToSource');
 need('src/game/effectEngine/coreActionLibrary.js','paySourceCost');
 need('src/game/effectEngine/conditionEngine.js','attackNumber');

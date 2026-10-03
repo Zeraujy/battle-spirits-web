@@ -2,7 +2,7 @@ import fs from "node:fs";
 
 const required = [
   "src/game/effectEngine/triggerOrderingEngine.js",
-  "src/game/effectEngine/phase1920.test.js",
+  "src/game/effectEngine/triggerOrdering.test.js",
   "server/matches/effectDecisionAuthority.js",
   "server/matches/effectDecisionAuthority.test.js",
   "docs/effects/server-authoritative-effects-phase19.md",

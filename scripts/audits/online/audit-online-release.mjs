@@ -8,9 +8,9 @@ const required = [
   "docs/changelog/changelog-5.0.0.md",
   "docs/online/phase-22-25-final-security-qa.md",
   "docs/online/v5.0.0-final-qa.md",
-  "scripts/audits/online/audit-online-security-v500-phase22.mjs",
-  "scripts/regression/run-online-multiplayer-regression-v500.mjs",
-  "scripts/regression/run-online-ranked-regression-v500.mjs"
+  "scripts/audits/online/audit-online-security.mjs",
+  "scripts/regression/run-online-multiplayer-regression.mjs",
+  "scripts/regression/run-online-ranked-regression.mjs"
 ];
 for (const file of required) if (!fs.existsSync(file)) failures.push(`Missing ${file}`);
 
@@ -24,11 +24,11 @@ for (const [file, marker] of [
 
 const packageText = read("package.json");
 for (const marker of [
-  "online:v500:phase22:audit",
-  "online:v500:phase23:test",
-  "online:v500:phase24:test",
-  "online:v500:phase25:audit",
-  "online:v500:final:check"
+  "online:security:audit",
+  "online:multiplayer:regression",
+  "online:ranked:regression",
+  "online:release:audit",
+  "online:release:check"
 ]) if (!packageText.includes(marker)) failures.push(`Final QA script missing from package.json: ${marker}`);
 
 const server = read("server/index.mjs");

@@ -1,7 +1,7 @@
 import fs from "node:fs";
 
 const decks = fs.readFileSync("src/features/deck-builder/Decks.jsx", "utf8");
-const data = fs.readFileSync("src/data/prebuiltDecks.js", "utf8");
+const data = fs.readFileSync("src/data/decks/prebuilt-decks.js", "utf8");
 
 const fail = (message) => {
   console.error(`[deck-builder-recipes] ${message}`);

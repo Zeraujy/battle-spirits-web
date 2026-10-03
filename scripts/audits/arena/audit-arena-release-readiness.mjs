@@ -60,7 +60,7 @@ const motion = exists("src/features/arena/components/CardMotionLayer.jsx") ? rea
 if (/dispatch\s*\(|onlineClient|applyGameAction/.test(motion)) issues.push("CardMotionLayer must not dispatch gameplay or Online actions");
 
 const verifyScript = pkg.scripts?.verify || "";
-for (const name of ["audit-arena-phase01.mjs","audit-arena-phase23.mjs","audit-arena-phase45.mjs","audit-arena-phase67.mjs","audit-arena-phase89.mjs","audit-arena-phase1314.mjs","audit-arena-phase1618.mjs","audit-arena-phase1921.mjs"]) {
+for (const name of ["audit-arena-foundation.mjs","audit-arena-battlefield-hud.mjs","audit-arena-resources-hand.mjs","audit-arena-card-context.mjs","audit-arena-actions-timing.mjs","audit-arena-targeting-motion.mjs","audit-arena-overlays-events.mjs","audit-arena-responsive-performance.mjs"]) {
   if (!verifyScript.includes(name)) issues.push(`Final verify no longer includes ${name}`);
 }
 

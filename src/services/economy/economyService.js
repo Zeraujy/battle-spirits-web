@@ -1,5 +1,5 @@
 import { supabase } from "../platform/supabase.js";
-import { SHOP_PRODUCT_BY_ID } from "../../data/shopCatalog.js";
+import { SHOP_PRODUCT_BY_ID } from "../../data/catalog/shop-catalog.js";
 import { clearAuthenticatedStorageUser, setAuthenticatedStorageUser } from "../platform/storage.js";
 import {
   safeNumber,
@@ -230,7 +230,7 @@ export async function craftCard(cardOrId) {
 async function catalogRuntime() {
   const [{ cards, cardIndex }, { PREBUILT_DECKS, buildPrebuiltDeck }] = await Promise.all([
     import("../cards/cardRepository.js"),
-    import("../../data/prebuiltDecks.js")
+    import("../../data/decks/prebuilt-decks.js")
   ]);
   return { cards, cardIndex, PREBUILT_DECKS, buildPrebuiltDeck };
 }

@@ -33,7 +33,7 @@ const checks = [
   [server.includes('onSafe(socket, "match:concede"'), "Server concede intent endpoint is missing"],
   [server.includes("createDeckSnapshot") && server.includes("validateDeckSnapshot"), "Ranked room must lock decks server-side"],
   [!server.includes("payload.winnerId") && !server.includes("payload.rpDelta"), "Server must not trust client winner/RP fields"],
-  [Boolean(pkg.scripts?.["online:v500:phase1214:test"]), "Phase 12-14 test script missing"]
+  [Boolean(pkg.scripts?.["online:ranked:test"]), "Phase 12-14 test script missing"]
 ];
 for (const [ok, message] of checks) if (!ok) errors.push(message);
 

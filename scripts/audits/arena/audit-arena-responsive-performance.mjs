@@ -46,7 +46,7 @@ if (!motion.includes("motionSignature")) errors.push("CardMotionLayer must gate 
 if (!motion.includes("instanceId}@${card.zoneKey}")) errors.push("CardMotionLayer signature must include instance and zone");
 
 const pkg = JSON.parse(read("package.json"));
-if (!String(pkg.scripts?.verify || "").includes("audit-arena-phase1921.mjs")) errors.push("verify must include Phase 19/20/21 audit");
+if (!String(pkg.scripts?.verify || "").includes("audit-arena-responsive-performance.mjs")) errors.push("verify must include Phase 19/20/21 audit");
 
 if (errors.length) {
   console.error("Arena Phase 19/20/21 audit: FAILED");

@@ -19,14 +19,20 @@ const PATCHES = [
           "Phase 23: 11/11 sets PASS; Phase 24: 365 cenários gerados; Phase 25: 0% fallback manual; Phase 26 e Phase 27: PASS.",
           "Contract/GranWalker, Manifest, XV, Accel/Open Area, Advent, Burst observers, Heavy Exhaust e Field locks agora fazem parte da infraestrutura reutilizável do Effect Engine.",
           "A Core Action Library final contém 95 tipos reutilizáveis, sem depender de resolvers exclusivos por ID para fechar o catálogo auditado.",
-          "A estrutura interna do projeto foi simplificada e reorganizada para facilitar manutenção futura, sem alterar gameplay ou conteúdo."
+          "A estrutura interna do projeto foi simplificada e reorganizada para facilitar manutenção futura, sem alterar gameplay ou conteúdo.",
+          "Dados de catálogo e receitas foram separados em limites mais claros, e fontes de importação antigas já incorporadas ao jogo foram removidas.",
+          "Corrigido o carregamento do catálogo após a reorganização interna dos serviços; as cartas voltam a ser reconhecidas normalmente pelo simulador.",
+          "Audits, regressões e testes internos agora usam nomes funcionais em Inglês, substituindo identificadores antigos baseados em fases e versões."
         ],
         en: [
           "BSC49 is complete with 117/117 cards resolved by the automation gate.",
           "Phase 23: 11/11 sets PASS; Phase 24: 365 generated scenarios; Phase 25: 0% manual fallback; Phase 26 and Phase 27: PASS.",
           "Contract/GranWalker, Manifest, XV, Accel/Open Area, Advent, Burst observers, Heavy Exhaust and Field locks are now part of the reusable Effect Engine infrastructure.",
           "The final Core Action Library contains 95 reusable types without relying on card-ID-specific resolvers to close the audited catalog.",
-          "The project structure was simplified and reorganized for easier future maintenance without changing gameplay or content."
+          "The project structure was simplified and reorganized for easier future maintenance without changing gameplay or content.",
+          "Catalog data and deck recipes were separated into clearer boundaries, and obsolete import sources already integrated into the game were removed.",
+          "Fixed catalog loading after the internal service reorganization; cards are recognized normally by the simulator again.",
+          "Internal audits, regressions and tests now use functional English names instead of legacy phase- and version-based identifiers."
         ]
       }
     }]
