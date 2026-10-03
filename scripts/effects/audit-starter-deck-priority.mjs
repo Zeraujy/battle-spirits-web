@@ -15,15 +15,19 @@ const decks = PREBUILT_DECKS.map(deck=>{
   const readyWithoutManual=missingRuntime.length===0 && unresolved.length===0;
   return {id:deck.id,setCode:deck.setCode,title:deck.title,uniqueCards:ids.length,missingRuntime,unresolved,readyWithoutManual,status:readyWithoutManual?'READY_NO_MANUAL':missingRuntime.length?'BLOCKED_MISSING_RUNTIME_DATA':'NEEDS_MIGRATION'};
 });
-const out={generatedAt:new Date().toISOString(),starterDecks:decks.length,ready:decks.filter(d=>d.readyWithoutManual).length,decks};
-fs.mkdirSync(path.join(root,'data/effect-migrations'),{recursive:true});
+const outputPath=path.join(root,'data/effects/migrations/starter-deck-priority.json');
+let generatedAt=new Date().toISOString();
+if(fs.existsSync(outputPath)){
+  try{ generatedAt=JSON.parse(fs.readFileSync(outputPath,'utf8')).generatedAt || generatedAt; }catch{}
+}
+const out={generatedAt,starterDecks:decks.length,ready:decks.filter(d=>d.readyWithoutManual).length,decks};
 fs.mkdirSync(path.join(root,'docs/effects'),{recursive:true});
-fs.writeFileSync(path.join(root,'data/effects/migrations/starter-deck-priority.json'),JSON.stringify(out,null,2)+'\n');
-const lines=['# Starter Deck Priority Pass — Phase 22','',`Starter Deck recipes audited: ${decks.length}`,`Ready without Manual Resolution: ${out.ready}`,'','| Deck | Set | Runtime | Manual | Status |','|---|---|---:|---:|---|'];
+fs.writeFileSync(outputPath,JSON.stringify(out,null,2)+'\n');
+const lines=['# Starter Deck Readiness','',`Starter Deck recipes audited: ${decks.length}`,`Ready without Manual Resolution: ${out.ready}`,'','| Deck | Set | Runtime | Manual | Status |','|---|---|---:|---:|---|'];
 for(const d of decks) lines.push(`| ${d.title} | ${d.setCode} | ${d.uniqueCards-d.missingRuntime.length}/${d.uniqueCards} | ${d.unresolved.length} | ${d.status} |`);
 lines.push('','## Data gate','','`BLOCKED_MISSING_RUNTIME_DATA` means the Shop recipe exists, but one or more recipe card IDs do not yet have complete runtime gameplay records in `src/data/cards.json`. The pipeline deliberately refuses to label those decks automated.');
-fs.writeFileSync(path.join(root,'docs/effects/starter-deck-priority-pass.md'),lines.join('\n')+'\n');
+fs.writeFileSync(path.join(root,'docs/effects/starter-deck-readiness.md'),lines.join('\n')+'\n');
 const sd19=decks.find(d=>d.setCode==='SD19');
-if(!sd19?.readyWithoutManual){console.error('[phase22] SD19 is not ready without manual resolution',sd19); process.exit(1);}
-console.log(`[phase22] ${out.ready}/${decks.length} Starter Deck recipes ready without Manual Resolution.`);
+if(!sd19?.readyWithoutManual){console.error('[starter-deck-readiness] SD19 is not ready without manual resolution',sd19); process.exit(1);}
+console.log(`[starter-deck-readiness] ${out.ready}/${decks.length} Starter Deck recipes ready without Manual Resolution.`);
 for(const d of decks) console.log(`${d.setCode} ${d.title}: ${d.status}${d.missingRuntime.length?` (missing ${d.missingRuntime.length})`:''}${d.unresolved.length?` (unresolved ${d.unresolved.length})`:''}`);

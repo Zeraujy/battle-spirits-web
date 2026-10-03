@@ -10,7 +10,6 @@ const requiredFiles = [
   "src/styles/arena/gameLogDrawerV490.css",
   "src/styles/arena/gameEventToastV490.css",
   "src/styles/arena/burstPresentationV490.css",
-  "docs/arena/v4.9.1-visual-identity-block-08-11.md",
 ];
 for (const file of requiredFiles) if (!fs.existsSync(file)) failures.push(`Missing ${file}`);
 

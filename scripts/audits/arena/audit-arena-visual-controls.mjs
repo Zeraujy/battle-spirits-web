@@ -7,7 +7,6 @@ const requiredFiles = [
   "src/styles/arena/cardPreviewV490.css",
   "src/styles/arena/actionBarV490.css",
   "src/styles/arena/phaseTrackerV490.css",
-  "docs/arena/v4.9.1-visual-identity-block-05-07.md",
 ];
 
 for (const file of requiredFiles) {

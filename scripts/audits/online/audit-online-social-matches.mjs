@@ -12,7 +12,6 @@ const required = [
   "src/features/online/components/FriendChallengePrompt.jsx",
   "src/features/arena/components/MatchResultScreen.jsx",
   "src/styles/pages/onlineSocialMatchV500.css",
-  "docs/online/phase-15-18-social-match-flow.md"
 ];
 
 const failures = [];

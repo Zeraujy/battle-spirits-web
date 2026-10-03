@@ -8,7 +8,6 @@ const required = [
   "server/results/matchHistoryRecord.test.js",
   "src/online/errors/onlineErrorMessages.js",
   "src/online/errors/onlineErrorMessages.test.js",
-  "docs/online/phase-19-21-history-errors-ux.md"
 ];
 for (const file of required) if (!fs.existsSync(path.join(root, file))) failures.push(`Missing ${file}`);
 const text = (file) => fs.readFileSync(path.join(root, file), "utf8");

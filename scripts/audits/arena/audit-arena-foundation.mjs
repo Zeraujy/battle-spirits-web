@@ -4,11 +4,10 @@ import path from "node:path";
 const root = process.cwd();
 const shellPath = path.join(root, "src/features/arena/components/ArenaShell.jsx");
 const simulatorPath = path.join(root, "src/features/arena/Simulator.jsx");
-const auditPath = path.join(root, "docs/arena/phase-0-baseline-audit.md");
 
 const failures = [];
 
-for (const filePath of [shellPath, simulatorPath, auditPath]) {
+for (const filePath of [shellPath, simulatorPath]) {
   if (!fs.existsSync(filePath)) failures.push(`Missing required Phase 0/1 file: ${path.relative(root, filePath)}`);
 }
 

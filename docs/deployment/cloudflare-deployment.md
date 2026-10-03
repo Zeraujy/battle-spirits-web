@@ -1,41 +1,33 @@
-# Deploy Cloudflare — Battle Spirits: KAIHOU! Simulator v4.8.1
+# Cloudflare Deployment
 
-## Cloudflare Workers
+## Web application
+
 - Build command: `npm run build`
-- Deploy command: `npx wrangler@4 deploy`
-- Root directory: `/`
+- Deployment command: `npx wrangler@4 deploy`
+- Project root: `/`
 - Production branch: `main`
-- Saída do Vite: `dist`
-- SPA fallback: habilitado em `wrangler.jsonc`
+- Vite output: `dist/`
+- SPA fallback is configured through `wrangler.jsonc`.
 
 ## Multiplayer
-O frontend e o servidor multiplayer são serviços separados.
 
-O endereço usado pelo jogo está em:
-`public/config/online-config.js`
+The frontend and the authoritative multiplayer server are separate services. The browser obtains the public server endpoint from the runtime online configuration or the build environment.
 
-Configuração atual:
-`https://desktop-88e9pl9.tail8fb8c7.ts.net`
+The multiplayer endpoint must be publicly reachable through HTTPS/WSS for browser matchmaking and matches.
 
-Para o Online 1v1 funcionar no site, esse servidor precisa estar publicamente acessível por HTTPS/WSS.
+## Account and cloud services
 
-## Supabase
-Login/perfil usam variáveis de build:
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_PUBLISHABLE_KEY`
+Frontend builds use the public Supabase configuration values expected by the application. Privileged server-only credentials must never be included in browser code or public assets.
 
-Configure essas variáveis no ambiente de build da Cloudflare.
+## Validation before deployment
 
-Não coloque uma chave `service_role` no frontend.
-
-## Teste
 ```bash
 npm install
 npm run project:check
 ```
 
-## Deploy manual
+## Manual deployment
+
 ```bash
-npm install
 npm run deploy:cloudflare
 ```

@@ -7,7 +7,6 @@ const exists = (relative) => fs.existsSync(path.join(root, relative));
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 
 const required = [
-  "docs/online/phase-04-06-authoritative-sync.md",
   "src/online/sync/stateSync.js",
   "src/online/connection/connectionState.js",
   "server/matches/stateSync.js",

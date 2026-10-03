@@ -4,7 +4,6 @@ import path from "node:path";
 const root = process.cwd();
 const arenaDir = path.join(root, "src/features/arena/components");
 const simulatorPath = path.join(root, "src/features/arena/Simulator.jsx");
-const docPath = path.join(root, "docs/arena/phase-2-3-battlefield-hud.md");
 
 const requiredFiles = [
   "Battlefield.jsx",
@@ -17,7 +16,7 @@ const requiredFiles = [
 ].map((name) => path.join(arenaDir, name));
 
 const failures = [];
-for (const filePath of [...requiredFiles, simulatorPath, docPath]) {
+for (const filePath of [...requiredFiles, simulatorPath]) {
   if (!fs.existsSync(filePath)) failures.push(`Missing Phase 2/3 file: ${path.relative(root, filePath)}`);
 }
 

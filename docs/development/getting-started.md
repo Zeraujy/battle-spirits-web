@@ -1,36 +1,45 @@
-# START HERE — v5.0.3
+# Getting Started
 
-## Base oficial
+The project uses a Web-only frontend plus a separate authoritative multiplayer server.
 
-O projeto é exclusivamente Web + Online. Use os comandos npm como ponto de entrada para desenvolvimento, testes, validação e publicação.
-
-## Desenvolvimento
+## Install
 
 ```bash
 npm install
+```
+
+## Frontend development
+
+```bash
 npm run dev
 ```
 
-Servidor Online local, quando necessário:
+## Local multiplayer server
 
 ```bash
 npm run dev:server
 ```
 
-## Antes de publicar
+## Validation
+
+Use the full project check before publishing:
 
 ```bash
 npm run project:check
 ```
 
-## Publicação
+For source-only validation without the Vite build step:
+
+```bash
+npm run verify
+npm test
+npm run regression:full
+```
+
+## Publish
 
 ```bash
 npm run publish:cloudflare
 ```
 
-A camada Social e o transporte das partidas permanecem independentes. Não acople `socialService.js` a `src/online/publicProfile.js`, `src/online/socketClient.js` ou `server/index.mjs`.
-
-## v5.0.3 database step
-
-If you use authenticated Shop purchases, run `supabase/migrations/economy/economy-5.0.3-deck-purchase-fix.sql` after the prior economy migrations.
+Database migrations are organized below `supabase/migrations/` by domain. Apply only the migrations required by the target environment and never expose privileged server credentials to the frontend.

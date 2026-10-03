@@ -14,7 +14,6 @@ const required = [
   "src/styles/arena/burstPresentationV490.css",
   "src/styles/arena/gameLogDrawerV490.css",
   "src/styles/arena/gameEventToastV490.css",
-  "docs/arena/phase-16-18.md"
 ];
 
 const errors = [];

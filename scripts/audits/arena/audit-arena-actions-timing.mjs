@@ -10,7 +10,6 @@ const required = [
   "src/features/arena/components/PhaseTracker.jsx",
   "src/styles/arena/actionBarV490.css",
   "src/styles/arena/phaseTrackerV490.css",
-  "docs/arena/phase-8-9.md"
 ];
 
 const errors = [];

@@ -14,7 +14,6 @@ for (const file of [
   "server/matches/deckLock.test.js",
   "src/features/online/components/PreMatchVersus.jsx",
   "src/styles/pages/onlinePreMatchV500.css",
-  "docs/online/phase-10-11-prematch-deck-lock.md"
 ]) {
   if (!fs.existsSync(path.join(root, file))) errors.push(`Missing ${file}`);
 }

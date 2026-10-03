@@ -111,14 +111,16 @@ const requiredPaths = [
   "public/assets/cursors/cursor-grab.svg",
   "public/assets/cursors/cursor-grabbing.svg",
   "public/favicon.ico",
-  "docs/changelog/changelog-4.9.0.md",
-  "docs/changelog/changelog-4.9.1.md",
-  "docs/changelog/changelog-5.0.0.md",
-  "docs/online/v5.0.0-final-qa.md",
   "docs/shop/adding-shop-items.md",
   "public/images/ui/arena/levels",
   "public/images/arena/wallpaper_arena_default.png",
-  "docs/changelog"
+  "docs/changelog/project-history.md",
+  "docs/arena/arena-architecture.md",
+  "docs/arena/arena-validation.md",
+  "docs/effects/effect-engine.md",
+  "docs/effects/effect-validation.md",
+  "docs/online/online-architecture.md",
+  "docs/online/online-validation.md"
 ];
 
 console.log(`Battle Spirits: KAIHOU! Simulator v${currentVersion} — verificação estrutural\n`);

@@ -23,6 +23,6 @@ const md=['# Set-by-Set Automation — Phase 23','',`Target: >= ${target}% fully
 for(const s of sets) md.push(`| ${s.set} | ${s.automated}/${s.total} | ${s.unresolved} | ${s.automationPercent}% | ${s.complete?'PASS':'BLOCKED'} |`);
 md.push('','## Release blockers');
 for(const s of sets.filter(x=>!x.complete)) md.push(`- **${s.set}**: ${s.unresolved} unresolved card(s); ${s.automationPercent}% automated/no-effect.`);
-fs.mkdirSync(path.join(root,'docs/effects'),{recursive:true}); fs.writeFileSync(path.join(root,'docs/effects/set-by-set-automation-v5.1.0-phase23.md'),md.join('\n')+'\n');
+fs.mkdirSync(path.join(root,'docs/effects'),{recursive:true}); fs.writeFileSync(path.join(root,'docs/effects/set-automation.md'),md.join('\n')+'\n');
 console.log(`[phase23] ${out.completeSets}/${out.totalSets} sets meet the ${target}% automation gate.`); for(const s of sets) console.log(`${s.set}: ${s.automationPercent}% ${s.complete?'PASS':'BLOCKED'} (${s.unresolved} unresolved)`);
 if(process.argv.includes('--enforce') && out.completeSets!==out.totalSets) process.exit(1);

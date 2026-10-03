@@ -4,7 +4,6 @@ const requiredFiles = [
   "src/styles/theme/interfaceTokens.css",
   "src/styles/arena/arenaShell.css",
   "src/styles/arena/battlefieldV490.css",
-  "docs/arena/v4.9.1-visual-identity-block-01-03.md",
 ];
 
 const failures = [];

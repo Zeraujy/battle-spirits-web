@@ -1,4 +1,4 @@
-import { makeCardIndex, normalizeCard } from "../../game/cardAdapter.js";
+import { makeCardIndex, normalizeCard, resolveCardImage } from "../../game/cardAdapter.js";
 import { officialRestrictionForCard } from "../../game/eternalDeckRules.js";
 
 const modules = import.meta.glob("../../data/**/*.json", { eager: true, import: "default" });
@@ -28,6 +28,16 @@ for (const [, rawModule] of orderedModules) {
 
 export const cards = [...byId.values()];
 export const cardIndex = makeCardIndex(cards);
+
+export function getCardById(cardId) {
+  if (cardId == null) return null;
+  return cardIndex.get(String(cardId)) || null;
+}
+
+export function getCardArtworkUrl(cardOrId) {
+  const card = typeof cardOrId === "string" ? getCardById(cardOrId) : cardOrId;
+  return resolveCardImage(card);
+}
 
 function fold(value) {
   return String(value ?? "")

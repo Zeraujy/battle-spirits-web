@@ -5,9 +5,6 @@ const read = (file) => fs.readFileSync(file, "utf8");
 const pkg = JSON.parse(read("package.json"));
 
 const required = [
-  "docs/changelog/changelog-5.0.0.md",
-  "docs/online/phase-22-25-final-security-qa.md",
-  "docs/online/v5.0.0-final-qa.md",
   "scripts/audits/online/audit-online-security.mjs",
   "scripts/regression/run-online-multiplayer-regression.mjs",
   "scripts/regression/run-online-ranked-regression.mjs"

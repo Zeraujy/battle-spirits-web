@@ -10,8 +10,6 @@ const required = [
   "src/features/arena/components/ContextPanel.jsx",
   "src/styles/arena/cardPreviewV490.css",
   "src/styles/arena/contextPanelV490.css",
-  "docs/arena/phase-6-7.md",
-  "docs/arena/visual-cleanup-pending.md"
 ];
 
 const errors = [];
@@ -48,10 +46,6 @@ if (simulator.includes('<div\n          className="card-zoom-preview"')) {
   errors.push("Legacy inline card zoom preview remains in Simulator.jsx");
 }
 
-const pending = read("docs/arena/visual-cleanup-pending.md");
-if (!/Life HUD layout shift/i.test(pending)) {
-  errors.push("Life HUD layout-shift bug is not recorded for final Visual cleanup");
-}
 
 if (errors.length) {
   console.error("Arena Phase 6/7 audit: FAILED");

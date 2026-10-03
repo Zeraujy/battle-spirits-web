@@ -10,7 +10,6 @@ const required = [
   "src/features/arena/components/CardMotionLayer.jsx",
   "src/styles/arena/targetingUXV490.css",
   "src/styles/arena/cardMotionV490.css",
-  "docs/arena/phase-13-14.md"
 ];
 
 const errors = [];

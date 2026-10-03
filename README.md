@@ -33,3 +33,7 @@ npm run publish:cloudflare
 ```
 
 Para novos sets, consulte `docs/card-database/adding-new-sets.md`.
+
+## Documentation
+
+See `docs/README.md` for the active documentation index and maintenance policy.

@@ -5,8 +5,6 @@ const required = [
   "src/game/effectEngine/triggerOrdering.test.js",
   "server/matches/effectDecisionAuthority.js",
   "server/matches/effectDecisionAuthority.test.js",
-  "docs/effects/server-authoritative-effects-phase19.md",
-  "docs/effects/effect-stack-trigger-ordering-phase20.md"
 ];
 for (const file of required) if (!fs.existsSync(file)) throw new Error(`Phase 19-20 missing: ${file}`);
 const server = fs.readFileSync("server/index.mjs", "utf8");

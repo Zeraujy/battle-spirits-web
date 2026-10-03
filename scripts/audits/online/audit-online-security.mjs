@@ -7,7 +7,6 @@ const required = [
   "server/security/onlineSecurity.test.js",
   "server/matches/sanitizeMatch.js",
   "server/matches/sanitizeMatch.test.js",
-  "docs/online/phase-22-25-final-security-qa.md"
 ];
 for (const file of required) if (!fs.existsSync(file)) failures.push(`Missing ${file}`);
 

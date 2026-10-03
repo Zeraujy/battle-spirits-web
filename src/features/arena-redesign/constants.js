@@ -1,0 +1,4 @@
+export const ARENA_REDESIGN_VERSION = "0.4.0";
+export const ARENA_REDESIGN_FOUNDATION_PHASE = 3;
+export const DEFAULT_ARENA_PLAYMAT_ID = "default";
+export const ARENA_REDESIGN_CURRENT_PHASE = 10;

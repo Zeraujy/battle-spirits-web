@@ -19,7 +19,8 @@ const forbidden = [
   "src/data/prebuiltDecks.js",
   "src/data/prebuiltDecks.test.js",
   "resources",
-  "tools/import-ready"
+  "tools/import-ready",
+  "data/effect-migrations"
 ];
 let failed = false;
 for (const rel of required) {

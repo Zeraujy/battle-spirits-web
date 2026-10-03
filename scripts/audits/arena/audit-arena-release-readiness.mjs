@@ -36,8 +36,6 @@ const required = [
   "src/features/arena/components/BurstPresentation.jsx",
   "src/features/arena/components/GameLogDrawer.jsx",
   "src/features/arena/components/GameEventToast.jsx",
-  "docs/arena/phase-22-23-final-qa.md",
-  "docs/changelog/changelog-4.9.0.md"
 ];
 for (const rel of required) if (!exists(rel)) issues.push(`Missing final release artifact: ${rel}`);
 

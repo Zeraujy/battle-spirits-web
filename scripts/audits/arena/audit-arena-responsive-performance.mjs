@@ -10,7 +10,6 @@ const required = [
   "src/styles/arena/arenaResponsiveV490.css",
   "src/styles/arena/arenaPerformanceV490.css",
   "src/styles/arena/arenaVisualCleanupV490.css",
-  "docs/arena/phase-19-21.md"
 ];
 
 const errors = [];

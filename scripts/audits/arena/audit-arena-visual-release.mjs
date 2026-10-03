@@ -6,8 +6,6 @@ const exists = (file) => fs.existsSync(file);
 const required = [
   "src/styles/theme/interfaceTokens.css",
   "src/styles/arena/arenaVisualPolishV491.css",
-  "docs/arena/v4.9.1-final-qa.md",
-  "docs/changelog/changelog-4.9.1.md",
 ];
 for (const file of required) if (!exists(file)) failures.push(`Missing ${file}`);
 

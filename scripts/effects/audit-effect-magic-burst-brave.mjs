@@ -3,7 +3,6 @@ import fs from "node:fs";
 const required = [
   "src/game/effectEngine/magicAutomation.js",
   "src/game/effectEngine/burstEngine.js",
-  "src/game/effectEngine/braveEffectEngine.js",
   "src/game/effectEngine/magicBurstBrave.test.js"
 ];
 for (const file of required) {

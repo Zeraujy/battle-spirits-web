@@ -12,9 +12,6 @@ const required = [
   "src/game/effectEngine/modifierResolver.test.js",
   "src/game/effectEngine/durationSystem.js",
   "src/game/effectEngine/durationSystem.test.js",
-  "docs/effects/core-action-library.md",
-  "docs/effects/continuous-effects-and-modifiers.md",
-  "docs/effects/duration-system.md"
 ];
 const failures = [];
 for (const rel of required) if (!fs.existsSync(path.join(ROOT, rel))) failures.push(`missing ${rel}`);

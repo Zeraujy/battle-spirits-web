@@ -13,7 +13,6 @@ const required = [
   "src/features/online/components/QueueStatus.jsx",
   "src/features/online/components/ReadyCheck.jsx",
   "src/styles/pages/onlineMatchmakingV500.css",
-  "docs/online/phase-07-09-casual-matchmaking.md"
 ];
 
 const errors = [];

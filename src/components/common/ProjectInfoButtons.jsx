@@ -22,7 +22,20 @@ const PATCHES = [
           "A estrutura interna do projeto foi simplificada e reorganizada para facilitar manutenção futura, sem alterar gameplay ou conteúdo.",
           "Dados de catálogo e receitas foram separados em limites mais claros, e fontes de importação antigas já incorporadas ao jogo foram removidas.",
           "Corrigido o carregamento do catálogo após a reorganização interna dos serviços; as cartas voltam a ser reconhecidas normalmente pelo simulador.",
-          "Audits, regressões e testes internos agora usam nomes funcionais em Inglês, substituindo identificadores antigos baseados em fases e versões."
+          "Audits, regressões e testes internos agora usam nomes funcionais em Inglês, substituindo identificadores antigos baseados em fases e versões.",
+          "A documentação histórica redundante foi removida e a documentação ativa ganhou um índice e regras permanentes de retenção e nomenclatura.",
+          "A rotina de manutenção de documentação foi ajustada para normalizar nomes corretamente também em sistemas Windows.",
+          "A documentação técnica foi consolidada em referências atuais de Arena, Online e Effect Engine, removendo dependências de relatórios históricos.",
+          "A reorganização arquitetural foi encerrada com uma auditoria final, remoção de código comprovadamente sem uso e validação completa do projeto.",
+          "Iniciada a fundação paralela da nova Arena, com espaço full-screen e suporte preparado para Playmats sem substituir a Arena atual.",
+          "O Playmat padrão já está registrado para a nova Arena; as próximas etapas poderão adicionar Playmats cosméticos sem alterar as regras da partida.",
+          "A nova Arena recebeu a estrutura visual espelhada de jogador e oponente, com zonas dedicadas para Life, Burst, Reserve, Deck, Trash, Core Trash, Void, Hand e Field.",
+          "As novas artes de Core e Soul Core agora fazem parte da apresentação da Arena em desenvolvimento, sem alterar as regras atuais de movimentação ou custo.",
+          "A Reserve e os Cores sobre cartas agora possuem uma ponte de interação preparada para clique e arraste, reutilizando a autoridade existente para movimentos e pagamentos sem mover regras para a interface.",
+          "O campo da nova Arena passou a renderizar as artes oficiais das cartas, com Level, BP, estado de exaustão, papel em batalha e Cores exibidos fora da arte sempre que possível.",
+          "A mão da nova Arena agora usa um leque responsivo com artes oficiais, seleção visual e arraste para o Battlefield, mantendo a identidade da mão adversária protegida.",
+          "A Arena em desenvolvimento agora destaca cartas válidas para jogar e alvos válidos, enquanto opções indisponíveis ficam suavemente atenuadas sem cobrir a arte das cartas.",
+          "A nova camada de batalha agora mantém atacante, bloqueador ou alvo de Life visíveis no centro da Arena, com status de timing e seleção de alvos sem deslocar o campo."
         ],
         en: [
           "BSC49 is complete with 117/117 cards resolved by the automation gate.",
@@ -32,7 +45,20 @@ const PATCHES = [
           "The project structure was simplified and reorganized for easier future maintenance without changing gameplay or content.",
           "Catalog data and deck recipes were separated into clearer boundaries, and obsolete import sources already integrated into the game were removed.",
           "Fixed catalog loading after the internal service reorganization; cards are recognized normally by the simulator again.",
-          "Internal audits, regressions and tests now use functional English names instead of legacy phase- and version-based identifiers."
+          "Internal audits, regressions and tests now use functional English names instead of legacy phase- and version-based identifiers.",
+          "Redundant historical documentation was removed, and active documentation now has an index plus permanent retention and naming rules.",
+          "The documentation maintenance routine was adjusted to normalize filenames correctly on Windows systems as well.",
+          "Technical documentation was consolidated into current Arena, Online and Effect Engine references, removing dependencies on historical reports.",
+          "The architecture cleanup was closed with a final audit, removal of proven unused code and complete project validation.",
+          "The parallel foundation for the new Arena has started, with a full-screen surface and Playmat support prepared without replacing the current Arena.",
+          "The default Playmat is now registered for the new Arena; future stages can add cosmetic Playmats without changing match rules.",
+          "The new Arena now has a mirrored player/opponent field structure with dedicated Life, Burst, Reserve, Deck, Trash, Core Trash, Void, Hand and Field zones.",
+          "The new Core and Soul Core artwork is now part of the Arena presentation in development without changing current movement or cost rules.",
+          "Reserve and card Cores now expose an interaction bridge prepared for click and drag, reusing the existing authority for movement and payment without moving rules into the interface.",
+          "The new Arena field now renders official card artwork with Level, BP, exhaustion, battle role and Cores presented without covering the card art whenever possible.",
+          "The new Arena Hand now uses a responsive card fan with official artwork, visual selection and drag-to-Battlefield interaction while keeping opponent Hand identities protected.",
+          "The Arena in development now highlights playable cards and valid targets while unavailable options are gently subdued without covering card artwork.",
+          "The new battle layer now keeps the attacker, blocker or Life target visible at the center of the Arena, with timing status and target selection feedback without shifting the field."
         ]
       }
     }]

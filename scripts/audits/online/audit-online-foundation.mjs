@@ -5,13 +5,11 @@ const root = process.cwd();
 const failures = [];
 
 const requiredFiles = [
-  "docs/online/online-baseline-audit.md",
   "src/online/domain/matchModes.js",
   "src/online/domain/matchStatus.js",
   "src/online/domain/queueTypes.js",
   "src/online/domain/onlineErrors.js",
   "src/online/domain/onlineConstants.js",
-  "src/online/domain/index.js",
   "server/matches/MatchPlayer.js",
   "server/matches/MatchSession.js",
   "server/matches/MatchRegistry.js",
@@ -29,15 +27,6 @@ function read(relative) {
   return fs.readFileSync(path.join(root, relative), "utf8");
 }
 
-const audit = read("docs/online/online-baseline-audit.md");
-for (const marker of [
-  "The client requests. The server decides.",
-  "game:action",
-  "stateVersion",
-  "MatchSession",
-]) {
-  if (!audit.includes(marker)) failures.push(`Baseline audit missing marker: ${marker}`);
-}
 
 const sessionSource = read("server/matches/MatchSession.js");
 for (const marker of ["stateVersion", "replaceGameState", "MatchStatus.ACTIVE", "snapshot("]) {
