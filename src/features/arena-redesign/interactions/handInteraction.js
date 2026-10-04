@@ -40,3 +40,9 @@ export function isHandCardDrag(event) {
   const types = Array.from(event?.dataTransfer?.types || []);
   return types.includes(ARENA_HAND_CARD_DRAG_MIME);
 }
+
+export function getTouchHandDropTarget(documentLike, clientX, clientY) {
+  if (!documentLike?.elementFromPoint) return null;
+  const element = documentLike.elementFromPoint(clientX, clientY);
+  return element?.closest?.('[data-hand-drop-target="true"]') || null;
+}

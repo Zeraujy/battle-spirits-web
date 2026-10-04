@@ -1,7 +1,9 @@
+import { useRef } from "react";
 import { getCardArtworkUrl, getCardById } from "../../../../services/cards/cardRepository.js";
 import {
   createHandCardInteractionPayload,
-  writeHandCardDragPayload
+  writeHandCardDragPayload,
+  getTouchHandDropTarget
 } from "../../interactions/handInteraction.js";
 import { getHandCardInteractionState } from "../cards/cardInteractionPresentation.js";
 
@@ -16,6 +18,8 @@ export default function ArenaHandCard({
   density = "comfortable",
   interaction = null
 }) {
+  const touchDragRef = useRef(null);
+  const suppressClickRef = useRef(false);
   const hidden = Boolean(physical?.hidden || side === "opponent");
   const card = hidden ? null : getCardById(physical?.cardId);
   const title = hidden ? "Hidden card" : getCardName(card, physical?.cardId);
@@ -37,6 +41,10 @@ export default function ArenaHandCard({
 
   function handleClick(event) {
     event.stopPropagation();
+    if (suppressClickRef.current) {
+      suppressClickRef.current = false;
+      return;
+    }
     if (hidden) return;
     const selectionPayload = { ...payload, physical, card, side, zone: "hand" };
     if (cardInteractionState.targetingActive) {
@@ -47,9 +55,68 @@ export default function ArenaHandCard({
     interaction?.onHandCardClick?.(selectionPayload);
   }
 
+  function clearTouchDropHighlight() {
+    const previous = touchDragRef.current?.dropTarget || null;
+    previous?.classList?.remove("is-hand-drop-active");
+  }
+
   function handlePointerDown(event) {
     if (!draggable) return;
     interaction?.onHandCardPointerDown?.(event, { ...payload, physical, card, artwork });
+
+    if (event.pointerType === "touch" || event.pointerType === "pen") {
+      event.currentTarget?.setPointerCapture?.(event.pointerId);
+      touchDragRef.current = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        dragging: false,
+        dropTarget: null
+      };
+    }
+  }
+
+  function handlePointerMove(event) {
+    const state = touchDragRef.current;
+    if (!state || state.pointerId !== event.pointerId) return;
+
+    const distance = Math.hypot(event.clientX - state.startX, event.clientY - state.startY);
+    if (distance < 8 && !state.dragging) return;
+    state.dragging = true;
+
+    const nextTarget = getTouchHandDropTarget(document, event.clientX, event.clientY);
+    if (state.dropTarget !== nextTarget) {
+      state.dropTarget?.classList?.remove("is-hand-drop-active");
+      nextTarget?.classList?.add("is-hand-drop-active");
+      state.dropTarget = nextTarget;
+    }
+
+    interaction?.onHandCardPointerMove?.(event, { ...payload, physical, card, artwork });
+  }
+
+  function handlePointerUp(event) {
+    const state = touchDragRef.current;
+    if (!state || state.pointerId !== event.pointerId) return;
+
+    if (state.dragging) suppressClickRef.current = true;
+
+    if (state.dragging && state.dropTarget) {
+      interaction?.onHandCardDrop?.(payload, {
+        zone: "field",
+        side: state.dropTarget.dataset?.handDropSide || "player",
+        input: "touch"
+      });
+    }
+
+    clearTouchDropHighlight();
+    touchDragRef.current = null;
+    interaction?.onHandCardPointerUp?.(event, { ...payload, physical, card, artwork });
+  }
+
+  function handlePointerCancel(event) {
+    clearTouchDropHighlight();
+    touchDragRef.current = null;
+    interaction?.onHandCardPointerCancel?.(event, { ...payload, physical, card, artwork });
   }
 
   function handleDragStart(event) {
@@ -102,6 +169,9 @@ export default function ArenaHandCard({
       draggable={draggable}
       onClick={handleClick}
       onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerCancel}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       aria-pressed={selected || undefined}

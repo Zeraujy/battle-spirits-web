@@ -3,6 +3,8 @@ import ArenaRedesignSurface from "./components/ArenaRedesignSurface.jsx";
 import ArenaSideLayout from "./components/layout/ArenaSideLayout.jsx";
 import BattleFocus from "./components/battle/BattleFocus.jsx";
 import TargetingLayer from "./components/battle/TargetingLayer.jsx";
+import ArenaUtilityPanel from "./components/utility/ArenaUtilityPanel.jsx";
+import ArenaEffectResolutionLayer from "./components/effects/ArenaEffectResolutionLayer.jsx";
 import { resolveArenaPlaymat } from "./playmats/playmatResolver.js";
 
 /**
@@ -19,7 +21,9 @@ export default function ArenaRedesign({
   opponent,
   center,
   player,
-  utility
+  utility,
+  utilityData = null,
+  effectData = null
 }) {
   const playmat = resolveArenaPlaymat(playmatId);
   const resolvedInteraction = {
@@ -52,13 +56,27 @@ export default function ArenaRedesign({
     />
   );
 
+  const utilityContent = utility ?? (
+    <ArenaUtilityPanel
+      viewModel={viewModel}
+      presentationData={utilityData}
+      onActionRequest={resolvedInteraction?.onUtilityActionRequest}
+    />
+  );
+
   return (
     <ArenaRedesignShell playmat={playmat}>
       <ArenaRedesignSurface
         opponent={opponentContent}
         center={centerContent}
         player={playerContent}
-        utility={utility}
+        utility={utilityContent}
+      />
+
+      <ArenaEffectResolutionLayer
+        viewModel={viewModel}
+        presentationData={effectData}
+        onActionRequest={resolvedInteraction?.onEffectActionRequest}
       />
 
       <output

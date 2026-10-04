@@ -20,8 +20,9 @@ for (const relative of required) {
 }
 
 const shell = fs.readFileSync(path.join(root, "src/features/arena-redesign/components/ArenaRedesignShell.jsx"), "utf8");
-if (!shell.includes('data-arena-redesign-foundation="11"')) {
-  throw new Error("Arena redesign battle interaction audit failed: Phase 11 marker is missing.");
+const phaseMatch = shell.match(/data-arena-redesign-foundation="(\d+)"/);
+if (!phaseMatch || Number(phaseMatch[1]) < 11) {
+  throw new Error("Arena redesign battle interaction audit failed: Phase 11-or-newer marker is missing.");
 }
 
 const rootSource = fs.readFileSync(path.join(root, "src/features/arena-redesign/ArenaRedesign.jsx"), "utf8");

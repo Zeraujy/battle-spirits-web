@@ -120,6 +120,61 @@ function resolveOpponentPlayerId(players, viewerPlayerId) {
   return Object.keys(players).find((playerId) => playerId !== viewerPlayerId) || null;
 }
 
+
+function normalizeDecisionCandidate(candidate) {
+  const source = objectOrEmpty(candidate);
+  return {
+    instanceId: source.instanceId || source.sourceInstanceId || null,
+    cardId: source.cardId || source.sourceCardId || null,
+    triggerId: source.triggerId || null,
+    label: source.labelEN || source.label || null
+  };
+}
+
+function normalizeEffectDecision(decision) {
+  if (!decision || typeof decision !== "object") return null;
+  const source = objectOrEmpty(decision);
+  const optionSource = Array.isArray(source.options)
+    ? source.options
+    : Array.isArray(source.action?.options)
+      ? source.action.options
+      : [];
+
+  return {
+    id: source.id || null,
+    kind: source.kind || null,
+    playerId: source.playerId || null,
+    minimum: normalizeNumber(source.minimum),
+    maximum: normalizeNumber(source.maximum, 1),
+    allowZero: Boolean(source.allowZero),
+    totalCores: source.totalCores == null ? null : normalizeNumber(source.totalCores),
+    exactTotal: source.exactTotal !== false,
+    sourceCoreZone: source.sourceCoreZone || null,
+    title: source.titleEN || null,
+    instruction: source.instructionEN || null,
+    candidates: arrayOrEmpty(source.candidates).map(normalizeDecisionCandidate),
+    options: optionSource.map((option, index) => ({
+      id: String(option?.id ?? index),
+      label: option?.labelEN || option?.label || `Option ${index + 1}`
+    }))
+  };
+}
+
+function normalizeBurstOpportunity(opportunity) {
+  if (!opportunity || typeof opportunity !== "object") return null;
+  const source = objectOrEmpty(opportunity);
+  return {
+    playerId: source.playerId || null,
+    event: source.event || null,
+    amount: normalizeNumber(source.amount),
+    cause: source.cause || null,
+    sourcePlayerId: source.sourcePlayerId || null,
+    battleId: source.battleId || null,
+    turnNumber: normalizeNumber(source.turnNumber),
+    phase: source.phase || null
+  };
+}
+
 function normalizeAvailableActions(actions) {
   return arrayOrEmpty(actions).map((descriptor) => {
     const source = objectOrEmpty(descriptor?.action || descriptor);
@@ -207,8 +262,8 @@ export function createArenaRedesignViewModel({
     opponent,
 
     battle: sourceMatch.battle || null,
-    burstOpportunity: sourceMatch.burstOpportunity || null,
-    pendingEffectDecision: sourceMatch.pendingEffectDecision || null,
+    burstOpportunity: normalizeBurstOpportunity(sourceMatch.burstOpportunity),
+    pendingEffectDecision: normalizeEffectDecision(sourceMatch.pendingEffectDecision),
 
     timing: {
       turnNumber: normalizeNumber(sourceMatch.turnNumber, 1),

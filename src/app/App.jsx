@@ -22,6 +22,7 @@ const Store = lazy(() => import("../features/shop/Store.jsx"));
 const Simulator = lazy(() => import("../features/arena/Simulator.jsx"));
 const Tutorial = lazy(() => import("../features/tutorial/Tutorial.jsx"));
 const StarterOnboarding = lazy(() => import("../features/shop/components/StarterOnboarding.jsx"));
+const ArenaVisualPreview = lazy(() => import("../features/arena-visual/components/preview/ArenaVisualPreview.jsx"));
 
 function LoadingScreen() {
   return (
@@ -68,7 +69,8 @@ export default function App() {
   const go = (name, props = {}) => setScreen({ name, ...props });
 
   let content;
-  if (screen.name === "profile") content = <Profile onBack={() => go("home")} initialUsername={screen.initialUsername || null} />;
+  if (mode === "arena-visual-preview") content = <ArenaVisualPreview />;
+  else if (screen.name === "profile") content = <Profile onBack={() => go("home")} initialUsername={screen.initialUsername || null} />;
   else if (screen.name === "account") content = <Account onBack={() => go("home")} onProfile={() => go("profile")} />;
   else if (screen.name === "settings") content = <Settings onBack={() => go("home")} onAdmin={() => go("admin")} />;
   else if (screen.name === "admin") content = <AdminPanel onBack={() => go("settings")} />;
@@ -102,7 +104,7 @@ export default function App() {
   return (
     <Suspense fallback={<LoadingScreen />}>
       <div className="app-route-shell" key={routeKey}>{content}</div>
-      <StarterOnboarding />
+      {mode === "game" ? <StarterOnboarding /> : null}
     </Suspense>
   );
 }

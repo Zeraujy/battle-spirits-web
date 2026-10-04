@@ -1,3 +1,4 @@
+import useArenaResponsiveProfile from "../hooks/useArenaResponsiveProfile.js";
 import "../styles/arena-redesign.css";
 
 /**
@@ -11,6 +12,7 @@ export default function ArenaRedesignShell({
   children,
   className = ""
 }) {
+  const responsiveProfile = useArenaResponsiveProfile();
   const rootClassName = [
     "arena-redesign-shell",
     className
@@ -25,7 +27,9 @@ export default function ArenaRedesignShell({
       className={rootClassName}
       style={style}
       data-arena-redesign="true"
-      data-arena-redesign-foundation="11"
+      data-arena-redesign-foundation="15"
+      data-arena-viewport={responsiveProfile.viewport}
+      data-arena-input={responsiveProfile.input}
       data-playmat-id={playmat?.id || "default"}
     >
       <div className="arena-redesign-playmat" aria-hidden="true" />

@@ -1,0 +1,10 @@
+import fs from "node:fs";
+import path from "node:path";
+const root=process.cwd();
+const required=["src/features/arena-redesign/playmats/playmatRegistry.js","src/features/arena-redesign/playmats/playmatResolver.js","src/features/arena-redesign/playmats/playmatRegistry.test.js"];
+for(const rel of required) if(!fs.existsSync(path.join(root,rel))) throw new Error(`Playmat QA failed: missing ${rel}`);
+const reg=fs.readFileSync(path.join(root,required[0]),"utf8");
+const resolver=fs.readFileSync(path.join(root,required[1]),"utf8");
+if(!reg.includes("default")) throw new Error("Playmat QA failed: default playmat is not registered.");
+if(!resolver.toLowerCase().includes("fallback") && !resolver.includes("default")) throw new Error("Playmat QA failed: no safe default fallback detected.");
+console.log("Arena Release QA — Playmats: PASS");

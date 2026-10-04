@@ -18,6 +18,7 @@ function collectCards(players = {}) {
     pushCards(player?.trash, `trash:${playerId}`);
 
     if (player?.burst?.instanceId) pushCards([player.burst], `burst:${playerId}`);
+    if (player?.mirage?.instanceId) pushCards([player.mirage], `mirage:${playerId}`);
 
     for (const zone of ["other", "spirits", "nexuses"]) {
       pushCards(player?.field?.[zone], `field:${playerId}:${zone}`);

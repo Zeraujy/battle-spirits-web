@@ -44,6 +44,7 @@ import {
 } from "../../game/cardAdapter.js";
 import { otherPlayerId } from "../../game/utils.js";
 import { legalBlockers } from "../../game/battle.js";
+import { getLegalActions } from "../../game/legalActions.js";
 import { getBurstActivationEvent } from "../../game/burstRules.js";
 import {
   calculateReduction,
@@ -60,6 +61,17 @@ import { onlineErrorMessage } from "../../online/errors/onlineErrorMessages.js";
 import { buildPostMatchSummary } from "../../services/player/postMatchService.js";
 import { searchProfiles, sendFriendRequest } from "../../services/player/socialService.js";
 import { getSmartCoreClickTarget } from "../../interactions/coreClickPolicy.js";
+import ArenaVisual from "../arena-visual/ArenaVisual.jsx";
+import { createArenaVisualControllerBridge } from "../arena-visual/controller/ArenaVisualControllerBridge.js";
+import { routeArenaVisualIntent } from "../arena-visual/controller/arenaVisualIntentRouter.js";
+import { isArenaVisualDefault } from "../arena-visual/controller/arenaVisualProductionMode.js";
+import { createArenaVisualOnlineStatus } from "../arena-visual/controller/arenaVisualOnlineStatus.js";
+import { createArenaVisualManualPolicy } from "../arena-visual/controller/arenaVisualManualActions.js";
+import {
+  ARENA_VISUAL_EXIT_STRATEGY,
+  createArenaVisualSurrenderResult,
+  resolveArenaVisualExitStrategy
+} from "../arena-visual/controller/arenaVisualExitController.js";
 import {
   CARD_DRAG_THRESHOLD,
   getCardDropTargetAt,
@@ -554,6 +566,8 @@ export default function Simulator({
     language
   } = useLanguage();
 
+  const arenaVisualLive = isArenaVisualDefault(window.location.search);
+
   const [
     match,
     setMatch
@@ -583,6 +597,10 @@ export default function Simulator({
   ] = useState(
     initialRoomState ||
       null
+  );
+
+  const [onlineSocketConnected, setOnlineSocketConnected] = useState(
+    () => Boolean(onlineClient?.socket?.connected)
   );
 
   useEffect(() => {
@@ -626,11 +644,20 @@ export default function Simulator({
   const [turnClockNow, setTurnClockNow] = useState(Date.now());
 
   useEffect(() => {
-    if (!roomState?.turnClock?.deadline || match?.winnerId) return undefined;
+    const hasReconnectDeadline = Boolean(
+      roomState?.players?.player1?.reconnectDeadline ||
+      roomState?.players?.player2?.reconnectDeadline
+    );
+    if ((!roomState?.turnClock?.deadline && !hasReconnectDeadline) || match?.winnerId) return undefined;
     setTurnClockNow(Date.now());
     const interval = setInterval(() => setTurnClockNow(Date.now()), 1000);
     return () => clearInterval(interval);
-  }, [roomState?.turnClock?.deadline, match?.winnerId]);
+  }, [
+    roomState?.turnClock?.deadline,
+    roomState?.players?.player1?.reconnectDeadline,
+    roomState?.players?.player2?.reconnectDeadline,
+    match?.winnerId
+  ]);
 
   const customTurnRemaining = roomState?.turnClock?.deadline
     ? Math.max(0, Math.ceil((Number(roomState.turnClock.deadline) - turnClockNow) / 1000))
@@ -849,6 +876,13 @@ export default function Simulator({
       setPostMatchActionNotice(language === "en" ? "Rematch accepted." : "Revanche aceita.");
     };
 
+    const onSocketConnect = () => setOnlineSocketConnected(true);
+    const onSocketDisconnect = () => setOnlineSocketConnected(false);
+
+    setOnlineSocketConnected(Boolean(onlineClient.socket.connected));
+    onlineClient.socket.on("connect", onSocketConnect);
+    onlineClient.socket.on("disconnect", onSocketDisconnect);
+
     onlineClient.socket.on(
       "room:state",
       handler
@@ -859,6 +893,8 @@ export default function Simulator({
     onlineClient.connect();
 
     return () => {
+      onlineClient.socket.off("connect", onSocketConnect);
+      onlineClient.socket.off("disconnect", onSocketDisconnect);
       onlineClient.socket.off("room:state", handler);
       onlineClient.socket.off("room:rematch-status", onRematchStatus);
       onlineClient.socket.off("room:rematch-started", onRematchStarted);
@@ -5620,20 +5656,30 @@ export default function Simulator({
       return;
     }
     setPostMatchActionNotice(language === "en" ? "Finding opponent profile…" : "Localizando perfil do adversário…");
-    const results = await searchProfiles(username);
-    const exact = (results || []).find((row) => String(row.username || "").toLowerCase() === username.toLowerCase());
-    if (!exact?.id) {
-      setPostMatchActionNotice(language === "en" ? "Opponent profile not found." : "Perfil do adversário não encontrado.");
-      return;
+    try {
+      const results = await searchProfiles(username);
+      const exact = (results || []).find((row) => String(row.username || "").toLowerCase() === username.toLowerCase());
+      if (!exact?.id) {
+        setPostMatchActionNotice(language === "en" ? "Opponent profile not found." : "Perfil do adversário não encontrado.");
+        return;
+      }
+      const result = await sendFriendRequest(exact.id);
+      setPostMatchActionNotice(result.ok
+        ? (language === "en" ? "Friend request sent." : "Pedido de amizade enviado.")
+        : (result.error || (language === "en" ? "Could not send friend request." : "Não foi possível enviar o pedido.")));
+    } catch (socialError) {
+      setPostMatchActionNotice(
+        socialError?.message || (language === "en" ? "Could not reach the Social service." : "Não foi possível acessar o serviço Social.")
+      );
     }
-    const result = await sendFriendRequest(exact.id);
-    setPostMatchActionNotice(result.ok
-      ? (language === "en" ? "Friend request sent." : "Pedido de amizade enviado.")
-      : (result.error || (language === "en" ? "Could not send friend request." : "Não foi possível enviar o pedido.")));
   }
 
   function requestOnlineRematch() {
     if (!onlineClient?.socket || rematchPending) return;
+    if (!onlineClient.socket.connected) {
+      setPostMatchActionNotice(language === "en" ? "Reconnect before requesting a rematch." : "Reconecte antes de solicitar revanche.");
+      return;
+    }
     setPostMatchActionNotice(language === "en" ? "Requesting rematch…" : "Solicitando revanche…");
     onlineClient.socket.emit("room:rematch", {}, (reply) => {
       if (!reply?.ok) {
@@ -5650,6 +5696,393 @@ export default function Simulator({
   /* =======================================================
      RENDER
   ======================================================= */
+
+  if (arenaVisualLive) {
+    const arenaVisualLegalActions = getLegalActions(match, bottomId, cardIndex);
+    const arenaVisualNormalPlayableIds = [...new Set(
+      arenaVisualLegalActions
+        .filter((entry) => ["SUMMON", "DEPLOY_NEXUS", "USE_MAGIC", "USE_HIGH_SPEED"].includes(entry?.action?.type))
+        .map((entry) => entry?.action?.instanceId)
+        .filter(Boolean)
+    )];
+    const arenaVisualLegalActionDescriptors = arenaVisualLegalActions.map((entry) => {
+      const action = entry?.action || {};
+      const hostId = action.hostInstanceId || action.options?.directCombineHostInstanceId || null;
+      const hostContext = hostId ? findPhysicalCard(match, hostId) : null;
+      const hostCard = hostContext?.card ? getDatabaseCard(cardIndex, hostContext.card) : null;
+      return {
+        type: action.type || entry.type || null,
+        instanceId: action.instanceId || null,
+        braveInstanceId: action.braveInstanceId || null,
+        hostInstanceId: action.hostInstanceId || null,
+        options: action.options || {},
+        label: entry.label || "",
+        category: entry.category || "",
+        actorId: entry.actorId || bottomId,
+        hostName: hostCard ? getCardName(hostCard, language) : ""
+      };
+    });
+
+    const arenaVisualAttackableIds = [...new Set(
+      arenaVisualLegalActions
+        .filter((entry) => entry?.action?.type === "DECLARE_ATTACK")
+        .map((entry) => entry?.action?.instanceId)
+        .filter(Boolean)
+    )];
+    const arenaVisualBlockableIds = [...new Set(
+      arenaVisualLegalActions
+        .filter((entry) => entry?.action?.type === "DECLARE_BLOCK")
+        .map((entry) => entry?.action?.instanceId)
+        .filter(Boolean)
+    )];
+
+    const arenaVisualOnlineStatus = createArenaVisualOnlineStatus({
+      mode,
+      roomState,
+      viewerPlayerId: bottomId,
+      opponentPlayerId: topId,
+      socketConnected: online ? onlineSocketConnected : true,
+      now: turnClockNow,
+      turnRemainingSeconds: customTurnRemaining,
+      notice,
+      error
+    });
+
+    const arenaVisualManualPolicy = createArenaVisualManualPolicy({
+      mode,
+      canControlActor,
+      blockingPending,
+      winnerId: match?.winnerId || null
+    });
+
+    const arenaVisualViewModel = createArenaVisualControllerBridge({
+      match,
+      viewerPlayerId: bottomId,
+      opponentPlayerId: topId,
+      cardIndex,
+      language,
+      canMoveCores,
+      canControlActor,
+      actorId,
+      selectedInstanceId: selectedId,
+      chatMessages: Array.isArray(roomState?.chat) ? roomState.chat.map((message, index) => ({
+        id: message?.id || `chat-${index}`,
+        author: message?.profile?.name || message?.name || message?.author || "Player",
+        text: message?.text || "",
+        self: message?.playerId === bottomId
+      })) : [],
+      showAdvanceStep: !match.battle,
+      canAdvanceStep: !match.battle && canControlActor && !blockingPending,
+      advanceStepLabel: language === "en" ? "Advance" : "Avançar",
+      effectDecisionTitle: effectDecision ? effectDecisionTitle() : "",
+      effectDecisionInstruction: effectDecision ? effectDecisionInstruction() : "",
+      playableInstanceIds: arenaVisualNormalPlayableIds,
+      attackableInstanceIds: arenaVisualAttackableIds,
+      blockableInstanceIds: arenaVisualBlockableIds,
+      playabilityRelevant: match.phase === "main" && match.activePlayerId === bottomId && !match.battle,
+      legalActions: arenaVisualLegalActionDescriptors,
+      onlineStatus: arenaVisualOnlineStatus,
+      manualPolicy: arenaVisualManualPolicy
+    });
+
+let arenaVisualMatchResult = null;
+if (match?.winnerId) {
+  const winner = match.players?.[match.winnerId] || null;
+  const defeatedId = otherPlayerId(match, match.winnerId);
+  const defeated = defeatedId ? match.players?.[defeatedId] : null;
+  const resultViewerId = online ? viewerPlayerId : aiMode ? humanPlayerId : bottomId;
+  const summary = postMatchSummary;
+  const featuredMasteryCard = summary?.mastery?.featuredCardId
+    ? cardIndex.get(String(summary.mastery.featuredCardId))
+    : null;
+  arenaVisualMatchResult = {
+    language,
+    winner,
+    defeated,
+    isDefeat: Boolean(resultViewerId && match.winnerId !== resultViewerId),
+    reason: match.winnerReason || (Number(defeated?.life || 0) <= 0 ? "life" : defeated?.deck?.length === 0 ? "deck" : "other"),
+    turnNumber: match.turnNumber,
+    summary,
+    featuredMasteryImage: featuredMasteryCard ? resolveCardImage(featuredMasteryCard) : null,
+    featuredMasteryName: featuredMasteryCard ? getCardName(featuredMasteryCard, language) : "",
+    notice: postMatchActionNotice,
+    mode,
+    rematchPending,
+    opponentUsername: String(summary?.opponent?.username || "").replace(/^@/, "").trim(),
+    serverVerified: online ? Boolean(roomState?.matchHistoryRecord?.server_authoritative) : false
+  };
+}
+
+    const beginArenaVisualHandPlay = (instanceId) => {
+      if (!instanceId || !canControlActor) return;
+      const ctx = findPhysicalCard(match, instanceId);
+      if (!ctx || ctx.playerId !== bottomId || ctx.zone !== "hand") return;
+      const card = getDatabaseCard(cardIndex, ctx.card);
+      if (!card) return;
+
+      if (["spirit", "ultimate", "brave", "nexus"].includes(card.cardType)) {
+        dispatch({ type: "BEGIN_MANUAL_PLAY", instanceId }, bottomId);
+        setSelectedId(instanceId);
+        return;
+      }
+
+      if (card.cardType === "magic") {
+        const mode = match.battle?.flash?.priorityPlayerId === bottomId ? "flash" : "main";
+        dispatch({ type: "BEGIN_MANUAL_COST", instanceId, options: { kind: "magic", mode } }, bottomId);
+        setSelectedId(instanceId);
+      }
+    };
+
+    const requestArenaVisualIntent = (intent) => routeArenaVisualIntent(intent, {
+      selectCard(instanceId) {
+        setSelectedId(instanceId || null);
+      },
+      coreClick(source) {
+        smartCoreClick(source);
+      },
+      moveCore(source, target) {
+        if (!source || !target) return;
+        coreDrop(source, target);
+      },
+      playHandCard(instanceId) {
+        beginArenaVisualHandPlay(instanceId);
+      },
+      setBurstCard(instanceId) {
+        if (!instanceId || !canControlActor) return;
+        dispatch({ type: "SET_BURST", instanceId }, bottomId);
+        setSelectedId(instanceId);
+      },
+      combineBrave(braveInstanceId, hostInstanceId, options = {}) {
+        if (!braveInstanceId || !hostInstanceId || !canControlActor) return;
+        dispatch({ type: "COMBINE_BRAVE", braveInstanceId, hostInstanceId, options }, bottomId);
+      },
+      declareAttack(instanceId) {
+        if (!instanceId || !arenaVisualAttackableIds.includes(instanceId)) return;
+        dispatch({ type: "DECLARE_ATTACK", instanceId }, bottomId);
+      },
+      declareBlock(instanceId) {
+        if (!instanceId || !arenaVisualBlockableIds.includes(instanceId)) return;
+        dispatch({ type: "DECLARE_BLOCK", instanceId }, bottomId);
+      }
+    });
+
+    const requestArenaVisualUtilityAction = (action) => {
+      if (!action) return;
+      const type = action.type || action.id;
+      if (type === "MANUAL_ACTION") {
+        if (!arenaVisualManualPolicy.canUse || !action.payload) return;
+        dispatch({ type: "MANUAL", payload: action.payload }, action.actorId || bottomId);
+        return;
+      }
+      if (type === "SURRENDER_MATCH") {
+        const confirmed = window.confirm(language === "en"
+          ? "Surrender this match?"
+          : "Desistir desta partida?");
+        if (!confirmed) return;
+
+        const exitStrategy = resolveArenaVisualExitStrategy({
+          mode,
+          hasConcede: typeof onlineClient?.concede === "function"
+        });
+
+        if (exitStrategy === ARENA_VISUAL_EXIT_STRATEGY.ONLINE_CONCEDE) {
+          onlineClient.concede((result) => {
+            if (!result?.ok) {
+              setError(result?.error || (language === "en"
+                ? "Could not surrender the match."
+                : "Não foi possível desistir da partida."));
+              return;
+            }
+            onExit?.();
+          });
+          return;
+        }
+
+        if (exitStrategy === ARENA_VISUAL_EXIT_STRATEGY.ONLINE_EXIT) {
+          onExit?.();
+          return;
+        }
+
+        setMatch((current) => createArenaVisualSurrenderResult(current, bottomId, topId));
+        window.setTimeout(() => onExit?.(), 0);
+        return;
+      }
+      if (type === "MULLIGAN") {
+        dispatch({ type: "MULLIGAN" }, bottomId);
+        return;
+      }
+      if (type === "ADVANCE_PHASE" || type === "advance-phase") {
+        dispatch({ type: "ADVANCE_PHASE" }, match.activePlayerId);
+        return;
+      }
+      if (type === "PLAY_HAND_CARD") {
+        beginArenaVisualHandPlay(action.instanceId || selectedId);
+        return;
+      }
+      if (type === "BEGIN_MAGIC_COST") {
+        const instanceId = action.instanceId || selectedId;
+        if (instanceId) {
+          dispatch({
+            type: "BEGIN_MANUAL_COST",
+            instanceId,
+            options: { kind: "magic", mode: action.options?.mode || (match.battle?.flash?.priorityPlayerId === bottomId ? "flash" : "main") }
+          }, bottomId);
+          setSelectedId(instanceId);
+        }
+        return;
+      }
+      if (type === "BEGIN_MIRAGE_COST") {
+        const instanceId = action.instanceId || selectedId;
+        if (instanceId) {
+          dispatch({ type: "BEGIN_MANUAL_COST", instanceId, options: { kind: "mirage" } }, bottomId);
+          setSelectedId(instanceId);
+        }
+        return;
+      }
+      if (type === "USE_HIGH_SPEED") {
+        const instanceId = action.instanceId || selectedId;
+        if (instanceId) dispatch({ type: "USE_HIGH_SPEED", instanceId, options: action.options || { highSpeed: true } }, bottomId);
+        return;
+      }
+      if (type === "ACTIVATE_FIELD_FLASH") {
+        const instanceId = action.instanceId || selectedId;
+        if (instanceId) dispatch({ type: "ACTIVATE_FIELD_FLASH", instanceId }, bottomId);
+        return;
+      }
+      if (type === "DIRECT_COMBINE_BRAVE") {
+        const instanceId = action.instanceId || selectedId;
+        if (instanceId && action.hostInstanceId) {
+          dispatch({
+            type: "BEGIN_MANUAL_PLAY",
+            instanceId,
+            options: { ...(action.options || {}), directCombineHostInstanceId: action.hostInstanceId }
+          }, bottomId);
+          setSelectedId(instanceId);
+        }
+        return;
+      }
+      if (type === "SET_BURST_CARD") {
+        const instanceId = action.instanceId || selectedId;
+        if (instanceId) dispatch({ type: "SET_BURST", instanceId }, bottomId);
+        return;
+      }
+      if (["CONFIRM_MANUAL_PLAY", "CANCEL_MANUAL_PLAY", "CONFIRM_MANUAL_COST", "CANCEL_MANUAL_COST"].includes(type)) {
+        dispatch({ type }, bottomId);
+        return;
+      }
+      if (type === "COMBINE_BRAVE") {
+        dispatch({
+          type: "COMBINE_BRAVE",
+          braveInstanceId: action.braveInstanceId,
+          hostInstanceId: action.hostInstanceId,
+          options: action.options || {}
+        }, bottomId);
+        return;
+      }
+      if (type === "SEPARATE_BRAVE") {
+        dispatch({ type: "SEPARATE_BRAVE", braveInstanceId: action.braveInstanceId }, bottomId);
+        return;
+      }
+      if (type === "EXCHANGE_BRAVE") {
+        if (action.braveInstanceId && action.hostInstanceId) {
+          dispatch({
+            type: "EXCHANGE_BRAVE",
+            braveInstanceId: action.braveInstanceId,
+            hostInstanceId: action.hostInstanceId,
+            options: action.options || {}
+          }, bottomId);
+        }
+        return;
+      }
+      if (type === "DECLARE_ATTACK") {
+        const instanceId = action.instanceId || selectedId;
+        if (instanceId) dispatch({ type: "DECLARE_ATTACK", instanceId }, bottomId);
+        return;
+      }
+      if (type === "DECLARE_BLOCK") {
+        const instanceId = action.instanceId || selectedId;
+        if (instanceId) dispatch({ type: "DECLARE_BLOCK", instanceId }, bottomId);
+        return;
+      }
+      if (type === "DECLINE_BLOCK") {
+        if (match.battle?.defenderPlayerId) dispatch({ type: "DECLINE_BLOCK" }, match.battle.defenderPlayerId);
+        return;
+      }
+      if (type === "PASS_FLASH") {
+        const priorityPlayerId = match.battle?.flash?.priorityPlayerId;
+        if (priorityPlayerId) dispatch({ type: "PASS_FLASH" }, priorityPlayerId);
+        return;
+      }
+      if (type === "RESOLVE_BATTLE") {
+        dispatch({ type: "RESOLVE_BATTLE" }, actorId);
+        return;
+      }
+      if (type === "ACTIVATE_BURST") {
+        const playerId = match.burstOpportunity?.playerId;
+        if (playerId) dispatch({ type: "ACTIVATE_BURST", options: { confirmCondition: true } }, playerId);
+        return;
+      }
+      if (type === "PASS_BURST") {
+        const playerId = match.burstOpportunity?.playerId;
+        if (playerId) dispatch({ type: "PASS_BURST" }, playerId);
+        return;
+      }
+      if (type === "USE_TRIGGER_COUNTER") {
+        const trigger = match.battle?.ultimateTrigger;
+        const actor = action.actorId || trigger?.counterPlayerId;
+        if (actor && action.instanceId) dispatch({ type: "USE_TRIGGER_COUNTER", instanceId: action.instanceId }, actor);
+        return;
+      }
+      if (type === "PASS_TRIGGER_COUNTER") {
+        const trigger = match.battle?.ultimateTrigger;
+        const actor = action.actorId || trigger?.counterPlayerId;
+        if (actor) dispatch({ type: "PASS_TRIGGER_COUNTER" }, actor);
+        return;
+      }
+      if (type === "RESOLVE_ULTIMATE_TRIGGER") {
+        const trigger = match.battle?.ultimateTrigger;
+        const actor = action.actorId || trigger?.controllerPlayerId;
+        if (actor) dispatch({ type: "RESOLVE_ULTIMATE_TRIGGER" }, actor);
+        return;
+      }
+      if (type === "RESOLVE_EFFECT_DECISION") {
+        if (!effectDecision?.playerId || action.decisionId !== effectDecision.id) return;
+        dispatch({
+          type: "RESOLVE_EFFECT_DECISION",
+          decisionId: effectDecision.id,
+          payload: { decisionId: effectDecision.id, ...(action.payload || {}) }
+        }, effectDecision.playerId);
+      }
+    };
+
+    return (
+      <ArenaVisual
+        viewModel={arenaVisualViewModel}
+        interactionController={{ requestIntent: requestArenaVisualIntent }}
+        onUtilityActionRequest={requestArenaVisualUtilityAction}
+        motionPlayers={match.players}
+        matchResult={arenaVisualMatchResult}
+        matchResultActions={{
+          onRequestRematch: requestOnlineRematch,
+          onPlayAgain,
+          onAddOpponent: requestPostMatchFriend,
+          onOpenProfile,
+          onExit
+        }}
+        feedbackMatch={match}
+        feedbackActorId={actorId}
+        feedbackCanControlActor={canControlActor}
+        feedbackLanguage={language}
+        getFeedbackCardPresentation={(physical) => {
+          const card = getDatabaseCard(cardIndex, physical);
+          return {
+            name: getCardName(card, language),
+            image: resolveCardImage(card)
+          };
+        }}
+      />
+    );
+  }
 
   return (
     <ArenaShell>

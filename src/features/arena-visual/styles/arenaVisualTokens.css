@@ -1,0 +1,18 @@
+.arena-visual-root {
+  --arena-visual-background: #111214;
+  --arena-visual-surface: rgba(16, 17, 19, 0.38);
+  --arena-visual-surface-strong: rgba(10, 11, 13, 0.58);
+  --arena-visual-line: rgba(247, 247, 247, 0.54);
+  --arena-visual-line-soft: rgba(247, 247, 247, 0.22);
+  --arena-visual-line-faint: rgba(247, 247, 247, 0.10);
+  --arena-visual-text: #f7f7f7;
+  --arena-visual-text-muted: rgba(247, 247, 247, 0.66);
+  --arena-visual-playmat-image: url("/images/arena/wallpaper_arena_default.png");
+  --arena-visual-utility-width: clamp(19rem, 22vw, 25rem);
+  --arena-visual-side-rail-width: clamp(6.8rem, 7.4vw, 8rem);
+  --arena-visual-edge: clamp(0.55rem, 0.75vw, 0.9rem);
+  --arena-visual-zone-gap: clamp(0.28rem, 0.45vw, 0.52rem);
+  --arena-visual-zone-radius: clamp(0.38rem, 0.46vw, 0.55rem);
+  --arena-visual-panel-radius: clamp(1.15rem, 1.45vw, 1.65rem);
+  --arena-visual-hand-height: clamp(4.8rem, 9.3vh, 7.4rem);
+}

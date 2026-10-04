@@ -26,7 +26,8 @@ export default function BattleExperienceLayer({
   actorId,
   canControlActor,
   language = "ptBR",
-  showEventCue = true
+  showEventCue = true,
+  showActionCue = true
 }) {
   const [phaseCue, setPhaseCue] = useState(null);
   const [eventCue, setEventCue] = useState(null);
@@ -111,7 +112,7 @@ export default function BattleExperienceLayer({
         </div>
       )}
 
-      {actionCue && (
+      {showActionCue && actionCue && (
         <div className={`battle-exp-action-cue cue-${actionCue.kind}`} role="status">
           <span>{actionCue.eyebrow}</span>
           <strong>{actionCue.title}</strong>

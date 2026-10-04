@@ -54,6 +54,7 @@ export default function BattlefieldZone({
         data-card-count={cards.length}
         data-card-density={density}
         data-hand-drop-target={acceptsHandCards ? "true" : "false"}
+        data-hand-drop-side={acceptsHandCards ? side : undefined}
         onDragOver={handleHandDragOver}
         onDragLeave={handleHandDragLeave}
         onDrop={handleHandDrop}

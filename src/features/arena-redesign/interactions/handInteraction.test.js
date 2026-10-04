@@ -53,3 +53,16 @@ test("hand payload round-trips through browser drag data", () => {
   assert.ok(dataTransfer.types.includes(ARENA_HAND_CARD_DRAG_MIME));
   assert.deepEqual(readHandCardDragPayload(event), payload);
 });
+
+test("Phase 14 touch drag resolves only presentation drop targets", async () => {
+  const { getTouchHandDropTarget } = await import("./handInteraction.js");
+  const target = { dataset: { handDropSide: "player" } };
+  const documentLike = {
+    elementFromPoint() {
+      return { closest(selector) { return selector === '[data-hand-drop-target="true"]' ? target : null; } };
+    }
+  };
+
+  assert.equal(getTouchHandDropTarget(documentLike, 20, 30), target);
+  assert.equal(getTouchHandDropTarget(null, 20, 30), null);
+});

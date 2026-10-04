@@ -72,7 +72,7 @@ for (const selector of [
   if (!styles.includes(selector)) throw new Error(`Missing Phase 10 interaction style: ${selector}`);
 }
 
-const phase10Css = styles.split("/* Phase 10 — Card selection, playability and contextual targeting */")[1] || "";
+const phase10Css = (styles.split("/* Phase 10 — Card selection, playability and contextual targeting */")[1] || "").split("/* Phase 11 — Battle Interaction Layer */")[0] || "";
 if (phase10Css.includes("::before") || phase10Css.includes("::after") || phase10Css.includes("isolation: isolate")) {
   throw new Error("Phase 10 interaction feedback must not introduce artwork-covering pseudo overlays or new stacking contexts.");
 }

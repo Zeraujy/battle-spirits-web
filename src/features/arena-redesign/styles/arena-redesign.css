@@ -1125,3 +1125,689 @@
     padding: 0.3rem 0.4rem;
   }
 }
+
+/* Phase 12 — Right Utility Panel */
+.arena-redesign-utility {
+  overflow: hidden;
+}
+
+.arena-redesign-utility-panel {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.45rem, 0.75vh, 0.75rem);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: clamp(0.65rem, 1vw, 1rem);
+  box-sizing: border-box;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+
+.arena-redesign-utility-section {
+  flex: 0 0 auto;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.8rem;
+  background: rgba(5, 5, 5, 0.36);
+  padding: 0.65rem;
+}
+
+.arena-redesign-utility-heading,
+.arena-redesign-utility-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: var(--arena-redesign-text-muted);
+}
+
+.arena-redesign-utility-heading strong {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.arena-redesign-turn-phase {
+  margin-top: 0.35rem;
+  font-size: clamp(1rem, 1.1vw, 1.25rem);
+  font-weight: 800;
+}
+
+.arena-redesign-turn-owner,
+.arena-redesign-turn-clock {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.72rem;
+  color: var(--arena-redesign-text-muted);
+}
+
+.arena-redesign-phase-tracker {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.25rem;
+  margin: 0.55rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.arena-redesign-phase-tracker li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 0;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.56rem;
+  text-align: center;
+}
+
+.arena-redesign-phase-tracker li span:last-child {
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arena-redesign-phase-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.arena-redesign-phase-tracker li.is-complete .arena-redesign-phase-dot {
+  background: rgba(255, 255, 255, 0.44);
+}
+
+.arena-redesign-phase-tracker li.is-current {
+  color: #fff;
+  font-weight: 700;
+}
+
+.arena-redesign-phase-tracker li.is-current .arena-redesign-phase-dot {
+  background: #fff;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.12);
+}
+
+.arena-redesign-primary-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+}
+
+.arena-redesign-primary-actions button {
+  min-height: 2.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.92);
+  color: #0a0a0a;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.arena-redesign-primary-actions button:hover,
+.arena-redesign-primary-actions button:focus-visible {
+  background: #fff;
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.arena-redesign-utility-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.arena-redesign-utility-feed li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.55rem;
+  min-width: 0;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 0.7rem;
+}
+
+.arena-redesign-utility-feed li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.arena-redesign-utility-feed span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.arena-redesign-utility-feed small {
+  flex: 0 0 auto;
+  color: var(--arena-redesign-text-muted);
+}
+
+.arena-redesign-game-log {
+  flex: 1 1 9rem;
+  min-height: 5.5rem;
+  overflow: auto;
+}
+
+.arena-redesign-chat {
+  flex: 1 1 8rem;
+  min-height: 5rem;
+  overflow: auto;
+}
+
+.arena-redesign-chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.arena-redesign-chat-messages article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  max-width: 88%;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.55rem;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.7rem;
+}
+
+.arena-redesign-chat-messages article.is-own {
+  align-self: flex-end;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.arena-redesign-chat-messages strong {
+  font-size: 0.62rem;
+  color: var(--arena-redesign-text-muted);
+}
+
+.arena-redesign-utility-empty {
+  grid-column: 1 / -1;
+  margin-top: 0.45rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.7rem;
+}
+
+@media (max-width: 1366px), (max-height: 800px) {
+  .arena-redesign-utility-panel {
+    gap: 0.35rem;
+    padding: 0.5rem;
+  }
+
+  .arena-redesign-utility-section {
+    padding: 0.5rem;
+  }
+
+  .arena-redesign-phase-tracker li {
+    font-size: 0;
+  }
+
+  .arena-redesign-phase-tracker li span:last-child {
+    display: none;
+  }
+
+  .arena-redesign-game-log,
+  .arena-redesign-chat {
+    min-height: 3.5rem;
+  }
+}
+
+/* Phase 13 — Burst, Flash and Effect Resolution UX */
+.arena-redesign-effect-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.arena-redesign-effect-window,
+.arena-redesign-effect-resolution,
+.arena-redesign-target-prompt,
+.arena-redesign-choice-prompt {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 0.8rem;
+  background: rgba(7, 7, 7, 0.88);
+  box-shadow: 0 0.9rem 2rem rgba(0, 0, 0, 0.38);
+  color: #fff;
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+}
+
+.arena-redesign-effect-window {
+  left: 50%;
+  top: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  width: min(34rem, calc(100vw - 2rem));
+  padding: 0.7rem 0.8rem;
+  transform: translateX(-50%);
+}
+
+.arena-redesign-flash-window {
+  top: auto;
+  bottom: clamp(7rem, 14vh, 11rem);
+}
+
+.arena-redesign-effect-window > div:first-child,
+.arena-redesign-effect-resolution,
+.arena-redesign-target-prompt,
+.arena-redesign-choice-prompt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+}
+
+.arena-redesign-effect-eyebrow {
+  color: var(--arena-redesign-text-muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.arena-redesign-effect-window strong,
+.arena-redesign-effect-resolution strong,
+.arena-redesign-target-prompt strong,
+.arena-redesign-choice-prompt strong {
+  font-size: 0.82rem;
+}
+
+.arena-redesign-effect-window small,
+.arena-redesign-choice-prompt small {
+  color: var(--arena-redesign-text-muted);
+  font-size: 0.66rem;
+}
+
+.arena-redesign-effect-actions,
+.arena-redesign-choice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.arena-redesign-effect-window button,
+.arena-redesign-choice-prompt button {
+  min-height: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 0.55rem;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 0.35rem 0.62rem;
+  color: #080808;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.arena-redesign-effect-window button:hover,
+.arena-redesign-effect-window button:focus-visible,
+.arena-redesign-choice-prompt button:hover,
+.arena-redesign-choice-prompt button:focus-visible {
+  background: #fff;
+  outline: 2px solid rgba(255, 255, 255, 0.48);
+  outline-offset: 2px;
+}
+
+.arena-redesign-effect-resolution {
+  left: 50%;
+  top: 50%;
+  width: min(27rem, calc(100vw - 2rem));
+  padding: 0.7rem 0.8rem;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.arena-redesign-effect-resolution p,
+.arena-redesign-target-prompt span,
+.arena-redesign-choice-prompt span {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+.arena-redesign-target-prompt {
+  left: 50%;
+  bottom: clamp(3.75rem, 8vh, 6rem);
+  width: min(30rem, calc(100vw - 2rem));
+  padding: 0.65rem 0.75rem;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.arena-redesign-target-prompt small {
+  color: var(--arena-redesign-text-muted);
+  font-size: 0.64rem;
+}
+
+.arena-redesign-choice-prompt {
+  left: 50%;
+  top: 50%;
+  width: min(32rem, calc(100vw - 2rem));
+  padding: 0.8rem;
+  transform: translate(-50%, -50%);
+}
+
+.arena-redesign-choice-actions {
+  margin-top: 0.45rem;
+}
+
+@media (max-width: 900px), (max-height: 620px) {
+  .arena-redesign-effect-window {
+    top: 0.45rem;
+    width: min(29rem, calc(100vw - 1rem));
+    padding: 0.45rem 0.55rem;
+  }
+
+  .arena-redesign-flash-window {
+    top: auto;
+    bottom: 4.4rem;
+  }
+
+  .arena-redesign-effect-resolution {
+    width: min(24rem, calc(100vw - 1rem));
+    padding: 0.5rem 0.6rem;
+  }
+
+  .arena-redesign-target-prompt {
+    bottom: 0.55rem;
+    width: min(27rem, calc(100vw - 1rem));
+    padding: 0.45rem 0.55rem;
+  }
+}
+
+/* Phase 14 — Responsive and Touch Adaptation */
+.arena-redesign-shell {
+  --arena-redesign-touch-target: 2.75rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="desktop-wide"] {
+  --arena-redesign-utility-width: clamp(22rem, 21vw, 30rem);
+  --arena-redesign-edge-gap: clamp(0.65rem, 0.85vw, 1.1rem);
+}
+
+.arena-redesign-shell[data-arena-viewport="laptop"] {
+  --arena-redesign-utility-width: clamp(15rem, 19vw, 18rem);
+  --arena-redesign-edge-gap: clamp(0.32rem, 0.52vw, 0.62rem);
+}
+
+.arena-redesign-shell[data-arena-viewport="tablet-landscape"] {
+  --arena-redesign-utility-width: clamp(11.5rem, 21vw, 14rem);
+  --arena-redesign-edge-gap: clamp(0.24rem, 0.45vw, 0.5rem);
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] {
+  --arena-redesign-utility-width: clamp(8.75rem, 19vw, 10.5rem);
+  --arena-redesign-edge-gap: clamp(0.18rem, 0.36vw, 0.38rem);
+}
+
+/* Secondary zones compact but remain reachable at every official breakpoint. */
+.arena-redesign-shell[data-arena-viewport="tablet-landscape"] .arena-redesign-zone-void,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-zone-void {
+  display: block;
+}
+
+.arena-redesign-shell[data-arena-viewport="tablet-landscape"] .arena-redesign-player-side {
+  grid-template-columns:
+    clamp(4.7rem, 9vw, 5.6rem)
+    minmax(0, 1fr)
+    clamp(4.45rem, 8.5vw, 5.3rem);
+  gap: 0.3rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-surface {
+  grid-template-columns: minmax(0, 1fr) var(--arena-redesign-utility-width);
+  grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-areas:
+    "opponent utility"
+    "center utility"
+    "player utility";
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-utility {
+  position: static;
+  width: auto;
+  max-height: none;
+  transform: none;
+  border-radius: 0.55rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-player-side {
+  grid-template-columns:
+    clamp(3.35rem, 8.6vw, 4rem)
+    minmax(0, 1fr)
+    clamp(3.2rem, 8.1vw, 3.8rem);
+  gap: 0.2rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-side-rail {
+  gap: 0.16rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-zone.is-compact,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-resource-zone {
+  min-height: clamp(2.25rem, 9vh, 2.9rem);
+  border-radius: 0.38rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-zone-label {
+  left: 0.22rem;
+  right: 0.22rem;
+  top: 0.14rem;
+  font-size: 0.48rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-resource-zone {
+  padding: 0.95rem 0.18rem 0.18rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-core-pool {
+  min-height: 1.7rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-core-token.is-small,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-core-token.is-medium {
+  width: clamp(1rem, 2.7vw, 1.25rem);
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-zone-hand {
+  height: clamp(2.8rem, 10.5vh, 3.6rem);
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-hand-fan {
+  width: min(26rem, 92%);
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-hand-card,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-hand-card.is-dense,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-hand-card.is-compact {
+  width: clamp(2.7rem, 6.2vw, 3.5rem);
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-hand-card.is-visible:hover,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-hand-card.is-visible:focus-visible,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-hand-card.is-selected {
+  transform:
+    translateX(-50%)
+    translateY(calc(var(--hand-card-lift) - clamp(1.15rem, 4.8vh, 1.8rem)))
+    rotate(0deg)
+    scale(1.06);
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-battlefield-cards {
+  gap: 0.22rem;
+  padding: 0.8rem 0.22rem 0.12rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-field-card,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-field-card.is-medium,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-field-card.is-compact {
+  --arena-field-card-width: clamp(2.75rem, 6.2vw, 3.8rem);
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-field-card-status,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-field-card-feedback,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-target-marker {
+  font-size: 0.43rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-field-card-cores {
+  min-height: 0.9rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-field-card-cores .arena-redesign-core-token.is-small,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-field-card-cores .arena-redesign-core-token.is-medium {
+  width: 0.72rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-center {
+  min-height: 1.85rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-battle-focus {
+  width: min(24rem, 96%);
+  grid-template-columns: 1fr;
+  gap: 0.18rem;
+  padding: 0.2rem 0.3rem;
+  border-radius: 0.45rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-battle-status {
+  display: none;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-battle-focus-line {
+  grid-template-columns: minmax(0, 1fr) minmax(2.8rem, 0.45fr) minmax(0, 1fr);
+  gap: 0.2rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-battle-fighter,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-battle-life-target {
+  gap: 0;
+  padding: 0.16rem 0.22rem;
+  border-radius: 0.35rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-battle-fighter span,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-battle-life-target span,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-battle-connection small {
+  display: none;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-battle-fighter strong,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-battle-life-target strong {
+  font-size: 0.54rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-attack-connector {
+  height: 0.8rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-targeting-layer {
+  bottom: 0.12rem;
+  gap: 0.25rem;
+  padding: 0.14rem 0.3rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-targeting-layer strong,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-targeting-layer span {
+  font-size: 0.5rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-utility-panel {
+  gap: 0.22rem;
+  padding: 0.28rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-utility-section {
+  padding: 0.3rem;
+  border-radius: 0.42rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-utility-heading,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-utility-title,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-turn-owner,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-turn-clock,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-utility-feed li,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-chat-messages article,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-utility-empty {
+  font-size: 0.52rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-turn-phase {
+  margin-top: 0.14rem;
+  font-size: 0.68rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-primary-actions {
+  grid-template-columns: 1fr;
+  gap: 0.2rem;
+  margin-top: 0.25rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-primary-actions button {
+  min-height: 1.8rem;
+  padding: 0.2rem;
+  font-size: 0.56rem;
+}
+
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-game-log,
+.arena-redesign-shell[data-arena-viewport="mobile-landscape"] .arena-redesign-chat {
+  min-height: 2.5rem;
+}
+
+/* Coarse pointer: keep all controls finger-sized and do not depend on hover. */
+.arena-redesign-shell[data-arena-input="touch"] .arena-redesign-primary-actions button,
+.arena-redesign-shell[data-arena-input="touch"] .arena-redesign-effect-window button,
+.arena-redesign-shell[data-arena-input="touch"] .arena-redesign-choice-prompt button {
+  min-height: var(--arena-redesign-touch-target);
+  touch-action: manipulation;
+}
+
+.arena-redesign-shell[data-arena-input="touch"] .arena-redesign-core-token.is-interactive {
+  min-width: var(--arena-redesign-touch-target);
+  min-height: var(--arena-redesign-touch-target);
+  cursor: pointer;
+}
+
+.arena-redesign-shell[data-arena-input="touch"] .arena-redesign-field-card-art-frame {
+  touch-action: manipulation;
+}
+
+.arena-redesign-shell[data-arena-input="touch"] .arena-redesign-hand-card.is-draggable {
+  touch-action: none;
+  cursor: pointer;
+}
+
+.arena-redesign-shell[data-arena-input="touch"] .arena-redesign-hand-card.is-visible:active,
+.arena-redesign-shell[data-arena-input="touch"] .arena-redesign-hand-card.is-selected {
+  z-index: 90 !important;
+  border-color: rgba(255, 255, 255, 0.62);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arena-redesign-shell *,
+  .arena-redesign-shell *::before,
+  .arena-redesign-shell *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

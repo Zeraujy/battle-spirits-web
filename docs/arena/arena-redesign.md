@@ -78,3 +78,28 @@ The parallel Arena now presents the active battle in the center field without mo
 `BattleStatus` reflects the existing battle stage and safe priority context from the Arena View Model. `TargetingLayer` summarizes an active target-selection prompt, and `TargetMarker` reuses the Phase 10 targetability state directly on field cards without covering card artwork.
 
 The entire Phase 11 layer remains presentation-only. Attack declaration, blocker legality, Flash priority, direct-attack resolution, target validation and battle resolution continue to be decided by the existing controller and Rules Engine. No Phase 11 React component imports or calls gameplay authority modules.
+
+
+## Phase 12 — Right Utility Panel
+The right-side utility region now consolidates turn status, phase tracking, contextual global actions, recent action, game log and Arena chat while preserving controller authority.
+
+## Phase 13 — Burst, Flash and Effect Resolution UX
+
+The parallel Arena now has a dedicated presentation layer for Burst opportunities, Flash Timing, pending effect resolution, target-selection prompts and structured choices. The layer reads only the sanitized Arena View Model and legal action descriptors already supplied by the controller.
+
+`BurstRevealOverlay` exposes the current Burst window and controller-owned Activate/Pass requests. `FlashWindow` reflects authoritative Flash priority and offers Pass only when the legal action exists, while legal Magic, High Speed and field Flash cards continue to be highlighted by the existing interaction layer instead of being duplicated as global controls.
+
+`EffectResolutionPanel`, `TargetSelectionPrompt` and `ChoicePrompt` make pending Effect Engine decisions readable without implementing target legality or effect execution in React. The View Model now strips action bodies, continuation data and engine context from pending decisions before they reach the presentation tree.
+
+All Phase 13 controls emit `onEffectActionRequest(action, context)` and never call the Rules Engine directly.
+
+## Phase 14 — Responsive and Touch Adaptation
+
+The parallel Arena now exposes five presentation profiles aligned with the official reference sizes: Desktop Wide (2560×1440), Desktop (1920×1080), Laptop (1366×768), Tablet Landscape (1024×768) and Mobile Landscape (~844×390).
+
+Primary play content remains prioritized while secondary zones progressively compact instead of disappearing. At mobile-landscape size the utility panel reserves a narrow right column rather than overlaying the play surface. Coarse-pointer devices receive larger touch targets, hover-independent feedback and a Pointer Events Hand drag bridge that reuses the existing `onHandCardDrop` controller intent. React still never validates or resolves gameplay actions.
+
+
+## Phase 15 — Release QA
+
+The original Arena redesign roadmap is closed with permanent release audits covering layout, zones, card visibility, Core presentation, interactions, Playmats, responsive behavior and the aggregate release gate. The redesign remains parallel to production.

@@ -1,0 +1,11 @@
+import fs from "node:fs";
+import path from "node:path";
+const root=process.cwd();
+const rel="src/features/arena-redesign/models/responsiveArenaPresentation.js";
+if(!fs.existsSync(path.join(root,rel))) throw new Error(`Responsive QA failed: missing ${rel}`);
+const model=fs.readFileSync(path.join(root,rel),"utf8");
+for(const tier of ["desktop-wide","desktop","laptop","tablet-landscape","mobile-landscape"]) if(!model.includes(tier)) throw new Error(`Responsive QA failed: missing ${tier}`);
+const css=fs.readFileSync(path.join(root,"src/features/arena-redesign/styles/arena-redesign.css"),"utf8");
+for(const marker of ["arena-redesign-zone-life","arena-redesign-zone-void","arena-redesign-side-rail","mobile-landscape","tablet-landscape"]) if(!css.includes(marker)) throw new Error(`Responsive QA failed: missing responsive marker ${marker}.`);
+if(!css.includes("prefers-reduced-motion")) throw new Error("Responsive QA failed: reduced-motion support missing.");
+console.log("Arena Release QA — Responsive: PASS");
